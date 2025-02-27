@@ -245,7 +245,7 @@ type DefaultActionInitParameters struct {
 	Redirect *RedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
 	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead. Can be specified with forward but ARNs must match.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
@@ -314,7 +314,7 @@ type DefaultActionParameters struct {
 	Redirect *RedirectParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
 	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead. Can be specified with forward but ARNs must match.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
@@ -411,7 +411,7 @@ type LBListenerInitParameters struct {
 	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
 
 	// Reference to a LB in elbv2 to populate loadBalancerArn.
@@ -501,7 +501,7 @@ type LBListenerParameters struct {
 	DefaultAction []DefaultActionParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
 	// +kubebuilder:validation:Optional
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
 
@@ -694,7 +694,7 @@ type StickinessParameters struct {
 type TargetGroupInitParameters struct {
 
 	// ARN of the target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a LBTargetGroup in elbv2 to populate arn.
@@ -721,7 +721,7 @@ type TargetGroupObservation struct {
 type TargetGroupParameters struct {
 
 	// ARN of the target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 

@@ -19,7 +19,7 @@ type KinesisStreamingDestinationInitParameters struct {
 	ApproximateCreationDateTimePrecision *string `json:"approximateCreationDateTimePrecision,omitempty" tf:"approximate_creation_date_time_precision,omitempty"`
 
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
@@ -32,7 +32,7 @@ type KinesisStreamingDestinationInitParameters struct {
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table. There can only be one Kinesis streaming destination for a given DynamoDB table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Reference to a Table in dynamodb to populate tableName.
@@ -71,7 +71,7 @@ type KinesisStreamingDestinationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
@@ -85,7 +85,7 @@ type KinesisStreamingDestinationParameters struct {
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table. There can only be one Kinesis streaming destination for a given DynamoDB table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 

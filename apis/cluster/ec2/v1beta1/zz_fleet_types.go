@@ -359,7 +359,7 @@ type FleetSpotOptionsParameters struct {
 type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 
 	// The ID of the launch template.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.LaunchTemplate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 
@@ -375,7 +375,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
 	// The launch template version number, $Latest, or $Default.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.LaunchTemplate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("latest_version",true)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -403,7 +403,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationObservation struct {
 type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 
 	// The ID of the launch template.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.LaunchTemplate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
@@ -421,7 +421,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
 
 	// The launch template version number, $Latest, or $Default.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.LaunchTemplate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("latest_version",true)
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`

@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
-	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
-	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
-	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
+	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/cluster"
+	configuration "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/configuration"
+	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/scramsecretassociation"
+	serverlesscluster "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/serverlesscluster"
 )
 
 // Setup_kafka creates all controllers with the supplied logger and adds them to

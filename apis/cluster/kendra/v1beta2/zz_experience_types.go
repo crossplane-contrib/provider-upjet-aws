@@ -111,7 +111,7 @@ type ExperienceInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The identifier of the index for your Amazon Kendra experience.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta2.Index
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta2.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
@@ -127,7 +127,7 @@ type ExperienceInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and AWS SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -184,7 +184,7 @@ type ExperienceParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The identifier of the index for your Amazon Kendra experience.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta2.Index
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta2.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
@@ -207,7 +207,7 @@ type ExperienceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and AWS SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`

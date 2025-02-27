@@ -120,6 +120,8 @@ func (tr *DeliveryStream) LateInitialize(attrs []byte) (bool, error) {
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("ServerSideEncryption"))
 	opts = append(opts, resource.WithNameFilter("VersionID"))
+	opts = append(opts, resource.WithNameFilter("ServerSideEncryption"))
+	opts = append(opts, resource.WithNameFilter("VersionID"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

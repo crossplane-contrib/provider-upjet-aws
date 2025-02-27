@@ -117,7 +117,7 @@ type EventSourceMappingInitParameters struct {
 	FilterCriteria *FilterCriteriaInitParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
 	// The name or the ARN of the Lambda function that will be subscribing to events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
@@ -134,7 +134,7 @@ type EventSourceMappingInitParameters struct {
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
 	// The ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's filter criteria.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyArn.
@@ -345,7 +345,7 @@ type EventSourceMappingParameters struct {
 	FilterCriteria *FilterCriteriaParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
 	// The name or the ARN of the Lambda function that will be subscribing to events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -364,7 +364,7 @@ type EventSourceMappingParameters struct {
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
 	// The ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's filter criteria.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 

@@ -83,7 +83,7 @@ type RuleParameters struct {
 type RulePredicateInitParameters struct {
 
 	// The unique identifier of a predicate, such as the ID of a ByteMatchSet or IPSet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.IPSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.IPSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
 
@@ -117,7 +117,7 @@ type RulePredicateObservation struct {
 type RulePredicateParameters struct {
 
 	// The unique identifier of a predicate, such as the ID of a ByteMatchSet or IPSet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.IPSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.IPSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`

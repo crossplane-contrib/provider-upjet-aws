@@ -49,7 +49,7 @@ type DomainPermissionsPolicyObservation struct {
 type DomainPermissionsPolicyParameters struct {
 
 	// The name of the domain on which to set the resource policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codeartifact/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codeartifact/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",true)
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`

@@ -25,7 +25,7 @@ type MemberInitParameters struct {
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// ARN of the behavior graph to invite the member accounts to contribute their data to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/detective/v1beta1.Graph
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
@@ -94,7 +94,7 @@ type MemberParameters struct {
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// ARN of the behavior graph to invite the member accounts to contribute their data to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/detective/v1beta1.Graph
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`

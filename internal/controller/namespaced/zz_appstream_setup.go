@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	directoryconfig "github.com/upbound/provider-aws/internal/controller/appstream/directoryconfig"
-	fleet "github.com/upbound/provider-aws/internal/controller/appstream/fleet"
-	fleetstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/fleetstackassociation"
-	imagebuilder "github.com/upbound/provider-aws/internal/controller/appstream/imagebuilder"
-	stack "github.com/upbound/provider-aws/internal/controller/appstream/stack"
-	user "github.com/upbound/provider-aws/internal/controller/appstream/user"
-	userstackassociation "github.com/upbound/provider-aws/internal/controller/appstream/userstackassociation"
+	directoryconfig "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/directoryconfig"
+	fleet "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/fleet"
+	fleetstackassociation "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/fleetstackassociation"
+	imagebuilder "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/imagebuilder"
+	stack "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/stack"
+	user "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/user"
+	userstackassociation "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/userstackassociation"
 )
 
 // Setup_appstream creates all controllers with the supplied logger and adds them to

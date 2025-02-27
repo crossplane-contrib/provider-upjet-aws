@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
-	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
+	budget "github.com/upbound/provider-aws/internal/controller/cluster/budgets/budget"
+	budgetaction "github.com/upbound/provider-aws/internal/controller/cluster/budgets/budgetaction"
 )
 
 // Setup_budgets creates all controllers with the supplied logger and adds them to

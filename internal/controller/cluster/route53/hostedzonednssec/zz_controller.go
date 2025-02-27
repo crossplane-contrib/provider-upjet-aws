@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-aws/apis/route53/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/cluster/route53/v1beta1"
 	features "github.com/upbound/provider-aws/internal/features"
 )
 

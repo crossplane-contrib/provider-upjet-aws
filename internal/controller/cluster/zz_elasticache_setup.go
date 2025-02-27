@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
-	globalreplicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/globalreplicationgroup"
-	parametergroup "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
-	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
-	serverlesscache "github.com/upbound/provider-aws/internal/controller/elasticache/serverlesscache"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
-	user "github.com/upbound/provider-aws/internal/controller/elasticache/user"
-	usergroup "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
+	cluster "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/cluster"
+	globalreplicationgroup "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/globalreplicationgroup"
+	parametergroup "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/parametergroup"
+	replicationgroup "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/replicationgroup"
+	serverlesscache "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/serverlesscache"
+	subnetgroup "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/subnetgroup"
+	user "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/user"
+	usergroup "github.com/upbound/provider-aws/internal/controller/cluster/elasticache/usergroup"
 )
 
 // Setup_elasticache creates all controllers with the supplied logger and adds them to

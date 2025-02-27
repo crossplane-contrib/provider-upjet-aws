@@ -119,6 +119,7 @@ func (tr *GatewayAssociation) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("AssociatedGatewayOwnerAccountID"))
+	opts = append(opts, resource.WithNameFilter("AssociatedGatewayOwnerAccountID"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

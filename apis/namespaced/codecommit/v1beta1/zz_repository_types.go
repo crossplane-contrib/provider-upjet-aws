@@ -22,7 +22,7 @@ type RepositoryInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ARN of the encryption key. If no key is specified, the default aws/codecommit Amazon Web Services managed key is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -83,7 +83,7 @@ type RepositoryParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ARN of the encryption key. If no key is specified, the default aws/codecommit Amazon Web Services managed key is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

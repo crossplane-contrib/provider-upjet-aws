@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	framework "github.com/upbound/provider-aws/internal/controller/backup/framework"
-	globalsettings "github.com/upbound/provider-aws/internal/controller/backup/globalsettings"
-	plan "github.com/upbound/provider-aws/internal/controller/backup/plan"
-	regionsettings "github.com/upbound/provider-aws/internal/controller/backup/regionsettings"
-	reportplan "github.com/upbound/provider-aws/internal/controller/backup/reportplan"
-	selection "github.com/upbound/provider-aws/internal/controller/backup/selection"
-	vault "github.com/upbound/provider-aws/internal/controller/backup/vault"
-	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/backup/vaultlockconfiguration"
-	vaultnotifications "github.com/upbound/provider-aws/internal/controller/backup/vaultnotifications"
-	vaultpolicy "github.com/upbound/provider-aws/internal/controller/backup/vaultpolicy"
+	framework "github.com/upbound/provider-aws/internal/controller/namespaced/backup/framework"
+	globalsettings "github.com/upbound/provider-aws/internal/controller/namespaced/backup/globalsettings"
+	plan "github.com/upbound/provider-aws/internal/controller/namespaced/backup/plan"
+	regionsettings "github.com/upbound/provider-aws/internal/controller/namespaced/backup/regionsettings"
+	reportplan "github.com/upbound/provider-aws/internal/controller/namespaced/backup/reportplan"
+	selection "github.com/upbound/provider-aws/internal/controller/namespaced/backup/selection"
+	vault "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vault"
+	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vaultlockconfiguration"
+	vaultnotifications "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vaultnotifications"
+	vaultpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vaultpolicy"
 )
 
 // Setup_backup creates all controllers with the supplied logger and adds them to

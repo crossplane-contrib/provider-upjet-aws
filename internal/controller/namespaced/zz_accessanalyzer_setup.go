@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	analyzer "github.com/upbound/provider-aws/internal/controller/accessanalyzer/analyzer"
-	archiverule "github.com/upbound/provider-aws/internal/controller/accessanalyzer/archiverule"
+	analyzer "github.com/upbound/provider-aws/internal/controller/namespaced/accessanalyzer/analyzer"
+	archiverule "github.com/upbound/provider-aws/internal/controller/namespaced/accessanalyzer/archiverule"
 )
 
 // Setup_accessanalyzer creates all controllers with the supplied logger and adds them to

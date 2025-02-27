@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	application "github.com/upbound/provider-aws/internal/controller/appconfig/application"
-	configurationprofile "github.com/upbound/provider-aws/internal/controller/appconfig/configurationprofile"
-	deployment "github.com/upbound/provider-aws/internal/controller/appconfig/deployment"
-	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/appconfig/deploymentstrategy"
-	environment "github.com/upbound/provider-aws/internal/controller/appconfig/environment"
-	extension "github.com/upbound/provider-aws/internal/controller/appconfig/extension"
-	extensionassociation "github.com/upbound/provider-aws/internal/controller/appconfig/extensionassociation"
-	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/appconfig/hostedconfigurationversion"
+	application "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/application"
+	configurationprofile "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/configurationprofile"
+	deployment "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/deployment"
+	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/deploymentstrategy"
+	environment "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/environment"
+	extension "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/extension"
+	extensionassociation "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/extensionassociation"
+	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/namespaced/appconfig/hostedconfigurationversion"
 )
 
 // Setup_appconfig creates all controllers with the supplied logger and adds them to

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	ipset "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
-	regexpatternset "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
+	ipset "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/ipset"
+	regexpatternset "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/regexpatternset"
 )
 
 // Setup_wafv2 creates all controllers with the supplied logger and adds them to

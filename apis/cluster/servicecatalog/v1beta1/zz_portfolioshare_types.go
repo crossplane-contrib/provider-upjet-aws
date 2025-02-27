@@ -19,7 +19,7 @@ type PortfolioShareInitParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
@@ -83,7 +83,7 @@ type PortfolioShareParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`

@@ -123,6 +123,11 @@ func (tr *Certificate) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("Options"))
 	opts = append(opts, resource.WithNameFilter("SubjectAlternativeNames"))
 	opts = append(opts, resource.WithNameFilter("ValidationMethod"))
+	opts = append(opts, resource.WithNameFilter("CertificateBody"))
+	opts = append(opts, resource.WithNameFilter("KeyAlgorithm"))
+	opts = append(opts, resource.WithNameFilter("Options"))
+	opts = append(opts, resource.WithNameFilter("SubjectAlternativeNames"))
+	opts = append(opts, resource.WithNameFilter("ValidationMethod"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

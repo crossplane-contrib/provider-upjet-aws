@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	identityprovider "github.com/upbound/provider-aws/internal/controller/cognitoidp/identityprovider"
-	resourceserver "github.com/upbound/provider-aws/internal/controller/cognitoidp/resourceserver"
-	riskconfiguration "github.com/upbound/provider-aws/internal/controller/cognitoidp/riskconfiguration"
-	user "github.com/upbound/provider-aws/internal/controller/cognitoidp/user"
-	usergroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/usergroup"
-	useringroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/useringroup"
-	userpool "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpool"
-	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
-	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
-	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
+	identityprovider "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/identityprovider"
+	resourceserver "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/resourceserver"
+	riskconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/riskconfiguration"
+	user "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/user"
+	usergroup "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/usergroup"
+	useringroup "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/useringroup"
+	userpool "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/userpool"
+	userpoolclient "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/userpoolclient"
+	userpooldomain "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/userpooldomain"
+	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidp/userpooluicustomization"
 )
 
 // Setup_cognitoidp creates all controllers with the supplied logger and adds them to

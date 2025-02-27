@@ -1,0 +1,33 @@
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: LBCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/lbcertificate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    domainName: test.com
+    lbNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    region: us-west-1
+
+---
+
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/lbcertificate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    healthCheckPath: /
+    instancePort: "80"
+    region: us-west-1
+    tags:
+      foo: bar

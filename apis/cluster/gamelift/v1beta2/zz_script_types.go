@@ -93,7 +93,7 @@ type ScriptParameters struct {
 type ScriptStorageLocationInitParameters struct {
 
 	// Name of your S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -105,7 +105,7 @@ type ScriptStorageLocationInitParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the zip file containing your script files.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Object
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
@@ -121,7 +121,7 @@ type ScriptStorageLocationInitParameters struct {
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 
 	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -152,7 +152,7 @@ type ScriptStorageLocationObservation struct {
 type ScriptStorageLocationParameters struct {
 
 	// Name of your S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -165,7 +165,7 @@ type ScriptStorageLocationParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the zip file containing your script files.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Object
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -183,7 +183,7 @@ type ScriptStorageLocationParameters struct {
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 
 	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`

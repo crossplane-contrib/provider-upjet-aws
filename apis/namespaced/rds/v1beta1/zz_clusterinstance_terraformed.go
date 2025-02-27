@@ -121,6 +121,9 @@ func (tr *ClusterInstance) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("DBParameterGroupName"))
 	opts = append(opts, resource.WithNameFilter("EngineVersion"))
 	opts = append(opts, resource.WithNameFilter("PreferredBackupWindow"))
+	opts = append(opts, resource.WithNameFilter("DBParameterGroupName"))
+	opts = append(opts, resource.WithNameFilter("EngineVersion"))
+	opts = append(opts, resource.WithNameFilter("PreferredBackupWindow"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

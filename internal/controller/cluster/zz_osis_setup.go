@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	pipeline "github.com/upbound/provider-aws/internal/controller/osis/pipeline"
+	pipeline "github.com/upbound/provider-aws/internal/controller/cluster/osis/pipeline"
 )
 
 // Setup_osis creates all controllers with the supplied logger and adds them to

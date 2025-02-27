@@ -22,7 +22,7 @@ type ConditionInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Value for the key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Organization
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Organization
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
@@ -58,7 +58,7 @@ type ConditionParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 
 	// Value for the key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Organization
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Organization
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -82,7 +82,7 @@ type PermissionInitParameters struct {
 
 	// The name of the event bus to set the permissions on.
 	// If you omit this, the permissions are set on the default event bus.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
@@ -134,7 +134,7 @@ type PermissionParameters struct {
 
 	// The name of the event bus to set the permissions on.
 	// If you omit this, the permissions are set on the default event bus.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	pipeline "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
-	preset "github.com/upbound/provider-aws/internal/controller/elastictranscoder/preset"
+	pipeline "github.com/upbound/provider-aws/internal/controller/namespaced/elastictranscoder/pipeline"
+	preset "github.com/upbound/provider-aws/internal/controller/namespaced/elastictranscoder/preset"
 )
 
 // Setup_elastictranscoder creates all controllers with the supplied logger and adds them to

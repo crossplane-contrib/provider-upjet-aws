@@ -22,7 +22,7 @@ type ArchiveInitParameters struct {
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
 	// Event bus source ARN from where these events should be archived.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
 
@@ -69,7 +69,7 @@ type ArchiveParameters struct {
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
 	// Event bus source ARN from where these events should be archived.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`

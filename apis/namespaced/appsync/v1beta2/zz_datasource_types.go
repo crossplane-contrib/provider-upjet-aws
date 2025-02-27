@@ -98,7 +98,7 @@ type DatasourceInitParameters struct {
 	RelationalDatabaseConfig *RelationalDatabaseConfigInitParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
 	// IAM service role ARN for the data source. Required if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
@@ -158,7 +158,7 @@ type DatasourceObservation struct {
 type DatasourceParameters struct {
 
 	// API ID for the GraphQL API for the data source.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.GraphQLAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta2.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -210,7 +210,7 @@ type DatasourceParameters struct {
 	RelationalDatabaseConfig *RelationalDatabaseConfigParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
 	// IAM service role ARN for the data source. Required if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
@@ -273,7 +273,7 @@ type DynamodbConfigInitParameters struct {
 	DeltaSyncConfig *DeltaSyncConfigInitParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
 	// Name of the DynamoDB table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Reference to a Table in dynamodb to populate tableName.
@@ -320,7 +320,7 @@ type DynamodbConfigParameters struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Name of the DynamoDB table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 

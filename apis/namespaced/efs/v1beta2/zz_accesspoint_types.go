@@ -16,7 +16,7 @@ import (
 type AccessPointInitParameters struct {
 
 	// ID of the file system for which the access point is intended.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
@@ -73,7 +73,7 @@ type AccessPointObservation struct {
 type AccessPointParameters struct {
 
 	// ID of the file system for which the access point is intended.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 

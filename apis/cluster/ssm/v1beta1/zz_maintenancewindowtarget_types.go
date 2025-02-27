@@ -32,7 +32,7 @@ type MaintenanceWindowTargetInitParameters struct {
 	Targets []MaintenanceWindowTargetTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
 	// The Id of the maintenance window to register the target with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 
@@ -99,7 +99,7 @@ type MaintenanceWindowTargetParameters struct {
 	Targets []MaintenanceWindowTargetTargetsParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
 	// The Id of the maintenance window to register the target with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`

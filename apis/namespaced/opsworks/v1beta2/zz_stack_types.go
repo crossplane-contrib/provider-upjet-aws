@@ -104,7 +104,7 @@ type StackInitParameters struct {
 	DefaultAvailabilityZone *string `json:"defaultAvailabilityZone,omitempty" tf:"default_availability_zone,omitempty"`
 
 	// The ARN of an IAM Instance Profile that created instances will have by default.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	DefaultInstanceProfileArn *string `json:"defaultInstanceProfileArn,omitempty" tf:"default_instance_profile_arn,omitempty"`
 
@@ -127,7 +127,7 @@ type StackInitParameters struct {
 
 	// ID of the subnet in which instances will be created by default.
 	// Required if vpc_id is set to a VPC other than the default VPC, and forbidden if it isn't.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
 	DefaultSubnetID *string `json:"defaultSubnetId,omitempty" tf:"default_subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate defaultSubnetId.
@@ -148,7 +148,7 @@ type StackInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of an IAM role that the OpsWorks service will act as.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
@@ -172,7 +172,7 @@ type StackInitParameters struct {
 
 	// ID of the VPC that this stack belongs to.
 	// Defaults to the region's default VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -304,7 +304,7 @@ type StackParameters struct {
 	DefaultAvailabilityZone *string `json:"defaultAvailabilityZone,omitempty" tf:"default_availability_zone,omitempty"`
 
 	// The ARN of an IAM Instance Profile that created instances will have by default.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DefaultInstanceProfileArn *string `json:"defaultInstanceProfileArn,omitempty" tf:"default_instance_profile_arn,omitempty"`
@@ -331,7 +331,7 @@ type StackParameters struct {
 
 	// ID of the subnet in which instances will be created by default.
 	// Required if vpc_id is set to a VPC other than the default VPC, and forbidden if it isn't.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	DefaultSubnetID *string `json:"defaultSubnetId,omitempty" tf:"default_subnet_id,omitempty"`
 
@@ -360,7 +360,7 @@ type StackParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of an IAM role that the OpsWorks service will act as.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
@@ -388,7 +388,7 @@ type StackParameters struct {
 
 	// ID of the VPC that this stack belongs to.
 	// Defaults to the region's default VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

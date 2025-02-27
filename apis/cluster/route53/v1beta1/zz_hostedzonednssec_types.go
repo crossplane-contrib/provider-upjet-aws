@@ -16,7 +16,7 @@ import (
 type HostedZoneDNSSECInitParameters struct {
 
 	// Identifier of the Route 53 Hosted Zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
 	// Reference to a Zone in route53 to populate hostedZoneId.
@@ -46,7 +46,7 @@ type HostedZoneDNSSECObservation struct {
 type HostedZoneDNSSECParameters struct {
 
 	// Identifier of the Route 53 Hosted Zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
 	// +kubebuilder:validation:Optional
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 

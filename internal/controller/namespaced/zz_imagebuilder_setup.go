@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	component "github.com/upbound/provider-aws/internal/controller/imagebuilder/component"
-	containerrecipe "github.com/upbound/provider-aws/internal/controller/imagebuilder/containerrecipe"
-	distributionconfiguration "github.com/upbound/provider-aws/internal/controller/imagebuilder/distributionconfiguration"
-	image "github.com/upbound/provider-aws/internal/controller/imagebuilder/image"
-	imagepipeline "github.com/upbound/provider-aws/internal/controller/imagebuilder/imagepipeline"
-	imagerecipe "github.com/upbound/provider-aws/internal/controller/imagebuilder/imagerecipe"
-	infrastructureconfiguration "github.com/upbound/provider-aws/internal/controller/imagebuilder/infrastructureconfiguration"
+	component "github.com/upbound/provider-aws/internal/controller/namespaced/imagebuilder/component"
+	containerrecipe "github.com/upbound/provider-aws/internal/controller/namespaced/imagebuilder/containerrecipe"
+	distributionconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/imagebuilder/distributionconfiguration"
+	image "github.com/upbound/provider-aws/internal/controller/namespaced/imagebuilder/image"
+	imagepipeline "github.com/upbound/provider-aws/internal/controller/namespaced/imagebuilder/imagepipeline"
+	imagerecipe "github.com/upbound/provider-aws/internal/controller/namespaced/imagebuilder/imagerecipe"
+	infrastructureconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/imagebuilder/infrastructureconfiguration"
 )
 
 // Setup_imagebuilder creates all controllers with the supplied logger and adds them to

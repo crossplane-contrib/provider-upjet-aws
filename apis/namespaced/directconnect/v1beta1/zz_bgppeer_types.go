@@ -33,7 +33,7 @@ type BGPPeerInitParameters struct {
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
 
 	// The ID of the Direct Connect virtual interface on which to create the BGP peer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.PrivateVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.PrivateVirtualInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 
@@ -111,7 +111,7 @@ type BGPPeerParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the Direct Connect virtual interface on which to create the BGP peer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.PrivateVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.PrivateVirtualInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`

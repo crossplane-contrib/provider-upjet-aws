@@ -9,15 +9,15 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
-	clusterendpoint "github.com/upbound/provider-aws/internal/controller/neptune/clusterendpoint"
-	clusterinstance "github.com/upbound/provider-aws/internal/controller/neptune/clusterinstance"
-	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/neptune/clusterparametergroup"
-	clustersnapshot "github.com/upbound/provider-aws/internal/controller/neptune/clustersnapshot"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
-	globalcluster "github.com/upbound/provider-aws/internal/controller/neptune/globalcluster"
-	parametergroup "github.com/upbound/provider-aws/internal/controller/neptune/parametergroup"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
+	cluster "github.com/upbound/provider-aws/internal/controller/cluster/neptune/cluster"
+	clusterendpoint "github.com/upbound/provider-aws/internal/controller/cluster/neptune/clusterendpoint"
+	clusterinstance "github.com/upbound/provider-aws/internal/controller/cluster/neptune/clusterinstance"
+	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/cluster/neptune/clusterparametergroup"
+	clustersnapshot "github.com/upbound/provider-aws/internal/controller/cluster/neptune/clustersnapshot"
+	eventsubscription "github.com/upbound/provider-aws/internal/controller/cluster/neptune/eventsubscription"
+	globalcluster "github.com/upbound/provider-aws/internal/controller/cluster/neptune/globalcluster"
+	parametergroup "github.com/upbound/provider-aws/internal/controller/cluster/neptune/parametergroup"
+	subnetgroup "github.com/upbound/provider-aws/internal/controller/cluster/neptune/subnetgroup"
 )
 
 // Setup_neptune creates all controllers with the supplied logger and adds them to

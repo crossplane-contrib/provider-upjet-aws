@@ -122,6 +122,10 @@ func (tr *SecurityGroupRule) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("IPv6CidrBlocks"))
 	opts = append(opts, resource.WithNameFilter("Self"))
 	opts = append(opts, resource.WithNameFilter("SourceSecurityGroupID"))
+	opts = append(opts, resource.WithNameFilter("CidrBlocks"))
+	opts = append(opts, resource.WithNameFilter("IPv6CidrBlocks"))
+	opts = append(opts, resource.WithNameFilter("Self"))
+	opts = append(opts, resource.WithNameFilter("SourceSecurityGroupID"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

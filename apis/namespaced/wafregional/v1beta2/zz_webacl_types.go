@@ -54,7 +54,7 @@ type DefaultActionParameters struct {
 type LoggingConfigurationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
@@ -82,7 +82,7 @@ type LoggingConfigurationObservation struct {
 type LoggingConfigurationParameters struct {
 
 	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
@@ -180,7 +180,7 @@ type RuleInitParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// ID of the associated WAF (Regional) rule (e.g., aws_wafregional_rule). WAF (Global) rules cannot be used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.Rule
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.Rule
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 
@@ -231,7 +231,7 @@ type RuleParameters struct {
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// ID of the associated WAF (Regional) rule (e.g., aws_wafregional_rule). WAF (Global) rules cannot be used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.Rule
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.Rule
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`

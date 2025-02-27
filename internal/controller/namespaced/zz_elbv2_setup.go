@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	lb "github.com/upbound/provider-aws/internal/controller/elbv2/lb"
-	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
-	lblistenercertificate "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenercertificate"
-	lblistenerrule "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenerrule"
-	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
-	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
-	lbtruststore "github.com/upbound/provider-aws/internal/controller/elbv2/lbtruststore"
+	lb "github.com/upbound/provider-aws/internal/controller/namespaced/elbv2/lb"
+	lblistener "github.com/upbound/provider-aws/internal/controller/namespaced/elbv2/lblistener"
+	lblistenercertificate "github.com/upbound/provider-aws/internal/controller/namespaced/elbv2/lblistenercertificate"
+	lblistenerrule "github.com/upbound/provider-aws/internal/controller/namespaced/elbv2/lblistenerrule"
+	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/namespaced/elbv2/lbtargetgroup"
+	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/namespaced/elbv2/lbtargetgroupattachment"
+	lbtruststore "github.com/upbound/provider-aws/internal/controller/namespaced/elbv2/lbtruststore"
 )
 
 // Setup_elbv2 creates all controllers with the supplied logger and adds them to

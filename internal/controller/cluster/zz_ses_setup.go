@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	activereceiptruleset "github.com/upbound/provider-aws/internal/controller/ses/activereceiptruleset"
-	configurationset "github.com/upbound/provider-aws/internal/controller/ses/configurationset"
-	domaindkim "github.com/upbound/provider-aws/internal/controller/ses/domaindkim"
-	domainidentity "github.com/upbound/provider-aws/internal/controller/ses/domainidentity"
-	domainmailfrom "github.com/upbound/provider-aws/internal/controller/ses/domainmailfrom"
-	emailidentity "github.com/upbound/provider-aws/internal/controller/ses/emailidentity"
-	eventdestination "github.com/upbound/provider-aws/internal/controller/ses/eventdestination"
-	identitynotificationtopic "github.com/upbound/provider-aws/internal/controller/ses/identitynotificationtopic"
-	identitypolicy "github.com/upbound/provider-aws/internal/controller/ses/identitypolicy"
-	receiptfilter "github.com/upbound/provider-aws/internal/controller/ses/receiptfilter"
-	receiptrule "github.com/upbound/provider-aws/internal/controller/ses/receiptrule"
-	receiptruleset "github.com/upbound/provider-aws/internal/controller/ses/receiptruleset"
-	template "github.com/upbound/provider-aws/internal/controller/ses/template"
+	activereceiptruleset "github.com/upbound/provider-aws/internal/controller/cluster/ses/activereceiptruleset"
+	configurationset "github.com/upbound/provider-aws/internal/controller/cluster/ses/configurationset"
+	domaindkim "github.com/upbound/provider-aws/internal/controller/cluster/ses/domaindkim"
+	domainidentity "github.com/upbound/provider-aws/internal/controller/cluster/ses/domainidentity"
+	domainmailfrom "github.com/upbound/provider-aws/internal/controller/cluster/ses/domainmailfrom"
+	emailidentity "github.com/upbound/provider-aws/internal/controller/cluster/ses/emailidentity"
+	eventdestination "github.com/upbound/provider-aws/internal/controller/cluster/ses/eventdestination"
+	identitynotificationtopic "github.com/upbound/provider-aws/internal/controller/cluster/ses/identitynotificationtopic"
+	identitypolicy "github.com/upbound/provider-aws/internal/controller/cluster/ses/identitypolicy"
+	receiptfilter "github.com/upbound/provider-aws/internal/controller/cluster/ses/receiptfilter"
+	receiptrule "github.com/upbound/provider-aws/internal/controller/cluster/ses/receiptrule"
+	receiptruleset "github.com/upbound/provider-aws/internal/controller/cluster/ses/receiptruleset"
+	template "github.com/upbound/provider-aws/internal/controller/cluster/ses/template"
 )
 
 // Setup_ses creates all controllers with the supplied logger and adds them to

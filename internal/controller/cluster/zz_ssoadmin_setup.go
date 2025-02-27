@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	accountassignment "github.com/upbound/provider-aws/internal/controller/ssoadmin/accountassignment"
-	customermanagedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/customermanagedpolicyattachment"
-	instanceaccesscontrolattributes "github.com/upbound/provider-aws/internal/controller/ssoadmin/instanceaccesscontrolattributes"
-	managedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/managedpolicyattachment"
-	permissionsboundaryattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionsboundaryattachment"
-	permissionset "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionset"
-	permissionsetinlinepolicy "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionsetinlinepolicy"
+	accountassignment "github.com/upbound/provider-aws/internal/controller/cluster/ssoadmin/accountassignment"
+	customermanagedpolicyattachment "github.com/upbound/provider-aws/internal/controller/cluster/ssoadmin/customermanagedpolicyattachment"
+	instanceaccesscontrolattributes "github.com/upbound/provider-aws/internal/controller/cluster/ssoadmin/instanceaccesscontrolattributes"
+	managedpolicyattachment "github.com/upbound/provider-aws/internal/controller/cluster/ssoadmin/managedpolicyattachment"
+	permissionsboundaryattachment "github.com/upbound/provider-aws/internal/controller/cluster/ssoadmin/permissionsboundaryattachment"
+	permissionset "github.com/upbound/provider-aws/internal/controller/cluster/ssoadmin/permissionset"
+	permissionsetinlinepolicy "github.com/upbound/provider-aws/internal/controller/cluster/ssoadmin/permissionsetinlinepolicy"
 )
 
 // Setup_ssoadmin creates all controllers with the supplied logger and adds them to

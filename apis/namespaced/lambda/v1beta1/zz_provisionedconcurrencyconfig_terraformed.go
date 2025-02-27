@@ -119,6 +119,7 @@ func (tr *ProvisionedConcurrencyConfig) LateInitialize(attrs []byte) (bool, erro
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("ProvisionedConcurrentExecutions"))
+	opts = append(opts, resource.WithNameFilter("ProvisionedConcurrentExecutions"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

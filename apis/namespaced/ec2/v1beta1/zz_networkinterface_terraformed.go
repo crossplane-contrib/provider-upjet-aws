@@ -123,6 +123,11 @@ func (tr *NetworkInterface) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("IPv6Addresses"))
 	opts = append(opts, resource.WithNameFilter("PrivateIPList"))
 	opts = append(opts, resource.WithNameFilter("PrivateIps"))
+	opts = append(opts, resource.WithNameFilter("InterfaceType"))
+	opts = append(opts, resource.WithNameFilter("IPv6AddressCount"))
+	opts = append(opts, resource.WithNameFilter("IPv6Addresses"))
+	opts = append(opts, resource.WithNameFilter("PrivateIPList"))
+	opts = append(opts, resource.WithNameFilter("PrivateIps"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

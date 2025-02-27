@@ -119,6 +119,7 @@ func (tr *Stream) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("EnforceConsumerDeletion"))
+	opts = append(opts, resource.WithNameFilter("EnforceConsumerDeletion"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	profilinggroup "github.com/upbound/provider-aws/internal/controller/codeguruprofiler/profilinggroup"
+	profilinggroup "github.com/upbound/provider-aws/internal/controller/namespaced/codeguruprofiler/profilinggroup"
 )
 
 // Setup_codeguruprofiler creates all controllers with the supplied logger and adds them to

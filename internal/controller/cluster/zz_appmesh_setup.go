@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	gatewayroute "github.com/upbound/provider-aws/internal/controller/appmesh/gatewayroute"
-	mesh "github.com/upbound/provider-aws/internal/controller/appmesh/mesh"
-	route "github.com/upbound/provider-aws/internal/controller/appmesh/route"
-	virtualgateway "github.com/upbound/provider-aws/internal/controller/appmesh/virtualgateway"
-	virtualnode "github.com/upbound/provider-aws/internal/controller/appmesh/virtualnode"
-	virtualrouter "github.com/upbound/provider-aws/internal/controller/appmesh/virtualrouter"
-	virtualservice "github.com/upbound/provider-aws/internal/controller/appmesh/virtualservice"
+	gatewayroute "github.com/upbound/provider-aws/internal/controller/cluster/appmesh/gatewayroute"
+	mesh "github.com/upbound/provider-aws/internal/controller/cluster/appmesh/mesh"
+	route "github.com/upbound/provider-aws/internal/controller/cluster/appmesh/route"
+	virtualgateway "github.com/upbound/provider-aws/internal/controller/cluster/appmesh/virtualgateway"
+	virtualnode "github.com/upbound/provider-aws/internal/controller/cluster/appmesh/virtualnode"
+	virtualrouter "github.com/upbound/provider-aws/internal/controller/cluster/appmesh/virtualrouter"
+	virtualservice "github.com/upbound/provider-aws/internal/controller/cluster/appmesh/virtualservice"
 )
 
 // Setup_appmesh creates all controllers with the supplied logger and adds them to

@@ -68,7 +68,7 @@ type ReplicationConfigurationInitParameters struct {
 	Destination *DestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// The ID of the file system that is to be replicated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SourceFileSystemID *string `json:"sourceFileSystemId,omitempty" tf:"source_file_system_id,omitempty"`
 
@@ -117,7 +117,7 @@ type ReplicationConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the file system that is to be replicated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceFileSystemID *string `json:"sourceFileSystemId,omitempty" tf:"source_file_system_id,omitempty"`

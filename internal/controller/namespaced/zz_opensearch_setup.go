@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	domain "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
-	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
-	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
+	domain "github.com/upbound/provider-aws/internal/controller/namespaced/opensearch/domain"
+	domainpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/opensearch/domainpolicy"
+	domainsamloptions "github.com/upbound/provider-aws/internal/controller/namespaced/opensearch/domainsamloptions"
 )
 
 // Setup_opensearch creates all controllers with the supplied logger and adds them to

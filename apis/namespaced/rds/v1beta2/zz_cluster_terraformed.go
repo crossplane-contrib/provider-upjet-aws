@@ -119,6 +119,7 @@ func (tr *Cluster) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("EnabledCloudwatchLogsExports"))
+	opts = append(opts, resource.WithNameFilter("EnabledCloudwatchLogsExports"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

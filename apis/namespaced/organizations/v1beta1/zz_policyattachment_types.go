@@ -16,7 +16,7 @@ import (
 type PolicyAttachmentInitParameters struct {
 
 	// The unique identifier (ID) of the policy that you want to attach to the target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
 
@@ -51,7 +51,7 @@ type PolicyAttachmentObservation struct {
 type PolicyAttachmentParameters struct {
 
 	// The unique identifier (ID) of the policy that you want to attach to the target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`

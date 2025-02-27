@@ -16,7 +16,7 @@ import (
 type DestinationInitParameters struct {
 
 	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -33,7 +33,7 @@ type DestinationInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ARN of the target Amazon Kinesis stream resource for the destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -76,7 +76,7 @@ type DestinationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -95,7 +95,7 @@ type DestinationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ARN of the target Amazon Kinesis stream resource for the destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`

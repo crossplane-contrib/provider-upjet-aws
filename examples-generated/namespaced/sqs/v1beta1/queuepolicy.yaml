@@ -1,0 +1,30 @@
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: QueuePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queuepolicy
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.test.json}
+    queueUrlSelector:
+      matchLabels:
+        testing.upbound.io/example-name: q
+    region: us-west-1
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queuepolicy
+  labels:
+    testing.upbound.io/example-name: q
+  name: q
+spec:
+  forProvider:
+    name: examplequeue
+    region: us-west-1

@@ -1001,7 +1001,7 @@ type PolicyParameters struct {
 	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
 
 	// Name of the autoscaling group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta3.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 

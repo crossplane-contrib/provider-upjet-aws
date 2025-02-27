@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	environment "github.com/upbound/provider-aws/internal/controller/mwaa/environment"
+	environment "github.com/upbound/provider-aws/internal/controller/namespaced/mwaa/environment"
 )
 
 // Setup_mwaa creates all controllers with the supplied logger and adds them to

@@ -16,7 +16,7 @@ import (
 type ClusterEndpointInitParameters struct {
 
 	// The cluster identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -32,7 +32,7 @@ type ClusterEndpointInitParameters struct {
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
@@ -46,7 +46,7 @@ type ClusterEndpointInitParameters struct {
 	ExcludedMembersSelector *v1.Selector `json:"excludedMembersSelector,omitempty" tf:"-"`
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
@@ -101,7 +101,7 @@ type ClusterEndpointObservation struct {
 type ClusterEndpointParameters struct {
 
 	// The cluster identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
@@ -119,7 +119,7 @@ type ClusterEndpointParameters struct {
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -139,7 +139,7 @@ type ClusterEndpointParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

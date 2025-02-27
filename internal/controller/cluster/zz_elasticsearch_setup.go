@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	domain "github.com/upbound/provider-aws/internal/controller/elasticsearch/domain"
-	domainpolicy "github.com/upbound/provider-aws/internal/controller/elasticsearch/domainpolicy"
-	domainsamloptions "github.com/upbound/provider-aws/internal/controller/elasticsearch/domainsamloptions"
+	domain "github.com/upbound/provider-aws/internal/controller/cluster/elasticsearch/domain"
+	domainpolicy "github.com/upbound/provider-aws/internal/controller/cluster/elasticsearch/domainpolicy"
+	domainsamloptions "github.com/upbound/provider-aws/internal/controller/cluster/elasticsearch/domainsamloptions"
 )
 
 // Setup_elasticsearch creates all controllers with the supplied logger and adds them to

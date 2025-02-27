@@ -40,7 +40,7 @@ type AssociationInitParameters struct {
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
 	// The name of the SSM document to apply.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.Document
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.Document
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Document in ssm to populate name.
@@ -175,7 +175,7 @@ type AssociationParameters struct {
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
 	// The name of the SSM document to apply.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.Document
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.Document
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -268,7 +268,7 @@ type TargetsInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
@@ -297,7 +297,7 @@ type TargetsParameters struct {
 	Key *string `json:"key" tf:"key,omitempty"`
 
 	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`

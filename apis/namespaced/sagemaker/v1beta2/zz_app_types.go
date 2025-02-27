@@ -22,7 +22,7 @@ type AppInitParameters struct {
 	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 
 	// The domain ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta2.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
@@ -45,7 +45,7 @@ type AppInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The user profile name. At least one of user_profile_name or space_name required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta2.UserProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.UserProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
 	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
 
@@ -104,7 +104,7 @@ type AppParameters struct {
 	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 
 	// The domain ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta2.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
@@ -136,7 +136,7 @@ type AppParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The user profile name. At least one of user_profile_name or space_name required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta2.UserProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.UserProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
 	// +kubebuilder:validation:Optional
 	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`

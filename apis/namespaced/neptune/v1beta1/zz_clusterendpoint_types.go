@@ -16,7 +16,7 @@ import (
 type ClusterEndpointInitParameters struct {
 
 	// The DB cluster identifier of the DB cluster associated with the endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta2.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in neptune to populate clusterIdentifier.
@@ -80,7 +80,7 @@ type ClusterEndpointObservation struct {
 type ClusterEndpointParameters struct {
 
 	// The DB cluster identifier of the DB cluster associated with the endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	activity "github.com/upbound/provider-aws/internal/controller/sfn/activity"
-	statemachine "github.com/upbound/provider-aws/internal/controller/sfn/statemachine"
+	activity "github.com/upbound/provider-aws/internal/controller/namespaced/sfn/activity"
+	statemachine "github.com/upbound/provider-aws/internal/controller/namespaced/sfn/statemachine"
 )
 
 // Setup_sfn creates all controllers with the supplied logger and adds them to

@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	awsconfigurationrecorderstatus "github.com/upbound/provider-aws/internal/controller/configservice/awsconfigurationrecorderstatus"
-	configrule "github.com/upbound/provider-aws/internal/controller/configservice/configrule"
-	configurationaggregator "github.com/upbound/provider-aws/internal/controller/configservice/configurationaggregator"
-	configurationrecorder "github.com/upbound/provider-aws/internal/controller/configservice/configurationrecorder"
-	conformancepack "github.com/upbound/provider-aws/internal/controller/configservice/conformancepack"
-	deliverychannel "github.com/upbound/provider-aws/internal/controller/configservice/deliverychannel"
-	remediationconfiguration "github.com/upbound/provider-aws/internal/controller/configservice/remediationconfiguration"
+	awsconfigurationrecorderstatus "github.com/upbound/provider-aws/internal/controller/cluster/configservice/awsconfigurationrecorderstatus"
+	configrule "github.com/upbound/provider-aws/internal/controller/cluster/configservice/configrule"
+	configurationaggregator "github.com/upbound/provider-aws/internal/controller/cluster/configservice/configurationaggregator"
+	configurationrecorder "github.com/upbound/provider-aws/internal/controller/cluster/configservice/configurationrecorder"
+	conformancepack "github.com/upbound/provider-aws/internal/controller/cluster/configservice/conformancepack"
+	deliverychannel "github.com/upbound/provider-aws/internal/controller/cluster/configservice/deliverychannel"
+	remediationconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/configservice/remediationconfiguration"
 )
 
 // Setup_configservice creates all controllers with the supplied logger and adds them to

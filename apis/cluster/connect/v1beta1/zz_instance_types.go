@@ -25,7 +25,7 @@ type InstanceInitParameters struct {
 	ContactLensEnabled *bool `json:"contactLensEnabled,omitempty" tf:"contact_lens_enabled,omitempty"`
 
 	// The identifier for the directory if identity_management_type is EXISTING_DIRECTORY.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta2.Directory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta2.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
 
@@ -131,7 +131,7 @@ type InstanceParameters struct {
 	ContactLensEnabled *bool `json:"contactLensEnabled,omitempty" tf:"contact_lens_enabled,omitempty"`
 
 	// The identifier for the directory if identity_management_type is EXISTING_DIRECTORY.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta2.Directory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta2.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`

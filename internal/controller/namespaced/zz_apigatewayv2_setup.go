@@ -9,18 +9,18 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	api "github.com/upbound/provider-aws/internal/controller/apigatewayv2/api"
-	apimapping "github.com/upbound/provider-aws/internal/controller/apigatewayv2/apimapping"
-	authorizer "github.com/upbound/provider-aws/internal/controller/apigatewayv2/authorizer"
-	deployment "github.com/upbound/provider-aws/internal/controller/apigatewayv2/deployment"
-	domainname "github.com/upbound/provider-aws/internal/controller/apigatewayv2/domainname"
-	integration "github.com/upbound/provider-aws/internal/controller/apigatewayv2/integration"
-	integrationresponse "github.com/upbound/provider-aws/internal/controller/apigatewayv2/integrationresponse"
-	model "github.com/upbound/provider-aws/internal/controller/apigatewayv2/model"
-	route "github.com/upbound/provider-aws/internal/controller/apigatewayv2/route"
-	routeresponse "github.com/upbound/provider-aws/internal/controller/apigatewayv2/routeresponse"
-	stage "github.com/upbound/provider-aws/internal/controller/apigatewayv2/stage"
-	vpclink "github.com/upbound/provider-aws/internal/controller/apigatewayv2/vpclink"
+	api "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/api"
+	apimapping "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/apimapping"
+	authorizer "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/authorizer"
+	deployment "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/deployment"
+	domainname "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/domainname"
+	integration "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/integration"
+	integrationresponse "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/integrationresponse"
+	model "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/model"
+	route "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/route"
+	routeresponse "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/routeresponse"
+	stage "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/stage"
+	vpclink "github.com/upbound/provider-aws/internal/controller/namespaced/apigatewayv2/vpclink"
 )
 
 // Setup_apigatewayv2 creates all controllers with the supplied logger and adds them to

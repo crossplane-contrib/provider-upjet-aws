@@ -119,6 +119,7 @@ func (tr *VPCEndpoint) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("SubnetConfiguration"))
+	opts = append(opts, resource.WithNameFilter("SubnetConfiguration"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

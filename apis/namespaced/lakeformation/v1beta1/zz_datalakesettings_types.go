@@ -80,7 +80,7 @@ type CreateTableDefaultPermissionsParameters struct {
 type DataLakeSettingsInitParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
@@ -172,7 +172,7 @@ type DataLakeSettingsObservation struct {
 type DataLakeSettingsParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set

@@ -16,7 +16,7 @@ import (
 type RoutingControlInitParameters struct {
 
 	// ARN of the cluster in which this routing control will reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
@@ -29,7 +29,7 @@ type RoutingControlInitParameters struct {
 	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this routing control will reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.ControlPanel
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
 
@@ -68,7 +68,7 @@ type RoutingControlObservation struct {
 type RoutingControlParameters struct {
 
 	// ARN of the cluster in which this routing control will reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
@@ -82,7 +82,7 @@ type RoutingControlParameters struct {
 	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this routing control will reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.ControlPanel
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`

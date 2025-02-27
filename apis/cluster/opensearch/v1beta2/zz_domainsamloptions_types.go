@@ -16,7 +16,7 @@ import (
 type DomainSAMLOptionsInitParameters struct {
 
 	// Name of the domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta2.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/opensearch/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
@@ -47,7 +47,7 @@ type DomainSAMLOptionsObservation struct {
 type DomainSAMLOptionsParameters struct {
 
 	// Name of the domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta2.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/opensearch/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`

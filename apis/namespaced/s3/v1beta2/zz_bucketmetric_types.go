@@ -16,7 +16,7 @@ import (
 type BucketMetricFilterInitParameters struct {
 
 	// S3 Access Point ARN for filtering (singular).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta2.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	AccessPoint *string `json:"accessPoint,omitempty" tf:"access_point,omitempty"`
 
@@ -52,7 +52,7 @@ type BucketMetricFilterObservation struct {
 type BucketMetricFilterParameters struct {
 
 	// S3 Access Point ARN for filtering (singular).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta2.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AccessPoint *string `json:"accessPoint,omitempty" tf:"access_point,omitempty"`
@@ -78,7 +78,7 @@ type BucketMetricFilterParameters struct {
 type BucketMetricInitParameters struct {
 
 	// Name of the bucket to put metric configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -114,7 +114,7 @@ type BucketMetricObservation struct {
 type BucketMetricParameters struct {
 
 	// Name of the bucket to put metric configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`

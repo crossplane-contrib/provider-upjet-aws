@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	vault "github.com/upbound/provider-aws/internal/controller/glacier/vault"
-	vaultlock "github.com/upbound/provider-aws/internal/controller/glacier/vaultlock"
+	vault "github.com/upbound/provider-aws/internal/controller/namespaced/glacier/vault"
+	vaultlock "github.com/upbound/provider-aws/internal/controller/namespaced/glacier/vaultlock"
 )
 
 // Setup_glacier creates all controllers with the supplied logger and adds them to

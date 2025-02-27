@@ -120,6 +120,8 @@ func (tr *BucketACL) LateInitialize(attrs []byte) (bool, error) {
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("AccessControlPolicy"))
 	opts = append(opts, resource.WithNameFilter("ACL"))
+	opts = append(opts, resource.WithNameFilter("AccessControlPolicy"))
+	opts = append(opts, resource.WithNameFilter("ACL"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

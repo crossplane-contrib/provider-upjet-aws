@@ -120,6 +120,8 @@ func (tr *ObjectCopy) LateInitialize(attrs []byte) (bool, error) {
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("ACL"))
 	opts = append(opts, resource.WithNameFilter("Grant"))
+	opts = append(opts, resource.WithNameFilter("ACL"))
+	opts = append(opts, resource.WithNameFilter("Grant"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

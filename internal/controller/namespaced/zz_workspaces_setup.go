@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	directory "github.com/upbound/provider-aws/internal/controller/workspaces/directory"
-	ipgroup "github.com/upbound/provider-aws/internal/controller/workspaces/ipgroup"
+	directory "github.com/upbound/provider-aws/internal/controller/namespaced/workspaces/directory"
+	ipgroup "github.com/upbound/provider-aws/internal/controller/namespaced/workspaces/ipgroup"
 )
 
 // Setup_workspaces creates all controllers with the supplied logger and adds them to

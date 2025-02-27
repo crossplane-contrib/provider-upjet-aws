@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	datasource "github.com/upbound/provider-aws/internal/controller/kendra/datasource"
-	experience "github.com/upbound/provider-aws/internal/controller/kendra/experience"
-	index "github.com/upbound/provider-aws/internal/controller/kendra/index"
-	querysuggestionsblocklist "github.com/upbound/provider-aws/internal/controller/kendra/querysuggestionsblocklist"
-	thesaurus "github.com/upbound/provider-aws/internal/controller/kendra/thesaurus"
+	datasource "github.com/upbound/provider-aws/internal/controller/namespaced/kendra/datasource"
+	experience "github.com/upbound/provider-aws/internal/controller/namespaced/kendra/experience"
+	index "github.com/upbound/provider-aws/internal/controller/namespaced/kendra/index"
+	querysuggestionsblocklist "github.com/upbound/provider-aws/internal/controller/namespaced/kendra/querysuggestionsblocklist"
+	thesaurus "github.com/upbound/provider-aws/internal/controller/namespaced/kendra/thesaurus"
 )
 
 // Setup_kendra creates all controllers with the supplied logger and adds them to

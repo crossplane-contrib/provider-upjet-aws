@@ -122,7 +122,7 @@ type FeatureParameters struct {
 	EvaluationStrategy *string `json:"evaluationStrategy,omitempty" tf:"evaluation_strategy,omitempty"`
 
 	// The name or ARN of the project that is to contain the new feature.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/evidently/v1beta2.Project
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/evidently/v1beta2.Project
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Project *string `json:"project,omitempty" tf:"project,omitempty"`

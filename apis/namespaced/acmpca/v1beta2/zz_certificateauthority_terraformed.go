@@ -119,6 +119,7 @@ func (tr *CertificateAuthority) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("RevocationConfiguration"))
+	opts = append(opts, resource.WithNameFilter("RevocationConfiguration"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

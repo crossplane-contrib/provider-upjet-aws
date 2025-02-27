@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
-	cluster "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
-	endpointaccess "github.com/upbound/provider-aws/internal/controller/redshift/endpointaccess"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
-	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/redshift/hsmclientcertificate"
-	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/redshift/hsmconfiguration"
-	parametergroup "github.com/upbound/provider-aws/internal/controller/redshift/parametergroup"
-	scheduledaction "github.com/upbound/provider-aws/internal/controller/redshift/scheduledaction"
-	snapshotcopygrant "github.com/upbound/provider-aws/internal/controller/redshift/snapshotcopygrant"
-	snapshotschedule "github.com/upbound/provider-aws/internal/controller/redshift/snapshotschedule"
-	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
-	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
+	authenticationprofile "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/authenticationprofile"
+	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/cluster"
+	endpointaccess "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/endpointaccess"
+	eventsubscription "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/eventsubscription"
+	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/hsmclientcertificate"
+	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/hsmconfiguration"
+	parametergroup "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/parametergroup"
+	scheduledaction "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/scheduledaction"
+	snapshotcopygrant "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/snapshotcopygrant"
+	snapshotschedule "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/snapshotschedule"
+	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/snapshotscheduleassociation"
+	subnetgroup "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/subnetgroup"
+	usagelimit "github.com/upbound/provider-aws/internal/controller/namespaced/redshift/usagelimit"
 )
 
 // Setup_redshift creates all controllers with the supplied logger and adds them to

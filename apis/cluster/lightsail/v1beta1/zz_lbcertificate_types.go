@@ -75,7 +75,7 @@ type LBCertificateParameters struct {
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The load balancer name where you want to create the SSL/TLS certificate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lightsail/v1beta1.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`

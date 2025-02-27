@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	endpoint "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
-	rule "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
-	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
+	endpoint "github.com/upbound/provider-aws/internal/controller/cluster/route53resolver/endpoint"
+	rule "github.com/upbound/provider-aws/internal/controller/cluster/route53resolver/rule"
+	ruleassociation "github.com/upbound/provider-aws/internal/controller/cluster/route53resolver/ruleassociation"
 )
 
 // Setup_route53resolver creates all controllers with the supplied logger and adds them to

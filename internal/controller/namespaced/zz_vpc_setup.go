@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/vpc/networkperformancemetricsubscription"
+	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/namespaced/vpc/networkperformancemetricsubscription"
 )
 
 // Setup_vpc creates all controllers with the supplied logger and adds them to

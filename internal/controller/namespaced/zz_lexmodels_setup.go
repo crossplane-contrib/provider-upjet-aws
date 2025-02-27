@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	bot "github.com/upbound/provider-aws/internal/controller/lexmodels/bot"
-	botalias "github.com/upbound/provider-aws/internal/controller/lexmodels/botalias"
-	intent "github.com/upbound/provider-aws/internal/controller/lexmodels/intent"
-	slottype "github.com/upbound/provider-aws/internal/controller/lexmodels/slottype"
+	bot "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/bot"
+	botalias "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/botalias"
+	intent "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/intent"
+	slottype "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/slottype"
 )
 
 // Setup_lexmodels creates all controllers with the supplied logger and adds them to

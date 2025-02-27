@@ -16,7 +16,7 @@ import (
 type VPCAssociationAuthorizationInitParameters struct {
 
 	// The VPC to authorize for association with the private hosted zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -31,7 +31,7 @@ type VPCAssociationAuthorizationInitParameters struct {
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 
 	// The ID of the private hosted zone that you want to authorize associating a VPC with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in route53 to populate zoneId.
@@ -66,7 +66,7 @@ type VPCAssociationAuthorizationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The VPC to authorize for association with the private hosted zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -83,7 +83,7 @@ type VPCAssociationAuthorizationParameters struct {
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 
 	// The ID of the private hosted zone that you want to authorize associating a VPC with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

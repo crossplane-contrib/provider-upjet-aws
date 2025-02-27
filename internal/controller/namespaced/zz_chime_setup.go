@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	voiceconnector "github.com/upbound/provider-aws/internal/controller/chime/voiceconnector"
-	voiceconnectorgroup "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorgroup"
-	voiceconnectorlogging "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorlogging"
-	voiceconnectororigination "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectororigination"
-	voiceconnectorstreaming "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorstreaming"
-	voiceconnectortermination "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectortermination"
-	voiceconnectorterminationcredentials "github.com/upbound/provider-aws/internal/controller/chime/voiceconnectorterminationcredentials"
+	voiceconnector "github.com/upbound/provider-aws/internal/controller/namespaced/chime/voiceconnector"
+	voiceconnectorgroup "github.com/upbound/provider-aws/internal/controller/namespaced/chime/voiceconnectorgroup"
+	voiceconnectorlogging "github.com/upbound/provider-aws/internal/controller/namespaced/chime/voiceconnectorlogging"
+	voiceconnectororigination "github.com/upbound/provider-aws/internal/controller/namespaced/chime/voiceconnectororigination"
+	voiceconnectorstreaming "github.com/upbound/provider-aws/internal/controller/namespaced/chime/voiceconnectorstreaming"
+	voiceconnectortermination "github.com/upbound/provider-aws/internal/controller/namespaced/chime/voiceconnectortermination"
+	voiceconnectorterminationcredentials "github.com/upbound/provider-aws/internal/controller/namespaced/chime/voiceconnectorterminationcredentials"
 )
 
 // Setup_chime creates all controllers with the supplied logger and adds them to

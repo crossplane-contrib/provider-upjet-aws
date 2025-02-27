@@ -105,7 +105,7 @@ type As2ConfigParameters struct {
 type ConnectorInitParameters struct {
 
 	// The IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	AccessRole *string `json:"accessRole,omitempty" tf:"access_role,omitempty"`
 
@@ -176,7 +176,7 @@ type ConnectorObservation struct {
 type ConnectorParameters struct {
 
 	// The IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AccessRole *string `json:"accessRole,omitempty" tf:"access_role,omitempty"`
@@ -227,7 +227,7 @@ type SftpConfigInitParameters struct {
 	TrustedHostKeys []*string `json:"trustedHostKeys,omitempty" tf:"trusted_host_keys,omitempty"`
 
 	// The identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	UserSecretID *string `json:"userSecretId,omitempty" tf:"user_secret_id,omitempty"`
 
@@ -258,7 +258,7 @@ type SftpConfigParameters struct {
 	TrustedHostKeys []*string `json:"trustedHostKeys,omitempty" tf:"trusted_host_keys,omitempty"`
 
 	// The identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserSecretID *string `json:"userSecretId,omitempty" tf:"user_secret_id,omitempty"`

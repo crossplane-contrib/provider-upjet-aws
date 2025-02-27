@@ -1,0 +1,20 @@
+apiVersion: lambda.aws.upbound.io/v1beta2
+kind: CodeSigningConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta2/codesigningconfig
+  labels:
+    testing.upbound.io/example-name: new_csc
+  name: new-csc
+spec:
+  forProvider:
+    allowedPublishers:
+    - signingProfileVersionArnsRefs:
+      - name: example1
+      - name: example2
+    description: My awesome code signing config.
+    policies:
+    - untrustedArtifactOnDeployment: Warn
+    region: us-west-1
+    tags:
+      Name: dynamodb

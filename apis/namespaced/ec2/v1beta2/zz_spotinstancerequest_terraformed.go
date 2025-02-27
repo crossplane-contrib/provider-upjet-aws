@@ -123,6 +123,11 @@ func (tr *SpotInstanceRequest) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("SpotType"))
 	opts = append(opts, resource.WithNameFilter("ValidFrom"))
 	opts = append(opts, resource.WithNameFilter("ValidUntil"))
+	opts = append(opts, resource.WithNameFilter("InstanceInterruptionBehavior"))
+	opts = append(opts, resource.WithNameFilter("SourceDestCheck"))
+	opts = append(opts, resource.WithNameFilter("SpotType"))
+	opts = append(opts, resource.WithNameFilter("ValidFrom"))
+	opts = append(opts, resource.WithNameFilter("ValidUntil"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

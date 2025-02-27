@@ -43,7 +43,7 @@ type BackendEnvironmentObservation struct {
 type BackendEnvironmentParameters struct {
 
 	// Unique ID for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta2.App
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amplify/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`

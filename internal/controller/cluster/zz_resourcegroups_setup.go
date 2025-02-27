@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	group "github.com/upbound/provider-aws/internal/controller/resourcegroups/group"
+	group "github.com/upbound/provider-aws/internal/controller/cluster/resourcegroups/group"
 )
 
 // Setup_resourcegroups creates all controllers with the supplied logger and adds them to

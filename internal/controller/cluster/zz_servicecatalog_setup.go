@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	budgetresourceassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/budgetresourceassociation"
-	constraint "github.com/upbound/provider-aws/internal/controller/servicecatalog/constraint"
-	portfolio "github.com/upbound/provider-aws/internal/controller/servicecatalog/portfolio"
-	portfolioshare "github.com/upbound/provider-aws/internal/controller/servicecatalog/portfolioshare"
-	principalportfolioassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/principalportfolioassociation"
-	product "github.com/upbound/provider-aws/internal/controller/servicecatalog/product"
-	productportfolioassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/productportfolioassociation"
-	provisioningartifact "github.com/upbound/provider-aws/internal/controller/servicecatalog/provisioningartifact"
-	serviceaction "github.com/upbound/provider-aws/internal/controller/servicecatalog/serviceaction"
-	tagoption "github.com/upbound/provider-aws/internal/controller/servicecatalog/tagoption"
-	tagoptionresourceassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/tagoptionresourceassociation"
+	budgetresourceassociation "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/budgetresourceassociation"
+	constraint "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/constraint"
+	portfolio "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/portfolio"
+	portfolioshare "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/portfolioshare"
+	principalportfolioassociation "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/principalportfolioassociation"
+	product "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/product"
+	productportfolioassociation "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/productportfolioassociation"
+	provisioningartifact "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/provisioningartifact"
+	serviceaction "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/serviceaction"
+	tagoption "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/tagoption"
+	tagoptionresourceassociation "github.com/upbound/provider-aws/internal/controller/cluster/servicecatalog/tagoptionresourceassociation"
 )
 
 // Setup_servicecatalog creates all controllers with the supplied logger and adds them to

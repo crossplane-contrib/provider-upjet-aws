@@ -119,6 +119,7 @@ func (tr *RedshiftServerlessNamespace) LateInitialize(attrs []byte) (bool, error
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("KMSKeyID"))
+	opts = append(opts, resource.WithNameFilter("KMSKeyID"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
-	registry "github.com/upbound/provider-aws/internal/controller/schemas/registry"
-	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
+	discoverer "github.com/upbound/provider-aws/internal/controller/namespaced/schemas/discoverer"
+	registry "github.com/upbound/provider-aws/internal/controller/namespaced/schemas/registry"
+	schema "github.com/upbound/provider-aws/internal/controller/namespaced/schemas/schema"
 )
 
 // Setup_schemas creates all controllers with the supplied logger and adds them to

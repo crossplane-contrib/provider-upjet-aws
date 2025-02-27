@@ -121,6 +121,9 @@ func (tr *FlowLog) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("LogDestination"))
 	opts = append(opts, resource.WithNameFilter("LogFormat"))
 	opts = append(opts, resource.WithNameFilter("LogGroupName"))
+	opts = append(opts, resource.WithNameFilter("LogDestination"))
+	opts = append(opts, resource.WithNameFilter("LogFormat"))
+	opts = append(opts, resource.WithNameFilter("LogGroupName"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

@@ -24,7 +24,7 @@ type AddonInitParameters struct {
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
 	// –  Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in eks to populate clusterName.
@@ -59,7 +59,7 @@ type AddonInitParameters struct {
 	// an existing IAM role, then the add-on uses the permissions assigned to the node
 	// IAM role. For more information, see Amazon EKS node IAM role
 	// in the Amazon EKS User Guide.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
 
@@ -149,7 +149,7 @@ type AddonParameters struct {
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
 	// –  Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -196,7 +196,7 @@ type AddonParameters struct {
 	// an existing IAM role, then the add-on uses the permissions assigned to the node
 	// IAM role. For more information, see Amazon EKS node IAM role
 	// in the Amazon EKS User Guide.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`

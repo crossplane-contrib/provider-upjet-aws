@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	group "github.com/upbound/provider-aws/internal/controller/identitystore/group"
-	groupmembership "github.com/upbound/provider-aws/internal/controller/identitystore/groupmembership"
-	user "github.com/upbound/provider-aws/internal/controller/identitystore/user"
+	group "github.com/upbound/provider-aws/internal/controller/cluster/identitystore/group"
+	groupmembership "github.com/upbound/provider-aws/internal/controller/cluster/identitystore/groupmembership"
+	user "github.com/upbound/provider-aws/internal/controller/cluster/identitystore/user"
 )
 
 // Setup_identitystore creates all controllers with the supplied logger and adds them to

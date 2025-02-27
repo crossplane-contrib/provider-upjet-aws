@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
+	deliverystream "github.com/upbound/provider-aws/internal/controller/namespaced/firehose/deliverystream"
 )
 
 // Setup_firehose creates all controllers with the supplied logger and adds them to

@@ -19,7 +19,7 @@ type FileSystemPolicyInitParameters struct {
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// The ID of the EFS file system.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
@@ -56,7 +56,7 @@ type FileSystemPolicyParameters struct {
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// The ID of the EFS file system.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 

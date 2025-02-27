@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	domain "github.com/upbound/provider-aws/internal/controller/codeartifact/domain"
-	domainpermissionspolicy "github.com/upbound/provider-aws/internal/controller/codeartifact/domainpermissionspolicy"
-	repository "github.com/upbound/provider-aws/internal/controller/codeartifact/repository"
-	repositorypermissionspolicy "github.com/upbound/provider-aws/internal/controller/codeartifact/repositorypermissionspolicy"
+	domain "github.com/upbound/provider-aws/internal/controller/namespaced/codeartifact/domain"
+	domainpermissionspolicy "github.com/upbound/provider-aws/internal/controller/namespaced/codeartifact/domainpermissionspolicy"
+	repository "github.com/upbound/provider-aws/internal/controller/namespaced/codeartifact/repository"
+	repositorypermissionspolicy "github.com/upbound/provider-aws/internal/controller/namespaced/codeartifact/repositorypermissionspolicy"
 )
 
 // Setup_codeartifact creates all controllers with the supplied logger and adds them to

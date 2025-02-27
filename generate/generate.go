@@ -26,17 +26,19 @@
 // that prevent us from using it for generator program.
 
 // Run Terrajet generator
-//go:generate go run ../cmd/generator/main.go ../apis/..
+//go:generate go run ../cmd/generator/main.go ..
 
 // Generate deepcopy methodsets and CRD manifests
-//go:generate go run -tags generate sigs.k8s.io/controller-tools/cmd/controller-gen object:headerFile=../hack/boilerplate.go.txt paths=../apis/... crd:allowDangerousTypes=true,crdVersions=v1 output:artifacts:config=../package/crds
+//go:generate go run -tags generate sigs.k8s.io/controller-tools/cmd/controller-gen object:headerFile=../hack/boilerplate.go.txt paths=../apis/cluster/... crd:allowDangerousTypes=true,crdVersions=v1 output:artifacts:config=../package/crds/cluster
+//go:generate go run -tags generate sigs.k8s.io/controller-tools/cmd/controller-gen object:headerFile=../hack/boilerplate.go.txt paths=../apis/namespaced/... crd:allowDangerousTypes=true,crdVersions=v1 output:artifacts:config=../package/crds/namespaced
 
 // Generate crossplane-runtime methodsets (resource.Claim, etc)
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ../apis/...
 
 // Run upjet's transformer for the generated resolvers to get rid of the cross
 // API-group imports and to prevent import cycles
-//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.upbound.io -a github.com/upbound/provider-aws/internal/apis -s -p ../apis/...
+//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.upbound.io -a github.com/upbound/provider-aws/internal/apis -s -p ../apis/cluster/...
+//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.upbound.io -a github.com/upbound/provider-aws/internal/apis -s -p ../apis/namespaced/...
 
 package apis
 

@@ -1,0 +1,13 @@
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: Disk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/disk
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.available.names[0]}
+    region: us-west-1
+    sizeInGb: 8

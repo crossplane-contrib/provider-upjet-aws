@@ -16,7 +16,7 @@ import (
 type PatchGroupInitParameters struct {
 
 	// The ID of the patch baseline to register the patch group with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
 
@@ -47,7 +47,7 @@ type PatchGroupObservation struct {
 type PatchGroupParameters struct {
 
 	// The ID of the patch baseline to register the patch group with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`

@@ -58,7 +58,7 @@ type GrantInitParameters struct {
 	GrantCreationTokens []*string `json:"grantCreationTokens,omitempty" tf:"grant_creation_tokens,omitempty"`
 
 	// The principal that is given permission to perform the operations that the grant permits in ARN format.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	GranteePrincipal *string `json:"granteePrincipal,omitempty" tf:"grantee_principal,omitempty"`
 
@@ -71,7 +71,7 @@ type GrantInitParameters struct {
 	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
 	// The unique identifier for the customer master key (CMK) that the grant applies to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -145,7 +145,7 @@ type GrantParameters struct {
 	GrantCreationTokens []*string `json:"grantCreationTokens,omitempty" tf:"grant_creation_tokens,omitempty"`
 
 	// The principal that is given permission to perform the operations that the grant permits in ARN format.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	GranteePrincipal *string `json:"granteePrincipal,omitempty" tf:"grantee_principal,omitempty"`
@@ -159,7 +159,7 @@ type GrantParameters struct {
 	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
 	// The unique identifier for the customer master key (CMK) that the grant applies to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`

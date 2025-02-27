@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	group "github.com/upbound/provider-aws/internal/controller/quicksight/group"
-	user "github.com/upbound/provider-aws/internal/controller/quicksight/user"
+	group "github.com/upbound/provider-aws/internal/controller/cluster/quicksight/group"
+	user "github.com/upbound/provider-aws/internal/controller/cluster/quicksight/user"
 )
 
 // Setup_quicksight creates all controllers with the supplied logger and adds them to

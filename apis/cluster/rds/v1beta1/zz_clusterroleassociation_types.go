@@ -16,7 +16,7 @@ import (
 type ClusterRoleAssociationInitParameters struct {
 
 	// DB Cluster Identifier to associate with the IAM Role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
@@ -32,7 +32,7 @@ type ClusterRoleAssociationInitParameters struct {
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
 	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -63,7 +63,7 @@ type ClusterRoleAssociationObservation struct {
 type ClusterRoleAssociationParameters struct {
 
 	// DB Cluster Identifier to associate with the IAM Role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
@@ -86,7 +86,7 @@ type ClusterRoleAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`

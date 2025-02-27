@@ -120,6 +120,8 @@ func (tr *VPC) LateInitialize(attrs []byte) (bool, error) {
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("CidrBlock"))
 	opts = append(opts, resource.WithNameFilter("IPv6CidrBlock"))
+	opts = append(opts, resource.WithNameFilter("CidrBlock"))
+	opts = append(opts, resource.WithNameFilter("IPv6CidrBlock"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

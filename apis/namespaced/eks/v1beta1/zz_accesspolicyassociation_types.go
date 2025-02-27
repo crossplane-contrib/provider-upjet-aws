@@ -38,7 +38,7 @@ type AccessPolicyAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessScope *AccessScopeParameters `json:"accessScope,omitempty" tf:"access_scope,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -54,7 +54,7 @@ type AccessPolicyAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	PolicyArn *string `json:"policyArn" tf:"policy_arn,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.AccessEntry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta1.AccessEntry
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_arn",true)
 	// +kubebuilder:validation:Optional
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`

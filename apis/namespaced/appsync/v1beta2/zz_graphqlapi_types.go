@@ -125,7 +125,7 @@ type GraphQLAPIInitParameters struct {
 	LogConfig *LogConfigInitParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
 	// ARN of the execution role when api_type is set to MERGED.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
 
@@ -354,7 +354,7 @@ type GraphQLAPIParameters struct {
 	LogConfig *LogConfigParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
 	// ARN of the execution role when api_type is set to MERGED.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
@@ -422,7 +422,7 @@ type GraphQLAPIUserPoolConfigInitParameters struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// User pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
@@ -465,7 +465,7 @@ type GraphQLAPIUserPoolConfigParameters struct {
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
 	// User pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
@@ -521,7 +521,7 @@ type LambdaAuthorizerConfigParameters struct {
 type LogConfigInitParameters struct {
 
 	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	CloudwatchLogsRoleArn *string `json:"cloudwatchLogsRoleArn,omitempty" tf:"cloudwatch_logs_role_arn,omitempty"`
 
@@ -555,7 +555,7 @@ type LogConfigObservation struct {
 type LogConfigParameters struct {
 
 	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CloudwatchLogsRoleArn *string `json:"cloudwatchLogsRoleArn,omitempty" tf:"cloudwatch_logs_role_arn,omitempty"`

@@ -122,6 +122,10 @@ func (tr *ReplicationGroup) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("Description"))
 	opts = append(opts, resource.WithNameFilter("NumCacheClusters"))
 	opts = append(opts, resource.WithNameFilter("NumNodeGroups"))
+	opts = append(opts, resource.WithNameFilter("ClusterMode"))
+	opts = append(opts, resource.WithNameFilter("Description"))
+	opts = append(opts, resource.WithNameFilter("NumCacheClusters"))
+	opts = append(opts, resource.WithNameFilter("NumNodeGroups"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

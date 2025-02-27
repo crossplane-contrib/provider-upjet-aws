@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	stack "github.com/upbound/provider-aws/internal/controller/cloudformation/stack"
-	stackset "github.com/upbound/provider-aws/internal/controller/cloudformation/stackset"
-	stacksetinstance "github.com/upbound/provider-aws/internal/controller/cloudformation/stacksetinstance"
+	stack "github.com/upbound/provider-aws/internal/controller/namespaced/cloudformation/stack"
+	stackset "github.com/upbound/provider-aws/internal/controller/namespaced/cloudformation/stackset"
+	stacksetinstance "github.com/upbound/provider-aws/internal/controller/namespaced/cloudformation/stacksetinstance"
 )
 
 // Setup_cloudformation creates all controllers with the supplied logger and adds them to

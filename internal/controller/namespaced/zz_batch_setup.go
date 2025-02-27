@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	computeenvironment "github.com/upbound/provider-aws/internal/controller/batch/computeenvironment"
-	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
-	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
-	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	computeenvironment "github.com/upbound/provider-aws/internal/controller/namespaced/batch/computeenvironment"
+	jobdefinition "github.com/upbound/provider-aws/internal/controller/namespaced/batch/jobdefinition"
+	jobqueue "github.com/upbound/provider-aws/internal/controller/namespaced/batch/jobqueue"
+	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/batch/schedulingpolicy"
 )
 
 // Setup_batch creates all controllers with the supplied logger and adds them to

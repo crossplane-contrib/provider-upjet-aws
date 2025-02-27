@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	certificate "github.com/upbound/provider-aws/internal/controller/dms/certificate"
-	endpoint "github.com/upbound/provider-aws/internal/controller/dms/endpoint"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/dms/eventsubscription"
-	replicationinstance "github.com/upbound/provider-aws/internal/controller/dms/replicationinstance"
-	replicationsubnetgroup "github.com/upbound/provider-aws/internal/controller/dms/replicationsubnetgroup"
-	replicationtask "github.com/upbound/provider-aws/internal/controller/dms/replicationtask"
-	s3endpoint "github.com/upbound/provider-aws/internal/controller/dms/s3endpoint"
+	certificate "github.com/upbound/provider-aws/internal/controller/cluster/dms/certificate"
+	endpoint "github.com/upbound/provider-aws/internal/controller/cluster/dms/endpoint"
+	eventsubscription "github.com/upbound/provider-aws/internal/controller/cluster/dms/eventsubscription"
+	replicationinstance "github.com/upbound/provider-aws/internal/controller/cluster/dms/replicationinstance"
+	replicationsubnetgroup "github.com/upbound/provider-aws/internal/controller/cluster/dms/replicationsubnetgroup"
+	replicationtask "github.com/upbound/provider-aws/internal/controller/cluster/dms/replicationtask"
+	s3endpoint "github.com/upbound/provider-aws/internal/controller/cluster/dms/s3endpoint"
 )
 
 // Setup_dms creates all controllers with the supplied logger and adds them to

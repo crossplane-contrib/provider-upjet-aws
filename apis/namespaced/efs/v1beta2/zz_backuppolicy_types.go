@@ -38,7 +38,7 @@ type BackupPolicyInitParameters struct {
 	BackupPolicy *BackupPolicyBackupPolicyInitParameters `json:"backupPolicy,omitempty" tf:"backup_policy,omitempty"`
 
 	// The ID of the EFS file system.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
@@ -69,7 +69,7 @@ type BackupPolicyParameters struct {
 	BackupPolicy *BackupPolicyBackupPolicyParameters `json:"backupPolicy,omitempty" tf:"backup_policy,omitempty"`
 
 	// The ID of the EFS file system.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 

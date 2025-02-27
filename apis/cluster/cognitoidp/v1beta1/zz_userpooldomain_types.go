@@ -16,7 +16,7 @@ import (
 type UserPoolDomainInitParameters struct {
 
 	// The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
@@ -32,7 +32,7 @@ type UserPoolDomainInitParameters struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -79,7 +79,7 @@ type UserPoolDomainObservation struct {
 type UserPoolDomainParameters struct {
 
 	// The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
@@ -102,7 +102,7 @@ type UserPoolDomainParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

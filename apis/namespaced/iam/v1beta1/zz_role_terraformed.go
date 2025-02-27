@@ -120,6 +120,8 @@ func (tr *Role) LateInitialize(attrs []byte) (bool, error) {
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("InlinePolicy"))
 	opts = append(opts, resource.WithNameFilter("ManagedPolicyArns"))
+	opts = append(opts, resource.WithNameFilter("InlinePolicy"))
+	opts = append(opts, resource.WithNameFilter("ManagedPolicyArns"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

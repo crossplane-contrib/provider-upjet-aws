@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	channel "github.com/upbound/provider-aws/internal/controller/medialive/channel"
-	input "github.com/upbound/provider-aws/internal/controller/medialive/input"
-	inputsecuritygroup "github.com/upbound/provider-aws/internal/controller/medialive/inputsecuritygroup"
-	multiplex "github.com/upbound/provider-aws/internal/controller/medialive/multiplex"
+	channel "github.com/upbound/provider-aws/internal/controller/cluster/medialive/channel"
+	input "github.com/upbound/provider-aws/internal/controller/cluster/medialive/input"
+	inputsecuritygroup "github.com/upbound/provider-aws/internal/controller/cluster/medialive/inputsecuritygroup"
+	multiplex "github.com/upbound/provider-aws/internal/controller/cluster/medialive/multiplex"
 )
 
 // Setup_medialive creates all controllers with the supplied logger and adds them to

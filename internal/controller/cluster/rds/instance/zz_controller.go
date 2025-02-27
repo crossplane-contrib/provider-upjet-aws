@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta2 "github.com/upbound/provider-aws/apis/rds/v1beta2"
+	v1beta2 "github.com/upbound/provider-aws/apis/cluster/rds/v1beta2"
 	features "github.com/upbound/provider-aws/internal/features"
 )
 

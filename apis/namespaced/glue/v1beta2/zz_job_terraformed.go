@@ -121,6 +121,9 @@ func (tr *Job) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("MaxCapacity"))
 	opts = append(opts, resource.WithNameFilter("NumberOfWorkers"))
 	opts = append(opts, resource.WithNameFilter("WorkerType"))
+	opts = append(opts, resource.WithNameFilter("MaxCapacity"))
+	opts = append(opts, resource.WithNameFilter("NumberOfWorkers"))
+	opts = append(opts, resource.WithNameFilter("WorkerType"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

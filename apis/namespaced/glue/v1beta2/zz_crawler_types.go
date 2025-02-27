@@ -19,7 +19,7 @@ type CatalogTargetInitParameters struct {
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
 	// Glue database where results are written.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.CatalogDatabase
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
@@ -37,7 +37,7 @@ type CatalogTargetInitParameters struct {
 	EventQueueArn *string `json:"eventQueueArn,omitempty" tf:"event_queue_arn,omitempty"`
 
 	// A list of catalog tables to be synchronized.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.CatalogTable
 	Tables []*string `json:"tables,omitempty" tf:"tables,omitempty"`
 
 	// References to CatalogTable in glue to populate tables.
@@ -74,7 +74,7 @@ type CatalogTargetParameters struct {
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
 	// Glue database where results are written.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -95,7 +95,7 @@ type CatalogTargetParameters struct {
 	EventQueueArn *string `json:"eventQueueArn,omitempty" tf:"event_queue_arn,omitempty"`
 
 	// A list of catalog tables to be synchronized.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.CatalogTable
 	// +kubebuilder:validation:Optional
 	Tables []*string `json:"tables,omitempty" tf:"tables,omitempty"`
 
@@ -120,7 +120,7 @@ type CrawlerInitParameters struct {
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Glue database where results are written.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.CatalogDatabase
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
@@ -162,7 +162,7 @@ type CrawlerInitParameters struct {
 	RecrawlPolicy *RecrawlPolicyInitParameters `json:"recrawlPolicy,omitempty" tf:"recrawl_policy,omitempty"`
 
 	// The IAM role friendly name (including path without leading slash), or ARN of an IAM role, used by the crawler to access other resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -286,7 +286,7 @@ type CrawlerParameters struct {
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Glue database where results are written.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -344,7 +344,7 @@ type CrawlerParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The IAM role friendly name (including path without leading slash), or ARN of an IAM role, used by the crawler to access other resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -581,7 +581,7 @@ type IcebergTargetParameters struct {
 type JdbcTargetInitParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.Connection
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
 	// Reference to a Connection in glue to populate connectionName.
@@ -620,7 +620,7 @@ type JdbcTargetObservation struct {
 type JdbcTargetParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.Connection
 	// +kubebuilder:validation:Optional
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
@@ -696,7 +696,7 @@ type LineageConfigurationParameters struct {
 type MongodbTargetInitParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.Connection
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
 	// Reference to a Connection in glue to populate connectionName.
@@ -729,7 +729,7 @@ type MongodbTargetObservation struct {
 type MongodbTargetParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta2.Connection
 	// +kubebuilder:validation:Optional
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 

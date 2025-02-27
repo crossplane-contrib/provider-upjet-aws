@@ -16,7 +16,7 @@ import (
 type AuthorizerInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta2.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -48,7 +48,7 @@ type AuthorizerInitParameters struct {
 	// Authorizer's Uniform Resource Identifier (URI).
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
@@ -130,7 +130,7 @@ type AuthorizerObservation struct {
 type AuthorizerParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta2.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -167,7 +167,7 @@ type AuthorizerParameters struct {
 	// Authorizer's Uniform Resource Identifier (URI).
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()
 	// +kubebuilder:validation:Optional
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`

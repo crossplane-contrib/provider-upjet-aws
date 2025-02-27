@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
-	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
-	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
-	resourcepolicy "github.com/upbound/provider-aws/internal/controller/dynamodb/resourcepolicy"
-	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
-	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
-	tablereplica "github.com/upbound/provider-aws/internal/controller/dynamodb/tablereplica"
-	tag "github.com/upbound/provider-aws/internal/controller/dynamodb/tag"
+	contributorinsights "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/contributorinsights"
+	globaltable "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/globaltable"
+	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/kinesisstreamingdestination"
+	resourcepolicy "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/resourcepolicy"
+	table "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/table"
+	tableitem "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/tableitem"
+	tablereplica "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/tablereplica"
+	tag "github.com/upbound/provider-aws/internal/controller/cluster/dynamodb/tag"
 )
 
 // Setup_dynamodb creates all controllers with the supplied logger and adds them to

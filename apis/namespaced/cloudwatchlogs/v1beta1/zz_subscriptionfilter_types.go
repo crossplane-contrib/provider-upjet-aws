@@ -16,7 +16,7 @@ import (
 type SubscriptionFilterInitParameters struct {
 
 	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
@@ -41,7 +41,7 @@ type SubscriptionFilterInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -80,7 +80,7 @@ type SubscriptionFilterObservation struct {
 type SubscriptionFilterParameters struct {
 
 	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
@@ -115,7 +115,7 @@ type SubscriptionFilterParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`

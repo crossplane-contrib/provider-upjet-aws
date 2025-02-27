@@ -16,7 +16,7 @@ import (
 type ThingPrincipalAttachmentInitParameters struct {
 
 	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
@@ -29,7 +29,7 @@ type ThingPrincipalAttachmentInitParameters struct {
 	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
 
 	// The name of the thing.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Thing
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Thing
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 
 	// Reference to a Thing in iot to populate thing.
@@ -54,7 +54,7 @@ type ThingPrincipalAttachmentObservation struct {
 type ThingPrincipalAttachmentParameters struct {
 
 	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -73,7 +73,7 @@ type ThingPrincipalAttachmentParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the thing.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Thing
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Thing
 	// +kubebuilder:validation:Optional
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 

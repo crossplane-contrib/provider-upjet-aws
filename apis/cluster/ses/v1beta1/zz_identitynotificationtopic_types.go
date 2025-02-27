@@ -16,7 +16,7 @@ import (
 type IdentityNotificationTopicInitParameters struct {
 
 	// The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.DomainIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ses/v1beta1.DomainIdentity
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Reference to a DomainIdentity in ses to populate identity.
@@ -34,7 +34,7 @@ type IdentityNotificationTopicInitParameters struct {
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
@@ -66,7 +66,7 @@ type IdentityNotificationTopicObservation struct {
 type IdentityNotificationTopicParameters struct {
 
 	// The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.DomainIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ses/v1beta1.DomainIdentity
 	// +kubebuilder:validation:Optional
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -92,7 +92,7 @@ type IdentityNotificationTopicParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`

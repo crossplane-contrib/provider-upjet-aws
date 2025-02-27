@@ -54,7 +54,7 @@ type LBSSLNegotiationPolicyInitParameters struct {
 
 	// The load balancer to which the policy
 	// should be attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta2.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
@@ -113,7 +113,7 @@ type LBSSLNegotiationPolicyParameters struct {
 
 	// The load balancer to which the policy
 	// should be attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta2.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`

@@ -16,7 +16,7 @@ import (
 type FunctionInitParameters struct {
 
 	// ID of the associated AppSync API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.GraphQLAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta2.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -32,7 +32,7 @@ type FunctionInitParameters struct {
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Function data source name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.Datasource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta2.Datasource
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// Reference to a Datasource in appsync to populate dataSource.
@@ -116,7 +116,7 @@ type FunctionObservation struct {
 type FunctionParameters struct {
 
 	// ID of the associated AppSync API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.GraphQLAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta2.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -134,7 +134,7 @@ type FunctionParameters struct {
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Function data source name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.Datasource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta2.Datasource
 	// +kubebuilder:validation:Optional
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
