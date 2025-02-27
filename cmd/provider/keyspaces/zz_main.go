@@ -34,12 +34,14 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"github.com/upbound/provider-aws/apis"
-	"github.com/upbound/provider-aws/apis/v1alpha1"
+	clusterapis "github.com/upbound/provider-aws/apis/cluster"
+	clusterconfig "github.com/upbound/provider-aws/apis/cluster/v1alpha1"
+	namespacedapis "github.com/upbound/provider-aws/apis/namespaced"
 	"github.com/upbound/provider-aws/config"
 	resolverapis "github.com/upbound/provider-aws/internal/apis"
 	"github.com/upbound/provider-aws/internal/clients"
-	"github.com/upbound/provider-aws/internal/controller"
+	clustercontroller "github.com/upbound/provider-aws/internal/controller/cluster"
+	namespacedcontroller "github.com/upbound/provider-aws/internal/controller/namespaced"
 	"github.com/upbound/provider-aws/internal/features"
 )
 
@@ -146,8 +148,11 @@ func main() {
 		RenewDeadline:              func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
-	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add AWS APIs to scheme")
-	kingpin.FatalIfError(resolverapis.BuildScheme(apis.AddToSchemes), "Cannot register the AWS APIs with the API resolver's runtime scheme")
+
+	kingpin.FatalIfError(clusterapis.AddToScheme(mgr.GetScheme()), "Cannot add cluster scoped AWS APIs to scheme")
+	kingpin.FatalIfError(resolverapis.BuildScheme(clusterapis.AddToSchemes), "Cannot register cluster scoped AWS APIs with the API resolver's runtime scheme")
+	kingpin.FatalIfError(namespacedapis.AddToScheme(mgr.GetScheme()), "Cannot add namespaced AWS APIs to scheme")
+	kingpin.FatalIfError(resolverapis.BuildScheme(namespacedapis.AddToSchemes), "Cannot register namespaced AWS APIs with the API resolver's runtime scheme")
 
 	metricRecorder := managed.NewMRMetricRecorder()
 	stateMetrics := statemetrics.NewMRStateMetrics()
@@ -188,7 +193,7 @@ func main() {
 	}
 
 	if *enableExternalSecretStores {
-		o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
+		o.SecretStoreConfigGVK = &clusterconfig.StoreConfigGroupVersionKind
 		logr.Info("Alpha feature enabled", "flag", features.EnableAlphaExternalSecretStores)
 
 		o.ESSOptions = &tjcontroller.ESSOptions{}
@@ -201,23 +206,24 @@ func main() {
 		}
 
 		// Ensure default store config exists.
-		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(ctx, &v1alpha1.StoreConfig{
+		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(ctx, &clusterconfig.StoreConfig{
 			TypeMeta: metav1.TypeMeta{},
 			ObjectMeta: metav1.ObjectMeta{
 				Name: "default",
 			},
-			Spec: v1alpha1.StoreConfigSpec{
+			Spec: clusterconfig.StoreConfigSpec{
 				// NOTE(turkenh): We only set required spec and expect optional
 				// ones to properly be initialized with CRD level default values.
 				SecretStoreConfig: xpv1.SecretStoreConfig{
 					DefaultScope: *namespace,
 				},
 			},
-			Status: v1alpha1.StoreConfigStatus{},
+			Status: clusterconfig.StoreConfigStatus{},
 		})), "cannot create default store config")
 	}
 
 	kingpin.FatalIfError(conversion.RegisterConversions(o.Provider, mgr.GetScheme()), "Cannot initialize the webhook conversion registry")
-	kingpin.FatalIfError(controller.Setup_keyspaces(mgr, o), "Cannot setup AWS controllers")
+	kingpin.FatalIfError(clustercontroller.Setup_keyspaces(mgr, o), "Cannot setup cluster-scoped AWS controllers")
+	kingpin.FatalIfError(namespacedcontroller.Setup_keyspaces(mgr, o), "Cannot setup namespaced AWS controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }
