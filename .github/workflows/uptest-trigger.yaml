@@ -9,7 +9,7 @@ on:
     types: [created]
 
 env:
-  GO_VERSION: "1.22"
+  GO_VERSION: "1.23.6"
 
 jobs:
   debug:
@@ -22,7 +22,7 @@ jobs:
           echo "github.event.comment.author_association: ${{ github.event.comment.author_association }}"
 
   get-example-list:
-    if: ${{ (github.event.comment.author_association == 'OWNER' || github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'CONTRIBUTOR' ) &&
+    if: ${{ (github.event.comment.author_association == 'OWNER' ) &&
       github.event.issue.pull_request &&
       contains(github.event.comment.body, '/test-examples' ) }}
     runs-on: ubuntu-latest
@@ -79,7 +79,7 @@ jobs:
             -f context="Uptest-${{ steps.get-example-list-name.outputs.example-hash }}"
 
   uptest:
-    if: ${{ (github.event.comment.author_association == 'OWNER' || github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'CONTRIBUTOR' ) &&
+    if: ${{ (github.event.comment.author_association == 'OWNER' ) &&
       github.event.issue.pull_request &&
       contains(github.event.comment.body, '/test-examples' ) }}
     runs-on: ubuntu-latest
@@ -93,7 +93,7 @@ jobs:
           swap-storage: false
 
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@53851d14592bedcffcf25ea515637cff71ef929a # v3.3.0
+        uses: docker/setup-qemu-action@4574d27a4764455b42196d70a065bc6853246a25 # v3.4.0
         with:
           platforms: all
 
@@ -103,7 +103,7 @@ jobs:
           submodules: true
 
       - name: Setup Go
-        uses: actions/setup-go@3041bf56c941b39c61721a86cd11f3bb1338122a # v5.2.0
+        uses: actions/setup-go@f111f3307d8850f501ac008e886eec1fd1932a34 # v5.3.0
         with:
           go-version: ${{ env.GO_VERSION }}
 
@@ -153,7 +153,7 @@ jobs:
 
       - name: Upload Cluster Dump
         if: always()
-        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: controlplane-dump
           path: ./_output/controlplane-dump
