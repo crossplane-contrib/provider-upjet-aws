@@ -13,11 +13,11 @@ import (
 	accesspolicyassociation "github.com/upbound/provider-aws/internal/controller/namespaced/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/internal/controller/namespaced/eks/addon"
 	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/eks/cluster"
+	clusterauth "github.com/upbound/provider-aws/internal/controller/namespaced/eks/clusterauth"
 	fargateprofile "github.com/upbound/provider-aws/internal/controller/namespaced/eks/fargateprofile"
 	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/namespaced/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/provider-aws/internal/controller/namespaced/eks/nodegroup"
 	podidentityassociation "github.com/upbound/provider-aws/internal/controller/namespaced/eks/podidentityassociation"
-	clusterauth "github.com/upbound/provider-aws/internal/controller/namespaced/internal/controller/eks/clusterauth"
 )
 
 // Setup_eks creates all controllers with the supplied logger and adds them to
@@ -28,11 +28,11 @@ func Setup_eks(mgr ctrl.Manager, o controller.Options) error {
 		accesspolicyassociation.Setup,
 		addon.Setup,
 		cluster.Setup,
+		clusterauth.Setup,
 		fargateprofile.Setup,
 		identityproviderconfig.Setup,
 		nodegroup.Setup,
 		podidentityassociation.Setup,
-		clusterauth.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

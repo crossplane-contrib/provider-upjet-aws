@@ -422,6 +422,7 @@ import (
 	accesspolicyassociation "github.com/upbound/provider-aws/internal/controller/cluster/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/internal/controller/cluster/eks/addon"
 	clustereks "github.com/upbound/provider-aws/internal/controller/cluster/eks/cluster"
+	clusterauth "github.com/upbound/provider-aws/internal/controller/cluster/eks/clusterauth"
 	fargateprofile "github.com/upbound/provider-aws/internal/controller/cluster/eks/fargateprofile"
 	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/cluster/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/provider-aws/internal/controller/cluster/eks/nodegroup"
@@ -540,7 +541,6 @@ import (
 	assessmenttemplate "github.com/upbound/provider-aws/internal/controller/cluster/inspector/assessmenttemplate"
 	resourcegroup "github.com/upbound/provider-aws/internal/controller/cluster/inspector/resourcegroup"
 	enabler "github.com/upbound/provider-aws/internal/controller/cluster/inspector2/enabler"
-	clusterauth "github.com/upbound/provider-aws/internal/controller/cluster/internal/controller/eks/clusterauth"
 	certificateiot "github.com/upbound/provider-aws/internal/controller/cluster/iot/certificate"
 	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/iot/indexingconfiguration"
 	loggingoptions "github.com/upbound/provider-aws/internal/controller/cluster/iot/loggingoptions"
@@ -1388,6 +1388,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accesspolicyassociation.Setup,
 		addon.Setup,
 		clustereks.Setup,
+		clusterauth.Setup,
 		fargateprofile.Setup,
 		identityproviderconfig.Setup,
 		nodegroup.Setup,
@@ -1506,7 +1507,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		assessmenttemplate.Setup,
 		resourcegroup.Setup,
 		enabler.Setup,
-		clusterauth.Setup,
 		certificateiot.Setup,
 		indexingconfiguration.Setup,
 		loggingoptions.Setup,

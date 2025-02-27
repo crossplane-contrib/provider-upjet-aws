@@ -163,7 +163,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 			injectFieldRenamingConversionFunctions(),
 		),
 	)
-	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
+	pc.BasePackages.ControllerMap["eks/clusterauth"] = "eks"
 
 	for _, configure := range ProviderConfiguration {
 		configure(pc)
