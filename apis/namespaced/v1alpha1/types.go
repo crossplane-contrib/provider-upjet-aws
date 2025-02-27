@@ -26,7 +26,7 @@ type StoreConfigStatus struct {
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:printcolumn:name="TYPE",type="string",JSONPath=".spec.type"
 // +kubebuilder:printcolumn:name="DEFAULT-SCOPE",type="string",JSONPath=".spec.defaultScope"
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,store,aws}
+// +kubebuilder:resource:scope=Namespaced,categories={crossplane,store,aws}
 // +kubebuilder:subresource:status
 type StoreConfig struct {
 	metav1.TypeMeta   `json:",inline"`
