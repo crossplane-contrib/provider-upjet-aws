@@ -25,8 +25,8 @@ import (
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	ujresource "github.com/crossplane/upjet/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/eks/v1beta1"
-	"github.com/upbound/provider-aws/apis/v1alpha1"
+	"github.com/upbound/provider-aws/apis/namespaced/eks/v1beta1"
+	"github.com/upbound/provider-aws/apis/namespaced/v1alpha1"
 	"github.com/upbound/provider-aws/internal/clients"
 	"github.com/upbound/provider-aws/internal/features"
 )
