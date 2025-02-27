@@ -4,7 +4,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package apis
+package cluster
 
 import "k8s.io/apimachinery/pkg/runtime"
 
