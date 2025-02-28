@@ -351,6 +351,279 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this Replicator.
+func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
+		if mg.Spec.ForProvider.KafkaCluster[i3].AmazonMskCluster != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta3", "Cluster", "ClusterList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArnRef,
+					Selector:     mg.Spec.ForProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArn")
+			}
+			mg.Spec.ForProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
+		if mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIdsRefs,
+					Selector:      mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIds")
+			}
+			mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
+		if mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIds),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIds")
+			}
+			mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.ForProvider.ReplicationInfoList != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta3", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicationInfoList.SourceKafkaClusterArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.ReplicationInfoList.SourceKafkaClusterArnRef,
+				Selector:     mg.Spec.ForProvider.ReplicationInfoList.SourceKafkaClusterArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ReplicationInfoList.SourceKafkaClusterArn")
+		}
+		mg.Spec.ForProvider.ReplicationInfoList.SourceKafkaClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ReplicationInfoList.SourceKafkaClusterArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.ReplicationInfoList != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta3", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicationInfoList.TargetKafkaClusterArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.ReplicationInfoList.TargetKafkaClusterArnRef,
+				Selector:     mg.Spec.ForProvider.ReplicationInfoList.TargetKafkaClusterArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ReplicationInfoList.TargetKafkaClusterArn")
+		}
+		mg.Spec.ForProvider.ReplicationInfoList.TargetKafkaClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ReplicationInfoList.TargetKafkaClusterArnRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceExecutionRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.ServiceExecutionRoleArnRef,
+			Selector:     mg.Spec.ForProvider.ServiceExecutionRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceExecutionRoleArn")
+	}
+	mg.Spec.ForProvider.ServiceExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceExecutionRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {
+		if mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta3", "Cluster", "ClusterList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArnRef,
+					Selector:     mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArn")
+			}
+			mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {
+		if mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIdsRefs,
+					Selector:      mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIds")
+			}
+			mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {
+		if mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIds),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIds")
+			}
+			mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.InitProvider.ReplicationInfoList != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta3", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicationInfoList.SourceKafkaClusterArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.ReplicationInfoList.SourceKafkaClusterArnRef,
+				Selector:     mg.Spec.InitProvider.ReplicationInfoList.SourceKafkaClusterArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ReplicationInfoList.SourceKafkaClusterArn")
+		}
+		mg.Spec.InitProvider.ReplicationInfoList.SourceKafkaClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ReplicationInfoList.SourceKafkaClusterArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.ReplicationInfoList != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta3", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicationInfoList.TargetKafkaClusterArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.ReplicationInfoList.TargetKafkaClusterArnRef,
+				Selector:     mg.Spec.InitProvider.ReplicationInfoList.TargetKafkaClusterArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ReplicationInfoList.TargetKafkaClusterArn")
+		}
+		mg.Spec.InitProvider.ReplicationInfoList.TargetKafkaClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ReplicationInfoList.TargetKafkaClusterArnRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceExecutionRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.ServiceExecutionRoleArnRef,
+			Selector:     mg.Spec.InitProvider.ServiceExecutionRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceExecutionRoleArn")
+	}
+	mg.Spec.InitProvider.ServiceExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceExecutionRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ScramSecretAssociation.
 func (mg *ScramSecretAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
