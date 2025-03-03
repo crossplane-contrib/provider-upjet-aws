@@ -1545,6 +1545,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// MSK clusters can be imported using the cluster arn that has a random substring
 	// in the end.
 	"aws_msk_cluster": config.IdentifierFromProvider,
+	// MSK relicators can be imported using the relicator arn
+	// Example: arn:aws:kafka:us-west-2:123456789012:configuration/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
+	"aws_msk_replicator": config.IdentifierFromProvider,
 	// The terraform implementation of MSK SCRAM secret associations assume
 	// that there is a single aws_msk_scram_secret_association per msk
 	// cluster, so the best identifier is the cluster ARN.

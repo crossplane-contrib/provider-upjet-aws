@@ -227,6 +227,7 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_media_store_container":                                ReplaceGroupWords("mediastore", 2),
 	"aws_msk_cluster":                                          ReplaceGroupWords("kafka", 1),
 	"aws_msk_configuration":                                    ReplaceGroupWords("kafka", 1),
+	"aws_msk_replicator":                                       ReplaceGroupWords("kafka", 1),
 	"aws_msk_scram_secret_association":                         ReplaceGroupWords("kafka", 1),
 	"aws_msk_serverless_cluster":                               ReplaceGroupWords("kafka", 1),
 	"aws_mskconnect_connector":                                 ReplaceGroupWords("kafkaconnect", 1),
