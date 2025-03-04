@@ -436,6 +436,7 @@ import (
 	subnetgroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
+	usergroupassociation "github.com/upbound/provider-aws/internal/controller/elasticache/usergroupassociation"
 	applicationelasticbeanstalk "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/application"
 	applicationversion "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/applicationversion"
 	configurationtemplate "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/configurationtemplate"
@@ -1404,6 +1405,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
+		usergroupassociation.Setup,
 		applicationelasticbeanstalk.Setup,
 		applicationversion.Setup,
 		configurationtemplate.Setup,
