@@ -3227,20 +3227,28 @@ func eksOIDCIdentityProvider() config.ExternalName {
 }
 
 func eksPodIdentityAssociation() config.ExternalName {
+	e := config.IdentifierFromProvider
+
 	// Terraform does not allow Association ID to be empty.
 	// Using a stub value to pass validation.
-	// Terraform does not use "id" attribute anymore, instead a combination of association_id and cluster_name is used
-	e := config.IdentifierFromProvider
+	// Terraform does not use "id" attribute anymore, instead a combination of association_id and cluster_name is used.
+
+	// If the association_id is equal to the stub value, we replace it with the external name.
+	// Means that we are probably using a resource status that was not updated after creation due to write conflicts in the k8s API.
+	// https://github.com/crossplane-contrib/provider-upjet-aws/issues/1437
+
+	// must be 19 chars long and match regex ^a-[0-9a-z]*$
+	stubAssocId := "a-stubassocid123456"
 	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
-		if _, ok := base["association_id"]; !ok {
+		if assocId, ok := base["association_id"]; !ok || assocId == stubAssocId {
 			if externalName == "" {
-				// must be 19 chars long and match regex ^a-[0-9a-z]*$
-				base["association_id"] = "a-stubassocid123456"
+				base["association_id"] = stubAssocId
 			} else {
 				base["association_id"] = externalName
 			}
 		}
 	}
+
 	return e
 }
 
