@@ -7,10 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Configuration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Replicator) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ScramSecretAssociation) Hub() {}
+func (tr *InferenceProfile) Hub() {}

@@ -1,0 +1,17 @@
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: InferenceProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/inferenceprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Profile with tag for cost allocation tracking
+    modelSource:
+    - copyFrom: arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0
+    name: Claude Sonnet for Project 123
+    region: us-west-1
+    tags:
+      ProjectID: "123"

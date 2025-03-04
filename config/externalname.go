@@ -38,10 +38,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// AWS Batch job queue can be imported using the name
 	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", fullARNTemplate("batch", "job-queue/{{ .external_name }}")),
 
+	// bedrock
+	//
+	// Bedrock inference profile can be imported using the ID: inference_profile-id-12345678
+	"aws_bedrock_inference_profile": identifierFromProviderWithDefaultStub("bedrock12345"),
+
 	// bedrockagent
 	//
 	// Bedrock Agent can be imported using the agent arn
-	"aws_bedrockagent_agent": bedrockAgent(),
+	"aws_bedrockagent_agent": identifierFromProviderWithDefaultStub("STUB123456"),
 
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
@@ -1540,6 +1545,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// MSK clusters can be imported using the cluster arn that has a random substring
 	// in the end.
 	"aws_msk_cluster": config.IdentifierFromProvider,
+	// MSK relicators can be imported using the relicator arn
+	// Example: arn:aws:kafka:us-west-2:123456789012:configuration/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
+	"aws_msk_replicator": config.IdentifierFromProvider,
 	// The terraform implementation of MSK SCRAM secret associations assume
 	// that there is a single aws_msk_scram_secret_association per msk
 	// cluster, so the best identifier is the cluster ARN.
@@ -2882,13 +2890,13 @@ func kmsAlias() config.ExternalName {
 	return e
 }
 
-func bedrockAgent() config.ExternalName {
-	// Terraform does not allow agent id to be empty.
+func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalName {
+	// Terraform does not always allow id to be empty.
 	// Using a stub value to pass validation.
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
 		if len(externalName) == 0 {
-			return "STUB123456", nil
+			return defaultstub, nil
 		}
 		return externalName, nil
 	}
