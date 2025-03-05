@@ -145,7 +145,7 @@ spec:
                             to the attributes that thatKEYS_ONLY project.
                           type: string
                         rangeKey:
-                          description: Name of the range key; must be defined
+                          description: Name of the range key.
                           type: string
                         readCapacity:
                           description: Number of read units for this index. Must be
@@ -492,7 +492,7 @@ spec:
                             to the attributes that thatKEYS_ONLY project.
                           type: string
                         rangeKey:
-                          description: Name of the range key; must be defined
+                          description: Name of the range key.
                           type: string
                         readCapacity:
                           description: Number of read units for this index. Must be
@@ -995,7 +995,7 @@ spec:
                             to the attributes that thatKEYS_ONLY project.
                           type: string
                         rangeKey:
-                          description: Name of the range key; must be defined
+                          description: Name of the range key.
                           type: string
                         readCapacity:
                           description: Number of read units for this index. Must be
@@ -1472,7 +1472,7 @@ spec:
                             to the attributes that thatKEYS_ONLY project.
                           type: string
                         rangeKey:
-                          description: Name of the range key; must be defined
+                          description: Name of the range key.
                           type: string
                         readCapacity:
                           description: Number of read units for this index. Must be
@@ -1801,7 +1801,7 @@ spec:
                             to the attributes that thatKEYS_ONLY project.
                           type: string
                         rangeKey:
-                          description: Name of the range key; must be defined
+                          description: Name of the range key.
                           type: string
                         readCapacity:
                           description: Number of read units for this index. Must be
@@ -2286,7 +2286,7 @@ spec:
                             to the attributes that thatKEYS_ONLY project.
                           type: string
                         rangeKey:
-                          description: Name of the range key; must be defined
+                          description: Name of the range key.
                           type: string
                         readCapacity:
                           description: Number of read units for this index. Must be
