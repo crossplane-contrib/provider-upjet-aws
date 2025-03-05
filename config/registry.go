@@ -113,7 +113,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // configuration is being read for the code generation pipelines.
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
-func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, error) {
+func GetProvider(ctx context.Context, generationProvider bool, skipDefaultTags bool) (*config.Provider, error) {
 	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot get the Terraform framework and SDK providers")
@@ -134,6 +134,22 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		sdkProvider = p
 	}
 
+	defaultResourceOptions := []config.ResourceOption{
+		GroupKindOverrides(),
+		KindOverrides(),
+		RegionAddition(),
+		TagsAllRemoval(),
+		IdentifierAssignedByAWS(),
+		KnownReferencers(),
+		ResourceConfigurator(),
+		NamePrefixRemoval(),
+		DocumentationForTags(),
+		injectFieldRenamingConversionFunctions(),
+	}
+	if !skipDefaultTags {
+		defaultResourceOptions = append(defaultResourceOptions, AddExternalTagsField())
+	}
+
 	modulePath := "github.com/upbound/provider-aws"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
@@ -149,19 +165,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		config.WithTerraformProvider(sdkProvider),
 		config.WithTerraformPluginFrameworkProvider(fwProvider),
 		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
-		config.WithDefaultResourceOptions(
-			GroupKindOverrides(),
-			KindOverrides(),
-			RegionAddition(),
-			TagsAllRemoval(),
-			IdentifierAssignedByAWS(),
-			KnownReferencers(),
-			AddExternalTagsField(),
-			ResourceConfigurator(),
-			NamePrefixRemoval(),
-			DocumentationForTags(),
-			injectFieldRenamingConversionFunctions(),
-		),
+		config.WithDefaultResourceOptions(defaultResourceOptions...),
 	)
 	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
 
