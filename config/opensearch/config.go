@@ -59,11 +59,8 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_opensearch_domain_policy", func(r *config.Resource) {
 		r.References["domain_name"] = config.Reference{
 			TerraformName: "aws_opensearch_domain",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",true)`,
 		}
-		r.UseAsync = true
 	})
 
-	p.AddResourceConfigurator("aws_opensearch_domain_saml_options", func(r *config.Resource) {
-		r.UseAsync = true
-	})
 }
