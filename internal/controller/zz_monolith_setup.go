@@ -129,6 +129,7 @@ import (
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
 	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	inferenceprofile "github.com/upbound/provider-aws/internal/controller/bedrock/inferenceprofile"
 	agent "github.com/upbound/provider-aws/internal/controller/bedrockagent/agent"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
@@ -560,6 +561,7 @@ import (
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	replicator "github.com/upbound/provider-aws/internal/controller/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
 	connector "github.com/upbound/provider-aws/internal/controller/kafkaconnect/connector"
@@ -1096,6 +1098,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.Setup,
 		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		inferenceprofile.Setup,
 		agent.Setup,
 		budget.Setup,
 		budgetaction.Setup,
@@ -1527,6 +1530,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
+		replicator.Setup,
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 		connector.Setup,

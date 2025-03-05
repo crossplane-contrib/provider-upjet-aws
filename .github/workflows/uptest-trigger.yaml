@@ -9,22 +9,35 @@ on:
     types: [created]
 
 env:
-  GO_VERSION: "1.23.5"
+  GO_VERSION: "1.23.6"
 
 jobs:
-  debug:
+  check-permissions:
     runs-on: ubuntu-latest
+    outputs:
+      permission: ${{ steps.check-permissions.outputs.permission }}
     steps:
-      - name: Debug
+      - name: Get Commenter Permissions
+        id: check-permissions
         run: |
           echo "Trigger keyword: '/test-examples'"
           echo "Go version: ${{ env.GO_VERSION }}"
-          echo "github.event.comment.author_association: ${{ github.event.comment.author_association }}"
+
+          REPO=${{ github.repository }}
+          COMMENTER=${{ github.event.comment.user.login }}
+
+          # Fetch the commenter's repo-level permission grant
+          GRANTED=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$REPO/collaborators/$COMMENTER/permission" | jq -r .permission)
+
+          # Make it accessible in the workflow via a job output -- cannot use env
+          echo "User $COMMENTER has $GRANTED permissions"
+          echo "permission=$GRANTED" >> "$GITHUB_OUTPUT"
 
   get-example-list:
-    if: ${{ (github.event.comment.author_association == 'OWNER' || github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'CONTRIBUTOR' ) &&
-      github.event.issue.pull_request &&
-      contains(github.event.comment.body, '/test-examples' ) }}
+    needs: check-permissions
+    if: ${{ (needs.check-permissions.outputs.permission == 'admin' || needs.check-permissions.outputs.permission == 'maintain') && github.event.issue.pull_request != null && contains(github.event.comment.body, '/test-examples')}}
     runs-on: ubuntu-latest
     outputs:
       example_list: ${{ steps.get-example-list-name.outputs.example-list }}
@@ -79,12 +92,11 @@ jobs:
             -f context="Uptest-${{ steps.get-example-list-name.outputs.example-hash }}"
 
   uptest:
-    if: ${{ (github.event.comment.author_association == 'OWNER' || github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'CONTRIBUTOR' ) &&
-      github.event.issue.pull_request &&
-      contains(github.event.comment.body, '/test-examples' ) }}
+    needs:
+      - check-permissions
+      - get-example-list
+    if: ${{ (needs.check-permissions.outputs.permission == 'admin' || needs.check-permissions.outputs.permission == 'maintain') && github.event.issue.pull_request != null && contains(github.event.comment.body, '/test-examples')}}
     runs-on: ubuntu-latest
-    needs: get-example-list
-
     steps:
       - name: Cleanup Disk
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
@@ -93,7 +105,7 @@ jobs:
           swap-storage: false
 
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@53851d14592bedcffcf25ea515637cff71ef929a # v3.3.0
+        uses: docker/setup-qemu-action@4574d27a4764455b42196d70a065bc6853246a25 # v3.4.0
         with:
           platforms: all
 
