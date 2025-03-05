@@ -85,7 +85,7 @@ jobs:
           echo "analysis_cache_key_int=$(make go.lint.analysiskey-interval)" >> $GITHUB_OUTPUT
 
       - name: Cache Linter Analysis
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         id: cache-analysis
         with:
           path: ${{ steps.analysis_cache.outputs.analysis_cache }}
