@@ -51,6 +51,8 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				"ipv6_address_count",
 				"cpu_core_count",
 				"cpu_threads_per_core",
+				"cpu_options",
+				"root_block_device",
 			},
 		}
 		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{
