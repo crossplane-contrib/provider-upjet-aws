@@ -1,0 +1,17 @@
+apiVersion: emr.aws.upbound.io/v1beta1
+kind: InstanceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "InstanceGroup for EMR needs a bootable EMR cluster"
+    meta.upbound.io/example-id: emr/v1beta1/instancegroup
+  labels:
+    testing.upbound.io/example-name: task
+  name: task
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels: emr_cluster_example
+    instanceCount: 1
+    instanceType: m5.xlarge
+    name: my little instance group
+    region: us-west-1

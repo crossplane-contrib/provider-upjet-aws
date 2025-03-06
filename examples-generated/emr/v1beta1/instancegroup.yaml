@@ -1,0 +1,17 @@
+apiVersion: emr.aws.upbound.io/v1beta1
+kind: InstanceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emr/v1beta1/instancegroup
+  labels:
+    testing.upbound.io/example-name: task
+  name: task
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: tf-test-cluster
+    instanceCount: 1
+    instanceType: m5.xlarge
+    name: my little instance group
+    region: us-west-1
