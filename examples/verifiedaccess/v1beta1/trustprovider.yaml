@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: trustprovider
+  namespace: default
+stringData:
+  clientsecret: "example"
+---
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: TrustProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/trustprovider
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyReferenceName: example
+    region: us-west-1
+    trustProviderType: user
+    userTrustProviderType: oidc
+    oidcOptions:
+      issuer: "https://login.microsoftonline.com/<tenant>/v2.0"         
+      authorizationEndpoint: "https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize"
+      tokenEndpoint: "https://login.microsoftonline.com/organizations/oauth2/v2.0/token"            
+      userInfoEndpoint: "https://graph.microsoft.com/oidc/userinfo"                                 
+      clientId: clientid
+      clientSecretSecretRef:
+        name: trustprovider
+        namespace: default
+        key: clientsecret
+      scope: openid email
