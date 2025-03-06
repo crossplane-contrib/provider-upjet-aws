@@ -217,7 +217,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractParamPath("domain_name", true),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -236,7 +236,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractParamPath("domain_name", true),
 			Reference:    mg.Spec.InitProvider.DomainNameRef,
 			Selector:     mg.Spec.InitProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
