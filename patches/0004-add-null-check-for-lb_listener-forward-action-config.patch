@@ -1,0 +1,26 @@
+From 3818260acaa812a7973d189d1d1d2e3ea4d989d4 Mon Sep 17 00:00:00 2001
+From: Erhan Cagirici <erhan@upbound.io>
+Date: Fri, 18 Oct 2024 14:25:54 +0300
+Subject: [PATCH 4/6] add null check for lb_listener forward action config
+
+Signed-off-by: Erhan Cagirici <erhan@upbound.io>
+---
+ internal/service/elbv2/listener.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/internal/service/elbv2/listener.go b/internal/service/elbv2/listener.go
+index 4c8abea486..ad1cf8892a 100644
+--- a/internal/service/elbv2/listener.go
++++ b/internal/service/elbv2/listener.go
+@@ -1253,7 +1253,7 @@ func flattenForwardActionOneOf(actions cty.Value, i int, awsAction awstypes.Acti
+ 			action := actions.Index(index)
+ 			if action.IsKnown() && !action.IsNull() {
+ 				forward := action.GetAttr("forward")
+-				if forward.IsKnown() && forward.LengthInt() > 0 {
++				if forward.IsKnown() && !forward.IsNull() && forward.LengthInt() > 0 {
+ 					actionMap["forward"] = flattenListenerActionForwardConfig(awsAction.ForwardConfig)
+ 				} else {
+ 					actionMap["target_group_arn"] = aws.ToString(awsAction.TargetGroupArn)
+-- 
+2.43.0
+

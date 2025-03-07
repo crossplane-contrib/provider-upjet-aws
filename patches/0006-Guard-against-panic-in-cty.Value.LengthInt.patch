@@ -1,0 +1,28 @@
+From bed7ae32a1da475c51b2d6e3c5f2b5205bed10ca Mon Sep 17 00:00:00 2001
+From: Cem Mergenci <cmergenci@gmail.com>
+Date: Mon, 23 Dec 2024 22:36:57 +0300
+Subject: [PATCH 6/6] Guard against panic in cty.Value.LengthInt().
+
+Signed-off-by: Cem Mergenci <cmergenci@gmail.com>
+---
+ internal/tags/key_value_tags.go | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/internal/tags/key_value_tags.go b/internal/tags/key_value_tags.go
+index 725eae7aee..81e26b8a32 100644
+--- a/internal/tags/key_value_tags.go
++++ b/internal/tags/key_value_tags.go
+@@ -800,6 +800,10 @@ func GetAnyAttr(value cty.Value, attr string, shouldReturnSetElement func(string
+ 			return cty.NilVal, fmt.Errorf("invalid index: %s", indexStr)
+ 		}
+ 
++		if value.Type().IsListType() && (value.IsNull() || !value.IsKnown()) {
++			return cty.NilVal, fmt.Errorf("list attribute %s is unknown or null", attrName)
++		}
++
+ 		if index >= value.LengthInt() {
+ 			return cty.NilVal, fmt.Errorf("index %d out of range for attribute %s", index, attrName)
+ 		}
+-- 
+2.43.0
+
