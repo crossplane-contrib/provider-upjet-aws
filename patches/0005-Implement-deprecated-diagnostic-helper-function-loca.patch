@@ -1,0 +1,85 @@
+From ff257c3d8ca76b2e0a9180e9d860c209fb308a30 Mon Sep 17 00:00:00 2001
+From: Cem Mergenci <cmergenci@gmail.com>
+Date: Mon, 7 Oct 2024 21:09:52 +0300
+Subject: [PATCH 5/6] Implement deprecated diagnostic helper function locally.
+
+Signed-off-by: Cem Mergenci <cmergenci@gmail.com>
+---
+ internal/service/mq/user.go | 20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
+
+diff --git a/internal/service/mq/user.go b/internal/service/mq/user.go
+index c90551e6a3..7482851d1b 100644
+--- a/internal/service/mq/user.go
++++ b/internal/service/mq/user.go
+@@ -13,6 +13,7 @@ import (
+ 	"github.com/aws/aws-sdk-go/aws"
+ 
+ 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
++	"github.com/hashicorp/terraform-plugin-framework/diag"
+ 	"github.com/hashicorp/terraform-plugin-framework/path"
+ 	"github.com/hashicorp/terraform-plugin-framework/resource"
+ 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+@@ -29,6 +30,15 @@ import (
+ 	"github.com/hashicorp/terraform-provider-aws/names"
+ )
+ 
++// diagErrorFramework is a helper method that creates an error diagnostic.
++// This method was formerly at internal/create/errors.go
++func diagErrorFramework(service, action, resource, id string, gotError error) diag.Diagnostic {
++	return diag.NewErrorDiagnostic(
++		create.ProblemStandardMessage(service, action, resource, id, nil),
++		gotError.Error(),
++	)
++}
++
+ // @FrameworkResource(name="User")
+ func newResourceUser(_ context.Context) (resource.ResourceWithConfigure, error) {
+ 	return &resourceUser{}, nil
+@@ -103,14 +113,14 @@ func (r *resourceUser) Create(ctx context.Context, request resource.CreateReques
+ 	}
+ 	_, err := conn.CreateUser(ctx, input)
+ 	if err != nil {
+-		response.Diagnostics.Append(create.DiagErrorFramework(names.MQ, create.ErrActionCreating, ResourceNameUser, fmt.Sprintf("%s/%s", plan.BrokerID.ValueString(), plan.Username.ValueString()), err))
++		response.Diagnostics.Append(diagErrorFramework(names.MQ, create.ErrActionCreating, ResourceNameUser, fmt.Sprintf("%s/%s", plan.BrokerID.ValueString(), plan.Username.ValueString()), err))
+ 		return
+ 	}
+ 
+ 	// Create API call returns no data. Get resource details.
+ 	userDetails, err := findUserByID(ctx, conn, plan.BrokerID.ValueString(), plan.Username.ValueString())
+ 	if err != nil {
+-		response.Diagnostics.Append(create.DiagErrorFramework(names.MQ, create.ErrActionCreating, ResourceNameUser, fmt.Sprintf("%s/%s", plan.BrokerID.ValueString(), plan.Username.ValueString()), err))
++		response.Diagnostics.Append(diagErrorFramework(names.MQ, create.ErrActionCreating, ResourceNameUser, fmt.Sprintf("%s/%s", plan.BrokerID.ValueString(), plan.Username.ValueString()), err))
+ 		return
+ 	}
+ 
+@@ -136,7 +146,7 @@ func (r *resourceUser) Read(ctx context.Context, request resource.ReadRequest, r
+ 		return
+ 	}
+ 	if err != nil {
+-		response.Diagnostics.Append(create.DiagErrorFramework(names.MQ, create.ErrActionReading, ResourceNameUser, fmt.Sprintf("%s/%s", state.BrokerID.ValueString(), state.ID.ValueString()), err))
++		response.Diagnostics.Append(diagErrorFramework(names.MQ, create.ErrActionReading, ResourceNameUser, fmt.Sprintf("%s/%s", state.BrokerID.ValueString(), state.ID.ValueString()), err))
+ 		return
+ 	}
+ 
+@@ -170,7 +180,7 @@ func (r *resourceUser) Update(ctx context.Context, request resource.UpdateReques
+ 		}
+ 		_, err := conn.UpdateUser(ctx, input)
+ 		if err != nil {
+-			response.Diagnostics.Append(create.DiagErrorFramework(names.MQ, create.ErrActionUpdating, ResourceNameUser, fmt.Sprintf("%s/%s", state.BrokerID.ValueString(), state.ID.ValueString()), err))
++			response.Diagnostics.Append(diagErrorFramework(names.MQ, create.ErrActionUpdating, ResourceNameUser, fmt.Sprintf("%s/%s", state.BrokerID.ValueString(), state.ID.ValueString()), err))
+ 			return
+ 		}
+ 	}
+@@ -193,7 +203,7 @@ func (r *resourceUser) Delete(ctx context.Context, request resource.DeleteReques
+ 	}
+ 	_, err := conn.DeleteUser(ctx, input)
+ 	if err != nil {
+-		response.Diagnostics.Append(create.DiagErrorFramework(names.MQ, create.ErrActionDeleting, ResourceNameUser, fmt.Sprintf("%s/%s", state.BrokerID.ValueString(), state.ID.ValueString()), err))
++		response.Diagnostics.Append(diagErrorFramework(names.MQ, create.ErrActionDeleting, ResourceNameUser, fmt.Sprintf("%s/%s", state.BrokerID.ValueString(), state.ID.ValueString()), err))
+ 		return
+ 	}
+ }
+-- 
+2.43.0
+
