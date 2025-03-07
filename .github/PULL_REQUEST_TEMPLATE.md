@@ -20,6 +20,8 @@ Fixes #
 I have:
 
 - [ ] Read and followed Crossplane's [contribution process].
+- [ ] Not made any manual changes to generated files.
+- [ ] Run `make generate` and committed the results (ideally in a separate commit). <!-- This takes 10-15 minutes to run on a fairly powerful computer -->
 - [ ] Run `make reviewable` to ensure this PR is ready for review.
 - [ ] Added `backport release-x.y` labels to auto-backport this PR if necessary.
 
