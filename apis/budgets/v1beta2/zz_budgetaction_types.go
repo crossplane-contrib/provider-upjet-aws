@@ -273,8 +273,17 @@ type IAMActionDefinitionInitParameters struct {
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// A list of roles to be attached. There must be at least one role.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+
+	// References to Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesRefs []v1.Reference `json:"rolesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesSelector *v1.Selector `json:"rolesSelector,omitempty" tf:"-"`
 
 	// A list of users to be attached. There must be at least one user.
 	// +listType=set
@@ -321,9 +330,18 @@ type IAMActionDefinitionParameters struct {
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// A list of roles to be attached. There must be at least one role.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+
+	// References to Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesRefs []v1.Reference `json:"rolesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesSelector *v1.Selector `json:"rolesSelector,omitempty" tf:"-"`
 
 	// A list of users to be attached. There must be at least one user.
 	// +kubebuilder:validation:Optional

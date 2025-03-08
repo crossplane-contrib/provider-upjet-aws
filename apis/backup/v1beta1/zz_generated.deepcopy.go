@@ -2796,6 +2796,18 @@ func (in *SelectionInitParameters) DeepCopyInto(out *SelectionInitParameters) {
 			}
 		}
 	}
+	if in.NotResourcesRefs != nil {
+		in, out := &in.NotResourcesRefs, &out.NotResourcesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.NotResourcesSelector != nil {
+		in, out := &in.NotResourcesSelector, &out.NotResourcesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PlanID != nil {
 		in, out := &in.PlanID, &out.PlanID
 		*out = new(string)
@@ -2821,6 +2833,18 @@ func (in *SelectionInitParameters) DeepCopyInto(out *SelectionInitParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.ResourcesRefs != nil {
+		in, out := &in.ResourcesRefs, &out.ResourcesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ResourcesSelector != nil {
+		in, out := &in.ResourcesSelector, &out.ResourcesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelectionTag != nil {
 		in, out := &in.SelectionTag, &out.SelectionTag
@@ -2985,6 +3009,18 @@ func (in *SelectionParameters) DeepCopyInto(out *SelectionParameters) {
 			}
 		}
 	}
+	if in.NotResourcesRefs != nil {
+		in, out := &in.NotResourcesRefs, &out.NotResourcesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.NotResourcesSelector != nil {
+		in, out := &in.NotResourcesSelector, &out.NotResourcesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PlanID != nil {
 		in, out := &in.PlanID, &out.PlanID
 		*out = new(string)
@@ -3015,6 +3051,18 @@ func (in *SelectionParameters) DeepCopyInto(out *SelectionParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.ResourcesRefs != nil {
+		in, out := &in.ResourcesRefs, &out.ResourcesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ResourcesSelector != nil {
+		in, out := &in.ResourcesSelector, &out.ResourcesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelectionTag != nil {
 		in, out := &in.SelectionTag, &out.SelectionTag

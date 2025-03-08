@@ -60,8 +60,8 @@ spec:
     loadBalancerNameSelector:
       matchLabels:
         testing.upbound.io/example-name: wu-tang
-    policyNames:
-    - ${aws_load_balancer_policy.wu-tang-root-ca-backend-auth-policy.policy_name}
+    policyNamesRefs:
+    - name: wu-tang-root-ca-backend-auth-policy
     region: us-west-1
 
 ---
@@ -80,6 +80,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: wu-tang
     loadBalancerPort: 443
-    policyNames:
-    - ${aws_load_balancer_policy.wu-tang-ssl.policy_name}
+    policyNamesRefs:
+    - name: wu-tang-ssl
     region: us-west-1

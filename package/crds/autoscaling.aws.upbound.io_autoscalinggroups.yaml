@@ -73,6 +73,18 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    items:
+                      properties:
+                        capacityDistributionStrategy:
+                          description: The strategy to use for distributing capacity
+                            across the Availability Zones. Valid values are balanced-only
+                            and balanced-best-effort. Default is balanced-best-effort.
+                          type: string
+                      type: object
+                    type: array
                   availabilityZones:
                     description: List of one or more availability zones for the group.
                       Used for EC2-Classic, attaching a network interface via id from
@@ -141,6 +153,11 @@ spec:
                     description: '"EC2" or "ELB". Controls how health checking is
                       done.'
                     type: string
+                  ignoreFailedScalingActivities:
+                    description: Whether to ignore failed Auto Scaling scaling activities
+                      while waiting for capacity. The default is false -- failed scaling
+                      activities cause errors to be returned.
+                    type: boolean
                   initialLifecycleHook:
                     description: |-
                       One or more
@@ -172,6 +189,28 @@ spec:
                           type: string
                       type: object
                     type: array
+                  instanceMaintenancePolicy:
+                    description: If this block is configured, add a instance maintenance
+                      policy to the specified Auto Scaling group. Defined below.
+                    items:
+                      properties:
+                        maxHealthyPercentage:
+                          description: Amount of capacity in the Auto Scaling group
+                            that can be in service and healthy, or pending, to support
+                            your workload when an instance refresh is in place, as
+                            a percentage of the desired capacity of the Auto Scaling
+                            group. Values must be between 100 and 200, defaults to
+                            100.
+                          type: number
+                        minHealthyPercentage:
+                          description: Amount of capacity in the Auto Scaling group
+                            that must remain healthy during an instance refresh to
+                            allow the operation to continue, as a percentage of the
+                            desired capacity of the Auto Scaling group. Defaults to
+                            90.
+                          type: number
+                      type: object
+                    type: array
                   instanceRefresh:
                     description: |-
                       If this block is configured, start an
@@ -183,6 +222,19 @@ spec:
                           description: Override default parameters for Instance Refresh.
                           items:
                             properties:
+                              alarmSpecification:
+                                description: Alarm Specification for Instance Refresh.
+                                items:
+                                  properties:
+                                    alarms:
+                                      description: List of Cloudwatch alarms. If any
+                                        of these alarms goes into ALARM state, Instance
+                                        Refresh is failed.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               autoRollback:
                                 description: Automatically rollback if instance refresh
                                   fails. Defaults to false.
@@ -205,6 +257,14 @@ spec:
                                   behavior is to use the Auto Scaling Group's health
                                   check grace period.
                                 type: string
+                              maxHealthyPercentage:
+                                description: Amount of capacity in the Auto Scaling
+                                  group that can be in service and healthy, or pending,
+                                  to support your workload when an instance refresh
+                                  is in place, as a percentage of the desired capacity
+                                  of the Auto Scaling group. Values must be between
+                                  100 and 200, defaults to 100.
+                                type: number
                               minHealthyPercentage:
                                 description: Amount of capacity in the Auto Scaling
                                   group that must remain healthy during an instance
@@ -212,10 +272,20 @@ spec:
                                   percentage of the desired capacity of the Auto Scaling
                                   group. Defaults to 90.
                                 type: number
+                              scaleInProtectedInstances:
+                                description: Behavior when encountering instances
+                                  protected from scale in are found. Available behaviors
+                                  are Refresh, Ignore, and Wait. Default is Ignore.
+                                type: string
                               skipMatching:
                                 description: Replace instances that already have your
                                   desired configuration. Defaults to false.
                                 type: boolean
+                              standbyInstances:
+                                description: Behavior when encountering instances
+                                  in the Standby state in are found. Available behaviors
+                                  are Terminate, Ignore, and Wait. Default is Ignore.
+                                type: string
                             type: object
                           type: array
                         strategy:
@@ -741,6 +811,22 @@ spec:
                                               type: string
                                             type: array
                                             x-kubernetes-list-type: set
+                                          maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                            description: The price protection threshold
+                                              for Spot Instances. This is the maximum
+                                              you’ll pay for a Spot Instance, expressed
+                                              as a percentage higher than the cheapest
+                                              M, C, or R instance type with your specified
+                                              attributes. When Amazon EC2 Auto Scaling
+                                              selects instance types with your attributes,
+                                              we will exclude instance types whose
+                                              price is higher than your threshold.
+                                              The parameter accepts an integer, which
+                                              Amazon EC2 Auto Scaling interprets as
+                                              a percentage. To turn off price protection,
+                                              specify a high value, such as 999999.
+                                              Conflicts with spot_max_price_percentage_over_lowest_price
+                                            type: number
                                           memoryGibPerVcpu:
                                             description: Block describing the minimum
                                               and maximum amount of memory (GiB) per
@@ -1189,6 +1275,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  trafficSource:
+                    description: Attaches one or more traffic sources to the specified
+                      Auto Scaling group.
+                    items:
+                      properties:
+                        identifier:
+                          description: Identifies the traffic source. For Application
+                            Load Balancers, Gateway Load Balancers, Network Load Balancers,
+                            and VPC Lattice, this will be the Amazon Resource Name
+                            (ARN) for a target group in this account and Region. For
+                            Classic Load Balancers, this will be the name of the Classic
+                            Load Balancer in this account and Region.
+                          type: string
+                        type:
+                          description: |-
+                            Provides additional context for the value of Identifier.
+                            The following lists the valid values:
+                            elb if identifier is the name of a Classic Load Balancer.
+                            elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+                            vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+                          type: string
+                      type: object
+                    type: array
                   vpcZoneIdentifier:
                     description: List of subnet IDs to launch resources in. Subnets
                       automatically determine which availability zones the group will
@@ -1339,6 +1448,18 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    items:
+                      properties:
+                        capacityDistributionStrategy:
+                          description: The strategy to use for distributing capacity
+                            across the Availability Zones. Valid values are balanced-only
+                            and balanced-best-effort. Default is balanced-best-effort.
+                          type: string
+                      type: object
+                    type: array
                   availabilityZones:
                     description: List of one or more availability zones for the group.
                       Used for EC2-Classic, attaching a network interface via id from
@@ -1407,6 +1528,11 @@ spec:
                     description: '"EC2" or "ELB". Controls how health checking is
                       done.'
                     type: string
+                  ignoreFailedScalingActivities:
+                    description: Whether to ignore failed Auto Scaling scaling activities
+                      while waiting for capacity. The default is false -- failed scaling
+                      activities cause errors to be returned.
+                    type: boolean
                   initialLifecycleHook:
                     description: |-
                       One or more
@@ -1438,6 +1564,28 @@ spec:
                           type: string
                       type: object
                     type: array
+                  instanceMaintenancePolicy:
+                    description: If this block is configured, add a instance maintenance
+                      policy to the specified Auto Scaling group. Defined below.
+                    items:
+                      properties:
+                        maxHealthyPercentage:
+                          description: Amount of capacity in the Auto Scaling group
+                            that can be in service and healthy, or pending, to support
+                            your workload when an instance refresh is in place, as
+                            a percentage of the desired capacity of the Auto Scaling
+                            group. Values must be between 100 and 200, defaults to
+                            100.
+                          type: number
+                        minHealthyPercentage:
+                          description: Amount of capacity in the Auto Scaling group
+                            that must remain healthy during an instance refresh to
+                            allow the operation to continue, as a percentage of the
+                            desired capacity of the Auto Scaling group. Defaults to
+                            90.
+                          type: number
+                      type: object
+                    type: array
                   instanceRefresh:
                     description: |-
                       If this block is configured, start an
@@ -1449,6 +1597,19 @@ spec:
                           description: Override default parameters for Instance Refresh.
                           items:
                             properties:
+                              alarmSpecification:
+                                description: Alarm Specification for Instance Refresh.
+                                items:
+                                  properties:
+                                    alarms:
+                                      description: List of Cloudwatch alarms. If any
+                                        of these alarms goes into ALARM state, Instance
+                                        Refresh is failed.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               autoRollback:
                                 description: Automatically rollback if instance refresh
                                   fails. Defaults to false.
@@ -1471,6 +1632,14 @@ spec:
                                   behavior is to use the Auto Scaling Group's health
                                   check grace period.
                                 type: string
+                              maxHealthyPercentage:
+                                description: Amount of capacity in the Auto Scaling
+                                  group that can be in service and healthy, or pending,
+                                  to support your workload when an instance refresh
+                                  is in place, as a percentage of the desired capacity
+                                  of the Auto Scaling group. Values must be between
+                                  100 and 200, defaults to 100.
+                                type: number
                               minHealthyPercentage:
                                 description: Amount of capacity in the Auto Scaling
                                   group that must remain healthy during an instance
@@ -1478,10 +1647,20 @@ spec:
                                   percentage of the desired capacity of the Auto Scaling
                                   group. Defaults to 90.
                                 type: number
+                              scaleInProtectedInstances:
+                                description: Behavior when encountering instances
+                                  protected from scale in are found. Available behaviors
+                                  are Refresh, Ignore, and Wait. Default is Ignore.
+                                type: string
                               skipMatching:
                                 description: Replace instances that already have your
                                   desired configuration. Defaults to false.
                                 type: boolean
+                              standbyInstances:
+                                description: Behavior when encountering instances
+                                  in the Standby state in are found. Available behaviors
+                                  are Terminate, Ignore, and Wait. Default is Ignore.
+                                type: string
                             type: object
                           type: array
                         strategy:
@@ -2007,6 +2186,22 @@ spec:
                                               type: string
                                             type: array
                                             x-kubernetes-list-type: set
+                                          maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                            description: The price protection threshold
+                                              for Spot Instances. This is the maximum
+                                              you’ll pay for a Spot Instance, expressed
+                                              as a percentage higher than the cheapest
+                                              M, C, or R instance type with your specified
+                                              attributes. When Amazon EC2 Auto Scaling
+                                              selects instance types with your attributes,
+                                              we will exclude instance types whose
+                                              price is higher than your threshold.
+                                              The parameter accepts an integer, which
+                                              Amazon EC2 Auto Scaling interprets as
+                                              a percentage. To turn off price protection,
+                                              specify a high value, such as 999999.
+                                              Conflicts with spot_max_price_percentage_over_lowest_price
+                                            type: number
                                           memoryGibPerVcpu:
                                             description: Block describing the minimum
                                               and maximum amount of memory (GiB) per
@@ -2451,6 +2646,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  trafficSource:
+                    description: Attaches one or more traffic sources to the specified
+                      Auto Scaling group.
+                    items:
+                      properties:
+                        identifier:
+                          description: Identifies the traffic source. For Application
+                            Load Balancers, Gateway Load Balancers, Network Load Balancers,
+                            and VPC Lattice, this will be the Amazon Resource Name
+                            (ARN) for a target group in this account and Region. For
+                            Classic Load Balancers, this will be the name of the Classic
+                            Load Balancer in this account and Region.
+                          type: string
+                        type:
+                          description: |-
+                            Provides additional context for the value of Identifier.
+                            The following lists the valid values:
+                            elb if identifier is the name of a Classic Load Balancer.
+                            elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+                            vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+                          type: string
+                      type: object
+                    type: array
                   vpcZoneIdentifier:
                     description: List of subnet IDs to launch resources in. Subnets
                       automatically determine which availability zones the group will
@@ -2770,6 +2988,18 @@ spec:
                   arn:
                     description: ARN for this Auto Scaling Group
                     type: string
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    items:
+                      properties:
+                        capacityDistributionStrategy:
+                          description: The strategy to use for distributing capacity
+                            across the Availability Zones. Valid values are balanced-only
+                            and balanced-best-effort. Default is balanced-best-effort.
+                          type: string
+                      type: object
+                    type: array
                   availabilityZones:
                     description: List of one or more availability zones for the group.
                       Used for EC2-Classic, attaching a network interface via id from
@@ -2841,6 +3071,11 @@ spec:
                   id:
                     description: Auto Scaling Group id.
                     type: string
+                  ignoreFailedScalingActivities:
+                    description: Whether to ignore failed Auto Scaling scaling activities
+                      while waiting for capacity. The default is false -- failed scaling
+                      activities cause errors to be returned.
+                    type: boolean
                   initialLifecycleHook:
                     description: |-
                       One or more
@@ -2872,6 +3107,28 @@ spec:
                           type: string
                       type: object
                     type: array
+                  instanceMaintenancePolicy:
+                    description: If this block is configured, add a instance maintenance
+                      policy to the specified Auto Scaling group. Defined below.
+                    items:
+                      properties:
+                        maxHealthyPercentage:
+                          description: Amount of capacity in the Auto Scaling group
+                            that can be in service and healthy, or pending, to support
+                            your workload when an instance refresh is in place, as
+                            a percentage of the desired capacity of the Auto Scaling
+                            group. Values must be between 100 and 200, defaults to
+                            100.
+                          type: number
+                        minHealthyPercentage:
+                          description: Amount of capacity in the Auto Scaling group
+                            that must remain healthy during an instance refresh to
+                            allow the operation to continue, as a percentage of the
+                            desired capacity of the Auto Scaling group. Defaults to
+                            90.
+                          type: number
+                      type: object
+                    type: array
                   instanceRefresh:
                     description: |-
                       If this block is configured, start an
@@ -2883,6 +3140,19 @@ spec:
                           description: Override default parameters for Instance Refresh.
                           items:
                             properties:
+                              alarmSpecification:
+                                description: Alarm Specification for Instance Refresh.
+                                items:
+                                  properties:
+                                    alarms:
+                                      description: List of Cloudwatch alarms. If any
+                                        of these alarms goes into ALARM state, Instance
+                                        Refresh is failed.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               autoRollback:
                                 description: Automatically rollback if instance refresh
                                   fails. Defaults to false.
@@ -2905,6 +3175,14 @@ spec:
                                   behavior is to use the Auto Scaling Group's health
                                   check grace period.
                                 type: string
+                              maxHealthyPercentage:
+                                description: Amount of capacity in the Auto Scaling
+                                  group that can be in service and healthy, or pending,
+                                  to support your workload when an instance refresh
+                                  is in place, as a percentage of the desired capacity
+                                  of the Auto Scaling group. Values must be between
+                                  100 and 200, defaults to 100.
+                                type: number
                               minHealthyPercentage:
                                 description: Amount of capacity in the Auto Scaling
                                   group that must remain healthy during an instance
@@ -2912,10 +3190,20 @@ spec:
                                   percentage of the desired capacity of the Auto Scaling
                                   group. Defaults to 90.
                                 type: number
+                              scaleInProtectedInstances:
+                                description: Behavior when encountering instances
+                                  protected from scale in are found. Available behaviors
+                                  are Refresh, Ignore, and Wait. Default is Ignore.
+                                type: string
                               skipMatching:
                                 description: Replace instances that already have your
                                   desired configuration. Defaults to false.
                                 type: boolean
+                              standbyInstances:
+                                description: Behavior when encountering instances
+                                  in the Standby state in are found. Available behaviors
+                                  are Terminate, Ignore, and Wait. Default is Ignore.
+                                type: string
                             type: object
                           type: array
                         strategy:
@@ -3221,6 +3509,22 @@ spec:
                                               type: string
                                             type: array
                                             x-kubernetes-list-type: set
+                                          maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                            description: The price protection threshold
+                                              for Spot Instances. This is the maximum
+                                              you’ll pay for a Spot Instance, expressed
+                                              as a percentage higher than the cheapest
+                                              M, C, or R instance type with your specified
+                                              attributes. When Amazon EC2 Auto Scaling
+                                              selects instance types with your attributes,
+                                              we will exclude instance types whose
+                                              price is higher than your threshold.
+                                              The parameter accepts an integer, which
+                                              Amazon EC2 Auto Scaling interprets as
+                                              a percentage. To turn off price protection,
+                                              specify a high value, such as 999999.
+                                              Conflicts with spot_max_price_percentage_over_lowest_price
+                                            type: number
                                           memoryGibPerVcpu:
                                             description: Block describing the minimum
                                               and maximum amount of memory (GiB) per
@@ -3448,6 +3752,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  trafficSource:
+                    description: Attaches one or more traffic sources to the specified
+                      Auto Scaling group.
+                    items:
+                      properties:
+                        identifier:
+                          description: Identifies the traffic source. For Application
+                            Load Balancers, Gateway Load Balancers, Network Load Balancers,
+                            and VPC Lattice, this will be the Amazon Resource Name
+                            (ARN) for a target group in this account and Region. For
+                            Classic Load Balancers, this will be the name of the Classic
+                            Load Balancer in this account and Region.
+                          type: string
+                        type:
+                          description: |-
+                            Provides additional context for the value of Identifier.
+                            The following lists the valid values:
+                            elb if identifier is the name of a Classic Load Balancer.
+                            elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+                            vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+                          type: string
+                      type: object
+                    type: array
                   vpcZoneIdentifier:
                     description: List of subnet IDs to launch resources in. Subnets
                       automatically determine which availability zones the group will
@@ -3624,6 +3951,18 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    items:
+                      properties:
+                        capacityDistributionStrategy:
+                          description: The strategy to use for distributing capacity
+                            across the Availability Zones. Valid values are balanced-only
+                            and balanced-best-effort. Default is balanced-best-effort.
+                          type: string
+                      type: object
+                    type: array
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the
@@ -4986,6 +5325,18 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    items:
+                      properties:
+                        capacityDistributionStrategy:
+                          description: The strategy to use for distributing capacity
+                            across the Availability Zones. Valid values are balanced-only
+                            and balanced-best-effort. Default is balanced-best-effort.
+                          type: string
+                      type: object
+                    type: array
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the
@@ -6513,6 +6864,18 @@ spec:
                   arn:
                     description: ARN for this Auto Scaling Group
                     type: string
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    items:
+                      properties:
+                        capacityDistributionStrategy:
+                          description: The strategy to use for distributing capacity
+                            across the Availability Zones. Valid values are balanced-only
+                            and balanced-best-effort. Default is balanced-best-effort.
+                          type: string
+                      type: object
+                    type: array
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the
@@ -7464,6 +7827,16 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    properties:
+                      capacityDistributionStrategy:
+                        description: The strategy to use for distributing capacity
+                          across the Availability Zones. Valid values are balanced-only
+                          and balanced-best-effort. Default is balanced-best-effort.
+                        type: string
+                    type: object
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the
@@ -8760,6 +9133,16 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    properties:
+                      capacityDistributionStrategy:
+                        description: The strategy to use for distributing capacity
+                          across the Availability Zones. Valid values are balanced-only
+                          and balanced-best-effort. Default is balanced-best-effort.
+                        type: string
+                    type: object
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the
@@ -10221,6 +10604,16 @@ spec:
                   arn:
                     description: ARN for this Auto Scaling Group
                     type: string
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    properties:
+                      capacityDistributionStrategy:
+                        description: The strategy to use for distributing capacity
+                          across the Availability Zones. Valid values are balanced-only
+                          and balanced-best-effort. Default is balanced-best-effort.
+                        type: string
+                    type: object
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the

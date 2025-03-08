@@ -253,7 +253,27 @@ func (mg *GameSessionQueue) ResolveReferences(ctx context.Context, c client.Read
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("gamelift.aws.upbound.io", "v1beta2", "Fleet", "FleetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Destinations),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.DestinationsRefs,
+			Selector:      mg.Spec.ForProvider.DestinationsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Destinations")
+	}
+	mg.Spec.ForProvider.Destinations = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.DestinationsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
@@ -273,6 +293,25 @@ func (mg *GameSessionQueue) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.NotificationTarget = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NotificationTargetRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("gamelift.aws.upbound.io", "v1beta2", "Fleet", "FleetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Destinations),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.DestinationsRefs,
+			Selector:      mg.Spec.InitProvider.DestinationsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Destinations")
+	}
+	mg.Spec.InitProvider.Destinations = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.DestinationsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {

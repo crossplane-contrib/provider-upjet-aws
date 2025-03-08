@@ -546,6 +546,9 @@ type LBListenerParameters struct {
 
 type MutualAuthenticationInitParameters struct {
 
+	// Valid values are off and on.
+	AdvertiseTrustStoreCANames *string `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
+
 	// Whether client certificate expiry is ignored. Default is false.
 	IgnoreClientCertificateExpiry *bool `json:"ignoreClientCertificateExpiry,omitempty" tf:"ignore_client_certificate_expiry,omitempty"`
 
@@ -558,6 +561,9 @@ type MutualAuthenticationInitParameters struct {
 
 type MutualAuthenticationObservation struct {
 
+	// Valid values are off and on.
+	AdvertiseTrustStoreCANames *string `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
+
 	// Whether client certificate expiry is ignored. Default is false.
 	IgnoreClientCertificateExpiry *bool `json:"ignoreClientCertificateExpiry,omitempty" tf:"ignore_client_certificate_expiry,omitempty"`
 
@@ -569,6 +575,10 @@ type MutualAuthenticationObservation struct {
 }
 
 type MutualAuthenticationParameters struct {
+
+	// Valid values are off and on.
+	// +kubebuilder:validation:Optional
+	AdvertiseTrustStoreCANames *string `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
 
 	// Whether client certificate expiry is ignored. Default is false.
 	// +kubebuilder:validation:Optional

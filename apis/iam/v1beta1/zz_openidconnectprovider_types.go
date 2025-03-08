@@ -15,7 +15,7 @@ import (
 
 type OpenIDConnectProviderInitParameters struct {
 
-	// A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.)
+	// List of client IDs (audiences) that identify the application registered with the OpenID Connect provider. This is the value sent as the client_id parameter in OAuth requests.
 	// +listType=set
 	ClientIDList []*string `json:"clientIdList,omitempty" tf:"client_id_list,omitempty"`
 
@@ -23,19 +23,19 @@ type OpenIDConnectProviderInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s).
+	// List of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). For certain OIDC identity providers (e.g., Auth0, GitHub, GitLab, Google, or those using an Amazon S3-hosted JWKS endpoint), AWS relies on its own library of trusted root certificate authorities (CAs) for validation instead of using any configured thumbprints. In these cases, any configured thumbprint_list is retained in the configuration but not used for verification. For other IdPs, if no thumbprint_list is provided, IAM automatically retrieves and uses the top intermediate CA thumbprint from the OIDC IdP server certificate. Instead, it continues using the original thumbprint list from the initial configuration. This differs from the behavior when creating an aws_iam_openid_connect_provider without a thumbprint_list.
 	ThumbprintList []*string `json:"thumbprintList,omitempty" tf:"thumbprint_list,omitempty"`
 
-	// The URL of the identity provider. Corresponds to the iss claim.
+	// URL of the identity provider, corresponding to the iss claim.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type OpenIDConnectProviderObservation struct {
 
-	// The ARN assigned by AWS for this provider.
+	// ARN assigned by AWS for this provider.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.)
+	// List of client IDs (audiences) that identify the application registered with the OpenID Connect provider. This is the value sent as the client_id parameter in OAuth requests.
 	// +listType=set
 	ClientIDList []*string `json:"clientIdList,omitempty" tf:"client_id_list,omitempty"`
 
@@ -45,20 +45,20 @@ type OpenIDConnectProviderObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s).
+	// List of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). For certain OIDC identity providers (e.g., Auth0, GitHub, GitLab, Google, or those using an Amazon S3-hosted JWKS endpoint), AWS relies on its own library of trusted root certificate authorities (CAs) for validation instead of using any configured thumbprints. In these cases, any configured thumbprint_list is retained in the configuration but not used for verification. For other IdPs, if no thumbprint_list is provided, IAM automatically retrieves and uses the top intermediate CA thumbprint from the OIDC IdP server certificate. Instead, it continues using the original thumbprint list from the initial configuration. This differs from the behavior when creating an aws_iam_openid_connect_provider without a thumbprint_list.
 	ThumbprintList []*string `json:"thumbprintList,omitempty" tf:"thumbprint_list,omitempty"`
 
-	// The URL of the identity provider. Corresponds to the iss claim.
+	// URL of the identity provider, corresponding to the iss claim.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type OpenIDConnectProviderParameters struct {
 
-	// A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.)
+	// List of client IDs (audiences) that identify the application registered with the OpenID Connect provider. This is the value sent as the client_id parameter in OAuth requests.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ClientIDList []*string `json:"clientIdList,omitempty" tf:"client_id_list,omitempty"`
@@ -68,11 +68,11 @@ type OpenIDConnectProviderParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s).
+	// List of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). For certain OIDC identity providers (e.g., Auth0, GitHub, GitLab, Google, or those using an Amazon S3-hosted JWKS endpoint), AWS relies on its own library of trusted root certificate authorities (CAs) for validation instead of using any configured thumbprints. In these cases, any configured thumbprint_list is retained in the configuration but not used for verification. For other IdPs, if no thumbprint_list is provided, IAM automatically retrieves and uses the top intermediate CA thumbprint from the OIDC IdP server certificate. Instead, it continues using the original thumbprint list from the initial configuration. This differs from the behavior when creating an aws_iam_openid_connect_provider without a thumbprint_list.
 	// +kubebuilder:validation:Optional
 	ThumbprintList []*string `json:"thumbprintList,omitempty" tf:"thumbprint_list,omitempty"`
 
-	// The URL of the identity provider. Corresponds to the iss claim.
+	// URL of the identity provider, corresponding to the iss claim.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
@@ -114,7 +114,6 @@ type OpenIDConnectProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientIdList) || (has(self.initProvider) && has(self.initProvider.clientIdList))",message="spec.forProvider.clientIdList is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thumbprintList) || (has(self.initProvider) && has(self.initProvider.thumbprintList))",message="spec.forProvider.thumbprintList is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || (has(self.initProvider) && has(self.initProvider.url))",message="spec.forProvider.url is a required parameter"
 	Spec   OpenIDConnectProviderSpec   `json:"spec"`
 	Status OpenIDConnectProviderStatus `json:"status,omitempty"`

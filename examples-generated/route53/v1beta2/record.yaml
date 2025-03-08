@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     name: www.example.com
-    records:
-    - ${aws_eip.lb.public_ip}
+    recordsRefs:
+    - name: lb
     region: us-west-1
     ttl: 300
     type: A

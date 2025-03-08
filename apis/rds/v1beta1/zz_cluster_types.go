@@ -1014,6 +1014,9 @@ type Serverlessv2ScalingConfigurationInitParameters struct {
 
 	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 }
 
 type Serverlessv2ScalingConfigurationObservation struct {
@@ -1023,6 +1026,9 @@ type Serverlessv2ScalingConfigurationObservation struct {
 
 	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 }
 
 type Serverlessv2ScalingConfigurationParameters struct {
@@ -1034,6 +1040,10 @@ type Serverlessv2ScalingConfigurationParameters struct {
 	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	// +kubebuilder:validation:Optional
 	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
+
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	// +kubebuilder:validation:Optional
+	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

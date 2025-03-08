@@ -8,9 +8,9 @@ metadata:
   name: test
 spec:
   forProvider:
-    destinations:
-    - ${aws_gamelift_fleet.us_west_2_fleet.arn}
-    - ${aws_gamelift_fleet.eu_central_1_fleet.arn}
+    destinationsRefs:
+    - name: us_west_2_fleet
+    - name: eu_central_1_fleet
     notificationTargetSelector:
       matchLabels:
         testing.upbound.io/example-name: game_session_queue_notifications

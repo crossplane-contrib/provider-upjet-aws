@@ -10,4 +10,7 @@ package v1beta1
 func (tr *Configuration) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Replicator) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ScramSecretAssociation) Hub() {}

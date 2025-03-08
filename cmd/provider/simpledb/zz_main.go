@@ -67,6 +67,7 @@ func main() {
 		pollStateMetricInterval = app.Flag("poll-state-metric", "State metric recording interval").Default("5s").Duration()
 		leaderElection          = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may be checked for drift from the desired state.").Default("100").Int()
+		skipDefaultTags         = app.Flag("skip-default-tags", "Do not set default crossplane tags for resources").Bool()
 
 		namespace                  = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
@@ -156,7 +157,7 @@ func main() {
 	metrics.Registry.MustRegister(stateMetrics)
 
 	ctx := context.Background()
-	provider, err := config.GetProvider(ctx, false)
+	provider, err := config.GetProvider(ctx, false, *skipDefaultTags)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 	setupConfig := &clients.SetupConfig{
 		Logger:            logr,
@@ -217,7 +218,7 @@ func main() {
 		})), "cannot create default store config")
 	}
 
-	kingpin.FatalIfError(conversion.RegisterConversions(o.Provider), "Cannot initialize the webhook conversion registry")
+	kingpin.FatalIfError(conversion.RegisterConversions(o.Provider, mgr.GetScheme()), "Cannot initialize the webhook conversion registry")
 	kingpin.FatalIfError(controller.Setup_simpledb(mgr, o), "Cannot setup AWS controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }

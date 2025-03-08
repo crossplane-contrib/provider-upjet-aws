@@ -35,8 +35,18 @@ type NATGatewayInitParameters_2 struct {
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// A list of secondary allocation EIP IDs for this NAT Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
+
+	// References to EIP in ec2 to populate secondaryAllocationIds.
+	// +kubebuilder:validation:Optional
+	SecondaryAllocationIdsRefs []v1.Reference `json:"secondaryAllocationIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate secondaryAllocationIds.
+	// +kubebuilder:validation:Optional
+	SecondaryAllocationIdsSelector *v1.Selector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
 
 	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
@@ -138,9 +148,19 @@ type NATGatewayParameters_2 struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A list of secondary allocation EIP IDs for this NAT Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
+
+	// References to EIP in ec2 to populate secondaryAllocationIds.
+	// +kubebuilder:validation:Optional
+	SecondaryAllocationIdsRefs []v1.Reference `json:"secondaryAllocationIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate secondaryAllocationIds.
+	// +kubebuilder:validation:Optional
+	SecondaryAllocationIdsSelector *v1.Selector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
 
 	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	// +kubebuilder:validation:Optional

@@ -5321,6 +5321,18 @@ func (in *OpensearchConfigurationVPCConfigInitParameters) DeepCopyInto(out *Open
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -5331,6 +5343,18 @@ func (in *OpensearchConfigurationVPCConfigInitParameters) DeepCopyInto(out *Open
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5420,6 +5444,18 @@ func (in *OpensearchConfigurationVPCConfigParameters) DeepCopyInto(out *Opensear
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -5430,6 +5466,18 @@ func (in *OpensearchConfigurationVPCConfigParameters) DeepCopyInto(out *Opensear
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -12112,6 +12160,18 @@ func (in *VPCConfigInitParameters) DeepCopyInto(out *VPCConfigInitParameters) {
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -12122,6 +12182,18 @@ func (in *VPCConfigInitParameters) DeepCopyInto(out *VPCConfigInitParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -12211,6 +12283,18 @@ func (in *VPCConfigParameters) DeepCopyInto(out *VPCConfigParameters) {
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -12221,6 +12305,18 @@ func (in *VPCConfigParameters) DeepCopyInto(out *VPCConfigParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

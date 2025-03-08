@@ -1501,8 +1501,8 @@ spec:
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
                       runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, or  notebook-al2-v2, depending on which version
-                      of Amazon Linux you require.
+                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
+                      on which version of Amazon Linux you require.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -1911,8 +1911,8 @@ spec:
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
                       runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, or  notebook-al2-v2, depending on which version
-                      of Amazon Linux you require.
+                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
+                      on which version of Amazon Linux you require.
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
@@ -2341,8 +2341,8 @@ spec:
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
                       runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, or  notebook-al2-v2, depending on which version
-                      of Amazon Linux you require.
+                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
+                      on which version of Amazon Linux you require.
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook

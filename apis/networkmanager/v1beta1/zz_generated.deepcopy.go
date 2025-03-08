@@ -150,6 +150,17 @@ func (in *AttachmentAccepterObservation) DeepCopyInto(out *AttachmentAccepterObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.EdgeLocations != nil {
+		in, out := &in.EdgeLocations, &out.EdgeLocations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)

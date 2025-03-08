@@ -11929,6 +11929,18 @@ func (in *InputInitParameters) DeepCopyInto(out *InputInitParameters) {
 			}
 		}
 	}
+	if in.InputSecurityGroupsRefs != nil {
+		in, out := &in.InputSecurityGroupsRefs, &out.InputSecurityGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.InputSecurityGroupsSelector != nil {
+		in, out := &in.InputSecurityGroupsSelector, &out.InputSecurityGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MediaConnectFlows != nil {
 		in, out := &in.MediaConnectFlows, &out.MediaConnectFlows
 		*out = make([]MediaConnectFlowsInitParameters, len(*in))
@@ -12488,6 +12500,18 @@ func (in *InputParameters) DeepCopyInto(out *InputParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.InputSecurityGroupsRefs != nil {
+		in, out := &in.InputSecurityGroupsRefs, &out.InputSecurityGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.InputSecurityGroupsSelector != nil {
+		in, out := &in.InputSecurityGroupsSelector, &out.InputSecurityGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaConnectFlows != nil {
 		in, out := &in.MediaConnectFlows, &out.MediaConnectFlows

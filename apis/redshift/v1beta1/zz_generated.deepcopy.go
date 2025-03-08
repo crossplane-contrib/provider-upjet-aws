@@ -1608,6 +1608,18 @@ func (in *EventSubscriptionInitParameters) DeepCopyInto(out *EventSubscriptionIn
 			}
 		}
 	}
+	if in.SourceIdsRefs != nil {
+		in, out := &in.SourceIdsRefs, &out.SourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SourceIdsSelector != nil {
+		in, out := &in.SourceIdsSelector, &out.SourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SourceType != nil {
 		in, out := &in.SourceType, &out.SourceType
 		*out = new(string)
@@ -1836,6 +1848,18 @@ func (in *EventSubscriptionParameters) DeepCopyInto(out *EventSubscriptionParame
 				**out = **in
 			}
 		}
+	}
+	if in.SourceIdsRefs != nil {
+		in, out := &in.SourceIdsRefs, &out.SourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SourceIdsSelector != nil {
+		in, out := &in.SourceIdsSelector, &out.SourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceType != nil {
 		in, out := &in.SourceType, &out.SourceType

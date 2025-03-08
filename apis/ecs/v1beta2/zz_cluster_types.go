@@ -260,7 +260,7 @@ type SettingInitParameters struct {
 	// Name of the setting to manage. Valid values: containerInsights.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value to assign to the setting. Valid values: enabled, disabled.
+	// Value to assign to the setting. Valid values: enhanced, enabled, disabled.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -269,7 +269,7 @@ type SettingObservation struct {
 	// Name of the setting to manage. Valid values: containerInsights.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value to assign to the setting. Valid values: enabled, disabled.
+	// Value to assign to the setting. Valid values: enhanced, enabled, disabled.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -279,7 +279,7 @@ type SettingParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Value to assign to the setting. Valid values: enabled, disabled.
+	// Value to assign to the setting. Valid values: enhanced, enabled, disabled.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }

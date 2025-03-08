@@ -570,6 +570,18 @@ func (in *ClusterEndpointInitParameters) DeepCopyInto(out *ClusterEndpointInitPa
 			}
 		}
 	}
+	if in.ExcludedMembersRefs != nil {
+		in, out := &in.ExcludedMembersRefs, &out.ExcludedMembersRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ExcludedMembersSelector != nil {
+		in, out := &in.ExcludedMembersSelector, &out.ExcludedMembersSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StaticMembers != nil {
 		in, out := &in.StaticMembers, &out.StaticMembers
 		*out = make([]*string, len(*in))
@@ -580,6 +592,18 @@ func (in *ClusterEndpointInitParameters) DeepCopyInto(out *ClusterEndpointInitPa
 				**out = **in
 			}
 		}
+	}
+	if in.StaticMembersRefs != nil {
+		in, out := &in.StaticMembersRefs, &out.StaticMembersRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StaticMembersSelector != nil {
+		in, out := &in.StaticMembersSelector, &out.StaticMembersSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -769,6 +793,18 @@ func (in *ClusterEndpointParameters) DeepCopyInto(out *ClusterEndpointParameters
 			}
 		}
 	}
+	if in.ExcludedMembersRefs != nil {
+		in, out := &in.ExcludedMembersRefs, &out.ExcludedMembersRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ExcludedMembersSelector != nil {
+		in, out := &in.ExcludedMembersSelector, &out.ExcludedMembersSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -784,6 +820,18 @@ func (in *ClusterEndpointParameters) DeepCopyInto(out *ClusterEndpointParameters
 				**out = **in
 			}
 		}
+	}
+	if in.StaticMembersRefs != nil {
+		in, out := &in.StaticMembersRefs, &out.StaticMembersRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StaticMembersSelector != nil {
+		in, out := &in.StaticMembersSelector, &out.StaticMembersSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -1358,6 +1406,11 @@ func (in *ClusterInstanceInitParameters) DeepCopyInto(out *ClusterInstanceInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.InstanceClass != nil {
 		in, out := &in.InstanceClass, &out.InstanceClass
 		*out = new(string)
@@ -1564,6 +1617,11 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 	if in.EngineVersionActual != nil {
 		in, out := &in.EngineVersionActual, &out.EngineVersionActual
 		*out = new(string)
+		**out = **in
+	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -1776,6 +1834,11 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
+		**out = **in
+	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.InstanceClass != nil {
@@ -5020,6 +5083,18 @@ func (in *EventSubscriptionInitParameters) DeepCopyInto(out *EventSubscriptionIn
 			}
 		}
 	}
+	if in.SourceIdsRefs != nil {
+		in, out := &in.SourceIdsRefs, &out.SourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SourceIdsSelector != nil {
+		in, out := &in.SourceIdsSelector, &out.SourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SourceType != nil {
 		in, out := &in.SourceType, &out.SourceType
 		*out = new(string)
@@ -5234,6 +5309,18 @@ func (in *EventSubscriptionParameters) DeepCopyInto(out *EventSubscriptionParame
 			}
 		}
 	}
+	if in.SourceIdsRefs != nil {
+		in, out := &in.SourceIdsRefs, &out.SourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SourceIdsSelector != nil {
+		in, out := &in.SourceIdsSelector, &out.SourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SourceType != nil {
 		in, out := &in.SourceType, &out.SourceType
 		*out = new(string)
@@ -5381,6 +5468,22 @@ func (in *GlobalClusterInitParameters) DeepCopyInto(out *GlobalClusterInitParame
 		in, out := &in.StorageEncrypted, &out.StorageEncrypted
 		*out = new(bool)
 		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 }
 
@@ -5556,6 +5659,38 @@ func (in *GlobalClusterObservation) DeepCopyInto(out *GlobalClusterObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new GlobalClusterObservation.
@@ -5625,6 +5760,22 @@ func (in *GlobalClusterParameters) DeepCopyInto(out *GlobalClusterParameters) {
 		in, out := &in.StorageEncrypted, &out.StorageEncrypted
 		*out = new(bool)
 		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 }
 
@@ -9194,6 +9345,18 @@ func (in *ProxyInitParameters) DeepCopyInto(out *ProxyInitParameters) {
 			}
 		}
 	}
+	if in.VPCSubnetIdsRefs != nil {
+		in, out := &in.VPCSubnetIdsRefs, &out.VPCSubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.VPCSubnetIdsSelector != nil {
+		in, out := &in.VPCSubnetIdsSelector, &out.VPCSubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ProxyInitParameters.
@@ -9453,6 +9616,18 @@ func (in *ProxyParameters) DeepCopyInto(out *ProxyParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.VPCSubnetIdsRefs != nil {
+		in, out := &in.VPCSubnetIdsRefs, &out.VPCSubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.VPCSubnetIdsSelector != nil {
+		in, out := &in.VPCSubnetIdsSelector, &out.VPCSubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10168,6 +10343,11 @@ func (in *Serverlessv2ScalingConfigurationInitParameters) DeepCopyInto(out *Serv
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SecondsUntilAutoPause != nil {
+		in, out := &in.SecondsUntilAutoPause, &out.SecondsUntilAutoPause
+		*out = new(float64)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new Serverlessv2ScalingConfigurationInitParameters.
@@ -10193,6 +10373,11 @@ func (in *Serverlessv2ScalingConfigurationObservation) DeepCopyInto(out *Serverl
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SecondsUntilAutoPause != nil {
+		in, out := &in.SecondsUntilAutoPause, &out.SecondsUntilAutoPause
+		*out = new(float64)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new Serverlessv2ScalingConfigurationObservation.
@@ -10215,6 +10400,11 @@ func (in *Serverlessv2ScalingConfigurationParameters) DeepCopyInto(out *Serverle
 	}
 	if in.MinCapacity != nil {
 		in, out := &in.MinCapacity, &out.MinCapacity
+		*out = new(float64)
+		**out = **in
+	}
+	if in.SecondsUntilAutoPause != nil {
+		in, out := &in.SecondsUntilAutoPause, &out.SecondsUntilAutoPause
 		*out = new(float64)
 		**out = **in
 	}

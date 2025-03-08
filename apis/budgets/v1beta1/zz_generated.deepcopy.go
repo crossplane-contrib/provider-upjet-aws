@@ -1539,6 +1539,18 @@ func (in *IAMActionDefinitionInitParameters) DeepCopyInto(out *IAMActionDefiniti
 			}
 		}
 	}
+	if in.RolesRefs != nil {
+		in, out := &in.RolesRefs, &out.RolesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.RolesSelector != nil {
+		in, out := &in.RolesSelector, &out.RolesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Users != nil {
 		in, out := &in.Users, &out.Users
 		*out = make([]*string, len(*in))
@@ -1654,6 +1666,18 @@ func (in *IAMActionDefinitionParameters) DeepCopyInto(out *IAMActionDefinitionPa
 				**out = **in
 			}
 		}
+	}
+	if in.RolesRefs != nil {
+		in, out := &in.RolesRefs, &out.RolesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.RolesSelector != nil {
+		in, out := &in.RolesSelector, &out.RolesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Users != nil {
 		in, out := &in.Users, &out.Users

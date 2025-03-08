@@ -382,8 +382,18 @@ type EncryptionParameters struct {
 type ExcludeInitParameters struct {
 
 	// List of S3 bucket ARNs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
+
+	// References to Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsRefs []v1.Reference `json:"bucketsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsSelector *v1.Selector `json:"bucketsSelector,omitempty" tf:"-"`
 
 	// List of AWS Regions.
 	// +listType=set
@@ -404,9 +414,19 @@ type ExcludeObservation struct {
 type ExcludeParameters struct {
 
 	// List of S3 bucket ARNs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
+
+	// References to Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsRefs []v1.Reference `json:"bucketsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsSelector *v1.Selector `json:"bucketsSelector,omitempty" tf:"-"`
 
 	// List of AWS Regions.
 	// +kubebuilder:validation:Optional

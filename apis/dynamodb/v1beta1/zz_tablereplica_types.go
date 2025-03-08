@@ -15,6 +15,9 @@ import (
 
 type TableReplicaInitParameters_2 struct {
 
+	// Whether deletion protection is enabled (true) or disabled (false) on the table replica.
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
 	// ARN of the main or global table which this resource will replicate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
@@ -40,7 +43,7 @@ type TableReplicaInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Whether to enable Point In Time Recovery for the replica. Default is false.
+	// Whether to enable Point In Time Recovery for the table replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
 	// Storage class of the table replica. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS. If not used, the table replica will use the same class as the global table.
@@ -56,6 +59,9 @@ type TableReplicaObservation_2 struct {
 	// ARN of the table replica.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Whether deletion protection is enabled (true) or disabled (false) on the table replica.
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
 	// ARN of the main or global table which this resource will replicate.
 	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
 
@@ -65,7 +71,7 @@ type TableReplicaObservation_2 struct {
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// Whether to enable Point In Time Recovery for the replica. Default is false.
+	// Whether to enable Point In Time Recovery for the table replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
 	// Storage class of the table replica. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS. If not used, the table replica will use the same class as the global table.
@@ -82,6 +88,10 @@ type TableReplicaObservation_2 struct {
 
 type TableReplicaParameters_2 struct {
 
+	// Whether deletion protection is enabled (true) or disabled (false) on the table replica.
+	// +kubebuilder:validation:Optional
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
 	// ARN of the main or global table which this resource will replicate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
@@ -109,7 +119,7 @@ type TableReplicaParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Whether to enable Point In Time Recovery for the replica. Default is false.
+	// Whether to enable Point In Time Recovery for the table replica. Default is false.
 	// +kubebuilder:validation:Optional
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 

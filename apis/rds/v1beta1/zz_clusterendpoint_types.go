@@ -32,12 +32,32 @@ type ClusterEndpointInitParameters struct {
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
 
+	// References to ClusterInstance in rds to populate excludedMembers.
+	// +kubebuilder:validation:Optional
+	ExcludedMembersRefs []v1.Reference `json:"excludedMembersRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ClusterInstance in rds to populate excludedMembers.
+	// +kubebuilder:validation:Optional
+	ExcludedMembersSelector *v1.Selector `json:"excludedMembersSelector,omitempty" tf:"-"`
+
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
+
+	// References to ClusterInstance in rds to populate staticMembers.
+	// +kubebuilder:validation:Optional
+	StaticMembersRefs []v1.Reference `json:"staticMembersRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ClusterInstance in rds to populate staticMembers.
+	// +kubebuilder:validation:Optional
+	StaticMembersSelector *v1.Selector `json:"staticMembersSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -99,9 +119,19 @@ type ClusterEndpointParameters struct {
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
+
+	// References to ClusterInstance in rds to populate excludedMembers.
+	// +kubebuilder:validation:Optional
+	ExcludedMembersRefs []v1.Reference `json:"excludedMembersRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ClusterInstance in rds to populate excludedMembers.
+	// +kubebuilder:validation:Optional
+	ExcludedMembersSelector *v1.Selector `json:"excludedMembersSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -109,9 +139,19 @@ type ClusterEndpointParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
+
+	// References to ClusterInstance in rds to populate staticMembers.
+	// +kubebuilder:validation:Optional
+	StaticMembersRefs []v1.Reference `json:"staticMembersRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ClusterInstance in rds to populate staticMembers.
+	// +kubebuilder:validation:Optional
+	StaticMembersSelector *v1.Selector `json:"staticMembersSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

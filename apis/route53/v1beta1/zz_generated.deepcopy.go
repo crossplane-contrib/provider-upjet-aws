@@ -740,6 +740,18 @@ func (in *HealthCheckInitParameters) DeepCopyInto(out *HealthCheckInitParameters
 			}
 		}
 	}
+	if in.ChildHealthchecksRefs != nil {
+		in, out := &in.ChildHealthchecksRefs, &out.ChildHealthchecksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ChildHealthchecksSelector != nil {
+		in, out := &in.ChildHealthchecksSelector, &out.ChildHealthchecksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CloudwatchAlarmName != nil {
 		in, out := &in.CloudwatchAlarmName, &out.CloudwatchAlarmName
 		*out = new(string)
@@ -1093,6 +1105,18 @@ func (in *HealthCheckParameters) DeepCopyInto(out *HealthCheckParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.ChildHealthchecksRefs != nil {
+		in, out := &in.ChildHealthchecksRefs, &out.ChildHealthchecksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ChildHealthchecksSelector != nil {
+		in, out := &in.ChildHealthchecksSelector, &out.ChildHealthchecksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CloudwatchAlarmName != nil {
 		in, out := &in.CloudwatchAlarmName, &out.CloudwatchAlarmName
@@ -1633,6 +1657,18 @@ func (in *RecordInitParameters) DeepCopyInto(out *RecordInitParameters) {
 			}
 		}
 	}
+	if in.RecordsRefs != nil {
+		in, out := &in.RecordsRefs, &out.RecordsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.RecordsSelector != nil {
+		in, out := &in.RecordsSelector, &out.RecordsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SetIdentifier != nil {
 		in, out := &in.SetIdentifier, &out.SetIdentifier
 		*out = new(string)
@@ -1924,6 +1960,18 @@ func (in *RecordParameters) DeepCopyInto(out *RecordParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.RecordsRefs != nil {
+		in, out := &in.RecordsRefs, &out.RecordsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.RecordsSelector != nil {
+		in, out := &in.RecordsSelector, &out.RecordsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

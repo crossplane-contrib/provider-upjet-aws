@@ -8,9 +8,9 @@ metadata:
   name: example-notifications
 spec:
   forProvider:
-    groupNames:
-    - ${aws_autoscaling_group.bar.name}
-    - ${aws_autoscaling_group.foo.name}
+    groupNamesRefs:
+    - name: bar
+    - name: foo
     notifications:
     - autoscaling:EC2_INSTANCE_LAUNCH
     - autoscaling:EC2_INSTANCE_TERMINATE

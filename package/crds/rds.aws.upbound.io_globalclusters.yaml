@@ -194,6 +194,12 @@ spec:
                       default is false unless source_db_cluster_identifier is specified
                       and encrypted.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -327,6 +333,12 @@ spec:
                       default is false unless source_db_cluster_identifier is specified
                       and encrypted.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -501,7 +513,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: RDS Global Cluster Amazon Resource Name (ARN)
+                    description: RDS Global Cluster Amazon Resource Name (ARN).
                     type: string
                   databaseName:
                     description: Name for an automatically created database on cluster
@@ -549,20 +561,20 @@ spec:
                     items:
                       properties:
                         dbClusterArn:
-                          description: Amazon Resource Name (ARN) of member DB Cluster
+                          description: Amazon Resource Name (ARN) of member DB Cluster.
                           type: string
                         isWriter:
-                          description: Whether the member is the primary DB Cluster
+                          description: Whether the member is the primary DB Cluster.
                           type: boolean
                       type: object
                     type: array
                   globalClusterResourceId:
                     description: AWS Region-unique, immutable identifier for the global
                       database cluster. This identifier is found in AWS CloudTrail
-                      log entries whenever the AWS KMS key for the DB cluster is accessed
+                      log entries whenever the AWS KMS key for the DB cluster is accessed.
                     type: string
                   id:
-                    description: RDS Global Cluster identifier
+                    description: RDS Global Cluster identifier.
                     type: string
                   sourceDbClusterIdentifier:
                     description: Amazon Resource Name (ARN) to use as the primary
@@ -573,6 +585,19 @@ spec:
                       default is false unless source_db_cluster_identifier is specified
                       and encrypted.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

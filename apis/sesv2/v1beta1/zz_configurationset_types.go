@@ -129,6 +129,9 @@ type DashboardOptionsParameters struct {
 
 type DeliveryOptionsInitParameters struct {
 
+	// The maximum amount of time, in seconds, that Amazon SES API v2 will attempt delivery of email. If specified, the value must greater than or equal to 300 seconds (5 minutes) and less than or equal to 50400 seconds (840 minutes).
+	MaxDeliverySeconds *float64 `json:"maxDeliverySeconds,omitempty" tf:"max_delivery_seconds,omitempty"`
+
 	// The name of the dedicated IP pool to associate with the configuration set.
 	SendingPoolName *string `json:"sendingPoolName,omitempty" tf:"sending_pool_name,omitempty"`
 
@@ -138,6 +141,9 @@ type DeliveryOptionsInitParameters struct {
 
 type DeliveryOptionsObservation struct {
 
+	// The maximum amount of time, in seconds, that Amazon SES API v2 will attempt delivery of email. If specified, the value must greater than or equal to 300 seconds (5 minutes) and less than or equal to 50400 seconds (840 minutes).
+	MaxDeliverySeconds *float64 `json:"maxDeliverySeconds,omitempty" tf:"max_delivery_seconds,omitempty"`
+
 	// The name of the dedicated IP pool to associate with the configuration set.
 	SendingPoolName *string `json:"sendingPoolName,omitempty" tf:"sending_pool_name,omitempty"`
 
@@ -146,6 +152,10 @@ type DeliveryOptionsObservation struct {
 }
 
 type DeliveryOptionsParameters struct {
+
+	// The maximum amount of time, in seconds, that Amazon SES API v2 will attempt delivery of email. If specified, the value must greater than or equal to 300 seconds (5 minutes) and less than or equal to 50400 seconds (840 minutes).
+	// +kubebuilder:validation:Optional
+	MaxDeliverySeconds *float64 `json:"maxDeliverySeconds,omitempty" tf:"max_delivery_seconds,omitempty"`
 
 	// The name of the dedicated IP pool to associate with the configuration set.
 	// +kubebuilder:validation:Optional
@@ -239,12 +249,18 @@ type TrackingOptionsInitParameters struct {
 
 	// The domain to use for tracking open and click events.
 	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
+
+	// : The https policy to use for tracking open and click events. Valid values are REQUIRE, REQUIRE_OPEN_ONLY or OPTIONAL.
+	HTTPSPolicy *string `json:"httpsPolicy,omitempty" tf:"https_policy,omitempty"`
 }
 
 type TrackingOptionsObservation struct {
 
 	// The domain to use for tracking open and click events.
 	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
+
+	// : The https policy to use for tracking open and click events. Valid values are REQUIRE, REQUIRE_OPEN_ONLY or OPTIONAL.
+	HTTPSPolicy *string `json:"httpsPolicy,omitempty" tf:"https_policy,omitempty"`
 }
 
 type TrackingOptionsParameters struct {
@@ -252,6 +268,10 @@ type TrackingOptionsParameters struct {
 	// The domain to use for tracking open and click events.
 	// +kubebuilder:validation:Optional
 	CustomRedirectDomain *string `json:"customRedirectDomain" tf:"custom_redirect_domain,omitempty"`
+
+	// : The https policy to use for tracking open and click events. Valid values are REQUIRE, REQUIRE_OPEN_ONLY or OPTIONAL.
+	// +kubebuilder:validation:Optional
+	HTTPSPolicy *string `json:"httpsPolicy,omitempty" tf:"https_policy,omitempty"`
 }
 
 type VdmOptionsInitParameters struct {

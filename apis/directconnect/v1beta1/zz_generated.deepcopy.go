@@ -1570,6 +1570,11 @@ func (in *GatewayObservation) DeepCopyInto(out *GatewayObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Arn != nil {
+		in, out := &in.Arn, &out.Arn
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)

@@ -115,6 +115,14 @@ spec:
                       that are provisioned with HDD storage_type. Required for HDD
                       storage_type, set to either READ or NONE.'
                     type: string
+                  efaEnabled:
+                    description: Adds support for Elastic Fabric Adapter (EFA) and
+                      GPUDirect Storage (GDS) to Lustre. This must be set at creation.
+                      If set this cannot be changed and this prevents changes to per_unit_storage_throughput.
+                      This is only supported when deployment_type is set to PERSISTENT_2,
+                      metadata_configuration is used, and an EFA-enabled security
+                      group is attached.
+                    type: boolean
                   exportPath:
                     description: S3 URI (with optional prefix) where the root of your
                       Amazon FSx file system is exported. Can only be specified with
@@ -572,6 +580,14 @@ spec:
                       that are provisioned with HDD storage_type. Required for HDD
                       storage_type, set to either READ or NONE.'
                     type: string
+                  efaEnabled:
+                    description: Adds support for Elastic Fabric Adapter (EFA) and
+                      GPUDirect Storage (GDS) to Lustre. This must be set at creation.
+                      If set this cannot be changed and this prevents changes to per_unit_storage_throughput.
+                      This is only supported when deployment_type is set to PERSISTENT_2,
+                      metadata_configuration is used, and an EFA-enabled security
+                      group is attached.
+                    type: boolean
                   exportPath:
                     description: S3 URI (with optional prefix) where the root of your
                       Amazon FSx file system is exported. Can only be specified with
@@ -1188,6 +1204,14 @@ spec:
                       that are provisioned with HDD storage_type. Required for HDD
                       storage_type, set to either READ or NONE.'
                     type: string
+                  efaEnabled:
+                    description: Adds support for Elastic Fabric Adapter (EFA) and
+                      GPUDirect Storage (GDS) to Lustre. This must be set at creation.
+                      If set this cannot be changed and this prevents changes to per_unit_storage_throughput.
+                      This is only supported when deployment_type is set to PERSISTENT_2,
+                      metadata_configuration is used, and an EFA-enabled security
+                      group is attached.
+                    type: boolean
                   exportPath:
                     description: S3 URI (with optional prefix) where the root of your
                       Amazon FSx file system is exported. Can only be specified with
@@ -1541,6 +1565,14 @@ spec:
                       that are provisioned with HDD storage_type. Required for HDD
                       storage_type, set to either READ or NONE.'
                     type: string
+                  efaEnabled:
+                    description: Adds support for Elastic Fabric Adapter (EFA) and
+                      GPUDirect Storage (GDS) to Lustre. This must be set at creation.
+                      If set this cannot be changed and this prevents changes to per_unit_storage_throughput.
+                      This is only supported when deployment_type is set to PERSISTENT_2,
+                      metadata_configuration is used, and an EFA-enabled security
+                      group is attached.
+                    type: boolean
                   exportPath:
                     description: S3 URI (with optional prefix) where the root of your
                       Amazon FSx file system is exported. Can only be specified with
@@ -1995,6 +2027,14 @@ spec:
                       that are provisioned with HDD storage_type. Required for HDD
                       storage_type, set to either READ or NONE.'
                     type: string
+                  efaEnabled:
+                    description: Adds support for Elastic Fabric Adapter (EFA) and
+                      GPUDirect Storage (GDS) to Lustre. This must be set at creation.
+                      If set this cannot be changed and this prevents changes to per_unit_storage_throughput.
+                      This is only supported when deployment_type is set to PERSISTENT_2,
+                      metadata_configuration is used, and an EFA-enabled security
+                      group is attached.
+                    type: boolean
                   exportPath:
                     description: S3 URI (with optional prefix) where the root of your
                       Amazon FSx file system is exported. Can only be specified with
@@ -2608,6 +2648,14 @@ spec:
                       that are provisioned with HDD storage_type. Required for HDD
                       storage_type, set to either READ or NONE.'
                     type: string
+                  efaEnabled:
+                    description: Adds support for Elastic Fabric Adapter (EFA) and
+                      GPUDirect Storage (GDS) to Lustre. This must be set at creation.
+                      If set this cannot be changed and this prevents changes to per_unit_storage_throughput.
+                      This is only supported when deployment_type is set to PERSISTENT_2,
+                      metadata_configuration is used, and an EFA-enabled security
+                      group is attached.
+                    type: boolean
                   exportPath:
                     description: S3 URI (with optional prefix) where the root of your
                       Amazon FSx file system is exported. Can only be specified with

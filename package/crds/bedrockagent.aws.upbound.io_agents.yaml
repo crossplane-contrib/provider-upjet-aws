@@ -72,6 +72,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  agentCollaboration:
+                    description: 'Agents collaboration role. Valid values: SUPERVISOR,
+                      SUPERVISOR_ROUTER, DISABLED.'
+                    type: string
                   agentName:
                     description: Name of the agent.
                     type: string
@@ -163,6 +167,8 @@ spec:
                     description: Foundation model used for orchestration by the agent.
                     type: string
                   guardrailConfiguration:
+                    description: Details about the guardrail associated with the agent.
+                      See guardrail_configuration Block for details.
                     items:
                       properties:
                         guardrailIdentifier:
@@ -182,7 +188,8 @@ spec:
                     type: number
                   instruction:
                     description: Instructions that tell the agent what it should do
-                      and how it should interact with users.
+                      and how it should interact with users. The valid range is 40
+                      - 8000 characters.
                     type: string
                   prepareAgent:
                     description: Whether to prepare the agent after creation or modification.
@@ -316,6 +323,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  agentCollaboration:
+                    description: 'Agents collaboration role. Valid values: SUPERVISOR,
+                      SUPERVISOR_ROUTER, DISABLED.'
+                    type: string
                   agentName:
                     description: Name of the agent.
                     type: string
@@ -407,6 +418,8 @@ spec:
                     description: Foundation model used for orchestration by the agent.
                     type: string
                   guardrailConfiguration:
+                    description: Details about the guardrail associated with the agent.
+                      See guardrail_configuration Block for details.
                     items:
                       properties:
                         guardrailIdentifier:
@@ -426,7 +439,8 @@ spec:
                     type: number
                   instruction:
                     description: Instructions that tell the agent what it should do
-                      and how it should interact with users.
+                      and how it should interact with users. The valid range is 40
+                      - 8000 characters.
                     type: string
                   prepareAgent:
                     description: Whether to prepare the agent after creation or modification.
@@ -725,6 +739,10 @@ spec:
                   agentArn:
                     description: ARN of the agent.
                     type: string
+                  agentCollaboration:
+                    description: 'Agents collaboration role. Valid values: SUPERVISOR,
+                      SUPERVISOR_ROUTER, DISABLED.'
+                    type: string
                   agentId:
                     description: Unique identifier of the agent.
                     type: string
@@ -748,6 +766,8 @@ spec:
                     description: Foundation model used for orchestration by the agent.
                     type: string
                   guardrailConfiguration:
+                    description: Details about the guardrail associated with the agent.
+                      See guardrail_configuration Block for details.
                     items:
                       properties:
                         guardrailIdentifier:
@@ -770,7 +790,8 @@ spec:
                     type: number
                   instruction:
                     description: Instructions that tell the agent what it should do
-                      and how it should interact with users.
+                      and how it should interact with users. The valid range is 40
+                      - 8000 characters.
                     type: string
                   prepareAgent:
                     description: Whether to prepare the agent after creation or modification.

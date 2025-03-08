@@ -49,8 +49,8 @@ spec:
       Name: example
     vpcSecurityGroupIdRefs:
     - name: example
-    vpcSubnetIds:
-    - ${aws_subnet.example.id}
+    vpcSubnetIdsRefs:
+    - name: example
 
 ---
 

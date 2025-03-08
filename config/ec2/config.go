@@ -51,8 +51,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				"ipv6_address_count",
 				"cpu_core_count",
 				"cpu_threads_per_core",
+				"cpu_options",
+				"root_block_device",
 			},
 		}
+		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{
+			"volume_tags.%",
+		})
 		config.MoveToStatus(r.TerraformResource, "security_groups")
 	})
 	p.AddResourceConfigurator("aws_eip", func(r *config.Resource) {
@@ -153,6 +158,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// aws_vpc_endpoint_subnet_association
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
+		r.LateInitializer = config.LateInitializer{
+			// Conflicts with VPCEndpointSubnetAssociation
+			IgnoredFields: []string{
+				"subnet_configuration",
+			},
+		}
 		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
 		delete(r.References, "vpc_endpoint_type")
 	})

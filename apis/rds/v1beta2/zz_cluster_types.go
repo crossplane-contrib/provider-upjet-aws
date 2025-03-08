@@ -182,13 +182,13 @@ type ClusterInitParameters struct {
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Enables Performance Insights for the RDS Cluster
+	// Enables Performance Insights for the RDS Cluster
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
+	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
 	// Port on which the DB accepts connections.
@@ -200,7 +200,7 @@ type ClusterInitParameters struct {
 	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica.
+	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
 	// Nested attribute for point in time restore. More details below.
@@ -414,13 +414,13 @@ type ClusterObservation struct {
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Enables Performance Insights for the RDS Cluster
+	// Enables Performance Insights for the RDS Cluster
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
+	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
 	// Port on which the DB accepts connections.
@@ -436,7 +436,7 @@ type ClusterObservation struct {
 	// load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
-	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica.
+	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
 	// Nested attribute for point in time restore. More details below.
@@ -690,15 +690,15 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Enables Performance Insights for the RDS Cluster
+	// Enables Performance Insights for the RDS Cluster
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
+	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
@@ -719,7 +719,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica.
+	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
@@ -1014,6 +1014,9 @@ type Serverlessv2ScalingConfigurationInitParameters struct {
 
 	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 }
 
 type Serverlessv2ScalingConfigurationObservation struct {
@@ -1023,6 +1026,9 @@ type Serverlessv2ScalingConfigurationObservation struct {
 
 	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 }
 
 type Serverlessv2ScalingConfigurationParameters struct {
@@ -1034,6 +1040,10 @@ type Serverlessv2ScalingConfigurationParameters struct {
 	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	// +kubebuilder:validation:Optional
 	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
+
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	// +kubebuilder:validation:Optional
+	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

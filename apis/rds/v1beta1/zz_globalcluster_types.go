@@ -48,6 +48,10 @@ type GlobalClusterInitParameters struct {
 
 	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type GlobalClusterMembersInitParameters struct {
@@ -55,10 +59,10 @@ type GlobalClusterMembersInitParameters struct {
 
 type GlobalClusterMembersObservation struct {
 
-	// Amazon Resource Name (ARN) of member DB Cluster
+	// Amazon Resource Name (ARN) of member DB Cluster.
 	DBClusterArn *string `json:"dbClusterArn,omitempty" tf:"db_cluster_arn,omitempty"`
 
-	// Whether the member is the primary DB Cluster
+	// Whether the member is the primary DB Cluster.
 	IsWriter *bool `json:"isWriter,omitempty" tf:"is_writer,omitempty"`
 }
 
@@ -67,7 +71,7 @@ type GlobalClusterMembersParameters struct {
 
 type GlobalClusterObservation struct {
 
-	// RDS Global Cluster Amazon Resource Name (ARN)
+	// RDS Global Cluster Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Name for an automatically created database on cluster creation.
@@ -96,10 +100,10 @@ type GlobalClusterObservation struct {
 	// Set of objects containing Global Cluster members.
 	GlobalClusterMembers []GlobalClusterMembersObservation `json:"globalClusterMembers,omitempty" tf:"global_cluster_members,omitempty"`
 
-	// AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed
+	// AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.
 	GlobalClusterResourceID *string `json:"globalClusterResourceId,omitempty" tf:"global_cluster_resource_id,omitempty"`
 
-	// RDS Global Cluster identifier
+	// RDS Global Cluster identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
@@ -107,6 +111,14 @@ type GlobalClusterObservation struct {
 
 	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type GlobalClusterParameters struct {
@@ -157,6 +169,11 @@ type GlobalClusterParameters struct {
 	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // GlobalClusterSpec defines the desired state of GlobalCluster

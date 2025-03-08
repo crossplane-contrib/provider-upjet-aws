@@ -609,6 +609,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MultiRegionClusterName != nil {
+		in, out := &in.MultiRegionClusterName, &out.MultiRegionClusterName
+		*out = new(string)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -838,6 +843,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MultiRegionClusterName != nil {
+		in, out := &in.MultiRegionClusterName, &out.MultiRegionClusterName
+		*out = new(string)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -1021,6 +1031,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
+		*out = new(string)
+		**out = **in
+	}
+	if in.MultiRegionClusterName != nil {
+		in, out := &in.MultiRegionClusterName, &out.MultiRegionClusterName
 		*out = new(string)
 		**out = **in
 	}

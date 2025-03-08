@@ -15,6 +15,9 @@ import (
 
 type EBSSnapshotCopyInitParameters struct {
 
+	// Specifies a completion duration to initiate a time-based snapshot copy. Time-based snapshot copy operations complete within the specified duration.  Value must be between 15 and 2880 minutes, in 15 minute increments only.
+	CompletionDurationMinutes *float64 `json:"completionDurationMinutes,omitempty" tf:"completion_duration_minutes,omitempty"`
+
 	// A description of what the snapshot is.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -67,6 +70,9 @@ type EBSSnapshotCopyObservation struct {
 
 	// Amazon Resource Name (ARN) of the EBS Snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Specifies a completion duration to initiate a time-based snapshot copy. Time-based snapshot copy operations complete within the specified duration.  Value must be between 15 and 2880 minutes, in 15 minute increments only.
+	CompletionDurationMinutes *float64 `json:"completionDurationMinutes,omitempty" tf:"completion_duration_minutes,omitempty"`
 
 	// The data encryption key identifier for the snapshot.
 	DataEncryptionKeyID *string `json:"dataEncryptionKeyId,omitempty" tf:"data_encryption_key_id,omitempty"`
@@ -123,6 +129,10 @@ type EBSSnapshotCopyObservation struct {
 }
 
 type EBSSnapshotCopyParameters struct {
+
+	// Specifies a completion duration to initiate a time-based snapshot copy. Time-based snapshot copy operations complete within the specified duration.  Value must be between 15 and 2880 minutes, in 15 minute increments only.
+	// +kubebuilder:validation:Optional
+	CompletionDurationMinutes *float64 `json:"completionDurationMinutes,omitempty" tf:"completion_duration_minutes,omitempty"`
 
 	// A description of what the snapshot is.
 	// +kubebuilder:validation:Optional

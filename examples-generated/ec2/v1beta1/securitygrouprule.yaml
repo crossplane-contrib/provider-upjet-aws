@@ -8,11 +8,11 @@ metadata:
   name: example
 spec:
   forProvider:
-    cidrBlocks:
-    - ${aws_vpc.example.cidr_block}
+    cidrBlocksRefs:
+    - name: example
     fromPort: 0
-    ipv6CidrBlocks:
-    - ${aws_vpc.example.ipv6_cidr_block}
+    ipv6CidrBlocksRefs:
+    - name: example
     protocol: tcp
     region: us-west-1
     securityGroupIdSelector:

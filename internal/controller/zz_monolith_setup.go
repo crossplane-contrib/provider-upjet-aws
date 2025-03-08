@@ -129,6 +129,7 @@ import (
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
 	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	inferenceprofile "github.com/upbound/provider-aws/internal/controller/bedrock/inferenceprofile"
 	agent "github.com/upbound/provider-aws/internal/controller/bedrockagent/agent"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
@@ -559,6 +560,7 @@ import (
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	replicator "github.com/upbound/provider-aws/internal/controller/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
 	connector "github.com/upbound/provider-aws/internal/controller/kafkaconnect/connector"
@@ -828,6 +830,7 @@ import (
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	imagesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
 	imageversion "github.com/upbound/provider-aws/internal/controller/sagemaker/imageversion"
+	mlflowtrackingserver "github.com/upbound/provider-aws/internal/controller/sagemaker/mlflowtrackingserver"
 	modelsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/model"
 	modelpackagegroup "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegroup"
 	modelpackagegrouppolicy "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegrouppolicy"
@@ -1094,6 +1097,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.Setup,
 		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		inferenceprofile.Setup,
 		agent.Setup,
 		budget.Setup,
 		budgetaction.Setup,
@@ -1524,6 +1528,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
+		replicator.Setup,
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 		connector.Setup,
@@ -1793,6 +1798,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		featuregroup.Setup,
 		imagesagemaker.Setup,
 		imageversion.Setup,
+		mlflowtrackingserver.Setup,
 		modelsagemaker.Setup,
 		modelpackagegroup.Setup,
 		modelpackagegrouppolicy.Setup,
