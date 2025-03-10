@@ -483,10 +483,10 @@ func SetAssumeRoleOptions(ctx context.Context, kube client.Client, aro v1beta1.A
 			secretValue, err := ExtractSecretValue(ctx, kube, aro.ExternalIDSecretRef)
 			if err != nil {
 				fmt.Printf("Error fetching ExternalID from secret: %v\n", err)
-				return
+			} else {
+				secretValueStr := string(secretValue)
+				opt.ExternalID = &secretValueStr
 			}
-			secretValueStr := string(secretValue)
-			opt.ExternalID = &secretValueStr
 		}
 
 		for _, t := range aro.Tags {
