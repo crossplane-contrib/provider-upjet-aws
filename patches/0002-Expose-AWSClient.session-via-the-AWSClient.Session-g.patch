@@ -1,13 +1,10 @@
-From a17f1924c2c28c32545986fc192e89e3e3fada24 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alper Rifat Ulucinar <ulucinar@users.noreply.github.com>
 Date: Tue, 21 May 2024 20:23:42 +0300
-Subject: [PATCH 2/6] Expose AWSClient.session via the AWSClient.Session getter
+Subject: [PATCH] Expose AWSClient.session via the AWSClient.Session getter
  function
 
 Signed-off-by: Alper Rifat Ulucinar <ulucinar@users.noreply.github.com>
----
- internal/conns/awsclient_xp.go | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/internal/conns/awsclient_xp.go b/internal/conns/awsclient_xp.go
 index 478298e243..b796849631 100644
@@ -33,6 +30,3 @@ index 478298e243..b796849631 100644
 +func (c *AWSClient) Session() *session_sdkv1.Session {
 +	return c.session
 +}
--- 
-2.43.0
-
