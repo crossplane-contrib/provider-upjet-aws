@@ -1,0 +1,24 @@
+apiVersion: ses.m.aws.upbound.io/v1beta1
+kind: ReceiptRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/receiptrule
+  labels:
+    testing.upbound.io/example-name: store
+  name: store
+spec:
+  forProvider:
+    addHeaderAction:
+    - headerName: Custom-Header
+      headerValue: Added by SES
+      position: 1
+    enabled: true
+    name: store
+    recipients:
+    - karen@example.com
+    region: us-west-1
+    ruleSetName: default-rule-set
+    s3Action:
+    - bucketName: emails
+      position: 2
+    scanEnabled: true

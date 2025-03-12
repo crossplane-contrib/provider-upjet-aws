@@ -1,0 +1,13 @@
+apiVersion: ses.m.aws.upbound.io/v1beta1
+kind: ReceiptFilter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/receiptfilter
+  labels:
+    testing.upbound.io/example-name: filter
+  name: filter
+spec:
+  forProvider:
+    cidr: 10.10.10.10
+    policy: Block
+    region: us-west-1

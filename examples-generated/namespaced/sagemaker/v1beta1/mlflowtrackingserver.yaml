@@ -1,0 +1,15 @@
+apiVersion: sagemaker.m.aws.upbound.io/v1beta1
+kind: MlflowTrackingServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    artifactStoreUri: s3://${aws_s3_bucket.example.bucket}/path
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

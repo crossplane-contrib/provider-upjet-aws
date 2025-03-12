@@ -1,0 +1,15 @@
+apiVersion: evidently.m.aws.upbound.io/v1beta1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: evidently/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Example Description
+    name: Example
+    region: us-west-1
+    tags:
+      Key1: example Project

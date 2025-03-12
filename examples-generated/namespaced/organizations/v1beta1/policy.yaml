@@ -1,0 +1,13 @@
+apiVersion: organizations.m.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizations/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    content: ${data.aws_iam_policy_document.example.json}
+    name: example
+    region: us-west-1

@@ -1,0 +1,69 @@
+apiVersion: transfer.m.aws.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    homeDirectoryMappings:
+    - entry: /test.pdf
+      target: /bucket3/test-path/tftestuser.pdf
+    homeDirectoryType: LOGICAL
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: iam.m.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+
+---
+
+apiVersion: iam.m.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.foo.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: transfer.m.aws.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    identityProviderType: SERVICE_MANAGED
+    region: us-west-1
+    tags:
+      NAME: tf-acc-test-transfer-server

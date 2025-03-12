@@ -1,0 +1,29 @@
+apiVersion: ecrpublic.m.aws.upbound.io/v1beta1
+kind: RepositoryPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecrpublic/v1beta1/repositorypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
+    repositoryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ecrpublic.m.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecrpublic/v1beta1/repositorypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

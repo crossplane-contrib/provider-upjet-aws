@@ -1,0 +1,21 @@
+apiVersion: connect.m.aws.upbound.io/v1beta1
+kind: InstanceStorageConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/instancestorageconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    resourceType: CONTACT_TRACE_RECORDS
+    storageConfig:
+    - kinesisFirehoseConfig:
+      - firehoseArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      storageType: KINESIS_FIREHOSE

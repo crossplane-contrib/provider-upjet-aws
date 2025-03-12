@@ -1,0 +1,18 @@
+apiVersion: connect.m.aws.upbound.io/v1beta1
+kind: PhoneNumber
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/phonenumber
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    countryCode: US
+    region: us-west-1
+    tags:
+      hello: world
+    targetArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: DID

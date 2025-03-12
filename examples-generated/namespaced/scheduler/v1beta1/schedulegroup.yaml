@@ -1,0 +1,12 @@
+apiVersion: scheduler.m.aws.upbound.io/v1beta1
+kind: ScheduleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: scheduler/v1beta1/schedulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: my-schedule-group
+    region: us-west-1

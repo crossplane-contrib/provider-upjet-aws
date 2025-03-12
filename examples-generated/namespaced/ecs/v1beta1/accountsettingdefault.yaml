@@ -1,0 +1,13 @@
+apiVersion: ecs.m.aws.upbound.io/v1beta1
+kind: AccountSettingDefault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/accountsettingdefault
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: taskLongArnFormat
+    region: us-west-1
+    value: enabled

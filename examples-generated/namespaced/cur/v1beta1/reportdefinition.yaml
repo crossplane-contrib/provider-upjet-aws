@@ -1,0 +1,24 @@
+apiVersion: cur.m.aws.upbound.io/v1beta1
+kind: ReportDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cur/v1beta1/reportdefinition
+  labels:
+    testing.upbound.io/example-name: example_cur_report_definition
+  name: example-cur-report-definition
+spec:
+  forProvider:
+    additionalArtifacts:
+    - REDSHIFT
+    - QUICKSIGHT
+    additionalSchemaElements:
+    - RESOURCES
+    - SPLIT_COST_ALLOCATION_DATA
+    compression: GZIP
+    format: textORcsv
+    region: us-west-1
+    s3BucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    s3Region: us-east-1
+    timeUnit: HOURLY

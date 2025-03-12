@@ -1,0 +1,17 @@
+apiVersion: redshift.m.aws.upbound.io/v1beta1
+kind: EndpointAccess
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    subnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

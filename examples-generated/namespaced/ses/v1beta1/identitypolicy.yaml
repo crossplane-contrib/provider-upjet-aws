@@ -1,0 +1,30 @@
+apiVersion: ses.m.aws.upbound.io/v1beta1
+kind: IdentityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/identitypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identitySelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
+
+---
+
+apiVersion: ses.m.aws.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/identitypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

@@ -1,0 +1,38 @@
+apiVersion: acmpca.m.aws.upbound.io/v1beta1
+kind: Permission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: acmpca/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    actions:
+    - IssueCertificate
+    - GetCertificate
+    - ListPermissions
+    certificateAuthorityArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    principal: acm.amazonaws.com
+    region: us-west-1
+
+---
+
+apiVersion: acmpca.m.aws.upbound.io/v1beta1
+kind: CertificateAuthority
+metadata:
+  annotations:
+    meta.upbound.io/example-id: acmpca/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    certificateAuthorityConfiguration:
+    - keyAlgorithm: RSA_4096
+      signingAlgorithm: SHA512WITHRSA
+      subject:
+      - commonName: example.com
+    region: us-west-1
