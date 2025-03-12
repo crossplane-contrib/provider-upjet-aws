@@ -1,12 +1,9 @@
-From 3818260acaa812a7973d189d1d1d2e3ea4d989d4 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Erhan Cagirici <erhan@upbound.io>
 Date: Fri, 18 Oct 2024 14:25:54 +0300
-Subject: [PATCH 4/6] add null check for lb_listener forward action config
+Subject: [PATCH] add null check for lb_listener forward action config
 
 Signed-off-by: Erhan Cagirici <erhan@upbound.io>
----
- internal/service/elbv2/listener.go | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/internal/service/elbv2/listener.go b/internal/service/elbv2/listener.go
 index 4c8abea486..ad1cf8892a 100644
@@ -21,6 +18,3 @@ index 4c8abea486..ad1cf8892a 100644
  					actionMap["forward"] = flattenListenerActionForwardConfig(awsAction.ForwardConfig)
  				} else {
  					actionMap["target_group_arn"] = aws.ToString(awsAction.TargetGroupArn)
--- 
-2.43.0
-

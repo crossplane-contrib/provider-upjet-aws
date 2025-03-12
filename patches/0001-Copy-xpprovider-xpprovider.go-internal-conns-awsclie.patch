@@ -1,16 +1,10 @@
-From a29f9131f835bb2984e09f2342a2d63467dbf46c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alper Rifat Ulucinar <ulucinar@users.noreply.github.com>
 Date: Tue, 21 May 2024 17:02:34 +0300
-Subject: [PATCH 1/6] Copy xpprovider/xpprovider.go &
+Subject: [PATCH] Copy xpprovider/xpprovider.go &
  internal/conns/awsclient_xp.go to expose some provider internals.
 
 Signed-off-by: Alper Rifat Ulucinar <ulucinar@users.noreply.github.com>
----
- internal/conns/awsclient_xp.go | 10 +++++
- xpprovider/xpprovider.go       | 69 ++++++++++++++++++++++++++++++++++
- 2 files changed, 79 insertions(+)
- create mode 100644 internal/conns/awsclient_xp.go
- create mode 100644 xpprovider/xpprovider.go
 
 diff --git a/internal/conns/awsclient_xp.go b/internal/conns/awsclient_xp.go
 new file mode 100644
@@ -103,6 +97,3 @@ index 0000000000..38c41083b5
 +func (ac *AWSConfig) GetClient(ctx context.Context, client *AWSClient) (*conns.AWSClient, diag.Diagnostics) {
 +	return (*conns.Config)(ac).ConfigureProvider(ctx, (*conns.AWSClient)(client))
 +}
--- 
-2.43.0
-

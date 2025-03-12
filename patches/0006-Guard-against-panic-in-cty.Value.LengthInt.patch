@@ -1,12 +1,9 @@
-From bed7ae32a1da475c51b2d6e3c5f2b5205bed10ca Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Cem Mergenci <cmergenci@gmail.com>
 Date: Mon, 23 Dec 2024 22:36:57 +0300
-Subject: [PATCH 6/6] Guard against panic in cty.Value.LengthInt().
+Subject: [PATCH] Guard against panic in cty.Value.LengthInt().
 
 Signed-off-by: Cem Mergenci <cmergenci@gmail.com>
----
- internal/tags/key_value_tags.go | 4 ++++
- 1 file changed, 4 insertions(+)
 
 diff --git a/internal/tags/key_value_tags.go b/internal/tags/key_value_tags.go
 index 725eae7aee..81e26b8a32 100644
@@ -23,6 +20,3 @@ index 725eae7aee..81e26b8a32 100644
  		if index >= value.LengthInt() {
  			return cty.NilVal, fmt.Errorf("index %d out of range for attribute %s", index, attrName)
  		}
--- 
-2.43.0
-

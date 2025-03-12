@@ -1,16 +1,9 @@
-From aa9b57539204a0b6498ba67e7e9c6d08ddc5b6a2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Cem Mergenci <cmergenci@gmail.com>
 Date: Tue, 21 May 2024 21:07:57 +0300
-Subject: [PATCH 3/6] Add MQ User resource.
+Subject: [PATCH] Add MQ User resource.
 
 Signed-off-by: Cem Mergenci <cmergenci@gmail.com>
----
- internal/service/mq/service_package_gen.go |   7 +-
- internal/service/mq/user.go                | 277 +++++++++++++++++++++
- internal/service/mq/user_test.go           | 125 ++++++++++
- 3 files changed, 408 insertions(+), 1 deletion(-)
- create mode 100644 internal/service/mq/user.go
- create mode 100644 internal/service/mq/user_test.go
 
 diff --git a/internal/service/mq/service_package_gen.go b/internal/service/mq/service_package_gen.go
 index b39f6eb3ae..d8578cb9d7 100644
@@ -444,6 +437,3 @@ index 0000000000..2b3b2a11ba
 +}
 +`
 +}
--- 
-2.43.0
-

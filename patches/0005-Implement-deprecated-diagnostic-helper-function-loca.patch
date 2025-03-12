@@ -1,12 +1,9 @@
-From ff257c3d8ca76b2e0a9180e9d860c209fb308a30 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Cem Mergenci <cmergenci@gmail.com>
 Date: Mon, 7 Oct 2024 21:09:52 +0300
-Subject: [PATCH 5/6] Implement deprecated diagnostic helper function locally.
+Subject: [PATCH] Implement deprecated diagnostic helper function locally.
 
 Signed-off-by: Cem Mergenci <cmergenci@gmail.com>
----
- internal/service/mq/user.go | 20 +++++++++++++++-----
- 1 file changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/internal/service/mq/user.go b/internal/service/mq/user.go
 index c90551e6a3..7482851d1b 100644
@@ -80,6 +77,3 @@ index c90551e6a3..7482851d1b 100644
  		return
  	}
  }
--- 
-2.43.0
-
