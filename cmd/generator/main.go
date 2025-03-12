@@ -17,7 +17,8 @@ import (
 	"github.com/crossplane/upjet/pkg/pipeline"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/upbound/provider-aws/config"
+	configCluster "github.com/upbound/provider-aws/config/cluster"
+	configNamespaced "github.com/upbound/provider-aws/config/namespaced"
 )
 
 func main() {
@@ -33,11 +34,13 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
-	p, err := config.GetProvider(context.Background(), true)
-	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
-	dumpGeneratedResourceList(p, generatedResourceList)
-	dumpSkippedResourcesCSV(p, skippedResourcesCSV)
-	pipeline.Run(p, absRootDir)
+	pc, err := configCluster.GetProvider(context.Background(), true)
+	kingpin.FatalIfError(err, "Cannot initialize the provider cluster scoped configuration")
+	pns, err := configNamespaced.GetProvider(context.Background(), true)
+	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
+	dumpGeneratedResourceList(pc, generatedResourceList)
+	dumpSkippedResourcesCSV(pc, skippedResourcesCSV)
+	pipeline.Run(pc, pns, absRootDir)
 }
 
 func dumpGeneratedResourceList(p *ujconfig.Provider, targetPath *string) {
