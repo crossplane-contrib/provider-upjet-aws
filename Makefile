@@ -180,9 +180,8 @@ build.init: $(UP)
 # Setup Terraform for fetching provider schema
 TERRAFORM := $(TOOLS_HOST_DIR)/terraform-$(TERRAFORM_VERSION)
 TERRAFORM_WORKDIR := $(WORK_DIR)/terraform
-TERRAFORM_CLI_CONFIG_FILE := $(TERRAFORM_WORKDIR)/.terraformrc-custom
-TERRAFORM_FILESYSTEM_MIRROR := $(TOOLS_HOST_DIR)/$(TERRAFORM_PROVIDER_RELEASE)
-TERRAFORM_PROVIDER := $(TERRAFORM_FILESYSTEM_MIRROR)/registry.terraform.io/$(TERRAFORM_PROVIDER_SOURCE)/$(TERRAFORM_PROVIDER_VERSION)/$(SAFEHOST_PLATFORM)/terraform-provider-aws
+# The terraform aws provider hardcodes version 99.99.99 for local builds
+TERRAFORM_PROVIDER := $(ROOT_DIR)/upstream/terraform-plugin-dir/registry.terraform.io/$(TERRAFORM_PROVIDER_SOURCE)/99.99.99/$(SAFEHOST_PLATFORM)/terraform-provider-aws
 TERRAFORM_PROVIDER_SCHEMA := config/schema.json
 
 $(TERRAFORM):
@@ -194,32 +193,61 @@ $(TERRAFORM):
 	@rm -fr $(TOOLS_HOST_DIR)/tmp-terraform
 	@$(OK) installing terraform $(HOSTOS)-$(HOSTARCH)
 
-$(TERRAFORM_PROVIDER):
-	@$(INFO) installing terraform AWS provider for the platform $(SAFEHOST_PLATFORM)
-	@mkdir -p $(dir $(TERRAFORM_PROVIDER))
-	@curl -fsSL https://github.com/upbound/terraform-provider-aws/releases/download/$(TERRAFORM_PROVIDER_RELEASE)/terraform-provider-aws_$(TERRAFORM_PROVIDER_RELEASE)_$(SAFEHOST_PLATFORM).zip -o $(TERRAFORM_PROVIDER).zip
-	@unzip $(TERRAFORM_PROVIDER).zip -d $(dir $(TERRAFORM_PROVIDER))
-	@rm -fr $(TERRAFORM_PROVIDER).zip
-	@$(OK) installing terraform provider $(SAFEHOST_PLATFORM)
+# TODO(mbbush): this could be optimized to only rerun when necessary.
+# The upstream makefile always invokes `go build`, and relies on go to detect if there are changes that require rebuilding.
+# If I naively reapply the patches each time, then go will think there's a change that requires rebuilding. But it seems
+# to be very fast in that case, so maybe it's smarter than I thought?
+# When do I actually want to rerun this?
+# 1. If there have been changes in `patches/*.patch`
+# 2. If upstream git is dirty (but should I patch?)
+# 3. If the last upstream git commit is not the same as the last patch.
+# 4. If the terraform provider version has changed
+$(TERRAFORM_PROVIDER): $(ROOT_DIR)/.git/modules/upstream
+	@$(INFO) Building terraform AWS provider from source if changes detected
+	@(cd $(ROOT_DIR)/upstream && make go-build)
+	@$(OK) Built terraform AWS provider from source
 
+# TODO(mbbush) Remove this when we can. This is the last thing left over from when we used to fork a terraform cli
+# process for each resource. This generates the tf provider's json schema, which is slightly different from the go
+# schema (float vs int for some types). To avoid many schema changes, we added code in config/registry.go to use the
+# json schema for schema generation. Now that we have multi-version CRDs, it's easier to manage the schema change.
 $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
-	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
+	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
 	@rm -fr $(TERRAFORM_WORKDIR)
 	@mkdir -p $(TERRAFORM_WORKDIR)
-	@echo '{"terraform":[{"required_providers":[{"provider":{"source":"'"$(TERRAFORM_PROVIDER_SOURCE)"'","version":"'"$(TERRAFORM_PROVIDER_VERSION)"'"}}],"required_version":"'"$(TERRAFORM_VERSION)"'"}]}' > $(TERRAFORM_WORKDIR)/main.tf.json
-	@echo 'provider_installation { filesystem_mirror { path = "'"$(TERRAFORM_FILESYSTEM_MIRROR)"'", include = ["hashicorp/aws"] }, direct { exclude = ["hashicorp/aws"] } }' > $(TERRAFORM_CLI_CONFIG_FILE)
-	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) init -upgrade > $(TERRAFORM_WORKDIR)/terraform-logs.txt 2>&1
-	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
-	@$(OK) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
+	@echo 'data "aws_partition" "example" {}' > $(TERRAFORM_WORKDIR)/main.tf
+	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) init -plugin-dir $(ROOT_DIR)/upstream/terraform-plugin-dir > $(TERRAFORM_WORKDIR)/terraform-logs.txt 2>&1
+	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
+	@$(OK) generated provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
 
-pull-docs:
-	rm -fR "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))"
-	git clone -c advice.detachedHead=false --depth 1 --filter=blob:none --branch "v$(TERRAFORM_PROVIDER_VERSION)" --sparse "$(TERRAFORM_PROVIDER_REPO)" "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))";
-	@git -C "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))" sparse-checkout set "$(TERRAFORM_DOCS_PATH)"
+# Alias to build the upstream terraform provider
+upstream.build: $(TERRAFORM_PROVIDER)
 
-generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
+# Apply the contents of patches/*.patch to the upstream submodule starting from the configured version tag.
+upstream.apply-patches:
+	@$(INFO) Patching upstream terraform provider source
+	@(cd $(ROOT_DIR)/upstream && git reset --hard v$(TERRAFORM_PROVIDER_VERSION) && git am ../patches/*.patch)
+	@$(OK) Patched upstream terraform provider source
 
-.PHONY: pull-docs
+# Remove all existing patches in `patches/*.patch` re-generate them from commits in the upstream submodule after the
+# configured version tag.
+upstream.write-patches:
+	@$(INFO) Regenerating patch files from the git commits in the upstream submodule
+	@rm $(ROOT_DIR)/patches/*.patch
+	@(cd $(ROOT_DIR)/upstream && git format-patch v$(TERRAFORM_PROVIDER_VERSION) -o ../patches --zero-commit --no-signature --no-numbered --no-stat)
+	@$(OK) Regenerated patch files from git commits in the upstream submodule
+
+upstream.set-version:
+	@$(INFO) Updating upstream terraform provider from version $(TERRAFORM_PROVIDER_VERSION) to $(VERSION)
+	@sed -i 's/export TERRAFORM_PROVIDER_VERSION := $(TERRAFORM_PROVIDER_VERSION)/export TERRAFORM_PROVIDER_VERSION := $(VERSION)/' Makefile
+	@$(INFO) Updated makefile with new version. Fetching and patching upstream
+	@git submodule update upstream
+	@make upstream.apply-patches
+	@$(GO) mod tidy
+
+.PHONY: upstream.apply-patches upstream.build upstream.set-version upstream.write-patches
+
+generate.init: $(TERRAFORM_PROVIDER) $(TERRAFORM_PROVIDER_SCHEMA)
 
 # ====================================================================================
 # End to End Testing
