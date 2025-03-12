@@ -7,13 +7,9 @@ package config
 import (
 	"context"
 	_ "embed"
-	"fmt"
 	"regexp"
-	"strconv"
-	"strings"
 
 	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/registry/reference"
 	"github.com/crossplane/upjet/pkg/schema/traverser"
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
@@ -21,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
-	"k8s.io/apimachinery/pkg/util/sets"
 
 	"github.com/upbound/provider-aws/hack"
 )
@@ -35,27 +30,6 @@ var (
 
 	//go:embed field-rename.yaml
 	fieldRename []byte
-
-	// oldSingletonListAPIs is a newline-delimited list of Terraform resource
-	// names with converted singleton list APIs with at least CRD API version
-	// containing the old singleton list API. This is to prevent the API
-	// conversion for the newly added resources whose CRD APIs will already
-	// use embedded objects instead of the singleton lists and thus, will
-	// not possess a CRD API version with the singleton list. Thus, for
-	// the newly added resources (resources added after the singleton lists
-	// have been converted), we do not need the CRD API conversion
-	// functions that convert between singleton lists and embedded objects,
-	// but we need only the Terraform conversion functions.
-	// This list is immutable and represents the set of resources with the
-	// already generated CRD API versions with now converted singleton lists.
-	// Because new resources should never have singleton lists in their
-	// generated APIs, there should be no need to add them to this list.
-	// However, bugs might result in exceptions in the future.
-	// Please see:
-	// https://github.com/crossplane-contrib/provider-upjet-aws/pull/1332
-	// for more context on singleton list to embedded object conversions.
-	//go:embed old-singleton-list-apis.txt
-	oldSingletonListAPIs string
 )
 
 var skipList = []string{
@@ -168,157 +142,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 	}
 
 	pc.ConfigureResources()
-	return pc, bumpVersionsWithEmbeddedLists(pc)
-}
-
-func bumpVersionsWithEmbeddedLists(pc *config.Provider) error {
-	l := strings.Split(strings.TrimSpace(oldSingletonListAPIs), "\n")
-	oldSLAPIs := make(map[string]struct{}, len(l))
-	for _, n := range l {
-		oldSLAPIs[n] = struct{}{}
-	}
-
-	for name, r := range pc.Resources {
-		r := r
-		// nothing to do if no singleton list has been converted to
-		// an embedded object
-		if len(r.CRDListConversionPaths()) == 0 {
-			continue
-		}
-
-		if _, ok := oldSLAPIs[name]; ok {
-			if err := configureSingletonListAPIConverters(r); err != nil {
-				return errors.Wrap(err, "failed to configure singleton list API converters")
-			}
-		} else {
-			// the controller will be reconciling on the CRD API version
-			// with the converted API (with embedded objects in place of
-			// singleton lists), so we need the appropriate Terraform
-			// converter in this case.
-			r.TerraformConversions = []config.TerraformConversion{
-				config.NewTFSingletonConversion(),
-			}
-		}
-		pc.Resources[name] = r
-	}
-	return nil
-}
-
-func configureSingletonListAPIConverters(r *config.Resource) error {
-	bumped := r.Version
-	currentVer := "v1beta2"
-	// Field renamings for these three resources already bump their versions.
-	// Please see config.injectFieldRenamingConversionFunctions().
-	// We do not bump their versions again here.
-	if !sets.New("aws_connect_hours_of_operation", "aws_connect_queue", "aws_db_instance").Has(r.Name) {
-		var err error
-		bumped, err = bumpAPIVersion(r.Version)
-		if err != nil {
-			return errors.Wrapf(err, errFmtCannotBumpSingletonList, r.Name)
-		}
-		currentVer = r.Version
-	}
-
-	r.Version = bumped
-	if r.PreviousVersions == nil {
-		prev, err := getPreviousVersions(bumped)
-		if err != nil {
-			return errors.Wrapf(err, errFmtCannotFindPrev, r.Name)
-		}
-		r.PreviousVersions = prev
-	}
-	// we would like to set the storage version to v1beta1 to facilitate
-	// downgrades.
-	r.SetCRDStorageVersion(currentVer)
-	// because the controller reconciles on the API version with the singleton list API,
-	// no need for a Terraform conversion.
-	r.ControllerReconcileVersion = currentVer
-
-	// This block is to fix the issue described in the following PR: https://github.com/crossplane/upjet/pull/465
-	// In EKS Cluster object v1beta1, for spec.vpcConfig field, we mark
-	// +listType as "map" and +listMapKey as "index". During conversion between
-	// v1beta1 to v1beta2, we convert the that field from array to object,
-	// losing the index field since it is not in the schema. This is fine in
-	// most cases since in v1beta1 of the object schema index defaults to "0",
-	// even though conversion doesn't output the index field in the object.
-	//
-	// However, with Server Side Apply, apparently some on the fly conversions
-	// happening when different managers using different api versions and losing
-	// index field causing unexpected merging results and drop of the whole
-	// spec.forProvider.vpcConfig object. This is surfaced with an error like
-	// below:
-	/// cannot patch the managed resource via server-side apply: Cluster.eks.aws.upbound.io
-	//  "some-eks-cluster" is invalid: [spec.forProvider.vpcConfig: Invalid
-	//  value: "null": spec.forProvider.vpcConfig in body must be of type array: "null",
-	//  <nil>: Invalid value: "null": some validation rules were not checked because
-	//  the object was invalid; correct the existing errors to complete validation]
-	var opts []conversion.SingletonListConversionOption
-	if r.Name == "aws_eks_cluster" {
-		opts = append(opts, conversion.WithConvertOptions(&conversion.ConvertOptions{
-			ListInjectKeys: map[string]conversion.SingletonListInjectKey{
-				"vpcConfig": {
-					Key:   "index",
-					Value: "0",
-				},
-			},
-		}))
-	}
-
-	// assumes the first element is the identity conversion from
-	// the default resource and removes it because we will register another
-	// identity converter below.
-	r.Conversions = r.Conversions[1:]
-	r.Conversions = append([]conversion.Conversion{
-		conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
-		conversion.NewSingletonListConversion(conversion.AllVersions, bumped, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject, opts...),
-		conversion.NewSingletonListConversion(bumped, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList, opts...),
-	}, r.Conversions...)
-
-	return nil
-}
-
-// returns a new API version by bumping the last number if the
-// API version string is a Kubernetes API version string such
-// as v1alpha1, v1beta1 or v1. Otherwise, returns an error.
-// If the specified version is v1beta1, then the bumped version is v1beta2.
-// If the specified version is v1, then the bumped version is v2.
-func bumpAPIVersion(v string) (string, error) {
-	m := reAPIVersion.FindStringSubmatch(v)
-	switch {
-	// e.g., v1
-	case len(m) == 2:
-		n, err := strconv.ParseUint(m[1], 10, 0)
-		if err != nil {
-			return "", errors.Wrapf(err, errFmtInvalidAPIVersion, v)
-		}
-		return fmt.Sprintf("v%d", n+1), nil
-
-	// e.g., v1beta1
-	case len(m) == 5:
-		n, err := strconv.ParseUint(m[4], 10, 0)
-		if err != nil {
-			return "", errors.Wrapf(err, errFmtInvalidAPIVersion, v)
-		}
-		return fmt.Sprintf("v%s%s%d", m[1], m[3], n+1), nil
-
-	default:
-		// then cannot bump this version string
-		return "", errors.Errorf(errFmtInvalidAPIVersion, v)
-	}
-}
-
-func getPreviousVersions(v string) ([]string, error) {
-	p := "v1beta1"
-	var result []string
-	var err error
-	for p != v {
-		result = append(result, p)
-		p, err = bumpAPIVersion(p)
-		if err != nil {
-			return nil, err
-		}
-	}
-	return result, nil
+	return pc, nil
 }
 
 // CLIReconciledResourceList returns the list of resources that have external
