@@ -37,7 +37,7 @@ import (
 	clusterapis "github.com/upbound/provider-aws/apis/cluster"
 	clusterconfig "github.com/upbound/provider-aws/apis/cluster/v1alpha1"
 	namespacedapis "github.com/upbound/provider-aws/apis/namespaced"
-	"github.com/upbound/provider-aws/config"
+	config "github.com/upbound/provider-aws/config/cluster"
 	resolverapis "github.com/upbound/provider-aws/internal/apis"
 	"github.com/upbound/provider-aws/internal/clients"
 	clustercontroller "github.com/upbound/provider-aws/internal/controller/cluster"
