@@ -159,7 +159,7 @@ cobertura:
 		grep -v zz_ | \
 		$(GOCOVER_COBERTURA) > $(GO_TEST_OUTPUT)/cobertura-coverage.xml
 
-# Update the submodules, such as the common build scripts.
+# Update the submodules, such as the common build scripts and upstream terraform provider.
 submodules:
 	@git submodule sync
 	@git submodule update --init --recursive
@@ -193,16 +193,7 @@ $(TERRAFORM):
 	@rm -fr $(TOOLS_HOST_DIR)/tmp-terraform
 	@$(OK) installing terraform $(HOSTOS)-$(HOSTARCH)
 
-# TODO(mbbush): this could be optimized to only rerun when necessary.
-# The upstream makefile always invokes `go build`, and relies on go to detect if there are changes that require rebuilding.
-# If I naively reapply the patches each time, then go will think there's a change that requires rebuilding. But it seems
-# to be very fast in that case, so maybe it's smarter than I thought?
-# When do I actually want to rerun this?
-# 1. If there have been changes in `patches/*.patch`
-# 2. If upstream git is dirty (but should I patch?)
-# 3. If the last upstream git commit is not the same as the last patch.
-# 4. If the terraform provider version has changed
-$(TERRAFORM_PROVIDER): $(ROOT_DIR)/.git/modules/upstream
+$(TERRAFORM_PROVIDER): $(UPSTREAM)
 	@$(INFO) Building terraform AWS provider from source if changes detected
 	@(cd $(ROOT_DIR)/upstream && make go-build)
 	@$(OK) Built terraform AWS provider from source
@@ -220,34 +211,35 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
 	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
 	@$(OK) generated provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
 
+# Add sentinel files in the cache directory for tracking which targets need to be rebuilt
+UPSTREAM := $(CACHE_DIR)/upstream
+
+# Applies all the patches to the upstream files, but does not commit them.
+# Rebuild if the patches change, or upstream moves to a new HEAD, with some extra logic in the shell script
+$(UPSTREAM): $(wildcard patches/*) $(shell ./scripts/upstream.sh file_target)
+	@$(INFO) Patching upstream terraform provider source
+	@$(ROOT_DIR)/scripts/upstream.sh init -f
+	@touch $@
+	@$(OK) Patched upstream terraform provider source
+
+# Apply patches to upstream tf provider source
+upstream: $(UPSTREAM)
+
 # Alias to build the upstream terraform provider
 upstream.build: $(TERRAFORM_PROVIDER)
 
-# Apply the contents of patches/*.patch to the upstream submodule starting from the configured version tag.
-upstream.apply-patches:
-	@$(INFO) Patching upstream terraform provider source
-	@(cd $(ROOT_DIR)/upstream && git reset --hard v$(TERRAFORM_PROVIDER_VERSION) && git am ../patches/*.patch)
-	@$(OK) Patched upstream terraform provider source
+.PHONY: upstream upstream.build
 
-# Remove all existing patches in `patches/*.patch` re-generate them from commits in the upstream submodule after the
-# configured version tag.
-upstream.write-patches:
-	@$(INFO) Regenerating patch files from the git commits in the upstream submodule
-	@rm $(ROOT_DIR)/patches/*.patch
-	@(cd $(ROOT_DIR)/upstream && git format-patch v$(TERRAFORM_PROVIDER_VERSION) -o ../patches --zero-commit --no-signature --no-numbered --no-stat)
-	@$(OK) Regenerated patch files from git commits in the upstream submodule
+generate.init: $(UPSTREAM) $(TERRAFORM_PROVIDER) $(TERRAFORM_PROVIDER_SCHEMA)
 
-upstream.set-version:
-	@$(INFO) Updating upstream terraform provider from version $(TERRAFORM_PROVIDER_VERSION) to $(VERSION)
-	@sed -i 's/export TERRAFORM_PROVIDER_VERSION := $(TERRAFORM_PROVIDER_VERSION)/export TERRAFORM_PROVIDER_VERSION := $(VERSION)/' Makefile
-	@$(INFO) Updated makefile with new version. Fetching and patching upstream
-	@git submodule update upstream
-	@make upstream.apply-patches
-	@$(GO) mod tidy
+build.init: $(UPSTREAM)
 
-.PHONY: upstream.apply-patches upstream.build upstream.set-version upstream.write-patches
+lint.init: $(UPSTREAM)
 
-generate.init: $(TERRAFORM_PROVIDER) $(TERRAFORM_PROVIDER_SCHEMA)
+test.init: $(UPSTREAM)
+
+go.modules.download: $(UPSTREAM)
+
 
 # ====================================================================================
 # End to End Testing
@@ -309,7 +301,7 @@ providerconfig-e2e-nopublish:
 uptest-local:
 	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
 
-build-provider.%:
+build-provider.%: $(UPSTREAM)
 	@$(MAKE) build SUBPACKAGES="$$(tr ',' ' ' <<< $*)" LOAD_PACKAGES=true
 
 XPKG_SKIP_DEP_RESOLUTION := true
