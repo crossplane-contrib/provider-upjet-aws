@@ -35,6 +35,7 @@ jobs:
       version: ${{ github.event.inputs.version }}
       go-version: ${{ github.event.inputs.go-version }}
       cleanup-disk: true
+      runs-on: ubuntu-latest-16-cores
     secrets:
       GHCR_PAT: ${{ secrets.GITHUB_TOKEN }}
       XPKG_UPBOUND_TOKEN: ${{ secrets.XPKG_UPBOUND_TOKEN }}

@@ -85,7 +85,7 @@ jobs:
           echo "analysis_cache_key_int=$(make go.lint.analysiskey-interval)" >> $GITHUB_OUTPUT
 
       - name: Cache Linter Analysis
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         id: cache-analysis
         with:
           path: ${{ steps.analysis_cache.outputs.analysis_cache }}
@@ -149,7 +149,7 @@ jobs:
         run: head -1 _output/skipped_resources.csv
 
       - name: Publish skipped resources CSV to Github
-        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: skipped_resources
           path: _output/skipped_resources.csv

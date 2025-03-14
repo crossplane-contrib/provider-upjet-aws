@@ -77,7 +77,7 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.26.0
+KIND_VERSION = v0.27.0
 UP_VERSION = v0.34.2
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.11.1
@@ -130,9 +130,11 @@ export XPKG_IGNORE := $(XPKG_IGNORE)
 
 CONFIG_CRD_GROUP = $(PROVIDER_NAME)
 PROVIDER_AUTH_GROUP = $(PROVIDER_NAME)
+CONFIG_DEPENDENCY_REG_ORG ?= $(XPKG_REG_ORGS)
 
 export CONFIG_CRD_GROUP := $(CONFIG_CRD_GROUP)
 export PROVIDER_AUTH_GROUP := $(PROVIDER_AUTH_GROUP)
+export CONFIG_DEPENDENCY_REG_ORG := $(CONFIG_DEPENDENCY_REG_ORG)
 
 -include build/makelib/xpkg.mk
 
