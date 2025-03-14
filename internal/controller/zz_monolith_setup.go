@@ -941,6 +941,7 @@ import (
 	tagtransfer "github.com/upbound/provider-aws/internal/controller/transfer/tag"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
 	workflowtransfer "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
+	trustprovider "github.com/upbound/provider-aws/internal/controller/verifiedaccess/trustprovider"
 	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/vpc/networkperformancemetricsubscription"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
@@ -1909,6 +1910,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tagtransfer.Setup,
 		usertransfer.Setup,
 		workflowtransfer.Setup,
+		trustprovider.Setup,
 		networkperformancemetricsubscription.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
