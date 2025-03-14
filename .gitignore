@@ -13,6 +13,7 @@ kubeconfig
 e2e/*/.cache
 e2e/*/.work
 e2e/*/_output
+*.sentinel
 
 # ignore IDE folders
 .vscode/
