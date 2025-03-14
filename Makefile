@@ -212,7 +212,7 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
 	@$(OK) generated provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
 
 # Add sentinel files in the cache directory for tracking which targets need to be rebuilt
-UPSTREAM := $(CACHE_DIR)/upstream
+UPSTREAM := $(ROOT_DIR)/.upstream.sentinel
 
 # Applies all the patches to the upstream files, but does not commit them.
 # Rebuild if the patches change, or upstream moves to a new HEAD, with some extra logic in the shell script
