@@ -211,7 +211,7 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
 	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
 	@$(OK) generated provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
 
-# Add sentinel files in the cache directory for tracking which targets need to be rebuilt
+# Add sentinel files for tracking which targets need to be rebuilt
 UPSTREAM := $(ROOT_DIR)/.upstream.sentinel
 
 # Applies all the patches to the upstream files, but does not commit them.
@@ -227,6 +227,17 @@ upstream: $(UPSTREAM)
 
 # Alias to build the upstream terraform provider
 upstream.build: $(TERRAFORM_PROVIDER)
+
+# Overwrite the check-diff target from the build submodule to exclude the upstream submodule.
+# TODO(mbbush): merge this change into the build submodule in a backwards-compatible way once the use cases are clear.
+check-diff: generate
+	@$(INFO) checking that branch is clean
+	@if git status --porcelain --ignore-submodule=all | grep . ; then $(ERR) There are uncommitted changes after running make generate. Please ensure you commit all generated files in this branch after running make generate. && false; else $(OK) branch is clean; fi
+	@$(INFO) checking that the build submodule is clean
+	@if git status --porcelain build | grep . ; then $(ERR) There are uncommitted changes in the build submodule. Please ensure the build submodule is checked out at the desired commit. && false; else $(OK) build submodule is clean; fi
+	@$(INFO) checking that the upstream submodule
+	@if git status --porcelain --ignore-submodule=dirty | grep . ; then $(ERR) There are new commits in the upstream submodule. Please ensure all changes are written to patch files using scripts/upstream.sh. && false; else $(OK) upstream submodule is clean; fi
+
 
 .PHONY: upstream upstream.build
 
