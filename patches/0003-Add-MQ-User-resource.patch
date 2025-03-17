@@ -6,7 +6,7 @@ Subject: [PATCH] Add MQ User resource.
 Signed-off-by: Cem Mergenci <cmergenci@gmail.com>
 
 diff --git a/internal/service/mq/service_package_gen.go b/internal/service/mq/service_package_gen.go
-index b39f6eb3ae..d8578cb9d7 100644
+index 9a673de299..3e565e43f0 100644
 --- a/internal/service/mq/service_package_gen.go
 +++ b/internal/service/mq/service_package_gen.go
 @@ -19,7 +19,12 @@ func (p *servicePackage) FrameworkDataSources(ctx context.Context) []*types.Serv

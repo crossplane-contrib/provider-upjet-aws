@@ -69,16 +69,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
-	p.AddResourceConfigurator("aws_mq_user", func(r *config.Resource) {
-		r.References["broker_id"] = config.Reference{
-			TerraformName: "aws_mq_broker",
-		}
-		r.Version = "v1alpha1"
-		r.MetaResource = &registry.Resource{
-			ArgumentDocs: make(map[string]string),
-		}
-		r.MetaResource.ArgumentDocs["console_access"] = `- (Optional) Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.`
-	})
+	// p.AddResourceConfigurator("aws_mq_user", func(r *config.Resource) {
+	// 	r.References["broker_id"] = config.Reference{
+	// 		TerraformName: "aws_mq_broker",
+	// 	}
+	// 	r.Version = "v1alpha1"
+	// 	r.MetaResource = &registry.Resource{
+	// 		ArgumentDocs: make(map[string]string),
+	// 	}
+	// 	r.MetaResource.ArgumentDocs["console_access"] = `- (Optional) Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.`
+	// })
 
 	p.AddResourceConfigurator("aws_mq_configuration", func(r *config.Resource) {
 		c := &repeatedDiffCheckerForData{}

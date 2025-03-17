@@ -82,7 +82,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// mq
 	//
 	// admin
-	"aws_mq_user": mqUser(),
+	// "aws_mq_user": mqUser(),
 
 	// opensearchserverless
 	//
@@ -2777,16 +2777,16 @@ func cognitoUserPoolClient() config.ExternalName {
 	return e
 }
 
-func mqUser() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
-		if externalName == "" {
-			return "invalidnonemptystring", nil
-		}
-		return externalName, nil
-	}
-	return e
-}
+// func mqUser() config.ExternalName {
+// 	e := config.IdentifierFromProvider
+// 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
+// 		if externalName == "" {
+// 			return "invalidnonemptystring", nil
+// 		}
+// 		return externalName, nil
+// 	}
+// 	return e
+// }
 
 func lambdaFunctionURL() config.ExternalName {
 	e := config.IdentifierFromProvider
