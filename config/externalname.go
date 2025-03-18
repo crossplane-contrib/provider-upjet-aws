@@ -106,8 +106,12 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// s3
 	//
+	// S3 bucket lifecycle configuration id is either "bucket" or "bucket,expected_bucket_owner"
+	"aws_s3_bucket_lifecycle_configuration": s3BucketLifecycleConfiguration(),
+
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
+
 
 	// simpledb
 	//
@@ -2204,8 +2208,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// S3 bucket inventory configurations can be imported using bucket:inventory
 	// $ terraform import aws_s3_bucket_inventory.my-bucket-entire-bucket my-bucket:EntireBucket
 	"aws_s3_bucket_inventory": FormattedIdentifierFromProvider(":", "bucket", "name"),
-	// The S3 bucket lifecycle configuration resource should be imported using the bucket
-	"aws_s3_bucket_lifecycle_configuration": config.IdentifierFromProvider,
 	// The S3 bucket logging resource should be imported using the bucket
 	"aws_s3_bucket_logging": config.IdentifierFromProvider,
 	// S3 bucket metric configurations can be imported using bucket:metric
@@ -2888,6 +2890,36 @@ func kmsAlias() config.ExternalName {
 		return externalName, nil
 	}
 	return e
+}
+
+	// If expected_bucket_owner is provided, the terraform id is bucket,expected_bucket_owner. Otherwise
+	// it's just the bucket name.
+func s3BucketLifecycleConfiguration() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.IdentifierFields = []string{"bucket", "expected_bucket_owner"}
+	e.GetIDFn = func (_ context.Context, externalName string, tfstate map[string]any, _ map[string]any) (string, error) {
+		// TODO: wrap error
+		return s3BucketLifecycleConfigurationId(tfstate)
+	}
+	return e
+}
+
+func s3BucketLifecycleConfigurationId(tfstate map[string]any) (string, error) {
+	bucket, ok := tfstate["bucket"]
+	if !ok {
+		return "", errors.New("bucket attribute missing from state file")
+	}
+	bucketStr, ok := bucket.(string)
+	if !ok {
+		return "", errors.New("bucket attribute was not a string")
+	}
+
+	owner, hasOwner := tfstate["expected_bucket_owner"]
+	ownerStr, ownerIsStr := owner.(string)
+	if hasOwner && ownerIsStr {
+		return fmt.Sprintf("%s,%s", bucketStr, ownerStr), nil
+	}
+	return bucketStr, nil
 }
 
 func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalName {
