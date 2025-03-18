@@ -7,6 +7,7 @@ package config
 import (
 	"context"
 	_ "embed"
+	"fmt"
 	"regexp"
 
 	"github.com/crossplane/upjet/pkg/config"
@@ -142,7 +143,29 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 	}
 
 	pc.ConfigureResources()
+	registerConversions(pc)
 	return pc, nil
+}
+
+func registerConversions(pc *config.Provider) {
+	for name, r := range pc.Resources {
+		r := r
+		// nothing to do if no singleton list has been converted to
+		// an embedded object
+		if len(r.CRDListConversionPaths()) == 0 {
+			continue
+		}
+
+		fmt.Printf("registering TFSingletonConversion for %q\n", name)
+
+		// the resource has at least one singleton list converted, so we need
+		// the appropriate Terraform converter in this case.
+		r.TerraformConversions = []config.TerraformConversion{
+			config.NewTFSingletonConversion(),
+		}
+
+		pc.Resources[name] = r
+	}
 }
 
 // CLIReconciledResourceList returns the list of resources that have external

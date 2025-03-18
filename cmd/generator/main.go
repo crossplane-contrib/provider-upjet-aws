@@ -29,17 +29,20 @@ func main() {
 		generatedResourceList = app.Flag("generated-resource-list", "File path where a list of the generated resources will be stored.").Envar("GENERATED_RESOURCE_LIST").Default("../config/generated.lst").String()
 	)
 	kingpin.MustParse(app.Parse(os.Args[1:]))
-
 	absRootDir, err := filepath.Abs(*repoRoot)
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
+
 	pc, err := configCluster.GetProvider(context.Background(), true)
 	kingpin.FatalIfError(err, "Cannot initialize the provider cluster scoped configuration")
+
 	pns, err := configNamespaced.GetProvider(context.Background(), true)
 	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
+
 	dumpGeneratedResourceList(pc, generatedResourceList)
 	dumpSkippedResourcesCSV(pc, skippedResourcesCSV)
+
 	pipeline.Run(pc, pns, absRootDir)
 }
 
