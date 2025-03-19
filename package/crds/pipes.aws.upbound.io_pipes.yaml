@@ -204,6 +204,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  kmsKeyIdentifier:
+                    description: Identifier of the AWS KMS customer managed key for
+                      EventBridge to use, if you choose to use a customer managed
+                      key to encrypt pipe data. The identifier can be the key Amazon
+                      Resource Name (ARN), KeyId, key alias, or key alias ARN. If
+                      not set, EventBridge uses an AWS owned key to encrypt pipe data.
+                    type: string
                   logConfiguration:
                     description: Logging configuration settings for the pipe. Detailed
                       below.
@@ -1466,12 +1473,12 @@ spec:
                             type: boolean
                         type: object
                       sagemakerPipelineParameters:
-                        description: The parameters for using a SageMaker pipeline
+                        description: The parameters for using a SageMaker AI pipeline
                           as a target. Detailed below.
                         properties:
                           pipelineParameter:
                             description: List of Parameter names and values for SageMaker
-                              Model Building Pipeline execution. Detailed below.
+                              AI Model Building Pipeline execution. Detailed below.
                             items:
                               properties:
                                 name:
@@ -1481,7 +1488,7 @@ spec:
                                   type: string
                                 value:
                                   description: Value of parameter to start execution
-                                    of a SageMaker Model Building Pipeline. Maximum
+                                    of a SageMaker AI Model Building Pipeline. Maximum
                                     length of 1024.
                                   type: string
                               type: object
@@ -1731,6 +1738,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  kmsKeyIdentifier:
+                    description: Identifier of the AWS KMS customer managed key for
+                      EventBridge to use, if you choose to use a customer managed
+                      key to encrypt pipe data. The identifier can be the key Amazon
+                      Resource Name (ARN), KeyId, key alias, or key alias ARN. If
+                      not set, EventBridge uses an AWS owned key to encrypt pipe data.
+                    type: string
                   logConfiguration:
                     description: Logging configuration settings for the pipe. Detailed
                       below.
@@ -2989,12 +3003,12 @@ spec:
                             type: boolean
                         type: object
                       sagemakerPipelineParameters:
-                        description: The parameters for using a SageMaker pipeline
+                        description: The parameters for using a SageMaker AI pipeline
                           as a target. Detailed below.
                         properties:
                           pipelineParameter:
                             description: List of Parameter names and values for SageMaker
-                              Model Building Pipeline execution. Detailed below.
+                              AI Model Building Pipeline execution. Detailed below.
                             items:
                               properties:
                                 name:
@@ -3004,7 +3018,7 @@ spec:
                                   type: string
                                 value:
                                   description: Value of parameter to start execution
-                                    of a SageMaker Model Building Pipeline. Maximum
+                                    of a SageMaker AI Model Building Pipeline. Maximum
                                     length of 1024.
                                   type: string
                               type: object
@@ -3340,6 +3354,13 @@ spec:
                     type: object
                   id:
                     description: Same as name.
+                    type: string
+                  kmsKeyIdentifier:
+                    description: Identifier of the AWS KMS customer managed key for
+                      EventBridge to use, if you choose to use a customer managed
+                      key to encrypt pipe data. The identifier can be the key Amazon
+                      Resource Name (ARN), KeyId, key alias, or key alias ARN. If
+                      not set, EventBridge uses an AWS owned key to encrypt pipe data.
                     type: string
                   logConfiguration:
                     description: Logging configuration settings for the pipe. Detailed
@@ -4382,12 +4403,12 @@ spec:
                             type: boolean
                         type: object
                       sagemakerPipelineParameters:
-                        description: The parameters for using a SageMaker pipeline
+                        description: The parameters for using a SageMaker AI pipeline
                           as a target. Detailed below.
                         properties:
                           pipelineParameter:
                             description: List of Parameter names and values for SageMaker
-                              Model Building Pipeline execution. Detailed below.
+                              AI Model Building Pipeline execution. Detailed below.
                             items:
                               properties:
                                 name:
@@ -4397,7 +4418,7 @@ spec:
                                   type: string
                                 value:
                                   description: Value of parameter to start execution
-                                    of a SageMaker Model Building Pipeline. Maximum
+                                    of a SageMaker AI Model Building Pipeline. Maximum
                                     length of 1024.
                                   type: string
                               type: object

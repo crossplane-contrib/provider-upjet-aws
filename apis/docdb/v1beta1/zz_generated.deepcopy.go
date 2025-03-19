@@ -145,6 +145,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.MasterPasswordWo != nil {
+		in, out := &in.MasterPasswordWo, &out.MasterPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
@@ -857,6 +867,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MasterPasswordWo != nil {
+		in, out := &in.MasterPasswordWo, &out.MasterPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
@@ -1339,6 +1359,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.MasterPasswordSecretRef != nil {
 		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWo != nil {
+		in, out := &in.MasterPasswordWo, &out.MasterPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MasterUsername != nil {

@@ -44,7 +44,7 @@ type HealthCheckInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchAlarmNameSelector *v1.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
-	// The CloudWatchRegion that the CloudWatch alarm was created in.
+	// The region that the CloudWatch alarm was created in.
 	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
 
 	// A boolean value that stops Route 53 from performing health checks. When set to true, Route 53 will do the following depending on the type of health check:
@@ -98,6 +98,10 @@ type HealthCheckInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update of the CloudWatch alarm arguments. Use this argument to synchronize the health check when an alarm is changed. See example above.
+	// +mapType=granular
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+
 	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -117,7 +121,7 @@ type HealthCheckObservation struct {
 	// The name of the CloudWatch alarm.
 	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
 
-	// The CloudWatchRegion that the CloudWatch alarm was created in.
+	// The region that the CloudWatch alarm was created in.
 	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
 
 	// A boolean value that stops Route 53 from performing health checks. When set to true, Route 53 will do the following depending on the type of health check:
@@ -178,6 +182,10 @@ type HealthCheckObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update of the CloudWatch alarm arguments. Use this argument to synchronize the health check when an alarm is changed. See example above.
+	// +mapType=granular
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+
 	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -216,7 +224,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchAlarmNameSelector *v1.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
-	// The CloudWatchRegion that the CloudWatch alarm was created in.
+	// The region that the CloudWatch alarm was created in.
 	// +kubebuilder:validation:Optional
 	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
 
@@ -291,6 +299,11 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update of the CloudWatch alarm arguments. Use this argument to synchronize the health check when an alarm is changed. See example above.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
 	// +kubebuilder:validation:Optional
