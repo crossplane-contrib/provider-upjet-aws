@@ -107,7 +107,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// s3
 	//
 	// S3 bucket lifecycle configuration id is either "bucket" or "bucket,expected_bucket_owner"
-	// "aws_s3_bucket_lifecycle_configuration": s3BucketLifecycleConfiguration(),
+	"aws_s3_bucket_lifecycle_configuration": s3BucketLifecycleConfiguration(),
 
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
@@ -2894,33 +2894,34 @@ func kmsAlias() config.ExternalName {
 
 	// If expected_bucket_owner is provided, the terraform id is bucket,expected_bucket_owner. Otherwise
 	// it's just the bucket name.
-// func s3BucketLifecycleConfiguration() config.ExternalName {
-// 	e := config.IdentifierFromProvider
-// 	e.IdentifierFields = []string{"bucket", "expected_bucket_owner"}
-// 	e.GetIDFn = func (_ context.Context, externalName string, tfstate map[string]any, _ map[string]any) (string, error) {
-// 		// TODO: wrap error
-// 		return s3BucketLifecycleConfigurationId(tfstate)
-// 	}
-// 	return e
-// }
+func s3BucketLifecycleConfiguration() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// Setting these as identifier fields is correct but breaks the existing schema
+	// e.IdentifierFields = []string{"bucket", "expected_bucket_owner"}
+	e.GetIDFn = func (_ context.Context, externalName string, tfstate map[string]any, _ map[string]any) (string, error) {
+		// TODO: wrap error
+		return s3BucketLifecycleConfigurationId(tfstate)
+	}
+	return e
+}
 
-// func s3BucketLifecycleConfigurationId(tfstate map[string]any) (string, error) {
-// 	bucket, ok := tfstate["bucket"]
-// 	if !ok {
-// 		return "", errors.New("bucket attribute missing from state file")
-// 	}
-// 	bucketStr, ok := bucket.(string)
-// 	if !ok {
-// 		return "", errors.New("bucket attribute was not a string")
-// 	}
+func s3BucketLifecycleConfigurationId(tfstate map[string]any) (string, error) {
+	bucket, ok := tfstate["bucket"]
+	if !ok {
+		return "", errors.New("bucket attribute missing from state file")
+	}
+	bucketStr, ok := bucket.(string)
+	if !ok {
+		return "", errors.New("bucket attribute was not a string")
+	}
 
-// 	owner, hasOwner := tfstate["expected_bucket_owner"]
-// 	ownerStr, ownerIsStr := owner.(string)
-// 	if hasOwner && ownerIsStr {
-// 		return fmt.Sprintf("%s,%s", bucketStr, ownerStr), nil
-// 	}
-// 	return bucketStr, nil
-// }
+	owner, hasOwner := tfstate["expected_bucket_owner"]
+	ownerStr, ownerIsStr := owner.(string)
+	if hasOwner && ownerIsStr {
+		return fmt.Sprintf("%s,%s", bucketStr, ownerStr), nil
+	}
+	return bucketStr, nil
+}
 
 func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalName {
 	// Terraform does not always allow id to be empty.
