@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Image is the Schema for the Images API. Provides a SageMaker
-          Image resource.
+          AI Image resource.
         properties:
           apiVersion:
             description: |-
@@ -86,7 +86,7 @@ spec:
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of an IAM role that
-                      enables Amazon SageMaker to perform tasks on your behalf.
+                      enables Amazon SageMaker AI to perform tasks on your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -193,7 +193,7 @@ spec:
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of an IAM role that
-                      enables Amazon SageMaker to perform tasks on your behalf.
+                      enables Amazon SageMaker AI to perform tasks on your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -464,7 +464,7 @@ spec:
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of an IAM role that
-                      enables Amazon SageMaker to perform tasks on your behalf.
+                      enables Amazon SageMaker AI to perform tasks on your behalf.
                     type: string
                   tags:
                     additionalProperties:

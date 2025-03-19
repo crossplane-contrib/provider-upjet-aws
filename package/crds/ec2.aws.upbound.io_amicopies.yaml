@@ -791,6 +791,8 @@ spec:
                     x-kubernetes-map-type: granular
                   tpmSupport:
                     type: string
+                  uefiData:
+                    type: string
                   usageOperation:
                     type: string
                   virtualizationType:

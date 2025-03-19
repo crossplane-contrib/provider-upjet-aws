@@ -74,7 +74,9 @@ spec:
               forProvider:
                 properties:
                   dataRedundancy:
-                    description: 'Data redundancy. Valid values: SingleAvailabilityZone.'
+                    description: 'Data redundancy. Valid values: SingleAvailabilityZone,
+                      SingleLocalZone. The default value depends on the value of the
+                      location.type attribute.'
                     type: string
                   forceDestroy:
                     description: Boolean that indicates all objects should be deleted
@@ -122,7 +124,9 @@ spec:
                   autoscaler.
                 properties:
                   dataRedundancy:
-                    description: 'Data redundancy. Valid values: SingleAvailabilityZone.'
+                    description: 'Data redundancy. Valid values: SingleAvailabilityZone,
+                      SingleLocalZone. The default value depends on the value of the
+                      location.type attribute.'
                     type: string
                   forceDestroy:
                     description: Boolean that indicates all objects should be deleted
@@ -326,7 +330,9 @@ spec:
                     description: ARN of the bucket.
                     type: string
                   dataRedundancy:
-                    description: 'Data redundancy. Valid values: SingleAvailabilityZone.'
+                    description: 'Data redundancy. Valid values: SingleAvailabilityZone,
+                      SingleLocalZone. The default value depends on the value of the
+                      location.type attribute.'
                     type: string
                   forceDestroy:
                     description: Boolean that indicates all objects should be deleted
@@ -338,7 +344,7 @@ spec:
                       destroying the bucket, this flag will not work.
                     type: boolean
                   id:
-                    description: Name of the bucket.
+                    description: (Deprecated, use bucket instead) Name of the bucket.
                     type: string
                   location:
                     description: Bucket location. See Location below for more details.

@@ -91,7 +91,7 @@ spec:
                     description: 'Indicates the algorithm used to create the checksum
                       for the object. If a value is specified and the object is encrypted
                       with KMS, you must have permission to use the kms:Decrypt action.
-                      Valid values: CRC32, CRC32C, SHA1, SHA256.'
+                      Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.'
                     type: string
                   contentDisposition:
                     description: Specifies presentational information for the object.
@@ -275,6 +275,20 @@ spec:
                     description: Date and time, in RFC3339 format, when this object's
                       object lock will expire.
                     type: string
+                  overrideProvider:
+                    properties:
+                      defaultTags:
+                        description: Override the provider default_tags configuration
+                          block.
+                        properties:
+                          tags:
+                            additionalProperties:
+                              type: string
+                            description: Key-value map of resource tags.
+                            type: object
+                            x-kubernetes-map-type: granular
+                        type: object
+                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -384,7 +398,7 @@ spec:
                     description: 'Indicates the algorithm used to create the checksum
                       for the object. If a value is specified and the object is encrypted
                       with KMS, you must have permission to use the kms:Decrypt action.
-                      Valid values: CRC32, CRC32C, SHA1, SHA256.'
+                      Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.'
                     type: string
                   contentDisposition:
                     description: Specifies presentational information for the object.
@@ -568,6 +582,20 @@ spec:
                     description: Date and time, in RFC3339 format, when this object's
                       object lock will expire.
                     type: string
+                  overrideProvider:
+                    properties:
+                      defaultTags:
+                        description: Override the provider default_tags configuration
+                          block.
+                        properties:
+                          tags:
+                            additionalProperties:
+                              type: string
+                            description: Key-value map of resource tags.
+                            type: object
+                            x-kubernetes-map-type: granular
+                        type: object
+                    type: object
                   requestPayer:
                     description: Confirms that the requester knows that they will
                       be charged for the request. Bucket owners need not specify this
@@ -846,7 +874,7 @@ spec:
                     description: 'Indicates the algorithm used to create the checksum
                       for the object. If a value is specified and the object is encrypted
                       with KMS, you must have permission to use the kms:Decrypt action.
-                      Valid values: CRC32, CRC32C, SHA1, SHA256.'
+                      Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.'
                     type: string
                   checksumCrc32:
                     description: The base64-encoded, 32-bit CRC32 checksum of the
@@ -855,6 +883,10 @@ spec:
                   checksumCrc32C:
                     description: The base64-encoded, 32-bit CRC32C checksum of the
                       object.
+                    type: string
+                  checksumCrc64Nvme:
+                    description: The base64-encoded, 64-bit CRC64NVME checksum of
+                      the object.
                     type: string
                   checksumSha1:
                     description: The base64-encoded, 160-bit SHA-1 digest of the object.
@@ -1006,6 +1038,20 @@ spec:
                     description: Date and time, in RFC3339 format, when this object's
                       object lock will expire.
                     type: string
+                  overrideProvider:
+                    properties:
+                      defaultTags:
+                        description: Override the provider default_tags configuration
+                          block.
+                        properties:
+                          tags:
+                            additionalProperties:
+                              type: string
+                            description: Key-value map of resource tags.
+                            type: object
+                            x-kubernetes-map-type: granular
+                        type: object
+                    type: object
                   requestCharged:
                     description: If present, indicates that the requester was successfully
                       charged for the request.

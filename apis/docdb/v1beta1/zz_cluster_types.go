@@ -80,9 +80,16 @@ type ClusterInitParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may
-	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
+	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may
+	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password.
+	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -199,6 +206,13 @@ type ClusterObservation struct {
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Password for the master DB user. Note that this may
+	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password.
+	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -330,10 +344,19 @@ type ClusterParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may
-	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
+	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may
+	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	// +kubebuilder:validation:Optional

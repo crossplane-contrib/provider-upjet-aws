@@ -649,7 +649,6 @@ import (
 	usermemorydb "github.com/upbound/provider-aws/internal/controller/memorydb/user"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
-	usermq "github.com/upbound/provider-aws/internal/controller/mq/user"
 	environmentmwaa "github.com/upbound/provider-aws/internal/controller/mwaa/environment"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
 	clusterendpoint "github.com/upbound/provider-aws/internal/controller/neptune/clusterendpoint"
@@ -794,7 +793,6 @@ import (
 	bucketcorsconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketcorsconfiguration"
 	bucketintelligenttieringconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketintelligenttieringconfiguration"
 	bucketinventory "github.com/upbound/provider-aws/internal/controller/s3/bucketinventory"
-	bucketlifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketlifecycleconfiguration"
 	bucketlogging "github.com/upbound/provider-aws/internal/controller/s3/bucketlogging"
 	bucketmetric "github.com/upbound/provider-aws/internal/controller/s3/bucketmetric"
 	bucketnotification "github.com/upbound/provider-aws/internal/controller/s3/bucketnotification"
@@ -1617,7 +1615,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		usermemorydb.Setup,
 		broker.Setup,
 		configurationmq.Setup,
-		usermq.Setup,
 		environmentmwaa.Setup,
 		clusterneptune.Setup,
 		clusterendpoint.Setup,
@@ -1762,7 +1759,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		bucketcorsconfiguration.Setup,
 		bucketintelligenttieringconfiguration.Setup,
 		bucketinventory.Setup,
-		bucketlifecycleconfiguration.Setup,
 		bucketlogging.Setup,
 		bucketmetric.Setup,
 		bucketnotification.Setup,
