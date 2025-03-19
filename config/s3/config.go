@@ -119,6 +119,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_lifecycle_configuration", func(r *config.Resource) {
+		r.AddSingletonListConversion("rule[*].expiration", "rule[*].expiration")
+		r.AddSingletonListConversion("rule[*].filter", "rule[*].filter")
+		r.AddSingletonListConversion("rule[*].noncurrent_version_expiration", "rule[*].noncurrent_version_expiration")
+		r.AddSingletonListConversion("rule[*].abort_incomplete_multipart_upload", "rule[*].abort_incomplete_multipart_upload")
+		r.AddSingletonListConversion("rule[*].filter[0].and", "rule[*].filter.and")
+		r.AddSingletonListConversion("rule[*].filter[0].tag", "rule[*].filter.tag")
+		// There's a bug somewhere in upjet that's applying the docstring for prefix to these fields that end in prefix
 		r.MetaResource.ArgumentDocs["rule.filter.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.`
 		r.MetaResource.ArgumentDocs["rule.filter.and.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies.`
 	})
