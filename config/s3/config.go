@@ -125,6 +125,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("rule[*].abort_incomplete_multipart_upload", "rule[*].abort_incomplete_multipart_upload")
 		r.AddSingletonListConversion("rule[*].filter[0].and", "rule[*].filter.and")
 		r.AddSingletonListConversion("rule[*].filter[0].tag", "rule[*].filter.tag")
+
+		// Fields to change from number back to string
+		// rule[*].filter[0].object_size_greater_than
+		// rule[*].filter[0].object_size_less_than
+		// rule[*].noncurrent_version_expiration[0].newer_noncurrent_versions
+		// rule[*].noncurrent_version_transition[*].newer_noncurrent_versions
+
 		// There's a bug somewhere in upjet that's applying the docstring for prefix to these fields that end in prefix
 		r.MetaResource.ArgumentDocs["rule.filter.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.`
 		r.MetaResource.ArgumentDocs["rule.filter.and.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies.`
