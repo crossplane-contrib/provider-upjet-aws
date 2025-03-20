@@ -7,7 +7,6 @@ package config
 import (
 	"context"
 	_ "embed"
-	"fmt"
 	"regexp"
 
 	"github.com/crossplane/upjet/pkg/config"
@@ -15,8 +14,8 @@ import (
 	"github.com/crossplane/upjet/pkg/schema/traverser"
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	tfjson "github.com/hashicorp/terraform-json"
+	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-aws/hack"
@@ -86,12 +85,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // configuration is being read for the code generation pipelines.
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
-func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, error) {
-	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
-	if err != nil {
-		return nil, errors.Wrap(err, "cannot get the Terraform framework and SDK providers")
-	}
-
+func GetProvider(ctx context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool) (*config.Provider, error) {
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
 		if err != nil {
@@ -155,8 +149,6 @@ func registerConversions(pc *config.Provider) {
 		if len(r.CRDListConversionPaths()) == 0 {
 			continue
 		}
-
-		fmt.Printf("registering TFSingletonConversion for %q\n", name)
 
 		// the resource has at least one singleton list converted, so we need
 		// the appropriate Terraform converter in this case.

@@ -15,6 +15,7 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/pipeline"
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	configCluster "github.com/upbound/provider-aws/config/cluster"
@@ -34,10 +35,14 @@ func main() {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
 
-	pc, err := configCluster.GetProvider(context.Background(), true)
+	ctx := context.Background()
+	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
+	kingpin.FatalIfError(err, "Cannot get the Terraform framework and SDK providers")
+
+	pc, err := configCluster.GetProvider(ctx, fwProvider, sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot initialize the provider cluster scoped configuration")
 
-	pns, err := configNamespaced.GetProvider(context.Background(), true)
+	pns, err := configNamespaced.GetProvider(ctx, fwProvider, sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
 
 	dumpGeneratedResourceList(pc, generatedResourceList)
