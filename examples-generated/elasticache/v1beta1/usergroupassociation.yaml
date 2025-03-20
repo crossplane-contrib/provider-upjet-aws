@@ -1,0 +1,80 @@
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: UserGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    userGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: elasticache.aws.upbound.io/v1beta2
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
+      -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
+      -georadiusbymember
+    engine: REDIS
+    passwordsSecretRef:
+    - key: example-key
+      name: example-secret
+      namespace: upbound-system
+    region: us-west-1
+    userName: default
+
+---
+
+apiVersion: elasticache.aws.upbound.io/v1beta2
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
+      -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
+      -georadiusbymember
+    engine: REDIS
+    passwordsSecretRef:
+    - key: example-key
+      name: example-secret
+      namespace: upbound-system
+    region: us-west-1
+    userName: exampleuser
+
+---
+
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    engine: REDIS
+    region: us-west-1
+    userIdRefs:
+    - name: default
