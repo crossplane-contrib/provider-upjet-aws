@@ -804,8 +804,8 @@ github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 h1:C3w9PqII01/Oq
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822/go.mod h1:+n7T8mK8HuQTcFwEeznm/DIxMOiR9yIdICNftLE1DvQ=
 github.com/muvaf/typewriter v0.0.0-20210910160850-80e49fe1eb32 h1:yBQlHXLeUJL3TWVmzup5uT3wG5FLxhiTAiTsmNVocys=
 github.com/muvaf/typewriter v0.0.0-20210910160850-80e49fe1eb32/go.mod h1:SAAdeMEiFXR8LcHffvIdiLI1w243DCH2DuHq7UrA5YQ=
-github.com/negz/upjet v0.0.0-20250227033622-bf0ba4f0de9d h1:CKQmdkKYGLzM5PpQucRobIY5fVzK4u8W4M2ACLcZHqA=
-github.com/negz/upjet v0.0.0-20250227033622-bf0ba4f0de9d/go.mod h1:F2u9XwKNzxM+myfS1Opjnc6a5E1N2PC7Mytbkavawvs=
+github.com/negz/upjet v0.0.0-20250320063135-520f63c242c6 h1:UvITk13uQc754KSHQKcLvjXdwrOtho9Dxeu4pMJSNlM=
+github.com/negz/upjet v0.0.0-20250320063135-520f63c242c6/go.mod h1:F2u9XwKNzxM+myfS1Opjnc6a5E1N2PC7Mytbkavawvs=
 github.com/nxadm/tail v1.4.8 h1:nPr65rt6Y5JFSKQO7qToXr7pePgD6Gwiw05lkbyAQTE=
 github.com/nxadm/tail v1.4.8/go.mod h1:+ncqLTQzXmGhMZNUePPaPqPvBxHAIsmXswZKocGu+AU=
 github.com/oklog/run v1.1.0 h1:GEenZ1cK0+q0+wsJew9qUg/DyD8k3JzYsZAi5gYi2mA=

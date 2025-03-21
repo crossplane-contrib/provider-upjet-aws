@@ -6,7 +6,7 @@ module github.com/upbound/provider-aws
 
 go 1.23.6
 
-replace github.com/crossplane/upjet => github.com/negz/upjet v0.0.0-20250227033622-bf0ba4f0de9d
+replace github.com/crossplane/upjet => github.com/negz/upjet v0.0.0-20250320063135-520f63c242c6
 
 require (
 	dario.cat/mergo v1.0.1
@@ -26,6 +26,7 @@ require (
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.59
 	github.com/hashicorp/awspolicyequivalence v1.6.0
 	github.com/hashicorp/terraform-json v0.24.0
+	github.com/hashicorp/terraform-plugin-framework v1.13.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.35.0
 	github.com/hashicorp/terraform-provider-aws v0.0.0-00010101000000-000000000000
 	github.com/json-iterator/go v1.1.12
@@ -353,7 +354,6 @@ require (
 	github.com/hashicorp/hcl/v2 v2.23.0 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform-exec v0.21.0 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.13.0 // indirect
 	github.com/hashicorp/terraform-plugin-framework-jsontypes v0.2.0 // indirect
 	github.com/hashicorp/terraform-plugin-framework-timeouts v0.4.1 // indirect
 	github.com/hashicorp/terraform-plugin-framework-timetypes v0.5.0 // indirect
