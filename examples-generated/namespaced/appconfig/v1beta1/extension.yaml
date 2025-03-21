@@ -1,0 +1,53 @@
+apiVersion: appconfig.m.aws.upbound.io/v1beta1
+kind: Extension
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfig/v1beta1/extension
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    actionPoint:
+    - action:
+      - name: test
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: test
+        uriSelector:
+          matchLabels:
+            testing.upbound.io/example-name: test
+      point: ON_DEPLOYMENT_COMPLETE
+    description: test description
+    name: test
+    region: us-west-1
+    tags:
+      Type: AppConfig Extension
+
+---
+
+apiVersion: iam.m.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfig/v1beta1/extension
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.test.json}
+
+---
+
+apiVersion: sns.m.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfig/v1beta1/extension
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    region: us-west-1

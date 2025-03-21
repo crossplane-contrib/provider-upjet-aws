@@ -25,7 +25,8 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
+	// TODO(negz): Need a namespaced implementation, too.
+	"github.com/upbound/provider-aws/apis/cluster/v1beta1"
 )
 
 const (

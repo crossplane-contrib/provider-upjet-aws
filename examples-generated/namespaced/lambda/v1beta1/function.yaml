@@ -1,0 +1,35 @@
+apiVersion: lambda.m.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/function
+  labels:
+    testing.upbound.io/example-name: test_lambda
+  name: test-lambda
+spec:
+  forProvider:
+    environment:
+    - variables:
+        foo: bar
+    filename: lambda_function_payload.zip
+    handler: index.test
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iam_for_lambda
+    runtime: nodejs18.x
+    sourceCodeHash: ${data.archive_file.lambda.output_base64sha256}
+
+---
+
+apiVersion: iam.m.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/function
+  labels:
+    testing.upbound.io/example-name: iam_for_lambda
+  name: iam-for-lambda
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}

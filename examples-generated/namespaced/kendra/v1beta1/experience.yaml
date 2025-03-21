@@ -1,0 +1,26 @@
+apiVersion: kendra.m.aws.upbound.io/v1beta1
+kind: Experience
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kendra/v1beta1/experience
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    configuration:
+    - contentSourceConfiguration:
+      - directPutContent: true
+        faqIds:
+        - ${aws_kendra_faq.example.faq_id}
+      userIdentityConfiguration:
+      - identityAttributeName: 12345ec453-1546651e-79c4-4554-91fa-00b43ccfa245
+    description: My Kendra Experience
+    indexIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

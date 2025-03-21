@@ -1,0 +1,39 @@
+apiVersion: elbv2.m.aws.upbound.io/v1beta1
+kind: LBTrustStore
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtruststore
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    caCertificatesBundleS3Bucket: '...'
+    caCertificatesBundleS3Key: '...'
+    name: tf-example-lb-ts
+    region: us-west-1
+
+---
+
+apiVersion: elbv2.m.aws.upbound.io/v1beta1
+kind: LBListener
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtruststore
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultAction:
+    - targetGroupArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      type: forward
+    loadBalancerArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    mutualAuthentication:
+      mode: verify
+      trustStoreArn: ${aws_lb_trust_store.test.arn}
+    region: us-west-1

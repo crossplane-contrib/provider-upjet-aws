@@ -1,0 +1,14 @@
+apiVersion: lakeformation.m.aws.upbound.io/v1beta1
+kind: DataLakeSettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta1/datalakesettings
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminsRefs:
+    - name: test
+    - name: test
+    region: us-west-1

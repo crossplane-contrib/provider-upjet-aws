@@ -1,0 +1,61 @@
+apiVersion: batch.m.aws.upbound.io/v1beta1
+kind: JobDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobdefinition
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    containerProperties: |-
+      ${jsonencode({
+          command = ["ls", "-la"],
+          image   = "busybox"
+
+          resourceRequirements = [
+            {
+              type  = "VCPU"
+              value = "0.25"
+            },
+            {
+              type  = "MEMORY"
+              value = "512"
+            }
+          ]
+
+          volumes = [
+            {
+              host = {
+                sourcePath = "/tmp"
+              }
+              name = "tmp"
+            }
+          ]
+
+          environment = [
+            {
+              name  = "VARNAME"
+              value = "VARVAL"
+            }
+          ]
+
+          mountPoints = [
+            {
+              sourceVolume  = "tmp"
+              containerPath = "/tmp"
+              readOnly      = false
+            }
+          ]
+
+          ulimits = [
+            {
+              hardLimit = 1024
+              name      = "nofile"
+              softLimit = 1024
+            }
+          ]
+        })}
+    name: tf_test_batch_job_definition
+    region: us-west-1
+    type: container

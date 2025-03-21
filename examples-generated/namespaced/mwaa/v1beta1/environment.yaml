@@ -1,0 +1,24 @@
+apiVersion: mwaa.m.aws.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dagS3Path: dags/
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    networkConfiguration:
+    - securityGroupIdsRefs:
+      - name: example
+      subnetIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: private[*]
+    region: us-west-1
+    sourceBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

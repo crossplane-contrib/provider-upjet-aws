@@ -1,0 +1,21 @@
+apiVersion: networkfirewall.m.aws.upbound.io/v1beta1
+kind: LoggingConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/loggingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    firewallArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    loggingConfiguration:
+    - logDestinationConfig:
+      - logDestination:
+          bucketName: ${aws_s3_bucket.example.bucket}
+          prefix: example
+        logDestinationType: S3
+        logType: FLOW
+    region: us-west-1

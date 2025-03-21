@@ -1,0 +1,51 @@
+apiVersion: lightsail.m.aws.upbound.io/v1beta1
+kind: DiskAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/diskattachment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    diskNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    diskPath: /dev/xvdf
+    instanceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    region: us-west-1
+
+---
+
+apiVersion: lightsail.m.aws.upbound.io/v1beta1
+kind: Disk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/diskattachment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.available.names[0]}
+    region: us-west-1
+    sizeInGb: 8
+
+---
+
+apiVersion: lightsail.m.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/diskattachment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.available.names[0]}
+    blueprintId: amazon_linux_2
+    bundleId: nano_3_0
+    region: us-west-1

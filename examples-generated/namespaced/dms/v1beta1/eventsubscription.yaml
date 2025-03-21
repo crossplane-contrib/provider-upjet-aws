@@ -1,0 +1,23 @@
+apiVersion: dms.m.aws.upbound.io/v1beta1
+kind: EventSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/eventsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    eventCategories:
+    - creation
+    - failure
+    region: us-west-1
+    snsTopicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceIdsRefs:
+    - name: example
+    sourceType: replication-task
+    tags:
+      Name: example

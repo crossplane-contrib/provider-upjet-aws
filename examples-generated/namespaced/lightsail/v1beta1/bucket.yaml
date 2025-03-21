@@ -1,0 +1,12 @@
+apiVersion: lightsail.m.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/bucket
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    bundleId: small_1_0
+    region: us-west-1

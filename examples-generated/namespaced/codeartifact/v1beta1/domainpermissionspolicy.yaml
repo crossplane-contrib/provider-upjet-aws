@@ -1,0 +1,48 @@
+apiVersion: codeartifact.m.aws.upbound.io/v1beta1
+kind: DomainPermissionsPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/domainpermissionspolicy
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyDocument: ${data.aws_iam_policy_document.test.json}
+    region: us-west-1
+
+---
+
+apiVersion: codeartifact.m.aws.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/domainpermissionspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: example
+    encryptionKeySelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: kms.m.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/domainpermissionspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: domain key
+    region: us-west-1

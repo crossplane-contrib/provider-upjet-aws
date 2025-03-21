@@ -1,0 +1,23 @@
+apiVersion: iot.m.aws.upbound.io/v1beta1
+kind: TopicRuleDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    vpcConfiguration:
+    - roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      securityGroupRefs:
+      - name: example
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example[*]
+      vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example

@@ -1,0 +1,12 @@
+apiVersion: route53recoverycontrolconfig.m.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: georgefitzgerald
+    region: us-west-1

@@ -1,0 +1,39 @@
+apiVersion: opensearchserverless.m.aws.upbound.io/v1beta1
+kind: Collection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/collection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+
+---
+
+apiVersion: opensearchserverless.m.aws.upbound.io/v1beta1
+kind: SecurityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/collection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          "Rules" = [
+            {
+              "Resource" = [
+                "collection/example"
+              ],
+              "ResourceType" = "collection"
+            }
+          ],
+          "AWSOwnedKey" = true
+        })}
+    region: us-west-1
+    type: encryption

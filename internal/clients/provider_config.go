@@ -29,7 +29,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
+	// TODO(negz): Need a namespaced implementation, too.
+	"github.com/upbound/provider-aws/apis/cluster/v1beta1"
 	"github.com/upbound/provider-aws/internal/version"
 )
 

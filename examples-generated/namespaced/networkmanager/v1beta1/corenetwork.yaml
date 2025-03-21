@@ -1,0 +1,14 @@
+apiVersion: networkmanager.m.aws.upbound.io/v1beta1
+kind: CoreNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/corenetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1

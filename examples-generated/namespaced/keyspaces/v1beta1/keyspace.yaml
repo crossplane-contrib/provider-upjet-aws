@@ -1,0 +1,11 @@
+apiVersion: keyspaces.m.aws.upbound.io/v1beta1
+kind: Keyspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyspaces/v1beta1/keyspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
