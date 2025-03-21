@@ -20,9 +20,12 @@ spec:
     - expiration:
         days: 90
       filter:
-        prefix: tmp/
+        objectSizeGreaterThan: "900000"
       id: rule-1
       status: Enabled
+      noncurrentVersionExpiration:
+        newerNoncurrentVersions: "1"
+        # noncurrentDays: 90
 
 ---
 
