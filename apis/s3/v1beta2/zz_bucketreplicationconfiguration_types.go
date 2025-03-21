@@ -13,38 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AndInitParameters struct {
-
-	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
-	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
-type AndObservation struct {
-
-	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
-	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
-type AndParameters struct {
-
-	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
-	// +kubebuilder:validation:Optional
-	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
 type BucketReplicationConfigurationInitParameters struct {
 
 	// Name of the source S3 bucket you want Amazon S3 to monitor.
@@ -141,6 +109,45 @@ type BucketReplicationConfigurationParameters struct {
 	TokenSecretRef *v1.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
+type BucketReplicationConfigurationRuleFilterInitParameters struct {
+
+	// Configuration block for specifying rule filters. This element is required only if you specify more than one filter. See and below for more details.
+	And *FilterAndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Configuration block for specifying a tag key and value. See below.
+	Tag *FilterTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+}
+
+type BucketReplicationConfigurationRuleFilterObservation struct {
+
+	// Configuration block for specifying rule filters. This element is required only if you specify more than one filter. See and below for more details.
+	And *FilterAndObservation `json:"and,omitempty" tf:"and,omitempty"`
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Configuration block for specifying a tag key and value. See below.
+	Tag *FilterTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
+}
+
+type BucketReplicationConfigurationRuleFilterParameters struct {
+
+	// Configuration block for specifying rule filters. This element is required only if you specify more than one filter. See and below for more details.
+	// +kubebuilder:validation:Optional
+	And *FilterAndParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Configuration block for specifying a tag key and value. See below.
+	// +kubebuilder:validation:Optional
+	Tag *FilterTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+}
+
 type BucketReplicationConfigurationRuleInitParameters struct {
 
 	// Whether delete markers are replicated. This argument is only valid with V2 replication configurations (i.e., when filter is used)documented below.
@@ -153,7 +160,7 @@ type BucketReplicationConfigurationRuleInitParameters struct {
 	ExistingObjectReplication *ExistingObjectReplicationInitParameters `json:"existingObjectReplication,omitempty" tf:"existing_object_replication,omitempty"`
 
 	// Filter that identifies subset of objects to which the replication rule applies. See below. If not specified, the rule will default to using prefix.
-	Filter *RuleFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *BucketReplicationConfigurationRuleFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -183,7 +190,7 @@ type BucketReplicationConfigurationRuleObservation struct {
 	ExistingObjectReplication *ExistingObjectReplicationObservation `json:"existingObjectReplication,omitempty" tf:"existing_object_replication,omitempty"`
 
 	// Filter that identifies subset of objects to which the replication rule applies. See below. If not specified, the rule will default to using prefix.
-	Filter *RuleFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *BucketReplicationConfigurationRuleFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -217,7 +224,7 @@ type BucketReplicationConfigurationRuleParameters struct {
 
 	// Filter that identifies subset of objects to which the replication rule applies. See below. If not specified, the rule will default to using prefix.
 	// +kubebuilder:validation:Optional
-	Filter *RuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *BucketReplicationConfigurationRuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -411,6 +418,67 @@ type ExistingObjectReplicationParameters struct {
 	Status *string `json:"status" tf:"status,omitempty"`
 }
 
+type FilterAndInitParameters struct {
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterAndObservation struct {
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterAndParameters struct {
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterTagInitParameters struct {
+
+	// Name of the object key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Value of the tag.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type FilterTagObservation struct {
+
+	// Name of the object key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Value of the tag.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type FilterTagParameters struct {
+
+	// Name of the object key.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Value of the tag.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type ReplicaModificationsInitParameters struct {
 
 	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
@@ -529,45 +597,6 @@ type RuleDestinationParameters struct {
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
-type RuleFilterInitParameters struct {
-
-	// Configuration block for specifying rule filters. This element is required only if you specify more than one filter. See and below for more details.
-	And *AndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
-
-	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
-	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// Configuration block for specifying a tag key and value. See below.
-	Tag *TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type RuleFilterObservation struct {
-
-	// Configuration block for specifying rule filters. This element is required only if you specify more than one filter. See and below for more details.
-	And *AndObservation `json:"and,omitempty" tf:"and,omitempty"`
-
-	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
-	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// Configuration block for specifying a tag key and value. See below.
-	Tag *TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type RuleFilterParameters struct {
-
-	// Configuration block for specifying rule filters. This element is required only if you specify more than one filter. See and below for more details.
-	// +kubebuilder:validation:Optional
-	And *AndParameters `json:"and,omitempty" tf:"and,omitempty"`
-
-	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
-	// +kubebuilder:validation:Optional
-	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// Configuration block for specifying a tag key and value. See below.
-	// +kubebuilder:validation:Optional
-	Tag *TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
 type RuleSourceSelectionCriteriaInitParameters struct {
 
 	// Configuration block that you can specify for selections for modifications on replicas. Amazon S3 doesn't replicate replica modifications by default. In the latest version of replication configuration (when filter is specified), you can specify this element and set the status to Enabled to replicate modifications on replicas.
@@ -614,35 +643,6 @@ type SourceSelectionCriteriaSseKMSEncryptedObjectsParameters struct {
 	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status" tf:"status,omitempty"`
-}
-
-type TagInitParameters struct {
-
-	// Name of the object key.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Value of the tag.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type TagObservation struct {
-
-	// Name of the object key.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Value of the tag.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type TagParameters struct {
-
-	// Name of the object key.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Value of the tag.
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type TimeInitParameters struct {
