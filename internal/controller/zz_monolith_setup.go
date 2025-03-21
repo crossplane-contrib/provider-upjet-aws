@@ -794,6 +794,7 @@ import (
 	bucketcorsconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketcorsconfiguration"
 	bucketintelligenttieringconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketintelligenttieringconfiguration"
 	bucketinventory "github.com/upbound/provider-aws/internal/controller/s3/bucketinventory"
+	bucketlifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketlifecycleconfiguration"
 	bucketlogging "github.com/upbound/provider-aws/internal/controller/s3/bucketlogging"
 	bucketmetric "github.com/upbound/provider-aws/internal/controller/s3/bucketmetric"
 	bucketnotification "github.com/upbound/provider-aws/internal/controller/s3/bucketnotification"
@@ -1761,6 +1762,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		bucketcorsconfiguration.Setup,
 		bucketintelligenttieringconfiguration.Setup,
 		bucketinventory.Setup,
+		bucketlifecycleconfiguration.Setup,
 		bucketlogging.Setup,
 		bucketmetric.Setup,
 		bucketnotification.Setup,

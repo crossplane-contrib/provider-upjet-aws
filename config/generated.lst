@@ -750,6 +750,7 @@
 "aws_s3_bucket_cors_configuration",
 "aws_s3_bucket_intelligent_tiering_configuration",
 "aws_s3_bucket_inventory",
+"aws_s3_bucket_lifecycle_configuration",
 "aws_s3_bucket_logging",
 "aws_s3_bucket_metric",
 "aws_s3_bucket_notification",
