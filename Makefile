@@ -407,9 +407,7 @@ kustomize-crds: output.init $(KUSTOMIZE) $(YQ)
 	@$(INFO) Kustomizing CRDs...
 	@rm -fr $(OUTPUT_DIR)/package || $(FAIL)
 	@cp -R package $(OUTPUT_DIR) && \
-	cd $(OUTPUT_DIR)/package/crds/cluster && \
-	$(KUSTOMIZE) create --autodetect && \
-	cd $(OUTPUT_DIR)/package/crds/namespaced && \
+	cd $(OUTPUT_DIR)/package/crds && \
 	$(KUSTOMIZE) create --autodetect || $(FAIL)
 	@export YQ=$(YQ) && \
 	XDG_CONFIG_HOME=$(PWD)/package $(KUSTOMIZE) build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
