@@ -4,6 +4,6 @@
 
 // Package v1alpha1 contains the core resources of the aws provider.
 // +kubebuilder:object:generate=true
-// +groupName=m.aws.upbound.io
+// +groupName=aws.m.upbound.io
 // +versionName=v1alpha1
 package v1alpha1

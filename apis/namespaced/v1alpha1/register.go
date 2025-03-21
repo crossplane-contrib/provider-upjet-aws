@@ -13,7 +13,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "m.aws.upbound.io"
+	Group   = "aws.m.upbound.io"
 	Version = "v1alpha1"
 )
 
