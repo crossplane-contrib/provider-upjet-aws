@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: storeconfigs.m.aws.upbound.io
+  name: storeconfigs.aws.m.upbound.io
 spec:
-  group: m.aws.upbound.io
+  group: aws.m.upbound.io
   names:
     categories:
     - crossplane
