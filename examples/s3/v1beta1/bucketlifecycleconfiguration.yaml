@@ -8,21 +8,54 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1beta1/bucketlifecycleconfiguration
   labels:
-    testing.upbound.io/example-name: example
-  name: example-blc
+    testing.upbound.io/example-name: example-blc-v1beta1
+  name: example-blc-v1beta1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-west-2
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: s3
+        testing.upbound.io/example-name: example-blc-v1beta1
     rule:
       - id: rule-1
         status: Enabled
         filter:
-          - prefix: "tmp/"
+          - objectSizeLessThan: "300000"
         expiration:
           - days: 90
+        noncurrentVersionExpiration:
+          - newerNoncurrentVersions: "1"
+            noncurrentDays: 30
+      - id: rule-2
+        status: Enabled
+        filter:
+          - objectSizeGreaterThan: "300000"
+        transition:
+          - storageClass: ONEZONE_IA
+            days: 120
+        noncurrentVersionTransition:
+          - newerNoncurrentVersions: "1"
+            noncurrentDays: 30
+            storageClass: ONEZONE_IA
+      - id: rule-3
+        status: Enabled
+        filter:
+          - tag:
+              - key: foo
+                value: bar
+        expiration:
+          - days: 120
+      - id: rule-4
+        status: Enabled
+        filter:
+          - and:
+              - objectSizeGreaterThan: 100000
+                tags:
+                  some: thing
+                  Name: ralph
+        expiration:
+          - days: 120
+
 
 ---
 
@@ -32,11 +65,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1beta1/bucketlifecycleconfiguration
   labels:
-    testing.upbound.io/example-name: s3
+    testing.upbound.io/example-name: example-blc-v1beta1
   name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-west-2
     objectLockEnabled: true
+    
     tags:
       Name: SampleBucket
