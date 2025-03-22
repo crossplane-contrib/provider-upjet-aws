@@ -1494,6 +1494,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_iot_certificate": config.IdentifierFromProvider,
+	// import IoT Domain Configuration using the name.
+	"aws_iot_domain_configuration": config.NameAsIdentifier,
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_iot_indexing_configuration": config.IdentifierFromProvider,

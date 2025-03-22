@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/pkg/controller"
 
 	certificate "github.com/upbound/provider-aws/internal/controller/iot/certificate"
+	domainconfiguration "github.com/upbound/provider-aws/internal/controller/iot/domainconfiguration"
 	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/iot/indexingconfiguration"
 	loggingoptions "github.com/upbound/provider-aws/internal/controller/iot/loggingoptions"
 	policy "github.com/upbound/provider-aws/internal/controller/iot/policy"
@@ -30,6 +31,7 @@ import (
 func Setup_iot(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		certificate.Setup,
+		domainconfiguration.Setup,
 		indexingconfiguration.Setup,
 		loggingoptions.Setup,
 		policy.Setup,

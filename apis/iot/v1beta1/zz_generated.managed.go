@@ -67,6 +67,66 @@ func (mg *Certificate) SetWriteConnectionSecretToReference(r *xpv1.SecretReferen
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this DomainConfiguration.
+func (mg *DomainConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DomainConfiguration.
+func (mg *DomainConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this DomainConfiguration.
+func (mg *DomainConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this DomainConfiguration.
+func (mg *DomainConfiguration) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this DomainConfiguration.
+func (mg *DomainConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this DomainConfiguration.
+func (mg *DomainConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DomainConfiguration.
+func (mg *DomainConfiguration) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DomainConfiguration.
+func (mg *DomainConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this DomainConfiguration.
+func (mg *DomainConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this DomainConfiguration.
+func (mg *DomainConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this DomainConfiguration.
+func (mg *DomainConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this DomainConfiguration.
+func (mg *DomainConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this IndexingConfiguration.
 func (mg *IndexingConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
