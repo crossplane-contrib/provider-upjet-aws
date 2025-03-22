@@ -16,6 +16,15 @@ func (l *CertificateList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DomainConfigurationList.
+func (l *DomainConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this IndexingConfigurationList.
 func (l *IndexingConfigurationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
