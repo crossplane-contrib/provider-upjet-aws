@@ -17,6 +17,7 @@ import (
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	user "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroup "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
+	usergroupassociation "github.com/upbound/provider-aws/internal/controller/elasticache/usergroupassociation"
 )
 
 // Setup_elasticache creates all controllers with the supplied logger and adds them to
@@ -31,6 +32,7 @@ func Setup_elasticache(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroup.Setup,
 		user.Setup,
 		usergroup.Setup,
+		usergroupassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

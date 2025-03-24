@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: usergroups.elasticache.aws.upbound.io
+  name: usergroupassociations.elasticache.aws.upbound.io
 spec:
   group: elasticache.aws.upbound.io
   names:
@@ -12,10 +12,10 @@ spec:
     - crossplane
     - managed
     - aws
-    kind: UserGroup
-    listKind: UserGroupList
-    plural: usergroups
-    singular: usergroup
+    kind: UserGroupAssociation
+    listKind: UserGroupAssociationList
+    plural: usergroupassociations
+    singular: usergroupassociation
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: UserGroup is the Schema for the UserGroups API. Provides an ElastiCache
-          user group.
+        description: UserGroupAssociation is the Schema for the UserGroupAssociations
+          API. Associate an ElastiCache user and user group.
         properties:
           apiVersion:
             description: |-
@@ -55,7 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: UserGroupSpec defines the desired state of UserGroup
+            description: UserGroupAssociationSpec defines the desired state of UserGroupAssociation
             properties:
               deletionPolicy:
                 default: Delete
@@ -73,59 +73,51 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  engine:
-                    description: The current supported value is REDIS.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Key-value map of resource tags.
+                  userGroupId:
+                    description: The ID of the user group.
+                    type: string
+                  userGroupIdRef:
+                    description: Reference to a UserGroup in elasticache to populate
+                      userGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
                     type: object
-                    x-kubernetes-map-type: granular
-                  userIdRefs:
-                    description: References to User in elasticache to populate userIds.
-                    items:
-                      description: A Reference to a named object.
-                      properties:
-                        name:
-                          description: Name of the referenced object.
-                          type: string
-                        policy:
-                          description: Policies for referencing.
-                          properties:
-                            resolution:
-                              default: Required
-                              description: |-
-                                Resolution specifies whether resolution of this reference is required.
-                                The default is 'Required', which means the reconcile will fail if the
-                                reference cannot be resolved. 'Optional' means this reference will be
-                                a no-op if it cannot be resolved.
-                              enum:
-                              - Required
-                              - Optional
-                              type: string
-                            resolve:
-                              description: |-
-                                Resolve specifies when this reference should be resolved. The default
-                                is 'IfNotPresent', which will attempt to resolve the reference only when
-                                the corresponding field is not present. Use 'Always' to resolve the
-                                reference on every reconcile.
-                              enum:
-                              - Always
-                              - IfNotPresent
-                              type: string
-                          type: object
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  userIdSelector:
-                    description: Selector for a list of User in elasticache to populate
-                      userIds.
+                  userGroupIdSelector:
+                    description: Selector for a UserGroup in elasticache to populate
+                      userGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -164,15 +156,83 @@ spec:
                             type: string
                         type: object
                     type: object
-                  userIds:
-                    description: 'List of AWS ElastiCache user IDs to associate with
-                      the ElastiCache user group. Important note: This field must
-                      be left null if you want to use the UserGroupAssociation resource,
-                      to avoid conflict between the resource.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
+                  userId:
+                    description: ID of the user to associated with the user group.
+                    type: string
+                  userIdRef:
+                    description: Reference to a User in elasticache to populate userId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  userIdSelector:
+                    description: Selector for a User in elasticache to populate userId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 required:
                 - region
                 type: object
@@ -189,55 +249,47 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  engine:
-                    description: The current supported value is REDIS.
+                  userGroupId:
+                    description: The ID of the user group.
                     type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Key-value map of resource tags.
+                  userGroupIdRef:
+                    description: Reference to a UserGroup in elasticache to populate
+                      userGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
                     type: object
-                    x-kubernetes-map-type: granular
-                  userIdRefs:
-                    description: References to User in elasticache to populate userIds.
-                    items:
-                      description: A Reference to a named object.
-                      properties:
-                        name:
-                          description: Name of the referenced object.
-                          type: string
-                        policy:
-                          description: Policies for referencing.
-                          properties:
-                            resolution:
-                              default: Required
-                              description: |-
-                                Resolution specifies whether resolution of this reference is required.
-                                The default is 'Required', which means the reconcile will fail if the
-                                reference cannot be resolved. 'Optional' means this reference will be
-                                a no-op if it cannot be resolved.
-                              enum:
-                              - Required
-                              - Optional
-                              type: string
-                            resolve:
-                              description: |-
-                                Resolve specifies when this reference should be resolved. The default
-                                is 'IfNotPresent', which will attempt to resolve the reference only when
-                                the corresponding field is not present. Use 'Always' to resolve the
-                                reference on every reconcile.
-                              enum:
-                              - Always
-                              - IfNotPresent
-                              type: string
-                          type: object
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  userIdSelector:
-                    description: Selector for a list of User in elasticache to populate
-                      userIds.
+                  userGroupIdSelector:
+                    description: Selector for a UserGroup in elasticache to populate
+                      userGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -276,15 +328,83 @@ spec:
                             type: string
                         type: object
                     type: object
-                  userIds:
-                    description: 'List of AWS ElastiCache user IDs to associate with
-                      the ElastiCache user group. Important note: This field must
-                      be left null if you want to use the UserGroupAssociation resource,
-                      to avoid conflict between the resource.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
+                  userId:
+                    description: ID of the user to associated with the user group.
+                    type: string
+                  userIdRef:
+                    description: Reference to a User in elasticache to populate userId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  userIdSelector:
+                    description: Selector for a User in elasticache to populate userId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -453,48 +573,20 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.engine is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.engine)
-                || (has(self.initProvider) && has(self.initProvider.engine))'
           status:
-            description: UserGroupStatus defines the observed state of UserGroup.
+            description: UserGroupAssociationStatus defines the observed state of
+              UserGroupAssociation.
             properties:
               atProvider:
                 properties:
-                  arn:
-                    description: The ARN that identifies the user group.
-                    type: string
-                  engine:
-                    description: The current supported value is REDIS.
-                    type: string
                   id:
-                    description: The user group identifier.
                     type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Key-value map of resource tags.
-                    type: object
-                    x-kubernetes-map-type: granular
-                  tagsAll:
-                    additionalProperties:
-                      type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
-                    type: object
-                    x-kubernetes-map-type: granular
-                  userIds:
-                    description: 'List of AWS ElastiCache user IDs to associate with
-                      the ElastiCache user group. Important note: This field must
-                      be left null if you want to use the UserGroupAssociation resource,
-                      to avoid conflict between the resource.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
+                  userGroupId:
+                    description: The ID of the user group.
+                    type: string
+                  userId:
+                    description: ID of the user to associated with the user group.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

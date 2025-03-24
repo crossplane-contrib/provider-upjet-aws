@@ -389,6 +389,7 @@
 "aws_elasticache_subnet_group",
 "aws_elasticache_user",
 "aws_elasticache_user_group",
+"aws_elasticache_user_group_association",
 "aws_elasticsearch_domain",
 "aws_elasticsearch_domain_policy",
 "aws_elasticsearch_domain_saml_options",

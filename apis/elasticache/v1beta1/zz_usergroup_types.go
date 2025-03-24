@@ -30,7 +30,7 @@ type UserGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 
-	// The list of user IDs that belong to the user group.
+	// List of AWS ElastiCache user IDs to associate with the ElastiCache user group. Important note: This field must be left null if you want to use the UserGroupAssociation resource, to avoid conflict between the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta2.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
@@ -57,7 +57,7 @@ type UserGroupObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The list of user IDs that belong to the user group.
+	// List of AWS ElastiCache user IDs to associate with the ElastiCache user group. Important note: This field must be left null if you want to use the UserGroupAssociation resource, to avoid conflict between the resource.
 	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
@@ -86,7 +86,7 @@ type UserGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 
-	// The list of user IDs that belong to the user group.
+	// List of AWS ElastiCache user IDs to associate with the ElastiCache user group. Important note: This field must be left null if you want to use the UserGroupAssociation resource, to avoid conflict between the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta2.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector

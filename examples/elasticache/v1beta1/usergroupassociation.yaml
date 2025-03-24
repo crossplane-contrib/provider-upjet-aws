@@ -1,0 +1,98 @@
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: UserGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    userGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleGroup
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleuser
+
+---
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: UserGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    region: us-west-1
+    userGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleGroup
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleuser2
+
+---
+
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: exampleuser
+    crossplane.io/external-name: exampleuser
+  name: exampleuser
+spec:
+  forProvider:
+    accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
+      -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
+      -georadiusbymember
+    engine: REDIS
+    authenticationMode:
+      - type: iam
+    region: us-west-1
+    userName: exampleuser
+
+---
+
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: exampleuser2
+    crossplane.io/external-name: exampleuser2
+  name: exampleuser2
+spec:
+  forProvider:
+    accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
+      -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
+      -georadiusbymember
+    engine: REDIS
+    authenticationMode:
+      - type: iam
+    region: us-west-1
+    userName: exampleuser2
+
+---
+
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
+  labels:
+    testing.upbound.io/example-name: exampleGroup
+  name: test
+spec:
+  forProvider:
+    engine: REDIS
+    region: us-west-1
+  initProvider: # If using "UserGroupAssociation" -  use initProvider to create the user group but ignore changes
+    userIds:
+      - default
