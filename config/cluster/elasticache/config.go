@@ -18,7 +18,7 @@ import (
 
 	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta1"
 	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2"
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the elasticache group.

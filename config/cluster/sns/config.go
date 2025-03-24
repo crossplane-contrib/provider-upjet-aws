@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the sns group.

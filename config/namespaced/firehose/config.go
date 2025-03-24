@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/namespaced/common"
 )
 
 // Configure adds configurations for the firehose group.

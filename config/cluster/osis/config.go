@@ -7,7 +7,7 @@ package osis
 import (
 	"github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the osis group.
@@ -34,6 +34,5 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["log_publishing_options.cloudwatch_log_destination.log_group"] = config.Reference{
 			TerraformName: "aws_cloudwatch_log_group",
 		}
-
 	})
 }

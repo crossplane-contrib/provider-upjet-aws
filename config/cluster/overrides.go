@@ -17,7 +17,7 @@ import (
 	"github.com/crossplane/upjet/pkg/types/comments"
 	"github.com/crossplane/upjet/pkg/types/name"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // RegionAddition adds region to the spec of all resources except iam group which

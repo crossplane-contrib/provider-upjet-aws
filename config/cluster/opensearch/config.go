@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the opensearch group.
@@ -53,7 +53,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			return conn, nil
 		}
-
 	})
 
 	p.AddResourceConfigurator("aws_opensearch_domain_policy", func(r *config.Resource) {

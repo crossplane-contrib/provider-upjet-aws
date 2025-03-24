@@ -13,7 +13,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/types/comments"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/namespaced/common"
 	"github.com/upbound/provider-aws/config/namespaced/rds/utils"
 )
 

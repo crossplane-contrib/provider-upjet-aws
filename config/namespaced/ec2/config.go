@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/namespaced/common"
 )
 
 // Configure adds configurations for the ec2 group.
@@ -148,7 +148,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"default_version"},
 		}
-
 	})
 
 	p.AddResourceConfigurator("aws_vpc_endpoint", func(r *config.Resource) {

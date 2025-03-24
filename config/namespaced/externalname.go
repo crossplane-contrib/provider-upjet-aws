@@ -12,7 +12,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
 	"github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/namespaced/common"
 )
 
 // TerraformPluginFrameworkExternalNameConfigs contains all external
@@ -20,7 +20,6 @@ import (
 // resources to be reconciled under the no-fork architecture for this
 // provider.
 var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
-
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 
 	// apigateway
@@ -116,7 +115,6 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 // belonging to Terraform Plugin SDKv2 resources to be reconciled
 // under the no-fork architecture for this provider.
 var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
-
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 
 	// accessanalyzer
@@ -3253,7 +3251,6 @@ func apiGatewayAccount() config.ExternalName {
 // e.g. arn:aws:ec2:ap-south-1:123456789012:instance/i-1234567890ab
 func fullARNTemplate(service string, resource string) string {
 	return genericARNTemplate(service, resource, false)
-
 }
 
 // regionlessARNTemplate builds a templated string for constructing a terraform id component which is an ARN of a

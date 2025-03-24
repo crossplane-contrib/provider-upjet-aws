@@ -7,7 +7,7 @@ package ssoadmin
 import (
 	"github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the ssoadmin group.
@@ -42,5 +42,4 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_ssoadmin_permissions_boundary_attachment", func(r *config.Resource) {
 		delete(r.References, "instance_arn")
 	})
-
 }

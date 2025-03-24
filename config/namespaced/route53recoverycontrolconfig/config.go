@@ -7,7 +7,7 @@ package route53recoverycontrolconfig
 import (
 	"github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/namespaced/common"
 )
 
 // Configure adds configurations for the route53recoverycontrolconfig group.

@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/namespaced/common"
 )
 
 // Configure adds configurations for the glue group.
@@ -75,7 +75,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				"max_capacity", "number_of_workers", "worker_type",
 			},
 		}
-
 	})
 
 	p.AddResourceConfigurator("aws_glue_security_configuration", func(r *config.Resource) {
@@ -94,5 +93,4 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			Extractor:     common.PathARNExtractor,
 		}
 	})
-
 }

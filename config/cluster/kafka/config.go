@@ -11,7 +11,7 @@ import (
 
 	"github.com/upbound/provider-aws/apis/cluster/kafka/v1beta1"
 	"github.com/upbound/provider-aws/apis/cluster/kafka/v1beta2"
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the kafka group.

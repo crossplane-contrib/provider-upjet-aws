@@ -13,7 +13,7 @@ import (
 
 	"github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta1"
 	"github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta2"
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the autoscaling group.

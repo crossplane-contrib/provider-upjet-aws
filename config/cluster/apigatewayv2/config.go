@@ -7,7 +7,7 @@ package apigatewayv2
 import (
 	"github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // Configure adds configurations for the apigatewayv2 group.
@@ -30,7 +30,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["authorizer_uri"] = config.Reference{
 			TerraformName: "aws_lambda_function",
-			Extractor:     "github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()",
+			Extractor:     "github.com/upbound/provider-aws/config/cluster/common/apis/lambda.FunctionInvokeARN()",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_domain_name", func(r *config.Resource) {
@@ -75,7 +75,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["target"] = config.Reference{
 			TerraformName: "aws_apigatewayv2_integration",
-			Extractor:     "github.com/upbound/provider-aws/config/common/apis.IntegrationIDPrefixed()",
+			Extractor:     "github.com/upbound/provider-aws/config/cluster/common/apis.IntegrationIDPrefixed()",
 		}
 		r.References["authorizer_id"] = config.Reference{
 			TerraformName: "aws_apigatewayv2_authorizer",
