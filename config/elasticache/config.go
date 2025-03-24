@@ -223,5 +223,17 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			RefFieldName:      "UserIDRefs",
 			SelectorFieldName: "UserIDSelector",
 		}
+
+		// The user_ids field is a list of user IDs to associate with the user group.
+		// This field must be left null if you want to use the UserGroupAssociation resource, to avoid conflict between the resource.
+		r.MetaResource.ArgumentDocs["user_ids"] = "- (Optional) List of AWS ElastiCache user IDs to associate with the ElastiCache user group. Important note: This field must be left null if you want to use the UserGroupAssociation resource, to avoid conflict between the resource."
+		r.LateInitializer.IgnoredFields = append(r.LateInitializer.IgnoredFields, "user_ids")
 	})
+
+	p.AddResourceConfigurator("aws_elasticache_user_group_association", func(r *config.Resource) {
+		r.MetaResource.ArgumentDocs[""] = "Note: This resource conflicts with `aws_elasticache_user_group` when `user_ids` is provided in the `aws_elasticache_user_group` resource. To avoid conflict, `UserGroup.spec.forProvider.userIds` must be left null."
+		r.MetaResource.ArgumentDocs["user_group_id"] = "- (Required) The ID of the user group."
+		r.MetaResource.ArgumentDocs["user_ids"] = "- (Required) List of user IDs to associate with the user group."
+	})
+
 }
