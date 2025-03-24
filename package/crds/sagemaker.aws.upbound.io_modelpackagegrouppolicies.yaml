@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ModelPackageGroupPolicy is the Schema for the ModelPackageGroupPolicys
-          API. Provides a SageMaker Model Package Group Policy resource.
+          API. Provides a SageMaker AI Model Package Group Policy resource.
         properties:
           apiVersion:
             description: |-

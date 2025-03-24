@@ -2056,6 +2056,9 @@ type SourceConnectorPropertiesS3Parameters struct {
 
 type SourceConnectorPropertiesSalesforceInitParameters struct {
 
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
+
 	// Flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
 	EnableDynamicFieldUpdate *bool `json:"enableDynamicFieldUpdate,omitempty" tf:"enable_dynamic_field_update,omitempty"`
 
@@ -2068,6 +2071,9 @@ type SourceConnectorPropertiesSalesforceInitParameters struct {
 
 type SourceConnectorPropertiesSalesforceObservation struct {
 
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
+
 	// Flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
 	EnableDynamicFieldUpdate *bool `json:"enableDynamicFieldUpdate,omitempty" tf:"enable_dynamic_field_update,omitempty"`
 
@@ -2079,6 +2085,10 @@ type SourceConnectorPropertiesSalesforceObservation struct {
 }
 
 type SourceConnectorPropertiesSalesforceParameters struct {
+
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	// +kubebuilder:validation:Optional
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
 
 	// Flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
 	// +kubebuilder:validation:Optional

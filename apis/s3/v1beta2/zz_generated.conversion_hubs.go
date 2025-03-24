@@ -22,9 +22,6 @@ func (tr *BucketIntelligentTieringConfiguration) Hub() {}
 func (tr *BucketInventory) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BucketLifecycleConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BucketLogging) Hub() {}
 
 // Hub marks this type as a conversion hub.

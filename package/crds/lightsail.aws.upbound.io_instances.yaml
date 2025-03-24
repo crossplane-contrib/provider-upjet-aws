@@ -616,7 +616,7 @@ spec:
               forProvider:
                 properties:
                   addOn:
-                    description: The add on configuration for the instance. Detailed
+                    description: The add-on configuration for the instance. Detailed
                       below.
                     properties:
                       snapshotTime:
@@ -627,7 +627,7 @@ spec:
                           and up to 45 minutes after.
                         type: string
                       status:
-                        description: 'The status of the add on. Valid Values: Enabled,
+                        description: 'The status of the add-on. Valid Values: Enabled,
                           Disabled.'
                         type: string
                       type:
@@ -655,7 +655,7 @@ spec:
                     type: string
                   ipAddressType:
                     description: 'The IP address type of the Lightsail Instance. Valid
-                      Values: dualstack | ipv4.'
+                      Values: dualstack,  ipv4, and ipv6.'
                     type: string
                   keyPairName:
                     description: |-
@@ -693,7 +693,7 @@ spec:
                   autoscaler.
                 properties:
                   addOn:
-                    description: The add on configuration for the instance. Detailed
+                    description: The add-on configuration for the instance. Detailed
                       below.
                     properties:
                       snapshotTime:
@@ -704,7 +704,7 @@ spec:
                           and up to 45 minutes after.
                         type: string
                       status:
-                        description: 'The status of the add on. Valid Values: Enabled,
+                        description: 'The status of the add-on. Valid Values: Enabled,
                           Disabled.'
                         type: string
                       type:
@@ -732,7 +732,7 @@ spec:
                     type: string
                   ipAddressType:
                     description: 'The IP address type of the Lightsail Instance. Valid
-                      Values: dualstack | ipv4.'
+                      Values: dualstack,  ipv4, and ipv6.'
                     type: string
                   keyPairName:
                     description: |-
@@ -936,7 +936,7 @@ spec:
               atProvider:
                 properties:
                   addOn:
-                    description: The add on configuration for the instance. Detailed
+                    description: The add-on configuration for the instance. Detailed
                       below.
                     properties:
                       snapshotTime:
@@ -947,7 +947,7 @@ spec:
                           and up to 45 minutes after.
                         type: string
                       status:
-                        description: 'The status of the add on. Valid Values: Enabled,
+                        description: 'The status of the add-on. Valid Values: Enabled,
                           Disabled.'
                         type: string
                       type:
@@ -987,7 +987,7 @@ spec:
                     type: string
                   ipAddressType:
                     description: 'The IP address type of the Lightsail Instance. Valid
-                      Values: dualstack | ipv4.'
+                      Values: dualstack,  ipv4, and ipv6.'
                     type: string
                   ipv6Addresses:
                     description: List of IPv6 addresses for the Lightsail instance.

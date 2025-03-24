@@ -692,6 +692,26 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      maxTotalPrice:
+                        description: The maximum amount per hour for Spot Instances
+                          that you're willing to pay.
+                        type: string
+                      minTargetCapacity:
+                        description: The minimum target capacity for Spot Instances
+                          in the fleet. If the minimum target capacity is not reached,
+                          the fleet launches no instances. Supported only for fleets
+                          of type instant.
+                        type: number
+                      singleAvailabilityZone:
+                        description: Indicates that the fleet launches all Spot Instances
+                          into a single Availability Zone. Supported only for fleets
+                          of type instant.
+                        type: boolean
+                      singleInstanceType:
+                        description: Indicates that the fleet uses a single instance
+                          type to launch all Spot Instances in the fleet. Supported
+                          only for fleets of type instant.
+                        type: boolean
                     type: object
                   tags:
                     additionalProperties:
@@ -1379,6 +1399,26 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      maxTotalPrice:
+                        description: The maximum amount per hour for Spot Instances
+                          that you're willing to pay.
+                        type: string
+                      minTargetCapacity:
+                        description: The minimum target capacity for Spot Instances
+                          in the fleet. If the minimum target capacity is not reached,
+                          the fleet launches no instances. Supported only for fleets
+                          of type instant.
+                        type: number
+                      singleAvailabilityZone:
+                        description: Indicates that the fleet launches all Spot Instances
+                          into a single Availability Zone. Supported only for fleets
+                          of type instant.
+                        type: boolean
+                      singleInstanceType:
+                        description: Indicates that the fleet uses a single instance
+                          type to launch all Spot Instances in the fleet. Supported
+                          only for fleets of type instant.
+                        type: boolean
                     type: object
                   tags:
                     additionalProperties:
@@ -2087,6 +2127,26 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      maxTotalPrice:
+                        description: The maximum amount per hour for Spot Instances
+                          that you're willing to pay.
+                        type: string
+                      minTargetCapacity:
+                        description: The minimum target capacity for Spot Instances
+                          in the fleet. If the minimum target capacity is not reached,
+                          the fleet launches no instances. Supported only for fleets
+                          of type instant.
+                        type: number
+                      singleAvailabilityZone:
+                        description: Indicates that the fleet launches all Spot Instances
+                          into a single Availability Zone. Supported only for fleets
+                          of type instant.
+                        type: boolean
+                      singleInstanceType:
+                        description: Indicates that the fleet uses a single instance
+                          type to launch all Spot Instances in the fleet. Supported
+                          only for fleets of type instant.
+                        type: boolean
                     type: object
                   tags:
                     additionalProperties:

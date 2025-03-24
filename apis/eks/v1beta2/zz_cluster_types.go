@@ -44,19 +44,19 @@ type AccessConfigParameters struct {
 
 type BlockStorageInitParameters struct {
 
-	// Whether zonal shift is enabled for the cluster.
+	// Indicates if the block storage capability is enabled on your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create and delete block storage volumes in your Amazon Web Services account.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlockStorageObservation struct {
 
-	// Whether zonal shift is enabled for the cluster.
+	// Indicates if the block storage capability is enabled on your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create and delete block storage volumes in your Amazon Web Services account.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlockStorageParameters struct {
 
-	// Whether zonal shift is enabled for the cluster.
+	// Indicates if the block storage capability is enabled on your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create and delete block storage volumes in your Amazon Web Services account.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -75,7 +75,7 @@ type CertificateAuthorityParameters struct {
 
 type ClusterInitParameters struct {
 
-	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries. Detailed below.
 	AccessConfig *AccessConfigInitParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
@@ -135,7 +135,7 @@ type ClusterInitParameters struct {
 
 type ClusterObservation struct {
 
-	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries. Detailed below.
 	AccessConfig *AccessConfigObservation `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// ARN of the cluster.
@@ -216,7 +216,7 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries. Detailed below.
 	// +kubebuilder:validation:Optional
 	AccessConfig *AccessConfigParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
@@ -441,7 +441,7 @@ type KubernetesNetworkConfigObservation struct {
 	// The CIDR block to assign Kubernetes pod and service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created. The block must meet the following requirements:
 	ServiceIPv4Cidr *string `json:"serviceIpv4Cidr,omitempty" tf:"service_ipv4_cidr,omitempty"`
 
-	// The CIDR block that Kubernetes pod and service IP addresses are assigned from if you specified ipv6 for ip_family when you created the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
+	// (Computed) The CIDR block that Kubernetes pod and service IP addresses are assigned from if you specify ipv6 for ip_family when you create the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
 	ServiceIPv6Cidr *string `json:"serviceIpv6Cidr,omitempty" tf:"service_ipv6_cidr,omitempty"`
 }
 
@@ -610,15 +610,20 @@ type RemotePodNetworksParameters struct {
 }
 
 type StorageConfigInitParameters struct {
+
+	// Configuration block with block storage configuration for the cluster. Detailed below.
 	BlockStorage *BlockStorageInitParameters `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
 }
 
 type StorageConfigObservation struct {
+
+	// Configuration block with block storage configuration for the cluster. Detailed below.
 	BlockStorage *BlockStorageObservation `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
 }
 
 type StorageConfigParameters struct {
 
+	// Configuration block with block storage configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	BlockStorage *BlockStorageParameters `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
 }
@@ -687,7 +692,7 @@ type VPCConfigInitParameters struct {
 
 type VPCConfigObservation struct {
 
-	// Cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
+	// (Computed) Cluster security group that is created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
 	ClusterSecurityGroupID *string `json:"clusterSecurityGroupId,omitempty" tf:"cluster_security_group_id,omitempty"`
 
 	// Whether the Amazon EKS private API server endpoint is enabled. Default is false.
@@ -708,7 +713,7 @@ type VPCConfigObservation struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// ID of the VPC associated with your cluster.
+	// (Computed) ID of the VPC associated with your cluster.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 

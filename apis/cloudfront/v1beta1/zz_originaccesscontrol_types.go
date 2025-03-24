@@ -33,6 +33,9 @@ type OriginAccessControlInitParameters struct {
 
 type OriginAccessControlObservation struct {
 
+	// The Origin Access Control ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The description of the Origin Access Control.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

@@ -26,7 +26,7 @@ type MemberInitParameters struct {
 
 	// ARN of the behavior graph to invite the member accounts to contribute their data to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("graph_arn",true)
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
 	// Reference to a Graph in detective to populate graphArn.
@@ -95,7 +95,7 @@ type MemberParameters struct {
 
 	// ARN of the behavior graph to invite the member accounts to contribute their data to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("graph_arn",true)
 	// +kubebuilder:validation:Optional
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 

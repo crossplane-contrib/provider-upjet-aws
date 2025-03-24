@@ -45,7 +45,7 @@ spec:
       topicReplication:
       - startingPosition:
         - type: LATEST
-        topic_configuration_name:
+        topicNameConfiguration:
         - type: PREFIXED_WITH_SOURCE_CLUSTER_ALIAS
         topicsToReplicate:
         - .*

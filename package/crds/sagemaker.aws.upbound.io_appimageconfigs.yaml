@@ -855,7 +855,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AppImageConfig is the Schema for the AppImageConfigs API. Provides
-          a SageMaker App Image Config resource.
+          a SageMaker AI App Image Config resource.
         properties:
           apiVersion:
             description: |-
@@ -993,8 +993,8 @@ spec:
                     type: object
                   kernelGatewayImageConfig:
                     description: The configuration for the file system and kernels
-                      in a SageMaker image running as a KernelGateway app. See Kernel
-                      Gateway Image Config details below.
+                      in a SageMaker AI image running as a KernelGateway app. See
+                      Kernel Gateway Image Config details below.
                     properties:
                       fileSystemConfig:
                         description: The URL where the Git repository is located.
@@ -1154,8 +1154,8 @@ spec:
                     type: object
                   kernelGatewayImageConfig:
                     description: The configuration for the file system and kernels
-                      in a SageMaker image running as a KernelGateway app. See Kernel
-                      Gateway Image Config details below.
+                      in a SageMaker AI image running as a KernelGateway app. See
+                      Kernel Gateway Image Config details below.
                     properties:
                       fileSystemConfig:
                         description: The URL where the Git repository is located.
@@ -1475,8 +1475,8 @@ spec:
                     type: object
                   kernelGatewayImageConfig:
                     description: The configuration for the file system and kernels
-                      in a SageMaker image running as a KernelGateway app. See Kernel
-                      Gateway Image Config details below.
+                      in a SageMaker AI image running as a KernelGateway app. See
+                      Kernel Gateway Image Config details below.
                     properties:
                       fileSystemConfig:
                         description: The URL where the Git repository is located.

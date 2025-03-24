@@ -36,6 +36,9 @@ type CachePolicyInitParameters struct {
 
 type CachePolicyObservation struct {
 
+	// The cache policy ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Description for the cache policy.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 

@@ -4123,6 +4123,25 @@ spec:
                           Required if email_sending_account is set to DEVELOPER.
                         type: string
                     type: object
+                  emailMfaConfiguration:
+                    description: Configuration block for configuring email Multi-Factor
+                      Authentication (MFA); requires at least 2 account_recovery_setting
+                      entries; requires an email_configuration configuration block.
+                      Detailed below.
+                    properties:
+                      message:
+                        description: The template for the email messages that your
+                          user pool sends to users with codes for MFA and sign-in
+                          with email OTPs. The message must contain the {####} placeholder.
+                          In the message, Amazon Cognito replaces this placeholder
+                          with the code. If you don't provide this parameter, Amazon
+                          Cognito sends messages in the default format.
+                        type: string
+                      subject:
+                        description: The subject of the email messages that your user
+                          pool sends to users with codes for MFA and email OTP sign-in.
+                        type: string
+                    type: object
                   emailVerificationMessage:
                     description: String representing the email verification message.
                       Conflicts with verification_message_template configuration block
@@ -5322,6 +5341,19 @@ spec:
                           type: object
                       type: object
                     type: array
+                  signInPolicy:
+                    description: Configuration block for information about the user
+                      pool sign in policy. Detailed below.
+                    properties:
+                      allowedFirstAuthFactors:
+                        description: The sign in methods your user pool supports as
+                          the first factor. This is a list of strings, allowed values
+                          are PASSWORD, EMAIL_OTP, SMS_OTP, and WEB_AUTHN.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   smsAuthenticationMessage:
                     description: String representing the SMS authentication message.
                       The Message must contain the {####} placeholder, which will
@@ -5477,6 +5509,10 @@ spec:
                           AUDIT or ENFORCED.
                         type: string
                     type: object
+                  userPoolTier:
+                    description: 'The user pool feature plan, or tier. Valid values:
+                      LITE, ESSENTIALS, PLUS.'
+                    type: string
                   usernameAttributes:
                     description: Whether email addresses or phone numbers can be specified
                       as usernames when a user signs up. Conflicts with alias_attributes.
@@ -5520,6 +5556,19 @@ spec:
                       smsMessage:
                         description: SMS message template. Must contain the {####}
                           placeholder. Conflicts with sms_verification_message argument.
+                        type: string
+                    type: object
+                  webAuthnConfiguration:
+                    description: Configuration block for web authn configuration.
+                      Detailed below.
+                    properties:
+                      relyingPartyId:
+                        description: The authentication domain that passkeys providers
+                          use as a relying party.
+                        type: string
+                      userVerification:
+                        description: If your user pool should require a passkey. Must
+                          be one of required or preferred.
                         type: string
                     type: object
                 required:
@@ -5647,6 +5696,25 @@ spec:
                       sourceArn:
                         description: ARN of the SES verified email identity to use.
                           Required if email_sending_account is set to DEVELOPER.
+                        type: string
+                    type: object
+                  emailMfaConfiguration:
+                    description: Configuration block for configuring email Multi-Factor
+                      Authentication (MFA); requires at least 2 account_recovery_setting
+                      entries; requires an email_configuration configuration block.
+                      Detailed below.
+                    properties:
+                      message:
+                        description: The template for the email messages that your
+                          user pool sends to users with codes for MFA and sign-in
+                          with email OTPs. The message must contain the {####} placeholder.
+                          In the message, Amazon Cognito replaces this placeholder
+                          with the code. If you don't provide this parameter, Amazon
+                          Cognito sends messages in the default format.
+                        type: string
+                      subject:
+                        description: The subject of the email messages that your user
+                          pool sends to users with codes for MFA and email OTP sign-in.
                         type: string
                     type: object
                   emailVerificationMessage:
@@ -6844,6 +6912,19 @@ spec:
                           type: object
                       type: object
                     type: array
+                  signInPolicy:
+                    description: Configuration block for information about the user
+                      pool sign in policy. Detailed below.
+                    properties:
+                      allowedFirstAuthFactors:
+                        description: The sign in methods your user pool supports as
+                          the first factor. This is a list of strings, allowed values
+                          are PASSWORD, EMAIL_OTP, SMS_OTP, and WEB_AUTHN.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   smsAuthenticationMessage:
                     description: String representing the SMS authentication message.
                       The Message must contain the {####} placeholder, which will
@@ -6999,6 +7080,10 @@ spec:
                           AUDIT or ENFORCED.
                         type: string
                     type: object
+                  userPoolTier:
+                    description: 'The user pool feature plan, or tier. Valid values:
+                      LITE, ESSENTIALS, PLUS.'
+                    type: string
                   usernameAttributes:
                     description: Whether email addresses or phone numbers can be specified
                       as usernames when a user signs up. Conflicts with alias_attributes.
@@ -7042,6 +7127,19 @@ spec:
                       smsMessage:
                         description: SMS message template. Must contain the {####}
                           placeholder. Conflicts with sms_verification_message argument.
+                        type: string
+                    type: object
+                  webAuthnConfiguration:
+                    description: Configuration block for web authn configuration.
+                      Detailed below.
+                    properties:
+                      relyingPartyId:
+                        description: The authentication domain that passkeys providers
+                          use as a relying party.
+                        type: string
+                      userVerification:
+                        description: If your user pool should require a passkey. Must
+                          be one of required or preferred.
                         type: string
                     type: object
                 type: object
@@ -7349,6 +7447,25 @@ spec:
                           Required if email_sending_account is set to DEVELOPER.
                         type: string
                     type: object
+                  emailMfaConfiguration:
+                    description: Configuration block for configuring email Multi-Factor
+                      Authentication (MFA); requires at least 2 account_recovery_setting
+                      entries; requires an email_configuration configuration block.
+                      Detailed below.
+                    properties:
+                      message:
+                        description: The template for the email messages that your
+                          user pool sends to users with codes for MFA and sign-in
+                          with email OTPs. The message must contain the {####} placeholder.
+                          In the message, Amazon Cognito replaces this placeholder
+                          with the code. If you don't provide this parameter, Amazon
+                          Cognito sends messages in the default format.
+                        type: string
+                      subject:
+                        description: The subject of the email messages that your user
+                          pool sends to users with codes for MFA and email OTP sign-in.
+                        type: string
+                    type: object
                   emailVerificationMessage:
                     description: String representing the email verification message.
                       Conflicts with verification_message_template configuration block
@@ -7571,6 +7688,19 @@ spec:
                           type: object
                       type: object
                     type: array
+                  signInPolicy:
+                    description: Configuration block for information about the user
+                      pool sign in policy. Detailed below.
+                    properties:
+                      allowedFirstAuthFactors:
+                        description: The sign in methods your user pool supports as
+                          the first factor. This is a list of strings, allowed values
+                          are PASSWORD, EMAIL_OTP, SMS_OTP, and WEB_AUTHN.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   smsAuthenticationMessage:
                     description: String representing the SMS authentication message.
                       The Message must contain the {####} placeholder, which will
@@ -7660,6 +7790,10 @@ spec:
                           AUDIT or ENFORCED.
                         type: string
                     type: object
+                  userPoolTier:
+                    description: 'The user pool feature plan, or tier. Valid values:
+                      LITE, ESSENTIALS, PLUS.'
+                    type: string
                   usernameAttributes:
                     description: Whether email addresses or phone numbers can be specified
                       as usernames when a user signs up. Conflicts with alias_attributes.
@@ -7703,6 +7837,19 @@ spec:
                       smsMessage:
                         description: SMS message template. Must contain the {####}
                           placeholder. Conflicts with sms_verification_message argument.
+                        type: string
+                    type: object
+                  webAuthnConfiguration:
+                    description: Configuration block for web authn configuration.
+                      Detailed below.
+                    properties:
+                      relyingPartyId:
+                        description: The authentication domain that passkeys providers
+                          use as a relying party.
+                        type: string
+                      userVerification:
+                        description: If your user pool should require a passkey. Must
+                          be one of required or preferred.
                         type: string
                     type: object
                 type: object

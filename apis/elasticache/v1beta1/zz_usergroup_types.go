@@ -15,7 +15,7 @@ import (
 
 type UserGroupInitParameters struct {
 
-	// The current supported value is REDIS.
+	// The current supported value are redis, valkey (case insensitive).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Key-value map of resource tags.
@@ -43,7 +43,7 @@ type UserGroupObservation struct {
 	// The ARN that identifies the user group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The current supported value is REDIS.
+	// The current supported value are redis, valkey (case insensitive).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The user group identifier.
@@ -64,7 +64,7 @@ type UserGroupObservation struct {
 
 type UserGroupParameters struct {
 
-	// The current supported value is REDIS.
+	// The current supported value are redis, valkey (case insensitive).
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 

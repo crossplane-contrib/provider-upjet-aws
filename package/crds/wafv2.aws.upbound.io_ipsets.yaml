@@ -90,7 +90,7 @@ spec:
                     description: Specify IPV4 or IPV6. Valid values are IPV4 or IPV6.
                     type: string
                   name:
-                    description: A friendly name of the IP set.
+                    description: A friendly name of the IP set. Conflicts with name_prefix.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -141,7 +141,7 @@ spec:
                     description: Specify IPV4 or IPV6. Valid values are IPV4 or IPV6.
                     type: string
                   name:
-                    description: A friendly name of the IP set.
+                    description: A friendly name of the IP set. Conflicts with name_prefix.
                     type: string
                   scope:
                     description: Specifies whether this is for an AWS CloudFront distribution
@@ -328,10 +328,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ipAddressVersion)
                 || (has(self.initProvider) && has(self.initProvider.ipAddressVersion))'
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.scope is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
@@ -366,7 +362,7 @@ spec:
                   lockToken:
                     type: string
                   name:
-                    description: A friendly name of the IP set.
+                    description: A friendly name of the IP set. Conflicts with name_prefix.
                     type: string
                   scope:
                     description: Specifies whether this is for an AWS CloudFront distribution

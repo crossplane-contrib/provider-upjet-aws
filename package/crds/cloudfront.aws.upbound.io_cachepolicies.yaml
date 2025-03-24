@@ -1226,6 +1226,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The cache policy ARN.
+                    type: string
                   comment:
                     description: Description for the cache policy.
                     type: string

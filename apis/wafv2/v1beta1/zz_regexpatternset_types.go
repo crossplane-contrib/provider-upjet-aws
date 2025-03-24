@@ -18,7 +18,7 @@ type RegexPatternSetInitParameters struct {
 	// A friendly description of the regular expression pattern set.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A friendly name of the regular expression pattern set.
+	// A friendly name of the regular expression pattern set. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details. A maximum of 10 regular_expression blocks may be specified.
@@ -45,7 +45,7 @@ type RegexPatternSetObservation struct {
 
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`
 
-	// A friendly name of the regular expression pattern set.
+	// A friendly name of the regular expression pattern set. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details. A maximum of 10 regular_expression blocks may be specified.
@@ -69,7 +69,7 @@ type RegexPatternSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A friendly name of the regular expression pattern set.
+	// A friendly name of the regular expression pattern set. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -147,7 +147,6 @@ type RegexPatternSetStatus struct {
 type RegexPatternSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || (has(self.initProvider) && has(self.initProvider.scope))",message="spec.forProvider.scope is a required parameter"
 	Spec   RegexPatternSetSpec   `json:"spec"`
 	Status RegexPatternSetStatus `json:"status,omitempty"`

@@ -824,6 +824,11 @@ func (in *KafkaSettingsInitParameters) DeepCopyInto(out *KafkaSettingsInitParame
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.SaslMechanism != nil {
+		in, out := &in.SaslMechanism, &out.SaslMechanism
+		*out = new(string)
+		**out = **in
+	}
 	if in.SaslPasswordSecretRef != nil {
 		in, out := &in.SaslPasswordSecretRef, &out.SaslPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
@@ -921,6 +926,11 @@ func (in *KafkaSettingsObservation) DeepCopyInto(out *KafkaSettingsObservation) 
 	}
 	if in.SSLClientKeyArn != nil {
 		in, out := &in.SSLClientKeyArn, &out.SSLClientKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.SaslMechanism != nil {
+		in, out := &in.SaslMechanism, &out.SaslMechanism
 		*out = new(string)
 		**out = **in
 	}
@@ -1022,6 +1032,11 @@ func (in *KafkaSettingsParameters) DeepCopyInto(out *KafkaSettingsParameters) {
 	if in.SSLClientKeyPasswordSecretRef != nil {
 		in, out := &in.SSLClientKeyPasswordSecretRef, &out.SSLClientKeyPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.SaslMechanism != nil {
+		in, out := &in.SaslMechanism, &out.SaslMechanism
+		*out = new(string)
 		**out = **in
 	}
 	if in.SaslPasswordSecretRef != nil {

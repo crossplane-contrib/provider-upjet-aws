@@ -2640,6 +2640,9 @@ spec:
                                           description: Namespace of the metric.
                                           type: string
                                       type: object
+                                    period:
+                                      description: The period of the metric in seconds.
+                                      type: number
                                     stat:
                                       description: Statistic of the metrics to return.
                                       type: string
@@ -2657,6 +2660,9 @@ spec:
                           namespace:
                             description: Namespace of the metric.
                             type: string
+                          period:
+                            description: The period of the metric in seconds.
+                            type: number
                           statistic:
                             description: Statistic of the metric.
                             type: string
@@ -3107,6 +3113,9 @@ spec:
                                           description: Namespace of the metric.
                                           type: string
                                       type: object
+                                    period:
+                                      description: The period of the metric in seconds.
+                                      type: number
                                     stat:
                                       description: Statistic of the metrics to return.
                                       type: string
@@ -3124,6 +3133,9 @@ spec:
                           namespace:
                             description: Namespace of the metric.
                             type: string
+                          period:
+                            description: The period of the metric in seconds.
+                            type: number
                           statistic:
                             description: Statistic of the metric.
                             type: string
@@ -3741,6 +3753,9 @@ spec:
                                           description: Namespace of the metric.
                                           type: string
                                       type: object
+                                    period:
+                                      description: The period of the metric in seconds.
+                                      type: number
                                     stat:
                                       description: Statistic of the metrics to return.
                                       type: string
@@ -3758,6 +3773,9 @@ spec:
                           namespace:
                             description: Namespace of the metric.
                             type: string
+                          period:
+                            description: The period of the metric in seconds.
+                            type: number
                           statistic:
                             description: Statistic of the metric.
                             type: string

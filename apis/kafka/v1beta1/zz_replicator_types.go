@@ -339,13 +339,14 @@ type ReplicatorInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRoleArnSelector *v1.Selector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ReplicatorObservation struct {
 
-	// ARN of the Replicator. Do not begin the description with "An", "The", "Defines", "Indicates", or "Specifies," as these are verbose. In other words, "Indicates the amount of storage," can be rewritten as "Amount of storage," without losing any information.
+	// ARN of the Replicator.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	CurrentVersion *string `json:"currentVersion,omitempty" tf:"current_version,omitempty"`
@@ -367,9 +368,11 @@ type ReplicatorObservation struct {
 	// The ARN of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters).
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -411,6 +414,7 @@ type ReplicatorParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRoleArnSelector *v1.Selector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -468,6 +472,7 @@ type TopicReplicationInitParameters struct {
 	// Configuration for specifying the position in the topics to start replicating from.
 	StartingPosition *StartingPositionInitParameters `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
+	// Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.
 	TopicNameConfiguration *TopicNameConfigurationInitParameters `json:"topicNameConfiguration,omitempty" tf:"topic_name_configuration,omitempty"`
 
 	// List of regular expression patterns indicating the topics that should not be replica.
@@ -493,6 +498,7 @@ type TopicReplicationObservation struct {
 	// Configuration for specifying the position in the topics to start replicating from.
 	StartingPosition *StartingPositionObservation `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
+	// Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.
 	TopicNameConfiguration *TopicNameConfigurationObservation `json:"topicNameConfiguration,omitempty" tf:"topic_name_configuration,omitempty"`
 
 	// List of regular expression patterns indicating the topics that should not be replica.
@@ -522,6 +528,7 @@ type TopicReplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	StartingPosition *StartingPositionParameters `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
+	// Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.
 	// +kubebuilder:validation:Optional
 	TopicNameConfiguration *TopicNameConfigurationParameters `json:"topicNameConfiguration,omitempty" tf:"topic_name_configuration,omitempty"`
 

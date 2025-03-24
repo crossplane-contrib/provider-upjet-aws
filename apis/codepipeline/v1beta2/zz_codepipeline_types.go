@@ -15,17 +15,17 @@ import (
 
 type ActionInitParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A list of artifact names to be worked on.
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
 	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
 
-	// The action declaration's name.
+	// The name of a pipeline-level variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The namespace all output variables will be accessed from.
@@ -34,37 +34,38 @@ type ActionInitParameters struct {
 	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
 
-	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// The provider of the service being called by the action. Valid providers are determined by the action category. Provider names are listed in the Action Structure Reference documentation.
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
 
-	// The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The order in which actions are run.
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
+	// The action timeout for the rule.
 	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 
-	// A string that identifies the action type.
+	// A string that describes the rule version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ActionObservation struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A list of artifact names to be worked on.
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
 	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
 
-	// The action declaration's name.
+	// The name of a pipeline-level variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The namespace all output variables will be accessed from.
@@ -73,43 +74,44 @@ type ActionObservation struct {
 	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
 
-	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// The provider of the service being called by the action. Valid providers are determined by the action category. Provider names are listed in the Action Structure Reference documentation.
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
 
-	// The region in which to run the action.
+	// The Region for the condition associated with the rule.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The order in which actions are run.
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
+	// The action timeout for the rule.
 	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 
-	// A string that identifies the action type.
+	// A string that describes the rule version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ActionParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
 
-	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// A list of artifact names to be worked on.
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
 	// +kubebuilder:validation:Optional
 	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
 
-	// The action declaration's name.
+	// The name of a pipeline-level variable.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -121,19 +123,19 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
 
-	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
 	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner" tf:"owner,omitempty"`
 
-	// The provider of the service being called by the action. Valid providers are determined by the action category. Provider names are listed in the Action Structure Reference documentation.
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
 	// +kubebuilder:validation:Optional
 	Provider *string `json:"provider" tf:"provider,omitempty"`
 
-	// The region in which to run the action.
+	// The Region for the condition associated with the rule.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -141,10 +143,11 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
+	// The action timeout for the rule.
 	// +kubebuilder:validation:Optional
 	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 
-	// A string that identifies the action type.
+	// A string that describes the rule version.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -211,6 +214,25 @@ type ArtifactStoreParameters struct {
 	// The type of the artifact store, such as Amazon S3
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type BeforeEntryInitParameters struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	Condition *ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+}
+
+type BeforeEntryObservation struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	Condition *ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+}
+
+type BeforeEntryParameters struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	// +kubebuilder:validation:Optional
+	Condition *ConditionParameters `json:"condition" tf:"condition,omitempty"`
 }
 
 type BranchesInitParameters struct {
@@ -332,7 +354,7 @@ type CodepipelineParameters struct {
 	// +kubebuilder:validation:Optional
 	PipelineType *string `json:"pipelineType,omitempty" tf:"pipeline_type,omitempty"`
 
-	// The region in which to run the action.
+	// The Region for the condition associated with the rule.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -368,6 +390,173 @@ type CodepipelineParameters struct {
 	// A pipeline-level variable block. Valid only when pipeline_type is V2. Variable are documented below.
 	// +kubebuilder:validation:Optional
 	Variable []VariableParameters `json:"variable,omitempty" tf:"variable,omitempty"`
+}
+
+type ConditionInitParameters struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type ConditionObservation struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type ConditionParameters struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	// +kubebuilder:validation:Optional
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	// +kubebuilder:validation:Optional
+	Rule []RuleParameters `json:"rule" tf:"rule,omitempty"`
+}
+
+type ConditionRuleInitParameters struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	RuleTypeID *RuleRuleTypeIDInitParameters `json:"ruleTypeId,omitempty" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type ConditionRuleObservation struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Region for the condition associated with the rule.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	RuleTypeID *RuleRuleTypeIDObservation `json:"ruleTypeId,omitempty" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type ConditionRuleParameters struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// +kubebuilder:validation:Optional
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	// +kubebuilder:validation:Optional
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The Region for the condition associated with the rule.
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	// +kubebuilder:validation:Optional
+	RuleTypeID *RuleRuleTypeIDParameters `json:"ruleTypeId" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	// +kubebuilder:validation:Optional
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type ConditionRuleRuleTypeIDInitParameters struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type ConditionRuleRuleTypeIDObservation struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type ConditionRuleRuleTypeIDParameters struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	// +kubebuilder:validation:Optional
+	Category *string `json:"category" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	// +kubebuilder:validation:Optional
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	// +kubebuilder:validation:Optional
+	Provider *string `json:"provider" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type EncryptionKeyInitParameters struct {
@@ -465,6 +654,211 @@ type GitConfigurationParameters struct {
 	// The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 	// +kubebuilder:validation:Optional
 	SourceActionName *string `json:"sourceActionName" tf:"source_action_name,omitempty"`
+}
+
+type OnFailureConditionInitParameters struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	Rule []ConditionRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type OnFailureConditionObservation struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	Rule []ConditionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type OnFailureConditionParameters struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	// +kubebuilder:validation:Optional
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	// +kubebuilder:validation:Optional
+	Rule []ConditionRuleParameters `json:"rule" tf:"rule,omitempty"`
+}
+
+type OnFailureInitParameters struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	Condition *OnFailureConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The retry configuration specifies automatic retry for a failed stage, along with the configured retry mode. Defined as a retry_configuration block below.
+	RetryConfiguration *RetryConfigurationInitParameters `json:"retryConfiguration,omitempty" tf:"retry_configuration,omitempty"`
+}
+
+type OnFailureObservation struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	Condition *OnFailureConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The retry configuration specifies automatic retry for a failed stage, along with the configured retry mode. Defined as a retry_configuration block below.
+	RetryConfiguration *RetryConfigurationObservation `json:"retryConfiguration,omitempty" tf:"retry_configuration,omitempty"`
+}
+
+type OnFailureParameters struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	// +kubebuilder:validation:Optional
+	Condition *OnFailureConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	// +kubebuilder:validation:Optional
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The retry configuration specifies automatic retry for a failed stage, along with the configured retry mode. Defined as a retry_configuration block below.
+	// +kubebuilder:validation:Optional
+	RetryConfiguration *RetryConfigurationParameters `json:"retryConfiguration,omitempty" tf:"retry_configuration,omitempty"`
+}
+
+type OnSuccessConditionInitParameters struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	Rule []OnSuccessConditionRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type OnSuccessConditionObservation struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	Rule []OnSuccessConditionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type OnSuccessConditionParameters struct {
+
+	// The conditions that are configured as failure conditions. Possible values are ROLLBACK,  FAIL, RETRY and SKIP.
+	// +kubebuilder:validation:Optional
+	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// The rules that make up the condition. Defined as a rule block below.
+	// +kubebuilder:validation:Optional
+	Rule []OnSuccessConditionRuleParameters `json:"rule" tf:"rule,omitempty"`
+}
+
+type OnSuccessConditionRuleInitParameters struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	RuleTypeID *ConditionRuleRuleTypeIDInitParameters `json:"ruleTypeId,omitempty" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type OnSuccessConditionRuleObservation struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Region for the condition associated with the rule.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	RuleTypeID *ConditionRuleRuleTypeIDObservation `json:"ruleTypeId,omitempty" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type OnSuccessConditionRuleParameters struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// +kubebuilder:validation:Optional
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	// +kubebuilder:validation:Optional
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The Region for the condition associated with the rule.
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	// +kubebuilder:validation:Optional
+	RuleTypeID *ConditionRuleRuleTypeIDParameters `json:"ruleTypeId" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	// +kubebuilder:validation:Optional
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type OnSuccessInitParameters struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	Condition *OnSuccessConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+}
+
+type OnSuccessObservation struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	Condition *OnSuccessConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+}
+
+type OnSuccessParameters struct {
+
+	// The conditions that are configured as entry condition. Defined as a condition block below.
+	// +kubebuilder:validation:Optional
+	Condition *OnSuccessConditionParameters `json:"condition" tf:"condition,omitempty"`
 }
 
 type PullRequestInitParameters struct {
@@ -603,13 +997,228 @@ type PushParameters struct {
 	Tags *TagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type RetryConfigurationInitParameters struct {
+
+	// The method that you want to configure for automatic stage retry on stage failure. You can specify to retry only failed action in the stage or all actions in the stage. Possible values are FAILED_ACTIONS and ALL_ACTIONS.
+	RetryMode *string `json:"retryMode,omitempty" tf:"retry_mode,omitempty"`
+}
+
+type RetryConfigurationObservation struct {
+
+	// The method that you want to configure for automatic stage retry on stage failure. You can specify to retry only failed action in the stage or all actions in the stage. Possible values are FAILED_ACTIONS and ALL_ACTIONS.
+	RetryMode *string `json:"retryMode,omitempty" tf:"retry_mode,omitempty"`
+}
+
+type RetryConfigurationParameters struct {
+
+	// The method that you want to configure for automatic stage retry on stage failure. You can specify to retry only failed action in the stage or all actions in the stage. Possible values are FAILED_ACTIONS and ALL_ACTIONS.
+	// +kubebuilder:validation:Optional
+	RetryMode *string `json:"retryMode,omitempty" tf:"retry_mode,omitempty"`
+}
+
+type RuleInitParameters struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	RuleTypeID *RuleTypeIDInitParameters `json:"ruleTypeId,omitempty" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type RuleObservation struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Region for the condition associated with the rule.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	RuleTypeID *RuleTypeIDObservation `json:"ruleTypeId,omitempty" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type RuleParameters struct {
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// +kubebuilder:validation:Optional
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// The action configuration fields for the rule. Configurations options for rule types and providers can be found in the Rule structure reference.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The list of the input artifacts fields for the rule, such as specifying an input file for the rule.
+	// +kubebuilder:validation:Optional
+	InputArtifacts []*string `json:"inputArtifacts,omitempty" tf:"input_artifacts,omitempty"`
+
+	// The name of a pipeline-level variable.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The Region for the condition associated with the rule.
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ID for the rule type, which is made up of the combined values for category, owner, provider, and version. Defined as an rule_type_id block below.
+	// +kubebuilder:validation:Optional
+	RuleTypeID *RuleTypeIDParameters `json:"ruleTypeId" tf:"rule_type_id,omitempty"`
+
+	// The action timeout for the rule.
+	// +kubebuilder:validation:Optional
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
+type RuleRuleTypeIDInitParameters struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type RuleRuleTypeIDObservation struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type RuleRuleTypeIDParameters struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	// +kubebuilder:validation:Optional
+	Category *string `json:"category" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	// +kubebuilder:validation:Optional
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	// +kubebuilder:validation:Optional
+	Provider *string `json:"provider" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type RuleTypeIDInitParameters struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type RuleTypeIDObservation struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type RuleTypeIDParameters struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule.
+	// +kubebuilder:validation:Optional
+	Category *string `json:"category" tf:"category,omitempty"`
+
+	// The creator of the rule being called. The valid value for the Owner field in the rule category is AWS.
+	// +kubebuilder:validation:Optional
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule provider names, see the rules listed in the AWS CodePipeline rule reference.
+	// +kubebuilder:validation:Optional
+	Provider *string `json:"provider" tf:"provider,omitempty"`
+
+	// A string that describes the rule version.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type StageInitParameters struct {
 
 	// The action(s) to include in the stage. Defined as an action block below
 	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
+	// The method to use when a stage allows entry. For example, configuring this field for conditions will allow entry to the stage when the conditions are met.
+	BeforeEntry *BeforeEntryInitParameters `json:"beforeEntry,omitempty" tf:"before_entry,omitempty"`
+
 	// The name of the stage.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.
+	OnFailure *OnFailureInitParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// The method to use when a stage has succeeded. For example, configuring this field for conditions will allow the stage to succeed when the conditions are met.
+	OnSuccess *OnSuccessInitParameters `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
 type StageObservation struct {
@@ -617,8 +1226,17 @@ type StageObservation struct {
 	// The action(s) to include in the stage. Defined as an action block below
 	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
+	// The method to use when a stage allows entry. For example, configuring this field for conditions will allow entry to the stage when the conditions are met.
+	BeforeEntry *BeforeEntryObservation `json:"beforeEntry,omitempty" tf:"before_entry,omitempty"`
+
 	// The name of the stage.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.
+	OnFailure *OnFailureObservation `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// The method to use when a stage has succeeded. For example, configuring this field for conditions will allow the stage to succeed when the conditions are met.
+	OnSuccess *OnSuccessObservation `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
 type StageParameters struct {
@@ -627,9 +1245,21 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	Action []ActionParameters `json:"action" tf:"action,omitempty"`
 
+	// The method to use when a stage allows entry. For example, configuring this field for conditions will allow entry to the stage when the conditions are met.
+	// +kubebuilder:validation:Optional
+	BeforeEntry *BeforeEntryParameters `json:"beforeEntry,omitempty" tf:"before_entry,omitempty"`
+
 	// The name of the stage.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.
+	// +kubebuilder:validation:Optional
+	OnFailure *OnFailureParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// The method to use when a stage has succeeded. For example, configuring this field for conditions will allow the stage to succeed when the conditions are met.
+	// +kubebuilder:validation:Optional
+	OnSuccess *OnSuccessParameters `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
 type TagsInitParameters struct {

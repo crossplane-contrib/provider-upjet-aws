@@ -74,7 +74,8 @@ spec:
               forProvider:
                 properties:
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported value are redis, valkey (case
+                      insensitive).
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -187,7 +188,8 @@ spec:
                   autoscaler.
                 properties:
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported value are redis, valkey (case
+                      insensitive).
                     type: string
                   tags:
                     additionalProperties:
@@ -461,7 +463,8 @@ spec:
                     description: The ARN that identifies the user group.
                     type: string
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported value are redis, valkey (case
+                      insensitive).
                     type: string
                   id:
                     description: The user group identifier.

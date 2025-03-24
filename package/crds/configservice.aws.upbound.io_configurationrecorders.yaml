@@ -873,7 +873,7 @@ spec:
                     description: Recording mode - see below.
                     properties:
                       recordingFrequency:
-                        description: Default reecording frequency. CONTINUOUS or DAILY.
+                        description: Default recording frequency. CONTINUOUS or DAILY.
                         type: string
                       recordingModeOverride:
                         description: Recording mode overrides. Detailed below.
@@ -882,8 +882,8 @@ spec:
                             description: A description you provide of the override.
                             type: string
                           recordingFrequency:
-                            description: Default reecording frequency. CONTINUOUS
-                              or DAILY.
+                            description: Default recording frequency. CONTINUOUS or
+                              DAILY.
                             type: string
                           resourceTypes:
                             description: A list that specifies the types of AWS resources
@@ -1052,7 +1052,7 @@ spec:
                     description: Recording mode - see below.
                     properties:
                       recordingFrequency:
-                        description: Default reecording frequency. CONTINUOUS or DAILY.
+                        description: Default recording frequency. CONTINUOUS or DAILY.
                         type: string
                       recordingModeOverride:
                         description: Recording mode overrides. Detailed below.
@@ -1061,8 +1061,8 @@ spec:
                             description: A description you provide of the override.
                             type: string
                           recordingFrequency:
-                            description: Default reecording frequency. CONTINUOUS
-                              or DAILY.
+                            description: Default recording frequency. CONTINUOUS or
+                              DAILY.
                             type: string
                           resourceTypes:
                             description: A list that specifies the types of AWS resources
@@ -1388,7 +1388,7 @@ spec:
                     description: Recording mode - see below.
                     properties:
                       recordingFrequency:
-                        description: Default reecording frequency. CONTINUOUS or DAILY.
+                        description: Default recording frequency. CONTINUOUS or DAILY.
                         type: string
                       recordingModeOverride:
                         description: Recording mode overrides. Detailed below.
@@ -1397,8 +1397,8 @@ spec:
                             description: A description you provide of the override.
                             type: string
                           recordingFrequency:
-                            description: Default reecording frequency. CONTINUOUS
-                              or DAILY.
+                            description: Default recording frequency. CONTINUOUS or
+                              DAILY.
                             type: string
                           resourceTypes:
                             description: A list that specifies the types of AWS resources

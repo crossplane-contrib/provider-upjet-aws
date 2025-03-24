@@ -166,7 +166,7 @@ type RecordingGroupParameters struct {
 
 type RecordingModeInitParameters struct {
 
-	// Default reecording frequency. CONTINUOUS or DAILY.
+	// Default recording frequency. CONTINUOUS or DAILY.
 	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
 
 	// Recording mode overrides. Detailed below.
@@ -175,7 +175,7 @@ type RecordingModeInitParameters struct {
 
 type RecordingModeObservation struct {
 
-	// Default reecording frequency. CONTINUOUS or DAILY.
+	// Default recording frequency. CONTINUOUS or DAILY.
 	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
 
 	// Recording mode overrides. Detailed below.
@@ -187,7 +187,7 @@ type RecordingModeOverrideInitParameters struct {
 	// A description you provide of the override.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Default reecording frequency. CONTINUOUS or DAILY.
+	// Default recording frequency. CONTINUOUS or DAILY.
 	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
 
 	// A list that specifies the types of AWS resources for which AWS Config excludes records configuration changes. See relevant part of AWS Docs for available types.
@@ -200,7 +200,7 @@ type RecordingModeOverrideObservation struct {
 	// A description you provide of the override.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Default reecording frequency. CONTINUOUS or DAILY.
+	// Default recording frequency. CONTINUOUS or DAILY.
 	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
 
 	// A list that specifies the types of AWS resources for which AWS Config excludes records configuration changes. See relevant part of AWS Docs for available types.
@@ -214,7 +214,7 @@ type RecordingModeOverrideParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Default reecording frequency. CONTINUOUS or DAILY.
+	// Default recording frequency. CONTINUOUS or DAILY.
 	// +kubebuilder:validation:Optional
 	RecordingFrequency *string `json:"recordingFrequency" tf:"recording_frequency,omitempty"`
 
@@ -226,7 +226,7 @@ type RecordingModeOverrideParameters struct {
 
 type RecordingModeParameters struct {
 
-	// Default reecording frequency. CONTINUOUS or DAILY.
+	// Default recording frequency. CONTINUOUS or DAILY.
 	// +kubebuilder:validation:Optional
 	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
 

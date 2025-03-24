@@ -361,6 +361,9 @@ type TaskDefinitionInitParameters struct {
 	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
+	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
+	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
+
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	EphemeralStorage *EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
@@ -439,6 +442,9 @@ type TaskDefinitionObservation struct {
 	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
+	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
+	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
+
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	EphemeralStorage *EphemeralStorageObservation `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
@@ -511,6 +517,10 @@ type TaskDefinitionParameters struct {
 	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	// +kubebuilder:validation:Optional
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
+
+	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
+	// +kubebuilder:validation:Optional
+	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
 
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	// +kubebuilder:validation:Optional

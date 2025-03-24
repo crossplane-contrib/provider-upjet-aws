@@ -74,10 +74,12 @@ spec:
               forProvider:
                 properties:
                   policy:
-                    description: The JSON policy for the SQS queue.
+                    description: JSON policy for the SQS queue. Ensure that Version
+                      = "2012-10-17" is set in the policy or AWS may hang in creating
+                      the queue.
                     type: string
                   queueUrl:
-                    description: The URL of the SQS Queue to which to attach the policy
+                    description: URL of the SQS Queue to which to attach the policy.
                     type: string
                   queueUrlRef:
                     description: Reference to a Queue in sqs to populate queueUrl.
@@ -174,10 +176,12 @@ spec:
                   autoscaler.
                 properties:
                   policy:
-                    description: The JSON policy for the SQS queue.
+                    description: JSON policy for the SQS queue. Ensure that Version
+                      = "2012-10-17" is set in the policy or AWS may hang in creating
+                      the queue.
                     type: string
                   queueUrl:
-                    description: The URL of the SQS Queue to which to attach the policy
+                    description: URL of the SQS Queue to which to attach the policy.
                     type: string
                   queueUrlRef:
                     description: Reference to a Queue in sqs to populate queueUrl.
@@ -434,10 +438,12 @@ spec:
                   id:
                     type: string
                   policy:
-                    description: The JSON policy for the SQS queue.
+                    description: JSON policy for the SQS queue. Ensure that Version
+                      = "2012-10-17" is set in the policy or AWS may hang in creating
+                      the queue.
                     type: string
                   queueUrl:
-                    description: The URL of the SQS Queue to which to attach the policy
+                    description: URL of the SQS Queue to which to attach the policy.
                     type: string
                 type: object
               conditions:

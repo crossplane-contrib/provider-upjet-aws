@@ -1675,6 +1675,20 @@ spec:
                     description: Enter a description for the connection. Maximum of
                       512 characters.
                     type: string
+                  invocationConnectivityParameters:
+                    description: The parameters to use for invoking a private API.
+                      Documented below.
+                    properties:
+                      resourceParameters:
+                        description: The parameters for EventBridge to use when invoking
+                          the resource endpoint. Documented below.
+                        properties:
+                          resourceConfigurationArn:
+                            description: ARN of the Amazon VPC Lattice resource configuration
+                              for the resource endpoint.
+                            type: string
+                        type: object
+                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -2043,6 +2057,20 @@ spec:
                     description: Enter a description for the connection. Maximum of
                       512 characters.
                     type: string
+                  invocationConnectivityParameters:
+                    description: The parameters to use for invoking a private API.
+                      Documented below.
+                    properties:
+                      resourceParameters:
+                        description: The parameters for EventBridge to use when invoking
+                          the resource endpoint. Documented below.
+                        properties:
+                          resourceConfigurationArn:
+                            description: ARN of the Amazon VPC Lattice resource configuration
+                              for the resource endpoint.
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -2409,6 +2437,23 @@ spec:
                     type: string
                   id:
                     type: string
+                  invocationConnectivityParameters:
+                    description: The parameters to use for invoking a private API.
+                      Documented below.
+                    properties:
+                      resourceParameters:
+                        description: The parameters for EventBridge to use when invoking
+                          the resource endpoint. Documented below.
+                        properties:
+                          resourceAssociationArn:
+                            description: The Amazon Resource Name (ARN) of the connection.
+                            type: string
+                          resourceConfigurationArn:
+                            description: ARN of the Amazon VPC Lattice resource configuration
+                              for the resource endpoint.
+                            type: string
+                        type: object
+                    type: object
                   secretArn:
                     description: The Amazon Resource Name (ARN) of the secret created
                       from the authorization parameters specified for the connection.

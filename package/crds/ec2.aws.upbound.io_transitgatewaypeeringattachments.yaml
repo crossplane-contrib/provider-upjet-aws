@@ -635,8 +635,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: ARN of the attachment.
+                    type: string
                   id:
-                    description: EC2 Transit Gateway Attachment identifier
+                    description: EC2 Transit Gateway Attachment identifier.
                     type: string
                   options:
                     description: Describes whether dynamic routing is enabled or disabled

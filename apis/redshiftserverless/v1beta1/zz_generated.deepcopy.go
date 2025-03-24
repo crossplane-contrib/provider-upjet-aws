@@ -632,6 +632,16 @@ func (in *RedshiftServerlessNamespaceInitParameters) DeepCopyInto(out *RedshiftS
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.AdminUserPasswordWo != nil {
+		in, out := &in.AdminUserPasswordWo, &out.AdminUserPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdminUserPasswordWoVersion != nil {
+		in, out := &in.AdminUserPasswordWoVersion, &out.AdminUserPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.AdminUsernameSecretRef != nil {
 		in, out := &in.AdminUsernameSecretRef, &out.AdminUsernameSecretRef
 		*out = new(v1.SecretKeySelector)
@@ -784,6 +794,16 @@ func (in *RedshiftServerlessNamespaceObservation) DeepCopyInto(out *RedshiftServ
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdminUserPasswordWo != nil {
+		in, out := &in.AdminUserPasswordWo, &out.AdminUserPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdminUserPasswordWoVersion != nil {
+		in, out := &in.AdminUserPasswordWoVersion, &out.AdminUserPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Arn != nil {
 		in, out := &in.Arn, &out.Arn
 		*out = new(string)
@@ -896,6 +916,16 @@ func (in *RedshiftServerlessNamespaceParameters) DeepCopyInto(out *RedshiftServe
 	if in.AdminUserPasswordSecretRef != nil {
 		in, out := &in.AdminUserPasswordSecretRef, &out.AdminUserPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AdminUserPasswordWo != nil {
+		in, out := &in.AdminUserPasswordWo, &out.AdminUserPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdminUserPasswordWoVersion != nil {
+		in, out := &in.AdminUserPasswordWoVersion, &out.AdminUserPasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AdminUsernameSecretRef != nil {

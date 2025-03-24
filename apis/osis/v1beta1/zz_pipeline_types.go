@@ -218,6 +218,9 @@ type VPCOptionsInitParameters struct {
 	// A list of subnet IDs associated with the VPC endpoint.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline. Valid values are CUSTOMER or SERVICE
+	VPCEndpointManagement *string `json:"vpcEndpointManagement,omitempty" tf:"vpc_endpoint_management,omitempty"`
 }
 
 type VPCOptionsObservation struct {
@@ -229,6 +232,9 @@ type VPCOptionsObservation struct {
 	// A list of subnet IDs associated with the VPC endpoint.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline. Valid values are CUSTOMER or SERVICE
+	VPCEndpointManagement *string `json:"vpcEndpointManagement,omitempty" tf:"vpc_endpoint_management,omitempty"`
 }
 
 type VPCOptionsParameters struct {
@@ -242,6 +248,10 @@ type VPCOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+
+	// Whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline. Valid values are CUSTOMER or SERVICE
+	// +kubebuilder:validation:Optional
+	VPCEndpointManagement *string `json:"vpcEndpointManagement,omitempty" tf:"vpc_endpoint_management,omitempty"`
 }
 
 // PipelineSpec defines the desired state of Pipeline

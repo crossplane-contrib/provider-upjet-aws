@@ -74,21 +74,21 @@ spec:
               forProvider:
                 properties:
                   awsAccountId:
-                    description: The ID for the AWS account that the user is in. Currently,
-                      you use the ID for the AWS account that contains your Amazon
-                      QuickSight account.
+                    description: ID for the AWS account that the user is in. Use the
+                      ID for the AWS account that contains your Amazon QuickSight
+                      account.
                     type: string
                   email:
-                    description: The email address of the user that you want to register.
+                    description: Email address of the user that you want to register.
                     type: string
                   iamArn:
-                    description: The ARN of the IAM user or role that you are registering
-                      with Amazon QuickSight.
+                    description: ARN of the IAM user or role that you are registering
+                      with Amazon QuickSight. Required only for users with an identity
+                      type of IAM.
                     type: string
                   identityType:
-                    description: Amazon QuickSight supports several ways of managing
-                      the identity of users. This parameter accepts either  IAM or
-                      QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
+                    description: 'Identity type that your Amazon QuickSight account
+                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.'
                     type: string
                   namespace:
                     description: The Amazon Quicksight namespace to create the user
@@ -99,21 +99,20 @@ spec:
                       be created in.
                     type: string
                   sessionName:
-                    description: The name of the IAM session to use when assuming
-                      roles that can embed QuickSight dashboards. Only valid for registering
+                    description: Name of the IAM session to use when assuming roles
+                      that can embed QuickSight dashboards. Only valid for registering
                       users using an assumed IAM role. Additionally, if registering
                       multiple users using the same IAM role, each user needs to have
                       a unique session name.
                     type: string
                   userName:
-                    description: The Amazon QuickSight user name that you want to
-                      create for the user you are registering. Only valid for registering
-                      a user with identity_type set to QUICKSIGHT.
+                    description: Amazon QuickSight user name that you want to create
+                      for the user you are registering. Required only for users with
+                      an identity type of QUICKSIGHT.
                     type: string
                   userRole:
-                    description: 'The Amazon QuickSight role of the user. The user
-                      role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO,
-                      AUTHOR_PRO or ADMIN_PRO.'
+                    description: 'Amazon QuickSight role for the user. Value values:
+                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.'
                     type: string
                 required:
                 - region
@@ -132,42 +131,41 @@ spec:
                   autoscaler.
                 properties:
                   awsAccountId:
-                    description: The ID for the AWS account that the user is in. Currently,
-                      you use the ID for the AWS account that contains your Amazon
-                      QuickSight account.
+                    description: ID for the AWS account that the user is in. Use the
+                      ID for the AWS account that contains your Amazon QuickSight
+                      account.
                     type: string
                   email:
-                    description: The email address of the user that you want to register.
+                    description: Email address of the user that you want to register.
                     type: string
                   iamArn:
-                    description: The ARN of the IAM user or role that you are registering
-                      with Amazon QuickSight.
+                    description: ARN of the IAM user or role that you are registering
+                      with Amazon QuickSight. Required only for users with an identity
+                      type of IAM.
                     type: string
                   identityType:
-                    description: Amazon QuickSight supports several ways of managing
-                      the identity of users. This parameter accepts either  IAM or
-                      QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
+                    description: 'Identity type that your Amazon QuickSight account
+                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.'
                     type: string
                   namespace:
                     description: The Amazon Quicksight namespace to create the user
                       in. Defaults to default.
                     type: string
                   sessionName:
-                    description: The name of the IAM session to use when assuming
-                      roles that can embed QuickSight dashboards. Only valid for registering
+                    description: Name of the IAM session to use when assuming roles
+                      that can embed QuickSight dashboards. Only valid for registering
                       users using an assumed IAM role. Additionally, if registering
                       multiple users using the same IAM role, each user needs to have
                       a unique session name.
                     type: string
                   userName:
-                    description: The Amazon QuickSight user name that you want to
-                      create for the user you are registering. Only valid for registering
-                      a user with identity_type set to QUICKSIGHT.
+                    description: Amazon QuickSight user name that you want to create
+                      for the user you are registering. Required only for users with
+                      an identity type of QUICKSIGHT.
                     type: string
                   userRole:
-                    description: 'The Amazon QuickSight role of the user. The user
-                      role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO,
-                      AUTHOR_PRO or ADMIN_PRO.'
+                    description: 'Amazon QuickSight role for the user. Value values:
+                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.'
                     type: string
                 type: object
               managementPolicies:
@@ -356,47 +354,53 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the user
+                    description: Amazon Resource Name (ARN) for the user.
                     type: string
                   awsAccountId:
-                    description: The ID for the AWS account that the user is in. Currently,
-                      you use the ID for the AWS account that contains your Amazon
-                      QuickSight account.
+                    description: ID for the AWS account that the user is in. Use the
+                      ID for the AWS account that contains your Amazon QuickSight
+                      account.
                     type: string
                   email:
-                    description: The email address of the user that you want to register.
+                    description: Email address of the user that you want to register.
                     type: string
                   iamArn:
-                    description: The ARN of the IAM user or role that you are registering
-                      with Amazon QuickSight.
+                    description: ARN of the IAM user or role that you are registering
+                      with Amazon QuickSight. Required only for users with an identity
+                      type of IAM.
                     type: string
                   id:
+                    description: Unique identifier consisting of the account ID, the
+                      namespace, and the user name separated by /s.
                     type: string
                   identityType:
-                    description: Amazon QuickSight supports several ways of managing
-                      the identity of users. This parameter accepts either  IAM or
-                      QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
+                    description: 'Identity type that your Amazon QuickSight account
+                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.'
                     type: string
                   namespace:
                     description: The Amazon Quicksight namespace to create the user
                       in. Defaults to default.
                     type: string
                   sessionName:
-                    description: The name of the IAM session to use when assuming
-                      roles that can embed QuickSight dashboards. Only valid for registering
+                    description: Name of the IAM session to use when assuming roles
+                      that can embed QuickSight dashboards. Only valid for registering
                       users using an assumed IAM role. Additionally, if registering
                       multiple users using the same IAM role, each user needs to have
                       a unique session name.
                     type: string
+                  userInvitationUrl:
+                    description: URL the user visits to complete registration and
+                      provide a password. Returned only for users with an identity
+                      type of QUICKSIGHT.
+                    type: string
                   userName:
-                    description: The Amazon QuickSight user name that you want to
-                      create for the user you are registering. Only valid for registering
-                      a user with identity_type set to QUICKSIGHT.
+                    description: Amazon QuickSight user name that you want to create
+                      for the user you are registering. Required only for users with
+                      an identity type of QUICKSIGHT.
                     type: string
                   userRole:
-                    description: 'The Amazon QuickSight role of the user. The user
-                      role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO,
-                      AUTHOR_PRO or ADMIN_PRO.'
+                    description: 'Amazon QuickSight role for the user. Value values:
+                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.'
                     type: string
                 type: object
               conditions:

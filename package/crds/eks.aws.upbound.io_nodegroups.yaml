@@ -1718,6 +1718,15 @@ spec:
                         description: EC2 Launch Template version number.
                         type: string
                     type: object
+                  nodeRepairConfig:
+                    description: The node auto repair configuration for the node group.
+                      See node_repair_config below for details.
+                    properties:
+                      enabled:
+                        description: Specifies whether to enable node auto repair
+                          for the node group. Node auto repair is disabled by default.
+                        type: boolean
+                    type: object
                   nodeRoleArn:
                     description: –  Amazon Resource Name (ARN) of the IAM Role that
                       provides permissions for the EKS Node Group.
@@ -2187,6 +2196,15 @@ spec:
                       version:
                         description: EC2 Launch Template version number.
                         type: string
+                    type: object
+                  nodeRepairConfig:
+                    description: The node auto repair configuration for the node group.
+                      See node_repair_config below for details.
+                    properties:
+                      enabled:
+                        description: Specifies whether to enable node auto repair
+                          for the node group. Node auto repair is disabled by default.
+                        type: boolean
                     type: object
                   nodeRoleArn:
                     description: –  Amazon Resource Name (ARN) of the IAM Role that
@@ -2825,6 +2843,15 @@ spec:
                       version:
                         description: EC2 Launch Template version number.
                         type: string
+                    type: object
+                  nodeRepairConfig:
+                    description: The node auto repair configuration for the node group.
+                      See node_repair_config below for details.
+                    properties:
+                      enabled:
+                        description: Specifies whether to enable node auto repair
+                          for the node group. Node auto repair is disabled by default.
+                        type: boolean
                     type: object
                   nodeRoleArn:
                     description: –  Amazon Resource Name (ARN) of the IAM Role that

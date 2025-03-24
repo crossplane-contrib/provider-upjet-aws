@@ -21,7 +21,7 @@ type AppImageConfigInitParameters struct {
 	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyter Lab Image Config details below.
 	JupyterLabImageConfig *JupyterLabImageConfigInitParameters `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// The configuration for the file system and kernels in a SageMaker AI image running as a KernelGateway app. See Kernel Gateway Image Config details below.
 	KernelGatewayImageConfig *KernelGatewayImageConfigInitParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
 	// Key-value map of resource tags.
@@ -43,7 +43,7 @@ type AppImageConfigObservation struct {
 	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyter Lab Image Config details below.
 	JupyterLabImageConfig *JupyterLabImageConfigObservation `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// The configuration for the file system and kernels in a SageMaker AI image running as a KernelGateway app. See Kernel Gateway Image Config details below.
 	KernelGatewayImageConfig *KernelGatewayImageConfigObservation `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
 	// Key-value map of resource tags.
@@ -65,7 +65,7 @@ type AppImageConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	JupyterLabImageConfig *JupyterLabImageConfigParameters `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// The configuration for the file system and kernels in a SageMaker AI image running as a KernelGateway app. See Kernel Gateway Image Config details below.
 	// +kubebuilder:validation:Optional
 	KernelGatewayImageConfig *KernelGatewayImageConfigParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
@@ -423,7 +423,7 @@ type AppImageConfigStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// AppImageConfig is the Schema for the AppImageConfigs API. Provides a SageMaker App Image Config resource.
+// AppImageConfig is the Schema for the AppImageConfigs API. Provides a SageMaker AI App Image Config resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

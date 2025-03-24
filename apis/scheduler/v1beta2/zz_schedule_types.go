@@ -347,29 +347,29 @@ type NetworkConfigurationParameters struct {
 
 type PipelineParameterInitParameters struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterObservation struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterParameters struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -463,19 +463,19 @@ type RetryPolicyParameters struct {
 
 type SagemakerPipelineParametersInitParameters struct {
 
-	// Set of up to 200 parameter names and values to use when executing the SageMaker Model Building Pipeline. Detailed below.
+	// Set of up to 200 parameter names and values to use when executing the SageMaker AI Model Building Pipeline. Detailed below.
 	PipelineParameter []PipelineParameterInitParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
 
 type SagemakerPipelineParametersObservation struct {
 
-	// Set of up to 200 parameter names and values to use when executing the SageMaker Model Building Pipeline. Detailed below.
+	// Set of up to 200 parameter names and values to use when executing the SageMaker AI Model Building Pipeline. Detailed below.
 	PipelineParameter []PipelineParameterObservation `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
 
 type SagemakerPipelineParametersParameters struct {
 
-	// Set of up to 200 parameter names and values to use when executing the SageMaker Model Building Pipeline. Detailed below.
+	// Set of up to 200 parameter names and values to use when executing the SageMaker AI Model Building Pipeline. Detailed below.
 	// +kubebuilder:validation:Optional
 	PipelineParameter []PipelineParameterParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
@@ -693,7 +693,7 @@ type TargetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Templated target type for the Amazon SageMaker StartPipelineExecution API operation. Detailed below.
+	// Templated target type for the Amazon SageMaker AI StartPipelineExecution API operation. Detailed below.
 	SagemakerPipelineParameters *SagemakerPipelineParametersInitParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 
 	// The templated target type for the Amazon SQS SendMessage API operation. Detailed below.
@@ -726,7 +726,7 @@ type TargetObservation struct {
 	// ARN of the IAM role that EventBridge Scheduler will use for this target when the schedule is invoked. Read more in Set up the execution role.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Templated target type for the Amazon SageMaker StartPipelineExecution API operation. Detailed below.
+	// Templated target type for the Amazon SageMaker AI StartPipelineExecution API operation. Detailed below.
 	SagemakerPipelineParameters *SagemakerPipelineParametersObservation `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 
 	// The templated target type for the Amazon SQS SendMessage API operation. Detailed below.
@@ -787,7 +787,7 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Templated target type for the Amazon SageMaker StartPipelineExecution API operation. Detailed below.
+	// Templated target type for the Amazon SageMaker AI StartPipelineExecution API operation. Detailed below.
 	// +kubebuilder:validation:Optional
 	SagemakerPipelineParameters *SagemakerPipelineParametersParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 

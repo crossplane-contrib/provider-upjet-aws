@@ -197,6 +197,8 @@ type AMICopyObservation struct {
 
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
+
 	UsageOperation *string `json:"usageOperation,omitempty" tf:"usage_operation,omitempty"`
 
 	VirtualizationType *string `json:"virtualizationType,omitempty" tf:"virtualization_type,omitempty"`

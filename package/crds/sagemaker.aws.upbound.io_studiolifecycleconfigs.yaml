@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: StudioLifecycleConfig is the Schema for the StudioLifecycleConfigs
-          API. Provides a SageMaker Studio Lifecycle Config resource.
+          API. Provides a SageMaker AI Studio Lifecycle Config resource.
         properties:
           apiVersion:
             description: |-

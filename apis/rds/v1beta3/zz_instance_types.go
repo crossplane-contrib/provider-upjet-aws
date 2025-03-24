@@ -205,7 +205,7 @@ type InstanceInitParameters struct {
 	// for more information.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided.
+	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password or password_wo is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
@@ -221,7 +221,7 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterUserSecretKMSKeyIDSelector *v1.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
 
-	// When configured, the upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to allocated_storage. Must be greater than or equal to allocated_storage or 0 to disable Storage Autoscaling.
+	// Specifies the maximum storage (in GiB) that Amazon RDS can automatically scale to for this DB instance. By default, Storage Autoscaling is disabled. To enable Storage Autoscaling, set max_allocated_storage to greater than or equal to allocated_storage. Setting max_allocated_storage to 0 explicitly disables Storage Autoscaling. When configured, changes to allocated_storage will be automatically ignored as the storage can dynamically scale.
 	MaxAllocatedStorage *float64 `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty"`
 
 	// The interval, in seconds, between points
@@ -272,10 +272,15 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
-	// Password for the master DB user. Note that this may show up in
-	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
@@ -560,7 +565,7 @@ type InstanceObservation struct {
 	// for more information.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided.
+	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password or password_wo is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
 	// A block that specifies the master user secret. Only available when manage_master_user_password is set to true. Documented below.
@@ -569,7 +574,7 @@ type InstanceObservation struct {
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
 
-	// When configured, the upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to allocated_storage. Must be greater than or equal to allocated_storage or 0 to disable Storage Autoscaling.
+	// Specifies the maximum storage (in GiB) that Amazon RDS can automatically scale to for this DB instance. By default, Storage Autoscaling is disabled. To enable Storage Autoscaling, set max_allocated_storage to greater than or equal to allocated_storage. Setting max_allocated_storage to 0 explicitly disables Storage Autoscaling. When configured, changes to allocated_storage will be automatically ignored as the storage can dynamically scale.
 	MaxAllocatedStorage *float64 `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty"`
 
 	// The interval, in seconds, between points
@@ -600,6 +605,9 @@ type InstanceObservation struct {
 
 	// Name of the DB parameter group to associate.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
@@ -718,8 +726,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Password for the master DB user. Note that this may show up in
-	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Optional
@@ -914,7 +921,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided.
+	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password or password_wo is provided.
 	// +kubebuilder:validation:Optional
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
@@ -932,7 +939,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterUserSecretKMSKeyIDSelector *v1.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
 
-	// When configured, the upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to allocated_storage. Must be greater than or equal to allocated_storage or 0 to disable Storage Autoscaling.
+	// Specifies the maximum storage (in GiB) that Amazon RDS can automatically scale to for this DB instance. By default, Storage Autoscaling is disabled. To enable Storage Autoscaling, set max_allocated_storage to greater than or equal to allocated_storage. Setting max_allocated_storage to 0 explicitly disables Storage Autoscaling. When configured, changes to allocated_storage will be automatically ignored as the storage can dynamically scale.
 	// +kubebuilder:validation:Optional
 	MaxAllocatedStorage *float64 `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty"`
 
@@ -991,11 +998,18 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
-	// Password for the master DB user. Note that this may show up in
-	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// +kubebuilder:validation:Optional
+	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
+	// +kubebuilder:validation:Optional
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	// +kubebuilder:validation:Optional

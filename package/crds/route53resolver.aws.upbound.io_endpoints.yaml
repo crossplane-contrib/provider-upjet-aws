@@ -176,8 +176,9 @@ spec:
                     description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'Protocols you want to use for the Route 53 Resolver
-                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    description: |-
+                      Protocols you want to use for the Route 53 Resolver endpoint.
+                      Valid values are DoH, Do53, or DoH-FIPS.
                     items:
                       type: string
                     type: array
@@ -401,8 +402,9 @@ spec:
                     description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'Protocols you want to use for the Route 53 Resolver
-                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    description: |-
+                      Protocols you want to use for the Route 53 Resolver endpoint.
+                      Valid values are DoH, Do53, or DoH-FIPS.
                     items:
                       type: string
                     type: array
@@ -727,8 +729,9 @@ spec:
                     description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'Protocols you want to use for the Route 53 Resolver
-                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    description: |-
+                      Protocols you want to use for the Route 53 Resolver endpoint.
+                      Valid values are DoH, Do53, or DoH-FIPS.
                     items:
                       type: string
                     type: array

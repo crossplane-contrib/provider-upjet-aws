@@ -1746,7 +1746,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      The region in which to run the action.
+                      The Region for the condition associated with the rule.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
@@ -1839,32 +1839,27 @@ spec:
                           items:
                             properties:
                               category:
-                                description: A category defines what kind of action
-                                  can be taken in the stage, and constrains the provider
-                                  type for the action. Possible values are Approval,
-                                  Build, Deploy, Invoke, Source and Test.
+                                description: A category defines what kind of rule
+                                  can be run in the stage, and constrains the provider
+                                  type for the rule. The valid category is Rule.
                                 type: string
                               configuration:
                                 additionalProperties:
                                   type: string
-                                description: 'A map of the action declaration''s configuration.
-                                  Configurations options for action types and providers
-                                  can be found in the Pipeline Structure Reference
-                                  and Action Structure Reference documentation. Note:
-                                  The DetectChanges parameter  in the configuration
-                                  section causes CodePipeline to automatically start
-                                  your pipeline upon new commits. Please refer to
-                                  AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.'
+                                description: The action configuration fields for the
+                                  rule. Configurations options for rule types and
+                                  providers can be found in the Rule structure reference.
                                 type: object
                                 x-kubernetes-map-type: granular
                               inputArtifacts:
-                                description: A list of artifact names to be worked
-                                  on.
+                                description: The list of the input artifacts fields
+                                  for the rule, such as specifying an input file for
+                                  the rule.
                                 items:
                                   type: string
                                 type: array
                               name:
-                                description: The action declaration's name.
+                                description: The name of a pipeline-level variable.
                                 type: string
                               namespace:
                                 description: The namespace all output variables will
@@ -1877,36 +1872,337 @@ spec:
                                   type: string
                                 type: array
                               owner:
-                                description: The creator of the action being called.
-                                  Possible values are AWS, Custom and ThirdParty.
+                                description: The creator of the rule being called.
+                                  The valid value for the Owner field in the rule
+                                  category is AWS.
                                 type: string
                               provider:
-                                description: The provider of the service being called
-                                  by the action. Valid providers are determined by
-                                  the action category. Provider names are listed in
-                                  the Action Structure Reference documentation.
+                                description: The rule provider, such as the DeploymentWindow
+                                  rule. For a list of rule provider names, see the
+                                  rules listed in the AWS CodePipeline rule reference.
                                 type: string
                               region:
-                                description: The region in which to run the action.
+                                description: The Region for the condition associated
+                                  with the rule.
                                 type: string
                               roleArn:
-                                description: The ARN of the IAM service role that
-                                  will perform the declared action. This is assumed
-                                  through the roleArn for the pipeline.
+                                description: A service role Amazon Resource Name (ARN)
+                                  that grants AWS CodePipeline permission to make
+                                  calls to AWS services on your behalf.
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
                                 type: number
                               timeoutInMinutes:
+                                description: The action timeout for the rule.
                                 type: number
                               version:
-                                description: A string that identifies the action type.
+                                description: A string that describes the rule version.
                                 type: string
                             type: object
                           type: array
+                        beforeEntry:
+                          description: The method to use when a stage allows entry.
+                            For example, configuring this field for conditions will
+                            allow entry to the stage when the conditions are met.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      region:
+                                        description: The Region for the condition
+                                          associated with the rule.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                          type: object
                         name:
                           description: The name of the stage.
                           type: string
+                        onFailure:
+                          description: The method to use when a stage has not completed
+                            successfully. For example, configuring this field for
+                            rollback will roll back a failed stage automatically to
+                            the last successful pipeline execution in the stage.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      region:
+                                        description: The Region for the condition
+                                          associated with the rule.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                            result:
+                              description: The conditions that are configured as failure
+                                conditions. Possible values are ROLLBACK,  FAIL, RETRY
+                                and SKIP.
+                              type: string
+                            retryConfiguration:
+                              description: The retry configuration specifies automatic
+                                retry for a failed stage, along with the configured
+                                retry mode. Defined as a retry_configuration block
+                                below.
+                              properties:
+                                retryMode:
+                                  description: The method that you want to configure
+                                    for automatic stage retry on stage failure. You
+                                    can specify to retry only failed action in the
+                                    stage or all actions in the stage. Possible values
+                                    are FAILED_ACTIONS and ALL_ACTIONS.
+                                  type: string
+                              type: object
+                          type: object
+                        onSuccess:
+                          description: The method to use when a stage has succeeded.
+                            For example, configuring this field for conditions will
+                            allow the stage to succeed when the conditions are met.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      region:
+                                        description: The Region for the condition
+                                          associated with the rule.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                          type: object
                       type: object
                     type: array
                   tags:
@@ -2298,32 +2594,27 @@ spec:
                           items:
                             properties:
                               category:
-                                description: A category defines what kind of action
-                                  can be taken in the stage, and constrains the provider
-                                  type for the action. Possible values are Approval,
-                                  Build, Deploy, Invoke, Source and Test.
+                                description: A category defines what kind of rule
+                                  can be run in the stage, and constrains the provider
+                                  type for the rule. The valid category is Rule.
                                 type: string
                               configuration:
                                 additionalProperties:
                                   type: string
-                                description: 'A map of the action declaration''s configuration.
-                                  Configurations options for action types and providers
-                                  can be found in the Pipeline Structure Reference
-                                  and Action Structure Reference documentation. Note:
-                                  The DetectChanges parameter  in the configuration
-                                  section causes CodePipeline to automatically start
-                                  your pipeline upon new commits. Please refer to
-                                  AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.'
+                                description: The action configuration fields for the
+                                  rule. Configurations options for rule types and
+                                  providers can be found in the Rule structure reference.
                                 type: object
                                 x-kubernetes-map-type: granular
                               inputArtifacts:
-                                description: A list of artifact names to be worked
-                                  on.
+                                description: The list of the input artifacts fields
+                                  for the rule, such as specifying an input file for
+                                  the rule.
                                 items:
                                   type: string
                                 type: array
                               name:
-                                description: The action declaration's name.
+                                description: The name of a pipeline-level variable.
                                 type: string
                               namespace:
                                 description: The namespace all output variables will
@@ -2336,33 +2627,321 @@ spec:
                                   type: string
                                 type: array
                               owner:
-                                description: The creator of the action being called.
-                                  Possible values are AWS, Custom and ThirdParty.
+                                description: The creator of the rule being called.
+                                  The valid value for the Owner field in the rule
+                                  category is AWS.
                                 type: string
                               provider:
-                                description: The provider of the service being called
-                                  by the action. Valid providers are determined by
-                                  the action category. Provider names are listed in
-                                  the Action Structure Reference documentation.
+                                description: The rule provider, such as the DeploymentWindow
+                                  rule. For a list of rule provider names, see the
+                                  rules listed in the AWS CodePipeline rule reference.
                                 type: string
                               roleArn:
-                                description: The ARN of the IAM service role that
-                                  will perform the declared action. This is assumed
-                                  through the roleArn for the pipeline.
+                                description: A service role Amazon Resource Name (ARN)
+                                  that grants AWS CodePipeline permission to make
+                                  calls to AWS services on your behalf.
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
                                 type: number
                               timeoutInMinutes:
+                                description: The action timeout for the rule.
                                 type: number
                               version:
-                                description: A string that identifies the action type.
+                                description: A string that describes the rule version.
                                 type: string
                             type: object
                           type: array
+                        beforeEntry:
+                          description: The method to use when a stage allows entry.
+                            For example, configuring this field for conditions will
+                            allow entry to the stage when the conditions are met.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                          type: object
                         name:
                           description: The name of the stage.
                           type: string
+                        onFailure:
+                          description: The method to use when a stage has not completed
+                            successfully. For example, configuring this field for
+                            rollback will roll back a failed stage automatically to
+                            the last successful pipeline execution in the stage.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                            result:
+                              description: The conditions that are configured as failure
+                                conditions. Possible values are ROLLBACK,  FAIL, RETRY
+                                and SKIP.
+                              type: string
+                            retryConfiguration:
+                              description: The retry configuration specifies automatic
+                                retry for a failed stage, along with the configured
+                                retry mode. Defined as a retry_configuration block
+                                below.
+                              properties:
+                                retryMode:
+                                  description: The method that you want to configure
+                                    for automatic stage retry on stage failure. You
+                                    can specify to retry only failed action in the
+                                    stage or all actions in the stage. Possible values
+                                    are FAILED_ACTIONS and ALL_ACTIONS.
+                                  type: string
+                              type: object
+                          type: object
+                        onSuccess:
+                          description: The method to use when a stage has succeeded.
+                            For example, configuring this field for conditions will
+                            allow the stage to succeed when the conditions are met.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                          type: object
                       type: object
                     type: array
                   tags:
@@ -2783,32 +3362,27 @@ spec:
                           items:
                             properties:
                               category:
-                                description: A category defines what kind of action
-                                  can be taken in the stage, and constrains the provider
-                                  type for the action. Possible values are Approval,
-                                  Build, Deploy, Invoke, Source and Test.
+                                description: A category defines what kind of rule
+                                  can be run in the stage, and constrains the provider
+                                  type for the rule. The valid category is Rule.
                                 type: string
                               configuration:
                                 additionalProperties:
                                   type: string
-                                description: 'A map of the action declaration''s configuration.
-                                  Configurations options for action types and providers
-                                  can be found in the Pipeline Structure Reference
-                                  and Action Structure Reference documentation. Note:
-                                  The DetectChanges parameter  in the configuration
-                                  section causes CodePipeline to automatically start
-                                  your pipeline upon new commits. Please refer to
-                                  AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.'
+                                description: The action configuration fields for the
+                                  rule. Configurations options for rule types and
+                                  providers can be found in the Rule structure reference.
                                 type: object
                                 x-kubernetes-map-type: granular
                               inputArtifacts:
-                                description: A list of artifact names to be worked
-                                  on.
+                                description: The list of the input artifacts fields
+                                  for the rule, such as specifying an input file for
+                                  the rule.
                                 items:
                                   type: string
                                 type: array
                               name:
-                                description: The action declaration's name.
+                                description: The name of a pipeline-level variable.
                                 type: string
                               namespace:
                                 description: The namespace all output variables will
@@ -2821,36 +3395,337 @@ spec:
                                   type: string
                                 type: array
                               owner:
-                                description: The creator of the action being called.
-                                  Possible values are AWS, Custom and ThirdParty.
+                                description: The creator of the rule being called.
+                                  The valid value for the Owner field in the rule
+                                  category is AWS.
                                 type: string
                               provider:
-                                description: The provider of the service being called
-                                  by the action. Valid providers are determined by
-                                  the action category. Provider names are listed in
-                                  the Action Structure Reference documentation.
+                                description: The rule provider, such as the DeploymentWindow
+                                  rule. For a list of rule provider names, see the
+                                  rules listed in the AWS CodePipeline rule reference.
                                 type: string
                               region:
-                                description: The region in which to run the action.
+                                description: The Region for the condition associated
+                                  with the rule.
                                 type: string
                               roleArn:
-                                description: The ARN of the IAM service role that
-                                  will perform the declared action. This is assumed
-                                  through the roleArn for the pipeline.
+                                description: A service role Amazon Resource Name (ARN)
+                                  that grants AWS CodePipeline permission to make
+                                  calls to AWS services on your behalf.
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
                                 type: number
                               timeoutInMinutes:
+                                description: The action timeout for the rule.
                                 type: number
                               version:
-                                description: A string that identifies the action type.
+                                description: A string that describes the rule version.
                                 type: string
                             type: object
                           type: array
+                        beforeEntry:
+                          description: The method to use when a stage allows entry.
+                            For example, configuring this field for conditions will
+                            allow entry to the stage when the conditions are met.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      region:
+                                        description: The Region for the condition
+                                          associated with the rule.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                          type: object
                         name:
                           description: The name of the stage.
                           type: string
+                        onFailure:
+                          description: The method to use when a stage has not completed
+                            successfully. For example, configuring this field for
+                            rollback will roll back a failed stage automatically to
+                            the last successful pipeline execution in the stage.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      region:
+                                        description: The Region for the condition
+                                          associated with the rule.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                            result:
+                              description: The conditions that are configured as failure
+                                conditions. Possible values are ROLLBACK,  FAIL, RETRY
+                                and SKIP.
+                              type: string
+                            retryConfiguration:
+                              description: The retry configuration specifies automatic
+                                retry for a failed stage, along with the configured
+                                retry mode. Defined as a retry_configuration block
+                                below.
+                              properties:
+                                retryMode:
+                                  description: The method that you want to configure
+                                    for automatic stage retry on stage failure. You
+                                    can specify to retry only failed action in the
+                                    stage or all actions in the stage. Possible values
+                                    are FAILED_ACTIONS and ALL_ACTIONS.
+                                  type: string
+                              type: object
+                          type: object
+                        onSuccess:
+                          description: The method to use when a stage has succeeded.
+                            For example, configuring this field for conditions will
+                            allow the stage to succeed when the conditions are met.
+                          properties:
+                            condition:
+                              description: The conditions that are configured as entry
+                                condition. Defined as a condition block below.
+                              properties:
+                                result:
+                                  description: The conditions that are configured
+                                    as failure conditions. Possible values are ROLLBACK,  FAIL,
+                                    RETRY and SKIP.
+                                  type: string
+                                rule:
+                                  description: The rules that make up the condition.
+                                    Defined as a rule block below.
+                                  items:
+                                    properties:
+                                      commands:
+                                        description: The shell commands to run with
+                                          your commands rule in CodePipeline. All
+                                          commands are supported except multi-line
+                                          formats.
+                                        items:
+                                          type: string
+                                        type: array
+                                      configuration:
+                                        additionalProperties:
+                                          type: string
+                                        description: The action configuration fields
+                                          for the rule. Configurations options for
+                                          rule types and providers can be found in
+                                          the Rule structure reference.
+                                        type: object
+                                        x-kubernetes-map-type: granular
+                                      inputArtifacts:
+                                        description: The list of the input artifacts
+                                          fields for the rule, such as specifying
+                                          an input file for the rule.
+                                        items:
+                                          type: string
+                                        type: array
+                                      name:
+                                        description: The name of a pipeline-level
+                                          variable.
+                                        type: string
+                                      region:
+                                        description: The Region for the condition
+                                          associated with the rule.
+                                        type: string
+                                      roleArn:
+                                        description: A service role Amazon Resource
+                                          Name (ARN) that grants AWS CodePipeline
+                                          permission to make calls to AWS services
+                                          on your behalf.
+                                        type: string
+                                      ruleTypeId:
+                                        description: The ID for the rule type, which
+                                          is made up of the combined values for category,
+                                          owner, provider, and version. Defined as
+                                          an rule_type_id block below.
+                                        properties:
+                                          category:
+                                            description: A category defines what kind
+                                              of rule can be run in the stage, and
+                                              constrains the provider type for the
+                                              rule. The valid category is Rule.
+                                            type: string
+                                          owner:
+                                            description: The creator of the rule being
+                                              called. The valid value for the Owner
+                                              field in the rule category is AWS.
+                                            type: string
+                                          provider:
+                                            description: The rule provider, such as
+                                              the DeploymentWindow rule. For a list
+                                              of rule provider names, see the rules
+                                              listed in the AWS CodePipeline rule
+                                              reference.
+                                            type: string
+                                          version:
+                                            description: A string that describes the
+                                              rule version.
+                                            type: string
+                                        type: object
+                                      timeoutInMinutes:
+                                        description: The action timeout for the rule.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                          type: object
                       type: object
                     type: array
                   tags:

@@ -2897,6 +2897,12 @@ spec:
                           of tables to the same partition, which causes throttling.
                           Default is false.
                         type: boolean
+                      saslMechanism:
+                        description: For SASL/SSL authentication, AWS DMS supports
+                          the scram-sha-512 mechanism by default. AWS DMS versions
+                          3.5.0 and later also support the PLAIN mechanism. To use
+                          the PLAIN mechanism, set this parameter to plain.
+                        type: string
                       saslPasswordSecretRef:
                         description: Secure password you created when you first set
                           up your MSK cluster to validate a client identity and make
@@ -3786,6 +3792,12 @@ spec:
                           of tables to the same partition, which causes throttling.
                           Default is false.
                         type: boolean
+                      saslMechanism:
+                        description: For SASL/SSL authentication, AWS DMS supports
+                          the scram-sha-512 mechanism by default. AWS DMS versions
+                          3.5.0 and later also support the PLAIN mechanism. To use
+                          the PLAIN mechanism, set this parameter to plain.
+                        type: string
                       saslPasswordSecretRef:
                         description: Secure password you created when you first set
                           up your MSK cluster to validate a client identity and make
@@ -4842,6 +4854,12 @@ spec:
                           of tables to the same partition, which causes throttling.
                           Default is false.
                         type: boolean
+                      saslMechanism:
+                        description: For SASL/SSL authentication, AWS DMS supports
+                          the scram-sha-512 mechanism by default. AWS DMS versions
+                          3.5.0 and later also support the PLAIN mechanism. To use
+                          the PLAIN mechanism, set this parameter to plain.
+                        type: string
                       saslUsername:
                         description: Secure user name you created when you first set
                           up your MSK cluster to validate a client identity and make

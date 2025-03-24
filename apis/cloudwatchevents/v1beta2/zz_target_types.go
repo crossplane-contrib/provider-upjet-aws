@@ -473,29 +473,29 @@ type OrderedPlacementStrategyParameters struct {
 
 type PipelineParameterListInitParameters struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterListObservation struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterListParameters struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -658,19 +658,19 @@ type RunCommandTargetsParameters struct {
 
 type SagemakerPipelineTargetInitParameters struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution.
 	PipelineParameterList []PipelineParameterListInitParameters `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
 }
 
 type SagemakerPipelineTargetObservation struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution.
 	PipelineParameterList []PipelineParameterListObservation `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
 }
 
 type SagemakerPipelineTargetParameters struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution.
 	// +kubebuilder:validation:Optional
 	PipelineParameterList []PipelineParameterListParameters `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
 }
@@ -776,7 +776,7 @@ type TargetInitParameters struct {
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsInitParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
-	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker AI Pipeline. Documented below. A maximum of 1 are allowed.
 	SagemakerPipelineTarget *SagemakerPipelineTargetInitParameters `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
@@ -842,7 +842,7 @@ type TargetObservation struct {
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsObservation `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
-	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker AI Pipeline. Documented below. A maximum of 1 are allowed.
 	SagemakerPipelineTarget *SagemakerPipelineTargetObservation `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
@@ -956,7 +956,7 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	RunCommandTargets []RunCommandTargetsParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
-	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker AI Pipeline. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
 	SagemakerPipelineTarget *SagemakerPipelineTargetParameters `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
 

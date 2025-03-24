@@ -385,7 +385,7 @@ type WorkteamStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Workteam is the Schema for the Workteams API. Provides a SageMaker Workteam resource.
+// Workteam is the Schema for the Workteams API. Provides a SageMaker AI Workteam resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

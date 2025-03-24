@@ -155,6 +155,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 			}
 		}
 	}
+	if in.ClusterScalabilityType != nil {
+		in, out := &in.ClusterScalabilityType, &out.ClusterScalabilityType
+		*out = new(string)
+		**out = **in
+	}
 	if in.CopyTagsToSnapshot != nil {
 		in, out := &in.CopyTagsToSnapshot, &out.CopyTagsToSnapshot
 		*out = new(bool)
@@ -212,6 +217,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.DBSystemID != nil {
 		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
 		*out = new(string)
 		**out = **in
 	}
@@ -331,6 +341,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.MasterPasswordWoSecretRef != nil {
+		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUserSecretKMSKeyID != nil {
 		in, out := &in.MasterUserSecretKMSKeyID, &out.MasterUserSecretKMSKeyID
 		*out = new(string)
@@ -350,6 +370,26 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
 		**out = **in
+	}
+	if in.MonitoringInterval != nil {
+		in, out := &in.MonitoringInterval, &out.MonitoringInterval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MonitoringRoleArn != nil {
+		in, out := &in.MonitoringRoleArn, &out.MonitoringRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitoringRoleArnRef != nil {
+		in, out := &in.MonitoringRoleArnRef, &out.MonitoringRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.MonitoringRoleArnSelector != nil {
+		in, out := &in.MonitoringRoleArnSelector, &out.MonitoringRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
@@ -649,6 +689,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterScalabilityType != nil {
+		in, out := &in.ClusterScalabilityType, &out.ClusterScalabilityType
+		*out = new(string)
+		**out = **in
+	}
 	if in.CopyTagsToSnapshot != nil {
 		in, out := &in.CopyTagsToSnapshot, &out.CopyTagsToSnapshot
 		*out = new(bool)
@@ -676,6 +721,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.DBSystemID != nil {
 		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
 		*out = new(string)
 		**out = **in
 	}
@@ -811,6 +861,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUserSecret != nil {
 		in, out := &in.MasterUserSecret, &out.MasterUserSecret
 		*out = make([]ClusterMasterUserSecretObservation, len(*in))
@@ -825,6 +880,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitoringInterval != nil {
+		in, out := &in.MonitoringInterval, &out.MonitoringInterval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MonitoringRoleArn != nil {
+		in, out := &in.MonitoringRoleArn, &out.MonitoringRoleArn
 		*out = new(string)
 		**out = **in
 	}
@@ -1033,6 +1098,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 			}
 		}
 	}
+	if in.ClusterScalabilityType != nil {
+		in, out := &in.ClusterScalabilityType, &out.ClusterScalabilityType
+		*out = new(string)
+		**out = **in
+	}
 	if in.CopyTagsToSnapshot != nil {
 		in, out := &in.CopyTagsToSnapshot, &out.CopyTagsToSnapshot
 		*out = new(bool)
@@ -1090,6 +1160,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.DBSystemID != nil {
 		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
 		*out = new(string)
 		**out = **in
 	}
@@ -1209,6 +1284,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.MasterPasswordWoSecretRef != nil {
+		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUserSecretKMSKeyID != nil {
 		in, out := &in.MasterUserSecretKMSKeyID, &out.MasterUserSecretKMSKeyID
 		*out = new(string)
@@ -1228,6 +1313,26 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
 		**out = **in
+	}
+	if in.MonitoringInterval != nil {
+		in, out := &in.MonitoringInterval, &out.MonitoringInterval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MonitoringRoleArn != nil {
+		in, out := &in.MonitoringRoleArn, &out.MonitoringRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitoringRoleArnRef != nil {
+		in, out := &in.MonitoringRoleArnRef, &out.MonitoringRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.MonitoringRoleArnSelector != nil {
+		in, out := &in.MonitoringRoleArnSelector, &out.MonitoringRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType

@@ -1863,6 +1863,11 @@ func (in *CustomizedMetricSpecificationInitParameters) DeepCopyInto(out *Customi
 		*out = new(string)
 		**out = **in
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Statistic != nil {
 		in, out := &in.Statistic, &out.Statistic
 		*out = new(string)
@@ -1912,6 +1917,11 @@ func (in *CustomizedMetricSpecificationObservation) DeepCopyInto(out *Customized
 		*out = new(string)
 		**out = **in
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Statistic != nil {
 		in, out := &in.Statistic, &out.Statistic
 		*out = new(string)
@@ -1959,6 +1969,11 @@ func (in *CustomizedMetricSpecificationParameters) DeepCopyInto(out *CustomizedM
 	if in.Namespace != nil {
 		in, out := &in.Namespace, &out.Namespace
 		*out = new(string)
+		**out = **in
+	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Statistic != nil {
@@ -5925,6 +5940,11 @@ func (in *MetricsMetricStatInitParameters) DeepCopyInto(out *MetricsMetricStatIn
 		*out = new(MetricsMetricStatMetricInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Stat != nil {
 		in, out := &in.Stat, &out.Stat
 		*out = new(string)
@@ -6126,6 +6146,11 @@ func (in *MetricsMetricStatObservation) DeepCopyInto(out *MetricsMetricStatObser
 		*out = new(MetricsMetricStatMetricObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Stat != nil {
 		in, out := &in.Stat, &out.Stat
 		*out = new(string)
@@ -6155,6 +6180,11 @@ func (in *MetricsMetricStatParameters) DeepCopyInto(out *MetricsMetricStatParame
 		in, out := &in.Metric, &out.Metric
 		*out = new(MetricsMetricStatMetricParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Stat != nil {
 		in, out := &in.Stat, &out.Stat

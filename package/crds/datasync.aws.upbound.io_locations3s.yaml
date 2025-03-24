@@ -810,8 +810,8 @@ spec:
               forProvider:
                 properties:
                   agentArns:
-                    description: A list of DataSync Agent ARNs with which this location
-                      will be associated.
+                    description: (Amazon S3 on Outposts only) Amazon Resource Name
+                      (ARN) of the DataSync agent on the Outpost.
                     items:
                       type: string
                     type: array
@@ -821,7 +821,9 @@ spec:
                       be created in.
                     type: string
                   s3BucketArn:
-                    description: Amazon Resource Name (ARN) of the S3 Bucket.
+                    description: Amazon Resource Name (ARN) of the S3 bucket, or the
+                      Amazon S3 access point if the S3 bucket is located on an AWS
+                      Outposts resource.
                     type: string
                   s3BucketArnRef:
                     description: Reference to a Bucket in s3 to populate s3BucketArn.
@@ -981,9 +983,9 @@ spec:
                         type: object
                     type: object
                   s3StorageClass:
-                    description: The Amazon S3 storage class that you want to store
-                      your files in when this location is used as a task destination.
-                      Valid values
+                    description: Amazon S3 storage class that you want to store your
+                      files in when this location is used as a task destination. Valid
+                      values
                     type: string
                   subdirectory:
                     description: Prefix to perform actions as source or destination.
@@ -1011,14 +1013,16 @@ spec:
                   autoscaler.
                 properties:
                   agentArns:
-                    description: A list of DataSync Agent ARNs with which this location
-                      will be associated.
+                    description: (Amazon S3 on Outposts only) Amazon Resource Name
+                      (ARN) of the DataSync agent on the Outpost.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   s3BucketArn:
-                    description: Amazon Resource Name (ARN) of the S3 Bucket.
+                    description: Amazon Resource Name (ARN) of the S3 bucket, or the
+                      Amazon S3 access point if the S3 bucket is located on an AWS
+                      Outposts resource.
                     type: string
                   s3BucketArnRef:
                     description: Reference to a Bucket in s3 to populate s3BucketArn.
@@ -1178,9 +1182,9 @@ spec:
                         type: object
                     type: object
                   s3StorageClass:
-                    description: The Amazon S3 storage class that you want to store
-                      your files in when this location is used as a task destination.
-                      Valid values
+                    description: Amazon S3 storage class that you want to store your
+                      files in when this location is used as a task destination. Valid
+                      values
                     type: string
                   subdirectory:
                     description: Prefix to perform actions as source or destination.
@@ -1374,8 +1378,8 @@ spec:
               atProvider:
                 properties:
                   agentArns:
-                    description: A list of DataSync Agent ARNs with which this location
-                      will be associated.
+                    description: (Amazon S3 on Outposts only) Amazon Resource Name
+                      (ARN) of the DataSync agent on the Outpost.
                     items:
                       type: string
                     type: array
@@ -1387,7 +1391,9 @@ spec:
                     description: Amazon Resource Name (ARN) of the DataSync Location.
                     type: string
                   s3BucketArn:
-                    description: Amazon Resource Name (ARN) of the S3 Bucket.
+                    description: Amazon Resource Name (ARN) of the S3 bucket, or the
+                      Amazon S3 access point if the S3 bucket is located on an AWS
+                      Outposts resource.
                     type: string
                   s3Config:
                     description: Configuration block containing information for connecting
@@ -1399,9 +1405,9 @@ spec:
                         type: string
                     type: object
                   s3StorageClass:
-                    description: The Amazon S3 storage class that you want to store
-                      your files in when this location is used as a task destination.
-                      Valid values
+                    description: Amazon S3 storage class that you want to store your
+                      files in when this location is used as a task destination. Valid
+                      values
                     type: string
                   subdirectory:
                     description: Prefix to perform actions as source or destination.

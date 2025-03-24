@@ -1725,7 +1725,8 @@ spec:
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:
@@ -2287,7 +2288,8 @@ spec:
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:
@@ -2951,7 +2953,8 @@ spec:
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:

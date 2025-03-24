@@ -36,7 +36,7 @@ spec:
       openAPIV3Schema:
         description: NotebookInstanceLifecycleConfiguration is the Schema for the
           NotebookInstanceLifecycleConfigurations API. Provides a lifecycle configuration
-          for SageMaker Notebook Instances.
+          for SageMaker AI Notebook Instances.
         properties:
           apiVersion:
             description: |-
@@ -77,12 +77,12 @@ spec:
                 properties:
                   onCreate:
                     description: A shell script (base64-encoded) that runs only once
-                      when the SageMaker Notebook Instance is created.
+                      when the SageMaker AI Notebook Instance is created.
                     type: string
                   onStart:
                     description: A shell script (base64-encoded) that runs every time
-                      the SageMaker Notebook Instance is started including the time
-                      it's created.
+                      the SageMaker AI Notebook Instance is started including the
+                      time it's created.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -106,12 +106,12 @@ spec:
                 properties:
                   onCreate:
                     description: A shell script (base64-encoded) that runs only once
-                      when the SageMaker Notebook Instance is created.
+                      when the SageMaker AI Notebook Instance is created.
                     type: string
                   onStart:
                     description: A shell script (base64-encoded) that runs every time
-                      the SageMaker Notebook Instance is started including the time
-                      it's created.
+                      the SageMaker AI Notebook Instance is started including the
+                      time it's created.
                     type: string
                 type: object
               managementPolicies:
@@ -295,12 +295,12 @@ spec:
                     type: string
                   onCreate:
                     description: A shell script (base64-encoded) that runs only once
-                      when the SageMaker Notebook Instance is created.
+                      when the SageMaker AI Notebook Instance is created.
                     type: string
                   onStart:
                     description: A shell script (base64-encoded) that runs every time
-                      the SageMaker Notebook Instance is started including the time
-                      it's created.
+                      the SageMaker AI Notebook Instance is started including the
+                      time it's created.
                     type: string
                 type: object
               conditions:

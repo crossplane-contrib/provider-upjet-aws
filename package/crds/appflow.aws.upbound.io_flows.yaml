@@ -5076,6 +5076,11 @@ spec:
                             description: Properties that are required to query Salesforce.
                               See Salesforce Destination Properties for more details.
                             properties:
+                              dataTransferApi:
+                                description: Specifies which Salesforce API is used
+                                  by Amazon AppFlow when your flow transfers data
+                                  to Salesforce.
+                                type: string
                               enableDynamicFieldUpdate:
                                 description: Flag that enables dynamic fetching of
                                   new (recently added) fields in the Salesforce objects
@@ -6241,6 +6246,11 @@ spec:
                             description: Properties that are required to query Salesforce.
                               See Salesforce Destination Properties for more details.
                             properties:
+                              dataTransferApi:
+                                description: Specifies which Salesforce API is used
+                                  by Amazon AppFlow when your flow transfers data
+                                  to Salesforce.
+                                type: string
                               enableDynamicFieldUpdate:
                                 description: Flag that enables dynamic fetching of
                                   new (recently added) fields in the Salesforce objects
@@ -7436,6 +7446,11 @@ spec:
                             description: Properties that are required to query Salesforce.
                               See Salesforce Destination Properties for more details.
                             properties:
+                              dataTransferApi:
+                                description: Specifies which Salesforce API is used
+                                  by Amazon AppFlow when your flow transfers data
+                                  to Salesforce.
+                                type: string
                               enableDynamicFieldUpdate:
                                 description: Flag that enables dynamic fetching of
                                   new (recently added) fields in the Salesforce objects

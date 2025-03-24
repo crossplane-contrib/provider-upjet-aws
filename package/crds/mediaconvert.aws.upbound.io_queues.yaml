@@ -508,6 +508,14 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  concurrentJobs:
+                    description: The maximum number of jobs your queue can process
+                      concurrently. For on-demand queues, the value you enter is constrained
+                      by your service quotas for Maximum concurrent jobs, per on-demand
+                      queue and Maximum concurrent jobs, per account. For reserved
+                      queues, specify the number of jobs you can process concurrently
+                      in your reservation plan instead.
+                    type: number
                   description:
                     description: A description of the queue
                     type: string
@@ -563,6 +571,14 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  concurrentJobs:
+                    description: The maximum number of jobs your queue can process
+                      concurrently. For on-demand queues, the value you enter is constrained
+                      by your service quotas for Maximum concurrent jobs, per on-demand
+                      queue and Maximum concurrent jobs, per account. For reserved
+                      queues, specify the number of jobs you can process concurrently
+                      in your reservation plan instead.
+                    type: number
                   description:
                     description: A description of the queue
                     type: string
@@ -774,6 +790,14 @@ spec:
                   arn:
                     description: The Arn of the queue
                     type: string
+                  concurrentJobs:
+                    description: The maximum number of jobs your queue can process
+                      concurrently. For on-demand queues, the value you enter is constrained
+                      by your service quotas for Maximum concurrent jobs, per on-demand
+                      queue and Maximum concurrent jobs, per account. For reserved
+                      queues, specify the number of jobs you can process concurrently
+                      in your reservation plan instead.
+                    type: number
                   description:
                     description: A description of the queue
                     type: string

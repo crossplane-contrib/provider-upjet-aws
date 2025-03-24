@@ -4846,6 +4846,11 @@ func (in *TaskDefinitionInitParameters) DeepCopyInto(out *TaskDefinitionInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableFaultInjection != nil {
+		in, out := &in.EnableFaultInjection, &out.EnableFaultInjection
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EphemeralStorage != nil {
 		in, out := &in.EphemeralStorage, &out.EphemeralStorage
 		*out = new(EphemeralStorageInitParameters)
@@ -5031,6 +5036,11 @@ func (in *TaskDefinitionObservation) DeepCopyInto(out *TaskDefinitionObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableFaultInjection != nil {
+		in, out := &in.EnableFaultInjection, &out.EnableFaultInjection
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EphemeralStorage != nil {
 		in, out := &in.EphemeralStorage, &out.EphemeralStorage
 		*out = new(EphemeralStorageObservation)
@@ -5188,6 +5198,11 @@ func (in *TaskDefinitionParameters) DeepCopyInto(out *TaskDefinitionParameters) 
 	if in.ContainerDefinitions != nil {
 		in, out := &in.ContainerDefinitions, &out.ContainerDefinitions
 		*out = new(string)
+		**out = **in
+	}
+	if in.EnableFaultInjection != nil {
+		in, out := &in.EnableFaultInjection, &out.EnableFaultInjection
+		*out = new(bool)
 		**out = **in
 	}
 	if in.EphemeralStorage != nil {

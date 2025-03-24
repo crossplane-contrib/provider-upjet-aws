@@ -37,6 +37,9 @@ type AcceleratorInitParameters struct {
 
 type AcceleratorObservation struct {
 
+	// The Amazon Resource Name (ARN) of the accelerator.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The attributes of the accelerator. Fields documented below.
 	Attributes *AttributesObservation `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
