@@ -1,0 +1,119 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: Authorizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authorizerFunctionArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda-authorizer
+    region: us-west-1
+    signingDisabled: false
+    status: ACTIVE
+---
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Permission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  name: example-lambda-permission
+spec:
+  forProvider:
+    region: us-west-1
+    action: lambda:InvokeFunction
+    functionNameRef:
+      name: lambda-authorizer
+    principal: iot.amazonaws.com
+    statementId: AllowExecutionFromIotCore
+---
+apiVersion: lambda.aws.upbound.io/v1beta2
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta2/function
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: lambda-authorizer
+  name: lambda-authorizer
+spec:
+  forProvider:
+    handler: index.py
+    packageType: Zip
+    region: us-east-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    runtime: python3.9
+    s3Bucket: official-provider-test-data
+    s3Key: hello-python.zip
+    timeout: 60
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta2/function
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": ["lambda.amazonaws.com"]
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta2/function
+  labels:
+    testing.upbound.io/example-name: policy
+  name: sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+                "dynamodb:Get*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta2/function
+  labels:
+    testing.upbound.io/example-name: policy-attachment
+  name: sample-user-policy-attachment
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role

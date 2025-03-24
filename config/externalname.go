@@ -1491,6 +1491,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// iot
 	//
+	// IOT Authorizers can be imported using the name
+	"aws_iot_authorizer": config.NameAsIdentifier,
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_iot_certificate": config.IdentifierFromProvider,

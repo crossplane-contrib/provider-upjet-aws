@@ -480,6 +480,7 @@
 "aws_inspector_resource_group",
 "aws_instance",
 "aws_internet_gateway",
+"aws_iot_authorizer",
 "aws_iot_certificate",
 "aws_iot_domain_configuration",
 "aws_iot_indexing_configuration",

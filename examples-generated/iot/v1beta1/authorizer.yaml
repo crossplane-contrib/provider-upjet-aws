@@ -1,0 +1,23 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: Authorizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authorizerFunctionArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    signingDisabled: false
+    status: ACTIVE
+    tags:
+      Name: example
+    tokenKeyName: Token-Header
+    tokenSigningPublicKeysSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
