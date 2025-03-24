@@ -1,0 +1,47 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matt Bush <mbbush@gmail.com>
+Date: Mon, 24 Mar 2025 15:03:21 -0700
+Subject: [PATCH] Update aws_mq_user to the latest conventions
+
+Signed-off-by: Matt Bush <mbbush@gmail.com>
+
+diff --git a/internal/service/mq/service_package_gen.go b/internal/service/mq/service_package_gen.go
+index 3e565e43f0..f846f524d5 100644
+--- a/internal/service/mq/service_package_gen.go
++++ b/internal/service/mq/service_package_gen.go
+@@ -21,8 +21,9 @@ func (p *servicePackage) FrameworkDataSources(ctx context.Context) []*types.Serv
+ func (p *servicePackage) FrameworkResources(ctx context.Context) []*types.ServicePackageFrameworkResource {
+ 	return []*types.ServicePackageFrameworkResource{
+ 		{
+-			Factory: newResourceUser,
+-			Name:    "User",
++			Factory:  newResourceUser,
++			TypeName: "aws_mq_user",
++			Name:     "User",
+ 		},
+ 	}
+ }
+diff --git a/internal/service/mq/user.go b/internal/service/mq/user.go
+index 9766158dc7..14a7dc3906 100644
+--- a/internal/service/mq/user.go
++++ b/internal/service/mq/user.go
+@@ -40,7 +40,7 @@ func diagErrorFramework(service, action, resource, id string, gotError error) di
+ 	)
+ }
+ 
+-// @FrameworkResource(name="User")
++// @FrameworkResource("aws_mq_user", name="User")
+ func newResourceUser(_ context.Context) (resource.ResourceWithConfigure, error) {
+ 	return &resourceUser{}, nil
+ }
+@@ -53,10 +53,6 @@ type resourceUser struct {
+ 	framework.ResourceWithConfigure
+ }
+ 
+-func (r *resourceUser) Metadata(_ context.Context, _ resource.MetadataRequest, response *resource.MetadataResponse) {
+-	response.TypeName = "aws_mq_user"
+-}
+-
+ // Schema returns the schema for this resource.
+ func (r *resourceUser) Schema(ctx context.Context, request resource.SchemaRequest, response *resource.SchemaResponse) {
+ 	response.Schema = schema.Schema{

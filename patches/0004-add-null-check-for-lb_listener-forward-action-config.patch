@@ -6,10 +6,10 @@ Subject: [PATCH] add null check for lb_listener forward action config
 Signed-off-by: Erhan Cagirici <erhan@upbound.io>
 
 diff --git a/internal/service/elbv2/listener.go b/internal/service/elbv2/listener.go
-index 4c8abea486..ad1cf8892a 100644
+index 41e44ff047..1a5d7e0558 100644
 --- a/internal/service/elbv2/listener.go
 +++ b/internal/service/elbv2/listener.go
-@@ -1253,7 +1253,7 @@ func flattenForwardActionOneOf(actions cty.Value, i int, awsAction awstypes.Acti
+@@ -1494,7 +1494,7 @@ func flattenForwardActionOneOf(actions cty.Value, i int, awsAction awstypes.Acti
  			action := actions.Index(index)
  			if action.IsKnown() && !action.IsNull() {
  				forward := action.GetAttr("forward")
