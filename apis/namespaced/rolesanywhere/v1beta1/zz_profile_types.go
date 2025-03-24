@@ -33,7 +33,7 @@ type ProfileInitParameters struct {
 
 	// A list of IAM roles that this profile can assume
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +listType=set
 	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`
 
@@ -123,7 +123,7 @@ type ProfileParameters struct {
 
 	// A list of IAM roles that this profile can assume
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`

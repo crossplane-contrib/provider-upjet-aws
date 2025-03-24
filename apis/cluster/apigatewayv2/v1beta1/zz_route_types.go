@@ -102,7 +102,7 @@ type RouteInitParameters struct {
 
 	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.Integration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis.IntegrationIDPrefixed()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common/apis.IntegrationIDPrefixed()
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Reference to a Integration in apigatewayv2 to populate target.
@@ -237,7 +237,7 @@ type RouteParameters struct {
 
 	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.Integration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis.IntegrationIDPrefixed()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common/apis.IntegrationIDPrefixed()
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 

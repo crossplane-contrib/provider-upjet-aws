@@ -428,7 +428,7 @@ type ConfigurationInfoInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
 	// +crossplane:generate:reference:type=Configuration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a Configuration to populate arn.
@@ -456,7 +456,7 @@ type ConfigurationInfoParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
 	// +crossplane:generate:reference:type=Configuration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -554,7 +554,7 @@ type EncryptionInfoInitParameters struct {
 
 	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
 
 	// Reference to a Key in kms to populate encryptionAtRestKmsKeyArn.
@@ -582,7 +582,7 @@ type EncryptionInfoParameters struct {
 
 	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
 

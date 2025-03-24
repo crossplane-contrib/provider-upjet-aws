@@ -90,7 +90,7 @@ type NodeGroupInitParameters struct {
 
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate nodeRoleArn.
@@ -269,7 +269,7 @@ type NodeGroupParameters struct {
 
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
 

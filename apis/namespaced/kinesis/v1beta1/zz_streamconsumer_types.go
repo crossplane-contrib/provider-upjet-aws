@@ -20,7 +20,7 @@ type StreamConsumerInitParameters struct {
 
 	// –  Amazon Resource Name (ARN) of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kinesis/v1beta1.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
 	// Reference to a Stream in kinesis to populate streamArn.
@@ -63,7 +63,7 @@ type StreamConsumerParameters struct {
 
 	// –  Amazon Resource Name (ARN) of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kinesis/v1beta1.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 

@@ -209,7 +209,7 @@ type ConnectorInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
@@ -334,7 +334,7 @@ type ConnectorParameters struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
@@ -360,7 +360,7 @@ type CustomPluginInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the custom plugin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.CustomPlugin
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a CustomPlugin in kafkaconnect to populate arn.
@@ -388,7 +388,7 @@ type CustomPluginParameters struct {
 
 	// The Amazon Resource Name (ARN) of the custom plugin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.CustomPlugin
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -756,7 +756,7 @@ type WorkerConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the worker configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.WorkerConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a WorkerConfiguration in kafkaconnect to populate arn.
@@ -784,7 +784,7 @@ type WorkerConfigurationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the worker configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.WorkerConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 

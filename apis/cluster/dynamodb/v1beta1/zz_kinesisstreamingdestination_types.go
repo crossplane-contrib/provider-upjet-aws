@@ -20,7 +20,7 @@ type KinesisStreamingDestinationInitParameters struct {
 
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
 	// Reference to a Stream in kinesis to populate streamArn.
@@ -72,7 +72,7 @@ type KinesisStreamingDestinationParameters struct {
 
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 

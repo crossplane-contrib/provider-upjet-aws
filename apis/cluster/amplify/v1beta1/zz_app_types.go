@@ -61,7 +61,7 @@ type AppInitParameters struct {
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	IAMServiceRoleArn *string `json:"iamServiceRoleArn,omitempty" tf:"iam_service_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamServiceRoleArn.
@@ -224,7 +224,7 @@ type AppParameters struct {
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArn *string `json:"iamServiceRoleArn,omitempty" tf:"iam_service_role_arn,omitempty"`
 

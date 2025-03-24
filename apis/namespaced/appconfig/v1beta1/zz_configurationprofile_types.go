@@ -42,7 +42,7 @@ type ConfigurationProfileInitParameters struct {
 
 	// ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	RetrievalRoleArn *string `json:"retrievalRoleArn,omitempty" tf:"retrieval_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate retrievalRoleArn.
@@ -147,7 +147,7 @@ type ConfigurationProfileParameters struct {
 
 	// ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RetrievalRoleArn *string `json:"retrievalRoleArn,omitempty" tf:"retrieval_role_arn,omitempty"`
 

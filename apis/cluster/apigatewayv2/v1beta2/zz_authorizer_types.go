@@ -49,7 +49,7 @@ type AuthorizerInitParameters struct {
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common/apis/lambda.FunctionInvokeARN()
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
 	// Reference to a Function in lambda to populate authorizerUri.
@@ -168,7 +168,7 @@ type AuthorizerParameters struct {
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common/apis/lambda.FunctionInvokeARN()
 	// +kubebuilder:validation:Optional
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 

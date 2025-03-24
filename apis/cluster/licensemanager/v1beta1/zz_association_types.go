@@ -17,7 +17,7 @@ type AssociationInitParameters struct {
 
 	// ARN of the license configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/licensemanager/v1beta1.LicenseConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
 
 	// Reference to a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
@@ -58,7 +58,7 @@ type AssociationParameters struct {
 
 	// ARN of the license configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/licensemanager/v1beta1.LicenseConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
 

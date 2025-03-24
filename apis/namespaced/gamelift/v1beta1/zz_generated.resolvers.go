@@ -13,7 +13,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	common "github.com/upbound/provider-aws/config/common"
+	common "github.com/upbound/provider-aws/config/namespaced/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Build.

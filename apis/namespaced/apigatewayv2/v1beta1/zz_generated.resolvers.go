@@ -13,9 +13,9 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	common "github.com/upbound/provider-aws/config/common"
-	apis "github.com/upbound/provider-aws/config/common/apis"
-	lambda "github.com/upbound/provider-aws/config/common/apis/lambda"
+	common "github.com/upbound/provider-aws/config/namespaced/common"
+	apis "github.com/upbound/provider-aws/config/namespaced/common/apis"
+	lambda "github.com/upbound/provider-aws/config/namespaced/common/apis/lambda"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )

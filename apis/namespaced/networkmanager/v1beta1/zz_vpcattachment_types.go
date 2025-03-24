@@ -32,7 +32,7 @@ type VPCAttachmentInitParameters struct {
 
 	// The subnet ARN of the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +listType=set
 	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
 
@@ -180,7 +180,7 @@ type VPCAttachmentParameters struct {
 
 	// The subnet ARN of the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`

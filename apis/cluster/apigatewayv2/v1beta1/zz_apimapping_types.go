@@ -44,7 +44,7 @@ type APIMappingInitParameters struct {
 
 	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.Stage
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// Reference to a Stage in apigatewayv2 to populate stage.
@@ -113,7 +113,7 @@ type APIMappingParameters struct {
 
 	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.Stage
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 

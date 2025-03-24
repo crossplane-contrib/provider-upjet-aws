@@ -23,7 +23,7 @@ type AgentInitParameters struct {
 
 	// ARN of the IAM role with permissions to invoke API operations on the agent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	AgentResourceRoleArn *string `json:"agentResourceRoleArn,omitempty" tf:"agent_resource_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate agentResourceRoleArn.
@@ -137,7 +137,7 @@ type AgentParameters struct {
 
 	// ARN of the IAM role with permissions to invoke API operations on the agent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AgentResourceRoleArn *string `json:"agentResourceRoleArn,omitempty" tf:"agent_resource_role_arn,omitempty"`
 

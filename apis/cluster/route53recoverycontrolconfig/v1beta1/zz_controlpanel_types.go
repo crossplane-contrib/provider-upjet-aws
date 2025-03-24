@@ -17,7 +17,7 @@ type ControlPanelInitParameters struct {
 
 	// ARN of the cluster in which this control panel will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
 	// Reference to a Cluster in route53recoverycontrolconfig to populate clusterArn.
@@ -59,7 +59,7 @@ type ControlPanelParameters struct {
 
 	// ARN of the cluster in which this control panel will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 

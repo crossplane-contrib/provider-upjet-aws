@@ -56,7 +56,7 @@ type SafetyRuleInitParameters struct {
 
 	// Routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.RoutingControl
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	AssertedControls []*string `json:"assertedControls,omitempty" tf:"asserted_controls,omitempty"`
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate assertedControls.
@@ -69,7 +69,7 @@ type SafetyRuleInitParameters struct {
 
 	// ARN of the control panel in which this safety rule will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.ControlPanel
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
 
 	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
@@ -152,7 +152,7 @@ type SafetyRuleParameters struct {
 
 	// Routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.RoutingControl
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	AssertedControls []*string `json:"assertedControls,omitempty" tf:"asserted_controls,omitempty"`
 
@@ -166,7 +166,7 @@ type SafetyRuleParameters struct {
 
 	// ARN of the control panel in which this safety rule will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53recoverycontrolconfig/v1beta1.ControlPanel
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
 

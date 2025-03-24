@@ -435,7 +435,7 @@ type StatefulRuleGroupReferenceInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta2.RuleGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
@@ -471,7 +471,7 @@ type StatefulRuleGroupReferenceParameters struct {
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta2.RuleGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -520,7 +520,7 @@ type StatelessRuleGroupReferenceInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta2.RuleGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
@@ -549,7 +549,7 @@ type StatelessRuleGroupReferenceParameters struct {
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta2.RuleGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 

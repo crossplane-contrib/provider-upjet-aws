@@ -126,7 +126,7 @@ type GraphQLAPIInitParameters struct {
 
 	// ARN of the execution role when api_type is set to MERGED.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate mergedApiExecutionRoleArn.
@@ -355,7 +355,7 @@ type GraphQLAPIParameters struct {
 
 	// ARN of the execution role when api_type is set to MERGED.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
 

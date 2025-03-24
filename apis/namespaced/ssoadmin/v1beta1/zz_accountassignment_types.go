@@ -48,7 +48,7 @@ type AccountAssignmentParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Permission Set that the admin wants to grant the principal access to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ssoadmin/v1beta1.PermissionSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 

@@ -33,7 +33,7 @@ type GameSessionQueueInitParameters struct {
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
 
 	// Reference to a Topic in sns to populate notificationTarget.
@@ -108,7 +108,7 @@ type GameSessionQueueParameters struct {
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
 
