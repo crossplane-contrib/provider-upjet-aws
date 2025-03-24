@@ -24,6 +24,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	"github.com/crossplane/upjet/pkg/controller/conversion"
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"gopkg.in/alecthomas/kingpin.v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -34,7 +35,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	clusterapis "github.com/upbound/provider-aws/apis/cluster"
 	clusterv1alpha1 "github.com/upbound/provider-aws/apis/cluster/v1alpha1"
 	namespacedapis "github.com/upbound/provider-aws/apis/namespaced"
