@@ -7,7 +7,6 @@ package config
 import (
 	"context"
 	_ "embed"
-	"regexp"
 
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/registry/reference"
@@ -50,14 +49,6 @@ var skipList = []string{
 	"aws_appflow_connector_profile$",   // failure with unknown reason.
 	"aws_rds_reserved_instance",        // Expense of testing
 }
-
-var reAPIVersion = regexp.MustCompile(`^v(\d+)((alpha|beta)(\d+))?$`)
-
-const (
-	errFmtCannotBumpSingletonList = "cannot bump the API version for the resource %q containing a singleton list in its API"
-	errFmtCannotFindPrev          = "cannot compute the previous API versions for the resource %q containing a singleton list in its API"
-	errFmtInvalidAPIVersion       = "cannot parse %q as a Kubernetes API version string"
-)
 
 // workaround for the TF AWS v4.67.0-based no-fork release: We would like to
 // keep the types in the generated CRDs intact
