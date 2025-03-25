@@ -809,3 +809,53 @@ func (mg *ServerlessCluster) ResolveReferences(ctx context.Context, c client.Rea
 
 	return nil
 }
+
+// ResolveReferences of this SingleScramSecretAssociation.
+func (mg *SingleScramSecretAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta3", "Cluster", "ClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.ClusterArnRef,
+			Selector:     mg.Spec.ForProvider.ClusterArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterArn")
+	}
+	mg.Spec.ForProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.SecretArnRef,
+			Selector:     mg.Spec.ForProvider.SecretArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretArn")
+	}
+	mg.Spec.ForProvider.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretArnRef = rsp.ResolvedReference
+
+	return nil
+}
