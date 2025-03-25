@@ -20,7 +20,8 @@ Fixes #
 I have:
 
 - [ ] Read and followed Crossplane's [contribution process].
-- [ ] Run `make reviewable` to ensure this PR is ready for review.
+- [ ] Run `make generate` and committed the results (ideally in a separate commit). <!-- It's normal for this to appear to stall for several minutes with no visible output -->
+- [ ] Not made any manual changes to generated files, and verified this with `make check-diff`.
 
 ### How has this code been tested
 
