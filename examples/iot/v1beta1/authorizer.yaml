@@ -11,7 +11,7 @@ spec:
     authorizerFunctionArnSelector:
       matchLabels:
         testing.upbound.io/example-name: lambda-authorizer
-    region: us-west-1
+    region: us-east-1
     signingDisabled: false
     status: ACTIVE
     tags:
@@ -30,7 +30,7 @@ metadata:
   name: example-lambda-permission
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-1
     action: lambda:InvokeFunction
     functionNameRef:
       name: lambda-authorizer
