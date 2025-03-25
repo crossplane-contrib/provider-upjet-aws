@@ -23,7 +23,7 @@ type SingleScramSecretAssociationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// AWS Secrets Manager secret ARN to associate with the cluster.
+	// AWS Secrets Manager secret ARN.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
@@ -48,10 +48,9 @@ type SingleScramSecretAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// AWS Secrets Manager secret ARN to associate with the cluster.
+	// AWS Secrets Manager secret ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:refFieldName=SecretArnRef
-	// +crossplane:generate:reference:selectorFieldName=SecretArnSelector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 

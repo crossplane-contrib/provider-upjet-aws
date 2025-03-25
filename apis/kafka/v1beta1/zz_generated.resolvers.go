@@ -845,7 +845,7 @@ func (mg *SingleScramSecretAssociation) ResolveReferences(ctx context.Context, c
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretArn),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractParamPath("arn", true),
 			Reference:    mg.Spec.ForProvider.SecretArnRef,
 			Selector:     mg.Spec.ForProvider.SecretArnSelector,
 			To:           reference.To{List: l, Managed: m},
