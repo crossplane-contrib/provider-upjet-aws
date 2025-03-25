@@ -252,6 +252,7 @@ import (
 	v1beta2rum "github.com/upbound/provider-aws/apis/rum/v1beta2"
 	v1beta1s3 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta2s3 "github.com/upbound/provider-aws/apis/s3/v1beta2"
+	v1beta3s3 "github.com/upbound/provider-aws/apis/s3/v1beta3"
 	v1beta1s3control "github.com/upbound/provider-aws/apis/s3control/v1beta1"
 	v1beta2s3control "github.com/upbound/provider-aws/apis/s3control/v1beta2"
 	v1beta1sagemaker "github.com/upbound/provider-aws/apis/sagemaker/v1beta1"
@@ -550,6 +551,7 @@ func init() {
 		v1beta2rum.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta2s3.SchemeBuilder.AddToScheme,
+		v1beta3s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta2s3control.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
