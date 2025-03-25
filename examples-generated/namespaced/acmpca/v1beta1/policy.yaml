@@ -1,0 +1,15 @@
+apiVersion: acmpca.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: acmpca/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

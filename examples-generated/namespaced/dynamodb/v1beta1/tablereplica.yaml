@@ -1,0 +1,40 @@
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
+kind: TableReplica
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/tablereplica
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    globalTableArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    provider: ${aws.alt}
+    region: us-west-1
+    tags:
+      Name: IZPAWS
+      Pozo: Amargo
+
+---
+
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/tablereplica
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    attribute:
+    - name: BrodoBaggins
+      type: S
+    billingMode: PAY_PER_REQUEST
+    hashKey: BrodoBaggins
+    provider: ${aws.main}
+    region: us-west-1
+    streamEnabled: true
+    streamViewType: NEW_AND_OLD_IMAGES

@@ -1,0 +1,12 @@
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: ClientCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/clientcertificate
+  labels:
+    testing.upbound.io/example-name: demo
+  name: demo
+spec:
+  forProvider:
+    description: My client certificate
+    region: us-west-1

@@ -1,0 +1,45 @@
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: demo
+  name: demo
+spec:
+  forProvider:
+    cloudwatchRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cloudwatch
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: cloudwatch
+  name: cloudwatch
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: cloudwatch
+  name: cloudwatch
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.cloudwatch.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cloudwatch

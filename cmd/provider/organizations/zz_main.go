@@ -24,6 +24,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	"github.com/crossplane/upjet/pkg/controller/conversion"
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"gopkg.in/alecthomas/kingpin.v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -34,12 +35,15 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"github.com/upbound/provider-aws/apis"
-	"github.com/upbound/provider-aws/apis/v1alpha1"
-	"github.com/upbound/provider-aws/config"
+	clusterapis "github.com/upbound/provider-aws/apis/cluster"
+	clusterv1alpha1 "github.com/upbound/provider-aws/apis/cluster/v1alpha1"
+	namespacedapis "github.com/upbound/provider-aws/apis/namespaced"
+	clusterconfig "github.com/upbound/provider-aws/config/cluster"
+	namespacedconfig "github.com/upbound/provider-aws/config/namespaced"
 	resolverapis "github.com/upbound/provider-aws/internal/apis"
 	"github.com/upbound/provider-aws/internal/clients"
-	"github.com/upbound/provider-aws/internal/controller"
+	clustercontroller "github.com/upbound/provider-aws/internal/controller/cluster"
+	namespacedcontroller "github.com/upbound/provider-aws/internal/controller/namespaced"
 	"github.com/upbound/provider-aws/internal/features"
 )
 
@@ -146,8 +150,11 @@ func main() {
 		RenewDeadline:              func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
-	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add AWS APIs to scheme")
-	kingpin.FatalIfError(resolverapis.BuildScheme(apis.AddToSchemes), "Cannot register the AWS APIs with the API resolver's runtime scheme")
+
+	kingpin.FatalIfError(clusterapis.AddToScheme(mgr.GetScheme()), "Cannot add cluster scoped AWS APIs to scheme")
+	kingpin.FatalIfError(resolverapis.BuildScheme(clusterapis.AddToSchemes), "Cannot register cluster scoped AWS APIs with the API resolver's runtime scheme")
+	kingpin.FatalIfError(namespacedapis.AddToScheme(mgr.GetScheme()), "Cannot add namespaced AWS APIs to scheme")
+	kingpin.FatalIfError(resolverapis.BuildScheme(namespacedapis.AddToSchemes), "Cannot register namespaced AWS APIs with the API resolver's runtime scheme")
 
 	metricRecorder := managed.NewMRMetricRecorder()
 	stateMetrics := statemetrics.NewMRStateMetrics()
@@ -156,13 +163,18 @@ func main() {
 	metrics.Registry.MustRegister(stateMetrics)
 
 	ctx := context.Background()
-	provider, err := config.GetProvider(ctx, false)
-	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
-	setupConfig := &clients.SetupConfig{
+	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
+	kingpin.FatalIfError(err, "Cannot get the Terraform framework and SDK providers")
+	clusterProvider, err := clusterconfig.GetProvider(ctx, fwProvider, sdkProvider, false)
+	kingpin.FatalIfError(err, "Cannot initialize the cluster provider configuration")
+	namespacedProvider, err := namespacedconfig.GetProvider(ctx, fwProvider, sdkProvider, false)
+	kingpin.FatalIfError(err, "Cannot initialize the namespaced provider configuration")
+
+	clusterSetupConfig := &clients.SetupConfig{
 		Logger:            logr,
-		TerraformProvider: provider.TerraformProvider,
+		TerraformProvider: clusterProvider.TerraformProvider,
 	}
-	o := tjcontroller.Options{
+	clusterOptions := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  logr,
 			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
@@ -175,49 +187,75 @@ func main() {
 				MRStateMetrics:          stateMetrics,
 			},
 		},
-		Provider:              provider,
-		SetupFn:               clients.SelectTerraformSetup(setupConfig),
+		Provider:              clusterProvider,
+		SetupFn:               clients.SelectTerraformSetup(clusterSetupConfig),
+		PollJitter:            pollJitter,
+		OperationTrackerStore: tjcontroller.NewOperationStore(logr),
+		StartWebhooks:         *certsDir != "",
+	}
+
+	namespacedSetupConfig := &clients.SetupConfig{
+		Logger:            logr,
+		TerraformProvider: namespacedProvider.TerraformProvider,
+	}
+	namespacedOptions := tjcontroller.Options{
+		Options: xpcontroller.Options{
+			Logger:                  logr,
+			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
+			PollInterval:            *pollInterval,
+			MaxConcurrentReconciles: *maxReconcileRate,
+			Features:                &feature.Flags{},
+			MetricOptions: &xpcontroller.MetricOptions{
+				PollStateMetricInterval: *pollStateMetricInterval,
+				MRMetrics:               metricRecorder,
+				MRStateMetrics:          stateMetrics,
+			},
+		},
+		Provider:              namespacedProvider,
+		SetupFn:               clients.SelectTerraformSetup(namespacedSetupConfig),
 		PollJitter:            pollJitter,
 		OperationTrackerStore: tjcontroller.NewOperationStore(logr),
 		StartWebhooks:         *certsDir != "",
 	}
 
 	if *enableManagementPolicies {
-		o.Features.Enable(features.EnableBetaManagementPolicies)
+		clusterOptions.Features.Enable(features.EnableBetaManagementPolicies)
+		namespacedOptions.Features.Enable(features.EnableBetaManagementPolicies)
 		logr.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
 
 	if *enableExternalSecretStores {
-		o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
+		clusterOptions.SecretStoreConfigGVK = &clusterv1alpha1.StoreConfigGroupVersionKind
 		logr.Info("Alpha feature enabled", "flag", features.EnableAlphaExternalSecretStores)
 
-		o.ESSOptions = &tjcontroller.ESSOptions{}
+		clusterOptions.ESSOptions = &tjcontroller.ESSOptions{}
 		if *essTLSCertsPath != "" {
 			logr.Info("ESS TLS certificates path is set. Loading mTLS configuration.")
 			tCfg, err := certificates.LoadMTLSConfig(filepath.Join(*essTLSCertsPath, "ca.crt"), filepath.Join(*essTLSCertsPath, "tls.crt"), filepath.Join(*essTLSCertsPath, "tls.key"), false)
 			kingpin.FatalIfError(err, "Cannot load ESS TLS config.")
 
-			o.ESSOptions.TLSConfig = tCfg
+			clusterOptions.ESSOptions.TLSConfig = tCfg
 		}
 
 		// Ensure default store config exists.
-		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(ctx, &v1alpha1.StoreConfig{
+		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(ctx, &clusterv1alpha1.StoreConfig{
 			TypeMeta: metav1.TypeMeta{},
 			ObjectMeta: metav1.ObjectMeta{
 				Name: "default",
 			},
-			Spec: v1alpha1.StoreConfigSpec{
+			Spec: clusterv1alpha1.StoreConfigSpec{
 				// NOTE(turkenh): We only set required spec and expect optional
 				// ones to properly be initialized with CRD level default values.
 				SecretStoreConfig: xpv1.SecretStoreConfig{
 					DefaultScope: *namespace,
 				},
 			},
-			Status: v1alpha1.StoreConfigStatus{},
+			Status: clusterv1alpha1.StoreConfigStatus{},
 		})), "cannot create default store config")
 	}
 
-	kingpin.FatalIfError(conversion.RegisterConversions(o.Provider, mgr.GetScheme()), "Cannot initialize the webhook conversion registry")
-	kingpin.FatalIfError(controller.Setup_organizations(mgr, o), "Cannot setup AWS controllers")
+	kingpin.FatalIfError(conversion.RegisterConversions(clusterOptions.Provider, namespacedOptions.Provider, mgr.GetScheme()), "Cannot initialize the webhook conversion registry")
+	kingpin.FatalIfError(clustercontroller.Setup_organizations(mgr, clusterOptions), "Cannot setup cluster-scoped AWS controllers")
+	kingpin.FatalIfError(namespacedcontroller.Setup_organizations(mgr, namespacedOptions), "Cannot setup namespaced AWS controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }

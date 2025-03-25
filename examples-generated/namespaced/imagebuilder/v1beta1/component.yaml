@@ -1,0 +1,29 @@
+apiVersion: imagebuilder.aws.m.upbound.io/v1beta1
+kind: Component
+metadata:
+  annotations:
+    meta.upbound.io/example-id: imagebuilder/v1beta1/component
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    data: |-
+      ${yamlencode({
+          phases = [{
+            name = "build"
+            steps = [{
+              action = "ExecuteBash"
+              inputs = {
+                commands = ["echo 'hello world'"]
+              }
+              name      = "example"
+              onFailure = "Continue"
+            }]
+          }]
+          schemaVersion = 1.0
+        })}
+    name: example
+    platform: Linux
+    region: us-west-1
+    version: 1.0.0

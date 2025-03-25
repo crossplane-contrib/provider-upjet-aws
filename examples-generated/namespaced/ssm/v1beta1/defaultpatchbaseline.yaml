@@ -1,0 +1,34 @@
+apiVersion: ssm.aws.m.upbound.io/v1beta1
+kind: DefaultPatchBaseline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssm/v1beta1/defaultpatchbaseline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    baselineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    operatingSystemSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: ssm.aws.m.upbound.io/v1beta1
+kind: PatchBaseline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssm/v1beta1/defaultpatchbaseline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    approvedPatches:
+    - KB123456
+    name: example
+    region: us-west-1

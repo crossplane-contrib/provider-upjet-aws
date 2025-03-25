@@ -1,0 +1,18 @@
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    engine: memcached
+    nodeType: cache.m4.large
+    numCacheNodes: 2
+    parameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    port: 11211
+    region: us-west-1

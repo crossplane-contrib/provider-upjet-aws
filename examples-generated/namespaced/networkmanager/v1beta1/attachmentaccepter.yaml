@@ -1,0 +1,17 @@
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: AttachmentAccepter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/attachmentaccepter
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    attachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+    attachmentTypeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+    region: us-west-1

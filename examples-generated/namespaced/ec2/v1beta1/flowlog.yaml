@@ -1,0 +1,66 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: FlowLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    iamRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    logDestinationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    trafficType: ALL
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.example.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

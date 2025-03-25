@@ -1,0 +1,65 @@
+apiVersion: redshift.aws.m.upbound.io/v1beta1
+kind: ScheduledAction
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/scheduledaction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    iamRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    schedule: cron(00 23 * * ? *)
+    targetAction:
+    - pauseCluster:
+      - clusterIdentifier: tf-redshift001
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/scheduledaction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.example.json}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/scheduledaction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/scheduledaction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

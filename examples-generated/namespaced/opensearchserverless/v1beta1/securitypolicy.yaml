@@ -1,0 +1,25 @@
+apiVersion: opensearchserverless.aws.m.upbound.io/v1beta1
+kind: SecurityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/securitypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: encryption security policy for example-collection
+    policy: |-
+      ${jsonencode({
+          Rules = [
+            {
+              Resource = [
+                "collection/example-collection"
+              ],
+              ResourceType = "collection"
+            }
+          ],
+          AWSOwnedKey = true
+        })}
+    region: us-west-1
+    type: encryption

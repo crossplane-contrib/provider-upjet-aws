@@ -1,0 +1,25 @@
+apiVersion: kendra.aws.m.upbound.io/v1beta1
+kind: QuerySuggestionsBlockList
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kendra/v1beta1/querysuggestionsblocklist
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    indexIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Example
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceS3Path:
+    - bucketSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      key: example/suggestions.txt
+    tags:
+      Name: Example Kendra Index

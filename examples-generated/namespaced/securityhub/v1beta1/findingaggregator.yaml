@@ -1,0 +1,26 @@
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: FindingAggregator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/findingaggregator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    linkingMode: ALL_REGIONS
+    region: us-west-1
+
+---
+
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/findingaggregator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

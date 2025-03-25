@@ -1,0 +1,15 @@
+apiVersion: ram.aws.m.upbound.io/v1beta1
+kind: ResourceAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceArn: ${aws_subnet.example.arn}
+    resourceShareArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

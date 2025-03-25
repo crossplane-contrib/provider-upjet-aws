@@ -1,0 +1,53 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/rolepolicy
+  labels:
+    testing.upbound.io/example-name: test_policy
+  name: test-policy
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = [
+                "ec2:Describe*",
+              ]
+              Effect   = "Allow"
+              Resource = "*"
+            },
+          ]
+        })}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_role
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/rolepolicy
+  labels:
+    testing.upbound.io/example-name: test_role
+  name: test-role
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Sid    = ""
+              Principal = {
+                Service = "ec2.amazonaws.com"
+              }
+            },
+          ]
+        })}

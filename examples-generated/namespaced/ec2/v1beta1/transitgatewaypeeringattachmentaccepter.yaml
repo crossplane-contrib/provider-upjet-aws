@@ -1,0 +1,16 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: TransitGatewayPeeringAttachmentAccepter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaypeeringattachmentaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: Example cross-account attachment
+    transitGatewayAttachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

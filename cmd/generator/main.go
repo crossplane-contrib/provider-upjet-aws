@@ -15,9 +15,11 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/pipeline"
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/upbound/provider-aws/config"
+	configCluster "github.com/upbound/provider-aws/config/cluster"
+	configNamespaced "github.com/upbound/provider-aws/config/namespaced"
 )
 
 func main() {
@@ -28,16 +30,25 @@ func main() {
 		generatedResourceList = app.Flag("generated-resource-list", "File path where a list of the generated resources will be stored.").Envar("GENERATED_RESOURCE_LIST").Default("../config/generated.lst").String()
 	)
 	kingpin.MustParse(app.Parse(os.Args[1:]))
-
 	absRootDir, err := filepath.Abs(*repoRoot)
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
-	p, err := config.GetProvider(context.Background(), true)
-	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
-	dumpGeneratedResourceList(p, generatedResourceList)
-	dumpSkippedResourcesCSV(p, skippedResourcesCSV)
-	pipeline.Run(p, absRootDir)
+
+	ctx := context.Background()
+	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
+	kingpin.FatalIfError(err, "Cannot get the Terraform framework and SDK providers")
+
+	pc, err := configCluster.GetProvider(ctx, fwProvider, sdkProvider, true)
+	kingpin.FatalIfError(err, "Cannot initialize the provider cluster scoped configuration")
+
+	pns, err := configNamespaced.GetProvider(ctx, fwProvider, sdkProvider, true)
+	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
+
+	dumpGeneratedResourceList(pc, generatedResourceList)
+	dumpSkippedResourcesCSV(pc, skippedResourcesCSV)
+
+	pipeline.Run(pc, pns, absRootDir)
 }
 
 func dumpGeneratedResourceList(p *ujconfig.Provider, targetPath *string) {

@@ -1,0 +1,20 @@
+apiVersion: connect.aws.m.upbound.io/v1beta1
+kind: Vocabulary
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    content: "Phrase\tIPA\tSoundsLike\tDisplayAs\nLos-Angeles\t\t\tLos Angeles\nF.B.I.\tɛ
+      f b i aɪ\t\tFBI\nEtienne\t\teh-tee-en\t"
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    languageCode: en-US
+    name: example
+    region: us-west-1
+    tags:
+      Key1: Value1

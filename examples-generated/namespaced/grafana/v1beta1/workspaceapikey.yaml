@@ -1,0 +1,17 @@
+apiVersion: grafana.aws.m.upbound.io/v1beta1
+kind: WorkspaceAPIKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspaceapikey
+  labels:
+    testing.upbound.io/example-name: key
+  name: key
+spec:
+  forProvider:
+    keyName: test-key
+    keyRole: VIEWER
+    region: us-west-1
+    secondsToLive: 3600
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

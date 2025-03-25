@@ -1,0 +1,48 @@
+apiVersion: ds.aws.m.upbound.io/v1beta1
+kind: SharedDirectory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ds/v1beta1/shareddirectory
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    directoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    notesSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    region: us-west-1
+    target:
+    - id: ${data.aws_caller_identity.receiver.account_id}
+
+---
+
+apiVersion: ds.aws.m.upbound.io/v1beta1
+kind: Directory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ds/v1beta1/shareddirectory
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    edition: Standard
+    name: tf-example
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    region: us-west-1
+    type: MicrosoftAD
+    vpcSettings:
+    - subnetIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example[*]
+      vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example

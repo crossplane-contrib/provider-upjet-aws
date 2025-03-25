@@ -1,0 +1,12 @@
+apiVersion: ses.aws.m.upbound.io/v1beta1
+kind: ActiveReceiptRuleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/activereceiptruleset
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    region: us-west-1
+    ruleSetName: primary-rules

@@ -1,0 +1,21 @@
+apiVersion: eks.aws.m.upbound.io/v1beta1
+kind: AccessEntry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kubernetesGroups:
+    - group-1
+    - group-2
+    principalArnFromRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    type: STANDARD

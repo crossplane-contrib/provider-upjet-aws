@@ -1,0 +1,144 @@
+apiVersion: cloudwatch.aws.m.upbound.io/v1beta1
+kind: MetricStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    firehoseArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3_stream
+    includeFilter:
+    - metricNames:
+      - CPUUtilization
+      - NetworkOut
+      namespace: AWS/EC2
+    - metricNames: []
+      namespace: AWS/EBS
+    name: my-metric-stream
+    outputFormat: json
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: metric_stream_to_firehose
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: firehose_to_s3
+  name: firehose-to-s3
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.firehose_assume_role.json}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: metric_stream_to_firehose
+  name: metric-stream-to-firehose
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.streams_assume_role.json}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: firehose_to_s3
+  name: firehose-to-s3
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.firehose_to_s3.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: firehose_to_s3
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: metric_stream_to_firehose
+  name: metric-stream-to-firehose
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.metric_stream_to_firehose.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: metric_stream_to_firehose
+
+---
+
+apiVersion: firehose.aws.m.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: s3_stream
+  name: s3-stream
+spec:
+  forProvider:
+    destination: extended_s3
+    extendedS3Configuration:
+    - bucketArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: bucket
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: firehose_to_s3
+    name: metric-stream-test-stream
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: bucket
+  name: bucket
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatch/v1beta1/metricstream
+  labels:
+    testing.upbound.io/example-name: bucket_acl
+  name: bucket-acl
+spec:
+  forProvider:
+    acl: private
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket
+    region: us-west-1

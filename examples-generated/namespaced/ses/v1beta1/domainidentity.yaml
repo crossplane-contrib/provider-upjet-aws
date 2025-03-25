@@ -1,0 +1,11 @@
+apiVersion: ses.aws.m.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainidentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

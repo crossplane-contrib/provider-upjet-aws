@@ -1,0 +1,11 @@
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
+kind: RedshiftServerlessNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/redshiftserverlessnamespace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

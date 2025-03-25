@@ -1,0 +1,15 @@
+apiVersion: rum.aws.m.upbound.io/v1beta1
+kind: MetricsDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rum/v1beta1/metricsdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    appMonitorNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    destination: CloudWatch
+    region: us-west-1

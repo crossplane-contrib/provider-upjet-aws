@@ -1,0 +1,29 @@
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: VaultPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vaultpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
+
+---
+
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vaultpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

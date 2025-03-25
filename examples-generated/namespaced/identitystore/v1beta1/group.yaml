@@ -1,0 +1,14 @@
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/group
+  labels:
+    testing.upbound.io/example-name: this
+  name: this
+spec:
+  forProvider:
+    description: Example description
+    displayName: Example group
+    identityStoreId: ${tolist(data.aws_ssoadmin_instances.example.identity_store_ids)[0]}
+    region: us-west-1

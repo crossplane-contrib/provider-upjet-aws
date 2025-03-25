@@ -1,0 +1,18 @@
+apiVersion: ssm.aws.m.upbound.io/v1beta1
+kind: Association
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssm/v1beta1/association
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    nameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    targets:
+    - key: InstanceIds
+      valuesRefs:
+      - name: example

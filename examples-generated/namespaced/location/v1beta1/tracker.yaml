@@ -1,0 +1,11 @@
+apiVersion: location.aws.m.upbound.io/v1beta1
+kind: Tracker
+metadata:
+  annotations:
+    meta.upbound.io/example-id: location/v1beta1/tracker
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

@@ -57,6 +57,7 @@ var (
 			dnsSuffix: "c2s.ic.gov",
 			serviceToDefaultRegions: map[string]string{
 				"budgets":       "us-iso-east-1",
+				"ce":            "us-iso-east-1",
 				"iam":           "us-iso-east-1",
 				"organizations": "us-iso-east-1",
 				"route53":       "us-iso-east-1",
@@ -69,6 +70,7 @@ var (
 			dnsSuffix: "sc2s.sgov.gov",
 			serviceToDefaultRegions: map[string]string{
 				"budgets":       "us-isob-east-1",
+				"ce":            "us-isob-east-1",
 				"iam":           "us-isob-east-1",
 				"organizations": "us-isob-east-1",
 				"route53":       "us-isob-east-1",
@@ -87,6 +89,7 @@ var (
 			dnsSuffix: "csp.hci.ic.gov",
 			serviceToDefaultRegions: map[string]string{
 				"budgets":       "us-isof-south-1",
+				"ce":            "us-isof-south-1",
 				"iam":           "us-isof-south-1",
 				"organizations": "us-isof-south-1",
 				"route53":       "us-isof-south-1",

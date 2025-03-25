@@ -1,0 +1,29 @@
+apiVersion: networkfirewall.aws.m.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewall
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    firewallPolicyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    region: us-west-1
+    subnetMapping:
+    - subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    tags:
+      Tag1: Value1
+      Tag2: Value2
+    timeouts:
+    - create: 40m
+      delete: 1h
+      update: 50m
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

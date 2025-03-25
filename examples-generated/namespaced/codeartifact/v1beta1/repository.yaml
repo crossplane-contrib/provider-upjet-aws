@@ -1,0 +1,48 @@
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/repository
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    repository: example
+
+---
+
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/repository
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: example
+    encryptionKeySelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/repository
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: domain key
+    region: us-west-1

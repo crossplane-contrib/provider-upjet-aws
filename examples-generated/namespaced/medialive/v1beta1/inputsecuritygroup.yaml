@@ -1,0 +1,15 @@
+apiVersion: medialive.aws.m.upbound.io/v1beta1
+kind: InputSecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: medialive/v1beta1/inputsecuritygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      ENVIRONMENT: prod
+    whitelistRules:
+    - cidr: 10.0.0.8/32

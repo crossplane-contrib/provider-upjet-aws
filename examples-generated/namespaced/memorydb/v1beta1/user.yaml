@@ -1,0 +1,18 @@
+apiVersion: memorydb.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessString: on ~* &* +@all
+    authenticationMode:
+    - passwordsSecretRef:
+      - key: example-key
+        name: example-secret
+        namespace: upbound-system
+      type: password
+    region: us-west-1

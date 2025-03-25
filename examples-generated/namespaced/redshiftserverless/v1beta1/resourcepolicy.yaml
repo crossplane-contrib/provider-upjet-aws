@@ -1,0 +1,28 @@
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [{
+            Effect = "Allow"
+            Principal = {
+              AWS = ["12345678901"]
+            }
+            Action = [
+              "redshift-serverless:RestoreFromSnapshot",
+            ]
+            Sid = ""
+          }]
+        })}
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
