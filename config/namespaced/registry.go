@@ -96,7 +96,7 @@ func GetProvider(ctx context.Context, fwProvider fwprovider.Provider, sdkProvide
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),
-		config.WithRootGroup("m.aws.upbound.io"),
+		config.WithRootGroup("aws.m.upbound.io"),
 		config.WithIncludeList(CLIReconciledResourceList()),
 		config.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
 		config.WithTerraformPluginFrameworkIncludeList(TerraformPluginFrameworkResourceList()),
