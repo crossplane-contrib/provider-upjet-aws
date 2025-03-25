@@ -57,7 +57,7 @@ jobs:
           make schema-version-diff
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-16-cores
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
     steps:
