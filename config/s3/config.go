@@ -119,17 +119,15 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	// In tf provider version 5.86.0, this resource was migrated from the tf plugin sdk to the tf plugin framework
-	// These customizations are largely necessary to preserve the previous schema so the change is transparent to users.
+	// These customizations are largely necessary to preserve the previous schemas so the change is transparent to users.
 	p.AddResourceConfigurator("aws_s3_bucket_lifecycle_configuration", func(r *config.Resource) {
-		// The automatic singleton list conversion doesn't work for framework resources, where the notion of "max items = 1"
-		// is more abstract and harder to identify at runtime.
-		r.AddSingletonListConversion("rule[*].expiration", "rule[*].expiration")
-		r.AddSingletonListConversion("rule[*].filter", "rule[*].filter")
-		r.AddSingletonListConversion("rule[*].noncurrent_version_expiration", "rule[*].noncurrentVersionExpiration")
-		r.AddSingletonListConversion("rule[*].abort_incomplete_multipart_upload", "rule[*].abortIncompleteMultipartUpload")
-		// These seem like they should be filter[0] on the tf side, but I'm not sure if that actually works.
-		r.AddSingletonListConversion("rule[*].filter[*].and", "rule[*].filter[*].and")
-		r.AddSingletonListConversion("rule[*].filter[*].tag", "rule[*].filter[*].tag")
+		r.Version = "v1beta3"
+		// Explicitly set the reconcile version, since this is the only version that has types compatible with the tf
+		// plugin framework client at runtime.
+		r.ControllerReconcileVersion = "v1beta3"
+		r.SetCRDHubVersion("v1beta3")
+		r.SetCRDStorageVersion("v1beta1") // to facilitate downgrades
+		r.PreviousVersions = []string {"v1beta1", "v1beta2"}
 
 		// tf sdk v2 serializes optional integers to tfjson as string.
 		// tf plugin framework serializes optional integers to tfjson as number, which upjet converts to *float64
@@ -137,19 +135,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// framework resource in the tf provider so that when we convert the tfjson schema to the tf plugin sdk schema,
 		// we get the same type as we were using before.
 
-		// Fields to change from number back to string to avoid schema change
+		// The following fields are *string in v1beta1 and v1beta2, and *float64 in v1beta3
 		// rule[*].filter[0].object_size_greater_than
 		// rule[*].filter[0].object_size_less_than
 		// rule[*].noncurrent_version_expiration[0].newer_noncurrent_versions
 		// rule[*].noncurrent_version_transition[*].newer_noncurrent_versions
 
-// Shoot, this doesn't work. Conversion webhooks fail to unmarshal string into go struct field of type float64
-// How did they work before?
-// Now there's a different error. It seems like hub and spoke are mixed up?
 
-// Backup plan: Rewind to v1beta1 and regenerate, but with the patched json schema.
-// Then regenerate v1beta2 also with the patched json schema.
-// Then set the version to v1beta3 with the same numeric types from framework, and write conversion webhooks.
+
+
+
 
 		// There's a bug somewhere in upjet that's applying the docstring for prefix to these fields that end in prefix
 		r.MetaResource.ArgumentDocs["rule.filter.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.`
