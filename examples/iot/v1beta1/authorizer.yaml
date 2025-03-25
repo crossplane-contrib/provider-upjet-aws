@@ -19,7 +19,7 @@ apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Permission
 metadata:
   annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/permission
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
   name: example-lambda-permission
 spec:
   forProvider:
@@ -34,7 +34,7 @@ apiVersion: lambda.aws.upbound.io/v1beta2
 kind: Function
 metadata:
   annotations:
-    meta.upbound.io/example-id: lambda/v1beta2/function
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
     uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: lambda-authorizer
@@ -56,7 +56,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: lambda/v1beta2/function
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
