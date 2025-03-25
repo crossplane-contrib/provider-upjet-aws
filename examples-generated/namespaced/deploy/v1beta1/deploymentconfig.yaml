@@ -1,4 +1,4 @@
-apiVersion: deploy.m.aws.upbound.io/v1beta1
+apiVersion: deploy.aws.m.upbound.io/v1beta1
 kind: DeploymentConfig
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: deploy.m.aws.upbound.io/v1beta1
+apiVersion: deploy.aws.m.upbound.io/v1beta1
 kind: DeploymentGroup
 metadata:
   annotations:

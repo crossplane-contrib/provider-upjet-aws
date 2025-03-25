@@ -1,4 +1,4 @@
-apiVersion: cognitoidentity.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidentity.aws.m.upbound.io/v1beta1
 kind: Pool
 metadata:
   annotations:
@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: SAMLProvider
 metadata:
   annotations:

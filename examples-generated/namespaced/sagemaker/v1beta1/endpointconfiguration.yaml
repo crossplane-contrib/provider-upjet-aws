@@ -1,4 +1,4 @@
-apiVersion: sagemaker.m.aws.upbound.io/v1beta1
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
 kind: EndpointConfiguration
 metadata:
   annotations:

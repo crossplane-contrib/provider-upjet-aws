@@ -1,4 +1,4 @@
-apiVersion: waf.m.aws.upbound.io/v1beta1
+apiVersion: waf.aws.m.upbound.io/v1beta1
 kind: ByteMatchSet
 metadata:
   annotations:

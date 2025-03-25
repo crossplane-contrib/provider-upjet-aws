@@ -1,4 +1,4 @@
-apiVersion: ses.m.aws.upbound.io/v1beta1
+apiVersion: ses.aws.m.upbound.io/v1beta1
 kind: DomainMailFrom
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: route53.m.aws.upbound.io/v1beta1
+apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: Record
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: route53.m.aws.upbound.io/v1beta1
+apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: Record
 metadata:
   annotations:
@@ -60,7 +60,7 @@ spec:
 
 ---
 
-apiVersion: ses.m.aws.upbound.io/v1beta1
+apiVersion: ses.aws.m.upbound.io/v1beta1
 kind: DomainIdentity
 metadata:
   annotations:

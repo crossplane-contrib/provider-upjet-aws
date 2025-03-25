@@ -1,4 +1,4 @@
-apiVersion: ecr.m.aws.upbound.io/v1beta1
+apiVersion: ecr.aws.m.upbound.io/v1beta1
 kind: PullThroughCacheRule
 metadata:
   annotations:

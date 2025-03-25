@@ -1,4 +1,4 @@
-apiVersion: mediaconvert.m.aws.upbound.io/v1beta1
+apiVersion: mediaconvert.aws.m.upbound.io/v1beta1
 kind: Queue
 metadata:
   annotations:

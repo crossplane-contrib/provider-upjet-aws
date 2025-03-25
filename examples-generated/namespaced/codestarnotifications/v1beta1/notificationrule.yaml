@@ -1,4 +1,4 @@
-apiVersion: codestarnotifications.m.aws.upbound.io/v1beta1
+apiVersion: codestarnotifications.aws.m.upbound.io/v1beta1
 kind: NotificationRule
 metadata:
   annotations:
@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: codecommit.m.aws.upbound.io/v1beta1
+apiVersion: codecommit.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: Topic
 metadata:
   annotations:
@@ -51,7 +51,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: TopicPolicy
 metadata:
   annotations:

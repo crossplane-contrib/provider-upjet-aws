@@ -1,4 +1,4 @@
-apiVersion: networkmanager.m.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
 kind: CustomerGatewayAssociation
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: CustomerGateway
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: TransitGateway
 metadata:
   annotations:
@@ -52,7 +52,7 @@ spec:
 
 ---
 
-apiVersion: networkmanager.m.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
 kind: Device
 metadata:
   annotations:
@@ -72,7 +72,7 @@ spec:
 
 ---
 
-apiVersion: networkmanager.m.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
 kind: GlobalNetwork
 metadata:
   annotations:
@@ -87,7 +87,7 @@ spec:
 
 ---
 
-apiVersion: networkmanager.m.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
 kind: Site
 metadata:
   annotations:
@@ -104,7 +104,7 @@ spec:
 
 ---
 
-apiVersion: networkmanager.m.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
 kind: TransitGatewayRegistration
 metadata:
   annotations:
@@ -124,7 +124,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPNConnection
 metadata:
   annotations:

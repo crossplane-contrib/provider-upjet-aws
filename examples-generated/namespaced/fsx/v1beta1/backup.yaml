@@ -1,4 +1,4 @@
-apiVersion: fsx.m.aws.upbound.io/v1beta1
+apiVersion: fsx.aws.m.upbound.io/v1beta1
 kind: Backup
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: fsx.m.aws.upbound.io/v1beta1
+apiVersion: fsx.aws.m.upbound.io/v1beta1
 kind: LustreFileSystem
 metadata:
   annotations:

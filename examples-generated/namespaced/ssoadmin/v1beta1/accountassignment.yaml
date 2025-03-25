@@ -1,4 +1,4 @@
-apiVersion: ssoadmin.m.aws.upbound.io/v1beta1
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
 kind: AccountAssignment
 metadata:
   annotations:

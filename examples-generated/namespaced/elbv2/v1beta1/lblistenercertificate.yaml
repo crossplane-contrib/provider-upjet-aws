@@ -1,4 +1,4 @@
-apiVersion: elbv2.m.aws.upbound.io/v1beta1
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
 kind: LBListenerCertificate
 metadata:
   annotations:
@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: acm.m.aws.upbound.io/v1beta1
+apiVersion: acm.aws.m.upbound.io/v1beta1
 kind: Certificate
 metadata:
   annotations:
@@ -32,7 +32,7 @@ spec:
 
 ---
 
-apiVersion: elbv2.m.aws.upbound.io/v1beta1
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
 kind: LB
 metadata:
   annotations:
@@ -46,7 +46,7 @@ spec:
 
 ---
 
-apiVersion: elbv2.m.aws.upbound.io/v1beta1
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
 kind: LBListener
 metadata:
   annotations:

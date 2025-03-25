@@ -1,4 +1,4 @@
-apiVersion: ssoadmin.m.aws.upbound.io/v1beta1
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
 kind: PermissionsBoundaryAttachment
 metadata:
   annotations:
@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: ssoadmin.m.aws.upbound.io/v1beta1
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
 kind: PermissionSet
 metadata:
   annotations:

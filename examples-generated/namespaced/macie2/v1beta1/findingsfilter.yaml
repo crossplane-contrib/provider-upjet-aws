@@ -1,4 +1,4 @@
-apiVersion: macie2.m.aws.upbound.io/v1beta1
+apiVersion: macie2.aws.m.upbound.io/v1beta1
 kind: FindingsFilter
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: macie2.m.aws.upbound.io/v1beta1
+apiVersion: macie2.aws.m.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:

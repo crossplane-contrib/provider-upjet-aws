@@ -1,4 +1,4 @@
-apiVersion: cloud9.m.aws.upbound.io/v1beta1
+apiVersion: cloud9.aws.m.upbound.io/v1beta1
 kind: EnvironmentMembership
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: cloud9.m.aws.upbound.io/v1beta1
+apiVersion: cloud9.aws.m.upbound.io/v1beta1
 kind: EnvironmentEC2
 metadata:
   annotations:
@@ -35,7 +35,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: User
 metadata:
   annotations:

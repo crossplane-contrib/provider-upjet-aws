@@ -1,4 +1,4 @@
-apiVersion: sqs.m.aws.upbound.io/v1beta1
+apiVersion: sqs.aws.m.upbound.io/v1beta1
 kind: QueueRedrivePolicy
 metadata:
   annotations:
@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: sqs.m.aws.upbound.io/v1beta1
+apiVersion: sqs.aws.m.upbound.io/v1beta1
 kind: Queue
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
 
 ---
 
-apiVersion: sqs.m.aws.upbound.io/v1beta1
+apiVersion: sqs.aws.m.upbound.io/v1beta1
 kind: Queue
 metadata:
   annotations:

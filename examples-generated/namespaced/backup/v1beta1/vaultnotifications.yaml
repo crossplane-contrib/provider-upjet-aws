@@ -1,4 +1,4 @@
-apiVersion: backup.m.aws.upbound.io/v1beta1
+apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: VaultNotifications
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: Topic
 metadata:
   annotations:
@@ -35,7 +35,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: TopicPolicy
 metadata:
   annotations:

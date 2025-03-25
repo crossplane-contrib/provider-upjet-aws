@@ -1,4 +1,4 @@
-apiVersion: ssm.m.aws.upbound.io/v1beta1
+apiVersion: ssm.aws.m.upbound.io/v1beta1
 kind: Document
 metadata:
   annotations:

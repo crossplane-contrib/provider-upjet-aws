@@ -1,4 +1,4 @@
-apiVersion: mediapackage.m.aws.upbound.io/v1beta1
+apiVersion: mediapackage.aws.m.upbound.io/v1beta1
 kind: Channel
 metadata:
   annotations:

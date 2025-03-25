@@ -1,4 +1,4 @@
-apiVersion: location.m.aws.upbound.io/v1beta1
+apiVersion: location.aws.m.upbound.io/v1beta1
 kind: PlaceIndex
 metadata:
   annotations:

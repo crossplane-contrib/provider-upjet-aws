@@ -1,4 +1,4 @@
-apiVersion: dms.m.aws.upbound.io/v1beta1
+apiVersion: dms.aws.m.upbound.io/v1beta1
 kind: Certificate
 metadata:
   annotations:

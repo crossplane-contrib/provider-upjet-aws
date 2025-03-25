@@ -1,4 +1,4 @@
-apiVersion: neptune.m.aws.upbound.io/v1beta1
+apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: EventSubscription
 metadata:
   annotations:
@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: neptune.m.aws.upbound.io/v1beta1
+apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
@@ -53,7 +53,7 @@ spec:
 
 ---
 
-apiVersion: neptune.m.aws.upbound.io/v1beta1
+apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
   annotations:
@@ -73,7 +73,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: Topic
 metadata:
   annotations:

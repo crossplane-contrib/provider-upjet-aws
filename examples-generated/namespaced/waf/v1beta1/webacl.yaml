@@ -1,4 +1,4 @@
-apiVersion: waf.m.aws.upbound.io/v1beta1
+apiVersion: waf.aws.m.upbound.io/v1beta1
 kind: WebACL
 metadata:
   annotations:
@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: waf.m.aws.upbound.io/v1beta1
+apiVersion: waf.aws.m.upbound.io/v1beta1
 kind: IPSet
 metadata:
   annotations:
@@ -42,7 +42,7 @@ spec:
 
 ---
 
-apiVersion: waf.m.aws.upbound.io/v1beta1
+apiVersion: waf.aws.m.upbound.io/v1beta1
 kind: Rule
 metadata:
   annotations:

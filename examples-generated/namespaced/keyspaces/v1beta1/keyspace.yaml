@@ -1,4 +1,4 @@
-apiVersion: keyspaces.m.aws.upbound.io/v1beta1
+apiVersion: keyspaces.aws.m.upbound.io/v1beta1
 kind: Keyspace
 metadata:
   annotations:

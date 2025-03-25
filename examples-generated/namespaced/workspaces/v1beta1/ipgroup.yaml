@@ -1,4 +1,4 @@
-apiVersion: workspaces.m.aws.upbound.io/v1beta1
+apiVersion: workspaces.aws.m.upbound.io/v1beta1
 kind: IPGroup
 metadata:
   annotations:

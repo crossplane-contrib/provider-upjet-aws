@@ -1,4 +1,4 @@
-apiVersion: serverlessrepo.m.aws.upbound.io/v1beta1
+apiVersion: serverlessrepo.aws.m.upbound.io/v1beta1
 kind: CloudFormationStack
 metadata:
   annotations:

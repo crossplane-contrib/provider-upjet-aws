@@ -1,4 +1,4 @@
-apiVersion: docdb.m.aws.upbound.io/v1beta1
+apiVersion: docdb.aws.m.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: chime.m.aws.upbound.io/v1beta1
+apiVersion: chime.aws.m.upbound.io/v1beta1
 kind: VoiceConnectorStreaming
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: chime.m.aws.upbound.io/v1beta1
+apiVersion: chime.aws.m.upbound.io/v1beta1
 kind: VoiceConnector
 metadata:
   annotations:

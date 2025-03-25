@@ -1,4 +1,4 @@
-apiVersion: acmpca.m.aws.upbound.io/v1beta1
+apiVersion: acmpca.aws.m.upbound.io/v1beta1
 kind: CertificateAuthorityCertificate
 metadata:
   annotations:
@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: acmpca.m.aws.upbound.io/v1beta1
+apiVersion: acmpca.aws.m.upbound.io/v1beta1
 kind: Certificate
 metadata:
   annotations:
@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: acmpca.m.aws.upbound.io/v1beta1
+apiVersion: acmpca.aws.m.upbound.io/v1beta1
 kind: CertificateAuthority
 metadata:
   annotations:

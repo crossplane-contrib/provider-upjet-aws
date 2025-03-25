@@ -1,4 +1,4 @@
-apiVersion: cloudwatchevents.m.aws.upbound.io/v1beta1
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
 kind: Rule
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: cloudwatchevents.m.aws.upbound.io/v1beta1
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
 kind: Target
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: Topic
 metadata:
   annotations:
@@ -52,7 +52,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: TopicPolicy
 metadata:
   annotations:

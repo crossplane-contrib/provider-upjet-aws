@@ -1,4 +1,4 @@
-apiVersion: account.m.aws.upbound.io/v1beta1
+apiVersion: account.aws.m.upbound.io/v1beta1
 kind: Region
 metadata:
   annotations:

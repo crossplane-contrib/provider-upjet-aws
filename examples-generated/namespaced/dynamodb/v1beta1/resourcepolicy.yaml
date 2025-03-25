@@ -1,4 +1,4 @@
-apiVersion: dynamodb.m.aws.upbound.io/v1beta1
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: ResourcePolicy
 metadata:
   annotations:

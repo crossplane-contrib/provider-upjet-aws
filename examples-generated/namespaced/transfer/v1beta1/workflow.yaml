@@ -1,4 +1,4 @@
-apiVersion: transfer.m.aws.upbound.io/v1beta1
+apiVersion: transfer.aws.m.upbound.io/v1beta1
 kind: Workflow
 metadata:
   annotations:

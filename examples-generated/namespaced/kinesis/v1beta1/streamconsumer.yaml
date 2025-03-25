@@ -1,4 +1,4 @@
-apiVersion: kinesis.m.aws.upbound.io/v1beta1
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
 kind: StreamConsumer
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: kinesis.m.aws.upbound.io/v1beta1
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
 kind: Stream
 metadata:
   annotations:

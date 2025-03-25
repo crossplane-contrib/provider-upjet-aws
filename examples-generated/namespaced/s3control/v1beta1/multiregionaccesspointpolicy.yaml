@@ -1,4 +1,4 @@
-apiVersion: s3control.m.aws.upbound.io/v1beta1
+apiVersion: s3control.aws.m.upbound.io/v1beta1
 kind: MultiRegionAccessPointPolicy
 metadata:
   annotations:
@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -45,7 +45,7 @@ spec:
 
 ---
 
-apiVersion: s3control.m.aws.upbound.io/v1beta1
+apiVersion: s3control.aws.m.upbound.io/v1beta1
 kind: MultiRegionAccessPoint
 metadata:
   annotations:

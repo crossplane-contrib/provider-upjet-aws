@@ -1,4 +1,4 @@
-apiVersion: route53.m.aws.upbound.io/v1beta1
+apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: ZoneAssociation
 metadata:
   annotations:
@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: route53.m.aws.upbound.io/v1beta1
+apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: Zone
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
@@ -54,7 +54,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:

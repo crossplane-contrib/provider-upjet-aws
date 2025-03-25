@@ -1,4 +1,4 @@
-apiVersion: cur.m.aws.upbound.io/v1beta1
+apiVersion: cur.aws.m.upbound.io/v1beta1
 kind: ReportDefinition
 metadata:
   annotations:

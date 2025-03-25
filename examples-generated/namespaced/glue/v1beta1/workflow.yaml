@@ -1,4 +1,4 @@
-apiVersion: glue.m.aws.upbound.io/v1beta1
+apiVersion: glue.aws.m.upbound.io/v1beta1
 kind: Workflow
 metadata:
   annotations:
@@ -12,7 +12,7 @@ spec:
 
 ---
 
-apiVersion: glue.m.aws.upbound.io/v1beta1
+apiVersion: glue.aws.m.upbound.io/v1beta1
 kind: Trigger
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: glue.m.aws.upbound.io/v1beta1
+apiVersion: glue.aws.m.upbound.io/v1beta1
 kind: Trigger
 metadata:
   annotations:

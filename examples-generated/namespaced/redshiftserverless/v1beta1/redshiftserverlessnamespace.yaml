@@ -1,4 +1,4 @@
-apiVersion: redshiftserverless.m.aws.upbound.io/v1beta1
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
 kind: RedshiftServerlessNamespace
 metadata:
   annotations:

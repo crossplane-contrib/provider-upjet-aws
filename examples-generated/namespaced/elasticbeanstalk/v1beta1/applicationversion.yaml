@@ -1,4 +1,4 @@
-apiVersion: elasticbeanstalk.m.aws.upbound.io/v1beta1
+apiVersion: elasticbeanstalk.aws.m.upbound.io/v1beta1
 kind: ApplicationVersion
 metadata:
   annotations:
@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: elasticbeanstalk.m.aws.upbound.io/v1beta1
+apiVersion: elasticbeanstalk.aws.m.upbound.io/v1beta1
 kind: Application
 metadata:
   annotations:
@@ -35,7 +35,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -50,7 +50,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Object
 metadata:
   annotations:

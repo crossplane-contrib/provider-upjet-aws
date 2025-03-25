@@ -1,4 +1,4 @@
-apiVersion: elb.m.aws.upbound.io/v1beta1
+apiVersion: elb.aws.m.upbound.io/v1beta1
 kind: Attachment
 metadata:
   annotations:

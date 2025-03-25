@@ -1,4 +1,4 @@
-apiVersion: kms.m.aws.upbound.io/v1beta1
+apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Grant
 metadata:
   annotations:
@@ -26,7 +26,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
 
 ---
 
-apiVersion: kms.m.aws.upbound.io/v1beta1
+apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   annotations:

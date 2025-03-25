@@ -1,4 +1,4 @@
-apiVersion: route53.m.aws.upbound.io/v1beta1
+apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: ResolverConfig
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:

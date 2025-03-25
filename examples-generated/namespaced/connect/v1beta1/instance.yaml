@@ -1,4 +1,4 @@
-apiVersion: connect.m.aws.upbound.io/v1beta1
+apiVersion: connect.aws.m.upbound.io/v1beta1
 kind: Instance
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: ram.m.aws.upbound.io/v1beta1
+apiVersion: ram.aws.m.upbound.io/v1beta1
 kind: ResourceShareAccepter
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: ram.m.aws.upbound.io/v1beta1
+apiVersion: ram.aws.m.upbound.io/v1beta1
 kind: PrincipalAssociation
 metadata:
   annotations:
@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: ram.m.aws.upbound.io/v1beta1
+apiVersion: ram.aws.m.upbound.io/v1beta1
 kind: ResourceShare
 metadata:
   annotations:

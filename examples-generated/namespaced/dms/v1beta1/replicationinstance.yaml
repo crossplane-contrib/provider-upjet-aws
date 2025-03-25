@@ -1,4 +1,4 @@
-apiVersion: dms.m.aws.upbound.io/v1beta1
+apiVersion: dms.aws.m.upbound.io/v1beta1
 kind: ReplicationInstance
 metadata:
   annotations:
@@ -31,7 +31,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -45,7 +45,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -59,7 +59,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -73,7 +73,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
@@ -92,7 +92,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
@@ -111,7 +111,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:

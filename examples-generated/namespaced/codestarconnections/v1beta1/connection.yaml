@@ -1,4 +1,4 @@
-apiVersion: codestarconnections.m.aws.upbound.io/v1beta1
+apiVersion: codestarconnections.aws.m.upbound.io/v1beta1
 kind: Connection
 metadata:
   annotations:
@@ -14,7 +14,7 @@ spec:
 
 ---
 
-apiVersion: codepipeline.m.aws.upbound.io/v1beta1
+apiVersion: codepipeline.aws.m.upbound.io/v1beta1
 kind: Codepipeline
 metadata:
   annotations:

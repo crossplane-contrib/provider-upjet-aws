@@ -1,4 +1,4 @@
-apiVersion: networkfirewall.m.aws.upbound.io/v1beta1
+apiVersion: networkfirewall.aws.m.upbound.io/v1beta1
 kind: Firewall
 metadata:
   annotations:

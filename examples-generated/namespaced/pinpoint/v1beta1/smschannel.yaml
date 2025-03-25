@@ -1,4 +1,4 @@
-apiVersion: pinpoint.m.aws.upbound.io/v1beta1
+apiVersion: pinpoint.aws.m.upbound.io/v1beta1
 kind: SMSChannel
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: pinpoint.m.aws.upbound.io/v1beta1
+apiVersion: pinpoint.aws.m.upbound.io/v1beta1
 kind: App
 metadata:
   annotations:

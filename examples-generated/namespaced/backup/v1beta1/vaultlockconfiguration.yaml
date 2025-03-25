@@ -1,4 +1,4 @@
-apiVersion: backup.m.aws.upbound.io/v1beta1
+apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: VaultLockConfiguration
 metadata:
   annotations:

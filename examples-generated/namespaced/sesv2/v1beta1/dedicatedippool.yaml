@@ -1,4 +1,4 @@
-apiVersion: sesv2.m.aws.upbound.io/v1beta1
+apiVersion: sesv2.aws.m.upbound.io/v1beta1
 kind: DedicatedIPPool
 metadata:
   annotations:

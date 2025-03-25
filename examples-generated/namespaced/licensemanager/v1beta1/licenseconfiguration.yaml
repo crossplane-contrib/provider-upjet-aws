@@ -1,4 +1,4 @@
-apiVersion: licensemanager.m.aws.upbound.io/v1beta1
+apiVersion: licensemanager.aws.m.upbound.io/v1beta1
 kind: LicenseConfiguration
 metadata:
   annotations:

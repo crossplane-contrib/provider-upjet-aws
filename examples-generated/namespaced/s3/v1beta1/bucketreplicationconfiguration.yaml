@@ -1,4 +1,4 @@
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketReplicationConfiguration
 metadata:
   annotations:
@@ -29,7 +29,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
@@ -43,7 +43,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -57,7 +57,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
@@ -76,7 +76,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -91,7 +91,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -107,7 +107,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketACL
 metadata:
   annotations:
@@ -126,7 +126,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
   annotations:
@@ -145,7 +145,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
   annotations:

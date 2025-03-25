@@ -1,4 +1,4 @@
-apiVersion: opensearch.m.aws.upbound.io/v1beta1
+apiVersion: opensearch.aws.m.upbound.io/v1beta1
 kind: DomainSAMLOptions
 metadata:
   annotations:
@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: opensearch.m.aws.upbound.io/v1beta1
+apiVersion: opensearch.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
   annotations:

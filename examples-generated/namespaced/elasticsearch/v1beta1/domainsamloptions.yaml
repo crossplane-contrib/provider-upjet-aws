@@ -1,4 +1,4 @@
-apiVersion: elasticsearch.m.aws.upbound.io/v1beta1
+apiVersion: elasticsearch.aws.m.upbound.io/v1beta1
 kind: DomainSAMLOptions
 metadata:
   annotations:
@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: elasticsearch.m.aws.upbound.io/v1beta1
+apiVersion: elasticsearch.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
   annotations:

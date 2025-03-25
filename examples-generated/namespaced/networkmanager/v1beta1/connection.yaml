@@ -1,4 +1,4 @@
-apiVersion: networkmanager.m.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
 kind: Connection
 metadata:
   annotations:

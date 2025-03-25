@@ -1,4 +1,4 @@
-apiVersion: transfer.m.aws.upbound.io/v1beta1
+apiVersion: transfer.aws.m.upbound.io/v1beta1
 kind: SSHKey
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:
@@ -50,7 +50,7 @@ spec:
 
 ---
 
-apiVersion: transfer.m.aws.upbound.io/v1beta1
+apiVersion: transfer.aws.m.upbound.io/v1beta1
 kind: Server
 metadata:
   annotations:
@@ -67,7 +67,7 @@ spec:
 
 ---
 
-apiVersion: transfer.m.aws.upbound.io/v1beta1
+apiVersion: transfer.aws.m.upbound.io/v1beta1
 kind: User
 metadata:
   annotations:

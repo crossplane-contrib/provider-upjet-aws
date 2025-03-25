@@ -1,4 +1,4 @@
-apiVersion: cloudformation.m.aws.upbound.io/v1beta1
+apiVersion: cloudformation.aws.m.upbound.io/v1beta1
 kind: Stack
 metadata:
   annotations:

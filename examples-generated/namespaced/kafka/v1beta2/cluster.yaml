@@ -1,4 +1,4 @@
-apiVersion: kafka.m.aws.upbound.io/v1beta2
+apiVersion: kafka.aws.m.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:
@@ -56,7 +56,7 @@ spec:
 
 ---
 
-apiVersion: cloudwatchlogs.m.aws.upbound.io/v1beta1
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
 kind: Group
 metadata:
   annotations:
@@ -70,7 +70,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -84,7 +84,7 @@ spec:
 
 ---
 
-apiVersion: firehose.m.aws.upbound.io/v1beta1
+apiVersion: firehose.aws.m.upbound.io/v1beta1
 kind: DeliveryStream
 metadata:
   annotations:
@@ -109,7 +109,7 @@ spec:
 
 ---
 
-apiVersion: kms.m.aws.upbound.io/v1beta1
+apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   annotations:
@@ -124,7 +124,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -139,7 +139,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketACL
 metadata:
   annotations:
@@ -157,7 +157,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
@@ -174,7 +174,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -193,7 +193,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -212,7 +212,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -231,7 +231,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:

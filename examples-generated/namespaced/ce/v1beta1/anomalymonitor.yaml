@@ -1,4 +1,4 @@
-apiVersion: ce.m.aws.upbound.io/v1beta1
+apiVersion: ce.aws.m.upbound.io/v1beta1
 kind: AnomalyMonitor
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: inspector.m.aws.upbound.io/v1beta1
+apiVersion: inspector.aws.m.upbound.io/v1beta1
 kind: AssessmentTemplate
 metadata:
   annotations:

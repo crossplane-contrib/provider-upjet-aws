@@ -1,4 +1,4 @@
-apiVersion: emrserverless.m.aws.upbound.io/v1beta1
+apiVersion: emrserverless.aws.m.upbound.io/v1beta1
 kind: Application
 metadata:
   annotations:

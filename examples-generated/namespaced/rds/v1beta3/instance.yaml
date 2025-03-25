@@ -1,4 +1,4 @@
-apiVersion: rds.m.aws.upbound.io/v1beta3
+apiVersion: rds.aws.m.upbound.io/v1beta3
 kind: Instance
 metadata:
   annotations:

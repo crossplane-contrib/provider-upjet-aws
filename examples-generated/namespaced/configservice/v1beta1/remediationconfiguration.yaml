@@ -1,4 +1,4 @@
-apiVersion: configservice.m.aws.upbound.io/v1beta1
+apiVersion: configservice.aws.m.upbound.io/v1beta1
 kind: RemediationConfiguration
 metadata:
   annotations:
@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: configservice.m.aws.upbound.io/v1beta1
+apiVersion: configservice.aws.m.upbound.io/v1beta1
 kind: ConfigRule
 metadata:
   annotations:

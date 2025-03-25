@@ -1,4 +1,4 @@
-apiVersion: elb.m.aws.upbound.io/v1beta1
+apiVersion: elb.aws.m.upbound.io/v1beta1
 kind: BackendServerPolicy
 metadata:
   annotations:
@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: elb.m.aws.upbound.io/v1beta1
+apiVersion: elb.aws.m.upbound.io/v1beta1
 kind: ELB
 metadata:
   annotations:
@@ -42,7 +42,7 @@ spec:
 
 ---
 
-apiVersion: elb.m.aws.upbound.io/v1beta1
+apiVersion: elb.aws.m.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
@@ -66,7 +66,7 @@ spec:
 
 ---
 
-apiVersion: elb.m.aws.upbound.io/v1beta1
+apiVersion: elb.aws.m.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:

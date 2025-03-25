@@ -1,4 +1,4 @@
-apiVersion: xray.m.aws.upbound.io/v1beta1
+apiVersion: xray.aws.m.upbound.io/v1beta1
 kind: EncryptionConfig
 metadata:
   annotations:

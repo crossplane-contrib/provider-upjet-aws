@@ -1,4 +1,4 @@
-apiVersion: configservice.m.aws.upbound.io/v1beta1
+apiVersion: configservice.aws.m.upbound.io/v1beta1
 kind: ConfigRule
 metadata:
   annotations:
@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: configservice.m.aws.upbound.io/v1beta1
+apiVersion: configservice.aws.m.upbound.io/v1beta1
 kind: ConfigurationRecorder
 metadata:
   annotations:
@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -48,7 +48,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: kafka.m.aws.upbound.io/v1beta1
+apiVersion: kafka.aws.m.upbound.io/v1beta1
 kind: Configuration
 metadata:
   annotations:

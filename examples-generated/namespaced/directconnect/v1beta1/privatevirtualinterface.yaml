@@ -1,4 +1,4 @@
-apiVersion: directconnect.m.aws.upbound.io/v1beta1
+apiVersion: directconnect.aws.m.upbound.io/v1beta1
 kind: PrivateVirtualInterface
 metadata:
   annotations:

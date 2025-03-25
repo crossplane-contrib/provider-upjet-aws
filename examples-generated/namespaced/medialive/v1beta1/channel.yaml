@@ -1,4 +1,4 @@
-apiVersion: medialive.m.aws.upbound.io/v1beta1
+apiVersion: medialive.aws.m.upbound.io/v1beta1
 kind: Channel
 metadata:
   annotations:

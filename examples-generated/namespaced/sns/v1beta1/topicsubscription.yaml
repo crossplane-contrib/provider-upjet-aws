@@ -1,4 +1,4 @@
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: TopicSubscription
 metadata:
   annotations:

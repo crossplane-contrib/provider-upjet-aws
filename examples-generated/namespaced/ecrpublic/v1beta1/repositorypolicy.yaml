@@ -1,4 +1,4 @@
-apiVersion: ecrpublic.m.aws.upbound.io/v1beta1
+apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
 kind: RepositoryPolicy
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: ecrpublic.m.aws.upbound.io/v1beta1
+apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   annotations:

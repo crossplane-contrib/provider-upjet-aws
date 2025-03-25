@@ -1,4 +1,4 @@
-apiVersion: ds.m.aws.upbound.io/v1beta1
+apiVersion: ds.aws.m.upbound.io/v1beta1
 kind: Directory
 metadata:
   annotations:
@@ -27,7 +27,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -46,7 +46,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -65,7 +65,7 @@ spec:
 
 ---
 
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:

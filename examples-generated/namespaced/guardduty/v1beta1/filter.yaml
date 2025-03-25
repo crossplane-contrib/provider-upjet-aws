@@ -1,4 +1,4 @@
-apiVersion: guardduty.m.aws.upbound.io/v1beta1
+apiVersion: guardduty.aws.m.upbound.io/v1beta1
 kind: Filter
 metadata:
   annotations:

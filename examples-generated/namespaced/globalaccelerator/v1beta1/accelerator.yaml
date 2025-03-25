@@ -1,4 +1,4 @@
-apiVersion: globalaccelerator.m.aws.upbound.io/v1beta1
+apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
 kind: Accelerator
 metadata:
   annotations:

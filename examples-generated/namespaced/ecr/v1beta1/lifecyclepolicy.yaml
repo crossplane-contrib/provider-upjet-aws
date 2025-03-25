@@ -1,4 +1,4 @@
-apiVersion: ecr.m.aws.upbound.io/v1beta1
+apiVersion: ecr.aws.m.upbound.io/v1beta1
 kind: LifecyclePolicy
 metadata:
   annotations:
@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: ecr.m.aws.upbound.io/v1beta1
+apiVersion: ecr.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   annotations:

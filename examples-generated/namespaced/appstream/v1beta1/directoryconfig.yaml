@@ -1,4 +1,4 @@
-apiVersion: appstream.m.aws.upbound.io/v1beta1
+apiVersion: appstream.aws.m.upbound.io/v1beta1
 kind: DirectoryConfig
 metadata:
   annotations:

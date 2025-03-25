@@ -1,4 +1,4 @@
-apiVersion: wafregional.m.aws.upbound.io/v1beta1
+apiVersion: wafregional.aws.m.upbound.io/v1beta1
 kind: RegexMatchSet
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: wafregional.m.aws.upbound.io/v1beta1
+apiVersion: wafregional.aws.m.upbound.io/v1beta1
 kind: RegexPatternSet
 metadata:
   annotations:

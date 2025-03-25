@@ -1,4 +1,4 @@
-apiVersion: connect.m.aws.upbound.io/v1beta2
+apiVersion: connect.aws.m.upbound.io/v1beta2
 kind: RoutingProfile
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: swf.m.aws.upbound.io/v1beta1
+apiVersion: swf.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: inspector2.m.aws.upbound.io/v1beta1
+apiVersion: inspector2.aws.m.upbound.io/v1beta1
 kind: Enabler
 metadata:
   annotations:

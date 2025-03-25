@@ -1,4 +1,4 @@
-apiVersion: redshift.m.aws.upbound.io/v1beta1
+apiVersion: redshift.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:

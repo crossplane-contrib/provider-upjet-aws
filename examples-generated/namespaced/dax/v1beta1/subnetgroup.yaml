@@ -1,4 +1,4 @@
-apiVersion: dax.m.aws.upbound.io/v1beta1
+apiVersion: dax.aws.m.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
   annotations:

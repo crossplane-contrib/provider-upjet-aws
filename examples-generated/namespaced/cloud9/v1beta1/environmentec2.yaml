@@ -1,4 +1,4 @@
-apiVersion: cloud9.m.aws.upbound.io/v1beta1
+apiVersion: cloud9.aws.m.upbound.io/v1beta1
 kind: EnvironmentEC2
 metadata:
   annotations:

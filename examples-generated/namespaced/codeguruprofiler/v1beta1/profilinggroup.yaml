@@ -1,4 +1,4 @@
-apiVersion: codeguruprofiler.m.aws.upbound.io/v1beta1
+apiVersion: codeguruprofiler.aws.m.upbound.io/v1beta1
 kind: ProfilingGroup
 metadata:
   annotations:

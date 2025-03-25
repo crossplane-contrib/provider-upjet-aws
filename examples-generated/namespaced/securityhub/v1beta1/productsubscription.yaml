@@ -1,4 +1,4 @@
-apiVersion: securityhub.m.aws.upbound.io/v1beta1
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
 kind: ProductSubscription
 metadata:
   annotations:
@@ -13,7 +13,7 @@ spec:
 
 ---
 
-apiVersion: securityhub.m.aws.upbound.io/v1beta1
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:

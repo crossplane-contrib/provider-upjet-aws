@@ -1,4 +1,4 @@
-apiVersion: fsx.m.aws.upbound.io/v1beta1
+apiVersion: fsx.aws.m.upbound.io/v1beta1
 kind: DataRepositoryAssociation
 metadata:
   annotations:
@@ -28,7 +28,7 @@ spec:
 
 ---
 
-apiVersion: fsx.m.aws.upbound.io/v1beta1
+apiVersion: fsx.aws.m.upbound.io/v1beta1
 kind: LustreFileSystem
 metadata:
   annotations:
@@ -47,7 +47,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -62,7 +62,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketACL
 metadata:
   annotations:

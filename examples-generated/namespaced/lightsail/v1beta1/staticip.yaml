@@ -1,4 +1,4 @@
-apiVersion: lightsail.m.aws.upbound.io/v1beta1
+apiVersion: lightsail.aws.m.upbound.io/v1beta1
 kind: StaticIP
 metadata:
   annotations:

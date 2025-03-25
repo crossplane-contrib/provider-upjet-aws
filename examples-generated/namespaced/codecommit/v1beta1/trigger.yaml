@@ -1,4 +1,4 @@
-apiVersion: codecommit.m.aws.upbound.io/v1beta1
+apiVersion: codecommit.aws.m.upbound.io/v1beta1
 kind: Trigger
 metadata:
   annotations:
@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: codecommit.m.aws.upbound.io/v1beta1
+apiVersion: codecommit.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   annotations:

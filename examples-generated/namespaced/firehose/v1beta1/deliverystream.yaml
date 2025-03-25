@@ -1,4 +1,4 @@
-apiVersion: firehose.m.aws.upbound.io/v1beta1
+apiVersion: firehose.aws.m.upbound.io/v1beta1
 kind: DeliveryStream
 metadata:
   annotations:
@@ -28,7 +28,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -42,7 +42,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -56,7 +56,7 @@ spec:
 
 ---
 
-apiVersion: lambda.m.aws.upbound.io/v1beta1
+apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: Function
 metadata:
   annotations:
@@ -76,7 +76,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -91,7 +91,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketACL
 metadata:
   annotations:

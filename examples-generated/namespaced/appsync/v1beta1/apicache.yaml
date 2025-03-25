@@ -1,4 +1,4 @@
-apiVersion: appsync.m.aws.upbound.io/v1beta1
+apiVersion: appsync.aws.m.upbound.io/v1beta1
 kind: APICache
 metadata:
   annotations:
@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: appsync.m.aws.upbound.io/v1beta1
+apiVersion: appsync.aws.m.upbound.io/v1beta1
 kind: GraphQLAPI
 metadata:
   annotations:

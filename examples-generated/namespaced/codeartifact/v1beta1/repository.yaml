@@ -1,4 +1,4 @@
-apiVersion: codeartifact.m.aws.upbound.io/v1beta1
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: codeartifact.m.aws.upbound.io/v1beta1
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
   annotations:
@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: kms.m.aws.upbound.io/v1beta1
+apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   annotations:

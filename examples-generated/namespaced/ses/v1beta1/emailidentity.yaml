@@ -1,4 +1,4 @@
-apiVersion: ses.m.aws.upbound.io/v1beta1
+apiVersion: ses.aws.m.upbound.io/v1beta1
 kind: EmailIdentity
 metadata:
   annotations:

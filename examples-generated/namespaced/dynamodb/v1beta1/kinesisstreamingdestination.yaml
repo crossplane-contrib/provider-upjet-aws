@@ -1,4 +1,4 @@
-apiVersion: dynamodb.m.aws.upbound.io/v1beta1
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: KinesisStreamingDestination
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: dynamodb.m.aws.upbound.io/v1beta1
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: Table
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: kinesis.m.aws.upbound.io/v1beta1
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
 kind: Stream
 metadata:
   annotations:

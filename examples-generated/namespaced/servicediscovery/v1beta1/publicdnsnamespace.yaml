@@ -1,4 +1,4 @@
-apiVersion: servicediscovery.m.aws.upbound.io/v1beta1
+apiVersion: servicediscovery.aws.m.upbound.io/v1beta1
 kind: PublicDNSNamespace
 metadata:
   annotations:

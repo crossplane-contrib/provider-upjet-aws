@@ -1,4 +1,4 @@
-apiVersion: cloudwatchevents.m.aws.upbound.io/v1beta1
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
 kind: Connection
 metadata:
   annotations:

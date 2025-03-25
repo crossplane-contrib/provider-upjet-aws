@@ -1,4 +1,4 @@
-apiVersion: amp.m.aws.upbound.io/v1beta1
+apiVersion: amp.aws.m.upbound.io/v1beta1
 kind: AlertManagerDefinition
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: amp.m.aws.upbound.io/v1beta1
+apiVersion: amp.aws.m.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:

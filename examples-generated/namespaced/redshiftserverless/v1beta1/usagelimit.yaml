@@ -1,4 +1,4 @@
-apiVersion: redshiftserverless.m.aws.upbound.io/v1beta1
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
 kind: UsageLimit
 metadata:
   annotations:
@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: redshiftserverless.m.aws.upbound.io/v1beta1
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
 kind: Workgroup
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: schemas.m.aws.upbound.io/v1beta1
+apiVersion: schemas.aws.m.upbound.io/v1beta1
 kind: Schema
 metadata:
   annotations:
@@ -39,7 +39,7 @@ spec:
 
 ---
 
-apiVersion: schemas.m.aws.upbound.io/v1beta1
+apiVersion: schemas.aws.m.upbound.io/v1beta1
 kind: Registry
 metadata:
   annotations:

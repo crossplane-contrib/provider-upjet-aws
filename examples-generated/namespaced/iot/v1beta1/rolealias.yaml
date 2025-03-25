@@ -1,4 +1,4 @@
-apiVersion: iot.m.aws.upbound.io/v1beta1
+apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: RoleAlias
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:

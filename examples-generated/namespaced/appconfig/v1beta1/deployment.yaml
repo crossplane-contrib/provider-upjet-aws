@@ -1,4 +1,4 @@
-apiVersion: appconfig.m.aws.upbound.io/v1beta1
+apiVersion: appconfig.aws.m.upbound.io/v1beta1
 kind: Deployment
 metadata:
   annotations:

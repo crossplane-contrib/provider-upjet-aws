@@ -1,4 +1,4 @@
-apiVersion: elasticache.m.aws.upbound.io/v1beta1
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:

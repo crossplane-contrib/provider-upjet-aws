@@ -1,4 +1,4 @@
-apiVersion: osis.m.aws.upbound.io/v1beta1
+apiVersion: osis.aws.m.upbound.io/v1beta1
 kind: Pipeline
 metadata:
   annotations:
@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:

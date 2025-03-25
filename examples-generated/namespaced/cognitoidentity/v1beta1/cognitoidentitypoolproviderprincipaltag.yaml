@@ -1,4 +1,4 @@
-apiVersion: cognitoidentity.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidentity.aws.m.upbound.io/v1beta1
 kind: CognitoIdentityPoolProviderPrincipalTag
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: cognitoidentity.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidentity.aws.m.upbound.io/v1beta1
 kind: Pool
 metadata:
   annotations:
@@ -43,7 +43,7 @@ spec:
 
 ---
 
-apiVersion: cognitoidp.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: UserPool
 metadata:
   annotations:
@@ -60,7 +60,7 @@ spec:
 
 ---
 
-apiVersion: cognitoidp.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: UserPoolClient
 metadata:
   annotations:

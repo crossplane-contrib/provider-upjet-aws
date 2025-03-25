@@ -1,4 +1,4 @@
-apiVersion: athena.m.aws.upbound.io/v1beta1
+apiVersion: athena.aws.m.upbound.io/v1beta1
 kind: DataCatalog
 metadata:
   annotations:

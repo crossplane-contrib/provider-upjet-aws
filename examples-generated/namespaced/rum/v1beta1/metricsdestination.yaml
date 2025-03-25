@@ -1,4 +1,4 @@
-apiVersion: rum.m.aws.upbound.io/v1beta1
+apiVersion: rum.aws.m.upbound.io/v1beta1
 kind: MetricsDestination
 metadata:
   annotations:

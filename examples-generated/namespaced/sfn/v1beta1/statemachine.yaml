@@ -1,4 +1,4 @@
-apiVersion: sfn.m.aws.upbound.io/v1beta1
+apiVersion: sfn.aws.m.upbound.io/v1beta1
 kind: StateMachine
 metadata:
   annotations:

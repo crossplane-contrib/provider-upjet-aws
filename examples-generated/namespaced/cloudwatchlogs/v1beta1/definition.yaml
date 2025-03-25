@@ -1,4 +1,4 @@
-apiVersion: cloudwatchlogs.m.aws.upbound.io/v1beta1
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
 kind: Definition
 metadata:
   annotations:

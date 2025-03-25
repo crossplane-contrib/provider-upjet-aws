@@ -1,4 +1,4 @@
-apiVersion: dynamodb.m.aws.upbound.io/v1beta1
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: GlobalTable
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: dynamodb.m.aws.upbound.io/v1beta1
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: Table
 metadata:
   annotations:
@@ -39,7 +39,7 @@ spec:
 
 ---
 
-apiVersion: dynamodb.m.aws.upbound.io/v1beta1
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: Table
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: quicksight.m.aws.upbound.io/v1beta1
+apiVersion: quicksight.aws.m.upbound.io/v1beta1
 kind: Group
 metadata:
   annotations:

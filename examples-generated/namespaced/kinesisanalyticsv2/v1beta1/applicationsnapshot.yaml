@@ -1,4 +1,4 @@
-apiVersion: kinesisanalyticsv2.m.aws.upbound.io/v1beta1
+apiVersion: kinesisanalyticsv2.aws.m.upbound.io/v1beta1
 kind: ApplicationSnapshot
 metadata:
   annotations:

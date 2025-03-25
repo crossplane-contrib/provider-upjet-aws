@@ -1,4 +1,4 @@
-apiVersion: elastictranscoder.m.aws.upbound.io/v1beta1
+apiVersion: elastictranscoder.aws.m.upbound.io/v1beta1
 kind: Pipeline
 metadata:
   annotations:

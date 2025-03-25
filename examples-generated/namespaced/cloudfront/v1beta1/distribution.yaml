@@ -1,4 +1,4 @@
-apiVersion: cloudfront.m.aws.upbound.io/v1beta1
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
 kind: Distribution
 metadata:
   annotations:
@@ -103,7 +103,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -120,7 +120,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketACL
 metadata:
   annotations:

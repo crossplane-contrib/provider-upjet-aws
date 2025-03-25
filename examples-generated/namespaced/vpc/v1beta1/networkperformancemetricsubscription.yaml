@@ -1,4 +1,4 @@
-apiVersion: vpc.m.aws.upbound.io/v1beta1
+apiVersion: vpc.aws.m.upbound.io/v1beta1
 kind: NetworkPerformanceMetricSubscription
 metadata:
   annotations:

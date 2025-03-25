@@ -1,4 +1,4 @@
-apiVersion: appintegrations.m.aws.upbound.io/v1beta1
+apiVersion: appintegrations.aws.m.upbound.io/v1beta1
 kind: EventIntegration
 metadata:
   annotations:

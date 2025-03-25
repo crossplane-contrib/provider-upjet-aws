@@ -1,4 +1,4 @@
-apiVersion: appautoscaling.m.aws.upbound.io/v1beta1
+apiVersion: appautoscaling.aws.m.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
@@ -26,7 +26,7 @@ spec:
 
 ---
 
-apiVersion: appautoscaling.m.aws.upbound.io/v1beta1
+apiVersion: appautoscaling.aws.m.upbound.io/v1beta1
 kind: Target
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: opensearchserverless.m.aws.upbound.io/v1beta1
+apiVersion: opensearchserverless.aws.m.upbound.io/v1beta1
 kind: SecurityConfig
 metadata:
   annotations:

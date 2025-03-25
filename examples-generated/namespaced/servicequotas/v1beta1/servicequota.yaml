@@ -1,4 +1,4 @@
-apiVersion: servicequotas.m.aws.upbound.io/v1beta1
+apiVersion: servicequotas.aws.m.upbound.io/v1beta1
 kind: ServiceQuota
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: ssoadmin.m.aws.upbound.io/v1beta1
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
 kind: PermissionSetInlinePolicy
 metadata:
   annotations:
@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: ssoadmin.m.aws.upbound.io/v1beta1
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
 kind: PermissionSet
 metadata:
   annotations:

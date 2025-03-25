@@ -1,4 +1,4 @@
-apiVersion: lambda.m.aws.upbound.io/v1beta1
+apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: Permission
 metadata:
   annotations:
@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: lambda.m.aws.upbound.io/v1beta1
+apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: Alias
 metadata:
   annotations:
@@ -68,7 +68,7 @@ spec:
 
 ---
 
-apiVersion: lambda.m.aws.upbound.io/v1beta1
+apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: Function
 metadata:
   annotations:

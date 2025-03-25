@@ -1,4 +1,4 @@
-apiVersion: identitystore.m.aws.upbound.io/v1beta1
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
 kind: GroupMembership
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: identitystore.m.aws.upbound.io/v1beta1
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
 kind: Group
 metadata:
   annotations:
@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: identitystore.m.aws.upbound.io/v1beta1
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
 kind: User
 metadata:
   annotations:

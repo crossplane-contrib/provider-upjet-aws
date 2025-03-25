@@ -1,4 +1,4 @@
-apiVersion: scheduler.m.aws.upbound.io/v1beta1
+apiVersion: scheduler.aws.m.upbound.io/v1beta1
 kind: ScheduleGroup
 metadata:
   annotations:

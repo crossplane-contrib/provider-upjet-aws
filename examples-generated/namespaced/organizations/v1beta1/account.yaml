@@ -1,4 +1,4 @@
-apiVersion: organizations.m.aws.upbound.io/v1beta1
+apiVersion: organizations.aws.m.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:

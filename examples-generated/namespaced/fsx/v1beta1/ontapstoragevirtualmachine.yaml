@@ -1,4 +1,4 @@
-apiVersion: fsx.m.aws.upbound.io/v1beta1
+apiVersion: fsx.aws.m.upbound.io/v1beta1
 kind: OntapStorageVirtualMachine
 metadata:
   annotations:

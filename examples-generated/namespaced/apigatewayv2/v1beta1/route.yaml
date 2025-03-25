@@ -1,4 +1,4 @@
-apiVersion: apigatewayv2.m.aws.upbound.io/v1beta1
+apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
 kind: Route
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: apigatewayv2.m.aws.upbound.io/v1beta1
+apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
 kind: API
 metadata:
   annotations:

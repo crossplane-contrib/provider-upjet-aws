@@ -1,4 +1,4 @@
-apiVersion: codepipeline.m.aws.upbound.io/v1beta1
+apiVersion: codepipeline.aws.m.upbound.io/v1beta1
 kind: Codepipeline
 metadata:
   annotations:
@@ -65,7 +65,7 @@ spec:
 
 ---
 
-apiVersion: codestarconnections.m.aws.upbound.io/v1beta1
+apiVersion: codestarconnections.aws.m.upbound.io/v1beta1
 kind: Connection
 metadata:
   annotations:
@@ -81,7 +81,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -95,7 +95,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:
@@ -112,7 +112,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
@@ -127,7 +127,7 @@ spec:
 
 ---
 
-apiVersion: s3.m.aws.upbound.io/v1beta1
+apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketPublicAccessBlock
 metadata:
   annotations:

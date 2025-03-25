@@ -1,4 +1,4 @@
-apiVersion: amplify.m.aws.upbound.io/v1beta1
+apiVersion: amplify.aws.m.upbound.io/v1beta1
 kind: Webhook
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: amplify.m.aws.upbound.io/v1beta1
+apiVersion: amplify.aws.m.upbound.io/v1beta1
 kind: App
 metadata:
   annotations:
@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: amplify.m.aws.upbound.io/v1beta1
+apiVersion: amplify.aws.m.upbound.io/v1beta1
 kind: Branch
 metadata:
   annotations:

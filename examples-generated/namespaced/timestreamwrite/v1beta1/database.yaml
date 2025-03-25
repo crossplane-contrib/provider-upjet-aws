@@ -1,4 +1,4 @@
-apiVersion: timestreamwrite.m.aws.upbound.io/v1beta1
+apiVersion: timestreamwrite.aws.m.upbound.io/v1beta1
 kind: Database
 metadata:
   annotations:

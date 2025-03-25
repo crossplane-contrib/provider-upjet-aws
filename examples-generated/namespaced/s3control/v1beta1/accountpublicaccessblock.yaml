@@ -1,4 +1,4 @@
-apiVersion: s3control.m.aws.upbound.io/v1beta1
+apiVersion: s3control.aws.m.upbound.io/v1beta1
 kind: AccountPublicAccessBlock
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: efs.m.aws.upbound.io/v1beta1
+apiVersion: efs.aws.m.upbound.io/v1beta1
 kind: AccessPoint
 metadata:
   annotations:

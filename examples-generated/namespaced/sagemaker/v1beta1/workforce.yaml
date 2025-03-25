@@ -1,4 +1,4 @@
-apiVersion: sagemaker.m.aws.upbound.io/v1beta1
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
 kind: Workforce
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: cognitoidp.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: UserPool
 metadata:
   annotations:
@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: cognitoidp.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: UserPoolClient
 metadata:
   annotations:
@@ -53,7 +53,7 @@ spec:
 
 ---
 
-apiVersion: cognitoidp.m.aws.upbound.io/v1beta1
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: UserPoolDomain
 metadata:
   annotations:

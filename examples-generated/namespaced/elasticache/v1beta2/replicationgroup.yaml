@@ -1,4 +1,4 @@
-apiVersion: elasticache.m.aws.upbound.io/v1beta2
+apiVersion: elasticache.aws.m.upbound.io/v1beta2
 kind: ReplicationGroup
 metadata:
   annotations:

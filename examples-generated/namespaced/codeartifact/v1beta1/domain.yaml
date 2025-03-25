@@ -1,4 +1,4 @@
-apiVersion: codeartifact.m.aws.upbound.io/v1beta1
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
   annotations:

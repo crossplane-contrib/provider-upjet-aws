@@ -1,4 +1,4 @@
-apiVersion: appsync.m.aws.upbound.io/v1beta1
+apiVersion: appsync.aws.m.upbound.io/v1beta1
 kind: Datasource
 metadata:
   annotations:
@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: appsync.m.aws.upbound.io/v1beta1
+apiVersion: appsync.aws.m.upbound.io/v1beta1
 kind: GraphQLAPI
 metadata:
   annotations:
@@ -39,7 +39,7 @@ spec:
 
 ---
 
-apiVersion: dynamodb.m.aws.upbound.io/v1beta1
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: Table
 metadata:
   annotations:
@@ -59,7 +59,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -73,7 +73,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:

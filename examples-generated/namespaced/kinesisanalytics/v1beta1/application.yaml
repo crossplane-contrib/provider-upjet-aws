@@ -1,4 +1,4 @@
-apiVersion: kinesisanalytics.m.aws.upbound.io/v1beta1
+apiVersion: kinesisanalytics.aws.m.upbound.io/v1beta1
 kind: Application
 metadata:
   annotations:
@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: kinesis.m.aws.upbound.io/v1beta1
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
 kind: Stream
 metadata:
   annotations:

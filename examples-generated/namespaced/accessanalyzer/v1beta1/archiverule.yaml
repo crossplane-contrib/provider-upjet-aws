@@ -1,4 +1,4 @@
-apiVersion: accessanalyzer.m.aws.upbound.io/v1beta1
+apiVersion: accessanalyzer.aws.m.upbound.io/v1beta1
 kind: ArchiveRule
 metadata:
   annotations:

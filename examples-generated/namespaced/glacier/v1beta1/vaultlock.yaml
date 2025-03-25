@@ -1,4 +1,4 @@
-apiVersion: glacier.m.aws.upbound.io/v1beta1
+apiVersion: glacier.aws.m.upbound.io/v1beta1
 kind: VaultLock
 metadata:
   annotations:
@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: glacier.m.aws.upbound.io/v1beta1
+apiVersion: glacier.aws.m.upbound.io/v1beta1
 kind: Vault
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: devicefarm.m.aws.upbound.io/v1beta1
+apiVersion: devicefarm.aws.m.upbound.io/v1beta1
 kind: TestGridProject
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: cloudcontrol.m.aws.upbound.io/v1beta1
+apiVersion: cloudcontrol.aws.m.upbound.io/v1beta1
 kind: Resource
 metadata:
   annotations:

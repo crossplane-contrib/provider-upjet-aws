@@ -1,4 +1,4 @@
-apiVersion: detective.m.aws.upbound.io/v1beta1
+apiVersion: detective.aws.m.upbound.io/v1beta1
 kind: Graph
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: elasticbeanstalk.m.aws.upbound.io/v1beta1
+apiVersion: elasticbeanstalk.aws.m.upbound.io/v1beta1
 kind: ConfigurationTemplate
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: elasticbeanstalk.m.aws.upbound.io/v1beta1
+apiVersion: elasticbeanstalk.aws.m.upbound.io/v1beta1
 kind: Application
 metadata:
   annotations:

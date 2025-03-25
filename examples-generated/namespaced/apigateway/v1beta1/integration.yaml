@@ -1,4 +1,4 @@
-apiVersion: apigateway.m.aws.upbound.io/v1beta1
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
 kind: Integration
 metadata:
   annotations:
@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: apigateway.m.aws.upbound.io/v1beta1
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
 kind: Method
 metadata:
   annotations:
@@ -55,7 +55,7 @@ spec:
 
 ---
 
-apiVersion: apigateway.m.aws.upbound.io/v1beta1
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
 kind: Resource
 metadata:
   annotations:
@@ -76,7 +76,7 @@ spec:
 
 ---
 
-apiVersion: apigateway.m.aws.upbound.io/v1beta1
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
 kind: RestAPI
 metadata:
   annotations:

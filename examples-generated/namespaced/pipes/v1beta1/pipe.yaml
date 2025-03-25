@@ -1,4 +1,4 @@
-apiVersion: pipes.m.aws.upbound.io/v1beta1
+apiVersion: pipes.aws.m.upbound.io/v1beta1
 kind: Pipe
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -50,7 +50,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:
@@ -83,7 +83,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:
@@ -114,7 +114,7 @@ spec:
 
 ---
 
-apiVersion: sqs.m.aws.upbound.io/v1beta1
+apiVersion: sqs.aws.m.upbound.io/v1beta1
 kind: Queue
 metadata:
   annotations:
@@ -128,7 +128,7 @@ spec:
 
 ---
 
-apiVersion: sqs.m.aws.upbound.io/v1beta1
+apiVersion: sqs.aws.m.upbound.io/v1beta1
 kind: Queue
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: lexmodels.m.aws.upbound.io/v1beta1
+apiVersion: lexmodels.aws.m.upbound.io/v1beta1
 kind: Intent
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: ec2.m.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: AMILaunchPermission
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: iot.m.aws.upbound.io/v1beta1
+apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: PolicyAttachment
 metadata:
   annotations:
@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: iot.m.aws.upbound.io/v1beta1
+apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: Certificate
 metadata:
   annotations:
@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: iot.m.aws.upbound.io/v1beta1
+apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:

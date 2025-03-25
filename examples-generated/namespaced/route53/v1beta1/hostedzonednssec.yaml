@@ -1,4 +1,4 @@
-apiVersion: route53.m.aws.upbound.io/v1beta1
+apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: HostedZoneDNSSEC
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: kms.m.aws.upbound.io/v1beta1
+apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   annotations:
@@ -61,7 +61,7 @@ spec:
 
 ---
 
-apiVersion: route53.m.aws.upbound.io/v1beta1
+apiVersion: route53.aws.m.upbound.io/v1beta1
 kind: Zone
 metadata:
   annotations:

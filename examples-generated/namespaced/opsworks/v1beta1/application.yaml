@@ -1,4 +1,4 @@
-apiVersion: opsworks.m.aws.upbound.io/v1beta1
+apiVersion: opsworks.aws.m.upbound.io/v1beta1
 kind: Application
 metadata:
   annotations:

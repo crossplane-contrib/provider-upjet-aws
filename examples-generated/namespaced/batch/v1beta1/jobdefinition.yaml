@@ -1,4 +1,4 @@
-apiVersion: batch.m.aws.upbound.io/v1beta1
+apiVersion: batch.aws.m.upbound.io/v1beta1
 kind: JobDefinition
 metadata:
   annotations:

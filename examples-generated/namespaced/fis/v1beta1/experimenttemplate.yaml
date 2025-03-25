@@ -1,4 +1,4 @@
-apiVersion: fis.m.aws.upbound.io/v1beta1
+apiVersion: fis.aws.m.upbound.io/v1beta1
 kind: ExperimentTemplate
 metadata:
   annotations:

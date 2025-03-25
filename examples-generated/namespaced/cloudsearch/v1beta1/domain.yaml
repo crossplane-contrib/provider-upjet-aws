@@ -1,4 +1,4 @@
-apiVersion: cloudsearch.m.aws.upbound.io/v1beta1
+apiVersion: cloudsearch.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
   annotations:

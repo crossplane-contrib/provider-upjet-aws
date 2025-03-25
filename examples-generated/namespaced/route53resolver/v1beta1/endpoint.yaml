@@ -1,4 +1,4 @@
-apiVersion: route53resolver.m.aws.upbound.io/v1beta1
+apiVersion: route53resolver.aws.m.upbound.io/v1beta1
 kind: Endpoint
 metadata:
   annotations:

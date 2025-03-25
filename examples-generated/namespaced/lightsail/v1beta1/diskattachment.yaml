@@ -1,4 +1,4 @@
-apiVersion: lightsail.m.aws.upbound.io/v1beta1
+apiVersion: lightsail.aws.m.upbound.io/v1beta1
 kind: DiskAttachment
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: lightsail.m.aws.upbound.io/v1beta1
+apiVersion: lightsail.aws.m.upbound.io/v1beta1
 kind: Disk
 metadata:
   annotations:
@@ -35,7 +35,7 @@ spec:
 
 ---
 
-apiVersion: lightsail.m.aws.upbound.io/v1beta1
+apiVersion: lightsail.aws.m.upbound.io/v1beta1
 kind: Instance
 metadata:
   annotations:

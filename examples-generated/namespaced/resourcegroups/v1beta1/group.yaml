@@ -1,4 +1,4 @@
-apiVersion: resourcegroups.m.aws.upbound.io/v1beta1
+apiVersion: resourcegroups.aws.m.upbound.io/v1beta1
 kind: Group
 metadata:
   annotations:

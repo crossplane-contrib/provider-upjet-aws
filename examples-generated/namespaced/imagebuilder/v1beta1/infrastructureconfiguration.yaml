@@ -1,4 +1,4 @@
-apiVersion: imagebuilder.m.aws.upbound.io/v1beta1
+apiVersion: imagebuilder.aws.m.upbound.io/v1beta1
 kind: InfrastructureConfiguration
 metadata:
   annotations:

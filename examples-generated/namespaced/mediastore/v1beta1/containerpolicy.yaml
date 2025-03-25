@@ -1,4 +1,4 @@
-apiVersion: mediastore.m.aws.upbound.io/v1beta1
+apiVersion: mediastore.aws.m.upbound.io/v1beta1
 kind: ContainerPolicy
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: mediastore.m.aws.upbound.io/v1beta1
+apiVersion: mediastore.aws.m.upbound.io/v1beta1
 kind: Container
 metadata:
   annotations:

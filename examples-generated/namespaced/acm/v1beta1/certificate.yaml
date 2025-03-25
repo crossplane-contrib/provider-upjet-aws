@@ -1,4 +1,4 @@
-apiVersion: acm.m.aws.upbound.io/v1beta1
+apiVersion: acm.aws.m.upbound.io/v1beta1
 kind: Certificate
 metadata:
   annotations:

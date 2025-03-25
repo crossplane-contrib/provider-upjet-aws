@@ -1,4 +1,4 @@
-apiVersion: codepipeline.m.aws.upbound.io/v1beta1
+apiVersion: codepipeline.aws.m.upbound.io/v1beta1
 kind: CustomActionType
 metadata:
   annotations:

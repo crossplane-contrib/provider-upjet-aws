@@ -1,4 +1,4 @@
-apiVersion: rds.m.aws.upbound.io/v1beta1
+apiVersion: rds.aws.m.upbound.io/v1beta1
 kind: ProxyDefaultTargetGroup
 metadata:
   annotations:
@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: rds.m.aws.upbound.io/v1beta1
+apiVersion: rds.aws.m.upbound.io/v1beta1
 kind: Proxy
 metadata:
   annotations:

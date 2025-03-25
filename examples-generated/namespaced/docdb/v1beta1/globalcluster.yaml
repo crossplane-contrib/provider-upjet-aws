@@ -1,4 +1,4 @@
-apiVersion: docdb.m.aws.upbound.io/v1beta1
+apiVersion: docdb.aws.m.upbound.io/v1beta1
 kind: GlobalCluster
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: docdb.m.aws.upbound.io/v1beta1
+apiVersion: docdb.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
@@ -39,7 +39,7 @@ spec:
 
 ---
 
-apiVersion: docdb.m.aws.upbound.io/v1beta1
+apiVersion: docdb.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
@@ -58,7 +58,7 @@ spec:
 
 ---
 
-apiVersion: docdb.m.aws.upbound.io/v1beta1
+apiVersion: docdb.aws.m.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
   annotations:
@@ -78,7 +78,7 @@ spec:
 
 ---
 
-apiVersion: docdb.m.aws.upbound.io/v1beta1
+apiVersion: docdb.aws.m.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
   annotations:

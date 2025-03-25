@@ -1,4 +1,4 @@
-apiVersion: codestarconnections.m.aws.upbound.io/v1beta1
+apiVersion: codestarconnections.aws.m.upbound.io/v1beta1
 kind: Host
 metadata:
   annotations:

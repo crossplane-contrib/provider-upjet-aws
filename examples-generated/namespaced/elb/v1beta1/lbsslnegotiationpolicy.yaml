@@ -1,4 +1,4 @@
-apiVersion: elb.m.aws.upbound.io/v1beta1
+apiVersion: elb.aws.m.upbound.io/v1beta1
 kind: LBSSLNegotiationPolicy
 metadata:
   annotations:
@@ -32,7 +32,7 @@ spec:
 
 ---
 
-apiVersion: elb.m.aws.upbound.io/v1beta1
+apiVersion: elb.aws.m.upbound.io/v1beta1
 kind: ELB
 metadata:
   annotations:

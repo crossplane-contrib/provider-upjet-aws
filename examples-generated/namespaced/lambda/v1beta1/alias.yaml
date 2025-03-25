@@ -1,4 +1,4 @@
-apiVersion: lambda.m.aws.upbound.io/v1beta1
+apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: Alias
 metadata:
   annotations:

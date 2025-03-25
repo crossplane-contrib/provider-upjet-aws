@@ -1,4 +1,4 @@
-apiVersion: ram.m.aws.upbound.io/v1beta1
+apiVersion: ram.aws.m.upbound.io/v1beta1
 kind: ResourceAssociation
 metadata:
   annotations:

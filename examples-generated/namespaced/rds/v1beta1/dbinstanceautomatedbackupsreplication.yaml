@@ -1,4 +1,4 @@
-apiVersion: rds.m.aws.upbound.io/v1beta1
+apiVersion: rds.aws.m.upbound.io/v1beta1
 kind: DBInstanceAutomatedBackupsReplication
 metadata:
   annotations:

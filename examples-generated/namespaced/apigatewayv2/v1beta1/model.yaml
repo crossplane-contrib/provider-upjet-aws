@@ -1,4 +1,4 @@
-apiVersion: apigatewayv2.m.aws.upbound.io/v1beta1
+apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
 kind: Model
 metadata:
   annotations:

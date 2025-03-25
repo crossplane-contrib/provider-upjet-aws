@@ -1,4 +1,4 @@
-apiVersion: cloudwatch.m.aws.upbound.io/v1beta1
+apiVersion: cloudwatch.aws.m.upbound.io/v1beta1
 kind: CompositeAlarm
 metadata:
   annotations:

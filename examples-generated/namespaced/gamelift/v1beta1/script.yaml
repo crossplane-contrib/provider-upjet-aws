@@ -1,4 +1,4 @@
-apiVersion: gamelift.m.aws.upbound.io/v1beta1
+apiVersion: gamelift.aws.m.upbound.io/v1beta1
 kind: Script
 metadata:
   annotations:

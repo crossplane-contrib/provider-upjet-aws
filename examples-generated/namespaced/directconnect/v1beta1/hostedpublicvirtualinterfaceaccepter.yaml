@@ -1,4 +1,4 @@
-apiVersion: directconnect.m.aws.upbound.io/v1beta1
+apiVersion: directconnect.aws.m.upbound.io/v1beta1
 kind: HostedPublicVirtualInterfaceAccepter
 metadata:
   annotations:
@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: directconnect.m.aws.upbound.io/v1beta1
+apiVersion: directconnect.aws.m.upbound.io/v1beta1
 kind: HostedPublicVirtualInterface
 metadata:
   annotations:

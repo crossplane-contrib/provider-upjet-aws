@@ -1,4 +1,4 @@
-apiVersion: wafv2.m.aws.upbound.io/v1beta1
+apiVersion: wafv2.aws.m.upbound.io/v1beta1
 kind: RegexPatternSet
 metadata:
   annotations:

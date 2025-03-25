@@ -1,4 +1,4 @@
-apiVersion: deploy.m.aws.upbound.io/v1beta1
+apiVersion: deploy.aws.m.upbound.io/v1beta1
 kind: DeploymentGroup
 metadata:
   annotations:
@@ -42,7 +42,7 @@ spec:
 
 ---
 
-apiVersion: deploy.m.aws.upbound.io/v1beta1
+apiVersion: deploy.aws.m.upbound.io/v1beta1
 kind: App
 metadata:
   annotations:
@@ -56,7 +56,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
@@ -70,7 +70,7 @@ spec:
 
 ---
 
-apiVersion: iam.m.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
@@ -89,7 +89,7 @@ spec:
 
 ---
 
-apiVersion: sns.m.aws.upbound.io/v1beta1
+apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: Topic
 metadata:
   annotations:
