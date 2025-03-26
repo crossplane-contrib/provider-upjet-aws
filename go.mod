@@ -6,8 +6,6 @@ module github.com/upbound/provider-aws
 
 go 1.23.6
 
-replace github.com/crossplane/upjet => github.com/negz/upjet v0.0.0-20250320063135-520f63c242c6
-
 require (
 	dario.cat/mergo v1.0.1
 	github.com/aws/aws-sdk-go v1.55.5
@@ -20,7 +18,7 @@ require (
 	github.com/aws/smithy-go v1.22.1
 	github.com/crossplane/crossplane-runtime v1.17.0
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v1.5.0
+	github.com/crossplane/upjet v1.5.1-0.20250326011105-978f519ee970
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.59
