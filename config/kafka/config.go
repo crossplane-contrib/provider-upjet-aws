@@ -233,6 +233,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.MetaResource.ArgumentDocs["secret_arn_list"] = "- (Required) List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster."
 	})
+	p.AddResourceConfigurator("aws_msk_single_scram_secret_association", func(r *config.Resource) {
+		r.MetaResource.Description += " NOTE: This resource will not have any effect in case AWS MSK cluster has matching ScramSecretAssociation, since ScramSecretAssociation will have exclusive ownership over all SCRAM secrets in the cluster."
+	})
 	p.AddResourceConfigurator("aws_msk_serverless_cluster", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["vpc_config.security_group_ids"] = config.Reference{
