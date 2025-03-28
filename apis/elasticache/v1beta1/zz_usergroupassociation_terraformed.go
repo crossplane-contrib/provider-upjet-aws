@@ -14,18 +14,18 @@ import (
 	"github.com/crossplane/upjet/pkg/resource/json"
 )
 
-// GetTerraformResourceType returns Terraform resource type for this UserGroup
-func (mg *UserGroup) GetTerraformResourceType() string {
-	return "aws_elasticache_user_group"
+// GetTerraformResourceType returns Terraform resource type for this UserGroupAssociation
+func (mg *UserGroupAssociation) GetTerraformResourceType() string {
+	return "aws_elasticache_user_group_association"
 }
 
-// GetConnectionDetailsMapping for this UserGroup
-func (tr *UserGroup) GetConnectionDetailsMapping() map[string]string {
+// GetConnectionDetailsMapping for this UserGroupAssociation
+func (tr *UserGroupAssociation) GetConnectionDetailsMapping() map[string]string {
 	return nil
 }
 
-// GetObservation of this UserGroup
-func (tr *UserGroup) GetObservation() (map[string]any, error) {
+// GetObservation of this UserGroupAssociation
+func (tr *UserGroupAssociation) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -34,8 +34,8 @@ func (tr *UserGroup) GetObservation() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this UserGroup
-func (tr *UserGroup) SetObservation(obs map[string]any) error {
+// SetObservation for this UserGroupAssociation
+func (tr *UserGroupAssociation) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -43,16 +43,16 @@ func (tr *UserGroup) SetObservation(obs map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this UserGroup
-func (tr *UserGroup) GetID() string {
+// GetID returns ID of underlying Terraform resource of this UserGroupAssociation
+func (tr *UserGroupAssociation) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this UserGroup
-func (tr *UserGroup) GetParameters() (map[string]any, error) {
+// GetParameters of this UserGroupAssociation
+func (tr *UserGroupAssociation) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -61,8 +61,8 @@ func (tr *UserGroup) GetParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this UserGroup
-func (tr *UserGroup) SetParameters(params map[string]any) error {
+// SetParameters for this UserGroupAssociation
+func (tr *UserGroupAssociation) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -70,8 +70,8 @@ func (tr *UserGroup) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// GetInitParameters of this UserGroup
-func (tr *UserGroup) GetInitParameters() (map[string]any, error) {
+// GetInitParameters of this UserGroupAssociation
+func (tr *UserGroupAssociation) GetInitParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func (tr *UserGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// GetInitParameters of this UserGroup
-func (tr *UserGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
+// GetInitParameters of this UserGroupAssociation
+func (tr *UserGroupAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
@@ -110,21 +110,20 @@ func (tr *UserGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[stri
 	return params, nil
 }
 
-// LateInitialize this UserGroup using its observed tfState.
+// LateInitialize this UserGroupAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *UserGroup) LateInitialize(attrs []byte) (bool, error) {
-	params := &UserGroupParameters{}
+func (tr *UserGroupAssociation) LateInitialize(attrs []byte) (bool, error) {
+	params := &UserGroupAssociationParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
-	opts = append(opts, resource.WithNameFilter("UserIds"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *UserGroup) GetTerraformSchemaVersion() int {
+func (tr *UserGroupAssociation) GetTerraformSchemaVersion() int {
 	return 0
 }
