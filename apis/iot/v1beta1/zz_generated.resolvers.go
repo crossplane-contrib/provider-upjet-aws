@@ -18,8 +18,108 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *LoggingOptions) ResolveReferences( // ResolveReferences of this LoggingOptions.
+func (mg *Authorizer) ResolveReferences( // ResolveReferences of this Authorizer.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerFunctionArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.AuthorizerFunctionArnRef,
+			Selector:     mg.Spec.ForProvider.AuthorizerFunctionArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AuthorizerFunctionArn")
+	}
+	mg.Spec.ForProvider.AuthorizerFunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AuthorizerFunctionArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerFunctionArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.AuthorizerFunctionArnRef,
+			Selector:     mg.Spec.InitProvider.AuthorizerFunctionArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AuthorizerFunctionArn")
+	}
+	mg.Spec.InitProvider.AuthorizerFunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AuthorizerFunctionArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DomainConfiguration.
+func (mg *DomainConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta2", "Certificate", "CertificateList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ServerCertificateArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.ServerCertificateArnsRefs,
+			Selector:      mg.Spec.ForProvider.ServerCertificateArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerCertificateArns")
+	}
+	mg.Spec.ForProvider.ServerCertificateArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ServerCertificateArnsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta2", "Certificate", "CertificateList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ServerCertificateArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.ServerCertificateArnsRefs,
+			Selector:      mg.Spec.InitProvider.ServerCertificateArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerCertificateArns")
+	}
+	mg.Spec.InitProvider.ServerCertificateArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ServerCertificateArnsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this LoggingOptions.
+func (mg *LoggingOptions) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

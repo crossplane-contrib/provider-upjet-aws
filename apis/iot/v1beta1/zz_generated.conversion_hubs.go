@@ -7,7 +7,13 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *Authorizer) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Certificate) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *DomainConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LoggingOptions) Hub() {}

@@ -1,0 +1,50 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: DomainConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/domainconfiguration
+  labels:
+    testing.upbound.io/example-name: iot
+  name: iot
+spec:
+  forProvider:
+    domainName: iot.example.com
+    region: us-west-1
+    serverCertificateArnsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: certificate
+    serviceType: DATA
+---
+apiVersion: acm.aws.upbound.io/v1beta2
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/domainconfiguration
+  labels:
+    testing.upbound.io/example-name: certificate
+  name: example-dns
+spec:
+  forProvider:
+    domainName: example-dns.upbound-providers.io
+    region: us-west-1
+    tags:
+      Environment: test
+    validationMethod: DNS
+---
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: CertificateValidation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/domainconfiguration
+    upjet.upbound.io/manual-intervention: It requires a real domain to be bought
+  labels:
+    testing.upbound.io/example-name: certificate
+  name: example-dns
+spec:
+  forProvider:
+    certificateArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: certificate
+    region: us-west-1
+    validationRecordFqdns:
+      - _6a48817259ef461524224d64f7a209f4.example-dns.upbound-providers.io
