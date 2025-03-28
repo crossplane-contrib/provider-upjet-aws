@@ -230,6 +230,7 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_msk_replicator":                                       ReplaceGroupWords("kafka", 1),
 	"aws_msk_scram_secret_association":                         ReplaceGroupWords("kafka", 1),
 	"aws_msk_serverless_cluster":                               ReplaceGroupWords("kafka", 1),
+	"aws_msk_single_scram_secret_association":                  ReplaceGroupWords("kafka", 1),
 	"aws_mskconnect_connector":                                 ReplaceGroupWords("kafkaconnect", 1),
 	"aws_mskconnect_custom_plugin":                             ReplaceGroupWords("kafkaconnect", 1),
 	"aws_mskconnect_worker_configuration":                      ReplaceGroupWords("kafkaconnect", 1),

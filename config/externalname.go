@@ -79,6 +79,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 
+	// kafka
+	//
+	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
+	"aws_msk_single_scram_secret_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }},{{ .parameters.secret_arn }}"),
+
 	// mq
 	//
 	// admin
