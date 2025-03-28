@@ -586,7 +586,8 @@ spec:
                         type: string
                     type: object
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported values are redis, valkey (case
+                      insensitive).
                     type: string
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
@@ -660,7 +661,8 @@ spec:
                         type: string
                     type: object
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported values are redis, valkey (case
+                      insensitive).
                     type: string
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
@@ -883,7 +885,8 @@ spec:
                         type: string
                     type: object
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported values are redis, valkey (case
+                      insensitive).
                     type: string
                   id:
                     type: string

@@ -35,7 +35,7 @@ type ContainerInitParameters struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker AI Developer Guide.
 	ModelDataSource *ModelDataSourceInitParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
 
 	// The URL for the S3 location where model artifacts are stored.
@@ -70,7 +70,7 @@ type ContainerObservation struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker AI Developer Guide.
 	ModelDataSource *ModelDataSourceObservation `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
 
 	// The URL for the S3 location where model artifacts are stored.
@@ -111,7 +111,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker AI Developer Guide.
 	// +kubebuilder:validation:Optional
 	ModelDataSource *ModelDataSourceParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
 
@@ -290,7 +290,7 @@ type ModelInitParameters struct {
 	// Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
 	EnableNetworkIsolation *bool `json:"enableNetworkIsolation,omitempty" tf:"enable_network_isolation,omitempty"`
 
-	// A role that SageMaker can assume to access model artifacts and docker images for deployment.
+	// A role that SageMaker AI can assume to access model artifacts and docker images for deployment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
@@ -328,7 +328,7 @@ type ModelObservation struct {
 	// Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
 	EnableNetworkIsolation *bool `json:"enableNetworkIsolation,omitempty" tf:"enable_network_isolation,omitempty"`
 
-	// A role that SageMaker can assume to access model artifacts and docker images for deployment.
+	// A role that SageMaker AI can assume to access model artifacts and docker images for deployment.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -361,7 +361,7 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableNetworkIsolation *bool `json:"enableNetworkIsolation,omitempty" tf:"enable_network_isolation,omitempty"`
 
-	// A role that SageMaker can assume to access model artifacts and docker images for deployment.
+	// A role that SageMaker AI can assume to access model artifacts and docker images for deployment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -468,7 +468,7 @@ type PrimaryContainerInitParameters struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker AI Developer Guide.
 	ModelDataSource *PrimaryContainerModelDataSourceInitParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
 
 	// The URL for the S3 location where model artifacts are stored.
@@ -541,7 +541,7 @@ type PrimaryContainerObservation struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker AI Developer Guide.
 	ModelDataSource *PrimaryContainerModelDataSourceObservation `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
 
 	// The URL for the S3 location where model artifacts are stored.
@@ -582,7 +582,7 @@ type PrimaryContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker AI Developer Guide.
 	// +kubebuilder:validation:Optional
 	ModelDataSource *PrimaryContainerModelDataSourceParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
 
@@ -741,7 +741,7 @@ type ModelStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Model is the Schema for the Models API. Provides a SageMaker model resource.
+// Model is the Schema for the Models API. Provides a SageMaker AI model resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

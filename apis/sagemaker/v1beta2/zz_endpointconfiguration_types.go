@@ -15,7 +15,7 @@ import (
 
 type AsyncInferenceConfigInitParameters struct {
 
-	// Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
+	// Configures the behavior of the client used by Amazon SageMaker AI to interact with the model container during asynchronous inference.
 	ClientConfig *ClientConfigInitParameters `json:"clientConfig,omitempty" tf:"client_config,omitempty"`
 
 	// Specifies the configuration for asynchronous inference invocation outputs.
@@ -24,7 +24,7 @@ type AsyncInferenceConfigInitParameters struct {
 
 type AsyncInferenceConfigObservation struct {
 
-	// Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
+	// Configures the behavior of the client used by Amazon SageMaker AI to interact with the model container during asynchronous inference.
 	ClientConfig *ClientConfigObservation `json:"clientConfig,omitempty" tf:"client_config,omitempty"`
 
 	// Specifies the configuration for asynchronous inference invocation outputs.
@@ -33,7 +33,7 @@ type AsyncInferenceConfigObservation struct {
 
 type AsyncInferenceConfigOutputConfigInitParameters struct {
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker AI uses to encrypt the asynchronous inference output in Amazon S3.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Specifies the configuration for notifications of inference results for asynchronous inference.
@@ -48,7 +48,7 @@ type AsyncInferenceConfigOutputConfigInitParameters struct {
 
 type AsyncInferenceConfigOutputConfigObservation struct {
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker AI uses to encrypt the asynchronous inference output in Amazon S3.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Specifies the configuration for notifications of inference results for asynchronous inference.
@@ -63,7 +63,7 @@ type AsyncInferenceConfigOutputConfigObservation struct {
 
 type AsyncInferenceConfigOutputConfigParameters struct {
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker AI uses to encrypt the asynchronous inference output in Amazon S3.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -82,7 +82,7 @@ type AsyncInferenceConfigOutputConfigParameters struct {
 
 type AsyncInferenceConfigParameters struct {
 
-	// Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
+	// Configures the behavior of the client used by Amazon SageMaker AI to interact with the model container during asynchronous inference.
 	// +kubebuilder:validation:Optional
 	ClientConfig *ClientConfigParameters `json:"clientConfig,omitempty" tf:"client_config,omitempty"`
 
@@ -94,10 +94,12 @@ type AsyncInferenceConfigParameters struct {
 type CaptureContentTypeHeaderInitParameters struct {
 
 	// The CSV content type headers to capture.
+	// One of csv_content_types or json_content_types is required.
 	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
+	// One of json_content_types or csv_content_types is required.
 	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
@@ -105,10 +107,12 @@ type CaptureContentTypeHeaderInitParameters struct {
 type CaptureContentTypeHeaderObservation struct {
 
 	// The CSV content type headers to capture.
+	// One of csv_content_types or json_content_types is required.
 	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
+	// One of json_content_types or csv_content_types is required.
 	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
@@ -116,11 +120,13 @@ type CaptureContentTypeHeaderObservation struct {
 type CaptureContentTypeHeaderParameters struct {
 
 	// The CSV content type headers to capture.
+	// One of csv_content_types or json_content_types is required.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
+	// One of json_content_types or csv_content_types is required.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
@@ -147,19 +153,19 @@ type CaptureOptionsParameters struct {
 
 type ClientConfigInitParameters struct {
 
-	// The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
+	// The maximum number of concurrent requests sent by the SageMaker AI client to the model container. If no value is provided, Amazon SageMaker AI will choose an optimal value for you.
 	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
 
 type ClientConfigObservation struct {
 
-	// The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
+	// The maximum number of concurrent requests sent by the SageMaker AI client to the model container. If no value is provided, Amazon SageMaker AI will choose an optimal value for you.
 	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
 
 type ClientConfigParameters struct {
 
-	// The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
+	// The maximum number of concurrent requests sent by the SageMaker AI client to the model container. If no value is provided, Amazon SageMaker AI will choose an optimal value for you.
 	// +kubebuilder:validation:Optional
 	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
@@ -169,7 +175,7 @@ type CoreDumpConfigInitParameters struct {
 	// The Amazon S3 bucket to send the core dump to.
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker AI uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
@@ -178,7 +184,7 @@ type CoreDumpConfigObservation struct {
 	// The Amazon S3 bucket to send the core dump to.
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker AI uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
@@ -188,14 +194,15 @@ type CoreDumpConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker AI uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type DataCaptureConfigInitParameters struct {
 
-	// The content type headers to capture. Fields are documented below.
+	// The content type headers to capture.
+	// See capture_content_type_header below.
 	CaptureContentTypeHeader *CaptureContentTypeHeaderInitParameters `json:"captureContentTypeHeader,omitempty" tf:"capture_content_type_header,omitempty"`
 
 	// Specifies what data to capture. Fields are documented below.
@@ -210,13 +217,14 @@ type DataCaptureConfigInitParameters struct {
 	// Portion of data to capture. Should be between 0 and 100.
 	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
 
-	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker AI uses to encrypt the captured data on Amazon S3.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type DataCaptureConfigObservation struct {
 
-	// The content type headers to capture. Fields are documented below.
+	// The content type headers to capture.
+	// See capture_content_type_header below.
 	CaptureContentTypeHeader *CaptureContentTypeHeaderObservation `json:"captureContentTypeHeader,omitempty" tf:"capture_content_type_header,omitempty"`
 
 	// Specifies what data to capture. Fields are documented below.
@@ -231,13 +239,14 @@ type DataCaptureConfigObservation struct {
 	// Portion of data to capture. Should be between 0 and 100.
 	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
 
-	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker AI uses to encrypt the captured data on Amazon S3.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type DataCaptureConfigParameters struct {
 
-	// The content type headers to capture. Fields are documented below.
+	// The content type headers to capture.
+	// See capture_content_type_header below.
 	// +kubebuilder:validation:Optional
 	CaptureContentTypeHeader *CaptureContentTypeHeaderParameters `json:"captureContentTypeHeader,omitempty" tf:"capture_content_type_header,omitempty"`
 
@@ -257,7 +266,7 @@ type DataCaptureConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage" tf:"initial_sampling_percentage,omitempty"`
 
-	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker AI uses to encrypt the captured data on Amazon S3.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
@@ -267,10 +276,10 @@ type EndpointConfigurationInitParameters struct {
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	AsyncInferenceConfig *AsyncInferenceConfigInitParameters `json:"asyncInferenceConfig,omitempty" tf:"async_inference_config,omitempty"`
 
-	// Specifies the parameters to capture input/output of SageMaker models endpoints. Fields are documented below.
+	// Specifies the parameters to capture input/output of SageMaker AI models endpoints. Fields are documented below.
 	DataCaptureConfig *DataCaptureConfigInitParameters `json:"dataCaptureConfig,omitempty" tf:"data_capture_config,omitempty"`
 
-	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -301,12 +310,12 @@ type EndpointConfigurationObservation struct {
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	AsyncInferenceConfig *AsyncInferenceConfigObservation `json:"asyncInferenceConfig,omitempty" tf:"async_inference_config,omitempty"`
 
-	// Specifies the parameters to capture input/output of SageMaker models endpoints. Fields are documented below.
+	// Specifies the parameters to capture input/output of SageMaker AI models endpoints. Fields are documented below.
 	DataCaptureConfig *DataCaptureConfigObservation `json:"dataCaptureConfig,omitempty" tf:"data_capture_config,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
@@ -330,11 +339,11 @@ type EndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AsyncInferenceConfig *AsyncInferenceConfigParameters `json:"asyncInferenceConfig,omitempty" tf:"async_inference_config,omitempty"`
 
-	// Specifies the parameters to capture input/output of SageMaker models endpoints. Fields are documented below.
+	// Specifies the parameters to capture input/output of SageMaker AI models endpoints. Fields are documented below.
 	// +kubebuilder:validation:Optional
 	DataCaptureConfig *DataCaptureConfigParameters `json:"dataCaptureConfig,omitempty" tf:"data_capture_config,omitempty"`
 
-	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -452,7 +461,7 @@ type ProductionVariantsInitParameters struct {
 	// The size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
-	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
@@ -509,7 +518,7 @@ type ProductionVariantsObservation struct {
 	// The size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
-	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
@@ -558,7 +567,7 @@ type ProductionVariantsParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
-	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
@@ -687,7 +696,7 @@ type ShadowProductionVariantsCoreDumpConfigInitParameters struct {
 	// The Amazon S3 bucket to send the core dump to.
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker AI uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
@@ -696,7 +705,7 @@ type ShadowProductionVariantsCoreDumpConfigObservation struct {
 	// The Amazon S3 bucket to send the core dump to.
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker AI uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
@@ -706,7 +715,7 @@ type ShadowProductionVariantsCoreDumpConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker AI uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId" tf:"kms_key_id,omitempty"`
 }
@@ -716,7 +725,7 @@ type ShadowProductionVariantsInitParameters struct {
 	// The size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
-	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
@@ -803,7 +812,7 @@ type ShadowProductionVariantsObservation struct {
 	// The size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
-	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
@@ -852,7 +861,7 @@ type ShadowProductionVariantsParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
-	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
@@ -993,7 +1002,7 @@ type EndpointConfigurationStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// EndpointConfiguration is the Schema for the EndpointConfigurations API. Provides a SageMaker Endpoint Configuration resource.
+// EndpointConfiguration is the Schema for the EndpointConfigurations API. Provides a SageMaker AI Endpoint Configuration resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
