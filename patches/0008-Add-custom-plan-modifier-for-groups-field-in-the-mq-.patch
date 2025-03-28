@@ -1,0 +1,77 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fatih=20T=C3=BCrken?= <turkenf@gmail.com>
+Date: Thu, 6 Feb 2025 14:13:26 +0300
+Subject: [PATCH] Add custom plan modifier for groups field in the mq User
+ resource
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Fatih Türken <turkenf@gmail.com>
+
+diff --git a/internal/service/mq/user.go b/internal/service/mq/user.go
+index 7482851d1b..9766158dc7 100644
+--- a/internal/service/mq/user.go
++++ b/internal/service/mq/user.go
+@@ -6,6 +6,7 @@ package mq
+ import (
+ 	"context"
+ 	"fmt"
++	"sort"
+ 	"strings"
+ 
+ 	"github.com/aws/aws-sdk-go-v2/service/mq"
+@@ -72,6 +73,9 @@ func (r *resourceUser) Schema(ctx context.Context, request resource.SchemaReques
+ 			"groups": schema.ListAttribute{
+ 				ElementType: types.StringType,
+ 				Optional:    true,
++				PlanModifiers: []planmodifier.List{
++					listSortModifier{},
++				},
+ 			},
+ 			"id": framework.IDAttribute(),
+ 			"password": schema.StringAttribute{
+@@ -285,3 +289,43 @@ func userHasChanges(plan, state resourceUserData) bool {
+ 		!plan.Password.Equal(state.Password) ||
+ 		!plan.ReplicationUser.Equal(state.ReplicationUser)
+ }
++
++// Custom Plan Modifier: Sorts list items
++type listSortModifier struct{}
++
++func (m listSortModifier) PlanModifyList(ctx context.Context, req planmodifier.ListRequest, resp *planmodifier.ListResponse) {
++	// Get plan value
++	planValue := req.PlanValue
++
++	// If plan value is null or unknown, do nothing
++	if planValue.IsNull() || planValue.IsUnknown() {
++		return
++	}
++
++	// Convert plan value to []string
++	var groups []string
++	diags := planValue.ElementsAs(ctx, &groups, false)
++	if diags.HasError() {
++		resp.Diagnostics.Append(diags...)
++		return
++	}
++
++	sort.Strings(groups)
++
++	// Write sorted value back to plan
++	sortedList, diags := types.ListValueFrom(ctx, types.StringType, groups)
++	if diags.HasError() {
++		resp.Diagnostics.Append(diags...)
++		return
++	}
++
++	resp.PlanValue = sortedList
++}
++
++func (m listSortModifier) Description(ctx context.Context) string {
++	return "Sorts the list elements alphabetically."
++}
++
++func (m listSortModifier) MarkdownDescription(ctx context.Context) string {
++	return "Sorts the list elements alphabetically."
++}
