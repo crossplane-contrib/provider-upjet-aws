@@ -1,0 +1,15 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: DomainConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/domainconfiguration
+  labels:
+    testing.upbound.io/example-name: iot
+  name: iot
+spec:
+  forProvider:
+    domainName: iot.example.com
+    region: us-west-1
+    serverCertificateArnsRefs:
+    - name: cert
+    serviceType: DATA

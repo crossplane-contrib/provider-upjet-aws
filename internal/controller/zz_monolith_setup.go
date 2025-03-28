@@ -542,7 +542,9 @@ import (
 	assessmenttemplate "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttemplate"
 	resourcegroup "github.com/upbound/provider-aws/internal/controller/inspector/resourcegroup"
 	enabler "github.com/upbound/provider-aws/internal/controller/inspector2/enabler"
+	authorizeriot "github.com/upbound/provider-aws/internal/controller/iot/authorizer"
 	certificateiot "github.com/upbound/provider-aws/internal/controller/iot/certificate"
+	domainconfiguration "github.com/upbound/provider-aws/internal/controller/iot/domainconfiguration"
 	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/iot/indexingconfiguration"
 	loggingoptions "github.com/upbound/provider-aws/internal/controller/iot/loggingoptions"
 	policyiot "github.com/upbound/provider-aws/internal/controller/iot/policy"
@@ -1510,7 +1512,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		assessmenttemplate.Setup,
 		resourcegroup.Setup,
 		enabler.Setup,
+		authorizeriot.Setup,
 		certificateiot.Setup,
+		domainconfiguration.Setup,
 		indexingconfiguration.Setup,
 		loggingoptions.Setup,
 		policyiot.Setup,
