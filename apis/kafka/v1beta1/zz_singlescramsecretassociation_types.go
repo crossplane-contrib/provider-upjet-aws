@@ -90,7 +90,7 @@ type SingleScramSecretAssociationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// SingleScramSecretAssociation is the Schema for the SingleScramSecretAssociations API. Associates a single SCRAM secret with a Managed Streaming for Kafka (MSK) cluster. NOTE: This resource will not have any effect in case AWS MSK cluster has matching ScramSecretAssociation, since ScramSecretAssociation will have exclusive ownership over all SCRAM secrets in the cluster.
+// SingleScramSecretAssociation is the Schema for the SingleScramSecretAssociations API. Associates a single SCRAM secret with a Managed Streaming for Kafka (MSK) cluster. Warning: If this AWS MSK cluster has a ScramSecretAssociation managed resource that does not reference, select, or list this secret, the secret will be repeatedly attached and detached each time one of the resources enters its reconciliation loop. To avoid this, choose either ScramSecretAssociation or SingleScramSecretAssociation to manage credentials, not both.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
