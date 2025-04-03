@@ -1,0 +1,119 @@
+apiVersion: emr.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: cluster
+  name: cluster
+spec:
+  forProvider:
+    additionalInfo: |
+      {
+        "instanceAwsClientConfiguration": {
+          "proxyPort": 8099,
+          "proxyHost": "myproxy.example.com"
+        }
+      }
+    applications:
+    - Spark
+    bootstrapAction:
+    - args:
+      - instance.isMaster=true
+      - echo running on master node
+      name: runif
+      path: s3://elasticmapreduce/bootstrap-actions/run-if
+    configurationsJson: |2
+        [
+          {
+            "Classification": "hadoop-env",
+            "Configurations": [
+              {
+                "Classification": "export",
+                "Properties": {
+                  "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                }
+              }
+            ],
+            "Properties": {}
+          },
+          {
+            "Classification": "spark-env",
+            "Configurations": [
+              {
+                "Classification": "export",
+                "Properties": {
+                  "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                }
+              }
+            ],
+            "Properties": {}
+          }
+        ]
+    coreInstanceGroup:
+    - autoscalingPolicy: |
+        {
+        "Constraints": {
+          "MinCapacity": 1,
+          "MaxCapacity": 2
+        },
+        "Rules": [
+          {
+            "Name": "ScaleOutMemoryPercentage",
+            "Description": "Scale out if YARNMemoryAvailablePercentage is less than 15",
+            "Action": {
+              "SimpleScalingPolicyConfiguration": {
+                "AdjustmentType": "CHANGE_IN_CAPACITY",
+                "ScalingAdjustment": 1,
+                "CoolDown": 300
+              }
+            },
+            "Trigger": {
+              "CloudWatchAlarmDefinition": {
+                "ComparisonOperator": "LESS_THAN",
+                "EvaluationPeriods": 1,
+                "MetricName": "YARNMemoryAvailablePercentage",
+                "Namespace": "AWS/ElasticMapReduce",
+                "Period": 300,
+                "Statistic": "AVERAGE",
+                "Threshold": 15.0,
+                "Unit": "PERCENT"
+              }
+            }
+          }
+        ]
+        }
+      bidPrice: "0.30"
+      ebsConfig:
+      - size: "40"
+        type: gp2
+        volumesPerInstance: 1
+      instanceCount: 1
+      instanceType: c4.large
+    ebsRootVolumeSize: 100
+    ec2Attributes:
+    - emrManagedMasterSecurityGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sg
+      emrManagedSlaveSecurityGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sg
+      instanceProfileSelector:
+        matchLabels:
+          testing.upbound.io/example-name: emr_profile
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: main
+    keepJobFlowAliveWhenNoSteps: true
+    masterInstanceGroup:
+    - instanceType: m4.large
+    name: emr-test-arn
+    region: us-west-1
+    releaseLabel: emr-4.6.0
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iam_emr_service_role
+    tags:
+      env: env
+      role: rolename
+    terminationProtection: false
