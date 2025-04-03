@@ -14,6 +14,7 @@ import (
 	replicator "github.com/upbound/provider-aws/internal/controller/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
+	singlescramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/singlescramsecretassociation"
 )
 
 // Setup_kafka creates all controllers with the supplied logger and adds them to
@@ -25,6 +26,7 @@ func Setup_kafka(mgr ctrl.Manager, o controller.Options) error {
 		replicator.Setup,
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
+		singlescramsecretassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

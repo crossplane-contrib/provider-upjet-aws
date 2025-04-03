@@ -565,6 +565,7 @@ import (
 	replicator "github.com/upbound/provider-aws/internal/controller/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
+	singlescramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/singlescramsecretassociation"
 	connector "github.com/upbound/provider-aws/internal/controller/kafkaconnect/connector"
 	customplugin "github.com/upbound/provider-aws/internal/controller/kafkaconnect/customplugin"
 	workerconfiguration "github.com/upbound/provider-aws/internal/controller/kafkaconnect/workerconfiguration"
@@ -1535,6 +1536,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		replicator.Setup,
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
+		singlescramsecretassociation.Setup,
 		connector.Setup,
 		customplugin.Setup,
 		workerconfiguration.Setup,
