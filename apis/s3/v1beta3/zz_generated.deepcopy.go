@@ -541,10 +541,8 @@ func (in *FilterInitParameters) DeepCopyInto(out *FilterInitParameters) {
 	*out = *in
 	if in.And != nil {
 		in, out := &in.And, &out.And
-		*out = make([]AndInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AndInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectSizeGreaterThan != nil {
 		in, out := &in.ObjectSizeGreaterThan, &out.ObjectSizeGreaterThan
@@ -563,10 +561,8 @@ func (in *FilterInitParameters) DeepCopyInto(out *FilterInitParameters) {
 	}
 	if in.Tag != nil {
 		in, out := &in.Tag, &out.Tag
-		*out = make([]TagInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TagInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -585,10 +581,8 @@ func (in *FilterObservation) DeepCopyInto(out *FilterObservation) {
 	*out = *in
 	if in.And != nil {
 		in, out := &in.And, &out.And
-		*out = make([]AndObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AndObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectSizeGreaterThan != nil {
 		in, out := &in.ObjectSizeGreaterThan, &out.ObjectSizeGreaterThan
@@ -607,10 +601,8 @@ func (in *FilterObservation) DeepCopyInto(out *FilterObservation) {
 	}
 	if in.Tag != nil {
 		in, out := &in.Tag, &out.Tag
-		*out = make([]TagObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TagObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -629,10 +621,8 @@ func (in *FilterParameters) DeepCopyInto(out *FilterParameters) {
 	*out = *in
 	if in.And != nil {
 		in, out := &in.And, &out.And
-		*out = make([]AndParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AndParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectSizeGreaterThan != nil {
 		in, out := &in.ObjectSizeGreaterThan, &out.ObjectSizeGreaterThan
@@ -651,10 +641,8 @@ func (in *FilterParameters) DeepCopyInto(out *FilterParameters) {
 	}
 	if in.Tag != nil {
 		in, out := &in.Tag, &out.Tag
-		*out = make([]TagParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TagParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -838,24 +826,18 @@ func (in *RuleInitParameters) DeepCopyInto(out *RuleInitParameters) {
 	*out = *in
 	if in.AbortIncompleteMultipartUpload != nil {
 		in, out := &in.AbortIncompleteMultipartUpload, &out.AbortIncompleteMultipartUpload
-		*out = make([]AbortIncompleteMultipartUploadInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AbortIncompleteMultipartUploadInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Expiration != nil {
 		in, out := &in.Expiration, &out.Expiration
-		*out = make([]ExpirationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ExpirationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Filter != nil {
 		in, out := &in.Filter, &out.Filter
-		*out = make([]FilterInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FilterInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -864,10 +846,8 @@ func (in *RuleInitParameters) DeepCopyInto(out *RuleInitParameters) {
 	}
 	if in.NoncurrentVersionExpiration != nil {
 		in, out := &in.NoncurrentVersionExpiration, &out.NoncurrentVersionExpiration
-		*out = make([]NoncurrentVersionExpirationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NoncurrentVersionExpirationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NoncurrentVersionTransition != nil {
 		in, out := &in.NoncurrentVersionTransition, &out.NoncurrentVersionTransition
@@ -910,24 +890,18 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 	*out = *in
 	if in.AbortIncompleteMultipartUpload != nil {
 		in, out := &in.AbortIncompleteMultipartUpload, &out.AbortIncompleteMultipartUpload
-		*out = make([]AbortIncompleteMultipartUploadObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AbortIncompleteMultipartUploadObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Expiration != nil {
 		in, out := &in.Expiration, &out.Expiration
-		*out = make([]ExpirationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ExpirationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Filter != nil {
 		in, out := &in.Filter, &out.Filter
-		*out = make([]FilterObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FilterObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -936,10 +910,8 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 	}
 	if in.NoncurrentVersionExpiration != nil {
 		in, out := &in.NoncurrentVersionExpiration, &out.NoncurrentVersionExpiration
-		*out = make([]NoncurrentVersionExpirationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NoncurrentVersionExpirationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NoncurrentVersionTransition != nil {
 		in, out := &in.NoncurrentVersionTransition, &out.NoncurrentVersionTransition
@@ -982,24 +954,18 @@ func (in *RuleParameters) DeepCopyInto(out *RuleParameters) {
 	*out = *in
 	if in.AbortIncompleteMultipartUpload != nil {
 		in, out := &in.AbortIncompleteMultipartUpload, &out.AbortIncompleteMultipartUpload
-		*out = make([]AbortIncompleteMultipartUploadParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AbortIncompleteMultipartUploadParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Expiration != nil {
 		in, out := &in.Expiration, &out.Expiration
-		*out = make([]ExpirationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ExpirationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Filter != nil {
 		in, out := &in.Filter, &out.Filter
-		*out = make([]FilterParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FilterParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -1008,10 +974,8 @@ func (in *RuleParameters) DeepCopyInto(out *RuleParameters) {
 	}
 	if in.NoncurrentVersionExpiration != nil {
 		in, out := &in.NoncurrentVersionExpiration, &out.NoncurrentVersionExpiration
-		*out = make([]NoncurrentVersionExpirationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NoncurrentVersionExpirationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NoncurrentVersionTransition != nil {
 		in, out := &in.NoncurrentVersionTransition, &out.NoncurrentVersionTransition

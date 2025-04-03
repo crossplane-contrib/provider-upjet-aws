@@ -203,7 +203,7 @@ type ExpirationParameters struct {
 type FilterInitParameters struct {
 
 	// Configuration block used to apply a logical AND to two or more predicates. See below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
-	And []AndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+	And *AndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
 
 	// Minimum object size (in bytes) to which the rule applies.
 	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
@@ -215,13 +215,13 @@ type FilterInitParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Configuration block for specifying a tag key and value. See below.
-	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag *TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type FilterObservation struct {
 
 	// Configuration block used to apply a logical AND to two or more predicates. See below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
-	And []AndObservation `json:"and,omitempty" tf:"and,omitempty"`
+	And *AndObservation `json:"and,omitempty" tf:"and,omitempty"`
 
 	// Minimum object size (in bytes) to which the rule applies.
 	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
@@ -233,14 +233,14 @@ type FilterObservation struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Configuration block for specifying a tag key and value. See below.
-	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag *TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type FilterParameters struct {
 
 	// Configuration block used to apply a logical AND to two or more predicates. See below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
 	// +kubebuilder:validation:Optional
-	And []AndParameters `json:"and,omitempty" tf:"and,omitempty"`
+	And *AndParameters `json:"and,omitempty" tf:"and,omitempty"`
 
 	// Minimum object size (in bytes) to which the rule applies.
 	// +kubebuilder:validation:Optional
@@ -256,7 +256,7 @@ type FilterParameters struct {
 
 	// Configuration block for specifying a tag key and value. See below.
 	// +kubebuilder:validation:Optional
-	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag *TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type NoncurrentVersionExpirationInitParameters struct {
@@ -330,19 +330,19 @@ type NoncurrentVersionTransitionParameters struct {
 type RuleInitParameters struct {
 
 	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. See below.
-	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadInitParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
+	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadInitParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
-	Expiration []ExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration *ExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
 	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below. If not specified, the rule will default to using prefix.
-	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block that specifies when noncurrent object versions expire. See below.
-	NoncurrentVersionExpiration []NoncurrentVersionExpirationInitParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+	NoncurrentVersionExpiration *NoncurrentVersionExpirationInitParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	NoncurrentVersionTransition []NoncurrentVersionTransitionInitParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
@@ -360,19 +360,19 @@ type RuleInitParameters struct {
 type RuleObservation struct {
 
 	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. See below.
-	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadObservation `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
+	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadObservation `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
-	Expiration []ExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration *ExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
 	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below. If not specified, the rule will default to using prefix.
-	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block that specifies when noncurrent object versions expire. See below.
-	NoncurrentVersionExpiration []NoncurrentVersionExpirationObservation `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+	NoncurrentVersionExpiration *NoncurrentVersionExpirationObservation `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	NoncurrentVersionTransition []NoncurrentVersionTransitionObservation `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
@@ -391,15 +391,15 @@ type RuleParameters struct {
 
 	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. See below.
 	// +kubebuilder:validation:Optional
-	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
+	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
 	// +kubebuilder:validation:Optional
-	Expiration []ExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration *ExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
 	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below. If not specified, the rule will default to using prefix.
 	// +kubebuilder:validation:Optional
-	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	// +kubebuilder:validation:Optional
@@ -407,7 +407,7 @@ type RuleParameters struct {
 
 	// Configuration block that specifies when noncurrent object versions expire. See below.
 	// +kubebuilder:validation:Optional
-	NoncurrentVersionExpiration []NoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+	NoncurrentVersionExpiration *NoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	// +kubebuilder:validation:Optional
