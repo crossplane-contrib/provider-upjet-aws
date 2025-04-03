@@ -15,7 +15,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
-    storageCapacity: 300
+    storageCapacity: 32
     subnetIdRefs:
     - name: example
-    throughputCapacity: 1024
+    throughputCapacity: 32

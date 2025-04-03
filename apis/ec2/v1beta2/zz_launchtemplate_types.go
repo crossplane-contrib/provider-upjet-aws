@@ -184,6 +184,45 @@ type CapacityReservationSpecificationCapacityReservationTargetParameters struct 
 	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
 }
 
+type ConnectionTrackingSpecificationInitParameters struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
+type ConnectionTrackingSpecificationObservation struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
+type ConnectionTrackingSpecificationParameters struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+	// +kubebuilder:validation:Optional
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	// +kubebuilder:validation:Optional
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	// +kubebuilder:validation:Optional
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
 type EBSInitParameters struct {
 
 	// Whether the volume should be destroyed on instance termination.
@@ -344,6 +383,54 @@ type ElasticInferenceAcceleratorParameters struct {
 	// Accelerator type.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type EnaSrdSpecificationInitParameters struct {
+
+	// Whether to enable ENA Express. ENA Express uses AWS Scalable Reliable Datagram (SRD) technology to improve the performance of TCP traffic.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configuration for ENA Express UDP optimization. See details below.
+	EnaSrdUDPSpecification *EnaSrdUDPSpecificationInitParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type EnaSrdSpecificationObservation struct {
+
+	// Whether to enable ENA Express. ENA Express uses AWS Scalable Reliable Datagram (SRD) technology to improve the performance of TCP traffic.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configuration for ENA Express UDP optimization. See details below.
+	EnaSrdUDPSpecification *EnaSrdUDPSpecificationObservation `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type EnaSrdSpecificationParameters struct {
+
+	// Whether to enable ENA Express. ENA Express uses AWS Scalable Reliable Datagram (SRD) technology to improve the performance of TCP traffic.
+	// +kubebuilder:validation:Optional
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configuration for ENA Express UDP optimization. See details below.
+	// +kubebuilder:validation:Optional
+	EnaSrdUDPSpecification *EnaSrdUDPSpecificationParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type EnaSrdUDPSpecificationInitParameters struct {
+
+	// Whether to enable UDP traffic optimization through ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdUDPSpecificationObservation struct {
+
+	// Whether to enable UDP traffic optimization through ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdUDPSpecificationParameters struct {
+
+	// Whether to enable UDP traffic optimization through ENA Express. Requires ena_srd_enabled to be true.
+	// +kubebuilder:validation:Optional
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
 }
 
 type HibernationOptionsInitParameters struct {
@@ -920,11 +1007,11 @@ type LaunchTemplateInitParameters_2 struct {
 	// If true, the launched EC2 instance will be EBS-optimized.
 	EBSOptimized *string `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
-	// The elastic GPU to attach to the instance. See Elastic GPU
+	// DEPRECATED The elastic GPU to attach to the instance. See Elastic GPU
 	// below for more details.
 	ElasticGpuSpecifications []ElasticGpuSpecificationsInitParameters `json:"elasticGpuSpecifications,omitempty" tf:"elastic_gpu_specifications,omitempty"`
 
-	// Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
+	// DEPRECATED Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
 	ElasticInferenceAccelerator *ElasticInferenceAcceleratorInitParameters `json:"elasticInferenceAccelerator,omitempty" tf:"elastic_inference_accelerator,omitempty"`
 
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
@@ -1175,11 +1262,11 @@ type LaunchTemplateObservation_2 struct {
 	// If true, the launched EC2 instance will be EBS-optimized.
 	EBSOptimized *string `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
-	// The elastic GPU to attach to the instance. See Elastic GPU
+	// DEPRECATED The elastic GPU to attach to the instance. See Elastic GPU
 	// below for more details.
 	ElasticGpuSpecifications []ElasticGpuSpecificationsObservation `json:"elasticGpuSpecifications,omitempty" tf:"elastic_gpu_specifications,omitempty"`
 
-	// Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
+	// DEPRECATED Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
 	ElasticInferenceAccelerator *ElasticInferenceAcceleratorObservation `json:"elasticInferenceAccelerator,omitempty" tf:"elastic_inference_accelerator,omitempty"`
 
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
@@ -1317,12 +1404,12 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	EBSOptimized *string `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
-	// The elastic GPU to attach to the instance. See Elastic GPU
+	// DEPRECATED The elastic GPU to attach to the instance. See Elastic GPU
 	// below for more details.
 	// +kubebuilder:validation:Optional
 	ElasticGpuSpecifications []ElasticGpuSpecificationsParameters `json:"elasticGpuSpecifications,omitempty" tf:"elastic_gpu_specifications,omitempty"`
 
-	// Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
+	// DEPRECATED Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
 	// +kubebuilder:validation:Optional
 	ElasticInferenceAccelerator *ElasticInferenceAcceleratorParameters `json:"elasticInferenceAccelerator,omitempty" tf:"elastic_inference_accelerator,omitempty"`
 
@@ -1663,6 +1750,9 @@ type NetworkInterfacesInitParameters struct {
 	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
+	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
+	ConnectionTrackingSpecification *ConnectionTrackingSpecificationInitParameters `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
+
 	// Whether the network interface should be destroyed on instance termination.
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
@@ -1671,6 +1761,9 @@ type NetworkInterfacesInitParameters struct {
 
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
+	EnaSrdSpecification *EnaSrdSpecificationInitParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// The number of secondary private IPv4 addresses to assign to a network interface. Conflicts with ipv4_addresses
 	IPv4AddressCount *float64 `json:"ipv4AddressCount,omitempty" tf:"ipv4_address_count,omitempty"`
@@ -1760,6 +1853,9 @@ type NetworkInterfacesObservation struct {
 	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
+	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
+	ConnectionTrackingSpecification *ConnectionTrackingSpecificationObservation `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
+
 	// Whether the network interface should be destroyed on instance termination.
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
@@ -1768,6 +1864,9 @@ type NetworkInterfacesObservation struct {
 
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
+	EnaSrdSpecification *EnaSrdSpecificationObservation `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// The number of secondary private IPv4 addresses to assign to a network interface. Conflicts with ipv4_addresses
 	IPv4AddressCount *float64 `json:"ipv4AddressCount,omitempty" tf:"ipv4_address_count,omitempty"`
@@ -1830,6 +1929,10 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
+	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
+	// +kubebuilder:validation:Optional
+	ConnectionTrackingSpecification *ConnectionTrackingSpecificationParameters `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
+
 	// Whether the network interface should be destroyed on instance termination.
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
@@ -1841,6 +1944,10 @@ type NetworkInterfacesParameters struct {
 	// The integer index of the network interface attachment.
 	// +kubebuilder:validation:Optional
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
+	// +kubebuilder:validation:Optional
+	EnaSrdSpecification *EnaSrdSpecificationParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// The number of secondary private IPv4 addresses to assign to a network interface. Conflicts with ipv4_addresses
 	// +kubebuilder:validation:Optional

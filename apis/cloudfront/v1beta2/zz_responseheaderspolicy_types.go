@@ -389,6 +389,9 @@ type ResponseHeadersPolicyInitParameters struct {
 
 type ResponseHeadersPolicyObservation struct {
 
+	// The response headers policy ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// A comment to describe the response headers policy. The comment cannot be longer than 128 characters.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
