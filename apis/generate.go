@@ -20,7 +20,7 @@
 //go:generate bash -c "find ../cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete"
 
 // Scrape metadata from Terraform registry
-//go:generate go run github.com/crossplane/upjet/cmd/scraper -n hashicorp/terraform-provider-aws -r ../.work/terraform-provider-aws/website/docs/r -o ../config/provider-metadata.yaml
+//go:generate go run github.com/crossplane/upjet/cmd/scraper -n hashicorp/terraform-provider-aws -r ../upstream/website/docs/r -o ../config/provider-metadata.yaml
 
 // NOTE(muvaf): Some of Terraform AWS provider files have "!generate" build tag
 // that prevent us from using it for generator program.
