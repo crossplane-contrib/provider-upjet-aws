@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: BucketLifecycleConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/bucketlifecycleconfiguration
+  labels:
+    testing.upbound.io/example-name: example-blc-v1beta2
+  name: example-blc-v1beta2
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-blc-v1beta2
+    region: us-west-2
+    rule:
+      - id: rule-1
+        status: Enabled
+        filter:
+          objectSizeLessThan: "300000"
+        expiration:
+          days: 90
+        noncurrentVersionExpiration:
+          newerNoncurrentVersions: "1"
+          noncurrentDays: 30
+      - id: rule-2
+        status: Enabled
+        filter:
+          objectSizeGreaterThan: "300000"
+        transition:
+          - storageClass: ONEZONE_IA
+            days: 120
+        noncurrentVersionTransition:
+          - newerNoncurrentVersions: "1"
+            noncurrentDays: 30
+            storageClass: ONEZONE_IA
+      - id: rule-3
+        status: Enabled
+        filter:
+          tag:
+            key: foo
+            value: bar
+        expiration:
+          days: 120
+      - id: rule-4
+        status: Enabled
+        filter:
+          and:
+            objectSizeGreaterThan: 100000
+            tags:
+              some: thing
+              Name: ralph
+        expiration:
+          days: 120
+
