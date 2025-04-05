@@ -18,7 +18,7 @@ type AddOnInitParameters struct {
 	// The daily time when an automatic snapshot will be created. Must be in HH:00 format, and in an hourly increment and specified in Coordinated Universal Time (UTC). The snapshot will be automatically created between the time specified and up to 45 minutes after.
 	SnapshotTime *string `json:"snapshotTime,omitempty" tf:"snapshot_time,omitempty"`
 
-	// The status of the add on. Valid Values: Enabled, Disabled.
+	// The status of the add-on. Valid Values: Enabled, Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The add-on type. There is currently only one valid type AutoSnapshot.
@@ -30,7 +30,7 @@ type AddOnObservation struct {
 	// The daily time when an automatic snapshot will be created. Must be in HH:00 format, and in an hourly increment and specified in Coordinated Universal Time (UTC). The snapshot will be automatically created between the time specified and up to 45 minutes after.
 	SnapshotTime *string `json:"snapshotTime,omitempty" tf:"snapshot_time,omitempty"`
 
-	// The status of the add on. Valid Values: Enabled, Disabled.
+	// The status of the add-on. Valid Values: Enabled, Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The add-on type. There is currently only one valid type AutoSnapshot.
@@ -43,7 +43,7 @@ type AddOnParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotTime *string `json:"snapshotTime" tf:"snapshot_time,omitempty"`
 
-	// The status of the add on. Valid Values: Enabled, Disabled.
+	// The status of the add-on. Valid Values: Enabled, Disabled.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status" tf:"status,omitempty"`
 
@@ -54,7 +54,7 @@ type AddOnParameters struct {
 
 type InstanceInitParameters struct {
 
-	// The add on configuration for the instance. Detailed below.
+	// The add-on configuration for the instance. Detailed below.
 	AddOn *AddOnInitParameters `json:"addOn,omitempty" tf:"add_on,omitempty"`
 
 	// The Availability Zone in which to create your instance. A
@@ -72,7 +72,7 @@ type InstanceInitParameters struct {
 	// aws lightsail get-bundles.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
-	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
+	// The IP address type of the Lightsail Instance. Valid Values: dualstack,  ipv4, and ipv6.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The name of your key pair. Created in the
@@ -89,7 +89,7 @@ type InstanceInitParameters struct {
 
 type InstanceObservation struct {
 
-	// The add on configuration for the instance. Detailed below.
+	// The add-on configuration for the instance. Detailed below.
 	AddOn *AddOnObservation `json:"addOn,omitempty" tf:"add_on,omitempty"`
 
 	// The ARN of the Lightsail instance (matches id).
@@ -119,7 +119,7 @@ type InstanceObservation struct {
 	// The ARN of the Lightsail instance (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
+	// The IP address type of the Lightsail Instance. Valid Values: dualstack,  ipv4, and ipv6.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// List of IPv6 addresses for the Lightsail instance.
@@ -158,7 +158,7 @@ type InstanceObservation struct {
 
 type InstanceParameters struct {
 
-	// The add on configuration for the instance. Detailed below.
+	// The add-on configuration for the instance. Detailed below.
 	// +kubebuilder:validation:Optional
 	AddOn *AddOnParameters `json:"addOn,omitempty" tf:"add_on,omitempty"`
 
@@ -180,7 +180,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
-	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
+	// The IP address type of the Lightsail Instance. Valid Values: dualstack,  ipv4, and ipv6.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 

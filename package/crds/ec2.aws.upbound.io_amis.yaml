@@ -284,6 +284,10 @@ spec:
                       the value is v2.0. For more information, see NitroTPM in the
                       Amazon Elastic Compute Cloud User Guide.
                     type: string
+                  uefiData:
+                    description: Base64 representation of the non-volatile UEFI variable
+                      store.
+                    type: string
                   virtualizationType:
                     description: |-
                       Keyword to choose what virtualization mode created instances
@@ -512,6 +516,10 @@ spec:
                     description: If the image is configured for NitroTPM support,
                       the value is v2.0. For more information, see NitroTPM in the
                       Amazon Elastic Compute Cloud User Guide.
+                    type: string
+                  uefiData:
+                    description: Base64 representation of the non-volatile UEFI variable
+                      store.
                     type: string
                   virtualizationType:
                     description: |-
@@ -869,6 +877,10 @@ spec:
                     description: If the image is configured for NitroTPM support,
                       the value is v2.0. For more information, see NitroTPM in the
                       Amazon Elastic Compute Cloud User Guide.
+                    type: string
+                  uefiData:
+                    description: Base64 representation of the non-volatile UEFI variable
+                      store.
                     type: string
                   usageOperation:
                     description: Operation of the Amazon EC2 instance and the billing

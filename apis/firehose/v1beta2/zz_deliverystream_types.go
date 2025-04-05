@@ -1932,6 +1932,9 @@ type MskSourceConfigurationInitParameters struct {
 	// The ARN of the Amazon MSK cluster.
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
 
+	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
+
 	// The topic name within the Amazon MSK cluster.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
@@ -1943,6 +1946,9 @@ type MskSourceConfigurationObservation struct {
 
 	// The ARN of the Amazon MSK cluster.
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
+
+	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
 
 	// The topic name within the Amazon MSK cluster.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
@@ -1957,6 +1963,10 @@ type MskSourceConfigurationParameters struct {
 	// The ARN of the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional
 	MskClusterArn *string `json:"mskClusterArn" tf:"msk_cluster_arn,omitempty"`
+
+	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	// +kubebuilder:validation:Optional
+	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
 
 	// The topic name within the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional

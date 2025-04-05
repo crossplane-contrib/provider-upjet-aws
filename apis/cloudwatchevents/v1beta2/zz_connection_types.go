@@ -186,6 +186,9 @@ type ConnectionInitParameters struct {
 
 	// Enter a description for the connection. Maximum of 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The parameters to use for invoking a private API. Documented below.
+	InvocationConnectivityParameters *InvocationConnectivityParametersInitParameters `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
 }
 
 type ConnectionObservation struct {
@@ -204,6 +207,9 @@ type ConnectionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The parameters to use for invoking a private API. Documented below.
+	InvocationConnectivityParameters *InvocationConnectivityParametersObservation `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the secret created from the authorization parameters specified for the connection.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
@@ -221,6 +227,10 @@ type ConnectionParameters struct {
 	// Enter a description for the connection. Maximum of 512 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The parameters to use for invoking a private API. Documented below.
+	// +kubebuilder:validation:Optional
+	InvocationConnectivityParameters *InvocationConnectivityParametersParameters `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -262,6 +272,25 @@ type HeaderParameters struct {
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+}
+
+type InvocationConnectivityParametersInitParameters struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	ResourceParameters *ResourceParametersInitParameters `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+}
+
+type InvocationConnectivityParametersObservation struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	ResourceParameters *ResourceParametersObservation `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+}
+
+type InvocationConnectivityParametersParameters struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	// +kubebuilder:validation:Optional
+	ResourceParameters *ResourceParametersParameters `json:"resourceParameters" tf:"resource_parameters,omitempty"`
 }
 
 type InvocationHTTPParametersInitParameters struct {
@@ -533,6 +562,28 @@ type QueryStringParameters struct {
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+}
+
+type ResourceParametersInitParameters struct {
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type ResourceParametersObservation struct {
+
+	// The Amazon Resource Name (ARN) of the connection.
+	ResourceAssociationArn *string `json:"resourceAssociationArn,omitempty" tf:"resource_association_arn,omitempty"`
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type ResourceParametersParameters struct {
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn" tf:"resource_configuration_arn,omitempty"`
 }
 
 // ConnectionSpec defines the desired state of Connection

@@ -120,7 +120,7 @@ type ClusterInitParameters struct {
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
-	// Conflicts with master_password.
+	// Conflicts with master_password and master_password_wo.
 	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
 	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
 
@@ -131,11 +131,21 @@ type ClusterInitParameters struct {
 	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
 
 	// Password for the master DB user.
-	// Conflicts with manage_master_password.
-	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Conflicts with manage_master_password and master_password_wo.
+	// One of master_password, master_password_wo or manage_master_password is required unless snapshot_identifier is provided.
 	// Note that this may show up in logs, and it will be stored in the state file.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user.
+	// Conflicts with manage_master_password and master_password.
+	// One of master_password_wo, master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Note that this may show up in logs.
+	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
+	MasterPasswordWoSecretRef *v1.SecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -310,7 +320,7 @@ type ClusterObservation struct {
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
-	// Conflicts with master_password.
+	// Conflicts with master_password and master_password_wo.
 	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
 	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
 
@@ -322,6 +332,9 @@ type ClusterObservation struct {
 
 	// ID of the KMS key used to encrypt the cluster admin credentials secret.
 	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -509,7 +522,7 @@ type ClusterParameters struct {
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
-	// Conflicts with master_password.
+	// Conflicts with master_password and master_password_wo.
 	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
 	// +kubebuilder:validation:Optional
 	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
@@ -523,12 +536,24 @@ type ClusterParameters struct {
 	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
 
 	// Password for the master DB user.
-	// Conflicts with manage_master_password.
-	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Conflicts with manage_master_password and master_password_wo.
+	// One of master_password, master_password_wo or manage_master_password is required unless snapshot_identifier is provided.
 	// Note that this may show up in logs, and it will be stored in the state file.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user.
+	// Conflicts with manage_master_password and master_password.
+	// One of master_password_wo, master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Note that this may show up in logs.
+	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoSecretRef *v1.SecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	// +kubebuilder:validation:Optional

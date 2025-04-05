@@ -1490,6 +1490,11 @@ spec:
                     description: Number of cpu units used by the task. If the requires_compatibilities
                       is FARGATE this field is required.
                     type: string
+                  enableFaultInjection:
+                    description: Enables fault injection and allows for fault injection
+                      requests to be accepted from the task's containers. Default
+                      is false.
+                    type: boolean
                   ephemeralStorage:
                     description: The amount of ephemeral storage to allocate for the
                       task. This parameter is used to expand the total amount of ephemeral
@@ -1872,6 +1877,11 @@ spec:
                     description: Number of cpu units used by the task. If the requires_compatibilities
                       is FARGATE this field is required.
                     type: string
+                  enableFaultInjection:
+                    description: Enables fault injection and allows for fault injection
+                      requests to be accepted from the task's containers. Default
+                      is false.
+                    type: boolean
                   ephemeralStorage:
                     description: The amount of ephemeral storage to allocate for the
                       task. This parameter is used to expand the total amount of ephemeral
@@ -2427,6 +2437,11 @@ spec:
                     description: Number of cpu units used by the task. If the requires_compatibilities
                       is FARGATE this field is required.
                     type: string
+                  enableFaultInjection:
+                    description: Enables fault injection and allows for fault injection
+                      requests to be accepted from the task's containers. Default
+                      is false.
+                    type: boolean
                   ephemeralStorage:
                     description: The amount of ephemeral storage to allocate for the
                       task. This parameter is used to expand the total amount of ephemeral

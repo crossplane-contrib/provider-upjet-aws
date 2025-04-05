@@ -28,7 +28,6 @@ type GraphObservation struct {
 	// ARN of the Detective Graph.
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
-	// ARN of the Detective Graph.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.

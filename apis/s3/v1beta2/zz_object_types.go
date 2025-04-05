@@ -59,7 +59,7 @@ type ObjectInitParameters struct {
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
@@ -154,7 +154,7 @@ type ObjectObservation struct {
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// The base64-encoded, 32-bit CRC32 checksum of the object.
@@ -162,6 +162,9 @@ type ObjectObservation struct {
 
 	// The base64-encoded, 32-bit CRC32C checksum of the object.
 	ChecksumCrc32C *string `json:"checksumCrc32C,omitempty" tf:"checksum_crc32c,omitempty"`
+
+	// The base64-encoded, 64-bit CRC64NVME checksum of the object.
+	ChecksumCrc64Nvme *string `json:"checksumCrc64Nvme,omitempty" tf:"checksum_crc64nvme,omitempty"`
 
 	// The base64-encoded, 160-bit SHA-1 digest of the object.
 	ChecksumSha1 *string `json:"checksumSha1,omitempty" tf:"checksum_sha1,omitempty"`
@@ -272,7 +275,7 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
 	// +kubebuilder:validation:Optional
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
