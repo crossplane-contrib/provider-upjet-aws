@@ -51,6 +51,12 @@ var (
 				"support":       "cn-north-1",
 			},
 		},
+		"aws-eusc": {
+			id:                      "aws-eusc",
+			name:                    "AWS EUSC",
+			dnsSuffix:               "amazonaws.eu",
+			serviceToDefaultRegions: map[string]string{},
+		},
 		"aws-iso": {
 			id:        "aws-iso",
 			name:      "AWS ISO (US)",
