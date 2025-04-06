@@ -68,6 +68,47 @@ spec:
 Follow the Upjet guide
 for [adding new resources](https://github.com/crossplane/upjet/blob/main/docs/adding-new-resource.md).
 
+### Changing the Upstream Terraform Provider
+Provider Upjet-AWS depends on and is generated from terraform-provider-aws. It makes a
+few changes to the source of the terraform provider to expose internal functionality,
+or fix crossplane-specific issues. These changes are contained in `.patch` files in
+the `patches` directory. These patches are automatically applied to the source in the
+`upstream` git submodule before running any of the makefile targets, using logic
+defined in `scripts/upstream.sh`.
+
+Here is one example workflow for making changes to the upstream provider:
+```
+# Convert the patches in the patch directory into commits, and check out the 
+# detached head created by applying them on top of the commit in the parent repo
+./scripts/upstream.sh checkout
+
+# change the code as needed
+cd upstream
+...
+
+# commit your changes, and make/amend existing commits as needed
+git commit --whatever
+
+# convert the git commits back into patches, overwriting what's currently in the
+# patches directory
+cd ..
+./scripts/upstream.sh check_in
+
+# At this point the upstream submodule has the base git ref checked out (the 
+# unmodified upstream terraform provider), but with all the crossplane-specific
+# patches applied to the source code. The git tree is dirty.
+
+# test your changes
+...
+
+# Commit your changes to the patch files to provider-upjet-aws
+git commit -s -m "Changed the terraform provider to make it glow in the dark"
+```
+
+It is important that the git reference stored in this repo for the `upstream` submodule
+is an unmodified ref from the upstream repository. The only time it should change is
+when upgrading the upstream provider version.
+
 ## Getting help
 
 For filing bugs, suggesting improvements, or requesting new resources or features, please
