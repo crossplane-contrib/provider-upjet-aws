@@ -945,6 +945,7 @@ import (
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
 	workflowtransfer "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
 	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/vpc/networkperformancemetricsubscription"
+	servicevpclattice "github.com/upbound/provider-aws/internal/controller/vpclattice/service"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
@@ -1916,6 +1917,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		usertransfer.Setup,
 		workflowtransfer.Setup,
 		networkperformancemetricsubscription.Setup,
+		servicevpclattice.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,
