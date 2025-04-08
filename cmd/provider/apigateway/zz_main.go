@@ -32,6 +32,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/cache"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
+	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
 	"github.com/upbound/provider-aws/apis"
@@ -68,6 +69,8 @@ func main() {
 		leaderElection          = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may be checked for drift from the desired state.").Default("100").Int()
 		skipDefaultTags         = app.Flag("skip-default-tags", "Do not set default crossplane tags for resources").Bool()
+		webhookPort             = app.Flag("webhook-port", "The port the webhook listens on").Default("9443").Envar("WEBHOOK_PORT").Int()
+		metricsBindAddress      = app.Flag("metrics-bind-address", "The address the metrics server listens on").Default(":8080").Envar("METRICS_BIND_ADDRESS").String()
 
 		namespace                  = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
@@ -138,9 +141,13 @@ func main() {
 		Cache: cache.Options{
 			SyncPeriod: syncInterval,
 		},
+		Metrics: metricsserver.Options{
+			BindAddress: *metricsBindAddress,
+		},
 		WebhookServer: webhook.NewServer(
 			webhook.Options{
 				CertDir: *certsDir,
+				Port:    *webhookPort,
 			}),
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),
