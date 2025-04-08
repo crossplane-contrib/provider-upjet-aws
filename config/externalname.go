@@ -2681,6 +2681,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_vpc_network_performance_metric_subscription": config.IdentifierFromProvider,
 
+	// vpclattice
+	//
+	// VPC Lattice Service can be imported using the id
+	"aws_vpclattice_service": config.IdentifierFromProvider,
+
 	// waf
 	//
 	// WAF Byte Match Set can be imported using the id

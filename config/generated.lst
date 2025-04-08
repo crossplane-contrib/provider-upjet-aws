@@ -928,6 +928,7 @@
 "aws_vpc_peering_connection_options",
 "aws_vpc_security_group_egress_rule",
 "aws_vpc_security_group_ingress_rule",
+"aws_vpclattice_service",
 "aws_vpn_connection",
 "aws_vpn_connection_route",
 "aws_vpn_gateway",

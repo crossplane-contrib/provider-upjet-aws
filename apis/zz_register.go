@@ -294,6 +294,7 @@ import (
 	v1alpha1apis "github.com/upbound/provider-aws/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-aws/apis/v1beta1"
 	v1beta1vpc "github.com/upbound/provider-aws/apis/vpc/v1beta1"
+	v1beta1vpclattice "github.com/upbound/provider-aws/apis/vpclattice/v1beta1"
 	v1beta1waf "github.com/upbound/provider-aws/apis/waf/v1beta1"
 	v1beta2waf "github.com/upbound/provider-aws/apis/waf/v1beta2"
 	v1beta1wafregional "github.com/upbound/provider-aws/apis/wafregional/v1beta1"
@@ -592,6 +593,7 @@ func init() {
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
 		v1beta1vpc.SchemeBuilder.AddToScheme,
+		v1beta1vpclattice.SchemeBuilder.AddToScheme,
 		v1beta1waf.SchemeBuilder.AddToScheme,
 		v1beta2waf.SchemeBuilder.AddToScheme,
 		v1beta1wafregional.SchemeBuilder.AddToScheme,
