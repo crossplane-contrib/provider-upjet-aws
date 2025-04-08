@@ -2248,21 +2248,21 @@ spec:
                         type: object
                       sagemakerPipelineParameters:
                         description: Templated target type for the Amazon SageMaker
-                          StartPipelineExecution API operation. Detailed below.
+                          AI StartPipelineExecution API operation. Detailed below.
                         properties:
                           pipelineParameter:
                             description: Set of up to 200 parameter names and values
-                              to use when executing the SageMaker Model Building Pipeline.
-                              Detailed below.
+                              to use when executing the SageMaker AI Model Building
+                              Pipeline. Detailed below.
                             items:
                               properties:
                                 name:
                                   description: Name of parameter to start execution
-                                    of a SageMaker Model Building Pipeline.
+                                    of a SageMaker AI Model Building Pipeline.
                                   type: string
                                 value:
                                   description: Value of parameter to start execution
-                                    of a SageMaker Model Building Pipeline.
+                                    of a SageMaker AI Model Building Pipeline.
                                   type: string
                               type: object
                             type: array
@@ -2768,21 +2768,21 @@ spec:
                         type: object
                       sagemakerPipelineParameters:
                         description: Templated target type for the Amazon SageMaker
-                          StartPipelineExecution API operation. Detailed below.
+                          AI StartPipelineExecution API operation. Detailed below.
                         properties:
                           pipelineParameter:
                             description: Set of up to 200 parameter names and values
-                              to use when executing the SageMaker Model Building Pipeline.
-                              Detailed below.
+                              to use when executing the SageMaker AI Model Building
+                              Pipeline. Detailed below.
                             items:
                               properties:
                                 name:
                                   description: Name of parameter to start execution
-                                    of a SageMaker Model Building Pipeline.
+                                    of a SageMaker AI Model Building Pipeline.
                                   type: string
                                 value:
                                   description: Value of parameter to start execution
-                                    of a SageMaker Model Building Pipeline.
+                                    of a SageMaker AI Model Building Pipeline.
                                   type: string
                               type: object
                             type: array
@@ -3243,21 +3243,21 @@ spec:
                         type: string
                       sagemakerPipelineParameters:
                         description: Templated target type for the Amazon SageMaker
-                          StartPipelineExecution API operation. Detailed below.
+                          AI StartPipelineExecution API operation. Detailed below.
                         properties:
                           pipelineParameter:
                             description: Set of up to 200 parameter names and values
-                              to use when executing the SageMaker Model Building Pipeline.
-                              Detailed below.
+                              to use when executing the SageMaker AI Model Building
+                              Pipeline. Detailed below.
                             items:
                               properties:
                                 name:
                                   description: Name of parameter to start execution
-                                    of a SageMaker Model Building Pipeline.
+                                    of a SageMaker AI Model Building Pipeline.
                                   type: string
                                 value:
                                   description: Value of parameter to start execution
-                                    of a SageMaker Model Building Pipeline.
+                                    of a SageMaker AI Model Building Pipeline.
                                   type: string
                               type: object
                             type: array

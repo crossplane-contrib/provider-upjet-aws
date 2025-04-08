@@ -21,7 +21,7 @@ type ImageInitParameters struct {
 	// The display name of the image. When the image is added to a domain (must be unique to the domain).
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -53,7 +53,7 @@ type ImageObservation struct {
 	// The name of the Image.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -80,7 +80,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -127,7 +127,7 @@ type ImageStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Image is the Schema for the Images API. Provides a SageMaker Image resource.
+// Image is the Schema for the Images API. Provides a SageMaker AI Image resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

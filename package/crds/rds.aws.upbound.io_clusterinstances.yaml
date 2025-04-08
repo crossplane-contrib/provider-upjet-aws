@@ -448,8 +448,10 @@ spec:
                         type: object
                     type: object
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights is enabled
-                      or not.
+                    description: 'Specifies whether Performance Insights is enabled
+                      or not. NOTE: When Performance Insights is configured at the
+                      cluster level through aws_rds_cluster, this argument cannot
+                      be set to a value that conflicts with the cluster''s configuration.'
                     type: boolean
                   performanceInsightsKmsKeyId:
                     description: ARN for the KMS key to encrypt Performance Insights
@@ -957,8 +959,10 @@ spec:
                         type: object
                     type: object
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights is enabled
-                      or not.
+                    description: 'Specifies whether Performance Insights is enabled
+                      or not. NOTE: When Performance Insights is configured at the
+                      cluster level through aws_rds_cluster, this argument cannot
+                      be set to a value that conflicts with the cluster''s configuration.'
                     type: boolean
                   performanceInsightsKmsKeyId:
                     description: ARN for the KMS key to encrypt Performance Insights
@@ -1352,8 +1356,10 @@ spec:
                     description: Network type of the DB instance.
                     type: string
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights is enabled
-                      or not.
+                    description: 'Specifies whether Performance Insights is enabled
+                      or not. NOTE: When Performance Insights is configured at the
+                      cluster level through aws_rds_cluster, this argument cannot
+                      be set to a value that conflicts with the cluster''s configuration.'
                     type: boolean
                   performanceInsightsKmsKeyId:
                     description: ARN for the KMS key to encrypt Performance Insights

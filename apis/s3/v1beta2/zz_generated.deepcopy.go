@@ -7629,6 +7629,11 @@ func (in *ObjectObservation) DeepCopyInto(out *ObjectObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ChecksumCrc64Nvme != nil {
+		in, out := &in.ChecksumCrc64Nvme, &out.ChecksumCrc64Nvme
+		*out = new(string)
+		**out = **in
+	}
 	if in.ChecksumSha1 != nil {
 		in, out := &in.ChecksumSha1, &out.ChecksumSha1
 		*out = new(string)

@@ -1931,6 +1931,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The response headers policy ARN.
+                    type: string
                   comment:
                     description: A comment to describe the response headers policy.
                       The comment cannot be longer than 128 characters.

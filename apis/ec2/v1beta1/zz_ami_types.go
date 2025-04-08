@@ -70,6 +70,9 @@ type AMIInitParameters struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
+	// Base64 representation of the non-volatile UEFI variable store.
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
+
 	// Keyword to choose what virtualization mode created instances
 	// will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type
 	// changes the set of further arguments that are required, as described below.
@@ -169,6 +172,9 @@ type AMIObservation struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
+	// Base64 representation of the non-volatile UEFI variable store.
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
+
 	// Operation of the Amazon EC2 instance and the billing code that is associated with the AMI.
 	UsageOperation *string `json:"usageOperation,omitempty" tf:"usage_operation,omitempty"`
 
@@ -255,6 +261,10 @@ type AMIParameters struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
 	// +kubebuilder:validation:Optional
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
+
+	// Base64 representation of the non-volatile UEFI variable store.
+	// +kubebuilder:validation:Optional
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
 
 	// Keyword to choose what virtualization mode created instances
 	// will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type

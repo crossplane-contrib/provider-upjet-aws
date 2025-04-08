@@ -3121,6 +3121,101 @@ func (in *LBListenerInitParameters) DeepCopyInto(out *LBListenerInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName, &out.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznTLSVersionHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznTLSVersionHeaderName, &out.RoutingHTTPRequestXAmznTLSVersionHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue, &out.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue, &out.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue, &out.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowOriginHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowOriginHeaderValue, &out.RoutingHTTPResponseAccessControlAllowOriginHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue, &out.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlMaxAgeHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlMaxAgeHeaderValue, &out.RoutingHTTPResponseAccessControlMaxAgeHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseContentSecurityPolicyHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseContentSecurityPolicyHeaderValue, &out.RoutingHTTPResponseContentSecurityPolicyHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseServerEnabled != nil {
+		in, out := &in.RoutingHTTPResponseServerEnabled, &out.RoutingHTTPResponseServerEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseStrictTransportSecurityHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseStrictTransportSecurityHeaderValue, &out.RoutingHTTPResponseStrictTransportSecurityHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseXContentTypeOptionsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseXContentTypeOptionsHeaderValue, &out.RoutingHTTPResponseXContentTypeOptionsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseXFrameOptionsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseXFrameOptionsHeaderValue, &out.RoutingHTTPResponseXFrameOptionsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
 	if in.SSLPolicy != nil {
 		in, out := &in.SSLPolicy, &out.SSLPolicy
 		*out = new(string)
@@ -3241,6 +3336,101 @@ func (in *LBListenerObservation) DeepCopyInto(out *LBListenerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName, &out.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznTLSVersionHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznTLSVersionHeaderName, &out.RoutingHTTPRequestXAmznTLSVersionHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue, &out.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue, &out.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue, &out.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowOriginHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowOriginHeaderValue, &out.RoutingHTTPResponseAccessControlAllowOriginHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue, &out.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlMaxAgeHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlMaxAgeHeaderValue, &out.RoutingHTTPResponseAccessControlMaxAgeHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseContentSecurityPolicyHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseContentSecurityPolicyHeaderValue, &out.RoutingHTTPResponseContentSecurityPolicyHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseServerEnabled != nil {
+		in, out := &in.RoutingHTTPResponseServerEnabled, &out.RoutingHTTPResponseServerEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseStrictTransportSecurityHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseStrictTransportSecurityHeaderValue, &out.RoutingHTTPResponseStrictTransportSecurityHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseXContentTypeOptionsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseXContentTypeOptionsHeaderValue, &out.RoutingHTTPResponseXContentTypeOptionsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseXFrameOptionsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseXFrameOptionsHeaderValue, &out.RoutingHTTPResponseXFrameOptionsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
 	if in.SSLPolicy != nil {
 		in, out := &in.SSLPolicy, &out.SSLPolicy
 		*out = new(string)
@@ -3347,6 +3537,101 @@ func (in *LBListenerParameters) DeepCopyInto(out *LBListenerParameters) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertIssuerHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertLeafHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertSerialNumberHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertSubjectHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertValidityHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName, &out.RoutingHTTPRequestXAmznTLSCipherSuiteHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPRequestXAmznTLSVersionHeaderName != nil {
+		in, out := &in.RoutingHTTPRequestXAmznTLSVersionHeaderName, &out.RoutingHTTPRequestXAmznTLSVersionHeaderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue, &out.RoutingHTTPResponseAccessControlAllowCredentialsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue, &out.RoutingHTTPResponseAccessControlAllowHeadersHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue, &out.RoutingHTTPResponseAccessControlAllowMethodsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlAllowOriginHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlAllowOriginHeaderValue, &out.RoutingHTTPResponseAccessControlAllowOriginHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue, &out.RoutingHTTPResponseAccessControlExposeHeadersHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseAccessControlMaxAgeHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseAccessControlMaxAgeHeaderValue, &out.RoutingHTTPResponseAccessControlMaxAgeHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseContentSecurityPolicyHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseContentSecurityPolicyHeaderValue, &out.RoutingHTTPResponseContentSecurityPolicyHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseServerEnabled != nil {
+		in, out := &in.RoutingHTTPResponseServerEnabled, &out.RoutingHTTPResponseServerEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseStrictTransportSecurityHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseStrictTransportSecurityHeaderValue, &out.RoutingHTTPResponseStrictTransportSecurityHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseXContentTypeOptionsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseXContentTypeOptionsHeaderValue, &out.RoutingHTTPResponseXContentTypeOptionsHeaderValue
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingHTTPResponseXFrameOptionsHeaderValue != nil {
+		in, out := &in.RoutingHTTPResponseXFrameOptionsHeaderValue, &out.RoutingHTTPResponseXFrameOptionsHeaderValue
 		*out = new(string)
 		**out = **in
 	}

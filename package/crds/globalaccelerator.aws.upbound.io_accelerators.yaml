@@ -845,6 +845,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The Amazon Resource Name (ARN) of the accelerator.
+                    type: string
                   attributes:
                     description: The attributes of the accelerator. Fields documented
                       below.

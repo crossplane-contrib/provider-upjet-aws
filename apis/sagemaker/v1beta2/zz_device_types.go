@@ -54,7 +54,7 @@ type DeviceDeviceParameters struct {
 
 type DeviceInitParameters struct {
 
-	// The device to register with SageMaker Edge Manager. See Device details below.
+	// The device to register with SageMaker AI Edge Manager. See Device details below.
 	Device *DeviceDeviceInitParameters `json:"device,omitempty" tf:"device,omitempty"`
 
 	// The name of the Device Fleet.
@@ -76,7 +76,7 @@ type DeviceObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The device to register with SageMaker Edge Manager. See Device details below.
+	// The device to register with SageMaker AI Edge Manager. See Device details below.
 	Device *DeviceDeviceObservation `json:"device,omitempty" tf:"device,omitempty"`
 
 	// The name of the Device Fleet.
@@ -88,7 +88,7 @@ type DeviceObservation struct {
 
 type DeviceParameters struct {
 
-	// The device to register with SageMaker Edge Manager. See Device details below.
+	// The device to register with SageMaker AI Edge Manager. See Device details below.
 	// +kubebuilder:validation:Optional
 	Device *DeviceDeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
 
@@ -137,7 +137,7 @@ type DeviceStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Device is the Schema for the Devices API. Provides a SageMaker Device resource.
+// Device is the Schema for the Devices API. Provides a SageMaker AI Device resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

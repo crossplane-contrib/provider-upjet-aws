@@ -477,7 +477,8 @@ spec:
                     type: string
                   snsTopicName:
                     description: Name of the Amazon SNS topic defined for notification
-                      of log file delivery.
+                      of log file delivery. Specify the SNS topic ARN if it resides
+                      in another region.
                     type: string
                   tags:
                     additionalProperties:
@@ -901,7 +902,8 @@ spec:
                     type: string
                   snsTopicName:
                     description: Name of the Amazon SNS topic defined for notification
-                      of log file delivery.
+                      of log file delivery. Specify the SNS topic ARN if it resides
+                      in another region.
                     type: string
                   tags:
                     additionalProperties:
@@ -1267,9 +1269,14 @@ spec:
                     description: S3 key prefix that follows the name of the bucket
                       you have designated for log file delivery.
                     type: string
+                  snsTopicArn:
+                    description: ARN of the Amazon SNS topic that CloudTrail uses
+                      to send notifications when log files are delivered.
+                    type: string
                   snsTopicName:
                     description: Name of the Amazon SNS topic defined for notification
-                      of log file delivery.
+                      of log file delivery. Specify the SNS topic ARN if it resides
+                      in another region.
                     type: string
                   tags:
                     additionalProperties:
