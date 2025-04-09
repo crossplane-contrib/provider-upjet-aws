@@ -27,7 +27,8 @@ type EndpointInitParameters struct {
 	// Friendly name of the Route 53 Resolver endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// Protocols you want to use for the Route 53 Resolver endpoint.
+	// Valid values are DoH, Do53, or DoH-FIPS.
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -78,7 +79,8 @@ type EndpointObservation struct {
 	// Friendly name of the Route 53 Resolver endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// Protocols you want to use for the Route 53 Resolver endpoint.
+	// Valid values are DoH, Do53, or DoH-FIPS.
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -116,7 +118,8 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// Protocols you want to use for the Route 53 Resolver endpoint.
+	// Valid values are DoH, Do53, or DoH-FIPS.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`

@@ -124,6 +124,9 @@ type CustomizedMetricSpecificationInitParameters struct {
 	// Namespace of the metric.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+
 	// Statistic of the metric.
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 
@@ -144,6 +147,9 @@ type CustomizedMetricSpecificationObservation struct {
 
 	// Namespace of the metric.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Statistic of the metric.
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
@@ -169,6 +175,10 @@ type CustomizedMetricSpecificationParameters struct {
 	// Namespace of the metric.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The period of the metric in seconds.
+	// +kubebuilder:validation:Optional
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Statistic of the metric.
 	// +kubebuilder:validation:Optional
@@ -768,6 +778,9 @@ type MetricsMetricStatInitParameters struct {
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
 	Metric *MetricsMetricStatMetricInitParameters `json:"metric,omitempty" tf:"metric,omitempty"`
 
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+
 	// Statistic of the metrics to return.
 	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
@@ -848,6 +861,9 @@ type MetricsMetricStatObservation struct {
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
 	Metric *MetricsMetricStatMetricObservation `json:"metric,omitempty" tf:"metric,omitempty"`
 
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+
 	// Statistic of the metrics to return.
 	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
@@ -860,6 +876,10 @@ type MetricsMetricStatParameters struct {
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
 	// +kubebuilder:validation:Optional
 	Metric *MetricsMetricStatMetricParameters `json:"metric" tf:"metric,omitempty"`
+
+	// The period of the metric in seconds.
+	// +kubebuilder:validation:Optional
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Statistic of the metrics to return.
 	// +kubebuilder:validation:Optional

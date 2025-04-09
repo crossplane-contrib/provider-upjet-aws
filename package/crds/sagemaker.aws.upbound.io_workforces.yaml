@@ -1013,7 +1013,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Workforce is the Schema for the Workforces API. Provides a SageMaker
-          Workforce resource.
+          AI Workforce resource.
         properties:
           apiVersion:
             description: |-

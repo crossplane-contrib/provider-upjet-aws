@@ -145,7 +145,7 @@ type CodeRepositoryStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// CodeRepository is the Schema for the CodeRepositorys API. Provides a SageMaker Code Repository resource.
+// CodeRepository is the Schema for the CodeRepositorys API. Provides a SageMaker AI Code Repository resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

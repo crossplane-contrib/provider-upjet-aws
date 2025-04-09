@@ -110,6 +110,9 @@ type OriginRequestPolicyInitParameters struct {
 
 type OriginRequestPolicyObservation struct {
 
+	// The origin request policy ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Comment to describe the origin request policy.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
