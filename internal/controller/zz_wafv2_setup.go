@@ -11,6 +11,9 @@ import (
 
 	ipset "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
 	regexpatternset "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
+	webacl "github.com/upbound/provider-aws/internal/controller/wafv2/webacl"
+	webaclassociation "github.com/upbound/provider-aws/internal/controller/wafv2/webaclassociation"
+	webaclloggingconfiguration "github.com/upbound/provider-aws/internal/controller/wafv2/webaclloggingconfiguration"
 )
 
 // Setup_wafv2 creates all controllers with the supplied logger and adds them to
@@ -19,6 +22,9 @@ func Setup_wafv2(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		ipset.Setup,
 		regexpatternset.Setup,
+		webacl.Setup,
+		webaclassociation.Setup,
+		webaclloggingconfiguration.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
