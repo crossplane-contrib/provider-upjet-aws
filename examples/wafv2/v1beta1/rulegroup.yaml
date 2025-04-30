@@ -9,11 +9,11 @@ metadata:
     meta.upbound.io/example-id: wafv2/v1beta1/rulegroup
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-rg
 spec:
   forProvider:
     capacity: 2
-    name: example-rule
+    name: example-rule-group
     region: us-west-1
     ruleJson: |
       [

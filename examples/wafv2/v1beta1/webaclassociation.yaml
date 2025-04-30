@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: wafv2.aws.upbound.io/v1beta1
 kind: WebACLAssociation
 metadata:
@@ -15,9 +19,7 @@ spec:
     webAclArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Deployment
 metadata:
@@ -32,9 +34,7 @@ spec:
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
@@ -67,9 +67,7 @@ spec:
         })}
     name: test-demo
     region: us-west-1
-
 ---
-
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Stage
 metadata:
@@ -90,7 +88,6 @@ spec:
         testing.upbound.io/example-name: example
     stageName: example-wafv2
 ---
-
 apiVersion: wafv2.aws.upbound.io/v1beta1
 kind: WebACL
 metadata:
@@ -98,7 +95,7 @@ metadata:
     meta.upbound.io/example-id: wafv2/v1beta1/webaclassociation
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-waa
 spec:
   forProvider:
     defaultAction:
