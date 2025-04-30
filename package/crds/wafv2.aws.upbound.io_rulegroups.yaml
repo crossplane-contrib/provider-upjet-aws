@@ -35,7 +35,9 @@ spec:
     schema:
       openAPIV3Schema:
         description: RuleGroup is the Schema for the RuleGroups API. Creates a WAFv2
-          rule group resource.
+          rule group resource. The 'rule' field is not supported due to Kubernetes
+          CRD size limitations with deeply nested fields. Please use the 'ruleJson'
+          field to define rules.
         properties:
           apiVersion:
             description: |-
@@ -110,6 +112,12 @@ spec:
                       be created in.
                     type: string
                   ruleJson:
+                    description: Raw JSON string to allow more than three nested statements.
+                      Conflicts with rule attribute. This is for advanced use cases
+                      where more than 3 levels of nested statements are required.
+                      There is no drift detection at this time. If you use this attribute
+                      instead of rule, you will be foregoing drift detection. See
+                      the AWS documentation for the JSON structure.
                     type: string
                   scope:
                     description: Specifies whether this is for an AWS CloudFront distribution
@@ -195,6 +203,12 @@ spec:
                     description: A friendly name of the rule group.
                     type: string
                   ruleJson:
+                    description: Raw JSON string to allow more than three nested statements.
+                      Conflicts with rule attribute. This is for advanced use cases
+                      where more than 3 levels of nested statements are required.
+                      There is no drift detection at this time. If you use this attribute
+                      instead of rule, you will be foregoing drift detection. See
+                      the AWS documentation for the JSON structure.
                     type: string
                   scope:
                     description: Specifies whether this is for an AWS CloudFront distribution
@@ -458,6 +472,12 @@ spec:
                     description: A friendly name of the rule group.
                     type: string
                   ruleJson:
+                    description: Raw JSON string to allow more than three nested statements.
+                      Conflicts with rule attribute. This is for advanced use cases
+                      where more than 3 levels of nested statements are required.
+                      There is no drift detection at this time. If you use this attribute
+                      instead of rule, you will be foregoing drift detection. See
+                      the AWS documentation for the JSON structure.
                     type: string
                   scope:
                     description: Specifies whether this is for an AWS CloudFront distribution

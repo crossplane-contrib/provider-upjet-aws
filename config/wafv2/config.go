@@ -20,6 +20,7 @@ func Configure(p *config.Provider) {
 				r.RemoveSingletonListConversion(e)
 			}
 		}
+		r.MetaResource.Description = "Creates a WAFv2 Web ACL resource. The 'rule' field is not supported due to Kubernetes CRD size limitations with deeply nested fields. Please use the 'ruleJson' field to define rules."
 	})
 	p.AddResourceConfigurator("aws_wafv2_rule_group", func(r *config.Resource) {
 		delete(r.TerraformResource.Schema, "rule")
@@ -29,5 +30,7 @@ func Configure(p *config.Provider) {
 				r.RemoveSingletonListConversion(e)
 			}
 		}
+		r.MetaResource.Description = "Creates a WAFv2 rule group resource. The 'rule' field is not supported due to Kubernetes CRD size limitations with deeply nested fields. Please use the 'ruleJson' field to define rules."
+		r.TerraformResource.Schema["rule_json"].Description = "Raw JSON string to allow more than three nested statements. Conflicts with rule attribute. This is for advanced use cases where more than 3 levels of nested statements are required. There is no drift detection at this time. If you use this attribute instead of rule, you will be foregoing drift detection. See the AWS documentation for the JSON structure."
 	})
 }

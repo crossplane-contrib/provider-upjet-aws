@@ -708,7 +708,7 @@ type WebACLStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// WebACL is the Schema for the WebACLs API. Creates a WAFv2 Web ACL resource.
+// WebACL is the Schema for the WebACLs API. Creates a WAFv2 Web ACL resource. The 'rule' field is not supported due to Kubernetes CRD size limitations with deeply nested fields. Please use the 'ruleJson' field to define rules.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -66,6 +66,7 @@ type RuleGroupInitParameters struct {
 	// A friendly name of the rule group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Raw JSON string to allow more than three nested statements. Conflicts with rule attribute. This is for advanced use cases where more than 3 levels of nested statements are required. There is no drift detection at this time. If you use this attribute instead of rule, you will be foregoing drift detection. See the AWS documentation for the JSON structure.
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
@@ -101,6 +102,7 @@ type RuleGroupObservation struct {
 	// A friendly name of the rule group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Raw JSON string to allow more than three nested statements. Conflicts with rule attribute. This is for advanced use cases where more than 3 levels of nested statements are required. There is no drift detection at this time. If you use this attribute instead of rule, you will be foregoing drift detection. See the AWS documentation for the JSON structure.
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
@@ -141,6 +143,7 @@ type RuleGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Raw JSON string to allow more than three nested statements. Conflicts with rule attribute. This is for advanced use cases where more than 3 levels of nested statements are required. There is no drift detection at this time. If you use this attribute instead of rule, you will be foregoing drift detection. See the AWS documentation for the JSON structure.
 	// +kubebuilder:validation:Optional
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
@@ -224,7 +227,7 @@ type RuleGroupStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// RuleGroup is the Schema for the RuleGroups API. Creates a WAFv2 rule group resource.
+// RuleGroup is the Schema for the RuleGroups API. Creates a WAFv2 rule group resource. The 'rule' field is not supported due to Kubernetes CRD size limitations with deeply nested fields. Please use the 'ruleJson' field to define rules.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

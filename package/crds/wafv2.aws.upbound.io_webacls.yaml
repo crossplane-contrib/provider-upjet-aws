@@ -35,7 +35,9 @@ spec:
     schema:
       openAPIV3Schema:
         description: WebACL is the Schema for the WebACLs API. Creates a WAFv2 Web
-          ACL resource.
+          ACL resource. The 'rule' field is not supported due to Kubernetes CRD size
+          limitations with deeply nested fields. Please use the 'ruleJson' field to
+          define rules.
         properties:
           apiVersion:
             description: |-
