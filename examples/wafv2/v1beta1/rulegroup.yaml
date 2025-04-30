@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
 #
 # SPDX-License-Identifier: CC0-1.0
 
@@ -15,23 +15,31 @@ spec:
     capacity: 2
     name: example-rule
     region: us-west-1
-    rule:
-    - action:
-      - allow:
-        - {}
-      name: rule-1
-      priority: 1
-      statement:
-      - geoMatchStatement:
-        - countryCodes:
-          - US
-          - NL
-      visibilityConfig:
-      - cloudwatchMetricsEnabled: false
-        metricName: friendly-rule-metric-name
-        sampledRequestsEnabled: false
+    ruleJson: |
+      [
+        {
+          "Name": "rule-1",
+          "Priority": 1,
+          "Statement": {
+            "GeoMatchStatement": {
+              "CountryCodes": [
+                "US",
+                "NL"
+              ]
+            }
+          },
+          "Action": {
+            "Allow": {}
+          },
+          "VisibilityConfig": {
+            "SampledRequestsEnabled": false,
+            "CloudWatchMetricsEnabled": false,
+            "MetricName": "friendly-rule-metric-name"
+          }
+        }
+      ]
     scope: REGIONAL
     visibilityConfig:
-    - cloudwatchMetricsEnabled: false
+      cloudwatchMetricsEnabled: false
       metricName: friendly-metric-name
       sampledRequestsEnabled: false

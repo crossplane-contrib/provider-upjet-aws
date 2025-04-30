@@ -13,6 +13,9 @@ func (tr *IPSet) Hub() {}
 func (tr *RegexPatternSet) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *RuleGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *WebACL) Hub() {}
 
 // Hub marks this type as a conversion hub.

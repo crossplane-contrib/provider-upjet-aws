@@ -21,4 +21,13 @@ func Configure(p *config.Provider) {
 			}
 		}
 	})
+	p.AddResourceConfigurator("aws_wafv2_rule_group", func(r *config.Resource) {
+		delete(r.TerraformResource.Schema, "rule")
+		l := r.TFListConversionPaths()
+		for _, e := range l {
+			if strings.HasPrefix(e, "rule[*].") {
+				r.RemoveSingletonListConversion(e)
+			}
+		}
+	})
 }

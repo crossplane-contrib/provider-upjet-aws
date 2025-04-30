@@ -222,45 +222,6 @@ type CustomRequestHandlingParameters struct {
 	InsertHeader []InsertHeaderParameters `json:"insertHeader" tf:"insert_header,omitempty"`
 }
 
-type CustomResponseBodyInitParameters struct {
-
-	// Payload of the custom response.
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
-
-	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
-
-	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the custom_response block.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type CustomResponseBodyObservation struct {
-
-	// Payload of the custom response.
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
-
-	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
-
-	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the custom_response block.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type CustomResponseBodyParameters struct {
-
-	// Payload of the custom response.
-	// +kubebuilder:validation:Optional
-	Content *string `json:"content" tf:"content,omitempty"`
-
-	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
-	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
-
-	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the custom_response block.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-}
-
 type CustomResponseInitParameters struct {
 
 	// References the response body that you want AWS WAF to return to the web request client. This must reference a key defined in a custom_response_body block of this resource.
@@ -484,43 +445,43 @@ type VerifiedAccessInstanceParameters struct {
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit" tf:"default_size_inspection_limit,omitempty"`
 }
 
-type VisibilityConfigInitParameters struct {
+type WebACLCustomResponseBodyInitParameters struct {
 
-	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
-	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
+	// Payload of the custom response.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
-	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
+	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the custom_response block.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
-type VisibilityConfigObservation struct {
+type WebACLCustomResponseBodyObservation struct {
 
-	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
-	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
+	// Payload of the custom response.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
-	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
+	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the custom_response block.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
-type VisibilityConfigParameters struct {
+type WebACLCustomResponseBodyParameters struct {
 
-	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// Payload of the custom response.
 	// +kubebuilder:validation:Optional
-	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled" tf:"cloudwatch_metrics_enabled,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
-	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the custom_response block.
 	// +kubebuilder:validation:Optional
-	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled" tf:"sampled_requests_enabled,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 }
 
 type WebACLInitParameters struct {
@@ -535,7 +496,7 @@ type WebACLInitParameters struct {
 	ChallengeConfig *ChallengeConfigInitParameters `json:"challengeConfig,omitempty" tf:"challenge_config,omitempty"`
 
 	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
-	CustomResponseBody []CustomResponseBodyInitParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
+	CustomResponseBody []WebACLCustomResponseBodyInitParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
 	DefaultAction *DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
@@ -561,7 +522,7 @@ type WebACLInitParameters struct {
 	TokenDomains []*string `json:"tokenDomains,omitempty" tf:"token_domains,omitempty"`
 
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See visibility_config below for details.
-	VisibilityConfig *VisibilityConfigInitParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
+	VisibilityConfig *WebACLVisibilityConfigInitParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 }
 
 type WebACLObservation struct {
@@ -585,7 +546,7 @@ type WebACLObservation struct {
 	ChallengeConfig *ChallengeConfigObservation `json:"challengeConfig,omitempty" tf:"challenge_config,omitempty"`
 
 	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
-	CustomResponseBody []CustomResponseBodyObservation `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
+	CustomResponseBody []WebACLCustomResponseBodyObservation `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
 	DefaultAction *DefaultActionObservation `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
@@ -620,7 +581,7 @@ type WebACLObservation struct {
 	TokenDomains []*string `json:"tokenDomains,omitempty" tf:"token_domains,omitempty"`
 
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See visibility_config below for details.
-	VisibilityConfig *VisibilityConfigObservation `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
+	VisibilityConfig *WebACLVisibilityConfigObservation `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 }
 
 type WebACLParameters struct {
@@ -639,7 +600,7 @@ type WebACLParameters struct {
 
 	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
 	// +kubebuilder:validation:Optional
-	CustomResponseBody []CustomResponseBodyParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
+	CustomResponseBody []WebACLCustomResponseBodyParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
 	// +kubebuilder:validation:Optional
@@ -678,7 +639,46 @@ type WebACLParameters struct {
 
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See visibility_config below for details.
 	// +kubebuilder:validation:Optional
-	VisibilityConfig *VisibilityConfigParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
+	VisibilityConfig *WebACLVisibilityConfigParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
+}
+
+type WebACLVisibilityConfigInitParameters struct {
+
+	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
+
+	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
+}
+
+type WebACLVisibilityConfigObservation struct {
+
+	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
+
+	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
+}
+
+type WebACLVisibilityConfigParameters struct {
+
+	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// +kubebuilder:validation:Optional
+	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled" tf:"cloudwatch_metrics_enabled,omitempty"`
+
+	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+
+	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// +kubebuilder:validation:Optional
+	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled" tf:"sampled_requests_enabled,omitempty"`
 }
 
 // WebACLSpec defines the desired state of WebACL

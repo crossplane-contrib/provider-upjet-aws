@@ -970,6 +970,7 @@ import (
 	xssmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/xssmatchset"
 	ipsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
 	regexpatternsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
+	rulegroupwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/rulegroup"
 	webaclwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/webacl"
 	webaclassociation "github.com/upbound/provider-aws/internal/controller/wafv2/webaclassociation"
 	webaclloggingconfiguration "github.com/upbound/provider-aws/internal/controller/wafv2/webaclloggingconfiguration"
@@ -1945,6 +1946,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		xssmatchsetwafregional.Setup,
 		ipsetwafv2.Setup,
 		regexpatternsetwafv2.Setup,
+		rulegroupwafv2.Setup,
 		webaclwafv2.Setup,
 		webaclassociation.Setup,
 		webaclloggingconfiguration.Setup,
