@@ -12,11 +12,13 @@ PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.5.5
 export TERRAFORM_PROVIDER_VERSION := 5.82.2
-export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 export PROVIDER_NAME
+
+# The build process for terraform-provider-aws always uses this version string when building locally.
+LOCAL_TERRAFORM_PROVIDER_VERSION := 99.99.99
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
@@ -180,8 +182,10 @@ build.init: $(UP)
 # Setup Terraform for fetching provider schema
 TERRAFORM := $(TOOLS_HOST_DIR)/terraform-$(TERRAFORM_VERSION)
 TERRAFORM_WORKDIR := $(WORK_DIR)/terraform
+TERRAFORM_FILESYSTEM_MIRROR := $(ROOT_DIR)/upstream/terraform-plugin-dir
+TERRAFORM_CLI_CONFIG_FILE := $(TERRAFORM_WORKDIR)/.terraformrc-custom
 # The terraform aws provider hardcodes version 99.99.99 for local builds
-TERRAFORM_PROVIDER := $(ROOT_DIR)/upstream/terraform-plugin-dir/registry.terraform.io/$(TERRAFORM_PROVIDER_SOURCE)/99.99.99/$(SAFEHOST_PLATFORM)/terraform-provider-aws
+TERRAFORM_PROVIDER := $(TERRAFORM_FILESYSTEM_MIRROR)/registry.terraform.io/$(TERRAFORM_PROVIDER_SOURCE)/$(LOCAL_TERRAFORM_PROVIDER_VERSION)/$(SAFEHOST_PLATFORM)/terraform-provider-aws
 TERRAFORM_PROVIDER_SCHEMA := config/schema.json
 
 $(TERRAFORM):
@@ -198,17 +202,14 @@ $(TERRAFORM_PROVIDER): $(UPSTREAM)
 	@(cd $(ROOT_DIR)/upstream && make go-build)
 	@$(OK) Built terraform AWS provider from source
 
-# TODO(mbbush) Remove this when we can. This is the last thing left over from when we used to fork a terraform cli
-# process for each resource. This generates the tf provider's json schema, which is slightly different from the go
-# schema (float vs int for some types). To avoid many schema changes, we added code in config/registry.go to use the
-# json schema for schema generation. Now that we have multi-version CRDs, it's easier to manage the schema change.
-$(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
-	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
+$(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER) $(UPSTREAM)
+	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the patched upstream git submodule
 	@rm -fr $(TERRAFORM_WORKDIR)
 	@mkdir -p $(TERRAFORM_WORKDIR)
-	@echo 'data "aws_partition" "example" {}' > $(TERRAFORM_WORKDIR)/main.tf
-	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) init -plugin-dir $(ROOT_DIR)/upstream/terraform-plugin-dir > $(TERRAFORM_WORKDIR)/terraform-logs.txt 2>&1
-	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
+	@echo '{"terraform":[{"required_providers":[{"provider":{"source":"'"$(TERRAFORM_PROVIDER_SOURCE)"'","version":"'"$(LOCAL_TERRAFORM_PROVIDER_VERSION)"'"}}],"required_version":"'"$(TERRAFORM_VERSION)"'"}]}' > $(TERRAFORM_WORKDIR)/main.tf.json
+	@echo 'provider_installation { filesystem_mirror { path = "'"$(TERRAFORM_FILESYSTEM_MIRROR)"'", include = ["hashicorp/aws"] }, direct { exclude = ["hashicorp/aws"] } }' > $(TERRAFORM_CLI_CONFIG_FILE)
+	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) init -upgrade > $(TERRAFORM_WORKDIR)/terraform-logs.txt 2>&1
+	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
 	@$(OK) generated provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
 
 # Add sentinel files for tracking which targets need to be rebuilt
@@ -228,7 +229,9 @@ upstream: $(UPSTREAM)
 # Alias to build the upstream terraform provider
 upstream.build: $(TERRAFORM_PROVIDER)
 
-# Overwrite the check-diff target from the build submodule to exclude the upstream submodule.
+# Overwrite the check-diff target from the build submodule to handle the upstream submodule.
+# We want to ensure that there are no changes in the main repo or build submodule after code generation,
+# and also that the upstream submodule has no new commits.
 # TODO(mbbush): merge this change into the build submodule in a backwards-compatible way once the use cases are clear.
 check-diff: generate
 	@$(INFO) checking that branch is clean
