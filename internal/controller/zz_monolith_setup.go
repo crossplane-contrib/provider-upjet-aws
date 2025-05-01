@@ -542,7 +542,9 @@ import (
 	assessmenttemplate "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttemplate"
 	resourcegroup "github.com/upbound/provider-aws/internal/controller/inspector/resourcegroup"
 	enabler "github.com/upbound/provider-aws/internal/controller/inspector2/enabler"
+	authorizeriot "github.com/upbound/provider-aws/internal/controller/iot/authorizer"
 	certificateiot "github.com/upbound/provider-aws/internal/controller/iot/certificate"
+	domainconfiguration "github.com/upbound/provider-aws/internal/controller/iot/domainconfiguration"
 	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/iot/indexingconfiguration"
 	loggingoptions "github.com/upbound/provider-aws/internal/controller/iot/loggingoptions"
 	policyiot "github.com/upbound/provider-aws/internal/controller/iot/policy"
@@ -563,6 +565,7 @@ import (
 	replicator "github.com/upbound/provider-aws/internal/controller/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
+	singlescramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/singlescramsecretassociation"
 	connector "github.com/upbound/provider-aws/internal/controller/kafkaconnect/connector"
 	customplugin "github.com/upbound/provider-aws/internal/controller/kafkaconnect/customplugin"
 	workerconfiguration "github.com/upbound/provider-aws/internal/controller/kafkaconnect/workerconfiguration"
@@ -942,6 +945,7 @@ import (
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
 	workflowtransfer "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
 	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/vpc/networkperformancemetricsubscription"
+	servicevpclattice "github.com/upbound/provider-aws/internal/controller/vpclattice/service"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
@@ -1510,7 +1514,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		assessmenttemplate.Setup,
 		resourcegroup.Setup,
 		enabler.Setup,
+		authorizeriot.Setup,
 		certificateiot.Setup,
+		domainconfiguration.Setup,
 		indexingconfiguration.Setup,
 		loggingoptions.Setup,
 		policyiot.Setup,
@@ -1531,6 +1537,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		replicator.Setup,
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
+		singlescramsecretassociation.Setup,
 		connector.Setup,
 		customplugin.Setup,
 		workerconfiguration.Setup,
@@ -1910,6 +1917,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		usertransfer.Setup,
 		workflowtransfer.Setup,
 		networkperformancemetricsubscription.Setup,
+		servicevpclattice.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,

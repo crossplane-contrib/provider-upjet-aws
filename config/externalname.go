@@ -79,6 +79,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 
+	// kafka
+	//
+	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
+	"aws_msk_single_scram_secret_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }},{{ .parameters.secret_arn }}"),
+
 	// mq
 	//
 	// admin
@@ -1491,9 +1496,13 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// iot
 	//
+	// IOT Authorizers can be imported using the name
+	"aws_iot_authorizer": config.NameAsIdentifier,
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_iot_certificate": config.IdentifierFromProvider,
+	// import IoT Domain Configuration using the name.
+	"aws_iot_domain_configuration": config.NameAsIdentifier,
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_iot_indexing_configuration": config.IdentifierFromProvider,
@@ -2671,6 +2680,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_vpc_network_performance_metric_subscription": config.IdentifierFromProvider,
+
+	// vpclattice
+	//
+	// VPC Lattice Service can be imported using the id
+	"aws_vpclattice_service": config.IdentifierFromProvider,
 
 	// waf
 	//
