@@ -84,10 +84,15 @@ var (
 			},
 		},
 		"aws-iso-e": {
-			id:                      "aws-iso-e",
-			name:                    "AWS ISOE (Europe)",
-			dnsSuffix:               "cloud.adc-e.uk",
-			serviceToDefaultRegions: map[string]string{},
+			id:        "aws-iso-e",
+			name:      "AWS ISOE (Europe)",
+			dnsSuffix: "cloud.adc-e.uk",
+			serviceToDefaultRegions: map[string]string{
+				"budgets":       "eu-isoe-west-1",
+				"organizations": "eu-isoe-west-1",
+				"route53":       "eu-isoe-west-1",
+				"savingsplans":  "eu-isoe-west-1",
+			},
 		},
 		"aws-iso-f": {
 			id:        "aws-iso-f",
