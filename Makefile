@@ -12,11 +12,13 @@ PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.5.5
 export TERRAFORM_PROVIDER_VERSION := 5.82.2
-export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 export PROVIDER_NAME
+
+# The build process for terraform-provider-aws always uses this version string when building locally.
+LOCAL_TERRAFORM_PROVIDER_VERSION := 99.99.99
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
@@ -159,7 +161,7 @@ cobertura:
 		grep -v zz_ | \
 		$(GOCOVER_COBERTURA) > $(GO_TEST_OUTPUT)/cobertura-coverage.xml
 
-# Update the submodules, such as the common build scripts.
+# Update the submodules, such as the common build scripts and upstream terraform provider.
 submodules:
 	@git submodule sync
 	@git submodule update --init --recursive
@@ -180,9 +182,10 @@ build.init: $(UP)
 # Setup Terraform for fetching provider schema
 TERRAFORM := $(TOOLS_HOST_DIR)/terraform-$(TERRAFORM_VERSION)
 TERRAFORM_WORKDIR := $(WORK_DIR)/terraform
+TERRAFORM_FILESYSTEM_MIRROR := $(ROOT_DIR)/upstream/terraform-plugin-dir
 TERRAFORM_CLI_CONFIG_FILE := $(TERRAFORM_WORKDIR)/.terraformrc-custom
-TERRAFORM_FILESYSTEM_MIRROR := $(TOOLS_HOST_DIR)/$(TERRAFORM_PROVIDER_RELEASE)
-TERRAFORM_PROVIDER := $(TERRAFORM_FILESYSTEM_MIRROR)/registry.terraform.io/$(TERRAFORM_PROVIDER_SOURCE)/$(TERRAFORM_PROVIDER_VERSION)/$(SAFEHOST_PLATFORM)/terraform-provider-aws
+# The terraform aws provider hardcodes version 99.99.99 for local builds
+TERRAFORM_PROVIDER := $(TERRAFORM_FILESYSTEM_MIRROR)/registry.terraform.io/$(TERRAFORM_PROVIDER_SOURCE)/$(LOCAL_TERRAFORM_PROVIDER_VERSION)/$(SAFEHOST_PLATFORM)/terraform-provider-aws
 TERRAFORM_PROVIDER_SCHEMA := config/schema.json
 
 $(TERRAFORM):
@@ -194,32 +197,63 @@ $(TERRAFORM):
 	@rm -fr $(TOOLS_HOST_DIR)/tmp-terraform
 	@$(OK) installing terraform $(HOSTOS)-$(HOSTARCH)
 
-$(TERRAFORM_PROVIDER):
-	@$(INFO) installing terraform AWS provider for the platform $(SAFEHOST_PLATFORM)
-	@mkdir -p $(dir $(TERRAFORM_PROVIDER))
-	@curl -fsSL https://github.com/upbound/terraform-provider-aws/releases/download/$(TERRAFORM_PROVIDER_RELEASE)/terraform-provider-aws_$(TERRAFORM_PROVIDER_RELEASE)_$(SAFEHOST_PLATFORM).zip -o $(TERRAFORM_PROVIDER).zip
-	@unzip $(TERRAFORM_PROVIDER).zip -d $(dir $(TERRAFORM_PROVIDER))
-	@rm -fr $(TERRAFORM_PROVIDER).zip
-	@$(OK) installing terraform provider $(SAFEHOST_PLATFORM)
+$(TERRAFORM_PROVIDER): $(UPSTREAM)
+	@$(INFO) Building terraform AWS provider from source if changes detected
+	@(cd $(ROOT_DIR)/upstream && make go-build)
+	@$(OK) Built terraform AWS provider from source
 
-$(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
-	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
+$(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER) $(UPSTREAM)
+	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the patched upstream git submodule
 	@rm -fr $(TERRAFORM_WORKDIR)
 	@mkdir -p $(TERRAFORM_WORKDIR)
-	@echo '{"terraform":[{"required_providers":[{"provider":{"source":"'"$(TERRAFORM_PROVIDER_SOURCE)"'","version":"'"$(TERRAFORM_PROVIDER_VERSION)"'"}}],"required_version":"'"$(TERRAFORM_VERSION)"'"}]}' > $(TERRAFORM_WORKDIR)/main.tf.json
+	@echo '{"terraform":[{"required_providers":[{"provider":{"source":"'"$(TERRAFORM_PROVIDER_SOURCE)"'","version":"'"$(LOCAL_TERRAFORM_PROVIDER_VERSION)"'"}}],"required_version":"'"$(TERRAFORM_VERSION)"'"}]}' > $(TERRAFORM_WORKDIR)/main.tf.json
 	@echo 'provider_installation { filesystem_mirror { path = "'"$(TERRAFORM_FILESYSTEM_MIRROR)"'", include = ["hashicorp/aws"] }, direct { exclude = ["hashicorp/aws"] } }' > $(TERRAFORM_CLI_CONFIG_FILE)
 	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) init -upgrade > $(TERRAFORM_WORKDIR)/terraform-logs.txt 2>&1
 	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
-	@$(OK) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
+	@$(OK) generated provider schema for $(TERRAFORM_PROVIDER_SOURCE) from the upstream git submodule
 
-pull-docs:
-	rm -fR "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))"
-	git clone -c advice.detachedHead=false --depth 1 --filter=blob:none --branch "v$(TERRAFORM_PROVIDER_VERSION)" --sparse "$(TERRAFORM_PROVIDER_REPO)" "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))";
-	@git -C "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))" sparse-checkout set "$(TERRAFORM_DOCS_PATH)"
+# Add sentinel files for tracking which targets need to be rebuilt
+UPSTREAM := $(ROOT_DIR)/.upstream.sentinel
 
-generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
+# Applies all the patches to the upstream files, but does not commit them.
+# Rebuild if the patches change, or upstream moves to a new HEAD, with some extra logic in the shell script
+$(UPSTREAM): $(wildcard patches/*) $(shell ./scripts/upstream.sh file_target)
+	@$(INFO) Patching upstream terraform provider source
+	@$(ROOT_DIR)/scripts/upstream.sh init -f
+	@touch $@
+	@$(OK) Patched upstream terraform provider source
 
-.PHONY: pull-docs
+# Apply patches to upstream tf provider source
+upstream: $(UPSTREAM)
+
+# Alias to build the upstream terraform provider
+upstream.build: $(TERRAFORM_PROVIDER)
+
+# Overwrite the check-diff target from the build submodule to handle the upstream submodule.
+# We want to ensure that there are no changes in the main repo or build submodule after code generation,
+# and also that the upstream submodule has no new commits.
+# TODO(mbbush): merge this change into the build submodule in a backwards-compatible way once the use cases are clear.
+check-diff: generate
+	@$(INFO) checking that branch is clean
+	@if git status --porcelain --ignore-submodule=all | grep . ; then $(ERR) There are uncommitted changes after running make generate. Please ensure you commit all generated files in this branch after running make generate. && false; else $(OK) branch is clean; fi
+	@$(INFO) checking that the build submodule is clean
+	@if git status --porcelain build | grep . ; then $(ERR) There are uncommitted changes in the build submodule. Please ensure the build submodule is checked out at the desired commit. && false; else $(OK) build submodule is clean; fi
+	@$(INFO) checking that the upstream submodule
+	@if git status --porcelain --ignore-submodule=dirty | grep . ; then $(ERR) There are new commits in the upstream submodule. Please ensure all changes are written to patch files using scripts/upstream.sh. && false; else $(OK) upstream submodule is clean; fi
+
+
+.PHONY: upstream upstream.build
+
+generate.init: $(UPSTREAM) $(TERRAFORM_PROVIDER) $(TERRAFORM_PROVIDER_SCHEMA)
+
+build.init: $(UPSTREAM)
+
+lint.init: $(UPSTREAM)
+
+test.init: $(UPSTREAM)
+
+go.modules.download: $(UPSTREAM)
+
 
 # ====================================================================================
 # End to End Testing
@@ -281,7 +315,7 @@ providerconfig-e2e-nopublish:
 uptest-local:
 	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
 
-build-provider.%:
+build-provider.%: $(UPSTREAM)
 	@$(MAKE) build SUBPACKAGES="$$(tr ',' ' ' <<< $*)" LOAD_PACKAGES=true
 
 XPKG_SKIP_DEP_RESOLUTION := true
