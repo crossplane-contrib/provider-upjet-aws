@@ -58,6 +58,20 @@ def find_exceptions(filename: str):
         if aws_group == "elbv2" and tf_resource_name.startswith("aws_lb"):
             # The elbv2 resources currently all have a kind that starts with LB, so we need to not drop that word.
             words_to_drop = 0
+
+        # provider-aws-ec2 is more than twice as big as the next largest provider. Where it makes sense to do so, split new
+        # resources into their own providers, deviating from the "use the aws go sdk group" convention for pragmatic reasons.
+        if aws_group == "ec2":
+            if name.startswith("ec2_client_vpn"):
+                aws_group = "vpnclient"
+                words_to_drop = 3
+            elif name.startswith("verifiedaccess"):
+                aws_group = "verifiedaccess"
+                words_to_drop = 1
+            elif name.startswith("ec2_local_gateway"):
+                aws_group = "outposts"
+                words_to_drop = 3
+
         if aws_group != calculated_group:
             needs_change.append([tf_resource_name, aws_group, words_to_drop])
     return needs_change
