@@ -164,6 +164,11 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        vpcEndpointManagement:
+                          description: Whether you or Amazon OpenSearch Ingestion
+                            service create and manage the VPC endpoint configured
+                            for the pipeline. Valid values are CUSTOMER or SERVICE
+                          type: string
                       type: object
                     type: array
                 required:
@@ -270,6 +275,11 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        vpcEndpointManagement:
+                          description: Whether you or Amazon OpenSearch Ingestion
+                            service create and manage the VPC endpoint configured
+                            for the pipeline. Valid values are CUSTOMER or SERVICE
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -564,6 +574,11 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        vpcEndpointManagement:
+                          description: Whether you or Amazon OpenSearch Ingestion
+                            service create and manage the VPC endpoint configured
+                            for the pipeline. Valid values are CUSTOMER or SERVICE
+                          type: string
                       type: object
                     type: array
                 type: object

@@ -84,7 +84,8 @@ spec:
                       with the VPC's default security group that is created when no
                       security groups are specified during VPC endpoint creation.
                       At most 1 association per-VPC endpoint should be configured
-                      with replace_default_association = true.
+                      with replace_default_association = true. false should be used
+                      when importing resources.
                     type: boolean
                   securityGroupId:
                     description: The ID of the security group to be associated with
@@ -263,7 +264,8 @@ spec:
                       with the VPC's default security group that is created when no
                       security groups are specified during VPC endpoint creation.
                       At most 1 association per-VPC endpoint should be configured
-                      with replace_default_association = true.
+                      with replace_default_association = true. false should be used
+                      when importing resources.
                     type: boolean
                   securityGroupId:
                     description: The ID of the security group to be associated with
@@ -603,7 +605,8 @@ spec:
                       with the VPC's default security group that is created when no
                       security groups are specified during VPC endpoint creation.
                       At most 1 association per-VPC endpoint should be configured
-                      with replace_default_association = true.
+                      with replace_default_association = true. false should be used
+                      when importing resources.
                     type: boolean
                   securityGroupId:
                     description: The ID of the security group to be associated with

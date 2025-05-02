@@ -87,7 +87,7 @@ type AndParameters struct {
 type BucketLifecycleConfigurationInitParameters struct {
 
 	// Name of the source S3 bucket you want Amazon S3 to monitor.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -130,7 +130,7 @@ type BucketLifecycleConfigurationObservation struct {
 type BucketLifecycleConfigurationParameters struct {
 
 	// Name of the source S3 bucket you want Amazon S3 to monitor.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -384,7 +384,7 @@ type RuleNoncurrentVersionExpirationParameters struct {
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
-	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+	NoncurrentDays *float64 `json:"noncurrentDays" tf:"noncurrent_days,omitempty"`
 }
 
 type RuleNoncurrentVersionTransitionInitParameters struct {
@@ -419,7 +419,7 @@ type RuleNoncurrentVersionTransitionParameters struct {
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
-	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+	NoncurrentDays *float64 `json:"noncurrentDays" tf:"noncurrent_days,omitempty"`
 
 	// Class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Optional
@@ -530,9 +530,8 @@ type BucketLifecycleConfigurationStatus struct {
 type BucketLifecycleConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || (has(self.initProvider) && has(self.initProvider.rule))",message="spec.forProvider.rule is a required parameter"
-	Spec   BucketLifecycleConfigurationSpec   `json:"spec"`
-	Status BucketLifecycleConfigurationStatus `json:"status,omitempty"`
+	Spec              BucketLifecycleConfigurationSpec   `json:"spec"`
+	Status            BucketLifecycleConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

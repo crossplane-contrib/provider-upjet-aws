@@ -6,6 +6,7 @@ package s3
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/registry"
 )
 
@@ -118,8 +119,100 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
+	// In tf provider version 5.86.0, this resource was migrated from the tf plugin sdk to the tf plugin framework
+	// These customizations are largely necessary to preserve the previous schemas so the change is transparent to users.
 	p.AddResourceConfigurator("aws_s3_bucket_lifecycle_configuration", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		// Explicitly set the reconcile version, since this is the only version that has types compatible with the tf 
+		// plugin framework client at runtime.
+		r.ControllerReconcileVersion = "v1beta3" 
+		r.SetCRDHubVersion("v1beta3")
+		r.SetCRDStorageVersion("v1beta1") // to facilitate downgrades
+		r.PreviousVersions = []string {"v1beta1", "v1beta2"}
+		// The following field paths need singleton list conversions between v1beta1 and v1beta3
+		singletonListConversionCRDPaths := []string {
+			"rule[*].expiration",
+			"rule[*].filter",
+			"rule[*].noncurrentVersionExpiration",
+			"rule[*].abortIncompleteMultipartUpload",
+			// Should these be filter[0]? It probably doesn't matter.
+			"rule[*].filter[0].and",
+			"rule[*].filter[0].tag",
+		}
+
+		// paths refer to the embedded object form of the schema
+		typeChangeCRDPaths := []string {
+			"spec.forProvider.rule[*].filter.objectSizeGreaterThan",
+			"spec.forProvider.rule[*].filter.objectSizeLessThan",
+			"spec.forProvider.rule[*].noncurrentVersionExpiration.newerNoncurrentVersions",
+			"spec.forProvider.rule[*].noncurrentVersionTransition[*].newerNoncurrentVersions",
+			"spec.initProvider.rule[*].filter.objectSizeGreaterThan",
+			"spec.initProvider.rule[*].filter.objectSizeLessThan",
+			"spec.initProvider.rule[*].noncurrentVersionExpiration.newerNoncurrentVersions",
+			"spec.initProvider.rule[*].noncurrentVersionTransition[*].newerNoncurrentVersions",
+			"status.atProvider.rule[*].filter.objectSizeGreaterThan",
+			"status.atProvider.rule[*].filter.objectSizeLessThan",
+			"status.atProvider.rule[*].noncurrentVersionExpiration.newerNoncurrentVersions",
+			"status.atProvider.rule[*].noncurrentVersionTransition[*].newerNoncurrentVersions",
+		}
+
+
+		// The crd paths where something is changing between versions. Outside of these paths and their children, the
+		// conversion function is the identity.
+		excludeCRDPaths := []string {
+			"rule[*].expiration",
+			"rule[*].filter",
+			"rule[*].noncurrentVersionExpiration",
+			"rule[*].abortIncompleteMultipartUpload",
+			"rule[*].noncurrentVersionTransition[*].newerNoncurrentVersions",
+		}
+
+		// Manually manage all conversions for this resource, as it breaks several assumptions the automatic conversions
+		// rely on.
+		r.Conversions = []conversion.Conversion{
+			// First register the identity conversions for all the field paths that won't be changed.
+			conversion.NewIdentityConversionExpandPaths("v1beta1", "v1beta3", conversion.DefaultPathPrefixes(), excludeCRDPaths...),
+			conversion.NewSingletonListConversion("v1beta1", "v1beta3", conversion.DefaultPathPrefixes(), singletonListConversionCRDPaths, conversion.ToEmbeddedObject),
+			conversion.NewTypeChangeConversion("v1beta1", "v1beta3", typeChangeCRDPaths, conversion.StringToFloat),
+			conversion.NewTypeChangeConversion("v1beta3", "v1beta1", typeChangeCRDPaths, conversion.FloatToString),
+			conversion.NewSingletonListConversion("v1beta3", "v1beta1", conversion.DefaultPathPrefixes(), singletonListConversionCRDPaths, conversion.ToSingletonList),
+			conversion.NewIdentityConversionExpandPaths("v1beta3", "v1beta1", conversion.DefaultPathPrefixes(), excludeCRDPaths...),
+			
+			conversion.NewIdentityConversionExpandPaths("v1beta2", "v1beta3", []string{}, typeChangeCRDPaths...),
+			conversion.NewTypeChangeConversion("v1beta2", "v1beta3", typeChangeCRDPaths, conversion.StringToFloat),
+			conversion.NewTypeChangeConversion("v1beta3", "v1beta2", typeChangeCRDPaths, conversion.FloatToString),
+			conversion.NewIdentityConversionExpandPaths("v1beta3", "v1beta2", []string{}, typeChangeCRDPaths...),
+		}
+		r.AddSingletonListConversion("rule[*].expiration", "rule[*].expiration")
+		r.AddSingletonListConversion("rule[*].filter", "rule[*].filter")
+		r.AddSingletonListConversion("rule[*].noncurrent_version_expiration", "rule[*].noncurrentVersionExpiration")
+		r.AddSingletonListConversion("rule[*].abort_incomplete_multipart_upload", "rule[*].abortIncompleteMultipartUpload")
+		r.AddSingletonListConversion("rule[*].filter[*].and", "rule[*].filter[*].and")
+		r.AddSingletonListConversion("rule[*].filter[*].tag", "rule[*].filter[*].tag")
+
+		// tf sdk v2 serializes optional integers to tfjson as string.
+		// tf plugin framework serializes optional integers to tfjson as number, which upjet converts to *float64
+		// This provider currently relies on the tfjson to generate the schema, so we're patching the tfjson generated by the
+		// framework resource in the tf provider so that when we convert the tfjson schema to the tf plugin sdk schema,
+		// we get the same type as we were using before.
+
+		// The following fields are *string in v1beta1 and v1beta2, and *float64 in v1beta3
+		// rule[*].filter[0].object_size_greater_than
+		// rule[*].filter[0].object_size_less_than
+		// rule[*].noncurrent_version_expiration[0].newer_noncurrent_versions
+		// rule[*].noncurrent_version_transition[*].newer_noncurrent_versions
+
+
+
+
+
+
+		// There's a bug somewhere in upjet that's applying the docstring for prefix to these fields that end in prefix
 		r.MetaResource.ArgumentDocs["rule.filter.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.`
 		r.MetaResource.ArgumentDocs["rule.filter.and.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies.`
 	})
 }
+
+// Plan for a test:
+// 1. Instantiate a BucketLifecycleConfiguration of each of the three api groups from yaml manifests
+// 2. Call upjet/controller/conversion.RoundTrip for each hub/spoke pair

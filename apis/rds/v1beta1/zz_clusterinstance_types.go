@@ -99,7 +99,7 @@ type ClusterInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
-	// Specifies whether Performance Insights is enabled or not.
+	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
 	// ARN for the KMS key to encrypt Performance Insights data. When specifying performance_insights_kms_key_id, performance_insights_enabled needs to be set to true.
@@ -203,7 +203,7 @@ type ClusterInstanceObservation struct {
 	// Network type of the DB instance.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Specifies whether Performance Insights is enabled or not.
+	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
 	// ARN for the KMS key to encrypt Performance Insights data. When specifying performance_insights_kms_key_id, performance_insights_enabled needs to be set to true.
@@ -343,7 +343,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
-	// Specifies whether Performance Insights is enabled or not.
+	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
