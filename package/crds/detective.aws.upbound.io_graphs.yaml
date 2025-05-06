@@ -286,7 +286,6 @@ spec:
                     description: ARN of the Detective Graph.
                     type: string
                   id:
-                    description: ARN of the Detective Graph.
                     type: string
                   tags:
                     additionalProperties:

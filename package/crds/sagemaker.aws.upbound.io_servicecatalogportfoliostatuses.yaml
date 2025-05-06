@@ -36,7 +36,7 @@ spec:
       openAPIV3Schema:
         description: ServicecatalogPortfolioStatus is the Schema for the ServicecatalogPortfolioStatuss
           API. Manages status of Service Catalog in SageMaker. Service Catalog is
-          used to create SageMaker projects.
+          used to create SageMaker AI projects.
         properties:
           apiVersion:
             description: |-

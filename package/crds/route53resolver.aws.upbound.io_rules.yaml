@@ -182,8 +182,8 @@ spec:
                     items:
                       properties:
                         ip:
-                          description: One IP address that you want to forward DNS
-                            queries to. You can specify only IPv4 addresses.
+                          description: One IPv4 address that you want to forward DNS
+                            queries to.
                           type: string
                         ipv6:
                           description: One IPv6 address that you want to forward DNS
@@ -321,8 +321,8 @@ spec:
                     items:
                       properties:
                         ip:
-                          description: One IP address that you want to forward DNS
-                            queries to. You can specify only IPv4 addresses.
+                          description: One IPv4 address that you want to forward DNS
+                            queries to.
                           type: string
                         ipv6:
                           description: One IPv6 address that you want to forward DNS
@@ -572,8 +572,8 @@ spec:
                     items:
                       properties:
                         ip:
-                          description: One IP address that you want to forward DNS
-                            queries to. You can specify only IPv4 addresses.
+                          description: One IPv4 address that you want to forward DNS
+                            queries to.
                           type: string
                         ipv6:
                           description: One IPv6 address that you want to forward DNS

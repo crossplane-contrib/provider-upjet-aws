@@ -992,7 +992,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FeatureGroup is the Schema for the FeatureGroups API. Provides
-          a SageMaker Feature Group resource.
+          a SageMaker AI Feature Group resource.
         properties:
           apiVersion:
             description: |-

@@ -6,6 +6,7 @@ package clients
 
 import (
 	"context"
+	"maps"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -268,10 +269,12 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	}
 
 	// only used for retrieving the ServicePackages from the singleton provider instance
+	// so that we can reuse it in a newly instantiated aws client
 	p := config.TerraformProvider.Meta()
-	tfAwsConnsClient, diags := tfAwsConnsCfg.GetClient(ctx, &xpprovider.AWSClient{
-		ServicePackages: p.(*xpprovider.AWSClient).ServicePackages,
-	})
+	singletonServicePackages := maps.Collect(p.(*xpprovider.AWSClient).ServicePackages(ctx))
+	newClient := xpprovider.AWSClient{}
+	newClient.SetServicePackages(ctx, singletonServicePackages)
+	tfAwsConnsClient, diags := tfAwsConnsCfg.GetClient(ctx, &newClient)
 	if diags.HasError() {
 		return errors.Errorf("cannot construct TF AWS Client from TF AWS Config, %v", diags)
 	}

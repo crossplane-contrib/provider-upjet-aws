@@ -88,6 +88,9 @@ type NodeGroupInitParameters struct {
 	// Configuration block with Launch Template settings. See launch_template below for details. Conflicts with remote_access.
 	LaunchTemplate *LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
+	// The node auto repair configuration for the node group. See node_repair_config below for details.
+	NodeRepairConfig *NodeRepairConfigInitParameters `json:"nodeRepairConfig,omitempty" tf:"node_repair_config,omitempty"`
+
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -182,6 +185,9 @@ type NodeGroupObservation struct {
 	// Configuration block with Launch Template settings. See launch_template below for details. Conflicts with remote_access.
 	LaunchTemplate *LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
+	// The node auto repair configuration for the node group. See node_repair_config below for details.
+	NodeRepairConfig *NodeRepairConfigObservation `json:"nodeRepairConfig,omitempty" tf:"node_repair_config,omitempty"`
+
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
 
@@ -267,6 +273,10 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplate *LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
+	// The node auto repair configuration for the node group. See node_repair_config below for details.
+	// +kubebuilder:validation:Optional
+	NodeRepairConfig *NodeRepairConfigParameters `json:"nodeRepairConfig,omitempty" tf:"node_repair_config,omitempty"`
+
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -340,6 +350,25 @@ type NodeGroupParameters struct {
 	// Selector for a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
 	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
+}
+
+type NodeRepairConfigInitParameters struct {
+
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type NodeRepairConfigObservation struct {
+
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type NodeRepairConfigParameters struct {
+
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type RemoteAccessInitParameters struct {

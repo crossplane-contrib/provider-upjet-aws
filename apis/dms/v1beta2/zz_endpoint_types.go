@@ -439,6 +439,9 @@ type KafkaSettingsInitParameters struct {
 	// Password for the client private key used to securely connect to a Kafka target endpoint.
 	SSLClientKeyPasswordSecretRef *v1.SecretKeySelector `json:"sslClientKeyPasswordSecretRef,omitempty" tf:"-"`
 
+	// For SASL/SSL authentication, AWS DMS supports the scram-sha-512 mechanism by default. AWS DMS versions 3.5.0 and later also support the PLAIN mechanism. To use the PLAIN mechanism, set this parameter to plain.
+	SaslMechanism *string `json:"saslMechanism,omitempty" tf:"sasl_mechanism,omitempty"`
+
 	// Secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	SaslPasswordSecretRef *v1.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
 
@@ -492,6 +495,9 @@ type KafkaSettingsObservation struct {
 
 	// ARN for the client private key used to securely connect to a Kafka target endpoint.
 	SSLClientKeyArn *string `json:"sslClientKeyArn,omitempty" tf:"ssl_client_key_arn,omitempty"`
+
+	// For SASL/SSL authentication, AWS DMS supports the scram-sha-512 mechanism by default. AWS DMS versions 3.5.0 and later also support the PLAIN mechanism. To use the PLAIN mechanism, set this parameter to plain.
+	SaslMechanism *string `json:"saslMechanism,omitempty" tf:"sasl_mechanism,omitempty"`
 
 	// Secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
@@ -560,6 +566,10 @@ type KafkaSettingsParameters struct {
 	// Password for the client private key used to securely connect to a Kafka target endpoint.
 	// +kubebuilder:validation:Optional
 	SSLClientKeyPasswordSecretRef *v1.SecretKeySelector `json:"sslClientKeyPasswordSecretRef,omitempty" tf:"-"`
+
+	// For SASL/SSL authentication, AWS DMS supports the scram-sha-512 mechanism by default. AWS DMS versions 3.5.0 and later also support the PLAIN mechanism. To use the PLAIN mechanism, set this parameter to plain.
+	// +kubebuilder:validation:Optional
+	SaslMechanism *string `json:"saslMechanism,omitempty" tf:"sasl_mechanism,omitempty"`
 
 	// Secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	// +kubebuilder:validation:Optional
