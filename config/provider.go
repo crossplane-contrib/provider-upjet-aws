@@ -94,6 +94,7 @@ import (
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/ssoadmin"
 	"github.com/upbound/provider-aws/config/transfer"
+	"github.com/upbound/provider-aws/config/wafv2"
 )
 
 func init() {
@@ -186,4 +187,5 @@ func init() {
 	ProviderConfiguration.AddConfig(identitystore.Configure)
 	ProviderConfiguration.AddConfig(iot.Configure)
 	ProviderConfiguration.AddConfig(cloudformation.Configure)
+	ProviderConfiguration.AddConfig(wafv2.Configure)
 }

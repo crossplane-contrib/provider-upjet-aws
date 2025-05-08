@@ -1,0 +1,109 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: wafv2.aws.upbound.io/v1beta1
+kind: WebACLAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webaclassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    webAclArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webaclassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-deployment
+spec:
+  forProvider:
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webaclassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-restapi
+spec:
+  forProvider:
+    body: |-
+      ${jsonencode({
+          openapi = "3.0.1"
+          info = {
+            title   = "example"
+            version = "1.0"
+          }
+          paths = {
+            "/path1" = {
+              get = {
+                x-amazon-apigateway-integration = {
+                  httpMethod           = "GET"
+                  payloadFormatVersion = "1.0"
+                  type                 = "HTTP_PROXY"
+                  uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+                }
+              }
+            }
+          }
+        })}
+    name: test-demo
+    region: us-west-1
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webaclassociation
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-stage
+spec:
+  forProvider:
+    deploymentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    stageName: example-wafv2
+---
+apiVersion: wafv2.aws.upbound.io/v1beta1
+kind: WebACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webaclassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-waa
+spec:
+  forProvider:
+    defaultAction:
+      allow: {}
+    name: web-acl-association-example
+    region: us-west-1
+    scope: REGIONAL
+    visibilityConfig:
+      cloudwatchMetricsEnabled: false
+      metricName: friendly-metric-name
+      sampledRequestsEnabled: false

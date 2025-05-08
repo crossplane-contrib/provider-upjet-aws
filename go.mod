@@ -4,7 +4,7 @@
 
 module github.com/upbound/provider-aws
 
-go 1.23.6
+go 1.23.8
 
 require (
 	dario.cat/mergo v1.0.1
@@ -18,7 +18,7 @@ require (
 	github.com/aws/smithy-go v1.22.1
 	github.com/crossplane/crossplane-runtime v1.17.0
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v1.5.0
+	github.com/crossplane/upjet v1.5.1
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.59
@@ -441,4 +441,4 @@ require (
 // copied from the Terraform provider
 replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terraform-plugin-log v0.0.0-20230928191232-6c653d8ef8fb
 
-replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20250210124112-ca3a4c5ba291
+replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20250506092832-b90a2e906d79

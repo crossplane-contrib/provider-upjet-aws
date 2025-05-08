@@ -1,0 +1,19 @@
+apiVersion: wafv2.aws.upbound.io/v1beta1
+kind: WebACLLoggingConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webaclloggingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    logDestinationConfigsRefs:
+    - name: example
+    redactedFields:
+    - singleHeader:
+      - name: user-agent
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
