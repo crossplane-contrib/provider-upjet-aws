@@ -1096,6 +1096,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
+	// verified access
+	"aws_verifiedaccess_trust_provider": config.IdentifierFromProvider,
+
 	// ecr
 	//
 	// Imported using the name of the repository.
