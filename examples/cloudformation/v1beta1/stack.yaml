@@ -38,3 +38,18 @@ spec:
           }
         }
       }
+
+---
+# Observe only CloudFormation Stack
+apiVersion: cloudformation.aws.upbound.io/v1beta1
+kind: Stack
+metadata:
+  name: my-k8s-stack-resource-name
+  annotations:
+    crossplane.io/external-name: "97f1dc70-f461-11ef-b8bd-06f58344f049" # /!\ Needs to be cloudformation stack ID
+spec:
+  managementPolicies:
+    - Observe
+  forProvider:
+    region: eu-west-1
+    name: DevPlatform0EksStack # /!\ Needs to be cloudformation stack name
