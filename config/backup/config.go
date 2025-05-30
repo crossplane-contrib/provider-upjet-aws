@@ -5,7 +5,10 @@
 package backup
 
 import (
+	"strings"
+
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/config/common"
 )
@@ -26,6 +29,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["plan_id"] = config.Reference{
 			TerraformName: "aws_backup_plan",
+		}
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			for key, attrDiff := range diff.Attributes {
+				if strings.HasPrefix(key, "condition.") && strings.HasSuffix(key, ".#") {
+					if attrDiff.Old == "0" && attrDiff.New == "0" && !attrDiff.NewComputed {
+						delete(diff.Attributes, key)
+					}
+				}
+			}
+			return diff, nil
 		}
 	})
 
