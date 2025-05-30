@@ -1543,6 +1543,37 @@ func (mg *InstanceRoleAssociation) ResolveReferences(ctx context.Context, c clie
 	return nil
 }
 
+// ResolveReferences of this InstanceState.
+func (mg *InstanceState) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Identifier),
+			Extract:      resource.ExtractParamPath("identifier", false),
+			Reference:    mg.Spec.ForProvider.IdentifierRef,
+			Selector:     mg.Spec.ForProvider.IdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Identifier")
+	}
+	mg.Spec.ForProvider.Identifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Proxy.
 func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

@@ -697,6 +697,7 @@
 "aws_rds_cluster_parameter_group",
 "aws_rds_cluster_role_association",
 "aws_rds_global_cluster",
+"aws_rds_instance_state",
 "aws_redshift_authentication_profile",
 "aws_redshift_cluster",
 "aws_redshift_endpoint_access",

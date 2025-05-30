@@ -109,6 +109,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
 
+	// rds
+	//
+	// aws_rds_instance_state import format: rdsInstanceId-12345678
+	"aws_rds_instance_state": config.TemplatedStringAsIdentifier("", "{{ .parameters.identifier }}"),
+
 	// s3
 	//
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
