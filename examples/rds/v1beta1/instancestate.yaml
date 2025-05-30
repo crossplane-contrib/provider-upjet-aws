@@ -1,0 +1,50 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: InstanceState
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/instancestate
+  labels:
+    testing.upbound.io/example-name: instancestate
+  name: example-instancestate
+spec:
+  forProvider:
+    identifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instancestate
+    region: us-west-1
+    state: available
+---
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/instancestate
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: instancestate
+  name: example-instancestate
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    allocatedStorage: 20
+    autoMinorVersionUpgrade: true
+    backupRetentionPeriod: 14
+    instanceClass: db.t3.micro
+    engine: postgres
+    engineVersion: "16.6"
+    username: adminuser
+    autoGeneratePassword: true
+    passwordSecretRef:
+      key: password
+      name: example-dbinstance
+      namespace: upbound-system
+    backupWindow: "09:46-10:16"
+    maintenanceWindow: "Mon:00:00-Mon:03:00"
+    publiclyAccessible: false
+    skipFinalSnapshot: true
+    storageEncrypted: true
+    storageType: gp2
+  writeConnectionSecretToRef:
+    name: example-dbinstance-out
+    namespace: default
