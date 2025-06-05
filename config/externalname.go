@@ -1338,6 +1338,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_glue_catalog_table": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	//
+	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
+	//
 	"aws_glue_classifier": config.NameAsIdentifier,
 	// Imported as CATALOG_ID:name 123456789012:MyConnection
 	"aws_glue_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
