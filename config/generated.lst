@@ -421,6 +421,7 @@
 "aws_globalaccelerator_listener",
 "aws_glue_catalog_database",
 "aws_glue_catalog_table",
+"aws_glue_catalog_table_optimizer",
 "aws_glue_classifier",
 "aws_glue_connection",
 "aws_glue_crawler",
