@@ -79,6 +79,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 
+	// glue
+	//
+	//
+	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
+
 	// kafka
 	//
 	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
@@ -1337,8 +1342,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_glue_catalog_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .external_name }}"),
 	//
 	"aws_glue_catalog_table": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
-	//
-	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 	//
 	"aws_glue_classifier": config.NameAsIdentifier,
 	// Imported as CATALOG_ID:name 123456789012:MyConnection
