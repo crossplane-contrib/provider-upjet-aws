@@ -51,6 +51,12 @@ var (
 				"support":       "cn-north-1",
 			},
 		},
+		"aws-eusc": {
+			id:                      "aws-eusc",
+			name:                    "AWS EUSC",
+			dnsSuffix:               "amazonaws.eu",
+			serviceToDefaultRegions: map[string]string{},
+		},
 		"aws-iso": {
 			id:        "aws-iso",
 			name:      "AWS ISO (US)",
@@ -78,10 +84,15 @@ var (
 			},
 		},
 		"aws-iso-e": {
-			id:                      "aws-iso-e",
-			name:                    "AWS ISOE (Europe)",
-			dnsSuffix:               "cloud.adc-e.uk",
-			serviceToDefaultRegions: map[string]string{},
+			id:        "aws-iso-e",
+			name:      "AWS ISOE (Europe)",
+			dnsSuffix: "cloud.adc-e.uk",
+			serviceToDefaultRegions: map[string]string{
+				"budgets":       "eu-isoe-west-1",
+				"organizations": "eu-isoe-west-1",
+				"route53":       "eu-isoe-west-1",
+				"savingsplans":  "eu-isoe-west-1",
+			},
 		},
 		"aws-iso-f": {
 			id:        "aws-iso-f",
