@@ -27,7 +27,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -35,6 +35,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.RoleArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.RoleArnsRefs,
 			Selector:      mg.Spec.ForProvider.RoleArnsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -46,7 +47,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.RoleArns = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.RoleArnsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -54,6 +55,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.RoleArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.RoleArnsRefs,
 			Selector:      mg.Spec.InitProvider.RoleArnsSelector,
 			To:            reference.To{List: l, Managed: m},

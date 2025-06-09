@@ -34,6 +34,7 @@ func (mg *AccessPoint) ResolveReferences( // ResolveReferences of this AccessPoi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *AccessPoint) ResolveReferences( // ResolveReferences of this AccessPoi
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCConfiguration.VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VPCConfiguration.VPCIDRef,
 				Selector:     mg.Spec.ForProvider.VPCConfiguration.VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -74,6 +76,7 @@ func (mg *AccessPoint) ResolveReferences( // ResolveReferences of this AccessPoi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,6 +97,7 @@ func (mg *AccessPoint) ResolveReferences( // ResolveReferences of this AccessPoi
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCConfiguration.VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VPCConfiguration.VPCIDRef,
 				Selector:     mg.Spec.InitProvider.VPCConfiguration.VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -129,6 +133,7 @@ func (mg *MultiRegionAccessPoint) ResolveReferences(ctx context.Context, c clien
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Details.Region[i4].Bucket),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Details.Region[i4].BucketRef,
 					Selector:     mg.Spec.ForProvider.Details.Region[i4].BucketSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -164,6 +169,7 @@ func (mg *ObjectLambdaAccessPoint) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.SupportingAccessPoint),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Configuration.SupportingAccessPointRef,
 				Selector:     mg.Spec.ForProvider.Configuration.SupportingAccessPointSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -188,6 +194,7 @@ func (mg *ObjectLambdaAccessPoint) ResolveReferences(ctx context.Context, c clie
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.TransformationConfiguration[i4].ContentTransformation.AwsLambda.FunctionArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.Configuration.TransformationConfiguration[i4].ContentTransformation.AwsLambda.FunctionArnRef,
 							Selector:     mg.Spec.ForProvider.Configuration.TransformationConfiguration[i4].ContentTransformation.AwsLambda.FunctionArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -212,6 +219,7 @@ func (mg *ObjectLambdaAccessPoint) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.SupportingAccessPoint),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Configuration.SupportingAccessPointRef,
 				Selector:     mg.Spec.InitProvider.Configuration.SupportingAccessPointSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -236,6 +244,7 @@ func (mg *ObjectLambdaAccessPoint) ResolveReferences(ctx context.Context, c clie
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.TransformationConfiguration[i4].ContentTransformation.AwsLambda.FunctionArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.Configuration.TransformationConfiguration[i4].ContentTransformation.AwsLambda.FunctionArnRef,
 							Selector:     mg.Spec.InitProvider.Configuration.TransformationConfiguration[i4].ContentTransformation.AwsLambda.FunctionArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -276,6 +285,7 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLensConfiguration.DataExport.S3BucketDestination.Arn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.StorageLensConfiguration.DataExport.S3BucketDestination.ArnRef,
 						Selector:     mg.Spec.ForProvider.StorageLensConfiguration.DataExport.S3BucketDestination.ArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -300,6 +310,7 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.StorageLensConfiguration.Exclude.Buckets),
 					Extract:       resource.ExtractParamPath("arn", true),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.StorageLensConfiguration.Exclude.BucketsRefs,
 					Selector:      mg.Spec.ForProvider.StorageLensConfiguration.Exclude.BucketsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -324,6 +335,7 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLensConfiguration.DataExport.S3BucketDestination.Arn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.StorageLensConfiguration.DataExport.S3BucketDestination.ArnRef,
 						Selector:     mg.Spec.InitProvider.StorageLensConfiguration.DataExport.S3BucketDestination.ArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -348,6 +360,7 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.StorageLensConfiguration.Exclude.Buckets),
 					Extract:       resource.ExtractParamPath("arn", true),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.StorageLensConfiguration.Exclude.BucketsRefs,
 					Selector:      mg.Spec.InitProvider.StorageLensConfiguration.Exclude.BucketsSelector,
 					To:            reference.To{List: l, Managed: m},

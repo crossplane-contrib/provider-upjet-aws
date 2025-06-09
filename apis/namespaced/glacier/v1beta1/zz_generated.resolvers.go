@@ -29,13 +29,14 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	if mg.Spec.ForProvider.Notification != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+			m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Notification.SnsTopic),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Notification.SnsTopicRef,
 				Selector:     mg.Spec.ForProvider.Notification.SnsTopicSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -50,13 +51,14 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	if mg.Spec.InitProvider.Notification != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+			m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Notification.SnsTopic),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Notification.SnsTopicRef,
 				Selector:     mg.Spec.InitProvider.Notification.SnsTopicSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -82,7 +84,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("glacier.aws.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -90,6 +92,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VaultNameRef,
 			Selector:     mg.Spec.ForProvider.VaultNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -101,7 +104,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("glacier.aws.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -109,6 +112,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VaultNameRef,
 			Selector:     mg.Spec.InitProvider.VaultNameSelector,
 			To:           reference.To{List: l, Managed: m},

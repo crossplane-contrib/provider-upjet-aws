@@ -26,7 +26,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("codecommit.aws.m.upbound.io", "v1beta1", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Resource),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceRef,
 			Selector:     mg.Spec.ForProvider.ResourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -47,13 +48,14 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Target); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+			m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target[i3].Address),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Target[i3].AddressRef,
 				Selector:     mg.Spec.ForProvider.Target[i3].AddressSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -67,13 +69,14 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("codecommit.aws.m.upbound.io", "v1beta1", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Resource),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceRef,
 			Selector:     mg.Spec.InitProvider.ResourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -87,13 +90,14 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Target); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+			m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target[i3].Address),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Target[i3].AddressRef,
 				Selector:     mg.Spec.InitProvider.Target[i3].AddressSelector,
 				To:           reference.To{List: l, Managed: m},

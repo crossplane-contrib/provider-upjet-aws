@@ -35,6 +35,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3BucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.S3BucketArnRef,
 			Selector:     mg.Spec.ForProvider.S3BucketArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Config[i3].BucketAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.S3Config[i3].BucketAccessRoleArnRef,
 				Selector:     mg.Spec.ForProvider.S3Config[i3].BucketAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -75,6 +77,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3BucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.S3BucketArnRef,
 			Selector:     mg.Spec.InitProvider.S3BucketArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -95,6 +98,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Config[i3].BucketAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.S3Config[i3].BucketAccessRoleArnRef,
 				Selector:     mg.Spec.InitProvider.S3Config[i3].BucketAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -128,6 +132,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLogGroupArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudwatchLogGroupArnRef,
 			Selector:     mg.Spec.ForProvider.CloudwatchLogGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -147,6 +152,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DestinationLocationArnRef,
 			Selector:     mg.Spec.ForProvider.DestinationLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -166,6 +172,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceLocationArnRef,
 			Selector:     mg.Spec.ForProvider.SourceLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -185,6 +192,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLogGroupArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudwatchLogGroupArnRef,
 			Selector:     mg.Spec.InitProvider.CloudwatchLogGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -204,6 +212,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DestinationLocationArnRef,
 			Selector:     mg.Spec.InitProvider.DestinationLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -223,6 +232,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceLocationArnRef,
 			Selector:     mg.Spec.InitProvider.SourceLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},

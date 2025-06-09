@@ -35,6 +35,7 @@ func (mg *VoiceConnectorGroup) ResolveReferences( // ResolveReferences of this V
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Connector[i3].VoiceConnectorID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Connector[i3].VoiceConnectorIDRef,
 				Selector:     mg.Spec.ForProvider.Connector[i3].VoiceConnectorIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *VoiceConnectorGroup) ResolveReferences( // ResolveReferences of this V
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Connector[i3].VoiceConnectorID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Connector[i3].VoiceConnectorIDRef,
 				Selector:     mg.Spec.InitProvider.Connector[i3].VoiceConnectorIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -89,6 +91,7 @@ func (mg *VoiceConnectorLogging) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -108,6 +111,7 @@ func (mg *VoiceConnectorLogging) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -139,6 +143,7 @@ func (mg *VoiceConnectorOrigination) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -158,6 +163,7 @@ func (mg *VoiceConnectorOrigination) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -189,6 +195,7 @@ func (mg *VoiceConnectorStreaming) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -208,6 +215,7 @@ func (mg *VoiceConnectorStreaming) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -239,6 +247,7 @@ func (mg *VoiceConnectorTermination) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -258,6 +267,7 @@ func (mg *VoiceConnectorTermination) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -289,6 +299,7 @@ func (mg *VoiceConnectorTerminationCredentials) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -308,6 +319,7 @@ func (mg *VoiceConnectorTerminationCredentials) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -28,7 +28,7 @@ func (mg *GroupTag) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *GroupTag) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -47,7 +48,7 @@ func (mg *GroupTag) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.AutoscalingGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AutoscalingGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -55,6 +56,7 @@ func (mg *GroupTag) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.InitProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,7 +80,7 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,6 +88,7 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -97,7 +100,7 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.AutoscalingGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AutoscalingGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -105,6 +108,7 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -116,7 +120,7 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -124,6 +128,7 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -148,7 +153,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -156,6 +161,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.GroupNames),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.GroupNamesRefs,
 			Selector:      mg.Spec.ForProvider.GroupNamesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -167,7 +173,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.GroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.GroupNamesRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -175,6 +181,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TopicArnRef,
 			Selector:     mg.Spec.ForProvider.TopicArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -186,7 +193,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -194,6 +201,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.GroupNames),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.GroupNamesRefs,
 			Selector:      mg.Spec.InitProvider.GroupNamesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -205,7 +213,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.InitProvider.GroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.GroupNamesRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -213,6 +221,7 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TopicArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TopicArnRef,
 			Selector:     mg.Spec.InitProvider.TopicArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -236,7 +245,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -244,6 +253,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -267,7 +277,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -275,6 +285,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

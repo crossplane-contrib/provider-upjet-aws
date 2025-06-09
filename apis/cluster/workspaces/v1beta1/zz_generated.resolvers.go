@@ -35,6 +35,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DirectoryIDRef,
 			Selector:     mg.Spec.ForProvider.DirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IPGroupIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.IPGroupIdsRefs,
 			Selector:      mg.Spec.ForProvider.IPGroupIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -93,6 +96,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDRef,
 				Selector:     mg.Spec.ForProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -113,6 +117,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DirectoryIDRef,
 			Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -132,6 +137,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IPGroupIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.IPGroupIdsRefs,
 			Selector:      mg.Spec.InitProvider.IPGroupIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -151,6 +157,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -171,6 +178,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDRef,
 				Selector:     mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},

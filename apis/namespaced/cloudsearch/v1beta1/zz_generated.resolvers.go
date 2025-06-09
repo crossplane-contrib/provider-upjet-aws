@@ -25,7 +25,7 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences( // ResolveReferences of 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences( // ResolveReferences of 
 	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DomainNameRef,
 			Selector:     mg.Spec.InitProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},

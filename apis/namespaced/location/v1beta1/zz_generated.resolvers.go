@@ -26,7 +26,7 @@ func (mg *GeofenceCollection) ResolveReferences( // ResolveReferences of this Ge
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *GeofenceCollection) ResolveReferences( // ResolveReferences of this Ge
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,7 +46,7 @@ func (mg *GeofenceCollection) ResolveReferences( // ResolveReferences of this Ge
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -53,6 +54,7 @@ func (mg *GeofenceCollection) ResolveReferences( // ResolveReferences of this Ge
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -76,7 +78,7 @@ func (mg *Tracker) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -84,6 +86,7 @@ func (mg *Tracker) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -95,7 +98,7 @@ func (mg *Tracker) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -103,6 +106,7 @@ func (mg *Tracker) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -126,7 +130,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("location.aws.upbound.io", "v1beta1", "GeofenceCollection", "GeofenceCollectionList")
+		m, l, err = apisresolver.GetManagedResource("location.aws.m.upbound.io", "v1beta1", "GeofenceCollection", "GeofenceCollectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -134,6 +138,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConsumerArn),
 			Extract:      resource.ExtractParamPath("collection_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConsumerArnRef,
 			Selector:     mg.Spec.ForProvider.ConsumerArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -145,7 +150,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ConsumerArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConsumerArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("location.aws.upbound.io", "v1beta1", "Tracker", "TrackerList")
+		m, l, err = apisresolver.GetManagedResource("location.aws.m.upbound.io", "v1beta1", "Tracker", "TrackerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -153,6 +158,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TrackerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TrackerNameRef,
 			Selector:     mg.Spec.ForProvider.TrackerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -164,7 +170,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.TrackerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TrackerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("location.aws.upbound.io", "v1beta1", "GeofenceCollection", "GeofenceCollectionList")
+		m, l, err = apisresolver.GetManagedResource("location.aws.m.upbound.io", "v1beta1", "GeofenceCollection", "GeofenceCollectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -172,6 +178,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConsumerArn),
 			Extract:      resource.ExtractParamPath("collection_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConsumerArnRef,
 			Selector:     mg.Spec.InitProvider.ConsumerArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -183,7 +190,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.ConsumerArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ConsumerArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("location.aws.upbound.io", "v1beta1", "Tracker", "TrackerList")
+		m, l, err = apisresolver.GetManagedResource("location.aws.m.upbound.io", "v1beta1", "Tracker", "TrackerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -191,6 +198,7 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TrackerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TrackerNameRef,
 			Selector:     mg.Spec.InitProvider.TrackerNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -35,6 +35,7 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ArtifactStore[i3].Location),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ArtifactStore[i3].LocationRef,
 				Selector:     mg.Spec.ForProvider.ArtifactStore[i3].LocationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +77,7 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ArtifactStore[i3].Location),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ArtifactStore[i3].LocationRef,
 				Selector:     mg.Spec.InitProvider.ArtifactStore[i3].LocationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -95,6 +98,7 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -126,6 +130,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetPipeline),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetPipelineRef,
 			Selector:     mg.Spec.ForProvider.TargetPipelineSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -145,6 +150,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetPipeline),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetPipelineRef,
 			Selector:     mg.Spec.InitProvider.TargetPipelineSelector,
 			To:           reference.To{List: l, Managed: m},

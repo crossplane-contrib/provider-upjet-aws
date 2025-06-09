@@ -37,6 +37,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -57,6 +58,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -77,6 +79,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -97,6 +100,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -130,6 +134,7 @@ func (mg *FleetStackAssociation) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FleetName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FleetNameRef,
 			Selector:     mg.Spec.ForProvider.FleetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -149,6 +154,7 @@ func (mg *FleetStackAssociation) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackNameRef,
 			Selector:     mg.Spec.ForProvider.StackNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -181,6 +187,7 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -201,6 +208,7 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -221,6 +229,7 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -241,6 +250,7 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -274,6 +284,7 @@ func (mg *UserStackAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthenticationType),
 			Extract:      resource.ExtractParamPath("authentication_type", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AuthenticationTypeRef,
 			Selector:     mg.Spec.ForProvider.AuthenticationTypeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -293,6 +304,7 @@ func (mg *UserStackAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackNameRef,
 			Selector:     mg.Spec.ForProvider.StackNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -312,6 +324,7 @@ func (mg *UserStackAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.UserNameRef,
 			Selector:     mg.Spec.ForProvider.UserNameSelector,
 			To:           reference.To{List: l, Managed: m},

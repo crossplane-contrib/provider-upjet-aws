@@ -40,6 +40,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.BucketArn),
 							Extract:      common.ARNExtractor(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.BucketArnRef,
 							Selector:     mg.Spec.ForProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -67,6 +68,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.FileKey),
 							Extract:      resource.ExtractParamPath("key", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.FileKeyRef,
 							Selector:     mg.Spec.ForProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.FileKeySelector,
 							To:           reference.To{List: l, Managed: m},
@@ -94,6 +96,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Input.KinesisStreamsInput.ResourceArn),
 							Extract:      common.TerraformID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Input.KinesisStreamsInput.ResourceArnRef,
 							Selector:     mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Input.KinesisStreamsInput.ResourceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -121,6 +124,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].KinesisFirehoseOutput.ResourceArn),
 							Extract:      resource.ExtractParamPath("arn", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].KinesisFirehoseOutput.ResourceArnRef,
 							Selector:     mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].KinesisFirehoseOutput.ResourceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -148,6 +152,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].LambdaOutput.ResourceArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].LambdaOutput.ResourceArnRef,
 							Selector:     mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].LambdaOutput.ResourceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -175,6 +180,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.ReferenceDataSource.S3ReferenceDataSource.BucketArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.ReferenceDataSource.S3ReferenceDataSource.BucketArnRef,
 							Selector:     mg.Spec.ForProvider.ApplicationConfiguration.SQLApplicationConfiguration.ReferenceDataSource.S3ReferenceDataSource.BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -200,6 +206,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration.VPCConfiguration.SecurityGroupIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.ApplicationConfiguration.VPCConfiguration.SecurityGroupIdsRefs,
 					Selector:      mg.Spec.ForProvider.ApplicationConfiguration.VPCConfiguration.SecurityGroupIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -223,6 +230,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration.VPCConfiguration.SubnetIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.ApplicationConfiguration.VPCConfiguration.SubnetIdsRefs,
 					Selector:      mg.Spec.ForProvider.ApplicationConfiguration.VPCConfiguration.SubnetIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -245,6 +253,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions.LogStreamArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions.LogStreamArnRef,
 				Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions.LogStreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -265,6 +274,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceExecutionRole),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceExecutionRoleRef,
 			Selector:     mg.Spec.ForProvider.ServiceExecutionRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -288,6 +298,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.BucketArn),
 							Extract:      common.ARNExtractor(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.BucketArnRef,
 							Selector:     mg.Spec.InitProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -315,6 +326,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.FileKey),
 							Extract:      resource.ExtractParamPath("key", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.FileKeyRef,
 							Selector:     mg.Spec.InitProvider.ApplicationConfiguration.ApplicationCodeConfiguration.CodeContent.S3ContentLocation.FileKeySelector,
 							To:           reference.To{List: l, Managed: m},
@@ -342,6 +354,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Input.KinesisStreamsInput.ResourceArn),
 							Extract:      common.TerraformID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Input.KinesisStreamsInput.ResourceArnRef,
 							Selector:     mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Input.KinesisStreamsInput.ResourceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -369,6 +382,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].KinesisFirehoseOutput.ResourceArn),
 							Extract:      resource.ExtractParamPath("arn", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].KinesisFirehoseOutput.ResourceArnRef,
 							Selector:     mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].KinesisFirehoseOutput.ResourceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -396,6 +410,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].LambdaOutput.ResourceArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].LambdaOutput.ResourceArnRef,
 							Selector:     mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.Output[i5].LambdaOutput.ResourceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -423,6 +438,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.ReferenceDataSource.S3ReferenceDataSource.BucketArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.ReferenceDataSource.S3ReferenceDataSource.BucketArnRef,
 							Selector:     mg.Spec.InitProvider.ApplicationConfiguration.SQLApplicationConfiguration.ReferenceDataSource.S3ReferenceDataSource.BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -448,6 +464,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ApplicationConfiguration.VPCConfiguration.SecurityGroupIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.ApplicationConfiguration.VPCConfiguration.SecurityGroupIdsRefs,
 					Selector:      mg.Spec.InitProvider.ApplicationConfiguration.VPCConfiguration.SecurityGroupIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -471,6 +488,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ApplicationConfiguration.VPCConfiguration.SubnetIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.ApplicationConfiguration.VPCConfiguration.SubnetIdsRefs,
 					Selector:      mg.Spec.InitProvider.ApplicationConfiguration.VPCConfiguration.SubnetIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -493,6 +511,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLoggingOptions.LogStreamArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CloudwatchLoggingOptions.LogStreamArnRef,
 				Selector:     mg.Spec.InitProvider.CloudwatchLoggingOptions.LogStreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -513,6 +532,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceExecutionRole),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceExecutionRoleRef,
 			Selector:     mg.Spec.InitProvider.ServiceExecutionRoleSelector,
 			To:           reference.To{List: l, Managed: m},

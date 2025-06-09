@@ -35,6 +35,7 @@ func (mg *EndpointAccess) ResolveReferences( // ResolveReferences of this Endpoi
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *EndpointAccess) ResolveReferences( // ResolveReferences of this Endpoi
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *EndpointAccess) ResolveReferences( // ResolveReferences of this Endpoi
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -92,6 +95,7 @@ func (mg *EndpointAccess) ResolveReferences( // ResolveReferences of this Endpoi
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -124,6 +128,7 @@ func (mg *RedshiftServerlessNamespace) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultIAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultIAMRoleArnRef,
 			Selector:     mg.Spec.ForProvider.DefaultIAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -143,6 +148,7 @@ func (mg *RedshiftServerlessNamespace) ResolveReferences(ctx context.Context, c 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IAMRoles),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.IAMRoleRefs,
 			Selector:      mg.Spec.ForProvider.IAMRoleSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -162,6 +168,7 @@ func (mg *RedshiftServerlessNamespace) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -181,6 +188,7 @@ func (mg *RedshiftServerlessNamespace) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultIAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultIAMRoleArnRef,
 			Selector:     mg.Spec.InitProvider.DefaultIAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -200,6 +208,7 @@ func (mg *RedshiftServerlessNamespace) ResolveReferences(ctx context.Context, c 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IAMRoles),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.IAMRoleRefs,
 			Selector:      mg.Spec.InitProvider.IAMRoleSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -219,6 +228,7 @@ func (mg *RedshiftServerlessNamespace) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -250,6 +260,7 @@ func (mg *ResourcePolicy) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -269,6 +280,7 @@ func (mg *ResourcePolicy) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -300,6 +312,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
 			Extract:      resource.ExtractParamPath("namespace_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -319,6 +332,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceName),
 			Extract:      resource.ExtractParamPath("namespace_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NamespaceNameRef,
 			Selector:     mg.Spec.InitProvider.NamespaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -350,6 +364,7 @@ func (mg *UsageLimit) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -369,6 +384,7 @@ func (mg *UsageLimit) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -400,6 +416,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -419,6 +436,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -438,6 +456,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -457,6 +476,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},

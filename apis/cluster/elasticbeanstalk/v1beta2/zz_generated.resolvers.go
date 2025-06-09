@@ -35,6 +35,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppversionLifecycle.ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AppversionLifecycle.ServiceRoleRef,
 				Selector:     mg.Spec.ForProvider.AppversionLifecycle.ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppversionLifecycle.ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AppversionLifecycle.ServiceRoleRef,
 				Selector:     mg.Spec.InitProvider.AppversionLifecycle.ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},

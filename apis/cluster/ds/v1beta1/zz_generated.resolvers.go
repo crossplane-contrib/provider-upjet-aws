@@ -34,6 +34,7 @@ func (mg *ConditionalForwarder) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DirectoryIDRef,
 			Selector:     mg.Spec.ForProvider.DirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -67,6 +68,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ConnectSettings[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.ConnectSettings[i3].SubnetIdsRefs,
 				Selector:      mg.Spec.ForProvider.ConnectSettings[i3].SubnetIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -88,6 +90,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectSettings[i3].VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ConnectSettings[i3].VPCIDRef,
 				Selector:     mg.Spec.ForProvider.ConnectSettings[i3].VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -109,6 +112,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSettings[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCSettings[i3].SubnetIdsRefs,
 				Selector:      mg.Spec.ForProvider.VPCSettings[i3].SubnetIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -130,6 +134,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCSettings[i3].VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VPCSettings[i3].VPCIDRef,
 				Selector:     mg.Spec.ForProvider.VPCSettings[i3].VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -151,6 +156,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ConnectSettings[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.ConnectSettings[i3].SubnetIdsRefs,
 				Selector:      mg.Spec.InitProvider.ConnectSettings[i3].SubnetIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -172,6 +178,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectSettings[i3].VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ConnectSettings[i3].VPCIDRef,
 				Selector:     mg.Spec.InitProvider.ConnectSettings[i3].VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -193,6 +200,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSettings[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCSettings[i3].SubnetIdsRefs,
 				Selector:      mg.Spec.InitProvider.VPCSettings[i3].SubnetIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -214,6 +222,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCSettings[i3].VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VPCSettings[i3].VPCIDRef,
 				Selector:     mg.Spec.InitProvider.VPCSettings[i3].VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -247,6 +256,7 @@ func (mg *SharedDirectory) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DirectoryIDRef,
 			Selector:     mg.Spec.ForProvider.DirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -266,6 +276,7 @@ func (mg *SharedDirectory) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DirectoryIDRef,
 			Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},

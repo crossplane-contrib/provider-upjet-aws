@@ -35,6 +35,7 @@ func (mg *ResourceSet) ResolveReferences( // ResolveReferences of this ResourceS
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Resources[i3].ResourceArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Resources[i3].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.Resources[i3].ResourceArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *ResourceSet) ResolveReferences( // ResolveReferences of this ResourceS
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Resources[i3].ResourceArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Resources[i3].ResourceArnRef,
 				Selector:     mg.Spec.InitProvider.Resources[i3].ResourceArnSelector,
 				To:           reference.To{List: l, Managed: m},

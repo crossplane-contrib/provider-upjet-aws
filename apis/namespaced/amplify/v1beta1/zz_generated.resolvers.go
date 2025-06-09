@@ -28,7 +28,7 @@ func (mg *App) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *App) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IAMServiceRoleArnRef,
 			Selector:     mg.Spec.ForProvider.IAMServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -47,7 +48,7 @@ func (mg *App) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.IAMServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMServiceRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -55,6 +56,7 @@ func (mg *App) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IAMServiceRoleArnRef,
 			Selector:     mg.Spec.InitProvider.IAMServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,7 +80,7 @@ func (mg *BackendEnvironment) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.m.upbound.io", "v1beta1", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,6 +88,7 @@ func (mg *BackendEnvironment) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppIDRef,
 			Selector:     mg.Spec.ForProvider.AppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -109,7 +112,7 @@ func (mg *Branch) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.m.upbound.io", "v1beta1", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -117,6 +120,7 @@ func (mg *Branch) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppIDRef,
 			Selector:     mg.Spec.ForProvider.AppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -140,7 +144,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.m.upbound.io", "v1beta1", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -148,6 +152,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppIDRef,
 			Selector:     mg.Spec.ForProvider.AppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -159,7 +164,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.AppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "Branch", "BranchList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.m.upbound.io", "v1beta1", "Branch", "BranchList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -167,6 +172,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BranchName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BranchNameRef,
 			Selector:     mg.Spec.ForProvider.BranchNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -178,7 +184,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.BranchName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BranchNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.m.upbound.io", "v1beta1", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -186,6 +192,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AppIDRef,
 			Selector:     mg.Spec.InitProvider.AppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -197,7 +204,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.InitProvider.AppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "Branch", "BranchList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.m.upbound.io", "v1beta1", "Branch", "BranchList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -205,6 +212,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BranchName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BranchNameRef,
 			Selector:     mg.Spec.InitProvider.BranchNameSelector,
 			To:           reference.To{List: l, Managed: m},

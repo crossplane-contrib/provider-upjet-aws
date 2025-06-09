@@ -27,7 +27,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "GlobalReplicationGroup", "GlobalReplicationGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.m.upbound.io", "v1beta1", "GlobalReplicationGroup", "GlobalReplicationGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -35,6 +35,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalReplicationGroupID),
 			Extract:      resource.ExtractParamPath("global_replication_group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalReplicationGroupIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalReplicationGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -46,7 +47,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.ForProvider.GlobalReplicationGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GlobalReplicationGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -54,6 +55,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -65,7 +67,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -73,6 +75,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -84,7 +87,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.m.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -92,6 +95,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetGroupNameRef,
 			Selector:     mg.Spec.ForProvider.SubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,7 +107,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.ForProvider.SubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "GlobalReplicationGroup", "GlobalReplicationGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.m.upbound.io", "v1beta1", "GlobalReplicationGroup", "GlobalReplicationGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -111,6 +115,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalReplicationGroupID),
 			Extract:      resource.ExtractParamPath("global_replication_group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalReplicationGroupIDRef,
 			Selector:     mg.Spec.InitProvider.GlobalReplicationGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,7 +127,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.InitProvider.GlobalReplicationGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GlobalReplicationGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -130,6 +135,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,7 +147,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -149,6 +155,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -160,7 +167,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.m.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -168,6 +175,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetGroupNameRef,
 			Selector:     mg.Spec.InitProvider.SubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

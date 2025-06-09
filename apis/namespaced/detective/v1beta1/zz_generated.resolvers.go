@@ -25,7 +25,7 @@ func (mg *InvitationAccepter) ResolveReferences( // ResolveReferences of this In
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("detective.aws.upbound.io", "v1beta1", "Graph", "GraphList")
+		m, l, err = apisresolver.GetManagedResource("detective.aws.m.upbound.io", "v1beta1", "Graph", "GraphList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *InvitationAccepter) ResolveReferences( // ResolveReferences of this In
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GraphArn),
 			Extract:      resource.ExtractParamPath("graph_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GraphArnRef,
 			Selector:     mg.Spec.ForProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *InvitationAccepter) ResolveReferences( // ResolveReferences of this In
 	mg.Spec.ForProvider.GraphArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GraphArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("detective.aws.upbound.io", "v1beta1", "Graph", "GraphList")
+		m, l, err = apisresolver.GetManagedResource("detective.aws.m.upbound.io", "v1beta1", "Graph", "GraphList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *InvitationAccepter) ResolveReferences( // ResolveReferences of this In
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GraphArn),
 			Extract:      resource.ExtractParamPath("graph_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GraphArnRef,
 			Selector:     mg.Spec.InitProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,7 +77,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("detective.aws.upbound.io", "v1beta1", "Graph", "GraphList")
+		m, l, err = apisresolver.GetManagedResource("detective.aws.m.upbound.io", "v1beta1", "Graph", "GraphList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -83,6 +85,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GraphArn),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GraphArnRef,
 			Selector:     mg.Spec.ForProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,7 +97,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.GraphArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GraphArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("detective.aws.upbound.io", "v1beta1", "Graph", "GraphList")
+		m, l, err = apisresolver.GetManagedResource("detective.aws.m.upbound.io", "v1beta1", "Graph", "GraphList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -102,6 +105,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GraphArn),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GraphArnRef,
 			Selector:     mg.Spec.InitProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},

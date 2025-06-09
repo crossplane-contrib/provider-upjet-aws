@@ -28,13 +28,14 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 
 	if mg.Spec.ForProvider.AppversionLifecycle != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppversionLifecycle.ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AppversionLifecycle.ServiceRoleRef,
 				Selector:     mg.Spec.ForProvider.AppversionLifecycle.ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -49,13 +50,14 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 	}
 	if mg.Spec.InitProvider.AppversionLifecycle != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppversionLifecycle.ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AppversionLifecycle.ServiceRoleRef,
 				Selector:     mg.Spec.InitProvider.AppversionLifecycle.ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -81,7 +83,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -89,6 +91,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -100,7 +103,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BucketRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Object", "ObjectList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Object", "ObjectList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -108,6 +111,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Key),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyRef,
 			Selector:     mg.Spec.ForProvider.KeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -119,7 +123,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.Key = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -127,6 +131,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -138,7 +143,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BucketRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Object", "ObjectList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Object", "ObjectList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -146,6 +151,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Key),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyRef,
 			Selector:     mg.Spec.InitProvider.KeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -169,7 +175,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.upbound.io", "v1beta1", "Application", "ApplicationList")
+		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.m.upbound.io", "v1beta1", "Application", "ApplicationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -177,6 +183,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Application),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationRef,
 			Selector:     mg.Spec.ForProvider.ApplicationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -188,7 +195,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.Application = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.upbound.io", "v1beta1", "Application", "ApplicationList")
+		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.m.upbound.io", "v1beta1", "Application", "ApplicationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -196,6 +203,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Application),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationRef,
 			Selector:     mg.Spec.InitProvider.ApplicationSelector,
 			To:           reference.To{List: l, Managed: m},

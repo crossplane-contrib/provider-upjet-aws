@@ -35,6 +35,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +88,7 @@ func (mg *CustomLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -105,6 +108,7 @@ func (mg *CustomLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +128,7 @@ func (mg *CustomLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -143,6 +148,7 @@ func (mg *CustomLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -175,6 +181,7 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -194,6 +201,7 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EcsClusterArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EcsClusterArnRef,
 			Selector:     mg.Spec.ForProvider.EcsClusterArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -213,6 +221,7 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -232,6 +241,7 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -251,6 +261,7 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EcsClusterArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EcsClusterArnRef,
 			Selector:     mg.Spec.InitProvider.EcsClusterArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -270,6 +281,7 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -302,6 +314,7 @@ func (mg *GangliaLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -321,6 +334,7 @@ func (mg *GangliaLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -340,6 +354,7 @@ func (mg *GangliaLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -359,6 +374,7 @@ func (mg *GangliaLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -391,6 +407,7 @@ func (mg *HAProxyLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -410,6 +427,7 @@ func (mg *HAProxyLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -429,6 +447,7 @@ func (mg *HAProxyLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -448,6 +467,7 @@ func (mg *HAProxyLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -480,6 +500,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.LayerIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.LayerIdsRefs,
 			Selector:      mg.Spec.ForProvider.LayerIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -499,6 +520,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -518,6 +540,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -537,6 +560,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -556,6 +580,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.LayerIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.LayerIdsRefs,
 			Selector:      mg.Spec.InitProvider.LayerIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -575,6 +600,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -594,6 +620,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -613,6 +640,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -645,6 +673,7 @@ func (mg *JavaAppLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -664,6 +693,7 @@ func (mg *JavaAppLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -683,6 +713,7 @@ func (mg *JavaAppLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -702,6 +733,7 @@ func (mg *JavaAppLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -734,6 +766,7 @@ func (mg *MemcachedLayer) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -753,6 +786,7 @@ func (mg *MemcachedLayer) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -772,6 +806,7 @@ func (mg *MemcachedLayer) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -791,6 +826,7 @@ func (mg *MemcachedLayer) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -823,6 +859,7 @@ func (mg *MySQLLayer) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -842,6 +879,7 @@ func (mg *MySQLLayer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -861,6 +899,7 @@ func (mg *MySQLLayer) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -880,6 +919,7 @@ func (mg *MySQLLayer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -912,6 +952,7 @@ func (mg *NodeJSAppLayer) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -931,6 +972,7 @@ func (mg *NodeJSAppLayer) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -950,6 +992,7 @@ func (mg *NodeJSAppLayer) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -969,6 +1012,7 @@ func (mg *NodeJSAppLayer) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1001,6 +1045,7 @@ func (mg *PHPAppLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1020,6 +1065,7 @@ func (mg *PHPAppLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1039,6 +1085,7 @@ func (mg *PHPAppLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1058,6 +1105,7 @@ func (mg *PHPAppLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1089,6 +1137,7 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1108,6 +1157,7 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.UserArnRef,
 			Selector:     mg.Spec.ForProvider.UserArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1127,6 +1177,7 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1146,6 +1197,7 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.UserArnRef,
 			Selector:     mg.Spec.InitProvider.UserArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1177,6 +1229,7 @@ func (mg *RDSDBInstance) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RDSDBInstanceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RDSDBInstanceArnRef,
 			Selector:     mg.Spec.ForProvider.RDSDBInstanceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1196,6 +1249,7 @@ func (mg *RDSDBInstance) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1215,6 +1269,7 @@ func (mg *RDSDBInstance) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RDSDBInstanceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RDSDBInstanceArnRef,
 			Selector:     mg.Spec.InitProvider.RDSDBInstanceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1234,6 +1289,7 @@ func (mg *RDSDBInstance) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1266,6 +1322,7 @@ func (mg *RailsAppLayer) ResolveReferences(ctx context.Context, c client.Reader)
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1285,6 +1342,7 @@ func (mg *RailsAppLayer) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1304,6 +1362,7 @@ func (mg *RailsAppLayer) ResolveReferences(ctx context.Context, c client.Reader)
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1323,6 +1382,7 @@ func (mg *RailsAppLayer) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1354,6 +1414,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultInstanceProfileArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultInstanceProfileArnRef,
 			Selector:     mg.Spec.ForProvider.DefaultInstanceProfileArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1373,6 +1434,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultSubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DefaultSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1392,6 +1454,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1411,6 +1474,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VPCIDRef,
 			Selector:     mg.Spec.ForProvider.VPCIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1430,6 +1494,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultInstanceProfileArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultInstanceProfileArnRef,
 			Selector:     mg.Spec.InitProvider.DefaultInstanceProfileArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1449,6 +1514,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultSubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DefaultSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1468,6 +1534,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1487,6 +1554,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VPCIDRef,
 			Selector:     mg.Spec.InitProvider.VPCIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1519,6 +1587,7 @@ func (mg *StaticWebLayer) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1538,6 +1607,7 @@ func (mg *StaticWebLayer) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackIDRef,
 			Selector:     mg.Spec.ForProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1557,6 +1627,7 @@ func (mg *StaticWebLayer) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CustomSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CustomSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.CustomSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1576,6 +1647,7 @@ func (mg *StaticWebLayer) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackIDRef,
 			Selector:     mg.Spec.InitProvider.StackIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1607,6 +1679,7 @@ func (mg *UserProfile) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.UserArnRef,
 			Selector:     mg.Spec.ForProvider.UserArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1626,6 +1699,7 @@ func (mg *UserProfile) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.UserArnRef,
 			Selector:     mg.Spec.InitProvider.UserArnSelector,
 			To:           reference.To{List: l, Managed: m},

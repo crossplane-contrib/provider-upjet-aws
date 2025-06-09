@@ -37,6 +37,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnRef,
 					Selector:     mg.Spec.ForProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -59,6 +60,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ObservabilityConfiguration.ObservabilityConfigurationArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ObservabilityConfiguration.ObservabilityConfigurationArnRef,
 				Selector:     mg.Spec.ForProvider.ObservabilityConfiguration.ObservabilityConfigurationArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -81,6 +83,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnRef,
 					Selector:     mg.Spec.ForProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -104,6 +107,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnRef,
 					Selector:     mg.Spec.InitProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -126,6 +130,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ObservabilityConfiguration.ObservabilityConfigurationArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ObservabilityConfiguration.ObservabilityConfigurationArnRef,
 				Selector:     mg.Spec.InitProvider.ObservabilityConfiguration.ObservabilityConfigurationArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -148,6 +153,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnRef,
 					Selector:     mg.Spec.InitProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnSelector,
 					To:           reference.To{List: l, Managed: m},

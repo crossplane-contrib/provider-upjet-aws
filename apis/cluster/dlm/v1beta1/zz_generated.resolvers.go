@@ -35,6 +35,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -57,6 +58,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef,
 						Selector:     mg.Spec.ForProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -79,6 +81,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -101,6 +104,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef,
 						Selector:     mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArnSelector,
 						To:           reference.To{List: l, Managed: m},

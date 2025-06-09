@@ -34,6 +34,7 @@ func (mg *DomainMailFrom) ResolveReferences( // ResolveReferences of this Domain
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *DomainMailFrom) ResolveReferences( // ResolveReferences of this Domain
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Domain),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DomainRef,
 			Selector:     mg.Spec.InitProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +86,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +107,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisDestination[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.KinesisDestination[i3].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.KinesisDestination[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -125,6 +129,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisDestination[i3].StreamArn),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.KinesisDestination[i3].StreamArnRef,
 				Selector:     mg.Spec.ForProvider.KinesisDestination[i3].StreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -146,6 +151,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnsDestination[i3].TopicArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SnsDestination[i3].TopicArnRef,
 				Selector:     mg.Spec.ForProvider.SnsDestination[i3].TopicArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -166,6 +172,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -186,6 +193,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KinesisDestination[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.KinesisDestination[i3].RoleArnRef,
 				Selector:     mg.Spec.InitProvider.KinesisDestination[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -207,6 +215,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KinesisDestination[i3].StreamArn),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.KinesisDestination[i3].StreamArnRef,
 				Selector:     mg.Spec.InitProvider.KinesisDestination[i3].StreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -228,6 +237,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnsDestination[i3].TopicArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SnsDestination[i3].TopicArnRef,
 				Selector:     mg.Spec.InitProvider.SnsDestination[i3].TopicArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -261,6 +271,7 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Identity),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IdentityRef,
 			Selector:     mg.Spec.ForProvider.IdentitySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -280,6 +291,7 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TopicArnRef,
 			Selector:     mg.Spec.ForProvider.TopicArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -299,6 +311,7 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Identity),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IdentityRef,
 			Selector:     mg.Spec.InitProvider.IdentitySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -318,6 +331,7 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TopicArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TopicArnRef,
 			Selector:     mg.Spec.InitProvider.TopicArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -349,6 +363,7 @@ func (mg *IdentityPolicy) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Identity),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IdentityRef,
 			Selector:     mg.Spec.ForProvider.IdentitySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -368,6 +383,7 @@ func (mg *IdentityPolicy) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Identity),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IdentityRef,
 			Selector:     mg.Spec.InitProvider.IdentitySelector,
 			To:           reference.To{List: l, Managed: m},

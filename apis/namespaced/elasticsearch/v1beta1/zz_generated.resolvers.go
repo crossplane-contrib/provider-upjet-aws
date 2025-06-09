@@ -30,13 +30,14 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogPublishingOptions); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef,
 				Selector:     mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -51,13 +52,14 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	if mg.Spec.ForProvider.VPCOptions != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions.SecurityGroupIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCOptions.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.ForProvider.VPCOptions.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -72,13 +74,14 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogPublishingOptions); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef,
 				Selector:     mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -93,13 +96,14 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	if mg.Spec.InitProvider.VPCOptions != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions.SecurityGroupIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCOptions.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.InitProvider.VPCOptions.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -125,7 +129,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticsearch.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("elasticsearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -133,6 +137,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -144,7 +149,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticsearch.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("elasticsearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -152,6 +157,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DomainNameRef,
 			Selector:     mg.Spec.InitProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},

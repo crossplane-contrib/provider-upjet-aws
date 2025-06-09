@@ -25,7 +25,7 @@ func (mg *QueuePolicy) ResolveReferences( // ResolveReferences of this QueuePoli
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("sqs.aws.m.upbound.io", "v1beta1", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *QueuePolicy) ResolveReferences( // ResolveReferences of this QueuePoli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueURL),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.QueueURLRef,
 			Selector:     mg.Spec.ForProvider.QueueURLSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *QueuePolicy) ResolveReferences( // ResolveReferences of this QueuePoli
 	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("sqs.aws.m.upbound.io", "v1beta1", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *QueuePolicy) ResolveReferences( // ResolveReferences of this QueuePoli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueURL),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.QueueURLRef,
 			Selector:     mg.Spec.InitProvider.QueueURLSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,7 +77,7 @@ func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("sqs.aws.m.upbound.io", "v1beta1", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -83,6 +85,7 @@ func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueURL),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.QueueURLRef,
 			Selector:     mg.Spec.ForProvider.QueueURLSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,7 +97,7 @@ func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("sqs.aws.m.upbound.io", "v1beta1", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -102,6 +105,7 @@ func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueURL),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.QueueURLRef,
 			Selector:     mg.Spec.InitProvider.QueueURLSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -125,7 +129,7 @@ func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("sqs.aws.m.upbound.io", "v1beta1", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -133,6 +137,7 @@ func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueURL),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.QueueURLRef,
 			Selector:     mg.Spec.ForProvider.QueueURLSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -144,7 +149,7 @@ func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("sqs.aws.m.upbound.io", "v1beta1", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -152,6 +157,7 @@ func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueURL),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.QueueURLRef,
 			Selector:     mg.Spec.InitProvider.QueueURLSelector,
 			To:           reference.To{List: l, Managed: m},

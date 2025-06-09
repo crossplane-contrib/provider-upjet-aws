@@ -36,6 +36,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef,
 				Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +58,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -79,6 +81,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArn),
 					Extract:      common.TerraformID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArnRef,
 					Selector:     mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -102,6 +105,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].RoleArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].RoleArnRef,
 					Selector:     mg.Spec.ForProvider.Inputs[i3].KinesisStream[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -125,6 +129,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].ResourceArn),
 					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnRef,
 					Selector:     mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -148,6 +153,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArnRef,
 					Selector:     mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -170,6 +176,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef,
 				Selector:     mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -191,6 +198,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArnRef,
 				Selector:     mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -213,6 +221,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArn),
 					Extract:      common.TerraformID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArnRef,
 					Selector:     mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -236,6 +245,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArnRef,
 					Selector:     mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -259,6 +269,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArn),
 					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnRef,
 					Selector:     mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -282,6 +293,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArnRef,
 					Selector:     mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},

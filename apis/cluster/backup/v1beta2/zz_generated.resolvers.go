@@ -35,6 +35,7 @@ func (mg *Plan) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].TargetVaultName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Rule[i3].TargetVaultNameRef,
 				Selector:     mg.Spec.ForProvider.Rule[i3].TargetVaultNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *Plan) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].TargetVaultName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Rule[i3].TargetVaultNameRef,
 				Selector:     mg.Spec.InitProvider.Rule[i3].TargetVaultNameSelector,
 				To:           reference.To{List: l, Managed: m},

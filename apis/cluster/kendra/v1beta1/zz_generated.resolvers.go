@@ -37,6 +37,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].S3Configuration[i4].BucketName),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Configuration[i3].S3Configuration[i4].BucketNameRef,
 					Selector:     mg.Spec.ForProvider.Configuration[i3].S3Configuration[i4].BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -62,6 +63,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].WebCrawlerConfiguration[i4].AuthenticationConfiguration[i5].BasicAuthentication[i6].Credentials),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.Configuration[i3].WebCrawlerConfiguration[i4].AuthenticationConfiguration[i5].BasicAuthentication[i6].CredentialsRef,
 							Selector:     mg.Spec.ForProvider.Configuration[i3].WebCrawlerConfiguration[i4].AuthenticationConfiguration[i5].BasicAuthentication[i6].CredentialsSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -88,6 +90,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].WebCrawlerConfiguration[i4].ProxyConfiguration[i5].Credentials),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Configuration[i3].WebCrawlerConfiguration[i4].ProxyConfiguration[i5].CredentialsRef,
 						Selector:     mg.Spec.ForProvider.Configuration[i3].WebCrawlerConfiguration[i4].ProxyConfiguration[i5].CredentialsSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -110,6 +113,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IndexIDRef,
 			Selector:     mg.Spec.ForProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +133,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -150,6 +155,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].S3Configuration[i4].BucketName),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Configuration[i3].S3Configuration[i4].BucketNameRef,
 					Selector:     mg.Spec.InitProvider.Configuration[i3].S3Configuration[i4].BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -175,6 +181,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].WebCrawlerConfiguration[i4].AuthenticationConfiguration[i5].BasicAuthentication[i6].Credentials),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.Configuration[i3].WebCrawlerConfiguration[i4].AuthenticationConfiguration[i5].BasicAuthentication[i6].CredentialsRef,
 							Selector:     mg.Spec.InitProvider.Configuration[i3].WebCrawlerConfiguration[i4].AuthenticationConfiguration[i5].BasicAuthentication[i6].CredentialsSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -201,6 +208,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].WebCrawlerConfiguration[i4].ProxyConfiguration[i5].Credentials),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Configuration[i3].WebCrawlerConfiguration[i4].ProxyConfiguration[i5].CredentialsRef,
 						Selector:     mg.Spec.InitProvider.Configuration[i3].WebCrawlerConfiguration[i4].ProxyConfiguration[i5].CredentialsSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -223,6 +231,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IndexIDRef,
 			Selector:     mg.Spec.InitProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -242,6 +251,7 @@ func (mg *DataSource) ResolveReferences( // ResolveReferences of this DataSource
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -273,6 +283,7 @@ func (mg *Experience) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IndexIDRef,
 			Selector:     mg.Spec.ForProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -292,6 +303,7 @@ func (mg *Experience) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -311,6 +323,7 @@ func (mg *Experience) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IndexIDRef,
 			Selector:     mg.Spec.InitProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -330,6 +343,7 @@ func (mg *Experience) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -361,6 +375,7 @@ func (mg *Index) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -380,6 +395,7 @@ func (mg *Index) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -411,6 +427,7 @@ func (mg *QuerySuggestionsBlockList) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IndexIDRef,
 			Selector:     mg.Spec.ForProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -430,6 +447,7 @@ func (mg *QuerySuggestionsBlockList) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -450,6 +468,7 @@ func (mg *QuerySuggestionsBlockList) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceS3Path[i3].Bucket),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceS3Path[i3].BucketRef,
 				Selector:     mg.Spec.ForProvider.SourceS3Path[i3].BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -470,6 +489,7 @@ func (mg *QuerySuggestionsBlockList) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IndexIDRef,
 			Selector:     mg.Spec.InitProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -489,6 +509,7 @@ func (mg *QuerySuggestionsBlockList) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -509,6 +530,7 @@ func (mg *QuerySuggestionsBlockList) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceS3Path[i3].Bucket),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceS3Path[i3].BucketRef,
 				Selector:     mg.Spec.InitProvider.SourceS3Path[i3].BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -542,6 +564,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IndexIDRef,
 			Selector:     mg.Spec.ForProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -561,6 +584,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -581,6 +605,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceS3Path[i3].Bucket),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceS3Path[i3].BucketRef,
 				Selector:     mg.Spec.ForProvider.SourceS3Path[i3].BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -602,6 +627,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceS3Path[i3].Key),
 				Extract:      resource.ExtractParamPath("key", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceS3Path[i3].KeyRef,
 				Selector:     mg.Spec.ForProvider.SourceS3Path[i3].KeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -622,6 +648,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IndexID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IndexIDRef,
 			Selector:     mg.Spec.InitProvider.IndexIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -641,6 +668,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -661,6 +689,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceS3Path[i3].Bucket),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceS3Path[i3].BucketRef,
 				Selector:     mg.Spec.InitProvider.SourceS3Path[i3].BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -682,6 +711,7 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceS3Path[i3].Key),
 				Extract:      resource.ExtractParamPath("key", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceS3Path[i3].KeyRef,
 				Selector:     mg.Spec.InitProvider.SourceS3Path[i3].KeySelector,
 				To:           reference.To{List: l, Managed: m},

@@ -24,7 +24,7 @@ func (mg *EndpointGroup) ResolveReferences( // ResolveReferences of this Endpoin
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io", "v1beta1", "Listener", "ListenerList")
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.m.upbound.io", "v1beta1", "Listener", "ListenerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -32,6 +32,7 @@ func (mg *EndpointGroup) ResolveReferences( // ResolveReferences of this Endpoin
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ListenerArnRef,
 			Selector:     mg.Spec.ForProvider.ListenerArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -43,7 +44,7 @@ func (mg *EndpointGroup) ResolveReferences( // ResolveReferences of this Endpoin
 	mg.Spec.ForProvider.ListenerArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ListenerArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io", "v1beta1", "Listener", "ListenerList")
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.m.upbound.io", "v1beta1", "Listener", "ListenerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -51,6 +52,7 @@ func (mg *EndpointGroup) ResolveReferences( // ResolveReferences of this Endpoin
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ListenerArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ListenerArnRef,
 			Selector:     mg.Spec.InitProvider.ListenerArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -74,7 +76,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io", "v1beta1", "Accelerator", "AcceleratorList")
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.m.upbound.io", "v1beta1", "Accelerator", "AcceleratorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -82,6 +84,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AcceleratorArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AcceleratorArnRef,
 			Selector:     mg.Spec.ForProvider.AcceleratorArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -93,7 +96,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.AcceleratorArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AcceleratorArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io", "v1beta1", "Accelerator", "AcceleratorList")
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.m.upbound.io", "v1beta1", "Accelerator", "AcceleratorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -101,6 +104,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AcceleratorArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AcceleratorArnRef,
 			Selector:     mg.Spec.InitProvider.AcceleratorArnSelector,
 			To:           reference.To{List: l, Managed: m},

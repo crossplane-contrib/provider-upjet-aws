@@ -25,7 +25,7 @@ func (mg *InviteAccepter) ResolveReferences( // ResolveReferences of this Invite
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("securityhub.aws.upbound.io", "v1beta1", "Member", "MemberList")
+		m, l, err = apisresolver.GetManagedResource("securityhub.aws.m.upbound.io", "v1beta1", "Member", "MemberList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *InviteAccepter) ResolveReferences( // ResolveReferences of this Invite
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterID),
 			Extract:      resource.ExtractParamPath("master_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MasterIDRef,
 			Selector:     mg.Spec.ForProvider.MasterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *InviteAccepter) ResolveReferences( // ResolveReferences of this Invite
 	mg.Spec.ForProvider.MasterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MasterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("securityhub.aws.upbound.io", "v1beta1", "Member", "MemberList")
+		m, l, err = apisresolver.GetManagedResource("securityhub.aws.m.upbound.io", "v1beta1", "Member", "MemberList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *InviteAccepter) ResolveReferences( // ResolveReferences of this Invite
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MasterID),
 			Extract:      resource.ExtractParamPath("master_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MasterIDRef,
 			Selector:     mg.Spec.InitProvider.MasterIDSelector,
 			To:           reference.To{List: l, Managed: m},

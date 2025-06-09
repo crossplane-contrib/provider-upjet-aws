@@ -35,6 +35,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalReplicationGroupID),
 			Extract:      resource.ExtractParamPath("global_replication_group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalReplicationGroupIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalReplicationGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -92,6 +95,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetGroupNameRef,
 			Selector:     mg.Spec.ForProvider.SubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -111,6 +115,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalReplicationGroupID),
 			Extract:      resource.ExtractParamPath("global_replication_group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalReplicationGroupIDRef,
 			Selector:     mg.Spec.InitProvider.GlobalReplicationGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,6 +135,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -149,6 +155,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -168,6 +175,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetGroupNameRef,
 			Selector:     mg.Spec.InitProvider.SubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

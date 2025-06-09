@@ -26,7 +26,7 @@ func (mg *PrivateDNSNamespace) ResolveReferences( // ResolveReferences of this P
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *PrivateDNSNamespace) ResolveReferences( // ResolveReferences of this P
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPC),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VPCRef,
 			Selector:     mg.Spec.ForProvider.VPCSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,7 +46,7 @@ func (mg *PrivateDNSNamespace) ResolveReferences( // ResolveReferences of this P
 	mg.Spec.ForProvider.VPC = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -53,6 +54,7 @@ func (mg *PrivateDNSNamespace) ResolveReferences( // ResolveReferences of this P
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPC),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VPCRef,
 			Selector:     mg.Spec.InitProvider.VPCSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,13 +80,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	if mg.Spec.ForProvider.DNSConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("servicediscovery.aws.upbound.io", "v1beta1", "PrivateDNSNamespace", "PrivateDNSNamespaceList")
+			m, l, err = apisresolver.GetManagedResource("servicediscovery.aws.m.upbound.io", "v1beta1", "PrivateDNSNamespace", "PrivateDNSNamespaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSConfig.NamespaceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DNSConfig.NamespaceIDRef,
 				Selector:     mg.Spec.ForProvider.DNSConfig.NamespaceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -99,13 +102,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	if mg.Spec.InitProvider.DNSConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("servicediscovery.aws.upbound.io", "v1beta1", "PrivateDNSNamespace", "PrivateDNSNamespaceList")
+			m, l, err = apisresolver.GetManagedResource("servicediscovery.aws.m.upbound.io", "v1beta1", "PrivateDNSNamespace", "PrivateDNSNamespaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSConfig.NamespaceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DNSConfig.NamespaceIDRef,
 				Selector:     mg.Spec.InitProvider.DNSConfig.NamespaceIDSelector,
 				To:           reference.To{List: l, Managed: m},

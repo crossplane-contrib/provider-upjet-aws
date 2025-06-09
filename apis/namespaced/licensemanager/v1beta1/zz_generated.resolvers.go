@@ -27,7 +27,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("licensemanager.aws.upbound.io", "v1beta1", "LicenseConfiguration", "LicenseConfigurationList")
+		m, l, err = apisresolver.GetManagedResource("licensemanager.aws.m.upbound.io", "v1beta1", "LicenseConfiguration", "LicenseConfigurationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -35,6 +35,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LicenseConfigurationArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LicenseConfigurationArnRef,
 			Selector:     mg.Spec.ForProvider.LicenseConfigurationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -46,7 +47,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 	mg.Spec.ForProvider.LicenseConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LicenseConfigurationArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -54,6 +55,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -65,7 +67,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("licensemanager.aws.upbound.io", "v1beta1", "LicenseConfiguration", "LicenseConfigurationList")
+		m, l, err = apisresolver.GetManagedResource("licensemanager.aws.m.upbound.io", "v1beta1", "LicenseConfiguration", "LicenseConfigurationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -73,6 +75,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LicenseConfigurationArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LicenseConfigurationArnRef,
 			Selector:     mg.Spec.InitProvider.LicenseConfigurationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,7 +87,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 	mg.Spec.InitProvider.LicenseConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LicenseConfigurationArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -92,6 +95,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},

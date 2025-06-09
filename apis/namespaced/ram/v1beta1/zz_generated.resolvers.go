@@ -26,7 +26,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io", "v1beta1", "Organization", "OrganizationList")
+		m, l, err = apisresolver.GetManagedResource("organizations.aws.m.upbound.io", "v1beta1", "Organization", "OrganizationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Principal),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrincipalRef,
 			Selector:     mg.Spec.ForProvider.PrincipalSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,7 +46,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 	mg.Spec.ForProvider.Principal = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrincipalRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
+		m, l, err = apisresolver.GetManagedResource("ram.aws.m.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -53,6 +54,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -64,7 +66,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 	mg.Spec.ForProvider.ResourceShareArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceShareArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io", "v1beta1", "Organization", "OrganizationList")
+		m, l, err = apisresolver.GetManagedResource("organizations.aws.m.upbound.io", "v1beta1", "Organization", "OrganizationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -72,6 +74,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Principal),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrincipalRef,
 			Selector:     mg.Spec.InitProvider.PrincipalSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -83,7 +86,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 	mg.Spec.InitProvider.Principal = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PrincipalRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
+		m, l, err = apisresolver.GetManagedResource("ram.aws.m.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -91,6 +94,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -114,7 +118,7 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
+		m, l, err = apisresolver.GetManagedResource("ram.aws.m.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -122,6 +126,7 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -133,7 +138,7 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceShareArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceShareArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
+		m, l, err = apisresolver.GetManagedResource("ram.aws.m.upbound.io", "v1beta1", "ResourceShare", "ResourceShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -141,6 +146,7 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -164,7 +170,7 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io", "v1beta1", "PrincipalAssociation", "PrincipalAssociationList")
+		m, l, err = apisresolver.GetManagedResource("ram.aws.m.upbound.io", "v1beta1", "PrincipalAssociation", "PrincipalAssociationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -172,6 +178,7 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareArn),
 			Extract:      resource.ExtractParamPath("resource_share_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ShareArnRef,
 			Selector:     mg.Spec.ForProvider.ShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -183,7 +190,7 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ShareArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io", "v1beta1", "PrincipalAssociation", "PrincipalAssociationList")
+		m, l, err = apisresolver.GetManagedResource("ram.aws.m.upbound.io", "v1beta1", "PrincipalAssociation", "PrincipalAssociationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -191,6 +198,7 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareArn),
 			Extract:      resource.ExtractParamPath("resource_share_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ShareArnRef,
 			Selector:     mg.Spec.InitProvider.ShareArnSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -25,7 +25,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("identitystore.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GroupID),
 			Extract:      resource.ExtractParamPath("group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GroupIDRef,
 			Selector:     mg.Spec.ForProvider.GroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 	mg.Spec.ForProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("identitystore.aws.m.upbound.io", "v1beta1", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberID),
 			Extract:      resource.ExtractParamPath("user_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MemberIDRef,
 			Selector:     mg.Spec.ForProvider.MemberIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -63,7 +65,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 	mg.Spec.ForProvider.MemberID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MemberIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("identitystore.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -71,6 +73,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GroupID),
 			Extract:      resource.ExtractParamPath("group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GroupIDRef,
 			Selector:     mg.Spec.InitProvider.GroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -82,7 +85,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 	mg.Spec.InitProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("identitystore.aws.m.upbound.io", "v1beta1", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -90,6 +93,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberID),
 			Extract:      resource.ExtractParamPath("user_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MemberIDRef,
 			Selector:     mg.Spec.InitProvider.MemberIDSelector,
 			To:           reference.To{List: l, Managed: m},

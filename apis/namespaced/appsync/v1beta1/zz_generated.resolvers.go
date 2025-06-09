@@ -28,7 +28,7 @@ func (mg *APICache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *APICache) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APIIDRef,
 			Selector:     mg.Spec.ForProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -47,7 +48,7 @@ func (mg *APICache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -55,6 +56,7 @@ func (mg *APICache) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.APIIDRef,
 			Selector:     mg.Spec.InitProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,7 +80,7 @@ func (mg *APIKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,6 +88,7 @@ func (mg *APIKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APIIDRef,
 			Selector:     mg.Spec.ForProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -109,7 +112,7 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -117,6 +120,7 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APIIDRef,
 			Selector:     mg.Spec.ForProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,13 +134,14 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.ForProvider.DynamodbConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+			m, l, err = apisresolver.GetManagedResource("dynamodb.aws.m.upbound.io", "v1beta1", "Table", "TableList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DynamodbConfig.TableName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DynamodbConfig.TableNameRef,
 				Selector:     mg.Spec.ForProvider.DynamodbConfig.TableNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -150,13 +155,14 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -170,13 +176,14 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.InitProvider.DynamodbConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+			m, l, err = apisresolver.GetManagedResource("dynamodb.aws.m.upbound.io", "v1beta1", "Table", "TableList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DynamodbConfig.TableName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DynamodbConfig.TableNameRef,
 				Selector:     mg.Spec.InitProvider.DynamodbConfig.TableNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -190,13 +197,14 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -220,7 +228,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -228,6 +236,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APIIDRef,
 			Selector:     mg.Spec.ForProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -239,7 +248,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Datasource", "DatasourceList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "Datasource", "DatasourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -247,6 +256,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSource),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataSourceRef,
 			Selector:     mg.Spec.ForProvider.DataSourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -258,7 +268,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataSourceRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -266,6 +276,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.APIIDRef,
 			Selector:     mg.Spec.InitProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -277,7 +288,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Datasource", "DatasourceList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "Datasource", "DatasourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -285,6 +296,7 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSource),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataSourceRef,
 			Selector:     mg.Spec.InitProvider.DataSourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -310,13 +322,14 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.ForProvider.LogConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogConfig.CloudwatchLogsRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LogConfig.CloudwatchLogsRoleArnRef,
 				Selector:     mg.Spec.ForProvider.LogConfig.CloudwatchLogsRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -330,13 +343,14 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MergedAPIExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MergedAPIExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.MergedAPIExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -350,13 +364,14 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.ForProvider.UserPoolConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io", "v1beta1", "UserPool", "UserPoolList")
+			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.m.upbound.io", "v1beta1", "UserPool", "UserPoolList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolConfig.UserPoolID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.UserPoolConfig.UserPoolIDRef,
 				Selector:     mg.Spec.ForProvider.UserPoolConfig.UserPoolIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -371,13 +386,14 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	if mg.Spec.InitProvider.LogConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogConfig.CloudwatchLogsRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LogConfig.CloudwatchLogsRoleArnRef,
 				Selector:     mg.Spec.InitProvider.LogConfig.CloudwatchLogsRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -391,13 +407,14 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MergedAPIExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MergedAPIExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.MergedAPIExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -411,13 +428,14 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.InitProvider.UserPoolConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io", "v1beta1", "UserPool", "UserPoolList")
+			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.m.upbound.io", "v1beta1", "UserPool", "UserPoolList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolConfig.UserPoolID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.UserPoolConfig.UserPoolIDRef,
 				Selector:     mg.Spec.InitProvider.UserPoolConfig.UserPoolIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -444,7 +462,7 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -452,6 +470,7 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APIIDRef,
 			Selector:     mg.Spec.ForProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -463,7 +482,7 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Datasource", "DatasourceList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "Datasource", "DatasourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -471,6 +490,7 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSource),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataSourceRef,
 			Selector:     mg.Spec.ForProvider.DataSourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -484,13 +504,14 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	if mg.Spec.ForProvider.PipelineConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+			m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PipelineConfig.Functions),
 				Extract:       resource.ExtractParamPath("function_id", true),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.PipelineConfig.FunctionsRefs,
 				Selector:      mg.Spec.ForProvider.PipelineConfig.FunctionsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -504,13 +525,14 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Datasource", "DatasourceList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "Datasource", "DatasourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSource),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataSourceRef,
 			Selector:     mg.Spec.InitProvider.DataSourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -524,13 +546,14 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	if mg.Spec.InitProvider.PipelineConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+			m, l, err = apisresolver.GetManagedResource("appsync.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PipelineConfig.Functions),
 				Extract:       resource.ExtractParamPath("function_id", true),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.PipelineConfig.FunctionsRefs,
 				Selector:      mg.Spec.InitProvider.PipelineConfig.FunctionsSelector,
 				To:            reference.To{List: l, Managed: m},

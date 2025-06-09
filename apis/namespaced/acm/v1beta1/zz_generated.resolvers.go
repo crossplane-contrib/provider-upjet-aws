@@ -25,7 +25,7 @@ func (mg *Certificate) ResolveReferences( // ResolveReferences of this Certifica
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("acmpca.aws.upbound.io", "v1beta1", "CertificateAuthority", "CertificateAuthorityList")
+		m, l, err = apisresolver.GetManagedResource("acmpca.aws.m.upbound.io", "v1beta1", "CertificateAuthority", "CertificateAuthorityList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *Certificate) ResolveReferences( // ResolveReferences of this Certifica
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateAuthorityArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateAuthorityArnRef,
 			Selector:     mg.Spec.ForProvider.CertificateAuthorityArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *Certificate) ResolveReferences( // ResolveReferences of this Certifica
 	mg.Spec.ForProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("acmpca.aws.upbound.io", "v1beta1", "CertificateAuthority", "CertificateAuthorityList")
+		m, l, err = apisresolver.GetManagedResource("acmpca.aws.m.upbound.io", "v1beta1", "CertificateAuthority", "CertificateAuthorityList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *Certificate) ResolveReferences( // ResolveReferences of this Certifica
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateAuthorityArnRef,
 			Selector:     mg.Spec.InitProvider.CertificateAuthorityArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,7 +77,7 @@ func (mg *CertificateValidation) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.m.upbound.io", "v1beta1", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -83,6 +85,7 @@ func (mg *CertificateValidation) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateArnRef,
 			Selector:     mg.Spec.ForProvider.CertificateArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,7 +97,7 @@ func (mg *CertificateValidation) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.m.upbound.io", "v1beta1", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -102,6 +105,7 @@ func (mg *CertificateValidation) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateArnRef,
 			Selector:     mg.Spec.InitProvider.CertificateArnSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -28,13 +28,14 @@ func (mg *LanguageModel) ResolveReferences( // ResolveReferences of this Languag
 
 	if mg.Spec.ForProvider.InputDataConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputDataConfig.DataAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.InputDataConfig.DataAccessRoleArnRef,
 				Selector:     mg.Spec.ForProvider.InputDataConfig.DataAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -49,13 +50,14 @@ func (mg *LanguageModel) ResolveReferences( // ResolveReferences of this Languag
 	}
 	if mg.Spec.InitProvider.InputDataConfig != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputDataConfig.DataAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.InputDataConfig.DataAccessRoleArnRef,
 				Selector:     mg.Spec.InitProvider.InputDataConfig.DataAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},

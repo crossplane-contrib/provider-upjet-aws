@@ -31,13 +31,14 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties != nil {
 			if mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3 != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -56,13 +57,14 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties != nil {
 			if mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties.S3 != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -81,13 +83,14 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties != nil {
 			if mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3 != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -106,13 +109,14 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties != nil {
 			if mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties.S3 != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "BucketPolicy", "BucketPolicyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},

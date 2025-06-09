@@ -38,6 +38,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameRef,
 						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -63,6 +64,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameRef,
 						Selector:     mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -88,6 +90,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameRef,
 						Selector:     mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -113,6 +116,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameRef,
 						Selector:     mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},

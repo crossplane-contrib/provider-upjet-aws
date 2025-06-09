@@ -35,6 +35,7 @@ func (mg *AttachmentAccepter) ResolveReferences( // ResolveReferences of this At
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AttachmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AttachmentIDRef,
 			Selector:     mg.Spec.ForProvider.AttachmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *AttachmentAccepter) ResolveReferences( // ResolveReferences of this At
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AttachmentType),
 			Extract:      resource.ExtractParamPath("attachment_type", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AttachmentTypeRef,
 			Selector:     mg.Spec.ForProvider.AttachmentTypeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *AttachmentAccepter) ResolveReferences( // ResolveReferences of this At
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AttachmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AttachmentIDRef,
 			Selector:     mg.Spec.InitProvider.AttachmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +95,7 @@ func (mg *AttachmentAccepter) ResolveReferences( // ResolveReferences of this At
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AttachmentType),
 			Extract:      resource.ExtractParamPath("attachment_type", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AttachmentTypeRef,
 			Selector:     mg.Spec.InitProvider.AttachmentTypeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +127,7 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CoreNetworkID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CoreNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.CoreNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +147,7 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EdgeLocation),
 			Extract:      resource.ExtractParamPath("edge_location", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EdgeLocationRef,
 			Selector:     mg.Spec.ForProvider.EdgeLocationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -161,6 +167,7 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransportAttachmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TransportAttachmentIDRef,
 			Selector:     mg.Spec.ForProvider.TransportAttachmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -180,6 +187,7 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CoreNetworkID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CoreNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.CoreNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -199,6 +207,7 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EdgeLocation),
 			Extract:      resource.ExtractParamPath("edge_location", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EdgeLocationRef,
 			Selector:     mg.Spec.InitProvider.EdgeLocationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -218,6 +227,7 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TransportAttachmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TransportAttachmentIDRef,
 			Selector:     mg.Spec.InitProvider.TransportAttachmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -249,6 +259,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectedDeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConnectedDeviceIDRef,
 			Selector:     mg.Spec.ForProvider.ConnectedDeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -268,6 +279,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DeviceIDRef,
 			Selector:     mg.Spec.ForProvider.DeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -287,6 +299,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -306,6 +319,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectedDeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConnectedDeviceIDRef,
 			Selector:     mg.Spec.InitProvider.ConnectedDeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -325,6 +339,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DeviceIDRef,
 			Selector:     mg.Spec.InitProvider.DeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -344,6 +359,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -375,6 +391,7 @@ func (mg *CoreNetwork) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -394,6 +411,7 @@ func (mg *CoreNetwork) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -425,6 +443,7 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomerGatewayArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CustomerGatewayArnRef,
 			Selector:     mg.Spec.ForProvider.CustomerGatewayArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -444,6 +463,7 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DeviceIDRef,
 			Selector:     mg.Spec.ForProvider.DeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -463,6 +483,7 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -482,6 +503,7 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DeviceIDRef,
 			Selector:     mg.Spec.InitProvider.DeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -513,6 +535,7 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -532,6 +555,7 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SiteIDRef,
 			Selector:     mg.Spec.ForProvider.SiteIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -551,6 +575,7 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -570,6 +595,7 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SiteIDRef,
 			Selector:     mg.Spec.InitProvider.SiteIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -601,6 +627,7 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -620,6 +647,7 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SiteIDRef,
 			Selector:     mg.Spec.ForProvider.SiteIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -639,6 +667,7 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -658,6 +687,7 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SiteIDRef,
 			Selector:     mg.Spec.InitProvider.SiteIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -689,6 +719,7 @@ func (mg *LinkAssociation) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeviceID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DeviceIDRef,
 			Selector:     mg.Spec.ForProvider.DeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -708,6 +739,7 @@ func (mg *LinkAssociation) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -727,6 +759,7 @@ func (mg *LinkAssociation) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LinkIDRef,
 			Selector:     mg.Spec.ForProvider.LinkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -758,6 +791,7 @@ func (mg *Site) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -777,6 +811,7 @@ func (mg *Site) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -808,6 +843,7 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DeviceIDRef,
 			Selector:     mg.Spec.ForProvider.DeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -827,6 +863,7 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -846,6 +883,7 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayConnectPeerArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TransitGatewayConnectPeerArnRef,
 			Selector:     mg.Spec.ForProvider.TransitGatewayConnectPeerArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -865,6 +903,7 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeviceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DeviceIDRef,
 			Selector:     mg.Spec.InitProvider.DeviceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -896,6 +935,7 @@ func (mg *TransitGatewayRegistration) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.GlobalNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -915,6 +955,7 @@ func (mg *TransitGatewayRegistration) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TransitGatewayArnRef,
 			Selector:     mg.Spec.ForProvider.TransitGatewayArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -947,6 +988,7 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CoreNetworkID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CoreNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.CoreNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -966,6 +1008,7 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetArnsRefs,
 			Selector:      mg.Spec.ForProvider.SubnetArnsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -985,6 +1028,7 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VPCArnRef,
 			Selector:     mg.Spec.ForProvider.VPCArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1004,6 +1048,7 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CoreNetworkID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CoreNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.CoreNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1023,6 +1068,7 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetArnsRefs,
 			Selector:      mg.Spec.InitProvider.SubnetArnsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1042,6 +1088,7 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VPCArnRef,
 			Selector:     mg.Spec.InitProvider.VPCArnSelector,
 			To:           reference.To{List: l, Managed: m},

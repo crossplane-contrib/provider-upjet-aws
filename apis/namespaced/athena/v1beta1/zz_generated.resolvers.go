@@ -28,7 +28,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -47,7 +48,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BucketRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -55,6 +56,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,7 +80,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.m.upbound.io", "v1beta1", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,6 +88,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseRef,
 			Selector:     mg.Spec.ForProvider.DatabaseSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -97,7 +100,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Database = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Workgroup", "WorkgroupList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.m.upbound.io", "v1beta1", "Workgroup", "WorkgroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -105,6 +108,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Workgroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkgroupRef,
 			Selector:     mg.Spec.ForProvider.WorkgroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -116,7 +120,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Workgroup = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkgroupRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.m.upbound.io", "v1beta1", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -124,6 +128,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseRef,
 			Selector:     mg.Spec.InitProvider.DatabaseSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,7 +140,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.Database = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Workgroup", "WorkgroupList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.m.upbound.io", "v1beta1", "Workgroup", "WorkgroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -143,6 +148,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Workgroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkgroupRef,
 			Selector:     mg.Spec.InitProvider.WorkgroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -170,13 +176,14 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 		if mg.Spec.ForProvider.Configuration.ResultConfiguration != nil {
 			if mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+					m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnRef,
 						Selector:     mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -195,13 +202,14 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 		if mg.Spec.InitProvider.Configuration.ResultConfiguration != nil {
 			if mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+					m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnRef,
 						Selector:     mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},

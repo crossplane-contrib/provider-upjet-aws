@@ -30,13 +30,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	if mg.Spec.ForProvider.NetworkConfiguration != nil {
 		if mg.Spec.ForProvider.NetworkConfiguration.EgressConfiguration != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("apprunner.aws.upbound.io", "v1beta1", "VPCConnector", "VPCConnectorList")
+				m, l, err = apisresolver.GetManagedResource("apprunner.aws.m.upbound.io", "v1beta1", "VPCConnector", "VPCConnectorList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnRef,
 					Selector:     mg.Spec.ForProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -52,13 +53,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	if mg.Spec.ForProvider.ObservabilityConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("apprunner.aws.upbound.io", "v1beta1", "ObservabilityConfiguration", "ObservabilityConfigurationList")
+			m, l, err = apisresolver.GetManagedResource("apprunner.aws.m.upbound.io", "v1beta1", "ObservabilityConfiguration", "ObservabilityConfigurationList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ObservabilityConfiguration.ObservabilityConfigurationArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ObservabilityConfiguration.ObservabilityConfigurationArnRef,
 				Selector:     mg.Spec.ForProvider.ObservabilityConfiguration.ObservabilityConfigurationArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -74,13 +76,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	if mg.Spec.ForProvider.SourceConfiguration != nil {
 		if mg.Spec.ForProvider.SourceConfiguration.AuthenticationConfiguration != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("apprunner.aws.upbound.io", "v1beta1", "Connection", "ConnectionList")
+				m, l, err = apisresolver.GetManagedResource("apprunner.aws.m.upbound.io", "v1beta1", "Connection", "ConnectionList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnRef,
 					Selector:     mg.Spec.ForProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -97,13 +100,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	if mg.Spec.InitProvider.NetworkConfiguration != nil {
 		if mg.Spec.InitProvider.NetworkConfiguration.EgressConfiguration != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("apprunner.aws.upbound.io", "v1beta1", "VPCConnector", "VPCConnectorList")
+				m, l, err = apisresolver.GetManagedResource("apprunner.aws.m.upbound.io", "v1beta1", "VPCConnector", "VPCConnectorList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnRef,
 					Selector:     mg.Spec.InitProvider.NetworkConfiguration.EgressConfiguration.VPCConnectorArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -119,13 +123,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	if mg.Spec.InitProvider.ObservabilityConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("apprunner.aws.upbound.io", "v1beta1", "ObservabilityConfiguration", "ObservabilityConfigurationList")
+			m, l, err = apisresolver.GetManagedResource("apprunner.aws.m.upbound.io", "v1beta1", "ObservabilityConfiguration", "ObservabilityConfigurationList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ObservabilityConfiguration.ObservabilityConfigurationArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ObservabilityConfiguration.ObservabilityConfigurationArnRef,
 				Selector:     mg.Spec.InitProvider.ObservabilityConfiguration.ObservabilityConfigurationArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -141,13 +146,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	if mg.Spec.InitProvider.SourceConfiguration != nil {
 		if mg.Spec.InitProvider.SourceConfiguration.AuthenticationConfiguration != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("apprunner.aws.upbound.io", "v1beta1", "Connection", "ConnectionList")
+				m, l, err = apisresolver.GetManagedResource("apprunner.aws.m.upbound.io", "v1beta1", "Connection", "ConnectionList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnRef,
 					Selector:     mg.Spec.InitProvider.SourceConfiguration.AuthenticationConfiguration.ConnectionArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -174,7 +180,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -182,6 +188,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -193,7 +200,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SecurityGroupRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -201,6 +208,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetRefs,
 			Selector:      mg.Spec.ForProvider.SubnetSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -212,7 +220,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -220,6 +228,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -231,7 +240,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.InitProvider.SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SecurityGroupRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -239,6 +248,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetRefs,
 			Selector:      mg.Spec.InitProvider.SubnetSelector,
 			To:            reference.To{List: l, Managed: m},

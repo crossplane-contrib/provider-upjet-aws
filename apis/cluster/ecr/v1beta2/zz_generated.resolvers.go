@@ -35,6 +35,7 @@ func (mg *Repository) ResolveReferences( // ResolveReferences of this Repository
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKey),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyRef,
 				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *Repository) ResolveReferences( // ResolveReferences of this Repository
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKey),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyRef,
 				Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeySelector,
 				To:           reference.To{List: l, Managed: m},

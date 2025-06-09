@@ -25,7 +25,7 @@ func (mg *DelegatedAdministrator) ResolveReferences( // ResolveReferences of thi
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("organizations.aws.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *DelegatedAdministrator) ResolveReferences( // ResolveReferences of thi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountIDRef,
 			Selector:     mg.Spec.ForProvider.AccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *DelegatedAdministrator) ResolveReferences( // ResolveReferences of thi
 	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("organizations.aws.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *DelegatedAdministrator) ResolveReferences( // ResolveReferences of thi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AccountIDRef,
 			Selector:     mg.Spec.InitProvider.AccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,7 +77,7 @@ func (mg *PolicyAttachment) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+		m, l, err = apisresolver.GetManagedResource("organizations.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -83,6 +85,7 @@ func (mg *PolicyAttachment) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,7 +97,7 @@ func (mg *PolicyAttachment) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.PolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+		m, l, err = apisresolver.GetManagedResource("organizations.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -102,6 +105,7 @@ func (mg *PolicyAttachment) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},

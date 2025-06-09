@@ -36,6 +36,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Name),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NameRef,
 			Selector:     mg.Spec.ForProvider.NameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Targets[i3].Values),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Targets[i3].ValuesRefs,
 				Selector:      mg.Spec.ForProvider.Targets[i3].ValuesSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -76,6 +78,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Name),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NameRef,
 			Selector:     mg.Spec.InitProvider.NameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -96,6 +99,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Targets[i3].Values),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Targets[i3].ValuesRefs,
 				Selector:      mg.Spec.InitProvider.Targets[i3].ValuesSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -130,6 +134,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -150,6 +155,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Targets[i3].Values),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Targets[i3].ValuesRefs,
 				Selector:      mg.Spec.ForProvider.Targets[i3].ValuesSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -170,6 +176,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TaskArnRef,
 			Selector:     mg.Spec.ForProvider.TaskArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -192,6 +199,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.TaskInvocationParameters.AutomationParameters.Parameter[i5].Values),
 						Extract:       resource.ExtractResourceID(),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.ForProvider.TaskInvocationParameters.AutomationParameters.Parameter[i5].ValuesRefs,
 						Selector:      mg.Spec.ForProvider.TaskInvocationParameters.AutomationParameters.Parameter[i5].ValuesSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -217,6 +225,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.NotificationConfig.NotificationArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.NotificationConfig.NotificationArnRef,
 						Selector:     mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.NotificationConfig.NotificationArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -241,6 +250,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.OutputS3Bucket),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.OutputS3BucketRef,
 					Selector:     mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.OutputS3BucketSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -264,6 +274,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.ServiceRoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.ServiceRoleArnRef,
 					Selector:     mg.Spec.ForProvider.TaskInvocationParameters.RunCommandParameters.ServiceRoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -285,6 +296,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WindowID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WindowIDRef,
 			Selector:     mg.Spec.ForProvider.WindowIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -304,6 +316,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -324,6 +337,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Targets[i3].Values),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Targets[i3].ValuesRefs,
 				Selector:      mg.Spec.InitProvider.Targets[i3].ValuesSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -344,6 +358,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TaskArnRef,
 			Selector:     mg.Spec.InitProvider.TaskArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -366,6 +381,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.TaskInvocationParameters.AutomationParameters.Parameter[i5].Values),
 						Extract:       resource.ExtractResourceID(),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.InitProvider.TaskInvocationParameters.AutomationParameters.Parameter[i5].ValuesRefs,
 						Selector:      mg.Spec.InitProvider.TaskInvocationParameters.AutomationParameters.Parameter[i5].ValuesSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -391,6 +407,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.NotificationConfig.NotificationArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.NotificationConfig.NotificationArnRef,
 						Selector:     mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.NotificationConfig.NotificationArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -415,6 +432,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.OutputS3Bucket),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.OutputS3BucketRef,
 					Selector:     mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.OutputS3BucketSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -438,6 +456,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.ServiceRoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.ServiceRoleArnRef,
 					Selector:     mg.Spec.InitProvider.TaskInvocationParameters.RunCommandParameters.ServiceRoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -459,6 +478,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WindowID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WindowIDRef,
 			Selector:     mg.Spec.InitProvider.WindowIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -491,6 +511,7 @@ func (mg *ResourceDataSync) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Destination.BucketName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.S3Destination.BucketNameRef,
 				Selector:     mg.Spec.ForProvider.S3Destination.BucketNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -512,6 +533,7 @@ func (mg *ResourceDataSync) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Destination.Region),
 				Extract:      resource.ExtractParamPath("region", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.S3Destination.RegionRef,
 				Selector:     mg.Spec.ForProvider.S3Destination.RegionSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -533,6 +555,7 @@ func (mg *ResourceDataSync) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Destination.BucketName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.S3Destination.BucketNameRef,
 				Selector:     mg.Spec.InitProvider.S3Destination.BucketNameSelector,
 				To:           reference.To{List: l, Managed: m},
