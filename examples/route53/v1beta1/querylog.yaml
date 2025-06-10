@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: QueryLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: example_com
+  name: example-com
+spec:
+  forProvider:
+    cloudwatchLogGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_route53_example_com
+    region: us-east-1
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_com
+---
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: aws_route53_example_com
+  name: aws-route53-example-com
+spec:
+  forProvider:
+    region: us-east-1
+    retentionInDays: 30
+---
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: route53-query-logging-policy
+  name: route53-query-logging-policy
+spec:
+  forProvider:
+    policyDocument: |
+      {
+         "Version": "2012-10-17",
+         "Statement": [
+           {
+             "Action": [
+                  "logs:CreateLogStream",
+                  "logs:PutLogEvents"
+              ],
+              "Resource": "*",
+              "Effect": "Allow",
+              "Principal": {
+                  "Service": ["route53.amazonaws.com"]
+              }
+           }
+         ]
+      }
+    region: us-east-1
+---
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: Zone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: example_com
+  name: example-com
+spec:
+  forProvider:
+    name: mycompany.test
+    region: us-east-1

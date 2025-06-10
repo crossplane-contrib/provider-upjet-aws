@@ -34,6 +34,15 @@ func (l *HostedZoneDNSSECList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this QueryLogList.
+func (l *QueryLogList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this RecordList.
 func (l *RecordList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

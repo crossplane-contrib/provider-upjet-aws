@@ -2150,6 +2150,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Z123456ABCDEFG:vpc-12345678
 	// "aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
 	"aws_route53_zone_association": FormattedIdentifierFromProvider(":", "zone_id", "vpc_id"),
+	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	// Route53 query logging configurations can be imported using their ID
+	"aws_route53_query_log": config.IdentifierFromProvider,
 
 	// route53recoverycontrolconfig
 	//

@@ -770,6 +770,7 @@ import (
 	delegationset "github.com/upbound/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/provider-aws/internal/controller/route53/healthcheck"
 	hostedzonednssec "github.com/upbound/provider-aws/internal/controller/route53/hostedzonednssec"
+	querylog "github.com/upbound/provider-aws/internal/controller/route53/querylog"
 	record "github.com/upbound/provider-aws/internal/controller/route53/record"
 	resolverconfig "github.com/upbound/provider-aws/internal/controller/route53/resolverconfig"
 	trafficpolicy "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicy"
@@ -1746,6 +1747,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		delegationset.Setup,
 		healthcheck.Setup,
 		hostedzonednssec.Setup,
+		querylog.Setup,
 		record.Setup,
 		resolverconfig.Setup,
 		trafficpolicy.Setup,
