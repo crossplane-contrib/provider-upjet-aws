@@ -36,6 +36,7 @@ func (mg *ConfigRule) ResolveReferences( // ResolveReferences of this ConfigRule
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source.SourceIdentifier),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Source.SourceIdentifierRef,
 				Selector:     mg.Spec.ForProvider.Source.SourceIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +58,7 @@ func (mg *ConfigRule) ResolveReferences( // ResolveReferences of this ConfigRule
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source.SourceIdentifier),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Source.SourceIdentifierRef,
 				Selector:     mg.Spec.InitProvider.Source.SourceIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *ConfigurationAggregator) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrganizationAggregationSource.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OrganizationAggregationSource.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.OrganizationAggregationSource.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -112,6 +115,7 @@ func (mg *ConfigurationAggregator) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrganizationAggregationSource.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OrganizationAggregationSource.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.OrganizationAggregationSource.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -145,6 +149,7 @@ func (mg *ConfigurationRecorder) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -164,6 +169,7 @@ func (mg *ConfigurationRecorder) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -195,6 +201,7 @@ func (mg *DeliveryChannel) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3BucketName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.S3BucketNameRef,
 			Selector:     mg.Spec.ForProvider.S3BucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -214,6 +221,7 @@ func (mg *DeliveryChannel) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3BucketName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.S3BucketNameRef,
 			Selector:     mg.Spec.InitProvider.S3BucketNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -36,6 +36,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +88,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseRef,
 			Selector:     mg.Spec.ForProvider.DatabaseSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +108,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Workgroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkgroupRef,
 			Selector:     mg.Spec.ForProvider.WorkgroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +128,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseRef,
 			Selector:     mg.Spec.InitProvider.DatabaseSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -143,6 +148,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Workgroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkgroupRef,
 			Selector:     mg.Spec.InitProvider.WorkgroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -177,6 +183,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnRef,
 						Selector:     mg.Spec.ForProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -202,6 +209,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnRef,
 						Selector:     mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},

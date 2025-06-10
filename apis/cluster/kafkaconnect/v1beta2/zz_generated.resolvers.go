@@ -39,6 +39,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.KafkaCluster.ApacheKafkaCluster.VPC.SecurityGroups),
 						Extract:       reference.ExternalName(),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.ForProvider.KafkaCluster.ApacheKafkaCluster.VPC.SecurityGroupRefs,
 						Selector:      mg.Spec.ForProvider.KafkaCluster.ApacheKafkaCluster.VPC.SecurityGroupSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -64,6 +65,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.KafkaCluster.ApacheKafkaCluster.VPC.Subnets),
 						Extract:       reference.ExternalName(),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.ForProvider.KafkaCluster.ApacheKafkaCluster.VPC.SubnetRefs,
 						Selector:      mg.Spec.ForProvider.KafkaCluster.ApacheKafkaCluster.VPC.SubnetSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -89,6 +91,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.CloudwatchLogs.LogGroup),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.CloudwatchLogs.LogGroupRef,
 						Selector:     mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.CloudwatchLogs.LogGroupSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -114,6 +117,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.Firehose.DeliveryStream),
 						Extract:      resource.ExtractParamPath("name", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.Firehose.DeliveryStreamRef,
 						Selector:     mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.Firehose.DeliveryStreamSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -139,6 +143,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.S3.Bucket),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.S3.BucketRef,
 						Selector:     mg.Spec.ForProvider.LogDelivery.WorkerLogDelivery.S3.BucketSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -163,6 +168,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Plugin[i3].CustomPlugin.Arn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Plugin[i3].CustomPlugin.ArnRef,
 					Selector:     mg.Spec.ForProvider.Plugin[i3].CustomPlugin.ArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -184,6 +190,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ServiceExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -204,6 +211,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkerConfiguration.Arn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.WorkerConfiguration.ArnRef,
 				Selector:     mg.Spec.ForProvider.WorkerConfiguration.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -227,6 +235,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.KafkaCluster.ApacheKafkaCluster.VPC.SecurityGroups),
 						Extract:       reference.ExternalName(),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.InitProvider.KafkaCluster.ApacheKafkaCluster.VPC.SecurityGroupRefs,
 						Selector:      mg.Spec.InitProvider.KafkaCluster.ApacheKafkaCluster.VPC.SecurityGroupSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -252,6 +261,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.KafkaCluster.ApacheKafkaCluster.VPC.Subnets),
 						Extract:       reference.ExternalName(),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.InitProvider.KafkaCluster.ApacheKafkaCluster.VPC.SubnetRefs,
 						Selector:      mg.Spec.InitProvider.KafkaCluster.ApacheKafkaCluster.VPC.SubnetSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -277,6 +287,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.CloudwatchLogs.LogGroup),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.CloudwatchLogs.LogGroupRef,
 						Selector:     mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.CloudwatchLogs.LogGroupSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -302,6 +313,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.Firehose.DeliveryStream),
 						Extract:      resource.ExtractParamPath("name", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.Firehose.DeliveryStreamRef,
 						Selector:     mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.Firehose.DeliveryStreamSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -327,6 +339,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.S3.Bucket),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.S3.BucketRef,
 						Selector:     mg.Spec.InitProvider.LogDelivery.WorkerLogDelivery.S3.BucketSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -351,6 +364,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Plugin[i3].CustomPlugin.Arn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Plugin[i3].CustomPlugin.ArnRef,
 					Selector:     mg.Spec.InitProvider.Plugin[i3].CustomPlugin.ArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -372,6 +386,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ServiceExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -392,6 +407,7 @@ func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkerConfiguration.Arn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.WorkerConfiguration.ArnRef,
 				Selector:     mg.Spec.InitProvider.WorkerConfiguration.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -427,6 +443,7 @@ func (mg *CustomPlugin) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Location.S3.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Location.S3.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.Location.S3.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -450,6 +467,7 @@ func (mg *CustomPlugin) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Location.S3.FileKey),
 					Extract:      resource.ExtractParamPath("key", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Location.S3.FileKeyRef,
 					Selector:     mg.Spec.ForProvider.Location.S3.FileKeySelector,
 					To:           reference.To{List: l, Managed: m},
@@ -473,6 +491,7 @@ func (mg *CustomPlugin) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Location.S3.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Location.S3.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.Location.S3.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -496,6 +515,7 @@ func (mg *CustomPlugin) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Location.S3.FileKey),
 					Extract:      resource.ExtractParamPath("key", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Location.S3.FileKeyRef,
 					Selector:     mg.Spec.InitProvider.Location.S3.FileKeySelector,
 					To:           reference.To{List: l, Managed: m},

@@ -35,6 +35,7 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences( // ResolveReferenc
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomerManagedPolicyReference.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CustomerManagedPolicyReference.PolicyNameRef,
 				Selector:     mg.Spec.ForProvider.CustomerManagedPolicyReference.PolicyNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences( // ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
 			Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +77,7 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences( // ResolveReferenc
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomerManagedPolicyReference.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CustomerManagedPolicyReference.PolicyNameRef,
 				Selector:     mg.Spec.InitProvider.CustomerManagedPolicyReference.PolicyNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -108,6 +111,7 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
 			Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +133,7 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionsBoundary.CustomerManagedPolicyReference.Name),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameRef,
 					Selector:     mg.Spec.ForProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -152,6 +157,7 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PermissionsBoundary.CustomerManagedPolicyReference.Name),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameRef,
 					Selector:     mg.Spec.InitProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameSelector,
 					To:           reference.To{List: l, Managed: m},

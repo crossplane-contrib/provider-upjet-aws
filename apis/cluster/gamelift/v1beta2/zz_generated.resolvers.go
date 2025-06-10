@@ -37,6 +37,7 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation.Bucket),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageLocation.BucketRef,
 				Selector:     mg.Spec.ForProvider.StorageLocation.BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -58,6 +59,7 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation.Key),
 				Extract:      resource.ExtractParamPath("key", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageLocation.KeyRef,
 				Selector:     mg.Spec.ForProvider.StorageLocation.KeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -79,6 +81,7 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation.RoleArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageLocation.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.StorageLocation.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -100,6 +103,7 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation.Bucket),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageLocation.BucketRef,
 				Selector:     mg.Spec.InitProvider.StorageLocation.BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -121,6 +125,7 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation.Key),
 				Extract:      resource.ExtractParamPath("key", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageLocation.KeyRef,
 				Selector:     mg.Spec.InitProvider.StorageLocation.KeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -142,6 +147,7 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation.RoleArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageLocation.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.StorageLocation.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -175,6 +181,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BuildID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BuildIDRef,
 			Selector:     mg.Spec.ForProvider.BuildIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -194,6 +201,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceRoleArnRef,
 			Selector:     mg.Spec.ForProvider.InstanceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -213,6 +221,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BuildID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BuildIDRef,
 			Selector:     mg.Spec.InitProvider.BuildIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -232,6 +241,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceRoleArnRef,
 			Selector:     mg.Spec.InitProvider.InstanceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -264,6 +274,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation.Bucket),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageLocation.BucketRef,
 				Selector:     mg.Spec.ForProvider.StorageLocation.BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -285,6 +296,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation.Key),
 				Extract:      resource.ExtractParamPath("key", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageLocation.KeyRef,
 				Selector:     mg.Spec.ForProvider.StorageLocation.KeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -306,6 +318,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation.RoleArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageLocation.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.StorageLocation.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -327,6 +340,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation.Bucket),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageLocation.BucketRef,
 				Selector:     mg.Spec.InitProvider.StorageLocation.BucketSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -348,6 +362,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation.Key),
 				Extract:      resource.ExtractParamPath("key", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageLocation.KeyRef,
 				Selector:     mg.Spec.InitProvider.StorageLocation.KeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -369,6 +384,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation.RoleArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageLocation.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.StorageLocation.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},

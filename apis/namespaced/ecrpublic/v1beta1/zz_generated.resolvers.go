@@ -24,7 +24,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.m.upbound.io", "v1beta1", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -32,6 +32,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RepositoryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RepositoryNameRef,
 			Selector:     mg.Spec.ForProvider.RepositoryNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -43,7 +44,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 	mg.Spec.ForProvider.RepositoryName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.m.upbound.io", "v1beta1", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -51,6 +52,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RepositoryNameRef,
 			Selector:     mg.Spec.InitProvider.RepositoryNameSelector,
 			To:           reference.To{List: l, Managed: m},

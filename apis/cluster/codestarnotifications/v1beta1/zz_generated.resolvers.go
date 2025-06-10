@@ -34,6 +34,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Resource),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceRef,
 			Selector:     mg.Spec.ForProvider.ResourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target[i3].Address),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Target[i3].AddressRef,
 				Selector:     mg.Spec.ForProvider.Target[i3].AddressSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -74,6 +76,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Resource),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceRef,
 			Selector:     mg.Spec.InitProvider.ResourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,6 +97,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target[i3].Address),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Target[i3].AddressRef,
 				Selector:     mg.Spec.InitProvider.Target[i3].AddressSelector,
 				To:           reference.To{List: l, Managed: m},

@@ -28,13 +28,14 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ArtifactStore); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+			m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ArtifactStore[i3].Location),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ArtifactStore[i3].LocationRef,
 				Selector:     mg.Spec.ForProvider.ArtifactStore[i3].LocationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -48,13 +49,14 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -68,13 +70,14 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ArtifactStore); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+			m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ArtifactStore[i3].Location),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ArtifactStore[i3].LocationRef,
 				Selector:     mg.Spec.InitProvider.ArtifactStore[i3].LocationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -88,13 +91,14 @@ func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipe
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -118,7 +122,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("codepipeline.aws.upbound.io", "v1beta1", "Codepipeline", "CodepipelineList")
+		m, l, err = apisresolver.GetManagedResource("codepipeline.aws.m.upbound.io", "v1beta1", "Codepipeline", "CodepipelineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -126,6 +130,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetPipeline),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetPipelineRef,
 			Selector:     mg.Spec.ForProvider.TargetPipelineSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -137,7 +142,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.TargetPipeline = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetPipelineRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("codepipeline.aws.upbound.io", "v1beta1", "Codepipeline", "CodepipelineList")
+		m, l, err = apisresolver.GetManagedResource("codepipeline.aws.m.upbound.io", "v1beta1", "Codepipeline", "CodepipelineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -145,6 +150,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetPipeline),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetPipelineRef,
 			Selector:     mg.Spec.InitProvider.TargetPipelineSelector,
 			To:           reference.To{List: l, Managed: m},

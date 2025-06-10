@@ -28,7 +28,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudwatchRoleArnRef,
 			Selector:     mg.Spec.ForProvider.CloudwatchRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -47,7 +48,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.CloudwatchRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudwatchRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -55,6 +56,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudwatchRoleArnRef,
 			Selector:     mg.Spec.InitProvider.CloudwatchRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,7 +80,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,6 +88,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerCredentials),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AuthorizerCredentialsRef,
 			Selector:     mg.Spec.ForProvider.AuthorizerCredentialsSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -97,7 +100,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.AuthorizerCredentials = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AuthorizerCredentialsRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -105,6 +108,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerURI),
 			Extract:      resource.ExtractParamPath("invoke_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AuthorizerURIRef,
 			Selector:     mg.Spec.ForProvider.AuthorizerURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -116,7 +120,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.AuthorizerURI = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AuthorizerURIRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -124,6 +128,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,7 +140,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -143,6 +148,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerCredentials),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AuthorizerCredentialsRef,
 			Selector:     mg.Spec.InitProvider.AuthorizerCredentialsSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,7 +160,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.AuthorizerCredentials = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AuthorizerCredentialsRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -162,6 +168,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerURI),
 			Extract:      resource.ExtractParamPath("invoke_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AuthorizerURIRef,
 			Selector:     mg.Spec.InitProvider.AuthorizerURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -173,7 +180,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.AuthorizerURI = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AuthorizerURIRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -181,6 +188,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -204,7 +212,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -212,6 +220,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APIIDRef,
 			Selector:     mg.Spec.ForProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -223,7 +232,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "DomainName", "DomainNameList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "DomainName", "DomainNameList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -231,6 +240,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
 			Extract:      resource.ExtractParamPath("domain_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -242,7 +252,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Stage", "StageList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Stage", "StageList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -250,6 +260,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StageName),
 			Extract:      resource.ExtractParamPath("stage_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StageNameRef,
 			Selector:     mg.Spec.ForProvider.StageNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -261,7 +272,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.StageName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StageNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -269,6 +280,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.APIIDRef,
 			Selector:     mg.Spec.InitProvider.APIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -280,7 +292,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.InitProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "DomainName", "DomainNameList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "DomainName", "DomainNameList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -288,6 +300,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
 			Extract:      resource.ExtractParamPath("domain_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DomainNameRef,
 			Selector:     mg.Spec.InitProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -299,7 +312,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.InitProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DomainNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Stage", "StageList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Stage", "StageList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -307,6 +320,7 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StageName),
 			Extract:      resource.ExtractParamPath("stage_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StageNameRef,
 			Selector:     mg.Spec.InitProvider.StageNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -330,7 +344,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -338,6 +352,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -349,7 +364,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -357,6 +372,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -380,7 +396,7 @@ func (mg *DocumentationPart) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -388,6 +404,7 @@ func (mg *DocumentationPart) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -399,7 +416,7 @@ func (mg *DocumentationPart) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -407,6 +424,7 @@ func (mg *DocumentationPart) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -430,7 +448,7 @@ func (mg *DocumentationVersion) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -438,6 +456,7 @@ func (mg *DocumentationVersion) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -449,7 +468,7 @@ func (mg *DocumentationVersion) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -457,6 +476,7 @@ func (mg *DocumentationVersion) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -480,7 +500,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.m.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -488,6 +508,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateArn),
 			Extract:      resource.ExtractParamPath("certificate_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateArnRef,
 			Selector:     mg.Spec.ForProvider.CertificateArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -499,7 +520,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.m.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -507,6 +528,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegionalCertificateArn),
 			Extract:      resource.ExtractParamPath("certificate_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RegionalCertificateArnRef,
 			Selector:     mg.Spec.ForProvider.RegionalCertificateArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -518,7 +540,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.RegionalCertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RegionalCertificateArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.m.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -526,6 +548,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateArn),
 			Extract:      resource.ExtractParamPath("certificate_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateArnRef,
 			Selector:     mg.Spec.InitProvider.CertificateArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -537,7 +560,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CertificateArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.m.upbound.io", "v1beta1", "CertificateValidation", "CertificateValidationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -545,6 +568,7 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegionalCertificateArn),
 			Extract:      resource.ExtractParamPath("certificate_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RegionalCertificateArnRef,
 			Selector:     mg.Spec.InitProvider.RegionalCertificateArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -568,7 +592,7 @@ func (mg *GatewayResponse) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -576,6 +600,7 @@ func (mg *GatewayResponse) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -587,7 +612,7 @@ func (mg *GatewayResponse) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -595,6 +620,7 @@ func (mg *GatewayResponse) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -618,7 +644,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "VPCLink", "VPCLinkList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "VPCLink", "VPCLinkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -626,6 +652,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConnectionIDRef,
 			Selector:     mg.Spec.ForProvider.ConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -637,7 +664,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConnectionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Method", "MethodList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Method", "MethodList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -645,6 +672,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPMethod),
 			Extract:      resource.ExtractParamPath("http_method", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.HTTPMethodRef,
 			Selector:     mg.Spec.ForProvider.HTTPMethodSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -656,7 +684,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HTTPMethodRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -664,6 +692,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -675,7 +704,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -683,6 +712,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -694,7 +724,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -702,6 +732,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.URI),
 			Extract:      resource.ExtractParamPath("invoke_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.URIRef,
 			Selector:     mg.Spec.ForProvider.URISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -713,7 +744,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.URI = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.URIRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "VPCLink", "VPCLinkList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "VPCLink", "VPCLinkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -721,6 +752,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConnectionIDRef,
 			Selector:     mg.Spec.InitProvider.ConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -732,7 +764,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ConnectionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Method", "MethodList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Method", "MethodList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -740,6 +772,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPMethod),
 			Extract:      resource.ExtractParamPath("http_method", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.HTTPMethodRef,
 			Selector:     mg.Spec.InitProvider.HTTPMethodSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -751,7 +784,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HTTPMethodRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -759,6 +792,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -770,7 +804,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -778,6 +812,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -789,7 +824,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -797,6 +832,7 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.URI),
 			Extract:      resource.ExtractParamPath("invoke_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.URIRef,
 			Selector:     mg.Spec.InitProvider.URISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -820,7 +856,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Method", "MethodList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Method", "MethodList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -828,6 +864,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPMethod),
 			Extract:      resource.ExtractParamPath("http_method", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.HTTPMethodRef,
 			Selector:     mg.Spec.ForProvider.HTTPMethodSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -839,7 +876,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HTTPMethodRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -847,6 +884,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -858,7 +896,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -866,6 +904,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -877,7 +916,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "MethodResponse", "MethodResponseList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "MethodResponse", "MethodResponseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -885,6 +924,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StatusCode),
 			Extract:      resource.ExtractParamPath("status_code", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StatusCodeRef,
 			Selector:     mg.Spec.ForProvider.StatusCodeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -896,7 +936,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.StatusCode = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StatusCodeRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Method", "MethodList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Method", "MethodList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -904,6 +944,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPMethod),
 			Extract:      resource.ExtractParamPath("http_method", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.HTTPMethodRef,
 			Selector:     mg.Spec.InitProvider.HTTPMethodSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -915,7 +956,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HTTPMethodRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -923,6 +964,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -934,7 +976,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -942,6 +984,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -953,7 +996,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "MethodResponse", "MethodResponseList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "MethodResponse", "MethodResponseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -961,6 +1004,7 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StatusCode),
 			Extract:      resource.ExtractParamPath("status_code", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StatusCodeRef,
 			Selector:     mg.Spec.InitProvider.StatusCodeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -984,7 +1028,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Authorizer", "AuthorizerList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Authorizer", "AuthorizerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -992,6 +1036,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AuthorizerIDRef,
 			Selector:     mg.Spec.ForProvider.AuthorizerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1003,7 +1048,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.AuthorizerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AuthorizerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1011,6 +1056,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1022,7 +1068,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1030,6 +1076,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1041,7 +1088,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Authorizer", "AuthorizerList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Authorizer", "AuthorizerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1049,6 +1096,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AuthorizerIDRef,
 			Selector:     mg.Spec.InitProvider.AuthorizerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1060,7 +1108,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.InitProvider.AuthorizerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AuthorizerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1068,6 +1116,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1079,7 +1128,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1087,6 +1136,7 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1110,7 +1160,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Method", "MethodList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Method", "MethodList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1118,6 +1168,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPMethod),
 			Extract:      resource.ExtractParamPath("http_method", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.HTTPMethodRef,
 			Selector:     mg.Spec.ForProvider.HTTPMethodSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1129,7 +1180,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HTTPMethodRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1137,6 +1188,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1148,7 +1200,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1156,6 +1208,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1167,7 +1220,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Method", "MethodList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Method", "MethodList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1175,6 +1228,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPMethod),
 			Extract:      resource.ExtractParamPath("http_method", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.HTTPMethodRef,
 			Selector:     mg.Spec.InitProvider.HTTPMethodSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1186,7 +1240,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.InitProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HTTPMethodRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1194,6 +1248,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1205,7 +1260,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1213,6 +1268,7 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1236,7 +1292,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1244,6 +1300,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1255,7 +1312,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Stage", "StageList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Stage", "StageList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1263,6 +1320,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StageName),
 			Extract:      resource.ExtractParamPath("stage_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StageNameRef,
 			Selector:     mg.Spec.ForProvider.StageNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1274,7 +1332,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.StageName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StageNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1282,6 +1340,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1293,7 +1352,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Stage", "StageList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Stage", "StageList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1301,6 +1360,7 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StageName),
 			Extract:      resource.ExtractParamPath("stage_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StageNameRef,
 			Selector:     mg.Spec.InitProvider.StageNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1324,7 +1384,7 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1332,6 +1392,7 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1343,7 +1404,7 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1351,6 +1412,7 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1374,7 +1436,7 @@ func (mg *RequestValidator) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1382,6 +1444,7 @@ func (mg *RequestValidator) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1393,7 +1456,7 @@ func (mg *RequestValidator) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1401,6 +1464,7 @@ func (mg *RequestValidator) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1424,7 +1488,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1432,6 +1496,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParentID),
 			Extract:      resource.ExtractParamPath("root_resource_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ParentIDRef,
 			Selector:     mg.Spec.ForProvider.ParentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1443,7 +1508,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ParentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ParentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1451,6 +1516,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1462,7 +1528,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1470,6 +1536,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParentID),
 			Extract:      resource.ExtractParamPath("root_resource_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ParentIDRef,
 			Selector:     mg.Spec.InitProvider.ParentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1481,7 +1548,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.ParentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ParentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1489,6 +1556,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1514,13 +1582,14 @@ func (mg *RestAPI) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	if mg.Spec.ForProvider.EndpointConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIdsRefs,
 				Selector:      mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1535,13 +1604,14 @@ func (mg *RestAPI) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	if mg.Spec.InitProvider.EndpointConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIdsRefs,
 				Selector:      mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1567,7 +1637,7 @@ func (mg *RestAPIPolicy) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1575,6 +1645,7 @@ func (mg *RestAPIPolicy) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1586,7 +1657,7 @@ func (mg *RestAPIPolicy) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1594,6 +1665,7 @@ func (mg *RestAPIPolicy) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1617,7 +1689,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Deployment", "DeploymentList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Deployment", "DeploymentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1625,6 +1697,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeploymentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DeploymentIDRef,
 			Selector:     mg.Spec.ForProvider.DeploymentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1636,7 +1709,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.DeploymentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DeploymentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1644,6 +1717,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RestAPIIDRef,
 			Selector:     mg.Spec.ForProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1655,7 +1729,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Deployment", "DeploymentList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Deployment", "DeploymentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1663,6 +1737,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeploymentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DeploymentIDRef,
 			Selector:     mg.Spec.InitProvider.DeploymentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1674,7 +1749,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.DeploymentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DeploymentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1682,6 +1757,7 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RestAPIIDRef,
 			Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1707,13 +1783,14 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.APIStages); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+			m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIStages[i3].APIID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.APIStages[i3].APIIDRef,
 				Selector:     mg.Spec.ForProvider.APIStages[i3].APIIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1728,13 +1805,14 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.APIStages); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Stage", "StageList")
+			m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Stage", "StageList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIStages[i3].Stage),
 				Extract:      resource.ExtractParamPath("stage_name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.APIStages[i3].StageRef,
 				Selector:     mg.Spec.ForProvider.APIStages[i3].StageSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1749,13 +1827,14 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.APIStages); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+			m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIStages[i3].APIID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.APIStages[i3].APIIDRef,
 				Selector:     mg.Spec.InitProvider.APIStages[i3].APIIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1770,13 +1849,14 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.APIStages); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Stage", "StageList")
+			m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "Stage", "StageList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIStages[i3].Stage),
 				Extract:      resource.ExtractParamPath("stage_name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.APIStages[i3].StageRef,
 				Selector:     mg.Spec.InitProvider.APIStages[i3].StageSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1802,7 +1882,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "APIKey", "APIKeyList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "APIKey", "APIKeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1810,6 +1890,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1821,7 +1902,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "UsagePlan", "UsagePlanList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "UsagePlan", "UsagePlanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1829,6 +1910,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UsagePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.UsagePlanIDRef,
 			Selector:     mg.Spec.ForProvider.UsagePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1840,7 +1922,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.UsagePlanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UsagePlanIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "APIKey", "APIKeyList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "APIKey", "APIKeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1848,6 +1930,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1859,7 +1942,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.InitProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "UsagePlan", "UsagePlanList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "UsagePlan", "UsagePlanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1867,6 +1950,7 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UsagePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.UsagePlanIDRef,
 			Selector:     mg.Spec.InitProvider.UsagePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1890,7 +1974,7 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta1", "LB", "LBList")
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.m.upbound.io", "v1beta1", "LB", "LBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1898,6 +1982,7 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.TargetArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.TargetArnRefs,
 			Selector:      mg.Spec.ForProvider.TargetArnSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1909,7 +1994,7 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.TargetArns = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.TargetArnRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta1", "LB", "LBList")
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.m.upbound.io", "v1beta1", "LB", "LBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1917,6 +2002,7 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.TargetArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.TargetArnRefs,
 			Selector:      mg.Spec.InitProvider.TargetArnSelector,
 			To:            reference.To{List: l, Managed: m},

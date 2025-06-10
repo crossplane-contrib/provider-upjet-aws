@@ -36,6 +36,7 @@ func (mg *TestGridProject) ResolveReferences( // ResolveReferences of this TestG
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfig.SecurityGroupIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfig.SecurityGroupIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -57,6 +58,7 @@ func (mg *TestGridProject) ResolveReferences( // ResolveReferences of this TestG
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfig.SubnetIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfig.SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -78,6 +80,7 @@ func (mg *TestGridProject) ResolveReferences( // ResolveReferences of this TestG
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCConfig.VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VPCConfig.VPCIDRef,
 				Selector:     mg.Spec.ForProvider.VPCConfig.VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -99,6 +102,7 @@ func (mg *TestGridProject) ResolveReferences( // ResolveReferences of this TestG
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfig.SecurityGroupIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfig.SecurityGroupIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -120,6 +124,7 @@ func (mg *TestGridProject) ResolveReferences( // ResolveReferences of this TestG
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfig.SubnetIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfig.SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -141,6 +146,7 @@ func (mg *TestGridProject) ResolveReferences( // ResolveReferences of this TestG
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCConfig.VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VPCConfig.VPCIDRef,
 				Selector:     mg.Spec.InitProvider.VPCConfig.VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},

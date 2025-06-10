@@ -34,6 +34,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GroupID),
 			Extract:      resource.ExtractParamPath("group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GroupIDRef,
 			Selector:     mg.Spec.ForProvider.GroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberID),
 			Extract:      resource.ExtractParamPath("user_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MemberIDRef,
 			Selector:     mg.Spec.ForProvider.MemberIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GroupID),
 			Extract:      resource.ExtractParamPath("group_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GroupIDRef,
 			Selector:     mg.Spec.InitProvider.GroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberID),
 			Extract:      resource.ExtractParamPath("user_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MemberIDRef,
 			Selector:     mg.Spec.InitProvider.MemberIDSelector,
 			To:           reference.To{List: l, Managed: m},

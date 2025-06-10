@@ -36,6 +36,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -89,6 +91,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnRef,
 						Selector:     mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -114,6 +117,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnRef,
 						Selector:     mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},

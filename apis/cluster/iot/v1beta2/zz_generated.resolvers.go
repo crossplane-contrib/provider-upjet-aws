@@ -35,6 +35,7 @@ func (mg *ProvisioningTemplate) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProvisioningRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProvisioningRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ProvisioningRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *ProvisioningTemplate) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProvisioningRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProvisioningRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ProvisioningRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +87,7 @@ func (mg *ThingGroup) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParentGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ParentGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ParentGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +107,7 @@ func (mg *ThingGroup) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParentGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ParentGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ParentGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -137,6 +141,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction.Sns.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ErrorAction.Sns.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.ErrorAction.Sns.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -160,6 +165,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction.Sns.TargetArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ErrorAction.Sns.TargetArnRef,
 					Selector:     mg.Spec.ForProvider.ErrorAction.Sns.TargetArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -182,6 +188,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Sns[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Sns[i3].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.Sns[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -203,6 +210,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Sns[i3].TargetArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Sns[i3].TargetArnRef,
 				Selector:     mg.Spec.ForProvider.Sns[i3].TargetArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -225,6 +233,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction.Sns.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ErrorAction.Sns.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.ErrorAction.Sns.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -248,6 +257,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction.Sns.TargetArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ErrorAction.Sns.TargetArnRef,
 					Selector:     mg.Spec.InitProvider.ErrorAction.Sns.TargetArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -270,6 +280,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sns[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Sns[i3].RoleArnRef,
 				Selector:     mg.Spec.InitProvider.Sns[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -291,6 +302,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sns[i3].TargetArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Sns[i3].TargetArnRef,
 				Selector:     mg.Spec.InitProvider.Sns[i3].TargetArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -326,6 +338,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VPCConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.VPCConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -347,6 +360,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfiguration.SecurityGroups),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfiguration.SecurityGroupRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfiguration.SecurityGroupSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -368,6 +382,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfiguration.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfiguration.SubnetIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfiguration.SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -389,6 +404,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCConfiguration.VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VPCConfiguration.VPCIDRef,
 				Selector:     mg.Spec.ForProvider.VPCConfiguration.VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -410,6 +426,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VPCConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.VPCConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -431,6 +448,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfiguration.SecurityGroups),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfiguration.SecurityGroupRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfiguration.SecurityGroupSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -452,6 +470,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfiguration.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfiguration.SubnetIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfiguration.SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -473,6 +492,7 @@ func (mg *TopicRuleDestination) ResolveReferences(ctx context.Context, c client.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCConfiguration.VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VPCConfiguration.VPCIDRef,
 				Selector:     mg.Spec.InitProvider.VPCConfiguration.VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},

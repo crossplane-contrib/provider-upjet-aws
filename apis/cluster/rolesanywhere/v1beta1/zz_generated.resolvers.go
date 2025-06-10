@@ -35,6 +35,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.RoleArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.RoleArnsRefs,
 			Selector:      mg.Spec.ForProvider.RoleArnsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.RoleArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.RoleArnsRefs,
 			Selector:      mg.Spec.InitProvider.RoleArnsSelector,
 			To:            reference.To{List: l, Managed: m},

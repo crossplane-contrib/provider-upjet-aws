@@ -28,7 +28,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta1", "Budget", "BudgetList")
+		m, l, err = apisresolver.GetManagedResource("budgets.aws.m.upbound.io", "v1beta1", "Budget", "BudgetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BudgetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BudgetNameRef,
 			Selector:     mg.Spec.ForProvider.BudgetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -50,13 +51,14 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	if mg.Spec.ForProvider.Definition != nil {
 		if mg.Spec.ForProvider.Definition.IAMActionDefinition != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Definition.IAMActionDefinition.PolicyArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Definition.IAMActionDefinition.PolicyArnRef,
 					Selector:     mg.Spec.ForProvider.Definition.IAMActionDefinition.PolicyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -73,13 +75,14 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	if mg.Spec.ForProvider.Definition != nil {
 		if mg.Spec.ForProvider.Definition.IAMActionDefinition != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Definition.IAMActionDefinition.Roles),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.Definition.IAMActionDefinition.RolesRefs,
 					Selector:      mg.Spec.ForProvider.Definition.IAMActionDefinition.RolesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -94,13 +97,14 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -112,7 +116,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta1", "Budget", "BudgetList")
+		m, l, err = apisresolver.GetManagedResource("budgets.aws.m.upbound.io", "v1beta1", "Budget", "BudgetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -120,6 +124,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BudgetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BudgetNameRef,
 			Selector:     mg.Spec.InitProvider.BudgetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -134,13 +139,14 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	if mg.Spec.InitProvider.Definition != nil {
 		if mg.Spec.InitProvider.Definition.IAMActionDefinition != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Definition.IAMActionDefinition.PolicyArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Definition.IAMActionDefinition.PolicyArnRef,
 					Selector:     mg.Spec.InitProvider.Definition.IAMActionDefinition.PolicyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -157,13 +163,14 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	if mg.Spec.InitProvider.Definition != nil {
 		if mg.Spec.InitProvider.Definition.IAMActionDefinition != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Definition.IAMActionDefinition.Roles),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.Definition.IAMActionDefinition.RolesRefs,
 					Selector:      mg.Spec.InitProvider.Definition.IAMActionDefinition.RolesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -178,13 +185,14 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

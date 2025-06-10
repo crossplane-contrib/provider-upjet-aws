@@ -26,7 +26,7 @@ func (mg *Filter) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("guardduty.aws.upbound.io", "v1beta1", "Detector", "DetectorList")
+		m, l, err = apisresolver.GetManagedResource("guardduty.aws.m.upbound.io", "v1beta1", "Detector", "DetectorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *Filter) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DetectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DetectorIDRef,
 			Selector:     mg.Spec.ForProvider.DetectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -57,7 +58,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("guardduty.aws.upbound.io", "v1beta1", "Detector", "DetectorList")
+		m, l, err = apisresolver.GetManagedResource("guardduty.aws.m.upbound.io", "v1beta1", "Detector", "DetectorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -65,6 +66,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
 			Extract:      resource.ExtractParamPath("account_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountIDRef,
 			Selector:     mg.Spec.ForProvider.AccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -76,7 +78,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("guardduty.aws.upbound.io", "v1beta1", "Detector", "DetectorList")
+		m, l, err = apisresolver.GetManagedResource("guardduty.aws.m.upbound.io", "v1beta1", "Detector", "DetectorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -84,6 +86,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DetectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DetectorIDRef,
 			Selector:     mg.Spec.ForProvider.DetectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -95,7 +98,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.DetectorID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DetectorIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("guardduty.aws.upbound.io", "v1beta1", "Detector", "DetectorList")
+		m, l, err = apisresolver.GetManagedResource("guardduty.aws.m.upbound.io", "v1beta1", "Detector", "DetectorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -103,6 +106,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
 			Extract:      resource.ExtractParamPath("account_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AccountIDRef,
 			Selector:     mg.Spec.InitProvider.AccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -114,7 +118,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("guardduty.aws.upbound.io", "v1beta1", "Detector", "DetectorList")
+		m, l, err = apisresolver.GetManagedResource("guardduty.aws.m.upbound.io", "v1beta1", "Detector", "DetectorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -122,6 +126,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DetectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DetectorIDRef,
 			Selector:     mg.Spec.InitProvider.DetectorIDSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -27,7 +27,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -35,6 +35,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3BucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.S3BucketArnRef,
 			Selector:     mg.Spec.ForProvider.S3BucketArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -48,13 +49,14 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 
 	if mg.Spec.ForProvider.S3Config != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Config.BucketAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.S3Config.BucketAccessRoleArnRef,
 				Selector:     mg.Spec.ForProvider.S3Config.BucketAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -68,13 +70,14 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3BucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.S3BucketArnRef,
 			Selector:     mg.Spec.InitProvider.S3BucketArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -88,13 +91,14 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 
 	if mg.Spec.InitProvider.S3Config != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Config.BucketAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.S3Config.BucketAccessRoleArnRef,
 				Selector:     mg.Spec.InitProvider.S3Config.BucketAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -120,7 +124,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -128,6 +132,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLogGroupArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudwatchLogGroupArnRef,
 			Selector:     mg.Spec.ForProvider.CloudwatchLogGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -139,7 +144,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudwatchLogGroupArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datasync.aws.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
+		m, l, err = apisresolver.GetManagedResource("datasync.aws.m.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -147,6 +152,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DestinationLocationArnRef,
 			Selector:     mg.Spec.ForProvider.DestinationLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -158,7 +164,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.DestinationLocationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DestinationLocationArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datasync.aws.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
+		m, l, err = apisresolver.GetManagedResource("datasync.aws.m.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -166,6 +172,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceLocationArnRef,
 			Selector:     mg.Spec.ForProvider.SourceLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -177,7 +184,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.SourceLocationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceLocationArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -185,6 +192,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLogGroupArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudwatchLogGroupArnRef,
 			Selector:     mg.Spec.InitProvider.CloudwatchLogGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -196,7 +204,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CloudwatchLogGroupArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datasync.aws.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
+		m, l, err = apisresolver.GetManagedResource("datasync.aws.m.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -204,6 +212,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DestinationLocationArnRef,
 			Selector:     mg.Spec.InitProvider.DestinationLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -215,7 +224,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.DestinationLocationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DestinationLocationArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datasync.aws.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
+		m, l, err = apisresolver.GetManagedResource("datasync.aws.m.upbound.io", "v1beta1", "LocationS3", "LocationS3List")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -223,6 +232,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceLocationArnRef,
 			Selector:     mg.Spec.InitProvider.SourceLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},

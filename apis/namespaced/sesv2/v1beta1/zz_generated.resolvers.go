@@ -26,7 +26,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sesv2.aws.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
+		m, l, err = apisresolver.GetManagedResource("sesv2.aws.m.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -48,13 +49,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.ForProvider.EventDestination != nil {
 		if mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+				m, l, err = apisresolver.GetManagedResource("firehose.aws.m.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination.DeliveryStreamArn),
 					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination.DeliveryStreamArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination.DeliveryStreamArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -71,13 +73,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.ForProvider.EventDestination != nil {
 		if mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination.IAMRoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination.IAMRoleArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination.KinesisFirehoseDestination.IAMRoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -94,13 +97,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.ForProvider.EventDestination != nil {
 		if mg.Spec.ForProvider.EventDestination.PinpointDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("pinpoint.aws.upbound.io", "v1beta1", "App", "AppList")
+				m, l, err = apisresolver.GetManagedResource("pinpoint.aws.m.upbound.io", "v1beta1", "App", "AppList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination.PinpointDestination.ApplicationArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination.PinpointDestination.ApplicationArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination.PinpointDestination.ApplicationArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -117,13 +121,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.ForProvider.EventDestination != nil {
 		if mg.Spec.ForProvider.EventDestination.SnsDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+				m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination.SnsDestination.TopicArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination.SnsDestination.TopicArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination.SnsDestination.TopicArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -138,13 +143,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("sesv2.aws.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
+		m, l, err = apisresolver.GetManagedResource("sesv2.aws.m.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -159,13 +165,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.InitProvider.EventDestination != nil {
 		if mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+				m, l, err = apisresolver.GetManagedResource("firehose.aws.m.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination.DeliveryStreamArn),
 					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination.DeliveryStreamArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination.DeliveryStreamArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -182,13 +189,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.InitProvider.EventDestination != nil {
 		if mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination.IAMRoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination.IAMRoleArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination.KinesisFirehoseDestination.IAMRoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -205,13 +213,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.InitProvider.EventDestination != nil {
 		if mg.Spec.InitProvider.EventDestination.PinpointDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("pinpoint.aws.upbound.io", "v1beta1", "App", "AppList")
+				m, l, err = apisresolver.GetManagedResource("pinpoint.aws.m.upbound.io", "v1beta1", "App", "AppList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination.PinpointDestination.ApplicationArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination.PinpointDestination.ApplicationArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination.PinpointDestination.ApplicationArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -228,13 +237,14 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 	if mg.Spec.InitProvider.EventDestination != nil {
 		if mg.Spec.InitProvider.EventDestination.SnsDestination != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+				m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination.SnsDestination.TopicArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination.SnsDestination.TopicArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination.SnsDestination.TopicArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -261,7 +271,7 @@ func (mg *EmailIdentity) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sesv2.aws.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
+		m, l, err = apisresolver.GetManagedResource("sesv2.aws.m.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -269,6 +279,7 @@ func (mg *EmailIdentity) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -280,7 +291,7 @@ func (mg *EmailIdentity) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ConfigurationSetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConfigurationSetNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sesv2.aws.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
+		m, l, err = apisresolver.GetManagedResource("sesv2.aws.m.upbound.io", "v1beta1", "ConfigurationSet", "ConfigurationSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -288,6 +299,7 @@ func (mg *EmailIdentity) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},

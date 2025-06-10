@@ -35,6 +35,7 @@ func (mg *RiskConfiguration) ResolveReferences( // ResolveReferences of this Ris
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.UserPoolIDRef,
 			Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *RiskConfiguration) ResolveReferences( // ResolveReferences of this Ris
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.UserPoolIDRef,
 			Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +88,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.CreateAuthChallenge),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.CreateAuthChallengeRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.CreateAuthChallengeSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -108,6 +111,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.CustomEmailSender.LambdaArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.LambdaConfig.CustomEmailSender.LambdaArnRef,
 					Selector:     mg.Spec.ForProvider.LambdaConfig.CustomEmailSender.LambdaArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -130,6 +134,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.CustomMessage),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.CustomMessageRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.CustomMessageSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -152,6 +157,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.CustomSMSSender.LambdaArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.LambdaConfig.CustomSMSSender.LambdaArnRef,
 					Selector:     mg.Spec.ForProvider.LambdaConfig.CustomSMSSender.LambdaArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -174,6 +180,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.DefineAuthChallenge),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.DefineAuthChallengeRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.DefineAuthChallengeSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -195,6 +202,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.KMSKeyID),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.KMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -216,6 +224,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.PostAuthentication),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.PostAuthenticationRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.PostAuthenticationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -237,6 +246,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.PostConfirmation),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.PostConfirmationRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.PostConfirmationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -258,6 +268,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.PreAuthentication),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.PreAuthenticationRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.PreAuthenticationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -279,6 +290,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.PreSignUp),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.PreSignUpRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.PreSignUpSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -300,6 +312,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.PreTokenGeneration),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.PreTokenGenerationRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.PreTokenGenerationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -321,6 +334,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.UserMigration),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.UserMigrationRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.UserMigrationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -342,6 +356,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig.VerifyAuthChallengeResponse),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LambdaConfig.VerifyAuthChallengeResponseRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig.VerifyAuthChallengeResponseSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -363,6 +378,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SMSConfiguration.SnsCallerArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SMSConfiguration.SnsCallerArnRef,
 				Selector:     mg.Spec.ForProvider.SMSConfiguration.SnsCallerArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -384,6 +400,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.CreateAuthChallenge),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.CreateAuthChallengeRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.CreateAuthChallengeSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -406,6 +423,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.CustomEmailSender.LambdaArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.LambdaConfig.CustomEmailSender.LambdaArnRef,
 					Selector:     mg.Spec.InitProvider.LambdaConfig.CustomEmailSender.LambdaArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -428,6 +446,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.CustomMessage),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.CustomMessageRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.CustomMessageSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -450,6 +469,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.CustomSMSSender.LambdaArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.LambdaConfig.CustomSMSSender.LambdaArnRef,
 					Selector:     mg.Spec.InitProvider.LambdaConfig.CustomSMSSender.LambdaArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -472,6 +492,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.DefineAuthChallenge),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.DefineAuthChallengeRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.DefineAuthChallengeSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -493,6 +514,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.KMSKeyID),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.KMSKeyIDRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -514,6 +536,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.PostAuthentication),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.PostAuthenticationRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.PostAuthenticationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -535,6 +558,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.PostConfirmation),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.PostConfirmationRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.PostConfirmationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -556,6 +580,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.PreAuthentication),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.PreAuthenticationRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.PreAuthenticationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -577,6 +602,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.PreSignUp),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.PreSignUpRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.PreSignUpSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -598,6 +624,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.PreTokenGeneration),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.PreTokenGenerationRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.PreTokenGenerationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -619,6 +646,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.UserMigration),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.UserMigrationRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.UserMigrationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -640,6 +668,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig.VerifyAuthChallengeResponse),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LambdaConfig.VerifyAuthChallengeResponseRef,
 				Selector:     mg.Spec.InitProvider.LambdaConfig.VerifyAuthChallengeResponseSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -661,6 +690,7 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SMSConfiguration.SnsCallerArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SMSConfiguration.SnsCallerArnRef,
 				Selector:     mg.Spec.InitProvider.SMSConfiguration.SnsCallerArnSelector,
 				To:           reference.To{List: l, Managed: m},

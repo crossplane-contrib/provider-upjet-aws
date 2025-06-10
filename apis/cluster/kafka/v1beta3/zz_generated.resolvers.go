@@ -38,6 +38,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.BrokerNodeGroupInfo.ClientSubnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.BrokerNodeGroupInfo.ClientSubnetsRefs,
 				Selector:      mg.Spec.ForProvider.BrokerNodeGroupInfo.ClientSubnetsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -59,6 +60,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.BrokerNodeGroupInfo.SecurityGroups),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.BrokerNodeGroupInfo.SecurityGroupsRefs,
 				Selector:      mg.Spec.ForProvider.BrokerNodeGroupInfo.SecurityGroupsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -80,6 +82,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationInfo.Arn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ConfigurationInfo.ArnRef,
 				Selector:     mg.Spec.ForProvider.ConfigurationInfo.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -101,6 +104,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionInfo.EncryptionAtRestKMSKeyArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionInfo.EncryptionAtRestKMSKeyArnRef,
 				Selector:     mg.Spec.ForProvider.EncryptionInfo.EncryptionAtRestKMSKeyArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -124,6 +128,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo.BrokerLogs.CloudwatchLogs.LogGroup),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.LoggingInfo.BrokerLogs.CloudwatchLogs.LogGroupRef,
 						Selector:     mg.Spec.ForProvider.LoggingInfo.BrokerLogs.CloudwatchLogs.LogGroupSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -149,6 +154,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo.BrokerLogs.Firehose.DeliveryStream),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.LoggingInfo.BrokerLogs.Firehose.DeliveryStreamRef,
 						Selector:     mg.Spec.ForProvider.LoggingInfo.BrokerLogs.Firehose.DeliveryStreamSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -174,6 +180,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo.BrokerLogs.S3.Bucket),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.LoggingInfo.BrokerLogs.S3.BucketRef,
 						Selector:     mg.Spec.ForProvider.LoggingInfo.BrokerLogs.S3.BucketSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -197,6 +204,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo.ClientSubnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.BrokerNodeGroupInfo.ClientSubnetsRefs,
 				Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo.ClientSubnetsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -218,6 +226,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo.SecurityGroups),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.BrokerNodeGroupInfo.SecurityGroupsRefs,
 				Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo.SecurityGroupsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -239,6 +248,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationInfo.Arn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ConfigurationInfo.ArnRef,
 				Selector:     mg.Spec.InitProvider.ConfigurationInfo.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -260,6 +270,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionInfo.EncryptionAtRestKMSKeyArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionInfo.EncryptionAtRestKMSKeyArnRef,
 				Selector:     mg.Spec.InitProvider.EncryptionInfo.EncryptionAtRestKMSKeyArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -283,6 +294,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo.BrokerLogs.CloudwatchLogs.LogGroup),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.LoggingInfo.BrokerLogs.CloudwatchLogs.LogGroupRef,
 						Selector:     mg.Spec.InitProvider.LoggingInfo.BrokerLogs.CloudwatchLogs.LogGroupSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -308,6 +320,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo.BrokerLogs.Firehose.DeliveryStream),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.LoggingInfo.BrokerLogs.Firehose.DeliveryStreamRef,
 						Selector:     mg.Spec.InitProvider.LoggingInfo.BrokerLogs.Firehose.DeliveryStreamSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -333,6 +346,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo.BrokerLogs.S3.Bucket),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.LoggingInfo.BrokerLogs.S3.BucketRef,
 						Selector:     mg.Spec.InitProvider.LoggingInfo.BrokerLogs.S3.BucketSelector,
 						To:           reference.To{List: l, Managed: m},

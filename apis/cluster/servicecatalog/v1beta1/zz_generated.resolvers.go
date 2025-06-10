@@ -35,6 +35,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BudgetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BudgetNameRef,
 			Selector:     mg.Spec.ForProvider.BudgetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BudgetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BudgetNameRef,
 			Selector:     mg.Spec.InitProvider.BudgetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +95,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +127,7 @@ func (mg *Constraint) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PortfolioID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PortfolioIDRef,
 			Selector:     mg.Spec.ForProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +147,7 @@ func (mg *Constraint) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProductID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProductIDRef,
 			Selector:     mg.Spec.ForProvider.ProductIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -161,6 +167,7 @@ func (mg *Constraint) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PortfolioIDRef,
 			Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -180,6 +187,7 @@ func (mg *Constraint) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProductID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProductIDRef,
 			Selector:     mg.Spec.InitProvider.ProductIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -211,6 +219,7 @@ func (mg *PortfolioShare) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PortfolioID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PortfolioIDRef,
 			Selector:     mg.Spec.ForProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -230,6 +239,7 @@ func (mg *PortfolioShare) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PortfolioIDRef,
 			Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -261,6 +271,7 @@ func (mg *PrincipalPortfolioAssociation) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PortfolioID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PortfolioIDRef,
 			Selector:     mg.Spec.ForProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -280,6 +291,7 @@ func (mg *PrincipalPortfolioAssociation) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrincipalArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrincipalArnRef,
 			Selector:     mg.Spec.ForProvider.PrincipalArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -299,6 +311,7 @@ func (mg *PrincipalPortfolioAssociation) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PortfolioIDRef,
 			Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -318,6 +331,7 @@ func (mg *PrincipalPortfolioAssociation) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrincipalArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrincipalArnRef,
 			Selector:     mg.Spec.InitProvider.PrincipalArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -349,6 +363,7 @@ func (mg *ProductPortfolioAssociation) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PortfolioID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PortfolioIDRef,
 			Selector:     mg.Spec.ForProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -368,6 +383,7 @@ func (mg *ProductPortfolioAssociation) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProductID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProductIDRef,
 			Selector:     mg.Spec.ForProvider.ProductIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -387,6 +403,7 @@ func (mg *ProductPortfolioAssociation) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PortfolioIDRef,
 			Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -406,6 +423,7 @@ func (mg *ProductPortfolioAssociation) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProductID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProductIDRef,
 			Selector:     mg.Spec.InitProvider.ProductIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -437,6 +455,7 @@ func (mg *ProvisioningArtifact) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProductID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProductIDRef,
 			Selector:     mg.Spec.ForProvider.ProductIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -456,6 +475,7 @@ func (mg *ProvisioningArtifact) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProductID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProductIDRef,
 			Selector:     mg.Spec.InitProvider.ProductIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -487,6 +507,7 @@ func (mg *TagOptionResourceAssociation) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -506,6 +527,7 @@ func (mg *TagOptionResourceAssociation) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TagOptionID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TagOptionIDRef,
 			Selector:     mg.Spec.ForProvider.TagOptionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -525,6 +547,7 @@ func (mg *TagOptionResourceAssociation) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -544,6 +567,7 @@ func (mg *TagOptionResourceAssociation) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TagOptionID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TagOptionIDRef,
 			Selector:     mg.Spec.InitProvider.TagOptionIDSelector,
 			To:           reference.To{List: l, Managed: m},

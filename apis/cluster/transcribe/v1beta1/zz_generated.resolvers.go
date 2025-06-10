@@ -35,6 +35,7 @@ func (mg *LanguageModel) ResolveReferences( // ResolveReferences of this Languag
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputDataConfig[i3].DataAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.InputDataConfig[i3].DataAccessRoleArnRef,
 				Selector:     mg.Spec.ForProvider.InputDataConfig[i3].DataAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *LanguageModel) ResolveReferences( // ResolveReferences of this Languag
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArnRef,
 				Selector:     mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},

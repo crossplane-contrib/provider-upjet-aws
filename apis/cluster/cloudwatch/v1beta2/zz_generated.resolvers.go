@@ -34,6 +34,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.ForProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.OkActionsRefs,
 			Selector:      mg.Spec.ForProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.InitProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.OkActionsRefs,
 			Selector:      mg.Spec.InitProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -122,6 +126,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.ForProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -141,6 +146,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.OkActionsRefs,
 			Selector:      mg.Spec.ForProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -160,6 +166,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.InitProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -179,6 +186,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.OkActionsRefs,
 			Selector:      mg.Spec.InitProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},

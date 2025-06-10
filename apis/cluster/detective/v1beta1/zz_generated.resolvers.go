@@ -33,6 +33,7 @@ func (mg *InvitationAccepter) ResolveReferences( // ResolveReferences of this In
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GraphArn),
 			Extract:      resource.ExtractParamPath("graph_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GraphArnRef,
 			Selector:     mg.Spec.ForProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -52,6 +53,7 @@ func (mg *InvitationAccepter) ResolveReferences( // ResolveReferences of this In
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GraphArn),
 			Extract:      resource.ExtractParamPath("graph_arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GraphArnRef,
 			Selector:     mg.Spec.InitProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -83,6 +85,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GraphArn),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GraphArnRef,
 			Selector:     mg.Spec.ForProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -102,6 +105,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GraphArn),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GraphArnRef,
 			Selector:     mg.Spec.InitProvider.GraphArnSelector,
 			To:           reference.To{List: l, Managed: m},

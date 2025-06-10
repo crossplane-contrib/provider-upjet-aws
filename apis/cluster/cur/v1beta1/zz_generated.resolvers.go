@@ -33,6 +33,7 @@ func (mg *ReportDefinition) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Bucket),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.S3BucketRef,
 			Selector:     mg.Spec.ForProvider.S3BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -52,6 +53,7 @@ func (mg *ReportDefinition) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Bucket),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.S3BucketRef,
 			Selector:     mg.Spec.InitProvider.S3BucketSelector,
 			To:           reference.To{List: l, Managed: m},

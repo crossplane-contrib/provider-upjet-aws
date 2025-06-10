@@ -34,6 +34,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Instances),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.InstancesRefs,
 			Selector:      mg.Spec.ForProvider.InstancesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetsRefs,
 			Selector:      mg.Spec.ForProvider.SubnetsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Instances),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.InstancesRefs,
 			Selector:      mg.Spec.InitProvider.InstancesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetsRefs,
 			Selector:      mg.Spec.InitProvider.SubnetsSelector,
 			To:            reference.To{List: l, Managed: m},

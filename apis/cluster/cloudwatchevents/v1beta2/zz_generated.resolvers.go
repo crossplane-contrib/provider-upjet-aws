@@ -36,6 +36,7 @@ func (mg *Permission) ResolveReferences( // ResolveReferences of this Permission
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Condition.Value),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Condition.ValueRef,
 				Selector:     mg.Spec.ForProvider.Condition.ValueSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *Permission) ResolveReferences( // ResolveReferences of this Permission
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventBusName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EventBusNameRef,
 			Selector:     mg.Spec.ForProvider.EventBusNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -76,6 +78,7 @@ func (mg *Permission) ResolveReferences( // ResolveReferences of this Permission
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Condition.Value),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Condition.ValueRef,
 				Selector:     mg.Spec.InitProvider.Condition.ValueSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -96,6 +99,7 @@ func (mg *Permission) ResolveReferences( // ResolveReferences of this Permission
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventBusName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EventBusNameRef,
 			Selector:     mg.Spec.InitProvider.EventBusNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -128,6 +132,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EcsTarget.TaskDefinitionArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EcsTarget.TaskDefinitionArnRef,
 				Selector:     mg.Spec.ForProvider.EcsTarget.TaskDefinitionArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -148,6 +153,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventBusName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EventBusNameRef,
 			Selector:     mg.Spec.ForProvider.EventBusNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -167,6 +173,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -186,6 +193,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RuleRef,
 			Selector:     mg.Spec.ForProvider.RuleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -206,6 +214,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EcsTarget.TaskDefinitionArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EcsTarget.TaskDefinitionArnRef,
 				Selector:     mg.Spec.InitProvider.EcsTarget.TaskDefinitionArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -226,6 +235,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventBusName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EventBusNameRef,
 			Selector:     mg.Spec.InitProvider.EventBusNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -245,6 +255,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -264,6 +275,7 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RuleRef,
 			Selector:     mg.Spec.InitProvider.RuleSelector,
 			To:           reference.To{List: l, Managed: m},

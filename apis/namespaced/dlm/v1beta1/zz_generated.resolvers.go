@@ -27,7 +27,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -35,6 +35,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -50,13 +51,14 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.PolicyDetails.Schedule); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule); i5++ {
 				{
-					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+					m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef,
 						Selector:     mg.Spec.ForProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -72,13 +74,14 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,13 +97,14 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.PolicyDetails.Schedule); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule); i5++ {
 				{
-					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+					m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef,
 						Selector:     mg.Spec.InitProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnSelector,
 						To:           reference.To{List: l, Managed: m},

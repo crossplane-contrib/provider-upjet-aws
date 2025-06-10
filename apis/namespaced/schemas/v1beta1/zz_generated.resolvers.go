@@ -26,7 +26,7 @@ func (mg *Discoverer) ResolveReferences( // ResolveReferences of this Discoverer
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.upbound.io", "v1beta1", "Bus", "BusList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.m.upbound.io", "v1beta1", "Bus", "BusList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *Discoverer) ResolveReferences( // ResolveReferences of this Discoverer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceArnRef,
 			Selector:     mg.Spec.ForProvider.SourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,7 +46,7 @@ func (mg *Discoverer) ResolveReferences( // ResolveReferences of this Discoverer
 	mg.Spec.ForProvider.SourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.upbound.io", "v1beta1", "Bus", "BusList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.m.upbound.io", "v1beta1", "Bus", "BusList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -53,6 +54,7 @@ func (mg *Discoverer) ResolveReferences( // ResolveReferences of this Discoverer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceArnRef,
 			Selector:     mg.Spec.InitProvider.SourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -76,7 +78,7 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("schemas.aws.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("schemas.aws.m.upbound.io", "v1beta1", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -84,6 +86,7 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegistryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RegistryNameRef,
 			Selector:     mg.Spec.ForProvider.RegistryNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -95,7 +98,7 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.RegistryName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RegistryNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("schemas.aws.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("schemas.aws.m.upbound.io", "v1beta1", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -103,6 +106,7 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RegistryNameRef,
 			Selector:     mg.Spec.InitProvider.RegistryNameSelector,
 			To:           reference.To{List: l, Managed: m},

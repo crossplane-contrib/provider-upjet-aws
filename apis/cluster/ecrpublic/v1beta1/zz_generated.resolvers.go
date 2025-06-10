@@ -33,6 +33,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RepositoryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RepositoryNameRef,
 			Selector:     mg.Spec.ForProvider.RepositoryNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -52,6 +53,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RepositoryNameRef,
 			Selector:     mg.Spec.InitProvider.RepositoryNameSelector,
 			To:           reference.To{List: l, Managed: m},

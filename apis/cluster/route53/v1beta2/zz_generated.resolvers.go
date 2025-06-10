@@ -36,6 +36,7 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HealthCheckID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.HealthCheckIDRef,
 			Selector:     mg.Spec.ForProvider.HealthCheckIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Records),
 			Extract:       resource.ExtractParamPath("public_ip", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.RecordsRefs,
 			Selector:      mg.Spec.ForProvider.RecordsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -74,6 +76,7 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ZoneIDRef,
 			Selector:     mg.Spec.ForProvider.ZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -93,6 +96,7 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HealthCheckID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.HealthCheckIDRef,
 			Selector:     mg.Spec.InitProvider.HealthCheckIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -112,6 +116,7 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Records),
 			Extract:       resource.ExtractParamPath("public_ip", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.RecordsRefs,
 			Selector:      mg.Spec.InitProvider.RecordsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -131,6 +136,7 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ZoneIDRef,
 			Selector:     mg.Spec.InitProvider.ZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},

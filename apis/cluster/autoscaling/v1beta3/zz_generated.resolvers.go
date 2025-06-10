@@ -36,6 +36,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchConfiguration),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LaunchConfigurationRef,
 			Selector:     mg.Spec.ForProvider.LaunchConfigurationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplate.ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LaunchTemplate.IDRef,
 				Selector:     mg.Spec.ForProvider.LaunchTemplate.IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -79,6 +81,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.LaunchTemplateID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.LaunchTemplateIDRef,
 						Selector:     mg.Spec.ForProvider.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.LaunchTemplateIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -105,6 +108,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MixedInstancesPolicy.LaunchTemplate.Override[i5].LaunchTemplateSpecification.LaunchTemplateID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.MixedInstancesPolicy.LaunchTemplate.Override[i5].LaunchTemplateSpecification.LaunchTemplateIDRef,
 							Selector:     mg.Spec.ForProvider.MixedInstancesPolicy.LaunchTemplate.Override[i5].LaunchTemplateSpecification.LaunchTemplateIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -128,6 +132,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PlacementGroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PlacementGroupRef,
 			Selector:     mg.Spec.ForProvider.PlacementGroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -147,6 +152,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceLinkedRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceLinkedRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ServiceLinkedRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -166,6 +172,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCZoneIdentifier),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.VPCZoneIdentifierRefs,
 			Selector:      mg.Spec.ForProvider.VPCZoneIdentifierSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -185,6 +192,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LaunchConfiguration),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LaunchConfigurationRef,
 			Selector:     mg.Spec.InitProvider.LaunchConfigurationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -205,6 +213,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LaunchTemplate.ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LaunchTemplate.IDRef,
 				Selector:     mg.Spec.InitProvider.LaunchTemplate.IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -228,6 +237,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.LaunchTemplateID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.LaunchTemplateIDRef,
 						Selector:     mg.Spec.InitProvider.MixedInstancesPolicy.LaunchTemplate.LaunchTemplateSpecification.LaunchTemplateIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -254,6 +264,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MixedInstancesPolicy.LaunchTemplate.Override[i5].LaunchTemplateSpecification.LaunchTemplateID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.MixedInstancesPolicy.LaunchTemplate.Override[i5].LaunchTemplateSpecification.LaunchTemplateIDRef,
 							Selector:     mg.Spec.InitProvider.MixedInstancesPolicy.LaunchTemplate.Override[i5].LaunchTemplateSpecification.LaunchTemplateIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -277,6 +288,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PlacementGroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PlacementGroupRef,
 			Selector:     mg.Spec.InitProvider.PlacementGroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -296,6 +308,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceLinkedRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceLinkedRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ServiceLinkedRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -315,6 +328,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCZoneIdentifier),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.VPCZoneIdentifierRefs,
 			Selector:      mg.Spec.InitProvider.VPCZoneIdentifierSelector,
 			To:            reference.To{List: l, Managed: m},

@@ -29,13 +29,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 
 	if mg.Spec.ForProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "InstanceProfile", "InstanceProfileList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "InstanceProfile", "InstanceProfileList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeResources.InstanceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ComputeResources.InstanceRoleRef,
 				Selector:     mg.Spec.ForProvider.ComputeResources.InstanceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -50,13 +51,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 	}
 	if mg.Spec.ForProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "PlacementGroup", "PlacementGroupList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "PlacementGroup", "PlacementGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeResources.PlacementGroup),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ComputeResources.PlacementGroupRef,
 				Selector:     mg.Spec.ForProvider.ComputeResources.PlacementGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -71,13 +73,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 	}
 	if mg.Spec.ForProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ComputeResources.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.ComputeResources.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.ForProvider.ComputeResources.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -92,13 +95,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 	}
 	if mg.Spec.ForProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ComputeResources.Subnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.ComputeResources.SubnetsRefs,
 				Selector:      mg.Spec.ForProvider.ComputeResources.SubnetsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -112,13 +116,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRole),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceRoleRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -132,13 +137,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 
 	if mg.Spec.InitProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "InstanceProfile", "InstanceProfileList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "InstanceProfile", "InstanceProfileList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeResources.InstanceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ComputeResources.InstanceRoleRef,
 				Selector:     mg.Spec.InitProvider.ComputeResources.InstanceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -153,13 +159,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 	}
 	if mg.Spec.InitProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "PlacementGroup", "PlacementGroupList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "PlacementGroup", "PlacementGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeResources.PlacementGroup),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ComputeResources.PlacementGroupRef,
 				Selector:     mg.Spec.InitProvider.ComputeResources.PlacementGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -174,13 +181,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 	}
 	if mg.Spec.InitProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ComputeResources.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.ComputeResources.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.InitProvider.ComputeResources.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -195,13 +203,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 	}
 	if mg.Spec.InitProvider.ComputeResources != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ComputeResources.Subnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.ComputeResources.SubnetsRefs,
 				Selector:      mg.Spec.InitProvider.ComputeResources.SubnetsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -215,13 +224,14 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRole),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceRoleRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -247,13 +257,14 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ComputeEnvironmentOrder); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("batch.aws.upbound.io", "v1beta1", "ComputeEnvironment", "ComputeEnvironmentList")
+			m, l, err = apisresolver.GetManagedResource("batch.aws.m.upbound.io", "v1beta1", "ComputeEnvironment", "ComputeEnvironmentList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeEnvironmentOrder[i3].ComputeEnvironment),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentRef,
 				Selector:     mg.Spec.ForProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -267,13 +278,14 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("batch.aws.upbound.io", "v1beta1", "SchedulingPolicy", "SchedulingPolicyList")
+		m, l, err = apisresolver.GetManagedResource("batch.aws.m.upbound.io", "v1beta1", "SchedulingPolicy", "SchedulingPolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SchedulingPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SchedulingPolicyArnRef,
 			Selector:     mg.Spec.ForProvider.SchedulingPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -287,13 +299,14 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ComputeEnvironmentOrder); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("batch.aws.upbound.io", "v1beta1", "ComputeEnvironment", "ComputeEnvironmentList")
+			m, l, err = apisresolver.GetManagedResource("batch.aws.m.upbound.io", "v1beta1", "ComputeEnvironment", "ComputeEnvironmentList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeEnvironmentOrder[i3].ComputeEnvironment),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentRef,
 				Selector:     mg.Spec.InitProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -307,13 +320,14 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("batch.aws.upbound.io", "v1beta1", "SchedulingPolicy", "SchedulingPolicyList")
+		m, l, err = apisresolver.GetManagedResource("batch.aws.m.upbound.io", "v1beta1", "SchedulingPolicy", "SchedulingPolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SchedulingPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SchedulingPolicyArnRef,
 			Selector:     mg.Spec.InitProvider.SchedulingPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},

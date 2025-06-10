@@ -26,7 +26,7 @@ func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.upbound.io", "v1beta1", "DataSet", "DataSetList")
+		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.m.upbound.io", "v1beta1", "DataSet", "DataSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataSetIDRef,
 			Selector:     mg.Spec.ForProvider.DataSetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,7 +46,7 @@ func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.DataSetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataSetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.upbound.io", "v1beta1", "DataSet", "DataSetList")
+		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.m.upbound.io", "v1beta1", "DataSet", "DataSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -53,6 +54,7 @@ func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataSetIDRef,
 			Selector:     mg.Spec.InitProvider.DataSetIDSelector,
 			To:           reference.To{List: l, Managed: m},

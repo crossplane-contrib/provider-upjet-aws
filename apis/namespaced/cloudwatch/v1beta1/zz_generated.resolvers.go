@@ -27,7 +27,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -35,6 +35,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.ForProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -46,7 +47,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 	mg.Spec.ForProvider.AlarmActions = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.AlarmActionsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -54,6 +55,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.OkActionsRefs,
 			Selector:      mg.Spec.ForProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -65,7 +67,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 	mg.Spec.ForProvider.OkActions = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.OkActionsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -73,6 +75,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.InitProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -84,7 +87,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 	mg.Spec.InitProvider.AlarmActions = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.AlarmActionsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -92,6 +95,7 @@ func (mg *CompositeAlarm) ResolveReferences( // ResolveReferences of this Compos
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.OkActionsRefs,
 			Selector:      mg.Spec.InitProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -115,7 +119,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -123,6 +127,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.ForProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -134,7 +139,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.AlarmActions = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.AlarmActionsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -142,6 +147,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.OkActionsRefs,
 			Selector:      mg.Spec.ForProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -153,7 +159,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.OkActions = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.OkActionsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -161,6 +167,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AlarmActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AlarmActionsRefs,
 			Selector:      mg.Spec.InitProvider.AlarmActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -172,7 +179,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.AlarmActions = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.AlarmActionsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -180,6 +187,7 @@ func (mg *MetricAlarm) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OkActions),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.OkActionsRefs,
 			Selector:      mg.Spec.InitProvider.OkActionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -203,7 +211,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+		m, l, err = apisresolver.GetManagedResource("firehose.aws.m.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -211,6 +219,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirehoseArn),
 			Extract:      resource.ExtractParamPath("arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FirehoseArnRef,
 			Selector:     mg.Spec.ForProvider.FirehoseArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -222,7 +231,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.FirehoseArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FirehoseArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -230,6 +239,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -241,7 +251,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+		m, l, err = apisresolver.GetManagedResource("firehose.aws.m.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -249,6 +259,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirehoseArn),
 			Extract:      resource.ExtractParamPath("arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FirehoseArnRef,
 			Selector:     mg.Spec.InitProvider.FirehoseArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -260,7 +271,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.InitProvider.FirehoseArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FirehoseArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -268,6 +279,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

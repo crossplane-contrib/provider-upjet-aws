@@ -26,7 +26,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("rum.aws.upbound.io", "v1beta1", "AppMonitor", "AppMonitorList")
+		m, l, err = apisresolver.GetManagedResource("rum.aws.m.upbound.io", "v1beta1", "AppMonitor", "AppMonitorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppMonitorName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppMonitorNameRef,
 			Selector:     mg.Spec.ForProvider.AppMonitorNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,7 +46,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 	mg.Spec.ForProvider.AppMonitorName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AppMonitorNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -53,6 +54,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -64,7 +66,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 	mg.Spec.ForProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("rum.aws.upbound.io", "v1beta1", "AppMonitor", "AppMonitorList")
+		m, l, err = apisresolver.GetManagedResource("rum.aws.m.upbound.io", "v1beta1", "AppMonitor", "AppMonitorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -72,6 +74,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppMonitorName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AppMonitorNameRef,
 			Selector:     mg.Spec.InitProvider.AppMonitorNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -83,7 +86,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 	mg.Spec.InitProvider.AppMonitorName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AppMonitorNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -91,6 +94,7 @@ func (mg *MetricsDestination) ResolveReferences( // ResolveReferences of this Me
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

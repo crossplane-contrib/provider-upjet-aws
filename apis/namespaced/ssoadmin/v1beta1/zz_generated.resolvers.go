@@ -27,7 +27,7 @@ func (mg *AccountAssignment) ResolveReferences( // ResolveReferences of this Acc
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
+		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.m.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -35,6 +35,7 @@ func (mg *AccountAssignment) ResolveReferences( // ResolveReferences of this Acc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
 			Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -46,7 +47,7 @@ func (mg *AccountAssignment) ResolveReferences( // ResolveReferences of this Acc
 	mg.Spec.ForProvider.PermissionSetArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PermissionSetArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("identitystore.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -54,6 +55,7 @@ func (mg *AccountAssignment) ResolveReferences( // ResolveReferences of this Acc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrincipalID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrincipalIDFromGroupRef,
 			Selector:     mg.Spec.ForProvider.PrincipalIDFromGroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -79,13 +81,14 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences(ctx context.Context
 
 	if mg.Spec.ForProvider.CustomerManagedPolicyReference != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomerManagedPolicyReference.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CustomerManagedPolicyReference.PolicyNameRef,
 				Selector:     mg.Spec.ForProvider.CustomerManagedPolicyReference.PolicyNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -99,13 +102,14 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences(ctx context.Context
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
+		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.m.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
 			Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -119,13 +123,14 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences(ctx context.Context
 
 	if mg.Spec.InitProvider.CustomerManagedPolicyReference != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomerManagedPolicyReference.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CustomerManagedPolicyReference.PolicyNameRef,
 				Selector:     mg.Spec.InitProvider.CustomerManagedPolicyReference.PolicyNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -151,7 +156,7 @@ func (mg *ManagedPolicyAttachment) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
+		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.m.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -159,6 +164,7 @@ func (mg *ManagedPolicyAttachment) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
 			Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -182,7 +188,7 @@ func (mg *PermissionSetInlinePolicy) ResolveReferences(ctx context.Context, c cl
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
+		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.m.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -190,6 +196,7 @@ func (mg *PermissionSetInlinePolicy) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
 			Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -213,7 +220,7 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
+		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.m.upbound.io", "v1beta1", "PermissionSet", "PermissionSetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -221,6 +228,7 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
 			Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -235,13 +243,14 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 	if mg.Spec.ForProvider.PermissionsBoundary != nil {
 		if mg.Spec.ForProvider.PermissionsBoundary.CustomerManagedPolicyReference != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionsBoundary.CustomerManagedPolicyReference.Name),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameRef,
 					Selector:     mg.Spec.ForProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -258,13 +267,14 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 	if mg.Spec.InitProvider.PermissionsBoundary != nil {
 		if mg.Spec.InitProvider.PermissionsBoundary.CustomerManagedPolicyReference != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+				m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Policy", "PolicyList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PermissionsBoundary.CustomerManagedPolicyReference.Name),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameRef,
 					Selector:     mg.Spec.InitProvider.PermissionsBoundary.CustomerManagedPolicyReference.NameSelector,
 					To:           reference.To{List: l, Managed: m},

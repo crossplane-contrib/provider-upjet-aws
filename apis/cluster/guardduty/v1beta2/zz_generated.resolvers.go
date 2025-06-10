@@ -34,6 +34,7 @@ func (mg *Filter) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DetectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DetectorIDRef,
 			Selector:     mg.Spec.ForProvider.DetectorIDSelector,
 			To:           reference.To{List: l, Managed: m},

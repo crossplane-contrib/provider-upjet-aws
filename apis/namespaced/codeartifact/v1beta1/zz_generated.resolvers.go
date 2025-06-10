@@ -28,7 +28,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionKey),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EncryptionKeyRef,
 			Selector:     mg.Spec.ForProvider.EncryptionKeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -47,7 +48,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.EncryptionKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EncryptionKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -55,6 +56,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionKey),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EncryptionKeyRef,
 			Selector:     mg.Spec.InitProvider.EncryptionKeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,7 +80,7 @@ func (mg *DomainPermissionsPolicy) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,6 +88,7 @@ func (mg *DomainPermissionsPolicy) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
 			Extract:      resource.ExtractParamPath("domain", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -109,7 +112,7 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -117,6 +120,7 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
 			Extract:      resource.ExtractParamPath("domain", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,13 +134,14 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Upstream); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+			m, l, err = apisresolver.GetManagedResource("codeartifact.aws.m.upbound.io", "v1beta1", "Repository", "RepositoryList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Upstream[i3].RepositoryName),
 				Extract:      resource.ExtractParamPath("repository", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Upstream[i3].RepositoryNameRef,
 				Selector:     mg.Spec.ForProvider.Upstream[i3].RepositoryNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -151,13 +156,14 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Upstream); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+			m, l, err = apisresolver.GetManagedResource("codeartifact.aws.m.upbound.io", "v1beta1", "Repository", "RepositoryList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Upstream[i3].RepositoryName),
 				Extract:      resource.ExtractParamPath("repository", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Upstream[i3].RepositoryNameRef,
 				Selector:     mg.Spec.InitProvider.Upstream[i3].RepositoryNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -183,7 +189,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -191,6 +197,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
 			Extract:      resource.ExtractParamPath("domain", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -202,7 +209,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.Domain = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.m.upbound.io", "v1beta1", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -210,6 +217,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Repository),
 			Extract:      resource.ExtractParamPath("repository", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RepositoryRef,
 			Selector:     mg.Spec.ForProvider.RepositorySelector,
 			To:           reference.To{List: l, Managed: m},

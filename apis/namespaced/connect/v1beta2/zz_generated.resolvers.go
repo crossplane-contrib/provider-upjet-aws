@@ -26,7 +26,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta3", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("connect.aws.m.upbound.io", "v1beta3", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -34,6 +34,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultOutboundQueueID),
 			Extract:      resource.ExtractParamPath("queue_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultOutboundQueueIDRef,
 			Selector:     mg.Spec.ForProvider.DefaultOutboundQueueIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,7 +46,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 	mg.Spec.ForProvider.DefaultOutboundQueueID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DefaultOutboundQueueIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("connect.aws.m.upbound.io", "v1beta1", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -53,6 +54,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceIDRef,
 			Selector:     mg.Spec.ForProvider.InstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -64,7 +66,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta3", "Queue", "QueueList")
+		m, l, err = apisresolver.GetManagedResource("connect.aws.m.upbound.io", "v1beta3", "Queue", "QueueList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -72,6 +74,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultOutboundQueueID),
 			Extract:      resource.ExtractParamPath("queue_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultOutboundQueueIDRef,
 			Selector:     mg.Spec.InitProvider.DefaultOutboundQueueIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -83,7 +86,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 	mg.Spec.InitProvider.DefaultOutboundQueueID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DefaultOutboundQueueIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("connect.aws.m.upbound.io", "v1beta1", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -91,6 +94,7 @@ func (mg *RoutingProfile) ResolveReferences( // ResolveReferences of this Routin
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceIDRef,
 			Selector:     mg.Spec.InitProvider.InstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -28,7 +28,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "FirewallPolicy", "FirewallPolicyList")
+		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "FirewallPolicy", "FirewallPolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -36,6 +36,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FirewallPolicyArnRef,
 			Selector:     mg.Spec.ForProvider.FirewallPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -49,13 +50,14 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SubnetMapping); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetMapping[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -69,13 +71,14 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VPCIDRef,
 			Selector:     mg.Spec.ForProvider.VPCIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -87,7 +90,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "FirewallPolicy", "FirewallPolicyList")
+		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "FirewallPolicy", "FirewallPolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -95,6 +98,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FirewallPolicyArnRef,
 			Selector:     mg.Spec.InitProvider.FirewallPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -108,13 +112,14 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.SubnetMapping); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetMapping[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SubnetMapping[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.SubnetMapping[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -128,13 +133,14 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VPCIDRef,
 			Selector:     mg.Spec.InitProvider.VPCIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -161,13 +167,14 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	if mg.Spec.ForProvider.FirewallPolicy != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.FirewallPolicy.StatefulRuleGroupReference); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
+				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy.StatefulRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FirewallPolicy.StatefulRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.ForProvider.FirewallPolicy.StatefulRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -184,13 +191,14 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	if mg.Spec.ForProvider.FirewallPolicy != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.FirewallPolicy.StatelessRuleGroupReference); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
+				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy.StatelessRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FirewallPolicy.StatelessRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.ForProvider.FirewallPolicy.StatelessRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -207,13 +215,14 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	if mg.Spec.InitProvider.FirewallPolicy != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.FirewallPolicy.StatefulRuleGroupReference); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
+				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicy.StatefulRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FirewallPolicy.StatefulRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.InitProvider.FirewallPolicy.StatefulRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -230,13 +239,14 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	if mg.Spec.InitProvider.FirewallPolicy != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.FirewallPolicy.StatelessRuleGroupReference); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
+				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicy.StatelessRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FirewallPolicy.StatelessRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.InitProvider.FirewallPolicy.StatelessRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -263,7 +273,7 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "Firewall", "FirewallList")
+		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "Firewall", "FirewallList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -271,6 +281,7 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FirewallArnRef,
 			Selector:     mg.Spec.ForProvider.FirewallArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -282,7 +293,7 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.FirewallArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FirewallArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io", "v1beta1", "Firewall", "FirewallList")
+		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.m.upbound.io", "v1beta1", "Firewall", "FirewallList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -290,6 +301,7 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FirewallArnRef,
 			Selector:     mg.Spec.InitProvider.FirewallArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -318,13 +330,14 @@ func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.RuleGroup.ReferenceSets.IPSetReferences); i5++ {
 				for i6 := 0; i6 < len(mg.Spec.ForProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference); i6++ {
 					{
-						m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "ManagedPrefixList", "ManagedPrefixListList")
+						m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "ManagedPrefixList", "ManagedPrefixListList")
 						if err != nil {
 							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference[i6].ReferenceArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference[i6].ReferenceArnRef,
 							Selector:     mg.Spec.ForProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference[i6].ReferenceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -345,13 +358,14 @@ func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.RuleGroup.ReferenceSets.IPSetReferences); i5++ {
 				for i6 := 0; i6 < len(mg.Spec.InitProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference); i6++ {
 					{
-						m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "ManagedPrefixList", "ManagedPrefixListList")
+						m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "ManagedPrefixList", "ManagedPrefixListList")
 						if err != nil {
 							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference[i6].ReferenceArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference[i6].ReferenceArnRef,
 							Selector:     mg.Spec.InitProvider.RuleGroup.ReferenceSets.IPSetReferences[i5].IPSetReference[i6].ReferenceArnSelector,
 							To:           reference.To{List: l, Managed: m},

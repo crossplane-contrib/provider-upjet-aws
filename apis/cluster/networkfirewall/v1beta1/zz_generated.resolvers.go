@@ -36,6 +36,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FirewallPolicyArnRef,
 			Selector:     mg.Spec.ForProvider.FirewallPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetMapping[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -76,6 +78,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VPCIDRef,
 			Selector:     mg.Spec.ForProvider.VPCIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -95,6 +98,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FirewallPolicyArnRef,
 			Selector:     mg.Spec.InitProvider.FirewallPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -115,6 +119,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetMapping[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SubnetMapping[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.SubnetMapping[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -135,6 +140,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VPCIDRef,
 			Selector:     mg.Spec.InitProvider.VPCIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -168,6 +174,7 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -191,6 +198,7 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -214,6 +222,7 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -237,6 +246,7 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnRef,
 					Selector:     mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -271,6 +281,7 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FirewallArnRef,
 			Selector:     mg.Spec.ForProvider.FirewallArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -290,6 +301,7 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FirewallArnRef,
 			Selector:     mg.Spec.InitProvider.FirewallArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -325,6 +337,7 @@ func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnRef,
 							Selector:     mg.Spec.ForProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -352,6 +365,7 @@ func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnRef,
 							Selector:     mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnSelector,
 							To:           reference.To{List: l, Managed: m},

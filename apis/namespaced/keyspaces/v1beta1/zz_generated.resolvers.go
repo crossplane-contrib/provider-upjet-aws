@@ -25,7 +25,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("keyspaces.aws.upbound.io", "v1beta1", "Keyspace", "KeyspaceList")
+		m, l, err = apisresolver.GetManagedResource("keyspaces.aws.m.upbound.io", "v1beta1", "Keyspace", "KeyspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -33,6 +33,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyspaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyspaceNameRef,
 			Selector:     mg.Spec.ForProvider.KeyspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -44,7 +45,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.KeyspaceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyspaceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyspaces.aws.upbound.io", "v1beta1", "Keyspace", "KeyspaceList")
+		m, l, err = apisresolver.GetManagedResource("keyspaces.aws.m.upbound.io", "v1beta1", "Keyspace", "KeyspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -52,6 +53,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyspaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyspaceNameRef,
 			Selector:     mg.Spec.InitProvider.KeyspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
