@@ -354,9 +354,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// identifier, separated by a comma (,), e.g., Z1D633PJN98FT9,example
 	// disabled until it's successfully tested
 	"aws_route53_key_signing_key": FormattedIdentifierUserDefinedNameLast("name", ",", "hosted_zone_id"),
-	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-	// disabled until it's successfully tested
-	"aws_route53_query_log": config.IdentifierFromProvider,
 
 	// route53domains
 	//

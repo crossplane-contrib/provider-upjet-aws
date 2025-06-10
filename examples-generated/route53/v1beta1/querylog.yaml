@@ -1,0 +1,64 @@
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: QueryLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: example_com
+  name: example-com
+spec:
+  forProvider:
+    cloudwatchLogGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_route53_example_com
+    region: us-west-1
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_com
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: aws_route53_example_com
+  name: aws-route53-example-com
+spec:
+  forProvider:
+    provider: ${aws.us-east-1}
+    region: us-west-1
+    retentionInDays: 30
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: route53-query-logging-policy
+  name: route53-query-logging-policy
+spec:
+  forProvider:
+    policyDocument: ${data.aws_iam_policy_document.route53-query-logging-policy.json}
+    provider: ${aws.us-east-1}
+    region: us-west-1
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: Zone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/querylog
+  labels:
+    testing.upbound.io/example-name: example_com
+  name: example-com
+spec:
+  forProvider:
+    name: example.com
+    region: us-west-1

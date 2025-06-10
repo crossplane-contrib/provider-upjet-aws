@@ -156,6 +156,94 @@ func (mg *HostedZoneDNSSEC) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this QueryLog.
+func (mg *QueryLog) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLogGroupArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.CloudwatchLogGroupArnRef,
+			Selector:     mg.Spec.ForProvider.CloudwatchLogGroupArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchLogGroupArn")
+	}
+	mg.Spec.ForProvider.CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CloudwatchLogGroupArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("route53.aws.upbound.io", "v1beta1", "Zone", "ZoneList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
+			Extract:      resource.ExtractParamPath("zone_id", true),
+			Reference:    mg.Spec.ForProvider.ZoneIDRef,
+			Selector:     mg.Spec.ForProvider.ZoneIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneID")
+	}
+	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLogGroupArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.CloudwatchLogGroupArnRef,
+			Selector:     mg.Spec.InitProvider.CloudwatchLogGroupArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchLogGroupArn")
+	}
+	mg.Spec.InitProvider.CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CloudwatchLogGroupArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("route53.aws.upbound.io", "v1beta1", "Zone", "ZoneList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
+			Extract:      resource.ExtractParamPath("zone_id", true),
+			Reference:    mg.Spec.InitProvider.ZoneIDRef,
+			Selector:     mg.Spec.InitProvider.ZoneIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ZoneID")
+	}
+	mg.Spec.InitProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ZoneIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Record.
 func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
