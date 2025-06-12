@@ -14,7 +14,7 @@ spec:
             testing.upbound.io/example-name: sample
         order: 1
     priority: 1
-    region: eu-west-1
+    region: us-east-2
     state: ENABLED
 ---
 apiVersion: batch.aws.upbound.io/v1beta1
@@ -43,7 +43,7 @@ spec:
       subnetsRefs:
       - name: sample
       type: EC2
-    region: eu-west-1
+    region: us-east-2
     serviceRoleSelector:
       matchLabels:
         testing.upbound.io/example-name: aws_batch_service_role
@@ -156,7 +156,7 @@ metadata:
   name: sample
 spec:
   forProvider:
-    region: eu-west-1
+    region: us-east-2
     strategy: cluster  
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
@@ -290,7 +290,7 @@ metadata:
   name: sample
 spec:
   forProvider:
-    region: eu-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample  
@@ -306,7 +306,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.1.1.0/24
-    region: eu-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample  
@@ -322,4 +322,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
-    region: eu-west-1 
+    region: us-east-2 
