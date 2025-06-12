@@ -1570,6 +1570,25 @@ func (mg *InstanceState) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.Identifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Identifier),
+			Extract:      resource.ExtractParamPath("identifier", false),
+			Reference:    mg.Spec.InitProvider.IdentifierRef,
+			Selector:     mg.Spec.InitProvider.IdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Identifier")
+	}
+	mg.Spec.InitProvider.Identifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IdentifierRef = rsp.ResolvedReference
 
 	return nil
 }

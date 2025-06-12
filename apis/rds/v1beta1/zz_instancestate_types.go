@@ -15,6 +15,19 @@ import (
 
 type InstanceStateInitParameters struct {
 
+	// DB Instance Identifier
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Reference to a Instance in rds to populate identifier.
+	// +kubebuilder:validation:Optional
+	IdentifierRef *v1.Reference `json:"identifierRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in rds to populate identifier.
+	// +kubebuilder:validation:Optional
+	IdentifierSelector *v1.Selector `json:"identifierSelector,omitempty" tf:"-"`
+
 	// Configured state of the DB Instance. Valid values are available and stopped.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
