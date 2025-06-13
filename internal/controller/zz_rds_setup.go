@@ -22,6 +22,7 @@ import (
 	globalcluster "github.com/upbound/provider-aws/internal/controller/rds/globalcluster"
 	instance "github.com/upbound/provider-aws/internal/controller/rds/instance"
 	instanceroleassociation "github.com/upbound/provider-aws/internal/controller/rds/instanceroleassociation"
+	instancestate "github.com/upbound/provider-aws/internal/controller/rds/instancestate"
 	optiongroup "github.com/upbound/provider-aws/internal/controller/rds/optiongroup"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/rds/parametergroup"
 	proxy "github.com/upbound/provider-aws/internal/controller/rds/proxy"
@@ -49,6 +50,7 @@ func Setup_rds(mgr ctrl.Manager, o controller.Options) error {
 		globalcluster.Setup,
 		instance.Setup,
 		instanceroleassociation.Setup,
+		instancestate.Setup,
 		optiongroup.Setup,
 		parametergroup.Setup,
 		proxy.Setup,

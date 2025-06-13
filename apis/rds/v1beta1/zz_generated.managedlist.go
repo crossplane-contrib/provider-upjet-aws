@@ -124,6 +124,15 @@ func (l *InstanceRoleAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this InstanceStateList.
+func (l *InstanceStateList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this OptionGroupList.
 func (l *OptionGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

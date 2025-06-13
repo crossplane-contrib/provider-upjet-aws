@@ -109,6 +109,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
 
+	// rds
+	//
+	// aws_rds_instance_state import format: rdsInstanceId-12345678
+	"aws_rds_instance_state": rdsInstanceState(),
+
 	// s3
 	//
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
@@ -3312,4 +3317,20 @@ func genericARNTemplate(service string, resource string, elideRegion bool) strin
 		region = ""
 	}
 	return fmt.Sprintf("arn:{{ .setup.client_metadata.partition }}:%s:%s:{{ .setup.client_metadata.account_id }}:%s", service, region, resource)
+}
+
+func rdsInstanceState() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["identifier"]
+		if !ok {
+			return "", errors.New("identifier field missing from tfstate")
+		}
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("identifier field must be a string")
+		}
+		return idStr, nil
+	}
+	return e
 }

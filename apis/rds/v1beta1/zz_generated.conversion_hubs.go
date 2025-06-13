@@ -40,6 +40,9 @@ func (tr *GlobalCluster) Hub() {}
 func (tr *InstanceRoleAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *InstanceState) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *OptionGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.

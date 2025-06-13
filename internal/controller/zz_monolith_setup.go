@@ -738,6 +738,7 @@ import (
 	globalclusterrds "github.com/upbound/provider-aws/internal/controller/rds/globalcluster"
 	instancerds "github.com/upbound/provider-aws/internal/controller/rds/instance"
 	instanceroleassociation "github.com/upbound/provider-aws/internal/controller/rds/instanceroleassociation"
+	instancestaterds "github.com/upbound/provider-aws/internal/controller/rds/instancestate"
 	optiongroup "github.com/upbound/provider-aws/internal/controller/rds/optiongroup"
 	parametergrouprds "github.com/upbound/provider-aws/internal/controller/rds/parametergroup"
 	proxy "github.com/upbound/provider-aws/internal/controller/rds/proxy"
@@ -1715,6 +1716,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		globalclusterrds.Setup,
 		instancerds.Setup,
 		instanceroleassociation.Setup,
+		instancestaterds.Setup,
 		optiongroup.Setup,
 		parametergrouprds.Setup,
 		proxy.Setup,
