@@ -77,7 +77,7 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.27.0
+KIND_VERSION = v0.29.0
 UP_VERSION = v0.39.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.11.1
