@@ -6,6 +6,7 @@ package v1beta1
 
 import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v2 "github.com/crossplane/crossplane-runtime/apis/common/v2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
@@ -47,8 +48,8 @@ type ClusterAuthObservation struct {
 
 // ClusterAuthSpec defines the desired state of ClusterAuth
 type ClusterAuthSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterAuthParameters `json:"forProvider"`
+	v2.ManagedResourceSpec `json:",inline"`
+	ForProvider            ClusterAuthParameters `json:"forProvider"`
 }
 
 // ClusterAuthStatus defines the observed state of ClusterAuth.
