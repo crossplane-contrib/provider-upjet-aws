@@ -11,13 +11,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/types/comments"
 
-	"github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1"
-	"github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta2"
 	"github.com/upbound/provider-aws/config/namespaced/common"
 )
 
@@ -109,70 +105,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			" autoGenerateAuthToken to true, the Secret referenced here will be" +
 			" created or updated with generated auth token if it does not already" +
 			" contain one."
-
-		r.Version = "v1beta2"
-		r.Conversions = append(r.Conversions,
-			conversion.NewCustomConverter("v1beta1", "v1beta2", func(src, target xpresource.Managed) error {
-				srcTyped := src.(*v1beta1.ReplicationGroup)
-				targetTyped := target.(*v1beta2.ReplicationGroup)
-				if len(srcTyped.Spec.ForProvider.ClusterMode) > 0 {
-					if srcTyped.Spec.ForProvider.ClusterMode[0].NumNodeGroups != nil {
-						targetTyped.Spec.ForProvider.NumNodeGroups = srcTyped.Spec.ForProvider.ClusterMode[0].NumNodeGroups
-					}
-					if srcTyped.Spec.ForProvider.ClusterMode[0].ReplicasPerNodeGroup != nil {
-						targetTyped.Spec.ForProvider.ReplicasPerNodeGroup = srcTyped.Spec.ForProvider.ClusterMode[0].ReplicasPerNodeGroup
-					}
-				}
-				if len(srcTyped.Spec.InitProvider.ClusterMode) > 0 {
-					if srcTyped.Spec.InitProvider.ClusterMode[0].NumNodeGroups != nil {
-						targetTyped.Spec.InitProvider.NumNodeGroups = srcTyped.Spec.InitProvider.ClusterMode[0].NumNodeGroups
-					}
-					if srcTyped.Spec.InitProvider.ClusterMode[0].ReplicasPerNodeGroup != nil {
-						targetTyped.Spec.InitProvider.ReplicasPerNodeGroup = srcTyped.Spec.InitProvider.ClusterMode[0].ReplicasPerNodeGroup
-					}
-				}
-				if len(srcTyped.Status.AtProvider.ClusterMode) > 0 {
-					if srcTyped.Status.AtProvider.ClusterMode[0].NumNodeGroups != nil {
-						targetTyped.Status.AtProvider.NumNodeGroups = srcTyped.Status.AtProvider.ClusterMode[0].NumNodeGroups
-					}
-					if srcTyped.Status.AtProvider.ClusterMode[0].ReplicasPerNodeGroup != nil {
-						targetTyped.Status.AtProvider.ReplicasPerNodeGroup = srcTyped.Status.AtProvider.ClusterMode[0].ReplicasPerNodeGroup
-					}
-				}
-				return nil
-			}),
-			conversion.NewCustomConverter("v1beta2", "v1beta1", func(src, target xpresource.Managed) error {
-				srcTyped := src.(*v1beta2.ReplicationGroup)
-				targetTyped := target.(*v1beta1.ReplicationGroup)
-				cm := v1beta1.ClusterModeParameters{}
-				if srcTyped.Spec.ForProvider.NumNodeGroups != nil {
-					cm.NumNodeGroups = srcTyped.Spec.ForProvider.NumNodeGroups
-				}
-				if srcTyped.Spec.ForProvider.ReplicasPerNodeGroup != nil {
-					cm.ReplicasPerNodeGroup = srcTyped.Spec.ForProvider.ReplicasPerNodeGroup
-				}
-				targetTyped.Spec.ForProvider.ClusterMode = []v1beta1.ClusterModeParameters{cm}
-
-				cmi := v1beta1.ClusterModeInitParameters{}
-				if srcTyped.Spec.InitProvider.NumNodeGroups != nil {
-					cm.NumNodeGroups = srcTyped.Spec.InitProvider.NumNodeGroups
-				}
-				if srcTyped.Spec.InitProvider.ReplicasPerNodeGroup != nil {
-					cm.ReplicasPerNodeGroup = srcTyped.Spec.InitProvider.ReplicasPerNodeGroup
-				}
-				targetTyped.Spec.InitProvider.ClusterMode = []v1beta1.ClusterModeInitParameters{cmi}
-
-				cmo := v1beta1.ClusterModeObservation{}
-				if srcTyped.Status.AtProvider.NumNodeGroups != nil {
-					cm.NumNodeGroups = srcTyped.Status.AtProvider.NumNodeGroups
-				}
-				if srcTyped.Status.AtProvider.ReplicasPerNodeGroup != nil {
-					cm.ReplicasPerNodeGroup = srcTyped.Status.AtProvider.ReplicasPerNodeGroup
-				}
-				targetTyped.Status.AtProvider.ClusterMode = []v1beta1.ClusterModeObservation{cmo}
-				return nil
-			}),
-		)
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_serverless_cache", func(r *config.Resource) {

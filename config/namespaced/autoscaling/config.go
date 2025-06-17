@@ -9,7 +9,6 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/config/conversion"
 
 	"github.com/upbound/provider-aws/apis/namespaced/autoscaling/v1beta1"
 	"github.com/upbound/provider-aws/apis/namespaced/autoscaling/v1beta2"
@@ -34,11 +33,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		delete(r.References, "launch_template.version")
 		r.UseAsync = true
 
-		r.Version = "v1beta2"
-		r.Conversions = append(r.Conversions,
-			conversion.NewCustomConverter("v1beta1", "v1beta2", autoScalingGroupConverterFromv1beta1Tov1beta2),
-			conversion.NewCustomConverter("v1beta2", "v1beta1", autoScalingGroupConverterFromv1beta2Tov1beta1),
-		)
 	})
 	p.AddResourceConfigurator("aws_autoscaling_attachment", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{
