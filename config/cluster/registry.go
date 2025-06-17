@@ -167,7 +167,7 @@ func GetProvider(ctx context.Context, generationProvider bool, skipDefaultTags b
 		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
 		config.WithDefaultResourceOptions(defaultResourceOptions...),
 	)
-	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
+	pc.BasePackages.ControllerMap["eks/clusterauth"] = "eks"
 
 	for _, configure := range ProviderConfiguration {
 		configure(pc)
