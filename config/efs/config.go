@@ -50,5 +50,15 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_kms_key",
 			Extractor:     common.PathARNExtractor,
 		}
+
+		r.UseAsync = true
+
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["id"].(string); ok {
+				conn["id"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 }
