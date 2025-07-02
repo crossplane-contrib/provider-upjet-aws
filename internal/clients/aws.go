@@ -11,7 +11,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
-	awsrequest "github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -269,9 +268,11 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 
 	// only used for retrieving the ServicePackages from the singleton provider instance
 	p := config.TerraformProvider.Meta()
-	tfAwsConnsClient, diags := tfAwsConnsCfg.GetClient(ctx, &xpprovider.AWSClient{
-		ServicePackages: p.(*xpprovider.AWSClient).ServicePackages,
-	})
+
+	xpac := &xpprovider.AWSClient{}
+	xpac.SetServicePackagesField(p.(*xpprovider.AWSClient).GetServicePackages())
+
+	tfAwsConnsClient, diags := tfAwsConnsCfg.GetClient(ctx, xpac)
 	if diags.HasError() {
 		return errors.Errorf("cannot construct TF AWS Client from TF AWS Config, %v", diags)
 	}
@@ -286,20 +287,22 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: tfAwsConnsClient})
 	ps.FrameworkProvider = fwProvider
 
-	// Register AWS SDK v1 call counter. Unlike AWS SDK v2, v1 doesn't
-	// store service ID (EC2, IAM, etc.) and operation name
-	// (DescribeVPCs, etc.) in request context. Therefore, it's not
-	// possible to implement this session handler's functionality with
-	// an http.RoundTripper. To learn how SDK v1 session handler phases
-	// map to SDK v2 middleware stack steps, see:
-	// https://aws.github.io/aws-sdk-go-v2/docs/migrating/#handler-phases
-	tfAwsConnsClient.Session().Handlers.Send.PushBack(func(r *awsrequest.Request) {
-		// In case of API errors (or no errors), r.Error is nil.
-		// In case of connection errors, r.Error is non-nil.
-		if r.Error == nil {
-			metrics.ExternalAPICalls.WithLabelValues(r.ClientInfo.ServiceID, r.Operation.Name).Inc()
-		}
-	})
+	/*
+		// Register AWS SDK v1 call counter. Unlike AWS SDK v2, v1 doesn't
+		// store service ID (EC2, IAM, etc.) and operation name
+		// (DescribeVPCs, etc.) in request context. Therefore, it's not
+		// possible to implement this session handler's functionality with
+		// an http.RoundTripper. To learn how SDK v1 session handler phases
+		// map to SDK v2 middleware stack steps, see:
+		// https://aws.github.io/aws-sdk-go-v2/docs/migrating/#handler-phases
+		tfAwsConnsClient.Session().Handlers.Send.PushBack(func(r *awsrequest.Request) {
+			// In case of API errors (or no errors), r.Error is nil.
+			// In case of connection errors, r.Error is non-nil.
+			if r.Error == nil {
+				metrics.ExternalAPICalls.WithLabelValues(r.ClientInfo.ServiceID, r.Operation.Name).Inc()
+			}
+		})
+	*/
 
 	// Register AWS SDK v2 call counter
 	tfAwsConnsClient.AppendAPIOptions(withExternalAPICallCounter)
