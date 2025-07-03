@@ -119,11 +119,6 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
 
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	"aws_simpledb_domain": config.NameAsIdentifier,
-
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
 
