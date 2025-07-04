@@ -118,6 +118,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
+	// The S3 bucket lifecycle configuration resource should be imported using the bucket
+	"aws_s3_bucket_lifecycle_configuration": config.IdentifierFromProvider,
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
@@ -2168,8 +2170,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// S3 bucket inventory configurations can be imported using bucket:inventory
 	// $ terraform import aws_s3_bucket_inventory.my-bucket-entire-bucket my-bucket:EntireBucket
 	"aws_s3_bucket_inventory": FormattedIdentifierFromProvider(":", "bucket", "name"),
-	// The S3 bucket lifecycle configuration resource should be imported using the bucket
-	"aws_s3_bucket_lifecycle_configuration": config.IdentifierFromProvider,
 	// The S3 bucket logging resource should be imported using the bucket
 	"aws_s3_bucket_logging": config.IdentifierFromProvider,
 	// S3 bucket metric configurations can be imported using bucket:metric
