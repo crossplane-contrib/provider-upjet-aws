@@ -58,6 +58,7 @@ type KeyPairParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

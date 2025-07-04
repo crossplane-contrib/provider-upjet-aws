@@ -662,6 +662,7 @@ type JobDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	PropagateTags *bool `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

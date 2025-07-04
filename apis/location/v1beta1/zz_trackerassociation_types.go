@@ -68,6 +68,7 @@ type TrackerAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConsumerArnSelector *v1.Selector `json:"consumerArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

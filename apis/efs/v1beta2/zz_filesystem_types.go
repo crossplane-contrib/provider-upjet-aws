@@ -172,6 +172,7 @@ type FileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	ProvisionedThroughputInMibps *float64 `json:"provisionedThroughputInMibps,omitempty" tf:"provisioned_throughput_in_mibps,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

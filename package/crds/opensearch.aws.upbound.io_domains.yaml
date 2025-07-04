@@ -2429,6 +2429,31 @@ spec:
                           standby AZ. For more information, see Configuring a multi-AZ
                           domain in Amazon OpenSearch Service.
                         type: boolean
+                      nodeOptions:
+                        description: List of node options for the domain.
+                        items:
+                          properties:
+                            nodeConfig:
+                              description: Container to specify sizing of a node type.
+                              properties:
+                                count:
+                                  description: Number of nodes of a particular node
+                                    type in the cluster.
+                                  type: number
+                                enabled:
+                                  description: Whether a particular node type is enabled.
+                                  type: boolean
+                                type:
+                                  description: The instance type of a particular node
+                                    type in the cluster.
+                                  type: string
+                              type: object
+                            nodeType:
+                              description: 'Type of node this configuration describes.
+                                Valid values: coordinator.'
+                              type: string
+                          type: object
+                        type: array
                       warmCount:
                         description: Number of warm nodes in the cluster. Valid values
                           are between 2 and 150. warm_count can be only and must be
@@ -2764,8 +2789,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   snapshotOptions:
                     description: Configuration block for snapshot related options.
@@ -3132,6 +3158,31 @@ spec:
                           standby AZ. For more information, see Configuring a multi-AZ
                           domain in Amazon OpenSearch Service.
                         type: boolean
+                      nodeOptions:
+                        description: List of node options for the domain.
+                        items:
+                          properties:
+                            nodeConfig:
+                              description: Container to specify sizing of a node type.
+                              properties:
+                                count:
+                                  description: Number of nodes of a particular node
+                                    type in the cluster.
+                                  type: number
+                                enabled:
+                                  description: Whether a particular node type is enabled.
+                                  type: boolean
+                                type:
+                                  description: The instance type of a particular node
+                                    type in the cluster.
+                                  type: string
+                              type: object
+                            nodeType:
+                              description: 'Type of node this configuration describes.
+                                Valid values: coordinator.'
+                              type: string
+                          type: object
+                        type: array
                       warmCount:
                         description: Number of warm nodes in the cluster. Valid values
                           are between 2 and 150. warm_count can be only and must be
@@ -3979,6 +4030,31 @@ spec:
                           standby AZ. For more information, see Configuring a multi-AZ
                           domain in Amazon OpenSearch Service.
                         type: boolean
+                      nodeOptions:
+                        description: List of node options for the domain.
+                        items:
+                          properties:
+                            nodeConfig:
+                              description: Container to specify sizing of a node type.
+                              properties:
+                                count:
+                                  description: Number of nodes of a particular node
+                                    type in the cluster.
+                                  type: number
+                                enabled:
+                                  description: Whether a particular node type is enabled.
+                                  type: boolean
+                                type:
+                                  description: The instance type of a particular node
+                                    type in the cluster.
+                                  type: string
+                              type: object
+                            nodeType:
+                              description: 'Type of node this configuration describes.
+                                Valid values: coordinator.'
+                              type: string
+                          type: object
+                        type: array
                       warmCount:
                         description: Number of warm nodes in the cluster. Valid values
                           are between 2 and 150. warm_count can be only and must be
@@ -4131,10 +4207,6 @@ spec:
                   ipAddressType:
                     description: The IP address type for the endpoint. Valid values
                       are ipv4 and dualstack.
-                    type: string
-                  kibanaEndpoint:
-                    description: (Deprecated) Domain-specific endpoint for kibana
-                      without https scheme. Use the dashboard_endpoint attribute instead.
                     type: string
                   logPublishingOptions:
                     description: Configuration block for publishing slow and application

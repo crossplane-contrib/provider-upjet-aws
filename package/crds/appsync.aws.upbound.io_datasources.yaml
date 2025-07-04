@@ -1520,7 +1520,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      AWS Region for RDS HTTP endpoint. Defaults to current region.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   relationalDatabaseConfig:

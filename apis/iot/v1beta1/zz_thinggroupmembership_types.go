@@ -46,6 +46,7 @@ type ThingGroupMembershipParameters struct {
 	// +kubebuilder:validation:Optional
 	OverrideDynamicGroup *bool `json:"overrideDynamicGroup,omitempty" tf:"override_dynamic_group,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

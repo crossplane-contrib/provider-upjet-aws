@@ -89,6 +89,7 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	PosixUser *PosixUserParameters `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

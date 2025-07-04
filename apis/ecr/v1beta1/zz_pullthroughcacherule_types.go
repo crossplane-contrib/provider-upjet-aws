@@ -18,11 +18,27 @@ type PullThroughCacheRuleInitParameters struct {
 	// ARN of the Secret which will be used to authenticate against the registry.
 	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
 
-	// The repository name prefix to use when caching images from the source registry.
+	// The ARN of the IAM role associated with the pull through cache rule. Must be specified if the upstream registry is a cross-account ECR private registry. See AWS Document - Setting up permissions for cross-account ECR to ECR PTC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	CustomRoleArn *string `json:"customRoleArn,omitempty" tf:"custom_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate customRoleArn.
+	// +kubebuilder:validation:Optional
+	CustomRoleArnRef *v1.Reference `json:"customRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate customRoleArn.
+	// +kubebuilder:validation:Optional
+	CustomRoleArnSelector *v1.Selector `json:"customRoleArnSelector,omitempty" tf:"-"`
+
+	// The repository name prefix to use when caching images from the source registry. Use ROOT as the prefix to apply a template to all repositories in your registry that don't have an associated pull through cache rule.
 	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
 
-	// The registry URL of the upstream public registry to use as the source.
+	// The registry URL of the upstream registry to use as the source.
 	UpstreamRegistryURL *string `json:"upstreamRegistryUrl,omitempty" tf:"upstream_registry_url,omitempty"`
+
+	// The upstream repository prefix associated with the pull through cache rule. Used if the upstream registry is an ECR private registry. If not specified, it's set to ROOT, which allows matching with any upstream repository. See AWS Document - Customizing repository prefixes for ECR to ECR pull through cache.
+	UpstreamRepositoryPrefix *string `json:"upstreamRepositoryPrefix,omitempty" tf:"upstream_repository_prefix,omitempty"`
 }
 
 type PullThroughCacheRuleObservation struct {
@@ -30,7 +46,10 @@ type PullThroughCacheRuleObservation struct {
 	// ARN of the Secret which will be used to authenticate against the registry.
 	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
 
-	// The repository name prefix to use when caching images from the source registry.
+	// The ARN of the IAM role associated with the pull through cache rule. Must be specified if the upstream registry is a cross-account ECR private registry. See AWS Document - Setting up permissions for cross-account ECR to ECR PTC.
+	CustomRoleArn *string `json:"customRoleArn,omitempty" tf:"custom_role_arn,omitempty"`
+
+	// The repository name prefix to use when caching images from the source registry. Use ROOT as the prefix to apply a template to all repositories in your registry that don't have an associated pull through cache rule.
 	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -38,8 +57,11 @@ type PullThroughCacheRuleObservation struct {
 	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
-	// The registry URL of the upstream public registry to use as the source.
+	// The registry URL of the upstream registry to use as the source.
 	UpstreamRegistryURL *string `json:"upstreamRegistryUrl,omitempty" tf:"upstream_registry_url,omitempty"`
+
+	// The upstream repository prefix associated with the pull through cache rule. Used if the upstream registry is an ECR private registry. If not specified, it's set to ROOT, which allows matching with any upstream repository. See AWS Document - Customizing repository prefixes for ECR to ECR pull through cache.
+	UpstreamRepositoryPrefix *string `json:"upstreamRepositoryPrefix,omitempty" tf:"upstream_repository_prefix,omitempty"`
 }
 
 type PullThroughCacheRuleParameters struct {
@@ -48,18 +70,37 @@ type PullThroughCacheRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
 
-	// The repository name prefix to use when caching images from the source registry.
+	// The ARN of the IAM role associated with the pull through cache rule. Must be specified if the upstream registry is a cross-account ECR private registry. See AWS Document - Setting up permissions for cross-account ECR to ECR PTC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	CustomRoleArn *string `json:"customRoleArn,omitempty" tf:"custom_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate customRoleArn.
+	// +kubebuilder:validation:Optional
+	CustomRoleArnRef *v1.Reference `json:"customRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate customRoleArn.
+	// +kubebuilder:validation:Optional
+	CustomRoleArnSelector *v1.Selector `json:"customRoleArnSelector,omitempty" tf:"-"`
+
+	// The repository name prefix to use when caching images from the source registry. Use ROOT as the prefix to apply a template to all repositories in your registry that don't have an associated pull through cache rule.
 	// +kubebuilder:validation:Optional
 	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The registry URL of the upstream public registry to use as the source.
+	// The registry URL of the upstream registry to use as the source.
 	// +kubebuilder:validation:Optional
 	UpstreamRegistryURL *string `json:"upstreamRegistryUrl,omitempty" tf:"upstream_registry_url,omitempty"`
+
+	// The upstream repository prefix associated with the pull through cache rule. Used if the upstream registry is an ECR private registry. If not specified, it's set to ROOT, which allows matching with any upstream repository. See AWS Document - Customizing repository prefixes for ECR to ECR pull through cache.
+	// +kubebuilder:validation:Optional
+	UpstreamRepositoryPrefix *string `json:"upstreamRepositoryPrefix,omitempty" tf:"upstream_repository_prefix,omitempty"`
 }
 
 // PullThroughCacheRuleSpec defines the desired state of PullThroughCacheRule

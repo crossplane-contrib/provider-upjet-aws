@@ -175,8 +175,9 @@ spec:
                     description: The name for the virtual interface.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routeFilterPrefixes:
                     description: A list of routes to be advertised to the AWS network

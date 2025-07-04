@@ -15,78 +15,82 @@ import (
 
 type UserInitParameters struct {
 
-	// The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	// ID for the AWS account that the user is in. Use the ID for the AWS account that contains your Amazon QuickSight account.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
-	// The email address of the user that you want to register.
+	// Email address of the user that you want to register.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
+	// ARN of the IAM user or role that you are registering with Amazon QuickSight. Required only for users with an identity type of IAM.
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
-	// Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts either  IAM or QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
+	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// The Amazon Quicksight namespace to create the user in. Defaults to default.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
+	// Name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
 	SessionName *string `json:"sessionName,omitempty" tf:"session_name,omitempty"`
 
-	// The Amazon QuickSight user name that you want to create for the user you are registering. Only valid for registering a user with identity_type set to QUICKSIGHT.
+	// Amazon QuickSight user name that you want to create for the user you are registering. Required only for users with an identity type of QUICKSIGHT.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO or ADMIN_PRO.
+	// Amazon QuickSight role for the user. Value values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
 type UserObservation struct {
 
-	// Amazon Resource Name (ARN) of the user
+	// Amazon Resource Name (ARN) for the user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	// ID for the AWS account that the user is in. Use the ID for the AWS account that contains your Amazon QuickSight account.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
-	// The email address of the user that you want to register.
+	// Email address of the user that you want to register.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
+	// ARN of the IAM user or role that you are registering with Amazon QuickSight. Required only for users with an identity type of IAM.
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
+	// Unique identifier consisting of the account ID, the namespace, and the user name separated by /s.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts either  IAM or QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
+	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// The Amazon Quicksight namespace to create the user in. Defaults to default.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
+	// Name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
 	SessionName *string `json:"sessionName,omitempty" tf:"session_name,omitempty"`
 
-	// The Amazon QuickSight user name that you want to create for the user you are registering. Only valid for registering a user with identity_type set to QUICKSIGHT.
+	// URL the user visits to complete registration and provide a password. Returned only for users with an identity type of QUICKSIGHT.
+	UserInvitationURL *string `json:"userInvitationUrl,omitempty" tf:"user_invitation_url,omitempty"`
+
+	// Amazon QuickSight user name that you want to create for the user you are registering. Required only for users with an identity type of QUICKSIGHT.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO or ADMIN_PRO.
+	// Amazon QuickSight role for the user. Value values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
 type UserParameters struct {
 
-	// The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	// ID for the AWS account that the user is in. Use the ID for the AWS account that contains your Amazon QuickSight account.
 	// +kubebuilder:validation:Optional
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
-	// The email address of the user that you want to register.
+	// Email address of the user that you want to register.
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
+	// ARN of the IAM user or role that you are registering with Amazon QuickSight. Required only for users with an identity type of IAM.
 	// +kubebuilder:validation:Optional
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
-	// Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts either  IAM or QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
+	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.
 	// +kubebuilder:validation:Optional
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
@@ -94,20 +98,21 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
+	// Name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
 	// +kubebuilder:validation:Optional
 	SessionName *string `json:"sessionName,omitempty" tf:"session_name,omitempty"`
 
-	// The Amazon QuickSight user name that you want to create for the user you are registering. Only valid for registering a user with identity_type set to QUICKSIGHT.
+	// Amazon QuickSight user name that you want to create for the user you are registering. Required only for users with an identity type of QUICKSIGHT.
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO or ADMIN_PRO.
+	// Amazon QuickSight role for the user. Value values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.
 	// +kubebuilder:validation:Optional
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }

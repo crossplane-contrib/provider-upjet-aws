@@ -79,10 +79,20 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Set to true to allow Amazon DocumentDB to manage the master user password in AWS Secrets Manager. Cannot be set if master_password or master_password_wo is provided.
+	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
+
 	// Password for the master DB user. Note that this may
-	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
+	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo and manage_master_user_password.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may
+	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password.
+	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -154,7 +164,7 @@ type ClusterObservation struct {
 	// The days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
-	// – List of DocumentDB Instances that are a part of this cluster
+	// List of DocumentDB Instances that are a part of this cluster
 	// +listType=set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
@@ -194,11 +204,23 @@ type ClusterObservation struct {
 	// The Route53 Hosted Zone ID of the endpoint
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// The DocumentDB Cluster Identifier
+	// (Deprecated) Amazon Resource Name (ARN) of cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Set to true to allow Amazon DocumentDB to manage the master user password in AWS Secrets Manager. Cannot be set if master_password or master_password_wo is provided.
+	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
+
+	// Password for the master DB user. Note that this may
+	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password.
+	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
+
+	MasterUserSecret []MasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -329,11 +351,24 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Set to true to allow Amazon DocumentDB to manage the master user password in AWS Secrets Manager. Cannot be set if master_password or master_password_wo is provided.
+	// +kubebuilder:validation:Optional
+	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
+
 	// Password for the master DB user. Note that this may
-	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
+	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo and manage_master_user_password.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may
+	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	// +kubebuilder:validation:Optional
@@ -352,6 +387,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -398,6 +434,23 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+}
+
+type MasterUserSecretInitParameters struct {
+}
+
+type MasterUserSecretObservation struct {
+
+	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Amazon Resource Name (ARN) of cluster
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
+}
+
+type MasterUserSecretParameters struct {
 }
 
 type RestoreToPointInTimeInitParameters struct {

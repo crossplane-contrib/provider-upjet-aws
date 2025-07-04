@@ -186,6 +186,7 @@ type PoolParameters struct {
 	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

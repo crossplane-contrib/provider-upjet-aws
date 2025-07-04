@@ -15,19 +15,19 @@ import (
 
 type SigningCertificateInitParameters struct {
 
-	// encoded format.
+	// The contents of the signing certificate in PEM-encoded format.
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
-	// –   The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
+	// The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// –  The name of the user the signing certificate is for.
+	// The name of the user the signing certificate is for.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type SigningCertificateObservation struct {
 
-	// encoded format.
+	// The contents of the signing certificate in PEM-encoded format.
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
 	// The ID for the signing certificate.
@@ -36,24 +36,24 @@ type SigningCertificateObservation struct {
 	// The certificate_id:user_name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –   The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
+	// The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// –  The name of the user the signing certificate is for.
+	// The name of the user the signing certificate is for.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type SigningCertificateParameters struct {
 
-	// encoded format.
+	// The contents of the signing certificate in PEM-encoded format.
 	// +kubebuilder:validation:Optional
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
-	// –   The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
+	// The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// –  The name of the user the signing certificate is for.
+	// The name of the user the signing certificate is for.
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }

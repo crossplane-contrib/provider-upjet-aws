@@ -2544,7 +2544,7 @@ spec:
                     type: boolean
                   function:
                     description: The ARN for a lambda function to use for the Identity
-                      provider.
+                      provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
                   hostKeySecretRef:
                     description: RSA, ECDSA, or ED25519 private key (e.g., as generated
@@ -2741,8 +2741,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   s3StorageOptions:
                     description: Specifies whether or not performance for your Amazon
@@ -2761,9 +2762,10 @@ spec:
                       The available values are:'
                     type: string
                   sftpAuthenticationMethods:
-                    description: 'For SFTP-enabled servers, and for custom identity
-                      providers only. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD
-                      and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.'
+                    description: 'For SFTP-enabled servers with an identity_provider_type
+                      of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY,
+                      PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default
+                      value is: PUBLIC_KEY_OR_PASSWORD.'
                     type: string
                   structuredLogDestinations:
                     description: |-
@@ -3283,7 +3285,7 @@ spec:
                     type: boolean
                   function:
                     description: The ARN for a lambda function to use for the Identity
-                      provider.
+                      provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
                   hostKeySecretRef:
                     description: RSA, ECDSA, or ED25519 private key (e.g., as generated
@@ -3496,9 +3498,10 @@ spec:
                       The available values are:'
                     type: string
                   sftpAuthenticationMethods:
-                    description: 'For SFTP-enabled servers, and for custom identity
-                      providers only. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD
-                      and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.'
+                    description: 'For SFTP-enabled servers with an identity_provider_type
+                      of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY,
+                      PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default
+                      value is: PUBLIC_KEY_OR_PASSWORD.'
                     type: string
                   structuredLogDestinations:
                     description: |-
@@ -3803,7 +3806,7 @@ spec:
                     type: boolean
                   function:
                     description: The ARN for a lambda function to use for the Identity
-                      provider.
+                      provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
                   hostKeyFingerprint:
                     description: This value contains the message-digest algorithm
@@ -3893,9 +3896,10 @@ spec:
                       The available values are:'
                     type: string
                   sftpAuthenticationMethods:
-                    description: 'For SFTP-enabled servers, and for custom identity
-                      providers only. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD
-                      and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.'
+                    description: 'For SFTP-enabled servers with an identity_provider_type
+                      of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY,
+                      PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default
+                      value is: PUBLIC_KEY_OR_PASSWORD.'
                     type: string
                   structuredLogDestinations:
                     description: |-

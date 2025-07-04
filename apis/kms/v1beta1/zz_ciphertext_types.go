@@ -74,6 +74,7 @@ type CiphertextParameters struct {
 	// +kubebuilder:validation:Optional
 	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -1494,7 +1494,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Model is the Schema for the Models API. Provides a SageMaker
-          model resource.
+          AI model resource.
         properties:
           apiVersion:
             description: |-
@@ -1598,7 +1598,7 @@ spec:
                           description: The location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
-                            models in the AWS SageMaker Developer Guide.
+                            models in the AWS SageMaker AI Developer Guide.
                           properties:
                             s3DataSource:
                               description: The S3 location of model data to deploy.
@@ -1669,7 +1669,7 @@ spec:
                       network calls can be made to or from the model container.
                     type: boolean
                   executionRoleArn:
-                    description: A role that SageMaker can assume to access model
+                    description: A role that SageMaker AI can assume to access model
                       artifacts and docker images for deployment.
                     type: string
                   executionRoleArnRef:
@@ -1821,7 +1821,7 @@ spec:
                         description: The location of model data to deploy. Use this
                           for uncompressed model deployment. For information about
                           how to deploy an uncompressed model, see Deploying uncompressed
-                          models in the AWS SageMaker Developer Guide.
+                          models in the AWS SageMaker AI Developer Guide.
                         properties:
                           s3DataSource:
                             description: The S3 location of model data to deploy.
@@ -1886,8 +1886,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -1992,7 +1993,7 @@ spec:
                           description: The location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
-                            models in the AWS SageMaker Developer Guide.
+                            models in the AWS SageMaker AI Developer Guide.
                           properties:
                             s3DataSource:
                               description: The S3 location of model data to deploy.
@@ -2063,7 +2064,7 @@ spec:
                       network calls can be made to or from the model container.
                     type: boolean
                   executionRoleArn:
-                    description: A role that SageMaker can assume to access model
+                    description: A role that SageMaker AI can assume to access model
                       artifacts and docker images for deployment.
                     type: string
                   executionRoleArnRef:
@@ -2215,7 +2216,7 @@ spec:
                         description: The location of model data to deploy. Use this
                           for uncompressed model deployment. For information about
                           how to deploy an uncompressed model, see Deploying uncompressed
-                          models in the AWS SageMaker Developer Guide.
+                          models in the AWS SageMaker AI Developer Guide.
                         properties:
                           s3DataSource:
                             description: The S3 location of model data to deploy.
@@ -2543,7 +2544,7 @@ spec:
                           description: The location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
-                            models in the AWS SageMaker Developer Guide.
+                            models in the AWS SageMaker AI Developer Guide.
                           properties:
                             s3DataSource:
                               description: The S3 location of model data to deploy.
@@ -2614,7 +2615,7 @@ spec:
                       network calls can be made to or from the model container.
                     type: boolean
                   executionRoleArn:
-                    description: A role that SageMaker can assume to access model
+                    description: A role that SageMaker AI can assume to access model
                       artifacts and docker images for deployment.
                     type: string
                   id:
@@ -2694,7 +2695,7 @@ spec:
                         description: The location of model data to deploy. Use this
                           for uncompressed model deployment. For information about
                           how to deploy an uncompressed model, see Deploying uncompressed
-                          models in the AWS SageMaker Developer Guide.
+                          models in the AWS SageMaker AI Developer Guide.
                         properties:
                           s3DataSource:
                             description: The S3 location of model data to deploy.

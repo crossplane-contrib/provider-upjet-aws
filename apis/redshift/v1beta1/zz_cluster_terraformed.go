@@ -21,7 +21,7 @@ func (mg *Cluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Cluster
 func (tr *Cluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"master_password": "masterPasswordSecretRef"}
+	return map[string]string{"master_password": "masterPasswordSecretRef", "master_password_wo": "masterPasswordWoSecretRef"}
 }
 
 // GetObservation of this Cluster

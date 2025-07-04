@@ -57,6 +57,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDefaultStandards *bool `json:"enableDefaultStandards,omitempty" tf:"enable_default_standards,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

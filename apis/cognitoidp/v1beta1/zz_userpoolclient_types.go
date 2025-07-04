@@ -112,6 +112,35 @@ type AnalyticsConfigurationParameters struct {
 	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
 }
 
+type RefreshTokenRotationInitParameters struct {
+
+	// The state of refresh token rotation for the current app client. Valid values are ENABLED or DISABLED.
+	Feature *string `json:"feature,omitempty" tf:"feature,omitempty"`
+
+	// A period of time in seconds that the user has to use the old refresh token before it is invalidated. Valid values are between 0 and 60.
+	RetryGracePeriodSeconds *float64 `json:"retryGracePeriodSeconds,omitempty" tf:"retry_grace_period_seconds,omitempty"`
+}
+
+type RefreshTokenRotationObservation struct {
+
+	// The state of refresh token rotation for the current app client. Valid values are ENABLED or DISABLED.
+	Feature *string `json:"feature,omitempty" tf:"feature,omitempty"`
+
+	// A period of time in seconds that the user has to use the old refresh token before it is invalidated. Valid values are between 0 and 60.
+	RetryGracePeriodSeconds *float64 `json:"retryGracePeriodSeconds,omitempty" tf:"retry_grace_period_seconds,omitempty"`
+}
+
+type RefreshTokenRotationParameters struct {
+
+	// The state of refresh token rotation for the current app client. Valid values are ENABLED or DISABLED.
+	// +kubebuilder:validation:Optional
+	Feature *string `json:"feature" tf:"feature,omitempty"`
+
+	// A period of time in seconds that the user has to use the old refresh token before it is invalidated. Valid values are between 0 and 60.
+	// +kubebuilder:validation:Optional
+	RetryGracePeriodSeconds *float64 `json:"retryGracePeriodSeconds,omitempty" tf:"retry_grace_period_seconds,omitempty"`
+}
+
 type TokenValidityUnitsInitParameters struct {
 
 	// Time unit in for the value in access_token_validity, defaults to hours.
@@ -186,7 +215,7 @@ type UserPoolClientInitParameters struct {
 	// Enables or disables token revocation.
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
-	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
+	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, and ALLOW_USER_AUTH.
 	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
@@ -209,6 +238,9 @@ type UserPoolClientInitParameters struct {
 	// List of user pool attributes that the application client can read from.
 	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
+
+	// A block that specifies the configuration of refresh token rotation. Detailed below.
+	RefreshTokenRotation []RefreshTokenRotationInitParameters `json:"refreshTokenRotation,omitempty" tf:"refresh_token_rotation,omitempty"`
 
 	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used. By default, the unit is days. The unit can be overridden by a value in token_validity_units.refresh_token.
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
@@ -272,7 +304,7 @@ type UserPoolClientObservation struct {
 	// Enables or disables token revocation.
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
-	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
+	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, and ALLOW_USER_AUTH.
 	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
@@ -298,6 +330,9 @@ type UserPoolClientObservation struct {
 	// List of user pool attributes that the application client can read from.
 	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
+
+	// A block that specifies the configuration of refresh token rotation. Detailed below.
+	RefreshTokenRotation []RefreshTokenRotationObservation `json:"refreshTokenRotation,omitempty" tf:"refresh_token_rotation,omitempty"`
 
 	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used. By default, the unit is days. The unit can be overridden by a value in token_validity_units.refresh_token.
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
@@ -362,7 +397,7 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
-	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
+	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, and ALLOW_USER_AUTH.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
@@ -393,10 +428,15 @@ type UserPoolClientParameters struct {
 	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
+	// A block that specifies the configuration of refresh token rotation. Detailed below.
+	// +kubebuilder:validation:Optional
+	RefreshTokenRotation []RefreshTokenRotationParameters `json:"refreshTokenRotation,omitempty" tf:"refresh_token_rotation,omitempty"`
+
 	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used. By default, the unit is days. The unit can be overridden by a value in token_validity_units.refresh_token.
 	// +kubebuilder:validation:Optional
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

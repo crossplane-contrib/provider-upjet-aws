@@ -96,6 +96,7 @@ type RecordingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

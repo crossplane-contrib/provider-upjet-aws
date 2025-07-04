@@ -15,15 +15,15 @@ import (
 
 type AddonInitParameters struct {
 
-	// on. The name must match one of
+	// Name of the EKS add-on. The name must match one of
 	// the names returned by describe-addon-versions.
 	AddonName *string `json:"addonName,omitempty" tf:"addon_name,omitempty"`
 
-	// on. The version must
+	// The version of the EKS add-on. The version must
 	// match one of the versions returned by describe-addon-versions.
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -44,13 +44,10 @@ type AddonInitParameters struct {
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
-	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
-	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
-
-	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Documentation.
 	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
 
-	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Documentation.
 	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
@@ -78,18 +75,18 @@ type AddonInitParameters struct {
 
 type AddonObservation struct {
 
-	// on. The name must match one of
+	// Name of the EKS add-on. The name must match one of
 	// the names returned by describe-addon-versions.
 	AddonName *string `json:"addonName,omitempty" tf:"addon_name,omitempty"`
 
-	// on. The version must
+	// The version of the EKS add-on. The version must
 	// match one of the versions returned by describe-addon-versions.
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
 	// Amazon Resource Name (ARN) of the EKS add-on.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
@@ -110,13 +107,10 @@ type AddonObservation struct {
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
-	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
-	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
-
-	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Documentation.
 	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
 
-	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Documentation.
 	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
@@ -138,17 +132,17 @@ type AddonObservation struct {
 
 type AddonParameters struct {
 
-	// on. The name must match one of
+	// Name of the EKS add-on. The name must match one of
 	// the names returned by describe-addon-versions.
 	// +kubebuilder:validation:Optional
 	AddonName *string `json:"addonName,omitempty" tf:"addon_name,omitempty"`
 
-	// on. The version must
+	// The version of the EKS add-on. The version must
 	// match one of the versions returned by describe-addon-versions.
 	// +kubebuilder:validation:Optional
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -173,20 +167,17 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
-	// +kubebuilder:validation:Optional
-	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
-
-	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Documentation.
 	// +kubebuilder:validation:Optional
 	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
 
-	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Documentation.
 	// +kubebuilder:validation:Optional
 	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 

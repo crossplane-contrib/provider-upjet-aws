@@ -15,7 +15,7 @@ import (
 
 type CustomerGatewayAssociationInitParameters struct {
 
-	// The ID of the device.
+	// ID of the device.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
@@ -28,30 +28,30 @@ type CustomerGatewayAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link.
+	// ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 }
 
 type CustomerGatewayAssociationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the customer gateway.
+	// ARN of the customer gateway.
 	CustomerGatewayArn *string `json:"customerGatewayArn,omitempty" tf:"customer_gateway_arn,omitempty"`
 
-	// The ID of the device.
+	// ID of the device.
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the link.
+	// ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 }
 
 type CustomerGatewayAssociationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the customer gateway.
+	// ARN of the customer gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.CustomerGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -65,7 +65,7 @@ type CustomerGatewayAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerGatewayArnSelector *v1.Selector `json:"customerGatewayArnSelector,omitempty" tf:"-"`
 
-	// The ID of the device.
+	// ID of the device.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type CustomerGatewayAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -93,7 +93,7 @@ type CustomerGatewayAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link.
+	// ID of the link.
 	// +kubebuilder:validation:Optional
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 
@@ -130,7 +130,7 @@ type CustomerGatewayAssociationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// CustomerGatewayAssociation is the Schema for the CustomerGatewayAssociations API. Associates a customer gateway with a device and optionally, with a link.
+// CustomerGatewayAssociation is the Schema for the CustomerGatewayAssociations API. Manages a Network Manager Customer Gateway Association.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

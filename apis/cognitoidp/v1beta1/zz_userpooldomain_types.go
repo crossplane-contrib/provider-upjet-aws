@@ -31,6 +31,9 @@ type UserPoolDomainInitParameters struct {
 	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// A version number that indicates the state of managed login for your domain. Valid values: 1 for hosted UI (classic), 2 for the newer managed login with the branding designer.
+	ManagedLoginVersion *float64 `json:"managedLoginVersion,omitempty" tf:"managed_login_version,omitempty"`
+
 	// The user pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
@@ -66,6 +69,9 @@ type UserPoolDomainObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A version number that indicates the state of managed login for your domain. Valid values: 1 for hosted UI (classic), 2 for the newer managed login with the branding designer.
+	ManagedLoginVersion *float64 `json:"managedLoginVersion,omitempty" tf:"managed_login_version,omitempty"`
+
 	// The S3 bucket where the static files for this domain are stored.
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
@@ -96,6 +102,11 @@ type UserPoolDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// A version number that indicates the state of managed login for your domain. Valid values: 1 for hosted UI (classic), 2 for the newer managed login with the branding designer.
+	// +kubebuilder:validation:Optional
+	ManagedLoginVersion *float64 `json:"managedLoginVersion,omitempty" tf:"managed_login_version,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

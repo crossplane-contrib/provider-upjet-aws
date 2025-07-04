@@ -1895,7 +1895,8 @@ spec:
                     type: object
                   authTokenUpdateStrategy:
                     description: Strategy to use when updating the auth_token. Valid
-                      values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+                      values are SET, ROTATE, and DELETE. Required if auth_token is
+                      set.
                     type: string
                   autoGenerateAuthToken:
                     description: |-
@@ -1925,8 +1926,8 @@ spec:
                       must be set to true when using r6gd nodes.
                     type: boolean
                   description:
-                    description: created description for the replication group. Must
-                      not be empty.
+                    description: User-created description for the replication group.
+                      Must not be empty.
                     type: string
                   engine:
                     description: |-
@@ -2140,8 +2141,10 @@ spec:
                       type: object
                     type: array
                   maintenanceWindow:
-                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-                      window is a 60 minute period. Example: sun:05:00-sun:09:00'
+                    description: 'Specifies the weekly time range for when maintenance
+                      on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi
+                      (24H Clock UTC). The minimum maintenance window is a 60 minute
+                      period. Example: sun:05:00-sun:09:00'
                     type: string
                   multiAzEnabled:
                     description: |-
@@ -2161,7 +2164,8 @@ spec:
                       Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
-                    description: east-1:012345678999:my_sns_topic
+                    description: 'ARN of an SNS topic to send ElastiCache notifications
+                      to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic'
                     type: string
                   numCacheClusters:
                     description: 00#.
@@ -2180,7 +2184,7 @@ spec:
                       has the parameter cluster-enabled set to true.
                     type: string
                   port:
-                    description: –  Port number on which each of the cache nodes will
+                    description: Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
                     type: number
@@ -2193,8 +2197,9 @@ spec:
                       type: string
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicasPerNodeGroup:
                     description: |-
@@ -2301,9 +2306,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   snapshotArns:
-                    description: –  List of ARNs that identify Redis RDB snapshot
-                      files stored in Amazon S3. The names object names cannot contain
-                      any commas.
+                    description: List of ARNs that identify Redis RDB snapshot files
+                      stored in Amazon S3. The names object names cannot contain any
+                      commas.
                     items:
                       type: string
                     type: array
@@ -2484,7 +2489,8 @@ spec:
                     type: object
                   authTokenUpdateStrategy:
                     description: Strategy to use when updating the auth_token. Valid
-                      values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+                      values are SET, ROTATE, and DELETE. Required if auth_token is
+                      set.
                     type: string
                   autoMinorVersionUpgrade:
                     description: |-
@@ -2509,8 +2515,8 @@ spec:
                       must be set to true when using r6gd nodes.
                     type: boolean
                   description:
-                    description: created description for the replication group. Must
-                      not be empty.
+                    description: User-created description for the replication group.
+                      Must not be empty.
                     type: string
                   engine:
                     description: |-
@@ -2724,8 +2730,10 @@ spec:
                       type: object
                     type: array
                   maintenanceWindow:
-                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-                      window is a 60 minute period. Example: sun:05:00-sun:09:00'
+                    description: 'Specifies the weekly time range for when maintenance
+                      on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi
+                      (24H Clock UTC). The minimum maintenance window is a 60 minute
+                      period. Example: sun:05:00-sun:09:00'
                     type: string
                   multiAzEnabled:
                     description: |-
@@ -2745,7 +2753,8 @@ spec:
                       Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
-                    description: east-1:012345678999:my_sns_topic
+                    description: 'ARN of an SNS topic to send ElastiCache notifications
+                      to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic'
                     type: string
                   numCacheClusters:
                     description: 00#.
@@ -2764,7 +2773,7 @@ spec:
                       has the parameter cluster-enabled set to true.
                     type: string
                   port:
-                    description: –  Port number on which each of the cache nodes will
+                    description: Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
                     type: number
@@ -2881,9 +2890,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   snapshotArns:
-                    description: –  List of ARNs that identify Redis RDB snapshot
-                      files stored in Amazon S3. The names object names cannot contain
-                      any commas.
+                    description: List of ARNs that identify Redis RDB snapshot files
+                      stored in Amazon S3. The names object names cannot contain any
+                      commas.
                     items:
                       type: string
                     type: array
@@ -3210,7 +3219,8 @@ spec:
                     type: string
                   authTokenUpdateStrategy:
                     description: Strategy to use when updating the auth_token. Valid
-                      values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+                      values are SET, ROTATE, and DELETE. Required if auth_token is
+                      set.
                     type: string
                   autoMinorVersionUpgrade:
                     description: |-
@@ -3242,8 +3252,8 @@ spec:
                       must be set to true when using r6gd nodes.
                     type: boolean
                   description:
-                    description: created description for the replication group. Must
-                      not be empty.
+                    description: User-created description for the replication group.
+                      Must not be empty.
                     type: string
                   engine:
                     description: |-
@@ -3315,8 +3325,10 @@ spec:
                       type: object
                     type: array
                   maintenanceWindow:
-                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-                      window is a 60 minute period. Example: sun:05:00-sun:09:00'
+                    description: 'Specifies the weekly time range for when maintenance
+                      on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi
+                      (24H Clock UTC). The minimum maintenance window is a 60 minute
+                      period. Example: sun:05:00-sun:09:00'
                     type: string
                   memberClusters:
                     description: Identifiers of all the nodes that are part of this
@@ -3343,7 +3355,8 @@ spec:
                       Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
-                    description: east-1:012345678999:my_sns_topic
+                    description: 'ARN of an SNS topic to send ElastiCache notifications
+                      to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic'
                     type: string
                   numCacheClusters:
                     description: 00#.
@@ -3362,7 +3375,7 @@ spec:
                       has the parameter cluster-enabled set to true.
                     type: string
                   port:
-                    description: –  Port number on which each of the cache nodes will
+                    description: Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
                     type: number
@@ -3409,9 +3422,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   snapshotArns:
-                    description: –  List of ARNs that identify Redis RDB snapshot
-                      files stored in Amazon S3. The names object names cannot contain
-                      any commas.
+                    description: List of ARNs that identify Redis RDB snapshot files
+                      stored in Amazon S3. The names object names cannot contain any
+                      commas.
                     items:
                       type: string
                     type: array

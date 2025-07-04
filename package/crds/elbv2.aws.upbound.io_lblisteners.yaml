@@ -2178,11 +2178,12 @@ spec:
                         description: Valid values are off and on.
                         type: string
                       ignoreClientCertificateExpiry:
-                        description: Whether client certificate expiry is ignored.
+                        description: |-
+                          Whether client certificate expiry is ignored.
                           Default is false.
                         type: boolean
                       mode:
-                        description: Valid values are off, verify and passthrough.
+                        description: Valid values are off, passthrough, and verify.
                         type: string
                       trustStoreArn:
                         description: ARN of the elbv2 Trust Store.
@@ -2201,8 +2202,136 @@ spec:
                       Gateway Load Balancers.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertIssuerHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Issuer
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertLeafHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Leaf
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertSerialNumberHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Serial-Number
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertSubjectHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Subject
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertValidityHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Validity
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznTlsCipherSuiteHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Tls-Cipher-Suite
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznTlsVersionHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Tls-Version
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpResponseAccessControlAllowCredentialsHeaderValue:
+                    description: Specifies which headers the browser can expose to
+                      the requesting client. Can only be set if protocol is HTTP or
+                      HTTPS for Application Load Balancers. Not supported for Network
+                      Load Balancer, or with a Gateway Load Balancer. The only valid
+                      value is true.
+                    type: string
+                  routingHttpResponseAccessControlAllowHeadersHeaderValue:
+                    description: Specifies which headers can be used during the request.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. Valid values are *, Accept, Accept-Language,
+                      Cache-Control, Content-Language, Content-Length, Content-Type,
+                      Expires, Last-Modified, Pragma. Dependent on your use-case other
+                      headers can be exposed and then set as a value consult the Access-Control-Allow-Headers
+                      documentation.
+                    type: string
+                  routingHttpResponseAccessControlAllowMethodsHeaderValue:
+                    description: Set which HTTP methods are allowed when accessing
+                      the server from a different origin. Can only be set if protocol
+                      is HTTP or HTTPS for Application Load Balancers. Not supported
+                      for Network Load Balancer, or with a Gateway Load Balancer.
+                      Valid values are GET, HEAD, POST, DELETE, CONNECT, OPTIONS,
+                      TRACE or PATCH.
+                    type: string
+                  routingHttpResponseAccessControlAllowOriginHeaderValue:
+                    description: 'Specifies which origins are allowed to access the
+                      server. Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. A valid value is a URI, eg: https://example.com.'
+                    type: string
+                  routingHttpResponseAccessControlExposeHeadersHeaderValue:
+                    description: Specifies whether the browser should include credentials
+                      such as cookies or authentication when making requests. Can
+                      only be set if protocol is HTTP or HTTPS for Application Load
+                      Balancers. Not supported for Network Load Balancer, or with
+                      a Gateway Load Balancer. Valid values are *, Cache-Control,
+                      Content-Language, Content-Length, Content-Type, Expires, Last-Modified,
+                      or Pragma. Dependent on your use-case other headers can be exposed,
+                      consult the Access-Control-Expose-Headers documentation.
+                    type: string
+                  routingHttpResponseAccessControlMaxAgeHeaderValue:
+                    description: Specifies how long the results of a preflight request
+                      can be cached, in seconds. Can only be set if protocol is HTTP
+                      or HTTPS for Application Load Balancers. Not supported for Network
+                      Load Balancer, or with a Gateway Load Balancer. Valid values
+                      are between 0 and 86400. This value is browser specific, consult
+                      the Access-Control-Max-Age documentation.
+                    type: string
+                  routingHttpResponseContentSecurityPolicyHeaderValue:
+                    description: Specifies restrictions enforced by the browser to
+                      help minimize the risk of certain types of security threats.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. Values for this are extensive,
+                      and can be impactful when set, consult Content-Security-Policy
+                      documentation.
+                    type: string
+                  routingHttpResponseServerEnabled:
+                    description: Enables you to allow or remove the HTTP response
+                      server header. Can only be set if protocol is HTTP or HTTPS
+                      for Application Load Balancers. Not supported for Network Load
+                      Balancer, or with a Gateway Load Balancer. Valid values are
+                      true or false.
+                    type: boolean
+                  routingHttpResponseStrictTransportSecurityHeaderValue:
+                    description: Informs browsers that the site should only be accessed
+                      using HTTPS, and that any future attempts to access it using
+                      HTTP should automatically be converted to HTTPS. Default values
+                      are max-age=31536000; includeSubDomains; preload consult the
+                      Strict-Transport-Security documentation for further details.
+                    type: string
+                  routingHttpResponseXContentTypeOptionsHeaderValue:
+                    description: Indicates whether the MIME types advertised in the
+                      Content-Type headers should be followed and not be changed.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. The only valid value is nosniff.
+                    type: string
+                  routingHttpResponseXFrameOptionsHeaderValue:
+                    description: Indicates whether the browser is allowed to render
+                      a page in a frame, iframe, embed or object. Can only be set
+                      if protocol is HTTP or HTTPS for Application Load Balancers.
+                      Not supported for Network Load Balancer, or with a Gateway Load
+                      Balancer. The only valid values are DENY, SAMEORIGIN, or ALLOW-FROM
+                      https://example.com.
                     type: string
                   sslPolicy:
                     description: Name of the SSL Policy for the listener. Required
@@ -2698,11 +2827,12 @@ spec:
                         description: Valid values are off and on.
                         type: string
                       ignoreClientCertificateExpiry:
-                        description: Whether client certificate expiry is ignored.
+                        description: |-
+                          Whether client certificate expiry is ignored.
                           Default is false.
                         type: boolean
                       mode:
-                        description: Valid values are off, verify and passthrough.
+                        description: Valid values are off, passthrough, and verify.
                         type: string
                       trustStoreArn:
                         description: ARN of the elbv2 Trust Store.
@@ -2719,6 +2849,133 @@ spec:
                       valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use
                       UDP or TCP_UDP if dual-stack mode is enabled. Not valid for
                       Gateway Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertIssuerHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Issuer
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertLeafHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Leaf
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertSerialNumberHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Serial-Number
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertSubjectHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Subject
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertValidityHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Validity
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznTlsCipherSuiteHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Tls-Cipher-Suite
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznTlsVersionHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Tls-Version
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpResponseAccessControlAllowCredentialsHeaderValue:
+                    description: Specifies which headers the browser can expose to
+                      the requesting client. Can only be set if protocol is HTTP or
+                      HTTPS for Application Load Balancers. Not supported for Network
+                      Load Balancer, or with a Gateway Load Balancer. The only valid
+                      value is true.
+                    type: string
+                  routingHttpResponseAccessControlAllowHeadersHeaderValue:
+                    description: Specifies which headers can be used during the request.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. Valid values are *, Accept, Accept-Language,
+                      Cache-Control, Content-Language, Content-Length, Content-Type,
+                      Expires, Last-Modified, Pragma. Dependent on your use-case other
+                      headers can be exposed and then set as a value consult the Access-Control-Allow-Headers
+                      documentation.
+                    type: string
+                  routingHttpResponseAccessControlAllowMethodsHeaderValue:
+                    description: Set which HTTP methods are allowed when accessing
+                      the server from a different origin. Can only be set if protocol
+                      is HTTP or HTTPS for Application Load Balancers. Not supported
+                      for Network Load Balancer, or with a Gateway Load Balancer.
+                      Valid values are GET, HEAD, POST, DELETE, CONNECT, OPTIONS,
+                      TRACE or PATCH.
+                    type: string
+                  routingHttpResponseAccessControlAllowOriginHeaderValue:
+                    description: 'Specifies which origins are allowed to access the
+                      server. Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. A valid value is a URI, eg: https://example.com.'
+                    type: string
+                  routingHttpResponseAccessControlExposeHeadersHeaderValue:
+                    description: Specifies whether the browser should include credentials
+                      such as cookies or authentication when making requests. Can
+                      only be set if protocol is HTTP or HTTPS for Application Load
+                      Balancers. Not supported for Network Load Balancer, or with
+                      a Gateway Load Balancer. Valid values are *, Cache-Control,
+                      Content-Language, Content-Length, Content-Type, Expires, Last-Modified,
+                      or Pragma. Dependent on your use-case other headers can be exposed,
+                      consult the Access-Control-Expose-Headers documentation.
+                    type: string
+                  routingHttpResponseAccessControlMaxAgeHeaderValue:
+                    description: Specifies how long the results of a preflight request
+                      can be cached, in seconds. Can only be set if protocol is HTTP
+                      or HTTPS for Application Load Balancers. Not supported for Network
+                      Load Balancer, or with a Gateway Load Balancer. Valid values
+                      are between 0 and 86400. This value is browser specific, consult
+                      the Access-Control-Max-Age documentation.
+                    type: string
+                  routingHttpResponseContentSecurityPolicyHeaderValue:
+                    description: Specifies restrictions enforced by the browser to
+                      help minimize the risk of certain types of security threats.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. Values for this are extensive,
+                      and can be impactful when set, consult Content-Security-Policy
+                      documentation.
+                    type: string
+                  routingHttpResponseServerEnabled:
+                    description: Enables you to allow or remove the HTTP response
+                      server header. Can only be set if protocol is HTTP or HTTPS
+                      for Application Load Balancers. Not supported for Network Load
+                      Balancer, or with a Gateway Load Balancer. Valid values are
+                      true or false.
+                    type: boolean
+                  routingHttpResponseStrictTransportSecurityHeaderValue:
+                    description: Informs browsers that the site should only be accessed
+                      using HTTPS, and that any future attempts to access it using
+                      HTTP should automatically be converted to HTTPS. Default values
+                      are max-age=31536000; includeSubDomains; preload consult the
+                      Strict-Transport-Security documentation for further details.
+                    type: string
+                  routingHttpResponseXContentTypeOptionsHeaderValue:
+                    description: Indicates whether the MIME types advertised in the
+                      Content-Type headers should be followed and not be changed.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. The only valid value is nosniff.
+                    type: string
+                  routingHttpResponseXFrameOptionsHeaderValue:
+                    description: Indicates whether the browser is allowed to render
+                      a page in a frame, iframe, embed or object. Can only be set
+                      if protocol is HTTP or HTTPS for Application Load Balancers.
+                      Not supported for Network Load Balancer, or with a Gateway Load
+                      Balancer. The only valid values are DENY, SAMEORIGIN, or ALLOW-FROM
+                      https://example.com.
                     type: string
                   sslPolicy:
                     description: Name of the SSL Policy for the listener. Required
@@ -2920,7 +3177,7 @@ spec:
                       HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
                     type: string
                   arn:
-                    description: ARN of the listener (matches id).
+                    description: ARN of the listener.
                     type: string
                   certificateArn:
                     description: ARN of the default SSL server certificate. Exactly
@@ -3124,7 +3381,6 @@ spec:
                     - index
                     x-kubernetes-list-type: map
                   id:
-                    description: ARN of the listener (matches arn).
                     type: string
                   loadBalancerArn:
                     description: ARN of the load balancer.
@@ -3137,11 +3393,12 @@ spec:
                         description: Valid values are off and on.
                         type: string
                       ignoreClientCertificateExpiry:
-                        description: Whether client certificate expiry is ignored.
+                        description: |-
+                          Whether client certificate expiry is ignored.
                           Default is false.
                         type: boolean
                       mode:
-                        description: Valid values are off, verify and passthrough.
+                        description: Valid values are off, passthrough, and verify.
                         type: string
                       trustStoreArn:
                         description: ARN of the elbv2 Trust Store.
@@ -3158,6 +3415,133 @@ spec:
                       valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use
                       UDP or TCP_UDP if dual-stack mode is enabled. Not valid for
                       Gateway Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertIssuerHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Issuer
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertLeafHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Leaf
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertSerialNumberHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Serial-Number
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertSubjectHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Subject
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznMtlsClientcertValidityHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert-Validity
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznTlsCipherSuiteHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Tls-Cipher-Suite
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpRequestXAmznTlsVersionHeaderName:
+                    description: Enables you to modify the header name of the X-Amzn-Tls-Version
+                      HTTP request header. Can only be set if protocol is HTTPS for
+                      Application Load Balancers.
+                    type: string
+                  routingHttpResponseAccessControlAllowCredentialsHeaderValue:
+                    description: Specifies which headers the browser can expose to
+                      the requesting client. Can only be set if protocol is HTTP or
+                      HTTPS for Application Load Balancers. Not supported for Network
+                      Load Balancer, or with a Gateway Load Balancer. The only valid
+                      value is true.
+                    type: string
+                  routingHttpResponseAccessControlAllowHeadersHeaderValue:
+                    description: Specifies which headers can be used during the request.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. Valid values are *, Accept, Accept-Language,
+                      Cache-Control, Content-Language, Content-Length, Content-Type,
+                      Expires, Last-Modified, Pragma. Dependent on your use-case other
+                      headers can be exposed and then set as a value consult the Access-Control-Allow-Headers
+                      documentation.
+                    type: string
+                  routingHttpResponseAccessControlAllowMethodsHeaderValue:
+                    description: Set which HTTP methods are allowed when accessing
+                      the server from a different origin. Can only be set if protocol
+                      is HTTP or HTTPS for Application Load Balancers. Not supported
+                      for Network Load Balancer, or with a Gateway Load Balancer.
+                      Valid values are GET, HEAD, POST, DELETE, CONNECT, OPTIONS,
+                      TRACE or PATCH.
+                    type: string
+                  routingHttpResponseAccessControlAllowOriginHeaderValue:
+                    description: 'Specifies which origins are allowed to access the
+                      server. Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. A valid value is a URI, eg: https://example.com.'
+                    type: string
+                  routingHttpResponseAccessControlExposeHeadersHeaderValue:
+                    description: Specifies whether the browser should include credentials
+                      such as cookies or authentication when making requests. Can
+                      only be set if protocol is HTTP or HTTPS for Application Load
+                      Balancers. Not supported for Network Load Balancer, or with
+                      a Gateway Load Balancer. Valid values are *, Cache-Control,
+                      Content-Language, Content-Length, Content-Type, Expires, Last-Modified,
+                      or Pragma. Dependent on your use-case other headers can be exposed,
+                      consult the Access-Control-Expose-Headers documentation.
+                    type: string
+                  routingHttpResponseAccessControlMaxAgeHeaderValue:
+                    description: Specifies how long the results of a preflight request
+                      can be cached, in seconds. Can only be set if protocol is HTTP
+                      or HTTPS for Application Load Balancers. Not supported for Network
+                      Load Balancer, or with a Gateway Load Balancer. Valid values
+                      are between 0 and 86400. This value is browser specific, consult
+                      the Access-Control-Max-Age documentation.
+                    type: string
+                  routingHttpResponseContentSecurityPolicyHeaderValue:
+                    description: Specifies restrictions enforced by the browser to
+                      help minimize the risk of certain types of security threats.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. Values for this are extensive,
+                      and can be impactful when set, consult Content-Security-Policy
+                      documentation.
+                    type: string
+                  routingHttpResponseServerEnabled:
+                    description: Enables you to allow or remove the HTTP response
+                      server header. Can only be set if protocol is HTTP or HTTPS
+                      for Application Load Balancers. Not supported for Network Load
+                      Balancer, or with a Gateway Load Balancer. Valid values are
+                      true or false.
+                    type: boolean
+                  routingHttpResponseStrictTransportSecurityHeaderValue:
+                    description: Informs browsers that the site should only be accessed
+                      using HTTPS, and that any future attempts to access it using
+                      HTTP should automatically be converted to HTTPS. Default values
+                      are max-age=31536000; includeSubDomains; preload consult the
+                      Strict-Transport-Security documentation for further details.
+                    type: string
+                  routingHttpResponseXContentTypeOptionsHeaderValue:
+                    description: Indicates whether the MIME types advertised in the
+                      Content-Type headers should be followed and not be changed.
+                      Can only be set if protocol is HTTP or HTTPS for Application
+                      Load Balancers. Not supported for Network Load Balancer, or
+                      with a Gateway Load Balancer. The only valid value is nosniff.
+                    type: string
+                  routingHttpResponseXFrameOptionsHeaderValue:
+                    description: Indicates whether the browser is allowed to render
+                      a page in a frame, iframe, embed or object. Can only be set
+                      if protocol is HTTP or HTTPS for Application Load Balancers.
+                      Not supported for Network Load Balancer, or with a Gateway Load
+                      Balancer. The only valid values are DENY, SAMEORIGIN, or ALLOW-FROM
+                      https://example.com.
                     type: string
                   sslPolicy:
                     description: Name of the SSL Policy for the listener. Required

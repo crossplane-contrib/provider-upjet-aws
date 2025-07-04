@@ -866,11 +866,11 @@ spec:
               forProvider:
                 properties:
                   architecture:
-                    description: –  The CPU architecture of an application. Valid
-                      values are ARM64 or X86_64. Default value is X86_64.
+                    description: The CPU architecture of an application. Valid values
+                      are ARM64 or X86_64. Default value is X86_64.
                     type: string
                   autoStartConfiguration:
-                    description: –  The configuration for an application to automatically
+                    description: The configuration for an application to automatically
                       start on job submission.
                     properties:
                       enabled:
@@ -879,7 +879,7 @@ spec:
                         type: boolean
                     type: object
                   autoStopConfiguration:
-                    description: –  The configuration for an application to automatically
+                    description: The configuration for an application to automatically
                       stop after a certain amount of time being idle.
                     properties:
                       enabled:
@@ -893,16 +893,15 @@ spec:
                         type: number
                     type: object
                   imageConfiguration:
-                    description: –  The image configuration applied to all worker
-                      types.
+                    description: The image configuration applied to all worker types.
                     properties:
                       imageUri:
                         description: The image URI.
                         type: string
                     type: object
                   initialCapacity:
-                    description: –  The capacity to initialize when the application
-                      is created.
+                    description: The capacity to initialize when the application is
+                      created.
                     items:
                       properties:
                         initialCapacityConfig:
@@ -937,8 +936,8 @@ spec:
                       type: object
                     type: array
                   interactiveConfiguration:
-                    description: –  Enables the interactive use cases to use when
-                      running an application.
+                    description: Enables the interactive use cases to use when running
+                      an application.
                     properties:
                       livyEndpointEnabled:
                         description: Enables an Apache Livy endpoint that you can
@@ -950,7 +949,7 @@ spec:
                         type: boolean
                     type: object
                   maximumCapacity:
-                    description: –  The maximum capacity to allocate when the application
+                    description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
                       point in time, not just when an application is created. No new
                       resources will be created once any one of the defined limits
@@ -967,10 +966,10 @@ spec:
                         type: string
                     type: object
                   name:
-                    description: –  The name of the application.
+                    description: The name of the application.
                     type: string
                   networkConfiguration:
-                    description: –  The network configuration for customer VPC connectivity.
+                    description: The network configuration for customer VPC connectivity.
                     properties:
                       securityGroupIds:
                         description: The array of security group Ids for customer
@@ -987,11 +986,12 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   releaseLabel:
-                    description: –  The EMR release version associated with the application.
+                    description: The EMR release version associated with the application.
                     type: string
                   tags:
                     additionalProperties:
@@ -1000,8 +1000,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: –  The type of application you want to start, such
-                      as spark or hive.
+                    description: The type of application you want to start, such as
+                      spark or hive.
                     type: string
                 required:
                 - region
@@ -1020,11 +1020,11 @@ spec:
                   autoscaler.
                 properties:
                   architecture:
-                    description: –  The CPU architecture of an application. Valid
-                      values are ARM64 or X86_64. Default value is X86_64.
+                    description: The CPU architecture of an application. Valid values
+                      are ARM64 or X86_64. Default value is X86_64.
                     type: string
                   autoStartConfiguration:
-                    description: –  The configuration for an application to automatically
+                    description: The configuration for an application to automatically
                       start on job submission.
                     properties:
                       enabled:
@@ -1033,7 +1033,7 @@ spec:
                         type: boolean
                     type: object
                   autoStopConfiguration:
-                    description: –  The configuration for an application to automatically
+                    description: The configuration for an application to automatically
                       stop after a certain amount of time being idle.
                     properties:
                       enabled:
@@ -1047,16 +1047,15 @@ spec:
                         type: number
                     type: object
                   imageConfiguration:
-                    description: –  The image configuration applied to all worker
-                      types.
+                    description: The image configuration applied to all worker types.
                     properties:
                       imageUri:
                         description: The image URI.
                         type: string
                     type: object
                   initialCapacity:
-                    description: –  The capacity to initialize when the application
-                      is created.
+                    description: The capacity to initialize when the application is
+                      created.
                     items:
                       properties:
                         initialCapacityConfig:
@@ -1091,8 +1090,8 @@ spec:
                       type: object
                     type: array
                   interactiveConfiguration:
-                    description: –  Enables the interactive use cases to use when
-                      running an application.
+                    description: Enables the interactive use cases to use when running
+                      an application.
                     properties:
                       livyEndpointEnabled:
                         description: Enables an Apache Livy endpoint that you can
@@ -1104,7 +1103,7 @@ spec:
                         type: boolean
                     type: object
                   maximumCapacity:
-                    description: –  The maximum capacity to allocate when the application
+                    description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
                       point in time, not just when an application is created. No new
                       resources will be created once any one of the defined limits
@@ -1121,10 +1120,10 @@ spec:
                         type: string
                     type: object
                   name:
-                    description: –  The name of the application.
+                    description: The name of the application.
                     type: string
                   networkConfiguration:
-                    description: –  The network configuration for customer VPC connectivity.
+                    description: The network configuration for customer VPC connectivity.
                     properties:
                       securityGroupIds:
                         description: The array of security group Ids for customer
@@ -1141,7 +1140,7 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   releaseLabel:
-                    description: –  The EMR release version associated with the application.
+                    description: The EMR release version associated with the application.
                     type: string
                   tags:
                     additionalProperties:
@@ -1150,8 +1149,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: –  The type of application you want to start, such
-                      as spark or hive.
+                    description: The type of application you want to start, such as
+                      spark or hive.
                     type: string
                 type: object
               managementPolicies:
@@ -1340,14 +1339,14 @@ spec:
               atProvider:
                 properties:
                   architecture:
-                    description: –  The CPU architecture of an application. Valid
-                      values are ARM64 or X86_64. Default value is X86_64.
+                    description: The CPU architecture of an application. Valid values
+                      are ARM64 or X86_64. Default value is X86_64.
                     type: string
                   arn:
                     description: ARN of the cluster.
                     type: string
                   autoStartConfiguration:
-                    description: –  The configuration for an application to automatically
+                    description: The configuration for an application to automatically
                       start on job submission.
                     properties:
                       enabled:
@@ -1356,7 +1355,7 @@ spec:
                         type: boolean
                     type: object
                   autoStopConfiguration:
-                    description: –  The configuration for an application to automatically
+                    description: The configuration for an application to automatically
                       stop after a certain amount of time being idle.
                     properties:
                       enabled:
@@ -1373,16 +1372,15 @@ spec:
                     description: The ID of the cluster.
                     type: string
                   imageConfiguration:
-                    description: –  The image configuration applied to all worker
-                      types.
+                    description: The image configuration applied to all worker types.
                     properties:
                       imageUri:
                         description: The image URI.
                         type: string
                     type: object
                   initialCapacity:
-                    description: –  The capacity to initialize when the application
-                      is created.
+                    description: The capacity to initialize when the application is
+                      created.
                     items:
                       properties:
                         initialCapacityConfig:
@@ -1417,8 +1415,8 @@ spec:
                       type: object
                     type: array
                   interactiveConfiguration:
-                    description: –  Enables the interactive use cases to use when
-                      running an application.
+                    description: Enables the interactive use cases to use when running
+                      an application.
                     properties:
                       livyEndpointEnabled:
                         description: Enables an Apache Livy endpoint that you can
@@ -1430,7 +1428,7 @@ spec:
                         type: boolean
                     type: object
                   maximumCapacity:
-                    description: –  The maximum capacity to allocate when the application
+                    description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
                       point in time, not just when an application is created. No new
                       resources will be created once any one of the defined limits
@@ -1447,10 +1445,10 @@ spec:
                         type: string
                     type: object
                   name:
-                    description: –  The name of the application.
+                    description: The name of the application.
                     type: string
                   networkConfiguration:
-                    description: –  The network configuration for customer VPC connectivity.
+                    description: The network configuration for customer VPC connectivity.
                     properties:
                       securityGroupIds:
                         description: The array of security group Ids for customer
@@ -1467,7 +1465,7 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   releaseLabel:
-                    description: –  The EMR release version associated with the application.
+                    description: The EMR release version associated with the application.
                     type: string
                   tags:
                     additionalProperties:
@@ -1483,8 +1481,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: –  The type of application you want to start, such
-                      as spark or hive.
+                    description: The type of application you want to start, such as
+                      spark or hive.
                     type: string
                 type: object
               conditions:

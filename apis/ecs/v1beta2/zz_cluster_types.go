@@ -37,7 +37,6 @@ type ClusterObservation struct {
 	// Execute command configuration for the cluster. See configuration Block for details.
 	Configuration *ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// ARN that identifies the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Default Service Connect namespace. See service_connect_defaults Block for details.
@@ -61,6 +60,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Configuration *ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

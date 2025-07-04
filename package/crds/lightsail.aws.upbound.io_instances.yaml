@@ -576,8 +576,8 @@ spec:
     name: v1beta2
     schema:
       openAPIV3Schema:
-        description: Instance is the Schema for the Instances API. Provides an Lightsail
-          Instance
+        description: Instance is the Schema for the Instances API. Manages a Lightsail
+          Instance.
         properties:
           apiVersion:
             description: |-
@@ -616,55 +616,51 @@ spec:
               forProvider:
                 properties:
                   addOn:
-                    description: The add on configuration for the instance. Detailed
-                      below.
+                    description: Add-on configuration for the instance. See below.
                     properties:
                       snapshotTime:
-                        description: The daily time when an automatic snapshot will
-                          be created. Must be in HH:00 format, and in an hourly increment
+                        description: Daily time when an automatic snapshot will be
+                          created. Must be in HH:00 format, and in an hourly increment
                           and specified in Coordinated Universal Time (UTC). The snapshot
                           will be automatically created between the time specified
                           and up to 45 minutes after.
                         type: string
                       status:
-                        description: 'The status of the add on. Valid Values: Enabled,
+                        description: 'Status of the add-on. Valid values: Enabled,
                           Disabled.'
                         type: string
                       type:
-                        description: The add-on type. There is currently only one
-                          valid type AutoSnapshot.
+                        description: Add-on type. There is currently only one valid
+                          type AutoSnapshot.
                         type: string
                     type: object
                   availabilityZone:
-                    description: |-
-                      The Availability Zone in which to create your instance. A
-                      list of available zones can be obtained using the AWS CLI command:
-                      aws lightsail get-regions --include-availability-zones.
+                    description: 'Availability Zone in which to create your instance.
+                      A list of available zones can be obtained using the AWS CLI
+                      command: aws lightsail get-regions --include-availability-zones.'
                     type: string
                   blueprintId:
-                    description: |-
-                      The ID for a virtual private server image. A list of available
-                      blueprint IDs can be obtained using the AWS CLI command:
-                      aws lightsail get-blueprints.
+                    description: 'ID for a virtual private server image. A list of
+                      available blueprint IDs can be obtained using the AWS CLI command:
+                      aws lightsail get-blueprints.'
                     type: string
                   bundleId:
-                    description: |-
-                      The bundle of specification information. A list of available
-                      bundle IDs can be obtained using the AWS CLI command:
-                      aws lightsail get-bundles.
+                    description: 'Bundle of specification information. A list of available
+                      bundle IDs can be obtained using the AWS CLI command: aws lightsail
+                      get-bundles.'
                     type: string
                   ipAddressType:
-                    description: 'The IP address type of the Lightsail Instance. Valid
-                      Values: dualstack | ipv4.'
+                    description: 'IP address type of the Lightsail Instance. Valid
+                      values: dualstack, ipv4, ipv6. Default: dualstack.'
                     type: string
                   keyPairName:
-                    description: |-
-                      The name of your key pair. Created in the
-                      Lightsail console (cannot use aws_key_pair at this time)
+                    description: Name of your key pair. Created in the Lightsail console
+                      (cannot use aws_key_pair at this time).
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -674,7 +670,7 @@ spec:
                     x-kubernetes-map-type: granular
                   userData:
                     description: Single lined launch script as a string to configure
-                      server with additional user data
+                      server with additional user data.
                     type: string
                 required:
                 - region
@@ -693,51 +689,46 @@ spec:
                   autoscaler.
                 properties:
                   addOn:
-                    description: The add on configuration for the instance. Detailed
-                      below.
+                    description: Add-on configuration for the instance. See below.
                     properties:
                       snapshotTime:
-                        description: The daily time when an automatic snapshot will
-                          be created. Must be in HH:00 format, and in an hourly increment
+                        description: Daily time when an automatic snapshot will be
+                          created. Must be in HH:00 format, and in an hourly increment
                           and specified in Coordinated Universal Time (UTC). The snapshot
                           will be automatically created between the time specified
                           and up to 45 minutes after.
                         type: string
                       status:
-                        description: 'The status of the add on. Valid Values: Enabled,
+                        description: 'Status of the add-on. Valid values: Enabled,
                           Disabled.'
                         type: string
                       type:
-                        description: The add-on type. There is currently only one
-                          valid type AutoSnapshot.
+                        description: Add-on type. There is currently only one valid
+                          type AutoSnapshot.
                         type: string
                     type: object
                   availabilityZone:
-                    description: |-
-                      The Availability Zone in which to create your instance. A
-                      list of available zones can be obtained using the AWS CLI command:
-                      aws lightsail get-regions --include-availability-zones.
+                    description: 'Availability Zone in which to create your instance.
+                      A list of available zones can be obtained using the AWS CLI
+                      command: aws lightsail get-regions --include-availability-zones.'
                     type: string
                   blueprintId:
-                    description: |-
-                      The ID for a virtual private server image. A list of available
-                      blueprint IDs can be obtained using the AWS CLI command:
-                      aws lightsail get-blueprints.
+                    description: 'ID for a virtual private server image. A list of
+                      available blueprint IDs can be obtained using the AWS CLI command:
+                      aws lightsail get-blueprints.'
                     type: string
                   bundleId:
-                    description: |-
-                      The bundle of specification information. A list of available
-                      bundle IDs can be obtained using the AWS CLI command:
-                      aws lightsail get-bundles.
+                    description: 'Bundle of specification information. A list of available
+                      bundle IDs can be obtained using the AWS CLI command: aws lightsail
+                      get-bundles.'
                     type: string
                   ipAddressType:
-                    description: 'The IP address type of the Lightsail Instance. Valid
-                      Values: dualstack | ipv4.'
+                    description: 'IP address type of the Lightsail Instance. Valid
+                      values: dualstack, ipv4, ipv6. Default: dualstack.'
                     type: string
                   keyPairName:
-                    description: |-
-                      The name of your key pair. Created in the
-                      Lightsail console (cannot use aws_key_pair at this time)
+                    description: Name of your key pair. Created in the Lightsail console
+                      (cannot use aws_key_pair at this time).
                     type: string
                   tags:
                     additionalProperties:
@@ -747,7 +738,7 @@ spec:
                     x-kubernetes-map-type: granular
                   userData:
                     description: Single lined launch script as a string to configure
-                      server with additional user data
+                      server with additional user data.
                     type: string
                 type: object
               managementPolicies:
@@ -936,58 +927,54 @@ spec:
               atProvider:
                 properties:
                   addOn:
-                    description: The add on configuration for the instance. Detailed
-                      below.
+                    description: Add-on configuration for the instance. See below.
                     properties:
                       snapshotTime:
-                        description: The daily time when an automatic snapshot will
-                          be created. Must be in HH:00 format, and in an hourly increment
+                        description: Daily time when an automatic snapshot will be
+                          created. Must be in HH:00 format, and in an hourly increment
                           and specified in Coordinated Universal Time (UTC). The snapshot
                           will be automatically created between the time specified
                           and up to 45 minutes after.
                         type: string
                       status:
-                        description: 'The status of the add on. Valid Values: Enabled,
+                        description: 'Status of the add-on. Valid values: Enabled,
                           Disabled.'
                         type: string
                       type:
-                        description: The add-on type. There is currently only one
-                          valid type AutoSnapshot.
+                        description: Add-on type. There is currently only one valid
+                          type AutoSnapshot.
                         type: string
                     type: object
                   arn:
-                    description: The ARN of the Lightsail instance (matches id).
+                    description: ARN of the Lightsail instance (matches id).
                     type: string
                   availabilityZone:
-                    description: |-
-                      The Availability Zone in which to create your instance. A
-                      list of available zones can be obtained using the AWS CLI command:
-                      aws lightsail get-regions --include-availability-zones.
+                    description: 'Availability Zone in which to create your instance.
+                      A list of available zones can be obtained using the AWS CLI
+                      command: aws lightsail get-regions --include-availability-zones.'
                     type: string
                   blueprintId:
-                    description: |-
-                      The ID for a virtual private server image. A list of available
-                      blueprint IDs can be obtained using the AWS CLI command:
-                      aws lightsail get-blueprints.
+                    description: 'ID for a virtual private server image. A list of
+                      available blueprint IDs can be obtained using the AWS CLI command:
+                      aws lightsail get-blueprints.'
                     type: string
                   bundleId:
-                    description: |-
-                      The bundle of specification information. A list of available
-                      bundle IDs can be obtained using the AWS CLI command:
-                      aws lightsail get-bundles.
+                    description: 'Bundle of specification information. A list of available
+                      bundle IDs can be obtained using the AWS CLI command: aws lightsail
+                      get-bundles.'
                     type: string
                   cpuCount:
-                    description: The number of vCPUs the instance has.
+                    description: Number of vCPUs the instance has.
                     type: number
                   createdAt:
-                    description: The timestamp when the instance was created.
+                    description: Timestamp when the instance was created.
                     type: string
                   id:
-                    description: The ARN of the Lightsail instance (matches arn).
+                    description: ARN of the Lightsail instance (matches arn).
                     type: string
                   ipAddressType:
-                    description: 'The IP address type of the Lightsail Instance. Valid
-                      Values: dualstack | ipv4.'
+                    description: 'IP address type of the Lightsail Instance. Valid
+                      values: dualstack, ipv4, ipv6. Default: dualstack.'
                     type: string
                   ipv6Addresses:
                     description: List of IPv6 addresses for the Lightsail instance.
@@ -995,22 +982,21 @@ spec:
                       type: string
                     type: array
                   isStaticIp:
-                    description: A Boolean value indicating whether this instance
-                      has a static IP assigned to it.
+                    description: Whether this instance has a static IP assigned to
+                      it.
                     type: boolean
                   keyPairName:
-                    description: |-
-                      The name of your key pair. Created in the
-                      Lightsail console (cannot use aws_key_pair at this time)
+                    description: Name of your key pair. Created in the Lightsail console
+                      (cannot use aws_key_pair at this time).
                     type: string
                   privateIpAddress:
-                    description: The private IP address of the instance.
+                    description: Private IP address of the instance.
                     type: string
                   publicIpAddress:
-                    description: The public IP address of the instance.
+                    description: Public IP address of the instance.
                     type: string
                   ramSize:
-                    description: The amount of RAM in GB on the instance (e.g., 1.0).
+                    description: Amount of RAM in GB on the instance (e.g., 1.0).
                     type: number
                   tags:
                     additionalProperties:
@@ -1021,18 +1007,16 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   userData:
                     description: Single lined launch script as a string to configure
-                      server with additional user data
+                      server with additional user data.
                     type: string
                   username:
-                    description: The user name for connecting to the instance (e.g.,
-                      ec2-user).
+                    description: User name for connecting to the instance (e.g., ec2-user).
                     type: string
                 type: object
               conditions:

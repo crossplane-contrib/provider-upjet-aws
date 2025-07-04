@@ -83,8 +83,9 @@ spec:
                       seconds (15 minutes) to 43200 seconds (12 hours).
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The identity of the role to which the alias refers.

@@ -74,6 +74,7 @@ type RoleAliasParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialDuration *float64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

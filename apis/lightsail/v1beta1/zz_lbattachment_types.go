@@ -15,7 +15,7 @@ import (
 
 type LBAttachmentInitParameters struct {
 
-	// The name of the instance to attach to the load balancer.
+	// Name of the instance to attach to the load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
@@ -27,7 +27,7 @@ type LBAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
-	// The name of the Lightsail load balancer.
+	// Name of the Lightsail load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.LB
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
 
@@ -42,19 +42,19 @@ type LBAttachmentInitParameters struct {
 
 type LBAttachmentObservation struct {
 
-	// A combination of attributes to create a unique id: lb_name,instance_name
+	// Combination of attributes to create a unique ID: lb_name,instance_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the instance to attach to the load balancer.
+	// Name of the instance to attach to the load balancer.
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
-	// The name of the Lightsail load balancer.
+	// Name of the Lightsail load balancer.
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
 }
 
 type LBAttachmentParameters struct {
 
-	// The name of the instance to attach to the load balancer.
+	// Name of the instance to attach to the load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
@@ -67,7 +67,7 @@ type LBAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
-	// The name of the Lightsail load balancer.
+	// Name of the Lightsail load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.LB
 	// +kubebuilder:validation:Optional
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
@@ -80,6 +80,7 @@ type LBAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	LBNameSelector *v1.Selector `json:"lbNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -113,7 +114,7 @@ type LBAttachmentStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LBAttachment is the Schema for the LBAttachments API. Attaches a Lightsail Instance to a Lightsail Load Balancer
+// LBAttachment is the Schema for the LBAttachments API. Manages a Lightsail Load Balancer Attachment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

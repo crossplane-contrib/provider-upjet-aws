@@ -15,7 +15,7 @@ import (
 
 type AMIInitParameters struct {
 
-	// Machine architecture for created instances. Defaults to "x86_64".
+	// Machine architecture for created instances. Defaults to x86_64.
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
 	// Boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
@@ -70,6 +70,9 @@ type AMIInitParameters struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
+	// Base64 representation of the non-volatile UEFI variable store.
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
+
 	// Keyword to choose what virtualization mode created instances
 	// will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type
 	// changes the set of further arguments that are required, as described below.
@@ -78,7 +81,7 @@ type AMIInitParameters struct {
 
 type AMIObservation struct {
 
-	// Machine architecture for created instances. Defaults to "x86_64".
+	// Machine architecture for created instances. Defaults to x86_64.
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
 	// ARN of the AMI.
@@ -127,6 +130,9 @@ type AMIObservation struct {
 	// kernel in created instances.
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
+	// (Computed) Date and time, in ISO 8601 date-time format , when the AMI was last used to launch an EC2 instance. When the AMI is used to launch an instance, there is a 24-hour delay before that usage is reported. For more information, see the following AWS document.
+	LastLaunchedTime *string `json:"lastLaunchedTime,omitempty" tf:"last_launched_time,omitempty"`
+
 	ManageEBSSnapshots *bool `json:"manageEbsSnapshots,omitempty" tf:"manage_ebs_snapshots,omitempty"`
 
 	// Region-unique name for the AMI.
@@ -169,6 +175,9 @@ type AMIObservation struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
+	// Base64 representation of the non-volatile UEFI variable store.
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
+
 	// Operation of the Amazon EC2 instance and the billing code that is associated with the AMI.
 	UsageOperation *string `json:"usageOperation,omitempty" tf:"usage_operation,omitempty"`
 
@@ -180,7 +189,7 @@ type AMIObservation struct {
 
 type AMIParameters struct {
 
-	// Machine architecture for created instances. Defaults to "x86_64".
+	// Machine architecture for created instances. Defaults to x86_64.
 	// +kubebuilder:validation:Optional
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
@@ -233,6 +242,7 @@ type AMIParameters struct {
 	// +kubebuilder:validation:Optional
 	RamdiskID *string `json:"ramdiskId,omitempty" tf:"ramdisk_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -255,6 +265,10 @@ type AMIParameters struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
 	// +kubebuilder:validation:Optional
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
+
+	// Base64 representation of the non-volatile UEFI variable store.
+	// +kubebuilder:validation:Optional
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
 
 	// Keyword to choose what virtualization mode created instances
 	// will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type

@@ -34,10 +34,6 @@ type InstanceMetadataServiceConfigurationParameters struct {
 
 type NotebookInstanceInitParameters struct {
 
-	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
-	// +listType=set
-	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
-
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
 	// +listType=set
@@ -55,7 +51,7 @@ type NotebookInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultCodeRepositorySelector *v1.Selector `json:"defaultCodeRepositorySelector,omitempty" tf:"-"`
 
-	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.
+	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker AI training and endpoint services unless your configure a NAT Gateway in your VPC.
 	DirectInternetAccess *string `json:"directInternetAccess,omitempty" tf:"direct_internet_access,omitempty"`
 
 	// Information on the IMDS configuration of the notebook instance. Conflicts with instance_metadata_service_configuration. see details below.
@@ -64,7 +60,7 @@ type NotebookInstanceInitParameters struct {
 	// The name of ML compute instance type.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker AI uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -82,7 +78,7 @@ type NotebookInstanceInitParameters struct {
 	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending on which version of Amazon Linux you require.
 	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
 
-	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker to call other services on your behalf.
+	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker AI to call other services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -124,10 +120,6 @@ type NotebookInstanceInitParameters struct {
 
 type NotebookInstanceObservation struct {
 
-	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
-	// +listType=set
-	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
-
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
 	// +listType=set
@@ -139,7 +131,7 @@ type NotebookInstanceObservation struct {
 	// The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in AWS CodeCommit or in any other Git repository.
 	DefaultCodeRepository *string `json:"defaultCodeRepository,omitempty" tf:"default_code_repository,omitempty"`
 
-	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.
+	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker AI training and endpoint services unless your configure a NAT Gateway in your VPC.
 	DirectInternetAccess *string `json:"directInternetAccess,omitempty" tf:"direct_internet_access,omitempty"`
 
 	// The name of the notebook instance.
@@ -151,19 +143,19 @@ type NotebookInstanceObservation struct {
 	// The name of ML compute instance type.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker AI uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	LifecycleConfigName *string `json:"lifecycleConfigName,omitempty" tf:"lifecycle_config_name,omitempty"`
 
-	// The network interface ID that Amazon SageMaker created at the time of creating the instance. Only available when setting subnet_id.
+	// The network interface ID that Amazon SageMaker AI created at the time of creating the instance. Only available when setting subnet_id.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
 	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending on which version of Amazon Linux you require.
 	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
 
-	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker to call other services on your behalf.
+	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker AI to call other services on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Whether root access is Enabled or Disabled for users of the notebook instance. The default value is Enabled.
@@ -193,11 +185,6 @@ type NotebookInstanceObservation struct {
 
 type NotebookInstanceParameters struct {
 
-	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
-
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
 	// +kubebuilder:validation:Optional
@@ -217,7 +204,7 @@ type NotebookInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultCodeRepositorySelector *v1.Selector `json:"defaultCodeRepositorySelector,omitempty" tf:"-"`
 
-	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.
+	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker AI training and endpoint services unless your configure a NAT Gateway in your VPC.
 	// +kubebuilder:validation:Optional
 	DirectInternetAccess *string `json:"directInternetAccess,omitempty" tf:"direct_internet_access,omitempty"`
 
@@ -229,7 +216,7 @@ type NotebookInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker AI uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -250,12 +237,13 @@ type NotebookInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker to call other services on your behalf.
+	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker AI to call other services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -327,7 +315,7 @@ type NotebookInstanceStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// NotebookInstance is the Schema for the NotebookInstances API. Provides a SageMaker Notebook Instance resource.
+// NotebookInstance is the Schema for the NotebookInstances API. Provides a SageMaker AI Notebook Instance resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

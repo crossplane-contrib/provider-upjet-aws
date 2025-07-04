@@ -98,6 +98,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -135,7 +136,7 @@ type RuleParameters struct {
 
 type TargetIPInitParameters struct {
 
-	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	// One IPv4 address that you want to forward DNS queries to.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// One IPv6 address that you want to forward DNS queries to.
@@ -150,7 +151,7 @@ type TargetIPInitParameters struct {
 
 type TargetIPObservation struct {
 
-	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	// One IPv4 address that you want to forward DNS queries to.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// One IPv6 address that you want to forward DNS queries to.
@@ -165,7 +166,7 @@ type TargetIPObservation struct {
 
 type TargetIPParameters struct {
 
-	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	// One IPv4 address that you want to forward DNS queries to.
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 

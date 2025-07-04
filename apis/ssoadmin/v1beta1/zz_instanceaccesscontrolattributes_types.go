@@ -74,6 +74,7 @@ type InstanceAccessControlAttributesParameters struct {
 	// +kubebuilder:validation:Required
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

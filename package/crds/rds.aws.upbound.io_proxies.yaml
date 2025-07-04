@@ -86,8 +86,9 @@ spec:
                           type: string
                         clientPasswordAuthType:
                           description: The type of authentication the proxy uses for
-                            connections from clients. Valid values are MYSQL_NATIVE_PASSWORD,
-                            POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+                            connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD,
+                            MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5,
+                            and SQL_SERVER_AUTHENTICATION.
                           type: string
                         description:
                           description: A user-specified description about the authentication
@@ -213,8 +214,9 @@ spec:
                       for the associated database.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requireTls:
                     description: A Boolean parameter that specifies whether Transport
@@ -505,8 +507,9 @@ spec:
                           type: string
                         clientPasswordAuthType:
                           description: The type of authentication the proxy uses for
-                            connections from clients. Valid values are MYSQL_NATIVE_PASSWORD,
-                            POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+                            connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD,
+                            MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5,
+                            and SQL_SERVER_AUTHENTICATION.
                           type: string
                         description:
                           description: A user-specified description about the authentication
@@ -1089,8 +1092,9 @@ spec:
                           type: string
                         clientPasswordAuthType:
                           description: The type of authentication the proxy uses for
-                            connections from clients. Valid values are MYSQL_NATIVE_PASSWORD,
-                            POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+                            connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD,
+                            MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5,
+                            and SQL_SERVER_AUTHENTICATION.
                           type: string
                         description:
                           description: A user-specified description about the authentication

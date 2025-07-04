@@ -4118,6 +4118,11 @@ spec:
                                 in MiB/s (specified as an integer, e.g., 500), with
                                 a maximum of 1,000 MiB/s.
                               type: number
+                            volumeInitializationRate:
+                              description: The volume initialization rate in MiB/s
+                                (specified as an integer, e.g. 100), with a minimum
+                                of 100 MiB/s and maximum of 300 MiB/s.
+                              type: number
                             volumeSize:
                               description: The size of the volume in gigabytes.
                               type: number
@@ -4209,26 +4214,6 @@ spec:
                   ebsOptimized:
                     description: If true, the launched EC2 instance will be EBS-optimized.
                     type: string
-                  elasticGpuSpecifications:
-                    description: |-
-                      The elastic GPU to attach to the instance. See Elastic GPU
-                      below for more details.
-                    items:
-                      properties:
-                        type:
-                          description: The Elastic GPU Type
-                          type: string
-                      type: object
-                    type: array
-                  elasticInferenceAccelerator:
-                    description: Configuration block containing an Elastic Inference
-                      Accelerator to attach to the instance. See Elastic Inference
-                      Accelerator below for more details.
-                    properties:
-                      type:
-                        description: Accelerator type.
-                        type: string
-                    type: object
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
                       Enclave Options below for more details.
@@ -4777,6 +4762,30 @@ spec:
                           description: Associate a public ip address with the network
                             interface. Boolean value, can be left unset.
                           type: string
+                        connectionTrackingSpecification:
+                          description: The Connection Tracking Configuration for the
+                            network interface. See Amazon EC2 security group connection
+                            tracking
+                          properties:
+                            tcpEstablishedTimeout:
+                              description: 'Timeout (in seconds) for idle TCP connections
+                                in an established state. Min: 60 seconds. Max: 432000
+                                seconds (5 days). Default: 432000 seconds. Recommended:
+                                Less than 432000 seconds.'
+                              type: number
+                            udpStreamTimeout:
+                              description: 'Timeout (in seconds) for idle UDP flows
+                                that have seen traffic only in a single direction
+                                or a single request-response transaction. Min: 30
+                                seconds. Max: 60 seconds. Default: 30 seconds.'
+                              type: number
+                            udpTimeout:
+                              description: 'Timeout (in seconds) for idle UDP flows
+                                classified as streams which have seen more than one
+                                request-response transaction. Min: 60 seconds. Max:
+                                180 seconds (3 minutes). Default: 180 seconds.'
+                              type: number
+                          type: object
                         deleteOnTermination:
                           description: Whether the network interface should be destroyed
                             on instance termination.
@@ -4788,6 +4797,27 @@ spec:
                           description: The integer index of the network interface
                             attachment.
                           type: number
+                        enaSrdSpecification:
+                          description: Configuration for Elastic Network Adapter (ENA)
+                            Express settings. Applies to network interfaces that use
+                            the ena Express feature. See details below.
+                          properties:
+                            enaSrdEnabled:
+                              description: Whether to enable ENA Express. ENA Express
+                                uses AWS Scalable Reliable Datagram (SRD) technology
+                                to improve the performance of TCP traffic.
+                              type: boolean
+                            enaSrdUdpSpecification:
+                              description: Configuration for ENA Express UDP optimization.
+                                See details below.
+                              properties:
+                                enaSrdUdpEnabled:
+                                  description: Whether to enable UDP traffic optimization
+                                    through ENA Express. Requires ena_srd_enabled
+                                    to be true.
+                                  type: boolean
+                              type: object
+                          type: object
                         interfaceType:
                           description: The type of network interface. To create an
                             Elastic Fabric Adapter (EFA), specify efa.
@@ -5153,8 +5183,9 @@ spec:
                     description: The ID of the RAM disk.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupNameRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupNames.
@@ -5490,6 +5521,11 @@ spec:
                                 in MiB/s (specified as an integer, e.g., 500), with
                                 a maximum of 1,000 MiB/s.
                               type: number
+                            volumeInitializationRate:
+                              description: The volume initialization rate in MiB/s
+                                (specified as an integer, e.g. 100), with a minimum
+                                of 100 MiB/s and maximum of 300 MiB/s.
+                              type: number
                             volumeSize:
                               description: The size of the volume in gigabytes.
                               type: number
@@ -5581,26 +5617,6 @@ spec:
                   ebsOptimized:
                     description: If true, the launched EC2 instance will be EBS-optimized.
                     type: string
-                  elasticGpuSpecifications:
-                    description: |-
-                      The elastic GPU to attach to the instance. See Elastic GPU
-                      below for more details.
-                    items:
-                      properties:
-                        type:
-                          description: The Elastic GPU Type
-                          type: string
-                      type: object
-                    type: array
-                  elasticInferenceAccelerator:
-                    description: Configuration block containing an Elastic Inference
-                      Accelerator to attach to the instance. See Elastic Inference
-                      Accelerator below for more details.
-                    properties:
-                      type:
-                        description: Accelerator type.
-                        type: string
-                    type: object
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
                       Enclave Options below for more details.
@@ -6149,6 +6165,30 @@ spec:
                           description: Associate a public ip address with the network
                             interface. Boolean value, can be left unset.
                           type: string
+                        connectionTrackingSpecification:
+                          description: The Connection Tracking Configuration for the
+                            network interface. See Amazon EC2 security group connection
+                            tracking
+                          properties:
+                            tcpEstablishedTimeout:
+                              description: 'Timeout (in seconds) for idle TCP connections
+                                in an established state. Min: 60 seconds. Max: 432000
+                                seconds (5 days). Default: 432000 seconds. Recommended:
+                                Less than 432000 seconds.'
+                              type: number
+                            udpStreamTimeout:
+                              description: 'Timeout (in seconds) for idle UDP flows
+                                that have seen traffic only in a single direction
+                                or a single request-response transaction. Min: 30
+                                seconds. Max: 60 seconds. Default: 30 seconds.'
+                              type: number
+                            udpTimeout:
+                              description: 'Timeout (in seconds) for idle UDP flows
+                                classified as streams which have seen more than one
+                                request-response transaction. Min: 60 seconds. Max:
+                                180 seconds (3 minutes). Default: 180 seconds.'
+                              type: number
+                          type: object
                         deleteOnTermination:
                           description: Whether the network interface should be destroyed
                             on instance termination.
@@ -6160,6 +6200,27 @@ spec:
                           description: The integer index of the network interface
                             attachment.
                           type: number
+                        enaSrdSpecification:
+                          description: Configuration for Elastic Network Adapter (ENA)
+                            Express settings. Applies to network interfaces that use
+                            the ena Express feature. See details below.
+                          properties:
+                            enaSrdEnabled:
+                              description: Whether to enable ENA Express. ENA Express
+                                uses AWS Scalable Reliable Datagram (SRD) technology
+                                to improve the performance of TCP traffic.
+                              type: boolean
+                            enaSrdUdpSpecification:
+                              description: Configuration for ENA Express UDP optimization.
+                                See details below.
+                              properties:
+                                enaSrdUdpEnabled:
+                                  description: Whether to enable UDP traffic optimization
+                                    through ENA Express. Requires ena_srd_enabled
+                                    to be true.
+                                  type: boolean
+                              type: object
+                          type: object
                         interfaceType:
                           description: The type of network interface. To create an
                             Elastic Fabric Adapter (EFA), specify efa.
@@ -6944,6 +7005,11 @@ spec:
                                 in MiB/s (specified as an integer, e.g., 500), with
                                 a maximum of 1,000 MiB/s.
                               type: number
+                            volumeInitializationRate:
+                              description: The volume initialization rate in MiB/s
+                                (specified as an integer, e.g. 100), with a minimum
+                                of 100 MiB/s and maximum of 300 MiB/s.
+                              type: number
                             volumeSize:
                               description: The size of the volume in gigabytes.
                               type: number
@@ -7035,26 +7101,6 @@ spec:
                   ebsOptimized:
                     description: If true, the launched EC2 instance will be EBS-optimized.
                     type: string
-                  elasticGpuSpecifications:
-                    description: |-
-                      The elastic GPU to attach to the instance. See Elastic GPU
-                      below for more details.
-                    items:
-                      properties:
-                        type:
-                          description: The Elastic GPU Type
-                          type: string
-                      type: object
-                    type: array
-                  elasticInferenceAccelerator:
-                    description: Configuration block containing an Elastic Inference
-                      Accelerator to attach to the instance. See Elastic Inference
-                      Accelerator below for more details.
-                    properties:
-                      type:
-                        description: Accelerator type.
-                        type: string
-                    type: object
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
                       Enclave Options below for more details.
@@ -7457,6 +7503,30 @@ spec:
                           description: Associate a public ip address with the network
                             interface. Boolean value, can be left unset.
                           type: string
+                        connectionTrackingSpecification:
+                          description: The Connection Tracking Configuration for the
+                            network interface. See Amazon EC2 security group connection
+                            tracking
+                          properties:
+                            tcpEstablishedTimeout:
+                              description: 'Timeout (in seconds) for idle TCP connections
+                                in an established state. Min: 60 seconds. Max: 432000
+                                seconds (5 days). Default: 432000 seconds. Recommended:
+                                Less than 432000 seconds.'
+                              type: number
+                            udpStreamTimeout:
+                              description: 'Timeout (in seconds) for idle UDP flows
+                                that have seen traffic only in a single direction
+                                or a single request-response transaction. Min: 30
+                                seconds. Max: 60 seconds. Default: 30 seconds.'
+                              type: number
+                            udpTimeout:
+                              description: 'Timeout (in seconds) for idle UDP flows
+                                classified as streams which have seen more than one
+                                request-response transaction. Min: 60 seconds. Max:
+                                180 seconds (3 minutes). Default: 180 seconds.'
+                              type: number
+                          type: object
                         deleteOnTermination:
                           description: Whether the network interface should be destroyed
                             on instance termination.
@@ -7468,6 +7538,27 @@ spec:
                           description: The integer index of the network interface
                             attachment.
                           type: number
+                        enaSrdSpecification:
+                          description: Configuration for Elastic Network Adapter (ENA)
+                            Express settings. Applies to network interfaces that use
+                            the ena Express feature. See details below.
+                          properties:
+                            enaSrdEnabled:
+                              description: Whether to enable ENA Express. ENA Express
+                                uses AWS Scalable Reliable Datagram (SRD) technology
+                                to improve the performance of TCP traffic.
+                              type: boolean
+                            enaSrdUdpSpecification:
+                              description: Configuration for ENA Express UDP optimization.
+                                See details below.
+                              properties:
+                                enaSrdUdpEnabled:
+                                  description: Whether to enable UDP traffic optimization
+                                    through ENA Express. Requires ena_srd_enabled
+                                    to be true.
+                                  type: boolean
+                              type: object
+                          type: object
                         interfaceType:
                           description: The type of network interface. To create an
                             Elastic Fabric Adapter (EFA), specify efa.

@@ -786,6 +786,12 @@ spec:
                       Gateway is creating or updating the resource using an OpenAPI
                       specification. Defaults to false. Applicable for HTTP APIs.
                     type: boolean
+                  ipAddressType:
+                    description: 'The IP address types that can invoke the API. Valid
+                      values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses
+                      to invoke your API, or use dualstack to allow both IPv4 and
+                      IPv6 addresses to invoke your API. Defaults to ipv4.'
+                    type: string
                   name:
                     description: Name of the API. Must be less than or equal to 128
                       characters in length.
@@ -794,8 +800,9 @@ spec:
                     description: 'API protocol. Valid values: HTTP, WEBSOCKET.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routeKey:
                     description: Part of quick create. Specifies any route key. Applicable
@@ -905,6 +912,12 @@ spec:
                       Gateway is creating or updating the resource using an OpenAPI
                       specification. Defaults to false. Applicable for HTTP APIs.
                     type: boolean
+                  ipAddressType:
+                    description: 'The IP address types that can invoke the API. Valid
+                      values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses
+                      to invoke your API, or use dualstack to allow both IPv4 and
+                      IPv6 addresses to invoke your API. Defaults to ipv4.'
+                    type: string
                   name:
                     description: Name of the API. Must be less than or equal to 128
                       characters in length.
@@ -1202,6 +1215,12 @@ spec:
                     type: boolean
                   id:
                     description: API identifier.
+                    type: string
+                  ipAddressType:
+                    description: 'The IP address types that can invoke the API. Valid
+                      values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses
+                      to invoke your API, or use dualstack to allow both IPv4 and
+                      IPv6 addresses to invoke your API. Defaults to ipv4.'
                     type: string
                   name:
                     description: Name of the API. Must be less than or equal to 128

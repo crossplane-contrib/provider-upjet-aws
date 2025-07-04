@@ -74,14 +74,15 @@ spec:
               forProvider:
                 properties:
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceTypeManagementPreference:
                     additionalProperties:
                       type: boolean
                     description: |-
-                      A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
+                      A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 
                       WARNING: All parameters are required to be given: EFS, DynamoDB
                     type: object
@@ -90,7 +91,7 @@ spec:
                     additionalProperties:
                       type: boolean
                     description: |-
-                      A map of services along with the opt-in preferences for the Region.
+                      A map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
 
                       WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
                     type: object
@@ -115,7 +116,7 @@ spec:
                     additionalProperties:
                       type: boolean
                     description: |-
-                      A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
+                      A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 
                       WARNING: All parameters are required to be given: EFS, DynamoDB
                     type: object
@@ -124,7 +125,7 @@ spec:
                     additionalProperties:
                       type: boolean
                     description: |-
-                      A map of services along with the opt-in preferences for the Region.
+                      A map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
 
                       WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
                     type: object
@@ -315,7 +316,7 @@ spec:
                     additionalProperties:
                       type: boolean
                     description: |-
-                      A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
+                      A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 
                       WARNING: All parameters are required to be given: EFS, DynamoDB
                     type: object
@@ -324,7 +325,7 @@ spec:
                     additionalProperties:
                       type: boolean
                     description: |-
-                      A map of services along with the opt-in preferences for the Region.
+                      A map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
 
                       WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
                     type: object

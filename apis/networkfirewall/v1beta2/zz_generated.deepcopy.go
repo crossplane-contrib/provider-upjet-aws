@@ -639,6 +639,17 @@ func (in *FirewallInitParameters) DeepCopyInto(out *FirewallInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnabledAnalysisTypes != nil {
+		in, out := &in.EnabledAnalysisTypes, &out.EnabledAnalysisTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
 		*out = new(EncryptionConfigurationInitParameters)
@@ -774,6 +785,17 @@ func (in *FirewallObservation) DeepCopyInto(out *FirewallObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnabledAnalysisTypes != nil {
+		in, out := &in.EnabledAnalysisTypes, &out.EnabledAnalysisTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
 		*out = new(EncryptionConfigurationObservation)
@@ -884,6 +906,17 @@ func (in *FirewallParameters) DeepCopyInto(out *FirewallParameters) {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.EnabledAnalysisTypes != nil {
+		in, out := &in.EnabledAnalysisTypes, &out.EnabledAnalysisTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration

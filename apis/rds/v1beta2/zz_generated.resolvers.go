@@ -123,6 +123,25 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.MasterUserSecretKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MonitoringRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.MonitoringRoleArnRef,
+			Selector:     mg.Spec.ForProvider.MonitoringRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MonitoringRoleArn")
+	}
+	mg.Spec.ForProvider.MonitoringRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MonitoringRoleArnRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.RestoreToPointInTime != nil {
 		{
@@ -279,6 +298,25 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.InitProvider.MasterUserSecretKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MasterUserSecretKMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MonitoringRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.MonitoringRoleArnRef,
+			Selector:     mg.Spec.InitProvider.MonitoringRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MonitoringRoleArn")
+	}
+	mg.Spec.InitProvider.MonitoringRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MonitoringRoleArnRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.RestoreToPointInTime != nil {
 		{

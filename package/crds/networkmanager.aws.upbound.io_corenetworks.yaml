@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: CoreNetwork is the Schema for the CoreNetworks API. Provides
-          a core network resource.
+        description: CoreNetwork is the Schema for the CoreNetworks API. Manages a
+          Network Manager Core Network.
         properties:
           apiVersion:
             description: |-
@@ -76,17 +76,10 @@ spec:
                   basePolicyDocument:
                     description: west-2 and ASN 65500 are used in the base policy.
                     type: string
-                  basePolicyRegion:
-                    description: The base policy created by setting the create_base_policy
-                      argument to true requires a region to be set in the edge-locations,
-                      location key. If base_policy_region is not specified, the region
-                      used in the base policy defaults to the region specified in
-                      the provider block.
-                    type: string
                   basePolicyRegions:
-                    description: A list of regions to add to the base policy. The
-                      base policy created by setting the create_base_policy argument
-                      to true requires one or more regions to be set in the edge-locations,
+                    description: List of regions to add to the base policy. The base
+                      policy created by setting the create_base_policy argument to
+                      true requires one or more regions to be set in the edge-locations,
                       location key. If base_policy_regions is not specified, the region
                       used in the base policy defaults to the region specified in
                       the provider block.
@@ -102,8 +95,8 @@ spec:
                     description: Description of the Core Network.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network that a core network
-                      will be a part of.
+                    description: ID of the global network that a core network will
+                      be a part of.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -210,17 +203,10 @@ spec:
                   basePolicyDocument:
                     description: west-2 and ASN 65500 are used in the base policy.
                     type: string
-                  basePolicyRegion:
-                    description: The base policy created by setting the create_base_policy
-                      argument to true requires a region to be set in the edge-locations,
-                      location key. If base_policy_region is not specified, the region
-                      used in the base policy defaults to the region specified in
-                      the provider block.
-                    type: string
                   basePolicyRegions:
-                    description: A list of regions to add to the base policy. The
-                      base policy created by setting the create_base_policy argument
-                      to true requires one or more regions to be set in the edge-locations,
+                    description: List of regions to add to the base policy. The base
+                      policy created by setting the create_base_policy argument to
+                      true requires one or more regions to be set in the edge-locations,
                       location key. If base_policy_regions is not specified, the region
                       used in the base policy defaults to the region specified in
                       the provider block.
@@ -236,8 +222,8 @@ spec:
                     description: Description of the Core Network.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network that a core network
-                      will be a part of.
+                    description: ID of the global network that a core network will
+                      be a part of.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -495,22 +481,15 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Core Network Amazon Resource Name (ARN).
+                    description: Core Network ARN.
                     type: string
                   basePolicyDocument:
                     description: west-2 and ASN 65500 are used in the base policy.
                     type: string
-                  basePolicyRegion:
-                    description: The base policy created by setting the create_base_policy
-                      argument to true requires a region to be set in the edge-locations,
-                      location key. If base_policy_region is not specified, the region
-                      used in the base policy defaults to the region specified in
-                      the provider block.
-                    type: string
                   basePolicyRegions:
-                    description: A list of regions to add to the base policy. The
-                      base policy created by setting the create_base_policy argument
-                      to true requires one or more regions to be set in the edge-locations,
+                    description: List of regions to add to the base policy. The base
+                      policy created by setting the create_base_policy argument to
+                      true requires one or more regions to be set in the edge-locations,
                       location key. If base_policy_regions is not specified, the region
                       used in the base policy defaults to the region specified in
                       the provider block.
@@ -547,8 +526,8 @@ spec:
                       type: object
                     type: array
                   globalNetworkId:
-                    description: The ID of the global network that a core network
-                      will be a part of.
+                    description: ID of the global network that a core network will
+                      be a part of.
                     type: string
                   id:
                     description: Core Network ID.
@@ -585,9 +564,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -931,7 +931,7 @@ spec:
                   dataSources:
                     description: The data sources for the workspace. Valid values
                       are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS,
-                      REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
                     items:
                       type: string
                     type: array
@@ -992,8 +992,9 @@ spec:
                       and IAM policy attachments will not be created.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The IAM role ARN that the workspace assumes.
@@ -1138,7 +1139,7 @@ spec:
                   dataSources:
                     description: The data sources for the workspace. Valid values
                       are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS,
-                      REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
                     items:
                       type: string
                     type: array
@@ -1514,7 +1515,7 @@ spec:
                   dataSources:
                     description: The data sources for the workspace. Valid values
                       are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS,
-                      REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
                     items:
                       type: string
                     type: array

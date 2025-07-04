@@ -92,7 +92,7 @@ type MultiRegionAccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	Details *DetailsParameters `json:"details,omitempty" tf:"details,omitempty"`
 
-	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -175,7 +175,7 @@ type RegionObservation struct {
 	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
-	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 

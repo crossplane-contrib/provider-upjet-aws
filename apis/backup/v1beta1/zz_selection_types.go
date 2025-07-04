@@ -14,43 +14,57 @@ import (
 )
 
 type ConditionInitParameters struct {
+
+	// Filters the values of your tagged resources for only those resources that you tagged with the same value. Also called "exact matching". See below for details.
 	StringEquals []StringEqualsInitParameters `json:"stringEquals,omitempty" tf:"string_equals,omitempty"`
 
+	// Filters the values of your tagged resources for matching tag values with the use of a wildcard character (*) anywhere in the string. For example, prod* or *rod* matches the tag value production. See below for details.
 	StringLike []StringLikeInitParameters `json:"stringLike,omitempty" tf:"string_like,omitempty"`
 
+	// Filters the values of your tagged resources for only those resources that you tagged that do not have the same value. Also called "negated matching". See below for details.
 	StringNotEquals []StringNotEqualsInitParameters `json:"stringNotEquals,omitempty" tf:"string_not_equals,omitempty"`
 
+	// Filters the values of your tagged resources for non-matching tag values with the use of a wildcard character (*) anywhere in the string. See below for details.
 	StringNotLike []StringNotLikeInitParameters `json:"stringNotLike,omitempty" tf:"string_not_like,omitempty"`
 }
 
 type ConditionObservation struct {
+
+	// Filters the values of your tagged resources for only those resources that you tagged with the same value. Also called "exact matching". See below for details.
 	StringEquals []StringEqualsObservation `json:"stringEquals,omitempty" tf:"string_equals,omitempty"`
 
+	// Filters the values of your tagged resources for matching tag values with the use of a wildcard character (*) anywhere in the string. For example, prod* or *rod* matches the tag value production. See below for details.
 	StringLike []StringLikeObservation `json:"stringLike,omitempty" tf:"string_like,omitempty"`
 
+	// Filters the values of your tagged resources for only those resources that you tagged that do not have the same value. Also called "negated matching". See below for details.
 	StringNotEquals []StringNotEqualsObservation `json:"stringNotEquals,omitempty" tf:"string_not_equals,omitempty"`
 
+	// Filters the values of your tagged resources for non-matching tag values with the use of a wildcard character (*) anywhere in the string. See below for details.
 	StringNotLike []StringNotLikeObservation `json:"stringNotLike,omitempty" tf:"string_not_like,omitempty"`
 }
 
 type ConditionParameters struct {
 
+	// Filters the values of your tagged resources for only those resources that you tagged with the same value. Also called "exact matching". See below for details.
 	// +kubebuilder:validation:Optional
 	StringEquals []StringEqualsParameters `json:"stringEquals,omitempty" tf:"string_equals,omitempty"`
 
+	// Filters the values of your tagged resources for matching tag values with the use of a wildcard character (*) anywhere in the string. For example, prod* or *rod* matches the tag value production. See below for details.
 	// +kubebuilder:validation:Optional
 	StringLike []StringLikeParameters `json:"stringLike,omitempty" tf:"string_like,omitempty"`
 
+	// Filters the values of your tagged resources for only those resources that you tagged that do not have the same value. Also called "negated matching". See below for details.
 	// +kubebuilder:validation:Optional
 	StringNotEquals []StringNotEqualsParameters `json:"stringNotEquals,omitempty" tf:"string_not_equals,omitempty"`
 
+	// Filters the values of your tagged resources for non-matching tag values with the use of a wildcard character (*) anywhere in the string. See below for details.
 	// +kubebuilder:validation:Optional
 	StringNotLike []StringNotLikeParameters `json:"stringNotLike,omitempty" tf:"string_not_like,omitempty"`
 }
 
 type SelectionInitParameters struct {
 
-	// A list of conditions that you define to assign resources to your backup plans using tags.
+	// Condition-based filters used to specify sets of resources for a backup plan. See below for details.
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
@@ -109,13 +123,13 @@ type SelectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourcesSelector *v1.Selector `json:"resourcesSelector,omitempty" tf:"-"`
 
-	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
+	// Tag-based conditions used to specify a set of resources to assign to a backup plan. See below for details.
 	SelectionTag []SelectionTagInitParameters `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
 }
 
 type SelectionObservation struct {
 
-	// A list of conditions that you define to assign resources to your backup plans using tags.
+	// Condition-based filters used to specify sets of resources for a backup plan. See below for details.
 	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
@@ -138,13 +152,13 @@ type SelectionObservation struct {
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
+	// Tag-based conditions used to specify a set of resources to assign to a backup plan. See below for details.
 	SelectionTag []SelectionTagObservation `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
 }
 
 type SelectionParameters struct {
 
-	// A list of conditions that you define to assign resources to your backup plans using tags.
+	// Condition-based filters used to specify sets of resources for a backup plan. See below for details.
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
@@ -194,6 +208,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -214,162 +229,162 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourcesSelector *v1.Selector `json:"resourcesSelector,omitempty" tf:"-"`
 
-	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
+	// Tag-based conditions used to specify a set of resources to assign to a backup plan. See below for details.
 	// +kubebuilder:validation:Optional
 	SelectionTag []SelectionTagParameters `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
 }
 
 type SelectionTagInitParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
+	// An operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SelectionTagObservation struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
+	// An operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SelectionTagParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
+	// An operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type StringEqualsInitParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringEqualsObservation struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringEqualsParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type StringLikeInitParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringLikeObservation struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringLikeParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type StringNotEqualsInitParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringNotEqualsObservation struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringNotEqualsParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type StringNotLikeInitParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringNotLikeObservation struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringNotLikeParameters struct {
 
-	// The key in a key-value pair.
+	// Key for the filter.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The value in a key-value pair.
+	// Value for the filter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }

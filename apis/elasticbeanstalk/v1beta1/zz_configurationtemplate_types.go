@@ -15,7 +15,7 @@ import (
 
 type ConfigurationTemplateInitParameters struct {
 
-	// –  name of the application to associate with this configuration template
+	// name of the application to associate with this configuration template
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticbeanstalk/v1beta2.Application
 	Application *string `json:"application,omitempty" tf:"application,omitempty"`
 
@@ -30,45 +30,45 @@ type ConfigurationTemplateInitParameters struct {
 	// Short description of the Template
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  The ID of the environment used with this configuration template
+	// The ID of the environment used with this configuration template
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
-	// –  Option settings to configure the new Environment. These
+	// Option settings to configure the new Environment. These
 	// override specific values that are set as defaults. The format is detailed
 	// below in Option Settings
 	Setting []SettingInitParameters `json:"setting,omitempty" tf:"setting,omitempty"`
 
-	// –  A solution stack to base your Template
+	// A solution stack to base your Template
 	// off of. Example stacks can be found in the Amazon API documentation
 	SolutionStackName *string `json:"solutionStackName,omitempty" tf:"solution_stack_name,omitempty"`
 }
 
 type ConfigurationTemplateObservation struct {
 
-	// –  name of the application to associate with this configuration template
+	// name of the application to associate with this configuration template
 	Application *string `json:"application,omitempty" tf:"application,omitempty"`
 
 	// Short description of the Template
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  The ID of the environment used with this configuration template
+	// The ID of the environment used with this configuration template
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  Option settings to configure the new Environment. These
+	// Option settings to configure the new Environment. These
 	// override specific values that are set as defaults. The format is detailed
 	// below in Option Settings
 	Setting []SettingObservation `json:"setting,omitempty" tf:"setting,omitempty"`
 
-	// –  A solution stack to base your Template
+	// A solution stack to base your Template
 	// off of. Example stacks can be found in the Amazon API documentation
 	SolutionStackName *string `json:"solutionStackName,omitempty" tf:"solution_stack_name,omitempty"`
 }
 
 type ConfigurationTemplateParameters struct {
 
-	// –  name of the application to associate with this configuration template
+	// name of the application to associate with this configuration template
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticbeanstalk/v1beta2.Application
 	// +kubebuilder:validation:Optional
 	Application *string `json:"application,omitempty" tf:"application,omitempty"`
@@ -85,22 +85,23 @@ type ConfigurationTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  The ID of the environment used with this configuration template
+	// The ID of the environment used with this configuration template
 	// +kubebuilder:validation:Optional
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// –  Option settings to configure the new Environment. These
+	// Option settings to configure the new Environment. These
 	// override specific values that are set as defaults. The format is detailed
 	// below in Option Settings
 	// +kubebuilder:validation:Optional
 	Setting []SettingParameters `json:"setting,omitempty" tf:"setting,omitempty"`
 
-	// –  A solution stack to base your Template
+	// A solution stack to base your Template
 	// off of. Example stacks can be found in the Amazon API documentation
 	// +kubebuilder:validation:Optional
 	SolutionStackName *string `json:"solutionStackName,omitempty" tf:"solution_stack_name,omitempty"`

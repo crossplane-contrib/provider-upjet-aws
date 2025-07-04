@@ -67,9 +67,6 @@ type JobQueueInitParameters struct {
 	// The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
 	ComputeEnvironmentOrder []ComputeEnvironmentOrderInitParameters `json:"computeEnvironmentOrder,omitempty" tf:"compute_environment_order,omitempty"`
 
-	// (Deprecated)  This parameter is deprecated, please use compute_environment_order instead. List of compute environment ARNs mapped to a job queue. The position of the compute environments in the list will dictate the order. When importing a AWS Batch Job Queue, the parameter compute_environments will always be used over compute_environment_order. Please adjust your HCL accordingly.
-	ComputeEnvironments []*string `json:"computeEnvironments,omitempty" tf:"compute_environments,omitempty"`
-
 	// The set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
 	JobStateTimeLimitAction []JobStateTimeLimitActionInitParameters `json:"jobStateTimeLimitAction,omitempty" tf:"job_state_time_limit_action,omitempty"`
 
@@ -106,9 +103,6 @@ type JobQueueObservation struct {
 	// The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
 	ComputeEnvironmentOrder []ComputeEnvironmentOrderObservation `json:"computeEnvironmentOrder,omitempty" tf:"compute_environment_order,omitempty"`
 
-	// (Deprecated)  This parameter is deprecated, please use compute_environment_order instead. List of compute environment ARNs mapped to a job queue. The position of the compute environments in the list will dictate the order. When importing a AWS Batch Job Queue, the parameter compute_environments will always be used over compute_environment_order. Please adjust your HCL accordingly.
-	ComputeEnvironments []*string `json:"computeEnvironments,omitempty" tf:"compute_environments,omitempty"`
-
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
@@ -139,10 +133,6 @@ type JobQueueParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeEnvironmentOrder []ComputeEnvironmentOrderParameters `json:"computeEnvironmentOrder,omitempty" tf:"compute_environment_order,omitempty"`
 
-	// (Deprecated)  This parameter is deprecated, please use compute_environment_order instead. List of compute environment ARNs mapped to a job queue. The position of the compute environments in the list will dictate the order. When importing a AWS Batch Job Queue, the parameter compute_environments will always be used over compute_environment_order. Please adjust your HCL accordingly.
-	// +kubebuilder:validation:Optional
-	ComputeEnvironments []*string `json:"computeEnvironments,omitempty" tf:"compute_environments,omitempty"`
-
 	// The set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
 	// +kubebuilder:validation:Optional
 	JobStateTimeLimitAction []JobStateTimeLimitActionParameters `json:"jobStateTimeLimitAction,omitempty" tf:"job_state_time_limit_action,omitempty"`
@@ -152,6 +142,7 @@ type JobQueueParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -105,6 +105,7 @@ type EventSubscriptionParameters struct {
 	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

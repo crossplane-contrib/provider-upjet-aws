@@ -26,20 +26,40 @@ type LayerVersionInitParameters struct {
 	// Description of what your Lambda Layer does.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// prefixed options cannot be used.
+	// Path to the function's deployment package within the local filesystem. If defined, The s3_-prefixed options cannot be used.
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
-	// Unique name for your Lambda Layer
+	// Unique name for your Lambda Layer.
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
 	// License info for your Lambda Layer. See License Info.
 	LicenseInfo *string `json:"licenseInfo,omitempty" tf:"license_info,omitempty"`
 
 	// S3 bucket location containing the function's deployment package. Conflicts with filename. This bucket must reside in the same AWS region where you are creating the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Object
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
+	// Reference to a Object in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
+
+	// Selector for a Object in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
+
 	// S3 key of an object containing the function's deployment package. Conflicts with filename.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Object
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
+
+	// Reference to a Object in s3 to populate s3Key.
+	// +kubebuilder:validation:Optional
+	S3KeyRef *v1.Reference `json:"s3KeyRef,omitempty" tf:"-"`
+
+	// Selector for a Object in s3 to populate s3Key.
+	// +kubebuilder:validation:Optional
+	S3KeySelector *v1.Selector `json:"s3KeySelector,omitempty" tf:"-"`
 
 	// Object version containing the function's deployment package. Conflicts with filename.
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
@@ -47,7 +67,7 @@ type LayerVersionInitParameters struct {
 	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// Virtual attribute used to trigger replacement when source code changes. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is ${filebase64sha256("file.11.12 or later) or ${base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
+	// Virtual attribute used to trigger replacement when source code changes. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256("file.11.12 or later) or base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 }
 
@@ -73,7 +93,7 @@ type LayerVersionObservation struct {
 	// Description of what your Lambda Layer does.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// prefixed options cannot be used.
+	// Path to the function's deployment package within the local filesystem. If defined, The s3_-prefixed options cannot be used.
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -81,7 +101,7 @@ type LayerVersionObservation struct {
 	// ARN of the Lambda Layer without version.
 	LayerArn *string `json:"layerArn,omitempty" tf:"layer_arn,omitempty"`
 
-	// Unique name for your Lambda Layer
+	// Unique name for your Lambda Layer.
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
 	// License info for your Lambda Layer. See License Info.
@@ -105,7 +125,7 @@ type LayerVersionObservation struct {
 	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// Virtual attribute used to trigger replacement when source code changes. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is ${filebase64sha256("file.11.12 or later) or ${base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
+	// Virtual attribute used to trigger replacement when source code changes. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256("file.11.12 or later) or base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
 	// Size in bytes of the function .zip file.
@@ -131,11 +151,11 @@ type LayerVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// prefixed options cannot be used.
+	// Path to the function's deployment package within the local filesystem. If defined, The s3_-prefixed options cannot be used.
 	// +kubebuilder:validation:Optional
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
-	// Unique name for your Lambda Layer
+	// Unique name for your Lambda Layer.
 	// +kubebuilder:validation:Optional
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
@@ -143,18 +163,39 @@ type LayerVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	LicenseInfo *string `json:"licenseInfo,omitempty" tf:"license_info,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
 	// S3 bucket location containing the function's deployment package. Conflicts with filename. This bucket must reside in the same AWS region where you are creating the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Object
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
+	// Reference to a Object in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
+
+	// Selector for a Object in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
+
 	// S3 key of an object containing the function's deployment package. Conflicts with filename.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Object
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
+
+	// Reference to a Object in s3 to populate s3Key.
+	// +kubebuilder:validation:Optional
+	S3KeyRef *v1.Reference `json:"s3KeyRef,omitempty" tf:"-"`
+
+	// Selector for a Object in s3 to populate s3Key.
+	// +kubebuilder:validation:Optional
+	S3KeySelector *v1.Selector `json:"s3KeySelector,omitempty" tf:"-"`
 
 	// Object version containing the function's deployment package. Conflicts with filename.
 	// +kubebuilder:validation:Optional
@@ -164,7 +205,7 @@ type LayerVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// Virtual attribute used to trigger replacement when source code changes. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is ${filebase64sha256("file.11.12 or later) or ${base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
+	// Virtual attribute used to trigger replacement when source code changes. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256("file.11.12 or later) or base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
 	// +kubebuilder:validation:Optional
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 }
@@ -196,7 +237,7 @@ type LayerVersionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LayerVersion is the Schema for the LayerVersions API. Provides a Lambda Layer Version resource. Lambda Layers allow you to reuse shared bits of code across multiple lambda functions.
+// LayerVersion is the Schema for the LayerVersions API. Manages an AWS Lambda Layer Version.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

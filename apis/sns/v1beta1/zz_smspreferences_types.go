@@ -99,6 +99,7 @@ type SMSPreferencesParameters struct {
 	// +kubebuilder:validation:Optional
 	MonthlySpendLimit *float64 `json:"monthlySpendLimit,omitempty" tf:"monthly_spend_limit,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

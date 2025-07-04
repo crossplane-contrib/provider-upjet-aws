@@ -15,19 +15,19 @@ import (
 
 type ActionConditionInitParameters struct {
 
-	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, and COUNT.
+	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 }
 
 type ActionConditionObservation struct {
 
-	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, and COUNT.
+	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 }
 
 type ActionConditionParameters struct {
 
-	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, and COUNT.
+	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 }
@@ -317,6 +317,7 @@ type WebACLLoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RedactedFields []RedactedFieldsParameters `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

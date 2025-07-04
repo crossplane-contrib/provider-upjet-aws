@@ -74,8 +74,7 @@ spec:
               forProvider:
                 properties:
                   group:
-                    description: –  The IAM Group name to attach the list of users
-                      to
+                    description: The IAM Group name to attach the list of users to
                     type: string
                   groupRef:
                     description: Reference to a Group in iam to populate group.
@@ -252,8 +251,7 @@ spec:
                   autoscaler.
                 properties:
                   group:
-                    description: –  The IAM Group name to attach the list of users
-                      to
+                    description: The IAM Group name to attach the list of users to
                     type: string
                   groupRef:
                     description: Reference to a Group in iam to populate group.
@@ -594,8 +592,7 @@ spec:
               atProvider:
                 properties:
                   group:
-                    description: –  The IAM Group name to attach the list of users
-                      to
+                    description: The IAM Group name to attach the list of users to
                     type: string
                   id:
                     type: string

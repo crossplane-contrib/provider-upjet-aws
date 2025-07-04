@@ -107,6 +107,9 @@ type StackSetInstanceInitParameters struct {
 	// You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false.
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
 
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
+
 	// Name of the StackSet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudformation/v1beta2.StackSet
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
@@ -153,6 +156,9 @@ type StackSetInstanceObservation struct {
 	// List of stack instances created from an organizational unit deployment target. This will only be populated when deployment_targets is set. See stack_instance_summaries.
 	// List of stack instances created from an organizational unit deployment target. This will only be populated when `deployment_targets` is set.
 	StackInstanceSummaries []StackInstanceSummariesObservation `json:"stackInstanceSummaries,omitempty" tf:"stack_instance_summaries,omitempty"`
+
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
 
 	// Name of the StackSet.
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
@@ -260,7 +266,7 @@ type StackSetInstanceParameters struct {
 	// +mapType=granular
 	ParameterOverrides map[string]*string `json:"parameterOverrides,omitempty" tf:"parameter_overrides,omitempty"`
 
-	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -269,6 +275,10 @@ type StackSetInstanceParameters struct {
 	// You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false.
 	// +kubebuilder:validation:Optional
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
+
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	// +kubebuilder:validation:Optional
+	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
 
 	// Name of the StackSet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudformation/v1beta2.StackSet

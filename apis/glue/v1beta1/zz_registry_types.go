@@ -15,7 +15,7 @@ import (
 
 type RegistryInitParameters struct {
 
-	// –  A description of the registry.
+	// A description of the registry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Key-value map of resource tags.
@@ -28,7 +28,7 @@ type RegistryObservation struct {
 	// Amazon Resource Name (ARN) of Glue Registry.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  A description of the registry.
+	// A description of the registry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Amazon Resource Name (ARN) of Glue Registry.
@@ -45,10 +45,11 @@ type RegistryObservation struct {
 
 type RegistryParameters struct {
 
-	// –  A description of the registry.
+	// A description of the registry.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

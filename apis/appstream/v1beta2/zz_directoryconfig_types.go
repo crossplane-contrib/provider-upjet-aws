@@ -56,6 +56,7 @@ type DirectoryConfigParameters struct {
 	// +listType=set
 	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

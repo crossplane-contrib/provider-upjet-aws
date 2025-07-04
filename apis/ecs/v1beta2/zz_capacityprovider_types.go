@@ -100,7 +100,6 @@ type CapacityProviderObservation struct {
 	// Configuration block for the provider for the ECS auto scaling group. Detailed below.
 	AutoScalingGroupProvider *AutoScalingGroupProviderObservation `json:"autoScalingGroupProvider,omitempty" tf:"auto_scaling_group_provider,omitempty"`
 
-	// ARN that identifies the capacity provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -118,6 +117,7 @@ type CapacityProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupProvider *AutoScalingGroupProviderParameters `json:"autoScalingGroupProvider,omitempty" tf:"auto_scaling_group_provider,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

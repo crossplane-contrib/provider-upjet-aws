@@ -1527,7 +1527,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      Region of the AMI.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
@@ -2185,7 +2185,8 @@ spec:
                                 description: The name of the Workflow parameter.
                                 type: string
                               region:
-                                description: Region of the AMI.
+                                description: Region where this resource will be managed.
+                                  Defaults to the Region set in the provider configuration.
                                 type: string
                             type: object
                           type: array
@@ -2201,7 +2202,8 @@ spec:
                                 type: array
                                 x-kubernetes-list-type: set
                               region:
-                                description: Region of the AMI.
+                                description: Region where this resource will be managed.
+                                  Defaults to the Region set in the provider configuration.
                                 type: string
                             type: object
                           type: array

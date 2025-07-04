@@ -694,13 +694,12 @@ spec:
                           column delimiter.
                         type: string
                       serde:
-                        description: –  The SerDe for processing CSV. Valid values
-                          are OpenCSVSerDe, LazySimpleSerDe, None.
+                        description: The SerDe for processing CSV. Valid values are
+                          OpenCSVSerDe, LazySimpleSerDe, None.
                         type: string
                     type: object
                   grokClassifier:
-                    description: –  A classifier that uses grok patterns. Defined
-                      below.
+                    description: A classifier that uses grok patterns. Defined below.
                     properties:
                       classification:
                         description: An identifier of the data format that the classifier
@@ -715,7 +714,7 @@ spec:
                         type: string
                     type: object
                   jsonClassifier:
-                    description: –  A classifier for JSON content. Defined below.
+                    description: A classifier for JSON content. Defined below.
                     properties:
                       jsonPath:
                         description: A JsonPath string defining the JSON data for
@@ -724,11 +723,12 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   xmlClassifier:
-                    description: –  A classifier for XML content. Defined below.
+                    description: A classifier for XML content. Defined below.
                     properties:
                       classification:
                         description: An identifier of the data format that the classifier
@@ -798,13 +798,12 @@ spec:
                           column delimiter.
                         type: string
                       serde:
-                        description: –  The SerDe for processing CSV. Valid values
-                          are OpenCSVSerDe, LazySimpleSerDe, None.
+                        description: The SerDe for processing CSV. Valid values are
+                          OpenCSVSerDe, LazySimpleSerDe, None.
                         type: string
                     type: object
                   grokClassifier:
-                    description: –  A classifier that uses grok patterns. Defined
-                      below.
+                    description: A classifier that uses grok patterns. Defined below.
                     properties:
                       classification:
                         description: An identifier of the data format that the classifier
@@ -819,7 +818,7 @@ spec:
                         type: string
                     type: object
                   jsonClassifier:
-                    description: –  A classifier for JSON content. Defined below.
+                    description: A classifier for JSON content. Defined below.
                     properties:
                       jsonPath:
                         description: A JsonPath string defining the JSON data for
@@ -828,7 +827,7 @@ spec:
                         type: string
                     type: object
                   xmlClassifier:
-                    description: –  A classifier for XML content. Defined below.
+                    description: A classifier for XML content. Defined below.
                     properties:
                       classification:
                         description: An identifier of the data format that the classifier
@@ -1055,13 +1054,12 @@ spec:
                           column delimiter.
                         type: string
                       serde:
-                        description: –  The SerDe for processing CSV. Valid values
-                          are OpenCSVSerDe, LazySimpleSerDe, None.
+                        description: The SerDe for processing CSV. Valid values are
+                          OpenCSVSerDe, LazySimpleSerDe, None.
                         type: string
                     type: object
                   grokClassifier:
-                    description: –  A classifier that uses grok patterns. Defined
-                      below.
+                    description: A classifier that uses grok patterns. Defined below.
                     properties:
                       classification:
                         description: An identifier of the data format that the classifier
@@ -1079,7 +1077,7 @@ spec:
                     description: Name of the classifier
                     type: string
                   jsonClassifier:
-                    description: –  A classifier for JSON content. Defined below.
+                    description: A classifier for JSON content. Defined below.
                     properties:
                       jsonPath:
                         description: A JsonPath string defining the JSON data for
@@ -1088,7 +1086,7 @@ spec:
                         type: string
                     type: object
                   xmlClassifier:
-                    description: –  A classifier for XML content. Defined below.
+                    description: A classifier for XML content. Defined below.
                     properties:
                       classification:
                         description: An identifier of the data format that the classifier

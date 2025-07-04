@@ -468,6 +468,7 @@ type RiskConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationParameters `json:"compromisedCredentialsRiskConfiguration,omitempty" tf:"compromised_credentials_risk_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

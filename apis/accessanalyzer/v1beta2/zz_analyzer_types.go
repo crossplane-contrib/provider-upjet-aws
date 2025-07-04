@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AnalysisRuleInitParameters struct {
+
+	// A block for the analyzer rules containing criteria to exclude from analysis. Documented below
+	Exclusion []ExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+}
+
+type AnalysisRuleObservation struct {
+
+	// A block for the analyzer rules containing criteria to exclude from analysis. Documented below
+	Exclusion []ExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+}
+
+type AnalysisRuleParameters struct {
+
+	// A block for the analyzer rules containing criteria to exclude from analysis. Documented below
+	// +kubebuilder:validation:Optional
+	Exclusion []ExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+}
+
 type AnalyzerInitParameters struct {
 
 	// A block that specifies the configuration of the analyzer. Documented below
@@ -55,6 +74,7 @@ type AnalyzerParameters struct {
 	// +kubebuilder:validation:Optional
 	Configuration *ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -89,7 +109,39 @@ type ConfigurationParameters struct {
 	UnusedAccess *UnusedAccessParameters `json:"unusedAccess,omitempty" tf:"unused_access,omitempty"`
 }
 
+type ExclusionInitParameters struct {
+
+	// A list of account IDs to exclude from the analysis.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// A list of key-value pairs for resource tags to exclude from the analysis.
+	ResourceTags []map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+}
+
+type ExclusionObservation struct {
+
+	// A list of account IDs to exclude from the analysis.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// A list of key-value pairs for resource tags to exclude from the analysis.
+	ResourceTags []map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+}
+
+type ExclusionParameters struct {
+
+	// A list of account IDs to exclude from the analysis.
+	// +kubebuilder:validation:Optional
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// A list of key-value pairs for resource tags to exclude from the analysis.
+	// +kubebuilder:validation:Optional
+	ResourceTags []map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+}
+
 type UnusedAccessInitParameters struct {
+
+	// A block for analysis rules. Documented below
+	AnalysisRule *AnalysisRuleInitParameters `json:"analysisRule,omitempty" tf:"analysis_rule,omitempty"`
 
 	// The specified access age in days for which to generate findings for unused access.
 	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
@@ -97,11 +149,18 @@ type UnusedAccessInitParameters struct {
 
 type UnusedAccessObservation struct {
 
+	// A block for analysis rules. Documented below
+	AnalysisRule *AnalysisRuleObservation `json:"analysisRule,omitempty" tf:"analysis_rule,omitempty"`
+
 	// The specified access age in days for which to generate findings for unused access.
 	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
 }
 
 type UnusedAccessParameters struct {
+
+	// A block for analysis rules. Documented below
+	// +kubebuilder:validation:Optional
+	AnalysisRule *AnalysisRuleParameters `json:"analysisRule,omitempty" tf:"analysis_rule,omitempty"`
 
 	// The specified access age in days for which to generate findings for unused access.
 	// +kubebuilder:validation:Optional

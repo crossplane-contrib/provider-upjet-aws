@@ -921,6 +921,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The origin request policy ARN.
+                    type: string
                   comment:
                     description: Comment to describe the origin request policy.
                     type: string

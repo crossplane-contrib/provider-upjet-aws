@@ -22,7 +22,7 @@ type UsageLimitInitParameters struct {
 	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
 
 	// The identifier of the cluster that you want to limit usage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -94,7 +94,7 @@ type UsageLimitParameters struct {
 	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
 
 	// The identifier of the cluster that you want to limit usage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
@@ -119,6 +119,7 @@ type UsageLimitParameters struct {
 	// +kubebuilder:validation:Optional
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

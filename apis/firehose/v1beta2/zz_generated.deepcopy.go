@@ -3881,6 +3881,11 @@ func (in *MskSourceConfigurationInitParameters) DeepCopyInto(out *MskSourceConfi
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReadFromTimestamp != nil {
+		in, out := &in.ReadFromTimestamp, &out.ReadFromTimestamp
+		*out = new(string)
+		**out = **in
+	}
 	if in.TopicName != nil {
 		in, out := &in.TopicName, &out.TopicName
 		*out = new(string)
@@ -3911,6 +3916,11 @@ func (in *MskSourceConfigurationObservation) DeepCopyInto(out *MskSourceConfigur
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReadFromTimestamp != nil {
+		in, out := &in.ReadFromTimestamp, &out.ReadFromTimestamp
+		*out = new(string)
+		**out = **in
+	}
 	if in.TopicName != nil {
 		in, out := &in.TopicName, &out.TopicName
 		*out = new(string)
@@ -3938,6 +3948,11 @@ func (in *MskSourceConfigurationParameters) DeepCopyInto(out *MskSourceConfigura
 	}
 	if in.MskClusterArn != nil {
 		in, out := &in.MskClusterArn, &out.MskClusterArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ReadFromTimestamp != nil {
+		in, out := &in.ReadFromTimestamp, &out.ReadFromTimestamp
 		*out = new(string)
 		**out = **in
 	}

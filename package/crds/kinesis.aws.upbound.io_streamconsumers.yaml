@@ -77,12 +77,13 @@ spec:
                     description: Name of the stream consumer.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   streamArn:
-                    description: –  Amazon Resource Name (ARN) of the data stream
-                      the consumer is registered with.
+                    description: Amazon Resource Name (ARN) of the data stream the
+                      consumer is registered with.
                     type: string
                   streamArnRef:
                     description: Reference to a Stream in kinesis to populate streamArn.
@@ -178,8 +179,8 @@ spec:
                     description: Name of the stream consumer.
                     type: string
                   streamArn:
-                    description: –  Amazon Resource Name (ARN) of the data stream
-                      the consumer is registered with.
+                    description: Amazon Resource Name (ARN) of the data stream the
+                      consumer is registered with.
                     type: string
                   streamArnRef:
                     description: Reference to a Stream in kinesis to populate streamArn.
@@ -447,8 +448,8 @@ spec:
                     description: Name of the stream consumer.
                     type: string
                   streamArn:
-                    description: –  Amazon Resource Name (ARN) of the data stream
-                      the consumer is registered with.
+                    description: Amazon Resource Name (ARN) of the data stream the
+                      consumer is registered with.
                     type: string
                 type: object
               conditions:

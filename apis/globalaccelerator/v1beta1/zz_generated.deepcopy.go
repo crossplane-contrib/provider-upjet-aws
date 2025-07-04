@@ -1053,6 +1053,11 @@ func (in *ListenerObservation) DeepCopyInto(out *ListenerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Arn != nil {
+		in, out := &in.Arn, &out.Arn
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClientAffinity != nil {
 		in, out := &in.ClientAffinity, &out.ClientAffinity
 		*out = new(string)

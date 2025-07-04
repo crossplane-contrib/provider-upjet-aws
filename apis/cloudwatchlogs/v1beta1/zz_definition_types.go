@@ -55,6 +55,7 @@ type DefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

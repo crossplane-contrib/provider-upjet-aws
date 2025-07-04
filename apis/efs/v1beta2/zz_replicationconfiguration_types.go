@@ -36,7 +36,7 @@ type DestinationObservation struct {
 	// The Key ID, ARN, alias, or alias ARN of the KMS key that should be used to encrypt the replica file system. If omitted, the default KMS key for EFS /aws/elasticfilesystem will be used.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The region in which the replica should be created.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The status of the replication.
@@ -57,7 +57,7 @@ type DestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The region in which the replica should be created.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -110,7 +110,7 @@ type ReplicationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Destination *DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// The region in which the replica should be created.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

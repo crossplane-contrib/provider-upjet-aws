@@ -2682,6 +2682,11 @@ func (in *ServerlessClusterObservation) DeepCopyInto(out *ServerlessClusterObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.BootstrapBrokersSaslIAM != nil {
+		in, out := &in.BootstrapBrokersSaslIAM, &out.BootstrapBrokersSaslIAM
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClientAuthentication != nil {
 		in, out := &in.ClientAuthentication, &out.ClientAuthentication
 		*out = new(ServerlessClusterClientAuthenticationObservation)

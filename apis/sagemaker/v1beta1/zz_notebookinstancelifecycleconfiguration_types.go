@@ -15,11 +15,15 @@ import (
 
 type NotebookInstanceLifecycleConfigurationInitParameters struct {
 
-	// A shell script (base64-encoded) that runs only once when the SageMaker Notebook Instance is created.
+	// A shell script (base64-encoded) that runs only once when the SageMaker AI Notebook Instance is created.
 	OnCreate *string `json:"onCreate,omitempty" tf:"on_create,omitempty"`
 
-	// A shell script (base64-encoded) that runs every time the SageMaker Notebook Instance is started including the time it's created.
+	// A shell script (base64-encoded) that runs every time the SageMaker AI Notebook Instance is started including the time it's created.
 	OnStart *string `json:"onStart,omitempty" tf:"on_start,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NotebookInstanceLifecycleConfigurationObservation struct {
@@ -29,27 +33,41 @@ type NotebookInstanceLifecycleConfigurationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A shell script (base64-encoded) that runs only once when the SageMaker Notebook Instance is created.
+	// A shell script (base64-encoded) that runs only once when the SageMaker AI Notebook Instance is created.
 	OnCreate *string `json:"onCreate,omitempty" tf:"on_create,omitempty"`
 
-	// A shell script (base64-encoded) that runs every time the SageMaker Notebook Instance is started including the time it's created.
+	// A shell script (base64-encoded) that runs every time the SageMaker AI Notebook Instance is started including the time it's created.
 	OnStart *string `json:"onStart,omitempty" tf:"on_start,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type NotebookInstanceLifecycleConfigurationParameters struct {
 
-	// A shell script (base64-encoded) that runs only once when the SageMaker Notebook Instance is created.
+	// A shell script (base64-encoded) that runs only once when the SageMaker AI Notebook Instance is created.
 	// +kubebuilder:validation:Optional
 	OnCreate *string `json:"onCreate,omitempty" tf:"on_create,omitempty"`
 
-	// A shell script (base64-encoded) that runs every time the SageMaker Notebook Instance is started including the time it's created.
+	// A shell script (base64-encoded) that runs every time the SageMaker AI Notebook Instance is started including the time it's created.
 	// +kubebuilder:validation:Optional
 	OnStart *string `json:"onStart,omitempty" tf:"on_start,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // NotebookInstanceLifecycleConfigurationSpec defines the desired state of NotebookInstanceLifecycleConfiguration
@@ -79,7 +97,7 @@ type NotebookInstanceLifecycleConfigurationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// NotebookInstanceLifecycleConfiguration is the Schema for the NotebookInstanceLifecycleConfigurations API. Provides a lifecycle configuration for SageMaker Notebook Instances.
+// NotebookInstanceLifecycleConfiguration is the Schema for the NotebookInstanceLifecycleConfigurations API. Provides a lifecycle configuration for SageMaker AI Notebook Instances.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -15,7 +15,7 @@ import (
 
 type FargateProfileInitParameters struct {
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -27,7 +27,7 @@ type FargateProfileInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
+	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
@@ -51,7 +51,7 @@ type FargateProfileInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// –  Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
+	// Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -68,13 +68,13 @@ type FargateProfileObservation struct {
 	// Amazon Resource Name (ARN) of the EKS Fargate Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// EKS Cluster name and EKS Fargate Profile name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
+	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
 
 	// Configuration block(s) for selecting Kubernetes Pods to execute with this EKS Fargate Profile. Detailed below.
@@ -83,7 +83,7 @@ type FargateProfileObservation struct {
 	// Status of the EKS Fargate Profile.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// –  Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
+	// Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -98,7 +98,7 @@ type FargateProfileObservation struct {
 
 type FargateProfileParameters struct {
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -111,7 +111,7 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
+	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -125,6 +125,7 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	PodExecutionRoleArnSelector *v1.Selector `json:"podExecutionRoleArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -142,7 +143,7 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// –  Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
+	// Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector

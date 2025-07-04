@@ -1726,8 +1726,9 @@ spec:
                       many as 500 characters. Conflicts with name_prefix.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   s3JobDefinition:
                     description: The S3 buckets that contain the objects to analyze,
@@ -3009,6 +3010,9 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                     x-kubernetes-map-type: granular
                   userPausedDetails:

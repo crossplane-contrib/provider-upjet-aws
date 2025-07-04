@@ -236,11 +236,6 @@ func (in *BucketObservation) DeepCopyInto(out *BucketObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.SupportCode != nil {
 		in, out := &in.SupportCode, &out.SupportCode
 		*out = new(string)

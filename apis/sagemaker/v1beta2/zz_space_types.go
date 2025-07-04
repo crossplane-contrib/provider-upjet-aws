@@ -15,19 +15,19 @@ import (
 
 type CodeEditorAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 }
 
 type CodeEditorAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 }
 
 type CodeEditorAppSettingsAppLifecycleManagementIdleSettingsParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 }
@@ -126,7 +126,7 @@ type SpaceInitParameters struct {
 	// A collection of ownership settings. Required if space_sharing_settings is set. See ownership_settings Block below.
 	OwnershipSettings *OwnershipSettingsInitParameters `json:"ownershipSettings,omitempty" tf:"ownership_settings,omitempty"`
 
-	// The name of the space that appears in the SageMaker Studio UI.
+	// The name of the space that appears in the SageMaker AI Studio UI.
 	SpaceDisplayName *string `json:"spaceDisplayName,omitempty" tf:"space_display_name,omitempty"`
 
 	// The name of the space.
@@ -160,7 +160,7 @@ type SpaceObservation struct {
 	// A collection of ownership settings. Required if space_sharing_settings is set. See ownership_settings Block below.
 	OwnershipSettings *OwnershipSettingsObservation `json:"ownershipSettings,omitempty" tf:"ownership_settings,omitempty"`
 
-	// The name of the space that appears in the SageMaker Studio UI.
+	// The name of the space that appears in the SageMaker AI Studio UI.
 	SpaceDisplayName *string `json:"spaceDisplayName,omitempty" tf:"space_display_name,omitempty"`
 
 	// The name of the space.
@@ -204,12 +204,13 @@ type SpaceParameters struct {
 	// +kubebuilder:validation:Optional
 	OwnershipSettings *OwnershipSettingsParameters `json:"ownershipSettings,omitempty" tf:"ownership_settings,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The name of the space that appears in the SageMaker Studio UI.
+	// The name of the space that appears in the SageMaker AI Studio UI.
 	// +kubebuilder:validation:Optional
 	SpaceDisplayName *string `json:"spaceDisplayName,omitempty" tf:"space_display_name,omitempty"`
 
@@ -258,10 +259,10 @@ type SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecInitParameters struct 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -276,10 +277,10 @@ type SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecObservation struct {
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -296,11 +297,11 @@ type SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -314,7 +315,7 @@ type SpaceSettingsCodeEditorAppSettingsInitParameters struct {
 	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
 	AppLifecycleManagement *SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementInitParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
@@ -323,7 +324,7 @@ type SpaceSettingsCodeEditorAppSettingsObservation struct {
 	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
 	AppLifecycleManagement *SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementObservation `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
@@ -333,7 +334,7 @@ type SpaceSettingsCodeEditorAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AppLifecycleManagement *SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec" tf:"default_resource_spec,omitempty"`
 }
@@ -346,7 +347,7 @@ type SpaceSettingsInitParameters struct {
 	// The Code Editor application settings. See code_editor_app_settings Block below.
 	CodeEditorAppSettings *SpaceSettingsCodeEditorAppSettingsInitParameters `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// A file system, created by you, that you assign to a space for an Amazon SageMaker Domain. See custom_file_system Block below.
+	// A file system, created by you, that you assign to a space for an Amazon SageMaker AI Domain. See custom_file_system Block below.
 	CustomFileSystem []CustomFileSystemInitParameters `json:"customFileSystem,omitempty" tf:"custom_file_system,omitempty"`
 
 	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
@@ -364,19 +365,19 @@ type SpaceSettingsInitParameters struct {
 
 type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 }
 
 type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 }
 
 type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 }
@@ -427,10 +428,10 @@ type SpaceSettingsJupyterLabAppSettingsDefaultResourceSpecInitParameters struct 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -445,10 +446,10 @@ type SpaceSettingsJupyterLabAppSettingsDefaultResourceSpecObservation struct {
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -465,11 +466,11 @@ type SpaceSettingsJupyterLabAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -483,10 +484,10 @@ type SpaceSettingsJupyterLabAppSettingsInitParameters struct {
 	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
 	AppLifecycleManagement *SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementInitParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
 	CodeRepository []SpaceSettingsJupyterLabAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsJupyterLabAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
@@ -495,10 +496,10 @@ type SpaceSettingsJupyterLabAppSettingsObservation struct {
 	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
 	AppLifecycleManagement *SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementObservation `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
 	CodeRepository []SpaceSettingsJupyterLabAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsJupyterLabAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
@@ -508,11 +509,11 @@ type SpaceSettingsJupyterLabAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AppLifecycleManagement *SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []SpaceSettingsJupyterLabAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *SpaceSettingsJupyterLabAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec" tf:"default_resource_spec,omitempty"`
 }
@@ -544,10 +545,10 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters stru
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -562,10 +563,10 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecObservation struct 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -582,11 +583,11 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -597,10 +598,10 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters struct {
 
 type SpaceSettingsJupyterServerAppSettingsInitParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
 	CodeRepository []SpaceSettingsJupyterServerAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -610,10 +611,10 @@ type SpaceSettingsJupyterServerAppSettingsInitParameters struct {
 
 type SpaceSettingsJupyterServerAppSettingsObservation struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
 	CodeRepository []SpaceSettingsJupyterServerAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -623,11 +624,11 @@ type SpaceSettingsJupyterServerAppSettingsObservation struct {
 
 type SpaceSettingsJupyterServerAppSettingsParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. See code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []SpaceSettingsJupyterServerAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec" tf:"default_resource_spec,omitempty"`
 
@@ -684,10 +685,10 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters stru
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -702,10 +703,10 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation struct 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -722,11 +723,11 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -737,10 +738,10 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 
 type SpaceSettingsKernelGatewayAppSettingsInitParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. See custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. See custom_image Block below.
 	CustomImage []SpaceSettingsKernelGatewayAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -750,10 +751,10 @@ type SpaceSettingsKernelGatewayAppSettingsInitParameters struct {
 
 type SpaceSettingsKernelGatewayAppSettingsObservation struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. See custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. See custom_image Block below.
 	CustomImage []SpaceSettingsKernelGatewayAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	DefaultResourceSpec *SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -763,11 +764,11 @@ type SpaceSettingsKernelGatewayAppSettingsObservation struct {
 
 type SpaceSettingsKernelGatewayAppSettingsParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. See custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. See custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []SpaceSettingsKernelGatewayAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. See default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. See default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec" tf:"default_resource_spec,omitempty"`
 
@@ -785,7 +786,7 @@ type SpaceSettingsObservation struct {
 	// The Code Editor application settings. See code_editor_app_settings Block below.
 	CodeEditorAppSettings *SpaceSettingsCodeEditorAppSettingsObservation `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// A file system, created by you, that you assign to a space for an Amazon SageMaker Domain. See custom_file_system Block below.
+	// A file system, created by you, that you assign to a space for an Amazon SageMaker AI Domain. See custom_file_system Block below.
 	CustomFileSystem []CustomFileSystemObservation `json:"customFileSystem,omitempty" tf:"custom_file_system,omitempty"`
 
 	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
@@ -811,7 +812,7 @@ type SpaceSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CodeEditorAppSettings *SpaceSettingsCodeEditorAppSettingsParameters `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// A file system, created by you, that you assign to a space for an Amazon SageMaker Domain. See custom_file_system Block below.
+	// A file system, created by you, that you assign to a space for an Amazon SageMaker AI Domain. See custom_file_system Block below.
 	// +kubebuilder:validation:Optional
 	CustomFileSystem []CustomFileSystemParameters `json:"customFileSystem,omitempty" tf:"custom_file_system,omitempty"`
 
@@ -896,7 +897,7 @@ type SpaceStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Space is the Schema for the Spaces API. Provides a SageMaker Space resource.
+// Space is the Schema for the Spaces API. Provides a SageMaker AI Space resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

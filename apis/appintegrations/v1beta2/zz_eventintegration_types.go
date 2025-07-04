@@ -88,6 +88,7 @@ type EventIntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	EventbridgeBus *string `json:"eventbridgeBus,omitempty" tf:"eventbridge_bus,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

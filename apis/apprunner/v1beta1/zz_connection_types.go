@@ -51,6 +51,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

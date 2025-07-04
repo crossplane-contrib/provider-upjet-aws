@@ -850,6 +850,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: Amazon Resource Name (ARN) of the byte match set.
+                    type: string
                   byteMatchTuples:
                     description: |-
                       Specifies the bytes (typically a string that corresponds

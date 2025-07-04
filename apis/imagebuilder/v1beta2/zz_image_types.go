@@ -30,7 +30,7 @@ type AmisObservation struct {
 	// The name of the Workflow parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Region of the AMI.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
@@ -46,7 +46,7 @@ type ContainersObservation struct {
 	// +listType=set
 	ImageUris []*string `json:"imageUris,omitempty" tf:"image_uris,omitempty"`
 
-	// Region of the AMI.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
@@ -274,7 +274,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
-	// Region of the AMI.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

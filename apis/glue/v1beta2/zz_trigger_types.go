@@ -295,32 +295,32 @@ type PredicateParameters struct {
 
 type TriggerInitParameters struct {
 
-	// –  List of actions initiated by this trigger when it fires. See Actions Below.
+	// List of actions initiated by this trigger when it fires. See Actions Below.
 	Actions []ActionsInitParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
-	// –  A description of the new trigger.
+	// A description of the new trigger.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  Start the trigger. Defaults to true.
+	// Start the trigger. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires. See Event Batching Condition.
 	EventBatchingCondition []EventBatchingConditionInitParameters `json:"eventBatchingCondition,omitempty" tf:"event_batching_condition,omitempty"`
 
-	// –  A predicate to specify when the new trigger should fire. Required when trigger type is CONDITIONAL. See Predicate Below.
+	// A predicate to specify when the new trigger should fire. Required when trigger type is CONDITIONAL. See Predicate Below.
 	Predicate *PredicateInitParameters `json:"predicate,omitempty" tf:"predicate,omitempty"`
 
-	// Based Schedules for Jobs and Crawlers
+	// A cron expression used to specify the schedule. Time-Based Schedules for Jobs and Crawlers
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// –  Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
+	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
 	StartOnCreation *bool `json:"startOnCreation,omitempty" tf:"start_on_creation,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
+	// The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A workflow to which the trigger should be associated to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND or SCHEDULED type) and can contain multiple additional CONDITIONAL triggers.
@@ -329,16 +329,16 @@ type TriggerInitParameters struct {
 
 type TriggerObservation struct {
 
-	// –  List of actions initiated by this trigger when it fires. See Actions Below.
+	// List of actions initiated by this trigger when it fires. See Actions Below.
 	Actions []ActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Amazon Resource Name (ARN) of Glue Trigger
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  A description of the new trigger.
+	// A description of the new trigger.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  Start the trigger. Defaults to true.
+	// Start the trigger. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires. See Event Batching Condition.
@@ -347,13 +347,13 @@ type TriggerObservation struct {
 	// Trigger name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  A predicate to specify when the new trigger should fire. Required when trigger type is CONDITIONAL. See Predicate Below.
+	// A predicate to specify when the new trigger should fire. Required when trigger type is CONDITIONAL. See Predicate Below.
 	Predicate *PredicateObservation `json:"predicate,omitempty" tf:"predicate,omitempty"`
 
-	// Based Schedules for Jobs and Crawlers
+	// A cron expression used to specify the schedule. Time-Based Schedules for Jobs and Crawlers
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// –  Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
+	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
 	StartOnCreation *bool `json:"startOnCreation,omitempty" tf:"start_on_creation,omitempty"`
 
 	// The condition job state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED. If this is specified, job_name must also be specified. Conflicts with crawler_state.
@@ -367,7 +367,7 @@ type TriggerObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
+	// The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A workflow to which the trigger should be associated to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND or SCHEDULED type) and can contain multiple additional CONDITIONAL triggers.
@@ -376,15 +376,15 @@ type TriggerObservation struct {
 
 type TriggerParameters struct {
 
-	// –  List of actions initiated by this trigger when it fires. See Actions Below.
+	// List of actions initiated by this trigger when it fires. See Actions Below.
 	// +kubebuilder:validation:Optional
 	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
-	// –  A description of the new trigger.
+	// A description of the new trigger.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  Start the trigger. Defaults to true.
+	// Start the trigger. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -392,20 +392,21 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	EventBatchingCondition []EventBatchingConditionParameters `json:"eventBatchingCondition,omitempty" tf:"event_batching_condition,omitempty"`
 
-	// –  A predicate to specify when the new trigger should fire. Required when trigger type is CONDITIONAL. See Predicate Below.
+	// A predicate to specify when the new trigger should fire. Required when trigger type is CONDITIONAL. See Predicate Below.
 	// +kubebuilder:validation:Optional
 	Predicate *PredicateParameters `json:"predicate,omitempty" tf:"predicate,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Based Schedules for Jobs and Crawlers
+	// A cron expression used to specify the schedule. Time-Based Schedules for Jobs and Crawlers
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// –  Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
+	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
 	// +kubebuilder:validation:Optional
 	StartOnCreation *bool `json:"startOnCreation,omitempty" tf:"start_on_creation,omitempty"`
 
@@ -414,7 +415,7 @@ type TriggerParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
+	// The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 

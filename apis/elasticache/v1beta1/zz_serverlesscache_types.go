@@ -151,7 +151,7 @@ type ServerlessCacheInitParameters struct {
 	// User-provided description for the serverless cache. The default is NULL.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis or valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis or valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// ARN of the customer managed key for encrypting the data at rest. If no KMS key is provided, a default service key is used.
@@ -166,7 +166,7 @@ type ServerlessCacheInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// –  The version of the cache engine that will be used to create the serverless cache.
+	// The version of the cache engine that will be used to create the serverless cache.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
@@ -199,7 +199,7 @@ type ServerlessCacheInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// –  A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed. All the subnetIds must belong to the same VPC.
+	// A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed. All the subnetIds must belong to the same VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -234,7 +234,7 @@ type ServerlessCacheObservation struct {
 	// Represents the information required for client programs to connect to a cache node. See endpoint Block for details.
 	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis or valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis or valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The name and version number of the engine the serverless cache is compatible with.
@@ -245,7 +245,7 @@ type ServerlessCacheObservation struct {
 	// ARN of the customer managed key for encrypting the data at rest. If no KMS key is provided, a default service key is used.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// –  The version of the cache engine that will be used to create the serverless cache.
+	// The version of the cache engine that will be used to create the serverless cache.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
@@ -265,7 +265,7 @@ type ServerlessCacheObservation struct {
 	// The current status of the serverless cache. The allowed values are CREATING, AVAILABLE, DELETING, CREATE-FAILED and MODIFYING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// –  A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed. All the subnetIds must belong to the same VPC.
+	// A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed. All the subnetIds must belong to the same VPC.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -294,7 +294,7 @@ type ServerlessCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis or valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis or valkey.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -311,11 +311,12 @@ type ServerlessCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// –  The version of the cache engine that will be used to create the serverless cache.
+	// The version of the cache engine that will be used to create the serverless cache.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
 	// +kubebuilder:validation:Optional
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -353,7 +354,7 @@ type ServerlessCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// –  A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed. All the subnetIds must belong to the same VPC.
+	// A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed. All the subnetIds must belong to the same VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector

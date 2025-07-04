@@ -15,7 +15,7 @@ import (
 
 type CertificateInitParameters struct {
 
-	// A domain name for which the certificate should be issued.
+	// Domain name for which the certificate should be issued.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
@@ -29,19 +29,19 @@ type CertificateInitParameters struct {
 
 type CertificateObservation struct {
 
-	// The ARN of the lightsail certificate.
+	// ARN of the certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The timestamp when the instance was created.
+	// Date and time when the certificate was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// A domain name for which the certificate should be issued.
+	// Domain name for which the certificate should be issued.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Set of domain validation objects which can be used to complete certificate validation. Can have more than one element, e.g., if SANs are defined.
+	// Set of domain validation objects which can be used to complete certificate validation. Can have more than one element, e.g., if SANs are defined. Each element contains the following attributes:
 	DomainValidationOptions []DomainValidationOptionsObservation `json:"domainValidationOptions,omitempty" tf:"domain_validation_options,omitempty"`
 
-	// The name of the lightsail certificate (matches name).
+	// Name of the certificate (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
@@ -52,17 +52,18 @@ type CertificateObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CertificateParameters struct {
 
-	// A domain name for which the certificate should be issued.
+	// Domain name for which the certificate should be issued.
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -84,14 +85,16 @@ type DomainValidationOptionsInitParameters struct {
 
 type DomainValidationOptionsObservation struct {
 
-	// A domain name for which the certificate should be issued.
+	// Domain name for which the certificate should be issued.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The name of the Lightsail load balancer.
+	// Name of the DNS record to create to validate the certificate.
 	ResourceRecordName *string `json:"resourceRecordName,omitempty" tf:"resource_record_name,omitempty"`
 
+	// Type of DNS record to create to validate the certificate.
 	ResourceRecordType *string `json:"resourceRecordType,omitempty" tf:"resource_record_type,omitempty"`
 
+	// Value of the DNS record to create to validate the certificate.
 	ResourceRecordValue *string `json:"resourceRecordValue,omitempty" tf:"resource_record_value,omitempty"`
 }
 
@@ -125,7 +128,7 @@ type CertificateStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Certificate is the Schema for the Certificates API. Provides a lightsail certificate
+// Certificate is the Schema for the Certificates API. Manages a Lightsail SSL/TLS certificate for custom domains.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

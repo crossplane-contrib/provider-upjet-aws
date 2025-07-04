@@ -1293,8 +1293,9 @@ spec:
                       Scaling Policies and Step Scaling Policies documentation.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceId:
                     description: 'Resource type and unique identifier string for the

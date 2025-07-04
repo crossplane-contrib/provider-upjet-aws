@@ -782,6 +782,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: Amazon Resource Name (ARN) of the SQL injection match
+                      set.
+                    type: string
                   id:
                     description: The ID of the WAF SQL Injection Match Set.
                     type: string

@@ -53,6 +53,7 @@ type ResolverConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AutodefinedReverseFlag *string `json:"autodefinedReverseFlag,omitempty" tf:"autodefined_reverse_flag,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

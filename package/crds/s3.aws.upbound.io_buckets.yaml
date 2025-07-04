@@ -998,7 +998,7 @@ spec:
                     type: boolean
                   region:
                     description: |-
-                      AWS region this bucket resides in.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
@@ -1233,6 +1233,9 @@ spec:
                     type: string
                   bucketDomainName:
                     description: Bucket domain name. Will be of format bucketname.s3.amazonaws.com.
+                    type: string
+                  bucketRegion:
+                    description: AWS region this bucket resides in.
                     type: string
                   bucketRegionalDomainName:
                     description: 'The bucket region-specific domain name. The bucket
@@ -1472,11 +1475,6 @@ spec:
                     description: |-
                       Valid bucket policy JSON document. In this case, please make sure you use the verbose/specific version of the policy.
                       Use the resource aws_s3_bucket_policy instead.
-                    type: string
-                  region:
-                    description: |-
-                      AWS region this bucket resides in.
-                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicationConfiguration:
                     description: |-

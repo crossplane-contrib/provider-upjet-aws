@@ -115,13 +115,27 @@ spec:
                     description: The port number on which the cluster accepts incoming
                       connections.
                     type: number
+                  pricePerformanceTarget:
+                    description: Price-performance scaling for the workgroup. See
+                      Price Performance Target below.
+                    properties:
+                      enabled:
+                        description: Whether to enable price-performance scaling.
+                        type: boolean
+                      level:
+                        description: The price-performance scaling level. Valid values
+                          are 1 (LOW_COST), 25 (ECONOMICAL), 50 (BALANCED), 75 (RESOURCEFUL),
+                          and 100 (HIGH_PERFORMANCE).
+                        type: number
+                    type: object
                   publiclyAccessible:
                     description: A value that specifies whether the workgroup can
                       be accessed from a public network.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -302,6 +316,14 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  trackName:
+                    description: The name of the track for the workgroup. If it is
+                      current, you get the most up-to-date certified release version
+                      with the latest features, security updates, and performance
+                      enhancements. If it is trailing, you will be on the previous
+                      certified release. For more information, see the following AWS
+                      document.
+                    type: string
                 required:
                 - region
                 type: object
@@ -360,6 +382,19 @@ spec:
                     description: The port number on which the cluster accepts incoming
                       connections.
                     type: number
+                  pricePerformanceTarget:
+                    description: Price-performance scaling for the workgroup. See
+                      Price Performance Target below.
+                    properties:
+                      enabled:
+                        description: Whether to enable price-performance scaling.
+                        type: boolean
+                      level:
+                        description: The price-performance scaling level. Valid values
+                          are 1 (LOW_COST), 25 (ECONOMICAL), 50 (BALANCED), 75 (RESOURCEFUL),
+                          and 100 (HIGH_PERFORMANCE).
+                        type: number
+                    type: object
                   publiclyAccessible:
                     description: A value that specifies whether the workgroup can
                       be accessed from a public network.
@@ -543,6 +578,14 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  trackName:
+                    description: The name of the track for the workgroup. If it is
+                      current, you get the most up-to-date certified release version
+                      with the latest features, security updates, and performance
+                      enhancements. If it is trailing, you will be on the previous
+                      certified release. For more information, see the following AWS
+                      document.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -819,6 +862,19 @@ spec:
                     description: The port number on which the cluster accepts incoming
                       connections.
                     type: number
+                  pricePerformanceTarget:
+                    description: Price-performance scaling for the workgroup. See
+                      Price Performance Target below.
+                    properties:
+                      enabled:
+                        description: Whether to enable price-performance scaling.
+                        type: boolean
+                      level:
+                        description: The price-performance scaling level. Valid values
+                          are 1 (LOW_COST), 25 (ECONOMICAL), 50 (BALANCED), 75 (RESOURCEFUL),
+                          and 100 (HIGH_PERFORMANCE).
+                        type: number
+                    type: object
                   publiclyAccessible:
                     description: A value that specifies whether the workgroup can
                       be accessed from a public network.
@@ -854,6 +910,14 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  trackName:
+                    description: The name of the track for the workgroup. If it is
+                      current, you get the most up-to-date certified release version
+                      with the latest features, security updates, and performance
+                      enhancements. If it is trailing, you will be on the previous
+                      certified release. For more information, see the following AWS
+                      document.
+                    type: string
                   workgroupId:
                     description: The Redshift Workgroup ID.
                     type: string

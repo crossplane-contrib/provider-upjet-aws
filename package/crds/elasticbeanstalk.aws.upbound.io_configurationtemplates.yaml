@@ -74,8 +74,8 @@ spec:
               forProvider:
                 properties:
                   application:
-                    description: –  name of the application to associate with this
-                      configuration template
+                    description: name of the application to associate with this configuration
+                      template
                     type: string
                   applicationRef:
                     description: Reference to a Application in elasticbeanstalk to
@@ -157,16 +157,17 @@ spec:
                     description: Short description of the Template
                     type: string
                   environmentId:
-                    description: –  The ID of the environment used with this configuration
+                    description: The ID of the environment used with this configuration
                       template
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   setting:
                     description: |-
-                      –  Option settings to configure the new Environment. These
+                      Option settings to configure the new Environment. These
                       override specific values that are set as defaults. The format is detailed
                       below in Option Settings
                     items:
@@ -188,7 +189,7 @@ spec:
                     type: array
                   solutionStackName:
                     description: |-
-                      –  A solution stack to base your Template
+                      A solution stack to base your Template
                       off of. Example stacks can be found in the Amazon API documentation
                     type: string
                 required:
@@ -208,8 +209,8 @@ spec:
                   autoscaler.
                 properties:
                   application:
-                    description: –  name of the application to associate with this
-                      configuration template
+                    description: name of the application to associate with this configuration
+                      template
                     type: string
                   applicationRef:
                     description: Reference to a Application in elasticbeanstalk to
@@ -291,12 +292,12 @@ spec:
                     description: Short description of the Template
                     type: string
                   environmentId:
-                    description: –  The ID of the environment used with this configuration
+                    description: The ID of the environment used with this configuration
                       template
                     type: string
                   setting:
                     description: |-
-                      –  Option settings to configure the new Environment. These
+                      Option settings to configure the new Environment. These
                       override specific values that are set as defaults. The format is detailed
                       below in Option Settings
                     items:
@@ -318,7 +319,7 @@ spec:
                     type: array
                   solutionStackName:
                     description: |-
-                      –  A solution stack to base your Template
+                      A solution stack to base your Template
                       off of. Example stacks can be found in the Amazon API documentation
                     type: string
                 type: object
@@ -496,21 +497,21 @@ spec:
               atProvider:
                 properties:
                   application:
-                    description: –  name of the application to associate with this
-                      configuration template
+                    description: name of the application to associate with this configuration
+                      template
                     type: string
                   description:
                     description: Short description of the Template
                     type: string
                   environmentId:
-                    description: –  The ID of the environment used with this configuration
+                    description: The ID of the environment used with this configuration
                       template
                     type: string
                   id:
                     type: string
                   setting:
                     description: |-
-                      –  Option settings to configure the new Environment. These
+                      Option settings to configure the new Environment. These
                       override specific values that are set as defaults. The format is detailed
                       below in Option Settings
                     items:
@@ -532,7 +533,7 @@ spec:
                     type: array
                   solutionStackName:
                     description: |-
-                      –  A solution stack to base your Template
+                      A solution stack to base your Template
                       off of. Example stacks can be found in the Amazon API documentation
                     type: string
                 type: object

@@ -177,8 +177,9 @@ spec:
                     description: Region-unique name for the AMI.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceAmiId:
                     description: |-
@@ -743,6 +744,8 @@ spec:
                       snapshots of an image during a copy operation. If not specified,
                       then the default AWS KMS Key will be used
                     type: string
+                  lastLaunchedTime:
+                    type: string
                   manageEbsSnapshots:
                     type: boolean
                   name:
@@ -790,6 +793,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tpmSupport:
+                    type: string
+                  uefiData:
                     type: string
                   usageOperation:
                     type: string

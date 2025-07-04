@@ -23,8 +23,8 @@ spec:
             testing.upbound.io/example-name: destination
         storageClass: STANDARD
       filter:
-      - prefix: foo
-      id: foobar
+      - prefix: example
+      id: examplerule
       status: Enabled
 
 ---

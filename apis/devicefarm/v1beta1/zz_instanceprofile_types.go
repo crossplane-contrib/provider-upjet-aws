@@ -91,6 +91,7 @@ type InstanceProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	RebootAfterUse *bool `json:"rebootAfterUse,omitempty" tf:"reboot_after_use,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

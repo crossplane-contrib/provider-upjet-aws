@@ -3526,8 +3526,9 @@ spec:
                       TASK_DEFINITION.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   schedulingStrategy:
                     description: Scheduling strategy to use for the service. The valid
@@ -3837,6 +3838,10 @@ spec:
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
+                            type: number
+                          volumeInitializationRate:
+                            description: Volume Initialization Rate in MiB/s. You
+                              must also specify a snapshot_id.
                             type: number
                           volumeType:
                             description: Volume type.
@@ -4812,6 +4817,10 @@ spec:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
                             type: number
+                          volumeInitializationRate:
+                            description: Volume Initialization Rate in MiB/s. You
+                              must also specify a snapshot_id.
+                            type: number
                           volumeType:
                             description: Volume type.
                             type: string
@@ -5037,6 +5046,9 @@ spec:
                           back to the last deployment that completed successfully.
                         type: boolean
                     type: object
+                  arn:
+                    description: ARN that identifies the service.
+                    type: string
                   availabilityZoneRebalancing:
                     description: ECS automatically redistributes tasks within a service
                       across Availability Zones (AZs) to mitigate the risk of impaired
@@ -5148,7 +5160,6 @@ spec:
                       specify a role here.
                     type: string
                   id:
-                    description: ARN that identifies the service.
                     type: string
                   launchType:
                     description: Launch type on which to run your service. The valid
@@ -5496,6 +5507,10 @@ spec:
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
+                            type: number
+                          volumeInitializationRate:
+                            description: Volume Initialization Rate in MiB/s. You
+                              must also specify a snapshot_id.
                             type: number
                           volumeType:
                             description: Volume type.

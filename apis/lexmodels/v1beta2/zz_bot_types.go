@@ -214,6 +214,7 @@ type BotParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessBehavior *string `json:"processBehavior,omitempty" tf:"process_behavior,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

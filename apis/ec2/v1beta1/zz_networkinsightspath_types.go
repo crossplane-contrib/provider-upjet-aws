@@ -13,9 +13,223 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FilterAtDestinationDestinationPortRangeInitParameters struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtDestinationDestinationPortRangeObservation struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtDestinationDestinationPortRangeParameters struct {
+
+	// The first port in the range.
+	// +kubebuilder:validation:Optional
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	// +kubebuilder:validation:Optional
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtDestinationInitParameters struct {
+
+	// The destination IPv4 address.
+	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
+
+	// The destination port range. See below for details.
+	DestinationPortRange *FilterAtDestinationDestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// IP address of the source resource.
+	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
+
+	// The source port range. See below for details.
+	SourcePortRange *FilterAtDestinationSourcePortRangeInitParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+}
+
+type FilterAtDestinationObservation struct {
+
+	// The destination IPv4 address.
+	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
+
+	// The destination port range. See below for details.
+	DestinationPortRange *FilterAtDestinationDestinationPortRangeObservation `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// IP address of the source resource.
+	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
+
+	// The source port range. See below for details.
+	SourcePortRange *FilterAtDestinationSourcePortRangeObservation `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+}
+
+type FilterAtDestinationParameters struct {
+
+	// The destination IPv4 address.
+	// +kubebuilder:validation:Optional
+	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
+
+	// The destination port range. See below for details.
+	// +kubebuilder:validation:Optional
+	DestinationPortRange *FilterAtDestinationDestinationPortRangeParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// IP address of the source resource.
+	// +kubebuilder:validation:Optional
+	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
+
+	// The source port range. See below for details.
+	// +kubebuilder:validation:Optional
+	SourcePortRange *FilterAtDestinationSourcePortRangeParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+}
+
+type FilterAtDestinationSourcePortRangeInitParameters struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtDestinationSourcePortRangeObservation struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtDestinationSourcePortRangeParameters struct {
+
+	// The first port in the range.
+	// +kubebuilder:validation:Optional
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	// +kubebuilder:validation:Optional
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtSourceDestinationPortRangeInitParameters struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtSourceDestinationPortRangeObservation struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtSourceDestinationPortRangeParameters struct {
+
+	// The first port in the range.
+	// +kubebuilder:validation:Optional
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	// +kubebuilder:validation:Optional
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtSourceInitParameters struct {
+
+	// The destination IPv4 address.
+	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
+
+	// The destination port range. See below for details.
+	DestinationPortRange *FilterAtSourceDestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// IP address of the source resource.
+	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
+
+	// The source port range. See below for details.
+	SourcePortRange *FilterAtSourceSourcePortRangeInitParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+}
+
+type FilterAtSourceObservation struct {
+
+	// The destination IPv4 address.
+	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
+
+	// The destination port range. See below for details.
+	DestinationPortRange *FilterAtSourceDestinationPortRangeObservation `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// IP address of the source resource.
+	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
+
+	// The source port range. See below for details.
+	SourcePortRange *FilterAtSourceSourcePortRangeObservation `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+}
+
+type FilterAtSourceParameters struct {
+
+	// The destination IPv4 address.
+	// +kubebuilder:validation:Optional
+	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
+
+	// The destination port range. See below for details.
+	// +kubebuilder:validation:Optional
+	DestinationPortRange *FilterAtSourceDestinationPortRangeParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// IP address of the source resource.
+	// +kubebuilder:validation:Optional
+	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
+
+	// The source port range. See below for details.
+	// +kubebuilder:validation:Optional
+	SourcePortRange *FilterAtSourceSourcePortRangeParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+}
+
+type FilterAtSourceSourcePortRangeInitParameters struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtSourceSourcePortRangeObservation struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type FilterAtSourceSourcePortRangeParameters struct {
+
+	// The first port in the range.
+	// +kubebuilder:validation:Optional
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	// +kubebuilder:validation:Optional
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
 type NetworkInsightsPathInitParameters struct {
 
-	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
+	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN. Either the destination argument or the destination_address argument in the filter_at_source block must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -33,6 +247,12 @@ type NetworkInsightsPathInitParameters struct {
 	// Selector for a NetworkInterface in ec2 to populate destination.
 	// +kubebuilder:validation:Optional
 	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+
+	// Scopes the analysis to network paths that match specific filters at the destination. If you specify this parameter, you can't specify destination_ip. See below for details.
+	FilterAtDestination *FilterAtDestinationInitParameters `json:"filterAtDestination,omitempty" tf:"filter_at_destination,omitempty"`
+
+	// Scopes the analysis to network paths that match specific filters at the source. If you specify this parameter, you can't specify source_ip or destination_port. See below for details.
+	FilterAtSource *FilterAtSourceInitParameters `json:"filterAtSource,omitempty" tf:"filter_at_source,omitempty"`
 
 	// Protocol to use for analysis. Valid options are tcp or udp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -63,7 +283,7 @@ type NetworkInsightsPathObservation struct {
 	// ARN of the Network Insights Path.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
+	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN. Either the destination argument or the destination_address argument in the filter_at_source block must be specified.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// ARN of the destination.
@@ -74,6 +294,12 @@ type NetworkInsightsPathObservation struct {
 
 	// Destination port to analyze access to.
 	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+
+	// Scopes the analysis to network paths that match specific filters at the destination. If you specify this parameter, you can't specify destination_ip. See below for details.
+	FilterAtDestination *FilterAtDestinationObservation `json:"filterAtDestination,omitempty" tf:"filter_at_destination,omitempty"`
+
+	// Scopes the analysis to network paths that match specific filters at the source. If you specify this parameter, you can't specify source_ip or destination_port. See below for details.
+	FilterAtSource *FilterAtSourceObservation `json:"filterAtSource,omitempty" tf:"filter_at_source,omitempty"`
 
 	// ID of the Network Insights Path.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -101,7 +327,7 @@ type NetworkInsightsPathObservation struct {
 
 type NetworkInsightsPathParameters struct {
 
-	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
+	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN. Either the destination argument or the destination_address argument in the filter_at_source block must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -123,10 +349,19 @@ type NetworkInsightsPathParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 
+	// Scopes the analysis to network paths that match specific filters at the destination. If you specify this parameter, you can't specify destination_ip. See below for details.
+	// +kubebuilder:validation:Optional
+	FilterAtDestination *FilterAtDestinationParameters `json:"filterAtDestination,omitempty" tf:"filter_at_destination,omitempty"`
+
+	// Scopes the analysis to network paths that match specific filters at the source. If you specify this parameter, you can't specify source_ip or destination_port. See below for details.
+	// +kubebuilder:validation:Optional
+	FilterAtSource *FilterAtSourceParameters `json:"filterAtSource,omitempty" tf:"filter_at_source,omitempty"`
+
 	// Protocol to use for analysis. Valid options are tcp or udp.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

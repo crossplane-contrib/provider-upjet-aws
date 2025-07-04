@@ -1603,7 +1603,7 @@ spec:
                       Valid values: ON_DEMAND, SPOT.'
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -1718,9 +1718,18 @@ spec:
                         description: EC2 Launch Template version number.
                         type: string
                     type: object
+                  nodeRepairConfig:
+                    description: The node auto repair configuration for the node group.
+                      See node_repair_config below for details.
+                    properties:
+                      enabled:
+                        description: Specifies whether to enable node auto repair
+                          for the node group. Node auto repair is disabled by default.
+                        type: boolean
+                    type: object
                   nodeRoleArn:
-                    description: –  Amazon Resource Name (ARN) of the IAM Role that
-                      provides permissions for the EKS Node Group.
+                    description: Amazon Resource Name (ARN) of the IAM Role that provides
+                      permissions for the EKS Node Group.
                     type: string
                   nodeRoleArnRef:
                     description: Reference to a Role in iam to populate nodeRoleArn.
@@ -1797,12 +1806,13 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   releaseVersion:
-                    description: –  AMI version of the EKS Node Group. Defaults to
-                      latest version for Kubernetes version.
+                    description: AMI version of the EKS Node Group. Defaults to latest
+                      version for Kubernetes version.
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
@@ -2048,7 +2058,7 @@ spec:
                         type: number
                     type: object
                   version:
-                    description: –  Kubernetes version. Defaults to EKS Cluster Kubernetes
+                    description: Kubernetes version. Defaults to EKS Cluster Kubernetes
                       version.
                     type: string
                   versionRef:
@@ -2188,9 +2198,18 @@ spec:
                         description: EC2 Launch Template version number.
                         type: string
                     type: object
+                  nodeRepairConfig:
+                    description: The node auto repair configuration for the node group.
+                      See node_repair_config below for details.
+                    properties:
+                      enabled:
+                        description: Specifies whether to enable node auto repair
+                          for the node group. Node auto repair is disabled by default.
+                        type: boolean
+                    type: object
                   nodeRoleArn:
-                    description: –  Amazon Resource Name (ARN) of the IAM Role that
-                      provides permissions for the EKS Node Group.
+                    description: Amazon Resource Name (ARN) of the IAM Role that provides
+                      permissions for the EKS Node Group.
                     type: string
                   nodeRoleArnRef:
                     description: Reference to a Role in iam to populate nodeRoleArn.
@@ -2267,8 +2286,8 @@ spec:
                         type: object
                     type: object
                   releaseVersion:
-                    description: –  AMI version of the EKS Node Group. Defaults to
-                      latest version for Kubernetes version.
+                    description: AMI version of the EKS Node Group. Defaults to latest
+                      version for Kubernetes version.
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
@@ -2514,7 +2533,7 @@ spec:
                         type: number
                     type: object
                   version:
-                    description: –  Kubernetes version. Defaults to EKS Cluster Kubernetes
+                    description: Kubernetes version. Defaults to EKS Cluster Kubernetes
                       version.
                     type: string
                   versionRef:
@@ -2781,7 +2800,7 @@ spec:
                       Valid values: ON_DEMAND, SPOT.'
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   diskSize:
                     description: Disk size in GiB for worker nodes. Defaults to 50
@@ -2826,13 +2845,22 @@ spec:
                         description: EC2 Launch Template version number.
                         type: string
                     type: object
+                  nodeRepairConfig:
+                    description: The node auto repair configuration for the node group.
+                      See node_repair_config below for details.
+                    properties:
+                      enabled:
+                        description: Specifies whether to enable node auto repair
+                          for the node group. Node auto repair is disabled by default.
+                        type: boolean
+                    type: object
                   nodeRoleArn:
-                    description: –  Amazon Resource Name (ARN) of the IAM Role that
-                      provides permissions for the EKS Node Group.
+                    description: Amazon Resource Name (ARN) of the IAM Role that provides
+                      permissions for the EKS Node Group.
                     type: string
                   releaseVersion:
-                    description: –  AMI version of the EKS Node Group. Defaults to
-                      latest version for Kubernetes version.
+                    description: AMI version of the EKS Node Group. Defaults to latest
+                      version for Kubernetes version.
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
@@ -2953,7 +2981,7 @@ spec:
                         type: number
                     type: object
                   version:
-                    description: –  Kubernetes version. Defaults to EKS Cluster Kubernetes
+                    description: Kubernetes version. Defaults to EKS Cluster Kubernetes
                       version.
                     type: string
                 type: object

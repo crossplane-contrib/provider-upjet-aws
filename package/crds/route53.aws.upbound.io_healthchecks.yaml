@@ -245,8 +245,8 @@ spec:
                         type: object
                     type: object
                   cloudwatchAlarmRegion:
-                    description: The CloudWatchRegion that the CloudWatch alarm was
-                      created in.
+                    description: The region that the CloudWatch alarm was created
+                      in.
                     type: string
                   disabled:
                     description: 'A boolean value that stops Route 53 from performing
@@ -331,6 +331,15 @@ spec:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger an in-place update of the CloudWatch alarm arguments.
+                      Use this argument to synchronize the health check when an alarm
+                      is changed. See example above.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
@@ -526,8 +535,8 @@ spec:
                         type: object
                     type: object
                   cloudwatchAlarmRegion:
-                    description: The CloudWatchRegion that the CloudWatch alarm was
-                      created in.
+                    description: The region that the CloudWatch alarm was created
+                      in.
                     type: string
                   disabled:
                     description: 'A boolean value that stops Route 53 from performing
@@ -608,6 +617,15 @@ spec:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger an in-place update of the CloudWatch alarm arguments.
+                      Use this argument to synchronize the health check when an alarm
+                      is changed. See example above.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
@@ -813,8 +831,8 @@ spec:
                     description: The name of the CloudWatch alarm.
                     type: string
                   cloudwatchAlarmRegion:
-                    description: The CloudWatchRegion that the CloudWatch alarm was
-                      created in.
+                    description: The region that the CloudWatch alarm was created
+                      in.
                     type: string
                   disabled:
                     description: 'A boolean value that stops Route 53 from performing
@@ -906,6 +924,15 @@ spec:
                     description: A map of tags assigned to the resource, including
                       those inherited from the provider default_tags configuration
                       block.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger an in-place update of the CloudWatch alarm arguments.
+                      Use this argument to synchronize the health check when an alarm
+                      is changed. See example above.
                     type: object
                     x-kubernetes-map-type: granular
                   type:

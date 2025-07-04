@@ -74,10 +74,10 @@ spec:
               forProvider:
                 properties:
                   dataRetentionInHours:
-                    description: –  The number of hours that you want to retain the
-                      data in the stream. Kinesis Video Streams retains the data in
-                      a data store that is associated with the stream. The default
-                      value is 0, indicating that the stream does not persist data.
+                    description: The number of hours that you want to retain the data
+                      in the stream. Kinesis Video Streams retains the data in a data
+                      store that is associated with the stream. The default value
+                      is 0, indicating that the stream does not persist data.
                     type: number
                   deviceName:
                     description: The name of the device that is writing to the stream.
@@ -176,8 +176,9 @@ spec:
                       AWS account and region the Stream is created in.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -202,10 +203,10 @@ spec:
                   autoscaler.
                 properties:
                   dataRetentionInHours:
-                    description: –  The number of hours that you want to retain the
-                      data in the stream. Kinesis Video Streams retains the data in
-                      a data store that is associated with the stream. The default
-                      value is 0, indicating that the stream does not persist data.
+                    description: The number of hours that you want to retain the data
+                      in the stream. Kinesis Video Streams retains the data in a data
+                      store that is associated with the stream. The default value
+                      is 0, indicating that the stream does not persist data.
                     type: number
                   deviceName:
                     description: The name of the device that is writing to the stream.
@@ -495,10 +496,10 @@ spec:
                     description: A time stamp that indicates when the stream was created.
                     type: string
                   dataRetentionInHours:
-                    description: –  The number of hours that you want to retain the
-                      data in the stream. Kinesis Video Streams retains the data in
-                      a data store that is associated with the stream. The default
-                      value is 0, indicating that the stream does not persist data.
+                    description: The number of hours that you want to retain the data
+                      in the stream. Kinesis Video Streams retains the data in a data
+                      store that is associated with the stream. The default value
+                      is 0, indicating that the stream does not persist data.
                     type: number
                   deviceName:
                     description: The name of the device that is writing to the stream.

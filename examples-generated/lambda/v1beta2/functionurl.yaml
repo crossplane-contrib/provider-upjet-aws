@@ -4,12 +4,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta2/functionurl
   labels:
-    testing.upbound.io/example-name: test_latest
-  name: test-latest
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     authorizationType: NONE
     functionNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     region: us-west-1

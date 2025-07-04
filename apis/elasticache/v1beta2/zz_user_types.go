@@ -46,7 +46,7 @@ type UserInitParameters struct {
 	// Denotes the user's authentication properties. Detailed below.
 	AuthenticationMode *AuthenticationModeInitParameters `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// The current supported value is REDIS.
+	// The current supported values are redis, valkey (case insensitive).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Indicates a password is not required for this user.
@@ -73,7 +73,7 @@ type UserObservation struct {
 	// Denotes the user's authentication properties. Detailed below.
 	AuthenticationMode *AuthenticationModeObservation `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// The current supported value is REDIS.
+	// The current supported values are redis, valkey (case insensitive).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -102,7 +102,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *AuthenticationModeParameters `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// The current supported value is REDIS.
+	// The current supported values are redis, valkey (case insensitive).
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -114,6 +114,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

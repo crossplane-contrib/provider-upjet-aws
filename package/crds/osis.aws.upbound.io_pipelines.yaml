@@ -134,8 +134,9 @@ spec:
                       line must be escaped with \n.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -164,6 +165,11 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        vpcEndpointManagement:
+                          description: Whether you or Amazon OpenSearch Ingestion
+                            service create and manage the VPC endpoint configured
+                            for the pipeline. Valid values are CUSTOMER or SERVICE
+                          type: string
                       type: object
                     type: array
                 required:
@@ -270,6 +276,11 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        vpcEndpointManagement:
+                          description: Whether you or Amazon OpenSearch Ingestion
+                            service create and manage the VPC endpoint configured
+                            for the pipeline. Valid values are CUSTOMER or SERVICE
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -564,6 +575,11 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        vpcEndpointManagement:
+                          description: Whether you or Amazon OpenSearch Ingestion
+                            service create and manage the VPC endpoint configured
+                            for the pipeline. Valid values are CUSTOMER or SERVICE
+                          type: string
                       type: object
                     type: array
                 type: object

@@ -15,7 +15,7 @@ import (
 
 type InvocationInitParameters struct {
 
-	// Name of the lambda function.
+	// Name of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
@@ -27,16 +27,16 @@ type InvocationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
-	// JSON payload to the lambda function.
+	// JSON payload to the Lambda function.
 	Input *string `json:"input,omitempty" tf:"input,omitempty"`
 
 	// Lifecycle scope of the resource to manage. Valid values are CREATE_ONLY and CRUD. Defaults to CREATE_ONLY. CREATE_ONLY will invoke the function only on creation or replacement. CRUD will invoke the function on each lifecycle event, and augment the input JSON payload with additional lifecycle information.
 	LifecycleScope *string `json:"lifecycleScope,omitempty" tf:"lifecycle_scope,omitempty"`
 
-	// Qualifier (i.e., version) of the lambda function. Defaults to $LATEST.
+	// Qualifier (i.e., version) of the Lambda function. Defaults to $LATEST.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// The JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
+	// JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
 	TerraformKey *string `json:"terraformKey,omitempty" tf:"terraform_key,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation.
@@ -46,24 +46,24 @@ type InvocationInitParameters struct {
 
 type InvocationObservation struct {
 
-	// Name of the lambda function.
+	// Name of the Lambda function.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// JSON payload to the lambda function.
+	// JSON payload to the Lambda function.
 	Input *string `json:"input,omitempty" tf:"input,omitempty"`
 
 	// Lifecycle scope of the resource to manage. Valid values are CREATE_ONLY and CRUD. Defaults to CREATE_ONLY. CREATE_ONLY will invoke the function only on creation or replacement. CRUD will invoke the function on each lifecycle event, and augment the input JSON payload with additional lifecycle information.
 	LifecycleScope *string `json:"lifecycleScope,omitempty" tf:"lifecycle_scope,omitempty"`
 
-	// Qualifier (i.e., version) of the lambda function. Defaults to $LATEST.
+	// Qualifier (i.e., version) of the Lambda function. Defaults to $LATEST.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// String result of the lambda function invocation.
+	// String result of the Lambda function invocation.
 	Result *string `json:"result,omitempty" tf:"result,omitempty"`
 
-	// The JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
+	// JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
 	TerraformKey *string `json:"terraformKey,omitempty" tf:"terraform_key,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation.
@@ -73,7 +73,7 @@ type InvocationObservation struct {
 
 type InvocationParameters struct {
 
-	// Name of the lambda function.
+	// Name of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -86,7 +86,7 @@ type InvocationParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
-	// JSON payload to the lambda function.
+	// JSON payload to the Lambda function.
 	// +kubebuilder:validation:Optional
 	Input *string `json:"input,omitempty" tf:"input,omitempty"`
 
@@ -94,16 +94,17 @@ type InvocationParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleScope *string `json:"lifecycleScope,omitempty" tf:"lifecycle_scope,omitempty"`
 
-	// Qualifier (i.e., version) of the lambda function. Defaults to $LATEST.
+	// Qualifier (i.e., version) of the Lambda function. Defaults to $LATEST.
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
+	// JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
 	// +kubebuilder:validation:Optional
 	TerraformKey *string `json:"terraformKey,omitempty" tf:"terraform_key,omitempty"`
 
@@ -140,7 +141,7 @@ type InvocationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Invocation is the Schema for the Invocations API. Invoke AWS Lambda Function
+// Invocation is the Schema for the Invocations API. Manages an AWS Lambda Function invocation.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

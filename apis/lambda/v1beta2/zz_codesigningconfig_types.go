@@ -15,7 +15,7 @@ import (
 
 type AllowedPublishersInitParameters struct {
 
-	// The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package.
+	// Set of ARNs for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. Maximum of 20 signing profiles.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/signer/v1beta2.SigningProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +listType=set
@@ -32,14 +32,14 @@ type AllowedPublishersInitParameters struct {
 
 type AllowedPublishersObservation struct {
 
-	// The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package.
+	// Set of ARNs for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. Maximum of 20 signing profiles.
 	// +listType=set
 	SigningProfileVersionArns []*string `json:"signingProfileVersionArns,omitempty" tf:"signing_profile_version_arns,omitempty"`
 }
 
 type AllowedPublishersParameters struct {
 
-	// The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package.
+	// Set of ARNs for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. Maximum of 20 signing profiles.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/signer/v1beta2.SigningProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -57,13 +57,13 @@ type AllowedPublishersParameters struct {
 
 type CodeSigningConfigInitParameters struct {
 
-	// A configuration block of allowed publishers as signing profiles for this code signing configuration. Detailed below.
+	// Configuration block of allowed publishers as signing profiles for this code signing configuration. See below.
 	AllowedPublishers *AllowedPublishersInitParameters `json:"allowedPublishers,omitempty" tf:"allowed_publishers,omitempty"`
 
 	// Descriptive name for this code signing configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
+	// Configuration block of code signing policies that define the actions to take if the validation checks fail. See below.
 	Policies *PoliciesInitParameters `json:"policies,omitempty" tf:"policies,omitempty"`
 
 	// Key-value map of resource tags.
@@ -73,10 +73,10 @@ type CodeSigningConfigInitParameters struct {
 
 type CodeSigningConfigObservation struct {
 
-	// A configuration block of allowed publishers as signing profiles for this code signing configuration. Detailed below.
+	// Configuration block of allowed publishers as signing profiles for this code signing configuration. See below.
 	AllowedPublishers *AllowedPublishersObservation `json:"allowedPublishers,omitempty" tf:"allowed_publishers,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the code signing configuration.
+	// ARN of the code signing configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Unique identifier for the code signing configuration.
@@ -87,24 +87,24 @@ type CodeSigningConfigObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The date and time that the code signing configuration was last modified.
+	// Date and time that the code signing configuration was last modified.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 
-	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
+	// Configuration block of code signing policies that define the actions to take if the validation checks fail. See below.
 	Policies *PoliciesObservation `json:"policies,omitempty" tf:"policies,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CodeSigningConfigParameters struct {
 
-	// A configuration block of allowed publishers as signing profiles for this code signing configuration. Detailed below.
+	// Configuration block of allowed publishers as signing profiles for this code signing configuration. See below.
 	// +kubebuilder:validation:Optional
 	AllowedPublishers *AllowedPublishersParameters `json:"allowedPublishers,omitempty" tf:"allowed_publishers,omitempty"`
 
@@ -112,10 +112,11 @@ type CodeSigningConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
+	// Configuration block of code signing policies that define the actions to take if the validation checks fail. See below.
 	// +kubebuilder:validation:Optional
 	Policies *PoliciesParameters `json:"policies,omitempty" tf:"policies,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -172,7 +173,7 @@ type CodeSigningConfigStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// CodeSigningConfig is the Schema for the CodeSigningConfigs API. Provides a Lambda Code Signing Config resource.
+// CodeSigningConfig is the Schema for the CodeSigningConfigs API. Manages an AWS Lambda Code Signing Config.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

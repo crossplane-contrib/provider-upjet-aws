@@ -8,6 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
+    certificateBasedAuthProperties:
+    - certificateAuthorityArn: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
+      status: ENABLED
     directoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

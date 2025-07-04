@@ -34,6 +34,19 @@ type AppInitParameters struct {
 	// Cache configuration for the Amplify app. See cache_config Block for details.
 	CacheConfig *CacheConfigInitParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
@@ -106,6 +119,9 @@ type AppObservation struct {
 
 	// Cache configuration for the Amplify app. See cache_config Block for details.
 	CacheConfig *CacheConfigObservation `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
+
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
 
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
@@ -189,6 +205,20 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheConfig *CacheConfigParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
+
 	// The custom HTTP headers for an Amplify app.
 	// +kubebuilder:validation:Optional
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
@@ -248,6 +278,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

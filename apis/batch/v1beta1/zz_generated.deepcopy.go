@@ -53,6 +53,11 @@ func (in *ComputeEnvironmentInitParameters) DeepCopyInto(out *ComputeEnvironment
 		*out = new(EksConfigurationInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceRole != nil {
 		in, out := &in.ServiceRole, &out.ServiceRole
 		*out = new(string)
@@ -168,6 +173,11 @@ func (in *ComputeEnvironmentObservation) DeepCopyInto(out *ComputeEnvironmentObs
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -352,6 +362,11 @@ func (in *ComputeEnvironmentParameters) DeepCopyInto(out *ComputeEnvironmentPara
 		in, out := &in.EksConfiguration, &out.EksConfiguration
 		*out = new(EksConfigurationParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -3054,17 +3069,6 @@ func (in *JobQueueInitParameters) DeepCopyInto(out *JobQueueInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.ComputeEnvironments != nil {
-		in, out := &in.ComputeEnvironments, &out.ComputeEnvironments
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.JobStateTimeLimitAction != nil {
 		in, out := &in.JobStateTimeLimitAction, &out.JobStateTimeLimitAction
 		*out = make([]JobStateTimeLimitActionInitParameters, len(*in))
@@ -3172,17 +3176,6 @@ func (in *JobQueueObservation) DeepCopyInto(out *JobQueueObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.ComputeEnvironments != nil {
-		in, out := &in.ComputeEnvironments, &out.ComputeEnvironments
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -3262,17 +3255,6 @@ func (in *JobQueueParameters) DeepCopyInto(out *JobQueueParameters) {
 		*out = make([]ComputeEnvironmentOrderParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
-	if in.ComputeEnvironments != nil {
-		in, out := &in.ComputeEnvironments, &out.ComputeEnvironments
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
 		}
 	}
 	if in.JobStateTimeLimitAction != nil {

@@ -79,6 +79,21 @@ func (in *AppInitParameters) DeepCopyInto(out *AppInitParameters) {
 		*out = new(CacheConfigInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ComputeRoleArnRef != nil {
+		in, out := &in.ComputeRoleArnRef, &out.ComputeRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ComputeRoleArnSelector != nil {
+		in, out := &in.ComputeRoleArnSelector, &out.ComputeRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
@@ -261,6 +276,11 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 		*out = new(CacheConfigObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
@@ -432,6 +452,21 @@ func (in *AppParameters) DeepCopyInto(out *AppParameters) {
 	if in.CacheConfig != nil {
 		in, out := &in.CacheConfig, &out.CacheConfig
 		*out = new(CacheConfigParameters)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ComputeRoleArnRef != nil {
+		in, out := &in.ComputeRoleArnRef, &out.ComputeRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ComputeRoleArnSelector != nil {
+		in, out := &in.ComputeRoleArnSelector, &out.ComputeRoleArnSelector
+		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomHeaders != nil {

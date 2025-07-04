@@ -62,6 +62,7 @@ type DeploymentConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	MinimumHealthyHosts *MinimumHealthyHostsParameters `json:"minimumHealthyHosts,omitempty" tf:"minimum_healthy_hosts,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

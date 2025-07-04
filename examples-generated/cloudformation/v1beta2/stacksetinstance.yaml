@@ -10,6 +10,7 @@ spec:
   forProvider:
     accountId: "123456789012"
     region: us-west-1
+    stackSetInstanceRegion: us-east-1
     stackSetNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

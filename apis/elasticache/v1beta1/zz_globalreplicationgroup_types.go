@@ -50,10 +50,10 @@ type GlobalReplicationGroupInitParameters struct {
 	// The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// created description for the global replication group.
+	// A user-created description for the global replication group.
 	GlobalReplicationGroupDescription *string `json:"globalReplicationGroupDescription,omitempty" tf:"global_replication_group_description,omitempty"`
 
-	// –  The suffix name of a Global Datastore. If global_replication_group_id_suffix is changed, creates a new resource.
+	// The suffix name of a Global Datastore. If global_replication_group_id_suffix is changed, creates a new resource.
 	GlobalReplicationGroupIDSuffix *string `json:"globalReplicationGroupIdSuffix,omitempty" tf:"global_replication_group_id_suffix,omitempty"`
 
 	// The number of node groups (shards) on the global replication group.
@@ -65,7 +65,7 @@ type GlobalReplicationGroupInitParameters struct {
 	// Note that ElastiCache creates a copy of this parameter group for each member replication group.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// –  The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
+	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta2.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PrimaryReplicationGroupID *string `json:"primaryReplicationGroupId,omitempty" tf:"primary_replication_group_id,omitempty"`
@@ -123,13 +123,13 @@ type GlobalReplicationGroupObservation struct {
 	// Has the values:
 	GlobalNodeGroups []GlobalNodeGroupsObservation `json:"globalNodeGroups,omitempty" tf:"global_node_groups,omitempty"`
 
-	// created description for the global replication group.
+	// A user-created description for the global replication group.
 	GlobalReplicationGroupDescription *string `json:"globalReplicationGroupDescription,omitempty" tf:"global_replication_group_description,omitempty"`
 
 	// The full ID of the global replication group.
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
 
-	// –  The suffix name of a Global Datastore. If global_replication_group_id_suffix is changed, creates a new resource.
+	// The suffix name of a Global Datastore. If global_replication_group_id_suffix is changed, creates a new resource.
 	GlobalReplicationGroupIDSuffix *string `json:"globalReplicationGroupIdSuffix,omitempty" tf:"global_replication_group_id_suffix,omitempty"`
 
 	// The ID of the ElastiCache Global Replication Group.
@@ -144,7 +144,7 @@ type GlobalReplicationGroupObservation struct {
 	// Note that ElastiCache creates a copy of this parameter group for each member replication group.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// –  The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
+	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
 	PrimaryReplicationGroupID *string `json:"primaryReplicationGroupId,omitempty" tf:"primary_replication_group_id,omitempty"`
 
 	// A flag that indicates whether the encryption in transit is enabled.
@@ -176,11 +176,11 @@ type GlobalReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// created description for the global replication group.
+	// A user-created description for the global replication group.
 	// +kubebuilder:validation:Optional
 	GlobalReplicationGroupDescription *string `json:"globalReplicationGroupDescription,omitempty" tf:"global_replication_group_description,omitempty"`
 
-	// –  The suffix name of a Global Datastore. If global_replication_group_id_suffix is changed, creates a new resource.
+	// The suffix name of a Global Datastore. If global_replication_group_id_suffix is changed, creates a new resource.
 	// +kubebuilder:validation:Optional
 	GlobalReplicationGroupIDSuffix *string `json:"globalReplicationGroupIdSuffix,omitempty" tf:"global_replication_group_id_suffix,omitempty"`
 
@@ -195,7 +195,7 @@ type GlobalReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// –  The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
+	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta2.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -209,6 +209,7 @@ type GlobalReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PrimaryReplicationGroupIDSelector *v1.Selector `json:"primaryReplicationGroupIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

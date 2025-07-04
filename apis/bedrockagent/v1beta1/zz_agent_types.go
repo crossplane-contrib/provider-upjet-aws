@@ -49,8 +49,11 @@ type AgentInitParameters struct {
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 8000 characters.
+	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 20000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
+
+	// Configurations for the agent's ability to retain the conversational context.
+	MemoryConfiguration []MemoryConfigurationInitParameters `json:"memoryConfiguration,omitempty" tf:"memory_configuration,omitempty"`
 
 	// Whether to prepare the agent after creation or modification. Defaults to true.
 	PrepareAgent *bool `json:"prepareAgent,omitempty" tf:"prepare_agent,omitempty"`
@@ -104,11 +107,17 @@ type AgentObservation struct {
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 8000 characters.
+	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 20000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
+
+	// Configurations for the agent's ability to retain the conversational context.
+	MemoryConfiguration []MemoryConfigurationObservation `json:"memoryConfiguration,omitempty" tf:"memory_configuration,omitempty"`
 
 	// Whether to prepare the agent after creation or modification. Defaults to true.
 	PrepareAgent *bool `json:"prepareAgent,omitempty" tf:"prepare_agent,omitempty"`
+
+	// Timestamp of when the agent was last prepared.
+	PreparedAt *string `json:"preparedAt,omitempty" tf:"prepared_at,omitempty"`
 
 	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration Block for details.
 	PromptOverrideConfiguration []PromptOverrideConfigurationObservation `json:"promptOverrideConfiguration,omitempty" tf:"prompt_override_configuration,omitempty"`
@@ -169,9 +178,13 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 8000 characters.
+	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 20000 characters.
 	// +kubebuilder:validation:Optional
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
+
+	// Configurations for the agent's ability to retain the conversational context.
+	// +kubebuilder:validation:Optional
+	MemoryConfiguration []MemoryConfigurationParameters `json:"memoryConfiguration,omitempty" tf:"memory_configuration,omitempty"`
 
 	// Whether to prepare the agent after creation or modification. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -181,6 +194,7 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	PromptOverrideConfiguration []PromptOverrideConfigurationParameters `json:"promptOverrideConfiguration,omitempty" tf:"prompt_override_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -282,6 +296,35 @@ type InferenceConfigurationParameters struct {
 	// Top percentage of the probability distribution of next tokens, between 0 and 1 (denoting 0% and 100%), from which the model chooses the next token in the sequence.
 	// +kubebuilder:validation:Optional
 	TopP *float64 `json:"topP,omitempty" tf:"top_p"`
+}
+
+type MemoryConfigurationInitParameters struct {
+
+	// The type of memory being stored by the agent. See AWS API documentation for possible values.
+	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types"`
+
+	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
+	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days"`
+}
+
+type MemoryConfigurationObservation struct {
+
+	// The type of memory being stored by the agent. See AWS API documentation for possible values.
+	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types,omitempty"`
+
+	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
+	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days,omitempty"`
+}
+
+type MemoryConfigurationParameters struct {
+
+	// The type of memory being stored by the agent. See AWS API documentation for possible values.
+	// +kubebuilder:validation:Optional
+	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types"`
+
+	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
+	// +kubebuilder:validation:Optional
+	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days"`
 }
 
 type PromptConfigurationsInitParameters struct {

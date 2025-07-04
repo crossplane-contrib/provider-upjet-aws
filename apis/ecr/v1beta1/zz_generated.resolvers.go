@@ -67,6 +67,56 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 	return nil
 }
 
+// ResolveReferences of this PullThroughCacheRule.
+func (mg *PullThroughCacheRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.CustomRoleArnRef,
+			Selector:     mg.Spec.ForProvider.CustomRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomRoleArn")
+	}
+	mg.Spec.ForProvider.CustomRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CustomRoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.CustomRoleArnRef,
+			Selector:     mg.Spec.InitProvider.CustomRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CustomRoleArn")
+	}
+	mg.Spec.InitProvider.CustomRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CustomRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Repository.
 func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

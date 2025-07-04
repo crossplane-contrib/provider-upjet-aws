@@ -12,10 +12,47 @@ spec:
     - onFailure:
       - destinationSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: dlq
       onSuccess:
       - destinationSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
-    functionName: ${aws_lambda_alias.example.function_name}
+            testing.upbound.io/example-name: success
+    functionName: ${aws_lambda_function.example.function_name}
+    maximumEventAgeInSeconds: 300
+    maximumRetryAttempts: 1
     region: us-west-1
+
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta2/functioneventinvokeconfig
+  labels:
+    testing.upbound.io/example-name: success
+  name: success
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Environment: production
+      Purpose: lambda-success-notifications
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta2/functioneventinvokeconfig
+  labels:
+    testing.upbound.io/example-name: dlq
+  name: dlq
+spec:
+  forProvider:
+    name: lambda-dlq
+    region: us-west-1
+    tags:
+      Environment: production
+      Purpose: lambda-error-handling

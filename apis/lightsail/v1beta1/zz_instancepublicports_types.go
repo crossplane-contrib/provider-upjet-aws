@@ -27,7 +27,7 @@ type InstancePublicPortsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
-	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. Detailed below.
+	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. See below.
 	PortInfo []PortInfoInitParameters `json:"portInfo,omitempty" tf:"port_info,omitempty"`
 }
 
@@ -39,7 +39,7 @@ type InstancePublicPortsObservation struct {
 	// Name of the Lightsail Instance.
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
-	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. Detailed below.
+	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. See below.
 	PortInfo []PortInfoObservation `json:"portInfo,omitempty" tf:"port_info,omitempty"`
 }
 
@@ -58,10 +58,11 @@ type InstancePublicPortsParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
-	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. Detailed below.
+	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. See below.
 	// +kubebuilder:validation:Optional
 	PortInfo []PortInfoParameters `json:"portInfo,omitempty" tf:"port_info,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -81,10 +82,11 @@ type PortInfoInitParameters struct {
 	// First port in a range of open ports on an instance.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// Set of IPv6 CIDR blocks.
 	// +listType=set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
-	// IP protocol name. Valid values are tcp, all, udp, and icmp.
+	// IP protocol name. Valid values: tcp, all, udp, icmp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Last port in a range of open ports on an instance.
@@ -104,10 +106,11 @@ type PortInfoObservation struct {
 	// First port in a range of open ports on an instance.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// Set of IPv6 CIDR blocks.
 	// +listType=set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
-	// IP protocol name. Valid values are tcp, all, udp, and icmp.
+	// IP protocol name. Valid values: tcp, all, udp, icmp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Last port in a range of open ports on an instance.
@@ -130,11 +133,12 @@ type PortInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
+	// Set of IPv6 CIDR blocks.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
-	// IP protocol name. Valid values are tcp, all, udp, and icmp.
+	// IP protocol name. Valid values: tcp, all, udp, icmp.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
@@ -170,7 +174,7 @@ type InstancePublicPortsStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// InstancePublicPorts is the Schema for the InstancePublicPortss API. Provides an Lightsail Instance
+// InstancePublicPorts is the Schema for the InstancePublicPortss API. Manages public ports for a Lightsail instance.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

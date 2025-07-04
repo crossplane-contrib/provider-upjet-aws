@@ -70,6 +70,7 @@ type MethodSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	MethodPath *string `json:"methodPath,omitempty" tf:"method_path,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

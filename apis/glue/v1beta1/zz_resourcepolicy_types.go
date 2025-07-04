@@ -18,7 +18,7 @@ type ResourcePolicyInitParameters struct {
 	// Indicates that you are using both methods to grant cross-account. Valid values are TRUE and FALSE.
 	EnableHybrid *string `json:"enableHybrid,omitempty" tf:"enable_hybrid,omitempty"`
 
-	// –  The policy to be applied to the aws glue data catalog.
+	// The policy to be applied to the aws glue data catalog.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
@@ -29,7 +29,7 @@ type ResourcePolicyObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  The policy to be applied to the aws glue data catalog.
+	// The policy to be applied to the aws glue data catalog.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
@@ -39,10 +39,11 @@ type ResourcePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableHybrid *string `json:"enableHybrid,omitempty" tf:"enable_hybrid,omitempty"`
 
-	// –  The policy to be applied to the aws glue data catalog.
+	// The policy to be applied to the aws glue data catalog.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

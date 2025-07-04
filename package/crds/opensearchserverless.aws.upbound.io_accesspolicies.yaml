@@ -73,19 +73,24 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the policy. Typically used to store
-                      information about the permissions defined in the policy.
+                    description: |-
+                      Description of the policy. Typically used to store information about the permissions defined in the policy.
+                      Description of the policy. Typically used to store information about the permissions defined in the policy.
                     type: string
                   policy:
-                    description: JSON policy document to use as the content for the
-                      new policy
+                    description: |-
+                      JSON policy document to use as the content for the new policy
+                      JSON policy document to use as the content for the new policy.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   type:
-                    description: Type of access policy. Must be data.
+                    description: |-
+                      Type of access policy. Must be data.
+                      Type of access policy. Must be `data`.
                     type: string
                 required:
                 - region
@@ -104,15 +109,19 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: Description of the policy. Typically used to store
-                      information about the permissions defined in the policy.
+                    description: |-
+                      Description of the policy. Typically used to store information about the permissions defined in the policy.
+                      Description of the policy. Typically used to store information about the permissions defined in the policy.
                     type: string
                   policy:
-                    description: JSON policy document to use as the content for the
-                      new policy
+                    description: |-
+                      JSON policy document to use as the content for the new policy
+                      JSON policy document to use as the content for the new policy.
                     type: string
                   type:
-                    description: Type of access policy. Must be data.
+                    description: |-
+                      Type of access policy. Must be data.
+                      Type of access policy. Must be `data`.
                     type: string
                 type: object
               managementPolicies:
@@ -297,20 +306,26 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: Description of the policy. Typically used to store
-                      information about the permissions defined in the policy.
+                    description: |-
+                      Description of the policy. Typically used to store information about the permissions defined in the policy.
+                      Description of the policy. Typically used to store information about the permissions defined in the policy.
                     type: string
                   id:
                     type: string
                   policy:
-                    description: JSON policy document to use as the content for the
-                      new policy
+                    description: |-
+                      JSON policy document to use as the content for the new policy
+                      JSON policy document to use as the content for the new policy.
                     type: string
                   policyVersion:
-                    description: Version of the policy.
+                    description: |-
+                      Version of the policy.
+                      Version of the policy.
                     type: string
                   type:
-                    description: Type of access policy. Must be data.
+                    description: |-
+                      Type of access policy. Must be data.
+                      Type of access policy. Must be `data`.
                     type: string
                 type: object
               conditions:

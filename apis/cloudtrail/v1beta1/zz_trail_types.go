@@ -291,7 +291,7 @@ type TrailInitParameters struct {
 	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
-	// Name of the Amazon SNS topic defined for notification of log file delivery.
+	// Name of the Amazon SNS topic defined for notification of log file delivery. Specify the SNS topic ARN if it resides in another region.
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -349,7 +349,10 @@ type TrailObservation struct {
 	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
-	// Name of the Amazon SNS topic defined for notification of log file delivery.
+	// ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// Name of the Amazon SNS topic defined for notification of log file delivery. Specify the SNS topic ARN if it resides in another region.
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -426,6 +429,7 @@ type TrailParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -449,7 +453,7 @@ type TrailParameters struct {
 	// +kubebuilder:validation:Optional
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
-	// Name of the Amazon SNS topic defined for notification of log file delivery.
+	// Name of the Amazon SNS topic defined for notification of log file delivery. Specify the SNS topic ARN if it resides in another region.
 	// +kubebuilder:validation:Optional
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 

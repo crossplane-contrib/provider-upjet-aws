@@ -2908,13 +2908,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -2937,11 +2930,6 @@ spec:
                           CPU Options for more information.
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -3429,8 +3417,9 @@ spec:
                       in a VPC.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     description: Configuration block to customize details about the
@@ -3829,13 +3818,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -3858,11 +3840,6 @@ spec:
                           CPU Options for more information.
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -4906,13 +4883,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -4935,11 +4905,6 @@ spec:
                           CPU Options for more information.
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.

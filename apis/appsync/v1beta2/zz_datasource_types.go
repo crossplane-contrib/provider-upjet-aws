@@ -199,7 +199,7 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	OpensearchserviceConfig *OpensearchserviceConfigParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
-	// AWS Region for RDS HTTP endpoint. Defaults to current region.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

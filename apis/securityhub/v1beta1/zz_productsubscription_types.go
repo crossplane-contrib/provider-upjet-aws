@@ -36,6 +36,7 @@ type ProductSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ProductArn *string `json:"productArn,omitempty" tf:"product_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

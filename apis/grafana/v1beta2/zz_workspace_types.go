@@ -94,7 +94,7 @@ type WorkspaceInitParameters struct {
 	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
 	// The workspace description.
@@ -159,7 +159,7 @@ type WorkspaceObservation struct {
 	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
 	// The workspace description.
@@ -225,7 +225,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
 	// +kubebuilder:validation:Optional
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
@@ -261,6 +261,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	PermissionType *string `json:"permissionType,omitempty" tf:"permission_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -515,6 +515,7 @@ type IntentParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ParentIntentSignature *string `json:"parentIntentSignature,omitempty" tf:"parent_intent_signature,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

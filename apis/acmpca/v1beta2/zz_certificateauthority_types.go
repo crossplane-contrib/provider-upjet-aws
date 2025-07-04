@@ -154,6 +154,7 @@ type CertificateAuthorityParameters struct {
 	// +kubebuilder:validation:Optional
 	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

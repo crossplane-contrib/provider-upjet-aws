@@ -15,6 +15,9 @@ import (
 
 type RestAPIEndpointConfigurationInitParameters struct {
 
+	// The IP address types that can invoke an API (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE, REGIONAL or PRIVATE. If unspecified, defaults to EDGE. If set to PRIVATE recommend to set put_rest_api_mode = merge to not cause the endpoints and associated Route53 records to be deleted. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 
@@ -35,6 +38,9 @@ type RestAPIEndpointConfigurationInitParameters struct {
 
 type RestAPIEndpointConfigurationObservation struct {
 
+	// The IP address types that can invoke an API (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE, REGIONAL or PRIVATE. If unspecified, defaults to EDGE. If set to PRIVATE recommend to set put_rest_api_mode = merge to not cause the endpoints and associated Route53 records to be deleted. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 
@@ -44,6 +50,10 @@ type RestAPIEndpointConfigurationObservation struct {
 }
 
 type RestAPIEndpointConfigurationParameters struct {
+
+	// The IP address types that can invoke an API (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE, REGIONAL or PRIVATE. If unspecified, defaults to EDGE. If set to PRIVATE recommend to set put_rest_api_mode = merge to not cause the endpoints and associated Route53 records to be deleted. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
 	// +kubebuilder:validation:Optional
@@ -218,6 +228,7 @@ type RestAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	PutRestAPIMode *string `json:"putRestApiMode,omitempty" tf:"put_rest_api_mode,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

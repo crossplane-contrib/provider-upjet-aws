@@ -541,9 +541,15 @@ spec:
                           Batch manages pods in this namespace.
                         type: string
                     type: object
+                  name:
+                    description: The name for your compute environment. Up to 128
+                      letters (uppercase and lowercase), numbers, and underscores
+                      are allowed.
+                    type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRole:
                     description: The full Amazon Resource Name (ARN) of the IAM role
@@ -1137,6 +1143,11 @@ spec:
                           Batch manages pods in this namespace.
                         type: string
                     type: object
+                  name:
+                    description: The name for your compute environment. Up to 128
+                      letters (uppercase and lowercase), numbers, and underscores
+                      are allowed.
+                    type: string
                   serviceRole:
                     description: The full Amazon Resource Name (ARN) of the IAM role
                       that allows AWS Batch to make calls to other AWS services on
@@ -1590,6 +1601,11 @@ spec:
                         type: string
                     type: object
                   id:
+                    type: string
+                  name:
+                    description: The name for your compute environment. Up to 128
+                      letters (uppercase and lowercase), numbers, and underscores
+                      are allowed.
                     type: string
                   serviceRole:
                     description: The full Amazon Resource Name (ARN) of the IAM role

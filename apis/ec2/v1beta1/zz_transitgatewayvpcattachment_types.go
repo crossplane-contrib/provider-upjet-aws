@@ -82,10 +82,13 @@ type TransitGatewayVPCAttachmentObservation struct {
 	// Whether Appliance Mode support is enabled. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. Valid values: disable, enable. Default value: disable.
 	ApplianceModeSupport *string `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
+	// ARN of the attachment.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Whether DNS support is enabled. Valid values: disable, enable. Default value: enable.
 	DNSSupport *string `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
 
-	// EC2 Transit Gateway Attachment identifier
+	// EC2 Transit Gateway Attachment identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether IPv6 support is enabled. Valid values: disable, enable. Default value: disable.
@@ -136,6 +139,7 @@ type TransitGatewayVPCAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6Support *string `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -87,7 +87,7 @@ type MetricAlarmInitParameters struct {
 	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
-	// Valid values are 10, 30, or any multiple of 60.
+	// Valid values are 10, 20, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to the alarm's associated metric.
@@ -171,7 +171,7 @@ type MetricAlarmObservation struct {
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// The period in seconds over which the specified statistic is applied.
-	// Valid values are 10, 30, or any multiple of 60.
+	// Valid values are 10, 20, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to the alarm's associated metric.
@@ -287,10 +287,11 @@ type MetricAlarmParameters struct {
 	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
-	// Valid values are 10, 30, or any multiple of 60.
+	// Valid values are 10, 20, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -339,7 +340,7 @@ type MetricInitParameters struct {
 
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
-	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to this metric.
@@ -366,7 +367,7 @@ type MetricObservation struct {
 
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
-	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to this metric.
@@ -396,7 +397,7 @@ type MetricParameters struct {
 
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
-	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
 	Period *float64 `json:"period" tf:"period,omitempty"`
 
@@ -429,7 +430,7 @@ type MetricQueryInitParameters struct {
 
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
-	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Specify exactly one metric_query to be true to use that metric_query result as the alarm.
@@ -455,7 +456,7 @@ type MetricQueryObservation struct {
 
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
-	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Specify exactly one metric_query to be true to use that metric_query result as the alarm.
@@ -486,7 +487,7 @@ type MetricQueryParameters struct {
 
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
-	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 

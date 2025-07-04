@@ -15,6 +15,9 @@ import (
 
 type QueueInitParameters struct {
 
+	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
+
 	// A description of the queue
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -36,6 +39,9 @@ type QueueObservation struct {
 
 	// The Arn of the queue
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
 
 	// A description of the queue
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -63,6 +69,10 @@ type QueueObservation struct {
 
 type QueueParameters struct {
 
+	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	// +kubebuilder:validation:Optional
+	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
+
 	// A description of the queue
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -71,6 +81,7 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Optional
 	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

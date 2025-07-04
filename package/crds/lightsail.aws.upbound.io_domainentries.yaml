@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DomainEntry is the Schema for the DomainEntrys API. Provides
-          an Lightsail Domain Entry
+        description: DomainEntry is the Schema for the DomainEntrys API. Manages a
+          Lightsail domain entry (DNS record).
         properties:
           apiVersion:
             description: |-
@@ -74,8 +74,8 @@ spec:
               forProvider:
                 properties:
                   domainName:
-                    description: The name of the Lightsail domain in which to create
-                      the entry
+                    description: Name of the Lightsail domain in which to create the
+                      entry.
                     type: string
                   domainNameRef:
                     description: Reference to a Domain in lightsail to populate domainName.
@@ -152,17 +152,19 @@ spec:
                         type: object
                     type: object
                   isAlias:
-                    description: If the entry should be an alias Defaults to false
+                    description: 'Whether the entry should be an alias. Default: false.'
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   target:
-                    description: Target of the domain entry
+                    description: Target of the domain entry.
                     type: string
                   type:
-                    description: Type of record
+                    description: 'Type of record. Valid values: A, AAAA, CNAME, MX,
+                      NS, SOA, SRV, TXT.'
                     type: string
                 required:
                 - region
@@ -182,10 +184,10 @@ spec:
                   autoscaler.
                 properties:
                   isAlias:
-                    description: If the entry should be an alias Defaults to false
+                    description: 'Whether the entry should be an alias. Default: false.'
                     type: boolean
                   target:
-                    description: Target of the domain entry
+                    description: Target of the domain entry.
                     type: string
                 type: object
               managementPolicies:
@@ -366,21 +368,22 @@ spec:
               atProvider:
                 properties:
                   domainName:
-                    description: The name of the Lightsail domain in which to create
-                      the entry
+                    description: Name of the Lightsail domain in which to create the
+                      entry.
                     type: string
                   id:
-                    description: 'A combination of attributes to create a unique id:
-                      name,domain_name,type,target'
+                    description: 'Combination of attributes to create a unique id:
+                      name,domain_name,type,target.'
                     type: string
                   isAlias:
-                    description: If the entry should be an alias Defaults to false
+                    description: 'Whether the entry should be an alias. Default: false.'
                     type: boolean
                   target:
-                    description: Target of the domain entry
+                    description: Target of the domain entry.
                     type: string
                   type:
-                    description: Type of record
+                    description: 'Type of record. Valid values: A, AAAA, CNAME, MX,
+                      NS, SOA, SRV, TXT.'
                     type: string
                 type: object
               conditions:

@@ -281,6 +281,7 @@ type UsagePlanParameters struct {
 	// +kubebuilder:validation:Optional
 	QuotaSettings *QuotaSettingsParameters `json:"quotaSettings,omitempty" tf:"quota_settings,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

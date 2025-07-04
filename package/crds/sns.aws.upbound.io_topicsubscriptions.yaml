@@ -190,8 +190,9 @@ spec:
                       used in the subscription. Refer to the SNS docs for more details.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replayPolicy:
                     description: JSON String with the archived message replay policy

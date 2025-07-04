@@ -1204,8 +1204,9 @@ spec:
                     description: Unique name for the fleet.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   streamView:
                     description: AppStream 2.0 view that is displayed to your users

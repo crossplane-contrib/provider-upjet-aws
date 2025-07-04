@@ -695,7 +695,7 @@ spec:
               forProvider:
                 properties:
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -776,8 +776,7 @@ spec:
                       provider information for the cluster. Detailed below.
                     properties:
                       clientId:
-                        description: –  Client ID for the OpenID Connect identity
-                          provider.
+                        description: Client ID for the OpenID Connect identity provider.
                         type: string
                       groupsClaim:
                         description: The JWT claim that the provider will use to return
@@ -806,8 +805,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -832,7 +832,7 @@ spec:
                   autoscaler.
                 properties:
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -913,8 +913,7 @@ spec:
                       provider information for the cluster. Detailed below.
                     properties:
                       clientId:
-                        description: –  Client ID for the OpenID Connect identity
-                          provider.
+                        description: Client ID for the OpenID Connect identity provider.
                         type: string
                       groupsClaim:
                         description: The JWT claim that the provider will use to return
@@ -1132,7 +1131,7 @@ spec:
                       Configuration.
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   id:
                     description: EKS Cluster name and EKS Identity Provider Configuration
@@ -1143,8 +1142,7 @@ spec:
                       provider information for the cluster. Detailed below.
                     properties:
                       clientId:
-                        description: –  Client ID for the OpenID Connect identity
-                          provider.
+                        description: Client ID for the OpenID Connect identity provider.
                         type: string
                       groupsClaim:
                         description: The JWT claim that the provider will use to return

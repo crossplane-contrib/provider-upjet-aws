@@ -149,7 +149,7 @@ type CatalogTableParameters struct {
 	// +kubebuilder:validation:Optional
 	PartitionKeys []PartitionKeysParameters `json:"partitionKeys,omitempty" tf:"partition_keys,omitempty"`
 
-	// Region of the target table.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

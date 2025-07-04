@@ -79,7 +79,7 @@ type CreateTableDefaultPermissionsParameters struct {
 
 type DataLakeSettingsInitParameters struct {
 
-	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -102,7 +102,7 @@ type DataLakeSettingsInitParameters struct {
 	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
 	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
 
-	// –  Identifier for the Data Catalog. By default, the account ID.
+	// Identifier for the Data Catalog. By default, the account ID.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Up to three configuration blocks of principal permissions for default create database permissions. Detailed below.
@@ -119,17 +119,17 @@ type DataLakeSettingsInitParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
+	// Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +listType=set
 	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
 
-	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
+	// List of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }
 
 type DataLakeSettingsObservation struct {
 
-	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
@@ -142,7 +142,7 @@ type DataLakeSettingsObservation struct {
 	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
 	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
 
-	// –  Identifier for the Data Catalog. By default, the account ID.
+	// Identifier for the Data Catalog. By default, the account ID.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Up to three configuration blocks of principal permissions for default create database permissions. Detailed below.
@@ -161,17 +161,17 @@ type DataLakeSettingsObservation struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
+	// Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +listType=set
 	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
 
-	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
+	// List of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }
 
 type DataLakeSettingsParameters struct {
 
-	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -198,7 +198,7 @@ type DataLakeSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
 
-	// –  Identifier for the Data Catalog. By default, the account ID.
+	// Identifier for the Data Catalog. By default, the account ID.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -220,17 +220,18 @@ type DataLakeSettingsParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
+	// Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
+	// List of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	// +kubebuilder:validation:Optional
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }

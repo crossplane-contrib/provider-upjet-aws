@@ -40,6 +40,9 @@ type APIInitParameters struct {
 	// Whether warnings should return an error while API Gateway is creating or updating the resource using an OpenAPI specification. Defaults to false. Applicable for HTTP APIs.
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
+	// The IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// Name of the API. Must be less than or equal to 128 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -107,6 +110,9 @@ type APIObservation struct {
 	// API identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// Name of the API. Must be less than or equal to 128 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -171,6 +177,10 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
+	// The IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// Name of the API. Must be less than or equal to 128 characters in length.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -179,6 +189,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

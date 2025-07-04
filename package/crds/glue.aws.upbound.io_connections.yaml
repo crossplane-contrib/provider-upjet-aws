@@ -1002,14 +1002,27 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  athenaPropertiesSecretRef:
+                    description: Map of key-value pairs used as connection properties
+                      specific to the Athena compute environment.
+                    properties:
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - name
+                    - namespace
+                    type: object
                   catalogId:
-                    description: –  ID of the Data Catalog in which to create the
-                      connection. If none is supplied, the AWS account ID is used
-                      by default.
+                    description: ID of the Data Catalog in which to create the connection.
+                      If none is supplied, the AWS account ID is used by default.
                     type: string
                   connectionPropertiesSecretRef:
-                    description: value pairs used as parameters for this connection.
-                      For more information, see the AWS Documentation.
+                    description: Map of key-value pairs used as parameters for this
+                      connection. For more information, see the AWS Documentation.
                     properties:
                       name:
                         description: Name of the secret.
@@ -1022,16 +1035,16 @@ spec:
                     - namespace
                     type: object
                   connectionType:
-                    description: '–  Type of the connection. Valid values: AZURECOSMOS,
-                      AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB,
-                      NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
+                    description: 'Type of the connection. Valid values: AZURECOSMOS,
+                      AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE,
+                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
                     type: string
                   description:
-                    description: –  Description of the connection.
+                    description: Description of the connection.
                     type: string
                   matchCriteria:
-                    description: –  List of criteria that can be used in selecting
-                      this connection.
+                    description: List of criteria that can be used in selecting this
+                      connection.
                     items:
                       type: string
                     type: array
@@ -1283,8 +1296,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -1309,21 +1323,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  athenaPropertiesSecretRef:
+                    additionalProperties:
+                      type: string
+                    type: object
                   connectionPropertiesSecretRef:
                     additionalProperties:
                       type: string
                     type: object
                   connectionType:
-                    description: '–  Type of the connection. Valid values: AZURECOSMOS,
-                      AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB,
-                      NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
+                    description: 'Type of the connection. Valid values: AZURECOSMOS,
+                      AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE,
+                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
                     type: string
                   description:
-                    description: –  Description of the connection.
+                    description: Description of the connection.
                     type: string
                   matchCriteria:
-                    description: –  List of criteria that can be used in selecting
-                      this connection.
+                    description: List of criteria that can be used in selecting this
+                      connection.
                     items:
                       type: string
                     type: array
@@ -1757,24 +1775,23 @@ spec:
                     description: ARN of the Glue Connection.
                     type: string
                   catalogId:
-                    description: –  ID of the Data Catalog in which to create the
-                      connection. If none is supplied, the AWS account ID is used
-                      by default.
+                    description: ID of the Data Catalog in which to create the connection.
+                      If none is supplied, the AWS account ID is used by default.
                     type: string
                   connectionType:
-                    description: '–  Type of the connection. Valid values: AZURECOSMOS,
-                      AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB,
-                      NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
+                    description: 'Type of the connection. Valid values: AZURECOSMOS,
+                      AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE,
+                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
                     type: string
                   description:
-                    description: –  Description of the connection.
+                    description: Description of the connection.
                     type: string
                   id:
                     description: Catalog ID and name of the connection.
                     type: string
                   matchCriteria:
-                    description: –  List of criteria that can be used in selecting
-                      this connection.
+                    description: List of criteria that can be used in selecting this
+                      connection.
                     items:
                       type: string
                     type: array

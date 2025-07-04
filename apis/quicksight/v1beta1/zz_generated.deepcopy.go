@@ -383,6 +383,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UserInvitationURL != nil {
+		in, out := &in.UserInvitationURL, &out.UserInvitationURL
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserName != nil {
 		in, out := &in.UserName, &out.UserName
 		*out = new(string)

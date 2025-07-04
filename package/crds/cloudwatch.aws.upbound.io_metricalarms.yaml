@@ -1505,7 +1505,7 @@ spec:
                               description: |-
                                 Granularity in seconds of returned data points.
                                 For metrics with regular resolution, valid values are any multiple of 60.
-                                For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+                                For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
                               type: number
                             stat:
                               description: |-
@@ -1520,7 +1520,7 @@ spec:
                           description: |-
                             Granularity in seconds of returned data points.
                             For metrics with regular resolution, valid values are any multiple of 60.
-                            For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+                            For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
                           type: number
                         returnData:
                           description: Specify exactly one metric_query to be true
@@ -1621,11 +1621,12 @@ spec:
                   period:
                     description: |-
                       The period in seconds over which the specified statistic is applied.
-                      Valid values are 10, 30, or any multiple of 60.
+                      Valid values are 10, 20, 30, or any multiple of 60.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   statistic:
                     description: |-
@@ -1874,7 +1875,7 @@ spec:
                               description: |-
                                 Granularity in seconds of returned data points.
                                 For metrics with regular resolution, valid values are any multiple of 60.
-                                For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+                                For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
                               type: number
                             stat:
                               description: |-
@@ -1889,7 +1890,7 @@ spec:
                           description: |-
                             Granularity in seconds of returned data points.
                             For metrics with regular resolution, valid values are any multiple of 60.
-                            For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+                            For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
                           type: number
                         returnData:
                           description: Specify exactly one metric_query to be true
@@ -1990,7 +1991,7 @@ spec:
                   period:
                     description: |-
                       The period in seconds over which the specified statistic is applied.
-                      Valid values are 10, 30, or any multiple of 60.
+                      Valid values are 10, 20, 30, or any multiple of 60.
                     type: number
                   statistic:
                     description: |-
@@ -2333,7 +2334,7 @@ spec:
                               description: |-
                                 Granularity in seconds of returned data points.
                                 For metrics with regular resolution, valid values are any multiple of 60.
-                                For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+                                For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
                               type: number
                             stat:
                               description: |-
@@ -2348,7 +2349,7 @@ spec:
                           description: |-
                             Granularity in seconds of returned data points.
                             For metrics with regular resolution, valid values are any multiple of 60.
-                            For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+                            For high-resolution metrics, valid values are 1, 5, 10, 20, 30, or any multiple of 60.
                           type: number
                         returnData:
                           description: Specify exactly one metric_query to be true
@@ -2372,7 +2373,7 @@ spec:
                   period:
                     description: |-
                       The period in seconds over which the specified statistic is applied.
-                      Valid values are 10, 30, or any multiple of 60.
+                      Valid values are 10, 20, 30, or any multiple of 60.
                     type: number
                   statistic:
                     description: |-

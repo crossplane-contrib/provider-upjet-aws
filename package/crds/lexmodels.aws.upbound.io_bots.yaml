@@ -1020,8 +1020,9 @@ spec:
                       it. Default is SAVE.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   voiceId:
                     description: The Amazon Polly voice ID that you want Amazon Lex

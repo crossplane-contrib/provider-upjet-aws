@@ -128,7 +128,7 @@ spec:
                       The default is NULL.
                     type: string
                   engine:
-                    description: –  Name of the cache engine to be used for this cache
+                    description: Name of the cache engine to be used for this cache
                       cluster. Valid values are memcached, redis or valkey.
                     type: string
                   kmsKeyId:
@@ -212,12 +212,13 @@ spec:
                     type: object
                   majorEngineVersion:
                     description: |-
-                      –  The version of the cache engine that will be used to create the serverless cache.
+                      The version of the cache engine that will be used to create the serverless cache.
                       See Describe Cache Engine Versions in the AWS Documentation for supported versions.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -398,9 +399,9 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: –  A list of the identifiers of the subnets where
-                      the VPC endpoint for the serverless cache will be deployed.
-                      All the subnetIds must belong to the same VPC.
+                    description: A list of the identifiers of the subnets where the
+                      VPC endpoint for the serverless cache will be deployed. All
+                      the subnetIds must belong to the same VPC.
                     items:
                       type: string
                     type: array
@@ -487,7 +488,7 @@ spec:
                       The default is NULL.
                     type: string
                   engine:
-                    description: –  Name of the cache engine to be used for this cache
+                    description: Name of the cache engine to be used for this cache
                       cluster. Valid values are memcached, redis or valkey.
                     type: string
                   kmsKeyId:
@@ -571,7 +572,7 @@ spec:
                     type: object
                   majorEngineVersion:
                     description: |-
-                      –  The version of the cache engine that will be used to create the serverless cache.
+                      The version of the cache engine that will be used to create the serverless cache.
                       See Describe Cache Engine Versions in the AWS Documentation for supported versions.
                     type: string
                   securityGroupIdRefs:
@@ -753,9 +754,9 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: –  A list of the identifiers of the subnets where
-                      the VPC endpoint for the serverless cache will be deployed.
-                      All the subnetIds must belong to the same VPC.
+                    description: A list of the identifiers of the subnets where the
+                      VPC endpoint for the serverless cache will be deployed. All
+                      the subnetIds must belong to the same VPC.
                     items:
                       type: string
                     type: array
@@ -1025,7 +1026,7 @@ spec:
                       type: object
                     type: array
                   engine:
-                    description: –  Name of the cache engine to be used for this cache
+                    description: Name of the cache engine to be used for this cache
                       cluster. Valid values are memcached, redis or valkey.
                     type: string
                   fullEngineVersion:
@@ -1041,7 +1042,7 @@ spec:
                     type: string
                   majorEngineVersion:
                     description: |-
-                      –  The version of the cache engine that will be used to create the serverless cache.
+                      The version of the cache engine that will be used to create the serverless cache.
                       See Describe Cache Engine Versions in the AWS Documentation for supported versions.
                     type: string
                   readerEndpoint:
@@ -1086,9 +1087,9 @@ spec:
                       MODIFYING.
                     type: string
                   subnetIds:
-                    description: –  A list of the identifiers of the subnets where
-                      the VPC endpoint for the serverless cache will be deployed.
-                      All the subnetIds must belong to the same VPC.
+                    description: A list of the identifiers of the subnets where the
+                      VPC endpoint for the serverless cache will be deployed. All
+                      the subnetIds must belong to the same VPC.
                     items:
                       type: string
                     type: array

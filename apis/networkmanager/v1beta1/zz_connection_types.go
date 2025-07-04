@@ -15,7 +15,7 @@ import (
 
 type ConnectionInitParameters struct {
 
-	// The ID of the second device in the connection.
+	// ID of the second device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ConnectedDeviceID *string `json:"connectedDeviceId,omitempty" tf:"connected_device_id,omitempty"`
@@ -28,13 +28,13 @@ type ConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectedDeviceIDSelector *v1.Selector `json:"connectedDeviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link for the second device.
+	// ID of the link for the second device.
 	ConnectedLinkID *string `json:"connectedLinkId,omitempty" tf:"connected_link_id,omitempty"`
 
-	// A description of the connection.
+	// Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the first device in the connection.
+	// ID of the first device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
@@ -47,7 +47,7 @@ type ConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -60,7 +60,7 @@ type ConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link for the first device.
+	// ID of the link for the first device.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -70,41 +70,41 @@ type ConnectionInitParameters struct {
 
 type ConnectionObservation struct {
 
-	// The Amazon Resource Name (ARN) of the connection.
+	// ARN of the connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ID of the second device in the connection.
+	// ID of the second device in the connection.
 	ConnectedDeviceID *string `json:"connectedDeviceId,omitempty" tf:"connected_device_id,omitempty"`
 
-	// The ID of the link for the second device.
+	// ID of the link for the second device.
 	ConnectedLinkID *string `json:"connectedLinkId,omitempty" tf:"connected_link_id,omitempty"`
 
-	// A description of the connection.
+	// Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the first device in the connection.
+	// ID of the first device in the connection.
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the link for the first device.
+	// ID of the link for the first device.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ConnectionParameters struct {
 
-	// The ID of the second device in the connection.
+	// ID of the second device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -118,15 +118,15 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectedDeviceIDSelector *v1.Selector `json:"connectedDeviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link for the second device.
+	// ID of the link for the second device.
 	// +kubebuilder:validation:Optional
 	ConnectedLinkID *string `json:"connectedLinkId,omitempty" tf:"connected_link_id,omitempty"`
 
-	// A description of the connection.
+	// Description of the connection.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the first device in the connection.
+	// ID of the first device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -140,7 +140,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -154,7 +154,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link for the first device.
+	// ID of the link for the first device.
 	// +kubebuilder:validation:Optional
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 
@@ -196,7 +196,7 @@ type ConnectionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Connection is the Schema for the Connections API. Creates a connection between two devices.
+// Connection is the Schema for the Connections API. Manages a Network Manager Connection.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
