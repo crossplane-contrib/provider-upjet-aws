@@ -11471,7 +11471,7 @@ spec:
                                   EC2 Parameter store.
                                 type: string
                               uri:
-                                description: –  Path to a file accessible to the live
+                                description: Path to a file accessible to the live
                                   stream.
                                 type: string
                               username:
@@ -11513,22 +11513,37 @@ spec:
                                     In Destination Settings for more details.
                                   properties:
                                     alignment:
-                                      description: justify live subtitles and center-justify
-                                        pre-recorded subtitles. All burn-in and DVB-Sub
-                                        font settings must match.
+                                      description: If no explicit xPosition or yPosition
+                                        is provided, setting alignment to centered
+                                        will place the captions at the bottom center
+                                        of the output. Similarly, setting a left alignment
+                                        will align captions to the bottom left of
+                                        the output. If x and y positions are given
+                                        in conjunction with the alignment parameter,
+                                        the font will be justified (either left or
+                                        centered) relative to those coordinates. Selecting
+                                        “smart” justification will left-justify live
+                                        subtitles and center-justify pre-recorded
+                                        subtitles. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: string
                                     backgroundColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the color of the rectangle
+                                        behind the captions. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     backgroundOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the opacity of the background
+                                        rectangle. 255 is opaque; 0 is transparent.
+                                        Leaving this parameter out is equivalent to
+                                        setting it to 0 (transparent). All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                     font:
-                                      description: in. File extension must be ‘ttf’
-                                        or ‘tte’. Although the user can select output
-                                        fonts for many different types of input captions,
+                                      description: External font file used for caption
+                                        burn-in. File extension must be ‘ttf’ or ‘tte’.
+                                        Although the user can select output fonts
+                                        for many different types of input captions,
                                         embedded, STL and teletext sources use a strict
                                         grid system. Using external fonts with these
                                         caption sources could cause unexpected display
@@ -11541,71 +11556,107 @@ spec:
                                             from EC2 Parameter store.
                                           type: string
                                         uri:
-                                          description: –  Path to a file accessible
-                                            to the live stream.
+                                          description: Path to a file accessible to
+                                            the live stream.
                                           type: string
                                         username:
                                           description: Username for destination.
                                           type: string
                                       type: object
                                     fontColor:
-                                      description: in captions. This option is not
-                                        valid for source captions that are STL, 608/embedded
-                                        or teletext. These source settings are already
-                                        pre-defined by the caption stream. All burn-in
-                                        and DVB-Sub font settings must match.
+                                      description: Specifies the color of the burned-in
+                                        captions. This option is not valid for source
+                                        captions that are STL, 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     fontOpacity:
-                                      description: in captions. 255 is opaque; 0 is
-                                        transparent. All burn-in and DVB-Sub font
-                                        settings must match.
+                                      description: Specifies the opacity of the burned-in
+                                        captions. 255 is opaque; 0 is transparent.
+                                        All burn-in and DVB-Sub font settings must
+                                        match.
                                       type: number
                                     fontResolution:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Font resolution in DPI (dots per
+                                        inch); default is 96 dpi. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: number
                                     fontSize:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: When set to ‘auto’ fontSize will
+                                        scale depending on the size of the output.
+                                        Giving a positive integer will specify the
+                                        exact font size in points. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: string
                                     outlineColor:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies font outline color. This
+                                        option is not valid for source captions that
+                                        are either 608/embedded or teletext. These
+                                        source settings are already pre-defined by
+                                        the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     outlineSize:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: string
-                                    shadowOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowXOffset:
-                                      description: 2 would result in a shadow offset
-                                        2 pixels to the left. All burn-in and DVB-Sub
+                                      description: Specifies font outline size in
+                                        pixels. This option is not valid for source
+                                        captions that are either 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
+                                    shadowColor:
+                                      description: Specifies the color of the shadow
+                                        cast by the captions. All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: string
+                                    shadowOpacity:
+                                      description: Specifies the opacity of the shadow.
+                                        255 is opaque; 0 is transparent. Leaving this
+                                        parameter out is equivalent to setting it
+                                        to 0 (transparent). All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: number
+                                    shadowXOffset:
+                                      description: Specifies the horizontal offset
+                                        of the shadow relative to the captions in
+                                        pixels. A value of -2 would result in a shadow
+                                        offset 2 pixels to the left. All burn-in and
+                                        DVB-Sub font settings must match.
+                                      type: number
                                     shadowYOffset:
-                                      description: 2 would result in a shadow offset
+                                      description: Specifies the vertical offset of
+                                        the shadow relative to the captions in pixels.
+                                        A value of -2 would result in a shadow offset
                                         2 pixels above the text. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
                                     teletextGridControl:
-                                      description: Sub/Burn-in outputs.
+                                      description: Controls whether a fixed grid size
+                                        will be used to generate the output subtitles
+                                        bitmap. Only applicable for Teletext inputs
+                                        and DVB-Sub/Burn-in outputs.
                                       type: string
                                     xPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the horizontal position
+                                        of the caption relative to the left side of
+                                        the output in pixels. A value of 10 would
+                                        result in the captions starting 10 pixels
+                                        from the left of the output. If no explicit
+                                        xPosition is provided, the horizontal caption
+                                        position will be determined by the alignment
+                                        parameter. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: number
                                     yPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the vertical position
+                                        of the caption relative to the top of the
+                                        output in pixels. A value of 10 would result
+                                        in the captions starting 10 pixels from the
+                                        top of the output. If no explicit yPosition
+                                        is provided, the caption will be positioned
+                                        towards the bottom of the output. All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                   type: object
                                 dvbSubDestinationSettings:
@@ -11613,22 +11664,37 @@ spec:
                                     Sub Destination Settings for more details.
                                   properties:
                                     alignment:
-                                      description: justify live subtitles and center-justify
-                                        pre-recorded subtitles. All burn-in and DVB-Sub
-                                        font settings must match.
+                                      description: If no explicit xPosition or yPosition
+                                        is provided, setting alignment to centered
+                                        will place the captions at the bottom center
+                                        of the output. Similarly, setting a left alignment
+                                        will align captions to the bottom left of
+                                        the output. If x and y positions are given
+                                        in conjunction with the alignment parameter,
+                                        the font will be justified (either left or
+                                        centered) relative to those coordinates. Selecting
+                                        “smart” justification will left-justify live
+                                        subtitles and center-justify pre-recorded
+                                        subtitles. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: string
                                     backgroundColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the color of the rectangle
+                                        behind the captions. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     backgroundOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the opacity of the background
+                                        rectangle. 255 is opaque; 0 is transparent.
+                                        Leaving this parameter out is equivalent to
+                                        setting it to 0 (transparent). All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                     font:
-                                      description: in. File extension must be ‘ttf’
-                                        or ‘tte’. Although the user can select output
-                                        fonts for many different types of input captions,
+                                      description: External font file used for caption
+                                        burn-in. File extension must be ‘ttf’ or ‘tte’.
+                                        Although the user can select output fonts
+                                        for many different types of input captions,
                                         embedded, STL and teletext sources use a strict
                                         grid system. Using external fonts with these
                                         caption sources could cause unexpected display
@@ -11641,71 +11707,107 @@ spec:
                                             from EC2 Parameter store.
                                           type: string
                                         uri:
-                                          description: –  Path to a file accessible
-                                            to the live stream.
+                                          description: Path to a file accessible to
+                                            the live stream.
                                           type: string
                                         username:
                                           description: Username for destination.
                                           type: string
                                       type: object
                                     fontColor:
-                                      description: in captions. This option is not
-                                        valid for source captions that are STL, 608/embedded
-                                        or teletext. These source settings are already
-                                        pre-defined by the caption stream. All burn-in
-                                        and DVB-Sub font settings must match.
+                                      description: Specifies the color of the burned-in
+                                        captions. This option is not valid for source
+                                        captions that are STL, 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     fontOpacity:
-                                      description: in captions. 255 is opaque; 0 is
-                                        transparent. All burn-in and DVB-Sub font
-                                        settings must match.
+                                      description: Specifies the opacity of the burned-in
+                                        captions. 255 is opaque; 0 is transparent.
+                                        All burn-in and DVB-Sub font settings must
+                                        match.
                                       type: number
                                     fontResolution:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Font resolution in DPI (dots per
+                                        inch); default is 96 dpi. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: number
                                     fontSize:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: When set to ‘auto’ fontSize will
+                                        scale depending on the size of the output.
+                                        Giving a positive integer will specify the
+                                        exact font size in points. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: string
                                     outlineColor:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies font outline color. This
+                                        option is not valid for source captions that
+                                        are either 608/embedded or teletext. These
+                                        source settings are already pre-defined by
+                                        the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     outlineSize:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: string
-                                    shadowOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowXOffset:
-                                      description: 2 would result in a shadow offset
-                                        2 pixels to the left. All burn-in and DVB-Sub
+                                      description: Specifies font outline size in
+                                        pixels. This option is not valid for source
+                                        captions that are either 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
+                                    shadowColor:
+                                      description: Specifies the color of the shadow
+                                        cast by the captions. All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: string
+                                    shadowOpacity:
+                                      description: Specifies the opacity of the shadow.
+                                        255 is opaque; 0 is transparent. Leaving this
+                                        parameter out is equivalent to setting it
+                                        to 0 (transparent). All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: number
+                                    shadowXOffset:
+                                      description: Specifies the horizontal offset
+                                        of the shadow relative to the captions in
+                                        pixels. A value of -2 would result in a shadow
+                                        offset 2 pixels to the left. All burn-in and
+                                        DVB-Sub font settings must match.
+                                      type: number
                                     shadowYOffset:
-                                      description: 2 would result in a shadow offset
+                                      description: Specifies the vertical offset of
+                                        the shadow relative to the captions in pixels.
+                                        A value of -2 would result in a shadow offset
                                         2 pixels above the text. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
                                     teletextGridControl:
-                                      description: Sub/Burn-in outputs.
+                                      description: Controls whether a fixed grid size
+                                        will be used to generate the output subtitles
+                                        bitmap. Only applicable for Teletext inputs
+                                        and DVB-Sub/Burn-in outputs.
                                       type: string
                                     xPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the horizontal position
+                                        of the caption relative to the left side of
+                                        the output in pixels. A value of 10 would
+                                        result in the captions starting 10 pixels
+                                        from the left of the output. If no explicit
+                                        xPosition is provided, the horizontal caption
+                                        position will be determined by the alignment
+                                        parameter. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: number
                                     yPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the vertical position
+                                        of the caption relative to the top of the
+                                        output in pixels. A value of 10 would result
+                                        in the captions starting 10 pixels from the
+                                        top of the output. If no explicit yPosition
+                                        is provided, the caption will be positioned
+                                        towards the bottom of the output. All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                   type: object
                                 ebuTtDDestinationSettings:
@@ -11713,37 +11815,42 @@ spec:
                                     EBU TT D Destination Settings for more details.
                                   properties:
                                     copyrightHolder:
-                                      description: –  Complete this field if you want
+                                      description: Complete this field if you want
                                         to include the name of the copyright holder
                                         in the copyright tag in the captions metadata.
                                       type: string
                                     fillLineGap:
-                                      description: 'line captions). - enabled: Fill
-                                        with the captions background color (as specified
-                                        in the input captions). - disabled: Leave
-                                        the gap unfilled.'
+                                      description: 'Specifies how to handle the gap
+                                        between the lines (in multi-line captions).
+                                        - enabled: Fill with the captions background
+                                        color (as specified in the input captions).
+                                        - disabled: Leave the gap unfilled.'
                                       type: string
                                     fontFamily:
-                                      description: TT captions. Valid only if styleControl
-                                        is set to include. If you leave this field
-                                        empty, the font family is set to “monospaced”.
-                                        (If styleControl is set to exclude, the font
-                                        family is always set to “monospaced”.) You
-                                        specify only the font family. All other style
-                                        information (color, bold, position and so
-                                        on) is copied from the input captions. The
-                                        size is always set to 100% to allow the downstream
-                                        player to choose the size. - Enter a list
-                                        of font families, as a comma-separated list
-                                        of font names, in order of preference. The
-                                        name can be a font family (such as “Arial”),
-                                        or a generic font family (such as “serif”),
-                                        or “default” (to let the downstream player
-                                        choose the font). - Leave blank to set the
-                                        family to “monospace”.
+                                      description: Specifies the font family to include
+                                        in the font data attached to the EBU-TT captions.
+                                        Valid only if styleControl is set to include.
+                                        If you leave this field empty, the font family
+                                        is set to “monospaced”. (If styleControl is
+                                        set to exclude, the font family is always
+                                        set to “monospaced”.) You specify only the
+                                        font family. All other style information (color,
+                                        bold, position and so on) is copied from the
+                                        input captions. The size is always set to
+                                        100% to allow the downstream player to choose
+                                        the size. - Enter a list of font families,
+                                        as a comma-separated list of font names, in
+                                        order of preference. The name can be a font
+                                        family (such as “Arial”), or a generic font
+                                        family (such as “serif”), or “default” (to
+                                        let the downstream player choose the font).
+                                        - Leave blank to set the family to “monospace”.
                                       type: string
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -11768,20 +11875,23 @@ spec:
                                   description: SCTE20 Plus Embedded Destination Settings.
                                   type: object
                                 scte27DestinationSettings:
-                                  description: –  SCTE27 Destination Settings.
+                                  description: SCTE27 Destination Settings.
                                   type: object
                                 smpteTtDestinationSettings:
-                                  description: –  SMPTE TT Destination Settings.
+                                  description: SMPTE TT Destination Settings.
                                   type: object
                                 teletextDestinationSettings:
-                                  description: –  Teletext Destination Settings.
+                                  description: Teletext Destination Settings.
                                   type: object
                                 ttmlDestinationSettings:
-                                  description: –  TTML Destination Settings. See TTML
+                                  description: TTML Destination Settings. See TTML
                                     Destination Settings for more details.
                                   properties:
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -11798,7 +11908,10 @@ spec:
                                     Destination Settings for more details.
                                   properties:
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -11829,17 +11942,18 @@ spec:
                           as a whole. See Global Configuration for more details.
                         properties:
                           initialAudioGain:
-                            description: –  Value to set the initial audio gain for
-                              the Live Event.
+                            description: Value to set the initial audio gain for the
+                              Live Event.
                             type: number
                           inputEndAction:
-                            description: of-file). When switchAndLoopInputs is configured
-                              the encoder will restart at the beginning of the first
-                              input. When “none” is configured the encoder will transcode
-                              either black, a solid color, or a user specified slate
-                              images per the “Input Loss Behavior” configuration until
-                              the next input switch occurs (which is controlled through
-                              the Channel Schedule API).
+                            description: Indicates the action to take when the current
+                              input completes (e.g. end-of-file). When switchAndLoopInputs
+                              is configured the encoder will restart at the beginning
+                              of the first input. When “none” is configured the encoder
+                              will transcode either black, a solid color, or a user
+                              specified slate images per the “Input Loss Behavior”
+                              configuration until the next input switch occurs (which
+                              is controlled through the Channel Schedule API).
                             type: string
                           inputLossBehavior:
                             description: Settings for system actions when input is
@@ -11856,7 +11970,7 @@ spec:
                                       from EC2 Parameter store.
                                     type: string
                                   uri:
-                                    description: –  Path to a file accessible to the
+                                    description: Path to a file accessible to the
                                       live stream.
                                     type: string
                                   username:
@@ -11869,23 +11983,24 @@ spec:
                                 type: number
                             type: object
                           outputLockingMode:
-                            description: MediaLive will attempt to synchronize the
-                              output of each pipeline to the other. EPOCH_LOCKING
+                            description: Indicates how MediaLive pipelines are synchronized.
+                              PIPELINE_LOCKING - MediaLive will attempt to synchronize
+                              the output of each pipeline to the other. EPOCH_LOCKING
                               - MediaLive will attempt to synchronize the output of
                               each pipeline to the Unix epoch.
                             type: string
                           outputTimingSource:
-                            description: –  Indicates whether the rate of frames emitted
+                            description: Indicates whether the rate of frames emitted
                               by the Live encoder should be paced by its system clock
                               (which optionally may be locked to another source via
                               NTP) or should be locked to the clock of the source
                               that is providing the input stream.
                             type: string
                           supportLowFramerateInputs:
-                            description: –  Adjusts video input buffer for streams
-                              with very low video framerates. This is commonly set
-                              to enabled for music channels with less than one video
-                              frame per second.
+                            description: Adjusts video input buffer for streams with
+                              very low video framerates. This is commonly set to enabled
+                              for music channels with less than one video frame per
+                              second.
                             type: string
                         type: object
                       motionGraphicsConfiguration:
@@ -11893,14 +12008,14 @@ spec:
                           Configuration for more details.
                         properties:
                           motionGraphicsInsertion:
-                            description: –  Motion Graphics Insertion.
+                            description: Motion Graphics Insertion.
                             type: string
                           motionGraphicsSettings:
                             description: –  Motion Graphics Settings. See Motion Graphics
                               Settings for more details.
                             properties:
                               htmlMotionGraphicsSettings:
-                                description: –  Html Motion Graphics Settings.
+                                description: Html Motion Graphics Settings.
                                 type: object
                             type: object
                         type: object
@@ -11909,11 +12024,11 @@ spec:
                           for more details.
                         properties:
                           distributorId:
-                            description: –  Enter the Distributor ID assigned to your
+                            description: Enter the Distributor ID assigned to your
                               organization by Nielsen.
                             type: string
                           nielsenPcmToId3Tagging:
-                            description: –  Enables Nielsen PCM to ID3 tagging.
+                            description: Enables Nielsen PCM to ID3 tagging.
                             type: string
                         type: object
                       outputGroups:
@@ -12216,8 +12331,8 @@ spec:
                                                       store.
                                                     type: string
                                                   uri:
-                                                    description: –  Path to a file
-                                                      accessible to the live stream.
+                                                    description: Path to a file accessible
+                                                      to the live stream.
                                                     type: string
                                                   username:
                                                     description: Username for destination.
@@ -12652,9 +12767,8 @@ spec:
                                                           store.
                                                         type: string
                                                       uri:
-                                                        description: –  Path to a
-                                                          file accessible to the live
-                                                          stream.
+                                                        description: Path to a file
+                                                          accessible to the live stream.
                                                         type: string
                                                       username:
                                                         description: Username for
@@ -14049,8 +14163,9 @@ spec:
                     description: Name of the Channel.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: Concise argument description.
@@ -14592,7 +14707,7 @@ spec:
                                   EC2 Parameter store.
                                 type: string
                               uri:
-                                description: –  Path to a file accessible to the live
+                                description: Path to a file accessible to the live
                                   stream.
                                 type: string
                               username:
@@ -14634,22 +14749,37 @@ spec:
                                     In Destination Settings for more details.
                                   properties:
                                     alignment:
-                                      description: justify live subtitles and center-justify
-                                        pre-recorded subtitles. All burn-in and DVB-Sub
-                                        font settings must match.
+                                      description: If no explicit xPosition or yPosition
+                                        is provided, setting alignment to centered
+                                        will place the captions at the bottom center
+                                        of the output. Similarly, setting a left alignment
+                                        will align captions to the bottom left of
+                                        the output. If x and y positions are given
+                                        in conjunction with the alignment parameter,
+                                        the font will be justified (either left or
+                                        centered) relative to those coordinates. Selecting
+                                        “smart” justification will left-justify live
+                                        subtitles and center-justify pre-recorded
+                                        subtitles. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: string
                                     backgroundColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the color of the rectangle
+                                        behind the captions. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     backgroundOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the opacity of the background
+                                        rectangle. 255 is opaque; 0 is transparent.
+                                        Leaving this parameter out is equivalent to
+                                        setting it to 0 (transparent). All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                     font:
-                                      description: in. File extension must be ‘ttf’
-                                        or ‘tte’. Although the user can select output
-                                        fonts for many different types of input captions,
+                                      description: External font file used for caption
+                                        burn-in. File extension must be ‘ttf’ or ‘tte’.
+                                        Although the user can select output fonts
+                                        for many different types of input captions,
                                         embedded, STL and teletext sources use a strict
                                         grid system. Using external fonts with these
                                         caption sources could cause unexpected display
@@ -14662,71 +14792,107 @@ spec:
                                             from EC2 Parameter store.
                                           type: string
                                         uri:
-                                          description: –  Path to a file accessible
-                                            to the live stream.
+                                          description: Path to a file accessible to
+                                            the live stream.
                                           type: string
                                         username:
                                           description: Username for destination.
                                           type: string
                                       type: object
                                     fontColor:
-                                      description: in captions. This option is not
-                                        valid for source captions that are STL, 608/embedded
-                                        or teletext. These source settings are already
-                                        pre-defined by the caption stream. All burn-in
-                                        and DVB-Sub font settings must match.
+                                      description: Specifies the color of the burned-in
+                                        captions. This option is not valid for source
+                                        captions that are STL, 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     fontOpacity:
-                                      description: in captions. 255 is opaque; 0 is
-                                        transparent. All burn-in and DVB-Sub font
-                                        settings must match.
+                                      description: Specifies the opacity of the burned-in
+                                        captions. 255 is opaque; 0 is transparent.
+                                        All burn-in and DVB-Sub font settings must
+                                        match.
                                       type: number
                                     fontResolution:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Font resolution in DPI (dots per
+                                        inch); default is 96 dpi. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: number
                                     fontSize:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: When set to ‘auto’ fontSize will
+                                        scale depending on the size of the output.
+                                        Giving a positive integer will specify the
+                                        exact font size in points. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: string
                                     outlineColor:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies font outline color. This
+                                        option is not valid for source captions that
+                                        are either 608/embedded or teletext. These
+                                        source settings are already pre-defined by
+                                        the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     outlineSize:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: string
-                                    shadowOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowXOffset:
-                                      description: 2 would result in a shadow offset
-                                        2 pixels to the left. All burn-in and DVB-Sub
+                                      description: Specifies font outline size in
+                                        pixels. This option is not valid for source
+                                        captions that are either 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
+                                    shadowColor:
+                                      description: Specifies the color of the shadow
+                                        cast by the captions. All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: string
+                                    shadowOpacity:
+                                      description: Specifies the opacity of the shadow.
+                                        255 is opaque; 0 is transparent. Leaving this
+                                        parameter out is equivalent to setting it
+                                        to 0 (transparent). All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: number
+                                    shadowXOffset:
+                                      description: Specifies the horizontal offset
+                                        of the shadow relative to the captions in
+                                        pixels. A value of -2 would result in a shadow
+                                        offset 2 pixels to the left. All burn-in and
+                                        DVB-Sub font settings must match.
+                                      type: number
                                     shadowYOffset:
-                                      description: 2 would result in a shadow offset
+                                      description: Specifies the vertical offset of
+                                        the shadow relative to the captions in pixels.
+                                        A value of -2 would result in a shadow offset
                                         2 pixels above the text. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
                                     teletextGridControl:
-                                      description: Sub/Burn-in outputs.
+                                      description: Controls whether a fixed grid size
+                                        will be used to generate the output subtitles
+                                        bitmap. Only applicable for Teletext inputs
+                                        and DVB-Sub/Burn-in outputs.
                                       type: string
                                     xPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the horizontal position
+                                        of the caption relative to the left side of
+                                        the output in pixels. A value of 10 would
+                                        result in the captions starting 10 pixels
+                                        from the left of the output. If no explicit
+                                        xPosition is provided, the horizontal caption
+                                        position will be determined by the alignment
+                                        parameter. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: number
                                     yPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the vertical position
+                                        of the caption relative to the top of the
+                                        output in pixels. A value of 10 would result
+                                        in the captions starting 10 pixels from the
+                                        top of the output. If no explicit yPosition
+                                        is provided, the caption will be positioned
+                                        towards the bottom of the output. All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                   type: object
                                 dvbSubDestinationSettings:
@@ -14734,22 +14900,37 @@ spec:
                                     Sub Destination Settings for more details.
                                   properties:
                                     alignment:
-                                      description: justify live subtitles and center-justify
-                                        pre-recorded subtitles. All burn-in and DVB-Sub
-                                        font settings must match.
+                                      description: If no explicit xPosition or yPosition
+                                        is provided, setting alignment to centered
+                                        will place the captions at the bottom center
+                                        of the output. Similarly, setting a left alignment
+                                        will align captions to the bottom left of
+                                        the output. If x and y positions are given
+                                        in conjunction with the alignment parameter,
+                                        the font will be justified (either left or
+                                        centered) relative to those coordinates. Selecting
+                                        “smart” justification will left-justify live
+                                        subtitles and center-justify pre-recorded
+                                        subtitles. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: string
                                     backgroundColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the color of the rectangle
+                                        behind the captions. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     backgroundOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the opacity of the background
+                                        rectangle. 255 is opaque; 0 is transparent.
+                                        Leaving this parameter out is equivalent to
+                                        setting it to 0 (transparent). All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                     font:
-                                      description: in. File extension must be ‘ttf’
-                                        or ‘tte’. Although the user can select output
-                                        fonts for many different types of input captions,
+                                      description: External font file used for caption
+                                        burn-in. File extension must be ‘ttf’ or ‘tte’.
+                                        Although the user can select output fonts
+                                        for many different types of input captions,
                                         embedded, STL and teletext sources use a strict
                                         grid system. Using external fonts with these
                                         caption sources could cause unexpected display
@@ -14762,71 +14943,107 @@ spec:
                                             from EC2 Parameter store.
                                           type: string
                                         uri:
-                                          description: –  Path to a file accessible
-                                            to the live stream.
+                                          description: Path to a file accessible to
+                                            the live stream.
                                           type: string
                                         username:
                                           description: Username for destination.
                                           type: string
                                       type: object
                                     fontColor:
-                                      description: in captions. This option is not
-                                        valid for source captions that are STL, 608/embedded
-                                        or teletext. These source settings are already
-                                        pre-defined by the caption stream. All burn-in
-                                        and DVB-Sub font settings must match.
+                                      description: Specifies the color of the burned-in
+                                        captions. This option is not valid for source
+                                        captions that are STL, 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     fontOpacity:
-                                      description: in captions. 255 is opaque; 0 is
-                                        transparent. All burn-in and DVB-Sub font
-                                        settings must match.
+                                      description: Specifies the opacity of the burned-in
+                                        captions. 255 is opaque; 0 is transparent.
+                                        All burn-in and DVB-Sub font settings must
+                                        match.
                                       type: number
                                     fontResolution:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Font resolution in DPI (dots per
+                                        inch); default is 96 dpi. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: number
                                     fontSize:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: When set to ‘auto’ fontSize will
+                                        scale depending on the size of the output.
+                                        Giving a positive integer will specify the
+                                        exact font size in points. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: string
                                     outlineColor:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies font outline color. This
+                                        option is not valid for source captions that
+                                        are either 608/embedded or teletext. These
+                                        source settings are already pre-defined by
+                                        the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     outlineSize:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: string
-                                    shadowOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowXOffset:
-                                      description: 2 would result in a shadow offset
-                                        2 pixels to the left. All burn-in and DVB-Sub
+                                      description: Specifies font outline size in
+                                        pixels. This option is not valid for source
+                                        captions that are either 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
+                                    shadowColor:
+                                      description: Specifies the color of the shadow
+                                        cast by the captions. All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: string
+                                    shadowOpacity:
+                                      description: Specifies the opacity of the shadow.
+                                        255 is opaque; 0 is transparent. Leaving this
+                                        parameter out is equivalent to setting it
+                                        to 0 (transparent). All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: number
+                                    shadowXOffset:
+                                      description: Specifies the horizontal offset
+                                        of the shadow relative to the captions in
+                                        pixels. A value of -2 would result in a shadow
+                                        offset 2 pixels to the left. All burn-in and
+                                        DVB-Sub font settings must match.
+                                      type: number
                                     shadowYOffset:
-                                      description: 2 would result in a shadow offset
+                                      description: Specifies the vertical offset of
+                                        the shadow relative to the captions in pixels.
+                                        A value of -2 would result in a shadow offset
                                         2 pixels above the text. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
                                     teletextGridControl:
-                                      description: Sub/Burn-in outputs.
+                                      description: Controls whether a fixed grid size
+                                        will be used to generate the output subtitles
+                                        bitmap. Only applicable for Teletext inputs
+                                        and DVB-Sub/Burn-in outputs.
                                       type: string
                                     xPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the horizontal position
+                                        of the caption relative to the left side of
+                                        the output in pixels. A value of 10 would
+                                        result in the captions starting 10 pixels
+                                        from the left of the output. If no explicit
+                                        xPosition is provided, the horizontal caption
+                                        position will be determined by the alignment
+                                        parameter. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: number
                                     yPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the vertical position
+                                        of the caption relative to the top of the
+                                        output in pixels. A value of 10 would result
+                                        in the captions starting 10 pixels from the
+                                        top of the output. If no explicit yPosition
+                                        is provided, the caption will be positioned
+                                        towards the bottom of the output. All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                   type: object
                                 ebuTtDDestinationSettings:
@@ -14834,37 +15051,42 @@ spec:
                                     EBU TT D Destination Settings for more details.
                                   properties:
                                     copyrightHolder:
-                                      description: –  Complete this field if you want
+                                      description: Complete this field if you want
                                         to include the name of the copyright holder
                                         in the copyright tag in the captions metadata.
                                       type: string
                                     fillLineGap:
-                                      description: 'line captions). - enabled: Fill
-                                        with the captions background color (as specified
-                                        in the input captions). - disabled: Leave
-                                        the gap unfilled.'
+                                      description: 'Specifies how to handle the gap
+                                        between the lines (in multi-line captions).
+                                        - enabled: Fill with the captions background
+                                        color (as specified in the input captions).
+                                        - disabled: Leave the gap unfilled.'
                                       type: string
                                     fontFamily:
-                                      description: TT captions. Valid only if styleControl
-                                        is set to include. If you leave this field
-                                        empty, the font family is set to “monospaced”.
-                                        (If styleControl is set to exclude, the font
-                                        family is always set to “monospaced”.) You
-                                        specify only the font family. All other style
-                                        information (color, bold, position and so
-                                        on) is copied from the input captions. The
-                                        size is always set to 100% to allow the downstream
-                                        player to choose the size. - Enter a list
-                                        of font families, as a comma-separated list
-                                        of font names, in order of preference. The
-                                        name can be a font family (such as “Arial”),
-                                        or a generic font family (such as “serif”),
-                                        or “default” (to let the downstream player
-                                        choose the font). - Leave blank to set the
-                                        family to “monospace”.
+                                      description: Specifies the font family to include
+                                        in the font data attached to the EBU-TT captions.
+                                        Valid only if styleControl is set to include.
+                                        If you leave this field empty, the font family
+                                        is set to “monospaced”. (If styleControl is
+                                        set to exclude, the font family is always
+                                        set to “monospaced”.) You specify only the
+                                        font family. All other style information (color,
+                                        bold, position and so on) is copied from the
+                                        input captions. The size is always set to
+                                        100% to allow the downstream player to choose
+                                        the size. - Enter a list of font families,
+                                        as a comma-separated list of font names, in
+                                        order of preference. The name can be a font
+                                        family (such as “Arial”), or a generic font
+                                        family (such as “serif”), or “default” (to
+                                        let the downstream player choose the font).
+                                        - Leave blank to set the family to “monospace”.
                                       type: string
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -14889,20 +15111,23 @@ spec:
                                   description: SCTE20 Plus Embedded Destination Settings.
                                   type: object
                                 scte27DestinationSettings:
-                                  description: –  SCTE27 Destination Settings.
+                                  description: SCTE27 Destination Settings.
                                   type: object
                                 smpteTtDestinationSettings:
-                                  description: –  SMPTE TT Destination Settings.
+                                  description: SMPTE TT Destination Settings.
                                   type: object
                                 teletextDestinationSettings:
-                                  description: –  Teletext Destination Settings.
+                                  description: Teletext Destination Settings.
                                   type: object
                                 ttmlDestinationSettings:
-                                  description: –  TTML Destination Settings. See TTML
+                                  description: TTML Destination Settings. See TTML
                                     Destination Settings for more details.
                                   properties:
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -14919,7 +15144,10 @@ spec:
                                     Destination Settings for more details.
                                   properties:
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -14950,17 +15178,18 @@ spec:
                           as a whole. See Global Configuration for more details.
                         properties:
                           initialAudioGain:
-                            description: –  Value to set the initial audio gain for
-                              the Live Event.
+                            description: Value to set the initial audio gain for the
+                              Live Event.
                             type: number
                           inputEndAction:
-                            description: of-file). When switchAndLoopInputs is configured
-                              the encoder will restart at the beginning of the first
-                              input. When “none” is configured the encoder will transcode
-                              either black, a solid color, or a user specified slate
-                              images per the “Input Loss Behavior” configuration until
-                              the next input switch occurs (which is controlled through
-                              the Channel Schedule API).
+                            description: Indicates the action to take when the current
+                              input completes (e.g. end-of-file). When switchAndLoopInputs
+                              is configured the encoder will restart at the beginning
+                              of the first input. When “none” is configured the encoder
+                              will transcode either black, a solid color, or a user
+                              specified slate images per the “Input Loss Behavior”
+                              configuration until the next input switch occurs (which
+                              is controlled through the Channel Schedule API).
                             type: string
                           inputLossBehavior:
                             description: Settings for system actions when input is
@@ -14977,7 +15206,7 @@ spec:
                                       from EC2 Parameter store.
                                     type: string
                                   uri:
-                                    description: –  Path to a file accessible to the
+                                    description: Path to a file accessible to the
                                       live stream.
                                     type: string
                                   username:
@@ -14990,23 +15219,24 @@ spec:
                                 type: number
                             type: object
                           outputLockingMode:
-                            description: MediaLive will attempt to synchronize the
-                              output of each pipeline to the other. EPOCH_LOCKING
+                            description: Indicates how MediaLive pipelines are synchronized.
+                              PIPELINE_LOCKING - MediaLive will attempt to synchronize
+                              the output of each pipeline to the other. EPOCH_LOCKING
                               - MediaLive will attempt to synchronize the output of
                               each pipeline to the Unix epoch.
                             type: string
                           outputTimingSource:
-                            description: –  Indicates whether the rate of frames emitted
+                            description: Indicates whether the rate of frames emitted
                               by the Live encoder should be paced by its system clock
                               (which optionally may be locked to another source via
                               NTP) or should be locked to the clock of the source
                               that is providing the input stream.
                             type: string
                           supportLowFramerateInputs:
-                            description: –  Adjusts video input buffer for streams
-                              with very low video framerates. This is commonly set
-                              to enabled for music channels with less than one video
-                              frame per second.
+                            description: Adjusts video input buffer for streams with
+                              very low video framerates. This is commonly set to enabled
+                              for music channels with less than one video frame per
+                              second.
                             type: string
                         type: object
                       motionGraphicsConfiguration:
@@ -15014,14 +15244,14 @@ spec:
                           Configuration for more details.
                         properties:
                           motionGraphicsInsertion:
-                            description: –  Motion Graphics Insertion.
+                            description: Motion Graphics Insertion.
                             type: string
                           motionGraphicsSettings:
                             description: –  Motion Graphics Settings. See Motion Graphics
                               Settings for more details.
                             properties:
                               htmlMotionGraphicsSettings:
-                                description: –  Html Motion Graphics Settings.
+                                description: Html Motion Graphics Settings.
                                 type: object
                             type: object
                         type: object
@@ -15030,11 +15260,11 @@ spec:
                           for more details.
                         properties:
                           distributorId:
-                            description: –  Enter the Distributor ID assigned to your
+                            description: Enter the Distributor ID assigned to your
                               organization by Nielsen.
                             type: string
                           nielsenPcmToId3Tagging:
-                            description: –  Enables Nielsen PCM to ID3 tagging.
+                            description: Enables Nielsen PCM to ID3 tagging.
                             type: string
                         type: object
                       outputGroups:
@@ -15337,8 +15567,8 @@ spec:
                                                       store.
                                                     type: string
                                                   uri:
-                                                    description: –  Path to a file
-                                                      accessible to the live stream.
+                                                    description: Path to a file accessible
+                                                      to the live stream.
                                                     type: string
                                                   username:
                                                     description: Username for destination.
@@ -15773,9 +16003,8 @@ spec:
                                                           store.
                                                         type: string
                                                       uri:
-                                                        description: –  Path to a
-                                                          file accessible to the live
-                                                          stream.
+                                                        description: Path to a file
+                                                          accessible to the live stream.
                                                         type: string
                                                       username:
                                                         description: Username for
@@ -17898,7 +18127,7 @@ spec:
                                   EC2 Parameter store.
                                 type: string
                               uri:
-                                description: –  Path to a file accessible to the live
+                                description: Path to a file accessible to the live
                                   stream.
                                 type: string
                               username:
@@ -17940,22 +18169,37 @@ spec:
                                     In Destination Settings for more details.
                                   properties:
                                     alignment:
-                                      description: justify live subtitles and center-justify
-                                        pre-recorded subtitles. All burn-in and DVB-Sub
-                                        font settings must match.
+                                      description: If no explicit xPosition or yPosition
+                                        is provided, setting alignment to centered
+                                        will place the captions at the bottom center
+                                        of the output. Similarly, setting a left alignment
+                                        will align captions to the bottom left of
+                                        the output. If x and y positions are given
+                                        in conjunction with the alignment parameter,
+                                        the font will be justified (either left or
+                                        centered) relative to those coordinates. Selecting
+                                        “smart” justification will left-justify live
+                                        subtitles and center-justify pre-recorded
+                                        subtitles. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: string
                                     backgroundColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the color of the rectangle
+                                        behind the captions. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     backgroundOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the opacity of the background
+                                        rectangle. 255 is opaque; 0 is transparent.
+                                        Leaving this parameter out is equivalent to
+                                        setting it to 0 (transparent). All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                     font:
-                                      description: in. File extension must be ‘ttf’
-                                        or ‘tte’. Although the user can select output
-                                        fonts for many different types of input captions,
+                                      description: External font file used for caption
+                                        burn-in. File extension must be ‘ttf’ or ‘tte’.
+                                        Although the user can select output fonts
+                                        for many different types of input captions,
                                         embedded, STL and teletext sources use a strict
                                         grid system. Using external fonts with these
                                         caption sources could cause unexpected display
@@ -17968,71 +18212,107 @@ spec:
                                             from EC2 Parameter store.
                                           type: string
                                         uri:
-                                          description: –  Path to a file accessible
-                                            to the live stream.
+                                          description: Path to a file accessible to
+                                            the live stream.
                                           type: string
                                         username:
                                           description: Username for destination.
                                           type: string
                                       type: object
                                     fontColor:
-                                      description: in captions. This option is not
-                                        valid for source captions that are STL, 608/embedded
-                                        or teletext. These source settings are already
-                                        pre-defined by the caption stream. All burn-in
-                                        and DVB-Sub font settings must match.
+                                      description: Specifies the color of the burned-in
+                                        captions. This option is not valid for source
+                                        captions that are STL, 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     fontOpacity:
-                                      description: in captions. 255 is opaque; 0 is
-                                        transparent. All burn-in and DVB-Sub font
-                                        settings must match.
+                                      description: Specifies the opacity of the burned-in
+                                        captions. 255 is opaque; 0 is transparent.
+                                        All burn-in and DVB-Sub font settings must
+                                        match.
                                       type: number
                                     fontResolution:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Font resolution in DPI (dots per
+                                        inch); default is 96 dpi. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: number
                                     fontSize:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: When set to ‘auto’ fontSize will
+                                        scale depending on the size of the output.
+                                        Giving a positive integer will specify the
+                                        exact font size in points. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: string
                                     outlineColor:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies font outline color. This
+                                        option is not valid for source captions that
+                                        are either 608/embedded or teletext. These
+                                        source settings are already pre-defined by
+                                        the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     outlineSize:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: string
-                                    shadowOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowXOffset:
-                                      description: 2 would result in a shadow offset
-                                        2 pixels to the left. All burn-in and DVB-Sub
+                                      description: Specifies font outline size in
+                                        pixels. This option is not valid for source
+                                        captions that are either 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
+                                    shadowColor:
+                                      description: Specifies the color of the shadow
+                                        cast by the captions. All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: string
+                                    shadowOpacity:
+                                      description: Specifies the opacity of the shadow.
+                                        255 is opaque; 0 is transparent. Leaving this
+                                        parameter out is equivalent to setting it
+                                        to 0 (transparent). All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: number
+                                    shadowXOffset:
+                                      description: Specifies the horizontal offset
+                                        of the shadow relative to the captions in
+                                        pixels. A value of -2 would result in a shadow
+                                        offset 2 pixels to the left. All burn-in and
+                                        DVB-Sub font settings must match.
+                                      type: number
                                     shadowYOffset:
-                                      description: 2 would result in a shadow offset
+                                      description: Specifies the vertical offset of
+                                        the shadow relative to the captions in pixels.
+                                        A value of -2 would result in a shadow offset
                                         2 pixels above the text. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
                                     teletextGridControl:
-                                      description: Sub/Burn-in outputs.
+                                      description: Controls whether a fixed grid size
+                                        will be used to generate the output subtitles
+                                        bitmap. Only applicable for Teletext inputs
+                                        and DVB-Sub/Burn-in outputs.
                                       type: string
                                     xPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the horizontal position
+                                        of the caption relative to the left side of
+                                        the output in pixels. A value of 10 would
+                                        result in the captions starting 10 pixels
+                                        from the left of the output. If no explicit
+                                        xPosition is provided, the horizontal caption
+                                        position will be determined by the alignment
+                                        parameter. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: number
                                     yPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the vertical position
+                                        of the caption relative to the top of the
+                                        output in pixels. A value of 10 would result
+                                        in the captions starting 10 pixels from the
+                                        top of the output. If no explicit yPosition
+                                        is provided, the caption will be positioned
+                                        towards the bottom of the output. All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                   type: object
                                 dvbSubDestinationSettings:
@@ -18040,22 +18320,37 @@ spec:
                                     Sub Destination Settings for more details.
                                   properties:
                                     alignment:
-                                      description: justify live subtitles and center-justify
-                                        pre-recorded subtitles. All burn-in and DVB-Sub
-                                        font settings must match.
+                                      description: If no explicit xPosition or yPosition
+                                        is provided, setting alignment to centered
+                                        will place the captions at the bottom center
+                                        of the output. Similarly, setting a left alignment
+                                        will align captions to the bottom left of
+                                        the output. If x and y positions are given
+                                        in conjunction with the alignment parameter,
+                                        the font will be justified (either left or
+                                        centered) relative to those coordinates. Selecting
+                                        “smart” justification will left-justify live
+                                        subtitles and center-justify pre-recorded
+                                        subtitles. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: string
                                     backgroundColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the color of the rectangle
+                                        behind the captions. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     backgroundOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the opacity of the background
+                                        rectangle. 255 is opaque; 0 is transparent.
+                                        Leaving this parameter out is equivalent to
+                                        setting it to 0 (transparent). All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                     font:
-                                      description: in. File extension must be ‘ttf’
-                                        or ‘tte’. Although the user can select output
-                                        fonts for many different types of input captions,
+                                      description: External font file used for caption
+                                        burn-in. File extension must be ‘ttf’ or ‘tte’.
+                                        Although the user can select output fonts
+                                        for many different types of input captions,
                                         embedded, STL and teletext sources use a strict
                                         grid system. Using external fonts with these
                                         caption sources could cause unexpected display
@@ -18068,71 +18363,107 @@ spec:
                                             from EC2 Parameter store.
                                           type: string
                                         uri:
-                                          description: –  Path to a file accessible
-                                            to the live stream.
+                                          description: Path to a file accessible to
+                                            the live stream.
                                           type: string
                                         username:
                                           description: Username for destination.
                                           type: string
                                       type: object
                                     fontColor:
-                                      description: in captions. This option is not
-                                        valid for source captions that are STL, 608/embedded
-                                        or teletext. These source settings are already
-                                        pre-defined by the caption stream. All burn-in
-                                        and DVB-Sub font settings must match.
+                                      description: Specifies the color of the burned-in
+                                        captions. This option is not valid for source
+                                        captions that are STL, 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     fontOpacity:
-                                      description: in captions. 255 is opaque; 0 is
-                                        transparent. All burn-in and DVB-Sub font
-                                        settings must match.
+                                      description: Specifies the opacity of the burned-in
+                                        captions. 255 is opaque; 0 is transparent.
+                                        All burn-in and DVB-Sub font settings must
+                                        match.
                                       type: number
                                     fontResolution:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Font resolution in DPI (dots per
+                                        inch); default is 96 dpi. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: number
                                     fontSize:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: When set to ‘auto’ fontSize will
+                                        scale depending on the size of the output.
+                                        Giving a positive integer will specify the
+                                        exact font size in points. All burn-in and
+                                        DVB-Sub font settings must match.
                                       type: string
                                     outlineColor:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies font outline color. This
+                                        option is not valid for source captions that
+                                        are either 608/embedded or teletext. These
+                                        source settings are already pre-defined by
+                                        the caption stream. All burn-in and DVB-Sub
+                                        font settings must match.
                                       type: string
                                     outlineSize:
-                                      description: defined by the caption stream.
-                                        All burn-in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowColor:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: string
-                                    shadowOpacity:
-                                      description: in and DVB-Sub font settings must
-                                        match.
-                                      type: number
-                                    shadowXOffset:
-                                      description: 2 would result in a shadow offset
-                                        2 pixels to the left. All burn-in and DVB-Sub
+                                      description: Specifies font outline size in
+                                        pixels. This option is not valid for source
+                                        captions that are either 608/embedded or teletext.
+                                        These source settings are already pre-defined
+                                        by the caption stream. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
+                                    shadowColor:
+                                      description: Specifies the color of the shadow
+                                        cast by the captions. All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: string
+                                    shadowOpacity:
+                                      description: Specifies the opacity of the shadow.
+                                        255 is opaque; 0 is transparent. Leaving this
+                                        parameter out is equivalent to setting it
+                                        to 0 (transparent). All burn-in and DVB-Sub
+                                        font settings must match.
+                                      type: number
+                                    shadowXOffset:
+                                      description: Specifies the horizontal offset
+                                        of the shadow relative to the captions in
+                                        pixels. A value of -2 would result in a shadow
+                                        offset 2 pixels to the left. All burn-in and
+                                        DVB-Sub font settings must match.
+                                      type: number
                                     shadowYOffset:
-                                      description: 2 would result in a shadow offset
+                                      description: Specifies the vertical offset of
+                                        the shadow relative to the captions in pixels.
+                                        A value of -2 would result in a shadow offset
                                         2 pixels above the text. All burn-in and DVB-Sub
                                         font settings must match.
                                       type: number
                                     teletextGridControl:
-                                      description: Sub/Burn-in outputs.
+                                      description: Controls whether a fixed grid size
+                                        will be used to generate the output subtitles
+                                        bitmap. Only applicable for Teletext inputs
+                                        and DVB-Sub/Burn-in outputs.
                                       type: string
                                     xPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the horizontal position
+                                        of the caption relative to the left side of
+                                        the output in pixels. A value of 10 would
+                                        result in the captions starting 10 pixels
+                                        from the left of the output. If no explicit
+                                        xPosition is provided, the horizontal caption
+                                        position will be determined by the alignment
+                                        parameter. All burn-in and DVB-Sub font settings
+                                        must match.
                                       type: number
                                     yPosition:
-                                      description: in and DVB-Sub font settings must
-                                        match.
+                                      description: Specifies the vertical position
+                                        of the caption relative to the top of the
+                                        output in pixels. A value of 10 would result
+                                        in the captions starting 10 pixels from the
+                                        top of the output. If no explicit yPosition
+                                        is provided, the caption will be positioned
+                                        towards the bottom of the output. All burn-in
+                                        and DVB-Sub font settings must match.
                                       type: number
                                   type: object
                                 ebuTtDDestinationSettings:
@@ -18140,37 +18471,42 @@ spec:
                                     EBU TT D Destination Settings for more details.
                                   properties:
                                     copyrightHolder:
-                                      description: –  Complete this field if you want
+                                      description: Complete this field if you want
                                         to include the name of the copyright holder
                                         in the copyright tag in the captions metadata.
                                       type: string
                                     fillLineGap:
-                                      description: 'line captions). - enabled: Fill
-                                        with the captions background color (as specified
-                                        in the input captions). - disabled: Leave
-                                        the gap unfilled.'
+                                      description: 'Specifies how to handle the gap
+                                        between the lines (in multi-line captions).
+                                        - enabled: Fill with the captions background
+                                        color (as specified in the input captions).
+                                        - disabled: Leave the gap unfilled.'
                                       type: string
                                     fontFamily:
-                                      description: TT captions. Valid only if styleControl
-                                        is set to include. If you leave this field
-                                        empty, the font family is set to “monospaced”.
-                                        (If styleControl is set to exclude, the font
-                                        family is always set to “monospaced”.) You
-                                        specify only the font family. All other style
-                                        information (color, bold, position and so
-                                        on) is copied from the input captions. The
-                                        size is always set to 100% to allow the downstream
-                                        player to choose the size. - Enter a list
-                                        of font families, as a comma-separated list
-                                        of font names, in order of preference. The
-                                        name can be a font family (such as “Arial”),
-                                        or a generic font family (such as “serif”),
-                                        or “default” (to let the downstream player
-                                        choose the font). - Leave blank to set the
-                                        family to “monospace”.
+                                      description: Specifies the font family to include
+                                        in the font data attached to the EBU-TT captions.
+                                        Valid only if styleControl is set to include.
+                                        If you leave this field empty, the font family
+                                        is set to “monospaced”. (If styleControl is
+                                        set to exclude, the font family is always
+                                        set to “monospaced”.) You specify only the
+                                        font family. All other style information (color,
+                                        bold, position and so on) is copied from the
+                                        input captions. The size is always set to
+                                        100% to allow the downstream player to choose
+                                        the size. - Enter a list of font families,
+                                        as a comma-separated list of font names, in
+                                        order of preference. The name can be a font
+                                        family (such as “Arial”), or a generic font
+                                        family (such as “serif”), or “default” (to
+                                        let the downstream player choose the font).
+                                        - Leave blank to set the family to “monospace”.
                                       type: string
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -18195,20 +18531,23 @@ spec:
                                   description: SCTE20 Plus Embedded Destination Settings.
                                   type: object
                                 scte27DestinationSettings:
-                                  description: –  SCTE27 Destination Settings.
+                                  description: SCTE27 Destination Settings.
                                   type: object
                                 smpteTtDestinationSettings:
-                                  description: –  SMPTE TT Destination Settings.
+                                  description: SMPTE TT Destination Settings.
                                   type: object
                                 teletextDestinationSettings:
-                                  description: –  Teletext Destination Settings.
+                                  description: Teletext Destination Settings.
                                   type: object
                                 ttmlDestinationSettings:
-                                  description: –  TTML Destination Settings. See TTML
+                                  description: TTML Destination Settings. See TTML
                                     Destination Settings for more details.
                                   properties:
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -18225,7 +18564,10 @@ spec:
                                     Destination Settings for more details.
                                   properties:
                                     styleControl:
-                                      description: 'TT captions. - include: Take the
+                                      description: 'Specifies the style information
+                                        (font color, font position, and so on) to
+                                        include in the font data that is attached
+                                        to the EBU-TT captions. - include: Take the
                                         style information (font color, font position,
                                         and so on) from the source captions and include
                                         that information in the font data attached
@@ -18256,17 +18598,18 @@ spec:
                           as a whole. See Global Configuration for more details.
                         properties:
                           initialAudioGain:
-                            description: –  Value to set the initial audio gain for
-                              the Live Event.
+                            description: Value to set the initial audio gain for the
+                              Live Event.
                             type: number
                           inputEndAction:
-                            description: of-file). When switchAndLoopInputs is configured
-                              the encoder will restart at the beginning of the first
-                              input. When “none” is configured the encoder will transcode
-                              either black, a solid color, or a user specified slate
-                              images per the “Input Loss Behavior” configuration until
-                              the next input switch occurs (which is controlled through
-                              the Channel Schedule API).
+                            description: Indicates the action to take when the current
+                              input completes (e.g. end-of-file). When switchAndLoopInputs
+                              is configured the encoder will restart at the beginning
+                              of the first input. When “none” is configured the encoder
+                              will transcode either black, a solid color, or a user
+                              specified slate images per the “Input Loss Behavior”
+                              configuration until the next input switch occurs (which
+                              is controlled through the Channel Schedule API).
                             type: string
                           inputLossBehavior:
                             description: Settings for system actions when input is
@@ -18283,7 +18626,7 @@ spec:
                                       from EC2 Parameter store.
                                     type: string
                                   uri:
-                                    description: –  Path to a file accessible to the
+                                    description: Path to a file accessible to the
                                       live stream.
                                     type: string
                                   username:
@@ -18296,23 +18639,24 @@ spec:
                                 type: number
                             type: object
                           outputLockingMode:
-                            description: MediaLive will attempt to synchronize the
-                              output of each pipeline to the other. EPOCH_LOCKING
+                            description: Indicates how MediaLive pipelines are synchronized.
+                              PIPELINE_LOCKING - MediaLive will attempt to synchronize
+                              the output of each pipeline to the other. EPOCH_LOCKING
                               - MediaLive will attempt to synchronize the output of
                               each pipeline to the Unix epoch.
                             type: string
                           outputTimingSource:
-                            description: –  Indicates whether the rate of frames emitted
+                            description: Indicates whether the rate of frames emitted
                               by the Live encoder should be paced by its system clock
                               (which optionally may be locked to another source via
                               NTP) or should be locked to the clock of the source
                               that is providing the input stream.
                             type: string
                           supportLowFramerateInputs:
-                            description: –  Adjusts video input buffer for streams
-                              with very low video framerates. This is commonly set
-                              to enabled for music channels with less than one video
-                              frame per second.
+                            description: Adjusts video input buffer for streams with
+                              very low video framerates. This is commonly set to enabled
+                              for music channels with less than one video frame per
+                              second.
                             type: string
                         type: object
                       motionGraphicsConfiguration:
@@ -18320,14 +18664,14 @@ spec:
                           Configuration for more details.
                         properties:
                           motionGraphicsInsertion:
-                            description: –  Motion Graphics Insertion.
+                            description: Motion Graphics Insertion.
                             type: string
                           motionGraphicsSettings:
                             description: –  Motion Graphics Settings. See Motion Graphics
                               Settings for more details.
                             properties:
                               htmlMotionGraphicsSettings:
-                                description: –  Html Motion Graphics Settings.
+                                description: Html Motion Graphics Settings.
                                 type: object
                             type: object
                         type: object
@@ -18336,11 +18680,11 @@ spec:
                           for more details.
                         properties:
                           distributorId:
-                            description: –  Enter the Distributor ID assigned to your
+                            description: Enter the Distributor ID assigned to your
                               organization by Nielsen.
                             type: string
                           nielsenPcmToId3Tagging:
-                            description: –  Enables Nielsen PCM to ID3 tagging.
+                            description: Enables Nielsen PCM to ID3 tagging.
                             type: string
                         type: object
                       outputGroups:
@@ -18643,8 +18987,8 @@ spec:
                                                       store.
                                                     type: string
                                                   uri:
-                                                    description: –  Path to a file
-                                                      accessible to the live stream.
+                                                    description: Path to a file accessible
+                                                      to the live stream.
                                                     type: string
                                                   username:
                                                     description: Username for destination.
@@ -19079,9 +19423,8 @@ spec:
                                                           store.
                                                         type: string
                                                       uri:
-                                                        description: –  Path to a
-                                                          file accessible to the live
-                                                          stream.
+                                                        description: Path to a file
+                                                          accessible to the live stream.
                                                         type: string
                                                       username:
                                                         description: Username for

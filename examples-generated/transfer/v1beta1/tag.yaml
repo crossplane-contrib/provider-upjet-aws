@@ -8,7 +8,7 @@ metadata:
   name: zone-id
 spec:
   forProvider:
-    key: aws:transfer:route53HostedZoneId
+    key: transfer:route53HostedZoneId
     region: us-west-1
     resourceArnSelector:
       matchLabels:

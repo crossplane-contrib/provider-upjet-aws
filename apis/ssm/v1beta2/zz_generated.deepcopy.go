@@ -68,11 +68,6 @@ func (in *AssociationInitParameters) DeepCopyInto(out *AssociationInitParameters
 		*out = new(string)
 		**out = **in
 	}
-	if in.InstanceID != nil {
-		in, out := &in.InstanceID, &out.InstanceID
-		*out = new(string)
-		**out = **in
-	}
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
 		*out = new(string)
@@ -244,11 +239,6 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.InstanceID != nil {
-		in, out := &in.InstanceID, &out.InstanceID
-		*out = new(string)
-		**out = **in
-	}
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
 		*out = new(string)
@@ -376,11 +366,6 @@ func (in *AssociationParameters) DeepCopyInto(out *AssociationParameters) {
 	}
 	if in.DocumentVersion != nil {
 		in, out := &in.DocumentVersion, &out.DocumentVersion
-		*out = new(string)
-		**out = **in
-	}
-	if in.InstanceID != nil {
-		in, out := &in.InstanceID, &out.InstanceID
 		*out = new(string)
 		**out = **in
 	}

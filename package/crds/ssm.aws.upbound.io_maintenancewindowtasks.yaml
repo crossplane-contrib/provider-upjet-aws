@@ -2378,8 +2378,9 @@ spec:
                       the same priority scheduled in parallel.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRoleArn:
                     description: The role that should be assumed when executing the

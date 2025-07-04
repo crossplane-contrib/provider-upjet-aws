@@ -59,6 +59,7 @@ type LoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableAllLogs *bool `json:"disableAllLogs,omitempty" tf:"disable_all_logs,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

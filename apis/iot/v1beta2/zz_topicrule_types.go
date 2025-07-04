@@ -2229,6 +2229,7 @@ type TopicRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Lambda []TopicRuleLambdaParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

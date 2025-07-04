@@ -13,6 +13,35 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataReadCacheConfigurationInitParameters struct {
+
+	// Size of the file system's SSD read cache, in gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Sizing mode for the cache. Valud values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+	SizingMode *string `json:"sizingMode,omitempty" tf:"sizing_mode,omitempty"`
+}
+
+type DataReadCacheConfigurationObservation struct {
+
+	// Size of the file system's SSD read cache, in gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Sizing mode for the cache. Valud values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+	SizingMode *string `json:"sizingMode,omitempty" tf:"sizing_mode,omitempty"`
+}
+
+type DataReadCacheConfigurationParameters struct {
+
+	// Size of the file system's SSD read cache, in gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
+	// +kubebuilder:validation:Optional
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Sizing mode for the cache. Valud values are NO_CACHE, USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+	// +kubebuilder:validation:Optional
+	SizingMode *string `json:"sizingMode" tf:"sizing_mode,omitempty"`
+}
+
 type LogConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.
@@ -61,6 +90,8 @@ type LustreFileSystemInitParameters struct {
 
 	// Sets the data compression configuration for the file system. Valid values are LZ4 and NONE. Default value is NONE. Unsetting this value reverts the compression type back to NONE.
 	DataCompressionType *string `json:"dataCompressionType,omitempty" tf:"data_compression_type,omitempty"`
+
+	DataReadCacheConfiguration *DataReadCacheConfigurationInitParameters `json:"dataReadCacheConfiguration,omitempty" tf:"data_read_cache_configuration,omitempty"`
 
 	// - The filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
@@ -132,7 +163,7 @@ type LustreFileSystemInitParameters struct {
 	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// - The filesystem storage type. Either SSD or HDD, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types.
+	// - The filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -152,6 +183,9 @@ type LustreFileSystemInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Throughput in MBps required for the INTELLIGENT_TIERING storage type. Must be 4000 or multiples of 4000.
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
@@ -182,6 +216,8 @@ type LustreFileSystemObservation struct {
 
 	// Sets the data compression configuration for the file system. Valid values are LZ4 and NONE. Default value is NONE. Unsetting this value reverts the compression type back to NONE.
 	DataCompressionType *string `json:"dataCompressionType,omitempty" tf:"data_compression_type,omitempty"`
+
+	DataReadCacheConfiguration *DataReadCacheConfigurationObservation `json:"dataReadCacheConfiguration,omitempty" tf:"data_read_cache_configuration,omitempty"`
 
 	// - The filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
@@ -245,7 +281,7 @@ type LustreFileSystemObservation struct {
 	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// - The filesystem storage type. Either SSD or HDD, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types.
+	// - The filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. File systems currently support only one subnet. The file server is also launched in that subnet's Availability Zone.
@@ -258,6 +294,9 @@ type LustreFileSystemObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Throughput in MBps required for the INTELLIGENT_TIERING storage type. Must be 4000 or multiples of 4000.
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// Identifier of the Virtual Private Cloud for the file system.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -291,6 +330,9 @@ type LustreFileSystemParameters struct {
 	// Sets the data compression configuration for the file system. Valid values are LZ4 and NONE. Default value is NONE. Unsetting this value reverts the compression type back to NONE.
 	// +kubebuilder:validation:Optional
 	DataCompressionType *string `json:"dataCompressionType,omitempty" tf:"data_compression_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DataReadCacheConfiguration *DataReadCacheConfigurationParameters `json:"dataReadCacheConfiguration,omitempty" tf:"data_read_cache_configuration,omitempty"`
 
 	// - The filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
 	// +kubebuilder:validation:Optional
@@ -350,6 +392,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	PerUnitStorageThroughput *float64 `json:"perUnitStorageThroughput,omitempty" tf:"per_unit_storage_throughput,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -383,7 +426,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// - The filesystem storage type. Either SSD or HDD, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types.
+	// - The filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -407,6 +450,10 @@ type LustreFileSystemParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Throughput in MBps required for the INTELLIGENT_TIERING storage type. Must be 4000 or multiples of 4000.
+	// +kubebuilder:validation:Optional
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
@@ -414,29 +461,29 @@ type LustreFileSystemParameters struct {
 
 type MetadataConfigurationInitParameters struct {
 
-	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000.
+	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000. Valid values for INTELLIGENT_TIERING storage type are 6000 or 12000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED. Must be set to USER_PROVISIONED for INTELLIGENT_TIERING storage type.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type MetadataConfigurationObservation struct {
 
-	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000.
+	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000. Valid values for INTELLIGENT_TIERING storage type are 6000 or 12000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED. Must be set to USER_PROVISIONED for INTELLIGENT_TIERING storage type.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type MetadataConfigurationParameters struct {
 
-	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000.
+	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000. Valid values for INTELLIGENT_TIERING storage type are 6000 or 12000.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED. Must be set to USER_PROVISIONED for INTELLIGENT_TIERING storage type.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }

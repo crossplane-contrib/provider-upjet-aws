@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Image is the Schema for the Images API. Provides a SageMaker
-          Image resource.
+          AI Image resource.
         properties:
           apiVersion:
             description: |-
@@ -81,12 +81,13 @@ spec:
                       added to a domain (must be unique to the domain).
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of an IAM role that
-                      enables Amazon SageMaker to perform tasks on your behalf.
+                      enables Amazon SageMaker AI to perform tasks on your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -193,7 +194,7 @@ spec:
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of an IAM role that
-                      enables Amazon SageMaker to perform tasks on your behalf.
+                      enables Amazon SageMaker AI to perform tasks on your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -464,7 +465,7 @@ spec:
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of an IAM role that
-                      enables Amazon SageMaker to perform tasks on your behalf.
+                      enables Amazon SageMaker AI to perform tasks on your behalf.
                     type: string
                   tags:
                     additionalProperties:

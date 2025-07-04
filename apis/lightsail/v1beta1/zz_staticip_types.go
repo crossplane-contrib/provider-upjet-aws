@@ -15,33 +15,34 @@ import (
 
 type StaticIPInitParameters struct {
 
-	// The name for the allocated static IP
+	// Name for the allocated static IP.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type StaticIPObservation struct {
 
-	// The ARN of the Lightsail static IP
+	// ARN of the Lightsail static IP.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The allocated static IP address
+	// Allocated static IP address.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// The name for the allocated static IP
+	// Name for the allocated static IP.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The support code.
+	// Support code for the static IP. Include this code in your email to support when you have questions about a static IP in Lightsail. This code enables our support team to look up your Lightsail information more easily.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
 }
 
 type StaticIPParameters struct {
 
-	// The name for the allocated static IP
+	// Name for the allocated static IP.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -75,7 +76,7 @@ type StaticIPStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// StaticIP is the Schema for the StaticIPs API. Provides an Lightsail Static IP
+// StaticIP is the Schema for the StaticIPs API. Manages a Lightsail Static IP.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

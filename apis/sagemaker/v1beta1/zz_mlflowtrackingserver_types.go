@@ -100,6 +100,7 @@ type MlflowTrackingServerParameters struct {
 	// +kubebuilder:validation:Optional
 	MlflowVersion *string `json:"mlflowVersion,omitempty" tf:"mlflow_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -160,7 +161,7 @@ type MlflowTrackingServerStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// MlflowTrackingServer is the Schema for the MlflowTrackingServers API. Provides a SageMaker MLFlow Tracking Server resource.
+// MlflowTrackingServer is the Schema for the MlflowTrackingServers API. Provides a SageMaker AI MLFlow Tracking Server resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

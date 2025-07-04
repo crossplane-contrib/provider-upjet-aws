@@ -347,8 +347,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicationInfoList:
                     description: A list of replication configurations, where each
@@ -568,6 +569,9 @@ spec:
                                   type: string
                               type: object
                             topicNameConfiguration:
+                              description: Configuration for specifying replicated
+                                topic names should be the same as their corresponding
+                                upstream topics or prefixed with source cluster alias.
                               properties:
                                 type:
                                   description: The type of topic configuration name.
@@ -677,6 +681,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 required:
@@ -1187,6 +1192,9 @@ spec:
                                   type: string
                               type: object
                             topicNameConfiguration:
+                              description: Configuration for specifying replicated
+                                topic names should be the same as their corresponding
+                                upstream topics or prefixed with source cluster alias.
                               properties:
                                 type:
                                   description: The type of topic configuration name.
@@ -1296,6 +1304,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -1485,11 +1494,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the Replicator. Do not begin the description
-                      with "An", "The", "Defines", "Indicates", or "Specifies," as
-                      these are verbose. In other words, "Indicates the amount of
-                      storage," can be rewritten as "Amount of storage," without losing
-                      any information.
+                    description: ARN of the Replicator.
                     type: string
                   currentVersion:
                     type: string
@@ -1609,6 +1614,9 @@ spec:
                                   type: string
                               type: object
                             topicNameConfiguration:
+                              description: Configuration for specifying replicated
+                                topic names should be the same as their corresponding
+                                upstream topics or prefixed with source cluster alias.
                               properties:
                                 type:
                                   description: The type of topic configuration name.
@@ -1644,11 +1652,15 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -242,16 +242,6 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ClusterPublicKey != nil {
-		in, out := &in.ClusterPublicKey, &out.ClusterPublicKey
-		*out = new(string)
-		**out = **in
-	}
-	if in.ClusterRevisionNumber != nil {
-		in, out := &in.ClusterRevisionNumber, &out.ClusterRevisionNumber
-		*out = new(string)
-		**out = **in
-	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName
 		*out = new(string)
@@ -294,11 +284,6 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.Encrypted != nil {
 		in, out := &in.Encrypted, &out.Encrypted
-		*out = new(bool)
-		**out = **in
-	}
-	if in.Endpoint != nil {
-		in, out := &in.Endpoint, &out.Endpoint
 		*out = new(string)
 		**out = **in
 	}
@@ -350,13 +335,6 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Logging != nil {
-		in, out := &in.Logging, &out.Logging
-		*out = make([]LoggingInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
 	if in.MaintenanceTrackName != nil {
 		in, out := &in.MaintenanceTrackName, &out.MaintenanceTrackName
 		*out = new(string)
@@ -380,6 +358,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	if in.MasterPasswordSecretRef != nil {
 		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoSecretRef != nil {
+		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MasterUsername != nil {
@@ -436,13 +424,6 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.SnapshotClusterIdentifier, &out.SnapshotClusterIdentifier
 		*out = new(string)
 		**out = **in
-	}
-	if in.SnapshotCopy != nil {
-		in, out := &in.SnapshotCopy, &out.SnapshotCopy
-		*out = make([]SnapshotCopyInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
 	}
 	if in.SnapshotIdentifier != nil {
 		in, out := &in.SnapshotIdentifier, &out.SnapshotIdentifier
@@ -694,7 +675,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.Encrypted != nil {
 		in, out := &in.Encrypted, &out.Encrypted
-		*out = new(bool)
+		*out = new(string)
 		**out = **in
 	}
 	if in.Endpoint != nil {
@@ -733,13 +714,6 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Logging != nil {
-		in, out := &in.Logging, &out.Logging
-		*out = make([]LoggingObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
 	if in.MaintenanceTrackName != nil {
 		in, out := &in.MaintenanceTrackName, &out.MaintenanceTrackName
 		*out = new(string)
@@ -763,6 +737,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	if in.MasterPasswordSecretKMSKeyID != nil {
 		in, out := &in.MasterPasswordSecretKMSKeyID, &out.MasterPasswordSecretKMSKeyID
 		*out = new(string)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MasterUsername != nil {
@@ -819,13 +798,6 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		in, out := &in.SnapshotClusterIdentifier, &out.SnapshotClusterIdentifier
 		*out = new(string)
 		**out = **in
-	}
-	if in.SnapshotCopy != nil {
-		in, out := &in.SnapshotCopy, &out.SnapshotCopy
-		*out = make([]SnapshotCopyObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
 	}
 	if in.SnapshotIdentifier != nil {
 		in, out := &in.SnapshotIdentifier, &out.SnapshotIdentifier
@@ -925,16 +897,6 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ClusterPublicKey != nil {
-		in, out := &in.ClusterPublicKey, &out.ClusterPublicKey
-		*out = new(string)
-		**out = **in
-	}
-	if in.ClusterRevisionNumber != nil {
-		in, out := &in.ClusterRevisionNumber, &out.ClusterRevisionNumber
-		*out = new(string)
-		**out = **in
-	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName
 		*out = new(string)
@@ -977,11 +939,6 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.Encrypted != nil {
 		in, out := &in.Encrypted, &out.Encrypted
-		*out = new(bool)
-		**out = **in
-	}
-	if in.Endpoint != nil {
-		in, out := &in.Endpoint, &out.Endpoint
 		*out = new(string)
 		**out = **in
 	}
@@ -1033,13 +990,6 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Logging != nil {
-		in, out := &in.Logging, &out.Logging
-		*out = make([]LoggingParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
 	if in.MaintenanceTrackName != nil {
 		in, out := &in.MaintenanceTrackName, &out.MaintenanceTrackName
 		*out = new(string)
@@ -1063,6 +1013,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.MasterPasswordSecretRef != nil {
 		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoSecretRef != nil {
+		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MasterUsername != nil {
@@ -1124,13 +1084,6 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.SnapshotClusterIdentifier, &out.SnapshotClusterIdentifier
 		*out = new(string)
 		**out = **in
-	}
-	if in.SnapshotCopy != nil {
-		in, out := &in.SnapshotCopy, &out.SnapshotCopy
-		*out = make([]SnapshotCopyParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
 	}
 	if in.SnapshotIdentifier != nil {
 		in, out := &in.SnapshotIdentifier, &out.SnapshotIdentifier
@@ -2433,144 +2386,6 @@ func (in *HSMConfigurationStatus) DeepCopy() *HSMConfigurationStatus {
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
-func (in *LoggingInitParameters) DeepCopyInto(out *LoggingInitParameters) {
-	*out = *in
-	if in.BucketName != nil {
-		in, out := &in.BucketName, &out.BucketName
-		*out = new(string)
-		**out = **in
-	}
-	if in.Enable != nil {
-		in, out := &in.Enable, &out.Enable
-		*out = new(bool)
-		**out = **in
-	}
-	if in.LogDestinationType != nil {
-		in, out := &in.LogDestinationType, &out.LogDestinationType
-		*out = new(string)
-		**out = **in
-	}
-	if in.LogExports != nil {
-		in, out := &in.LogExports, &out.LogExports
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
-	if in.S3KeyPrefix != nil {
-		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix
-		*out = new(string)
-		**out = **in
-	}
-}
-
-// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LoggingInitParameters.
-func (in *LoggingInitParameters) DeepCopy() *LoggingInitParameters {
-	if in == nil {
-		return nil
-	}
-	out := new(LoggingInitParameters)
-	in.DeepCopyInto(out)
-	return out
-}
-
-// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
-func (in *LoggingObservation) DeepCopyInto(out *LoggingObservation) {
-	*out = *in
-	if in.BucketName != nil {
-		in, out := &in.BucketName, &out.BucketName
-		*out = new(string)
-		**out = **in
-	}
-	if in.Enable != nil {
-		in, out := &in.Enable, &out.Enable
-		*out = new(bool)
-		**out = **in
-	}
-	if in.LogDestinationType != nil {
-		in, out := &in.LogDestinationType, &out.LogDestinationType
-		*out = new(string)
-		**out = **in
-	}
-	if in.LogExports != nil {
-		in, out := &in.LogExports, &out.LogExports
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
-	if in.S3KeyPrefix != nil {
-		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix
-		*out = new(string)
-		**out = **in
-	}
-}
-
-// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LoggingObservation.
-func (in *LoggingObservation) DeepCopy() *LoggingObservation {
-	if in == nil {
-		return nil
-	}
-	out := new(LoggingObservation)
-	in.DeepCopyInto(out)
-	return out
-}
-
-// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
-func (in *LoggingParameters) DeepCopyInto(out *LoggingParameters) {
-	*out = *in
-	if in.BucketName != nil {
-		in, out := &in.BucketName, &out.BucketName
-		*out = new(string)
-		**out = **in
-	}
-	if in.Enable != nil {
-		in, out := &in.Enable, &out.Enable
-		*out = new(bool)
-		**out = **in
-	}
-	if in.LogDestinationType != nil {
-		in, out := &in.LogDestinationType, &out.LogDestinationType
-		*out = new(string)
-		**out = **in
-	}
-	if in.LogExports != nil {
-		in, out := &in.LogExports, &out.LogExports
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
-	if in.S3KeyPrefix != nil {
-		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix
-		*out = new(string)
-		**out = **in
-	}
-}
-
-// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LoggingParameters.
-func (in *LoggingParameters) DeepCopy() *LoggingParameters {
-	if in == nil {
-		return nil
-	}
-	out := new(LoggingParameters)
-	in.DeepCopyInto(out)
-	return out
-}
-
-// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *NetworkInterfaceInitParameters) DeepCopyInto(out *NetworkInterfaceInitParameters) {
 	*out = *in
 }
@@ -3778,96 +3593,6 @@ func (in *SnapshotCopyGrantStatus) DeepCopy() *SnapshotCopyGrantStatus {
 		return nil
 	}
 	out := new(SnapshotCopyGrantStatus)
-	in.DeepCopyInto(out)
-	return out
-}
-
-// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
-func (in *SnapshotCopyInitParameters) DeepCopyInto(out *SnapshotCopyInitParameters) {
-	*out = *in
-	if in.DestinationRegion != nil {
-		in, out := &in.DestinationRegion, &out.DestinationRegion
-		*out = new(string)
-		**out = **in
-	}
-	if in.GrantName != nil {
-		in, out := &in.GrantName, &out.GrantName
-		*out = new(string)
-		**out = **in
-	}
-	if in.RetentionPeriod != nil {
-		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(float64)
-		**out = **in
-	}
-}
-
-// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SnapshotCopyInitParameters.
-func (in *SnapshotCopyInitParameters) DeepCopy() *SnapshotCopyInitParameters {
-	if in == nil {
-		return nil
-	}
-	out := new(SnapshotCopyInitParameters)
-	in.DeepCopyInto(out)
-	return out
-}
-
-// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
-func (in *SnapshotCopyObservation) DeepCopyInto(out *SnapshotCopyObservation) {
-	*out = *in
-	if in.DestinationRegion != nil {
-		in, out := &in.DestinationRegion, &out.DestinationRegion
-		*out = new(string)
-		**out = **in
-	}
-	if in.GrantName != nil {
-		in, out := &in.GrantName, &out.GrantName
-		*out = new(string)
-		**out = **in
-	}
-	if in.RetentionPeriod != nil {
-		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(float64)
-		**out = **in
-	}
-}
-
-// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SnapshotCopyObservation.
-func (in *SnapshotCopyObservation) DeepCopy() *SnapshotCopyObservation {
-	if in == nil {
-		return nil
-	}
-	out := new(SnapshotCopyObservation)
-	in.DeepCopyInto(out)
-	return out
-}
-
-// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
-func (in *SnapshotCopyParameters) DeepCopyInto(out *SnapshotCopyParameters) {
-	*out = *in
-	if in.DestinationRegion != nil {
-		in, out := &in.DestinationRegion, &out.DestinationRegion
-		*out = new(string)
-		**out = **in
-	}
-	if in.GrantName != nil {
-		in, out := &in.GrantName, &out.GrantName
-		*out = new(string)
-		**out = **in
-	}
-	if in.RetentionPeriod != nil {
-		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(float64)
-		**out = **in
-	}
-}
-
-// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SnapshotCopyParameters.
-func (in *SnapshotCopyParameters) DeepCopy() *SnapshotCopyParameters {
-	if in == nil {
-		return nil
-	}
-	out := new(SnapshotCopyParameters)
 	in.DeepCopyInto(out)
 	return out
 }

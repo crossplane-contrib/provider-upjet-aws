@@ -13,55 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type DeploymentCanarySettingsInitParameters struct {
-
-	// Percentage (0.0-100.0) of traffic routed to the canary deployment.
-	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
-
-	// Stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
-	// +mapType=granular
-	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
-
-	// Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
-	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
-}
-
-type DeploymentCanarySettingsObservation struct {
-
-	// Percentage (0.0-100.0) of traffic routed to the canary deployment.
-	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
-
-	// Stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
-	// +mapType=granular
-	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
-
-	// Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
-	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
-}
-
-type DeploymentCanarySettingsParameters struct {
-
-	// Percentage (0.0-100.0) of traffic routed to the canary deployment.
-	// +kubebuilder:validation:Optional
-	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
-
-	// Stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
-
-	// Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
-	// +kubebuilder:validation:Optional
-	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
-}
-
 type DeploymentInitParameters struct {
 
-	// Input configuration for the canary deployment when the deployment is a canary release deployment.
-	// See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
-	CanarySettings *DeploymentCanarySettingsInitParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
-
-	// Description of the deployment
+	// Description of the deployment.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// REST API identifier.
@@ -77,80 +31,45 @@ type DeploymentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// Description to set on the stage managed by the stage_name argument.
-	// Has no effect when stage_name is not set.
-	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
-
-	// Name of the stage to create with this deployment.
-	// If the specified stage already exists, it will be updated to point to the new deployment.
-	// We recommend using the aws_api_gateway_stage resource instead to manage stages.
-	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
-
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
-	// Map to set on the stage managed by the stage_name argument.
+	// Map to set on the related stage.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
 type DeploymentObservation struct {
 
-	// Input configuration for the canary deployment when the deployment is a canary release deployment.
-	// See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
-	CanarySettings *DeploymentCanarySettingsObservation `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
-
 	// Creation date of the deployment
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
-	// Description of the deployment
+	// Description of the deployment.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Execution ARN to be used in lambda_permission's source_arn
-	// when allowing API Gateway to invoke a Lambda function,
-	// e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod
-	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
 	// ID of the deployment
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// URL to invoke the API pointing to the stage,
-	// e.g., https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/prod
-	InvokeURL *string `json:"invokeUrl,omitempty" tf:"invoke_url,omitempty"`
-
 	// REST API identifier.
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
-
-	// Description to set on the stage managed by the stage_name argument.
-	// Has no effect when stage_name is not set.
-	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
-
-	// Name of the stage to create with this deployment.
-	// If the specified stage already exists, it will be updated to point to the new deployment.
-	// We recommend using the aws_api_gateway_stage resource instead to manage stages.
-	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
-	// Map to set on the stage managed by the stage_name argument.
+	// Map to set on the related stage.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
 type DeploymentParameters struct {
 
-	// Input configuration for the canary deployment when the deployment is a canary release deployment.
-	// See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
-	// +kubebuilder:validation:Optional
-	CanarySettings *DeploymentCanarySettingsParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
-
-	// Description of the deployment
+	// Description of the deployment.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -170,23 +89,12 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// Description to set on the stage managed by the stage_name argument.
-	// Has no effect when stage_name is not set.
-	// +kubebuilder:validation:Optional
-	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
-
-	// Name of the stage to create with this deployment.
-	// If the specified stage already exists, it will be updated to point to the new deployment.
-	// We recommend using the aws_api_gateway_stage resource instead to manage stages.
-	// +kubebuilder:validation:Optional
-	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
-
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
-	// Map to set on the stage managed by the stage_name argument.
+	// Map to set on the related stage.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`

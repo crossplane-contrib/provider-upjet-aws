@@ -4,17 +4,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/diskattachment
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     diskNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     diskPath: /dev/xvdf
     instanceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---
@@ -25,8 +25,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/diskattachment
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.available.names[0]}
@@ -41,8 +41,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/diskattachment
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.available.names[0]}

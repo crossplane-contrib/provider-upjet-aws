@@ -4,13 +4,82 @@ metadata:
   annotations:
     meta.upbound.io/example-id: glue/v1beta2/job
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: etl_job
+  name: etl-job
 spec:
   forProvider:
     command:
-    - scriptLocation: s3://${aws_s3_bucket.example.bucket}/example.py
+    - name: glueetl
+      pythonVersion: "3"
+      scriptLocation: s3://${aws_s3_bucket.glue_scripts.bucket}/jobs/etl_job.py
+    connectionsRefs:
+    - name: example
+    defaultArguments:
+      --continuous-log-logGroup: /aws-glue/jobs
+      --enable-auto-scaling: "true"
+      --enable-continuous-cloudwatch-log: "true"
+      --enable-continuous-log-filter: "true"
+      --enable-metrics: ""
+      --job-language: python
+    description: An example Glue ETL job
+    executionClass: STANDARD
+    executionProperty:
+    - maxConcurrentRuns: 1
+    glueVersion: "5.0"
+    maxRetries: 0
+    notificationProperty:
+    - notifyDelayAfter: 3
+    numberOfWorkers: 2
     region: us-west-1
     roleArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: glue_job_role
+    tags:
+      ManagedBy: AWS
+    timeout: 2880
+    workerType: G.1X
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: glue_job_role
+  name: glue-job-role
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Principal = {
+                Service = "glue.amazonaws.com"
+              }
+            }
+          ]
+        })}
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: glue_etl_script
+  name: glue-etl-script
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: glue_scripts
+    key: jobs/etl_job.py
+    region: us-west-1
+    source: jobs/etl_job.py

@@ -842,7 +842,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                 required:
@@ -1160,9 +1160,8 @@ spec:
                                 Access Point.
                               type: string
                             region:
-                              description: The Region configuration block to specify
-                                the bucket associated with the Multi-Region Access
-                                Point. See Region Configuration below for more details.
+                              description: Region where this resource will be managed.
+                                Defaults to the Region set in the provider configuration.
                               type: string
                           type: object
                         type: array

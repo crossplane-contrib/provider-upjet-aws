@@ -250,12 +250,9 @@ spec:
                       Used for cross-account Direct Connect gateway associations.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                  vpnGatewayId:
-                    description: The ID of the Direct Connect gateway association
-                      resource.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -448,10 +445,6 @@ spec:
                     description: |-
                       The ID of the Direct Connect gateway association proposal.
                       Used for cross-account Direct Connect gateway associations.
-                    type: string
-                  vpnGatewayId:
-                    description: The ID of the Direct Connect gateway association
-                      resource.
                     type: string
                 type: object
               managementPolicies:
@@ -659,17 +652,11 @@ spec:
                       gateway.
                     type: string
                   id:
-                    description: The ID of the Direct Connect gateway association
-                      resource.
                     type: string
                   proposalId:
                     description: |-
                       The ID of the Direct Connect gateway association proposal.
                       Used for cross-account Direct Connect gateway associations.
-                    type: string
-                  vpnGatewayId:
-                    description: The ID of the Direct Connect gateway association
-                      resource.
                     type: string
                 type: object
               conditions:

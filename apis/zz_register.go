@@ -221,8 +221,6 @@ import (
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
 	v1beta2opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta2"
 	v1beta1opensearchserverless "github.com/upbound/provider-aws/apis/opensearchserverless/v1beta1"
-	v1beta1opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta1"
-	v1beta2opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta2"
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	v1beta1osis "github.com/upbound/provider-aws/apis/osis/v1beta1"
 	v1beta1pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
@@ -277,7 +275,6 @@ import (
 	v1beta2sfn "github.com/upbound/provider-aws/apis/sfn/v1beta2"
 	v1beta1signer "github.com/upbound/provider-aws/apis/signer/v1beta1"
 	v1beta2signer "github.com/upbound/provider-aws/apis/signer/v1beta2"
-	v1beta1simpledb "github.com/upbound/provider-aws/apis/simpledb/v1beta1"
 	v1beta1sns "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	v1beta1sqs "github.com/upbound/provider-aws/apis/sqs/v1beta1"
 	v1beta1ssm "github.com/upbound/provider-aws/apis/ssm/v1beta1"
@@ -520,8 +517,6 @@ func init() {
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
 		v1beta2opensearch.SchemeBuilder.AddToScheme,
 		v1beta1opensearchserverless.SchemeBuilder.AddToScheme,
-		v1beta1opsworks.SchemeBuilder.AddToScheme,
-		v1beta2opsworks.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,
 		v1beta1osis.SchemeBuilder.AddToScheme,
 		v1beta1pinpoint.SchemeBuilder.AddToScheme,
@@ -576,7 +571,6 @@ func init() {
 		v1beta2sfn.SchemeBuilder.AddToScheme,
 		v1beta1signer.SchemeBuilder.AddToScheme,
 		v1beta2signer.SchemeBuilder.AddToScheme,
-		v1beta1simpledb.SchemeBuilder.AddToScheme,
 		v1beta1sns.SchemeBuilder.AddToScheme,
 		v1beta1sqs.SchemeBuilder.AddToScheme,
 		v1beta1ssm.SchemeBuilder.AddToScheme,

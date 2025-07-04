@@ -99,6 +99,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	OpsItemSnsTopicArn *string `json:"opsItemSnsTopicArn,omitempty" tf:"ops_item_sns_topic_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

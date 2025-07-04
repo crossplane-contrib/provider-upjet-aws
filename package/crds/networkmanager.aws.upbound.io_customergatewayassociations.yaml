@@ -35,8 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: CustomerGatewayAssociation is the Schema for the CustomerGatewayAssociations
-          API. Associates a customer gateway with a device and optionally, with a
-          link.
+          API. Manages a Network Manager Customer Gateway Association.
         properties:
           apiVersion:
             description: |-
@@ -76,7 +75,7 @@ spec:
               forProvider:
                 properties:
                   customerGatewayArn:
-                    description: The Amazon Resource Name (ARN) of the customer gateway.
+                    description: ARN of the customer gateway.
                     type: string
                   customerGatewayArnRef:
                     description: Reference to a CustomerGateway in ec2 to populate
@@ -155,7 +154,7 @@ spec:
                         type: object
                     type: object
                   deviceId:
-                    description: The ID of the device.
+                    description: ID of the device.
                     type: string
                   deviceIdRef:
                     description: Reference to a Device in networkmanager to populate
@@ -234,7 +233,7 @@ spec:
                         type: object
                     type: object
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -313,7 +312,7 @@ spec:
                         type: object
                     type: object
                   linkId:
-                    description: The ID of the link.
+                    description: ID of the link.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -336,7 +335,7 @@ spec:
                   autoscaler.
                 properties:
                   deviceId:
-                    description: The ID of the device.
+                    description: ID of the device.
                     type: string
                   deviceIdRef:
                     description: Reference to a Device in networkmanager to populate
@@ -415,7 +414,7 @@ spec:
                         type: object
                     type: object
                   linkId:
-                    description: The ID of the link.
+                    description: ID of the link.
                     type: string
                 type: object
               managementPolicies:
@@ -592,18 +591,18 @@ spec:
               atProvider:
                 properties:
                   customerGatewayArn:
-                    description: The Amazon Resource Name (ARN) of the customer gateway.
+                    description: ARN of the customer gateway.
                     type: string
                   deviceId:
-                    description: The ID of the device.
+                    description: ID of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   id:
                     type: string
                   linkId:
-                    description: The ID of the link.
+                    description: ID of the link.
                     type: string
                 type: object
               conditions:

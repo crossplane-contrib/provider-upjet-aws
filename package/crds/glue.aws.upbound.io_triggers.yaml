@@ -1406,8 +1406,8 @@ spec:
               forProvider:
                 properties:
                   actions:
-                    description: –  List of actions initiated by this trigger when
-                      it fires. See Actions Below.
+                    description: List of actions initiated by this trigger when it
+                      fires. See Actions Below.
                     items:
                       properties:
                         arguments:
@@ -1596,10 +1596,10 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: –  A description of the new trigger.
+                    description: A description of the new trigger.
                     type: string
                   enabled:
-                    description: –  Start the trigger. Defaults to true.
+                    description: Start the trigger. Defaults to true.
                     type: boolean
                   eventBatchingCondition:
                     description: Batch condition that must be met (specified number
@@ -1619,7 +1619,7 @@ spec:
                       type: object
                     type: array
                   predicate:
-                    description: –  A predicate to specify when the new trigger should
+                    description: A predicate to specify when the new trigger should
                       fire. Required when trigger type is CONDITIONAL. See Predicate
                       Below.
                     properties:
@@ -1811,15 +1811,17 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   schedule:
-                    description: Based Schedules for Jobs and Crawlers
+                    description: A cron expression used to specify the schedule. Time-Based
+                      Schedules for Jobs and Crawlers
                     type: string
                   startOnCreation:
-                    description: –  Set to true to start SCHEDULED and CONDITIONAL
-                      triggers when created. True is not supported for ON_DEMAND triggers.
+                    description: Set to true to start SCHEDULED and CONDITIONAL triggers
+                      when created. True is not supported for ON_DEMAND triggers.
                     type: boolean
                   tags:
                     additionalProperties:
@@ -1828,7 +1830,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: –  The type of trigger. Valid values are CONDITIONAL,
+                    description: The type of trigger. Valid values are CONDITIONAL,
                       EVENT, ON_DEMAND, and SCHEDULED.
                     type: string
                   workflowName:
@@ -1854,8 +1856,8 @@ spec:
                   autoscaler.
                 properties:
                   actions:
-                    description: –  List of actions initiated by this trigger when
-                      it fires. See Actions Below.
+                    description: List of actions initiated by this trigger when it
+                      fires. See Actions Below.
                     items:
                       properties:
                         arguments:
@@ -2044,10 +2046,10 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: –  A description of the new trigger.
+                    description: A description of the new trigger.
                     type: string
                   enabled:
-                    description: –  Start the trigger. Defaults to true.
+                    description: Start the trigger. Defaults to true.
                     type: boolean
                   eventBatchingCondition:
                     description: Batch condition that must be met (specified number
@@ -2067,7 +2069,7 @@ spec:
                       type: object
                     type: array
                   predicate:
-                    description: –  A predicate to specify when the new trigger should
+                    description: A predicate to specify when the new trigger should
                       fire. Required when trigger type is CONDITIONAL. See Predicate
                       Below.
                     properties:
@@ -2259,11 +2261,12 @@ spec:
                         type: string
                     type: object
                   schedule:
-                    description: Based Schedules for Jobs and Crawlers
+                    description: A cron expression used to specify the schedule. Time-Based
+                      Schedules for Jobs and Crawlers
                     type: string
                   startOnCreation:
-                    description: –  Set to true to start SCHEDULED and CONDITIONAL
-                      triggers when created. True is not supported for ON_DEMAND triggers.
+                    description: Set to true to start SCHEDULED and CONDITIONAL triggers
+                      when created. True is not supported for ON_DEMAND triggers.
                     type: boolean
                   tags:
                     additionalProperties:
@@ -2272,7 +2275,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: –  The type of trigger. Valid values are CONDITIONAL,
+                    description: The type of trigger. Valid values are CONDITIONAL,
                       EVENT, ON_DEMAND, and SCHEDULED.
                     type: string
                   workflowName:
@@ -2464,8 +2467,8 @@ spec:
               atProvider:
                 properties:
                   actions:
-                    description: –  List of actions initiated by this trigger when
-                      it fires. See Actions Below.
+                    description: List of actions initiated by this trigger when it
+                      fires. See Actions Below.
                     items:
                       properties:
                         arguments:
@@ -2507,10 +2510,10 @@ spec:
                     description: Amazon Resource Name (ARN) of Glue Trigger
                     type: string
                   description:
-                    description: –  A description of the new trigger.
+                    description: A description of the new trigger.
                     type: string
                   enabled:
-                    description: –  Start the trigger. Defaults to true.
+                    description: Start the trigger. Defaults to true.
                     type: boolean
                   eventBatchingCondition:
                     description: Batch condition that must be met (specified number
@@ -2533,7 +2536,7 @@ spec:
                     description: Trigger name
                     type: string
                   predicate:
-                    description: –  A predicate to specify when the new trigger should
+                    description: A predicate to specify when the new trigger should
                       fire. Required when trigger type is CONDITIONAL. See Predicate
                       Below.
                     properties:
@@ -2573,11 +2576,12 @@ spec:
                         type: string
                     type: object
                   schedule:
-                    description: Based Schedules for Jobs and Crawlers
+                    description: A cron expression used to specify the schedule. Time-Based
+                      Schedules for Jobs and Crawlers
                     type: string
                   startOnCreation:
-                    description: –  Set to true to start SCHEDULED and CONDITIONAL
-                      triggers when created. True is not supported for ON_DEMAND triggers.
+                    description: Set to true to start SCHEDULED and CONDITIONAL triggers
+                      when created. True is not supported for ON_DEMAND triggers.
                     type: boolean
                   state:
                     description: The condition job state. Currently, the values supported
@@ -2599,7 +2603,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: –  The type of trigger. Valid values are CONDITIONAL,
+                    description: The type of trigger. Valid values are CONDITIONAL,
                       EVENT, ON_DEMAND, and SCHEDULED.
                     type: string
                   workflowName:

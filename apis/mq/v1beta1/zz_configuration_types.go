@@ -15,10 +15,10 @@ import (
 
 type ConfigurationInitParameters_2 struct {
 
-	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for engine_type RabbitMQ.
+	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for RabbitMQ engine type.
 	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
 
-	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See official docs for supported parameters and format of the XML.
+	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See AWS documentation for supported parameters and format of the XML.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// Description of the configuration.
@@ -43,10 +43,10 @@ type ConfigurationObservation_2 struct {
 	// ARN of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for engine_type RabbitMQ.
+	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for RabbitMQ engine type.
 	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
 
-	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See official docs for supported parameters and format of the XML.
+	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See AWS documentation for supported parameters and format of the XML.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// Description of the configuration.
@@ -71,18 +71,18 @@ type ConfigurationObservation_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ConfigurationParameters_2 struct {
 
-	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for engine_type RabbitMQ.
+	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for RabbitMQ engine type.
 	// +kubebuilder:validation:Optional
 	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
 
-	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See official docs for supported parameters and format of the XML.
+	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See AWS documentation for supported parameters and format of the XML.
 	// +kubebuilder:validation:Optional
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
@@ -102,6 +102,7 @@ type ConfigurationParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -140,7 +141,7 @@ type ConfigurationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Configuration is the Schema for the Configurations API. Provides an MQ configuration Resource
+// Configuration is the Schema for the Configurations API. "Manages an Amazon MQ configuration"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

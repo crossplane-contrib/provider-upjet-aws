@@ -36,6 +36,7 @@ type DashboardParameters struct {
 	// +kubebuilder:validation:Optional
 	DashboardBody *string `json:"dashboardBody,omitempty" tf:"dashboard_body,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

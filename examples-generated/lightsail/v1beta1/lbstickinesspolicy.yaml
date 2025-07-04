@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/lbstickinesspolicy
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     cookieDuration: 900
@@ -20,8 +20,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/lbstickinesspolicy
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     healthCheckPath: /

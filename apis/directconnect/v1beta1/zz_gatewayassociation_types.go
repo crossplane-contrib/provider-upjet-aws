@@ -53,9 +53,6 @@ type GatewayAssociationInitParameters struct {
 	// The ID of the Direct Connect gateway association proposal.
 	// Used for cross-account Direct Connect gateway associations.
 	ProposalID *string `json:"proposalId,omitempty" tf:"proposal_id,omitempty"`
-
-	// The ID of the Direct Connect gateway association resource.
-	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 }
 
 type GatewayAssociationObservation struct {
@@ -84,15 +81,11 @@ type GatewayAssociationObservation struct {
 	// The ID of the AWS account that owns the Direct Connect gateway.
 	DxGatewayOwnerAccountID *string `json:"dxGatewayOwnerAccountId,omitempty" tf:"dx_gateway_owner_account_id,omitempty"`
 
-	// The ID of the Direct Connect gateway association resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the Direct Connect gateway association proposal.
 	// Used for cross-account Direct Connect gateway associations.
 	ProposalID *string `json:"proposalId,omitempty" tf:"proposal_id,omitempty"`
-
-	// The ID of the Direct Connect gateway association resource.
-	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 }
 
 type GatewayAssociationParameters struct {
@@ -141,14 +134,11 @@ type GatewayAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ProposalID *string `json:"proposalId,omitempty" tf:"proposal_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
-
-	// The ID of the Direct Connect gateway association resource.
-	// +kubebuilder:validation:Optional
-	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 }
 
 // GatewayAssociationSpec defines the desired state of GatewayAssociation

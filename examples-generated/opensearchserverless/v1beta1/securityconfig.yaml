@@ -9,4 +9,6 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
+    samlOptions:
+    - metadata: ${file("${path.module}/idp-metadata.xml")}
     type: saml

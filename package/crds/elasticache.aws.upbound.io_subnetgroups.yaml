@@ -74,11 +74,12 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: –  Description for the cache subnet group.
+                    description: Description for the cache subnet group.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -159,7 +160,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: –  List of VPC Subnet IDs for the cache subnet group
+                    description: List of VPC Subnet IDs for the cache subnet group
                     items:
                       type: string
                     type: array
@@ -187,7 +188,7 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: –  Description for the cache subnet group.
+                    description: Description for the cache subnet group.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -268,7 +269,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: –  List of VPC Subnet IDs for the cache subnet group
+                    description: List of VPC Subnet IDs for the cache subnet group
                     items:
                       type: string
                     type: array
@@ -455,12 +456,12 @@ spec:
                   arn:
                     type: string
                   description:
-                    description: –  Description for the cache subnet group.
+                    description: Description for the cache subnet group.
                     type: string
                   id:
                     type: string
                   subnetIds:
-                    description: –  List of VPC Subnet IDs for the cache subnet group
+                    description: List of VPC Subnet IDs for the cache subnet group
                     items:
                       type: string
                     type: array

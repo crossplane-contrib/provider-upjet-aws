@@ -61,6 +61,25 @@ type AdminCreateUserConfigParameters struct {
 	InviteMessageTemplate *InviteMessageTemplateParameters `json:"inviteMessageTemplate,omitempty" tf:"invite_message_template,omitempty"`
 }
 
+type AdvancedSecurityAdditionalFlowsInitParameters struct {
+
+	// Mode of threat protection operation in custom authentication. Valid values are AUDIT or ENFORCED. The default value is AUDIT.
+	CustomAuthMode *string `json:"customAuthMode,omitempty" tf:"custom_auth_mode,omitempty"`
+}
+
+type AdvancedSecurityAdditionalFlowsObservation struct {
+
+	// Mode of threat protection operation in custom authentication. Valid values are AUDIT or ENFORCED. The default value is AUDIT.
+	CustomAuthMode *string `json:"customAuthMode,omitempty" tf:"custom_auth_mode,omitempty"`
+}
+
+type AdvancedSecurityAdditionalFlowsParameters struct {
+
+	// Mode of threat protection operation in custom authentication. Valid values are AUDIT or ENFORCED. The default value is AUDIT.
+	// +kubebuilder:validation:Optional
+	CustomAuthMode *string `json:"customAuthMode,omitempty" tf:"custom_auth_mode,omitempty"`
+}
+
 type CustomEmailSenderInitParameters struct {
 
 	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
@@ -245,6 +264,35 @@ type EmailConfigurationParameters struct {
 	// ARN of the SES verified email identity to use. Required if email_sending_account is set to DEVELOPER.
 	// +kubebuilder:validation:Optional
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
+}
+
+type EmailMfaConfigurationInitParameters struct {
+
+	// The template for the email messages that your user pool sends to users with codes for MFA and sign-in with email OTPs. The message must contain the {####} placeholder. In the message, Amazon Cognito replaces this placeholder with the code. If you don't provide this parameter, Amazon Cognito sends messages in the default format.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The subject of the email messages that your user pool sends to users with codes for MFA and email OTP sign-in.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+}
+
+type EmailMfaConfigurationObservation struct {
+
+	// The template for the email messages that your user pool sends to users with codes for MFA and sign-in with email OTPs. The message must contain the {####} placeholder. In the message, Amazon Cognito replaces this placeholder with the code. If you don't provide this parameter, Amazon Cognito sends messages in the default format.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The subject of the email messages that your user pool sends to users with codes for MFA and email OTP sign-in.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+}
+
+type EmailMfaConfigurationParameters struct {
+
+	// The template for the email messages that your user pool sends to users with codes for MFA and sign-in with email OTPs. The message must contain the {####} placeholder. In the message, Amazon Cognito replaces this placeholder with the code. If you don't provide this parameter, Amazon Cognito sends messages in the default format.
+	// +kubebuilder:validation:Optional
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The subject of the email messages that your user pool sends to users with codes for MFA and email OTP sign-in.
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 type InviteMessageTemplateInitParameters struct {
@@ -768,7 +816,7 @@ type PreTokenGenerationConfigInitParameters struct {
 	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
-	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0.
+	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0, V3_0.
 	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
 }
 
@@ -777,7 +825,7 @@ type PreTokenGenerationConfigObservation struct {
 	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
-	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0.
+	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0, V3_0.
 	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
 }
 
@@ -787,7 +835,7 @@ type PreTokenGenerationConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
-	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0.
+	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0, V3_0.
 	// +kubebuilder:validation:Optional
 	LambdaVersion *string `json:"lambdaVersion" tf:"lambda_version,omitempty"`
 }
@@ -959,6 +1007,28 @@ type SchemaParameters struct {
 	StringAttributeConstraints *StringAttributeConstraintsParameters `json:"stringAttributeConstraints,omitempty" tf:"string_attribute_constraints,omitempty"`
 }
 
+type SignInPolicyInitParameters struct {
+
+	// The sign in methods your user pool supports as the first factor. This is a list of strings, allowed values are PASSWORD, EMAIL_OTP, SMS_OTP, and WEB_AUTHN.
+	// +listType=set
+	AllowedFirstAuthFactors []*string `json:"allowedFirstAuthFactors,omitempty" tf:"allowed_first_auth_factors,omitempty"`
+}
+
+type SignInPolicyObservation struct {
+
+	// The sign in methods your user pool supports as the first factor. This is a list of strings, allowed values are PASSWORD, EMAIL_OTP, SMS_OTP, and WEB_AUTHN.
+	// +listType=set
+	AllowedFirstAuthFactors []*string `json:"allowedFirstAuthFactors,omitempty" tf:"allowed_first_auth_factors,omitempty"`
+}
+
+type SignInPolicyParameters struct {
+
+	// The sign in methods your user pool supports as the first factor. This is a list of strings, allowed values are PASSWORD, EMAIL_OTP, SMS_OTP, and WEB_AUTHN.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedFirstAuthFactors []*string `json:"allowedFirstAuthFactors,omitempty" tf:"allowed_first_auth_factors,omitempty"`
+}
+
 type SoftwareTokenMfaConfigurationInitParameters struct {
 
 	// Boolean whether to enable software token Multi-Factor (MFA) tokens, such as Time-based One-Time Password (TOTP). To disable software token MFA When sms_configuration is not present, the mfa_configuration argument must be set to OFF and the software_token_mfa_configuration configuration block must be fully removed.
@@ -1031,17 +1101,27 @@ type UserAttributeUpdateSettingsParameters struct {
 
 type UserPoolAddOnsInitParameters struct {
 
+	// A block to specify the threat protection configuration options for additional authentication types in your user pool, including custom authentication. Detailed below.
+	AdvancedSecurityAdditionalFlows *AdvancedSecurityAdditionalFlowsInitParameters `json:"advancedSecurityAdditionalFlows,omitempty" tf:"advanced_security_additional_flows,omitempty"`
+
 	// Mode for advanced security, must be one of OFF, AUDIT or ENFORCED.
 	AdvancedSecurityMode *string `json:"advancedSecurityMode,omitempty" tf:"advanced_security_mode,omitempty"`
 }
 
 type UserPoolAddOnsObservation struct {
 
+	// A block to specify the threat protection configuration options for additional authentication types in your user pool, including custom authentication. Detailed below.
+	AdvancedSecurityAdditionalFlows *AdvancedSecurityAdditionalFlowsObservation `json:"advancedSecurityAdditionalFlows,omitempty" tf:"advanced_security_additional_flows,omitempty"`
+
 	// Mode for advanced security, must be one of OFF, AUDIT or ENFORCED.
 	AdvancedSecurityMode *string `json:"advancedSecurityMode,omitempty" tf:"advanced_security_mode,omitempty"`
 }
 
 type UserPoolAddOnsParameters struct {
+
+	// A block to specify the threat protection configuration options for additional authentication types in your user pool, including custom authentication. Detailed below.
+	// +kubebuilder:validation:Optional
+	AdvancedSecurityAdditionalFlows *AdvancedSecurityAdditionalFlowsParameters `json:"advancedSecurityAdditionalFlows,omitempty" tf:"advanced_security_additional_flows,omitempty"`
 
 	// Mode for advanced security, must be one of OFF, AUDIT or ENFORCED.
 	// +kubebuilder:validation:Optional
@@ -1073,6 +1153,9 @@ type UserPoolInitParameters struct {
 	// Configuration block for configuring email. Detailed below.
 	EmailConfiguration *EmailConfigurationInitParameters `json:"emailConfiguration,omitempty" tf:"email_configuration,omitempty"`
 
+	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Detailed below.
+	EmailMfaConfiguration *EmailMfaConfigurationInitParameters `json:"emailMfaConfiguration,omitempty" tf:"email_mfa_configuration,omitempty"`
+
 	// String representing the email verification message. Conflicts with verification_message_template configuration block email_message argument.
 	EmailVerificationMessage *string `json:"emailVerificationMessage,omitempty" tf:"email_verification_message,omitempty"`
 
@@ -1103,6 +1186,9 @@ type UserPoolInitParameters struct {
 	// Configuration block for the schema attributes of a user pool. Detailed below. Schema attributes from the standard attribute set only need to be specified if they are different from the default configuration. Attributes can be added, but not modified or removed. Maximum of 50 attributes.
 	Schema []SchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
+	// Configuration block for information about the user pool sign in policy. Detailed below.
+	SignInPolicy *SignInPolicyInitParameters `json:"signInPolicy,omitempty" tf:"sign_in_policy,omitempty"`
+
 	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
 	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigurationInitParameters `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 
@@ -1116,6 +1202,9 @@ type UserPoolInitParameters struct {
 	// Configuration block for user pool add-ons to enable user pool advanced security mode features. Detailed below.
 	UserPoolAddOns *UserPoolAddOnsInitParameters `json:"userPoolAddOns,omitempty" tf:"user_pool_add_ons,omitempty"`
 
+	// The user pool feature plan, or tier. Valid values: LITE, ESSENTIALS, PLUS.
+	UserPoolTier *string `json:"userPoolTier,omitempty" tf:"user_pool_tier,omitempty"`
+
 	// Whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with alias_attributes.
 	// +listType=set
 	UsernameAttributes []*string `json:"usernameAttributes,omitempty" tf:"username_attributes,omitempty"`
@@ -1125,6 +1214,9 @@ type UserPoolInitParameters struct {
 
 	// Configuration block for verification message templates. Detailed below.
 	VerificationMessageTemplate *VerificationMessageTemplateInitParameters `json:"verificationMessageTemplate,omitempty" tf:"verification_message_template,omitempty"`
+
+	// Configuration block for web authn configuration. Detailed below.
+	WebAuthnConfiguration *WebAuthnConfigurationInitParameters `json:"webAuthnConfiguration,omitempty" tf:"web_authn_configuration,omitempty"`
 }
 
 type UserPoolObservation struct {
@@ -1163,6 +1255,9 @@ type UserPoolObservation struct {
 
 	// Configuration block for configuring email. Detailed below.
 	EmailConfiguration *EmailConfigurationObservation `json:"emailConfiguration,omitempty" tf:"email_configuration,omitempty"`
+
+	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Detailed below.
+	EmailMfaConfiguration *EmailMfaConfigurationObservation `json:"emailMfaConfiguration,omitempty" tf:"email_mfa_configuration,omitempty"`
 
 	// String representing the email verification message. Conflicts with verification_message_template configuration block email_message argument.
 	EmailVerificationMessage *string `json:"emailVerificationMessage,omitempty" tf:"email_verification_message,omitempty"`
@@ -1206,6 +1301,9 @@ type UserPoolObservation struct {
 	// Configuration block for the schema attributes of a user pool. Detailed below. Schema attributes from the standard attribute set only need to be specified if they are different from the default configuration. Attributes can be added, but not modified or removed. Maximum of 50 attributes.
 	Schema []SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 
+	// Configuration block for information about the user pool sign in policy. Detailed below.
+	SignInPolicy *SignInPolicyObservation `json:"signInPolicy,omitempty" tf:"sign_in_policy,omitempty"`
+
 	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
 	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigurationObservation `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 
@@ -1223,6 +1321,9 @@ type UserPoolObservation struct {
 	// Configuration block for user pool add-ons to enable user pool advanced security mode features. Detailed below.
 	UserPoolAddOns *UserPoolAddOnsObservation `json:"userPoolAddOns,omitempty" tf:"user_pool_add_ons,omitempty"`
 
+	// The user pool feature plan, or tier. Valid values: LITE, ESSENTIALS, PLUS.
+	UserPoolTier *string `json:"userPoolTier,omitempty" tf:"user_pool_tier,omitempty"`
+
 	// Whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with alias_attributes.
 	// +listType=set
 	UsernameAttributes []*string `json:"usernameAttributes,omitempty" tf:"username_attributes,omitempty"`
@@ -1232,6 +1333,9 @@ type UserPoolObservation struct {
 
 	// Configuration block for verification message templates. Detailed below.
 	VerificationMessageTemplate *VerificationMessageTemplateObservation `json:"verificationMessageTemplate,omitempty" tf:"verification_message_template,omitempty"`
+
+	// Configuration block for web authn configuration. Detailed below.
+	WebAuthnConfiguration *WebAuthnConfigurationObservation `json:"webAuthnConfiguration,omitempty" tf:"web_authn_configuration,omitempty"`
 }
 
 type UserPoolParameters struct {
@@ -1266,6 +1370,10 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailConfiguration *EmailConfigurationParameters `json:"emailConfiguration,omitempty" tf:"email_configuration,omitempty"`
 
+	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Detailed below.
+	// +kubebuilder:validation:Optional
+	EmailMfaConfiguration *EmailMfaConfigurationParameters `json:"emailMfaConfiguration,omitempty" tf:"email_mfa_configuration,omitempty"`
+
 	// String representing the email verification message. Conflicts with verification_message_template configuration block email_message argument.
 	// +kubebuilder:validation:Optional
 	EmailVerificationMessage *string `json:"emailVerificationMessage,omitempty" tf:"email_verification_message,omitempty"`
@@ -1290,6 +1398,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordPolicy *PasswordPolicyParameters `json:"passwordPolicy,omitempty" tf:"password_policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -1311,6 +1420,10 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Schema []SchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
+	// Configuration block for information about the user pool sign in policy. Detailed below.
+	// +kubebuilder:validation:Optional
+	SignInPolicy *SignInPolicyParameters `json:"signInPolicy,omitempty" tf:"sign_in_policy,omitempty"`
+
 	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
 	// +kubebuilder:validation:Optional
 	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigurationParameters `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
@@ -1328,6 +1441,10 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	UserPoolAddOns *UserPoolAddOnsParameters `json:"userPoolAddOns,omitempty" tf:"user_pool_add_ons,omitempty"`
 
+	// The user pool feature plan, or tier. Valid values: LITE, ESSENTIALS, PLUS.
+	// +kubebuilder:validation:Optional
+	UserPoolTier *string `json:"userPoolTier,omitempty" tf:"user_pool_tier,omitempty"`
+
 	// Whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with alias_attributes.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -1340,6 +1457,10 @@ type UserPoolParameters struct {
 	// Configuration block for verification message templates. Detailed below.
 	// +kubebuilder:validation:Optional
 	VerificationMessageTemplate *VerificationMessageTemplateParameters `json:"verificationMessageTemplate,omitempty" tf:"verification_message_template,omitempty"`
+
+	// Configuration block for web authn configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	WebAuthnConfiguration *WebAuthnConfigurationParameters `json:"webAuthnConfiguration,omitempty" tf:"web_authn_configuration,omitempty"`
 }
 
 type UsernameConfigurationInitParameters struct {
@@ -1358,7 +1479,7 @@ type UsernameConfigurationParameters struct {
 
 	// Whether username case sensitivity will be applied for all users in the user pool through Cognito APIs.
 	// +kubebuilder:validation:Optional
-	CaseSensitive *bool `json:"caseSensitive" tf:"case_sensitive,omitempty"`
+	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 }
 
 type VerificationMessageTemplateInitParameters struct {
@@ -1428,6 +1549,35 @@ type VerificationMessageTemplateParameters struct {
 	// SMS message template. Must contain the {####} placeholder. Conflicts with sms_verification_message argument.
 	// +kubebuilder:validation:Optional
 	SMSMessage *string `json:"smsMessage,omitempty" tf:"sms_message,omitempty"`
+}
+
+type WebAuthnConfigurationInitParameters struct {
+
+	// The authentication domain that passkeys providers use as a relying party.
+	RelyingPartyID *string `json:"relyingPartyId,omitempty" tf:"relying_party_id,omitempty"`
+
+	// If your user pool should require a passkey. Must be one of required or preferred.
+	UserVerification *string `json:"userVerification,omitempty" tf:"user_verification,omitempty"`
+}
+
+type WebAuthnConfigurationObservation struct {
+
+	// The authentication domain that passkeys providers use as a relying party.
+	RelyingPartyID *string `json:"relyingPartyId,omitempty" tf:"relying_party_id,omitempty"`
+
+	// If your user pool should require a passkey. Must be one of required or preferred.
+	UserVerification *string `json:"userVerification,omitempty" tf:"user_verification,omitempty"`
+}
+
+type WebAuthnConfigurationParameters struct {
+
+	// The authentication domain that passkeys providers use as a relying party.
+	// +kubebuilder:validation:Optional
+	RelyingPartyID *string `json:"relyingPartyId,omitempty" tf:"relying_party_id,omitempty"`
+
+	// If your user pool should require a passkey. Must be one of required or preferred.
+	// +kubebuilder:validation:Optional
+	UserVerification *string `json:"userVerification,omitempty" tf:"user_verification,omitempty"`
 }
 
 // UserPoolSpec defines the desired state of UserPool

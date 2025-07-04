@@ -15,8 +15,15 @@ import (
 
 type ImageVersionInitParameters struct {
 
+	// A list of aliases for the image version.
+	// +listType=set
+	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
+
 	// The registry path of the container image on which this image version is based.
 	BaseImage *string `json:"baseImage,omitempty" tf:"base_image,omitempty"`
+
+	// Indicates Horovod compatibility.
+	Horovod *bool `json:"horovod,omitempty" tf:"horovod,omitempty"`
 
 	// The name of the image. Must be unique to your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Image
@@ -30,9 +37,31 @@ type ImageVersionInitParameters struct {
 	// Selector for a Image in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
 	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
+
+	// Indicates SageMaker AI job type compatibility. Valid values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.
+	JobType *string `json:"jobType,omitempty" tf:"job_type,omitempty"`
+
+	// The machine learning framework vended in the image version.
+	MLFramework *string `json:"mlFramework,omitempty" tf:"ml_framework,omitempty"`
+
+	// Indicates CPU or GPU compatibility. Valid values are: CPU and GPU.
+	Processor *string `json:"processor,omitempty" tf:"processor,omitempty"`
+
+	// The supported programming language and its version.
+	ProgrammingLang *string `json:"programmingLang,omitempty" tf:"programming_lang,omitempty"`
+
+	// The maintainer description of the image version.
+	ReleaseNotes *string `json:"releaseNotes,omitempty" tf:"release_notes,omitempty"`
+
+	// The stability of the image version, specified by the maintainer. Valid values are: NOT_PROVIDED, STABLE, TO_BE_ARCHIVED, and ARCHIVED.
+	VendorGuidance *string `json:"vendorGuidance,omitempty" tf:"vendor_guidance,omitempty"`
 }
 
 type ImageVersionObservation struct {
+
+	// A list of aliases for the image version.
+	// +listType=set
+	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Image Version.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -43,23 +72,53 @@ type ImageVersionObservation struct {
 	// The registry path of the container image that contains this image version.
 	ContainerImage *string `json:"containerImage,omitempty" tf:"container_image,omitempty"`
 
-	// The name of the Image.
+	// Indicates Horovod compatibility.
+	Horovod *bool `json:"horovod,omitempty" tf:"horovod,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the image the version is based on.
+	// The Amazon Resource Name (ARN) assigned by AWS to this Image Version.
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
 	// The name of the image. Must be unique to your account.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
+	// Indicates SageMaker AI job type compatibility. Valid values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.
+	JobType *string `json:"jobType,omitempty" tf:"job_type,omitempty"`
+
+	// The machine learning framework vended in the image version.
+	MLFramework *string `json:"mlFramework,omitempty" tf:"ml_framework,omitempty"`
+
+	// Indicates CPU or GPU compatibility. Valid values are: CPU and GPU.
+	Processor *string `json:"processor,omitempty" tf:"processor,omitempty"`
+
+	// The supported programming language and its version.
+	ProgrammingLang *string `json:"programmingLang,omitempty" tf:"programming_lang,omitempty"`
+
+	// The maintainer description of the image version.
+	ReleaseNotes *string `json:"releaseNotes,omitempty" tf:"release_notes,omitempty"`
+
+	// The stability of the image version, specified by the maintainer. Valid values are: NOT_PROVIDED, STABLE, TO_BE_ARCHIVED, and ARCHIVED.
+	VendorGuidance *string `json:"vendorGuidance,omitempty" tf:"vendor_guidance,omitempty"`
+
+	// The version of the image. If not specified, the latest version is described.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ImageVersionParameters struct {
 
+	// A list of aliases for the image version.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
+
 	// The registry path of the container image on which this image version is based.
 	// +kubebuilder:validation:Optional
 	BaseImage *string `json:"baseImage,omitempty" tf:"base_image,omitempty"`
+
+	// Indicates Horovod compatibility.
+	// +kubebuilder:validation:Optional
+	Horovod *bool `json:"horovod,omitempty" tf:"horovod,omitempty"`
 
 	// The name of the image. Must be unique to your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Image
@@ -75,10 +134,35 @@ type ImageVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
 
+	// Indicates SageMaker AI job type compatibility. Valid values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.
+	// +kubebuilder:validation:Optional
+	JobType *string `json:"jobType,omitempty" tf:"job_type,omitempty"`
+
+	// The machine learning framework vended in the image version.
+	// +kubebuilder:validation:Optional
+	MLFramework *string `json:"mlFramework,omitempty" tf:"ml_framework,omitempty"`
+
+	// Indicates CPU or GPU compatibility. Valid values are: CPU and GPU.
+	// +kubebuilder:validation:Optional
+	Processor *string `json:"processor,omitempty" tf:"processor,omitempty"`
+
+	// The supported programming language and its version.
+	// +kubebuilder:validation:Optional
+	ProgrammingLang *string `json:"programmingLang,omitempty" tf:"programming_lang,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// The maintainer description of the image version.
+	// +kubebuilder:validation:Optional
+	ReleaseNotes *string `json:"releaseNotes,omitempty" tf:"release_notes,omitempty"`
+
+	// The stability of the image version, specified by the maintainer. Valid values are: NOT_PROVIDED, STABLE, TO_BE_ARCHIVED, and ARCHIVED.
+	// +kubebuilder:validation:Optional
+	VendorGuidance *string `json:"vendorGuidance,omitempty" tf:"vendor_guidance,omitempty"`
 }
 
 // ImageVersionSpec defines the desired state of ImageVersion
@@ -108,7 +192,7 @@ type ImageVersionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ImageVersion is the Schema for the ImageVersions API. Provides a SageMaker Image Version resource.
+// ImageVersion is the Schema for the ImageVersions API. Provides a SageMaker AI Image Version resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

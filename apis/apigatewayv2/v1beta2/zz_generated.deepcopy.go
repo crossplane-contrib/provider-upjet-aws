@@ -78,6 +78,11 @@ func (in *APIInitParameters) DeepCopyInto(out *APIInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -226,6 +231,11 @@ func (in *APIObservation) DeepCopyInto(out *APIObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -336,6 +346,11 @@ func (in *APIParameters) DeepCopyInto(out *APIParameters) {
 	if in.FailOnWarnings != nil {
 		in, out := &in.FailOnWarnings, &out.FailOnWarnings
 		*out = new(bool)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1245,6 +1260,11 @@ func (in *DomainNameConfigurationInitParameters) DeepCopyInto(out *DomainNameCon
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.OwnershipVerificationCertificateArn != nil {
 		in, out := &in.OwnershipVerificationCertificateArn, &out.OwnershipVerificationCertificateArn
 		*out = new(string)
@@ -1282,6 +1302,11 @@ func (in *DomainNameConfigurationObservation) DeepCopyInto(out *DomainNameConfig
 	}
 	if in.HostedZoneID != nil {
 		in, out := &in.HostedZoneID, &out.HostedZoneID
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
 		*out = new(string)
 		**out = **in
 	}
@@ -1332,6 +1357,11 @@ func (in *DomainNameConfigurationParameters) DeepCopyInto(out *DomainNameConfigu
 	}
 	if in.EndpointType != nil {
 		in, out := &in.EndpointType, &out.EndpointType
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
 		*out = new(string)
 		**out = **in
 	}

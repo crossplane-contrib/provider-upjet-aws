@@ -175,7 +175,7 @@ type ClusterInstanceObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// – Boolean indicating if this instance is writable. False indicates this instance is a read replica.
+	// Boolean indicating if this instance is writable. False indicates this instance is a read replica.
 	Writer *bool `json:"writer,omitempty" tf:"writer,omitempty"`
 }
 
@@ -266,6 +266,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

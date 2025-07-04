@@ -15,42 +15,42 @@ import (
 
 type ClusterInitParameters struct {
 
-	// Specifies whether upgrades between different major versions are allowed. You must set it to true when providing an engine_version parameter that uses a different major version than the DB cluster's current version. Default is false.
+	// Whether upgrades between different major versions are allowed. You must set it to true when providing an engine_version parameter that uses a different major version than the DB cluster's current version. Default is false.
 	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
 
-	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
+	// Whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// A list of EC2 Availability Zones that instances in the Neptune cluster can be created in.
+	// List of EC2 Availability Zones that instances in the Neptune cluster can be created in.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The days to retain backups for. Default 1
+	// Days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// If set to true, tags are copied to any snapshot of the DB cluster that is created.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
+	// Value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
+	// List of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
-	// The name of the database engine to be used for this Neptune cluster. Defaults to neptune.
+	// Name of the database engine to be used for this Neptune cluster. Defaults to neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine version.
+	// Database engine version.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final Neptune snapshot when this Neptune cluster is deleted. If omitted, no final snapshot will be made.
+	// Name of your final Neptune snapshot when this Neptune cluster is deleted. If omitted, no final snapshot will be made.
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// The global cluster identifier specified on aws_neptune_global_cluster.
+	// Global cluster identifier specified on aws_neptune_global_cluster.
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
-	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+	// Whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
 	// References to Role in iam to populate iamRoles.
@@ -61,14 +61,14 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
-	// A List of ARNs for the IAM roles to associate to the Neptune Cluster.
+	// List of ARNs for the IAM roles to associate to the Neptune Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
-	// The ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
+	// ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -80,7 +80,7 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// A cluster parameter group to associate with the cluster.
+	// Cluster parameter group to associate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterParameterGroup
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
 
@@ -92,10 +92,10 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
-	// The name of the DB parameter group to apply to all instances of the DB cluster.
+	// –  Name of DB parameter group to apply to all instances in the cluster. When upgrading, AWS does not return this value, so do not reference it in other arguments—either leave it unset, configure each instance directly, or ensure it matches the engine_version.
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
 
-	// A Neptune subnet group to associate with this Neptune instance.
+	// Neptune subnet group to associate with this Neptune instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.SubnetGroup
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
@@ -107,13 +107,13 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
-	// The port on which the Neptune accepts connections. Default is 8182.
+	// Port on which the Neptune accepts connections. Default is 8182.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
+	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
@@ -131,10 +131,10 @@ type ClusterInitParameters struct {
 	// If set, create the Neptune cluster as a serverless one. See Serverless for example block attributes.
 	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInitParameters `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
 
-	// Determines whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
+	// Whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
+	// Whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterSnapshot
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
@@ -146,10 +146,10 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierSelector *v1.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
 
-	// Specifies whether the Neptune cluster is encrypted. The default is false if not specified.
+	// Whether the Neptune cluster is encrypted. The default is false if not specified.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// Storage type associated with the cluster standard/iopt1. Default: standard
+	// Storage type associated with the cluster standard/iopt1. Default: standard.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -174,89 +174,89 @@ type ClusterInitParameters struct {
 
 type ClusterObservation struct {
 
-	// Specifies whether upgrades between different major versions are allowed. You must set it to true when providing an engine_version parameter that uses a different major version than the DB cluster's current version. Default is false.
+	// Whether upgrades between different major versions are allowed. You must set it to true when providing an engine_version parameter that uses a different major version than the DB cluster's current version. Default is false.
 	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
 
-	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
+	// Whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// The Neptune Cluster Amazon Resource Name (ARN)
+	// Neptune Cluster ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A list of EC2 Availability Zones that instances in the Neptune cluster can be created in.
+	// List of EC2 Availability Zones that instances in the Neptune cluster can be created in.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The days to retain backups for. Default 1
+	// Days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// – List of Neptune Instances that are a part of this cluster
 	// +listType=set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
-	// The Neptune Cluster Resource ID
+	// Neptune Cluster Resource ID
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
 	// If set to true, tags are copied to any snapshot of the DB cluster that is created.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
+	// Value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
+	// List of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
-	// The DNS address of the Neptune instance
+	// DNS address of the Neptune instance
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The name of the database engine to be used for this Neptune cluster. Defaults to neptune.
+	// Name of the database engine to be used for this Neptune cluster. Defaults to neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine version.
+	// Database engine version.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final Neptune snapshot when this Neptune cluster is deleted. If omitted, no final snapshot will be made.
+	// Name of your final Neptune snapshot when this Neptune cluster is deleted. If omitted, no final snapshot will be made.
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// The global cluster identifier specified on aws_neptune_global_cluster.
+	// Global cluster identifier specified on aws_neptune_global_cluster.
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
-	// The Route53 Hosted Zone ID of the endpoint
+	// Route53 Hosted Zone ID of the endpoint
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+	// Whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// A List of ARNs for the IAM roles to associate to the Neptune Cluster.
+	// List of ARNs for the IAM roles to associate to the Neptune Cluster.
 	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
-	// The Neptune Cluster Identifier
+	// Neptune Cluster Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
+	// ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// A cluster parameter group to associate with the cluster.
+	// Cluster parameter group to associate with the cluster.
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
 
-	// The name of the DB parameter group to apply to all instances of the DB cluster.
+	// –  Name of DB parameter group to apply to all instances in the cluster. When upgrading, AWS does not return this value, so do not reference it in other arguments—either leave it unset, configure each instance directly, or ensure it matches the engine_version.
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
 
-	// A Neptune subnet group to associate with this Neptune instance.
+	// Neptune subnet group to associate with this Neptune instance.
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
-	// The port on which the Neptune accepts connections. Default is 8182.
+	// Port on which the Neptune accepts connections. Default is 8182.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
+	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// A read-only endpoint for the Neptune cluster, automatically load-balanced across replicas
+	// Read-only endpoint for the Neptune cluster, automatically load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
@@ -265,23 +265,23 @@ type ClusterObservation struct {
 	// If set, create the Neptune cluster as a serverless one. See Serverless for example block attributes.
 	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationObservation `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
 
-	// Determines whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
+	// Whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
+	// Whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
-	// Specifies whether the Neptune cluster is encrypted. The default is false if not specified.
+	// Whether the Neptune cluster is encrypted. The default is false if not specified.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// Storage type associated with the cluster standard/iopt1. Default: standard
+	// Storage type associated with the cluster standard/iopt1. Default: standard.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -292,20 +292,20 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// Specifies whether upgrades between different major versions are allowed. You must set it to true when providing an engine_version parameter that uses a different major version than the DB cluster's current version. Default is false.
+	// Whether upgrades between different major versions are allowed. You must set it to true when providing an engine_version parameter that uses a different major version than the DB cluster's current version. Default is false.
 	// +kubebuilder:validation:Optional
 	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
 
-	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
+	// Whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// A list of EC2 Availability Zones that instances in the Neptune cluster can be created in.
+	// List of EC2 Availability Zones that instances in the Neptune cluster can be created in.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The days to retain backups for. Default 1
+	// Days to retain backups for. Default 1
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
@@ -313,32 +313,32 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
+	// Value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
+	// List of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
-	// The name of the database engine to be used for this Neptune cluster. Defaults to neptune.
+	// Name of the database engine to be used for this Neptune cluster. Defaults to neptune.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine version.
+	// Database engine version.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final Neptune snapshot when this Neptune cluster is deleted. If omitted, no final snapshot will be made.
+	// Name of your final Neptune snapshot when this Neptune cluster is deleted. If omitted, no final snapshot will be made.
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// The global cluster identifier specified on aws_neptune_global_cluster.
+	// Global cluster identifier specified on aws_neptune_global_cluster.
 	// +kubebuilder:validation:Optional
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
-	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+	// Whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
@@ -350,7 +350,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
-	// A List of ARNs for the IAM roles to associate to the Neptune Cluster.
+	// List of ARNs for the IAM roles to associate to the Neptune Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
@@ -358,7 +358,7 @@ type ClusterParameters struct {
 	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
-	// The ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
+	// ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -371,7 +371,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// A cluster parameter group to associate with the cluster.
+	// Cluster parameter group to associate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
@@ -384,11 +384,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
-	// The name of the DB parameter group to apply to all instances of the DB cluster.
+	// –  Name of DB parameter group to apply to all instances in the cluster. When upgrading, AWS does not return this value, so do not reference it in other arguments—either leave it unset, configure each instance directly, or ensure it matches the engine_version.
 	// +kubebuilder:validation:Optional
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
 
-	// A Neptune subnet group to associate with this Neptune instance.
+	// Neptune subnet group to associate with this Neptune instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
@@ -401,18 +401,19 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
-	// The port on which the Neptune accepts connections. Default is 8182.
+	// Port on which the Neptune accepts connections. Default is 8182.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
 	// +kubebuilder:validation:Optional
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
+	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -435,11 +436,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationParameters `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
 
-	// Determines whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
+	// Whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
+	// Whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterSnapshot
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
@@ -452,11 +453,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierSelector *v1.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
 
-	// Specifies whether the Neptune cluster is encrypted. The default is false if not specified.
+	// Whether the Neptune cluster is encrypted. The default is false if not specified.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// Storage type associated with the cluster standard/iopt1. Default: standard
+	// Storage type associated with the cluster standard/iopt1. Default: standard.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -484,29 +485,29 @@ type ClusterParameters struct {
 
 type ServerlessV2ScalingConfigurationInitParameters struct {
 
-	// : (default: 128) The maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
+	// : (default: 128) Maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
+	// : (default: 2.5) Minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 type ServerlessV2ScalingConfigurationObservation struct {
 
-	// : (default: 128) The maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
+	// : (default: 128) Maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
+	// : (default: 2.5) Minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 type ServerlessV2ScalingConfigurationParameters struct {
 
-	// : (default: 128) The maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
+	// : (default: 128) Maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
 	// +kubebuilder:validation:Optional
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
+	// : (default: 2.5) Minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
 	// +kubebuilder:validation:Optional
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }

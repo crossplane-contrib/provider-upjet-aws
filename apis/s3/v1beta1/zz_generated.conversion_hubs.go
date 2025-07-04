@@ -13,6 +13,9 @@ func (tr *BucketAccelerateConfiguration) Hub() {}
 func (tr *BucketCorsConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *BucketLifecycleConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *BucketNotification) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -151,8 +151,8 @@ spec:
                         type: object
                     type: object
                   podExecutionRoleArn:
-                    description: –  Amazon Resource Name (ARN) of the IAM Role that
-                      provides permissions for the EKS Fargate Profile.
+                    description: Amazon Resource Name (ARN) of the IAM Role that provides
+                      permissions for the EKS Fargate Profile.
                     type: string
                   podExecutionRoleArnRef:
                     description: Reference to a Role in iam to populate podExecutionRoleArn.
@@ -229,8 +229,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   selector:
                     description: Configuration block(s) for selecting Kubernetes Pods
@@ -327,7 +328,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: '–  Identifiers of private EC2 Subnets to associate
+                    description: 'Identifiers of private EC2 Subnets to associate
                       with the EKS Fargate Profile. These subnets must have the following
                       resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME
                       is replaced with the name of the EKS Cluster).'
@@ -358,7 +359,7 @@ spec:
                   autoscaler.
                 properties:
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -435,8 +436,8 @@ spec:
                         type: object
                     type: object
                   podExecutionRoleArn:
-                    description: –  Amazon Resource Name (ARN) of the IAM Role that
-                      provides permissions for the EKS Fargate Profile.
+                    description: Amazon Resource Name (ARN) of the IAM Role that provides
+                      permissions for the EKS Fargate Profile.
                     type: string
                   podExecutionRoleArnRef:
                     description: Reference to a Role in iam to populate podExecutionRoleArn.
@@ -607,7 +608,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: '–  Identifiers of private EC2 Subnets to associate
+                    description: 'Identifiers of private EC2 Subnets to associate
                       with the EKS Fargate Profile. These subnets must have the following
                       resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME
                       is replaced with the name of the EKS Cluster).'
@@ -803,15 +804,15 @@ spec:
                     description: Amazon Resource Name (ARN) of the EKS Fargate Profile.
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   id:
                     description: EKS Cluster name and EKS Fargate Profile name separated
                       by a colon (:).
                     type: string
                   podExecutionRoleArn:
-                    description: –  Amazon Resource Name (ARN) of the IAM Role that
-                      provides permissions for the EKS Fargate Profile.
+                    description: Amazon Resource Name (ARN) of the IAM Role that provides
+                      permissions for the EKS Fargate Profile.
                     type: string
                   selector:
                     description: Configuration block(s) for selecting Kubernetes Pods
@@ -833,7 +834,7 @@ spec:
                     description: Status of the EKS Fargate Profile.
                     type: string
                   subnetIds:
-                    description: '–  Identifiers of private EC2 Subnets to associate
+                    description: 'Identifiers of private EC2 Subnets to associate
                       with the EKS Fargate Profile. These subnets must have the following
                       resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME
                       is replaced with the name of the EKS Cluster).'

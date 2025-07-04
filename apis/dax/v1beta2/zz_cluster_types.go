@@ -20,12 +20,12 @@ type ClusterInitParameters struct {
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// –  The type of encryption the
+	// The type of encryption the
 	// cluster's endpoint should support. Valid values are: NONE and TLS.
 	// Default value is NONE.
 	ClusterEndpointEncryptionType *string `json:"clusterEndpointEncryptionType,omitempty" tf:"cluster_endpoint_encryption_type,omitempty"`
 
-	// –  Description for the cluster
+	// Description for the cluster
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A valid Amazon Resource Name (ARN) that identifies
@@ -43,23 +43,27 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// ddd:hh24:mi
+	// Specifies the weekly time range for when
+	// maintenance on the cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi
 	// (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example:
 	// sun:05:00-sun:09:00
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// –  The compute and memory capacity of the nodes. See
+	// The compute and memory capacity of the nodes. See
 	// Nodes for supported node types
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// east-1:012345678999:my_sns_topic
+	// An Amazon Resource Name (ARN) of an
+	// SNS topic to send DAX notifications to. Example:
+	// arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
-	// –  Name of the parameter group to associate
+	// Name of the parameter group to associate
 	// with this DAX cluster
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// node cluster, without any read
+	// The number of nodes in the DAX cluster. A
+	// replication factor of 1 will create a single-node cluster, without any read
 	// replicas
 	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
 
@@ -71,7 +75,7 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// –  One or more VPC security groups associated
+	// One or more VPC security groups associated
 	// with the cluster
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
@@ -82,7 +86,7 @@ type ClusterInitParameters struct {
 	// Encrypt at rest options
 	ServerSideEncryption *ServerSideEncryptionInitParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// –  Name of the subnet group to be used for the
+	// Name of the subnet group to be used for the
 	// cluster
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
@@ -104,7 +108,7 @@ type ClusterObservation struct {
 	// The DNS name of the DAX cluster without the port appended
 	ClusterAddress *string `json:"clusterAddress,omitempty" tf:"cluster_address,omitempty"`
 
-	// –  The type of encryption the
+	// The type of encryption the
 	// cluster's endpoint should support. Valid values are: NONE and TLS.
 	// Default value is NONE.
 	ClusterEndpointEncryptionType *string `json:"clusterEndpointEncryptionType,omitempty" tf:"cluster_endpoint_encryption_type,omitempty"`
@@ -113,7 +117,7 @@ type ClusterObservation struct {
 	// consisting of a DNS name and a port number
 	ConfigurationEndpoint *string `json:"configurationEndpoint,omitempty" tf:"configuration_endpoint,omitempty"`
 
-	// –  Description for the cluster
+	// Description for the cluster
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A valid Amazon Resource Name (ARN) that identifies
@@ -123,12 +127,13 @@ type ClusterObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// ddd:hh24:mi
+	// Specifies the weekly time range for when
+	// maintenance on the cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi
 	// (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example:
 	// sun:05:00-sun:09:00
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// –  The compute and memory capacity of the nodes. See
+	// The compute and memory capacity of the nodes. See
 	// Nodes for supported node types
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -137,21 +142,24 @@ type ClusterObservation struct {
 	// ${aws_dax_cluster.test.nodes.0.address}
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
 
-	// east-1:012345678999:my_sns_topic
+	// An Amazon Resource Name (ARN) of an
+	// SNS topic to send DAX notifications to. Example:
+	// arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
-	// –  Name of the parameter group to associate
+	// Name of the parameter group to associate
 	// with this DAX cluster
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// The port used by the configuration endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// node cluster, without any read
+	// The number of nodes in the DAX cluster. A
+	// replication factor of 1 will create a single-node cluster, without any read
 	// replicas
 	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
 
-	// –  One or more VPC security groups associated
+	// One or more VPC security groups associated
 	// with the cluster
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -159,7 +167,7 @@ type ClusterObservation struct {
 	// Encrypt at rest options
 	ServerSideEncryption *ServerSideEncryptionObservation `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// –  Name of the subnet group to be used for the
+	// Name of the subnet group to be used for the
 	// cluster
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
@@ -180,13 +188,13 @@ type ClusterParameters struct {
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// –  The type of encryption the
+	// The type of encryption the
 	// cluster's endpoint should support. Valid values are: NONE and TLS.
 	// Default value is NONE.
 	// +kubebuilder:validation:Optional
 	ClusterEndpointEncryptionType *string `json:"clusterEndpointEncryptionType,omitempty" tf:"cluster_endpoint_encryption_type,omitempty"`
 
-	// –  Description for the cluster
+	// Description for the cluster
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -206,32 +214,37 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// ddd:hh24:mi
+	// Specifies the weekly time range for when
+	// maintenance on the cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi
 	// (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example:
 	// sun:05:00-sun:09:00
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// –  The compute and memory capacity of the nodes. See
+	// The compute and memory capacity of the nodes. See
 	// Nodes for supported node types
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// east-1:012345678999:my_sns_topic
+	// An Amazon Resource Name (ARN) of an
+	// SNS topic to send DAX notifications to. Example:
+	// arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
-	// –  Name of the parameter group to associate
+	// Name of the parameter group to associate
 	// with this DAX cluster
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// node cluster, without any read
+	// The number of nodes in the DAX cluster. A
+	// replication factor of 1 will create a single-node cluster, without any read
 	// replicas
 	// +kubebuilder:validation:Optional
 	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
@@ -244,7 +257,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// –  One or more VPC security groups associated
+	// One or more VPC security groups associated
 	// with the cluster
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
@@ -257,7 +270,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption *ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// –  Name of the subnet group to be used for the
+	// Name of the subnet group to be used for the
 	// cluster
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`

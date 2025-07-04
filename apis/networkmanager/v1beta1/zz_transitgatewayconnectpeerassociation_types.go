@@ -15,7 +15,7 @@ import (
 
 type TransitGatewayConnectPeerAssociationInitParameters struct {
 
-	// The ID of the device.
+	// ID of the device.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
@@ -28,30 +28,30 @@ type TransitGatewayConnectPeerAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link.
+	// ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 }
 
 type TransitGatewayConnectPeerAssociationObservation struct {
 
-	// The ID of the device.
+	// ID of the device.
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the link.
+	// ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Connect peer.
+	// ARN of the Connect peer.
 	TransitGatewayConnectPeerArn *string `json:"transitGatewayConnectPeerArn,omitempty" tf:"transit_gateway_connect_peer_arn,omitempty"`
 }
 
 type TransitGatewayConnectPeerAssociationParameters struct {
 
-	// The ID of the device.
+	// ID of the device.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -65,7 +65,7 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link.
+	// ID of the link.
 	// +kubebuilder:validation:Optional
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 
@@ -88,7 +88,7 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the Connect peer.
+	// ARN of the Connect peer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayConnectPeer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -130,7 +130,7 @@ type TransitGatewayConnectPeerAssociationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// TransitGatewayConnectPeerAssociation is the Schema for the TransitGatewayConnectPeerAssociations API. Associates a transit gateway Connect peer with a device, and optionally, with a link.
+// TransitGatewayConnectPeerAssociation is the Schema for the TransitGatewayConnectPeerAssociations API. Manages a Network Manager transit gateway Connect peer association.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

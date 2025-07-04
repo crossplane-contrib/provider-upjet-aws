@@ -18,7 +18,7 @@ type AuthInitParameters struct {
 	// The type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
 	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
 
-	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
 	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
 
 	// A user-specified description about the authentication used by a proxy to log in as a specific database user.
@@ -49,7 +49,7 @@ type AuthObservation struct {
 	// The type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
 	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
 
-	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
 	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
 
 	// A user-specified description about the authentication used by a proxy to log in as a specific database user.
@@ -71,7 +71,7 @@ type AuthParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
 
-	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
 	// +kubebuilder:validation:Optional
 	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
 
@@ -230,6 +230,7 @@ type ProxyParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
