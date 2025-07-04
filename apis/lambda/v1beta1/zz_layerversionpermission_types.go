@@ -15,95 +15,136 @@ import (
 
 type LayerVersionPermissionInitParameters struct {
 
-	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
+	// Action that will be allowed. lambda:GetLayerVersion is the standard value for layer access.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The name or ARN of the Lambda Layer, which you want to grant access to.
+	// Name or ARN of the Lambda Layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("layer_name",false)
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
-	// An identifier of AWS Organization, which should be able to use your Lambda Layer. principal should be equal to * if organization_id provided.
+	// Reference to a LayerVersion in lambda to populate layerName.
+	// +kubebuilder:validation:Optional
+	LayerNameRef *v1.Reference `json:"layerNameRef,omitempty" tf:"-"`
+
+	// Selector for a LayerVersion in lambda to populate layerName.
+	// +kubebuilder:validation:Optional
+	LayerNameSelector *v1.Selector `json:"layerNameSelector,omitempty" tf:"-"`
+
+	// AWS Organization ID that should be able to use your Lambda Layer. principal should be set to * when organization_id is provided.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
+	// AWS account ID that should be able to use your Lambda Layer. Use * to share with all AWS accounts.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
-	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
+	// Whether to retain the permission when the resource is destroyed. Default is false.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
+	// Unique identifier for the permission statement.
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
-	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
+	// Version of Lambda Layer to grant access to. Note: permissions only apply to a single version of a layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",true)
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
+
+	// Reference to a LayerVersion in lambda to populate versionNumber.
+	// +kubebuilder:validation:Optional
+	VersionNumberRef *v1.Reference `json:"versionNumberRef,omitempty" tf:"-"`
+
+	// Selector for a LayerVersion in lambda to populate versionNumber.
+	// +kubebuilder:validation:Optional
+	VersionNumberSelector *v1.Selector `json:"versionNumberSelector,omitempty" tf:"-"`
 }
 
 type LayerVersionPermissionObservation struct {
 
-	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
+	// Action that will be allowed. lambda:GetLayerVersion is the standard value for layer access.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The layer_name and version_number, separated by a comma (,).
+	// Layer name and version number, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name or ARN of the Lambda Layer, which you want to grant access to.
+	// Name or ARN of the Lambda Layer.
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
-	// An identifier of AWS Organization, which should be able to use your Lambda Layer. principal should be equal to * if organization_id provided.
+	// AWS Organization ID that should be able to use your Lambda Layer. principal should be set to * when organization_id is provided.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// Full Lambda Layer Permission policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
+	// AWS account ID that should be able to use your Lambda Layer. Use * to share with all AWS accounts.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
-	// A unique identifier for the current revision of the policy.
+	// Unique identifier for the current revision of the policy.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 
-	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
+	// Whether to retain the permission when the resource is destroyed. Default is false.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
+	// Unique identifier for the permission statement.
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
-	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
+	// Version of Lambda Layer to grant access to. Note: permissions only apply to a single version of a layer.
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 type LayerVersionPermissionParameters struct {
 
-	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
+	// Action that will be allowed. lambda:GetLayerVersion is the standard value for layer access.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The name or ARN of the Lambda Layer, which you want to grant access to.
+	// Name or ARN of the Lambda Layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("layer_name",false)
 	// +kubebuilder:validation:Optional
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
-	// An identifier of AWS Organization, which should be able to use your Lambda Layer. principal should be equal to * if organization_id provided.
+	// Reference to a LayerVersion in lambda to populate layerName.
+	// +kubebuilder:validation:Optional
+	LayerNameRef *v1.Reference `json:"layerNameRef,omitempty" tf:"-"`
+
+	// Selector for a LayerVersion in lambda to populate layerName.
+	// +kubebuilder:validation:Optional
+	LayerNameSelector *v1.Selector `json:"layerNameSelector,omitempty" tf:"-"`
+
+	// AWS Organization ID that should be able to use your Lambda Layer. principal should be set to * when organization_id is provided.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
+	// AWS account ID that should be able to use your Lambda Layer. Use * to share with all AWS accounts.
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
+	// Whether to retain the permission when the resource is destroyed. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
+	// Unique identifier for the permission statement.
 	// +kubebuilder:validation:Optional
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
-	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
+	// Version of Lambda Layer to grant access to. Note: permissions only apply to a single version of a layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",true)
 	// +kubebuilder:validation:Optional
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
+
+	// Reference to a LayerVersion in lambda to populate versionNumber.
+	// +kubebuilder:validation:Optional
+	VersionNumberRef *v1.Reference `json:"versionNumberRef,omitempty" tf:"-"`
+
+	// Selector for a LayerVersion in lambda to populate versionNumber.
+	// +kubebuilder:validation:Optional
+	VersionNumberSelector *v1.Selector `json:"versionNumberSelector,omitempty" tf:"-"`
 }
 
 // LayerVersionPermissionSpec defines the desired state of LayerVersionPermission
@@ -133,7 +174,7 @@ type LayerVersionPermissionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LayerVersionPermission is the Schema for the LayerVersionPermissions API. Provides a Lambda Layer Version Permission resource.
+// LayerVersionPermission is the Schema for the LayerVersionPermissions API. Manages an AWS Lambda Layer Version Permission.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -143,10 +184,8 @@ type LayerVersionPermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || (has(self.initProvider) && has(self.initProvider.action))",message="spec.forProvider.action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerName) || (has(self.initProvider) && has(self.initProvider.layerName))",message="spec.forProvider.layerName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal) || (has(self.initProvider) && has(self.initProvider.principal))",message="spec.forProvider.principal is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.statementId) || (has(self.initProvider) && has(self.initProvider.statementId))",message="spec.forProvider.statementId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versionNumber) || (has(self.initProvider) && has(self.initProvider.versionNumber))",message="spec.forProvider.versionNumber is a required parameter"
 	Spec   LayerVersionPermissionSpec   `json:"spec"`
 	Status LayerVersionPermissionStatus `json:"status,omitempty"`
 }

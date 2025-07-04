@@ -218,7 +218,7 @@ type TableObservation struct {
 	// The ARN that uniquely identifies this table.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  The name of the Timestream database.
+	// The name of the Timestream database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The table_name and database_name separated by a colon (:).
@@ -247,7 +247,7 @@ type TableObservation struct {
 
 type TableParameters struct {
 
-	// –  The name of the Timestream database.
+	// The name of the Timestream database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -264,6 +264,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	MagneticStoreWriteProperties *MagneticStoreWritePropertiesParameters `json:"magneticStoreWriteProperties,omitempty" tf:"magnetic_store_write_properties,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -344,14 +344,8 @@ type InstanceInitParameters struct {
 	// AZ to start the instance in.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	// The CPU options for the instance. See CPU Options below for more details.
 	CPUOptions *CPUOptionsInitParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	CapacityReservationSpecification *CapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -541,14 +535,8 @@ type InstanceObservation struct {
 	// AZ to start the instance in.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	// The CPU options for the instance. See CPU Options below for more details.
 	CPUOptions *CPUOptionsObservation `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	CapacityReservationSpecification *CapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -727,17 +715,9 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	// +kubebuilder:validation:Optional
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	// The CPU options for the instance. See CPU Options below for more details.
 	// +kubebuilder:validation:Optional
 	CPUOptions *CPUOptionsParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	// +kubebuilder:validation:Optional
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	// +kubebuilder:validation:Optional
@@ -855,6 +835,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

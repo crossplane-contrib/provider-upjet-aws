@@ -123,6 +123,7 @@ type SigningProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

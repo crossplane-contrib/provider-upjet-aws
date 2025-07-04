@@ -15,7 +15,7 @@ import (
 
 type AttachmentAccepterInitParameters struct {
 
-	// The ID of the attachment.
+	// ID of the attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
@@ -28,7 +28,7 @@ type AttachmentAccepterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AttachmentIDSelector *v1.Selector `json:"attachmentIdSelector,omitempty" tf:"-"`
 
-	// The type of attachment. Valid values can be found in the AWS Documentation
+	// Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY, SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("attachment_type",true)
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
@@ -44,45 +44,45 @@ type AttachmentAccepterInitParameters struct {
 
 type AttachmentAccepterObservation struct {
 
-	// The ID of the attachment.
+	// ID of the attachment.
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
-	// The policy rule number associated with the attachment.
+	// Policy rule number associated with the attachment.
 	AttachmentPolicyRuleNumber *float64 `json:"attachmentPolicyRuleNumber,omitempty" tf:"attachment_policy_rule_number,omitempty"`
 
-	// The type of attachment. Valid values can be found in the AWS Documentation
+	// Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY, SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
-	// The ARN of a core network.
+	// ARN of the core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
-	// The id of a core network.
+	// ID of the core network.
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
-	// The Region where the edge is located. This is returned for all attachment types except a Direct Connect gateway attachment, which instead returns edge_locations.
+	// Region where the edge is located. This is returned for all attachment types except Direct Connect gateway attachments, which instead return edge_locations.
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
 
-	// The edge locations that the Direct Connect gateway is associated with. This is returned only for Direct Connect gateway attachments. All other attachment types return edge_location
+	// Edge locations that the Direct Connect gateway is associated with. This is returned only for Direct Connect gateway attachments. All other attachment types return edge_location.
 	EdgeLocations []*string `json:"edgeLocations,omitempty" tf:"edge_locations,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the attachment account owner.
+	// ID of the attachment account owner.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
-	// The attachment resource ARN.
+	// Attachment resource ARN.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The name of the segment attachment.
+	// Name of the segment attachment.
 	SegmentName *string `json:"segmentName,omitempty" tf:"segment_name,omitempty"`
 
-	// The state of the attachment.
+	// State of the attachment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type AttachmentAccepterParameters struct {
 
-	// The ID of the attachment.
+	// ID of the attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -96,7 +96,7 @@ type AttachmentAccepterParameters struct {
 	// +kubebuilder:validation:Optional
 	AttachmentIDSelector *v1.Selector `json:"attachmentIdSelector,omitempty" tf:"-"`
 
-	// The type of attachment. Valid values can be found in the AWS Documentation
+	// Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY, SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("attachment_type",true)
 	// +kubebuilder:validation:Optional
@@ -143,7 +143,7 @@ type AttachmentAccepterStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// AttachmentAccepter is the Schema for the AttachmentAccepters API.
+// AttachmentAccepter is the Schema for the AttachmentAccepters API. Manages an AWS Network Manager Attachment Accepter.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

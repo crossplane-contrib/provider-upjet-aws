@@ -1139,8 +1139,9 @@ spec:
                       30 days.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   revocationConfiguration:
                     description: Nested argument containing revocation configuration.

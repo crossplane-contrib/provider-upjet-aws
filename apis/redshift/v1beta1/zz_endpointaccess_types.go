@@ -16,7 +16,7 @@ import (
 type EndpointAccessInitParameters struct {
 
 	// The cluster identifier of the cluster to access.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
@@ -90,7 +90,7 @@ type EndpointAccessObservation struct {
 type EndpointAccessParameters struct {
 
 	// The cluster identifier of the cluster to access.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -102,6 +102,7 @@ type EndpointAccessParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

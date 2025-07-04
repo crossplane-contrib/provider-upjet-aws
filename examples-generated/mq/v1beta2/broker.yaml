@@ -25,4 +25,4 @@ spec:
         key: example-key
         name: example-secret
         namespace: upbound-system
-      username: ExampleUser
+      username: example_user

@@ -262,6 +262,7 @@ type WorkforceParameters struct {
 	// +kubebuilder:validation:Optional
 	OidcConfig *OidcConfigParameters `json:"oidcConfig,omitempty" tf:"oidc_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -350,7 +351,7 @@ type WorkforceStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Workforce is the Schema for the Workforces API. Provides a SageMaker Workforce resource.
+// Workforce is the Schema for the Workforces API. Provides a SageMaker AI Workforce resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

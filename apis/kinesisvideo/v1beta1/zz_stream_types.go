@@ -15,7 +15,7 @@ import (
 
 type StreamInitParameters struct {
 
-	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+	// The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
 	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
 
 	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
@@ -53,7 +53,7 @@ type StreamObservation struct {
 	// A time stamp that indicates when the stream was created.
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
-	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+	// The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
 	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
 
 	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
@@ -86,7 +86,7 @@ type StreamObservation struct {
 
 type StreamParameters struct {
 
-	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+	// The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
 	// +kubebuilder:validation:Optional
 	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
 
@@ -116,6 +116,7 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -91,6 +91,9 @@ type ServerlessClusterObservation struct {
 	// The ARN of the serverless cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// One or more DNS names (or IP addresses) and SASL IAM port pairs. For example, boot-abcdefg.c2.kafka-serverless.eu-central-1.amazonaws.com:9098. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	BootstrapBrokersSaslIAM *string `json:"bootstrapBrokersSaslIam,omitempty" tf:"bootstrap_brokers_sasl_iam,omitempty"`
+
 	// Specifies client authentication information for the serverless cluster. See below.
 	ClientAuthentication *ServerlessClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
@@ -124,6 +127,7 @@ type ServerlessClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

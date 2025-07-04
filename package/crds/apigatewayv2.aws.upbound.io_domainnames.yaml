@@ -807,6 +807,13 @@ spec:
                       endpointType:
                         description: 'Endpoint type. Valid values: REGIONAL.'
                         type: string
+                      ipAddressType:
+                        description: 'The IP address types that can invoke the domain
+                          name. Valid values: ipv4, dualstack. Use ipv4 to allow only
+                          IPv4 addresses to invoke your domain name, or use dualstack
+                          to allow both IPv4 and IPv6 addresses to invoke your domain
+                          name. Defaults to ipv4.'
+                        type: string
                       ownershipVerificationCertificateArn:
                         description: ARN of the AWS-issued certificate used to validate
                           custom domain ownership (when certificate_arn is issued
@@ -837,8 +844,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -949,6 +957,13 @@ spec:
                         type: object
                       endpointType:
                         description: 'Endpoint type. Valid values: REGIONAL.'
+                        type: string
+                      ipAddressType:
+                        description: 'The IP address types that can invoke the domain
+                          name. Valid values: ipv4, dualstack. Use ipv4 to allow only
+                          IPv4 addresses to invoke your domain name, or use dualstack
+                          to allow both IPv4 and IPv6 addresses to invoke your domain
+                          name. Defaults to ipv4.'
                         type: string
                       ownershipVerificationCertificateArn:
                         description: ARN of the AWS-issued certificate used to validate
@@ -1184,6 +1199,13 @@ spec:
                       hostedZoneId:
                         description: (Computed) Amazon Route 53 Hosted Zone ID of
                           the endpoint.
+                        type: string
+                      ipAddressType:
+                        description: 'The IP address types that can invoke the domain
+                          name. Valid values: ipv4, dualstack. Use ipv4 to allow only
+                          IPv4 addresses to invoke your domain name, or use dualstack
+                          to allow both IPv4 and IPv6 addresses to invoke your domain
+                          name. Defaults to ipv4.'
                         type: string
                       ownershipVerificationCertificateArn:
                         description: ARN of the AWS-issued certificate used to validate

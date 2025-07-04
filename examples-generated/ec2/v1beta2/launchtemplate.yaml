@@ -22,10 +22,6 @@ spec:
     disableApiStop: true
     disableApiTermination: true
     ebsOptimized: true
-    elasticGpuSpecifications:
-    - type: test
-    elasticInferenceAccelerator:
-    - type: eia1.medium
     iamInstanceProfile:
     - nameSelector:
         matchLabels:

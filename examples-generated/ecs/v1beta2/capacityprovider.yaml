@@ -4,14 +4,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ecs/v1beta2/capacityprovider
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     autoScalingGroupProvider:
     - autoScalingGroupArnSelector:
         matchLabels:
-          testing.upbound.io/example-name: test
+          testing.upbound.io/example-name: example
       managedScaling:
       - maximumScalingStepSize: 1000
         minimumScalingStepSize: 1
@@ -28,8 +28,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ecs/v1beta2/capacityprovider
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1

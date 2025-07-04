@@ -24,7 +24,7 @@ type ProvisionedConcurrencyConfigInitParameters struct {
 	// Lambda Function version or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// Whether to retain the provisoned concurrency configuration upon destruction. Defaults to false. If set to true, the resource in simply removed from state instead.
+	// Whether to retain the provisioned concurrency configuration upon destruction. Defaults to false. If set to true, the resource is simply removed from state instead.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
@@ -42,7 +42,7 @@ type ProvisionedConcurrencyConfigObservation struct {
 	// Lambda Function version or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// Whether to retain the provisoned concurrency configuration upon destruction. Defaults to false. If set to true, the resource in simply removed from state instead.
+	// Whether to retain the provisioned concurrency configuration upon destruction. Defaults to false. If set to true, the resource is simply removed from state instead.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
@@ -60,12 +60,13 @@ type ProvisionedConcurrencyConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Whether to retain the provisoned concurrency configuration upon destruction. Defaults to false. If set to true, the resource in simply removed from state instead.
+	// Whether to retain the provisioned concurrency configuration upon destruction. Defaults to false. If set to true, the resource is simply removed from state instead.
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
@@ -97,7 +98,7 @@ type ProvisionedConcurrencyConfigStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ProvisionedConcurrencyConfig is the Schema for the ProvisionedConcurrencyConfigs API. Manages a Lambda Provisioned Concurrency Configuration
+// ProvisionedConcurrencyConfig is the Schema for the ProvisionedConcurrencyConfigs API. Manages an AWS Lambda Provisioned Concurrency Configuration.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

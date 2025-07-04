@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   admins:
-                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                    description: Set of ARNs of AWS Lake Formation principals (IAM
                       users or roles).
                     items:
                       type: string
@@ -174,7 +174,7 @@ spec:
                       type: string
                     type: array
                   catalogId:
-                    description: –  Identifier for the Data Catalog. By default, the
+                    description: Identifier for the Data Catalog. By default, the
                       account ID.
                     type: string
                   createDatabaseDefaultPermissions:
@@ -240,19 +240,21 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   readOnlyAdmins:
-                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                    description: Set of ARNs of AWS Lake Formation principals (IAM
                       users or roles) with only view access to the resources.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   trustedResourceOwners:
-                    description: owning account IDs that the caller's account can
-                      use to share their user access details (user ARNs).
+                    description: List of the resource-owning account IDs that the
+                      caller's account can use to share their user access details
+                      (user ARNs).
                     items:
                       type: string
                     type: array
@@ -273,7 +275,7 @@ spec:
                   autoscaler.
                 properties:
                   admins:
-                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                    description: Set of ARNs of AWS Lake Formation principals (IAM
                       users or roles).
                     items:
                       type: string
@@ -373,7 +375,7 @@ spec:
                       type: string
                     type: array
                   catalogId:
-                    description: –  Identifier for the Data Catalog. By default, the
+                    description: Identifier for the Data Catalog. By default, the
                       account ID.
                     type: string
                   createDatabaseDefaultPermissions:
@@ -439,15 +441,16 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   readOnlyAdmins:
-                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                    description: Set of ARNs of AWS Lake Formation principals (IAM
                       users or roles) with only view access to the resources.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   trustedResourceOwners:
-                    description: owning account IDs that the caller's account can
-                      use to share their user access details (user ARNs).
+                    description: List of the resource-owning account IDs that the
+                      caller's account can use to share their user access details
+                      (user ARNs).
                     items:
                       type: string
                     type: array
@@ -625,7 +628,7 @@ spec:
               atProvider:
                 properties:
                   admins:
-                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                    description: Set of ARNs of AWS Lake Formation principals (IAM
                       users or roles).
                     items:
                       type: string
@@ -648,7 +651,7 @@ spec:
                       type: string
                     type: array
                   catalogId:
-                    description: –  Identifier for the Data Catalog. By default, the
+                    description: Identifier for the Data Catalog. By default, the
                       account ID.
                     type: string
                   createDatabaseDefaultPermissions:
@@ -716,15 +719,16 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   readOnlyAdmins:
-                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                    description: Set of ARNs of AWS Lake Formation principals (IAM
                       users or roles) with only view access to the resources.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   trustedResourceOwners:
-                    description: owning account IDs that the caller's account can
-                      use to share their user access details (user ARNs).
+                    description: List of the resource-owning account IDs that the
+                      caller's account can use to share their user access details
+                      (user ARNs).
                     items:
                       type: string
                     type: array

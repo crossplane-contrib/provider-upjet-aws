@@ -77,8 +77,9 @@ spec:
                     description: A description of the subnet group.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -159,7 +160,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: –  A list of VPC subnet IDs for the subnet group.
+                    description: A list of VPC subnet IDs for the subnet group.
                     items:
                       type: string
                     type: array
@@ -262,7 +263,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: –  A list of VPC subnet IDs for the subnet group.
+                    description: A list of VPC subnet IDs for the subnet group.
                     items:
                       type: string
                     type: array
@@ -447,13 +448,13 @@ spec:
                     description: The name of the subnet group.
                     type: string
                   subnetIds:
-                    description: –  A list of VPC subnet IDs for the subnet group.
+                    description: A list of VPC subnet IDs for the subnet group.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   vpcId:
-                    description: – VPC ID of the subnet group.
+                    description: VPC ID of the subnet group.
                     type: string
                 type: object
               conditions:

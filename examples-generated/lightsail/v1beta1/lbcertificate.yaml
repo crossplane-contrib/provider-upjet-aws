@@ -4,14 +4,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/lbcertificate
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    domainName: test.com
+    domainName: example.com
     lbNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     region: us-west-1
 
 ---
@@ -22,8 +22,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/lbcertificate
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     healthCheckPath: /

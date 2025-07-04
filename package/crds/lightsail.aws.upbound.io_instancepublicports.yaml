@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: InstancePublicPorts is the Schema for the InstancePublicPortss
-          API. Provides an Lightsail Instance
+          API. Manages public ports for a Lightsail instance.
         properties:
           apiVersion:
             description: |-
@@ -155,7 +155,7 @@ spec:
                   portInfo:
                     description: Configuration block with port information. AWS closes
                       all currently open ports that are not included in the port_info.
-                      Detailed below.
+                      See below.
                     items:
                       properties:
                         cidrListAliases:
@@ -175,13 +175,14 @@ spec:
                           description: First port in a range of open ports on an instance.
                           type: number
                         ipv6Cidrs:
+                          description: Set of IPv6 CIDR blocks.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         protocol:
-                          description: IP protocol name. Valid values are tcp, all,
-                            udp, and icmp.
+                          description: 'IP protocol name. Valid values: tcp, all,
+                            udp, icmp.'
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
@@ -189,8 +190,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -290,7 +292,7 @@ spec:
                   portInfo:
                     description: Configuration block with port information. AWS closes
                       all currently open ports that are not included in the port_info.
-                      Detailed below.
+                      See below.
                     items:
                       properties:
                         cidrListAliases:
@@ -310,13 +312,14 @@ spec:
                           description: First port in a range of open ports on an instance.
                           type: number
                         ipv6Cidrs:
+                          description: Set of IPv6 CIDR blocks.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         protocol:
-                          description: IP protocol name. Valid values are tcp, all,
-                            udp, and icmp.
+                          description: 'IP protocol name. Valid values: tcp, all,
+                            udp, icmp.'
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
@@ -510,7 +513,7 @@ spec:
                   portInfo:
                     description: Configuration block with port information. AWS closes
                       all currently open ports that are not included in the port_info.
-                      Detailed below.
+                      See below.
                     items:
                       properties:
                         cidrListAliases:
@@ -530,13 +533,14 @@ spec:
                           description: First port in a range of open ports on an instance.
                           type: number
                         ipv6Cidrs:
+                          description: Set of IPv6 CIDR blocks.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         protocol:
-                          description: IP protocol name. Valid values are tcp, all,
-                            udp, and icmp.
+                          description: 'IP protocol name. Valid values: tcp, all,
+                            udp, icmp.'
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.

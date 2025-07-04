@@ -76,7 +76,7 @@ type ReplicationGroupInitParameters struct {
 	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
 	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
-	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -93,7 +93,7 @@ type ReplicationGroupInitParameters struct {
 	// Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
 	DataTieringEnabled *bool `json:"dataTieringEnabled,omitempty" tf:"data_tiering_enabled,omitempty"`
 
-	// created description for the replication group. Must not be empty.
+	// User-created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the cache engine to be used for the clusters in this replication group.
@@ -143,7 +143,7 @@ type ReplicationGroupInitParameters struct {
 	// Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	LogDeliveryConfiguration []LogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
+	// Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// Specifies whether to enable Multi-AZ Support for the replication group.
@@ -160,7 +160,7 @@ type ReplicationGroupInitParameters struct {
 	// Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// east-1:012345678999:my_sns_topic
+	// ARN of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
 	// 00#.
@@ -174,7 +174,7 @@ type ReplicationGroupInitParameters struct {
 	// Name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. To enable "cluster mode", i.e., data sharding, use a parameter group that has the parameter cluster-enabled set to true.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// –  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
+	// Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is considered. The first item in the list will be the primary node. Ignored when updating.
@@ -206,7 +206,7 @@ type ReplicationGroupInitParameters struct {
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
-	// –  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
+	// List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
 	// +listType=set
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
@@ -264,7 +264,7 @@ type ReplicationGroupObservation struct {
 	// When engine is valkey, default is true.
 	AtRestEncryptionEnabled *string `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
-	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -287,7 +287,7 @@ type ReplicationGroupObservation struct {
 	// Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
 	DataTieringEnabled *bool `json:"dataTieringEnabled,omitempty" tf:"data_tiering_enabled,omitempty"`
 
-	// created description for the replication group. Must not be empty.
+	// User-created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the cache engine to be used for the clusters in this replication group.
@@ -324,7 +324,7 @@ type ReplicationGroupObservation struct {
 	// Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	LogDeliveryConfiguration []LogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
+	// Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// Identifiers of all the nodes that are part of this replication group.
@@ -345,7 +345,7 @@ type ReplicationGroupObservation struct {
 	// Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// east-1:012345678999:my_sns_topic
+	// ARN of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
 	// 00#.
@@ -359,7 +359,7 @@ type ReplicationGroupObservation struct {
 	// Name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. To enable "cluster mode", i.e., data sharding, use a parameter group that has the parameter cluster-enabled set to true.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// –  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
+	// Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is considered. The first item in the list will be the primary node. Ignored when updating.
@@ -386,7 +386,7 @@ type ReplicationGroupObservation struct {
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
-	// –  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
+	// List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
 	// +listType=set
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
@@ -443,7 +443,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
-	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.
 	// +kubebuilder:validation:Optional
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
@@ -471,7 +471,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DataTieringEnabled *bool `json:"dataTieringEnabled,omitempty" tf:"data_tiering_enabled,omitempty"`
 
-	// created description for the replication group. Must not be empty.
+	// User-created description for the replication group. Must not be empty.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -529,7 +529,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration []LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
+	// Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -550,7 +550,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// east-1:012345678999:my_sns_topic
+	// ARN of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
@@ -568,7 +568,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// –  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
+	// Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -576,6 +576,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredCacheClusterAzs []*string `json:"preferredCacheClusterAzs,omitempty" tf:"preferred_cache_cluster_azs,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -610,7 +611,7 @@ type ReplicationGroupParameters struct {
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
-	// –  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
+	// List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`

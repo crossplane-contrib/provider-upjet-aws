@@ -85,6 +85,45 @@ type ActionParameters struct {
 	Target *TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
+type CloudwatchDashboardInitParameters struct {
+
+	// The ARN of the CloudWatch dashboard.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.Dashboard
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("dashboard_arn",true)
+	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
+
+	// Reference to a Dashboard in cloudwatch to populate dashboardArn.
+	// +kubebuilder:validation:Optional
+	DashboardArnRef *v1.Reference `json:"dashboardArnRef,omitempty" tf:"-"`
+
+	// Selector for a Dashboard in cloudwatch to populate dashboardArn.
+	// +kubebuilder:validation:Optional
+	DashboardArnSelector *v1.Selector `json:"dashboardArnSelector,omitempty" tf:"-"`
+}
+
+type CloudwatchDashboardObservation struct {
+
+	// The ARN of the CloudWatch dashboard.
+	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
+}
+
+type CloudwatchDashboardParameters struct {
+
+	// The ARN of the CloudWatch dashboard.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.Dashboard
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("dashboard_arn",true)
+	// +kubebuilder:validation:Optional
+	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
+
+	// Reference to a Dashboard in cloudwatch to populate dashboardArn.
+	// +kubebuilder:validation:Optional
+	DashboardArnRef *v1.Reference `json:"dashboardArnRef,omitempty" tf:"-"`
+
+	// Selector for a Dashboard in cloudwatch to populate dashboardArn.
+	// +kubebuilder:validation:Optional
+	DashboardArnSelector *v1.Selector `json:"dashboardArnSelector,omitempty" tf:"-"`
+}
+
 type CloudwatchLogsConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
@@ -102,6 +141,25 @@ type CloudwatchLogsConfigurationParameters struct {
 	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
+}
+
+type DataSourcesInitParameters struct {
+
+	// The data sources for the experiment report. See below.
+	CloudwatchDashboard []CloudwatchDashboardInitParameters `json:"cloudwatchDashboard,omitempty" tf:"cloudwatch_dashboard,omitempty"`
+}
+
+type DataSourcesObservation struct {
+
+	// The data sources for the experiment report. See below.
+	CloudwatchDashboard []CloudwatchDashboardObservation `json:"cloudwatchDashboard,omitempty" tf:"cloudwatch_dashboard,omitempty"`
+}
+
+type DataSourcesParameters struct {
+
+	// The data sources for the experiment report. See below.
+	// +kubebuilder:validation:Optional
+	CloudwatchDashboard []CloudwatchDashboardParameters `json:"cloudwatchDashboard,omitempty" tf:"cloudwatch_dashboard,omitempty"`
 }
 
 type ExperimentOptionsInitParameters struct {
@@ -133,6 +191,55 @@ type ExperimentOptionsParameters struct {
 	EmptyTargetResolutionMode *string `json:"emptyTargetResolutionMode,omitempty" tf:"empty_target_resolution_mode,omitempty"`
 }
 
+type ExperimentReportConfigurationInitParameters struct {
+
+	// The data sources for the experiment report. See below.
+	DataSources *DataSourcesInitParameters `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
+
+	// The outputs for the experiment report. See below.
+	Outputs *OutputsInitParameters `json:"outputs,omitempty" tf:"outputs,omitempty"`
+
+	// The duration of the post-experiment period. Defaults to PT20M.
+	PostExperimentDuration *string `json:"postExperimentDuration,omitempty" tf:"post_experiment_duration,omitempty"`
+
+	// The duration of the pre-experiment period. Defaults to PT20M.
+	PreExperimentDuration *string `json:"preExperimentDuration,omitempty" tf:"pre_experiment_duration,omitempty"`
+}
+
+type ExperimentReportConfigurationObservation struct {
+
+	// The data sources for the experiment report. See below.
+	DataSources *DataSourcesObservation `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
+
+	// The outputs for the experiment report. See below.
+	Outputs *OutputsObservation `json:"outputs,omitempty" tf:"outputs,omitempty"`
+
+	// The duration of the post-experiment period. Defaults to PT20M.
+	PostExperimentDuration *string `json:"postExperimentDuration,omitempty" tf:"post_experiment_duration,omitempty"`
+
+	// The duration of the pre-experiment period. Defaults to PT20M.
+	PreExperimentDuration *string `json:"preExperimentDuration,omitempty" tf:"pre_experiment_duration,omitempty"`
+}
+
+type ExperimentReportConfigurationParameters struct {
+
+	// The data sources for the experiment report. See below.
+	// +kubebuilder:validation:Optional
+	DataSources *DataSourcesParameters `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
+
+	// The outputs for the experiment report. See below.
+	// +kubebuilder:validation:Optional
+	Outputs *OutputsParameters `json:"outputs,omitempty" tf:"outputs,omitempty"`
+
+	// The duration of the post-experiment period. Defaults to PT20M.
+	// +kubebuilder:validation:Optional
+	PostExperimentDuration *string `json:"postExperimentDuration,omitempty" tf:"post_experiment_duration,omitempty"`
+
+	// The duration of the pre-experiment period. Defaults to PT20M.
+	// +kubebuilder:validation:Optional
+	PreExperimentDuration *string `json:"preExperimentDuration,omitempty" tf:"pre_experiment_duration,omitempty"`
+}
+
 type ExperimentTemplateInitParameters struct {
 
 	// Action to be performed during an experiment. See below.
@@ -143,6 +250,9 @@ type ExperimentTemplateInitParameters struct {
 
 	// The experiment options for the experiment template. See experiment_options below for more details!
 	ExperimentOptions *ExperimentOptionsInitParameters `json:"experimentOptions,omitempty" tf:"experiment_options,omitempty"`
+
+	// The configuration for experiment reporting. See below.
+	ExperimentReportConfiguration *ExperimentReportConfigurationInitParameters `json:"experimentReportConfiguration,omitempty" tf:"experiment_report_configuration,omitempty"`
 
 	// The configuration for experiment logging. See below.
 	LogConfiguration *LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
@@ -182,6 +292,9 @@ type ExperimentTemplateObservation struct {
 	// The experiment options for the experiment template. See experiment_options below for more details!
 	ExperimentOptions *ExperimentOptionsObservation `json:"experimentOptions,omitempty" tf:"experiment_options,omitempty"`
 
+	// The configuration for experiment reporting. See below.
+	ExperimentReportConfiguration *ExperimentReportConfigurationObservation `json:"experimentReportConfiguration,omitempty" tf:"experiment_report_configuration,omitempty"`
+
 	// Experiment Template ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -219,10 +332,15 @@ type ExperimentTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	ExperimentOptions *ExperimentOptionsParameters `json:"experimentOptions,omitempty" tf:"experiment_options,omitempty"`
 
+	// The configuration for experiment reporting. See below.
+	// +kubebuilder:validation:Optional
+	ExperimentReportConfiguration *ExperimentReportConfigurationParameters `json:"experimentReportConfiguration,omitempty" tf:"experiment_report_configuration,omitempty"`
+
 	// The configuration for experiment logging. See below.
 	// +kubebuilder:validation:Optional
 	LogConfiguration *LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -382,7 +500,7 @@ type LogConfigurationInitParameters struct {
 	LogSchemaVersion *float64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
 
 	// The configuration for experiment logging to Amazon S3. See below.
-	S3Configuration *S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *LogConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type LogConfigurationObservation struct {
@@ -394,7 +512,7 @@ type LogConfigurationObservation struct {
 	LogSchemaVersion *float64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
 
 	// The configuration for experiment logging to Amazon S3. See below.
-	S3Configuration *S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *LogConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type LogConfigurationParameters struct {
@@ -408,6 +526,54 @@ type LogConfigurationParameters struct {
 	LogSchemaVersion *float64 `json:"logSchemaVersion" tf:"log_schema_version,omitempty"`
 
 	// The configuration for experiment logging to Amazon S3. See below.
+	// +kubebuilder:validation:Optional
+	S3Configuration *LogConfigurationS3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type LogConfigurationS3ConfigurationInitParameters struct {
+
+	// The name of the destination bucket.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The bucket prefix.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type LogConfigurationS3ConfigurationObservation struct {
+
+	// The name of the destination bucket.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The bucket prefix.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type LogConfigurationS3ConfigurationParameters struct {
+
+	// The name of the destination bucket.
+	// +kubebuilder:validation:Optional
+	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+
+	// The bucket prefix.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type OutputsInitParameters struct {
+
+	// The data sources for the experiment report. See below.
+	S3Configuration *S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type OutputsObservation struct {
+
+	// The data sources for the experiment report. See below.
+	S3Configuration *S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type OutputsParameters struct {
+
+	// The data sources for the experiment report. See below.
 	// +kubebuilder:validation:Optional
 	S3Configuration *S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
@@ -473,7 +639,16 @@ type ResourceTagParameters struct {
 type S3ConfigurationInitParameters struct {
 
 	// The name of the destination bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The bucket prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -491,8 +666,17 @@ type S3ConfigurationObservation struct {
 type S3ConfigurationParameters struct {
 
 	// The name of the destination bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The bucket prefix.
 	// +kubebuilder:validation:Optional

@@ -921,6 +921,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ConnectAttachment is the Schema for the ConnectAttachments API.
+          Manages an AWS Network Manager Connect Attachment.
         properties:
           apiVersion:
             description: |-
@@ -959,8 +960,8 @@ spec:
               forProvider:
                 properties:
                   coreNetworkId:
-                    description: The ID of a core network where you want to create
-                      the attachment.
+                    description: ID of a core network where you want to create the
+                      attachment.
                     type: string
                   coreNetworkIdRef:
                     description: Reference to a CoreNetwork in networkmanager to populate
@@ -1039,7 +1040,7 @@ spec:
                         type: object
                     type: object
                   edgeLocation:
-                    description: The Region where the edge is located.
+                    description: Region where the edge is located.
                     type: string
                   edgeLocationRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -1121,8 +1122,8 @@ spec:
                     description: Options block. See options for more information.
                     properties:
                       protocol:
-                        description: The protocol used for the attachment connection.
-                          Possible values are GRE and NO_ENCAP.
+                        description: 'Protocol used for the attachment connection.
+                          Valid values: GRE, NO_ENCAP.'
                         type: string
                     type: object
                   region:
@@ -1136,7 +1137,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   transportAttachmentId:
-                    description: The ID of the attachment between the two connections.
+                    description: ID of the attachment between the two connections.
                     type: string
                   transportAttachmentIdRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -1231,8 +1232,8 @@ spec:
                   autoscaler.
                 properties:
                   coreNetworkId:
-                    description: The ID of a core network where you want to create
-                      the attachment.
+                    description: ID of a core network where you want to create the
+                      attachment.
                     type: string
                   coreNetworkIdRef:
                     description: Reference to a CoreNetwork in networkmanager to populate
@@ -1311,7 +1312,7 @@ spec:
                         type: object
                     type: object
                   edgeLocation:
-                    description: The Region where the edge is located.
+                    description: Region where the edge is located.
                     type: string
                   edgeLocationRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -1393,8 +1394,8 @@ spec:
                     description: Options block. See options for more information.
                     properties:
                       protocol:
-                        description: The protocol used for the attachment connection.
-                          Possible values are GRE and NO_ENCAP.
+                        description: 'Protocol used for the attachment connection.
+                          Valid values: GRE, NO_ENCAP.'
                         type: string
                     type: object
                   tags:
@@ -1404,7 +1405,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   transportAttachmentId:
-                    description: The ID of the attachment between the two connections.
+                    description: ID of the attachment between the two connections.
                     type: string
                   transportAttachmentIdRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -1661,49 +1662,48 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the attachment.
+                    description: ARN of the attachment.
                     type: string
                   attachmentId:
-                    description: The ID of the attachment.
+                    description: ID of the attachment.
                     type: string
                   attachmentPolicyRuleNumber:
-                    description: The policy rule number associated with the attachment.
+                    description: Policy rule number associated with the attachment.
                     type: number
                   attachmentType:
-                    description: The type of attachment.
+                    description: Type of attachment.
                     type: string
                   coreNetworkArn:
-                    description: The ARN of a core network.
+                    description: ARN of a core network.
                     type: string
                   coreNetworkId:
-                    description: The ID of a core network where you want to create
-                      the attachment.
+                    description: ID of a core network where you want to create the
+                      attachment.
                     type: string
                   edgeLocation:
-                    description: The Region where the edge is located.
+                    description: Region where the edge is located.
                     type: string
                   id:
-                    description: The ID of the attachment.
                     type: string
                   options:
                     description: Options block. See options for more information.
                     properties:
                       protocol:
-                        description: The protocol used for the attachment connection.
-                          Possible values are GRE and NO_ENCAP.
+                        description: 'Protocol used for the attachment connection.
+                          Valid values: GRE, NO_ENCAP.'
                         type: string
                     type: object
                   ownerAccountId:
-                    description: The ID of the attachment account owner.
+                    description: ID of the attachment account owner.
                     type: string
                   resourceArn:
-                    description: The attachment resource ARN.
+                    description: Attachment resource ARN.
                     type: string
                   segmentName:
-                    description: The name of the segment attachment.
+                    description: Name of the segment attachment.
                     type: string
                   state:
-                    description: The state of the attachment.
+                    description: State of the attachment.
                     type: string
                   tags:
                     additionalProperties:
@@ -1714,13 +1714,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   transportAttachmentId:
-                    description: The ID of the attachment between the two connections.
+                    description: ID of the attachment between the two connections.
                     type: string
                 type: object
               conditions:

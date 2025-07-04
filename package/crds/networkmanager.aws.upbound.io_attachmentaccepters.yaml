@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AttachmentAccepter is the Schema for the AttachmentAccepters
-          API.
+          API. Manages an AWS Network Manager Attachment Accepter.
         properties:
           apiVersion:
             description: |-
@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   attachmentId:
-                    description: The ID of the attachment.
+                    description: ID of the attachment.
                     type: string
                   attachmentIdRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -153,8 +153,8 @@ spec:
                         type: object
                     type: object
                   attachmentType:
-                    description: The type of attachment. Valid values can be found
-                      in the AWS Documentation
+                    description: 'Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY,
+                      SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.'
                     type: string
                   attachmentTypeRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -253,7 +253,7 @@ spec:
                   autoscaler.
                 properties:
                   attachmentId:
-                    description: The ID of the attachment.
+                    description: ID of the attachment.
                     type: string
                   attachmentIdRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -332,8 +332,8 @@ spec:
                         type: object
                     type: object
                   attachmentType:
-                    description: The type of attachment. Valid values can be found
-                      in the AWS Documentation
+                    description: 'Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY,
+                      SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.'
                     type: string
                   attachmentTypeRef:
                     description: Reference to a VPCAttachment in networkmanager to
@@ -585,46 +585,46 @@ spec:
               atProvider:
                 properties:
                   attachmentId:
-                    description: The ID of the attachment.
+                    description: ID of the attachment.
                     type: string
                   attachmentPolicyRuleNumber:
-                    description: The policy rule number associated with the attachment.
+                    description: Policy rule number associated with the attachment.
                     type: number
                   attachmentType:
-                    description: The type of attachment. Valid values can be found
-                      in the AWS Documentation
+                    description: 'Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY,
+                      SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.'
                     type: string
                   coreNetworkArn:
-                    description: The ARN of a core network.
+                    description: ARN of the core network.
                     type: string
                   coreNetworkId:
-                    description: The id of a core network.
+                    description: ID of the core network.
                     type: string
                   edgeLocation:
-                    description: The Region where the edge is located. This is returned
-                      for all attachment types except a Direct Connect gateway attachment,
-                      which instead returns edge_locations.
+                    description: Region where the edge is located. This is returned
+                      for all attachment types except Direct Connect gateway attachments,
+                      which instead return edge_locations.
                     type: string
                   edgeLocations:
-                    description: The edge locations that the Direct Connect gateway
-                      is associated with. This is returned only for Direct Connect
-                      gateway attachments. All other attachment types return edge_location
+                    description: Edge locations that the Direct Connect gateway is
+                      associated with. This is returned only for Direct Connect gateway
+                      attachments. All other attachment types return edge_location.
                     items:
                       type: string
                     type: array
                   id:
                     type: string
                   ownerAccountId:
-                    description: The ID of the attachment account owner.
+                    description: ID of the attachment account owner.
                     type: string
                   resourceArn:
-                    description: The attachment resource ARN.
+                    description: Attachment resource ARN.
                     type: string
                   segmentName:
-                    description: The name of the segment attachment.
+                    description: Name of the segment attachment.
                     type: string
                   state:
-                    description: The state of the attachment.
+                    description: State of the attachment.
                     type: string
                 type: object
               conditions:

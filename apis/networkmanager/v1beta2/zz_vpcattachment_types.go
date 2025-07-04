@@ -15,7 +15,7 @@ import (
 
 type VPCAttachmentInitParameters struct {
 
-	// The ID of a core network for the VPC attachment.
+	// ID of a core network for the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
@@ -27,10 +27,10 @@ type VPCAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
-	// Options for the VPC attachment.
+	// Options for the VPC attachment. See below.
 	Options *VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
-	// The subnet ARN of the VPC attachment.
+	// Subnet ARNs of the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +listType=set
@@ -48,7 +48,7 @@ type VPCAttachmentInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ARN of the VPC.
+	// ARN of the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
@@ -64,43 +64,43 @@ type VPCAttachmentInitParameters struct {
 
 type VPCAttachmentObservation struct {
 
-	// The ARN of the attachment.
+	// ARN of the attachment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The policy rule number associated with the attachment.
+	// Policy rule number associated with the attachment.
 	AttachmentPolicyRuleNumber *float64 `json:"attachmentPolicyRuleNumber,omitempty" tf:"attachment_policy_rule_number,omitempty"`
 
-	// The type of attachment.
+	// Type of attachment.
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
-	// The ARN of a core network.
+	// ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
-	// The ID of a core network for the VPC attachment.
+	// ID of a core network for the VPC attachment.
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
-	// The Region where the edge is located.
+	// Region where the edge is located.
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
 
-	// The ID of the attachment.
+	// ID of the attachment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Options for the VPC attachment.
+	// Options for the VPC attachment. See below.
 	Options *VPCAttachmentOptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
 
-	// The ID of the attachment account owner.
+	// ID of the attachment account owner.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
-	// The attachment resource ARN.
+	// Attachment resource ARN.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The name of the segment attachment.
+	// Name of the segment attachment.
 	SegmentName *string `json:"segmentName,omitempty" tf:"segment_name,omitempty"`
 
-	// The state of the attachment.
+	// State of the attachment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// The subnet ARN of the VPC attachment.
+	// Subnet ARNs of the VPC attachment.
 	// +listType=set
 	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
 
@@ -108,55 +108,46 @@ type VPCAttachmentObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The ARN of the VPC.
+	// ARN of the VPC.
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
 }
 
 type VPCAttachmentOptionsInitParameters struct {
 
-	// Indicates whether appliance mode is supported.
-	// If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
-	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// Whether to enable appliance mode support. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
-	// Indicates whether IPv6 is supported.
-	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// Whether to enable IPv6 support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentOptionsObservation struct {
 
-	// Indicates whether appliance mode is supported.
-	// If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
-	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// Whether to enable appliance mode support. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
-	// Indicates whether IPv6 is supported.
-	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// Whether to enable IPv6 support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentOptionsParameters struct {
 
-	// Indicates whether appliance mode is supported.
-	// If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
-	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// Whether to enable appliance mode support. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	// +kubebuilder:validation:Optional
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
-	// Indicates whether IPv6 is supported.
-	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// Whether to enable IPv6 support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	// +kubebuilder:validation:Optional
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentParameters struct {
 
-	// The ID of a core network for the VPC attachment.
+	// ID of a core network for the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
 	// +kubebuilder:validation:Optional
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
@@ -169,7 +160,7 @@ type VPCAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
-	// Options for the VPC attachment.
+	// Options for the VPC attachment. See below.
 	// +kubebuilder:validation:Optional
 	Options *VPCAttachmentOptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
@@ -178,7 +169,7 @@ type VPCAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The subnet ARN of the VPC attachment.
+	// Subnet ARNs of the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -198,7 +189,7 @@ type VPCAttachmentParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ARN of the VPC.
+	// ARN of the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -239,7 +230,7 @@ type VPCAttachmentStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// VPCAttachment is the Schema for the VPCAttachments API.
+// VPCAttachment is the Schema for the VPCAttachments API. Manages a Network Manager VPC attachment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

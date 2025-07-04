@@ -38,12 +38,6 @@ type ClusterInitParameters struct {
 	// The name of the parameter group to be associated with this cluster.
 	ClusterParameterGroupName *string `json:"clusterParameterGroupName,omitempty" tf:"cluster_parameter_group_name,omitempty"`
 
-	// The public key for the cluster
-	ClusterPublicKey *string `json:"clusterPublicKey,omitempty" tf:"cluster_public_key,omitempty"`
-
-	// The specific revision number of the database in the cluster
-	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
 
@@ -75,10 +69,8 @@ type ClusterInitParameters struct {
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
 
 	// If true , the data in the cluster is encrypted at rest.
-	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
-
-	// The connection endpoint
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	// Default is true.
+	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// If true , enhanced VPC routing is enabled.
 	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
@@ -113,14 +105,11 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Logging, documented below.
-	Logging []LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
-
 	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
-	// Conflicts with master_password.
+	// Conflicts with master_password and master_password_wo.
 	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
 	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
 
@@ -131,11 +120,21 @@ type ClusterInitParameters struct {
 	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
 
 	// Password for the master DB user.
-	// Conflicts with manage_master_password.
-	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Conflicts with manage_master_password and master_password_wo.
+	// One of master_password, master_password_wo or manage_master_password is required unless snapshot_identifier is provided.
 	// Note that this may show up in logs, and it will be stored in the state file.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user.
+	// Conflicts with manage_master_password and master_password.
+	// One of master_password_wo, master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Note that this may show up in logs.
+	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
+	MasterPasswordWoSecretRef *v1.SecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -162,7 +161,7 @@ type ClusterInitParameters struct {
 	// Format: ddd:hh24:mi-ddd:hh24:mi
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// If true, the cluster can be accessed from a public network. Default is true.
+	// If true, the cluster can be accessed from a public network. Default is false.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
 	// Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false.
@@ -173,9 +172,6 @@ type ClusterInitParameters struct {
 
 	// The name of the cluster the source snapshot was created from.
 	SnapshotClusterIdentifier *string `json:"snapshotClusterIdentifier,omitempty" tf:"snapshot_cluster_identifier,omitempty"`
-
-	// Configuration of automatic copy of snapshots from one region to another. Documented below.
-	SnapshotCopy []SnapshotCopyInitParameters `json:"snapshotCopy,omitempty" tf:"snapshot_copy,omitempty"`
 
 	// The name of the snapshot from which to create the new cluster.  Conflicts with snapshot_arn.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
@@ -282,7 +278,8 @@ type ClusterObservation struct {
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
 
 	// If true , the data in the cluster is encrypted at rest.
-	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+	// Default is true.
+	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// The connection endpoint
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
@@ -303,14 +300,11 @@ type ClusterObservation struct {
 	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Logging, documented below.
-	Logging []LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
-
 	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
-	// Conflicts with master_password.
+	// Conflicts with master_password and master_password_wo.
 	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
 	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
 
@@ -322,6 +316,9 @@ type ClusterObservation struct {
 
 	// ID of the KMS key used to encrypt the cluster admin credentials secret.
 	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -348,7 +345,7 @@ type ClusterObservation struct {
 	// Format: ddd:hh24:mi-ddd:hh24:mi
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// If true, the cluster can be accessed from a public network. Default is true.
+	// If true, the cluster can be accessed from a public network. Default is false.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
 	// Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false.
@@ -359,9 +356,6 @@ type ClusterObservation struct {
 
 	// The name of the cluster the source snapshot was created from.
 	SnapshotClusterIdentifier *string `json:"snapshotClusterIdentifier,omitempty" tf:"snapshot_cluster_identifier,omitempty"`
-
-	// Configuration of automatic copy of snapshots from one region to another. Documented below.
-	SnapshotCopy []SnapshotCopyObservation `json:"snapshotCopy,omitempty" tf:"snapshot_copy,omitempty"`
 
 	// The name of the snapshot from which to create the new cluster.  Conflicts with snapshot_arn.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
@@ -411,14 +405,6 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterParameterGroupName *string `json:"clusterParameterGroupName,omitempty" tf:"cluster_parameter_group_name,omitempty"`
 
-	// The public key for the cluster
-	// +kubebuilder:validation:Optional
-	ClusterPublicKey *string `json:"clusterPublicKey,omitempty" tf:"cluster_public_key,omitempty"`
-
-	// The specific revision number of the database in the cluster
-	// +kubebuilder:validation:Optional
-	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	// +kubebuilder:validation:Optional
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
@@ -456,12 +442,9 @@ type ClusterParameters struct {
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
 
 	// If true , the data in the cluster is encrypted at rest.
+	// Default is true.
 	// +kubebuilder:validation:Optional
-	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
-
-	// The connection endpoint
-	// +kubebuilder:validation:Optional
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// If true , enhanced VPC routing is enabled.
 	// +kubebuilder:validation:Optional
@@ -500,16 +483,12 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Logging, documented below.
-	// +kubebuilder:validation:Optional
-	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
-
 	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
 	// +kubebuilder:validation:Optional
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
-	// Conflicts with master_password.
+	// Conflicts with master_password and master_password_wo.
 	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
 	// +kubebuilder:validation:Optional
 	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
@@ -523,12 +502,24 @@ type ClusterParameters struct {
 	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
 
 	// Password for the master DB user.
-	// Conflicts with manage_master_password.
-	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Conflicts with manage_master_password and master_password_wo.
+	// One of master_password, master_password_wo or manage_master_password is required unless snapshot_identifier is provided.
 	// Note that this may show up in logs, and it will be stored in the state file.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user.
+	// Conflicts with manage_master_password and master_password.
+	// One of master_password_wo, master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Note that this may show up in logs.
+	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoSecretRef *v1.SecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
 	// +kubebuilder:validation:Optional
@@ -562,10 +553,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// If true, the cluster can be accessed from a public network. Default is true.
+	// If true, the cluster can be accessed from a public network. Default is false.
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -582,10 +574,6 @@ type ClusterParameters struct {
 	// The name of the cluster the source snapshot was created from.
 	// +kubebuilder:validation:Optional
 	SnapshotClusterIdentifier *string `json:"snapshotClusterIdentifier,omitempty" tf:"snapshot_cluster_identifier,omitempty"`
-
-	// Configuration of automatic copy of snapshots from one region to another. Documented below.
-	// +kubebuilder:validation:Optional
-	SnapshotCopy []SnapshotCopyParameters `json:"snapshotCopy,omitempty" tf:"snapshot_copy,omitempty"`
 
 	// The name of the snapshot from which to create the new cluster.  Conflicts with snapshot_arn.
 	// +kubebuilder:validation:Optional
@@ -611,110 +599,6 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
-}
-
-type LoggingInitParameters struct {
-
-	// The name of an existing S3 bucket where the log files are to be stored. Must be in the same region as the cluster and the cluster must have read bucket and put object permissions.
-	// For more information on the permissions required for the bucket, please read the AWS documentation
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
-	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
-
-	// The log destination type. An enum with possible values of s3 and cloudwatch.
-	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
-
-	// The collection of exported log types. Log types include the connection log, user log and user activity log. Required when log_destination_type is cloudwatch. Valid log types are connectionlog, userlog, and useractivitylog.
-	// +listType=set
-	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
-
-	// The prefix applied to the log file names.
-	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
-}
-
-type LoggingObservation struct {
-
-	// The name of an existing S3 bucket where the log files are to be stored. Must be in the same region as the cluster and the cluster must have read bucket and put object permissions.
-	// For more information on the permissions required for the bucket, please read the AWS documentation
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
-	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
-
-	// The log destination type. An enum with possible values of s3 and cloudwatch.
-	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
-
-	// The collection of exported log types. Log types include the connection log, user log and user activity log. Required when log_destination_type is cloudwatch. Valid log types are connectionlog, userlog, and useractivitylog.
-	// +listType=set
-	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
-
-	// The prefix applied to the log file names.
-	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
-}
-
-type LoggingParameters struct {
-
-	// The name of an existing S3 bucket where the log files are to be stored. Must be in the same region as the cluster and the cluster must have read bucket and put object permissions.
-	// For more information on the permissions required for the bucket, please read the AWS documentation
-	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
-	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
-	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable" tf:"enable,omitempty"`
-
-	// The log destination type. An enum with possible values of s3 and cloudwatch.
-	// +kubebuilder:validation:Optional
-	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
-
-	// The collection of exported log types. Log types include the connection log, user log and user activity log. Required when log_destination_type is cloudwatch. Valid log types are connectionlog, userlog, and useractivitylog.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
-
-	// The prefix applied to the log file names.
-	// +kubebuilder:validation:Optional
-	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
-}
-
-type SnapshotCopyInitParameters struct {
-
-	// The destination region that you want to copy snapshots to.
-	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
-
-	// The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
-	GrantName *string `json:"grantName,omitempty" tf:"grant_name,omitempty"`
-
-	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
-}
-
-type SnapshotCopyObservation struct {
-
-	// The destination region that you want to copy snapshots to.
-	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
-
-	// The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
-	GrantName *string `json:"grantName,omitempty" tf:"grant_name,omitempty"`
-
-	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
-}
-
-type SnapshotCopyParameters struct {
-
-	// The destination region that you want to copy snapshots to.
-	// +kubebuilder:validation:Optional
-	DestinationRegion *string `json:"destinationRegion" tf:"destination_region,omitempty"`
-
-	// The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
-	// +kubebuilder:validation:Optional
-	GrantName *string `json:"grantName,omitempty" tf:"grant_name,omitempty"`
-
-	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
-	// +kubebuilder:validation:Optional
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

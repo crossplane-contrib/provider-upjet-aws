@@ -15,35 +15,36 @@ import (
 
 type LBStickinessPolicyInitParameters struct {
 
-	// The cookie duration in seconds. This determines the length of the session stickiness.
+	// Cookie duration in seconds. This determines the length of the session stickiness.
 	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
-	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
+	// Whether to enable session stickiness for the load balancer.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type LBStickinessPolicyObservation struct {
 
-	// The cookie duration in seconds. This determines the length of the session stickiness.
+	// Cookie duration in seconds. This determines the length of the session stickiness.
 	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
-	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
+	// Whether to enable session stickiness for the load balancer.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The name used for this load balancer (matches lb_name).
+	// Name used for this load balancer (matches lb_name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type LBStickinessPolicyParameters struct {
 
-	// The cookie duration in seconds. This determines the length of the session stickiness.
+	// Cookie duration in seconds. This determines the length of the session stickiness.
 	// +kubebuilder:validation:Optional
 	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
-	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
+	// Whether to enable session stickiness for the load balancer.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -77,7 +78,7 @@ type LBStickinessPolicyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LBStickinessPolicy is the Schema for the LBStickinessPolicys API. Configures Session Stickiness for a Lightsail Load Balancer
+// LBStickinessPolicy is the Schema for the LBStickinessPolicys API. Manages session stickiness for a Lightsail Load Balancer.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

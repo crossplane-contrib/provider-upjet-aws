@@ -15,7 +15,7 @@ import (
 
 type IdentityProviderConfigInitParameters struct {
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -40,7 +40,7 @@ type IdentityProviderConfigObservation struct {
 	// Amazon Resource Name (ARN) of the EKS Identity Provider Configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// EKS Cluster name and EKS Identity Provider Configuration name separated by a colon (:).
@@ -63,7 +63,7 @@ type IdentityProviderConfigObservation struct {
 
 type IdentityProviderConfigOidcInitParameters struct {
 
-	// –  Client ID for the OpenID Connect identity provider.
+	// Client ID for the OpenID Connect identity provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The JWT claim that the provider will use to return groups.
@@ -88,7 +88,7 @@ type IdentityProviderConfigOidcInitParameters struct {
 
 type IdentityProviderConfigOidcObservation struct {
 
-	// –  Client ID for the OpenID Connect identity provider.
+	// Client ID for the OpenID Connect identity provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The JWT claim that the provider will use to return groups.
@@ -113,7 +113,7 @@ type IdentityProviderConfigOidcObservation struct {
 
 type IdentityProviderConfigOidcParameters struct {
 
-	// –  Client ID for the OpenID Connect identity provider.
+	// Client ID for the OpenID Connect identity provider.
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
@@ -145,7 +145,7 @@ type IdentityProviderConfigOidcParameters struct {
 
 type IdentityProviderConfigParameters struct {
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -162,6 +162,7 @@ type IdentityProviderConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Oidc *IdentityProviderConfigOidcParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

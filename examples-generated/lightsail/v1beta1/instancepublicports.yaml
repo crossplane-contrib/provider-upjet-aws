@@ -4,17 +4,22 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/instancepublicports
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     instanceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     portInfo:
     - fromPort: 80
       protocol: tcp
       toPort: 80
+    - cidrs:
+      - 192.168.1.0/24
+      fromPort: 443
+      protocol: tcp
+      toPort: 443
     region: us-west-1
 
 ---
@@ -25,8 +30,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/instancepublicports
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     availabilityZone: ${data.aws_availability_zones.available.names[0]}

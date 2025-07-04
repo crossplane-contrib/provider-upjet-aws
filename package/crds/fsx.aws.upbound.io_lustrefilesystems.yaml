@@ -1556,6 +1556,17 @@ spec:
                       system. Valid values are LZ4 and NONE. Default value is NONE.
                       Unsetting this value reverts the compression type back to NONE.
                     type: string
+                  dataReadCacheConfiguration:
+                    properties:
+                      size:
+                        description: Size of the file system's SSD read cache, in
+                          gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
+                        type: number
+                      sizingMode:
+                        description: Sizing mode for the cache. Valud values are NO_CACHE,
+                          USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+                        type: string
+                    type: object
                   deploymentType:
                     description: '- The filesystem deployment type. One of: SCRATCH_1,
                       SCRATCH_2, PERSISTENT_1, PERSISTENT_2.'
@@ -1719,11 +1730,14 @@ spec:
                         description: Amount of IOPS provisioned for metadata. This
                           parameter should only be used when the mode is set to USER_PROVISIONED.
                           Valid Values are 1500,3000,6000 and 12000 through 192000
-                          in increments of 12000.
+                          in increments of 12000. Valid values for INTELLIGENT_TIERING
+                          storage type are 6000 or 12000.
                         type: number
                       mode:
                         description: Mode for the metadata configuration of the file
                           system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+                          Must be set to USER_PROVISIONED for INTELLIGENT_TIERING
+                          storage type.
                         type: string
                     type: object
                   perUnitStorageThroughput:
@@ -1736,8 +1750,9 @@ spec:
                       and  SSD storage_type are 125, 250, 500, 1000.'
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootSquashConfiguration:
                     description: The Lustre root squash configuration used when creating
@@ -1869,9 +1884,11 @@ spec:
                       backup.
                     type: number
                   storageType:
-                    description: '- The filesystem storage type. Either SSD or HDD,
-                      defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
-                      types.'
+                    description: '- The filesystem storage type. One of SSD, HDD or
+                      INTELLIGENT_TIERING, defaults to SSD. HDD is only supported
+                      on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires
+                      data_read_cache_configuration and metadata_configuration to
+                      be set and is only supported for PERSISTENT_2 deployment types.'
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -1965,6 +1982,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputCapacity:
+                    description: Throughput in MBps required for the INTELLIGENT_TIERING
+                      storage type. Must be 4000 or multiples of 4000.
+                    type: number
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -2018,6 +2039,17 @@ spec:
                       system. Valid values are LZ4 and NONE. Default value is NONE.
                       Unsetting this value reverts the compression type back to NONE.
                     type: string
+                  dataReadCacheConfiguration:
+                    properties:
+                      size:
+                        description: Size of the file system's SSD read cache, in
+                          gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
+                        type: number
+                      sizingMode:
+                        description: Sizing mode for the cache. Valud values are NO_CACHE,
+                          USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+                        type: string
+                    type: object
                   deploymentType:
                     description: '- The filesystem deployment type. One of: SCRATCH_1,
                       SCRATCH_2, PERSISTENT_1, PERSISTENT_2.'
@@ -2181,11 +2213,14 @@ spec:
                         description: Amount of IOPS provisioned for metadata. This
                           parameter should only be used when the mode is set to USER_PROVISIONED.
                           Valid Values are 1500,3000,6000 and 12000 through 192000
-                          in increments of 12000.
+                          in increments of 12000. Valid values for INTELLIGENT_TIERING
+                          storage type are 6000 or 12000.
                         type: number
                       mode:
                         description: Mode for the metadata configuration of the file
                           system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+                          Must be set to USER_PROVISIONED for INTELLIGENT_TIERING
+                          storage type.
                         type: string
                     type: object
                   perUnitStorageThroughput:
@@ -2327,9 +2362,11 @@ spec:
                       backup.
                     type: number
                   storageType:
-                    description: '- The filesystem storage type. Either SSD or HDD,
-                      defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
-                      types.'
+                    description: '- The filesystem storage type. One of SSD, HDD or
+                      INTELLIGENT_TIERING, defaults to SSD. HDD is only supported
+                      on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires
+                      data_read_cache_configuration and metadata_configuration to
+                      be set and is only supported for PERSISTENT_2 deployment types.'
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -2423,6 +2460,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputCapacity:
+                    description: Throughput in MBps required for the INTELLIGENT_TIERING
+                      storage type. Must be 4000 or multiples of 4000.
+                    type: number
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -2636,6 +2677,17 @@ spec:
                       system. Valid values are LZ4 and NONE. Default value is NONE.
                       Unsetting this value reverts the compression type back to NONE.
                     type: string
+                  dataReadCacheConfiguration:
+                    properties:
+                      size:
+                        description: Size of the file system's SSD read cache, in
+                          gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
+                        type: number
+                      sizingMode:
+                        description: Sizing mode for the cache. Valud values are NO_CACHE,
+                          USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
+                        type: string
+                    type: object
                   deploymentType:
                     description: '- The filesystem deployment type. One of: SCRATCH_1,
                       SCRATCH_2, PERSISTENT_1, PERSISTENT_2.'
@@ -2731,11 +2783,14 @@ spec:
                         description: Amount of IOPS provisioned for metadata. This
                           parameter should only be used when the mode is set to USER_PROVISIONED.
                           Valid Values are 1500,3000,6000 and 12000 through 192000
-                          in increments of 12000.
+                          in increments of 12000. Valid values for INTELLIGENT_TIERING
+                          storage type are 6000 or 12000.
                         type: number
                       mode:
                         description: Mode for the metadata configuration of the file
                           system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+                          Must be set to USER_PROVISIONED for INTELLIGENT_TIERING
+                          storage type.
                         type: string
                     type: object
                   mountName:
@@ -2813,9 +2868,11 @@ spec:
                       backup.
                     type: number
                   storageType:
-                    description: '- The filesystem storage type. Either SSD or HDD,
-                      defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
-                      types.'
+                    description: '- The filesystem storage type. One of SSD, HDD or
+                      INTELLIGENT_TIERING, defaults to SSD. HDD is only supported
+                      on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires
+                      data_read_cache_configuration and metadata_configuration to
+                      be set and is only supported for PERSISTENT_2 deployment types.'
                     type: string
                   subnetIds:
                     description: A list of IDs for the subnets that the file system
@@ -2839,6 +2896,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputCapacity:
+                    description: Throughput in MBps required for the INTELLIGENT_TIERING
+                      storage type. Must be 4000 or multiples of 4000.
+                    type: number
                   vpcId:
                     description: Identifier of the Virtual Private Cloud for the file
                       system.

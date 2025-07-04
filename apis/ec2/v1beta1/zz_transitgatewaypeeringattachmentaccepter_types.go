@@ -41,6 +41,7 @@ type TransitGatewayPeeringAttachmentAccepterObservation struct {
 	// Identifier of the AWS account that owns the EC2 TGW peering.
 	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
 	// Identifier of EC2 Transit Gateway to peer with.
@@ -63,6 +64,7 @@ type TransitGatewayPeeringAttachmentAccepterObservation struct {
 
 type TransitGatewayPeeringAttachmentAccepterParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

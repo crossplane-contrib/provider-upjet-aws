@@ -15,28 +15,29 @@ import (
 
 type DomainInitParameters struct {
 
-	// The name of the Lightsail domain to manage
+	// Name of the Lightsail domain to manage.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 }
 
 type DomainObservation struct {
 
-	// The ARN of the Lightsail domain
+	// ARN of the Lightsail domain.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The name of the Lightsail domain to manage
+	// Name of the Lightsail domain to manage.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The name used for this domain
+	// Name used for this domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DomainParameters struct {
 
-	// The name of the Lightsail domain to manage
+	// Name of the Lightsail domain to manage.
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -70,7 +71,7 @@ type DomainStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Domain is the Schema for the Domains API. Provides an Lightsail Domain
+// Domain is the Schema for the Domains API. Manages a Lightsail domain for DNS management.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

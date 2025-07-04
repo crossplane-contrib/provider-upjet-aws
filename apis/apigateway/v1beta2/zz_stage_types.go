@@ -130,7 +130,7 @@ type StageInitParameters struct {
 	// Description of the stage.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version of the associated API documentation
+	// Version of the associated API documentation.
 	DocumentationVersion *string `json:"documentationVersion,omitempty" tf:"documentation_version,omitempty"`
 
 	// ID of the associated REST API
@@ -153,7 +153,7 @@ type StageInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Map that defines the stage variables
+	// Map that defines the stage variables.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
@@ -187,7 +187,7 @@ type StageObservation struct {
 	// Description of the stage.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version of the associated API documentation
+	// Version of the associated API documentation.
 	DocumentationVersion *string `json:"documentationVersion,omitempty" tf:"documentation_version,omitempty"`
 
 	// Execution ARN to be used in lambda_permission's source_arn
@@ -216,7 +216,7 @@ type StageObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Map that defines the stage variables
+	// Map that defines the stage variables.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
@@ -267,10 +267,11 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version of the associated API documentation
+	// Version of the associated API documentation.
 	// +kubebuilder:validation:Optional
 	DocumentationVersion *string `json:"documentationVersion,omitempty" tf:"documentation_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -299,7 +300,7 @@ type StageParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Map that defines the stage variables
+	// Map that defines the stage variables.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`

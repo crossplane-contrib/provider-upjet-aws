@@ -4,11 +4,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/certificate
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    domainName: testdomain.com
+    domainName: example.com
     region: us-west-1
     subjectAlternativeNames:
-    - www.testdomain.com
+    - www.example.com

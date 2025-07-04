@@ -161,7 +161,7 @@ type DataFormatConversionConfigurationParameters struct {
 
 type DeliveryStreamInitParameters struct {
 
-	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
+	// This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
@@ -218,7 +218,7 @@ type DeliveryStreamObservation struct {
 	// The Amazon Resource Name (ARN) specifying the Stream
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
+	// This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
@@ -278,7 +278,7 @@ type DeliveryStreamObservation struct {
 
 type DeliveryStreamParameters struct {
 
-	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
+	// This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
@@ -325,7 +325,7 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	RedshiftConfiguration *RedshiftConfigurationParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
-	// If you don't specify an AWS Region, the default is the current region.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -1932,6 +1932,9 @@ type MskSourceConfigurationInitParameters struct {
 	// The ARN of the Amazon MSK cluster.
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
 
+	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
+
 	// The topic name within the Amazon MSK cluster.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
@@ -1943,6 +1946,9 @@ type MskSourceConfigurationObservation struct {
 
 	// The ARN of the Amazon MSK cluster.
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
+
+	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
 
 	// The topic name within the Amazon MSK cluster.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
@@ -1957,6 +1963,10 @@ type MskSourceConfigurationParameters struct {
 	// The ARN of the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional
 	MskClusterArn *string `json:"mskClusterArn" tf:"msk_cluster_arn,omitempty"`
+
+	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	// +kubebuilder:validation:Optional
+	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
 
 	// The topic name within the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional

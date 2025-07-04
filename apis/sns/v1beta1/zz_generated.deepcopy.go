@@ -713,6 +713,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FifoThroughputScope != nil {
+		in, out := &in.FifoThroughputScope, &out.FifoThroughputScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.FifoTopic != nil {
 		in, out := &in.FifoTopic, &out.FifoTopic
 		*out = new(bool)
@@ -986,6 +991,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FifoThroughputScope != nil {
+		in, out := &in.FifoThroughputScope, &out.FifoThroughputScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.FifoTopic != nil {
 		in, out := &in.FifoTopic, &out.FifoTopic
 		*out = new(bool)
@@ -1180,6 +1190,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
+		**out = **in
+	}
+	if in.FifoThroughputScope != nil {
+		in, out := &in.FifoThroughputScope, &out.FifoThroughputScope
 		*out = new(string)
 		**out = **in
 	}

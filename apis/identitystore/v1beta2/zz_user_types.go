@@ -399,7 +399,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	ProfileURL *string `json:"profileUrl,omitempty" tf:"profile_url,omitempty"`
 
-	// The region of the address.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

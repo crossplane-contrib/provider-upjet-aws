@@ -1220,6 +1220,11 @@ func (in *TaskInitParameters) DeepCopyInto(out *TaskInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.TaskMode != nil {
+		in, out := &in.TaskMode, &out.TaskMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.TaskReportConfig != nil {
 		in, out := &in.TaskReportConfig, &out.TaskReportConfig
 		*out = new(TaskReportConfigInitParameters)
@@ -1354,6 +1359,11 @@ func (in *TaskObservation) DeepCopyInto(out *TaskObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.TaskMode != nil {
+		in, out := &in.TaskMode, &out.TaskMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.TaskReportConfig != nil {
 		in, out := &in.TaskReportConfig, &out.TaskReportConfig
 		*out = new(TaskReportConfigObservation)
@@ -1464,6 +1474,11 @@ func (in *TaskParameters) DeepCopyInto(out *TaskParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TaskMode != nil {
+		in, out := &in.TaskMode, &out.TaskMode
+		*out = new(string)
+		**out = **in
 	}
 	if in.TaskReportConfig != nil {
 		in, out := &in.TaskReportConfig, &out.TaskReportConfig

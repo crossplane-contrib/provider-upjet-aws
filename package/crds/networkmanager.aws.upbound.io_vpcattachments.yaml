@@ -942,7 +942,8 @@ spec:
     name: v1beta2
     schema:
       openAPIV3Schema:
-        description: VPCAttachment is the Schema for the VPCAttachments API.
+        description: VPCAttachment is the Schema for the VPCAttachments API. Manages
+          a Network Manager VPC attachment.
         properties:
           apiVersion:
             description: |-
@@ -981,7 +982,7 @@ spec:
               forProvider:
                 properties:
                   coreNetworkId:
-                    description: The ID of a core network for the VPC attachment.
+                    description: ID of a core network for the VPC attachment.
                     type: string
                   coreNetworkIdRef:
                     description: Reference to a CoreNetwork in networkmanager to populate
@@ -1060,18 +1061,19 @@ spec:
                         type: object
                     type: object
                   options:
-                    description: Options for the VPC attachment.
+                    description: Options for the VPC attachment. See below.
                     properties:
                       applianceModeSupport:
-                        description: |-
-                          Indicates whether appliance mode is supported.
-                          If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
-                          If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+                        description: Whether to enable appliance mode support. If
+                          enabled, traffic flow between a source and destination use
+                          the same Availability Zone for the VPC attachment for the
+                          lifetime of that flow. If the VPC attachment is pending
+                          acceptance, changing this value will recreate the resource.
                         type: boolean
                       ipv6Support:
-                        description: |-
-                          Indicates whether IPv6 is supported.
-                          If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+                        description: Whether to enable IPv6 support. If the VPC attachment
+                          is pending acceptance, changing this value will recreate
+                          the resource.
                         type: boolean
                     type: object
                   region:
@@ -1079,7 +1081,7 @@ spec:
                       be created in.
                     type: string
                   subnetArns:
-                    description: The subnet ARN of the VPC attachment.
+                    description: Subnet ARNs of the VPC attachment.
                     items:
                       type: string
                     type: array
@@ -1169,7 +1171,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcArn:
-                    description: The ARN of the VPC.
+                    description: ARN of the VPC.
                     type: string
                   vpcArnRef:
                     description: Reference to a VPC in ec2 to populate vpcArn.
@@ -1262,7 +1264,7 @@ spec:
                   autoscaler.
                 properties:
                   coreNetworkId:
-                    description: The ID of a core network for the VPC attachment.
+                    description: ID of a core network for the VPC attachment.
                     type: string
                   coreNetworkIdRef:
                     description: Reference to a CoreNetwork in networkmanager to populate
@@ -1341,22 +1343,23 @@ spec:
                         type: object
                     type: object
                   options:
-                    description: Options for the VPC attachment.
+                    description: Options for the VPC attachment. See below.
                     properties:
                       applianceModeSupport:
-                        description: |-
-                          Indicates whether appliance mode is supported.
-                          If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
-                          If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+                        description: Whether to enable appliance mode support. If
+                          enabled, traffic flow between a source and destination use
+                          the same Availability Zone for the VPC attachment for the
+                          lifetime of that flow. If the VPC attachment is pending
+                          acceptance, changing this value will recreate the resource.
                         type: boolean
                       ipv6Support:
-                        description: |-
-                          Indicates whether IPv6 is supported.
-                          If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+                        description: Whether to enable IPv6 support. If the VPC attachment
+                          is pending acceptance, changing this value will recreate
+                          the resource.
                         type: boolean
                     type: object
                   subnetArns:
-                    description: The subnet ARN of the VPC attachment.
+                    description: Subnet ARNs of the VPC attachment.
                     items:
                       type: string
                     type: array
@@ -1446,7 +1449,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcArn:
-                    description: The ARN of the VPC.
+                    description: ARN of the VPC.
                     type: string
                   vpcArnRef:
                     description: Reference to a VPC in ec2 to populate vpcArn.
@@ -1696,55 +1699,56 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the attachment.
+                    description: ARN of the attachment.
                     type: string
                   attachmentPolicyRuleNumber:
-                    description: The policy rule number associated with the attachment.
+                    description: Policy rule number associated with the attachment.
                     type: number
                   attachmentType:
-                    description: The type of attachment.
+                    description: Type of attachment.
                     type: string
                   coreNetworkArn:
-                    description: The ARN of a core network.
+                    description: ARN of a core network.
                     type: string
                   coreNetworkId:
-                    description: The ID of a core network for the VPC attachment.
+                    description: ID of a core network for the VPC attachment.
                     type: string
                   edgeLocation:
-                    description: The Region where the edge is located.
+                    description: Region where the edge is located.
                     type: string
                   id:
-                    description: The ID of the attachment.
+                    description: ID of the attachment.
                     type: string
                   options:
-                    description: Options for the VPC attachment.
+                    description: Options for the VPC attachment. See below.
                     properties:
                       applianceModeSupport:
-                        description: |-
-                          Indicates whether appliance mode is supported.
-                          If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
-                          If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+                        description: Whether to enable appliance mode support. If
+                          enabled, traffic flow between a source and destination use
+                          the same Availability Zone for the VPC attachment for the
+                          lifetime of that flow. If the VPC attachment is pending
+                          acceptance, changing this value will recreate the resource.
                         type: boolean
                       ipv6Support:
-                        description: |-
-                          Indicates whether IPv6 is supported.
-                          If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+                        description: Whether to enable IPv6 support. If the VPC attachment
+                          is pending acceptance, changing this value will recreate
+                          the resource.
                         type: boolean
                     type: object
                   ownerAccountId:
-                    description: The ID of the attachment account owner.
+                    description: ID of the attachment account owner.
                     type: string
                   resourceArn:
-                    description: The attachment resource ARN.
+                    description: Attachment resource ARN.
                     type: string
                   segmentName:
-                    description: The name of the segment attachment.
+                    description: Name of the segment attachment.
                     type: string
                   state:
-                    description: The state of the attachment.
+                    description: State of the attachment.
                     type: string
                   subnetArns:
-                    description: The subnet ARN of the VPC attachment.
+                    description: Subnet ARNs of the VPC attachment.
                     items:
                       type: string
                     type: array
@@ -1758,13 +1762,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vpcArn:
-                    description: The ARN of the VPC.
+                    description: ARN of the VPC.
                     type: string
                 type: object
               conditions:

@@ -82,8 +82,9 @@ spec:
                       Routing decisions are based on the most specific match.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   transitGatewayAttachmentId:
                     description: Identifier of EC2 Transit Gateway Attachment .

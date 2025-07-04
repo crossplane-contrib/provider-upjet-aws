@@ -51,6 +51,9 @@ type TrafficPolicyInstanceInitParameters struct {
 
 type TrafficPolicyInstanceObservation struct {
 
+	// Amazon Resource Name (ARN) of the traffic policy instance.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 

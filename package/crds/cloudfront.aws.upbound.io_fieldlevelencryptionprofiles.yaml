@@ -1121,6 +1121,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The Field Level Encryption Profile ARN.
+                    type: string
                   callerReference:
                     description: Internal value used by CloudFront to allow future
                       updates to the Field Level Encryption Profile.
