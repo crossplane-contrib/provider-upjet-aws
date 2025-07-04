@@ -909,8 +909,9 @@ spec:
                     description: The name of the serverless cluster.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -1504,6 +1505,13 @@ spec:
                 properties:
                   arn:
                     description: The ARN of the serverless cluster.
+                    type: string
+                  bootstrapBrokersSaslIam:
+                    description: One or more DNS names (or IP addresses) and SASL
+                      IAM port pairs. For example, boot-abcdefg.c2.kafka-serverless.eu-central-1.amazonaws.com:9098.
+                      The resource sorts the list alphabetically. AWS may not always
+                      return all endpoints so the values may not be stable across
+                      applies.
                     type: string
                   clientAuthentication:
                     description: Specifies client authentication information for the

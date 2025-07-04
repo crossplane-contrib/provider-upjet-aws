@@ -1842,9 +1842,32 @@ spec:
                   name:
                     description: Name for the configuration.
                     type: string
+                  placement:
+                    description: Configuration block with placement settings that
+                      define where the instances that are launched from your image
+                      will run. Detailed below.
+                    properties:
+                      availabilityZone:
+                        description: Availability Zone where your build and test instances
+                          will launch.
+                        type: string
+                      hostId:
+                        description: ID of the Dedicated Host on which build and test
+                          instances run. Conflicts with host_resource_group_arn.
+                        type: string
+                      hostResourceGroupArn:
+                        description: ARN of the host resource group in which to launch
+                          build and test instances. Conflicts with host_id.
+                        type: string
+                      tenancy:
+                        description: 'Placement tenancy of the instance. Valid values:
+                          default, dedicated and host.'
+                        type: string
+                    type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceTags:
                     additionalProperties:
@@ -2390,6 +2413,28 @@ spec:
                   name:
                     description: Name for the configuration.
                     type: string
+                  placement:
+                    description: Configuration block with placement settings that
+                      define where the instances that are launched from your image
+                      will run. Detailed below.
+                    properties:
+                      availabilityZone:
+                        description: Availability Zone where your build and test instances
+                          will launch.
+                        type: string
+                      hostId:
+                        description: ID of the Dedicated Host on which build and test
+                          instances run. Conflicts with host_resource_group_arn.
+                        type: string
+                      hostResourceGroupArn:
+                        description: ARN of the host resource group in which to launch
+                          build and test instances. Conflicts with host_id.
+                        type: string
+                      tenancy:
+                        description: 'Placement tenancy of the instance. Valid values:
+                          default, dedicated and host.'
+                        type: string
+                    type: object
                   resourceTags:
                     additionalProperties:
                       type: string
@@ -2885,6 +2930,28 @@ spec:
                   name:
                     description: Name for the configuration.
                     type: string
+                  placement:
+                    description: Configuration block with placement settings that
+                      define where the instances that are launched from your image
+                      will run. Detailed below.
+                    properties:
+                      availabilityZone:
+                        description: Availability Zone where your build and test instances
+                          will launch.
+                        type: string
+                      hostId:
+                        description: ID of the Dedicated Host on which build and test
+                          instances run. Conflicts with host_resource_group_arn.
+                        type: string
+                      hostResourceGroupArn:
+                        description: ARN of the host resource group in which to launch
+                          build and test instances. Conflicts with host_id.
+                        type: string
+                      tenancy:
+                        description: 'Placement tenancy of the instance. Valid values:
+                          default, dedicated and host.'
+                        type: string
+                    type: object
                   resourceTags:
                     additionalProperties:
                       type: string

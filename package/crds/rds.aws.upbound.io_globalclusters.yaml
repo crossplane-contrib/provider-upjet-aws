@@ -108,12 +108,16 @@ spec:
                       on destroy. Required with source_db_cluster_identifier.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceDbClusterIdentifier:
-                    description: Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation.
+                    description: 'Amazon Resource Name (ARN) to use as the primary
+                      DB Cluster of the Global Cluster on creation. NOTE: After initial
+                      creation, this argument can be removed and replaced with engine
+                      and engine_version. This allows upgrading the engine version
+                      of the Global Cluster.'
                     type: string
                   sourceDbClusterIdentifierRef:
                     description: Reference to a Cluster in rds to populate sourceDbClusterIdentifier.
@@ -251,8 +255,11 @@ spec:
                       on destroy. Required with source_db_cluster_identifier.
                     type: boolean
                   sourceDbClusterIdentifier:
-                    description: Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation.
+                    description: 'Amazon Resource Name (ARN) to use as the primary
+                      DB Cluster of the Global Cluster on creation. NOTE: After initial
+                      creation, this argument can be removed and replaced with engine
+                      and engine_version. This allows upgrading the engine version
+                      of the Global Cluster.'
                     type: string
                   sourceDbClusterIdentifierRef:
                     description: Reference to a Cluster in rds to populate sourceDbClusterIdentifier.
@@ -577,8 +584,11 @@ spec:
                     description: RDS Global Cluster identifier.
                     type: string
                   sourceDbClusterIdentifier:
-                    description: Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation.
+                    description: 'Amazon Resource Name (ARN) to use as the primary
+                      DB Cluster of the Global Cluster on creation. NOTE: After initial
+                      creation, this argument can be removed and replaced with engine
+                      and engine_version. This allows upgrading the engine version
+                      of the Global Cluster.'
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The

@@ -488,6 +488,9 @@ spec:
                   acceleratorArn:
                     description: The Amazon Resource Name (ARN) of your accelerator.
                     type: string
+                  arn:
+                    description: The Amazon Resource Name (ARN) of the listener.
+                    type: string
                   clientAffinity:
                     description: 'Direct all requests from a user to the same endpoint.
                       Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global

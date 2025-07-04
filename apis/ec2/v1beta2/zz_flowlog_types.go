@@ -15,7 +15,7 @@ import (
 
 type DestinationOptionsInitParameters struct {
 
-	// The format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
+	// File format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
 	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
 	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
@@ -27,7 +27,7 @@ type DestinationOptionsInitParameters struct {
 
 type DestinationOptionsObservation struct {
 
-	// The format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
+	// File format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
 	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
 	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
@@ -39,7 +39,7 @@ type DestinationOptionsObservation struct {
 
 type DestinationOptionsParameters struct {
 
-	// The format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
+	// File format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
 	// +kubebuilder:validation:Optional
 	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
@@ -60,10 +60,10 @@ type FlowLogInitParameters struct {
 	// Describes the destination options for a flow log. More details below.
 	DestinationOptions *DestinationOptionsInitParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
-	// Elastic Network Interface ID to attach to
+	// Elastic Network Interface ID to attach to.
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
-	// The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group
+	// ARN of the IAM role that's used to post flow logs to a CloudWatch Logs log group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
@@ -76,7 +76,7 @@ type FlowLogInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// The ARN of the logging destination. Either log_destination or log_group_name must be set.
+	// ARN of the logging destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
@@ -89,22 +89,18 @@ type FlowLogInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
 
-	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
+	// Logging destination type. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
 	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
-	// The maximum interval of time
-	// during which a flow of packets is captured and aggregated into a flow
-	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	// The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+	// Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+	// When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
-	// Subnet ID to attach to
+	// Subnet ID to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -123,13 +119,13 @@ type FlowLogInitParameters struct {
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
-	// Transit Gateway Attachment ID to attach to
+	// Transit Gateway Attachment ID to attach to.
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// Transit Gateway ID to attach to
+	// Transit Gateway ID to attach to.
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
-	// VPC ID to attach to
+	// VPC ID to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -144,7 +140,7 @@ type FlowLogInitParameters struct {
 
 type FlowLogObservation struct {
 
-	// The ARN of the Flow Log.
+	// ARN of the Flow Log.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
@@ -153,34 +149,30 @@ type FlowLogObservation struct {
 	// Describes the destination options for a flow log. More details below.
 	DestinationOptions *DestinationOptionsObservation `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
-	// Elastic Network Interface ID to attach to
+	// Elastic Network Interface ID to attach to.
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
-	// The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group
+	// ARN of the IAM role that's used to post flow logs to a CloudWatch Logs log group.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
-	// The Flow Log ID
+	// Flow Log ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the logging destination. Either log_destination or log_group_name must be set.
+	// ARN of the logging destination.
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
-	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
+	// Logging destination type. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
 	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
-	// The maximum interval of time
-	// during which a flow of packets is captured and aggregated into a flow
-	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	// The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+	// Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+	// When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
-	// Subnet ID to attach to
+	// Subnet ID to attach to.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -194,13 +186,13 @@ type FlowLogObservation struct {
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
-	// Transit Gateway Attachment ID to attach to
+	// Transit Gateway Attachment ID to attach to.
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// Transit Gateway ID to attach to
+	// Transit Gateway ID to attach to.
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
-	// VPC ID to attach to
+	// VPC ID to attach to.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
@@ -214,11 +206,11 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationOptions *DestinationOptionsParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
-	// Elastic Network Interface ID to attach to
+	// Elastic Network Interface ID to attach to.
 	// +kubebuilder:validation:Optional
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
-	// The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group
+	// ARN of the IAM role that's used to post flow logs to a CloudWatch Logs log group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -232,7 +224,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// The ARN of the logging destination. Either log_destination or log_group_name must be set.
+	// ARN of the logging destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -246,7 +238,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
 
-	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
+	// Logging destination type. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	// +kubebuilder:validation:Optional
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
@@ -254,23 +246,19 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
-	// +kubebuilder:validation:Optional
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
-	// The maximum interval of time
-	// during which a flow of packets is captured and aggregated into a flow
-	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	// The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+	// Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+	// When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	// +kubebuilder:validation:Optional
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Subnet ID to attach to
+	// Subnet ID to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -292,15 +280,15 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
-	// Transit Gateway Attachment ID to attach to
+	// Transit Gateway Attachment ID to attach to.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// Transit Gateway ID to attach to
+	// Transit Gateway ID to attach to.
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
-	// VPC ID to attach to
+	// VPC ID to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

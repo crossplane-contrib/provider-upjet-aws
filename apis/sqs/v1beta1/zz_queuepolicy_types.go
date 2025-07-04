@@ -15,10 +15,10 @@ import (
 
 type QueuePolicyInitParameters struct {
 
-	// The JSON policy for the SQS queue.
+	// JSON policy for the SQS queue. Ensure that Version = "2012-10-17" is set in the policy or AWS may hang in creating the queue.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The URL of the SQS Queue to which to attach the policy
+	// URL of the SQS Queue to which to attach the policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
@@ -35,20 +35,20 @@ type QueuePolicyInitParameters struct {
 type QueuePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The JSON policy for the SQS queue.
+	// JSON policy for the SQS queue. Ensure that Version = "2012-10-17" is set in the policy or AWS may hang in creating the queue.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The URL of the SQS Queue to which to attach the policy
+	// URL of the SQS Queue to which to attach the policy.
 	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
 }
 
 type QueuePolicyParameters struct {
 
-	// The JSON policy for the SQS queue.
+	// JSON policy for the SQS queue. Ensure that Version = "2012-10-17" is set in the policy or AWS may hang in creating the queue.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The URL of the SQS Queue to which to attach the policy
+	// URL of the SQS Queue to which to attach the policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
@@ -62,6 +62,7 @@ type QueuePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

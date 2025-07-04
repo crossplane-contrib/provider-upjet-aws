@@ -286,6 +286,9 @@ type ManagedEBSVolumeInitParameters struct {
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
+	// Volume Initialization Rate in MiB/s. You must also specify a snapshot_id.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
+
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -318,6 +321,9 @@ type ManagedEBSVolumeObservation struct {
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume Initialization Rate in MiB/s. You must also specify a snapshot_id.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -360,6 +366,10 @@ type ManagedEBSVolumeParameters struct {
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume Initialization Rate in MiB/s. You must also specify a snapshot_id.
+	// +kubebuilder:validation:Optional
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 
 	// Volume type.
 	// +kubebuilder:validation:Optional
@@ -842,6 +852,9 @@ type ServiceObservation struct {
 	// Information about the CloudWatch alarms. See below.
 	Alarms *AlarmsObservation `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
+	// ARN that identifies the service.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
@@ -884,7 +897,6 @@ type ServiceObservation struct {
 	// ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the awsvpc network mode. If using awsvpc network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here.
 	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
 
-	// ARN that identifies the service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts with capacity_provider_strategy.
@@ -1051,6 +1063,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

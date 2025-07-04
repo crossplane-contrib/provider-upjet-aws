@@ -620,6 +620,7 @@ type RuleGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -761,7 +762,7 @@ type RulesSourceInitParameters struct {
 	// A configuration block containing stateful inspection criteria for a domain list rule group. See Rules Source List below for details.
 	RulesSourceList *RulesSourceListInitParameters `json:"rulesSourceList,omitempty" tf:"rules_source_list,omitempty"`
 
-	// The fully qualified name of a file in an S3 bucket that contains Suricata compatible intrusion preventions system (IPS) rules or the Suricata rules as a string. These rules contain stateful inspection criteria and the action to take for traffic that matches the criteria.
+	// Stateful inspection criteria, provided in Suricata compatible rules. These rules contain the inspection criteria and the action to take for traffic that matches the criteria, so this type of rule group doesn’t have a separate action setting.
 	RulesString *string `json:"rulesString,omitempty" tf:"rules_string,omitempty"`
 
 	// Set of configuration blocks containing stateful inspection criteria for 5-tuple rules to be used together in a rule group. See Stateful Rule below for details.
@@ -821,7 +822,7 @@ type RulesSourceObservation struct {
 	// A configuration block containing stateful inspection criteria for a domain list rule group. See Rules Source List below for details.
 	RulesSourceList *RulesSourceListObservation `json:"rulesSourceList,omitempty" tf:"rules_source_list,omitempty"`
 
-	// The fully qualified name of a file in an S3 bucket that contains Suricata compatible intrusion preventions system (IPS) rules or the Suricata rules as a string. These rules contain stateful inspection criteria and the action to take for traffic that matches the criteria.
+	// Stateful inspection criteria, provided in Suricata compatible rules. These rules contain the inspection criteria and the action to take for traffic that matches the criteria, so this type of rule group doesn’t have a separate action setting.
 	RulesString *string `json:"rulesString,omitempty" tf:"rules_string,omitempty"`
 
 	// Set of configuration blocks containing stateful inspection criteria for 5-tuple rules to be used together in a rule group. See Stateful Rule below for details.
@@ -837,7 +838,7 @@ type RulesSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	RulesSourceList *RulesSourceListParameters `json:"rulesSourceList,omitempty" tf:"rules_source_list,omitempty"`
 
-	// The fully qualified name of a file in an S3 bucket that contains Suricata compatible intrusion preventions system (IPS) rules or the Suricata rules as a string. These rules contain stateful inspection criteria and the action to take for traffic that matches the criteria.
+	// Stateful inspection criteria, provided in Suricata compatible rules. These rules contain the inspection criteria and the action to take for traffic that matches the criteria, so this type of rule group doesn’t have a separate action setting.
 	// +kubebuilder:validation:Optional
 	RulesString *string `json:"rulesString,omitempty" tf:"rules_string,omitempty"`
 

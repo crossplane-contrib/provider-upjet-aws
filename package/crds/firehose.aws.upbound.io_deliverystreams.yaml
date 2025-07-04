@@ -14177,7 +14177,7 @@ spec:
               forProvider:
                 properties:
                   destination:
-                    description: –  This is the destination to where the data is delivered.
+                    description: This is the destination to where the data is delivered.
                       The only options are s3 (Deprecated, use extended_s3 instead),
                       extended_s3, redshift, elasticsearch, splunk, http_endpoint,
                       opensearch, opensearchserverless and snowflake.
@@ -16759,6 +16759,14 @@ spec:
                       mskClusterArn:
                         description: The ARN of the Amazon MSK cluster.
                         type: string
+                      readFromTimestamp:
+                        description: The start date and time in UTC for the offset
+                          position within your MSK topic from where Firehose begins
+                          to read. By default, this is set to timestamp when Firehose
+                          becomes Active. If you want to create a Firehose stream
+                          with Earliest start position set the read_from_timestamp
+                          parameter to Epoch (1970-01-01T00:00:00Z).
+                        type: string
                       topicName:
                         description: The topic name within the Amazon MSK cluster.
                         type: string
@@ -18671,7 +18679,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      If you don't specify an AWS Region, the default is the current region.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   serverSideEncryption:
@@ -19556,7 +19564,7 @@ spec:
                   autoscaler.
                 properties:
                   destination:
-                    description: –  This is the destination to where the data is delivered.
+                    description: This is the destination to where the data is delivered.
                       The only options are s3 (Deprecated, use extended_s3 instead),
                       extended_s3, redshift, elasticsearch, splunk, http_endpoint,
                       opensearch, opensearchserverless and snowflake.
@@ -22133,6 +22141,14 @@ spec:
                         type: object
                       mskClusterArn:
                         description: The ARN of the Amazon MSK cluster.
+                        type: string
+                      readFromTimestamp:
+                        description: The start date and time in UTC for the offset
+                          position within your MSK topic from where Firehose begins
+                          to read. By default, this is set to timestamp when Firehose
+                          becomes Active. If you want to create a Firehose stream
+                          with Earliest start position set the read_from_timestamp
+                          parameter to Epoch (1970-01-01T00:00:00Z).
                         type: string
                       topicName:
                         description: The topic name within the Amazon MSK cluster.
@@ -25095,7 +25111,7 @@ spec:
                     description: The Amazon Resource Name (ARN) specifying the Stream
                     type: string
                   destination:
-                    description: –  This is the destination to where the data is delivered.
+                    description: This is the destination to where the data is delivered.
                       The only options are s3 (Deprecated, use extended_s3 instead),
                       extended_s3, redshift, elasticsearch, splunk, http_endpoint,
                       opensearch, opensearchserverless and snowflake.
@@ -26237,6 +26253,14 @@ spec:
                         type: object
                       mskClusterArn:
                         description: The ARN of the Amazon MSK cluster.
+                        type: string
+                      readFromTimestamp:
+                        description: The start date and time in UTC for the offset
+                          position within your MSK topic from where Firehose begins
+                          to read. By default, this is set to timestamp when Firehose
+                          becomes Active. If you want to create a Firehose stream
+                          with Earliest start position set the read_from_timestamp
+                          parameter to Epoch (1970-01-01T00:00:00Z).
                         type: string
                       topicName:
                         description: The topic name within the Amazon MSK cluster.

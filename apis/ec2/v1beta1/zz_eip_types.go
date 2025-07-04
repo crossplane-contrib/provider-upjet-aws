@@ -64,10 +64,6 @@ type EIPInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Boolean if the EIP is in a VPC or not. Use domain instead.
-	// Defaults to true unless the region supports EC2-Classic.
-	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type EIPObservation struct {
@@ -139,10 +135,6 @@ type EIPObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
-
-	// Boolean if the EIP is in a VPC or not. Use domain instead.
-	// Defaults to true unless the region supports EC2-Classic.
-	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type EIPParameters struct {
@@ -202,6 +194,7 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPv4Pool *string `json:"publicIpv4Pool,omitempty" tf:"public_ipv4_pool,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -211,11 +204,6 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Boolean if the EIP is in a VPC or not. Use domain instead.
-	// Defaults to true unless the region supports EC2-Classic.
-	// +kubebuilder:validation:Optional
-	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 // EIPSpec defines the desired state of EIP

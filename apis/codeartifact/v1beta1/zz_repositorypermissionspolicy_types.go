@@ -77,6 +77,7 @@ type RepositoryPermissionsPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyRevision *string `json:"policyRevision,omitempty" tf:"policy_revision,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

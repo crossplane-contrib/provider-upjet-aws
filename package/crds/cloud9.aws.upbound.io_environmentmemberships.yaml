@@ -159,8 +159,9 @@ spec:
                       read-only and read-write .
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   userArn:
                     description: The Amazon Resource Name (ARN) of the environment

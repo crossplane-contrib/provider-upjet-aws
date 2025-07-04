@@ -1002,7 +1002,7 @@ spec:
               forProvider:
                 properties:
                   encryptionConfiguration:
-                    description: –  Configuration block containing encryption configuration.
+                    description: Configuration block containing encryption configuration.
                       Detailed below.
                     properties:
                       cloudwatchEncryption:
@@ -1265,8 +1265,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -1285,7 +1286,7 @@ spec:
                   autoscaler.
                 properties:
                   encryptionConfiguration:
-                    description: –  Configuration block containing encryption configuration.
+                    description: Configuration block containing encryption configuration.
                       Detailed below.
                     properties:
                       cloudwatchEncryption:
@@ -1727,7 +1728,7 @@ spec:
               atProvider:
                 properties:
                   encryptionConfiguration:
-                    description: –  Configuration block containing encryption configuration.
+                    description: Configuration block containing encryption configuration.
                       Detailed below.
                     properties:
                       cloudwatchEncryption:

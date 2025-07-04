@@ -93,19 +93,19 @@ type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters struct
 
 type DataCatalogEncryptionSettingsInitParameters struct {
 
-	// –  The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	// The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// –  The security configuration to set. see Data Catalog Encryption Settings.
+	// The security configuration to set. see Data Catalog Encryption Settings.
 	DataCatalogEncryptionSettings *DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsInitParameters `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsObservation struct {
 
-	// –  The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	// The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// –  The security configuration to set. see Data Catalog Encryption Settings.
+	// The security configuration to set. see Data Catalog Encryption Settings.
 	DataCatalogEncryptionSettings *DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 
 	// The ID of the Data Catalog to set the security configuration for.
@@ -114,14 +114,15 @@ type DataCatalogEncryptionSettingsObservation struct {
 
 type DataCatalogEncryptionSettingsParameters struct {
 
-	// –  The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	// The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// –  The security configuration to set. see Data Catalog Encryption Settings.
+	// The security configuration to set. see Data Catalog Encryption Settings.
 	// +kubebuilder:validation:Optional
 	DataCatalogEncryptionSettings *DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

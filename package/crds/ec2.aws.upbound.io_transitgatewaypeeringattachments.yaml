@@ -171,8 +171,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -635,8 +636,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: ARN of the attachment.
+                    type: string
                   id:
-                    description: EC2 Transit Gateway Attachment identifier
+                    description: EC2 Transit Gateway Attachment identifier.
                     type: string
                   options:
                     description: Describes whether dynamic routing is enabled or disabled

@@ -84,7 +84,7 @@ spec:
                     x-kubernetes-list-type: set
                   additionalSchemaElements:
                     description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                      SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.'
                     items:
                       type: string
                     type: array
@@ -233,7 +233,7 @@ spec:
                     x-kubernetes-list-type: set
                   additionalSchemaElements:
                     description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                      SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.'
                     items:
                       type: string
                     type: array
@@ -532,6 +532,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.format)
                 || (has(self.initProvider) && has(self.initProvider.format))'
+            - message: spec.forProvider.s3Prefix is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.s3Prefix)
+                || (has(self.initProvider) && has(self.initProvider.s3Prefix))'
             - message: spec.forProvider.s3Region is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.s3Region)
@@ -556,7 +560,7 @@ spec:
                     x-kubernetes-list-type: set
                   additionalSchemaElements:
                     description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                      SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.'
                     items:
                       type: string
                     type: array

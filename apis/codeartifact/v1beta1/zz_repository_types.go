@@ -124,6 +124,7 @@ type RepositoryParameters struct {
 	// +kubebuilder:validation:Optional
 	ExternalConnections *ExternalConnectionsParameters `json:"externalConnections,omitempty" tf:"external_connections,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

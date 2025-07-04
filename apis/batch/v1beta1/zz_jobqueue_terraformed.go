@@ -125,5 +125,5 @@ func (tr *JobQueue) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *JobQueue) GetTerraformSchemaVersion() int {
-	return 1
+	return 2
 }

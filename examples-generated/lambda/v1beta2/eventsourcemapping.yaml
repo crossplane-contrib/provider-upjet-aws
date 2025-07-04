@@ -15,4 +15,4 @@ spec:
     region: us-west-1
     startingPosition: LATEST
     tags:
-      Name: dynamodb
+      Name: dynamodb-stream-mapping

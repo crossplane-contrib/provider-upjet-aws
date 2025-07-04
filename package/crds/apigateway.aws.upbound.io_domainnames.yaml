@@ -1200,6 +1200,13 @@ spec:
                     description: Configuration block defining API endpoint information
                       including type. See below.
                     properties:
+                      ipAddressType:
+                        description: 'The IP address types that can invoke a DomainName.
+                          Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4
+                          addresses to invoke a DomainName, or use dualstack to allow
+                          both IPv4 and IPv6 addresses to invoke a DomainName. For
+                          the PRIVATE endpoint type, only dualstack is supported.'
+                        type: string
                       types:
                         description: A list of endpoint types of an API or its custom
                           domain name. For an edge-optimized API and its custom domain
@@ -1241,8 +1248,9 @@ spec:
                       custom domain names.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   regionalCertificateArn:
                     description: ARN for an AWS-managed certificate. AWS Certificate
@@ -1488,6 +1496,13 @@ spec:
                     description: Configuration block defining API endpoint information
                       including type. See below.
                     properties:
+                      ipAddressType:
+                        description: 'The IP address types that can invoke a DomainName.
+                          Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4
+                          addresses to invoke a DomainName, or use dualstack to allow
+                          both IPv4 and IPv6 addresses to invoke a DomainName. For
+                          the PRIVATE endpoint type, only dualstack is supported.'
+                        type: string
                       types:
                         description: A list of endpoint types of an API or its custom
                           domain name. For an edge-optimized API and its custom domain
@@ -1856,6 +1871,13 @@ spec:
                     description: Configuration block defining API endpoint information
                       including type. See below.
                     properties:
+                      ipAddressType:
+                        description: 'The IP address types that can invoke a DomainName.
+                          Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4
+                          addresses to invoke a DomainName, or use dualstack to allow
+                          both IPv4 and IPv6 addresses to invoke a DomainName. For
+                          the PRIVATE endpoint type, only dualstack is supported.'
+                        type: string
                       types:
                         description: A list of endpoint types of an API or its custom
                           domain name. For an edge-optimized API and its custom domain

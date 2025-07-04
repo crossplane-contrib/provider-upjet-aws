@@ -15,11 +15,11 @@ import (
 
 type LocationS3InitParameters struct {
 
-	// A list of DataSync Agent ARNs with which this location will be associated.
+	// (Amazon S3 on Outposts only) Amazon Resource Name (ARN) of the DataSync agent on the Outpost.
 	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
-	// Amazon Resource Name (ARN) of the S3 Bucket.
+	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
@@ -35,7 +35,7 @@ type LocationS3InitParameters struct {
 	// Configuration block containing information for connecting to S3.
 	S3Config *S3ConfigInitParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
 
-	// The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. Valid values
+	// Amazon S3 storage class that you want to store your files in when this location is used as a task destination. Valid values
 	S3StorageClass *string `json:"s3StorageClass,omitempty" tf:"s3_storage_class,omitempty"`
 
 	// Prefix to perform actions as source or destination.
@@ -48,7 +48,7 @@ type LocationS3InitParameters struct {
 
 type LocationS3Observation struct {
 
-	// A list of DataSync Agent ARNs with which this location will be associated.
+	// (Amazon S3 on Outposts only) Amazon Resource Name (ARN) of the DataSync agent on the Outpost.
 	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
@@ -58,13 +58,13 @@ type LocationS3Observation struct {
 	// Amazon Resource Name (ARN) of the DataSync Location.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the S3 Bucket.
+	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
 
 	// Configuration block containing information for connecting to S3.
 	S3Config *S3ConfigObservation `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
 
-	// The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. Valid values
+	// Amazon S3 storage class that you want to store your files in when this location is used as a task destination. Valid values
 	S3StorageClass *string `json:"s3StorageClass,omitempty" tf:"s3_storage_class,omitempty"`
 
 	// Prefix to perform actions as source or destination.
@@ -83,17 +83,18 @@ type LocationS3Observation struct {
 
 type LocationS3Parameters struct {
 
-	// A list of DataSync Agent ARNs with which this location will be associated.
+	// (Amazon S3 on Outposts only) Amazon Resource Name (ARN) of the DataSync agent on the Outpost.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Amazon Resource Name (ARN) of the S3 Bucket.
+	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -111,7 +112,7 @@ type LocationS3Parameters struct {
 	// +kubebuilder:validation:Optional
 	S3Config *S3ConfigParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
 
-	// The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. Valid values
+	// Amazon S3 storage class that you want to store your files in when this location is used as a task destination. Valid values
 	// +kubebuilder:validation:Optional
 	S3StorageClass *string `json:"s3StorageClass,omitempty" tf:"s3_storage_class,omitempty"`
 

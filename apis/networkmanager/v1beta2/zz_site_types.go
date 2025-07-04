@@ -18,7 +18,7 @@ type SiteInitParameters struct {
 	// Description of the Site.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the Global Network to create the site in.
+	// ID of the Global Network to create the site in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -31,7 +31,7 @@ type SiteInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The site location as documented below.
+	// Site location. See below.
 	Location *SiteLocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Key-value map of resource tags.
@@ -80,25 +80,25 @@ type SiteLocationParameters struct {
 
 type SiteObservation struct {
 
-	// Site Amazon Resource Name (ARN)
+	// Site ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the Site.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the Global Network to create the site in.
+	// ID of the Global Network to create the site in.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The site location as documented below.
+	// Site location. See below.
 	Location *SiteLocationObservation `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -109,7 +109,7 @@ type SiteParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the Global Network to create the site in.
+	// ID of the Global Network to create the site in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -123,7 +123,7 @@ type SiteParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The site location as documented below.
+	// Site location. See below.
 	// +kubebuilder:validation:Optional
 	Location *SiteLocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -164,7 +164,7 @@ type SiteStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Site is the Schema for the Sites API. Creates a site in a global network.
+// Site is the Schema for the Sites API. Manages a Network Manager site.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

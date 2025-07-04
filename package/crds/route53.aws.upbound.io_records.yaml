@@ -1393,7 +1393,8 @@ spec:
                     properties:
                       type:
                         description: The record type. Valid values are A, AAAA, CAA,
-                          CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                          CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP,
+                          SVCB, TLSA, and TXT.
                         type: string
                     type: object
                   geolocationRoutingPolicy:
@@ -1642,7 +1643,8 @@ spec:
                     type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
-                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                      DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA,
+                      and TXT.
                     type: string
                   weightedRoutingPolicy:
                     description: A block indicating a weighted routing policy. Conflicts
@@ -1792,7 +1794,8 @@ spec:
                     properties:
                       type:
                         description: The record type. Valid values are A, AAAA, CAA,
-                          CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                          CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP,
+                          SVCB, TLSA, and TXT.
                         type: string
                     type: object
                   geolocationRoutingPolicy:
@@ -2029,7 +2032,8 @@ spec:
                     type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
-                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                      DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA,
+                      and TXT.
                     type: string
                   weightedRoutingPolicy:
                     description: A block indicating a weighted routing policy. Conflicts
@@ -2345,7 +2349,8 @@ spec:
                     properties:
                       type:
                         description: The record type. Valid values are A, AAAA, CAA,
-                          CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                          CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP,
+                          SVCB, TLSA, and TXT.
                         type: string
                     type: object
                   fqdn:
@@ -2439,7 +2444,8 @@ spec:
                     type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
-                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                      DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA,
+                      and TXT.
                     type: string
                   weightedRoutingPolicy:
                     description: A block indicating a weighted routing policy. Conflicts

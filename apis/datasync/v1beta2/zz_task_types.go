@@ -395,6 +395,9 @@ type TaskInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// One of the following task modes for your data transfer:
+	TaskMode *string `json:"taskMode,omitempty" tf:"task_mode,omitempty"`
+
 	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
 	TaskReportConfig *TaskReportConfigInitParameters `json:"taskReportConfig,omitempty" tf:"task_report_config,omitempty"`
 }
@@ -438,6 +441,9 @@ type TaskObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// One of the following task modes for your data transfer:
+	TaskMode *string `json:"taskMode,omitempty" tf:"task_mode,omitempty"`
 
 	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
 	TaskReportConfig *TaskReportConfigObservation `json:"taskReportConfig,omitempty" tf:"task_report_config,omitempty"`
@@ -488,6 +494,7 @@ type TaskParameters struct {
 	// +kubebuilder:validation:Optional
 	Options *OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -514,6 +521,10 @@ type TaskParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One of the following task modes for your data transfer:
+	// +kubebuilder:validation:Optional
+	TaskMode *string `json:"taskMode,omitempty" tf:"task_mode,omitempty"`
 
 	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
 	// +kubebuilder:validation:Optional

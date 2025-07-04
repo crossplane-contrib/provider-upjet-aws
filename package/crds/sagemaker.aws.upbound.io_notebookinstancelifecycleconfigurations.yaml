@@ -36,7 +36,7 @@ spec:
       openAPIV3Schema:
         description: NotebookInstanceLifecycleConfiguration is the Schema for the
           NotebookInstanceLifecycleConfigurations API. Provides a lifecycle configuration
-          for SageMaker Notebook Instances.
+          for SageMaker AI Notebook Instances.
         properties:
           apiVersion:
             description: |-
@@ -77,17 +77,24 @@ spec:
                 properties:
                   onCreate:
                     description: A shell script (base64-encoded) that runs only once
-                      when the SageMaker Notebook Instance is created.
+                      when the SageMaker AI Notebook Instance is created.
                     type: string
                   onStart:
                     description: A shell script (base64-encoded) that runs every time
-                      the SageMaker Notebook Instance is started including the time
-                      it's created.
+                      the SageMaker AI Notebook Instance is started including the
+                      time it's created.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -106,13 +113,19 @@ spec:
                 properties:
                   onCreate:
                     description: A shell script (base64-encoded) that runs only once
-                      when the SageMaker Notebook Instance is created.
+                      when the SageMaker AI Notebook Instance is created.
                     type: string
                   onStart:
                     description: A shell script (base64-encoded) that runs every time
-                      the SageMaker Notebook Instance is started including the time
-                      it's created.
+                      the SageMaker AI Notebook Instance is started including the
+                      time it's created.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -295,13 +308,27 @@ spec:
                     type: string
                   onCreate:
                     description: A shell script (base64-encoded) that runs only once
-                      when the SageMaker Notebook Instance is created.
+                      when the SageMaker AI Notebook Instance is created.
                     type: string
                   onStart:
                     description: A shell script (base64-encoded) that runs every time
-                      the SageMaker Notebook Instance is started including the time
-                      it's created.
+                      the SageMaker AI Notebook Instance is started including the
+                      time it's created.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

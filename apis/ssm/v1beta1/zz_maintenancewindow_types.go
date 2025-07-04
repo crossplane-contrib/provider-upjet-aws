@@ -39,7 +39,7 @@ type MaintenanceWindowInitParameters struct {
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
+	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. Valid range is 1 to 6.
 	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Timezone for schedule in Internet Assigned Numbers Authority (IANA) Time Zone Database format. For example: America/Los_Angeles, etc/UTC, or Asia/Seoul.
@@ -82,7 +82,7 @@ type MaintenanceWindowObservation struct {
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
+	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. Valid range is 1 to 6.
 	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Timezone for schedule in Internet Assigned Numbers Authority (IANA) Time Zone Database format. For example: America/Los_Angeles, etc/UTC, or Asia/Seoul.
@@ -130,6 +130,7 @@ type MaintenanceWindowParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -139,7 +140,7 @@ type MaintenanceWindowParameters struct {
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
+	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. Valid range is 1 to 6.
 	// +kubebuilder:validation:Optional
 	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 

@@ -84,6 +84,7 @@ type MaintenanceWindowTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	OwnerInformation *string `json:"ownerInformation,omitempty" tf:"owner_information,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -20,5 +20,6 @@ spec:
     s3BucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    s3Prefix: example-cur-report
     s3Region: us-east-1
     timeUnit: HOURLY

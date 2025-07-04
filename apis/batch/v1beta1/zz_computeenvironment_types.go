@@ -21,6 +21,9 @@ type ComputeEnvironmentInitParameters struct {
 	// Details for the Amazon EKS cluster that supports the compute environment. See details below.
 	EksConfiguration *EksConfigurationInitParameters `json:"eksConfiguration,omitempty" tf:"eks_configuration,omitempty"`
 
+	// The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
@@ -64,6 +67,9 @@ type ComputeEnvironmentObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
@@ -101,6 +107,11 @@ type ComputeEnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	EksConfiguration *EksConfigurationParameters `json:"eksConfiguration,omitempty" tf:"eks_configuration,omitempty"`
 
+	// The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

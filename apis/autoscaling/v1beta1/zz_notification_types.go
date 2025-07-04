@@ -86,6 +86,7 @@ type NotificationParameters struct {
 	// +listType=set
 	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

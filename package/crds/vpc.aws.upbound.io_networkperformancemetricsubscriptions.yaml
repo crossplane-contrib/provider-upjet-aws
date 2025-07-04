@@ -83,8 +83,9 @@ spec:
                       values: aggregate-latency. Default: aggregate-latency.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   source:
                     description: The source Region or Availability Zone that the metric

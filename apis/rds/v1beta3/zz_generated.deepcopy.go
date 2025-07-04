@@ -193,6 +193,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DedicatedLogVolume != nil {
 		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
 		*out = new(bool)
@@ -408,6 +413,16 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoSecretRef != nil {
+		in, out := &in.PasswordWoSecretRef, &out.PasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerformanceInsightsEnabled != nil {
@@ -681,6 +696,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DedicatedLogVolume != nil {
 		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
 		*out = new(bool)
@@ -890,6 +910,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	if in.ParameterGroupName != nil {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerformanceInsightsEnabled != nil {
@@ -1151,6 +1176,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DedicatedLogVolume != nil {
 		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
 		*out = new(bool)
@@ -1366,6 +1396,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoSecretRef != nil {
+		in, out := &in.PasswordWoSecretRef, &out.PasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerformanceInsightsEnabled != nil {

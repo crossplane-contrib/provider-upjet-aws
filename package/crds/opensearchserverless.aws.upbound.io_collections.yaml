@@ -73,18 +73,24 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the collection.
+                    description: |-
+                      Description of the collection.
+                      Description of the collection.
                     type: string
                   name:
-                    description: Name of the collection.
+                    description: |-
+                      Name of the collection.
+                      Name of the collection.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   standbyReplicas:
-                    description: Indicates whether standby replicas should be used
-                      for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                    description: |-
+                      Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                      Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
                     type: string
                   tags:
                     additionalProperties:
@@ -93,8 +99,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of collection. One of SEARCH, TIMESERIES, or
-                      VECTORSEARCH. Defaults to TIMESERIES.
+                    description: |-
+                      Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
+                      Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
                     type: string
                 required:
                 - region
@@ -113,14 +120,19 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: Description of the collection.
+                    description: |-
+                      Description of the collection.
+                      Description of the collection.
                     type: string
                   name:
-                    description: Name of the collection.
+                    description: |-
+                      Name of the collection.
+                      Name of the collection.
                     type: string
                   standbyReplicas:
-                    description: Indicates whether standby replicas should be used
-                      for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                    description: |-
+                      Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                      Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
                     type: string
                   tags:
                     additionalProperties:
@@ -129,8 +141,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of collection. One of SEARCH, TIMESERIES, or
-                      VECTORSEARCH. Defaults to TIMESERIES.
+                    description: |-
+                      Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
+                      Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
                     type: string
                 type: object
               managementPolicies:
@@ -314,30 +327,37 @@ spec:
                     description: Amazon Resource Name (ARN) of the collection.
                     type: string
                   collectionEndpoint:
-                    description: Collection-specific endpoint used to submit index,
-                      search, and data upload requests to an OpenSearch Serverless
-                      collection.
+                    description: |-
+                      Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.
+                      Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.
                     type: string
                   dashboardEndpoint:
-                    description: Collection-specific endpoint used to access OpenSearch
-                      Dashboards.
+                    description: |-
+                      Collection-specific endpoint used to access OpenSearch Dashboards.
+                      Collection-specific endpoint used to access OpenSearch Dashboards.
                     type: string
                   description:
-                    description: Description of the collection.
+                    description: |-
+                      Description of the collection.
+                      Description of the collection.
                     type: string
                   id:
                     description: Unique identifier for the collection.
                     type: string
                   kmsKeyArn:
-                    description: The ARN of the Amazon Web Services KMS key used to
-                      encrypt the collection.
+                    description: |-
+                      The ARN of the Amazon Web Services KMS key used to encrypt the collection.
+                      The ARN of the Amazon Web Services KMS key used to encrypt the collection.
                     type: string
                   name:
-                    description: Name of the collection.
+                    description: |-
+                      Name of the collection.
+                      Name of the collection.
                     type: string
                   standbyReplicas:
-                    description: Indicates whether standby replicas should be used
-                      for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                    description: |-
+                      Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                      Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
                     type: string
                   tags:
                     additionalProperties:
@@ -351,8 +371,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of collection. One of SEARCH, TIMESERIES, or
-                      VECTORSEARCH. Defaults to TIMESERIES.
+                    description: |-
+                      Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
+                      Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
                     type: string
                 type: object
               conditions:

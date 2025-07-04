@@ -18,10 +18,7 @@ type CoreNetworkInitParameters struct {
 	// west-2 and ASN 65500 are used in the base policy.
 	BasePolicyDocument *string `json:"basePolicyDocument,omitempty" tf:"base_policy_document,omitempty"`
 
-	// The base policy created by setting the create_base_policy argument to true requires a region to be set in the edge-locations, location key. If base_policy_region is not specified, the region used in the base policy defaults to the region specified in the provider block.
-	BasePolicyRegion *string `json:"basePolicyRegion,omitempty" tf:"base_policy_region,omitempty"`
-
-	// A list of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
+	// List of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
 	// +listType=set
 	BasePolicyRegions []*string `json:"basePolicyRegions,omitempty" tf:"base_policy_regions,omitempty"`
 
@@ -31,7 +28,7 @@ type CoreNetworkInitParameters struct {
 	// Description of the Core Network.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the global network that a core network will be a part of.
+	// ID of the global network that a core network will be a part of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -51,16 +48,13 @@ type CoreNetworkInitParameters struct {
 
 type CoreNetworkObservation struct {
 
-	// Core Network Amazon Resource Name (ARN).
+	// Core Network ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// west-2 and ASN 65500 are used in the base policy.
 	BasePolicyDocument *string `json:"basePolicyDocument,omitempty" tf:"base_policy_document,omitempty"`
 
-	// The base policy created by setting the create_base_policy argument to true requires a region to be set in the edge-locations, location key. If base_policy_region is not specified, the region used in the base policy defaults to the region specified in the provider block.
-	BasePolicyRegion *string `json:"basePolicyRegion,omitempty" tf:"base_policy_region,omitempty"`
-
-	// A list of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
+	// List of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
 	// +listType=set
 	BasePolicyRegions []*string `json:"basePolicyRegions,omitempty" tf:"base_policy_regions,omitempty"`
 
@@ -76,7 +70,7 @@ type CoreNetworkObservation struct {
 	// One or more blocks detailing the edges within a core network. Detailed below.
 	Edges []EdgesObservation `json:"edges,omitempty" tf:"edges,omitempty"`
 
-	// The ID of the global network that a core network will be a part of.
+	// ID of the global network that a core network will be a part of.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	// Core Network ID.
@@ -92,7 +86,7 @@ type CoreNetworkObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -103,11 +97,7 @@ type CoreNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	BasePolicyDocument *string `json:"basePolicyDocument,omitempty" tf:"base_policy_document,omitempty"`
 
-	// The base policy created by setting the create_base_policy argument to true requires a region to be set in the edge-locations, location key. If base_policy_region is not specified, the region used in the base policy defaults to the region specified in the provider block.
-	// +kubebuilder:validation:Optional
-	BasePolicyRegion *string `json:"basePolicyRegion,omitempty" tf:"base_policy_region,omitempty"`
-
-	// A list of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
+	// List of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	BasePolicyRegions []*string `json:"basePolicyRegions,omitempty" tf:"base_policy_regions,omitempty"`
@@ -120,7 +110,7 @@ type CoreNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the global network that a core network will be a part of.
+	// ID of the global network that a core network will be a part of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -208,7 +198,7 @@ type CoreNetworkStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// CoreNetwork is the Schema for the CoreNetworks API. Provides a core network resource.
+// CoreNetwork is the Schema for the CoreNetworks API. Manages a Network Manager Core Network.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

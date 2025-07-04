@@ -17,16 +17,31 @@ type RuleGroupNamespaceInitParameters struct {
 
 	// the rule group namespace data that you want to be applied. See more in AWS Docs.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type RuleGroupNamespaceObservation struct {
+
+	// The ARN of the rule group namespace.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// the rule group namespace data that you want to be applied. See more in AWS Docs.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// ID of the prometheus workspace the rule group namespace should be linked to
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// ID of the prometheus workspace the rule group namespace should be linked to.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
@@ -36,12 +51,18 @@ type RuleGroupNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// ID of the prometheus workspace the rule group namespace should be linked to
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// ID of the prometheus workspace the rule group namespace should be linked to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amp/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

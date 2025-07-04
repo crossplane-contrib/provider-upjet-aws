@@ -15,10 +15,10 @@ import (
 
 type DiskInitParameters struct {
 
-	// The Availability Zone in which to create your disk.
+	// Availability Zone in which to create the disk.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The size of the disk in GB.
+	// Size of the disk in GB.
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// Key-value map of resource tags.
@@ -28,45 +28,46 @@ type DiskInitParameters struct {
 
 type DiskObservation struct {
 
-	// The ARN of the Lightsail disk.
+	// ARN of the disk.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Availability Zone in which to create your disk.
+	// Availability Zone in which to create the disk.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The timestamp when the disk was created.
+	// Date and time when the disk was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The name of the disk (matches name).
+	// Name of the disk (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The size of the disk in GB.
+	// Size of the disk in GB.
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
-	// The support code for the disk. Include this code in your email to support when you have questions about a disk in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+	// Support code for the disk. Include this code in your email to support when you have questions about a disk in Lightsail.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type DiskParameters struct {
 
-	// The Availability Zone in which to create your disk.
+	// Availability Zone in which to create the disk.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The size of the disk in GB.
+	// Size of the disk in GB.
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -103,7 +104,7 @@ type DiskStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Disk is the Schema for the Disks API. Provides a Lightsail Disk resource
+// Disk is the Schema for the Disks API. Manages a Lightsail block storage disk.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

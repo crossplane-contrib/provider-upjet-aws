@@ -79,8 +79,9 @@ spec:
                       timestamp. Valid values: MILLISECOND and MICROSECOND.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   streamArn:
                     description: The ARN for a Kinesis data stream. This must exist

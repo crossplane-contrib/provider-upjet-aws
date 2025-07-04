@@ -15,7 +15,7 @@ import (
 
 type GroupMembershipInitParameters struct {
 
-	// –  The IAM Group name to attach the list of users to
+	// The IAM Group name to attach the list of users to
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
@@ -48,7 +48,7 @@ type GroupMembershipInitParameters struct {
 
 type GroupMembershipObservation struct {
 
-	// –  The IAM Group name to attach the list of users to
+	// The IAM Group name to attach the list of users to
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -63,7 +63,7 @@ type GroupMembershipObservation struct {
 
 type GroupMembershipParameters struct {
 
-	// –  The IAM Group name to attach the list of users to
+	// The IAM Group name to attach the list of users to
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`

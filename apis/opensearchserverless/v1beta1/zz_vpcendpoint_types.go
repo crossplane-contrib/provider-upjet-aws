@@ -16,6 +16,7 @@ import (
 type VPCEndpointInitParameters struct {
 
 	// Name of the interface endpoint.
+	// Name of the interface endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -26,6 +27,7 @@ type VPCEndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
+	// One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
 	// One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
@@ -42,12 +44,14 @@ type VPCEndpointInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
+	// One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// ID of the VPC from which you'll access OpenSearch Serverless.
 	// ID of the VPC from which you'll access OpenSearch Serverless.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -67,16 +71,20 @@ type VPCEndpointObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the interface endpoint.
+	// Name of the interface endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
 	// One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
+	// One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// ID of the VPC from which you'll access OpenSearch Serverless.
 	// ID of the VPC from which you'll access OpenSearch Serverless.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
@@ -84,9 +92,11 @@ type VPCEndpointObservation struct {
 type VPCEndpointParameters struct {
 
 	// Name of the interface endpoint.
+	// Name of the interface endpoint.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -100,6 +110,7 @@ type VPCEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
+	// One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
 	// One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
@@ -117,6 +128,7 @@ type VPCEndpointParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
+	// One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -124,6 +136,7 @@ type VPCEndpointParameters struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// ID of the VPC from which you'll access OpenSearch Serverless.
 	// ID of the VPC from which you'll access OpenSearch Serverless.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional

@@ -89,8 +89,9 @@ spec:
                       enable. Default value: disable.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupReferencingSupport:
                     description: 'Whether Security Group Referencing Support is enabled.
@@ -828,12 +829,15 @@ spec:
                       Availability Zone for the VPC attachment for the lifetime of
                       that flow. Valid values: disable, enable. Default value: disable.'
                     type: string
+                  arn:
+                    description: ARN of the attachment.
+                    type: string
                   dnsSupport:
                     description: 'Whether DNS support is enabled. Valid values: disable,
                       enable. Default value: enable.'
                     type: string
                   id:
-                    description: EC2 Transit Gateway Attachment identifier
+                    description: EC2 Transit Gateway Attachment identifier.
                     type: string
                   ipv6Support:
                     description: 'Whether IPv6 support is enabled. Valid values: disable,

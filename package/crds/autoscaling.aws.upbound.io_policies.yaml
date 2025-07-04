@@ -2532,8 +2532,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scalingAdjustment:
                     description: Number of instances by which to scale. adjustment_type
@@ -2640,6 +2641,9 @@ spec:
                                           description: Namespace of the metric.
                                           type: string
                                       type: object
+                                    period:
+                                      description: The period of the metric in seconds.
+                                      type: number
                                     stat:
                                       description: Statistic of the metrics to return.
                                       type: string
@@ -2657,6 +2661,9 @@ spec:
                           namespace:
                             description: Namespace of the metric.
                             type: string
+                          period:
+                            description: The period of the metric in seconds.
+                            type: number
                           statistic:
                             description: Statistic of the metric.
                             type: string
@@ -3107,6 +3114,9 @@ spec:
                                           description: Namespace of the metric.
                                           type: string
                                       type: object
+                                    period:
+                                      description: The period of the metric in seconds.
+                                      type: number
                                     stat:
                                       description: Statistic of the metrics to return.
                                       type: string
@@ -3124,6 +3134,9 @@ spec:
                           namespace:
                             description: Namespace of the metric.
                             type: string
+                          period:
+                            description: The period of the metric in seconds.
+                            type: number
                           statistic:
                             description: Statistic of the metric.
                             type: string
@@ -3741,6 +3754,9 @@ spec:
                                           description: Namespace of the metric.
                                           type: string
                                       type: object
+                                    period:
+                                      description: The period of the metric in seconds.
+                                      type: number
                                     stat:
                                       description: Statistic of the metrics to return.
                                       type: string
@@ -3758,6 +3774,9 @@ spec:
                           namespace:
                             description: Namespace of the metric.
                             type: string
+                          period:
+                            description: The period of the metric in seconds.
+                            type: number
                           statistic:
                             description: Statistic of the metric.
                             type: string

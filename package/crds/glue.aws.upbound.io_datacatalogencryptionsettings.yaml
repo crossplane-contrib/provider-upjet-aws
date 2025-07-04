@@ -872,12 +872,11 @@ spec:
               forProvider:
                 properties:
                   catalogId:
-                    description: –  The ID of the Data Catalog to set the security
-                      configuration for. If none is provided, the AWS account ID is
-                      used by default.
+                    description: The ID of the Data Catalog to set the security configuration
+                      for. If none is provided, the AWS account ID is used by default.
                     type: string
                   dataCatalogEncryptionSettings:
-                    description: –  The security configuration to set. see Data Catalog
+                    description: The security configuration to set. see Data Catalog
                       Encryption Settings.
                     properties:
                       connectionPasswordEncryption:
@@ -1071,8 +1070,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -1091,12 +1091,11 @@ spec:
                   autoscaler.
                 properties:
                   catalogId:
-                    description: –  The ID of the Data Catalog to set the security
-                      configuration for. If none is provided, the AWS account ID is
-                      used by default.
+                    description: The ID of the Data Catalog to set the security configuration
+                      for. If none is provided, the AWS account ID is used by default.
                     type: string
                   dataCatalogEncryptionSettings:
-                    description: –  The security configuration to set. see Data Catalog
+                    description: The security configuration to set. see Data Catalog
                       Encryption Settings.
                     properties:
                       connectionPasswordEncryption:
@@ -1470,12 +1469,11 @@ spec:
               atProvider:
                 properties:
                   catalogId:
-                    description: –  The ID of the Data Catalog to set the security
-                      configuration for. If none is provided, the AWS account ID is
-                      used by default.
+                    description: The ID of the Data Catalog to set the security configuration
+                      for. If none is provided, the AWS account ID is used by default.
                     type: string
                   dataCatalogEncryptionSettings:
-                    description: –  The security configuration to set. see Data Catalog
+                    description: The security configuration to set. see Data Catalog
                       Encryption Settings.
                     properties:
                       connectionPasswordEncryption:

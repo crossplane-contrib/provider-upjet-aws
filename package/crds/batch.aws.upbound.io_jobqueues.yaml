@@ -171,17 +171,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  computeEnvironments:
-                    description: (Deprecated)  This parameter is deprecated, please
-                      use compute_environment_order instead. List of compute environment
-                      ARNs mapped to a job queue. The position of the compute environments
-                      in the list will dictate the order. When importing a AWS Batch
-                      Job Queue, the parameter compute_environments will always be
-                      used over compute_environment_order. Please adjust your HCL
-                      accordingly.
-                    items:
-                      type: string
-                    type: array
                   jobStateTimeLimitAction:
                     description: The set of job state time limit actions mapped to
                       a job queue. Specifies an action that AWS Batch will take after
@@ -215,8 +204,9 @@ spec:
                       are evaluated first when associated with the same compute environment.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   schedulingPolicyArn:
                     description: The ARN of the fair share scheduling policy. If this
@@ -425,17 +415,6 @@ spec:
                             value is tried for job placement first.
                           type: number
                       type: object
-                    type: array
-                  computeEnvironments:
-                    description: (Deprecated)  This parameter is deprecated, please
-                      use compute_environment_order instead. List of compute environment
-                      ARNs mapped to a job queue. The position of the compute environments
-                      in the list will dictate the order. When importing a AWS Batch
-                      Job Queue, the parameter compute_environments will always be
-                      used over compute_environment_order. Please adjust your HCL
-                      accordingly.
-                    items:
-                      type: string
                     type: array
                   jobStateTimeLimitAction:
                     description: The set of job state time limit actions mapped to
@@ -769,17 +748,6 @@ spec:
                             value is tried for job placement first.
                           type: number
                       type: object
-                    type: array
-                  computeEnvironments:
-                    description: (Deprecated)  This parameter is deprecated, please
-                      use compute_environment_order instead. List of compute environment
-                      ARNs mapped to a job queue. The position of the compute environments
-                      in the list will dictate the order. When importing a AWS Batch
-                      Job Queue, the parameter compute_environments will always be
-                      used over compute_environment_order. Please adjust your HCL
-                      accordingly.
-                    items:
-                      type: string
                     type: array
                   id:
                     type: string

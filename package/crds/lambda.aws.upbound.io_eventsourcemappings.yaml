@@ -1527,9 +1527,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: EventSourceMapping is the Schema for the EventSourceMappings
-          API. Provides a Lambda event source mapping. This allows Lambda functions
-          to get events from Kinesis, DynamoDB, SQS, Amazon MQ and Managed Streaming
-          for Apache Kafka (MSK).
+          API. Manages an AWS Lambda Event Source Mapping.
         properties:
           apiVersion:
             description: |-
@@ -1569,55 +1567,128 @@ spec:
                 properties:
                   amazonManagedKafkaEventSourceConfig:
                     description: Additional configuration block for Amazon Managed
-                      Kafka sources. Incompatible with "self_managed_event_source"
-                      and "self_managed_kafka_event_source_config". Detailed below.
+                      Kafka sources. Incompatible with self_managed_event_source and
+                      self_managed_kafka_event_source_config. See below.
                     properties:
                       consumerGroupId:
-                        description: A Kafka consumer group ID between 1 and 200 characters
+                        description: Kafka consumer group ID between 1 and 200 characters
                           for use when creating this event source mapping. If one
                           is not specified, this value will be automatically generated.
                           See AmazonManagedKafkaEventSourceConfig Syntax.
                         type: string
                     type: object
                   batchSize:
-                    description: The largest number of records that Lambda will retrieve
+                    description: Largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
                       100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
                     type: number
                   bisectBatchOnFunctionError:
-                    description: If the function returns an error, split the batch
-                      in two and retry. Only available for stream sources (DynamoDB
-                      and Kinesis). Defaults to false.
+                    description: Whether to split the batch in two and retry if the
+                      function returns an error. Only available for stream sources
+                      (DynamoDB and Kinesis). Defaults to false.
                     type: boolean
                   destinationConfig:
-                    description: An Amazon SQS queue, Amazon SNS topic or Amazon S3
-                      bucket (only available for Kafka sources) destination for failed
-                      records. Only available for stream sources (DynamoDB and Kinesis)
-                      and Kafka sources (Amazon MSK and Self-managed Apache Kafka).
-                      Detailed below.
+                    description: Amazon SQS queue, Amazon SNS topic or Amazon S3 bucket
+                      (only available for Kafka sources) destination for failed records.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      Kafka sources (Amazon MSK and Self-managed Apache Kafka). See
+                      below.
                     properties:
                       onFailure:
-                        description: The destination configuration for failed invocations.
-                          Detailed below.
+                        description: Destination configuration for failed invocations.
+                          See below.
                         properties:
                           destinationArn:
-                            description: The Amazon Resource Name (ARN) of the destination
-                              resource.
+                            description: ARN of the destination resource.
                             type: string
+                          destinationArnRef:
+                            description: Reference to a Queue in sqs to populate destinationArn.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          destinationArnSelector:
+                            description: Selector for a Queue in sqs to populate destinationArn.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
                         type: object
                     type: object
                   documentDbEventSourceConfig:
                     description: Configuration settings for a DocumentDB event source.
-                      Detailed below.
+                      See below.
                     properties:
                       collectionName:
-                        description: The name of the collection to consume within
-                          the database. If you do not specify a collection, Lambda
-                          consumes all collections.
+                        description: Name of the collection to consume within the
+                          database. If you do not specify a collection, Lambda consumes
+                          all collections.
                         type: string
                       databaseName:
-                        description: The name of the database to consume within the
-                          DocumentDB cluster.
+                        description: Name of the database to consume within the DocumentDB
+                          cluster.
                         type: string
                       fullDocument:
                         description: 'Determines what DocumentDB sends to your event
@@ -1629,35 +1700,33 @@ spec:
                         type: string
                     type: object
                   enabled:
-                    description: Determines if the mapping will be enabled on creation.
-                      Defaults to true.
+                    description: Whether the mapping is enabled. Defaults to true.
                     type: boolean
                   eventSourceArn:
-                    description: The event source ARN - this is required for Kinesis
-                      stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or
-                      DocumentDB change stream.  It is incompatible with a Self Managed
-                      Kafka source.
+                    description: Event source ARN - required for Kinesis stream, DynamoDB
+                      stream, SQS queue, MQ broker, MSK cluster or DocumentDB change
+                      stream. Incompatible with Self Managed Kafka source.
                     type: string
                   filterCriteria:
-                    description: The criteria to use for event filtering Kinesis stream,
-                      DynamoDB stream, SQS queue event sources. Detailed below.
+                    description: Criteria to use for event filtering Kinesis stream,
+                      DynamoDB stream, SQS queue event sources. See below.
                     properties:
                       filter:
-                        description: A set of up to 5 filter. If an event satisfies
+                        description: Set of up to 5 filter. If an event satisfies
                           at least one, Lambda sends the event to the function or
-                          adds it to the next batch. Detailed below.
+                          adds it to the next batch. See below.
                         items:
                           properties:
                             pattern:
-                              description: A filter pattern up to 4096 characters.
-                                See Filter Rule Syntax.
+                              description: Filter pattern up to 4096 characters. See
+                                Filter Rule Syntax.
                               type: string
                           type: object
                         type: array
                     type: object
                   functionName:
-                    description: The name or the ARN of the Lambda function that will
-                      be subscribing to events.
+                    description: Name or ARN of the Lambda function that will be subscribing
+                      to events.
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -1734,16 +1803,16 @@ spec:
                         type: object
                     type: object
                   functionResponseTypes:
-                    description: 'A list of current response type enums applied to
-                      the event source mapping for AWS Lambda checkpointing. Only
-                      available for SQS and stream sources (DynamoDB and Kinesis).
-                      Valid values: ReportBatchItemFailures.'
+                    description: 'List of current response type enums applied to the
+                      event source mapping for AWS Lambda checkpointing. Only available
+                      for SQS and stream sources (DynamoDB and Kinesis). Valid values:
+                      ReportBatchItemFailures.'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   kmsKeyArn:
-                    description: The ARN of the Key Management Service (KMS) customer
+                    description: ARN of the Key Management Service (KMS) customer
                       managed key that Lambda uses to encrypt your function's filter
                       criteria.
                     type: string
@@ -1822,24 +1891,21 @@ spec:
                         type: object
                     type: object
                   maximumBatchingWindowInSeconds:
-                    description: The maximum amount of time to gather records before
-                      invoking the function, in seconds (between 0 and 300). Records
-                      will continue to buffer (or accumulate in the case of an SQS
-                      queue event source) until either maximum_batching_window_in_seconds
-                      expires or batch_size has been met. For streaming event sources,
-                      defaults to as soon as records are available in the stream.
-                      If the batch it reads from the stream/queue only has one record
-                      in it, Lambda only sends one record to the function. Only available
+                    description: Maximum amount of time to gather records before invoking
+                      the function, in seconds (between 0 and 300). Records will continue
+                      to buffer until either maximum_batching_window_in_seconds expires
+                      or batch_size has been met. For streaming event sources, defaults
+                      to as soon as records are available in the stream. Only available
                       for stream sources (DynamoDB and Kinesis) and SQS standard queues.
                     type: number
                   maximumRecordAgeInSeconds:
-                    description: The maximum age of a record that Lambda sends to
-                      a function for processing. Only available for stream sources
-                      (DynamoDB and Kinesis). Must be either -1 (forever, and the
-                      default value) or between 60 and 604800 (inclusive).
+                    description: Maximum age of a record that Lambda sends to a function
+                      for processing. Only available for stream sources (DynamoDB
+                      and Kinesis). Must be either -1 (forever, and the default value)
+                      or between 60 and 604800 (inclusive).
                     type: number
                   maximumRetryAttempts:
-                    description: The maximum number of times to retry when the function
+                    description: Maximum number of times to retry when the function
                       returns an error. Only available for stream sources (DynamoDB
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
@@ -1847,49 +1913,50 @@ spec:
                   metricsConfig:
                     description: CloudWatch metrics configuration of the event source.
                       Only available for stream sources (DynamoDB and Kinesis) and
-                      SQS queues. Detailed below.
+                      SQS queues. See below.
                     properties:
                       metrics:
-                        description: 'A list containing the metrics to be produced
-                          by the event source mapping. Valid values: EventCount.'
+                        description: 'List containing the metrics to be produced by
+                          the event source mapping. Valid values: EventCount.'
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                     type: object
                   parallelizationFactor:
-                    description: The number of batches to process from each shard
-                      concurrently. Only available for stream sources (DynamoDB and
-                      Kinesis). Minimum and default of 1, maximum of 10.
+                    description: Number of batches to process from each shard concurrently.
+                      Only available for stream sources (DynamoDB and Kinesis). Minimum
+                      and default of 1, maximum of 10.
                     type: number
                   provisionedPollerConfig:
                     description: Event poller configuration for the event source.
                       Only valid for Amazon MSK or self-managed Apache Kafka sources.
-                      Detailed below.
+                      See below.
                     properties:
                       maximumPollers:
-                        description: The maximum number of event pollers this event
-                          source can scale up to. The range is between 1 and 2000.
+                        description: Maximum number of event pollers this event source
+                          can scale up to. The range is between 1 and 2000.
                         type: number
                       minimumPollers:
-                        description: The minimum number of event pollers this event
-                          source can scale down to. The range is between 1 and 200.
+                        description: Minimum number of event pollers this event source
+                          can scale down to. The range is between 1 and 200.
                         type: number
                     type: object
                   queues:
-                    description: The name of the Amazon MQ broker destination queue
-                      to consume. Only available for MQ sources. The list must contain
+                    description: Name of the Amazon MQ broker destination queue to
+                      consume. Only available for MQ sources. The list must contain
                       exactly one queue name.
                     items:
                       type: string
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scalingConfig:
                     description: Scaling configuration of the event source. Only available
-                      for SQS queues. Detailed below.
+                      for SQS queues. See below.
                     properties:
                       maximumConcurrency:
                         description: Limits the number of concurrent instances that
@@ -1902,13 +1969,13 @@ spec:
                   selfManagedEventSource:
                     description: For Self Managed Kafka sources, the location of the
                       self managed cluster. If set, configuration must also include
-                      source_access_configuration. Detailed below.
+                      source_access_configuration. See below.
                     properties:
                       endpoints:
                         additionalProperties:
                           type: string
-                        description: A map of endpoints for the self managed source.  For
-                          Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS
+                        description: Map of endpoints for the self managed source.
+                          For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS
                           and the value should be a string with a comma separated
                           list of broker endpoints.
                         type: object
@@ -1916,32 +1983,32 @@ spec:
                     type: object
                   selfManagedKafkaEventSourceConfig:
                     description: Additional configuration block for Self Managed Kafka
-                      sources. Incompatible with "event_source_arn" and "amazon_managed_kafka_event_source_config".
-                      Detailed below.
+                      sources. Incompatible with event_source_arn and amazon_managed_kafka_event_source_config.
+                      See below.
                     properties:
                       consumerGroupId:
-                        description: A Kafka consumer group ID between 1 and 200 characters
+                        description: Kafka consumer group ID between 1 and 200 characters
                           for use when creating this event source mapping. If one
                           is not specified, this value will be automatically generated.
                           See SelfManagedKafkaEventSourceConfig Syntax.
                         type: string
                     type: object
                   sourceAccessConfiguration:
-                    description: ':  For Self Managed Kafka sources, the access configuration
+                    description: For Self Managed Kafka sources, the access configuration
                       for the source. If set, configuration must also include self_managed_event_source.
-                      Detailed below.'
+                      See below.
                     items:
                       properties:
                         type:
-                          description: The type of authentication protocol, VPC components,
+                          description: Type of authentication protocol, VPC components,
                             or virtual host for your event source. For valid values,
                             refer to the AWS documentation.
                           type: string
                         uri:
-                          description: The URI for this configuration.  For type VPC_SUBNET
+                          description: URI for this configuration. For type VPC_SUBNET
                             the value should be subnet:subnet_id where subnet_id is
                             the value you would find in an aws_subnet resource's id
-                            attribute.  For type VPC_SECURITY_GROUP the value should
+                            attribute. For type VPC_SECURITY_GROUP the value should
                             be security_group:security_group_id where security_group_id
                             is the value you would find in an aws_security_group resource's
                             id attribute.
@@ -1949,8 +2016,8 @@ spec:
                       type: object
                     type: array
                   startingPosition:
-                    description: The position in the stream where AWS Lambda should
-                      start reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST
+                    description: Position in the stream where AWS Lambda should start
+                      reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST
                       or TRIM_HORIZON if getting events from Kinesis, DynamoDB, MSK
                       or Self Managed Apache Kafka. Must not be provided if getting
                       events from SQS. More information about these positions can
@@ -1958,8 +2025,8 @@ spec:
                       API Reference.
                     type: string
                   startingPositionTimestamp:
-                    description: A timestamp in RFC3339 format of the data record
-                      which to start reading when using starting_position set to AT_TIMESTAMP.
+                    description: Timestamp in RFC3339 format of the data record which
+                      to start reading when using starting_position set to AT_TIMESTAMP.
                       If a record with this exact timestamp does not exist, the next
                       later record is chosen. If the timestamp is older than the current
                       trim horizon, the oldest available record is chosen.
@@ -1971,16 +2038,16 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   topics:
-                    description: The name of the Kafka topics. Only available for
-                      MSK sources. A single topic name must be specified.
+                    description: Name of the Kafka topics. Only available for MSK
+                      sources. A single topic name must be specified.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   tumblingWindowInSeconds:
-                    description: The duration in seconds of a processing window for
-                      AWS Lambda streaming analytics. The range is between 1 second
-                      up to 900 seconds. Only available for stream sources (DynamoDB
+                    description: Duration in seconds of a processing window for AWS
+                      Lambda streaming analytics. The range is between 1 second up
+                      to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
                     type: number
                 required:
@@ -2001,55 +2068,128 @@ spec:
                 properties:
                   amazonManagedKafkaEventSourceConfig:
                     description: Additional configuration block for Amazon Managed
-                      Kafka sources. Incompatible with "self_managed_event_source"
-                      and "self_managed_kafka_event_source_config". Detailed below.
+                      Kafka sources. Incompatible with self_managed_event_source and
+                      self_managed_kafka_event_source_config. See below.
                     properties:
                       consumerGroupId:
-                        description: A Kafka consumer group ID between 1 and 200 characters
+                        description: Kafka consumer group ID between 1 and 200 characters
                           for use when creating this event source mapping. If one
                           is not specified, this value will be automatically generated.
                           See AmazonManagedKafkaEventSourceConfig Syntax.
                         type: string
                     type: object
                   batchSize:
-                    description: The largest number of records that Lambda will retrieve
+                    description: Largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
                       100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
                     type: number
                   bisectBatchOnFunctionError:
-                    description: If the function returns an error, split the batch
-                      in two and retry. Only available for stream sources (DynamoDB
-                      and Kinesis). Defaults to false.
+                    description: Whether to split the batch in two and retry if the
+                      function returns an error. Only available for stream sources
+                      (DynamoDB and Kinesis). Defaults to false.
                     type: boolean
                   destinationConfig:
-                    description: An Amazon SQS queue, Amazon SNS topic or Amazon S3
-                      bucket (only available for Kafka sources) destination for failed
-                      records. Only available for stream sources (DynamoDB and Kinesis)
-                      and Kafka sources (Amazon MSK and Self-managed Apache Kafka).
-                      Detailed below.
+                    description: Amazon SQS queue, Amazon SNS topic or Amazon S3 bucket
+                      (only available for Kafka sources) destination for failed records.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      Kafka sources (Amazon MSK and Self-managed Apache Kafka). See
+                      below.
                     properties:
                       onFailure:
-                        description: The destination configuration for failed invocations.
-                          Detailed below.
+                        description: Destination configuration for failed invocations.
+                          See below.
                         properties:
                           destinationArn:
-                            description: The Amazon Resource Name (ARN) of the destination
-                              resource.
+                            description: ARN of the destination resource.
                             type: string
+                          destinationArnRef:
+                            description: Reference to a Queue in sqs to populate destinationArn.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          destinationArnSelector:
+                            description: Selector for a Queue in sqs to populate destinationArn.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
                         type: object
                     type: object
                   documentDbEventSourceConfig:
                     description: Configuration settings for a DocumentDB event source.
-                      Detailed below.
+                      See below.
                     properties:
                       collectionName:
-                        description: The name of the collection to consume within
-                          the database. If you do not specify a collection, Lambda
-                          consumes all collections.
+                        description: Name of the collection to consume within the
+                          database. If you do not specify a collection, Lambda consumes
+                          all collections.
                         type: string
                       databaseName:
-                        description: The name of the database to consume within the
-                          DocumentDB cluster.
+                        description: Name of the database to consume within the DocumentDB
+                          cluster.
                         type: string
                       fullDocument:
                         description: 'Determines what DocumentDB sends to your event
@@ -2061,35 +2201,33 @@ spec:
                         type: string
                     type: object
                   enabled:
-                    description: Determines if the mapping will be enabled on creation.
-                      Defaults to true.
+                    description: Whether the mapping is enabled. Defaults to true.
                     type: boolean
                   eventSourceArn:
-                    description: The event source ARN - this is required for Kinesis
-                      stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or
-                      DocumentDB change stream.  It is incompatible with a Self Managed
-                      Kafka source.
+                    description: Event source ARN - required for Kinesis stream, DynamoDB
+                      stream, SQS queue, MQ broker, MSK cluster or DocumentDB change
+                      stream. Incompatible with Self Managed Kafka source.
                     type: string
                   filterCriteria:
-                    description: The criteria to use for event filtering Kinesis stream,
-                      DynamoDB stream, SQS queue event sources. Detailed below.
+                    description: Criteria to use for event filtering Kinesis stream,
+                      DynamoDB stream, SQS queue event sources. See below.
                     properties:
                       filter:
-                        description: A set of up to 5 filter. If an event satisfies
+                        description: Set of up to 5 filter. If an event satisfies
                           at least one, Lambda sends the event to the function or
-                          adds it to the next batch. Detailed below.
+                          adds it to the next batch. See below.
                         items:
                           properties:
                             pattern:
-                              description: A filter pattern up to 4096 characters.
-                                See Filter Rule Syntax.
+                              description: Filter pattern up to 4096 characters. See
+                                Filter Rule Syntax.
                               type: string
                           type: object
                         type: array
                     type: object
                   functionName:
-                    description: The name or the ARN of the Lambda function that will
-                      be subscribing to events.
+                    description: Name or ARN of the Lambda function that will be subscribing
+                      to events.
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -2166,16 +2304,16 @@ spec:
                         type: object
                     type: object
                   functionResponseTypes:
-                    description: 'A list of current response type enums applied to
-                      the event source mapping for AWS Lambda checkpointing. Only
-                      available for SQS and stream sources (DynamoDB and Kinesis).
-                      Valid values: ReportBatchItemFailures.'
+                    description: 'List of current response type enums applied to the
+                      event source mapping for AWS Lambda checkpointing. Only available
+                      for SQS and stream sources (DynamoDB and Kinesis). Valid values:
+                      ReportBatchItemFailures.'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   kmsKeyArn:
-                    description: The ARN of the Key Management Service (KMS) customer
+                    description: ARN of the Key Management Service (KMS) customer
                       managed key that Lambda uses to encrypt your function's filter
                       criteria.
                     type: string
@@ -2254,24 +2392,21 @@ spec:
                         type: object
                     type: object
                   maximumBatchingWindowInSeconds:
-                    description: The maximum amount of time to gather records before
-                      invoking the function, in seconds (between 0 and 300). Records
-                      will continue to buffer (or accumulate in the case of an SQS
-                      queue event source) until either maximum_batching_window_in_seconds
-                      expires or batch_size has been met. For streaming event sources,
-                      defaults to as soon as records are available in the stream.
-                      If the batch it reads from the stream/queue only has one record
-                      in it, Lambda only sends one record to the function. Only available
+                    description: Maximum amount of time to gather records before invoking
+                      the function, in seconds (between 0 and 300). Records will continue
+                      to buffer until either maximum_batching_window_in_seconds expires
+                      or batch_size has been met. For streaming event sources, defaults
+                      to as soon as records are available in the stream. Only available
                       for stream sources (DynamoDB and Kinesis) and SQS standard queues.
                     type: number
                   maximumRecordAgeInSeconds:
-                    description: The maximum age of a record that Lambda sends to
-                      a function for processing. Only available for stream sources
-                      (DynamoDB and Kinesis). Must be either -1 (forever, and the
-                      default value) or between 60 and 604800 (inclusive).
+                    description: Maximum age of a record that Lambda sends to a function
+                      for processing. Only available for stream sources (DynamoDB
+                      and Kinesis). Must be either -1 (forever, and the default value)
+                      or between 60 and 604800 (inclusive).
                     type: number
                   maximumRetryAttempts:
-                    description: The maximum number of times to retry when the function
+                    description: Maximum number of times to retry when the function
                       returns an error. Only available for stream sources (DynamoDB
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
@@ -2279,45 +2414,45 @@ spec:
                   metricsConfig:
                     description: CloudWatch metrics configuration of the event source.
                       Only available for stream sources (DynamoDB and Kinesis) and
-                      SQS queues. Detailed below.
+                      SQS queues. See below.
                     properties:
                       metrics:
-                        description: 'A list containing the metrics to be produced
-                          by the event source mapping. Valid values: EventCount.'
+                        description: 'List containing the metrics to be produced by
+                          the event source mapping. Valid values: EventCount.'
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                     type: object
                   parallelizationFactor:
-                    description: The number of batches to process from each shard
-                      concurrently. Only available for stream sources (DynamoDB and
-                      Kinesis). Minimum and default of 1, maximum of 10.
+                    description: Number of batches to process from each shard concurrently.
+                      Only available for stream sources (DynamoDB and Kinesis). Minimum
+                      and default of 1, maximum of 10.
                     type: number
                   provisionedPollerConfig:
                     description: Event poller configuration for the event source.
                       Only valid for Amazon MSK or self-managed Apache Kafka sources.
-                      Detailed below.
+                      See below.
                     properties:
                       maximumPollers:
-                        description: The maximum number of event pollers this event
-                          source can scale up to. The range is between 1 and 2000.
+                        description: Maximum number of event pollers this event source
+                          can scale up to. The range is between 1 and 2000.
                         type: number
                       minimumPollers:
-                        description: The minimum number of event pollers this event
-                          source can scale down to. The range is between 1 and 200.
+                        description: Minimum number of event pollers this event source
+                          can scale down to. The range is between 1 and 200.
                         type: number
                     type: object
                   queues:
-                    description: The name of the Amazon MQ broker destination queue
-                      to consume. Only available for MQ sources. The list must contain
+                    description: Name of the Amazon MQ broker destination queue to
+                      consume. Only available for MQ sources. The list must contain
                       exactly one queue name.
                     items:
                       type: string
                     type: array
                   scalingConfig:
                     description: Scaling configuration of the event source. Only available
-                      for SQS queues. Detailed below.
+                      for SQS queues. See below.
                     properties:
                       maximumConcurrency:
                         description: Limits the number of concurrent instances that
@@ -2330,13 +2465,13 @@ spec:
                   selfManagedEventSource:
                     description: For Self Managed Kafka sources, the location of the
                       self managed cluster. If set, configuration must also include
-                      source_access_configuration. Detailed below.
+                      source_access_configuration. See below.
                     properties:
                       endpoints:
                         additionalProperties:
                           type: string
-                        description: A map of endpoints for the self managed source.  For
-                          Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS
+                        description: Map of endpoints for the self managed source.
+                          For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS
                           and the value should be a string with a comma separated
                           list of broker endpoints.
                         type: object
@@ -2344,32 +2479,32 @@ spec:
                     type: object
                   selfManagedKafkaEventSourceConfig:
                     description: Additional configuration block for Self Managed Kafka
-                      sources. Incompatible with "event_source_arn" and "amazon_managed_kafka_event_source_config".
-                      Detailed below.
+                      sources. Incompatible with event_source_arn and amazon_managed_kafka_event_source_config.
+                      See below.
                     properties:
                       consumerGroupId:
-                        description: A Kafka consumer group ID between 1 and 200 characters
+                        description: Kafka consumer group ID between 1 and 200 characters
                           for use when creating this event source mapping. If one
                           is not specified, this value will be automatically generated.
                           See SelfManagedKafkaEventSourceConfig Syntax.
                         type: string
                     type: object
                   sourceAccessConfiguration:
-                    description: ':  For Self Managed Kafka sources, the access configuration
+                    description: For Self Managed Kafka sources, the access configuration
                       for the source. If set, configuration must also include self_managed_event_source.
-                      Detailed below.'
+                      See below.
                     items:
                       properties:
                         type:
-                          description: The type of authentication protocol, VPC components,
+                          description: Type of authentication protocol, VPC components,
                             or virtual host for your event source. For valid values,
                             refer to the AWS documentation.
                           type: string
                         uri:
-                          description: The URI for this configuration.  For type VPC_SUBNET
+                          description: URI for this configuration. For type VPC_SUBNET
                             the value should be subnet:subnet_id where subnet_id is
                             the value you would find in an aws_subnet resource's id
-                            attribute.  For type VPC_SECURITY_GROUP the value should
+                            attribute. For type VPC_SECURITY_GROUP the value should
                             be security_group:security_group_id where security_group_id
                             is the value you would find in an aws_security_group resource's
                             id attribute.
@@ -2377,8 +2512,8 @@ spec:
                       type: object
                     type: array
                   startingPosition:
-                    description: The position in the stream where AWS Lambda should
-                      start reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST
+                    description: Position in the stream where AWS Lambda should start
+                      reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST
                       or TRIM_HORIZON if getting events from Kinesis, DynamoDB, MSK
                       or Self Managed Apache Kafka. Must not be provided if getting
                       events from SQS. More information about these positions can
@@ -2386,8 +2521,8 @@ spec:
                       API Reference.
                     type: string
                   startingPositionTimestamp:
-                    description: A timestamp in RFC3339 format of the data record
-                      which to start reading when using starting_position set to AT_TIMESTAMP.
+                    description: Timestamp in RFC3339 format of the data record which
+                      to start reading when using starting_position set to AT_TIMESTAMP.
                       If a record with this exact timestamp does not exist, the next
                       later record is chosen. If the timestamp is older than the current
                       trim horizon, the oldest available record is chosen.
@@ -2399,16 +2534,16 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   topics:
-                    description: The name of the Kafka topics. Only available for
-                      MSK sources. A single topic name must be specified.
+                    description: Name of the Kafka topics. Only available for MSK
+                      sources. A single topic name must be specified.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   tumblingWindowInSeconds:
-                    description: The duration in seconds of a processing window for
-                      AWS Lambda streaming analytics. The range is between 1 second
-                      up to 900 seconds. Only available for stream sources (DynamoDB
+                    description: Duration in seconds of a processing window for AWS
+                      Lambda streaming analytics. The range is between 1 second up
+                      to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
                     type: number
                 type: object
@@ -2586,58 +2721,57 @@ spec:
                 properties:
                   amazonManagedKafkaEventSourceConfig:
                     description: Additional configuration block for Amazon Managed
-                      Kafka sources. Incompatible with "self_managed_event_source"
-                      and "self_managed_kafka_event_source_config". Detailed below.
+                      Kafka sources. Incompatible with self_managed_event_source and
+                      self_managed_kafka_event_source_config. See below.
                     properties:
                       consumerGroupId:
-                        description: A Kafka consumer group ID between 1 and 200 characters
+                        description: Kafka consumer group ID between 1 and 200 characters
                           for use when creating this event source mapping. If one
                           is not specified, this value will be automatically generated.
                           See AmazonManagedKafkaEventSourceConfig Syntax.
                         type: string
                     type: object
                   arn:
-                    description: The event source mapping ARN.
+                    description: Event source mapping ARN.
                     type: string
                   batchSize:
-                    description: The largest number of records that Lambda will retrieve
+                    description: Largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
                       100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
                     type: number
                   bisectBatchOnFunctionError:
-                    description: If the function returns an error, split the batch
-                      in two and retry. Only available for stream sources (DynamoDB
-                      and Kinesis). Defaults to false.
+                    description: Whether to split the batch in two and retry if the
+                      function returns an error. Only available for stream sources
+                      (DynamoDB and Kinesis). Defaults to false.
                     type: boolean
                   destinationConfig:
-                    description: An Amazon SQS queue, Amazon SNS topic or Amazon S3
-                      bucket (only available for Kafka sources) destination for failed
-                      records. Only available for stream sources (DynamoDB and Kinesis)
-                      and Kafka sources (Amazon MSK and Self-managed Apache Kafka).
-                      Detailed below.
+                    description: Amazon SQS queue, Amazon SNS topic or Amazon S3 bucket
+                      (only available for Kafka sources) destination for failed records.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      Kafka sources (Amazon MSK and Self-managed Apache Kafka). See
+                      below.
                     properties:
                       onFailure:
-                        description: The destination configuration for failed invocations.
-                          Detailed below.
+                        description: Destination configuration for failed invocations.
+                          See below.
                         properties:
                           destinationArn:
-                            description: The Amazon Resource Name (ARN) of the destination
-                              resource.
+                            description: ARN of the destination resource.
                             type: string
                         type: object
                     type: object
                   documentDbEventSourceConfig:
                     description: Configuration settings for a DocumentDB event source.
-                      Detailed below.
+                      See below.
                     properties:
                       collectionName:
-                        description: The name of the collection to consume within
-                          the database. If you do not specify a collection, Lambda
-                          consumes all collections.
+                        description: Name of the collection to consume within the
+                          database. If you do not specify a collection, Lambda consumes
+                          all collections.
                         type: string
                       databaseName:
-                        description: The name of the database to consume within the
-                          DocumentDB cluster.
+                        description: Name of the database to consume within the DocumentDB
+                          cluster.
                         type: string
                       fullDocument:
                         description: 'Determines what DocumentDB sends to your event
@@ -2649,46 +2783,44 @@ spec:
                         type: string
                     type: object
                   enabled:
-                    description: Determines if the mapping will be enabled on creation.
-                      Defaults to true.
+                    description: Whether the mapping is enabled. Defaults to true.
                     type: boolean
                   eventSourceArn:
-                    description: The event source ARN - this is required for Kinesis
-                      stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or
-                      DocumentDB change stream.  It is incompatible with a Self Managed
-                      Kafka source.
+                    description: Event source ARN - required for Kinesis stream, DynamoDB
+                      stream, SQS queue, MQ broker, MSK cluster or DocumentDB change
+                      stream. Incompatible with Self Managed Kafka source.
                     type: string
                   filterCriteria:
-                    description: The criteria to use for event filtering Kinesis stream,
-                      DynamoDB stream, SQS queue event sources. Detailed below.
+                    description: Criteria to use for event filtering Kinesis stream,
+                      DynamoDB stream, SQS queue event sources. See below.
                     properties:
                       filter:
-                        description: A set of up to 5 filter. If an event satisfies
+                        description: Set of up to 5 filter. If an event satisfies
                           at least one, Lambda sends the event to the function or
-                          adds it to the next batch. Detailed below.
+                          adds it to the next batch. See below.
                         items:
                           properties:
                             pattern:
-                              description: A filter pattern up to 4096 characters.
-                                See Filter Rule Syntax.
+                              description: Filter pattern up to 4096 characters. See
+                                Filter Rule Syntax.
                               type: string
                           type: object
                         type: array
                     type: object
                   functionArn:
-                    description: 'The ARN of the Lambda function the event source
-                      mapping is sending events to. (Note: this is a computed value
-                      that differs from function_name above.)'
+                    description: 'ARN of the Lambda function the event source mapping
+                      is sending events to. (Note: this is a computed value that differs
+                      from function_name above.)'
                     type: string
                   functionName:
-                    description: The name or the ARN of the Lambda function that will
-                      be subscribing to events.
+                    description: Name or ARN of the Lambda function that will be subscribing
+                      to events.
                     type: string
                   functionResponseTypes:
-                    description: 'A list of current response type enums applied to
-                      the event source mapping for AWS Lambda checkpointing. Only
-                      available for SQS and stream sources (DynamoDB and Kinesis).
-                      Valid values: ReportBatchItemFailures.'
+                    description: 'List of current response type enums applied to the
+                      event source mapping for AWS Lambda checkpointing. Only available
+                      for SQS and stream sources (DynamoDB and Kinesis). Valid values:
+                      ReportBatchItemFailures.'
                     items:
                       type: string
                     type: array
@@ -2696,36 +2828,33 @@ spec:
                   id:
                     type: string
                   kmsKeyArn:
-                    description: The ARN of the Key Management Service (KMS) customer
+                    description: ARN of the Key Management Service (KMS) customer
                       managed key that Lambda uses to encrypt your function's filter
                       criteria.
                     type: string
                   lastModified:
-                    description: The date this resource was last modified.
+                    description: Date this resource was last modified.
                     type: string
                   lastProcessingResult:
-                    description: The result of the last AWS Lambda invocation of your
+                    description: Result of the last AWS Lambda invocation of your
                       Lambda function.
                     type: string
                   maximumBatchingWindowInSeconds:
-                    description: The maximum amount of time to gather records before
-                      invoking the function, in seconds (between 0 and 300). Records
-                      will continue to buffer (or accumulate in the case of an SQS
-                      queue event source) until either maximum_batching_window_in_seconds
-                      expires or batch_size has been met. For streaming event sources,
-                      defaults to as soon as records are available in the stream.
-                      If the batch it reads from the stream/queue only has one record
-                      in it, Lambda only sends one record to the function. Only available
+                    description: Maximum amount of time to gather records before invoking
+                      the function, in seconds (between 0 and 300). Records will continue
+                      to buffer until either maximum_batching_window_in_seconds expires
+                      or batch_size has been met. For streaming event sources, defaults
+                      to as soon as records are available in the stream. Only available
                       for stream sources (DynamoDB and Kinesis) and SQS standard queues.
                     type: number
                   maximumRecordAgeInSeconds:
-                    description: The maximum age of a record that Lambda sends to
-                      a function for processing. Only available for stream sources
-                      (DynamoDB and Kinesis). Must be either -1 (forever, and the
-                      default value) or between 60 and 604800 (inclusive).
+                    description: Maximum age of a record that Lambda sends to a function
+                      for processing. Only available for stream sources (DynamoDB
+                      and Kinesis). Must be either -1 (forever, and the default value)
+                      or between 60 and 604800 (inclusive).
                     type: number
                   maximumRetryAttempts:
-                    description: The maximum number of times to retry when the function
+                    description: Maximum number of times to retry when the function
                       returns an error. Only available for stream sources (DynamoDB
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
@@ -2733,45 +2862,45 @@ spec:
                   metricsConfig:
                     description: CloudWatch metrics configuration of the event source.
                       Only available for stream sources (DynamoDB and Kinesis) and
-                      SQS queues. Detailed below.
+                      SQS queues. See below.
                     properties:
                       metrics:
-                        description: 'A list containing the metrics to be produced
-                          by the event source mapping. Valid values: EventCount.'
+                        description: 'List containing the metrics to be produced by
+                          the event source mapping. Valid values: EventCount.'
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                     type: object
                   parallelizationFactor:
-                    description: The number of batches to process from each shard
-                      concurrently. Only available for stream sources (DynamoDB and
-                      Kinesis). Minimum and default of 1, maximum of 10.
+                    description: Number of batches to process from each shard concurrently.
+                      Only available for stream sources (DynamoDB and Kinesis). Minimum
+                      and default of 1, maximum of 10.
                     type: number
                   provisionedPollerConfig:
                     description: Event poller configuration for the event source.
                       Only valid for Amazon MSK or self-managed Apache Kafka sources.
-                      Detailed below.
+                      See below.
                     properties:
                       maximumPollers:
-                        description: The maximum number of event pollers this event
-                          source can scale up to. The range is between 1 and 2000.
+                        description: Maximum number of event pollers this event source
+                          can scale up to. The range is between 1 and 2000.
                         type: number
                       minimumPollers:
-                        description: The minimum number of event pollers this event
-                          source can scale down to. The range is between 1 and 200.
+                        description: Minimum number of event pollers this event source
+                          can scale down to. The range is between 1 and 200.
                         type: number
                     type: object
                   queues:
-                    description: The name of the Amazon MQ broker destination queue
-                      to consume. Only available for MQ sources. The list must contain
+                    description: Name of the Amazon MQ broker destination queue to
+                      consume. Only available for MQ sources. The list must contain
                       exactly one queue name.
                     items:
                       type: string
                     type: array
                   scalingConfig:
                     description: Scaling configuration of the event source. Only available
-                      for SQS queues. Detailed below.
+                      for SQS queues. See below.
                     properties:
                       maximumConcurrency:
                         description: Limits the number of concurrent instances that
@@ -2784,13 +2913,13 @@ spec:
                   selfManagedEventSource:
                     description: For Self Managed Kafka sources, the location of the
                       self managed cluster. If set, configuration must also include
-                      source_access_configuration. Detailed below.
+                      source_access_configuration. See below.
                     properties:
                       endpoints:
                         additionalProperties:
                           type: string
-                        description: A map of endpoints for the self managed source.  For
-                          Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS
+                        description: Map of endpoints for the self managed source.
+                          For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS
                           and the value should be a string with a comma separated
                           list of broker endpoints.
                         type: object
@@ -2798,32 +2927,32 @@ spec:
                     type: object
                   selfManagedKafkaEventSourceConfig:
                     description: Additional configuration block for Self Managed Kafka
-                      sources. Incompatible with "event_source_arn" and "amazon_managed_kafka_event_source_config".
-                      Detailed below.
+                      sources. Incompatible with event_source_arn and amazon_managed_kafka_event_source_config.
+                      See below.
                     properties:
                       consumerGroupId:
-                        description: A Kafka consumer group ID between 1 and 200 characters
+                        description: Kafka consumer group ID between 1 and 200 characters
                           for use when creating this event source mapping. If one
                           is not specified, this value will be automatically generated.
                           See SelfManagedKafkaEventSourceConfig Syntax.
                         type: string
                     type: object
                   sourceAccessConfiguration:
-                    description: ':  For Self Managed Kafka sources, the access configuration
+                    description: For Self Managed Kafka sources, the access configuration
                       for the source. If set, configuration must also include self_managed_event_source.
-                      Detailed below.'
+                      See below.
                     items:
                       properties:
                         type:
-                          description: The type of authentication protocol, VPC components,
+                          description: Type of authentication protocol, VPC components,
                             or virtual host for your event source. For valid values,
                             refer to the AWS documentation.
                           type: string
                         uri:
-                          description: The URI for this configuration.  For type VPC_SUBNET
+                          description: URI for this configuration. For type VPC_SUBNET
                             the value should be subnet:subnet_id where subnet_id is
                             the value you would find in an aws_subnet resource's id
-                            attribute.  For type VPC_SECURITY_GROUP the value should
+                            attribute. For type VPC_SECURITY_GROUP the value should
                             be security_group:security_group_id where security_group_id
                             is the value you would find in an aws_security_group resource's
                             id attribute.
@@ -2831,8 +2960,8 @@ spec:
                       type: object
                     type: array
                   startingPosition:
-                    description: The position in the stream where AWS Lambda should
-                      start reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST
+                    description: Position in the stream where AWS Lambda should start
+                      reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST
                       or TRIM_HORIZON if getting events from Kinesis, DynamoDB, MSK
                       or Self Managed Apache Kafka. Must not be provided if getting
                       events from SQS. More information about these positions can
@@ -2840,17 +2969,17 @@ spec:
                       API Reference.
                     type: string
                   startingPositionTimestamp:
-                    description: A timestamp in RFC3339 format of the data record
-                      which to start reading when using starting_position set to AT_TIMESTAMP.
+                    description: Timestamp in RFC3339 format of the data record which
+                      to start reading when using starting_position set to AT_TIMESTAMP.
                       If a record with this exact timestamp does not exist, the next
                       later record is chosen. If the timestamp is older than the current
                       trim horizon, the oldest available record is chosen.
                     type: string
                   state:
-                    description: The state of the event source mapping.
+                    description: State of the event source mapping.
                     type: string
                   stateTransitionReason:
-                    description: The reason the event source mapping is in its current
+                    description: Reason the event source mapping is in its current
                       state.
                     type: string
                   tags:
@@ -2862,26 +2991,25 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   topics:
-                    description: The name of the Kafka topics. Only available for
-                      MSK sources. A single topic name must be specified.
+                    description: Name of the Kafka topics. Only available for MSK
+                      sources. A single topic name must be specified.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   tumblingWindowInSeconds:
-                    description: The duration in seconds of a processing window for
-                      AWS Lambda streaming analytics. The range is between 1 second
-                      up to 900 seconds. Only available for stream sources (DynamoDB
+                    description: Duration in seconds of a processing window for AWS
+                      Lambda streaming analytics. The range is between 1 second up
+                      to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
                     type: number
                   uuid:
-                    description: The UUID of the created event source mapping.
+                    description: UUID of the created event source mapping.
                     type: string
                 type: object
               conditions:

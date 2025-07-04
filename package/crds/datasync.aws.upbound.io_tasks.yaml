@@ -1887,8 +1887,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   schedule:
                     description: Specifies a schedule used to periodically transfer
@@ -1985,6 +1986,9 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  taskMode:
+                    description: 'One of the following task modes for your data transfer:'
+                    type: string
                   taskReportConfig:
                     description: Configuration block containing the configuration
                       of a DataSync Task Report. See task_report_config below.
@@ -2460,6 +2464,9 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  taskMode:
+                    description: 'One of the following task modes for your data transfer:'
+                    type: string
                   taskReportConfig:
                     description: Configuration block containing the configuration
                       of a DataSync Task Report. See task_report_config below.
@@ -2878,6 +2885,9 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  taskMode:
+                    description: 'One of the following task modes for your data transfer:'
+                    type: string
                   taskReportConfig:
                     description: Configuration block containing the configuration
                       of a DataSync Task Report. See task_report_config below.

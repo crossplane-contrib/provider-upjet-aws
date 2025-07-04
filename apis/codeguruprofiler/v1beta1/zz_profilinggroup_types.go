@@ -78,6 +78,7 @@ type ProfilingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputePlatform *string `json:"computePlatform,omitempty" tf:"compute_platform,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

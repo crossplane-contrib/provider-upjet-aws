@@ -15,80 +15,80 @@ import (
 
 type ApplicationInitParameters struct {
 
-	// –  The CPU architecture of an application. Valid values are ARM64 or X86_64. Default value is X86_64.
+	// The CPU architecture of an application. Valid values are ARM64 or X86_64. Default value is X86_64.
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
-	// –  The configuration for an application to automatically start on job submission.
+	// The configuration for an application to automatically start on job submission.
 	AutoStartConfiguration *AutoStartConfigurationInitParameters `json:"autoStartConfiguration,omitempty" tf:"auto_start_configuration,omitempty"`
 
-	// –  The configuration for an application to automatically stop after a certain amount of time being idle.
+	// The configuration for an application to automatically stop after a certain amount of time being idle.
 	AutoStopConfiguration *AutoStopConfigurationInitParameters `json:"autoStopConfiguration,omitempty" tf:"auto_stop_configuration,omitempty"`
 
-	// –  The image configuration applied to all worker types.
+	// The image configuration applied to all worker types.
 	ImageConfiguration *ImageConfigurationInitParameters `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
 
-	// –  The capacity to initialize when the application is created.
+	// The capacity to initialize when the application is created.
 	InitialCapacity []InitialCapacityInitParameters `json:"initialCapacity,omitempty" tf:"initial_capacity,omitempty"`
 
-	// –  Enables the interactive use cases to use when running an application.
+	// Enables the interactive use cases to use when running an application.
 	InteractiveConfiguration *InteractiveConfigurationInitParameters `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
 
-	// –  The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
+	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity *MaximumCapacityInitParameters `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
 
-	// –  The name of the application.
+	// The name of the application.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  The network configuration for customer VPC connectivity.
+	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// –  The EMR release version associated with the application.
+	// The EMR release version associated with the application.
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The type of application you want to start, such as spark or hive.
+	// The type of application you want to start, such as spark or hive.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ApplicationObservation struct {
 
-	// –  The CPU architecture of an application. Valid values are ARM64 or X86_64. Default value is X86_64.
+	// The CPU architecture of an application. Valid values are ARM64 or X86_64. Default value is X86_64.
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
 	// ARN of the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  The configuration for an application to automatically start on job submission.
+	// The configuration for an application to automatically start on job submission.
 	AutoStartConfiguration *AutoStartConfigurationObservation `json:"autoStartConfiguration,omitempty" tf:"auto_start_configuration,omitempty"`
 
-	// –  The configuration for an application to automatically stop after a certain amount of time being idle.
+	// The configuration for an application to automatically stop after a certain amount of time being idle.
 	AutoStopConfiguration *AutoStopConfigurationObservation `json:"autoStopConfiguration,omitempty" tf:"auto_stop_configuration,omitempty"`
 
 	// The ID of the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  The image configuration applied to all worker types.
+	// The image configuration applied to all worker types.
 	ImageConfiguration *ImageConfigurationObservation `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
 
-	// –  The capacity to initialize when the application is created.
+	// The capacity to initialize when the application is created.
 	InitialCapacity []InitialCapacityObservation `json:"initialCapacity,omitempty" tf:"initial_capacity,omitempty"`
 
-	// –  Enables the interactive use cases to use when running an application.
+	// Enables the interactive use cases to use when running an application.
 	InteractiveConfiguration *InteractiveConfigurationObservation `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
 
-	// –  The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
+	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity *MaximumCapacityObservation `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
 
-	// –  The name of the application.
+	// The name of the application.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  The network configuration for customer VPC connectivity.
+	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// –  The EMR release version associated with the application.
+	// The EMR release version associated with the application.
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
 
 	// Key-value map of resource tags.
@@ -99,54 +99,55 @@ type ApplicationObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// –  The type of application you want to start, such as spark or hive.
+	// The type of application you want to start, such as spark or hive.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ApplicationParameters struct {
 
-	// –  The CPU architecture of an application. Valid values are ARM64 or X86_64. Default value is X86_64.
+	// The CPU architecture of an application. Valid values are ARM64 or X86_64. Default value is X86_64.
 	// +kubebuilder:validation:Optional
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
-	// –  The configuration for an application to automatically start on job submission.
+	// The configuration for an application to automatically start on job submission.
 	// +kubebuilder:validation:Optional
 	AutoStartConfiguration *AutoStartConfigurationParameters `json:"autoStartConfiguration,omitempty" tf:"auto_start_configuration,omitempty"`
 
-	// –  The configuration for an application to automatically stop after a certain amount of time being idle.
+	// The configuration for an application to automatically stop after a certain amount of time being idle.
 	// +kubebuilder:validation:Optional
 	AutoStopConfiguration *AutoStopConfigurationParameters `json:"autoStopConfiguration,omitempty" tf:"auto_stop_configuration,omitempty"`
 
-	// –  The image configuration applied to all worker types.
+	// The image configuration applied to all worker types.
 	// +kubebuilder:validation:Optional
 	ImageConfiguration *ImageConfigurationParameters `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
 
-	// –  The capacity to initialize when the application is created.
+	// The capacity to initialize when the application is created.
 	// +kubebuilder:validation:Optional
 	InitialCapacity []InitialCapacityParameters `json:"initialCapacity,omitempty" tf:"initial_capacity,omitempty"`
 
-	// –  Enables the interactive use cases to use when running an application.
+	// Enables the interactive use cases to use when running an application.
 	// +kubebuilder:validation:Optional
 	InteractiveConfiguration *InteractiveConfigurationParameters `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
 
-	// –  The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
+	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	// +kubebuilder:validation:Optional
 	MaximumCapacity *MaximumCapacityParameters `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
 
-	// –  The name of the application.
+	// The name of the application.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  The network configuration for customer VPC connectivity.
+	// The network configuration for customer VPC connectivity.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// –  The EMR release version associated with the application.
+	// The EMR release version associated with the application.
 	// +kubebuilder:validation:Optional
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
 
@@ -155,7 +156,7 @@ type ApplicationParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The type of application you want to start, such as spark or hive.
+	// The type of application you want to start, such as spark or hive.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

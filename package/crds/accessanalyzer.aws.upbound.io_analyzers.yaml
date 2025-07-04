@@ -495,6 +495,31 @@ spec:
                           unused access analyzer for an AWS organization or account.
                           Documented below
                         properties:
+                          analysisRule:
+                            description: A block for analysis rules. Documented below
+                            properties:
+                              exclusion:
+                                description: A block for the analyzer rules containing
+                                  criteria to exclude from analysis. Documented below
+                                items:
+                                  properties:
+                                    accountIds:
+                                      description: A list of account IDs to exclude
+                                        from the analysis.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceTags:
+                                      description: A list of key-value pairs for resource
+                                        tags to exclude from the analysis.
+                                      items:
+                                        additionalProperties:
+                                          type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
                           unusedAccessAge:
                             description: The specified access age in days for which
                               to generate findings for unused access.
@@ -502,8 +527,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -541,6 +567,31 @@ spec:
                           unused access analyzer for an AWS organization or account.
                           Documented below
                         properties:
+                          analysisRule:
+                            description: A block for analysis rules. Documented below
+                            properties:
+                              exclusion:
+                                description: A block for the analyzer rules containing
+                                  criteria to exclude from analysis. Documented below
+                                items:
+                                  properties:
+                                    accountIds:
+                                      description: A list of account IDs to exclude
+                                        from the analysis.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceTags:
+                                      description: A list of key-value pairs for resource
+                                        tags to exclude from the analysis.
+                                      items:
+                                        additionalProperties:
+                                          type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
                           unusedAccessAge:
                             description: The specified access age in days for which
                               to generate findings for unused access.
@@ -743,6 +794,31 @@ spec:
                           unused access analyzer for an AWS organization or account.
                           Documented below
                         properties:
+                          analysisRule:
+                            description: A block for analysis rules. Documented below
+                            properties:
+                              exclusion:
+                                description: A block for the analyzer rules containing
+                                  criteria to exclude from analysis. Documented below
+                                items:
+                                  properties:
+                                    accountIds:
+                                      description: A list of account IDs to exclude
+                                        from the analysis.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceTags:
+                                      description: A list of key-value pairs for resource
+                                        tags to exclude from the analysis.
+                                      items:
+                                        additionalProperties:
+                                          type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
                           unusedAccessAge:
                             description: The specified access age in days for which
                               to generate findings for unused access.

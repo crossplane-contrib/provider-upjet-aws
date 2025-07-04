@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ImageVersion is the Schema for the ImageVersions API. Provides
-          a SageMaker Image Version resource.
+          a SageMaker AI Image Version resource.
         properties:
           apiVersion:
             description: |-
@@ -73,10 +73,19 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  aliases:
+                    description: A list of aliases for the image version.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   baseImage:
                     description: The registry path of the container image on which
                       this image version is based.
                     type: string
+                  horovod:
+                    description: Indicates Horovod compatibility.
+                    type: boolean
                   imageName:
                     description: The name of the image. Must be unique to your account.
                     type: string
@@ -154,9 +163,33 @@ spec:
                             type: string
                         type: object
                     type: object
+                  jobType:
+                    description: 'Indicates SageMaker AI job type compatibility. Valid
+                      values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.'
+                    type: string
+                  mlFramework:
+                    description: The machine learning framework vended in the image
+                      version.
+                    type: string
+                  processor:
+                    description: 'Indicates CPU or GPU compatibility. Valid values
+                      are: CPU and GPU.'
+                    type: string
+                  programmingLang:
+                    description: The supported programming language and its version.
+                    type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  releaseNotes:
+                    description: The maintainer description of the image version.
+                    type: string
+                  vendorGuidance:
+                    description: 'The stability of the image version, specified by
+                      the maintainer. Valid values are: NOT_PROVIDED, STABLE, TO_BE_ARCHIVED,
+                      and ARCHIVED.'
                     type: string
                 required:
                 - region
@@ -174,10 +207,19 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  aliases:
+                    description: A list of aliases for the image version.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   baseImage:
                     description: The registry path of the container image on which
                       this image version is based.
                     type: string
+                  horovod:
+                    description: Indicates Horovod compatibility.
+                    type: boolean
                   imageName:
                     description: The name of the image. Must be unique to your account.
                     type: string
@@ -255,6 +297,29 @@ spec:
                             type: string
                         type: object
                     type: object
+                  jobType:
+                    description: 'Indicates SageMaker AI job type compatibility. Valid
+                      values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.'
+                    type: string
+                  mlFramework:
+                    description: The machine learning framework vended in the image
+                      version.
+                    type: string
+                  processor:
+                    description: 'Indicates CPU or GPU compatibility. Valid values
+                      are: CPU and GPU.'
+                    type: string
+                  programmingLang:
+                    description: The supported programming language and its version.
+                    type: string
+                  releaseNotes:
+                    description: The maintainer description of the image version.
+                    type: string
+                  vendorGuidance:
+                    description: 'The stability of the image version, specified by
+                      the maintainer. Valid values are: NOT_PROVIDED, STABLE, TO_BE_ARCHIVED,
+                      and ARCHIVED.'
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -433,6 +498,12 @@ spec:
             properties:
               atProvider:
                 properties:
+                  aliases:
+                    description: A list of aliases for the image version.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   arn:
                     description: The Amazon Resource Name (ARN) assigned by AWS to
                       this Image Version.
@@ -445,17 +516,44 @@ spec:
                     description: The registry path of the container image that contains
                       this image version.
                     type: string
+                  horovod:
+                    description: Indicates Horovod compatibility.
+                    type: boolean
                   id:
-                    description: The name of the Image.
                     type: string
                   imageArn:
-                    description: The Amazon Resource Name (ARN) of the image the version
-                      is based on.
+                    description: The Amazon Resource Name (ARN) assigned by AWS to
+                      this Image Version.
                     type: string
                   imageName:
                     description: The name of the image. Must be unique to your account.
                     type: string
+                  jobType:
+                    description: 'Indicates SageMaker AI job type compatibility. Valid
+                      values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.'
+                    type: string
+                  mlFramework:
+                    description: The machine learning framework vended in the image
+                      version.
+                    type: string
+                  processor:
+                    description: 'Indicates CPU or GPU compatibility. Valid values
+                      are: CPU and GPU.'
+                    type: string
+                  programmingLang:
+                    description: The supported programming language and its version.
+                    type: string
+                  releaseNotes:
+                    description: The maintainer description of the image version.
+                    type: string
+                  vendorGuidance:
+                    description: 'The stability of the image version, specified by
+                      the maintainer. Valid values are: NOT_PROVIDED, STABLE, TO_BE_ARCHIVED,
+                      and ARCHIVED.'
+                    type: string
                   version:
+                    description: The version of the image. If not specified, the latest
+                      version is described.
                     type: number
                 type: object
               conditions:

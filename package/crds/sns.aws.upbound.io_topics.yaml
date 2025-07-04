@@ -246,6 +246,12 @@ spec:
                   displayName:
                     description: The display name for the topic
                     type: string
+                  fifoThroughputScope:
+                    description: Enables higher throughput for FIFO topics by adjusting
+                      the scope of deduplication. This attribute has two possible
+                      values, Topic and MessageGroup. For more information, see the
+                      related documentation.
+                    type: string
                   fifoTopic:
                     description: Boolean indicating whether or not to create a FIFO
                       (first-in-first-out) topic. FIFO topics can't deliver messages
@@ -736,8 +742,9 @@ spec:
                     description: The fully-formed AWS policy as JSON.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   signatureVersion:
                     description: If SignatureVersion should be 1 (SHA1) or 2 (SHA256).
@@ -1102,6 +1109,12 @@ spec:
                     type: string
                   displayName:
                     description: The display name for the topic
+                    type: string
+                  fifoThroughputScope:
+                    description: Enables higher throughput for FIFO topics by adjusting
+                      the scope of deduplication. This attribute has two possible
+                      values, Topic and MessageGroup. For more information, see the
+                      related documentation.
                     type: string
                   fifoTopic:
                     description: Boolean indicating whether or not to create a FIFO
@@ -1972,6 +1985,12 @@ spec:
                     type: string
                   displayName:
                     description: The display name for the topic
+                    type: string
+                  fifoThroughputScope:
+                    description: Enables higher throughput for FIFO topics by adjusting
+                      the scope of deduplication. This attribute has two possible
+                      values, Topic and MessageGroup. For more information, see the
+                      related documentation.
                     type: string
                   fifoTopic:
                     description: Boolean indicating whether or not to create a FIFO
