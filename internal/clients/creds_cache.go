@@ -21,7 +21,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
+	"github.com/upbound/provider-aws/apis/namespaced/v1beta1"
 )
 
 const (
@@ -151,7 +151,7 @@ func newCredentials(ctx context.Context, credsProvider aws.CredentialsProvider, 
 // the downstream aws.CredentialsProvider.Retrieve, and for now, does *not*
 // call the given AccountIDFn because in that case, a separate identity cache
 // should be used to retrieve the caller identity.
-func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ProviderConfig, region string, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
+func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ClusterProviderConfig, region string, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
 	// Only IRSA credentials are cached currently and
 	// only aws.CredentialsCache is supported as the underlying
 	// credential provider.
