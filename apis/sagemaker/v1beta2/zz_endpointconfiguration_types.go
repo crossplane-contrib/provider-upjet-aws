@@ -321,6 +321,10 @@ type EndpointConfigurationObservation struct {
 	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
 	ProductionVariants []ProductionVariantsObservation `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants. If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
 	ShadowProductionVariants []ShadowProductionVariantsObservation `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
@@ -362,9 +366,8 @@ type EndpointConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants. If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
 	// +kubebuilder:validation:Optional

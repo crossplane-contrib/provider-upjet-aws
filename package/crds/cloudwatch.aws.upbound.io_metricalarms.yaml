@@ -2375,6 +2375,11 @@ spec:
                       The period in seconds over which the specified statistic is applied.
                       Valid values are 10, 20, 30, or any multiple of 60.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   statistic:
                     description: |-
                       The statistic to apply to the alarm's associated metric.

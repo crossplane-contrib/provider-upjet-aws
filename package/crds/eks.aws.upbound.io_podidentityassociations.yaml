@@ -640,6 +640,11 @@ spec:
                       to create the association in. The service account and the pods
                       that use the service account must be in this namespace.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM role to
                       associate with the service account. The EKS Pod Identity agent

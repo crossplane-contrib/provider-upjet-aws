@@ -1170,6 +1170,11 @@ func (in *SigningProfilePermissionObservation) DeepCopyInto(out *SigningProfileP
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StatementID != nil {
 		in, out := &in.StatementID, &out.StatementID
 		*out = new(string)

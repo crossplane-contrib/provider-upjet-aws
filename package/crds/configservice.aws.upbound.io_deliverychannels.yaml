@@ -1015,6 +1015,11 @@ spec:
                   id:
                     description: The name of the delivery channel.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   s3BucketName:
                     description: The name of the S3 bucket used to store the configuration
                       history.

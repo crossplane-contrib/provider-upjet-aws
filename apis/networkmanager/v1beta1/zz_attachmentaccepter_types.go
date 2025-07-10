@@ -109,11 +109,6 @@ type AttachmentAccepterParameters struct {
 	// Selector for a VPCAttachment in networkmanager to populate attachmentType.
 	// +kubebuilder:validation:Optional
 	AttachmentTypeSelector *v1.Selector `json:"attachmentTypeSelector,omitempty" tf:"-"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // AttachmentAccepterSpec defines the desired state of AttachmentAccepter

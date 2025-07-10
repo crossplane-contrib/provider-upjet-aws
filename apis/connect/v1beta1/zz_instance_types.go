@@ -101,6 +101,10 @@ type InstanceObservation struct {
 	// Specifies whether outbound calls are enabled.
 	OutboundCallsEnabled *bool `json:"outboundCallsEnabled,omitempty" tf:"outbound_calls_enabled,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The service role of the instance.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
@@ -170,9 +174,8 @@ type InstanceParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

@@ -81,12 +81,6 @@ spec:
                   name:
                     description: The name of the connection.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

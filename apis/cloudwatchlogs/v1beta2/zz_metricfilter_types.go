@@ -49,6 +49,10 @@ type MetricFilterObservation struct {
 	// A valid CloudWatch Logs filter pattern
 	// for extracting metric data out of ingested log events.
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type MetricFilterParameters struct {
@@ -77,9 +81,8 @@ type MetricFilterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type MetricTransformationInitParameters struct {

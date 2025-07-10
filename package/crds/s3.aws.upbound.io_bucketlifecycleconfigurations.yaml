@@ -849,6 +849,11 @@ spec:
                   id:
                     description: and status)
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rule:
                     description: List of configuration blocks describing the rules
                       managing the replication. See below.

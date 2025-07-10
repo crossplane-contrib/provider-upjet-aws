@@ -112,11 +112,6 @@ type ProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Specifies whether instance properties are required in CreateSession requests with this profile.
 	// +kubebuilder:validation:Optional
 	RequireInstanceProperties *bool `json:"requireInstanceProperties,omitempty" tf:"require_instance_properties,omitempty"`

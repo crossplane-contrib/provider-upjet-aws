@@ -66,6 +66,10 @@ type VPCIpamPoolCidrAllocationObservation struct {
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ID of the resource.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -111,9 +115,8 @@ type VPCIpamPoolCidrAllocationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // VPCIpamPoolCidrAllocationSpec defines the desired state of VPCIpamPoolCidrAllocation

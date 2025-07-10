@@ -2980,6 +2980,12 @@ spec:
                     description: The public IP address assigned to the instance, if
                       applicable.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rootBlockDevice:
                     properties:
                       deleteOnTermination:

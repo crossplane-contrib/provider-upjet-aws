@@ -1427,6 +1427,11 @@ func (in *IdentityProviderObservation) DeepCopyInto(out *IdentityProviderObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserPoolID != nil {
 		in, out := &in.UserPoolID, &out.UserPoolID
 		*out = new(string)
@@ -3207,6 +3212,11 @@ func (in *ResourceServerObservation) DeepCopyInto(out *ResourceServerObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Scope != nil {
 		in, out := &in.Scope, &out.Scope
 		*out = make([]ScopeObservation, len(*in))
@@ -4521,6 +4531,11 @@ func (in *UserGroupObservation) DeepCopyInto(out *UserGroupObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -4772,6 +4787,11 @@ func (in *UserInGroupObservation) DeepCopyInto(out *UserInGroupObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5117,6 +5137,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 	}
 	if in.PreferredMfaSetting != nil {
 		in, out := &in.PreferredMfaSetting, &out.PreferredMfaSetting
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5765,6 +5790,11 @@ func (in *UserPoolClientObservation) DeepCopyInto(out *UserPoolClientObservation
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SupportedIdentityProviders != nil {
 		in, out := &in.SupportedIdentityProviders, &out.SupportedIdentityProviders
 		*out = make([]*string, len(*in))
@@ -6200,6 +6230,11 @@ func (in *UserPoolDomainObservation) DeepCopyInto(out *UserPoolDomainObservation
 	if in.ManagedLoginVersion != nil {
 		in, out := &in.ManagedLoginVersion, &out.ManagedLoginVersion
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.S3Bucket != nil {
@@ -7176,6 +7211,11 @@ func (in *UserPoolUICustomizationObservation) DeepCopyInto(out *UserPoolUICustom
 	}
 	if in.LastModifiedDate != nil {
 		in, out := &in.LastModifiedDate, &out.LastModifiedDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

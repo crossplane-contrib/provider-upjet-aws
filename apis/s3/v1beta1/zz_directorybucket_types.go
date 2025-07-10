@@ -45,6 +45,10 @@ type DirectoryBucketObservation struct {
 	// Bucket location. See Location below for more details.
 	Location []LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Bucket type. Valid values: Directory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -65,9 +69,8 @@ type DirectoryBucketParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Bucket type. Valid values: Directory.
 	// +kubebuilder:validation:Optional

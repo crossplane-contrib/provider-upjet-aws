@@ -1178,6 +1178,11 @@ spec:
                     type: string
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   signingAlgorithm:
                     description: 'Algorithm to use to sign certificate requests. Valid
                       values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA,

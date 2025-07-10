@@ -1399,6 +1399,11 @@ spec:
                       Default false. See the documentation on Creating DB Instances
                       for more details on controlling this property.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted.
                     type: boolean

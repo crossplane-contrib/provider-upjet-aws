@@ -85,6 +85,10 @@ type ClusterEndpointObservation struct {
 	// The RDS Cluster Endpoint Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
 	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
@@ -135,9 +139,8 @@ type ClusterEndpointParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterInstance

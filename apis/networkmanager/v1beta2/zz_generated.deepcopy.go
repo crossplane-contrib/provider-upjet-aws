@@ -458,11 +458,6 @@ func (in *ConnectAttachmentParameters) DeepCopyInto(out *ConnectAttachmentParame
 		*out = new(OptionsParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -836,11 +831,6 @@ func (in *DeviceParameters) DeepCopyInto(out *DeviceParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.SerialNumber != nil {
 		in, out := &in.SerialNumber, &out.SerialNumber
 		*out = new(string)
@@ -1191,11 +1181,6 @@ func (in *LinkParameters) DeepCopyInto(out *LinkParameters) {
 	}
 	if in.ProviderName != nil {
 		in, out := &in.ProviderName, &out.ProviderName
-		*out = new(string)
-		**out = **in
-	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1737,11 +1722,6 @@ func (in *SiteParameters) DeepCopyInto(out *SiteParameters) {
 		*out = new(SiteLocationParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2173,11 +2153,6 @@ func (in *VPCAttachmentParameters) DeepCopyInto(out *VPCAttachmentParameters) {
 		in, out := &in.Options, &out.Options
 		*out = new(VPCAttachmentOptionsParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
 	}
 	if in.SubnetArns != nil {
 		in, out := &in.SubnetArns, &out.SubnetArns

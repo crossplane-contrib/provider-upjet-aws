@@ -154,6 +154,10 @@ type UserObservation struct {
 	// A block that contains information about the phone settings for the user. Documented below.
 	PhoneConfig *UserPhoneConfigObservation `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The identifier of the routing profile for the user.
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
@@ -215,9 +219,8 @@ type UserParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The identifier of the routing profile for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.RoutingProfile

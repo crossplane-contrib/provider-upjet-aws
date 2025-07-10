@@ -127,6 +127,11 @@ func (in *ApprovalRuleTemplateAssociationObservation) DeepCopyInto(out *Approval
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RepositoryName != nil {
 		in, out := &in.RepositoryName, &out.RepositoryName
 		*out = new(string)
@@ -321,6 +326,11 @@ func (in *ApprovalRuleTemplateObservation) DeepCopyInto(out *ApprovalRuleTemplat
 	}
 	if in.LastModifiedUser != nil {
 		in, out := &in.LastModifiedUser, &out.LastModifiedUser
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -556,6 +566,11 @@ func (in *RepositoryObservation) DeepCopyInto(out *RepositoryObservation) {
 	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -810,6 +825,11 @@ func (in *TriggerObservation) DeepCopyInto(out *TriggerObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

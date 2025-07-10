@@ -727,6 +727,11 @@ spec:
                   licenseInfo:
                     description: License info for your Lambda Layer. See License Info.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   s3Bucket:
                     description: S3 bucket location containing the function's deployment
                       package. Conflicts with filename. This bucket must reside in

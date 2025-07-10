@@ -1252,6 +1252,11 @@ spec:
                     description: URL that users are redirected to after their streaming
                       session ends.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   storageConnectors:
                     description: |-
                       Configuration block for the storage connectors to enable.

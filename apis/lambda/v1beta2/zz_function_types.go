@@ -359,6 +359,10 @@ type FunctionObservation struct {
 	// Qualified ARN (ARN with lambda version number) to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	QualifiedInvokeArn *string `json:"qualifiedInvokeArn,omitempty" tf:"qualified_invoke_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether to replace the security groups on the function's VPC configuration prior to destruction. Default is false.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
@@ -510,9 +514,8 @@ type FunctionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether to replace the security groups on the function's VPC configuration prior to destruction. Default is false.
 	// +kubebuilder:validation:Optional

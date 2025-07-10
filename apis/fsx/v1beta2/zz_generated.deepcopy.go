@@ -592,6 +592,11 @@ func (in *DataRepositoryAssociationObservation) DeepCopyInto(out *DataRepository
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.S3 != nil {
 		in, out := &in.S3, &out.S3
 		*out = new(S3Observation)
@@ -1576,6 +1581,11 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RootSquashConfiguration != nil {
 		in, out := &in.RootSquashConfiguration, &out.RootSquashConfiguration
 		*out = new(RootSquashConfigurationObservation)
@@ -2455,6 +2465,11 @@ func (in *OntapFileSystemObservation) DeepCopyInto(out *OntapFileSystemObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RouteTableIds != nil {
 		in, out := &in.RouteTableIds, &out.RouteTableIds
 		*out = make([]*string, len(*in))
@@ -3010,6 +3025,11 @@ func (in *OntapStorageVirtualMachineObservation) DeepCopyInto(out *OntapStorageV
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4138,6 +4158,11 @@ func (in *WindowsFileSystemObservation) DeepCopyInto(out *WindowsFileSystemObser
 	}
 	if in.PreferredSubnetID != nil {
 		in, out := &in.PreferredSubnetID, &out.PreferredSubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

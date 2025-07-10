@@ -148,6 +148,10 @@ type SelectionObservation struct {
 	// The backup plan ID to be associated with the selection of resources.
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
@@ -210,9 +214,8 @@ type SelectionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance

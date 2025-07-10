@@ -470,6 +470,10 @@ spec:
                     type: string
                   principalArn:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -130,6 +130,11 @@ func (in *BudgetResourceAssociationObservation) DeepCopyInto(out *BudgetResource
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceID != nil {
 		in, out := &in.ResourceID, &out.ResourceID
 		*out = new(string)
@@ -391,6 +396,11 @@ func (in *ConstraintObservation) DeepCopyInto(out *ConstraintObservation) {
 	}
 	if in.ProductID != nil {
 		in, out := &in.ProductID, &out.ProductID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -779,6 +789,11 @@ func (in *PortfolioObservation) DeepCopyInto(out *PortfolioObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1018,6 +1033,11 @@ func (in *PortfolioShareObservation) DeepCopyInto(out *PortfolioShareObservation
 	}
 	if in.PrincipalID != nil {
 		in, out := &in.PrincipalID, &out.PrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1327,6 +1347,11 @@ func (in *PrincipalPortfolioAssociationObservation) DeepCopyInto(out *PrincipalP
 	}
 	if in.PrincipalType != nil {
 		in, out := &in.PrincipalType, &out.PrincipalType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1928,6 +1953,11 @@ func (in *ProductPortfolioAssociationObservation) DeepCopyInto(out *ProductPortf
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourcePortfolioID != nil {
 		in, out := &in.SourcePortfolioID, &out.SourcePortfolioID
 		*out = new(string)
@@ -2259,6 +2289,11 @@ func (in *ProvisioningArtifactObservation) DeepCopyInto(out *ProvisioningArtifac
 	}
 	if in.ProvisioningArtifactID != nil {
 		in, out := &in.ProvisioningArtifactID, &out.ProvisioningArtifactID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2866,6 +2901,11 @@ func (in *TagOptionObservation) DeepCopyInto(out *TagOptionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
 		*out = new(string)
@@ -3027,6 +3067,11 @@ func (in *TagOptionResourceAssociationObservation) DeepCopyInto(out *TagOptionRe
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -11,7 +11,6 @@ spec:
     name: www.example.com
     recordsRefs:
     - name: lb
-    region: us-west-1
     ttl: 300
     type: A
     zoneIdSelector:

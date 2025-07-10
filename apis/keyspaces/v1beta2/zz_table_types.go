@@ -376,6 +376,10 @@ type TableObservation struct {
 	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
 	PointInTimeRecovery *PointInTimeRecoveryObservation `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Describes the schema of the table.
 	SchemaDefinition *SchemaDefinitionObservation `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
@@ -435,9 +439,8 @@ type TableParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Describes the schema of the table.
 	// +kubebuilder:validation:Optional

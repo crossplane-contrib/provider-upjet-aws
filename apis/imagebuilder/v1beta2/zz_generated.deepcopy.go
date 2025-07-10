@@ -1150,6 +1150,11 @@ func (in *ContainerRecipeObservation) DeepCopyInto(out *ContainerRecipeObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1562,6 +1567,11 @@ func (in *DistributionConfigurationObservation) DeepCopyInto(out *DistributionCo
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2518,6 +2528,11 @@ func (in *ImageObservation) DeepCopyInto(out *ImageObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3099,6 +3114,11 @@ func (in *ImagePipelineObservation) DeepCopyInto(out *ImagePipelineObservation) 
 	}
 	if in.Platform != nil {
 		in, out := &in.Platform, &out.Platform
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -3909,6 +3929,11 @@ func (in *ImageRecipeObservation) DeepCopyInto(out *ImageRecipeObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SystemsManagerAgent != nil {
 		in, out := &in.SystemsManagerAgent, &out.SystemsManagerAgent
 		*out = new(SystemsManagerAgentObservation)
@@ -4669,6 +4694,11 @@ func (in *InfrastructureConfigurationObservation) DeepCopyInto(out *Infrastructu
 		in, out := &in.Placement, &out.Placement
 		*out = new(PlacementObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.ResourceTags != nil {
 		in, out := &in.ResourceTags, &out.ResourceTags

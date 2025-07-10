@@ -443,6 +443,11 @@ spec:
                   id:
                     description: A combination of "snapshot_id-account_id".
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   snapshotId:
                     description: A snapshot ID
                     type: string

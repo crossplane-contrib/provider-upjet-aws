@@ -514,6 +514,11 @@ spec:
                   id:
                     description: Unique ID of the appstream User Stack association.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sendEmailNotification:
                     description: Whether a welcome email is sent to a user after the
                       user is created in the user pool.

@@ -649,6 +649,11 @@ spec:
                       REDHAT_ENTERPRISE_LINUX, ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS.
                       The default value is WINDOWS.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rejectedPatches:
                     description: List of rejected patches.
                     items:

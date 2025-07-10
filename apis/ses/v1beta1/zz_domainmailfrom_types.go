@@ -47,6 +47,10 @@ type DomainMailFromObservation struct {
 
 	// Subdomain (of above domain) which is to be used as MAIL FROM address
 	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DomainMailFromParameters struct {
@@ -74,9 +78,8 @@ type DomainMailFromParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // DomainMailFromSpec defines the desired state of DomainMailFrom

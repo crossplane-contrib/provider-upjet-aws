@@ -46,6 +46,7 @@ spec:
             }
           ]
         })}
+    region: us-west-1
 
 ---
 

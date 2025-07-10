@@ -73,11 +73,6 @@ type QueryLogParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Route53 hosted zone ID to enable query logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("zone_id",true)

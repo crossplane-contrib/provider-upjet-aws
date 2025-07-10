@@ -1059,6 +1059,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroupIds:
                     description: A list of the one or more VPC security groups to
                       be associated with the serverless cache. The security group

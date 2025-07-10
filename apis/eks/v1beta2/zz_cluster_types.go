@@ -187,6 +187,10 @@ type ClusterObservation struct {
 	// Platform version for the cluster.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block with remote network configuration for EKS Hybrid Nodes. Detailed below.
 	RemoteNetworkConfig *RemoteNetworkConfigObservation `json:"remoteNetworkConfig,omitempty" tf:"remote_network_config,omitempty"`
 
@@ -257,9 +261,8 @@ type ClusterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block with remote network configuration for EKS Hybrid Nodes. Detailed below.
 	// +kubebuilder:validation:Optional

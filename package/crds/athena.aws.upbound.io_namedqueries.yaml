@@ -628,6 +628,11 @@ spec:
                     description: Text of the query itself. In other words, all query
                       statements. Maximum length of 262144.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   workgroup:
                     description: Workgroup to which the query belongs. Defaults to
                       primary

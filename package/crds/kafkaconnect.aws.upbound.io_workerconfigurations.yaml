@@ -323,6 +323,11 @@ spec:
                     description: Contents of connect-distributed.properties file.
                       The value can be either base64 encoded or in raw format.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

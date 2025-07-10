@@ -173,6 +173,11 @@ func (in *DevicePoolObservation) DeepCopyInto(out *DevicePoolObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
 		*out = make([]RuleObservation, len(*in))
@@ -500,6 +505,11 @@ func (in *InstanceProfileObservation) DeepCopyInto(out *InstanceProfileObservati
 	if in.RebootAfterUse != nil {
 		in, out := &in.RebootAfterUse, &out.RebootAfterUse
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -856,6 +866,11 @@ func (in *NetworkProfileObservation) DeepCopyInto(out *NetworkProfileObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1186,6 +1201,11 @@ func (in *ProjectObservation) DeepCopyInto(out *ProjectObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1812,6 +1832,11 @@ func (in *UploadObservation) DeepCopyInto(out *UploadObservation) {
 	}
 	if in.ProjectArn != nil {
 		in, out := &in.ProjectArn, &out.ProjectArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

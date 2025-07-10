@@ -147,6 +147,10 @@ type GlobalReplicationGroupObservation struct {
 	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
 	PrimaryReplicationGroupID *string `json:"primaryReplicationGroupId,omitempty" tf:"primary_replication_group_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A flag that indicates whether the encryption in transit is enabled.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
@@ -211,9 +215,8 @@ type GlobalReplicationGroupParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // GlobalReplicationGroupSpec defines the desired state of GlobalReplicationGroup

@@ -41,6 +41,10 @@ type DomainServiceAccessPolicyObservation struct {
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DomainServiceAccessPolicyParameters struct {
@@ -65,9 +69,8 @@ type DomainServiceAccessPolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // DomainServiceAccessPolicySpec defines the desired state of DomainServiceAccessPolicy

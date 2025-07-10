@@ -513,10 +513,6 @@ spec:
                     description: The name or description of the SQL Injection Match
                       Set.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   sqlInjectionMatchTuples:
                     description: The parts of web requests that you want AWS WAF to
                       inspect for malicious SQL code and, if you want AWS WAF to inspect
@@ -550,8 +546,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

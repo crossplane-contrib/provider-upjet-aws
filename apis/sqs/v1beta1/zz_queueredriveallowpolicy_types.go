@@ -40,6 +40,10 @@ type QueueRedriveAllowPolicyObservation struct {
 
 	// The JSON redrive allow policy for the SQS queue. Learn more in the Amazon SQS dead-letter queues documentation.
 	RedriveAllowPolicy *string `json:"redriveAllowPolicy,omitempty" tf:"redrive_allow_policy,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type QueueRedriveAllowPolicyParameters struct {
@@ -64,9 +68,8 @@ type QueueRedriveAllowPolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // QueueRedriveAllowPolicySpec defines the desired state of QueueRedriveAllowPolicy

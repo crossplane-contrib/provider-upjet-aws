@@ -23,4 +23,3 @@ spec:
             matchLabels:
               testing.upbound.io/example-name: test
           queryArg: Arg1
-    region: us-west-1

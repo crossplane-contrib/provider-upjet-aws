@@ -601,6 +601,11 @@ func (in *DeliveryStreamObservation) DeepCopyInto(out *DeliveryStreamObservation
 		*out = new(RedshiftConfigurationObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerSideEncryption != nil {
 		in, out := &in.ServerSideEncryption, &out.ServerSideEncryption
 		*out = new(ServerSideEncryptionObservation)

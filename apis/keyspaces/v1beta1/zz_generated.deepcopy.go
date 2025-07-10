@@ -556,6 +556,11 @@ func (in *KeyspaceObservation) DeepCopyInto(out *KeyspaceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationSpecification != nil {
 		in, out := &in.ReplicationSpecification, &out.ReplicationSpecification
 		*out = new(ReplicationSpecificationObservation)

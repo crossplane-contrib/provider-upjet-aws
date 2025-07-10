@@ -130,6 +130,11 @@ func (in *PrincipalAssociationObservation) DeepCopyInto(out *PrincipalAssociatio
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceShareArn != nil {
 		in, out := &in.ResourceShareArn, &out.ResourceShareArn
 		*out = new(string)
@@ -331,6 +336,11 @@ func (in *ResourceAssociationObservation) DeepCopyInto(out *ResourceAssociationO
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -562,6 +572,11 @@ func (in *ResourceShareAccepterObservation) DeepCopyInto(out *ResourceShareAccep
 	}
 	if in.ReceiverAccountID != nil {
 		in, out := &in.ReceiverAccountID, &out.ReceiverAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -800,6 +815,11 @@ func (in *ResourceShareObservation) DeepCopyInto(out *ResourceShareObservation) 
 				**out = **in
 			}
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

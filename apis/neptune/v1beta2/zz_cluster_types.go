@@ -259,6 +259,10 @@ type ClusterObservation struct {
 	// Read-only endpoint for the Neptune cluster, automatically load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
@@ -415,9 +419,8 @@ type ClusterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta2.Cluster

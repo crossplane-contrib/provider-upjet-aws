@@ -391,6 +391,11 @@ func (in *StateMachineObservation) DeepCopyInto(out *StateMachineObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RevisionID != nil {
 		in, out := &in.RevisionID, &out.RevisionID
 		*out = new(string)

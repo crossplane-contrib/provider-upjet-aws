@@ -932,6 +932,11 @@ func (in *BackendEnvironmentObservation) DeepCopyInto(out *BackendEnvironmentObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StackName != nil {
 		in, out := &in.StackName, &out.StackName
 		*out = new(string)
@@ -1308,6 +1313,11 @@ func (in *BranchObservation) DeepCopyInto(out *BranchObservation) {
 	}
 	if in.PullRequestEnvironmentName != nil {
 		in, out := &in.PullRequestEnvironmentName, &out.PullRequestEnvironmentName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1901,6 +1911,11 @@ func (in *WebhookObservation) DeepCopyInto(out *WebhookObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

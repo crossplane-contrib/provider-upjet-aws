@@ -205,6 +205,10 @@ type EnvironmentObservation struct {
 	// The relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	PluginsS3Path *string `json:"pluginsS3Path,omitempty" tf:"plugins_s3_path,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The requirements.txt file version you want to use.
 	RequirementsS3ObjectVersion *string `json:"requirementsS3ObjectVersion,omitempty" tf:"requirements_s3_object_version,omitempty"`
 
@@ -333,9 +337,8 @@ type EnvironmentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The requirements.txt file version you want to use.
 	// +kubebuilder:validation:Optional

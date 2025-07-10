@@ -144,11 +144,6 @@ type FieldLevelEncryptionConfigParameters struct {
 	// Query Arg Profile Config that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
 	// +kubebuilder:validation:Optional
 	QueryArgProfileConfig *QueryArgProfileConfigParameters `json:"queryArgProfileConfig,omitempty" tf:"query_arg_profile_config,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type QueryArgProfileConfigInitParameters struct {

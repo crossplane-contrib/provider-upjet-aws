@@ -1176,6 +1176,11 @@ spec:
                     description: The AWS account ID and access point name separated
                       by a colon (:).
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: 'The current status of the Multi-Region Access Point.
                       One of: READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED,

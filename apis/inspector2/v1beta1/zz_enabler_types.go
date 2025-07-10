@@ -36,6 +36,10 @@ type EnablerObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Type of resources to scan.
 	// Valid values are EC2, ECR, LAMBDA and LAMBDA_CODE.
 	// At least one item is required.
@@ -53,9 +57,8 @@ type EnablerParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Type of resources to scan.
 	// Valid values are EC2, ECR, LAMBDA and LAMBDA_CODE.

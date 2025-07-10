@@ -602,11 +602,6 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	PriceClass *string `json:"priceClass,omitempty" tf:"price_class,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// The restriction configuration for this distribution (maximum one).
 	// +kubebuilder:validation:Optional
 	Restrictions *RestrictionsParameters `json:"restrictions,omitempty" tf:"restrictions,omitempty"`

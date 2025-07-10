@@ -115,6 +115,10 @@ type ScheduledActionObservation struct {
 	// Name of the scheduled action.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Identifier of the resource associated with the scheduled action. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -149,9 +153,8 @@ type ScheduledActionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Identifier of the resource associated with the scheduled action. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target

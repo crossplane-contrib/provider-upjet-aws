@@ -1130,6 +1130,11 @@ spec:
                   peerVpcId:
                     description: The ID of the requester VPC.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requester:
                     description: |-
                       A configuration block that describes [VPC Peering Connection]

@@ -154,6 +154,10 @@ type ClusterObservation struct {
 	// The port used by the configuration endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The number of nodes in the DAX cluster. A
 	// replication factor of 1 will create a single-node cluster, without any read
 	// replicas
@@ -239,9 +243,8 @@ type ClusterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The number of nodes in the DAX cluster. A
 	// replication factor of 1 will create a single-node cluster, without any read

@@ -449,6 +449,11 @@ spec:
                       source may be used, so long as it specifies a principal. Note:
                       Bucket policies are limited to 20 KB in size.'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

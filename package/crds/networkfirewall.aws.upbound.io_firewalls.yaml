@@ -2011,6 +2011,11 @@ spec:
                   name:
                     description: A friendly name of the firewall.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   subnetChangeProtection:
                     description: A flag indicating whether the firewall is protected
                       against changes to the subnet associations. Use this setting

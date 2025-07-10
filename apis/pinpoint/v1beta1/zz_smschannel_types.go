@@ -51,6 +51,10 @@ type SMSChannelObservation struct {
 	// Maximum number of promotional messages that can be sent per second.
 	PromotionalMessagesPerSecond *float64 `json:"promotionalMessagesPerSecond,omitempty" tf:"promotional_messages_per_second,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Identifier of the sender for your messages.
 	SenderID *string `json:"senderId,omitempty" tf:"sender_id,omitempty"`
 
@@ -83,9 +87,8 @@ type SMSChannelParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Identifier of the sender for your messages.
 	// +kubebuilder:validation:Optional

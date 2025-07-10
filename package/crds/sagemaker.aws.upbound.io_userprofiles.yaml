@@ -4860,6 +4860,11 @@ spec:
                   id:
                     description: The user profile Amazon Resource Name (ARN).
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   singleSignOnUserIdentifier:
                     description: A specifier for the type of value specified in single_sign_on_user_value.
                       Currently, the only supported value is UserName. If the Domain's

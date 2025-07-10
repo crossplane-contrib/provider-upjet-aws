@@ -473,6 +473,11 @@ spec:
                     description: Date and time the resource was last modified in RFC
                       3339 format.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: Role that has read/write access to the resource.
                     type: string

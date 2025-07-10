@@ -64,6 +64,10 @@ type ClusterActivityStreamObservation struct {
 	// Specifies the mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. One of: sync, async.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the DB cluster.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
@@ -93,9 +97,8 @@ type ClusterActivityStreamParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the DB cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Cluster

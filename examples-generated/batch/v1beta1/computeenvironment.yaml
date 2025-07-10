@@ -43,6 +43,7 @@ metadata:
   name: ecs-instance-role
 spec:
   forProvider:
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -60,6 +61,7 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.batch_assume_role.json}
+    region: us-west-1
 
 ---
 
@@ -74,6 +76,7 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.ec2_assume_role.json}
+    region: us-west-1
 
 ---
 
@@ -90,6 +93,7 @@ spec:
     policyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: aws_batch_service_role
@@ -109,6 +113,7 @@ spec:
     policyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: ecs_instance_role

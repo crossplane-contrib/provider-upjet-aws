@@ -59,6 +59,10 @@ type MaintenanceWindowTargetObservation struct {
 	// User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
 	OwnerInformation *string `json:"ownerInformation,omitempty" tf:"owner_information,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The type of target being registered with the Maintenance Window. Possible values are INSTANCE and RESOURCE_GROUP.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
@@ -86,9 +90,8 @@ type MaintenanceWindowTargetParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The type of target being registered with the Maintenance Window. Possible values are INSTANCE and RESOURCE_GROUP.
 	// +kubebuilder:validation:Optional

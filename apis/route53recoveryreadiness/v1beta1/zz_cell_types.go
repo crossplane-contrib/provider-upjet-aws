@@ -51,11 +51,6 @@ type CellParameters struct {
 	// +kubebuilder:validation:Optional
 	Cells []*string `json:"cells,omitempty" tf:"cells,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular

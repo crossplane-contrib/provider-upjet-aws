@@ -52,6 +52,10 @@ type TransitGatewayVPCAttachmentAccepterObservation struct {
 	// Whether IPv6 support is enabled. Valid values: disable, enable.
 	IPv6Support *string `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable.
 	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 
@@ -90,9 +94,8 @@ type TransitGatewayVPCAttachmentAccepterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

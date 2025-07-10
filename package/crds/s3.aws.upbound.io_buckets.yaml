@@ -1476,6 +1476,11 @@ spec:
                       Valid bucket policy JSON document. In this case, please make sure you use the verbose/specific version of the policy.
                       Use the resource aws_s3_bucket_policy instead.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicationConfiguration:
                     description: |-
                       Configuration of replication configuration. See Replication Configuration below for details.

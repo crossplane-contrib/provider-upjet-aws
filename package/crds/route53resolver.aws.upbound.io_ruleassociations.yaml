@@ -598,6 +598,11 @@ spec:
                     description: A name for the association that you're creating between
                       a resolver rule and a VPC.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolverRuleId:
                     description: The ID of the resolver rule that you want to associate
                       with the VPC.

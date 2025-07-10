@@ -62,11 +62,6 @@ type TrafficPolicyParameters struct {
 	// Name of the traffic policy.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // TrafficPolicySpec defines the desired state of TrafficPolicy

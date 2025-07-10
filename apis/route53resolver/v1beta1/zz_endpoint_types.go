@@ -84,6 +84,10 @@ type EndpointObservation struct {
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Endpoint IP type. This endpoint type is applied to all IP addresses.
 	// Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
 	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
@@ -126,9 +130,8 @@ type EndpointParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Endpoint IP type. This endpoint type is applied to all IP addresses.
 	// Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).

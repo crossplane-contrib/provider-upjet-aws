@@ -1584,6 +1584,11 @@ spec:
                   name:
                     description: The display name of a backup plan.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rule:
                     description: A rule object that specifies a scheduled task that
                       is used to back up a selection of resources.

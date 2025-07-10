@@ -27,6 +27,10 @@ type GlobalTableObservation struct {
 	// The name of the DynamoDB Global Table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Underlying DynamoDB Table. At least 1 replica must be defined. See below.
 	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 }
@@ -35,9 +39,8 @@ type GlobalTableParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Underlying DynamoDB Table. At least 1 replica must be defined. See below.
 	// +kubebuilder:validation:Optional

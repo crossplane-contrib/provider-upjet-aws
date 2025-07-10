@@ -24,6 +24,10 @@ type AWSConfigurationRecorderStatusObservation struct {
 
 	// Whether the configuration recorder should be enabled or disabled.
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AWSConfigurationRecorderStatusParameters struct {
@@ -34,9 +38,8 @@ type AWSConfigurationRecorderStatusParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // AWSConfigurationRecorderStatusSpec defines the desired state of AWSConfigurationRecorderStatus

@@ -57,6 +57,10 @@ type ModelObservation struct {
 	// Name of the model. Must be alphanumeric. Must be between 1 and 128 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
@@ -90,9 +94,8 @@ type ModelParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
 	// +kubebuilder:validation:Optional

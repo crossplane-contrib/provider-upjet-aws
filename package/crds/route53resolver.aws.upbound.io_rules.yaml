@@ -540,6 +540,11 @@ spec:
                     description: When a rule is shared with another AWS account, the
                       account ID of the account that the rule is shared with.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolverEndpointId:
                     description: |-
                       ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.

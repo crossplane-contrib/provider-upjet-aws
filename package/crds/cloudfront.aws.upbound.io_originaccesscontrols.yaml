@@ -84,10 +84,6 @@ spec:
                       is for. Valid values are lambda, mediapackagev2, mediastore,
                       and s3.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   signingBehavior:
                     description: 'Specifies which requests CloudFront signs. Specify
                       always for the most common use case. Allowed values: always,
@@ -97,8 +93,6 @@ spec:
                     description: Determines how CloudFront signs (authenticates) requests.
                       The only valid value is sigv4.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

@@ -44,6 +44,10 @@ type AliasObservation struct {
 	// ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	InvokeArn *string `json:"invokeArn,omitempty" tf:"invoke_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Lambda alias' route configuration settings. See below.
 	RoutingConfig *RoutingConfigObservation `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 }
@@ -73,9 +77,8 @@ type AliasParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Lambda alias' route configuration settings. See below.
 	// +kubebuilder:validation:Optional

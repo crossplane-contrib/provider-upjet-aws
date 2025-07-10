@@ -109,6 +109,10 @@ type BucketMetricObservation struct {
 
 	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type BucketMetricParameters struct {
@@ -137,9 +141,8 @@ type BucketMetricParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // BucketMetricSpec defines the desired state of BucketMetric

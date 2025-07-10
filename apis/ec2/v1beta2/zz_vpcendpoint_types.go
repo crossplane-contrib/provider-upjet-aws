@@ -219,6 +219,10 @@ type VPCEndpointObservation struct {
 	// Defaults to false.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether or not the VPC Endpoint is being managed by its service - true or false.
 	RequesterManaged *bool `json:"requesterManaged,omitempty" tf:"requester_managed,omitempty"`
 
@@ -293,9 +297,8 @@ type VPCEndpointParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +kubebuilder:validation:Optional

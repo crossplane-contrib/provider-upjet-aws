@@ -29,6 +29,10 @@ type BotAssociationObservation struct {
 
 	// Configuration information of an Amazon Lex (V1) bot. Detailed below.
 	LexBot *LexBotObservation `json:"lexBot,omitempty" tf:"lex_bot,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type BotAssociationParameters struct {
@@ -53,9 +57,8 @@ type BotAssociationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type LexBotInitParameters struct {

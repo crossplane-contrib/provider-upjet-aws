@@ -192,6 +192,10 @@ type FleetObservation struct {
 	// Operating system of the fleet's computing resources.
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Policy that limits the number of game sessions an individual player can create over a span of time for this fleet. See below.
 	ResourceCreationLimitPolicy *ResourceCreationLimitPolicyObservation `json:"resourceCreationLimitPolicy,omitempty" tf:"resource_creation_limit_policy,omitempty"`
 
@@ -276,9 +280,8 @@ type FleetParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Policy that limits the number of game sessions an individual player can create over a span of time for this fleet. See below.
 	// +kubebuilder:validation:Optional

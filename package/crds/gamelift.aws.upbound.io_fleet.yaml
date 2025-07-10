@@ -1940,6 +1940,11 @@ spec:
                   operatingSystem:
                     description: Operating system of the fleet's computing resources.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceCreationLimitPolicy:
                     description: Policy that limits the number of game sessions an
                       individual player can create over a span of time for this fleet.

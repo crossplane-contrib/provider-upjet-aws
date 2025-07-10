@@ -211,6 +211,11 @@ func (in *GeofenceCollectionObservation) DeepCopyInto(out *GeofenceCollectionObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -758,6 +763,11 @@ func (in *RouteCalculatorObservation) DeepCopyInto(out *RouteCalculatorObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1032,6 +1042,11 @@ func (in *TrackerAssociationObservation) DeepCopyInto(out *TrackerAssociationObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TrackerName != nil {
 		in, out := &in.TrackerName, &out.TrackerName
 		*out = new(string)
@@ -1247,6 +1262,11 @@ func (in *TrackerObservation) DeepCopyInto(out *TrackerObservation) {
 	}
 	if in.PositionFiltering != nil {
 		in, out := &in.PositionFiltering, &out.PositionFiltering
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

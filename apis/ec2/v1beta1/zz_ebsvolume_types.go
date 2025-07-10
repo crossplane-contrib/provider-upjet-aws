@@ -94,6 +94,10 @@ type EBSVolumeObservation struct {
 	// Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Size of the drive in GiBs.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
@@ -156,9 +160,8 @@ type EBSVolumeParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Size of the drive in GiBs.
 	// +kubebuilder:validation:Optional

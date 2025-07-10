@@ -676,6 +676,11 @@ spec:
                   id:
                     description: The name of the Redshift event notification subscription
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   severity:
                     description: The event severity to be published by the notification
                       subscription. Valid options are INFO or ERROR. Default value

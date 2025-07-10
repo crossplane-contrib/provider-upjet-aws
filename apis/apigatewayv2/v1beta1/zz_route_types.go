@@ -144,6 +144,10 @@ type RouteObservation struct {
 	// Operation name for the route. Must be between 1 and 64 characters in length.
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Request models for the route. Supported only for WebSocket APIs.
 	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
@@ -215,9 +219,8 @@ type RouteParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Request models for the route. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional

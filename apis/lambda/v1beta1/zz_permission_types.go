@@ -92,6 +92,10 @@ type PermissionObservation struct {
 	// Lambda function version or alias name
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// AWS account ID of the source owner for cross-account access, S3, or SES
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 
@@ -155,9 +159,8 @@ type PermissionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// AWS account ID of the source owner for cross-account access, S3, or SES
 	// +kubebuilder:validation:Optional

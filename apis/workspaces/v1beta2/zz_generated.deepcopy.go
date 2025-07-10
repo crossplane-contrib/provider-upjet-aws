@@ -454,6 +454,11 @@ func (in *DirectoryObservation) DeepCopyInto(out *DirectoryObservation) {
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RegistrationCode != nil {
 		in, out := &in.RegistrationCode, &out.RegistrationCode
 		*out = new(string)

@@ -52,6 +52,10 @@ type KinesisStreamingDestinationObservation struct {
 	// The table_name and stream_arn separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
@@ -67,9 +71,8 @@ type KinesisStreamingDestinationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream

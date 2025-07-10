@@ -33,6 +33,10 @@ type DomainEntryObservation struct {
 	// Whether the entry should be an alias. Default: false.
 	IsAlias *bool `json:"isAlias,omitempty" tf:"is_alias,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Target of the domain entry.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
@@ -62,9 +66,8 @@ type DomainEntryParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Target of the domain entry.
 	// +kubebuilder:validation:Optional

@@ -75,10 +75,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   vpcId:
                     description: The VPC to authorize for association with the private
                       hosted zone.
@@ -239,8 +235,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

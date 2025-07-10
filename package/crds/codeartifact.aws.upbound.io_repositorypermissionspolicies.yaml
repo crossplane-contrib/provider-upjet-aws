@@ -484,6 +484,11 @@ spec:
                       others from overwriting your changes to the domain's resource
                       policy.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   repository:
                     description: The name of the repository to set the resource policy
                       on.

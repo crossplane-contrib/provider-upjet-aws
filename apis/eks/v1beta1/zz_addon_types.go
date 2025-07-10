@@ -107,6 +107,10 @@ type AddonObservation struct {
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Documentation.
 	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
 
@@ -169,9 +173,8 @@ type AddonParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Documentation.
 	// +kubebuilder:validation:Optional

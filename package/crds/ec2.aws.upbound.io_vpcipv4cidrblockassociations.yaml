@@ -474,6 +474,11 @@ spec:
                     description: The netmask length of the IPv4 CIDR you want to allocate
                       to this VPC. Requires specifying a ipv4_ipam_pool_id.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   vpcId:
                     description: The ID of the VPC to make the association with.
                     type: string

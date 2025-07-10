@@ -1446,6 +1446,11 @@ spec:
                     description: The outpost ARN in which the cache cluster will be
                       created.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicationGroupId:
                     description: ID of the replication group to which this cluster
                       should belong. If this parameter is specified, the cluster is

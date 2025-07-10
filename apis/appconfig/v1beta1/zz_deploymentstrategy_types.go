@@ -67,6 +67,10 @@ type DeploymentStrategyObservation struct {
 	// Name for the deployment strategy. Must be between 1 and 64 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Where to save the deployment strategy. Valid values: NONE and SSM_DOCUMENT.
 	ReplicateTo *string `json:"replicateTo,omitempty" tf:"replicate_to,omitempty"`
 
@@ -107,9 +111,8 @@ type DeploymentStrategyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Where to save the deployment strategy. Valid values: NONE and SSM_DOCUMENT.
 	// +kubebuilder:validation:Optional

@@ -607,6 +607,11 @@ spec:
                   pathPart:
                     description: Last path segment of this API resource.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   restApiId:
                     description: ID of the associated REST API
                     type: string

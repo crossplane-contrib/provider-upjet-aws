@@ -830,6 +830,10 @@ type TargetObservation struct {
 	// Parameters used when you are using the rule to invoke an Amazon Redshift Statement. Documented below. A maximum of 1 are allowed.
 	RedshiftTarget *RedshiftTargetObservation `json:"redshiftTarget,omitempty" tf:"redshift_target,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Parameters used when you are providing retry policies. Documented below. A maximum of 1 are allowed.
 	RetryPolicy *RetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
@@ -918,9 +922,8 @@ type TargetParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Parameters used when you are providing retry policies. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional

@@ -3506,6 +3506,11 @@ spec:
                   name:
                     description: A friendly name of the rule group.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleGroup:
                     description: A configuration block that defines the rule group
                       rules. Required unless rules is specified. See Rule Group below

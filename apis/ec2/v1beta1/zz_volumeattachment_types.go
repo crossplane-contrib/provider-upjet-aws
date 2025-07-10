@@ -78,6 +78,10 @@ type VolumeAttachmentObservation struct {
 	// ID of the Instance to attach to
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// This is
 	// useful when destroying an instance which has volumes created by some other
 	// means attached.
@@ -121,9 +125,8 @@ type VolumeAttachmentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// This is
 	// useful when destroying an instance which has volumes created by some other

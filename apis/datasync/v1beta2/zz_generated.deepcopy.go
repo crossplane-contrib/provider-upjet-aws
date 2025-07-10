@@ -318,6 +318,11 @@ func (in *LocationS3Observation) DeepCopyInto(out *LocationS3Observation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.S3BucketArn != nil {
 		in, out := &in.S3BucketArn, &out.S3BucketArn
 		*out = new(string)
@@ -1316,6 +1321,11 @@ func (in *TaskObservation) DeepCopyInto(out *TaskObservation) {
 		in, out := &in.Options, &out.Options
 		*out = new(OptionsObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Schedule != nil {
 		in, out := &in.Schedule, &out.Schedule

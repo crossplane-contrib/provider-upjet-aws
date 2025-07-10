@@ -27,6 +27,10 @@ type TagObservation struct {
 	// Tag name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Amazon Resource Name (ARN) of the DynamoDB resource to tag.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -42,9 +46,8 @@ type TagParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of the DynamoDB resource to tag.
 	// +kubebuilder:validation:Required

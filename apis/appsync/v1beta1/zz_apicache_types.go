@@ -58,6 +58,10 @@ type APICacheObservation struct {
 	// AppSync API ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// TTL in seconds for cache entries.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
@@ -94,9 +98,8 @@ type APICacheParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// TTL in seconds for cache entries.
 	// +kubebuilder:validation:Optional

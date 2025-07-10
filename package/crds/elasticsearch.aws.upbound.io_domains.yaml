@@ -3210,6 +3210,11 @@ spec:
                           new domain requires an elasticsearch_version of 6.0 or greater.
                         type: boolean
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   snapshotOptions:
                     description: Configuration block for snapshot related options.
                       Detailed below. DEPRECATED. For domains running Elasticsearch

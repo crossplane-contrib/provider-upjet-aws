@@ -9658,6 +9658,11 @@ func (in *ImageObservation) DeepCopyInto(out *ImageObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -10009,6 +10014,11 @@ func (in *ImageVersionObservation) DeepCopyInto(out *ImageVersionObservation) {
 	}
 	if in.ProgrammingLang != nil {
 		in, out := &in.ProgrammingLang, &out.ProgrammingLang
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -12551,6 +12561,11 @@ func (in *MlflowTrackingServerObservation) DeepCopyInto(out *MlflowTrackingServe
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -13309,6 +13324,11 @@ func (in *ModelPackageGroupObservation) DeepCopyInto(out *ModelPackageGroupObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -13498,6 +13518,11 @@ func (in *ModelPackageGroupPolicyObservation) DeepCopyInto(out *ModelPackageGrou
 	}
 	if in.ModelPackageGroupName != nil {
 		in, out := &in.ModelPackageGroupName, &out.ModelPackageGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -14190,6 +14215,11 @@ func (in *NotebookInstanceLifecycleConfigurationObservation) DeepCopyInto(out *N
 	}
 	if in.OnStart != nil {
 		in, out := &in.OnStart, &out.OnStart
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -17958,6 +17988,11 @@ func (in *ServicecatalogPortfolioStatusObservation) DeepCopyInto(out *Servicecat
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -21048,6 +21083,11 @@ func (in *StudioLifecycleConfigObservation) DeepCopyInto(out *StudioLifecycleCon
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

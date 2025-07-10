@@ -81,11 +81,6 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`

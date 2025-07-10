@@ -404,6 +404,10 @@ type VPNConnectionObservation struct {
 	// Storage mode for the pre-shared key (PSK). Valid values are Standard (stored in the Site-to-Site VPN service) or SecretsManager (stored in AWS Secrets Manager).
 	PresharedKeyStorage *string `json:"presharedKeyStorage,omitempty" tf:"preshared_key_storage,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The IPv4 CIDR on the AWS side of the VPN connection.
 	RemoteIPv4NetworkCidr *string `json:"remoteIpv4NetworkCidr,omitempty" tf:"remote_ipv4_network_cidr,omitempty"`
 
@@ -642,9 +646,8 @@ type VPNConnectionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The IPv4 CIDR on the AWS side of the VPN connection.
 	// +kubebuilder:validation:Optional

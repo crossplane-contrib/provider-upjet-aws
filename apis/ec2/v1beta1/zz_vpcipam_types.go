@@ -87,6 +87,10 @@ type VPCIpamObservation struct {
 	// IP space. The public scope is intended for all internet-routable IP space.
 	PublicDefaultScopeID *string `json:"publicDefaultScopeId,omitempty" tf:"public_default_scope_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The number of scopes in the IPAM.
 	ScopeCount *float64 `json:"scopeCount,omitempty" tf:"scope_count,omitempty"`
 
@@ -122,9 +126,8 @@ type VPCIpamParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

@@ -479,6 +479,10 @@ type ClusterObservation struct {
 	// load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
@@ -793,9 +797,8 @@ type ClusterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	// +kubebuilder:validation:Optional

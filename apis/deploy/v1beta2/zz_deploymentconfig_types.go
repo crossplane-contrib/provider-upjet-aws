@@ -45,6 +45,10 @@ type DeploymentConfigObservation struct {
 	// A minimum_healthy_hosts block. Required for Server compute platform. Minimum Healthy Hosts are documented below.
 	MinimumHealthyHosts *MinimumHealthyHostsObservation `json:"minimumHealthyHosts,omitempty" tf:"minimum_healthy_hosts,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A traffic_routing_config block. Traffic Routing Config is documented below.
 	TrafficRoutingConfig *TrafficRoutingConfigObservation `json:"trafficRoutingConfig,omitempty" tf:"traffic_routing_config,omitempty"`
 
@@ -64,9 +68,8 @@ type DeploymentConfigParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A traffic_routing_config block. Traffic Routing Config is documented below.
 	// +kubebuilder:validation:Optional

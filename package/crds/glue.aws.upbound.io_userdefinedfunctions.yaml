@@ -435,6 +435,11 @@ spec:
                   ownerType:
                     description: The owner type. can be one of USER, ROLE, and GROUP.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceUris:
                     description: The configuration block for Resource URIs. See resource
                       uris below for more details.

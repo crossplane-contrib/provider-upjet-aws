@@ -197,6 +197,10 @@ type FleetObservation struct {
 	// Nested argument containing On-Demand configurations. Defined below.
 	OnDemandOptions *OnDemandOptionsObservation `json:"onDemandOptions,omitempty" tf:"on_demand_options,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether EC2 Fleet should replace unhealthy instances. Defaults to false. Supported only for fleets of type maintain.
 	ReplaceUnhealthyInstances *bool `json:"replaceUnhealthyInstances,omitempty" tf:"replace_unhealthy_instances,omitempty"`
 
@@ -266,9 +270,8 @@ type FleetParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether EC2 Fleet should replace unhealthy instances. Defaults to false. Supported only for fleets of type maintain.
 	// +kubebuilder:validation:Optional

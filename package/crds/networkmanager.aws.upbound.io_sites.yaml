@@ -724,18 +724,12 @@ spec:
                         description: Longitude of the location.
                         type: string
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

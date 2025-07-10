@@ -2067,6 +2067,11 @@ spec:
                       Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
                       Defaults to false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requesterManaged:
                     description: Whether or not the VPC Endpoint is being managed
                       by its service - true or false.

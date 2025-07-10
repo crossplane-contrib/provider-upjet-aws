@@ -444,6 +444,11 @@ spec:
                     description: The recurring schedule for this action specified
                       using the Unix cron syntax format.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   startTime:
                     description: The date and time for the recurring schedule to start,
                       in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").

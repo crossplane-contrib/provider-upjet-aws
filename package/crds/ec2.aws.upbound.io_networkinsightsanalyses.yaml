@@ -1317,6 +1317,11 @@ spec:
                   pathFound:
                     description: Set to true if the destination was reachable.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   returnPathComponents:
                     description: The components in the path from destination to source.
                       See the AWS documentation for details.

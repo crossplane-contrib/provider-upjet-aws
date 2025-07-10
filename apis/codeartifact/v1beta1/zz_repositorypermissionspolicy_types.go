@@ -42,6 +42,10 @@ type RepositoryPermissionsPolicyObservation struct {
 	// The current revision of the resource policy to be set. This revision is used for optimistic locking, which prevents others from overwriting your changes to the domain's resource policy.
 	PolicyRevision *string `json:"policyRevision,omitempty" tf:"policy_revision,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The name of the repository to set the resource policy on.
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 
@@ -79,9 +83,8 @@ type RepositoryPermissionsPolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the repository to set the resource policy on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codeartifact/v1beta1.Repository

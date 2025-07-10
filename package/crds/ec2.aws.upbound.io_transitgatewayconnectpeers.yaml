@@ -557,6 +557,11 @@ spec:
                       will be used as tunnel endpoint. It can be IPv4 or IPv6 address,
                       but must be the same address family as transit_gateway_address
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

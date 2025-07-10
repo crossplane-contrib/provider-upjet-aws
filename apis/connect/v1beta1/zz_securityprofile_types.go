@@ -67,6 +67,10 @@ type SecurityProfileObservation struct {
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The identifier for the Security Profile.
 	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 
@@ -110,9 +114,8 @@ type SecurityProfileParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

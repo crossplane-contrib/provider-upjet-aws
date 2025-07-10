@@ -608,6 +608,11 @@ spec:
                     description: DB Cluster Identifier and IAM Role ARN separated
                       by a comma (,)
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role to associate
                       with the DB Cluster.

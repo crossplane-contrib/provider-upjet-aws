@@ -508,6 +508,11 @@ spec:
                     description: Indicates whether to permanently restore an archived
                       snapshot.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   storageTier:
                     description: The name of the storage tier. Valid values are archive
                       and standard. Default value is standard.

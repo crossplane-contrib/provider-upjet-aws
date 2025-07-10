@@ -88,6 +88,10 @@ type NetworkACLRuleObservation struct {
 	// The protocol. A value of -1 means all protocols.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Indicates whether to allow or deny the traffic that matches the rule. Accepted values: allow | deny
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
@@ -144,9 +148,8 @@ type NetworkACLRuleParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Indicates whether to allow or deny the traffic that matches the rule. Accepted values: allow | deny
 	// +kubebuilder:validation:Optional

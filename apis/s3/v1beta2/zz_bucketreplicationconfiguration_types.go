@@ -89,6 +89,10 @@ type BucketReplicationConfigurationObservation struct {
 	// S3 source bucket name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ARN of the IAM role for Amazon S3 to assume when replicating the objects.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -114,9 +118,8 @@ type BucketReplicationConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of the IAM role for Amazon S3 to assume when replicating the objects.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

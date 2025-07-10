@@ -363,6 +363,11 @@ func (in *SecretObservation) DeepCopyInto(out *SecretObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Replica != nil {
 		in, out := &in.Replica, &out.Replica
 		*out = make([]ReplicaObservation, len(*in))
@@ -606,6 +611,11 @@ func (in *SecretPolicyObservation) DeepCopyInto(out *SecretPolicyObservation) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1136,6 +1146,11 @@ func (in *SecretVersionObservation) DeepCopyInto(out *SecretVersionObservation) 
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

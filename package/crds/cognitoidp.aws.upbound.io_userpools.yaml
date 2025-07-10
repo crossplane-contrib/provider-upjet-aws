@@ -7656,6 +7656,11 @@ spec:
                           need to be reset by an administrator.
                         type: number
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schema:
                     description: Configuration block for the schema attributes of
                       a user pool. Detailed below. Schema attributes from the standard

@@ -314,6 +314,10 @@ type S3EndpointObservation struct {
 	// Whether DMS saves the transaction order for a CDC load on the S3 target specified by cdc_path. Default is false. (Ignored for source endpoints.)
 	PreserveTransactions *bool `json:"preserveTransactions,omitempty" tf:"preserve_transactions,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// For an S3 source, whether each leading double quotation mark has to be followed by an ending double quotation mark. Default is true.
 	Rfc4180 *bool `json:"rfc4180,omitempty" tf:"rfc_4180,omitempty"`
 
@@ -515,9 +519,8 @@ type S3EndpointParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// For an S3 source, whether each leading double quotation mark has to be followed by an ending double quotation mark. Default is true.
 	// +kubebuilder:validation:Optional

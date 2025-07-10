@@ -630,6 +630,11 @@ func (in *IPGroupObservation) DeepCopyInto(out *IPGroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Rules != nil {
 		in, out := &in.Rules, &out.Rules
 		*out = make([]RulesObservation, len(*in))

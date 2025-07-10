@@ -70,6 +70,10 @@ type IntegrationResponseObservation struct {
 	// Integration response key.
 	IntegrationResponseKey *string `json:"integrationResponseKey,omitempty" tf:"integration_response_key,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
@@ -116,9 +120,8 @@ type IntegrationResponseParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
 	// +kubebuilder:validation:Optional

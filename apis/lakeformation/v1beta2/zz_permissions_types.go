@@ -348,6 +348,10 @@ type PermissionsObservation struct {
 	// Principal to be granted the permissions on the resource. Supported principals include IAM_ALLOWED_PRINCIPALS (see Default Behavior and  above), IAM roles, users, groups, Federated Users, SAML groups and users, QuickSight groups, OUs, and organizations as well as AWS account IDs for cross-account permissions. For more information, see Lake Formation Permissions Reference.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for a table resource. Detailed below.
 	Table *TableObservation `json:"table,omitempty" tf:"table,omitempty"`
 
@@ -401,9 +405,8 @@ type PermissionsParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for a table resource. Detailed below.
 	// +kubebuilder:validation:Optional

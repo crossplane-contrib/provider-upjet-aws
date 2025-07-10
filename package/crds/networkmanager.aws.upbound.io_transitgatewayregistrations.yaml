@@ -153,10 +153,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   transitGatewayArn:
                     description: ARN of the Transit Gateway to register.
                     type: string
@@ -236,8 +232,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

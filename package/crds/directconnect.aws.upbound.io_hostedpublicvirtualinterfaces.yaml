@@ -562,6 +562,11 @@ spec:
                   ownerAccountId:
                     description: The AWS account that will own the new virtual interface.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routeFilterPrefixes:
                     description: A list of routes to be advertised to the AWS network
                       in this region.

@@ -4217,6 +4217,11 @@ spec:
                           and CRAWL_NEW_FOLDERS_ONLY. Default value is CRAWL_EVERYTHING.'
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   role:
                     description: The IAM role friendly name (including path without
                       leading slash), or ARN of an IAM role, used by the crawler to

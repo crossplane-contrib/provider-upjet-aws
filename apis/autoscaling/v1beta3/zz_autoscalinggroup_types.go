@@ -391,6 +391,10 @@ type AutoscalingGroupObservation struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ARN of the service-linked role that the ASG will use to call other AWS services
 	ServiceLinkedRoleArn *string `json:"serviceLinkedRoleArn,omitempty" tf:"service_linked_role_arn,omitempty"`
 
@@ -589,9 +593,8 @@ type AutoscalingGroupParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of the service-linked role that the ASG will use to call other AWS services
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

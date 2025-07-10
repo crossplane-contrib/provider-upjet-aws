@@ -2846,6 +2846,11 @@ func (in *SSHKeyObservation) DeepCopyInto(out *SSHKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SSHKeyID != nil {
 		in, out := &in.SSHKeyID, &out.SSHKeyID
 		*out = new(string)
@@ -4618,6 +4623,11 @@ func (in *TagObservation) DeepCopyInto(out *TagObservation) {
 	}
 	if in.Key != nil {
 		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

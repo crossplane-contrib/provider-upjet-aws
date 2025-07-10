@@ -38,6 +38,10 @@ type TagOptionObservation struct {
 
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Tag option value.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -54,9 +58,8 @@ type TagOptionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Tag option value.
 	// +kubebuilder:validation:Optional

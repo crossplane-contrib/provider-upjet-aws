@@ -14,7 +14,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: daisyguttridge
-    region: us-west-1
     ruleConfig:
     - inverted: false
       threshold: 1

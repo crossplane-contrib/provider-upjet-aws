@@ -1365,6 +1365,11 @@ func (in *MemberObservation) DeepCopyInto(out *MemberObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RelationshipStatus != nil {
 		in, out := &in.RelationshipStatus, &out.RelationshipStatus
 		*out = new(string)

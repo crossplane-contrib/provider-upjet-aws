@@ -63,6 +63,10 @@ type PrincipalPortfolioAssociationObservation struct {
 
 	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type PrincipalPortfolioAssociationParameters struct {
@@ -104,9 +108,8 @@ type PrincipalPortfolioAssociationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // PrincipalPortfolioAssociationSpec defines the desired state of PrincipalPortfolioAssociation

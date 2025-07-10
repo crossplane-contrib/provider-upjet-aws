@@ -322,6 +322,10 @@ type LBObservation struct {
 	// Whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
 	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -446,9 +450,8 @@ type LBParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional

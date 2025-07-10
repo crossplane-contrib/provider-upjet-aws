@@ -349,6 +349,11 @@ spec:
                       must contain only alphanumeric characters or hyphens, and must
                       not begin or end with a hyphen.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

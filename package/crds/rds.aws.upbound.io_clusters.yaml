@@ -5724,6 +5724,11 @@ spec:
                       Read-only endpoint for the Aurora cluster, automatically
                       load-balanced across replicas
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicationSourceIdentifier:
                     description: 'ARN of a source DB cluster or DB instance if this
                       DB cluster is to be created as a Read Replica. Note: Removing

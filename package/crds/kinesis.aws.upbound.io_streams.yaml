@@ -1160,6 +1160,11 @@ spec:
                       for encryption. You can also use a Kinesis-owned master key
                       by specifying the alias alias/aws/kinesis.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionPeriod:
                     description: Length of time data records are accessible after
                       they are added to the stream. The maximum value of a stream's

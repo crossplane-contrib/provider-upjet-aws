@@ -1538,6 +1538,11 @@ spec:
                       the element to SAVE Amazon Lex saves the bot, but doesn't build
                       it. Default is SAVE.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: |-
                       When you send a request to create or update a bot, Amazon Lex sets the status response

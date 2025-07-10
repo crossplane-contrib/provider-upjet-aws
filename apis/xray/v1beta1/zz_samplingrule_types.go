@@ -78,6 +78,10 @@ type SamplingRuleObservation struct {
 	// The priority of the sampling rule.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
 	ReservoirSize *float64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
 
@@ -130,9 +134,8 @@ type SamplingRuleParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
 	// +kubebuilder:validation:Optional

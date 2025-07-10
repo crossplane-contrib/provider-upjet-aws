@@ -1271,6 +1271,11 @@ spec:
                   id:
                     description: The Redshift Scheduled Action name.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schedule:
                     description: The schedule of action. The schedule is defined format
                       of "at expression" or "cron expression", for example at(2016-03-04T17:27:00)

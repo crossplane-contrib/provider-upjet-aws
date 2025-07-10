@@ -725,6 +725,11 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   trustedResourceOwners:
                     description: List of the resource-owning account IDs that the
                       caller's account can use to share their user access details

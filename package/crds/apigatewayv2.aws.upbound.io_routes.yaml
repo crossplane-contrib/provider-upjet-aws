@@ -899,6 +899,11 @@ spec:
                     description: Operation name for the route. Must be between 1 and
                       64 characters in length.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requestModels:
                     additionalProperties:
                       type: string

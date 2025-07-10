@@ -982,10 +982,6 @@ spec:
                   model:
                     description: Model of device.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   serialNumber:
                     description: Serial number of the device.
                     type: string
@@ -1080,8 +1076,6 @@ spec:
                   vendor:
                     description: Vendor of the device.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

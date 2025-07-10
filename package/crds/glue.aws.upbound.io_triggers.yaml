@@ -2575,6 +2575,11 @@ spec:
                           AND. Valid values are AND or ANY.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schedule:
                     description: A cron expression used to specify the schedule. Time-Based
                       Schedules for Jobs and Crawlers

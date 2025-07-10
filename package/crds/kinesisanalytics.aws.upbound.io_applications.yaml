@@ -4399,6 +4399,11 @@ spec:
                         description: The in-application Table Name.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   startApplication:
                     description: |-
                       Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured.

@@ -1333,10 +1333,6 @@ spec:
                   name:
                     description: A unique name to identify the response headers policy.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   removeHeadersConfig:
                     description: A configuration for a set of HTTP headers to remove
                       from the HTTP response. Object that contains an attribute items
@@ -1486,8 +1482,6 @@ spec:
                           of 0.0. Maximum value of 100.0.'
                         type: number
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

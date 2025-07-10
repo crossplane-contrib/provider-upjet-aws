@@ -37,6 +37,10 @@ type LifecyclePolicyObservation struct {
 	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the policy argument.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
@@ -52,9 +56,8 @@ type LifecyclePolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the repository to apply the policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecr/v1beta2.Repository

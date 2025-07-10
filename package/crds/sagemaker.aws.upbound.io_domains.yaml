@@ -9845,6 +9845,11 @@ spec:
                     description: The AWS KMS customer managed CMK used to encrypt
                       the EFS volume attached to the domain.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionPolicy:
                     description: The retention policy for this domain, which specifies
                       whether resources will be retained after the Domain is deleted.

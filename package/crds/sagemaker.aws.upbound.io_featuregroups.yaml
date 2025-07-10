@@ -1786,6 +1786,11 @@ spec:
                       a Record defined in the Feature Store. Only the latest record
                       per identifier value will be stored in the Online Store.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM execution
                       role used to persist data into the Offline Store if an offline_store_config

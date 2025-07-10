@@ -446,6 +446,11 @@ spec:
                       docs. Consider using the aws_ecr_lifecycle_policy_document data_source
                       to generate/manage the JSON document used for the policy argument.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   registryId:
                     description: The registry ID where the repository was created.
                     type: string

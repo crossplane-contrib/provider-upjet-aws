@@ -56,6 +56,10 @@ type ConfigurationTemplateObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Option settings to configure the new Environment. These
 	// override specific values that are set as defaults. The format is detailed
 	// below in Option Settings
@@ -91,9 +95,8 @@ type ConfigurationTemplateParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Option settings to configure the new Environment. These
 	// override specific values that are set as defaults. The format is detailed

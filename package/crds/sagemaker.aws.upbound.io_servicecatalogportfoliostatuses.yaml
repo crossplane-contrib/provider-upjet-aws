@@ -287,6 +287,11 @@ spec:
                     description: The AWS Region the Servicecatalog portfolio status
                       resides in.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: Whether Service Catalog is enabled or disabled in
                       SageMaker. Valid values are Enabled and Disabled.

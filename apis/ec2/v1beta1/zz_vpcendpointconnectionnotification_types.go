@@ -64,6 +64,10 @@ type VPCEndpointConnectionNotificationObservation struct {
 	// The type of notification.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The state of the notification.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -97,9 +101,8 @@ type VPCEndpointConnectionNotificationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the VPC Endpoint to receive notifications for.
 	// +kubebuilder:validation:Optional

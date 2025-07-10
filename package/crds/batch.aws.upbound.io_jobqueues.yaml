@@ -783,6 +783,11 @@ spec:
                       The priority of the job queue. Job queues with a higher priority
                       are evaluated first when associated with the same compute environment.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schedulingPolicyArn:
                     description: The ARN of the fair share scheduling policy. If this
                       parameter is specified, the job queue uses a fair share scheduling

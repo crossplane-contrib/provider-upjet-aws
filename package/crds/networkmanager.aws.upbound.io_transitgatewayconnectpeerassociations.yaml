@@ -235,10 +235,6 @@ spec:
                   linkId:
                     description: ID of the link.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   transitGatewayConnectPeerArn:
                     description: ARN of the Connect peer.
                     type: string
@@ -318,8 +314,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

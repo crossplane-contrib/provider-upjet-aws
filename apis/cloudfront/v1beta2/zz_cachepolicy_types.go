@@ -89,11 +89,6 @@ type CachePolicyParameters struct {
 	// Configuration for including HTTP headers, cookies, and URL query strings in the cache key. For more information, refer to the Parameters In Cache Key And Forwarded To Origin section.
 	// +kubebuilder:validation:Optional
 	ParametersInCacheKeyAndForwardedToOrigin *ParametersInCacheKeyAndForwardedToOriginParameters `json:"parametersInCacheKeyAndForwardedToOrigin,omitempty" tf:"parameters_in_cache_key_and_forwarded_to_origin,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type CookiesConfigInitParameters struct {

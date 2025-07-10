@@ -38,6 +38,10 @@ type ResourceShareAccepterObservation struct {
 	// The account ID of the receiver account which accepts the invitation.
 	ReceiverAccountID *string `json:"receiverAccountId,omitempty" tf:"receiver_account_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A list of the resource ARNs shared via the resource share.
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -61,9 +65,8 @@ type ResourceShareAccepterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.PrincipalAssociation

@@ -584,6 +584,11 @@ spec:
                   id:
                     description: A hash of the EC2 Route Table and VPC Endpoint identifiers.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routeTableId:
                     description: Identifier of the EC2 Route Table to be associated
                       with the VPC Endpoint.

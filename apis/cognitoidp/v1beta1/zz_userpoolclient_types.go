@@ -337,6 +337,10 @@ type UserPoolClientObservation struct {
 	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used. By default, the unit is days. The unit can be overridden by a value in token_validity_units.refresh_token.
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of provider names for the identity providers that are supported on this client. It uses the provider_name attribute of the aws_cognito_identity_provider resource(s), or the equivalent string(s).
 	// +listType=set
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
@@ -438,9 +442,8 @@ type UserPoolClientParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of provider names for the identity providers that are supported on this client. It uses the provider_name attribute of the aws_cognito_identity_provider resource(s), or the equivalent string(s).
 	// +kubebuilder:validation:Optional

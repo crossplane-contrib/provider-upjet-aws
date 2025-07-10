@@ -91,6 +91,10 @@ type MountTargetObservation struct {
 	// AWS account ID that owns the resource.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A list of up to 5 VPC security group IDs (that must
 	// be for the same VPC as subnet specified) in effect for the mount target.
 	// +listType=set
@@ -122,9 +126,8 @@ type MountTargetParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A list of up to 5 VPC security group IDs (that must
 	// be for the same VPC as subnet specified) in effect for the mount target.

@@ -2422,6 +2422,11 @@ spec:
                           space.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   spaceDisplayName:
                     description: The name of the space that appears in the SageMaker
                       AI Studio UI.

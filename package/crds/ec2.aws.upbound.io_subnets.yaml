@@ -664,6 +664,11 @@ spec:
                       subnets, you can specify whether DNS names use the instance
                       IPv4 address or the instance ID. Valid values: ip-name, resource-name.'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

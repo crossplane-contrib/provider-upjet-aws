@@ -86,6 +86,10 @@ type VPCIpamPoolCidrObservation struct {
 
 	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type VPCIpamPoolCidrParameters struct {
@@ -118,9 +122,8 @@ type VPCIpamPoolCidrParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // VPCIpamPoolCidrSpec defines the desired state of VPCIpamPoolCidr

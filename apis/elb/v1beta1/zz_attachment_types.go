@@ -49,6 +49,10 @@ type AttachmentObservation struct {
 
 	// Instance ID to place in the ELB pool.
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AttachmentParameters struct {
@@ -81,9 +85,8 @@ type AttachmentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // AttachmentSpec defines the desired state of Attachment

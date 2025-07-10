@@ -1094,6 +1094,11 @@ spec:
                     description: Whether or not to maintain extra instances for the
                       domain in a second Availability Zone to ensure high availability.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   scalingParameters:
                     description: Domain scaling parameters. Documented below.
                     properties:

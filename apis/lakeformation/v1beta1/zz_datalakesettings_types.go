@@ -165,6 +165,10 @@ type DataLakeSettingsObservation struct {
 	// +listType=set
 	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }
@@ -227,9 +231,8 @@ type DataLakeSettingsParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	// +kubebuilder:validation:Optional

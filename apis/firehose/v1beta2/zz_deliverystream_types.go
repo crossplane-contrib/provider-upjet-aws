@@ -255,6 +255,10 @@ type DeliveryStreamObservation struct {
 	// Configuration options when destination is redshift. Requires the user to also specify an s3_configuration block. See redshift_configuration block below for details.
 	RedshiftConfiguration *RedshiftConfigurationObservation `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Encrypt at rest options. See server_side_encryption block below for details.
 	ServerSideEncryption *ServerSideEncryptionObservation `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
@@ -327,9 +331,8 @@ type DeliveryStreamParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Encrypt at rest options. See server_side_encryption block below for details.
 	// +kubebuilder:validation:Optional

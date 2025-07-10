@@ -174,6 +174,10 @@ type MetricAlarmObservation struct {
 	// Valid values are 10, 20, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The statistic to apply to the alarm's associated metric.
 	// Either of the following is supported: SampleCount, Average, Sum, Minimum, Maximum
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
@@ -293,9 +297,8 @@ type MetricAlarmParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The statistic to apply to the alarm's associated metric.
 	// Either of the following is supported: SampleCount, Average, Sum, Minimum, Maximum

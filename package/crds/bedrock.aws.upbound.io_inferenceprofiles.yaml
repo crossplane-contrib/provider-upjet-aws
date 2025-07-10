@@ -350,6 +350,11 @@ spec:
                   name:
                     description: The name of the inference profile.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: The status of the inference profile. ACTIVE means
                       that the inference profile is available to use.

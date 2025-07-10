@@ -1580,6 +1580,11 @@ spec:
                       automatically. If CUSTOMER_MANAGED is specified, the IAM roles
                       and IAM policy attachments will not be created.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The IAM role ARN that the workspace assumes.
                     type: string

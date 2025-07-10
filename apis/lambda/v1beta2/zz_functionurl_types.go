@@ -146,6 +146,10 @@ type FunctionURLObservation struct {
 	// Alias name or $LATEST.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Generated ID for the endpoint.
 	URLID *string `json:"urlId,omitempty" tf:"url_id,omitempty"`
 }
@@ -183,9 +187,8 @@ type FunctionURLParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // FunctionURLSpec defines the desired state of FunctionURL

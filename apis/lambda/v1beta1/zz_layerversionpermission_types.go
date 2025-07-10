@@ -77,6 +77,10 @@ type LayerVersionPermissionObservation struct {
 	// AWS account ID that should be able to use your Lambda Layer. Use * to share with all AWS accounts.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Unique identifier for the current revision of the policy.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 
@@ -120,9 +124,8 @@ type LayerVersionPermissionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether to retain the permission when the resource is destroyed. Default is false.
 	// +kubebuilder:validation:Optional

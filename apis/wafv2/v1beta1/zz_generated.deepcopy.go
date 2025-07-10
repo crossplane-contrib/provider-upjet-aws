@@ -1606,6 +1606,11 @@ func (in *IPSetObservation) DeepCopyInto(out *IPSetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Scope != nil {
 		in, out := &in.Scope, &out.Scope
 		*out = new(string)
@@ -2368,6 +2373,11 @@ func (in *RegexPatternSetObservation) DeepCopyInto(out *RegexPatternSetObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RegularExpression != nil {
 		in, out := &in.RegularExpression, &out.RegularExpression
 		*out = make([]RegularExpressionObservation, len(*in))
@@ -2939,6 +2949,11 @@ func (in *RuleGroupObservation) DeepCopyInto(out *RuleGroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RuleJSON != nil {
 		in, out := &in.RuleJSON, &out.RuleJSON
 		*out = new(string)
@@ -3470,6 +3485,11 @@ func (in *WebACLAssociationObservation) DeepCopyInto(out *WebACLAssociationObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceArn != nil {
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
@@ -3938,6 +3958,11 @@ func (in *WebACLLoggingConfigurationObservation) DeepCopyInto(out *WebACLLogging
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceArn != nil {
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
@@ -4127,6 +4152,11 @@ func (in *WebACLObservation) DeepCopyInto(out *WebACLObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

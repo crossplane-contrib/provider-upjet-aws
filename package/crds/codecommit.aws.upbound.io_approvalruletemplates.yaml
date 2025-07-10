@@ -314,6 +314,11 @@ spec:
                     description: The Amazon Resource Name (ARN) of the user who made
                       the most recent changes to the approval rule template.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleContentSha256:
                     description: The SHA-256 hash signature for the content of the
                       approval rule template.

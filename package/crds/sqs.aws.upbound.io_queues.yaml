@@ -523,6 +523,11 @@ spec:
                       resource instead. Note: when specifying maxReceiveCount, you
                       must specify it as an integer (5), and not a string ("5").'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sqsManagedSseEnabled:
                     description: Boolean to enable server-side encryption (SSE) of
                       message content with SQS-owned encryption keys. See Encryption

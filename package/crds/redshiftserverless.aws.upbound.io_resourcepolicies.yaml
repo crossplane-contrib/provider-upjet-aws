@@ -448,6 +448,11 @@ spec:
                     description: The policy to create or update. For example, the
                       following policy grants a user authorization to restore a snapshot.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceArn:
                     description: The Amazon Resource Name (ARN) of the account to
                       create or update a resource policy for.

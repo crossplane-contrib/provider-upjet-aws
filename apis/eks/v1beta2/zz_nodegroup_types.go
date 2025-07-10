@@ -191,6 +191,10 @@ type NodeGroupObservation struct {
 	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
@@ -293,9 +297,8 @@ type NodeGroupParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	// +kubebuilder:validation:Optional

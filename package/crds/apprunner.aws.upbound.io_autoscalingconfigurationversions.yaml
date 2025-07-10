@@ -352,6 +352,11 @@ spec:
                     description: Minimal number of instances that App Runner provisions
                       for your service.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: Current state of the auto scaling configuration.
                       An INACTIVE configuration revision has been deleted and can't

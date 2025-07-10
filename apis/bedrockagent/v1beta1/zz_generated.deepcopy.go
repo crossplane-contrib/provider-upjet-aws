@@ -278,6 +278,11 @@ func (in *AgentObservation) DeepCopyInto(out *AgentObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SkipResourceInUseCheck != nil {
 		in, out := &in.SkipResourceInUseCheck, &out.SkipResourceInUseCheck
 		*out = new(bool)

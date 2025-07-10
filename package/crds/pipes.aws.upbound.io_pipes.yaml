@@ -3424,6 +3424,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: ARN of the role that allows the pipe to send data
                       to the target.

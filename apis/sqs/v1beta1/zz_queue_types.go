@@ -118,6 +118,10 @@ type QueueObservation struct {
 	// JSON policy to set up the Dead Letter Queue, see AWS docs. It is preferred to use the aws_sqs_queue_redrive_policy resource instead. Note: when specifying maxReceiveCount, you must specify it as an integer (5), and not a string ("5").
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Boolean to enable server-side encryption (SSE) of message content with SQS-owned encryption keys. See Encryption at rest.
 	SqsManagedSseEnabled *bool `json:"sqsManagedSseEnabled,omitempty" tf:"sqs_managed_sse_enabled,omitempty"`
 
@@ -196,9 +200,8 @@ type QueueParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Boolean to enable server-side encryption (SSE) of message content with SQS-owned encryption keys. See Encryption at rest.
 	// +kubebuilder:validation:Optional

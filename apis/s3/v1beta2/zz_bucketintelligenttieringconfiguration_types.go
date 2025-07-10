@@ -86,6 +86,10 @@ type BucketIntelligentTieringConfigurationObservation struct {
 	// Unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Specifies the status of the configuration. Valid values: Enabled, Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -119,9 +123,8 @@ type BucketIntelligentTieringConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies the status of the configuration. Valid values: Enabled, Disabled.
 	// +kubebuilder:validation:Optional

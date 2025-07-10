@@ -856,6 +856,11 @@ spec:
                       ID of an initrd image (ARI) that will be used when booting the
                       created instances.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rootDeviceName:
                     description: Name of the root device (for example, /dev/sda1,
                       or /dev/xvda).

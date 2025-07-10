@@ -3385,6 +3385,11 @@ spec:
                     description: 'Type of the pipeline. Possible values are: V1 and
                       V2. Default value is V1.'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: A service role Amazon Resource Name (ARN) that grants
                       AWS CodePipeline permission to make calls to AWS services on

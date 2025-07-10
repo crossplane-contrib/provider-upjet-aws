@@ -797,10 +797,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   resourceSetType:
                     description: Type of the resources in the resource set.
                     type: string
@@ -947,8 +943,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

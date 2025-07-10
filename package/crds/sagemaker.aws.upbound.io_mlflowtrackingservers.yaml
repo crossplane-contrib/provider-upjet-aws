@@ -519,6 +519,11 @@ spec:
                       To see which MLflow versions are available to use, see How it
                       works.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) for an IAM role in
                       your account that the MLflow Tracking Server uses to access

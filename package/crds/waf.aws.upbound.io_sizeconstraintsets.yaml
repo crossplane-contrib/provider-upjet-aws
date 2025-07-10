@@ -535,10 +535,6 @@ spec:
                   name:
                     description: Name or description of the Size Constraint Set.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   sizeConstraints:
                     description: Parts of web requests that you want to inspect the
                       size of.
@@ -579,8 +575,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

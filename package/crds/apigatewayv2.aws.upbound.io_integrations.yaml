@@ -2391,6 +2391,11 @@ spec:
                     description: 'The format of the payload sent to an integration.
                       Valid values: 1.0, 2.0. Default is 1.0.'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requestParameters:
                     additionalProperties:
                       type: string

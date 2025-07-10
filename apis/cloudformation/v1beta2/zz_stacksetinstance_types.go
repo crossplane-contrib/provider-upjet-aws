@@ -147,6 +147,10 @@ type StackSetInstanceObservation struct {
 	// +mapType=granular
 	ParameterOverrides map[string]*string `json:"parameterOverrides,omitempty" tf:"parameter_overrides,omitempty"`
 
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false.
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
 
@@ -268,9 +272,8 @@ type StackSetInstanceParameters struct {
 
 	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false.
 	// +kubebuilder:validation:Optional

@@ -810,6 +810,11 @@ spec:
                       is on-demand or reserved. Valid values are ON_DEMAND or RESERVED.
                       Default to ON_DEMAND.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   reservationPlanSettings:
                     description: A detail pricing plan of the  reserved queue. See
                       below.

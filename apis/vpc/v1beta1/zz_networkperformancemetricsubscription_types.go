@@ -41,6 +41,10 @@ type NetworkPerformanceMetricSubscriptionObservation struct {
 	// The data aggregation time for the subscription.
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
@@ -60,9 +64,8 @@ type NetworkPerformanceMetricSubscriptionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
 	// +kubebuilder:validation:Optional

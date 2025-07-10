@@ -445,6 +445,10 @@ type IntentObservation_2 struct {
 	// in the Alexa Skills Kit.
 	ParentIntentSignature *string `json:"parentIntentSignature,omitempty" tf:"parent_intent_signature,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// When the user answers "no" to the question defined in
 	// confirmation_prompt, Amazon Lex responds with this statement to acknowledge that the intent was
 	// canceled. You must provide both the rejection_statement and the confirmation_prompt, or neither.
@@ -517,9 +521,8 @@ type IntentParameters_2 struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// When the user answers "no" to the question defined in
 	// confirmation_prompt, Amazon Lex responds with this statement to acknowledge that the intent was

@@ -43,11 +43,6 @@ type SQLInjectionMatchSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// The parts of web requests that you want AWS WAF to inspect for malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.
 	// +kubebuilder:validation:Optional
 	SQLInjectionMatchTuples []SQLInjectionMatchTuplesParameters `json:"sqlInjectionMatchTuples,omitempty" tf:"sql_injection_match_tuples,omitempty"`

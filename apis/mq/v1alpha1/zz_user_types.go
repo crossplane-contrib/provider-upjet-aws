@@ -48,6 +48,9 @@ type UserObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -78,9 +81,8 @@ type UserParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`

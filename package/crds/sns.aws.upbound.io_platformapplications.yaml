@@ -775,6 +775,11 @@ spec:
                     description: The platform that the app is registered with. See
                       Platform for supported platforms.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   successFeedbackRoleArn:
                     description: The IAM role ARN permitted to receive success feedback
                       for this application and give SNS write access to use CloudWatch

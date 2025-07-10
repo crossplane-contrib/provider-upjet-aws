@@ -60,6 +60,10 @@ type InvocationObservation struct {
 	// Qualifier (i.e., version) of the Lambda function. Defaults to $LATEST.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// String result of the Lambda function invocation.
 	Result *string `json:"result,omitempty" tf:"result,omitempty"`
 
@@ -100,9 +104,8 @@ type InvocationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
 	// +kubebuilder:validation:Optional

@@ -79,6 +79,10 @@ type MaintenanceWindowObservation struct {
 	// The name of the maintenance window.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
@@ -132,9 +136,8 @@ type MaintenanceWindowParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
 	// +kubebuilder:validation:Optional

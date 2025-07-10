@@ -359,6 +359,12 @@ spec:
                       be the key Amazon Resource Name (ARN), KeyId, key alias, or
                       key alias ARN.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      The following arguments are required:
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

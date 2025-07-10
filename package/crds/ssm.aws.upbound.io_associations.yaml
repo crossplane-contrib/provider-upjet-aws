@@ -1799,6 +1799,11 @@ spec:
                       the SSM document.
                     type: object
                     x-kubernetes-map-type: granular
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   scheduleExpression:
                     description: A cron or rate expression that specifies when the
                       association runs.

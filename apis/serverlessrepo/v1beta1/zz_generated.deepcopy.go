@@ -205,6 +205,11 @@ func (in *CloudFormationStackObservation) DeepCopyInto(out *CloudFormationStackO
 			(*out)[key] = outVal
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SemanticVersion != nil {
 		in, out := &in.SemanticVersion, &out.SemanticVersion
 		*out = new(string)

@@ -126,6 +126,10 @@ type BucketLifecycleConfigurationObservation struct {
 	// and status)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketLifecycleConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
@@ -155,9 +159,8 @@ type BucketLifecycleConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of configuration blocks describing the rules managing the replication. See below.
 	// +kubebuilder:validation:Optional

@@ -1215,6 +1215,11 @@ spec:
                     description: A read-only endpoint for the DocumentDB cluster,
                       automatically load-balanced across replicas
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   restoreToPointInTime:
                     description: A configuration block for restoring a DB instance
                       to an arbitrary point in time. Requires the identifier argument

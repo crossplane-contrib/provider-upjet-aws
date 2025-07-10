@@ -4149,6 +4149,11 @@ func (in *InvocationObservation) DeepCopyInto(out *InvocationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Result != nil {
 		in, out := &in.Result, &out.Result
 		*out = new(string)
@@ -4524,6 +4529,11 @@ func (in *LayerVersionObservation) DeepCopyInto(out *LayerVersionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.S3Bucket != nil {
 		in, out := &in.S3Bucket, &out.S3Bucket
 		*out = new(string)
@@ -4847,6 +4857,11 @@ func (in *LayerVersionPermissionObservation) DeepCopyInto(out *LayerVersionPermi
 	}
 	if in.Principal != nil {
 		in, out := &in.Principal, &out.Principal
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5542,6 +5557,11 @@ func (in *PermissionObservation) DeepCopyInto(out *PermissionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceAccount != nil {
 		in, out := &in.SourceAccount, &out.SourceAccount
 		*out = new(string)
@@ -5878,6 +5898,11 @@ func (in *ProvisionedConcurrencyConfigObservation) DeepCopyInto(out *Provisioned
 	}
 	if in.Qualifier != nil {
 		in, out := &in.Qualifier, &out.Qualifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

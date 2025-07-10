@@ -451,6 +451,11 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 		*out = new(RedshiftSettingsObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SSLMode != nil {
 		in, out := &in.SSLMode, &out.SSLMode
 		*out = new(string)

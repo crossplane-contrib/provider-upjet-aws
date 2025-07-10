@@ -171,6 +171,11 @@ func (in *APIKeyObservation) DeepCopyInto(out *APIKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -640,6 +645,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ThrottleSettings != nil {
 		in, out := &in.ThrottleSettings, &out.ThrottleSettings
 		*out = make([]ThrottleSettingsObservation, len(*in))
@@ -937,6 +947,11 @@ func (in *AuthorizerObservation) DeepCopyInto(out *AuthorizerObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RestAPIID != nil {
 		in, out := &in.RestAPIID, &out.RestAPIID
@@ -1250,6 +1265,11 @@ func (in *BasePathMappingObservation) DeepCopyInto(out *BasePathMappingObservati
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1646,6 +1666,11 @@ func (in *ClientCertificateObservation) DeepCopyInto(out *ClientCertificateObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1907,6 +1932,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2400,6 +2430,11 @@ func (in *DocumentationVersionObservation) DeepCopyInto(out *DocumentationVersio
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -3209,6 +3244,11 @@ func (in *GatewayResponseObservation) DeepCopyInto(out *GatewayResponseObservati
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4136,6 +4176,11 @@ func (in *IntegrationResponseObservation) DeepCopyInto(out *IntegrationResponseO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceID != nil {
 		in, out := &in.ResourceID, &out.ResourceID
 		*out = new(string)
@@ -4743,6 +4788,11 @@ func (in *MethodObservation) DeepCopyInto(out *MethodObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RequestModels != nil {
 		in, out := &in.RequestModels, &out.RequestModels
 		*out = make(map[string]*string, len(*in))
@@ -5101,6 +5151,11 @@ func (in *MethodResponseObservation) DeepCopyInto(out *MethodResponseObservation
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5722,6 +5777,11 @@ func (in *ModelObservation) DeepCopyInto(out *ModelObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RestAPIID != nil {
 		in, out := &in.RestAPIID, &out.RestAPIID
 		*out = new(string)
@@ -6116,6 +6176,11 @@ func (in *RequestValidatorObservation) DeepCopyInto(out *RequestValidatorObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RestAPIID != nil {
 		in, out := &in.RestAPIID, &out.RestAPIID
 		*out = new(string)
@@ -6357,6 +6422,11 @@ func (in *ResourceObservation) DeepCopyInto(out *ResourceObservation) {
 	}
 	if in.PathPart != nil {
 		in, out := &in.PathPart, &out.PathPart
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -7131,6 +7201,11 @@ func (in *RestAPIPolicyObservation) DeepCopyInto(out *RestAPIPolicyObservation) 
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -8385,6 +8460,11 @@ func (in *UsagePlanKeyObservation) DeepCopyInto(out *UsagePlanKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.UsagePlanID != nil {
 		in, out := &in.UsagePlanID, &out.UsagePlanID
 		*out = new(string)
@@ -8947,6 +9027,11 @@ func (in *VPCLinkObservation) DeepCopyInto(out *VPCLinkObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -29,6 +29,10 @@ type FindingAggregatorObservation struct {
 	// Indicates whether to aggregate findings from all of the available Regions or from a specified list. The options are ALL_REGIONS, ALL_REGIONS_EXCEPT_SPECIFIED, SPECIFIED_REGIONS or NO_REGIONS. When ALL_REGIONS or ALL_REGIONS_EXCEPT_SPECIFIED are used, Security Hub will automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.
 	LinkingMode *string `json:"linkingMode,omitempty" tf:"linking_mode,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of regions to include or exclude
 	// +listType=set
 	SpecifiedRegions []*string `json:"specifiedRegions,omitempty" tf:"specified_regions,omitempty"`
@@ -42,9 +46,8 @@ type FindingAggregatorParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of regions to include or exclude
 	// +kubebuilder:validation:Optional

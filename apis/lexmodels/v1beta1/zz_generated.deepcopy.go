@@ -3302,6 +3302,11 @@ func (in *SlotTypeObservation) DeepCopyInto(out *SlotTypeObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ValueSelectionStrategy != nil {
 		in, out := &in.ValueSelectionStrategy, &out.ValueSelectionStrategy
 		*out = new(string)

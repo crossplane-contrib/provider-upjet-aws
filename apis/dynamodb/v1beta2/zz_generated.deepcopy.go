@@ -1443,6 +1443,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Replica != nil {
 		in, out := &in.Replica, &out.Replica
 		*out = make([]ReplicaObservation, len(*in))

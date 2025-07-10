@@ -246,6 +246,11 @@ func (in *EndpointAccessObservation) DeepCopyInto(out *EndpointAccessObservation
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -936,6 +941,11 @@ func (in *RedshiftServerlessNamespaceObservation) DeepCopyInto(out *RedshiftServ
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1257,6 +1267,11 @@ func (in *ResourcePolicyObservation) DeepCopyInto(out *ResourcePolicyObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceArn != nil {
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
@@ -1503,6 +1518,11 @@ func (in *SnapshotObservation) DeepCopyInto(out *SnapshotObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
 		*out = new(float64)
@@ -1729,6 +1749,11 @@ func (in *UsageLimitObservation) DeepCopyInto(out *UsageLimitObservation) {
 	}
 	if in.Period != nil {
 		in, out := &in.Period, &out.Period
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2214,6 +2239,11 @@ func (in *WorkgroupObservation) DeepCopyInto(out *WorkgroupObservation) {
 	if in.PubliclyAccessible != nil {
 		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.SecurityGroupIds != nil {

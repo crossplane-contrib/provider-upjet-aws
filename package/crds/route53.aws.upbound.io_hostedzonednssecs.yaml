@@ -150,16 +150,10 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   signingStatus:
                     description: 'Hosted Zone signing status. Valid values: SIGNING,
                       NOT_SIGNING. Defaults to SIGNING.'
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

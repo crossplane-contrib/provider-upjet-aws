@@ -1732,6 +1732,11 @@ spec:
                       OpenAPI value, the argument value will override the OpenAPI
                       value.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rootResourceId:
                     description: Resource ID of the REST API's root
                     type: string

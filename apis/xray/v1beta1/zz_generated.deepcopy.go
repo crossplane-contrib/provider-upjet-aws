@@ -120,6 +120,11 @@ func (in *EncryptionConfigObservation) DeepCopyInto(out *EncryptionConfigObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -759,6 +764,11 @@ func (in *SamplingRuleObservation) DeepCopyInto(out *SamplingRuleObservation) {
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.ReservoirSize != nil {

@@ -93,6 +93,10 @@ type ReplicationTaskObservation struct {
 	// Migration type. Can be one of full-load | cdc | full-load-and-cdc.
 	MigrationType *string `json:"migrationType,omitempty" tf:"migration_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ARN of the replication instance.
 	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
 
@@ -145,9 +149,8 @@ type ReplicationTaskParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.ReplicationInstance

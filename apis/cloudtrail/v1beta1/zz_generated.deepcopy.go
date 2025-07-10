@@ -718,6 +718,11 @@ func (in *EventDataStoreObservation) DeepCopyInto(out *EventDataStoreObservation
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
 		*out = new(float64)
@@ -1624,6 +1629,11 @@ func (in *TrailObservation) DeepCopyInto(out *TrailObservation) {
 	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

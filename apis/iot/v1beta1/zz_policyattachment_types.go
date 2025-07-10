@@ -47,6 +47,10 @@ type PolicyAttachmentObservation struct {
 	// The name of the policy to attach.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The identity to which the policy is attached.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
@@ -68,9 +72,8 @@ type PolicyAttachmentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The identity to which the policy is attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Certificate

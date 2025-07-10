@@ -161,6 +161,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RepositoryCount != nil {
 		in, out := &in.RepositoryCount, &out.RepositoryCount
 		*out = new(float64)
@@ -385,6 +390,11 @@ func (in *DomainPermissionsPolicyObservation) DeepCopyInto(out *DomainPermission
 	}
 	if in.PolicyRevision != nil {
 		in, out := &in.PolicyRevision, &out.PolicyRevision
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -750,6 +760,11 @@ func (in *RepositoryObservation) DeepCopyInto(out *RepositoryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Repository != nil {
 		in, out := &in.Repository, &out.Repository
 		*out = new(string)
@@ -998,6 +1013,11 @@ func (in *RepositoryPermissionsPolicyObservation) DeepCopyInto(out *RepositoryPe
 	}
 	if in.PolicyRevision != nil {
 		in, out := &in.PolicyRevision, &out.PolicyRevision
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

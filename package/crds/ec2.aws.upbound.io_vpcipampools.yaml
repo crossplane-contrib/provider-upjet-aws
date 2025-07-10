@@ -817,6 +817,11 @@ spec:
                       when it is not available may result in erroneous differences
                       being reported.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sourceIpamPoolId:
                     description: The ID of the source IPAM pool. Use this argument
                       to create a child pool within an existing pool.

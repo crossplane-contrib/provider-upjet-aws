@@ -1076,10 +1076,6 @@ spec:
                           the resource.
                         type: boolean
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   subnetArns:
                     description: Subnet ARNs of the VPC attachment.
                     items:
@@ -1247,8 +1243,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

@@ -76,6 +76,10 @@ type MemberObservation struct {
 	// Boolean whether to invite the account to GuardDuty as a member. Defaults to false.
 	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The status of the relationship between the member account and its primary account. More information can be found in Amazon GuardDuty API Reference.
 	RelationshipStatus *string `json:"relationshipStatus,omitempty" tf:"relationship_status,omitempty"`
 }
@@ -128,9 +132,8 @@ type MemberParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // MemberSpec defines the desired state of Member

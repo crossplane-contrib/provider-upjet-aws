@@ -88,6 +88,10 @@ type ApplicationObservation struct {
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The EMR release version associated with the application.
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
 
@@ -143,9 +147,8 @@ type ApplicationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The EMR release version associated with the application.
 	// +kubebuilder:validation:Optional

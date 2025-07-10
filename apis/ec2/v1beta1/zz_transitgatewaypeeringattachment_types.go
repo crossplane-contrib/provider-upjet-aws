@@ -94,6 +94,10 @@ type TransitGatewayPeeringAttachmentObservation struct {
 	// Identifier of EC2 Transit Gateway to peer with.
 	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
@@ -138,9 +142,8 @@ type TransitGatewayPeeringAttachmentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

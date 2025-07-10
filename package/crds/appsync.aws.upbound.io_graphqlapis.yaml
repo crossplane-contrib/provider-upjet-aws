@@ -2961,6 +2961,11 @@ spec:
                       1 and 75 nested levels. This field will produce a limit error
                       if the operation falls out of bounds.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolverCountLimit:
                     description: The maximum number of resolvers that can be invoked
                       in a single request. The default value is 0 (or unspecified),

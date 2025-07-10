@@ -482,6 +482,11 @@ spec:
                     description: 'Specified the log class of the log group. Possible
                       values are: STANDARD or INFREQUENT_ACCESS.'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionInDays:
                     description: |-
                       Specifies the number of days

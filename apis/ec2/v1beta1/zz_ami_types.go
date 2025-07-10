@@ -154,6 +154,10 @@ type AMIObservation struct {
 	// created instances.
 	RamdiskID *string `json:"ramdiskId,omitempty" tf:"ramdisk_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Name of the root device (for example, /dev/sda1, or /dev/xvda).
 	RootDeviceName *string `json:"rootDeviceName,omitempty" tf:"root_device_name,omitempty"`
 
@@ -244,9 +248,8 @@ type AMIParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the root device (for example, /dev/sda1, or /dev/xvda).
 	// +kubebuilder:validation:Optional

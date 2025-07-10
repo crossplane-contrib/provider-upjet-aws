@@ -454,6 +454,11 @@ spec:
                       managed KMS key located in your account. Refer to AWS managed
                       KMS keys for more info.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tableCount:
                     description: The total number of tables found within the Timestream
                       database.

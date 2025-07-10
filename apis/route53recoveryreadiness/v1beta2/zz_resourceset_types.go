@@ -157,11 +157,6 @@ type ResourceSetObservation struct {
 
 type ResourceSetParameters struct {
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Type of the resources in the resource set.
 	// +kubebuilder:validation:Optional
 	ResourceSetType *string `json:"resourceSetType,omitempty" tf:"resource_set_type,omitempty"`

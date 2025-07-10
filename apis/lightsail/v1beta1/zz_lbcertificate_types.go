@@ -62,6 +62,10 @@ type LBCertificateObservation struct {
 	// Load balancer name where you want to create the SSL/TLS certificate.
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
 	// +listType=set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
@@ -92,9 +96,8 @@ type LBCertificateParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
 	// +kubebuilder:validation:Optional

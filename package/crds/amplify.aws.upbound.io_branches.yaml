@@ -541,6 +541,11 @@ spec:
                   pullRequestEnvironmentName:
                     description: Amplify environment name for the pull request.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sourceBranch:
                     description: Source branch if the branch is a pull request branch.
                     type: string

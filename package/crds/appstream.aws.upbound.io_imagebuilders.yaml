@@ -1681,6 +1681,11 @@ spec:
                   instanceType:
                     description: Instance type to use when launching the image builder.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   state:
                     description: State of the image builder. For valid values, refer
                       to the AWS documentation.

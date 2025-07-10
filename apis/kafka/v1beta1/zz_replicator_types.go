@@ -359,6 +359,10 @@ type ReplicatorObservation struct {
 	// A list of Kafka clusters which are targets of the replicator.
 	KafkaCluster []KafkaClusterObservation `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
 	ReplicationInfoList *ReplicationInfoListObservation `json:"replicationInfoList,omitempty" tf:"replication_info_list,omitempty"`
 
@@ -389,9 +393,8 @@ type ReplicatorParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
 	// +kubebuilder:validation:Optional

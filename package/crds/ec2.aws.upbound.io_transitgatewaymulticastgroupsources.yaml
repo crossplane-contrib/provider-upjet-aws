@@ -611,6 +611,11 @@ spec:
                     description: The group members' network interface ID to register
                       with the transit gateway multicast group.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   transitGatewayMulticastDomainId:
                     description: The ID of the transit gateway multicast domain.
                     type: string

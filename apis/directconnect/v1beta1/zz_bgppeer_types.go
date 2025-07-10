@@ -77,6 +77,10 @@ type BGPPeerObservation struct {
 	// The ID of the BGP peer resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ID of the Direct Connect virtual interface on which to create the BGP peer.
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 }
@@ -107,9 +111,8 @@ type BGPPeerParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the Direct Connect virtual interface on which to create the BGP peer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.PrivateVirtualInterface

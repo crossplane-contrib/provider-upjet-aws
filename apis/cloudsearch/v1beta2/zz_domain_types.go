@@ -50,6 +50,10 @@ type DomainObservation struct {
 	// Whether or not to maintain extra instances for the domain in a second Availability Zone to ensure high availability.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Domain scaling parameters. Documented below.
 	ScalingParameters *ScalingParametersObservation `json:"scalingParameters,omitempty" tf:"scaling_parameters,omitempty"`
 
@@ -73,9 +77,8 @@ type DomainParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Domain scaling parameters. Documented below.
 	// +kubebuilder:validation:Optional

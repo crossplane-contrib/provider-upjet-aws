@@ -73,6 +73,10 @@ type EndpointAccessObservation struct {
 	// The port number on which the cluster accepts incoming connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
@@ -104,9 +108,8 @@ type EndpointAccessParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.
 	// +kubebuilder:validation:Optional

@@ -246,6 +246,11 @@ func (in *CertificateObservation) DeepCopyInto(out *CertificateObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RenewalEligibility != nil {
 		in, out := &in.RenewalEligibility, &out.RenewalEligibility
 		*out = new(string)

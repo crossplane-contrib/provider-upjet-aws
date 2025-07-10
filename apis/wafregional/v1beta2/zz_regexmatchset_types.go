@@ -32,6 +32,10 @@ type RegexMatchSetObservation struct {
 
 	// The regular expression pattern that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings. See below.
 	RegexMatchTuple []RegexMatchTupleObservation `json:"regexMatchTuple,omitempty" tf:"regex_match_tuple,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RegexMatchSetParameters struct {
@@ -46,9 +50,8 @@ type RegexMatchSetParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type RegexMatchTupleFieldToMatchInitParameters struct {

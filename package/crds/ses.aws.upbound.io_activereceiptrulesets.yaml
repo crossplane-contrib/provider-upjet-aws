@@ -285,6 +285,11 @@ spec:
                   id:
                     description: The SES receipt rule set name.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleSetName:
                     description: The name of the rule set
                     type: string

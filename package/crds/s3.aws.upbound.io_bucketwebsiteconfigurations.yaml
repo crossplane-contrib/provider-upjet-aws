@@ -1430,6 +1430,11 @@ spec:
                           Valid values: http, https.'
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routingRule:
                     description: List of rules that define when a redirect is applied
                       and the redirect behavior. See below.

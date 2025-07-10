@@ -51,6 +51,10 @@ type StaticIPAttachmentObservation struct {
 	// Name of the Lightsail instance to attach the IP to.
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Name of the allocated static IP.
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 }
@@ -73,9 +77,8 @@ type StaticIPAttachmentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the allocated static IP.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.StaticIP

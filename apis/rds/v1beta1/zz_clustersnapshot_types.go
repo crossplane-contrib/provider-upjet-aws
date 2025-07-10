@@ -74,6 +74,10 @@ type ClusterSnapshotObservation struct {
 	// Port that the DB cluster was listening on at the time of the snapshot.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
@@ -123,9 +127,8 @@ type ClusterSnapshotParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +kubebuilder:validation:Optional

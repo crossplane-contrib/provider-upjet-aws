@@ -442,6 +442,10 @@ type TaskDefinitionObservation struct {
 	// Configuration block for the App Mesh proxy. Detailed below.
 	ProxyConfiguration *ProxyConfigurationObservation `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
 	// +listType=set
 	RequiresCompatibilities []*string `json:"requiresCompatibilities,omitempty" tf:"requires_compatibilities,omitempty"`
@@ -535,9 +539,8 @@ type TaskDefinitionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
 	// +kubebuilder:validation:Optional

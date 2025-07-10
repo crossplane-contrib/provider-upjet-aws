@@ -86,6 +86,10 @@ type CatalogTableObservation struct {
 	// Configuration block of columns by which the table is partitioned. Only primitive types are supported as partition keys. See partition_keys below.
 	PartitionKeys []PartitionKeysObservation `json:"partitionKeys,omitempty" tf:"partition_keys,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Retention time for this table.
 	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
 
@@ -151,9 +155,8 @@ type CatalogTableParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Retention time for this table.
 	// +kubebuilder:validation:Optional

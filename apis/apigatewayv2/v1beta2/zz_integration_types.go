@@ -165,6 +165,10 @@ type IntegrationObservation struct {
 	// The format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
 	PayloadFormatVersion *string `json:"payloadFormatVersion,omitempty" tf:"payload_format_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend.
 	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.
 	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
@@ -284,9 +288,8 @@ type IntegrationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend.
 	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.

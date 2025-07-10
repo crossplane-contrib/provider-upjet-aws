@@ -355,6 +355,11 @@ spec:
                     description: A friendly name of the regular expression pattern
                       set. Conflicts with name_prefix.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   regularExpression:
                     description: One or more blocks of regular expression patterns
                       that you want AWS WAF to search for, such as B[a@]dB[o0]t. See

@@ -120,6 +120,11 @@ func (in *AlertManagerDefinitionObservation) DeepCopyInto(out *AlertManagerDefin
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.WorkspaceID != nil {
 		in, out := &in.WorkspaceID, &out.WorkspaceID
 		*out = new(string)
@@ -382,6 +387,11 @@ func (in *RuleGroupNamespaceObservation) DeepCopyInto(out *RuleGroupNamespaceObs
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

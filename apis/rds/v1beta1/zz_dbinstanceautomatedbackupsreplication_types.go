@@ -58,6 +58,10 @@ type DBInstanceAutomatedBackupsReplicationObservation struct {
 	// A URL that contains a Signature Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication action to be called in the AWS Region of the source DB instance.
 	PreSignedURL *string `json:"preSignedUrl,omitempty" tf:"pre_signed_url,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The retention period for the replicated automated backups, defaults to 7.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
@@ -86,9 +90,8 @@ type DBInstanceAutomatedBackupsReplicationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The retention period for the replicated automated backups, defaults to 7.
 	// +kubebuilder:validation:Optional

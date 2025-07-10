@@ -14,5 +14,4 @@ spec:
       namespace: upbound-system
     comment: my function
     publish: true
-    region: us-west-1
     runtime: cloudfront-js-2.0

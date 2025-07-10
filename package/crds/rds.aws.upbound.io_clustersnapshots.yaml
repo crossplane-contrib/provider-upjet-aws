@@ -501,6 +501,11 @@ spec:
                     description: Port that the DB cluster was listening on at the
                       time of the snapshot.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sharedAccounts:
                     description: List of AWS Account IDs to share the snapshot with.
                       Use all to make the snapshot public.

@@ -101,6 +101,10 @@ type EBSSnapshotCopyObservation struct {
 	// Indicates whether to permanently restore an archived snapshot.
 	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The region of the source snapshot.
 	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
 
@@ -161,9 +165,8 @@ type EBSSnapshotCopyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The region of the source snapshot.
 	// +kubebuilder:validation:Optional

@@ -64,6 +64,10 @@ type CollectionObservation struct {
 	// Name of the collection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
 	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
 	StandbyReplicas *string `json:"standbyReplicas,omitempty" tf:"standby_replicas,omitempty"`
@@ -94,9 +98,8 @@ type CollectionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
 	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.

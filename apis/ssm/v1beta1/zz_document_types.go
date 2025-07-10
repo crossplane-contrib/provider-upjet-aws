@@ -135,6 +135,10 @@ type DocumentObservation struct {
 	// The list of operating system (OS) platforms compatible with this SSM document. Valid values: Windows, Linux, MacOS.
 	PlatformTypes []*string `json:"platformTypes,omitempty" tf:"platform_types,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The schema version of the document.
 	SchemaVersion *string `json:"schemaVersion,omitempty" tf:"schema_version,omitempty"`
 
@@ -181,9 +185,8 @@ type DocumentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

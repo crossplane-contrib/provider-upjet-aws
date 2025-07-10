@@ -184,18 +184,12 @@ spec:
                       value in the field specified by the RateKey, allowed in a five-minute
                       period. Minimum value is 100.
                     type: number
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

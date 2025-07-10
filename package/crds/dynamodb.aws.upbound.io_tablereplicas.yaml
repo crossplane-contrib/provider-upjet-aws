@@ -649,6 +649,11 @@ spec:
                     description: Whether to enable Point In Time Recovery for the
                       table replica. Default is false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tableClassOverride:
                     description: Storage class of the table replica. Valid values
                       are STANDARD and STANDARD_INFREQUENT_ACCESS. If not used, the

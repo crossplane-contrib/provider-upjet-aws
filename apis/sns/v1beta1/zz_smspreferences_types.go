@@ -63,6 +63,10 @@ type SMSPreferencesObservation struct {
 	// The maximum amount in USD that you are willing to spend each month to send SMS messages.
 	MonthlySpendLimit *float64 `json:"monthlySpendLimit,omitempty" tf:"monthly_spend_limit,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS.
 	UsageReportS3Bucket *string `json:"usageReportS3Bucket,omitempty" tf:"usage_report_s3_bucket,omitempty"`
 }
@@ -101,9 +105,8 @@ type SMSPreferencesParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS.
 	// +kubebuilder:validation:Optional

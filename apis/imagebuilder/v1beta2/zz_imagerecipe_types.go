@@ -294,6 +294,10 @@ type ImageRecipeObservation struct {
 	// Platform of the image recipe.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for the Systems Manager Agent installed by default by Image Builder. Detailed below.
 	SystemsManagerAgent *SystemsManagerAgentObservation `json:"systemsManagerAgent,omitempty" tf:"systems_manager_agent,omitempty"`
 
@@ -339,9 +343,8 @@ type ImageRecipeParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for the Systems Manager Agent installed by default by Image Builder. Detailed below.
 	// +kubebuilder:validation:Optional

@@ -452,6 +452,11 @@ spec:
                     description: The bucket or bucket and expected_bucket_owner separated
                       by a comma (,) if the latter is provided.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: 'Transfer acceleration state of the bucket. Valid
                       values: Enabled, Suspended.'

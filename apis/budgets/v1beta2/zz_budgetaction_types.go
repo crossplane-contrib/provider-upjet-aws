@@ -198,12 +198,6 @@ type BudgetActionParameters struct {
 	// +kubebuilder:validation:Optional
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
-	// The Region to run the SSM document.
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// A list of subscribers. See Subscriber.
 	// +kubebuilder:validation:Optional
 	Subscriber []SubscriberParameters `json:"subscriber,omitempty" tf:"subscriber,omitempty"`

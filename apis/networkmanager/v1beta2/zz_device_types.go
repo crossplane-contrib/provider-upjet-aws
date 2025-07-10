@@ -171,11 +171,6 @@ type DeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	Model *string `json:"model,omitempty" tf:"model,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Serial number of the device.
 	// +kubebuilder:validation:Optional
 	SerialNumber *string `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`

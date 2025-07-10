@@ -56,6 +56,10 @@ type PermissionObservation struct {
 	// AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ID of the calling account
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 }
@@ -87,9 +91,8 @@ type PermissionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the calling account
 	// +kubebuilder:validation:Optional

@@ -56,12 +56,6 @@ type ClusterParameters struct {
 	// Unique name describing the cluster.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region of the endpoint.
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // ClusterSpec defines the desired state of Cluster

@@ -14,4 +14,3 @@ spec:
     - type: IPV4
       value: 10.16.16.0/16
     name: tfIPSet
-    region: us-west-1
