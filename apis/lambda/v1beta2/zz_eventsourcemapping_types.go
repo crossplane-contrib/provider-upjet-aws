@@ -267,6 +267,10 @@ type EventSourceMappingObservation struct {
 	// Name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Scaling configuration of the event source. Only available for SQS queues. See below.
 	ScalingConfig *ScalingConfigObservation `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
@@ -406,9 +410,8 @@ type EventSourceMappingParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Scaling configuration of the event source. Only available for SQS queues. See below.
 	// +kubebuilder:validation:Optional

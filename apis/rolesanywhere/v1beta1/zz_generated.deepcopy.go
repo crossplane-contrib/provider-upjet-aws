@@ -295,11 +295,6 @@ func (in *ProfileParameters) DeepCopyInto(out *ProfileParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.RequireInstanceProperties != nil {
 		in, out := &in.RequireInstanceProperties, &out.RequireInstanceProperties
 		*out = new(bool)

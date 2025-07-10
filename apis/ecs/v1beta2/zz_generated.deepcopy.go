@@ -434,6 +434,11 @@ func (in *CapacityProviderObservation) DeepCopyInto(out *CapacityProviderObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -841,6 +846,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -3989,6 +3999,11 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SchedulingStrategy != nil {
 		in, out := &in.SchedulingStrategy, &out.SchedulingStrategy
 		*out = new(string)
@@ -5030,6 +5045,11 @@ func (in *TaskDefinitionObservation) DeepCopyInto(out *TaskDefinitionObservation
 		in, out := &in.ProxyConfiguration, &out.ProxyConfiguration
 		*out = new(ProxyConfigurationObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RequiresCompatibilities != nil {
 		in, out := &in.RequiresCompatibilities, &out.RequiresCompatibilities

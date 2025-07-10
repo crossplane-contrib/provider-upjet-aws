@@ -2315,6 +2315,11 @@ spec:
                       notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
                       on which version of Amazon Linux you require.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
                       instance which allows SageMaker AI to call other services on

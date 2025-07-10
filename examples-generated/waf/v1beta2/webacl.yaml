@@ -12,7 +12,6 @@ spec:
     - type: ALLOW
     metricName: tfWebACL
     name: tfWebACL
-    region: us-west-1
     rules:
     - action:
       - type: BLOCK
@@ -38,7 +37,6 @@ spec:
     - type: IPV4
       value: 192.0.7.0/24
     name: tfIPSet
-    region: us-west-1
 
 ---
 
@@ -60,4 +58,3 @@ spec:
           testing.upbound.io/example-name: ipset
       negated: false
       type: IPMatch
-    region: us-west-1

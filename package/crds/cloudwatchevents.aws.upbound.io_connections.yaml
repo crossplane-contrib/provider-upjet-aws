@@ -2618,6 +2618,11 @@ spec:
                       key to encrypt this connection. The identifier can be the key
                       Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   secretArn:
                     description: The Amazon Resource Name (ARN) of the secret created
                       from the authorization parameters specified for the connection.

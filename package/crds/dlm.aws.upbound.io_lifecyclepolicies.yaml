@@ -3910,6 +3910,11 @@ spec:
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   state:
                     description: Whether the lifecycle policy should be enabled or
                       disabled. ENABLED or DISABLED are valid values. Defaults to

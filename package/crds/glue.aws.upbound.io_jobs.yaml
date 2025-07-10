@@ -1913,6 +1913,11 @@ spec:
                     description: The number of workers of a defined workerType that
                       are allocated when a job runs.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The ARN of the IAM role associated with this job.
                     type: string

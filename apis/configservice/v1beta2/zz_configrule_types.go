@@ -57,6 +57,10 @@ type ConfigRuleObservation struct {
 	// The maximum frequency with which AWS Config runs evaluations for a rule.
 	MaximumExecutionFrequency *string `json:"maximumExecutionFrequency,omitempty" tf:"maximum_execution_frequency,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ID of the config rule
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 
@@ -95,9 +99,8 @@ type ConfigRuleParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Scope defines which resources can trigger an evaluation for the rule. See Scope Below.
 	// +kubebuilder:validation:Optional

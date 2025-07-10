@@ -1409,6 +1409,11 @@ spec:
                       of disks that a single file can be striped across is limited
                       by the total number of disks that make up the file system.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   s3:
                     description: |-
                       See the s3 configuration block. Max of 1.

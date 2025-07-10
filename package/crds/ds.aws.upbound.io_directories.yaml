@@ -2434,6 +2434,11 @@ spec:
                     description: The fully qualified name for the directory, such
                       as corp.example.com
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroupId:
                     description: The ID of the security group created by the directory.
                     type: string

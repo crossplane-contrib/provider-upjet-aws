@@ -149,11 +149,6 @@ type OriginRequestPolicyParameters struct {
 	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
 	// +kubebuilder:validation:Optional
 	QueryStringsConfig *OriginRequestPolicyQueryStringsConfigParameters `json:"queryStringsConfig,omitempty" tf:"query_strings_config,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type OriginRequestPolicyQueryStringsConfigInitParameters struct {

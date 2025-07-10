@@ -425,6 +425,11 @@ func (in *DirectoryObservation) DeepCopyInto(out *DirectoryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityGroupID != nil {
 		in, out := &in.SecurityGroupID, &out.SecurityGroupID
 		*out = new(string)
@@ -740,6 +745,11 @@ func (in *SharedDirectoryObservation) DeepCopyInto(out *SharedDirectoryObservati
 	}
 	if in.Method != nil {
 		in, out := &in.Method, &out.Method
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -296,6 +296,11 @@ func (in *ConfigRuleObservation) DeepCopyInto(out *ConfigRuleObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RuleID != nil {
 		in, out := &in.RuleID, &out.RuleID
 		*out = new(string)
@@ -581,6 +586,11 @@ func (in *ConfigurationAggregatorObservation) DeepCopyInto(out *ConfigurationAgg
 		*out = new(OrganizationAggregationSourceObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -822,6 +832,11 @@ func (in *ConfigurationRecorderObservation) DeepCopyInto(out *ConfigurationRecor
 		in, out := &in.RecordingMode, &out.RecordingMode
 		*out = new(RecordingModeObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
@@ -1124,6 +1139,11 @@ func (in *DeliveryChannelObservation) DeepCopyInto(out *DeliveryChannelObservati
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2251,6 +2271,11 @@ func (in *RemediationConfigurationObservation) DeepCopyInto(out *RemediationConf
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.ResourceType != nil {
 		in, out := &in.ResourceType, &out.ResourceType

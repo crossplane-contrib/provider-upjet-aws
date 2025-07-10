@@ -345,6 +345,11 @@ func (in *AuthorizerObservation) DeepCopyInto(out *AuthorizerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SigningDisabled != nil {
 		in, out := &in.SigningDisabled, &out.SigningDisabled
 		*out = new(bool)
@@ -634,6 +639,11 @@ func (in *CertificateObservation) DeepCopyInto(out *CertificateObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1392,6 +1402,11 @@ func (in *DomainConfigurationObservation) DeepCopyInto(out *DomainConfigurationO
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4636,6 +4651,11 @@ func (in *LoggingOptionsObservation) DeepCopyInto(out *LoggingOptionsObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -5014,6 +5034,11 @@ func (in *PolicyAttachmentObservation) DeepCopyInto(out *PolicyAttachmentObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Target != nil {
 		in, out := &in.Target, &out.Target
 		*out = new(string)
@@ -5204,6 +5229,11 @@ func (in *PolicyObservation) DeepCopyInto(out *PolicyObservation) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -6107,6 +6137,11 @@ func (in *RoleAliasObservation) DeepCopyInto(out *RoleAliasObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -7128,6 +7163,11 @@ func (in *ThingGroupMembershipObservation) DeepCopyInto(out *ThingGroupMembershi
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ThingGroupName != nil {
 		in, out := &in.ThingGroupName, &out.ThingGroupName
 		*out = new(string)
@@ -7814,6 +7854,11 @@ func (in *ThingObservation) DeepCopyInto(out *ThingObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ThingTypeName != nil {
 		in, out := &in.ThingTypeName, &out.ThingTypeName
 		*out = new(string)
@@ -7991,6 +8036,11 @@ func (in *ThingPrincipalAttachmentObservation) DeepCopyInto(out *ThingPrincipalA
 	}
 	if in.Principal != nil {
 		in, out := &in.Principal, &out.Principal
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

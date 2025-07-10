@@ -325,6 +325,11 @@ func (in *ReplicationConfigurationObservation) DeepCopyInto(out *ReplicationConf
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RegistryID != nil {
 		in, out := &in.RegistryID, &out.RegistryID
 		*out = new(string)
@@ -692,6 +697,11 @@ func (in *RepositoryObservation) DeepCopyInto(out *RepositoryObservation) {
 	}
 	if in.ImageTagMutability != nil {
 		in, out := &in.ImageTagMutability, &out.ImageTagMutability
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

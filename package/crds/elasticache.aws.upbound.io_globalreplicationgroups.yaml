@@ -610,6 +610,11 @@ spec:
                       and will replicate updates to the secondary cluster. If primary_replication_group_id
                       is changed, creates a new resource.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   transitEncryptionEnabled:
                     description: A flag that indicates whether the encryption in transit
                       is enabled.

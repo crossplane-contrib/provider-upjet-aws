@@ -246,6 +246,11 @@ func (in *APIObservation) DeepCopyInto(out *APIObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RouteKey != nil {
 		in, out := &in.RouteKey, &out.RouteKey
 		*out = new(string)
@@ -737,6 +742,11 @@ func (in *AuthorizerObservation) DeepCopyInto(out *AuthorizerObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1488,6 +1498,11 @@ func (in *DomainNameObservation) DeepCopyInto(out *DomainNameObservation) {
 		*out = new(MutualTLSAuthenticationObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1911,6 +1926,11 @@ func (in *IntegrationObservation) DeepCopyInto(out *IntegrationObservation) {
 	}
 	if in.PayloadFormatVersion != nil {
 		in, out := &in.PayloadFormatVersion, &out.PayloadFormatVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2823,6 +2843,11 @@ func (in *StageObservation) DeepCopyInto(out *StageObservation) {
 	}
 	if in.InvokeURL != nil {
 		in, out := &in.InvokeURL, &out.InvokeURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

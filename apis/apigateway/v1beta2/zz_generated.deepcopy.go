@@ -484,6 +484,11 @@ func (in *DocumentationPartObservation) DeepCopyInto(out *DocumentationPartObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RestAPIID != nil {
 		in, out := &in.RestAPIID, &out.RestAPIID
 		*out = new(string)
@@ -831,6 +836,11 @@ func (in *DomainNameObservation) DeepCopyInto(out *DomainNameObservation) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1448,6 +1458,11 @@ func (in *IntegrationObservation) DeepCopyInto(out *IntegrationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RequestParameters != nil {
 		in, out := &in.RequestParameters, &out.RequestParameters
 		*out = make(map[string]*string, len(*in))
@@ -1984,6 +1999,11 @@ func (in *MethodSettingsObservation) DeepCopyInto(out *MethodSettingsObservation
 	}
 	if in.MethodPath != nil {
 		in, out := &in.MethodPath, &out.MethodPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2686,6 +2706,11 @@ func (in *RestAPIObservation) DeepCopyInto(out *RestAPIObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RootResourceID != nil {
 		in, out := &in.RootResourceID, &out.RootResourceID
 		*out = new(string)
@@ -3317,6 +3342,11 @@ func (in *StageObservation) DeepCopyInto(out *StageObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RestAPIID != nil {
 		in, out := &in.RestAPIID, &out.RestAPIID
 		*out = new(string)
@@ -3945,6 +3975,11 @@ func (in *UsagePlanObservation) DeepCopyInto(out *UsagePlanObservation) {
 		in, out := &in.QuotaSettings, &out.QuotaSettings
 		*out = new(QuotaSettingsObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

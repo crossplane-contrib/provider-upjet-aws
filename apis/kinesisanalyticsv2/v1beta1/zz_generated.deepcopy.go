@@ -883,6 +883,11 @@ func (in *ApplicationSnapshotObservation) DeepCopyInto(out *ApplicationSnapshotO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SnapshotCreationTimestamp != nil {
 		in, out := &in.SnapshotCreationTimestamp, &out.SnapshotCreationTimestamp
 		*out = new(string)

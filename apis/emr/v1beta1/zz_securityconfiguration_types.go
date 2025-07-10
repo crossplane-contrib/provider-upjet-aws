@@ -29,6 +29,10 @@ type SecurityConfigurationObservation struct {
 
 	// The ID of the EMR Security Configuration (Same as the name)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type SecurityConfigurationParameters struct {
@@ -39,9 +43,8 @@ type SecurityConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // SecurityConfigurationSpec defines the desired state of SecurityConfiguration

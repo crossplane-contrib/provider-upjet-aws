@@ -5287,6 +5287,11 @@ spec:
                       refer to the EIP''s address directly and not use public_ip as
                       this field will change after the EIP is attached.'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rootBlockDevice:
                     description: Configuration block to customize details about the
                       root block device of the instance. See Block Devices below for

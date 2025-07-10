@@ -581,6 +581,10 @@ type RuleGroupObservation struct {
 	// A friendly name of the rule group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A configuration block that defines the rule group rules. Required unless rules is specified. See Rule Group below for details.
 	RuleGroup *RuleGroupRuleGroupObservation `json:"ruleGroup,omitempty" tf:"rule_group,omitempty"`
 
@@ -622,9 +626,8 @@ type RuleGroupParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A configuration block that defines the rule group rules. Required unless rules is specified. See Rule Group below for details.
 	// +kubebuilder:validation:Optional

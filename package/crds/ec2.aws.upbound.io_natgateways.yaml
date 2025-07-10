@@ -827,6 +827,11 @@ spec:
                   publicIp:
                     description: The Elastic IP address associated with the NAT Gateway.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   secondaryAllocationIds:
                     description: A list of secondary allocation EIP IDs for this NAT
                       Gateway.

@@ -149,6 +149,10 @@ type InfrastructureConfigurationObservation struct {
 	// Configuration block with placement settings that define where the instances that are launched from your image will run. Detailed below.
 	Placement *PlacementObservation `json:"placement,omitempty" tf:"placement,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
 	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
@@ -230,9 +234,8 @@ type InfrastructureConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
 	// +kubebuilder:validation:Optional

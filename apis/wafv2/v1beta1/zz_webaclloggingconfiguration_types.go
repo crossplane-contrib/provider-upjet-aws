@@ -285,6 +285,10 @@ type WebACLLoggingConfigurationObservation struct {
 	// Parts of the request to exclude from logs
 	RedactedFields []RedactedFieldsObservation `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Amazon Resource Name (ARN) of the web ACL that you want to associate with log_destination_configs.
 	// AWS WebACL ARN
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -319,9 +323,8 @@ type WebACLLoggingConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of the web ACL that you want to associate with log_destination_configs.
 	// AWS WebACL ARN

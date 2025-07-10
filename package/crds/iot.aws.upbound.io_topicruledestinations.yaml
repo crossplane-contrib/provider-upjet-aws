@@ -1969,6 +1969,11 @@ spec:
                     type: boolean
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   vpcConfiguration:
                     description: Configuration of the virtual private cloud (VPC)
                       connection. For more info, see the AWS documentation.

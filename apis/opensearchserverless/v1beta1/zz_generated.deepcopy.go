@@ -125,6 +125,11 @@ func (in *AccessPolicyObservation) DeepCopyInto(out *AccessPolicyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -357,6 +362,11 @@ func (in *CollectionObservation) DeepCopyInto(out *CollectionObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -614,6 +624,11 @@ func (in *LifecyclePolicyObservation) DeepCopyInto(out *LifecyclePolicyObservati
 	}
 	if in.PolicyVersion != nil {
 		in, out := &in.PolicyVersion, &out.PolicyVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -911,6 +926,11 @@ func (in *SecurityConfigObservation) DeepCopyInto(out *SecurityConfigObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SAMLOptions != nil {
 		in, out := &in.SAMLOptions, &out.SAMLOptions
 		*out = new(SAMLOptionsObservation)
@@ -1112,6 +1132,11 @@ func (in *SecurityPolicyObservation) DeepCopyInto(out *SecurityPolicyObservation
 	}
 	if in.PolicyVersion != nil {
 		in, out := &in.PolicyVersion, &out.PolicyVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1352,6 +1377,11 @@ func (in *VPCEndpointObservation) DeepCopyInto(out *VPCEndpointObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

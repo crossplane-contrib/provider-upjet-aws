@@ -164,11 +164,6 @@ type VPCAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Options *VPCAttachmentOptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Subnet ARNs of the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()

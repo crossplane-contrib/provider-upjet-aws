@@ -233,6 +233,11 @@ func (in *AppImageConfigObservation) DeepCopyInto(out *AppImageConfigObservation
 		*out = new(KernelGatewayImageConfigObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -666,6 +671,11 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2891,6 +2901,11 @@ func (in *CodeRepositoryObservation) DeepCopyInto(out *CodeRepositoryObservation
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -6588,6 +6603,11 @@ func (in *DeviceFleetObservation) DeepCopyInto(out *DeviceFleetObservation) {
 		*out = new(OutputConfigObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -6830,6 +6850,11 @@ func (in *DeviceObservation) DeepCopyInto(out *DeviceObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -7316,6 +7341,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -8273,6 +8303,11 @@ func (in *EndpointConfigurationObservation) DeepCopyInto(out *EndpointConfigurat
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ShadowProductionVariants != nil {
 		in, out := &in.ShadowProductionVariants, &out.ShadowProductionVariants
 		*out = make([]ShadowProductionVariantsObservation, len(*in))
@@ -8537,6 +8572,11 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -8964,6 +9004,11 @@ func (in *FeatureGroupObservation) DeepCopyInto(out *FeatureGroupObservation) {
 	}
 	if in.RecordIdentifierFeatureName != nil {
 		in, out := &in.RecordIdentifierFeatureName, &out.RecordIdentifierFeatureName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -12621,6 +12666,11 @@ func (in *ModelObservation) DeepCopyInto(out *ModelObservation) {
 		*out = new(PrimaryContainerObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -13186,6 +13236,11 @@ func (in *NotebookInstanceObservation) DeepCopyInto(out *NotebookInstanceObserva
 	}
 	if in.PlatformIdentifier != nil {
 		in, out := &in.PlatformIdentifier, &out.PlatformIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -17441,6 +17496,11 @@ func (in *SpaceObservation) DeepCopyInto(out *SpaceObservation) {
 		*out = new(OwnershipSettingsObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SpaceDisplayName != nil {
 		in, out := &in.SpaceDisplayName, &out.SpaceDisplayName
 		*out = new(string)
@@ -20115,6 +20175,11 @@ func (in *UserProfileObservation) DeepCopyInto(out *UserProfileObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -24140,6 +24205,11 @@ func (in *WorkforceObservation) DeepCopyInto(out *WorkforceObservation) {
 		*out = new(OidcConfigObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceIPConfig != nil {
 		in, out := &in.SourceIPConfig, &out.SourceIPConfig
 		*out = new(SourceIPConfigObservation)
@@ -24604,6 +24674,11 @@ func (in *WorkteamObservation) DeepCopyInto(out *WorkteamObservation) {
 		in, out := &in.NotificationConfiguration, &out.NotificationConfiguration
 		*out = new(NotificationConfigurationObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Subdomain != nil {
 		in, out := &in.Subdomain, &out.Subdomain

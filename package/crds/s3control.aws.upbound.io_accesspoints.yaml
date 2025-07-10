@@ -1661,6 +1661,11 @@ spec:
                           to specific accounts, is blocked. When set to true:'
                         type: boolean
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
                       point to requests from the specified Virtual Private Cloud (VPC).

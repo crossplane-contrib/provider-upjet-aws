@@ -48,6 +48,10 @@ type BucketRequestPaymentConfigurationObservation struct {
 
 	// Specifies who pays for the download and request fees. Valid values: BucketOwner, Requester.
 	Payer *string `json:"payer,omitempty" tf:"payer,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type BucketRequestPaymentConfigurationParameters struct {
@@ -76,9 +80,8 @@ type BucketRequestPaymentConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // BucketRequestPaymentConfigurationSpec defines the desired state of BucketRequestPaymentConfiguration

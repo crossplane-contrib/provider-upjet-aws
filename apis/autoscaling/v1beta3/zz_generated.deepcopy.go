@@ -761,6 +761,11 @@ func (in *AutoscalingGroupObservation) DeepCopyInto(out *AutoscalingGroupObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceLinkedRoleArn != nil {
 		in, out := &in.ServiceLinkedRoleArn, &out.ServiceLinkedRoleArn
 		*out = new(string)

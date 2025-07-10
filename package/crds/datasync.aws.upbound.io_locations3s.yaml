@@ -1391,6 +1391,11 @@ spec:
                   id:
                     description: Amazon Resource Name (ARN) of the DataSync Location.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   s3BucketArn:
                     description: Amazon Resource Name (ARN) of the S3 bucket, or the
                       Amazon S3 access point if the S3 bucket is located on an AWS

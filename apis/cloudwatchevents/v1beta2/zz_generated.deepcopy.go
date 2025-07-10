@@ -901,6 +901,11 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecretArn != nil {
 		in, out := &in.SecretArn, &out.SecretArn
 		*out = new(string)
@@ -2780,6 +2785,11 @@ func (in *PermissionObservation) DeepCopyInto(out *PermissionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StatementID != nil {
 		in, out := &in.StatementID, &out.StatementID
 		*out = new(string)
@@ -3894,6 +3904,11 @@ func (in *TargetObservation) DeepCopyInto(out *TargetObservation) {
 		in, out := &in.RedshiftTarget, &out.RedshiftTarget
 		*out = new(RedshiftTargetObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RetryPolicy != nil {
 		in, out := &in.RetryPolicy, &out.RetryPolicy

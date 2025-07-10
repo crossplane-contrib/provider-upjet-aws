@@ -1126,10 +1126,6 @@ spec:
                           Valid values: GRE, NO_ENCAP.'
                         type: string
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -1215,8 +1211,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

@@ -32,6 +32,10 @@ type PermissionSetInlinePolicyObservation struct {
 
 	// The Amazon Resource Name (ARN) of the Permission Set.
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type PermissionSetInlinePolicyParameters struct {
@@ -60,9 +64,8 @@ type PermissionSetInlinePolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // PermissionSetInlinePolicySpec defines the desired state of PermissionSetInlinePolicy

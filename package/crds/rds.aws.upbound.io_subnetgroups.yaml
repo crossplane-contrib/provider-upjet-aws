@@ -462,6 +462,11 @@ spec:
                   id:
                     description: The db subnet group name.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   subnetIds:
                     description: A list of VPC subnet IDs.
                     items:

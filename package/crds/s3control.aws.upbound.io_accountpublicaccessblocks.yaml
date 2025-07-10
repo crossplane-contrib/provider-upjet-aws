@@ -96,10 +96,6 @@ spec:
                       prevent new public ACLs from being set. When set to true causes
                       Amazon S3 to:'
                     type: boolean
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   restrictPublicBuckets:
                     description: 'Whether Amazon S3 should restrict public bucket
                       policies for buckets in this account. Defaults to false. Enabling
@@ -108,8 +104,6 @@ spec:
                       bucket policy, including non-public delegation to specific accounts,
                       is blocked. When set to true:'
                     type: boolean
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

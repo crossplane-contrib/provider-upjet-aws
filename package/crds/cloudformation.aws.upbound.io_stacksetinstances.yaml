@@ -1499,6 +1499,11 @@ spec:
                       the StackSet for this Instance.
                     type: object
                     x-kubernetes-map-type: granular
+                  region:
+                    description: |-
+                      Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retainStack:
                     description: You cannot reassociate a retained Stack or add an
                       existing, saved Stack to a new StackSet. Defaults to false.

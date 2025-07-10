@@ -107,6 +107,10 @@ type VPCPeeringConnectionObservation struct {
 	// The ID of the target VPC with which you are creating the VPC Peering Connection.
 	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests
 	// the peering connection (a maximum of one).
 	Requester *RequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
@@ -154,9 +158,8 @@ type VPCPeeringConnectionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

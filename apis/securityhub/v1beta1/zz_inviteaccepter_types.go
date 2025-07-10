@@ -37,6 +37,10 @@ type InviteAccepterObservation struct {
 
 	// The account ID of the master Security Hub account whose invitation you're accepting.
 	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type InviteAccepterParameters struct {
@@ -57,9 +61,8 @@ type InviteAccepterParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // InviteAccepterSpec defines the desired state of InviteAccepter

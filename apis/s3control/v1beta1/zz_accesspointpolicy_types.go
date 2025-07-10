@@ -45,6 +45,10 @@ type AccessPointPolicyObservation struct {
 
 	// The policy that you want to apply to the specified access point.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AccessPointPolicyParameters struct {
@@ -69,9 +73,8 @@ type AccessPointPolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // AccessPointPolicySpec defines the desired state of AccessPointPolicy

@@ -1626,11 +1626,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: |-
-                      An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
-                      Region is the region you'd like your resource to be created in.
-                    type: string
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
                       policies from one another. Required if using cidr_routing_policy,
@@ -1732,8 +1727,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

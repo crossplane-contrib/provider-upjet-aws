@@ -1412,6 +1412,11 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: Amazon Resource Name (ARN) of the IAM role. Used
                       to make read or write requests to the delivery channel and to

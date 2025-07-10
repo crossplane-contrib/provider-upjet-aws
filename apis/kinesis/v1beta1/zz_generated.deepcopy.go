@@ -157,6 +157,11 @@ func (in *StreamConsumerObservation) DeepCopyInto(out *StreamConsumerObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StreamArn != nil {
 		in, out := &in.StreamArn, &out.StreamArn
 		*out = new(string)

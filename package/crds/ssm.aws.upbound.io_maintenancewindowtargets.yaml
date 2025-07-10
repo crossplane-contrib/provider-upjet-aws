@@ -510,6 +510,11 @@ spec:
                       CloudWatch events raised while running tasks for these targets
                       in this Maintenance Window.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceType:
                     description: The type of target being registered with the Maintenance
                       Window. Possible values are INSTANCE and RESOURCE_GROUP.

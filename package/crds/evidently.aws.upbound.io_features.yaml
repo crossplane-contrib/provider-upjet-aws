@@ -1207,6 +1207,11 @@ spec:
                     description: The name or ARN of the project that is to contain
                       the new feature.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: The current state of the feature. Valid values are
                       AVAILABLE and UPDATING.

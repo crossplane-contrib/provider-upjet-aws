@@ -410,6 +410,11 @@ spec:
                   name:
                     description: The name of the maintenance window.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schedule:
                     description: The schedule of the Maintenance Window in the form
                       of a cron or rate expression.

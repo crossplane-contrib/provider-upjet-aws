@@ -1314,6 +1314,11 @@ spec:
                             type: object
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionProperties:
                     description: The retention duration for the memory store and magnetic
                       store. See Retention Properties below for more details. If not

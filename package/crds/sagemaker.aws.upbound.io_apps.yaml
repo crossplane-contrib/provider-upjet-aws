@@ -1477,6 +1477,11 @@ spec:
                   id:
                     description: The Amazon Resource Name (ARN) of the app.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceSpec:
                     description: The instance type and the Amazon Resource Name (ARN)
                       of the SageMaker AI image created on the instance.See Resource

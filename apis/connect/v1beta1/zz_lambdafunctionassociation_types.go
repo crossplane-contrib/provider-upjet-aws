@@ -26,6 +26,10 @@ type LambdaFunctionAssociationObservation struct {
 
 	// The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type LambdaFunctionAssociationParameters struct {
@@ -60,9 +64,8 @@ type LambdaFunctionAssociationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // LambdaFunctionAssociationSpec defines the desired state of LambdaFunctionAssociation

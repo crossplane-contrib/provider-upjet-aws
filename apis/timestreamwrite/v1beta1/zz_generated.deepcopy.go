@@ -226,6 +226,11 @@ func (in *DatabaseObservation) DeepCopyInto(out *DatabaseObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TableCount != nil {
 		in, out := &in.TableCount, &out.TableCount
 		*out = new(float64)

@@ -1153,6 +1153,11 @@ spec:
                     description: 'Indicates whether this bucket has an Object Lock
                       configuration enabled. Defaults to Enabled. Valid values: Enabled.'
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rule:
                     description: Configuration block for specifying the Object Lock
                       rule for the specified object. See below.

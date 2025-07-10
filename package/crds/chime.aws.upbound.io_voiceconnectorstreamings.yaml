@@ -1081,6 +1081,11 @@ spec:
                           not enabled. Defaults to false.
                         type: boolean
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   streamingNotificationTargets:
                     description: 'The streaming notification targets. Valid Values:
                       EventBridge | SNS | SQS'

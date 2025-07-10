@@ -465,6 +465,11 @@ spec:
                       AWS account, you must use the key ARN. If not specified, the
                       default key is used.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   snapshotCopyGrantName:
                     description: A friendly name for identifying the grant.
                     type: string

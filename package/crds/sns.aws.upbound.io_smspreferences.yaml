@@ -488,6 +488,11 @@ spec:
                     description: The maximum amount in USD that you are willing to
                       spend each month to send SMS messages.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   usageReportS3Bucket:
                     description: The name of the Amazon S3 bucket to receive daily
                       SMS usage reports from Amazon SNS.

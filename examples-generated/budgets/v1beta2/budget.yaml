@@ -22,7 +22,6 @@ spec:
       - test@example.com
       threshold: 100
       thresholdType: PERCENTAGE
-    region: us-west-1
     tags:
       Tag1: Value1
       Tag2: Value2

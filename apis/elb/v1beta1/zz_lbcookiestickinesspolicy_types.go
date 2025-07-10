@@ -62,6 +62,10 @@ type LBCookieStickinessPolicyObservation struct {
 
 	// The name of the stickiness policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type LBCookieStickinessPolicyParameters struct {
@@ -98,9 +102,8 @@ type LBCookieStickinessPolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // LBCookieStickinessPolicySpec defines the desired state of LBCookieStickinessPolicy

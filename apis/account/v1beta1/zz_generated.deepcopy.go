@@ -189,11 +189,6 @@ func (in *AlternateContactParameters) DeepCopyInto(out *AlternateContactParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.Title != nil {
 		in, out := &in.Title, &out.Title
 		*out = new(string)
@@ -381,11 +376,6 @@ func (in *RegionParameters) DeepCopyInto(out *RegionParameters) {
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)
-		**out = **in
-	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
 		**out = **in
 	}
 	if in.RegionName != nil {

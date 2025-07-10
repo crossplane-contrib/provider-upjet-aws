@@ -113,6 +113,10 @@ type PoolRolesAttachmentObservation struct {
 	// An identity pool ID in the format REGION_GUID.
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A List of Role Mapping.
 	RoleMapping []RoleMappingObservation `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
 
@@ -139,9 +143,8 @@ type PoolRolesAttachmentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A List of Role Mapping.
 	// +kubebuilder:validation:Optional

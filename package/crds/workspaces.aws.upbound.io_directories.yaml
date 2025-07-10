@@ -2841,6 +2841,11 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   registrationCode:
                     description: The registration code for the directory. This is
                       the code that users enter in their Amazon WorkSpaces client

@@ -637,6 +637,11 @@ spec:
                       login for your domain. Valid values: 1 for hosted UI (classic),
                       2 for the newer managed login with the branding designer.'
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   s3Bucket:
                     description: The S3 bucket where the static files for this domain
                       are stored.

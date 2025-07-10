@@ -71,6 +71,10 @@ type HostedConfigurationVersionObservation struct {
 	// AppConfig application ID, configuration profile ID, and version number separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Version number of the hosted configuration.
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
@@ -119,9 +123,8 @@ type HostedConfigurationVersionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // HostedConfigurationVersionSpec defines the desired state of HostedConfigurationVersion

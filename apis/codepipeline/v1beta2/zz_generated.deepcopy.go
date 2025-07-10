@@ -851,6 +851,11 @@ func (in *CodepipelineObservation) DeepCopyInto(out *CodepipelineObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -1786,6 +1791,11 @@ func (in *CustomActionTypeObservation) DeepCopyInto(out *CustomActionTypeObserva
 	}
 	if in.ProviderName != nil {
 		in, out := &in.ProviderName, &out.ProviderName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5177,6 +5187,11 @@ func (in *WebhookObservation) DeepCopyInto(out *WebhookObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -1269,6 +1269,10 @@ type SpotFleetRequestObservation struct {
 	// The number of On-Demand units to request. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
 	OnDemandTargetCapacity *float64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Indicates whether Spot fleet should replace unhealthy instances. Default false.
 	ReplaceUnhealthyInstances *bool `json:"replaceUnhealthyInstances,omitempty" tf:"replace_unhealthy_instances,omitempty"`
 
@@ -1391,9 +1395,8 @@ type SpotFleetRequestParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Indicates whether Spot fleet should replace unhealthy instances. Default false.
 	// +kubebuilder:validation:Optional

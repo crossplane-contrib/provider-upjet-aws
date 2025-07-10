@@ -108,6 +108,10 @@ type MethodObservation struct {
 	// Function name that will be given to the method when generating an SDK through API Gateway. If omitted, API Gateway will generate a function name based on the resource path and HTTP verb.
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Map of the API models used for the request's content type
 	// where key is the content type (e.g., application/json)
 	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
@@ -168,9 +172,8 @@ type MethodParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Map of the API models used for the request's content type
 	// where key is the content type (e.g., application/json)

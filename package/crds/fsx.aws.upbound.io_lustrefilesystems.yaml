@@ -2816,6 +2816,11 @@ spec:
                       HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
                       and  SSD storage_type are 125, 250, 500, 1000.'
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rootSquashConfiguration:
                     description: The Lustre root squash configuration used when creating
                       an Amazon FSx for Lustre file system. When enabled, root squash

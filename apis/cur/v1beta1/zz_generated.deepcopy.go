@@ -334,11 +334,6 @@ func (in *ReportDefinitionParameters) DeepCopyInto(out *ReportDefinitionParamete
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.ReportVersioning != nil {
 		in, out := &in.ReportVersioning, &out.ReportVersioning
 		*out = new(string)

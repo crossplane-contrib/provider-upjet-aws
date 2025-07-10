@@ -181,6 +181,11 @@ func (in *ComputeEnvironmentObservation) DeepCopyInto(out *ComputeEnvironmentObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceRole != nil {
 		in, out := &in.ServiceRole, &out.ServiceRole
 		*out = new(string)
@@ -3191,6 +3196,11 @@ func (in *JobQueueObservation) DeepCopyInto(out *JobQueueObservation) {
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.SchedulingPolicyArn != nil {

@@ -444,6 +444,11 @@ spec:
                       key policy, not an IAM policy, an aws_iam_policy_document, in
                       the form that designates a principal, can be used.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rotationPeriodInDays:
                     description: Custom period of time between each rotation date.
                       Must be a number between 90 and 2560 (inclusive).

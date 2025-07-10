@@ -244,6 +244,11 @@ func (in *AccessEntryObservation) DeepCopyInto(out *AccessEntryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -534,6 +539,11 @@ func (in *AccessPolicyAssociationObservation) DeepCopyInto(out *AccessPolicyAsso
 	}
 	if in.PrincipalArn != nil {
 		in, out := &in.PrincipalArn, &out.PrincipalArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -947,6 +957,11 @@ func (in *AddonObservation) DeepCopyInto(out *AddonObservation) {
 	if in.Preserve != nil {
 		in, out := &in.Preserve, &out.Preserve
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.ResolveConflictsOnCreate != nil {
@@ -2510,6 +2525,11 @@ func (in *FargateProfileObservation) DeepCopyInto(out *FargateProfileObservation
 	}
 	if in.PodExecutionRoleArn != nil {
 		in, out := &in.PodExecutionRoleArn, &out.PodExecutionRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4423,6 +4443,11 @@ func (in *PodIdentityAssociationObservation_2) DeepCopyInto(out *PodIdentityAsso
 	}
 	if in.Namespace != nil {
 		in, out := &in.Namespace, &out.Namespace
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

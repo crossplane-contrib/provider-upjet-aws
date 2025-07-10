@@ -42,6 +42,10 @@ type ClassifierObservation struct {
 	// A classifier for JSON content. Defined below.
 	JSONClassifier *JSONClassifierObservation `json:"jsonClassifier,omitempty" tf:"json_classifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A classifier for XML content. Defined below.
 	XMLClassifier *XMLClassifierObservation `json:"xmlClassifier,omitempty" tf:"xml_classifier,omitempty"`
 }
@@ -62,9 +66,8 @@ type ClassifierParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A classifier for XML content. Defined below.
 	// +kubebuilder:validation:Optional

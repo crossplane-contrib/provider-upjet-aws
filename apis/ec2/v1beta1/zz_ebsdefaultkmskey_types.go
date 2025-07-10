@@ -34,6 +34,10 @@ type EBSDefaultKMSKeyObservation struct {
 
 	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume.
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type EBSDefaultKMSKeyParameters struct {
@@ -54,9 +58,8 @@ type EBSDefaultKMSKeyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // EBSDefaultKMSKeySpec defines the desired state of EBSDefaultKMSKey

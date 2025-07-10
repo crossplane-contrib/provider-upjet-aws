@@ -83,6 +83,10 @@ type UserDefinedFunctionObservation struct {
 	// The owner type. can be one of USER, ROLE, and GROUP.
 	OwnerType *string `json:"ownerType,omitempty" tf:"owner_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The configuration block for Resource URIs. See resource uris below for more details.
 	ResourceUris []ResourceUrisObservation `json:"resourceUris,omitempty" tf:"resource_uris,omitempty"`
 }
@@ -120,9 +124,8 @@ type UserDefinedFunctionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The configuration block for Resource URIs. See resource uris below for more details.
 	// +kubebuilder:validation:Optional

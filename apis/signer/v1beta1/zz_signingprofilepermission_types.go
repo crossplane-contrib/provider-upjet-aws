@@ -54,6 +54,10 @@ type SigningProfilePermissionObservation struct {
 	// The signing profile version that a permission applies to.
 	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A unique statement identifier.
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
@@ -100,9 +104,8 @@ type SigningProfilePermissionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A unique statement identifier.
 	// +kubebuilder:validation:Optional

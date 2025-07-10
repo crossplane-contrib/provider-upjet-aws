@@ -47,6 +47,10 @@ type ConformancePackObservation struct {
 	// Set of configuration blocks describing input parameters passed to the conformance pack template. Documented below. When configured, the parameters must also be included in the template_body or in the template stored in Amazon S3 if using template_s3_uri.
 	InputParameter []InputParameterObservation `json:"inputParameter,omitempty" tf:"input_parameter,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A string containing full conformance pack template body. Maximum length of 51200. Drift detection is not possible with this argument.
 	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 
@@ -70,9 +74,8 @@ type ConformancePackParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A string containing full conformance pack template body. Maximum length of 51200. Drift detection is not possible with this argument.
 	// +kubebuilder:validation:Optional

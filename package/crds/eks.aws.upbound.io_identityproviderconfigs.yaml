@@ -1170,6 +1170,11 @@ spec:
                         description: A prefix that is prepended to username claims.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: Status of the EKS Identity Provider Configuration.
                     type: string

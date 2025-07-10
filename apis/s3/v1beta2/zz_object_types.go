@@ -220,6 +220,10 @@ type ObjectObservation struct {
 	// Override provider-level configuration options. See Override Provider below for more details.
 	OverrideProvider *OverrideProviderObservation `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
@@ -351,9 +355,8 @@ type ObjectParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
 	// +kubebuilder:validation:Optional

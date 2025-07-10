@@ -33,6 +33,10 @@ type RegionSettingsObservation struct {
 	// The AWS region.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
@@ -50,9 +54,8 @@ type RegionSettingsParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 	//

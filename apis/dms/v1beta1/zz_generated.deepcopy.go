@@ -126,6 +126,11 @@ func (in *CertificateObservation) DeepCopyInto(out *CertificateObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1212,6 +1217,11 @@ func (in *EventSubscriptionObservation) DeepCopyInto(out *EventSubscriptionObser
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2841,6 +2851,11 @@ func (in *ReplicationInstanceObservation) DeepCopyInto(out *ReplicationInstanceO
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationInstanceArn != nil {
 		in, out := &in.ReplicationInstanceArn, &out.ReplicationInstanceArn
 		*out = new(string)
@@ -3238,6 +3253,11 @@ func (in *ReplicationSubnetGroupObservation) DeepCopyInto(out *ReplicationSubnet
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationSubnetGroupArn != nil {
 		in, out := &in.ReplicationSubnetGroupArn, &out.ReplicationSubnetGroupArn
 		*out = new(string)
@@ -3597,6 +3617,11 @@ func (in *ReplicationTaskObservation) DeepCopyInto(out *ReplicationTaskObservati
 	}
 	if in.MigrationType != nil {
 		in, out := &in.MigrationType, &out.MigrationType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4401,6 +4426,11 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 	if in.PreserveTransactions != nil {
 		in, out := &in.PreserveTransactions, &out.PreserveTransactions
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.Rfc4180 != nil {

@@ -178,12 +178,6 @@ spec:
                     description: The protocol for the connections from clients to
                       the accelerator. Valid values are TCP, UDP.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

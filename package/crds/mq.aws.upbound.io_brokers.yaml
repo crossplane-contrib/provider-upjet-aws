@@ -3263,6 +3263,11 @@ spec:
                     description: Whether to enable connections from applications outside
                       of the VPC that hosts the broker's subnets.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroups:
                     description: List of security group IDs assigned to the broker.
                     items:

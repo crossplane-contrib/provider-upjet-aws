@@ -25,6 +25,10 @@ type EmailIdentityFeedbackAttributesObservation struct {
 	EmailForwardingEnabled *bool `json:"emailForwardingEnabled,omitempty" tf:"email_forwarding_enabled,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type EmailIdentityFeedbackAttributesParameters struct {
@@ -35,9 +39,8 @@ type EmailIdentityFeedbackAttributesParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // EmailIdentityFeedbackAttributesSpec defines the desired state of EmailIdentityFeedbackAttributes

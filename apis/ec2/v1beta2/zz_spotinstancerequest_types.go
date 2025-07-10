@@ -621,6 +621,11 @@ type SpotInstanceRequestObservation struct {
 	// The public IP address assigned to the instance, if applicable.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	RootBlockDevice *SpotInstanceRequestRootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
 	// +listType=set
@@ -799,9 +804,8 @@ type SpotInstanceRequestParameters struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RootBlockDevice *SpotInstanceRequestRootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`

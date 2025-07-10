@@ -3416,6 +3416,11 @@ spec:
                       UDP or TCP_UDP if dual-stack mode is enabled. Not valid for
                       Gateway Load Balancers.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routingHttpRequestXAmznMtlsClientcertHeaderName:
                     description: Enables you to modify the header name of the X-Amzn-Mtls-Clientcert
                       HTTP request header. Can only be set if protocol is HTTPS for

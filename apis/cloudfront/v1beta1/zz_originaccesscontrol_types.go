@@ -72,11 +72,6 @@ type OriginAccessControlParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginAccessControlOriginType *string `json:"originAccessControlOriginType,omitempty" tf:"origin_access_control_origin_type,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Specifies which requests CloudFront signs. Specify always for the most common use case. Allowed values: always, never, and no-override.
 	// +kubebuilder:validation:Optional
 	SigningBehavior *string `json:"signingBehavior,omitempty" tf:"signing_behavior,omitempty"`

@@ -17,7 +17,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
 
 ---
 
@@ -33,7 +32,6 @@ spec:
   forProvider:
     bgpAsn: 65000
     ipAddress: 172.83.124.10
-    region: us-west-1
     type: ipsec.1
 
 ---
@@ -47,8 +45,7 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider:
-    region: us-west-1
+  forProvider: {}
 
 ---
 
@@ -65,7 +62,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     siteIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -83,7 +79,6 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1
 
 ---
 
@@ -100,7 +95,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
 
 ---
 
@@ -117,7 +111,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     transitGatewayArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -137,7 +130,6 @@ spec:
     customerGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     staticRoutesOnly: true
     transitGatewayIdSelector:
       matchLabels:

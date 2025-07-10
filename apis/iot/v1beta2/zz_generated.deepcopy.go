@@ -2682,6 +2682,11 @@ func (in *IndexingConfigurationObservation) DeepCopyInto(out *IndexingConfigurat
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ThingGroupIndexingConfiguration != nil {
 		in, out := &in.ThingGroupIndexingConfiguration, &out.ThingGroupIndexingConfiguration
 		*out = new(ThingGroupIndexingConfigurationObservation)
@@ -3818,6 +3823,11 @@ func (in *ProvisioningTemplateObservation) DeepCopyInto(out *ProvisioningTemplat
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -4845,6 +4855,11 @@ func (in *ThingGroupObservation) DeepCopyInto(out *ThingGroupObservation) {
 		*out = new(PropertiesObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -5429,6 +5444,11 @@ func (in *ThingTypeObservation) DeepCopyInto(out *ThingTypeObservation) {
 		in, out := &in.Properties, &out.Properties
 		*out = new(ThingTypePropertiesObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -6130,6 +6150,11 @@ func (in *TopicRuleDestinationObservation) DeepCopyInto(out *TopicRuleDestinatio
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -7274,6 +7299,11 @@ func (in *TopicRuleObservation) DeepCopyInto(out *TopicRuleObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Republish != nil {
 		in, out := &in.Republish, &out.Republish

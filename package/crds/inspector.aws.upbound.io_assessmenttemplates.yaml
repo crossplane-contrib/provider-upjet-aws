@@ -689,6 +689,11 @@ spec:
                   name:
                     description: The name of the assessment template.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rulesPackageArns:
                     description: The rules to be used during the run.
                     items:

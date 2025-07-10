@@ -1170,6 +1170,11 @@ spec:
                     type: object
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
                       collects reputation metrics for the emails that you send that

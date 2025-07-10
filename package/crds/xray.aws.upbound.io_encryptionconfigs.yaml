@@ -440,6 +440,11 @@ spec:
                   keyId:
                     description: An AWS KMS customer master key (CMK) ARN.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   type:
                     description: The type of encryption. Set to KMS to use your own
                       key for encryption. Set to NONE for default encryption.

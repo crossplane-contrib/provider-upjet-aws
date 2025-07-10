@@ -72,11 +72,6 @@ type LinkAssociationParameters struct {
 	// Selector for a Link in networkmanager to populate linkId.
 	// +kubebuilder:validation:Optional
 	LinkIDSelector *v1.Selector `json:"linkIdSelector,omitempty" tf:"-"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // LinkAssociationSpec defines the desired state of LinkAssociation

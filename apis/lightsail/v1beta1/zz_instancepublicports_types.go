@@ -41,6 +41,10 @@ type InstancePublicPortsObservation struct {
 
 	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. See below.
 	PortInfo []PortInfoObservation `json:"portInfo,omitempty" tf:"port_info,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type InstancePublicPortsParameters struct {
@@ -64,9 +68,8 @@ type InstancePublicPortsParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type PortInfoInitParameters struct {

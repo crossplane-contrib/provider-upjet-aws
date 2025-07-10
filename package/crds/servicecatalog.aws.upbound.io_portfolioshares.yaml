@@ -509,6 +509,11 @@ spec:
                       the portfolio. Valid values AWS account IDs and ARNs of AWS
                       Organizations and organizational units.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sharePrincipals:
                     description: Enables or disables Principal sharing when creating
                       the portfolio share. If this flag is not provided, principal

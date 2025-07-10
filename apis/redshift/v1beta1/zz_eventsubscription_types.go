@@ -78,6 +78,10 @@ type EventSubscriptionObservation struct {
 	// The name of the Redshift event notification subscription
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The event severity to be published by the notification subscription. Valid options are INFO or ERROR. Default value of INFO.
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
@@ -115,9 +119,8 @@ type EventSubscriptionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The event severity to be published by the notification subscription. Valid options are INFO or ERROR. Default value of INFO.
 	// +kubebuilder:validation:Optional

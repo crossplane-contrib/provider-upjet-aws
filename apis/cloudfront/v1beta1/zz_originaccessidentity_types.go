@@ -57,11 +57,6 @@ type OriginAccessIdentityParameters struct {
 	// An optional comment for the origin access identity.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // OriginAccessIdentitySpec defines the desired state of OriginAccessIdentity

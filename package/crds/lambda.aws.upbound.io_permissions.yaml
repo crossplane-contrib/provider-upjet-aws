@@ -677,6 +677,11 @@ spec:
                   qualifier:
                     description: Lambda function version or alias name
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sourceAccount:
                     description: AWS account ID of the source owner for cross-account
                       access, S3, or SES

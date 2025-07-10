@@ -901,10 +901,6 @@ spec:
                   providerName:
                     description: Provider of the link.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   siteId:
                     description: ID of the site.
                     type: string
@@ -993,8 +989,6 @@ spec:
                   type:
                     description: Type of the link.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

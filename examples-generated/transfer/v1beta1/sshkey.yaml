@@ -30,6 +30,7 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
 
 ---
 
@@ -44,6 +45,7 @@ metadata:
 spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example

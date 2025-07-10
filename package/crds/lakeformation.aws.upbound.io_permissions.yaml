@@ -2557,6 +2557,11 @@ spec:
                       as well as AWS account IDs for cross-account permissions. For
                       more information, see Lake Formation Permissions Reference.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   table:
                     description: Configuration block for a table resource. Detailed
                       below.

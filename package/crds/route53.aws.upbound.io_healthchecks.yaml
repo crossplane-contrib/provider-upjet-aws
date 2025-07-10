@@ -297,10 +297,6 @@ spec:
                       This is a reference name used in Caller Reference
                       (helpful for identifying single health_check set amongst others)
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   regions:
                     description: A list of AWS regions that you want Amazon Route
                       53 health checkers to check the specified endpoint from.
@@ -347,8 +343,6 @@ spec:
                       Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH,
                       TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

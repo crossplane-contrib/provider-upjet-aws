@@ -3649,6 +3649,11 @@ spec:
                           launch time can be advanced. Minimum is 0.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   scalingAdjustment:
                     description: Number of instances by which to scale. adjustment_type
                       determines the interpretation of this number (e.g., as an absolute

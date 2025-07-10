@@ -44,6 +44,10 @@ type SecurityPolicyObservation struct {
 	// Version of the policy.
 	PolicyVersion *string `json:"policyVersion,omitempty" tf:"policy_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Type of security policy. One of encryption or network.
 	// Type of security policy. One of `encryption` or `network`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -63,9 +67,8 @@ type SecurityPolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Type of security policy. One of encryption or network.
 	// Type of security policy. One of `encryption` or `network`.

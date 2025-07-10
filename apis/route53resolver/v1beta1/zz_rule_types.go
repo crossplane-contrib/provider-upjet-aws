@@ -64,6 +64,10 @@ type RuleObservation struct {
 	// When a rule is shared with another AWS account, the account ID of the account that the rule is shared with.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
@@ -100,9 +104,8 @@ type RuleParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.

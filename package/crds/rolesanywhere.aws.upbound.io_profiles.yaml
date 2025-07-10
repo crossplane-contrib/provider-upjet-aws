@@ -90,10 +90,6 @@ spec:
                   name:
                     description: The name of the Profile.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   requireInstanceProperties:
                     description: Specifies whether instance properties are required
                       in CreateSession requests with this profile.
@@ -191,8 +187,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

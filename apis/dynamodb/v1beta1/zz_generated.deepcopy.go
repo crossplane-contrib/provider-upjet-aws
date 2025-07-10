@@ -195,6 +195,11 @@ func (in *ContributorInsightsObservation) DeepCopyInto(out *ContributorInsightsO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
@@ -663,6 +668,11 @@ func (in *GlobalTableObservation) DeepCopyInto(out *GlobalTableObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Replica != nil {
 		in, out := &in.Replica, &out.Replica
 		*out = make([]ReplicaObservation, len(*in))
@@ -1046,6 +1056,11 @@ func (in *KinesisStreamingDestinationObservation) DeepCopyInto(out *KinesisStrea
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1578,6 +1593,11 @@ func (in *ResourcePolicyObservation) DeepCopyInto(out *ResourcePolicyObservation
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2233,6 +2253,11 @@ func (in *TableItemObservation) DeepCopyInto(out *TableItemObservation) {
 	}
 	if in.RangeKey != nil {
 		in, out := &in.RangeKey, &out.RangeKey
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -3057,6 +3082,11 @@ func (in *TableReplicaObservation_2) DeepCopyInto(out *TableReplicaObservation_2
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TableClassOverride != nil {
 		in, out := &in.TableClassOverride, &out.TableClassOverride
 		*out = new(string)
@@ -3381,6 +3411,11 @@ func (in *TagObservation) DeepCopyInto(out *TagObservation) {
 	}
 	if in.Key != nil {
 		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

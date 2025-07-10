@@ -791,6 +791,10 @@ type NetworkInsightsAnalysisObservation struct {
 	// Set to true if the destination was reachable.
 	PathFound *bool `json:"pathFound,omitempty" tf:"path_found,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The components in the path from destination to source. See the AWS documentation for details.
 	ReturnPathComponents []ReturnPathComponentsObservation `json:"returnPathComponents,omitempty" tf:"return_path_components,omitempty"`
 
@@ -841,9 +845,8 @@ type NetworkInsightsAnalysisParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

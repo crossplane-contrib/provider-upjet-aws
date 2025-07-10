@@ -166,6 +166,10 @@ type AppObservation struct {
 	// Describes the information about a production branch for an Amplify app. A production_branch block is documented below.
 	ProductionBranch []ProductionBranchObservation `json:"productionBranch,omitempty" tf:"production_branch,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Repository for an Amplify app.
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 
@@ -280,9 +284,8 @@ type AppParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Repository for an Amplify app.
 	// +kubebuilder:validation:Optional

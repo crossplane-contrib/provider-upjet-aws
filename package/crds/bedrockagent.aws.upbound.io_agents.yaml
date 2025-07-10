@@ -953,6 +953,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   skipResourceInUseCheck:
                     description: Whether the in-use check is skipped when deleting
                       the agent.

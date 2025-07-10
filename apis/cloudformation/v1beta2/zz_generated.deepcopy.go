@@ -831,6 +831,11 @@ func (in *StackSetInstanceObservation) DeepCopyInto(out *StackSetInstanceObserva
 			(*out)[key] = outVal
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetainStack != nil {
 		in, out := &in.RetainStack, &out.RetainStack
 		*out = new(bool)
@@ -1263,6 +1268,11 @@ func (in *StackSetObservation) DeepCopyInto(out *StackSetObservation) {
 	}
 	if in.PermissionModel != nil {
 		in, out := &in.PermissionModel, &out.PermissionModel
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

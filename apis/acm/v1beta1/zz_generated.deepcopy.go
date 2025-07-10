@@ -609,6 +609,11 @@ func (in *CertificateValidationObservation) DeepCopyInto(out *CertificateValidat
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ValidationRecordFqdns != nil {
 		in, out := &in.ValidationRecordFqdns, &out.ValidationRecordFqdns
 		*out = make([]*string, len(*in))

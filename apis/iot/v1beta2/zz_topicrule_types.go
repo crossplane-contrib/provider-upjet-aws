@@ -2149,6 +2149,10 @@ type TopicRuleObservation struct {
 
 	Lambda []TopicRuleLambdaObservation `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	Republish []TopicRuleRepublishObservation `json:"republish,omitempty" tf:"republish,omitempty"`
 
 	S3 []TopicRuleS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
@@ -2231,9 +2235,8 @@ type TopicRuleParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Republish []TopicRuleRepublishParameters `json:"republish,omitempty" tf:"republish,omitempty"`

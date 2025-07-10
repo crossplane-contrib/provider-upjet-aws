@@ -765,6 +765,11 @@ func (in *ComponentObservation) DeepCopyInto(out *ComponentObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SkipDestroy != nil {
 		in, out := &in.SkipDestroy, &out.SkipDestroy
 		*out = new(bool)

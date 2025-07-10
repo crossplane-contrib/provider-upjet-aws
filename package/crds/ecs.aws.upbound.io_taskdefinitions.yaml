@@ -2490,6 +2490,11 @@ spec:
                           only supported value is APPMESH.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requiresCompatibilities:
                     description: Set of launch types required by the task. The valid
                       values are EC2 and FARGATE.

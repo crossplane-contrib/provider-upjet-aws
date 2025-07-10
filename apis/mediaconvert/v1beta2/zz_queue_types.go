@@ -52,6 +52,10 @@ type QueueObservation struct {
 	// Specifies whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
 	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A detail pricing plan of the  reserved queue. See below.
 	ReservationPlanSettings *ReservationPlanSettingsObservation `json:"reservationPlanSettings,omitempty" tf:"reservation_plan_settings,omitempty"`
 
@@ -83,9 +87,8 @@ type QueueParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A detail pricing plan of the  reserved queue. See below.
 	// +kubebuilder:validation:Optional

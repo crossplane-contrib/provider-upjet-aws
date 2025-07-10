@@ -58,6 +58,10 @@ type ManagedPrefixListEntryObservation struct {
 
 	// The ID of the prefix list.
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ManagedPrefixListEntryParameters struct {
@@ -96,9 +100,8 @@ type ManagedPrefixListEntryParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ManagedPrefixListEntrySpec defines the desired state of ManagedPrefixListEntry

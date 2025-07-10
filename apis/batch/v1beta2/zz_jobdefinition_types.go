@@ -598,6 +598,10 @@ type JobDefinitionObservation struct {
 	// Whether to propagate the tags from the job definition to the corresponding Amazon ECS task. Default is false.
 	PropagateTags *bool `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Retry strategy to use for failed jobs that are submitted with this job definition. Maximum number of retry_strategy is 1.  Defined below.
 	RetryStrategy *RetryStrategyObservation `json:"retryStrategy,omitempty" tf:"retry_strategy,omitempty"`
 
@@ -664,9 +668,8 @@ type JobDefinitionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Retry strategy to use for failed jobs that are submitted with this job definition. Maximum number of retry_strategy is 1.  Defined below.
 	// +kubebuilder:validation:Optional

@@ -1783,6 +1783,11 @@ spec:
                       URL to invoke the API pointing to the stage,
                       e.g., wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage, or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routeSettings:
                     description: Route settings for the stage.
                     items:

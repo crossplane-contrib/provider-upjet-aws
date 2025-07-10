@@ -668,6 +668,11 @@ spec:
                   id:
                     description: The name of the Neptune event notification subscription.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   snsTopicArn:
                     description: The ARN of the SNS topic to send events to.
                     type: string

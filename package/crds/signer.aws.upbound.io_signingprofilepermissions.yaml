@@ -561,6 +561,11 @@ spec:
                     description: The signing profile version that a permission applies
                       to.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   statementId:
                     description: A unique statement identifier.
                     type: string

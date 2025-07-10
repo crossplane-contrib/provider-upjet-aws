@@ -298,6 +298,11 @@ spec:
                     description: The custom MAIL FROM domain that you want the verified
                       identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

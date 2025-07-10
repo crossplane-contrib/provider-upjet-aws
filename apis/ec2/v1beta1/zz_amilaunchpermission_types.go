@@ -59,6 +59,10 @@ type AMILaunchPermissionObservation struct {
 
 	// ARN of an organizational unit for the launch permission.
 	OrganizationalUnitArn *string `json:"organizationalUnitArn,omitempty" tf:"organizational_unit_arn,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AMILaunchPermissionParameters struct {
@@ -94,9 +98,8 @@ type AMILaunchPermissionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // AMILaunchPermissionSpec defines the desired state of AMILaunchPermission

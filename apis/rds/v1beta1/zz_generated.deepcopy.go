@@ -397,6 +397,11 @@ func (in *ClusterActivityStreamObservation) DeepCopyInto(out *ClusterActivityStr
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceArn != nil {
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
@@ -701,6 +706,11 @@ func (in *ClusterEndpointObservation) DeepCopyInto(out *ClusterEndpointObservati
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1694,6 +1704,11 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StorageEncrypted != nil {
 		in, out := &in.StorageEncrypted, &out.StorageEncrypted
 		*out = new(bool)
@@ -2610,6 +2625,11 @@ func (in *ClusterParameterGroupObservation) DeepCopyInto(out *ClusterParameterGr
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3504,6 +3524,11 @@ func (in *ClusterRoleAssociationObservation) DeepCopyInto(out *ClusterRoleAssoci
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -3934,6 +3959,11 @@ func (in *ClusterSnapshotObservation) DeepCopyInto(out *ClusterSnapshotObservati
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.SharedAccounts != nil {
@@ -4423,6 +4453,11 @@ func (in *DBInstanceAutomatedBackupsReplicationObservation) DeepCopyInto(out *DB
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
 		*out = new(float64)
@@ -4776,6 +4811,11 @@ func (in *DBSnapshotCopyObservation) DeepCopyInto(out *DBSnapshotCopyObservation
 	}
 	if in.PresignedURL != nil {
 		in, out := &in.PresignedURL, &out.PresignedURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5191,6 +5231,11 @@ func (in *EventSubscriptionObservation) DeepCopyInto(out *EventSubscriptionObser
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5646,6 +5691,11 @@ func (in *GlobalClusterObservation) DeepCopyInto(out *GlobalClusterObservation) 
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -7463,6 +7513,11 @@ func (in *InstanceRoleAssociationObservation) DeepCopyInto(out *InstanceRoleAsso
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -7692,6 +7747,11 @@ func (in *InstanceStateObservation) DeepCopyInto(out *InstanceStateObservation) 
 	}
 	if in.Identifier != nil {
 		in, out := &in.Identifier, &out.Identifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -8073,6 +8133,11 @@ func (in *OptionGroupObservation) DeepCopyInto(out *OptionGroupObservation) {
 	}
 	if in.OptionGroupDescription != nil {
 		in, out := &in.OptionGroupDescription, &out.OptionGroupDescription
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -8616,6 +8681,11 @@ func (in *ParameterGroupObservation) DeepCopyInto(out *ParameterGroupObservation
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.SkipDestroy != nil {
 		in, out := &in.SkipDestroy, &out.SkipDestroy
@@ -9248,6 +9318,11 @@ func (in *ProxyEndpointObservation) DeepCopyInto(out *ProxyEndpointObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -9640,6 +9715,11 @@ func (in *ProxyObservation) DeepCopyInto(out *ProxyObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RequireTLS != nil {
 		in, out := &in.RequireTLS, &out.RequireTLS
 		*out = new(bool)
@@ -10024,6 +10104,11 @@ func (in *ProxyTargetObservation) DeepCopyInto(out *ProxyTargetObservation) {
 	}
 	if in.RDSResourceID != nil {
 		in, out := &in.RDSResourceID, &out.RDSResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -10803,6 +10888,11 @@ func (in *SnapshotObservation) DeepCopyInto(out *SnapshotObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SharedAccounts != nil {
 		in, out := &in.SharedAccounts, &out.SharedAccounts
 		*out = make([]*string, len(*in))
@@ -11118,6 +11208,11 @@ func (in *SubnetGroupObservation) DeepCopyInto(out *SubnetGroupObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

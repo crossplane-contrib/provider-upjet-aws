@@ -585,6 +585,11 @@ spec:
                   id:
                     description: The name of the created domain configuration.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   serverCertificateArns:
                     description: The ARNs of the certificates that IoT passes to the
                       device during the TLS handshake. Currently you can specify only

@@ -48,6 +48,10 @@ type BudgetResourceAssociationObservation struct {
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Resource identifier.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
@@ -69,9 +73,8 @@ type BudgetResourceAssociationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Resource identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta2.Product

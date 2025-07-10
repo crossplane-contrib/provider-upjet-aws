@@ -355,6 +355,11 @@ func (in *VaultLockObservation) DeepCopyInto(out *VaultLockObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.VaultName != nil {
 		in, out := &in.VaultName, &out.VaultName
 		*out = new(string)

@@ -54,6 +54,10 @@ type ClusterSnapshotObservation struct {
 	// Port that the DocumentDB cluster was listening on at the time of the snapshot.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the DocumentDB Cluster Snapshot.
@@ -87,9 +91,8 @@ type ClusterSnapshotParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ClusterSnapshotSpec defines the desired state of ClusterSnapshot

@@ -31,6 +31,9 @@ type AccessPolicyAssociationObservation struct {
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AccessPolicyAssociationParameters struct {
@@ -68,9 +71,8 @@ type AccessPolicyAssociationParameters struct {
 	PrincipalArnSelector *v1.Selector `json:"principalArnSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type AccessScopeInitParameters struct {

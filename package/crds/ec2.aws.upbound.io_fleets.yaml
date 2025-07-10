@@ -2087,6 +2087,11 @@ spec:
                           only for fleets of type instant.
                         type: boolean
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replaceUnhealthyInstances:
                     description: Whether EC2 Fleet should replace unhealthy instances.
                       Defaults to false. Supported only for fleets of type maintain.

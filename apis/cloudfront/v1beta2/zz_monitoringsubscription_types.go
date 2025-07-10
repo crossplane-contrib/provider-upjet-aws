@@ -82,11 +82,6 @@ type MonitoringSubscriptionParameters struct {
 	// A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
 	// +kubebuilder:validation:Optional
 	MonitoringSubscription *MonitoringSubscriptionMonitoringSubscriptionParameters `json:"monitoringSubscription,omitempty" tf:"monitoring_subscription,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type RealtimeMetricsSubscriptionConfigInitParameters struct {

@@ -501,6 +501,11 @@ spec:
                       of the country code. Do not specify this argument when importing
                       the resource.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: A block that specifies status of the phone number.
                       Documented below.

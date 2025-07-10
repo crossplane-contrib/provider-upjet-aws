@@ -269,11 +269,6 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
 	// +kubebuilder:validation:Optional
 	// +listType=set

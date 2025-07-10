@@ -76,6 +76,10 @@ type IndexingConfigurationInitParameters struct {
 type IndexingConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Thing group indexing configuration. See below.
 	ThingGroupIndexingConfiguration *ThingGroupIndexingConfigurationObservation `json:"thingGroupIndexingConfiguration,omitempty" tf:"thing_group_indexing_configuration,omitempty"`
 
@@ -87,9 +91,8 @@ type IndexingConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Thing group indexing configuration. See below.
 	// +kubebuilder:validation:Optional

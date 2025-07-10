@@ -591,6 +591,11 @@ spec:
                   ipAddress:
                     description: Allocated static IP address.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   staticIpName:
                     description: Name of the allocated static IP.
                     type: string

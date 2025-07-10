@@ -31,6 +31,10 @@ type ResourcePolicyObservation struct {
 
 	// The policy to be applied to the aws glue data catalog.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ResourcePolicyParameters struct {
@@ -45,9 +49,8 @@ type ResourcePolicyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ResourcePolicySpec defines the desired state of ResourcePolicy

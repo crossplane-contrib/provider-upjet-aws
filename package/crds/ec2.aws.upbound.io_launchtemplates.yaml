@@ -7694,6 +7694,11 @@ spec:
                   ramDiskId:
                     description: The ID of the RAM disk.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroupNames:
                     description: |-
                       A list of security group names to associate with. If you are creating Instances in a VPC, use

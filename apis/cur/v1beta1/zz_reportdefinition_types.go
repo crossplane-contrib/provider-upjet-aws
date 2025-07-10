@@ -133,11 +133,6 @@ type ReportDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	RefreshClosedReports *bool `json:"refreshClosedReports,omitempty" tf:"refresh_closed_reports,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Overwrite the previous version of each report or to deliver the report in addition to the previous versions. Valid values are: CREATE_NEW_REPORT and OVERWRITE_REPORT.
 	// +kubebuilder:validation:Optional
 	ReportVersioning *string `json:"reportVersioning,omitempty" tf:"report_versioning,omitempty"`

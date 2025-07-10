@@ -314,6 +314,10 @@ spec:
                     description: The ID of the AWS account that owns the DHCP options
                       set.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

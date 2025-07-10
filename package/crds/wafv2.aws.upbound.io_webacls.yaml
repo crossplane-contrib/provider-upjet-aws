@@ -1207,6 +1207,11 @@ spec:
                   name:
                     description: Friendly name of the WebACL. Conflicts with name_prefix.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleJson:
                     description: 'A raw JSON string used to define the rules for allowing,
                       blocking, or counting web requests. When this field is used,

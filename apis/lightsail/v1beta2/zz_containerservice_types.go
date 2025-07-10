@@ -99,6 +99,10 @@ type ContainerServiceObservation struct {
 	// Public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service. See below.
 	PublicDomainNames *PublicDomainNamesObservation `json:"publicDomainNames,omitempty" tf:"public_domain_names,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Lightsail resource type of the container service (i.e., ContainerService).
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
@@ -140,9 +144,8 @@ type ContainerServiceParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Scale specification for the container service. The scale specifies the allocated compute nodes of the container service.
 	// +kubebuilder:validation:Optional

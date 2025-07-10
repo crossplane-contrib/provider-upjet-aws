@@ -94,6 +94,10 @@ type ReplicationConfigurationObservation struct {
 	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in the replication configuration.
 	OriginalSourceFileSystemArn *string `json:"originalSourceFileSystemArn,omitempty" tf:"original_source_file_system_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the current source file system in the replication configuration.
 	SourceFileSystemArn *string `json:"sourceFileSystemArn,omitempty" tf:"source_file_system_arn,omitempty"`
 
@@ -112,9 +116,8 @@ type ReplicationConfigurationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the file system that is to be replicated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem

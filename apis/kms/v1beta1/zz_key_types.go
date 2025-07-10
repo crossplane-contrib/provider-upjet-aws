@@ -110,6 +110,10 @@ type KeyObservation struct {
 	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Custom period of time between each rotation date. Must be a number between 90 and 2560 (inclusive).
 	RotationPeriodInDays *float64 `json:"rotationPeriodInDays,omitempty" tf:"rotation_period_in_days,omitempty"`
 
@@ -176,9 +180,8 @@ type KeyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Custom period of time between each rotation date. Must be a number between 90 and 2560 (inclusive).
 	// +kubebuilder:validation:Optional

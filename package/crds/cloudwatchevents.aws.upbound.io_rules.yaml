@@ -692,6 +692,11 @@ spec:
                     description: Whether the rule should be enabled. Defaults to true.
                       Conflicts with state.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) associated with the
                       role that is used for target invocation.

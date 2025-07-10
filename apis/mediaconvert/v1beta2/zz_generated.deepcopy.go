@@ -155,6 +155,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReservationPlanSettings != nil {
 		in, out := &in.ReservationPlanSettings, &out.ReservationPlanSettings
 		*out = new(ReservationPlanSettingsObservation)

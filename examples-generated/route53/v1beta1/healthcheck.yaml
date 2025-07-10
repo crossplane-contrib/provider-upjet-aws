@@ -11,7 +11,6 @@ spec:
     failureThreshold: "5"
     fqdn: example.com
     port: 80
-    region: us-west-1
     requestInterval: "30"
     resourcePath: /
     tags:

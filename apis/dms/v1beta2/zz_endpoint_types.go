@@ -225,6 +225,10 @@ type EndpointObservation struct {
 	// Configuration block for Redshift settings. See below.
 	RedshiftSettings *RedshiftSettingsObservation `json:"redshiftSettings,omitempty" tf:"redshift_settings,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
@@ -329,9 +333,8 @@ type EndpointParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full
 	// +kubebuilder:validation:Optional

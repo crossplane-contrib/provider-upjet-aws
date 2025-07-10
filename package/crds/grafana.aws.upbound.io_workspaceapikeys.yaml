@@ -471,6 +471,11 @@ spec:
                     description: Specifies the permission level of the API key. Valid
                       values are VIEWER, EDITOR, or ADMIN.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   secondsToLive:
                     description: Specifies the time in seconds until the API key expires.
                       Keys can be valid for up to 30 days.

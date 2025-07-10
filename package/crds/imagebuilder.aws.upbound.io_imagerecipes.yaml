@@ -1654,6 +1654,11 @@ spec:
                   platform:
                     description: Platform of the image recipe.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   systemsManagerAgent:
                     description: Configuration block for the Systems Manager Agent
                       installed by default by Image Builder. Detailed below.

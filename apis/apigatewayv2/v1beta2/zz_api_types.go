@@ -119,6 +119,10 @@ type APIObservation struct {
 	// API protocol. Valid values: HTTP, WEBSOCKET.
 	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Part of quick create. Specifies any route key. Applicable for HTTP APIs.
 	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
@@ -191,9 +195,8 @@ type APIParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Part of quick create. Specifies any route key. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional

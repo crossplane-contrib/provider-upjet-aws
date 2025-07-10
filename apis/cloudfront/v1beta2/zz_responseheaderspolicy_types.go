@@ -435,11 +435,6 @@ type ResponseHeadersPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// A configuration for a set of HTTP headers to remove from the HTTP response. Object that contains an attribute items that contains a list of headers. See Remove Header for more information.
 	// +kubebuilder:validation:Optional
 	RemoveHeadersConfig *RemoveHeadersConfigParameters `json:"removeHeadersConfig,omitempty" tf:"remove_headers_config,omitempty"`

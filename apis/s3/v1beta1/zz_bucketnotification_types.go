@@ -58,6 +58,10 @@ type BucketNotificationObservation struct {
 	// Notification configuration to SQS Queue. See below.
 	Queue []QueueObservation `json:"queue,omitempty" tf:"queue,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Notification configuration to SNS Topic. See below.
 	Topic []TopicObservation `json:"topic,omitempty" tf:"topic,omitempty"`
 }
@@ -92,9 +96,8 @@ type BucketNotificationParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Notification configuration to SNS Topic. See below.
 	// +kubebuilder:validation:Optional

@@ -171,6 +171,10 @@ type BucketObjectObservation struct {
 	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
@@ -294,9 +298,8 @@ type BucketObjectParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
 	// +kubebuilder:validation:Optional

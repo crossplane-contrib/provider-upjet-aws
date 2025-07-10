@@ -12,4 +12,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: tinlicker
-    region: us-west-1

@@ -4532,6 +4532,11 @@ spec:
                           type: object
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   serviceExecutionRoleArn:
                     description: The Amazon Resource Name (ARN) of the IAM role used
                       by the connector to access the Amazon Web Services resources

@@ -382,6 +382,11 @@ spec:
                   masterAccountId:
                     description: The AWS account ID for the account.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   relationshipStatus:
                     description: The current status of the relationship between the
                       account and the administrator account.

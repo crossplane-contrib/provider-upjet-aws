@@ -42,6 +42,10 @@ type PatchGroupObservation struct {
 
 	// The name of the patch group that should be registered with the patch baseline.
 	PatchGroup *string `json:"patchGroup,omitempty" tf:"patch_group,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type PatchGroupParameters struct {
@@ -66,9 +70,8 @@ type PatchGroupParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // PatchGroupSpec defines the desired state of PatchGroup

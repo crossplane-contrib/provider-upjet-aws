@@ -59,6 +59,10 @@ type InstanceAccessControlAttributesObservation struct {
 	// The Amazon Resource Name (ARN) of the SSO Instance.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	StatusReason *string `json:"statusReason,omitempty" tf:"status_reason,omitempty"`
@@ -76,9 +80,8 @@ type InstanceAccessControlAttributesParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type ValueInitParameters struct {

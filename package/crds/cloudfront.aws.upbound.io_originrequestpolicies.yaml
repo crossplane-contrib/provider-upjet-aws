@@ -660,12 +660,6 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

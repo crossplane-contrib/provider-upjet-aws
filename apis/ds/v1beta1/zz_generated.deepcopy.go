@@ -122,6 +122,11 @@ func (in *ConditionalForwarderObservation) DeepCopyInto(out *ConditionalForwarde
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RemoteDomainName != nil {
 		in, out := &in.RemoteDomainName, &out.RemoteDomainName
 		*out = new(string)

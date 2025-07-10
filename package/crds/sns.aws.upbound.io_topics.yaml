@@ -2043,6 +2043,11 @@ spec:
                   policy:
                     description: The fully-formed AWS policy as JSON.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   signatureVersion:
                     description: If SignatureVersion should be 1 (SHA1) or 2 (SHA256).
                       The signature version corresponds to the hashing algorithm used

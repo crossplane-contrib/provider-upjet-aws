@@ -491,6 +491,11 @@ spec:
                     description: AWS service or identity that receives the permission.
                       At this time, the only valid principal is acm.amazonaws.com.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sourceAccount:
                     description: ID of the calling account
                     type: string

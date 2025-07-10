@@ -942,6 +942,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicaMode != nil {
 		in, out := &in.ReplicaMode, &out.ReplicaMode
 		*out = new(string)

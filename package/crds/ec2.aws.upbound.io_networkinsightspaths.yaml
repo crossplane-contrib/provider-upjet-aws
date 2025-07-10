@@ -863,6 +863,11 @@ spec:
                     description: Protocol to use for analysis. Valid options are tcp
                       or udp.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   source:
                     description: ID or ARN of the resource which is the source of
                       the path. Can be an Instance, Internet Gateway, Network Interface,

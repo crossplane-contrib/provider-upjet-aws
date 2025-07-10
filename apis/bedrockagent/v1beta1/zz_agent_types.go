@@ -122,6 +122,10 @@ type AgentObservation struct {
 	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration Block for details.
 	PromptOverrideConfiguration []PromptOverrideConfigurationObservation `json:"promptOverrideConfiguration,omitempty" tf:"prompt_override_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether the in-use check is skipped when deleting the agent.
 	SkipResourceInUseCheck *bool `json:"skipResourceInUseCheck,omitempty" tf:"skip_resource_in_use_check,omitempty"`
 
@@ -196,9 +200,8 @@ type AgentParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether the in-use check is skipped when deleting the agent.
 	// +kubebuilder:validation:Optional

@@ -469,6 +469,11 @@ spec:
                     description: Subdomain (of above domain) which is to be used as
                       MAIL FROM address
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

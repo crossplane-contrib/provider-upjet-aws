@@ -310,6 +310,10 @@ type ObjectCopyObservation struct {
 
 	OverrideProvider *ObjectCopyOverrideProviderObservation `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// If present, indicates that the requester was successfully charged for the request.
 	RequestCharged *bool `json:"requestCharged,omitempty" tf:"request_charged,omitempty"`
 
@@ -494,9 +498,8 @@ type ObjectCopyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Confirms that the requester knows that they will be charged for the request. Bucket owners need not specify this parameter in their requests. For information about downloading objects from requester pays buckets, see Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html) in the Amazon S3 Developer Guide. If included, the only valid value is requester.
 	// +kubebuilder:validation:Optional

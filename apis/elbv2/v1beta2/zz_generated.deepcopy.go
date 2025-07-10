@@ -3421,6 +3421,11 @@ func (in *LBListenerObservation) DeepCopyInto(out *LBListenerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName != nil {
 		in, out := &in.RoutingHTTPRequestXAmznMtlsClientcertHeaderName, &out.RoutingHTTPRequestXAmznMtlsClientcertHeaderName
 		*out = new(string)
@@ -3919,6 +3924,11 @@ func (in *LBListenerRuleObservation) DeepCopyInto(out *LBListenerRuleObservation
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -4239,6 +4249,11 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 	if in.PreserveHostHeader != nil {
 		in, out := &in.PreserveHostHeader, &out.PreserveHostHeader
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.SecurityGroups != nil {
@@ -4879,6 +4894,11 @@ func (in *LBTargetGroupObservation) DeepCopyInto(out *LBTargetGroupObservation) 
 	if in.ProxyProtocolV2 != nil {
 		in, out := &in.ProxyProtocolV2, &out.ProxyProtocolV2
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.SlowStart != nil {

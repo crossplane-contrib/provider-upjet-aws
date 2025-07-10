@@ -96,11 +96,6 @@ type CustomerGatewayAssociationParameters struct {
 	// ID of the link.
 	// +kubebuilder:validation:Optional
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // CustomerGatewayAssociationSpec defines the desired state of CustomerGatewayAssociation

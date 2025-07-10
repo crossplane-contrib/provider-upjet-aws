@@ -1442,6 +1442,11 @@ spec:
                     description: Indicates whether to permanently restore an archived
                       snapshot.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleName:
                     description: 'The name of the IAM Role the VM Import/Export service
                       will assume. This role needs certain permissions. See https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role.

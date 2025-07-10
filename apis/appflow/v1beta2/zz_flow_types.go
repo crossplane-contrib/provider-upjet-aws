@@ -701,6 +701,10 @@ type FlowObservation struct {
 	// A Catalog that determines the configuration that Amazon AppFlow uses when it catalogs the data that’s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
 	MetadataCatalogConfig *MetadataCatalogConfigObservation `json:"metadataCatalogConfig,omitempty" tf:"metadata_catalog_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Source Flow Config that controls how Amazon AppFlow retrieves data from the source connector.
 	SourceFlowConfig *SourceFlowConfigObservation `json:"sourceFlowConfig,omitempty" tf:"source_flow_config,omitempty"`
 
@@ -739,9 +743,8 @@ type FlowParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Source Flow Config that controls how Amazon AppFlow retrieves data from the source connector.
 	// +kubebuilder:validation:Optional

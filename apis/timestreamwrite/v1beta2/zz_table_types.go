@@ -227,6 +227,10 @@ type TableObservation struct {
 	// Contains properties to set on the table when enabling magnetic store writes. See Magnetic Store Write Properties below for more details.
 	MagneticStoreWriteProperties *MagneticStoreWritePropertiesObservation `json:"magneticStoreWriteProperties,omitempty" tf:"magnetic_store_write_properties,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
 	RetentionProperties *RetentionPropertiesObservation `json:"retentionProperties,omitempty" tf:"retention_properties,omitempty"`
 
@@ -266,9 +270,8 @@ type TableParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
 	// +kubebuilder:validation:Optional

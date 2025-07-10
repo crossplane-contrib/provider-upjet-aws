@@ -506,6 +506,11 @@ spec:
                       new public ACLs from being set. When set to true causes Amazon
                       S3 to:'
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   restrictPublicBuckets:
                     description: 'Whether Amazon S3 should restrict public bucket
                       policies for this bucket. Defaults to false. Enabling this setting

@@ -226,6 +226,11 @@ func (in *VoiceConnectorStreamingObservation) DeepCopyInto(out *VoiceConnectorSt
 		*out = new(MediaInsightsConfigurationObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StreamingNotificationTargets != nil {
 		in, out := &in.StreamingNotificationTargets, &out.StreamingNotificationTargets
 		*out = make([]*string, len(*in))

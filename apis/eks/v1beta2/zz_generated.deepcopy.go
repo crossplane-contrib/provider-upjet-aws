@@ -522,6 +522,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RemoteNetworkConfig != nil {
 		in, out := &in.RemoteNetworkConfig, &out.RemoteNetworkConfig
 		*out = new(RemoteNetworkConfigObservation)
@@ -1273,6 +1278,11 @@ func (in *IdentityProviderConfigObservation) DeepCopyInto(out *IdentityProviderC
 		in, out := &in.Oidc, &out.Oidc
 		*out = new(IdentityProviderConfigOidcObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
@@ -2086,6 +2096,11 @@ func (in *NodeGroupObservation) DeepCopyInto(out *NodeGroupObservation) {
 	}
 	if in.NodeRoleArn != nil {
 		in, out := &in.NodeRoleArn, &out.NodeRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

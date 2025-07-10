@@ -879,6 +879,11 @@ spec:
                     description: A value that specifies whether the workgroup can
                       be accessed from a public network.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroupIds:
                     description: An array of security group IDs to associate with
                       the workgroup.

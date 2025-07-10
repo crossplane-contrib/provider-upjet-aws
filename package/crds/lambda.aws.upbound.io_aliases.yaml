@@ -875,6 +875,11 @@ spec:
                     description: ARN to be used for invoking Lambda Function from
                       API Gateway - to be used in aws_api_gateway_integration's uri.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routingConfig:
                     description: Lambda alias' route configuration settings. See below.
                     properties:

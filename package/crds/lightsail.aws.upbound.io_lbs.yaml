@@ -336,6 +336,11 @@ spec:
                     items:
                       type: number
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   supportCode:
                     description: Support code for the load balancer. Include this
                       code in your email to support when you have questions about

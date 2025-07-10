@@ -557,6 +557,11 @@ spec:
                   provisioningArtifactId:
                     description: Provisioning artifact identifier.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   templatePhysicalId:
                     description: Template source as the physical ID of the resource
                       that contains the template. Currently only supports CloudFormation

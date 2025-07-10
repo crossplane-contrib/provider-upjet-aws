@@ -89,6 +89,10 @@ type TransitGatewayObservation_2 struct {
 	// Identifier of the default propagation route table
 	PropagationDefaultRouteTableID *string `json:"propagationDefaultRouteTableId,omitempty" tf:"propagation_default_route_table_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable. Default value: disable.
 	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 
@@ -140,9 +144,8 @@ type TransitGatewayParameters_2 struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional

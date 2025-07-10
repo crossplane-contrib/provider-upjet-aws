@@ -100,6 +100,10 @@ type FunctionObservation struct {
 	// Function name. The function name does not have to be unique.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
 	RequestMappingTemplate *string `json:"requestMappingTemplate,omitempty" tf:"request_mapping_template,omitempty"`
 
@@ -164,9 +168,8 @@ type FunctionParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
 	// +kubebuilder:validation:Optional

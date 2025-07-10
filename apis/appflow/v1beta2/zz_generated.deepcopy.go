@@ -1568,6 +1568,11 @@ func (in *FlowObservation) DeepCopyInto(out *FlowObservation) {
 		*out = new(MetadataCatalogConfigObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceFlowConfig != nil {
 		in, out := &in.SourceFlowConfig, &out.SourceFlowConfig
 		*out = new(SourceFlowConfigObservation)

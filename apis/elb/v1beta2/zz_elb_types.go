@@ -182,6 +182,10 @@ type ELBObservation struct {
 	// A list of listener blocks. Listeners documented below.
 	Listener []ListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A list of security group IDs to assign to the ELB.
 	// Only valid if creating an ELB within a VPC
 	// +listType=set
@@ -272,9 +276,8 @@ type ELBParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A list of security group IDs to assign to the ELB.
 	// Only valid if creating an ELB within a VPC

@@ -919,6 +919,11 @@ func (in *ScalingPlanObservation) DeepCopyInto(out *ScalingPlanObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ScalingInstruction != nil {
 		in, out := &in.ScalingInstruction, &out.ScalingInstruction
 		*out = make([]ScalingInstructionObservation, len(*in))

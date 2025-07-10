@@ -4760,6 +4760,11 @@ spec:
                           storage.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   secretsManagerAccessRoleArn:
                     description: ARN of the IAM role that specifies AWS DMS as the
                       trusted entity and has the required permissions to access the

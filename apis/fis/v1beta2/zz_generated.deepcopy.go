@@ -739,6 +739,11 @@ func (in *ExperimentTemplateObservation) DeepCopyInto(out *ExperimentTemplateObs
 		*out = new(LogConfigurationObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)

@@ -69,6 +69,10 @@ type MemberObservation struct {
 	// A custom message to include in the invitation. Amazon Detective adds this message to the standard content that it sends for an invitation.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Current membership status of the member account.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -113,9 +117,8 @@ type MemberParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // MemberSpec defines the desired state of Member

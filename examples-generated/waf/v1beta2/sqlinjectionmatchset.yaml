@@ -9,7 +9,6 @@ metadata:
 spec:
   forProvider:
     name: tf-sql_injection_match_set
-    region: us-west-1
     sqlInjectionMatchTuples:
     - fieldToMatch:
       - type: QUERY_STRING

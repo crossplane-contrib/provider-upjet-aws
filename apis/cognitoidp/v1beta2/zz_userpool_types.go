@@ -1289,6 +1289,10 @@ type UserPoolObservation struct {
 	// Configuration block for information about the user pool password policy. Detailed below.
 	PasswordPolicy *PasswordPolicyObservation `json:"passwordPolicy,omitempty" tf:"password_policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code.
 	SMSAuthenticationMessage *string `json:"smsAuthenticationMessage,omitempty" tf:"sms_authentication_message,omitempty"`
 
@@ -1400,9 +1404,8 @@ type UserPoolParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code.
 	// +kubebuilder:validation:Optional

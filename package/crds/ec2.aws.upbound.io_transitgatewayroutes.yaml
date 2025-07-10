@@ -616,6 +616,11 @@ spec:
                     description: EC2 Transit Gateway Route Table identifier combined
                       with destination
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   transitGatewayAttachmentId:
                     description: Identifier of EC2 Transit Gateway Attachment .
                     type: string

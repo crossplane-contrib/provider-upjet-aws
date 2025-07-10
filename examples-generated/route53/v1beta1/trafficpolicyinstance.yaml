@@ -12,7 +12,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: test.example.com
-    region: us-west-1
     trafficPolicyIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

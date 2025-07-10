@@ -40,6 +40,10 @@ type EncryptionConfigObservation struct {
 	// An AWS KMS customer master key (CMK) ARN.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -62,9 +66,8 @@ type EncryptionConfigParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	// +kubebuilder:validation:Optional

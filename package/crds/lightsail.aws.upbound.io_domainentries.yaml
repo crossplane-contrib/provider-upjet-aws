@@ -378,6 +378,11 @@ spec:
                   isAlias:
                     description: 'Whether the entry should be an alias. Default: false.'
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   target:
                     description: Target of the domain entry.
                     type: string

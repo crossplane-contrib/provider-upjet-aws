@@ -160,6 +160,10 @@ type SpaceObservation struct {
 	// A collection of ownership settings. Required if space_sharing_settings is set. See ownership_settings Block below.
 	OwnershipSettings *OwnershipSettingsObservation `json:"ownershipSettings,omitempty" tf:"ownership_settings,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The name of the space that appears in the SageMaker AI Studio UI.
 	SpaceDisplayName *string `json:"spaceDisplayName,omitempty" tf:"space_display_name,omitempty"`
 
@@ -206,9 +210,8 @@ type SpaceParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the space that appears in the SageMaker AI Studio UI.
 	// +kubebuilder:validation:Optional

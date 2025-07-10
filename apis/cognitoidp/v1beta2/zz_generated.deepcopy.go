@@ -2694,6 +2694,11 @@ func (in *RiskConfigurationObservation) DeepCopyInto(out *RiskConfigurationObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RiskExceptionConfiguration != nil {
 		in, out := &in.RiskExceptionConfiguration, &out.RiskExceptionConfiguration
 		*out = new(RiskExceptionConfigurationObservation)
@@ -3912,6 +3917,11 @@ func (in *UserPoolObservation) DeepCopyInto(out *UserPoolObservation) {
 		in, out := &in.PasswordPolicy, &out.PasswordPolicy
 		*out = new(PasswordPolicyObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.SMSAuthenticationMessage != nil {
 		in, out := &in.SMSAuthenticationMessage, &out.SMSAuthenticationMessage

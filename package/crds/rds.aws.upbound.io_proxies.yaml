@@ -1151,6 +1151,11 @@ spec:
                       this value higher or lower than the connection timeout limit
                       for the associated database.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requireTls:
                     description: A Boolean parameter that specifies whether Transport
                       Layer Security (TLS) encryption is required for connections

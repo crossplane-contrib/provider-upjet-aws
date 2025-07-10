@@ -639,6 +639,11 @@ spec:
                     description: The last-modified date in RFC3339 format for the
                       UI customization.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   userPoolId:
                     description: The user pool ID for the user pool.
                     type: string

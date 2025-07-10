@@ -3005,6 +3005,11 @@ spec:
                       file server to be located. Required for when deployment type
                       is MULTI_AZ_1.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   remoteAdministrationEndpoint:
                     description: For MULTI_AZ_1 deployment types, use this endpoint
                       when performing administrative tasks on the file system using

@@ -174,6 +174,10 @@ type AMICopyObservation struct {
 	// ID of the created AMI.
 	RamdiskID *string `json:"ramdiskId,omitempty" tf:"ramdisk_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Region-unique name for the AMI.
 	RootDeviceName *string `json:"rootDeviceName,omitempty" tf:"root_device_name,omitempty"`
 
@@ -248,9 +252,8 @@ type AMICopyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Id of the AMI to copy. This id must be valid in the region
 	// given by source_ami_region.

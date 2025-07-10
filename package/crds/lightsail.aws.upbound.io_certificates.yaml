@@ -338,6 +338,11 @@ spec:
                   id:
                     description: Name of the certificate (matches name).
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
                       certificate. domain_name attribute is automatically added as

@@ -1693,6 +1693,11 @@ spec:
                     description: 'Set to true to publish a version of the state machine
                       during creation. Default: false.'
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   revisionId:
                     description: The ARN of the state machine.
                     type: string

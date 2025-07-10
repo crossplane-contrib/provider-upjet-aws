@@ -42,6 +42,10 @@ type ProvisionedConcurrencyConfigObservation struct {
 	// Lambda Function version or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether to retain the provisioned concurrency configuration upon destruction. Defaults to false. If set to true, the resource is simply removed from state instead.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
@@ -62,9 +66,8 @@ type ProvisionedConcurrencyConfigParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether to retain the provisioned concurrency configuration upon destruction. Defaults to false. If set to true, the resource is simply removed from state instead.
 	// +kubebuilder:validation:Optional

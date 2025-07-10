@@ -776,6 +776,11 @@ spec:
                     description: The port number on which the cluster accepts incoming
                       connections.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceOwner:
                     description: The Amazon Web Services account ID of the owner of
                       the cluster. This is only required if the cluster is in another

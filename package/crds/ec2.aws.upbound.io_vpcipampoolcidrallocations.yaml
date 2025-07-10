@@ -487,6 +487,11 @@ spec:
                     description: 'The netmask length of the CIDR you would like to
                       allocate to the IPAM pool. Valid Values: 0-128.'
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceId:
                     description: The ID of the resource.
                     type: string

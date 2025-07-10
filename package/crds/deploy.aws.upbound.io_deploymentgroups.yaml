@@ -4809,6 +4809,11 @@ spec:
                       not receive the deployed application revision. Valid values
                       are UPDATE and IGNORE. Defaults to UPDATE.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   serviceRoleArn:
                     description: The service role ARN that allows deployments.
                     type: string

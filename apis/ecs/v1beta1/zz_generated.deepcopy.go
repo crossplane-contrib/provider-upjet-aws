@@ -115,6 +115,11 @@ func (in *AccountSettingDefaultObservation) DeepCopyInto(out *AccountSettingDefa
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
 		*out = new(string)
@@ -1077,6 +1082,11 @@ func (in *ClusterCapacityProvidersObservation) DeepCopyInto(out *ClusterCapacity
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

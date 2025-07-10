@@ -350,6 +350,10 @@ type TriggerObservation struct {
 	// A predicate to specify when the new trigger should fire. Required when trigger type is CONDITIONAL. See Predicate Below.
 	Predicate *PredicateObservation `json:"predicate,omitempty" tf:"predicate,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A cron expression used to specify the schedule. Time-Based Schedules for Jobs and Crawlers
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
@@ -398,9 +402,8 @@ type TriggerParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A cron expression used to specify the schedule. Time-Based Schedules for Jobs and Crawlers
 	// +kubebuilder:validation:Optional

@@ -6718,6 +6718,11 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -6937,6 +6942,11 @@ func (in *ResourcePolicyObservation) DeepCopyInto(out *ResourcePolicyObservation
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -7671,6 +7681,11 @@ func (in *SchemaObservation) DeepCopyInto(out *SchemaObservation) {
 	if in.NextSchemaVersion != nil {
 		in, out := &in.NextSchemaVersion, &out.NextSchemaVersion
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.RegistryArn != nil {
@@ -9515,6 +9530,11 @@ func (in *UserDefinedFunctionObservation) DeepCopyInto(out *UserDefinedFunctionO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceUris != nil {
 		in, out := &in.ResourceUris, &out.ResourceUris
 		*out = make([]ResourceUrisObservation, len(*in))
@@ -9784,6 +9804,11 @@ func (in *WorkflowObservation) DeepCopyInto(out *WorkflowObservation) {
 	if in.MaxConcurrentRuns != nil {
 		in, out := &in.MaxConcurrentRuns, &out.MaxConcurrentRuns
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {

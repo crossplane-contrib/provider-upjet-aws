@@ -5267,6 +5267,11 @@ spec:
                       or the service to the tasks. The valid values are SERVICE and
                       TASK_DEFINITION.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schedulingStrategy:
                     description: Scheduling strategy to use for the service. The valid
                       values are REPLICA and DAEMON. Defaults to REPLICA. Note that

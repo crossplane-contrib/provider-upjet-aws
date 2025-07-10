@@ -597,6 +597,11 @@ spec:
                     description: The table_name and stream_arn separated by a comma
                       (,).
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   streamArn:
                     description: The ARN for a Kinesis data stream. This must exist
                       in the same account and region as the DynamoDB table.

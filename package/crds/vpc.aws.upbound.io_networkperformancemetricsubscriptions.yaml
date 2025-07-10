@@ -323,6 +323,11 @@ spec:
                   period:
                     description: The data aggregation time for the subscription.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   source:
                     description: The source Region or Availability Zone that the metric
                       subscription is enabled for. For example, us-east-1.

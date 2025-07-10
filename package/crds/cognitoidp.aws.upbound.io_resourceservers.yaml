@@ -478,6 +478,11 @@ spec:
                   name:
                     description: A name for the resource server.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   scope:
                     description: A list of Authorization Scope.
                     items:

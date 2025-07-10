@@ -601,6 +601,11 @@ spec:
                   id:
                     description: The ID of the association.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replaceDefaultAssociation:
                     description: Whether this association should replace the association
                       with the VPC's default security group that is created when no

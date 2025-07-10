@@ -4213,10 +4213,6 @@ spec:
                     description: Price class for this distribution. One of PriceClass_All,
                       PriceClass_200, PriceClass_100.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   restrictions:
                     description: The restriction configuration for this distribution
                       (maximum one).
@@ -4311,8 +4307,6 @@ spec:
                       credentials configuring this argument must have waf:GetWebACL
                       permissions assigned.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

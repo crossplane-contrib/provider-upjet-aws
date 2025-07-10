@@ -152,10 +152,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   zoneId:
                     description: Route53 hosted zone ID to enable query logs.
                     type: string
@@ -233,8 +229,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

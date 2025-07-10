@@ -46,6 +46,10 @@ type ResourceServerObservation struct {
 	// A name for the resource server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A list of Authorization Scope.
 	Scope []ScopeObservation `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -68,9 +72,8 @@ type ResourceServerParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A list of Authorization Scope.
 	// +kubebuilder:validation:Optional

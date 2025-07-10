@@ -47,6 +47,10 @@ type WorkspaceAPIKeyObservation struct {
 	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
 	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
@@ -66,9 +70,8 @@ type WorkspaceAPIKeyParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
 	// +kubebuilder:validation:Optional

@@ -851,6 +851,11 @@ spec:
                     description: The name of the external provider where your third-party
                       code repository is configured.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   status:
                     description: The CodeStar Host status. Possible values are PENDING,
                       AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and

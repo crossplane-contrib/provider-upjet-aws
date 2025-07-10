@@ -1738,6 +1738,11 @@ spec:
                       been deleted, must be between 7 to 30 days, with default to
                       30 days.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   revocationConfiguration:
                     description: Nested argument containing revocation configuration.
                       Defined below.

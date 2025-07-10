@@ -354,6 +354,11 @@ spec:
                       Name of the collection.
                       Name of the collection.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   standbyReplicas:
                     description: |-
                       Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.

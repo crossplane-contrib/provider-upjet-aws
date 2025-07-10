@@ -4327,11 +4327,6 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.Runtime != nil {
 		in, out := &in.Runtime, &out.Runtime
 		*out = new(string)
@@ -4961,11 +4956,6 @@ func (in *KeyGroupParameters) DeepCopyInto(out *KeyGroupParameters) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -6694,11 +6684,6 @@ func (in *OriginAccessControlParameters) DeepCopyInto(out *OriginAccessControlPa
 		*out = new(string)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.SigningBehavior != nil {
 		in, out := &in.SigningBehavior, &out.SigningBehavior
 		*out = new(string)
@@ -6895,11 +6880,6 @@ func (in *OriginAccessIdentityParameters) DeepCopyInto(out *OriginAccessIdentity
 	*out = *in
 	if in.Comment != nil {
 		in, out := &in.Comment, &out.Comment
-		*out = new(string)
-		**out = **in
-	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -8136,11 +8116,6 @@ func (in *PublicKeyParameters) DeepCopyInto(out *PublicKeyParameters) {
 	out.EncodedKeySecretRef = in.EncodedKeySecretRef
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

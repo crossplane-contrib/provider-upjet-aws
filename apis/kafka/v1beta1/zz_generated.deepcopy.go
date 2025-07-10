@@ -1413,6 +1413,11 @@ func (in *ConfigurationObservation) DeepCopyInto(out *ConfigurationObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerProperties != nil {
 		in, out := &in.ServerProperties, &out.ServerProperties
 		*out = new(string)
@@ -3177,6 +3182,11 @@ func (in *ReplicatorObservation) DeepCopyInto(out *ReplicatorObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationInfoList != nil {
 		in, out := &in.ReplicationInfoList, &out.ReplicationInfoList
 		*out = new(ReplicationInfoListObservation)
@@ -3651,6 +3661,11 @@ func (in *ScramSecretAssociationObservation) DeepCopyInto(out *ScramSecretAssoci
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4200,6 +4215,11 @@ func (in *SingleScramSecretAssociationObservation) DeepCopyInto(out *SingleScram
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

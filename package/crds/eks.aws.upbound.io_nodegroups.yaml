@@ -2858,6 +2858,11 @@ spec:
                     description: Amazon Resource Name (ARN) of the IAM Role that provides
                       permissions for the EKS Node Group.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   releaseVersion:
                     description: AMI version of the EKS Node Group. Defaults to latest
                       version for Kubernetes version.

@@ -779,6 +779,11 @@ spec:
                     type: string
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   stageName:
                     description: Name of a specific deployment stage to expose at
                       the given path. If omitted, callers may select any stage by

@@ -157,10 +157,6 @@ spec:
                       DNS queries by using the resource record sets that Route 53
                       creates for this traffic policy instance.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   trafficPolicyId:
                     description: ID of the traffic policy that you want to use to
                       create resource record sets in the specified hosted zone.
@@ -249,8 +245,6 @@ spec:
                       the resource record sets that it creates in the specified hosted
                       zone.
                     type: number
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

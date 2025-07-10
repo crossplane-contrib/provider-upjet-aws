@@ -3606,6 +3606,11 @@ spec:
                     description: Read-only endpoint for the Neptune cluster, automatically
                       load-balanced across replicas
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicationSourceIdentifier:
                     description: ARN of a source Neptune cluster or Neptune instance
                       if this Neptune cluster is to be created as a Read Replica.

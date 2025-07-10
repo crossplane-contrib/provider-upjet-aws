@@ -44,4 +44,5 @@ metadata:
     testing.upbound.io/example-name: test
   name: test
 spec:
-  forProvider: {}
+  forProvider:
+    region: us-west-1

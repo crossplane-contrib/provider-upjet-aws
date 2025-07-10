@@ -446,6 +446,11 @@ spec:
                   id:
                     description: EC2 Transit Gateway Policy Table identifier.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   state:
                     description: The state of the EC2 Transit Gateway Policy Table.
                     type: string

@@ -3789,6 +3789,11 @@ spec:
                       values are Standard (stored in the Site-to-Site VPN service)
                       or SecretsManager (stored in AWS Secrets Manager).
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   remoteIpv4NetworkCidr:
                     description: The IPv4 CIDR on the AWS side of the VPN connection.
                     type: string

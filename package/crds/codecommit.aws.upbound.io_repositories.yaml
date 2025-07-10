@@ -477,6 +477,11 @@ spec:
                       the default aws/codecommit Amazon Web Services managed key is
                       used.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   repositoryId:
                     description: The ID of the repository
                     type: string

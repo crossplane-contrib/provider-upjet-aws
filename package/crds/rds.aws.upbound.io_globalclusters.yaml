@@ -583,6 +583,11 @@ spec:
                   id:
                     description: RDS Global Cluster identifier.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sourceDbClusterIdentifier:
                     description: 'Amazon Resource Name (ARN) to use as the primary
                       DB Cluster of the Global Cluster on creation. NOTE: After initial

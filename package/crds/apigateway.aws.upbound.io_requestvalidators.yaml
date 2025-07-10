@@ -458,6 +458,11 @@ spec:
                   name:
                     description: Name of the request validator
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   restApiId:
                     description: ID of the associated Rest API
                     type: string

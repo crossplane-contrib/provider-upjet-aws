@@ -112,6 +112,10 @@ type JobQueueObservation struct {
 	// are evaluated first when associated with the same compute environment.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
 	SchedulingPolicyArn *string `json:"schedulingPolicyArn,omitempty" tf:"scheduling_policy_arn,omitempty"`
 
@@ -144,9 +148,8 @@ type JobQueueParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/batch/v1beta2.SchedulingPolicy

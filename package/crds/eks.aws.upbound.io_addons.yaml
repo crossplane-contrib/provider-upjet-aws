@@ -753,6 +753,11 @@ spec:
                     description: Indicates if you want to preserve the created resources
                       when deleting the EKS add-on.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolveConflictsOnCreate:
                     description: How to resolve field value conflicts when migrating
                       a self-managed add-on to an Amazon EKS add-on. Valid values

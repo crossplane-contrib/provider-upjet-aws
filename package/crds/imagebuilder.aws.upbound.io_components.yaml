@@ -548,6 +548,11 @@ spec:
                   platform:
                     description: Platform of the component.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   skipDestroy:
                     description: Whether to retain the old version when the resource
                       is destroyed or replacement is necessary. Defaults to false.

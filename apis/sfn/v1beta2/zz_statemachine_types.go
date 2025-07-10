@@ -174,6 +174,10 @@ type StateMachineObservation struct {
 	// Set to true to publish a version of the state machine during creation. Default: false.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ARN of the state machine.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 
@@ -223,9 +227,8 @@ type StateMachineParameters struct {
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

@@ -393,6 +393,11 @@ spec:
                     description: The date when the $LATEST version of this slot type
                       was updated.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   valueSelectionStrategy:
                     description: |-
                       Determines the slot resolution strategy that Amazon Lex

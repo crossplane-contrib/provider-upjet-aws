@@ -509,6 +509,11 @@ spec:
                   id:
                     description: The ID of the BGP peer resource.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   virtualInterfaceId:
                     description: The ID of the Direct Connect virtual interface on
                       which to create the BGP peer.

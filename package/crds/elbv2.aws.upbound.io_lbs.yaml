@@ -2949,6 +2949,11 @@ spec:
                       the Host header in the HTTP request and send it to the target
                       without any change. Defaults to false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroups:
                     description: List of security group IDs to assign to the LB. Only
                       valid for Load Balancers of type application or network. For

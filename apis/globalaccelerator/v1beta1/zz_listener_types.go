@@ -84,11 +84,6 @@ type ListenerParameters struct {
 	// The protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type PortRangeInitParameters struct {

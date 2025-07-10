@@ -275,6 +275,11 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ScheduleExpression != nil {
 		in, out := &in.ScheduleExpression, &out.ScheduleExpression
 		*out = new(string)
@@ -953,6 +958,11 @@ func (in *MaintenanceWindowTaskObservation) DeepCopyInto(out *MaintenanceWindowT
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.ServiceRoleArn != nil {
@@ -1687,6 +1697,11 @@ func (in *ResourceDataSyncObservation) DeepCopyInto(out *ResourceDataSyncObserva
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
