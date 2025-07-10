@@ -26,12 +26,12 @@ type ClusterAuthParameters struct {
 	// Reference to a Cluster to populate clusterName.
 	// Either ClusterName, ClusterNameRef or ClusterNameSelector has to be given.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty"`
+	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty"`
 
 	// Selector for a Cluster to populate clusterName.
 	// Either ClusterName, ClusterNameRef or ClusterNameSelector has to be given.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty"`
+	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty"`
 
 	// RefreshPeriod is how frequently you'd like the token in the published
 	// Kubeconfig to be refreshed. The maximum is 10m0s.
