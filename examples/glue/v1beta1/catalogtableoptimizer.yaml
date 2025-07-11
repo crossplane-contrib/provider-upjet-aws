@@ -22,7 +22,7 @@ spec:
     tableName: example-glue-cto
     type: compaction
 ---
-apiVersion: glue.aws.upbound.io/v1beta2
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogDatabase
 metadata:
   name: example-glue-cto
@@ -35,7 +35,7 @@ spec:
     region: us-east-1
     catalogId: "${data.aws_account_id}"
 ---
-apiVersion: glue.aws.upbound.io/v1beta2
+apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogTable
 metadata:
   annotations:
@@ -47,13 +47,13 @@ spec:
     databaseNameRef:
       name: example-glue-cto
     openTableFormatInput: 
-      icebergInput: 
-        metadataOperation: "CREATE" 
+    - icebergInput: 
+      - metadataOperation: "CREATE" 
     parameters:
       classification: "csv"
     region: us-east-1
     storageDescriptor:
-      columns:
+    - columns:
       - name: year
         type: bigint
       - name: quarter
@@ -66,7 +66,7 @@ spec:
       location: s3://example-glue-cto/flight/2016/csv
       outputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
       serDeInfo:
-        serializationLibrary: "org.apache.hadoop.hive.serde2.OpenCSVSerde"
+      - serializationLibrary: "org.apache.hadoop.hive.serde2.OpenCSVSerde"
         parameters:
           field.delim: ','
     tableType: EXTERNAL_TABLE
@@ -147,7 +147,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-glue-cto
 ---
-apiVersion: s3.aws.upbound.io/v1beta2
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
