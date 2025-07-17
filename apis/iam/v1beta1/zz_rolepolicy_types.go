@@ -15,16 +15,16 @@ import (
 
 type RolePolicyInitParameters struct {
 
-	// The inline policy document. This is a JSON formatted string
+	// The inline policy document.
+	// This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type RolePolicyObservation struct {
-
-	// The role policy ID, in the form of role_name:role_policy_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The inline policy document. This is a JSON formatted string
+	// The inline policy document.
+	// This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The name of the IAM role to attach to the policy.
@@ -33,7 +33,8 @@ type RolePolicyObservation struct {
 
 type RolePolicyParameters struct {
 
-	// The inline policy document. This is a JSON formatted string
+	// The inline policy document.
+	// This is a JSON formatted string
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

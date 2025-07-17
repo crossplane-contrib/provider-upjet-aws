@@ -47,7 +47,7 @@ type ReportDefinitionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// Report path prefix. Limited to 256 characters.
+	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 
 	// Region of the existing S3 bucket to hold generated reports.
@@ -91,7 +91,7 @@ type ReportDefinitionObservation struct {
 	// Name of the existing S3 bucket to hold generated reports.
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
-	// Report path prefix. Limited to 256 characters.
+	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 
 	// Region of the existing S3 bucket to hold generated reports.
@@ -150,7 +150,7 @@ type ReportDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// Report path prefix. Limited to 256 characters.
+	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	// +kubebuilder:validation:Optional
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 

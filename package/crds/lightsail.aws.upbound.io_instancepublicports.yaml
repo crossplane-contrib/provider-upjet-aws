@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   instanceName:
-                    description: Name of the Lightsail Instance.
+                    description: Name of the instance for which to open ports.
                     type: string
                   instanceNameRef:
                     description: Reference to a Instance in lightsail to populate
@@ -153,9 +153,9 @@ spec:
                         type: object
                     type: object
                   portInfo:
-                    description: Configuration block with port information. AWS closes
-                      all currently open ports that are not included in the port_info.
-                      See below.
+                    description: Descriptor of the ports to open for the specified
+                      instance. AWS closes all currently open ports that are not included
+                      in this argument. See port_info Block for details.
                     items:
                       properties:
                         cidrListAliases:
@@ -166,26 +166,32 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         cidrs:
-                          description: Set of CIDR blocks.
+                          description: Set of IPv4 addresses or ranges of IPv4 addresses
+                            (in CIDR notation) that are allowed to connect to an instance
+                            through the ports, and the protocol.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         fromPort:
                           description: First port in a range of open ports on an instance.
+                            See PortInfo for details.
                           type: number
                         ipv6Cidrs:
-                          description: Set of IPv6 CIDR blocks.
+                          description: Set of IPv6 addresses or ranges of IPv6 addresses
+                            (in CIDR notation) that are allowed to connect to an instance
+                            through the ports, and the protocol.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         protocol:
                           description: 'IP protocol name. Valid values: tcp, all,
-                            udp, icmp.'
+                            udp, icmp, icmpv6. See PortInfo for details.'
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
+                            See PortInfo for details.
                           type: number
                       type: object
                     type: array
@@ -211,7 +217,7 @@ spec:
                   autoscaler.
                 properties:
                   instanceName:
-                    description: Name of the Lightsail Instance.
+                    description: Name of the instance for which to open ports.
                     type: string
                   instanceNameRef:
                     description: Reference to a Instance in lightsail to populate
@@ -290,9 +296,9 @@ spec:
                         type: object
                     type: object
                   portInfo:
-                    description: Configuration block with port information. AWS closes
-                      all currently open ports that are not included in the port_info.
-                      See below.
+                    description: Descriptor of the ports to open for the specified
+                      instance. AWS closes all currently open ports that are not included
+                      in this argument. See port_info Block for details.
                     items:
                       properties:
                         cidrListAliases:
@@ -303,26 +309,32 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         cidrs:
-                          description: Set of CIDR blocks.
+                          description: Set of IPv4 addresses or ranges of IPv4 addresses
+                            (in CIDR notation) that are allowed to connect to an instance
+                            through the ports, and the protocol.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         fromPort:
                           description: First port in a range of open ports on an instance.
+                            See PortInfo for details.
                           type: number
                         ipv6Cidrs:
-                          description: Set of IPv6 CIDR blocks.
+                          description: Set of IPv6 addresses or ranges of IPv6 addresses
+                            (in CIDR notation) that are allowed to connect to an instance
+                            through the ports, and the protocol.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         protocol:
                           description: 'IP protocol name. Valid values: tcp, all,
-                            udp, icmp.'
+                            udp, icmp, icmpv6. See PortInfo for details.'
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
+                            See PortInfo for details.
                           type: number
                       type: object
                     type: array
@@ -508,12 +520,12 @@ spec:
                     description: ID of the resource.
                     type: string
                   instanceName:
-                    description: Name of the Lightsail Instance.
+                    description: Name of the instance for which to open ports.
                     type: string
                   portInfo:
-                    description: Configuration block with port information. AWS closes
-                      all currently open ports that are not included in the port_info.
-                      See below.
+                    description: Descriptor of the ports to open for the specified
+                      instance. AWS closes all currently open ports that are not included
+                      in this argument. See port_info Block for details.
                     items:
                       properties:
                         cidrListAliases:
@@ -524,26 +536,32 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         cidrs:
-                          description: Set of CIDR blocks.
+                          description: Set of IPv4 addresses or ranges of IPv4 addresses
+                            (in CIDR notation) that are allowed to connect to an instance
+                            through the ports, and the protocol.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         fromPort:
                           description: First port in a range of open ports on an instance.
+                            See PortInfo for details.
                           type: number
                         ipv6Cidrs:
-                          description: Set of IPv6 CIDR blocks.
+                          description: Set of IPv6 addresses or ranges of IPv6 addresses
+                            (in CIDR notation) that are allowed to connect to an instance
+                            through the ports, and the protocol.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         protocol:
                           description: 'IP protocol name. Valid values: tcp, all,
-                            udp, icmp.'
+                            udp, icmp, icmpv6. See PortInfo for details.'
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
+                            See PortInfo for details.
                           type: number
                       type: object
                     type: array

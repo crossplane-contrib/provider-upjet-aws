@@ -4858,7 +4858,6 @@ spec:
                       File System (EFS) volume.
                     type: string
                   id:
-                    description: The user profile Amazon Resource Name (ARN).
                     type: string
                   region:
                     description: |-

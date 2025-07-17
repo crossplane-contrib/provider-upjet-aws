@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    productArn: arn:aws:securityhub:${data.aws_region.current.name}:733251395267:product/alertlogic/althreatmanagement
+    productArn: arn:aws:securityhub:${data.aws_region.current.region}:733251395267:product/alertlogic/althreatmanagement
     region: us-west-1
 
 ---

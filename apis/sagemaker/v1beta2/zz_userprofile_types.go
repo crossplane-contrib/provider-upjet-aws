@@ -268,7 +268,6 @@ type UserProfileObservation struct {
 	// The ID of the user's profile in the Amazon Elastic File System (EFS) volume.
 	HomeEFSFileSystemUID *string `json:"homeEfsFileSystemUid,omitempty" tf:"home_efs_file_system_uid,omitempty"`
 
-	// The user profile Amazon Resource Name (ARN).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

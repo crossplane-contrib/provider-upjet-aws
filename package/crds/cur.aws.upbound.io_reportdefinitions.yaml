@@ -186,7 +186,9 @@ spec:
                         type: object
                     type: object
                   s3Prefix:
-                    description: Report path prefix. Limited to 256 characters.
+                    description: Report path prefix. Limited to 256 characters. May
+                      be empty ("") but the resource can then not be modified via
+                      the AWS Console.
                     type: string
                   s3Region:
                     description: Region of the existing S3 bucket to hold generated
@@ -329,7 +331,9 @@ spec:
                         type: object
                     type: object
                   s3Prefix:
-                    description: Report path prefix. Limited to 256 characters.
+                    description: Report path prefix. Limited to 256 characters. May
+                      be empty ("") but the resource can then not be modified via
+                      the AWS Console.
                     type: string
                   s3Region:
                     description: Region of the existing S3 bucket to hold generated
@@ -588,7 +592,9 @@ spec:
                       reports.
                     type: string
                   s3Prefix:
-                    description: Report path prefix. Limited to 256 characters.
+                    description: Report path prefix. Limited to 256 characters. May
+                      be empty ("") but the resource can then not be modified via
+                      the AWS Console.
                     type: string
                   s3Region:
                     description: Region of the existing S3 bucket to hold generated
