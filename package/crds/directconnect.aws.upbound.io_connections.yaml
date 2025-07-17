@@ -75,9 +75,11 @@ spec:
                 properties:
                   bandwidth:
                     description: 'The bandwidth of the connection. Valid values for
-                      dedicated connections: 1Gbps, 10Gbps. Valid values for hosted
-                      connections: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps,
-                      1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.'
+                      dedicated connections: 1Gbps, 10Gbps, 100Gbps, and 400Gbps.
+                      Valid values for hosted connections: 50Mbps, 100Mbps, 200Mbps,
+                      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps, and
+                      25Gbps. Case sensitive. Refer to the AWS Direct Connection supported
+                      bandwidths for Dedicated Connections and Hosted Connections.'
                     type: string
                   encryptionMode:
                     description: The connection MAC Security (MACsec) encryption mode.
@@ -97,8 +99,9 @@ spec:
                       the connection.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requestMacsec:
                     description: 'Boolean value indicating whether you want the connection
@@ -133,9 +136,11 @@ spec:
                 properties:
                   bandwidth:
                     description: 'The bandwidth of the connection. Valid values for
-                      dedicated connections: 1Gbps, 10Gbps. Valid values for hosted
-                      connections: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps,
-                      1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.'
+                      dedicated connections: 1Gbps, 10Gbps, 100Gbps, and 400Gbps.
+                      Valid values for hosted connections: 50Mbps, 100Mbps, 200Mbps,
+                      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps, and
+                      25Gbps. Case sensitive. Refer to the AWS Direct Connection supported
+                      bandwidths for Dedicated Connections and Hosted Connections.'
                     type: string
                   encryptionMode:
                     description: The connection MAC Security (MACsec) encryption mode.
@@ -364,9 +369,11 @@ spec:
                     type: string
                   bandwidth:
                     description: 'The bandwidth of the connection. Valid values for
-                      dedicated connections: 1Gbps, 10Gbps. Valid values for hosted
-                      connections: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps,
-                      1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.'
+                      dedicated connections: 1Gbps, 10Gbps, 100Gbps, and 400Gbps.
+                      Valid values for hosted connections: 50Mbps, 100Mbps, 200Mbps,
+                      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps, and
+                      25Gbps. Case sensitive. Refer to the AWS Direct Connection supported
+                      bandwidths for Dedicated Connections and Hosted Connections.'
                     type: string
                   encryptionMode:
                     description: The connection MAC Security (MACsec) encryption mode.
@@ -410,6 +417,11 @@ spec:
                   providerName:
                     description: The name of the service provider associated with
                       the connection.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requestMacsec:
                     description: 'Boolean value indicating whether you want the connection

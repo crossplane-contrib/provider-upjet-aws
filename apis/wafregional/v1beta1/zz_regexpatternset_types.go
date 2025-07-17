@@ -34,6 +34,10 @@ type RegexPatternSetObservation struct {
 	// A list of regular expression (regex) patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t.
 	// +listType=set
 	RegexPatternStrings []*string `json:"regexPatternStrings,omitempty" tf:"regex_pattern_strings,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RegexPatternSetParameters struct {
@@ -47,10 +51,10 @@ type RegexPatternSetParameters struct {
 	// +listType=set
 	RegexPatternStrings []*string `json:"regexPatternStrings,omitempty" tf:"regex_pattern_strings,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // RegexPatternSetSpec defines the desired state of RegexPatternSet

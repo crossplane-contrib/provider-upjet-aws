@@ -3693,6 +3693,11 @@ func (in *PipeInitParameters) DeepCopyInto(out *PipeInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogConfiguration != nil {
 		in, out := &in.LogConfiguration, &out.LogConfiguration
 		*out = new(LogConfigurationInitParameters)
@@ -3846,10 +3851,20 @@ func (in *PipeObservation) DeepCopyInto(out *PipeObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogConfiguration != nil {
 		in, out := &in.LogConfiguration, &out.LogConfiguration
 		*out = new(LogConfigurationObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
@@ -3952,6 +3967,11 @@ func (in *PipeParameters) DeepCopyInto(out *PipeParameters) {
 		in, out := &in.EnrichmentSelector, &out.EnrichmentSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
 	}
 	if in.LogConfiguration != nil {
 		in, out := &in.LogConfiguration, &out.LogConfiguration

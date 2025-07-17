@@ -256,16 +256,7 @@ type SpotInstanceRequestInitParameters struct {
 
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	CPUOptions *SpotInstanceRequestCPUOptionsInitParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	CapacityReservationSpecification *SpotInstanceRequestCapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
@@ -539,16 +530,7 @@ type SpotInstanceRequestObservation struct {
 
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	CPUOptions *SpotInstanceRequestCPUOptionsObservation `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	CapacityReservationSpecification *SpotInstanceRequestCapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
@@ -639,6 +621,11 @@ type SpotInstanceRequestObservation struct {
 	// The public IP address assigned to the instance, if applicable.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	RootBlockDevice *SpotInstanceRequestRootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
 	// +listType=set
@@ -716,20 +703,8 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-	// +kubebuilder:validation:Optional
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	// +kubebuilder:validation:Optional
 	CPUOptions *SpotInstanceRequestCPUOptionsParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CapacityReservationSpecification *SpotInstanceRequestCapacityReservationSpecificationParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -826,10 +801,11 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RootBlockDevice *SpotInstanceRequestRootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`

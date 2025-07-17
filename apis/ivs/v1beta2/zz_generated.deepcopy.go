@@ -210,6 +210,11 @@ func (in *RecordingConfigurationObservation) DeepCopyInto(out *RecordingConfigur
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)

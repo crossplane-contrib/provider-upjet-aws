@@ -60,6 +60,10 @@ type CloudFormationStackObservation struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The version of the application to deploy. If not supplied, deploys the latest version.
 	SemanticVersion *string `json:"semanticVersion,omitempty" tf:"semantic_version,omitempty"`
 
@@ -92,10 +96,10 @@ type CloudFormationStackParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The version of the application to deploy. If not supplied, deploys the latest version.
 	// +kubebuilder:validation:Optional

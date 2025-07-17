@@ -125,5 +125,5 @@ func (tr *BucketLifecycleConfiguration) LateInitialize(attrs []byte) (bool, erro
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *BucketLifecycleConfiguration) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

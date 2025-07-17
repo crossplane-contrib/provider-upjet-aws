@@ -16,9 +16,9 @@ spec:
     - SPLIT_COST_ALLOCATION_DATA
     compression: GZIP
     format: textORcsv
-    region: us-west-1
     s3BucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    s3Prefix: example-cur-report
     s3Region: us-east-1
     timeUnit: HOURLY

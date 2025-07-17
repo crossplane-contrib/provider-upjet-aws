@@ -77,8 +77,9 @@ spec:
                     description: Name of the account setting to set.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   value:
                     description: State of the setting.
@@ -289,12 +290,16 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: ARN that identifies the account setting.
                     type: string
                   name:
                     description: Name of the account setting to set.
                     type: string
                   principalArn:
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   value:
                     description: State of the setting.

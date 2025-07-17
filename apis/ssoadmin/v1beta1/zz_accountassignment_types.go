@@ -33,6 +33,10 @@ type AccountAssignmentObservation struct {
 	// The entity type for which the assignment will be created. Valid values: USER, GROUP.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// An AWS account identifier, typically a 10-12 digit string.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
@@ -79,10 +83,10 @@ type AccountAssignmentParameters struct {
 	// +kubebuilder:validation:Required
 	PrincipalType *string `json:"principalType" tf:"principal_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// An AWS account identifier, typically a 10-12 digit string.
 	// +kubebuilder:validation:Required

@@ -176,15 +176,17 @@ spec:
                     description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'Protocols you want to use for the Route 53 Resolver
-                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    description: |-
+                      Protocols you want to use for the Route 53 Resolver endpoint.
+                      Valid values are DoH, Do53, or DoH-FIPS.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resolverEndpointType:
                     description: |-
@@ -401,8 +403,9 @@ spec:
                     description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'Protocols you want to use for the Route 53 Resolver
-                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    description: |-
+                      Protocols you want to use for the Route 53 Resolver endpoint.
+                      Valid values are DoH, Do53, or DoH-FIPS.
                     items:
                       type: string
                     type: array
@@ -727,12 +730,18 @@ spec:
                     description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'Protocols you want to use for the Route 53 Resolver
-                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    description: |-
+                      Protocols you want to use for the Route 53 Resolver endpoint.
+                      Valid values are DoH, Do53, or DoH-FIPS.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolverEndpointType:
                     description: |-
                       Endpoint IP type. This endpoint type is applied to all IP addresses.

@@ -1547,6 +1547,9 @@ type PipeInitParameters struct {
 	// +kubebuilder:validation:Optional
 	EnrichmentSelector *v1.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
 
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
 	// Logging configuration settings for the pipe. Detailed below.
 	LogConfiguration *LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
@@ -1620,8 +1623,15 @@ type PipeObservation struct {
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
 	// Logging configuration settings for the pipe. Detailed below.
 	LogConfiguration *LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// ARN of the role that allows the pipe to send data to the target.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1675,14 +1685,18 @@ type PipeParameters struct {
 	// +kubebuilder:validation:Optional
 	EnrichmentSelector *v1.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
 
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
 	// Logging configuration settings for the pipe. Detailed below.
 	// +kubebuilder:validation:Optional
 	LogConfiguration *LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of the role that allows the pipe to send data to the target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -1745,7 +1759,7 @@ type PipelineParameterInitParameters struct {
 	// The name of the container that receives the override. This parameter is required if any override is specified.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline. Maximum length of 1024.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 1024.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -1754,7 +1768,7 @@ type PipelineParameterObservation struct {
 	// The name of the container that receives the override. This parameter is required if any override is specified.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline. Maximum length of 1024.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 1024.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -1764,7 +1778,7 @@ type PipelineParameterParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline. Maximum length of 1024.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 1024.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -2076,19 +2090,19 @@ type S3LogDestinationParameters struct {
 
 type SagemakerPipelineParametersInitParameters struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution. Detailed below.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. Detailed below.
 	PipelineParameter []PipelineParameterInitParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
 
 type SagemakerPipelineParametersObservation struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution. Detailed below.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. Detailed below.
 	PipelineParameter []PipelineParameterObservation `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
 
 type SagemakerPipelineParametersParameters struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution. Detailed below.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. Detailed below.
 	// +kubebuilder:validation:Optional
 	PipelineParameter []PipelineParameterParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
@@ -2455,7 +2469,7 @@ type TargetParametersInitParameters struct {
 	// These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. Detailed below.
 	RedshiftDataParameters *RedshiftDataParametersInitParameters `json:"redshiftDataParameters,omitempty" tf:"redshift_data_parameters,omitempty"`
 
-	// The parameters for using a SageMaker pipeline as a target. Detailed below.
+	// The parameters for using a SageMaker AI pipeline as a target. Detailed below.
 	SagemakerPipelineParameters *SagemakerPipelineParametersInitParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 
 	// The parameters for using a Amazon SQS stream as a target. Detailed below.
@@ -2513,7 +2527,7 @@ type TargetParametersObservation struct {
 	// These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. Detailed below.
 	RedshiftDataParameters *RedshiftDataParametersObservation `json:"redshiftDataParameters,omitempty" tf:"redshift_data_parameters,omitempty"`
 
-	// The parameters for using a SageMaker pipeline as a target. Detailed below.
+	// The parameters for using a SageMaker AI pipeline as a target. Detailed below.
 	SagemakerPipelineParameters *SagemakerPipelineParametersObservation `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 
 	// The parameters for using a Amazon SQS stream as a target. Detailed below.
@@ -2561,7 +2575,7 @@ type TargetParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	RedshiftDataParameters *RedshiftDataParametersParameters `json:"redshiftDataParameters,omitempty" tf:"redshift_data_parameters,omitempty"`
 
-	// The parameters for using a SageMaker pipeline as a target. Detailed below.
+	// The parameters for using a SageMaker AI pipeline as a target. Detailed below.
 	// +kubebuilder:validation:Optional
 	SagemakerPipelineParameters *SagemakerPipelineParametersParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 

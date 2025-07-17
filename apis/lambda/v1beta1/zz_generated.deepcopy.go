@@ -4149,6 +4149,11 @@ func (in *InvocationObservation) DeepCopyInto(out *InvocationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Result != nil {
 		in, out := &in.Result, &out.Result
 		*out = new(string)
@@ -4370,10 +4375,30 @@ func (in *LayerVersionInitParameters) DeepCopyInto(out *LayerVersionInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.S3BucketRef != nil {
+		in, out := &in.S3BucketRef, &out.S3BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3BucketSelector != nil {
+		in, out := &in.S3BucketSelector, &out.S3BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.S3Key != nil {
 		in, out := &in.S3Key, &out.S3Key
 		*out = new(string)
 		**out = **in
+	}
+	if in.S3KeyRef != nil {
+		in, out := &in.S3KeyRef, &out.S3KeyRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3KeySelector != nil {
+		in, out := &in.S3KeySelector, &out.S3KeySelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.S3ObjectVersion != nil {
 		in, out := &in.S3ObjectVersion, &out.S3ObjectVersion
@@ -4504,6 +4529,11 @@ func (in *LayerVersionObservation) DeepCopyInto(out *LayerVersionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.S3Bucket != nil {
 		in, out := &in.S3Bucket, &out.S3Bucket
 		*out = new(string)
@@ -4616,10 +4646,30 @@ func (in *LayerVersionParameters) DeepCopyInto(out *LayerVersionParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.S3BucketRef != nil {
+		in, out := &in.S3BucketRef, &out.S3BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3BucketSelector != nil {
+		in, out := &in.S3BucketSelector, &out.S3BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.S3Key != nil {
 		in, out := &in.S3Key, &out.S3Key
 		*out = new(string)
 		**out = **in
+	}
+	if in.S3KeyRef != nil {
+		in, out := &in.S3KeyRef, &out.S3KeyRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3KeySelector != nil {
+		in, out := &in.S3KeySelector, &out.S3KeySelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.S3ObjectVersion != nil {
 		in, out := &in.S3ObjectVersion, &out.S3ObjectVersion
@@ -4688,6 +4738,16 @@ func (in *LayerVersionPermissionInitParameters) DeepCopyInto(out *LayerVersionPe
 		*out = new(string)
 		**out = **in
 	}
+	if in.LayerNameRef != nil {
+		in, out := &in.LayerNameRef, &out.LayerNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LayerNameSelector != nil {
+		in, out := &in.LayerNameSelector, &out.LayerNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.OrganizationID != nil {
 		in, out := &in.OrganizationID, &out.OrganizationID
 		*out = new(string)
@@ -4712,6 +4772,16 @@ func (in *LayerVersionPermissionInitParameters) DeepCopyInto(out *LayerVersionPe
 		in, out := &in.VersionNumber, &out.VersionNumber
 		*out = new(float64)
 		**out = **in
+	}
+	if in.VersionNumberRef != nil {
+		in, out := &in.VersionNumberRef, &out.VersionNumberRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VersionNumberSelector != nil {
+		in, out := &in.VersionNumberSelector, &out.VersionNumberSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -4790,6 +4860,11 @@ func (in *LayerVersionPermissionObservation) DeepCopyInto(out *LayerVersionPermi
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RevisionID != nil {
 		in, out := &in.RevisionID, &out.RevisionID
 		*out = new(string)
@@ -4835,6 +4910,16 @@ func (in *LayerVersionPermissionParameters) DeepCopyInto(out *LayerVersionPermis
 		*out = new(string)
 		**out = **in
 	}
+	if in.LayerNameRef != nil {
+		in, out := &in.LayerNameRef, &out.LayerNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LayerNameSelector != nil {
+		in, out := &in.LayerNameSelector, &out.LayerNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.OrganizationID != nil {
 		in, out := &in.OrganizationID, &out.OrganizationID
 		*out = new(string)
@@ -4864,6 +4949,16 @@ func (in *LayerVersionPermissionParameters) DeepCopyInto(out *LayerVersionPermis
 		in, out := &in.VersionNumber, &out.VersionNumber
 		*out = new(float64)
 		**out = **in
+	}
+	if in.VersionNumberRef != nil {
+		in, out := &in.VersionNumberRef, &out.VersionNumberRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VersionNumberSelector != nil {
+		in, out := &in.VersionNumberSelector, &out.VersionNumberSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5462,6 +5557,11 @@ func (in *PermissionObservation) DeepCopyInto(out *PermissionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceAccount != nil {
 		in, out := &in.SourceAccount, &out.SourceAccount
 		*out = new(string)
@@ -5798,6 +5898,11 @@ func (in *ProvisionedConcurrencyConfigObservation) DeepCopyInto(out *Provisioned
 	}
 	if in.Qualifier != nil {
 		in, out := &in.Qualifier, &out.Qualifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

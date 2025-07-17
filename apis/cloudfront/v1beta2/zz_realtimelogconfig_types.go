@@ -167,11 +167,6 @@ type RealtimeLogConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. An integer between 1 and 100, inclusive.
 	// +kubebuilder:validation:Optional
 	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`

@@ -78,8 +78,9 @@ spec:
                       characters.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceArn:
                     description: The ARN of the event bus to discover event schemas
@@ -455,6 +456,11 @@ spec:
                     type: string
                   id:
                     description: The ID of the discoverer.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceArn:
                     description: The ARN of the event bus to discover event schemas

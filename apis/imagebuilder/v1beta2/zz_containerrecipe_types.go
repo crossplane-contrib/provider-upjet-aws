@@ -215,6 +215,10 @@ type ContainerRecipeObservation struct {
 	// Specifies the operating system platform when you use a custom base image.
 	PlatformOverride *string `json:"platformOverride,omitempty" tf:"platform_override,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -284,10 +288,10 @@ type ContainerRecipeParameters struct {
 	// +kubebuilder:validation:Optional
 	PlatformOverride *string `json:"platformOverride,omitempty" tf:"platform_override,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

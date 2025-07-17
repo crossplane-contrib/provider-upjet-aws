@@ -755,6 +755,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationGroupID != nil {
 		in, out := &in.ReplicationGroupID, &out.ReplicationGroupID
 		*out = new(string)
@@ -1608,6 +1613,11 @@ func (in *GlobalReplicationGroupObservation) DeepCopyInto(out *GlobalReplication
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TransitEncryptionEnabled != nil {
 		in, out := &in.TransitEncryptionEnabled, &out.TransitEncryptionEnabled
 		*out = new(bool)
@@ -1981,6 +1991,11 @@ func (in *ParameterGroupObservation) DeepCopyInto(out *ParameterGroupObservation
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -3680,6 +3695,11 @@ func (in *ServerlessCacheObservation) DeepCopyInto(out *ServerlessCacheObservati
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -4088,6 +4108,11 @@ func (in *SubnetGroupObservation) DeepCopyInto(out *SubnetGroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -4407,6 +4432,11 @@ func (in *UserGroupObservation) DeepCopyInto(out *UserGroupObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

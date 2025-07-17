@@ -27,11 +27,6 @@ type AccountInitParameters struct {
 	// Selector for a Role in iam to populate cloudwatchRoleArn.
 	// +kubebuilder:validation:Optional
 	CloudwatchRoleArnSelector *v1.Selector `json:"cloudwatchRoleArnSelector,omitempty" tf:"-"`
-
-	// If true, destroying the resource will reset account settings to default, otherwise account settings are not modified.
-	// Defaults to false.
-	// Will be removed in a future major version of the provider.
-	ResetOnDelete *bool `json:"resetOnDelete,omitempty" tf:"reset_on_delete,omitempty"`
 }
 
 type AccountObservation struct {
@@ -48,10 +43,9 @@ type AccountObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// If true, destroying the resource will reset account settings to default, otherwise account settings are not modified.
-	// Defaults to false.
-	// Will be removed in a future major version of the provider.
-	ResetOnDelete *bool `json:"resetOnDelete,omitempty" tf:"reset_on_delete,omitempty"`
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Account-Level throttle settings. See exported fields below.
 	ThrottleSettings []ThrottleSettingsObservation `json:"throttleSettings,omitempty" tf:"throttle_settings,omitempty"`
@@ -73,16 +67,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchRoleArnSelector *v1.Selector `json:"cloudwatchRoleArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
-	// If true, destroying the resource will reset account settings to default, otherwise account settings are not modified.
-	// Defaults to false.
-	// Will be removed in a future major version of the provider.
-	// +kubebuilder:validation:Optional
-	ResetOnDelete *bool `json:"resetOnDelete,omitempty" tf:"reset_on_delete,omitempty"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type ThrottleSettingsInitParameters struct {

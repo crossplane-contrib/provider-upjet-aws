@@ -15,12 +15,13 @@ import (
 
 type LBInitParameters struct {
 
-	// The health check path of the load balancer. Default value "/".
+	// Health check path of the load balancer. Default value /.
 	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 
+	// IP address type of the load balancer. Valid values: dualstack, ipv4. Default value dualstack.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The instance port the load balancer will connect.
+	// Instance port the load balancer will connect to.
 	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
 	// Key-value map of resource tags.
@@ -30,61 +31,67 @@ type LBInitParameters struct {
 
 type LBObservation struct {
 
-	// The ARN of the Lightsail load balancer.
+	// ARN of the Lightsail load balancer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The timestamp when the load balancer was created.
+	// Timestamp when the load balancer was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The DNS name of the load balancer.
+	// DNS name of the load balancer.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The health check path of the load balancer. Default value "/".
+	// Health check path of the load balancer. Default value /.
 	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 
-	// The name used for this load balancer (matches name).
+	// Name used for this load balancer (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// IP address type of the load balancer. Valid values: dualstack, ipv4. Default value dualstack.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The instance port the load balancer will connect.
+	// Instance port the load balancer will connect to.
 	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
-	// The protocol of the load balancer.
+	// Protocol of the load balancer.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The public ports of the load balancer.
+	// Public ports of the load balancer.
 	PublicPorts []*float64 `json:"publicPorts,omitempty" tf:"public_ports,omitempty"`
 
-	// The support code for the database. Include this code in your email to support when you have questions about a database in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Support code for the load balancer. Include this code in your email to support when you have questions about a load balancer in Lightsail. This code enables our support team to look up your Lightsail information more easily.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type LBParameters struct {
 
-	// The health check path of the load balancer. Default value "/".
+	// Health check path of the load balancer. Default value /.
 	// +kubebuilder:validation:Optional
 	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 
+	// IP address type of the load balancer. Valid values: dualstack, ipv4. Default value dualstack.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The instance port the load balancer will connect.
+	// Instance port the load balancer will connect to.
 	// +kubebuilder:validation:Optional
 	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -119,7 +126,7 @@ type LBStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LB is the Schema for the LBs API. Provides a Lightsail Load Balancer
+// LB is the Schema for the LBs API. Manages a Lightsail Load Balancer.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

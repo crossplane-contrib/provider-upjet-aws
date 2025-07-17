@@ -62,6 +62,10 @@ type APIDestinationObservation struct {
 
 	// Enter the maximum number of invocations per second to allow for this destination. Enter a value greater than 0 (default 300).
 	InvocationRateLimitPerSecond *float64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type APIDestinationParameters struct {
@@ -96,10 +100,10 @@ type APIDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	InvocationRateLimitPerSecond *float64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // APIDestinationSpec defines the desired state of APIDestination

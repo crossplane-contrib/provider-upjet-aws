@@ -18,8 +18,7 @@ type RuleInitParameters struct {
 	// The description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name or ARN of the event bus to associate with this rule.
-	// If you omit this, the default event bus is used.
+	// The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
@@ -37,9 +36,7 @@ type RuleInitParameters struct {
 	// Used to delete managed rules created by AWS. Defaults to false.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// Whether the rule should be enabled.
-	// Defaults to true.
-	// Conflicts with state.
+	// Whether the rule should be enabled. Defaults to true. Conflicts with state.
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
 	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
@@ -58,12 +55,7 @@ type RuleInitParameters struct {
 	// The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus. For more information, refer to the AWS documentation Schedule Expressions for Rules.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 
-	// State of the rule.
-	// Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-	// When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail.
-	// To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-	// Defaults to ENABLED.
-	// Conflicts with is_enabled.
+	// State of the rule. Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail. To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. Defaults to ENABLED. Conflicts with is_enabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
@@ -79,8 +71,7 @@ type RuleObservation struct {
 	// The description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name or ARN of the event bus to associate with this rule.
-	// If you omit this, the default event bus is used.
+	// The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details. Note: The event pattern size is 2048 by default but it is adjustable up to 4096 characters by submitting a service quota increase request. See Amazon EventBridge quotas for details.
@@ -92,10 +83,12 @@ type RuleObservation struct {
 	// The name of the rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Whether the rule should be enabled.
-	// Defaults to true.
-	// Conflicts with state.
+	// Whether the rule should be enabled. Defaults to true. Conflicts with state.
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -103,12 +96,7 @@ type RuleObservation struct {
 	// The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus. For more information, refer to the AWS documentation Schedule Expressions for Rules.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 
-	// State of the rule.
-	// Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-	// When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail.
-	// To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-	// Defaults to ENABLED.
-	// Conflicts with is_enabled.
+	// State of the rule. Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail. To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. Defaults to ENABLED. Conflicts with is_enabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
@@ -126,8 +114,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name or ARN of the event bus to associate with this rule.
-	// If you omit this, the default event bus is used.
+	// The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
@@ -148,16 +135,14 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// Whether the rule should be enabled.
-	// Defaults to true.
-	// Conflicts with state.
+	// Whether the rule should be enabled. Defaults to true. Conflicts with state.
 	// +kubebuilder:validation:Optional
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -177,12 +162,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 
-	// State of the rule.
-	// Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-	// When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail.
-	// To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-	// Defaults to ENABLED.
-	// Conflicts with is_enabled.
+	// State of the rule. Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail. To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. Defaults to ENABLED. Conflicts with is_enabled.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 

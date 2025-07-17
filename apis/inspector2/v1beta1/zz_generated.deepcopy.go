@@ -127,6 +127,11 @@ func (in *EnablerObservation) DeepCopyInto(out *EnablerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceTypes != nil {
 		in, out := &in.ResourceTypes, &out.ResourceTypes
 		*out = make([]*string, len(*in))

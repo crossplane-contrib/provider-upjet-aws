@@ -39,6 +39,10 @@ type DefinitionObservation struct {
 
 	// The query to save. You can read more about CloudWatch Logs Query Syntax in the documentation.
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DefinitionParameters struct {
@@ -55,10 +59,10 @@ type DefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // DefinitionSpec defines the desired state of Definition

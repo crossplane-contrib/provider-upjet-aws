@@ -43,9 +43,10 @@ spec:
               Principal = {
                 Service = "lambda.amazonaws.com"
               }
-            },
+            }
           ]
         })}
+    region: us-west-1
 
 ---
 

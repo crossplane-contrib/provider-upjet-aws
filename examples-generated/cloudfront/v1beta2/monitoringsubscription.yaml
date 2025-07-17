@@ -14,4 +14,3 @@ spec:
     monitoringSubscription:
     - realtimeMetricsSubscriptionConfig:
       - realtimeMetricsSubscriptionStatus: Enabled
-    region: us-west-1

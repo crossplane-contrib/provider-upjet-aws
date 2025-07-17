@@ -73,6 +73,16 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  deadLetterConfig:
+                    description: 'Configuration details of the Amazon SQS queue for
+                      EventBridge to use as a dead-letter queue (DLQ). This block
+                      supports the following arguments:'
+                    properties:
+                      arn:
+                        description: The ARN of the SQS queue specified as the target
+                          for the dead-letter queue.
+                        type: string
+                    type: object
                   description:
                     description: Event bus description.
                     type: string
@@ -88,8 +98,10 @@ spec:
                       key alias ARN.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      The following arguments are required:
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -113,6 +125,16 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  deadLetterConfig:
+                    description: 'Configuration details of the Amazon SQS queue for
+                      EventBridge to use as a dead-letter queue (DLQ). This block
+                      supports the following arguments:'
+                    properties:
+                      arn:
+                        description: The ARN of the SQS queue specified as the target
+                          for the dead-letter queue.
+                        type: string
+                    type: object
                   description:
                     description: Event bus description.
                     type: string
@@ -307,8 +329,19 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the event bus.
+                    description: The ARN of the SQS queue specified as the target
+                      for the dead-letter queue.
                     type: string
+                  deadLetterConfig:
+                    description: 'Configuration details of the Amazon SQS queue for
+                      EventBridge to use as a dead-letter queue (DLQ). This block
+                      supports the following arguments:'
+                    properties:
+                      arn:
+                        description: The ARN of the SQS queue specified as the target
+                          for the dead-letter queue.
+                        type: string
+                    type: object
                   description:
                     description: Event bus description.
                     type: string
@@ -325,6 +358,12 @@ spec:
                       key to encrypt events on this event bus. The identifier can
                       be the key Amazon Resource Name (ARN), KeyId, key alias, or
                       key alias ARN.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      The following arguments are required:
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

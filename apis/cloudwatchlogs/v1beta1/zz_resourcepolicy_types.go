@@ -26,6 +26,10 @@ type ResourcePolicyObservation struct {
 
 	// Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ResourcePolicyParameters struct {
@@ -34,10 +38,10 @@ type ResourcePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ResourcePolicySpec defines the desired state of ResourcePolicy

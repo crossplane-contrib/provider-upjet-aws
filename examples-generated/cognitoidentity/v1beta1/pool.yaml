@@ -43,4 +43,5 @@ metadata:
   name: default
 spec:
   forProvider:
+    region: us-west-1
     samlMetadataDocument: ${file("saml-metadata.xml")}

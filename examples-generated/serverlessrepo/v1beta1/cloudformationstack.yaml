@@ -14,6 +14,6 @@ spec:
     - CAPABILITY_RESOURCE_POLICY
     name: postgres-rotator
     parameters:
-      endpoint: secretsmanager.${data.aws_region.current.name}.${data.aws_partition.current.dns_suffix}
+      endpoint: secretsmanager.${data.aws_region.current.region}.${data.aws_partition.current.dns_suffix}
       functionName: func-postgres-rotator
     region: us-west-1

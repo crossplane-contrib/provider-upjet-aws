@@ -243,6 +243,10 @@ type DeploymentGroupObservation struct {
 	// Configuration block of Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. Valid values are UPDATE and IGNORE. Defaults to UPDATE.
 	OutdatedInstancesStrategy *string `json:"outdatedInstancesStrategy,omitempty" tf:"outdated_instances_strategy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The service role ARN that allows deployments.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
@@ -325,10 +329,10 @@ type DeploymentGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	OutdatedInstancesStrategy *string `json:"outdatedInstancesStrategy,omitempty" tf:"outdated_instances_strategy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The service role ARN that allows deployments.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

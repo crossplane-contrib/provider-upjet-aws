@@ -80,6 +80,10 @@ type EBSSnapshotObservation struct {
 	// Indicates whether to permanently restore an archived snapshot.
 	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
 
@@ -115,10 +119,10 @@ type EBSSnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
 	// +kubebuilder:validation:Optional

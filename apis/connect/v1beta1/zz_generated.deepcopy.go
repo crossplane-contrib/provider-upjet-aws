@@ -618,6 +618,11 @@ func (in *ContactFlowModuleObservation) DeepCopyInto(out *ContactFlowModuleObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -818,6 +823,11 @@ func (in *ContactFlowObservation) DeepCopyInto(out *ContactFlowObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1943,6 +1953,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceRole != nil {
 		in, out := &in.ServiceRole, &out.ServiceRole
 		*out = new(string)
@@ -2698,6 +2713,11 @@ func (in *LambdaFunctionAssociationObservation) DeepCopyInto(out *LambdaFunction
 	}
 	if in.InstanceID != nil {
 		in, out := &in.InstanceID, &out.InstanceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -3623,6 +3643,11 @@ func (in *PhoneNumberObservation) DeepCopyInto(out *PhoneNumberObservation) {
 	}
 	if in.Prefix != nil {
 		in, out := &in.Prefix, &out.Prefix
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -5661,6 +5686,11 @@ func (in *SecurityProfileObservation) DeepCopyInto(out *SecurityProfileObservati
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityProfileID != nil {
 		in, out := &in.SecurityProfileID, &out.SecurityProfileID
 		*out = new(string)
@@ -7083,6 +7113,11 @@ func (in *VocabularyObservation) DeepCopyInto(out *VocabularyObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

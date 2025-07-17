@@ -109,6 +109,10 @@ type ProxyDefaultTargetGroupObservation struct {
 
 	// The name of the default target group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ProxyDefaultTargetGroupParameters struct {
@@ -130,10 +134,10 @@ type ProxyDefaultTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DBProxyNameSelector *v1.Selector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ProxyDefaultTargetGroupSpec defines the desired state of ProxyDefaultTargetGroup

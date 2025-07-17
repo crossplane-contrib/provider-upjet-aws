@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MlflowTrackingServer is the Schema for the MlflowTrackingServers
-          API. Provides a SageMaker MLFlow Tracking Server resource.
+          API. Provides a SageMaker AI MLFlow Tracking Server resource.
         properties:
           apiVersion:
             description: |-
@@ -87,8 +87,9 @@ spec:
                       works.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) for an IAM role in
@@ -517,6 +518,11 @@ spec:
                     description: The version of MLflow that the tracking server uses.
                       To see which MLflow versions are available to use, see How it
                       works.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) for an IAM role in

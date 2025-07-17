@@ -98,11 +98,6 @@ type RoutingControlParameters struct {
 	// The name describing the routing control.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // RoutingControlSpec defines the desired state of RoutingControl

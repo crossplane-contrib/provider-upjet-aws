@@ -43,6 +43,10 @@ type ScriptObservation struct {
 	// Name of the script
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Information indicating where your game script files are stored. See below.
 	StorageLocation *ScriptStorageLocationObservation `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 
@@ -67,10 +71,10 @@ type ScriptParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Information indicating where your game script files are stored. See below.
 	// +kubebuilder:validation:Optional

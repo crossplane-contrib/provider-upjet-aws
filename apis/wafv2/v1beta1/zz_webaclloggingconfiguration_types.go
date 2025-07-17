@@ -15,19 +15,19 @@ import (
 
 type ActionConditionInitParameters struct {
 
-	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, and COUNT.
+	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 }
 
 type ActionConditionObservation struct {
 
-	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, and COUNT.
+	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 }
 
 type ActionConditionParameters struct {
 
-	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, and COUNT.
+	// Action setting that a log record must contain in order to meet the condition. Valid values for action are ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 }
@@ -285,6 +285,10 @@ type WebACLLoggingConfigurationObservation struct {
 	// Parts of the request to exclude from logs
 	RedactedFields []RedactedFieldsObservation `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Amazon Resource Name (ARN) of the web ACL that you want to associate with log_destination_configs.
 	// AWS WebACL ARN
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -317,10 +321,10 @@ type WebACLLoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RedactedFields []RedactedFieldsParameters `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of the web ACL that you want to associate with log_destination_configs.
 	// AWS WebACL ARN

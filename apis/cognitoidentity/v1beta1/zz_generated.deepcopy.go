@@ -172,6 +172,11 @@ func (in *CognitoIdentityPoolProviderPrincipalTagObservation) DeepCopyInto(out *
 			(*out)[key] = outVal
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.UseDefaults != nil {
 		in, out := &in.UseDefaults, &out.UseDefaults
 		*out = new(bool)
@@ -748,6 +753,11 @@ func (in *PoolObservation) DeepCopyInto(out *PoolObservation) {
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SAMLProviderArns != nil {
 		in, out := &in.SAMLProviderArns, &out.SAMLProviderArns
 		*out = make([]*string, len(*in))
@@ -1054,6 +1064,11 @@ func (in *PoolRolesAttachmentObservation) DeepCopyInto(out *PoolRolesAttachmentO
 	}
 	if in.IdentityPoolID != nil {
 		in, out := &in.IdentityPoolID, &out.IdentityPoolID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

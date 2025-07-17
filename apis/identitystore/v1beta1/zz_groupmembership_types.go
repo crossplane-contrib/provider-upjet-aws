@@ -57,6 +57,10 @@ type GroupMembershipObservation struct {
 
 	// The identifier of the newly created group membership in the Identity Store.
 	MembershipID *string `json:"membershipId,omitempty" tf:"membership_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type GroupMembershipParameters struct {
@@ -93,10 +97,10 @@ type GroupMembershipParameters struct {
 	// +kubebuilder:validation:Optional
 	MemberIDSelector *v1.Selector `json:"memberIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // GroupMembershipSpec defines the desired state of GroupMembership

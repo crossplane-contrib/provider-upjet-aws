@@ -23,6 +23,9 @@ type IdentityInfoInitParameters struct {
 
 	// The last name. This is required if you are using Amazon Connect or SAML for identity management. Minimum length of 1. Maximum length of 100.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// The secondary email address. If present, email notifications will be sent to this email address instead of the primary one.
+	SecondaryEmail *string `json:"secondaryEmail,omitempty" tf:"secondary_email,omitempty"`
 }
 
 type IdentityInfoObservation struct {
@@ -35,6 +38,9 @@ type IdentityInfoObservation struct {
 
 	// The last name. This is required if you are using Amazon Connect or SAML for identity management. Minimum length of 1. Maximum length of 100.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// The secondary email address. If present, email notifications will be sent to this email address instead of the primary one.
+	SecondaryEmail *string `json:"secondaryEmail,omitempty" tf:"secondary_email,omitempty"`
 }
 
 type IdentityInfoParameters struct {
@@ -50,6 +56,10 @@ type IdentityInfoParameters struct {
 	// The last name. This is required if you are using Amazon Connect or SAML for identity management. Minimum length of 1. Maximum length of 100.
 	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// The secondary email address. If present, email notifications will be sent to this email address instead of the primary one.
+	// +kubebuilder:validation:Optional
+	SecondaryEmail *string `json:"secondaryEmail,omitempty" tf:"secondary_email,omitempty"`
 }
 
 type UserInitParameters struct {
@@ -144,6 +154,10 @@ type UserObservation struct {
 	// A block that contains information about the phone settings for the user. Documented below.
 	PhoneConfig *UserPhoneConfigObservation `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The identifier of the routing profile for the user.
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
@@ -203,10 +217,10 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	PhoneConfig *UserPhoneConfigParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The identifier of the routing profile for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.RoutingProfile

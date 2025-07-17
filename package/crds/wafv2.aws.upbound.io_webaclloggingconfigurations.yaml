@@ -198,7 +198,7 @@ spec:
                                         description: Action setting that a log record
                                           must contain in order to meet the condition.
                                           Valid values for action are ALLOW, BLOCK,
-                                          and COUNT.
+                                          COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
                                         type: string
                                     type: object
                                   labelNameCondition:
@@ -264,8 +264,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
                     description: |-
@@ -486,7 +487,7 @@ spec:
                                         description: Action setting that a log record
                                           must contain in order to meet the condition.
                                           Valid values for action are ALLOW, BLOCK,
-                                          and COUNT.
+                                          COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
                                         type: string
                                     type: object
                                   labelNameCondition:
@@ -773,7 +774,7 @@ spec:
                                         description: Action setting that a log record
                                           must contain in order to meet the condition.
                                           Valid values for action are ALLOW, BLOCK,
-                                          and COUNT.
+                                          COUNT, CAPTCHA, CHALLENGE and EXCLUDED_AS_COUNT.
                                         type: string
                                     type: object
                                   labelNameCondition:
@@ -838,6 +839,11 @@ spec:
                           type: object
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceArn:
                     description: |-
                       Amazon Resource Name (ARN) of the web ACL that you want to associate with log_destination_configs.

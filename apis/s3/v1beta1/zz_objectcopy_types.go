@@ -88,7 +88,7 @@ type ObjectCopyInitParameters struct {
 	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Specifies presentational information for the object. Read w3c content_disposition for further information.
@@ -164,6 +164,8 @@ type ObjectCopyInitParameters struct {
 	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	OverrideProvider *ObjectCopyOverrideProviderInitParameters `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
+
 	// Confirms that the requester knows that they will be charged for the request. Bucket owners need not specify this parameter in their requests. For information about downloading objects from requester pays buckets, see Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html) in the Amazon S3 Developer Guide. If included, the only valid value is requester.
 	RequestPayer *string `json:"requestPayer,omitempty" tf:"request_payer,omitempty"`
 
@@ -212,7 +214,7 @@ type ObjectCopyObservation struct {
 	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// The base64-encoded, 32-bit CRC32 checksum of the object.
@@ -220,6 +222,9 @@ type ObjectCopyObservation struct {
 
 	// The base64-encoded, 32-bit CRC32C checksum of the object.
 	ChecksumCrc32C *string `json:"checksumCrc32C,omitempty" tf:"checksum_crc32c,omitempty"`
+
+	// The base64-encoded, 64-bit CRC64NVME checksum of the object.
+	ChecksumCrc64Nvme *string `json:"checksumCrc64Nvme,omitempty" tf:"checksum_crc64nvme,omitempty"`
 
 	// The base64-encoded, 160-bit SHA-1 digest of the object.
 	ChecksumSha1 *string `json:"checksumSha1,omitempty" tf:"checksum_sha1,omitempty"`
@@ -303,6 +308,12 @@ type ObjectCopyObservation struct {
 	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	OverrideProvider *ObjectCopyOverrideProviderObservation `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// If present, indicates that the requester was successfully charged for the request.
 	RequestCharged *bool `json:"requestCharged,omitempty" tf:"request_charged,omitempty"`
 
@@ -345,6 +356,25 @@ type ObjectCopyObservation struct {
 	WebsiteRedirect *string `json:"websiteRedirect,omitempty" tf:"website_redirect,omitempty"`
 }
 
+type ObjectCopyOverrideProviderInitParameters struct {
+
+	// Override the provider default_tags configuration block.
+	DefaultTags *OverrideProviderDefaultTagsInitParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
+}
+
+type ObjectCopyOverrideProviderObservation struct {
+
+	// Override the provider default_tags configuration block.
+	DefaultTags *OverrideProviderDefaultTagsObservation `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
+}
+
+type ObjectCopyOverrideProviderParameters struct {
+
+	// Override the provider default_tags configuration block.
+	// +kubebuilder:validation:Optional
+	DefaultTags *OverrideProviderDefaultTagsParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
+}
+
 type ObjectCopyParameters struct {
 
 	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
@@ -362,7 +392,7 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
 	// +kubebuilder:validation:Optional
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
@@ -463,10 +493,13 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	OverrideProvider *ObjectCopyOverrideProviderParameters `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Confirms that the requester knows that they will be charged for the request. Bucket owners need not specify this parameter in their requests. For information about downloading objects from requester pays buckets, see Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html) in the Amazon S3 Developer Guide. If included, the only valid value is requester.
 	// +kubebuilder:validation:Optional
@@ -508,6 +541,28 @@ type ObjectCopyParameters struct {
 	// Specifies a target URL for website redirect.
 	// +kubebuilder:validation:Optional
 	WebsiteRedirect *string `json:"websiteRedirect,omitempty" tf:"website_redirect,omitempty"`
+}
+
+type OverrideProviderDefaultTagsInitParameters struct {
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OverrideProviderDefaultTagsObservation struct {
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OverrideProviderDefaultTagsParameters struct {
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // ObjectCopySpec defines the desired state of ObjectCopy

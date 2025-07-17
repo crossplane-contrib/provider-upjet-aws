@@ -59,6 +59,10 @@ type ResourceObservation struct {
 	// Last path segment of this API resource.
 	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ID of the associated REST API
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 }
@@ -83,10 +87,10 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.RestAPI

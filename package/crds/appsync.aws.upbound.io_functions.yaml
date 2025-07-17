@@ -1118,8 +1118,9 @@ spec:
                       be unique.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requestMappingTemplate:
                     description: Function request mapping template. Functions support
@@ -1621,6 +1622,11 @@ spec:
                   name:
                     description: Function name. The function name does not have to
                       be unique.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requestMappingTemplate:
                     description: Function request mapping template. Functions support

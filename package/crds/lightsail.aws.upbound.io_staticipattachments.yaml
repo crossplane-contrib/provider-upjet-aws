@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: StaticIPAttachment is the Schema for the StaticIPAttachments
-          API. Provides an Lightsail Static IP Attachment
+          API. Manages a Lightsail Static IP Attachment.
         properties:
           apiVersion:
             description: |-
@@ -74,8 +74,7 @@ spec:
               forProvider:
                 properties:
                   instanceName:
-                    description: The name of the Lightsail instance to attach the
-                      IP to
+                    description: Name of the Lightsail instance to attach the IP to.
                     type: string
                   instanceNameRef:
                     description: Reference to a Instance in lightsail to populate
@@ -154,11 +153,12 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   staticIpName:
-                    description: The name of the allocated static IP
+                    description: Name of the allocated static IP.
                     type: string
                   staticIpNameRef:
                     description: Reference to a StaticIP in lightsail to populate
@@ -253,8 +253,7 @@ spec:
                   autoscaler.
                 properties:
                   instanceName:
-                    description: The name of the Lightsail instance to attach the
-                      IP to
+                    description: Name of the Lightsail instance to attach the IP to.
                     type: string
                   instanceNameRef:
                     description: Reference to a Instance in lightsail to populate
@@ -333,7 +332,7 @@ spec:
                         type: object
                     type: object
                   staticIpName:
-                    description: The name of the allocated static IP
+                    description: Name of the allocated static IP.
                     type: string
                   staticIpNameRef:
                     description: Reference to a StaticIP in lightsail to populate
@@ -587,14 +586,18 @@ spec:
                   id:
                     type: string
                   instanceName:
-                    description: The name of the Lightsail instance to attach the
-                      IP to
+                    description: Name of the Lightsail instance to attach the IP to.
                     type: string
                   ipAddress:
-                    description: The allocated static IP address
+                    description: Allocated static IP address.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   staticIpName:
-                    description: The name of the allocated static IP
+                    description: Name of the allocated static IP.
                     type: string
                 type: object
               conditions:

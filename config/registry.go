@@ -136,7 +136,7 @@ func GetProvider(ctx context.Context, generationProvider bool, skipDefaultTags b
 	defaultResourceOptions := []config.ResourceOption{
 		GroupKindOverrides(),
 		KindOverrides(),
-		RegionAddition(),
+		RegionRequired(),
 		TagsAllRemoval(),
 		IdentifierAssignedByAWS(),
 		KnownReferencers(),

@@ -104,19 +104,19 @@ type CoordinatesParameters struct {
 
 type FailoverRoutingPolicyInitParameters struct {
 
-	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA, and TXT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FailoverRoutingPolicyObservation struct {
 
-	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA, and TXT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FailoverRoutingPolicyParameters struct {
 
-	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA, and TXT.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -287,7 +287,7 @@ type RecordInitParameters struct {
 	// The TTL of the record.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA, and TXT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below.
@@ -354,7 +354,7 @@ type RecordObservation struct {
 	// The TTL of the record.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA, and TXT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below.
@@ -431,12 +431,6 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	RecordsSelector *v1.Selector `json:"recordsSelector,omitempty" tf:"-"`
 
-	// An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	// +kubebuilder:validation:Optional
 	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
@@ -445,7 +439,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA, and TXT.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 

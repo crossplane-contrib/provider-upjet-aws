@@ -734,6 +734,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicasPerNodeGroup != nil {
 		in, out := &in.ReplicasPerNodeGroup, &out.ReplicasPerNodeGroup
 		*out = new(float64)
@@ -1349,6 +1354,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 	if in.NoPasswordRequired != nil {
 		in, out := &in.NoPasswordRequired, &out.NoPasswordRequired
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {

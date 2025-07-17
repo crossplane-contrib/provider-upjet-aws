@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Certificate is the Schema for the Certificates API. Provides
-          a lightsail certificate
+        description: Certificate is the Schema for the Certificates API. Manages a
+          Lightsail SSL/TLS certificate for custom domains.
         properties:
           apiVersion:
             description: |-
@@ -74,12 +74,12 @@ spec:
               forProvider:
                 properties:
                   domainName:
-                    description: A domain name for which the certificate should be
-                      issued.
+                    description: Domain name for which the certificate should be issued.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
@@ -112,8 +112,7 @@ spec:
                   autoscaler.
                 properties:
                   domainName:
-                    description: A domain name for which the certificate should be
-                      issued.
+                    description: Domain name for which the certificate should be issued.
                     type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
@@ -303,36 +302,46 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the lightsail certificate.
+                    description: ARN of the certificate.
                     type: string
                   createdAt:
-                    description: The timestamp when the instance was created.
+                    description: Date and time when the certificate was created.
                     type: string
                   domainName:
-                    description: A domain name for which the certificate should be
-                      issued.
+                    description: Domain name for which the certificate should be issued.
                     type: string
                   domainValidationOptions:
-                    description: Set of domain validation objects which can be used
+                    description: 'Set of domain validation objects which can be used
                       to complete certificate validation. Can have more than one element,
-                      e.g., if SANs are defined.
+                      e.g., if SANs are defined. Each element contains the following
+                      attributes:'
                     items:
                       properties:
                         domainName:
-                          description: A domain name for which the certificate should
+                          description: Domain name for which the certificate should
                             be issued.
                           type: string
                         resourceRecordName:
-                          description: The name of the Lightsail load balancer.
+                          description: Name of the DNS record to create to validate
+                            the certificate.
                           type: string
                         resourceRecordType:
+                          description: Type of DNS record to create to validate the
+                            certificate.
                           type: string
                         resourceRecordValue:
+                          description: Value of the DNS record to create to validate
+                            the certificate.
                           type: string
                       type: object
                     type: array
                   id:
-                    description: The name of the lightsail certificate (matches name).
+                    description: Name of the certificate (matches name).
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
@@ -351,9 +360,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

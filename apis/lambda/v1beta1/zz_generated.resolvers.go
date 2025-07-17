@@ -728,6 +728,182 @@ func (mg *Invocation) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this LayerVersion.
+func (mg *LayerVersion) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Object", "ObjectList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Bucket),
+			Extract:      resource.ExtractParamPath("bucket", false),
+			Reference:    mg.Spec.ForProvider.S3BucketRef,
+			Selector:     mg.Spec.ForProvider.S3BucketSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.S3Bucket")
+	}
+	mg.Spec.ForProvider.S3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.S3BucketRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Object", "ObjectList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Key),
+			Extract:      resource.ExtractParamPath("key", false),
+			Reference:    mg.Spec.ForProvider.S3KeyRef,
+			Selector:     mg.Spec.ForProvider.S3KeySelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.S3Key")
+	}
+	mg.Spec.ForProvider.S3Key = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.S3KeyRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Object", "ObjectList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Bucket),
+			Extract:      resource.ExtractParamPath("bucket", false),
+			Reference:    mg.Spec.InitProvider.S3BucketRef,
+			Selector:     mg.Spec.InitProvider.S3BucketSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.S3Bucket")
+	}
+	mg.Spec.InitProvider.S3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.S3BucketRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Object", "ObjectList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Key),
+			Extract:      resource.ExtractParamPath("key", false),
+			Reference:    mg.Spec.InitProvider.S3KeyRef,
+			Selector:     mg.Spec.InitProvider.S3KeySelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.S3Key")
+	}
+	mg.Spec.InitProvider.S3Key = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.S3KeyRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LayerVersionPermission.
+func (mg *LayerVersionPermission) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "LayerVersion", "LayerVersionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LayerName),
+			Extract:      resource.ExtractParamPath("layer_name", false),
+			Reference:    mg.Spec.ForProvider.LayerNameRef,
+			Selector:     mg.Spec.ForProvider.LayerNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LayerName")
+	}
+	mg.Spec.ForProvider.LayerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LayerNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "LayerVersion", "LayerVersionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.VersionNumber),
+			Extract:      resource.ExtractParamPath("version", true),
+			Reference:    mg.Spec.ForProvider.VersionNumberRef,
+			Selector:     mg.Spec.ForProvider.VersionNumberSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VersionNumber")
+	}
+	mg.Spec.ForProvider.VersionNumber = reference.ToFloatPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VersionNumberRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "LayerVersion", "LayerVersionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LayerName),
+			Extract:      resource.ExtractParamPath("layer_name", false),
+			Reference:    mg.Spec.InitProvider.LayerNameRef,
+			Selector:     mg.Spec.InitProvider.LayerNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LayerName")
+	}
+	mg.Spec.InitProvider.LayerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LayerNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "LayerVersion", "LayerVersionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.InitProvider.VersionNumber),
+			Extract:      resource.ExtractParamPath("version", true),
+			Reference:    mg.Spec.InitProvider.VersionNumberRef,
+			Selector:     mg.Spec.InitProvider.VersionNumberSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VersionNumber")
+	}
+	mg.Spec.InitProvider.VersionNumber = reference.ToFloatPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VersionNumberRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Permission.
 func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

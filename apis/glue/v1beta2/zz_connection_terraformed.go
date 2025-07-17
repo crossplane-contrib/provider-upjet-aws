@@ -21,7 +21,7 @@ func (mg *Connection) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Connection
 func (tr *Connection) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_properties": "connectionPropertiesSecretRef"}
+	return map[string]string{"athena_properties": "athenaPropertiesSecretRef", "connection_properties": "connectionPropertiesSecretRef"}
 }
 
 // GetObservation of this Connection

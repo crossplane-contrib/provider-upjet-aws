@@ -155,8 +155,9 @@ spec:
                       key type is API_KEY.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   usagePlanId:
                     description: Id of the usage plan resource representing to associate
@@ -605,6 +606,11 @@ spec:
                     type: string
                   name:
                     description: Name of a usage plan key.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   usagePlanId:
                     description: Id of the usage plan resource representing to associate

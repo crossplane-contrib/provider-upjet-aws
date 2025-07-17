@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: KeyPair is the Schema for the KeyPairs API. Provides an Lightsail
-          Key Pair
+        description: KeyPair is the Schema for the KeyPairs API. Manages a Lightsail
+          Key Pair.
         properties:
           apiVersion:
             description: |-
@@ -74,19 +74,20 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: The name of the Lightsail Key Pair
+                    description: Name of the Lightsail Key Pair. Conflicts with name_prefix.
                     type: string
                   pgpKey:
-                    description: –  An optional PGP key to encrypt the resulting private
-                      key material. Only used when creating a new key pair
+                    description: PGP key to encrypt the resulting private key material.
+                      Only used when creating a new key pair.
                     type: string
                   publicKey:
-                    description: The public key material. This public key will be
-                      imported into Lightsail
+                    description: Public key material. This public key will be imported
+                      into Lightsail.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -111,15 +112,15 @@ spec:
                   autoscaler.
                 properties:
                   name:
-                    description: The name of the Lightsail Key Pair
+                    description: Name of the Lightsail Key Pair. Conflicts with name_prefix.
                     type: string
                   pgpKey:
-                    description: –  An optional PGP key to encrypt the resulting private
-                      key material. Only used when creating a new key pair
+                    description: PGP key to encrypt the resulting private key material.
+                      Only used when creating a new key pair.
                     type: string
                   publicKey:
-                    description: The public key material. This public key will be
-                      imported into Lightsail
+                    description: Public key material. This public key will be imported
+                      into Lightsail.
                     type: string
                   tags:
                     additionalProperties:
@@ -301,38 +302,43 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Lightsail key pair.
+                    description: ARN of the Lightsail key pair.
                     type: string
                   encryptedFingerprint:
-                    description: The MD5 public key fingerprint for the encrypted
-                      private key.
+                    description: MD5 public key fingerprint for the encrypted private
+                      key.
                     type: string
                   encryptedPrivateKey:
-                    description: – the private key material, base 64 encoded and encrypted
+                    description: Private key material, base 64 encoded and encrypted
                       with the given pgp_key. This is only populated when creating
                       a new key and pgp_key is supplied.
                     type: string
                   fingerprint:
-                    description: The MD5 public key fingerprint as specified in section
+                    description: MD5 public key fingerprint as specified in section
                       4 of RFC 4716.
                     type: string
                   id:
-                    description: The name used for this key pair.
+                    description: Name used for this key pair.
                     type: string
                   name:
-                    description: The name of the Lightsail Key Pair
+                    description: Name of the Lightsail Key Pair. Conflicts with name_prefix.
                     type: string
                   pgpKey:
-                    description: –  An optional PGP key to encrypt the resulting private
-                      key material. Only used when creating a new key pair
+                    description: PGP key to encrypt the resulting private key material.
+                      Only used when creating a new key pair.
                     type: string
                   privateKey:
-                    description: the private key, base64 encoded. This is only populated
+                    description: Private key, base64 encoded. This is only populated
                       when creating a new key, and when no pgp_key is provided.
                     type: string
                   publicKey:
-                    description: The public key material. This public key will be
-                      imported into Lightsail
+                    description: Public key material. This public key will be imported
+                      into Lightsail.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -343,6 +349,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

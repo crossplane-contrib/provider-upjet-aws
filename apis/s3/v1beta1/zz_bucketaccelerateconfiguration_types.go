@@ -46,6 +46,10 @@ type BucketAccelerateConfigurationObservation struct {
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -70,10 +74,10 @@ type BucketAccelerateConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
 	// +kubebuilder:validation:Optional

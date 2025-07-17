@@ -39,6 +39,10 @@ type VoiceConnectorObservation struct {
 	// The outbound host name for the Amazon Chime Voice Connector.
 	OutboundHostName *string `json:"outboundHostName,omitempty" tf:"outbound_host_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
 
@@ -57,10 +61,10 @@ type VoiceConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	// +kubebuilder:validation:Optional

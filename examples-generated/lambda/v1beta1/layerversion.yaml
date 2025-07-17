@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta1/layerversion
   labels:
-    testing.upbound.io/example-name: lambda_layer
-  name: lambda-layer
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     compatibleRuntimes:

@@ -74,11 +74,12 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: –  A description of the registry.
+                    description: A description of the registry.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -103,7 +104,7 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: –  A description of the registry.
+                    description: A description of the registry.
                     type: string
                   tags:
                     additionalProperties:
@@ -288,10 +289,15 @@ spec:
                     description: Amazon Resource Name (ARN) of Glue Registry.
                     type: string
                   description:
-                    description: –  A description of the registry.
+                    description: A description of the registry.
                     type: string
                   id:
                     description: Amazon Resource Name (ARN) of Glue Registry.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

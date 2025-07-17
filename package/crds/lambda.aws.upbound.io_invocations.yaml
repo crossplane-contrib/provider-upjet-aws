@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Invocation is the Schema for the Invocations API. Invoke AWS
-          Lambda Function
+        description: Invocation is the Schema for the Invocations API. Manages an
+          AWS Lambda Function invocation.
         properties:
           apiVersion:
             description: |-
@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   functionName:
-                    description: Name of the lambda function.
+                    description: Name of the Lambda function.
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -151,7 +151,7 @@ spec:
                         type: object
                     type: object
                   input:
-                    description: JSON payload to the lambda function.
+                    description: JSON payload to the Lambda function.
                     type: string
                   lifecycleScope:
                     description: Lifecycle scope of the resource to manage. Valid
@@ -161,17 +161,18 @@ spec:
                       the input JSON payload with additional lifecycle information.
                     type: string
                   qualifier:
-                    description: Qualifier (i.e., version) of the lambda function.
+                    description: Qualifier (i.e., version) of the Lambda function.
                       Defaults to $LATEST.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   terraformKey:
-                    description: The JSON key used to store lifecycle information
-                      in the input JSON payload. Defaults to tf. This additional key
-                      is only included when lifecycle_scope is set to CRUD.
+                    description: JSON key used to store lifecycle information in the
+                      input JSON payload. Defaults to tf. This additional key is only
+                      included when lifecycle_scope is set to CRUD.
                     type: string
                   triggers:
                     additionalProperties:
@@ -197,7 +198,7 @@ spec:
                   autoscaler.
                 properties:
                   functionName:
-                    description: Name of the lambda function.
+                    description: Name of the Lambda function.
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -274,7 +275,7 @@ spec:
                         type: object
                     type: object
                   input:
-                    description: JSON payload to the lambda function.
+                    description: JSON payload to the Lambda function.
                     type: string
                   lifecycleScope:
                     description: Lifecycle scope of the resource to manage. Valid
@@ -284,13 +285,13 @@ spec:
                       the input JSON payload with additional lifecycle information.
                     type: string
                   qualifier:
-                    description: Qualifier (i.e., version) of the lambda function.
+                    description: Qualifier (i.e., version) of the Lambda function.
                       Defaults to $LATEST.
                     type: string
                   terraformKey:
-                    description: The JSON key used to store lifecycle information
-                      in the input JSON payload. Defaults to tf. This additional key
-                      is only included when lifecycle_scope is set to CRUD.
+                    description: JSON key used to store lifecycle information in the
+                      input JSON payload. Defaults to tf. This additional key is only
+                      included when lifecycle_scope is set to CRUD.
                     type: string
                   triggers:
                     additionalProperties:
@@ -478,12 +479,12 @@ spec:
               atProvider:
                 properties:
                   functionName:
-                    description: Name of the lambda function.
+                    description: Name of the Lambda function.
                     type: string
                   id:
                     type: string
                   input:
-                    description: JSON payload to the lambda function.
+                    description: JSON payload to the Lambda function.
                     type: string
                   lifecycleScope:
                     description: Lifecycle scope of the resource to manage. Valid
@@ -493,16 +494,21 @@ spec:
                       the input JSON payload with additional lifecycle information.
                     type: string
                   qualifier:
-                    description: Qualifier (i.e., version) of the lambda function.
+                    description: Qualifier (i.e., version) of the Lambda function.
                       Defaults to $LATEST.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   result:
-                    description: String result of the lambda function invocation.
+                    description: String result of the Lambda function invocation.
                     type: string
                   terraformKey:
-                    description: The JSON key used to store lifecycle information
-                      in the input JSON payload. Defaults to tf. This additional key
-                      is only included when lifecycle_scope is set to CRUD.
+                    description: JSON key used to store lifecycle information in the
+                      input JSON payload. Defaults to tf. This additional key is only
+                      included when lifecycle_scope is set to CRUD.
                     type: string
                   triggers:
                     additionalProperties:

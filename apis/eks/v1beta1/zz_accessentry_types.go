@@ -15,7 +15,7 @@ import (
 
 type AccessEntryInitParameters struct {
 
-	// –  List of string which can optionally specify the Kubernetes groups the user would belong to when creating an access entry.
+	// List of string which can optionally specify the Kubernetes groups the user would belong to when creating an access entry.
 	// +listType=set
 	KubernetesGroups []*string `json:"kubernetesGroups,omitempty" tf:"kubernetes_groups,omitempty"`
 
@@ -35,7 +35,7 @@ type AccessEntryObservation struct {
 	// Amazon Resource Name (ARN) of the Access Entry.
 	AccessEntryArn *string `json:"accessEntryArn,omitempty" tf:"access_entry_arn,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Date and time in RFC3339 format that the EKS add-on was created.
@@ -43,15 +43,19 @@ type AccessEntryObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  List of string which can optionally specify the Kubernetes groups the user would belong to when creating an access entry.
+	// List of string which can optionally specify the Kubernetes groups the user would belong to when creating an access entry.
 	// +listType=set
 	KubernetesGroups []*string `json:"kubernetesGroups,omitempty" tf:"kubernetes_groups,omitempty"`
 
 	// Date and time in RFC3339 format that the EKS add-on was updated.
 	ModifiedAt *string `json:"modifiedAt,omitempty" tf:"modified_at,omitempty"`
 
-	// –  The IAM Principal ARN which requires Authentication access to the EKS cluster.
+	// The IAM Principal ARN which requires Authentication access to the EKS cluster.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -70,7 +74,7 @@ type AccessEntryObservation struct {
 
 type AccessEntryParameters struct {
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
@@ -84,12 +88,12 @@ type AccessEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// –  List of string which can optionally specify the Kubernetes groups the user would belong to when creating an access entry.
+	// List of string which can optionally specify the Kubernetes groups the user would belong to when creating an access entry.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	KubernetesGroups []*string `json:"kubernetesGroups,omitempty" tf:"kubernetes_groups,omitempty"`
 
-	// –  The IAM Principal ARN which requires Authentication access to the EKS cluster.
+	// The IAM Principal ARN which requires Authentication access to the EKS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +crossplane:generate:reference:refFieldName=PrincipalArnFromRoleRef
@@ -105,10 +109,10 @@ type AccessEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalArnFromRoleSelector *v1.Selector `json:"principalArnFromRoleSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

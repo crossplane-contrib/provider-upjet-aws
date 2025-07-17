@@ -145,6 +145,10 @@ type DatasourceObservation struct {
 	// Amazon OpenSearch Service settings. See opensearchservice_config Block for details.
 	OpensearchserviceConfig *OpensearchserviceConfigObservation `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// AWS RDS settings. See relational_database_config Block for details.
 	RelationalDatabaseConfig *RelationalDatabaseConfigObservation `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
@@ -199,11 +203,10 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	OpensearchserviceConfig *OpensearchserviceConfigParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
-	// AWS Region for RDS HTTP endpoint. Defaults to current region.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// AWS RDS settings. See relational_database_config Block for details.
 	// +kubebuilder:validation:Optional

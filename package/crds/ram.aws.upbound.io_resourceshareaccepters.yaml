@@ -74,8 +74,9 @@ spec:
               forProvider:
                 properties:
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   shareArn:
                     description: The ARN of the resource share.
@@ -433,6 +434,11 @@ spec:
                   receiverAccountId:
                     description: The account ID of the receiver account which accepts
                       the invitation.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resources:
                     description: A list of the resource ARNs shared via the resource

@@ -13,7 +13,29 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BusDeadLetterConfigInitParameters struct {
+
+	// The ARN of the SQS queue specified as the target for the dead-letter queue.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type BusDeadLetterConfigObservation struct {
+
+	// The ARN of the SQS queue specified as the target for the dead-letter queue.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type BusDeadLetterConfigParameters struct {
+
+	// The ARN of the SQS queue specified as the target for the dead-letter queue.
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
 type BusInitParameters struct {
+
+	// Configuration details of the Amazon SQS queue for EventBridge to use as a dead-letter queue (DLQ). This block supports the following arguments:
+	DeadLetterConfig *BusDeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Event bus description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -31,8 +53,11 @@ type BusInitParameters struct {
 
 type BusObservation struct {
 
-	// ARN of the event bus.
+	// The ARN of the SQS queue specified as the target for the dead-letter queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Configuration details of the Amazon SQS queue for EventBridge to use as a dead-letter queue (DLQ). This block supports the following arguments:
+	DeadLetterConfig *BusDeadLetterConfigObservation `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Event bus description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -46,6 +71,11 @@ type BusObservation struct {
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// The following arguments are required:
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -56,6 +86,10 @@ type BusObservation struct {
 }
 
 type BusParameters struct {
+
+	// Configuration details of the Amazon SQS queue for EventBridge to use as a dead-letter queue (DLQ). This block supports the following arguments:
+	// +kubebuilder:validation:Optional
+	DeadLetterConfig *BusDeadLetterConfigParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Event bus description.
 	// +kubebuilder:validation:Optional
@@ -69,10 +103,11 @@ type BusParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// The following arguments are required:
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

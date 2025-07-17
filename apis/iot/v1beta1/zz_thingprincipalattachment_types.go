@@ -47,6 +47,10 @@ type ThingPrincipalAttachmentObservation struct {
 	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The name of the thing.
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 }
@@ -67,10 +71,10 @@ type ThingPrincipalAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the thing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Thing

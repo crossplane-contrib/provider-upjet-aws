@@ -185,6 +185,11 @@ func (in *NotificationRuleObservation) DeepCopyInto(out *NotificationRuleObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Resource != nil {
 		in, out := &in.Resource, &out.Resource
 		*out = new(string)

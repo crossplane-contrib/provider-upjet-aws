@@ -121,6 +121,11 @@ func (in *GraphObservation) DeepCopyInto(out *GraphObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -335,6 +340,11 @@ func (in *InvitationAccepterObservation) DeepCopyInto(out *InvitationAccepterObs
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -574,6 +584,11 @@ func (in *MemberObservation) DeepCopyInto(out *MemberObservation) {
 	}
 	if in.Message != nil {
 		in, out := &in.Message, &out.Message
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

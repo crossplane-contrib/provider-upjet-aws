@@ -115,6 +115,10 @@ type StackObservation struct {
 	// Conflicts w/ policy_body.
 	PolicyURL *string `json:"policyUrl,omitempty" tf:"policy_url,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -189,10 +193,10 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyURL *string `json:"policyUrl,omitempty" tf:"policy_url,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

@@ -15,7 +15,7 @@ import (
 
 type VirtualMfaDeviceInitParameters struct {
 
-	// –  The path for the virtual MFA device.
+	// The path for the virtual MFA device.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Key-value map of resource tags.
@@ -39,7 +39,7 @@ type VirtualMfaDeviceObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  The path for the virtual MFA device.
+	// The path for the virtual MFA device.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set (otherwise, the account ID), and Base32String is the seed in base32 format.
@@ -62,7 +62,7 @@ type VirtualMfaDeviceObservation struct {
 
 type VirtualMfaDeviceParameters struct {
 
-	// –  The path for the virtual MFA device.
+	// The path for the virtual MFA device.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 

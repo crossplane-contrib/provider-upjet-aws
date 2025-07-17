@@ -47,6 +47,6 @@ spec:
       - name: Parameter2
         value: Value2
     name: example
-    parentImage: arn:${data.aws_partition.current.partition}:imagebuilder:${data.aws_region.current.name}:aws:image/amazon-linux-2-x86/x.x.x
+    parentImage: arn:${data.aws_partition.current.partition}:imagebuilder:${data.aws_region.current.region}:aws:image/amazon-linux-2-x86/x.x.x
     region: us-west-1
     version: 1.0.0

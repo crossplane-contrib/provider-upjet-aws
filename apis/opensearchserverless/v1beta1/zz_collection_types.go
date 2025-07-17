@@ -16,12 +16,15 @@ import (
 type CollectionInitParameters struct {
 
 	// Description of the collection.
+	// Description of the collection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Name of the collection.
 	// Name of the collection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
 	StandbyReplicas *string `json:"standbyReplicas,omitempty" tf:"standby_replicas,omitempty"`
 
 	// Key-value map of resource tags.
@@ -29,6 +32,7 @@ type CollectionInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
+	// Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -38,11 +42,14 @@ type CollectionObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.
+	// Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.
 	CollectionEndpoint *string `json:"collectionEndpoint,omitempty" tf:"collection_endpoint,omitempty"`
 
 	// Collection-specific endpoint used to access OpenSearch Dashboards.
+	// Collection-specific endpoint used to access OpenSearch Dashboards.
 	DashboardEndpoint *string `json:"dashboardEndpoint,omitempty" tf:"dashboard_endpoint,omitempty"`
 
+	// Description of the collection.
 	// Description of the collection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -50,12 +57,19 @@ type CollectionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN of the Amazon Web Services KMS key used to encrypt the collection.
+	// The ARN of the Amazon Web Services KMS key used to encrypt the collection.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Name of the collection.
+	// Name of the collection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
 	StandbyReplicas *string `json:"standbyReplicas,omitempty" tf:"standby_replicas,omitempty"`
 
 	// Key-value map of resource tags.
@@ -66,25 +80,29 @@ type CollectionObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
+	// Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CollectionParameters struct {
 
 	// Description of the collection.
+	// Description of the collection.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the collection.
+	// Name of the collection.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
 	// +kubebuilder:validation:Optional
 	StandbyReplicas *string `json:"standbyReplicas,omitempty" tf:"standby_replicas,omitempty"`
 
@@ -94,6 +112,7 @@ type CollectionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
+	// Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta2/containerservice
   labels:
-    testing.upbound.io/example-name: my_container_service
-  name: my-container-service
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     isDisabled: false

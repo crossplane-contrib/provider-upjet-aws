@@ -157,8 +157,9 @@ spec:
                       by AWS CLI rds describe-db-engine-versions.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role to associate
@@ -606,6 +607,11 @@ spec:
                   id:
                     description: DB Cluster Identifier and IAM Role ARN separated
                       by a comma (,)
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role to associate

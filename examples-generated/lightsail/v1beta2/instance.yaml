@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta2/instance
   labels:
-    testing.upbound.io/example-name: gitlab_test
-  name: gitlab-test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     availabilityZone: us-east-1b

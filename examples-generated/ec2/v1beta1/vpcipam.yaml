@@ -10,7 +10,7 @@ spec:
   forProvider:
     description: My IPAM
     operatingRegions:
-    - regionName: ${data.aws_region.current.name}
+    - regionName: ${data.aws_region.current.region}
     region: us-west-1
     tags:
       Test: Main

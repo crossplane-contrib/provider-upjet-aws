@@ -26,7 +26,7 @@ spec:
 
 ---
 
-apiVersion: redshift.aws.upbound.io/v1beta2
+apiVersion: redshift.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:

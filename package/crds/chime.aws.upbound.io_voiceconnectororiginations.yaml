@@ -80,8 +80,9 @@ spec:
                       are not enabled for your Amazon Chime Voice Connector.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   route:
                     description: Set of call distribution properties defined for your
@@ -508,6 +509,11 @@ spec:
                     type: boolean
                   id:
                     description: The Amazon Chime Voice Connector ID.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   route:
                     description: Set of call distribution properties defined for your

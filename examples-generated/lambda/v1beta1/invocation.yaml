@@ -10,10 +10,33 @@ spec:
   forProvider:
     functionNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: lambda_function_test
+        testing.upbound.io/example-name: example
     input: |-
       ${jsonencode({
-          key1 = "value1"
-          key2 = "value2"
+          operation = "initialize"
+          config = {
+            environment = "production"
+            debug       = false
+          }
         })}
     region: us-west-1
+
+---
+
+apiVersion: lambda.aws.upbound.io/v1beta2
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/invocation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    filename: function.zip
+    handler: index.handler
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda_role
+    runtime: python3.12

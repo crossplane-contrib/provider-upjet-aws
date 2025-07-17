@@ -142,19 +142,19 @@ type HealthCheckConfigParameters struct {
 
 type HealthCheckCustomConfigInitParameters struct {
 
-	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Maximum value of 10.
+	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Value is always set to 1.
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 }
 
 type HealthCheckCustomConfigObservation struct {
 
-	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Maximum value of 10.
+	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Value is always set to 1.
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 }
 
 type HealthCheckCustomConfigParameters struct {
 
-	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Maximum value of 10.
+	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Value is always set to 1.
 	// +kubebuilder:validation:Optional
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 }
@@ -219,11 +219,14 @@ type ServiceObservation struct {
 	// The ID of the namespace that you want to use to create the service.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -261,10 +264,10 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

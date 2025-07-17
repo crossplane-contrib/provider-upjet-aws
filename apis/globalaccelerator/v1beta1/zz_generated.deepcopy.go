@@ -816,11 +816,6 @@ func (in *EndpointGroupParameters) DeepCopyInto(out *EndpointGroupParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.ThresholdCount != nil {
 		in, out := &in.ThresholdCount, &out.ThresholdCount
 		*out = new(float64)
@@ -1053,6 +1048,11 @@ func (in *ListenerObservation) DeepCopyInto(out *ListenerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Arn != nil {
+		in, out := &in.Arn, &out.Arn
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClientAffinity != nil {
 		in, out := &in.ClientAffinity, &out.ClientAffinity
 		*out = new(string)
@@ -1119,11 +1119,6 @@ func (in *ListenerParameters) DeepCopyInto(out *ListenerParameters) {
 	}
 	if in.Protocol != nil {
 		in, out := &in.Protocol, &out.Protocol
-		*out = new(string)
-		**out = **in
-	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

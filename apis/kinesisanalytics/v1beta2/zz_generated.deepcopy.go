@@ -195,6 +195,11 @@ func (in *ApplicationObservation) DeepCopyInto(out *ApplicationObservation) {
 		*out = new(ReferenceDataSourcesObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StartApplication != nil {
 		in, out := &in.StartApplication, &out.StartApplication
 		*out = new(bool)

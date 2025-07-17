@@ -52,6 +52,7 @@ spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.iot_assume_role_policy.json}
     path: /service-role/
+    region: us-west-1
 
 ---
 
@@ -68,6 +69,7 @@ spec:
     policyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: iot_fleet_provisioning

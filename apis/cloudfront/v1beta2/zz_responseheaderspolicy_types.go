@@ -371,9 +371,6 @@ type ResponseHeadersPolicyInitParameters struct {
 	// Object that contains an attribute items that contains a list of custom headers. See Custom Header for more information.
 	CustomHeadersConfig *CustomHeadersConfigInitParameters `json:"customHeadersConfig,omitempty" tf:"custom_headers_config,omitempty"`
 
-	// The current version of the response headers policy.
-	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
-
 	// A unique name to identify the response headers policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -388,6 +385,9 @@ type ResponseHeadersPolicyInitParameters struct {
 }
 
 type ResponseHeadersPolicyObservation struct {
+
+	// The response headers policy ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A comment to describe the response headers policy. The comment cannot be longer than 128 characters.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
@@ -431,18 +431,9 @@ type ResponseHeadersPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomHeadersConfig *CustomHeadersConfigParameters `json:"customHeadersConfig,omitempty" tf:"custom_headers_config,omitempty"`
 
-	// The current version of the response headers policy.
-	// +kubebuilder:validation:Optional
-	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
-
 	// A unique name to identify the response headers policy.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 
 	// A configuration for a set of HTTP headers to remove from the HTTP response. Object that contains an attribute items that contains a list of headers. See Remove Header for more information.
 	// +kubebuilder:validation:Optional

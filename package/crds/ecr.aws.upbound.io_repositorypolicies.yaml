@@ -77,8 +77,9 @@ spec:
                     description: The policy document. This is a JSON formatted string
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   repository:
                     description: Name of the repository to apply the policy.
@@ -435,6 +436,11 @@ spec:
                     type: string
                   policy:
                     description: The policy document. This is a JSON formatted string
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   registryId:
                     description: The registry ID where the repository was created.

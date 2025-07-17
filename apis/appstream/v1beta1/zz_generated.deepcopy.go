@@ -1217,6 +1217,11 @@ func (in *FleetStackAssociationObservation) DeepCopyInto(out *FleetStackAssociat
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StackName != nil {
 		in, out := &in.StackName, &out.StackName
 		*out = new(string)
@@ -2765,6 +2770,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SendEmailNotification != nil {
 		in, out := &in.SendEmailNotification, &out.SendEmailNotification
 		*out = new(bool)
@@ -3009,6 +3019,11 @@ func (in *UserStackAssociationObservation) DeepCopyInto(out *UserStackAssociatio
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

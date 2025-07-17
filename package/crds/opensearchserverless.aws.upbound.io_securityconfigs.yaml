@@ -73,32 +73,43 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the security configuration.
+                    description: |-
+                      Description of the security configuration.
+                      Description of the security configuration.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
                     description: Configuration block for SAML options.
                     properties:
                       groupAttribute:
-                        description: Group attribute for this SAML integration.
+                        description: |-
+                          Group attribute for this SAML integration.
+                          Group attribute for this SAML integration.
                         type: string
                       metadata:
-                        description: The XML IdP metadata file generated from your
-                          identity provider.
+                        description: |-
+                          The XML IdP metadata file generated from your identity provider.
+                          The XML IdP metadata file generated from your identity provider.
                         type: string
                       sessionTimeout:
-                        description: Session timeout, in minutes. Minimum is 5 minutes
-                          and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                        description: |-
+                          Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                          Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
                         type: number
                       userAttribute:
-                        description: User attribute for this SAML integration.
+                        description: |-
+                          User attribute for this SAML integration.
+                          User attribute for this SAML integration.
                         type: string
                     type: object
                   type:
-                    description: Type of configuration. Must be saml.
+                    description: |-
+                      Type of configuration. Must be saml.
+                      Type of configuration. Must be `saml`.
                     type: string
                 required:
                 - region
@@ -118,24 +129,32 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: Description of the security configuration.
+                    description: |-
+                      Description of the security configuration.
+                      Description of the security configuration.
                     type: string
                   samlOptions:
                     description: Configuration block for SAML options.
                     properties:
                       groupAttribute:
-                        description: Group attribute for this SAML integration.
+                        description: |-
+                          Group attribute for this SAML integration.
+                          Group attribute for this SAML integration.
                         type: string
                       metadata:
-                        description: The XML IdP metadata file generated from your
-                          identity provider.
+                        description: |-
+                          The XML IdP metadata file generated from your identity provider.
+                          The XML IdP metadata file generated from your identity provider.
                         type: string
                       sessionTimeout:
-                        description: Session timeout, in minutes. Minimum is 5 minutes
-                          and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                        description: |-
+                          Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                          Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
                         type: number
                       userAttribute:
-                        description: User attribute for this SAML integration.
+                        description: |-
+                          User attribute for this SAML integration.
+                          User attribute for this SAML integration.
                         type: string
                     type: object
                 type: object
@@ -306,44 +325,56 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.samlOptions is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.samlOptions)
-                || (has(self.initProvider) && has(self.initProvider.samlOptions))'
           status:
             description: SecurityConfigStatus defines the observed state of SecurityConfig.
             properties:
               atProvider:
                 properties:
                   configVersion:
-                    description: Version of the configuration.
+                    description: |-
+                      Version of the configuration.
+                      Version of the configuration.
                     type: string
                   description:
-                    description: Description of the security configuration.
+                    description: |-
+                      Description of the security configuration.
+                      Description of the security configuration.
                     type: string
                   id:
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
                     description: Configuration block for SAML options.
                     properties:
                       groupAttribute:
-                        description: Group attribute for this SAML integration.
+                        description: |-
+                          Group attribute for this SAML integration.
+                          Group attribute for this SAML integration.
                         type: string
                       metadata:
-                        description: The XML IdP metadata file generated from your
-                          identity provider.
+                        description: |-
+                          The XML IdP metadata file generated from your identity provider.
+                          The XML IdP metadata file generated from your identity provider.
                         type: string
                       sessionTimeout:
-                        description: Session timeout, in minutes. Minimum is 5 minutes
-                          and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                        description: |-
+                          Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                          Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
                         type: number
                       userAttribute:
-                        description: User attribute for this SAML integration.
+                        description: |-
+                          User attribute for this SAML integration.
+                          User attribute for this SAML integration.
                         type: string
                     type: object
                   type:
-                    description: Type of configuration. Must be saml.
+                    description: |-
+                      Type of configuration. Must be saml.
+                      Type of configuration. Must be `saml`.
                     type: string
                 type: object
               conditions:

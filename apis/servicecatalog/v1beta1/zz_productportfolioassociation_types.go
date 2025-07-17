@@ -60,6 +60,10 @@ type ProductPortfolioAssociationObservation struct {
 	// Product identifier.
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Identifier of the source portfolio.
 	SourcePortfolioID *string `json:"sourcePortfolioId,omitempty" tf:"source_portfolio_id,omitempty"`
 }
@@ -96,10 +100,10 @@ type ProductPortfolioAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Identifier of the source portfolio.
 	// +kubebuilder:validation:Optional

@@ -21,7 +21,7 @@ type SchemaInitParameters struct {
 	// The data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
-	// –  A description of the schema.
+	// A description of the schema.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ARN of the Glue Registry to create the schema in.
@@ -40,7 +40,7 @@ type SchemaInitParameters struct {
 	// The schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// –  The Name of the schema.
+	// The Name of the schema.
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -59,7 +59,7 @@ type SchemaObservation struct {
 	// The data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
-	// –  A description of the schema.
+	// A description of the schema.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Amazon Resource Name (ARN) of the schema.
@@ -70,6 +70,10 @@ type SchemaObservation struct {
 
 	// The next version of the schema associated with the returned schema definition.
 	NextSchemaVersion *float64 `json:"nextSchemaVersion,omitempty" tf:"next_schema_version,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The ARN of the Glue Registry to create the schema in.
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
@@ -83,7 +87,7 @@ type SchemaObservation struct {
 	// The schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// –  The Name of the schema.
+	// The Name of the schema.
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -105,14 +109,14 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
-	// –  A description of the schema.
+	// A description of the schema.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the Glue Registry to create the schema in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Registry
@@ -132,7 +136,7 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// –  The Name of the schema.
+	// The Name of the schema.
 	// +kubebuilder:validation:Optional
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 

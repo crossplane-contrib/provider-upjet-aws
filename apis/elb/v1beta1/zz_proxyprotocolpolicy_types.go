@@ -47,6 +47,10 @@ type ProxyProtocolPolicyObservation struct {
 	// The load balancer to which the policy
 	// should be attached.
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ProxyProtocolPolicyParameters struct {
@@ -71,10 +75,10 @@ type ProxyProtocolPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ProxyProtocolPolicySpec defines the desired state of ProxyProtocolPolicy

@@ -325,6 +325,11 @@ func (in *ProductObservation) DeepCopyInto(out *ProductObservation) {
 		*out = new(ProvisioningArtifactParametersObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -769,6 +774,11 @@ func (in *ServiceActionObservation) DeepCopyInto(out *ServiceActionObservation) 
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -37,6 +37,9 @@ type AcceleratorInitParameters struct {
 
 type AcceleratorObservation struct {
 
+	// The Amazon Resource Name (ARN) of the accelerator.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The attributes of the accelerator. Fields documented below.
 	Attributes *AttributesObservation `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
@@ -99,11 +102,6 @@ type AcceleratorParameters struct {
 	// The name of the accelerator.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

@@ -220,6 +220,11 @@ func (in *ConfigurationSetObservation) DeepCopyInto(out *ConfigurationSetObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReputationMetricsEnabled != nil {
 		in, out := &in.ReputationMetricsEnabled, &out.ReputationMetricsEnabled
 		*out = new(bool)
@@ -549,6 +554,11 @@ func (in *EventDestinationObservation) DeepCopyInto(out *EventDestinationObserva
 				**out = **in
 			}
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.SnsDestination != nil {
 		in, out := &in.SnsDestination, &out.SnsDestination

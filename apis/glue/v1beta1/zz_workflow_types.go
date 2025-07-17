@@ -15,11 +15,11 @@ import (
 
 type WorkflowInitParameters struct {
 
-	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
-	// –  Description of the workflow.
+	// Description of the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Prevents exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
@@ -35,11 +35,11 @@ type WorkflowObservation struct {
 	// Amazon Resource Name (ARN) of Glue Workflow
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
-	// –  Description of the workflow.
+	// Description of the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Workflow name
@@ -47,6 +47,10 @@ type WorkflowObservation struct {
 
 	// Prevents exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
 	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -59,12 +63,12 @@ type WorkflowObservation struct {
 
 type WorkflowParameters struct {
 
-	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
-	// –  Description of the workflow.
+	// Description of the workflow.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -72,10 +76,10 @@ type WorkflowParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

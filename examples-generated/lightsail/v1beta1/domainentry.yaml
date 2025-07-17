@@ -4,13 +4,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/domainentry
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     domainNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: domain_test
+        testing.upbound.io/example-name: example
     region: us-west-1
     target: 127.0.0.1
     type: A
@@ -23,9 +23,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/domainentry
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    domainName: mydomain.com
+    domainName: example.com
     region: us-west-1

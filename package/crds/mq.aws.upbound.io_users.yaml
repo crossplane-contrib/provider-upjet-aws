@@ -499,6 +499,10 @@ spec:
                     type: array
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   replicationUser:
                     type: boolean
                   username:

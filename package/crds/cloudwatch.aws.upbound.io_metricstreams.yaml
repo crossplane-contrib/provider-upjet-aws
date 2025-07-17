@@ -207,8 +207,9 @@ spec:
                       about output formats, see Metric streams output formats.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: ARN of the IAM role that this metric stream will
@@ -850,6 +851,11 @@ spec:
                     description: Output format for the stream. Possible values are
                       json, opentelemetry0.7, and opentelemetry1.0. For more information
                       about output formats, see Metric streams output formats.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: ARN of the IAM role that this metric stream will

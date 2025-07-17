@@ -197,6 +197,10 @@ type FleetObservation struct {
 	// Nested argument containing On-Demand configurations. Defined below.
 	OnDemandOptions *OnDemandOptionsObservation `json:"onDemandOptions,omitempty" tf:"on_demand_options,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether EC2 Fleet should replace unhealthy instances. Defaults to false. Supported only for fleets of type maintain.
 	ReplaceUnhealthyInstances *bool `json:"replaceUnhealthyInstances,omitempty" tf:"replace_unhealthy_instances,omitempty"`
 
@@ -264,10 +268,10 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	OnDemandOptions *OnDemandOptionsParameters `json:"onDemandOptions,omitempty" tf:"on_demand_options,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether EC2 Fleet should replace unhealthy instances. Defaults to false. Supported only for fleets of type maintain.
 	// +kubebuilder:validation:Optional
@@ -320,6 +324,18 @@ type FleetSpotOptionsInitParameters struct {
 
 	// Nested argument containing maintenance strategies for managing your Spot Instances that are at an elevated risk of being interrupted. Defined below.
 	MaintenanceStrategies *MaintenanceStrategiesInitParameters `json:"maintenanceStrategies,omitempty" tf:"maintenance_strategies,omitempty"`
+
+	// The maximum amount per hour for Spot Instances that you're willing to pay.
+	MaxTotalPrice *string `json:"maxTotalPrice,omitempty" tf:"max_total_price,omitempty"`
+
+	// The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant.
+	MinTargetCapacity *float64 `json:"minTargetCapacity,omitempty" tf:"min_target_capacity,omitempty"`
+
+	// Indicates that the fleet launches all Spot Instances into a single Availability Zone. Supported only for fleets of type instant.
+	SingleAvailabilityZone *bool `json:"singleAvailabilityZone,omitempty" tf:"single_availability_zone,omitempty"`
+
+	// Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet. Supported only for fleets of type instant.
+	SingleInstanceType *bool `json:"singleInstanceType,omitempty" tf:"single_instance_type,omitempty"`
 }
 
 type FleetSpotOptionsObservation struct {
@@ -335,6 +351,18 @@ type FleetSpotOptionsObservation struct {
 
 	// Nested argument containing maintenance strategies for managing your Spot Instances that are at an elevated risk of being interrupted. Defined below.
 	MaintenanceStrategies *MaintenanceStrategiesObservation `json:"maintenanceStrategies,omitempty" tf:"maintenance_strategies,omitempty"`
+
+	// The maximum amount per hour for Spot Instances that you're willing to pay.
+	MaxTotalPrice *string `json:"maxTotalPrice,omitempty" tf:"max_total_price,omitempty"`
+
+	// The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant.
+	MinTargetCapacity *float64 `json:"minTargetCapacity,omitempty" tf:"min_target_capacity,omitempty"`
+
+	// Indicates that the fleet launches all Spot Instances into a single Availability Zone. Supported only for fleets of type instant.
+	SingleAvailabilityZone *bool `json:"singleAvailabilityZone,omitempty" tf:"single_availability_zone,omitempty"`
+
+	// Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet. Supported only for fleets of type instant.
+	SingleInstanceType *bool `json:"singleInstanceType,omitempty" tf:"single_instance_type,omitempty"`
 }
 
 type FleetSpotOptionsParameters struct {
@@ -354,6 +382,22 @@ type FleetSpotOptionsParameters struct {
 	// Nested argument containing maintenance strategies for managing your Spot Instances that are at an elevated risk of being interrupted. Defined below.
 	// +kubebuilder:validation:Optional
 	MaintenanceStrategies *MaintenanceStrategiesParameters `json:"maintenanceStrategies,omitempty" tf:"maintenance_strategies,omitempty"`
+
+	// The maximum amount per hour for Spot Instances that you're willing to pay.
+	// +kubebuilder:validation:Optional
+	MaxTotalPrice *string `json:"maxTotalPrice,omitempty" tf:"max_total_price,omitempty"`
+
+	// The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant.
+	// +kubebuilder:validation:Optional
+	MinTargetCapacity *float64 `json:"minTargetCapacity,omitempty" tf:"min_target_capacity,omitempty"`
+
+	// Indicates that the fleet launches all Spot Instances into a single Availability Zone. Supported only for fleets of type instant.
+	// +kubebuilder:validation:Optional
+	SingleAvailabilityZone *bool `json:"singleAvailabilityZone,omitempty" tf:"single_availability_zone,omitempty"`
+
+	// Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet. Supported only for fleets of type instant.
+	// +kubebuilder:validation:Optional
+	SingleInstanceType *bool `json:"singleInstanceType,omitempty" tf:"single_instance_type,omitempty"`
 }
 
 type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {

@@ -165,8 +165,9 @@ spec:
                       as a primary private IP will be assiged to an ENI by default.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroups.
@@ -915,6 +916,11 @@ spec:
                       ENI. The total number of private IPs will be 1 + private_ips_count,
                       as a primary private IP will be assiged to an ENI by default.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroups:
                     description: List of security group IDs to assign to the ENI.
                     items:

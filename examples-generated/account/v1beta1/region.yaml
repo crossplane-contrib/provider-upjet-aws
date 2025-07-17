@@ -9,5 +9,4 @@ metadata:
 spec:
   forProvider:
     enabled: true
-    region: us-west-1
     regionName: ap-southeast-3

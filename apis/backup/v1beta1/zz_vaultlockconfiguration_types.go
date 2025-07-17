@@ -55,6 +55,10 @@ type VaultLockConfigurationObservation struct {
 
 	// The minimum retention period that the vault retains its recovery points.
 	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type VaultLockConfigurationParameters struct {
@@ -84,10 +88,10 @@ type VaultLockConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // VaultLockConfigurationSpec defines the desired state of VaultLockConfiguration

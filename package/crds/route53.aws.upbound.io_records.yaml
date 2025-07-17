@@ -1393,7 +1393,8 @@ spec:
                     properties:
                       type:
                         description: The record type. Valid values are A, AAAA, CAA,
-                          CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                          CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP,
+                          SVCB, TLSA, and TXT.
                         type: string
                     type: object
                   geolocationRoutingPolicy:
@@ -1625,11 +1626,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: |-
-                      An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
-                      Region is the region you'd like your resource to be created in.
-                    type: string
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
                       policies from one another. Required if using cidr_routing_policy,
@@ -1642,7 +1638,8 @@ spec:
                     type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
-                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                      DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA,
+                      and TXT.
                     type: string
                   weightedRoutingPolicy:
                     description: A block indicating a weighted routing policy. Conflicts
@@ -1730,8 +1727,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -1792,7 +1787,8 @@ spec:
                     properties:
                       type:
                         description: The record type. Valid values are A, AAAA, CAA,
-                          CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                          CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP,
+                          SVCB, TLSA, and TXT.
                         type: string
                     type: object
                   geolocationRoutingPolicy:
@@ -2029,7 +2025,8 @@ spec:
                     type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
-                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                      DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA,
+                      and TXT.
                     type: string
                   weightedRoutingPolicy:
                     description: A block indicating a weighted routing policy. Conflicts
@@ -2345,7 +2342,8 @@ spec:
                     properties:
                       type:
                         description: The record type. Valid values are A, AAAA, CAA,
-                          CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                          CNAME, DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP,
+                          SVCB, TLSA, and TXT.
                         type: string
                     type: object
                   fqdn:
@@ -2439,7 +2437,8 @@ spec:
                     type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
-                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                      DS, HTTPS, MX, NAPTR, NS, PTR, SOA, SPF, SRV, SSHFP, SVCB, TLSA,
+                      and TXT.
                     type: string
                   weightedRoutingPolicy:
                     description: A block indicating a weighted routing policy. Conflicts

@@ -87,10 +87,6 @@ spec:
                   name:
                     description: The friendly name to assign to the policy.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   skipDestroy:
                     description: If set to true, destroy will not delete the policy
                       and instead just remove the resource from state. This can be
@@ -109,8 +105,6 @@ spec:
                       BACKUP_POLICY, RESOURCE_CONTROL_POLICY (RCP), SERVICE_CONTROL_POLICY
                       (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

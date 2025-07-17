@@ -64,6 +64,10 @@ type RuleObservation struct {
 	// When a rule is shared with another AWS account, the account ID of the account that the rule is shared with.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
@@ -98,10 +102,10 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
@@ -135,7 +139,7 @@ type RuleParameters struct {
 
 type TargetIPInitParameters struct {
 
-	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	// One IPv4 address that you want to forward DNS queries to.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// One IPv6 address that you want to forward DNS queries to.
@@ -150,7 +154,7 @@ type TargetIPInitParameters struct {
 
 type TargetIPObservation struct {
 
-	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	// One IPv4 address that you want to forward DNS queries to.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// One IPv6 address that you want to forward DNS queries to.
@@ -165,7 +169,7 @@ type TargetIPObservation struct {
 
 type TargetIPParameters struct {
 
-	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	// One IPv4 address that you want to forward DNS queries to.
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 

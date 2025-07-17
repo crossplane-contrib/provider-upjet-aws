@@ -27,13 +27,16 @@ type TrafficPolicyInitParameters struct {
 
 type TrafficPolicyObservation struct {
 
+	// Amazon Resource Name (ARN) of the traffic policy.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Comment for the traffic policy.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Policy document. This is a JSON formatted string. For more information about building Route53 traffic policy documents, see the AWS Route53 Traffic Policy document format
 	Document *string `json:"document,omitempty" tf:"document,omitempty"`
 
-	// ID of the traffic policy
+	// ID of the traffic policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the traffic policy.
@@ -59,11 +62,6 @@ type TrafficPolicyParameters struct {
 	// Name of the traffic policy.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // TrafficPolicySpec defines the desired state of TrafficPolicy

@@ -118,11 +118,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
-
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	"aws_simpledb_domain": config.NameAsIdentifier,
+	// The S3 bucket lifecycle configuration resource should be imported using the bucket
+	"aws_s3_bucket_lifecycle_configuration": config.IdentifierFromProvider,
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
@@ -1916,54 +1913,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
 
-	// opsworks
-	//
-	// OpsWorks stacks can be imported using the id
-	"aws_opsworks_stack": config.IdentifierFromProvider,
-	// OpsWorks static web server Layers can be imported using the id
-	"aws_opsworks_static_web_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_user_profile": config.IdentifierFromProvider,
-	// OpsWorks Custom Layers can be imported using the id
-	"aws_opsworks_custom_layer": config.IdentifierFromProvider,
-	// Opsworks Application can be imported using the id
-	"aws_opsworks_application": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ecs_cluster_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ganglia_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_haproxy_layer": config.IdentifierFromProvider,
-	// Opsworks Instances can be imported using the instance id
-	"aws_opsworks_instance": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_java_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_memcached_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_mysql_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_nodejs_app_layer": config.IdentifierFromProvider,
-	// OpsWorks PHP Application Layers can be imported using the id
-	"aws_opsworks_php_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rails_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rds_db_instance": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_permission": config.IdentifierFromProvider,
-
 	// organizations
 	//
 	// imported by using the account id, which is provider-generated
@@ -2221,8 +2170,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// S3 bucket inventory configurations can be imported using bucket:inventory
 	// $ terraform import aws_s3_bucket_inventory.my-bucket-entire-bucket my-bucket:EntireBucket
 	"aws_s3_bucket_inventory": FormattedIdentifierFromProvider(":", "bucket", "name"),
-	// The S3 bucket lifecycle configuration resource should be imported using the bucket
-	"aws_s3_bucket_lifecycle_configuration": config.IdentifierFromProvider,
 	// The S3 bucket logging resource should be imported using the bucket
 	"aws_s3_bucket_logging": config.IdentifierFromProvider,
 	// S3 bucket metric configurations can be imported using bucket:metric

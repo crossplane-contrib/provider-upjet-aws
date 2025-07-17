@@ -156,9 +156,15 @@ spec:
                       name, such as auth.example.com. For Amazon Cognito prefix domains,
                       this is the prefix alone, such as auth.
                     type: string
+                  managedLoginVersion:
+                    description: 'A version number that indicates the state of managed
+                      login for your domain. Valid values: 1 for hosted UI (classic),
+                      2 for the newer managed login with the branding designer.'
+                    type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   userPoolId:
                     description: The user pool ID.
@@ -338,6 +344,11 @@ spec:
                       name, such as auth.example.com. For Amazon Cognito prefix domains,
                       this is the prefix alone, such as auth.
                     type: string
+                  managedLoginVersion:
+                    description: 'A version number that indicates the state of managed
+                      login for your domain. Valid values: 1 for hosted UI (classic),
+                      2 for the newer managed login with the branding designer.'
+                    type: number
                   userPoolId:
                     description: The user pool ID.
                     type: string
@@ -620,6 +631,16 @@ spec:
                       this is the prefix alone, such as auth.
                     type: string
                   id:
+                    type: string
+                  managedLoginVersion:
+                    description: 'A version number that indicates the state of managed
+                      login for your domain. Valid values: 1 for hosted UI (classic),
+                      2 for the newer managed login with the branding designer.'
+                    type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   s3Bucket:
                     description: The S3 bucket where the static files for this domain

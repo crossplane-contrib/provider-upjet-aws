@@ -199,6 +199,11 @@ func (in *ServiceQuotaObservation) DeepCopyInto(out *ServiceQuotaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RequestID != nil {
 		in, out := &in.RequestID, &out.RequestID
 		*out = new(string)

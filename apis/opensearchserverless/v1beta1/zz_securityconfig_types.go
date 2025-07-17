@@ -16,14 +16,18 @@ import (
 type SAMLOptionsInitParameters struct {
 
 	// Group attribute for this SAML integration.
+	// Group attribute for this SAML integration.
 	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
 
+	// The XML IdP metadata file generated from your identity provider.
 	// The XML IdP metadata file generated from your identity provider.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
+	// Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
+	// User attribute for this SAML integration.
 	// User attribute for this SAML integration.
 	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
 }
@@ -31,14 +35,18 @@ type SAMLOptionsInitParameters struct {
 type SAMLOptionsObservation struct {
 
 	// Group attribute for this SAML integration.
+	// Group attribute for this SAML integration.
 	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
 
+	// The XML IdP metadata file generated from your identity provider.
 	// The XML IdP metadata file generated from your identity provider.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
+	// Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
+	// User attribute for this SAML integration.
 	// User attribute for this SAML integration.
 	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
 }
@@ -46,17 +54,21 @@ type SAMLOptionsObservation struct {
 type SAMLOptionsParameters struct {
 
 	// Group attribute for this SAML integration.
+	// Group attribute for this SAML integration.
 	// +kubebuilder:validation:Optional
 	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
 
+	// The XML IdP metadata file generated from your identity provider.
 	// The XML IdP metadata file generated from your identity provider.
 	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata" tf:"metadata,omitempty"`
 
 	// Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
+	// Session timeout, in minutes. Minimum is 5 minutes and maximum is 720 minutes (12 hours). Default is 60 minutes.
 	// +kubebuilder:validation:Optional
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
+	// User attribute for this SAML integration.
 	// User attribute for this SAML integration.
 	// +kubebuilder:validation:Optional
 	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
@@ -64,6 +76,7 @@ type SAMLOptionsParameters struct {
 
 type SecurityConfigInitParameters struct {
 
+	// Description of the security configuration.
 	// Description of the security configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -74,36 +87,45 @@ type SecurityConfigInitParameters struct {
 type SecurityConfigObservation struct {
 
 	// Version of the configuration.
+	// Version of the configuration.
 	ConfigVersion *string `json:"configVersion,omitempty" tf:"config_version,omitempty"`
 
+	// Description of the security configuration.
 	// Description of the security configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for SAML options.
 	SAMLOptions *SAMLOptionsObservation `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 
 	// Type of configuration. Must be saml.
+	// Type of configuration. Must be `saml`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SecurityConfigParameters struct {
 
 	// Description of the security configuration.
+	// Description of the security configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for SAML options.
 	// +kubebuilder:validation:Optional
 	SAMLOptions *SAMLOptionsParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 
 	// Type of configuration. Must be saml.
+	// Type of configuration. Must be `saml`.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -144,9 +166,8 @@ type SecurityConfigStatus struct {
 type SecurityConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.samlOptions) || (has(self.initProvider) && has(self.initProvider.samlOptions))",message="spec.forProvider.samlOptions is a required parameter"
-	Spec   SecurityConfigSpec   `json:"spec"`
-	Status SecurityConfigStatus `json:"status,omitempty"`
+	Spec              SecurityConfigSpec   `json:"spec"`
+	Status            SecurityConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
