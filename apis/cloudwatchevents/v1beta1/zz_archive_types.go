@@ -15,13 +15,13 @@ import (
 
 type ArchiveInitParameters struct {
 
-	// The description of the new event archive.
+	// Description for the archive.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Instructs the new event archive to only capture events matched by this pattern. By default, it attempts to archive every event received in the event_source_arn.
+	// Event pattern to use to filter events sent to the archive. By default, it attempts to archive every event received in the event_source_arn.
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
-	// Event bus source ARN from where these events should be archived.
+	// ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
@@ -40,16 +40,16 @@ type ArchiveInitParameters struct {
 
 type ArchiveObservation struct {
 
-	// The Amazon Resource Name (ARN) of the event archive.
+	// ARN of the archive.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description of the new event archive.
+	// Description for the archive.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Instructs the new event archive to only capture events matched by this pattern. By default, it attempts to archive every event received in the event_source_arn.
+	// Event pattern to use to filter events sent to the archive. By default, it attempts to archive every event received in the event_source_arn.
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
-	// Event bus source ARN from where these events should be archived.
+	// ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -64,15 +64,15 @@ type ArchiveObservation struct {
 
 type ArchiveParameters struct {
 
-	// The description of the new event archive.
+	// Description for the archive.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Instructs the new event archive to only capture events matched by this pattern. By default, it attempts to archive every event received in the event_source_arn.
+	// Event pattern to use to filter events sent to the archive. By default, it attempts to archive every event received in the event_source_arn.
 	// +kubebuilder:validation:Optional
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
-	// Event bus source ARN from where these events should be archived.
+	// ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

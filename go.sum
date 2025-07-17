@@ -875,8 +875,8 @@ github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOf
 github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
-github.com/turkenf/terraform-provider-aws v0.0.0-20250703202135-a6842cebbb02 h1:dAWxUxHteqLL8aR/LfnEiB+duGGUPPdZZ5+hUkDoWqU=
-github.com/turkenf/terraform-provider-aws v0.0.0-20250703202135-a6842cebbb02/go.mod h1:jG6IzKLM9Y+NOKBqop4ZrPV/df/zvYIyGrPUWnvri/4=
+github.com/turkenf/terraform-provider-aws v0.0.0-20250717192126-a1f654af5b42 h1:Bb5++DXGqvZVpP8v8BOARkl15Sp36ph+4dIQ+tDjBFY=
+github.com/turkenf/terraform-provider-aws v0.0.0-20250717192126-a1f654af5b42/go.mod h1:jG6IzKLM9Y+NOKBqop4ZrPV/df/zvYIyGrPUWnvri/4=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=

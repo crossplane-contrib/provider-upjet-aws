@@ -74,16 +74,16 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the new event archive.
+                    description: Description for the archive.
                     type: string
                   eventPattern:
-                    description: Instructs the new event archive to only capture events
-                      matched by this pattern. By default, it attempts to archive
-                      every event received in the event_source_arn.
+                    description: Event pattern to use to filter events sent to the
+                      archive. By default, it attempts to archive every event received
+                      in the event_source_arn.
                     type: string
                   eventSourceArn:
-                    description: Event bus source ARN from where these events should
-                      be archived.
+                    description: ARN of the event bus associated with the archive.
+                      Only events from this event bus are sent to the archive.
                     type: string
                   eventSourceArnRef:
                     description: Reference to a Bus in cloudwatchevents to populate
@@ -187,16 +187,16 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the new event archive.
+                    description: Description for the archive.
                     type: string
                   eventPattern:
-                    description: Instructs the new event archive to only capture events
-                      matched by this pattern. By default, it attempts to archive
-                      every event received in the event_source_arn.
+                    description: Event pattern to use to filter events sent to the
+                      archive. By default, it attempts to archive every event received
+                      in the event_source_arn.
                     type: string
                   eventSourceArn:
-                    description: Event bus source ARN from where these events should
-                      be archived.
+                    description: ARN of the event bus associated with the archive.
+                      Only events from this event bus are sent to the archive.
                     type: string
                   eventSourceArnRef:
                     description: Reference to a Bus in cloudwatchevents to populate
@@ -452,19 +452,19 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the event archive.
+                    description: ARN of the archive.
                     type: string
                   description:
-                    description: The description of the new event archive.
+                    description: Description for the archive.
                     type: string
                   eventPattern:
-                    description: Instructs the new event archive to only capture events
-                      matched by this pattern. By default, it attempts to archive
-                      every event received in the event_source_arn.
+                    description: Event pattern to use to filter events sent to the
+                      archive. By default, it attempts to archive every event received
+                      in the event_source_arn.
                     type: string
                   eventSourceArn:
-                    description: Event bus source ARN from where these events should
-                      be archived.
+                    description: ARN of the event bus associated with the archive.
+                      Only events from this event bus are sent to the archive.
                     type: string
                   id:
                     type: string
