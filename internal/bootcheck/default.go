@@ -1,6 +1,10 @@
 //go:build !custombootcheck
 // +build !custombootcheck
 
+// SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 package bootcheck
 
 func CheckEnv() error {
