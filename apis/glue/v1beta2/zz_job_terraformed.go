@@ -21,7 +21,7 @@ func (mg *Job) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Job
 func (tr *Job) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"source_control_details[*].auth_token": "sourceControlDetails[*].authTokenSecretRef"}
+	return map[string]string{"source_control_details[*].auth_token": "sourceControlDetails.authTokenSecretRef"}
 }
 
 // GetObservation of this Job
