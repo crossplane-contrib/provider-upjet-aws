@@ -21,7 +21,7 @@ func (mg *DeliveryStream) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this DeliveryStream
 func (tr *DeliveryStream) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"http_endpoint_configuration[*].access_key": "httpEndpointConfiguration[*].accessKeySecretRef", "redshift_configuration[*].password": "redshiftConfiguration[*].passwordSecretRef", "snowflake_configuration[*].key_passphrase": "snowflakeConfiguration[*].keyPassphraseSecretRef", "snowflake_configuration[*].private_key": "snowflakeConfiguration[*].privateKeySecretRef", "splunk_configuration[*].hec_token": "splunkConfiguration[*].hecTokenSecretRef"}
+	return map[string]string{"http_endpoint_configuration[*].access_key": "httpEndpointConfiguration.accessKeySecretRef", "redshift_configuration[*].password": "redshiftConfiguration.passwordSecretRef", "snowflake_configuration[*].key_passphrase": "snowflakeConfiguration.keyPassphraseSecretRef", "snowflake_configuration[*].private_key": "snowflakeConfiguration.privateKeySecretRef", "splunk_configuration[*].hec_token": "splunkConfiguration.hecTokenSecretRef"}
 }
 
 // GetObservation of this DeliveryStream
