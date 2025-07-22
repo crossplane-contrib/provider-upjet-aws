@@ -559,6 +559,10 @@ type TableObservation struct {
 	// Number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	Replica []TableReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 
@@ -685,9 +689,8 @@ type TableParameters struct {
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	// +kubebuilder:validation:Optional

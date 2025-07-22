@@ -1143,6 +1143,11 @@ spec:
                     description: Number of read units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replica:
                     description: Configuration block(s) with DynamoDB Global Tables
                       V2 (version 2019.11.21) replication configurations. See below.
