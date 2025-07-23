@@ -33343,6 +33343,11 @@ func (in *RouteObservation_2) DeepCopyInto(out *RouteObservation_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RouteTableID != nil {
 		in, out := &in.RouteTableID, &out.RouteTableID
 		*out = new(string)

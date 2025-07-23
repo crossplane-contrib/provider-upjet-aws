@@ -409,6 +409,10 @@ type ClusterObservation struct {
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See below.
 	OpenMonitoring []OpenMonitoringObservation `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Controls storage mode for supported storage tiers. Valid values are: LOCAL or TIERED.
 	StorageMode *string `json:"storageMode,omitempty" tf:"storage_mode,omitempty"`
 
@@ -469,10 +473,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	OpenMonitoring []OpenMonitoringParameters `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Controls storage mode for supported storage tiers. Valid values are: LOCAL or TIERED.
 	// +kubebuilder:validation:Optional

@@ -2936,6 +2936,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReaderEndpointAddress != nil {
 		in, out := &in.ReaderEndpointAddress, &out.ReaderEndpointAddress
 		*out = new(string)

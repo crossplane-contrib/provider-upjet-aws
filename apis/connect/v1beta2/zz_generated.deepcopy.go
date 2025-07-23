@@ -761,6 +761,11 @@ func (in *HoursOfOperationObservation) DeepCopyInto(out *HoursOfOperationObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2575,6 +2580,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status

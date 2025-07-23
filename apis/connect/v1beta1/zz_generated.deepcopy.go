@@ -1493,6 +1493,11 @@ func (in *HoursOfOperationObservation) DeepCopyInto(out *HoursOfOperationObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -4338,6 +4343,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -5160,6 +5170,11 @@ func (in *RoutingProfileObservation) DeepCopyInto(out *RoutingProfileObservation
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RoutingProfileID != nil {
 		in, out := &in.RoutingProfileID, &out.RoutingProfileID
