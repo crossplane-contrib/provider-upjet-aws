@@ -126,12 +126,6 @@ spec:
                   name:
                     description: The name or description of the Byte Match Set.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -377,6 +371,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: Amazon Resource Name (ARN) of the byte match set.
+                    type: string
                   byteMatchTuples:
                     description: |-
                       Specifies the bytes (typically a string that corresponds

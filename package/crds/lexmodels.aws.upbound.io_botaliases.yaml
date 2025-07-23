@@ -125,8 +125,9 @@ spec:
                       equal to 200 characters in length.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -448,6 +449,11 @@ spec:
                     description: The date that the bot alias was updated. When you
                       create a resource, the creation date and the last updated date
                       are the same.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

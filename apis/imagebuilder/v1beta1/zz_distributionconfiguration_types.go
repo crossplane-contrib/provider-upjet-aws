@@ -197,6 +197,10 @@ type DistributionConfigurationObservation struct {
 	// Name of the distribution configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -220,11 +224,10 @@ type DistributionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// AWS Region for the distribution.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -252,6 +255,9 @@ type DistributionInitParameters struct {
 
 	// Configuration block with S3 export settings. Detailed below.
 	S3ExportConfiguration []S3ExportConfigurationInitParameters `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
+
+	// Configuration block with SSM parameter configuration to use as AMI id output. Detailed below.
+	SsmParameterConfiguration []SsmParameterConfigurationInitParameters `json:"ssmParameterConfiguration,omitempty" tf:"ssm_parameter_configuration,omitempty"`
 }
 
 type DistributionObservation struct {
@@ -277,6 +283,9 @@ type DistributionObservation struct {
 
 	// Configuration block with S3 export settings. Detailed below.
 	S3ExportConfiguration []S3ExportConfigurationObservation `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
+
+	// Configuration block with SSM parameter configuration to use as AMI id output. Detailed below.
+	SsmParameterConfiguration []SsmParameterConfigurationObservation `json:"ssmParameterConfiguration,omitempty" tf:"ssm_parameter_configuration,omitempty"`
 }
 
 type DistributionParameters struct {
@@ -309,6 +318,10 @@ type DistributionParameters struct {
 	// Configuration block with S3 export settings. Detailed below.
 	// +kubebuilder:validation:Optional
 	S3ExportConfiguration []S3ExportConfigurationParameters `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
+
+	// Configuration block with SSM parameter configuration to use as AMI id output. Detailed below.
+	// +kubebuilder:validation:Optional
+	SsmParameterConfiguration []SsmParameterConfigurationParameters `json:"ssmParameterConfiguration,omitempty" tf:"ssm_parameter_configuration,omitempty"`
 }
 
 type FastLaunchConfigurationInitParameters struct {
@@ -575,6 +588,45 @@ type SnapshotConfigurationParameters struct {
 	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
 	// +kubebuilder:validation:Optional
 	TargetResourceCount *float64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
+}
+
+type SsmParameterConfigurationInitParameters struct {
+
+	// AWS account ID that will own the parameter in the given region. This account must be specified as a target account in the distribution settings.
+	AMIAccountID *string `json:"amiAccountId,omitempty" tf:"ami_account_id,omitempty"`
+
+	// Data type of the SSM parameter. Valid values are text and aws:ec2:image. AWS recommends using aws:ec2:image.
+	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
+
+	// Name of the SSM parameter that will store the AMI ID after distribution.
+	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+}
+
+type SsmParameterConfigurationObservation struct {
+
+	// AWS account ID that will own the parameter in the given region. This account must be specified as a target account in the distribution settings.
+	AMIAccountID *string `json:"amiAccountId,omitempty" tf:"ami_account_id,omitempty"`
+
+	// Data type of the SSM parameter. Valid values are text and aws:ec2:image. AWS recommends using aws:ec2:image.
+	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
+
+	// Name of the SSM parameter that will store the AMI ID after distribution.
+	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+}
+
+type SsmParameterConfigurationParameters struct {
+
+	// AWS account ID that will own the parameter in the given region. This account must be specified as a target account in the distribution settings.
+	// +kubebuilder:validation:Optional
+	AMIAccountID *string `json:"amiAccountId,omitempty" tf:"ami_account_id,omitempty"`
+
+	// Data type of the SSM parameter. Valid values are text and aws:ec2:image. AWS recommends using aws:ec2:image.
+	// +kubebuilder:validation:Optional
+	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
+
+	// Name of the SSM parameter that will store the AMI ID after distribution.
+	// +kubebuilder:validation:Optional
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 }
 
 // DistributionConfigurationSpec defines the desired state of DistributionConfiguration

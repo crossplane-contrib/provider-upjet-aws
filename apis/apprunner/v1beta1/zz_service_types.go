@@ -651,6 +651,10 @@ type ServiceObservation struct {
 	// The observability configuration of your service. See Observability Configuration below for more details.
 	ObservabilityConfiguration []ServiceObservabilityConfigurationObservation `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// An alphanumeric ID that App Runner generated for this service. Unique within the AWS Region.
 	ServiceID *string `json:"serviceId,omitempty" tf:"service_id,omitempty"`
 
@@ -701,10 +705,10 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ObservabilityConfiguration []ServiceObservabilityConfigurationParameters `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// (Forces new resource) Name of the service.
 	// +kubebuilder:validation:Optional

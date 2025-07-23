@@ -207,10 +207,6 @@ spec:
                   name:
                     description: The name or description of the web ACL.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   rules:
                     description: Configuration blocks containing rules to associate
                       with the web ACL and the settings for each rule. Detailed below.
@@ -336,8 +332,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

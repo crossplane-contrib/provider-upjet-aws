@@ -24,6 +24,9 @@ type SQLInjectionMatchSetInitParameters struct {
 
 type SQLInjectionMatchSetObservation struct {
 
+	// Amazon Resource Name (ARN) of the SQL injection match set.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The ID of the WAF SQL Injection Match Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -39,11 +42,6 @@ type SQLInjectionMatchSetParameters struct {
 	// The name or description of the SQL Injection Match Set.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 
 	// The parts of web requests that you want AWS WAF to inspect for malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.
 	// +kubebuilder:validation:Optional

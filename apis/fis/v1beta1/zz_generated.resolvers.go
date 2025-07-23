@@ -9,6 +9,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -25,12 +26,62 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExperimentReportConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta1", "Dashboard", "DashboardList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArn),
+						Extract:      resource.ExtractParamPath("dashboard_arn", true),
+						Reference:    mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArnRef,
+						Selector:     mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArn")
+				}
+				mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExperimentReportConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketName")
+				}
+				mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
@@ -44,12 +95,62 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExperimentReportConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta1", "Dashboard", "DashboardList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArn),
+						Extract:      resource.ExtractParamPath("dashboard_arn", true),
+						Reference:    mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArnRef,
+						Selector:     mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArn")
+				}
+				mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.ExperimentReportConfiguration[i3].DataSources[i4].CloudwatchDashboard[i5].DashboardArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExperimentReportConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketNameRef,
+						Selector:     mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketName")
+				}
+				mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.ExperimentReportConfiguration[i3].Outputs[i4].S3Configuration[i5].BucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),

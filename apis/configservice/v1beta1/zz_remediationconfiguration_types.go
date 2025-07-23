@@ -130,6 +130,10 @@ type RemediationConfigurationObservation struct {
 	// Can be specified multiple times for each parameter. Each parameter block supports arguments below.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Type of resource.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
@@ -164,10 +168,10 @@ type RemediationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Type of resource.
 	// +kubebuilder:validation:Optional

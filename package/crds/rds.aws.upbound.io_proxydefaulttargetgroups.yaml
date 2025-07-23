@@ -120,7 +120,8 @@ spec:
                             in a session using a proxy to be pinned to the same underlying
                             database connection. Including an item in the list exempts
                             that class of SQL operations from the pinning behavior.
-                            Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
+                            This setting is only supported for MySQL engine family
+                            databases. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
                           items:
                             type: string
                           type: array
@@ -205,8 +206,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -270,7 +272,8 @@ spec:
                             in a session using a proxy to be pinned to the same underlying
                             database connection. Including an item in the list exempts
                             that class of SQL operations from the pinning behavior.
-                            Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
+                            This setting is only supported for MySQL engine family
+                            databases. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
                           items:
                             type: string
                           type: array
@@ -578,7 +581,8 @@ spec:
                             in a session using a proxy to be pinned to the same underlying
                             database connection. Including an item in the list exempts
                             that class of SQL operations from the pinning behavior.
-                            Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
+                            This setting is only supported for MySQL engine family
+                            databases. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
                           items:
                             type: string
                           type: array
@@ -593,6 +597,11 @@ spec:
                     type: string
                   name:
                     description: The name of the default target group.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

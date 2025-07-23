@@ -280,6 +280,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationFactor != nil {
 		in, out := &in.ReplicationFactor, &out.ReplicationFactor
 		*out = new(float64)

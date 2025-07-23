@@ -74,9 +74,9 @@ spec:
               forProvider:
                 properties:
                   containerProperties:
-                    description: A valid container properties provided as a single
-                      valid JSON document. This parameter is only valid if the type
-                      parameter is container.
+                    description: Valid container properties provided as a single valid
+                      JSON document. This parameter is only valid if the type parameter
+                      is container.
                     type: string
                   deregisterOnNewRevision:
                     description: When updating a job definition a new revision is
@@ -89,22 +89,22 @@ spec:
                       is container.
                     type: string
                   eksProperties:
-                    description: A valid eks properties. This parameter is only valid
+                    description: Valid eks properties. This parameter is only valid
                       if the type parameter is container.
                     items:
                       properties:
                         podProperties:
-                          description: The properties for the Kubernetes pod resources
+                          description: Properties for the Kubernetes pod resources
                             of a job. See pod_properties below.
                           items:
                             properties:
                               containers:
-                                description: The properties of the container that's
-                                  used on the Amazon EKS pod. See containers below.
+                                description: Properties of the container that's used
+                                  on the Amazon EKS pod. See containers below.
                                 items:
                                   properties:
                                     args:
-                                      description: An array of arguments to the entrypoint.
+                                      description: Array of arguments to the entrypoint.
                                         If this isn't specified, the CMD of the container
                                         image is used. This corresponds to the args
                                         member in the Entrypoint portion of the Pod
@@ -114,47 +114,46 @@ spec:
                                         type: string
                                       type: array
                                     command:
-                                      description: The entrypoint for the container.
-                                        This isn't run within a shell. If this isn't
-                                        specified, the ENTRYPOINT of the container
-                                        image is used. Environment variable references
-                                        are expanded using the container's environment.
+                                      description: Entrypoint for the container. This
+                                        isn't run within a shell. If this isn't specified,
+                                        the ENTRYPOINT of the container image is used.
+                                        Environment variable references are expanded
+                                        using the container's environment.
                                       items:
                                         type: string
                                       type: array
                                     env:
-                                      description: The environment variables to pass
-                                        to a container. See EKS Environment below.
+                                      description: Environment variables to pass to
+                                        a container. See EKS Environment below.
                                       items:
                                         properties:
                                           name:
-                                            description: Specifies the name of the
-                                              job definition.
+                                            description: Name of the job definition.
                                             type: string
                                           value:
-                                            description: The value of the environment
+                                            description: Value of the environment
                                               variable.
                                             type: string
                                         type: object
                                       type: array
                                     image:
-                                      description: The Docker image used to start
-                                        the container.
+                                      description: Docker image used to start the
+                                        container.
                                       type: string
                                     imagePullPolicy:
-                                      description: The image pull policy for the container.
+                                      description: Image pull policy for the container.
                                         Supported values are Always, IfNotPresent,
                                         and Never.
                                       type: string
                                     name:
-                                      description: The name of the container. If the
-                                        name isn't specified, the default name "Default"
+                                      description: Name of the container. If the name
+                                        isn't specified, the default name "Default"
                                         is used. Each container in a pod must have
                                         a unique name.
                                       type: string
                                     resources:
-                                      description: The type and amount of resources
-                                        to assign to a container. The supported resources
+                                      description: Type and amount of resources to
+                                        assign to a container. The supported resources
                                         include memory, cpu, and nvidia.com/gpu.
                                       items:
                                         properties:
@@ -171,7 +170,7 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: The security context for a job.
+                                      description: Security context for a job.
                                       items:
                                         properties:
                                           privileged:
@@ -187,17 +186,16 @@ spec:
                                         type: object
                                       type: array
                                     volumeMounts:
-                                      description: The volume mounts for the container.
+                                      description: Volume mounts for the container.
                                       items:
                                         properties:
                                           mountPath:
-                                            description: The path of the file or directory
+                                            description: Path of the file or directory
                                               on the host to mount into containers
                                               on the pod.
                                             type: string
                                           name:
-                                            description: Specifies the name of the
-                                              job definition.
+                                            description: Name of the job definition.
                                             type: string
                                           readOnly:
                                             type: boolean
@@ -206,9 +204,9 @@ spec:
                                   type: object
                                 type: array
                               dnsPolicy:
-                                description: The DNS policy for the pod. The default
-                                  value is ClusterFirst. If the host_network argument
-                                  is not specified, the default is ClusterFirstWithHostNet.
+                                description: DNS policy for the pod. The default value
+                                  is ClusterFirst. If the host_network argument is
+                                  not specified, the default is ClusterFirstWithHostNet.
                                   ClusterFirst indicates that any DNS query that does
                                   not match the configured cluster domain suffix is
                                   forwarded to the upstream nameserver inherited from
@@ -216,12 +214,12 @@ spec:
                                   in the Kubernetes documentation.
                                 type: string
                               hostNetwork:
-                                description: Indicates if the pod uses the hosts'
-                                  network IP address. The default value is true. Setting
-                                  this to false enables the Kubernetes pod networking
-                                  model. Most AWS Batch workloads are egress-only
-                                  and don't require the overhead of IP allocation
-                                  for each pod for incoming connections.
+                                description: Whether the pod uses the hosts' network
+                                  IP address. The default value is true. Setting this
+                                  to false enables the Kubernetes pod networking model.
+                                  Most AWS Batch workloads are egress-only and don't
+                                  require the overhead of IP allocation for each pod
+                                  for incoming connections.
                                 type: boolean
                               imagePullSecret:
                                 description: List of Kubernetes secret resources.
@@ -347,13 +345,15 @@ spec:
                                     labels:
                                       additionalProperties:
                                         type: string
+                                      description: Key-value pairs used to identify,
+                                        sort, and organize cube resources.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               serviceAccountName:
-                                description: The name of the service account that's
-                                  used to run the pod.
+                                description: Name of the service account that's used
+                                  to run the pod.
                                 type: string
                               shareProcessNamespace:
                                 description: Indicates if the processes in a container
@@ -361,53 +361,51 @@ spec:
                                   same pod.
                                 type: boolean
                               volumes:
-                                description: Specifies the volumes for a job definition
-                                  that uses Amazon EKS resources. AWS Batch supports
-                                  emptyDir, hostPath, and secret volume types.
+                                description: Volumes for a job definition that uses
+                                  Amazon EKS resources. AWS Batch supports emptyDir,
+                                  hostPath, and secret volume types.
                                 items:
                                   properties:
                                     emptyDir:
                                       items:
                                         properties:
                                           medium:
-                                            description: The medium to store the volume.
+                                            description: Medium to store the volume.
                                               The default value is an empty string,
                                               which uses the storage of the node.
                                             type: string
                                           sizeLimit:
-                                            description: The maximum size of the volume.
+                                            description: Maximum size of the volume.
                                               By default, there's no maximum size
                                               defined.
                                             type: string
                                         type: object
                                       type: array
                                     hostPath:
-                                      description: The path of the file or directory
-                                        on the host to mount into containers on the
-                                        pod.
+                                      description: Path of the file or directory on
+                                        the host to mount into containers on the pod.
                                       items:
                                         properties:
                                           path:
-                                            description: The path of the file or directory
+                                            description: Path of the file or directory
                                               on the host to mount into containers
                                               on the pod.
                                             type: string
                                         type: object
                                       type: array
                                     name:
-                                      description: Specifies the name of the job definition.
+                                      description: Name of the job definition.
                                       type: string
                                     secret:
                                       items:
                                         properties:
                                           optional:
-                                            description: Specifies whether the secret
-                                              or the secret's keys must be defined.
+                                            description: Whether the secret or the
+                                              secret's keys must be defined.
                                             type: boolean
                                           secretName:
-                                            description: The name of the secret. The
-                                              name must be allowed as a DNS subdomain
-                                              name.
+                                            description: Name of the secret. The name
+                                              must be allowed as a DNS subdomain name.
                                             type: string
                                         type: object
                                       type: array
@@ -418,22 +416,22 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: Specifies the name of the job definition.
+                    description: Name of the job definition.
                     type: string
                   nodeProperties:
-                    description: A valid node properties provided as a single valid
+                    description: Valid node properties provided as a single valid
                       JSON document. This parameter is required if the type parameter
                       is multinode.
                     type: string
                   parameters:
                     additionalProperties:
                       type: string
-                    description: Specifies the parameter substitution placeholders
-                      to set in the job definition.
+                    description: Parameter substitution placeholders to set in the
+                      job definition.
                     type: object
                     x-kubernetes-map-type: granular
                   platformCapabilities:
-                    description: The platform capabilities required by the job definition.
+                    description: Platform capabilities required by the job definition.
                       If no value is specified, it defaults to EC2. To run the job
                       on Fargate resources, specify FARGATE.
                     items:
@@ -441,46 +439,46 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   propagateTags:
-                    description: Specifies whether to propagate the tags from the
-                      job definition to the corresponding Amazon ECS task. Default
-                      is false.
+                    description: Whether to propagate the tags from the job definition
+                      to the corresponding Amazon ECS task. Default is false.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retryStrategy:
-                    description: Specifies the retry strategy to use for failed jobs
-                      that are submitted with this job definition. Maximum number
-                      of retry_strategy is 1.  Defined below.
+                    description: Retry strategy to use for failed jobs that are submitted
+                      with this job definition. Maximum number of retry_strategy is
+                      1.  Defined below.
                     items:
                       properties:
                         attempts:
-                          description: The number of times to move a job to the RUNNABLE
+                          description: Number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
                           type: number
                         evaluateOnExit:
-                          description: The evaluate on exit conditions under which
-                            the job should be retried or failed. If this parameter
-                            is specified, then the attempts parameter must also be
-                            specified. You may specify up to 5 configuration blocks.
+                          description: Evaluate on exit conditions under which the
+                            job should be retried or failed. If this parameter is
+                            specified, then the attempts parameter must also be specified.
+                            You may specify up to 5 configuration blocks.
                           items:
                             properties:
                               action:
-                                description: 'Specifies the action to take if all
-                                  of the specified conditions are met. The values
-                                  are not case sensitive. Valid values: retry, exit.'
+                                description: 'Action to take if all of the specified
+                                  conditions are met. The values are not case sensitive.
+                                  Valid values: retry, exit.'
                                 type: string
                               onExitCode:
-                                description: A glob pattern to match against the decimal
+                                description: Glob pattern to match against the decimal
                                   representation of the exit code returned for a job.
                                 type: string
                               onReason:
-                                description: A glob pattern to match against the reason
+                                description: Glob pattern to match against the reason
                                   returned for a job.
                                 type: string
                               onStatusReason:
-                                description: A glob pattern to match against the status
+                                description: Glob pattern to match against the status
                                   reason returned for a job.
                                 type: string
                             type: object
@@ -488,10 +486,10 @@ spec:
                       type: object
                     type: array
                   schedulingPriority:
-                    description: The scheduling priority of the job definition. This
-                      only affects jobs in job queues with a fair share policy. Jobs
-                      with a higher scheduling priority are scheduled before jobs
-                      with a lower scheduling priority. Allowed values 0 through 9999.
+                    description: Scheduling priority of the job definition. This only
+                      affects jobs in job queues with a fair share policy. Jobs with
+                      a higher scheduling priority are scheduled before jobs with
+                      a lower scheduling priority. Allowed values 0 through 9999.
                     type: number
                   tags:
                     additionalProperties:
@@ -500,21 +498,20 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: Specifies the timeout for jobs so that if a job runs
-                      longer, AWS Batch terminates the job. Maximum number of timeout
-                      is 1. Defined below.
+                    description: Timeout for jobs so that if a job runs longer, AWS
+                      Batch terminates the job. Maximum number of timeout is 1. Defined
+                      below.
                     items:
                       properties:
                         attemptDurationSeconds:
-                          description: The time duration in seconds after which AWS
-                            Batch terminates your jobs if they have not finished.
-                            The minimum value for the timeout is 60 seconds.
+                          description: Time duration in seconds after which AWS Batch
+                            terminates your jobs if they have not finished. The minimum
+                            value for the timeout is 60 seconds.
                           type: number
                       type: object
                     type: array
                   type:
-                    description: The type of job definition. Must be container or
-                      multinode.
+                    description: Type of job definition. Must be container or multinode.
                     type: string
                 required:
                 - region
@@ -533,9 +530,9 @@ spec:
                   autoscaler.
                 properties:
                   containerProperties:
-                    description: A valid container properties provided as a single
-                      valid JSON document. This parameter is only valid if the type
-                      parameter is container.
+                    description: Valid container properties provided as a single valid
+                      JSON document. This parameter is only valid if the type parameter
+                      is container.
                     type: string
                   deregisterOnNewRevision:
                     description: When updating a job definition a new revision is
@@ -548,22 +545,22 @@ spec:
                       is container.
                     type: string
                   eksProperties:
-                    description: A valid eks properties. This parameter is only valid
+                    description: Valid eks properties. This parameter is only valid
                       if the type parameter is container.
                     items:
                       properties:
                         podProperties:
-                          description: The properties for the Kubernetes pod resources
+                          description: Properties for the Kubernetes pod resources
                             of a job. See pod_properties below.
                           items:
                             properties:
                               containers:
-                                description: The properties of the container that's
-                                  used on the Amazon EKS pod. See containers below.
+                                description: Properties of the container that's used
+                                  on the Amazon EKS pod. See containers below.
                                 items:
                                   properties:
                                     args:
-                                      description: An array of arguments to the entrypoint.
+                                      description: Array of arguments to the entrypoint.
                                         If this isn't specified, the CMD of the container
                                         image is used. This corresponds to the args
                                         member in the Entrypoint portion of the Pod
@@ -573,47 +570,46 @@ spec:
                                         type: string
                                       type: array
                                     command:
-                                      description: The entrypoint for the container.
-                                        This isn't run within a shell. If this isn't
-                                        specified, the ENTRYPOINT of the container
-                                        image is used. Environment variable references
-                                        are expanded using the container's environment.
+                                      description: Entrypoint for the container. This
+                                        isn't run within a shell. If this isn't specified,
+                                        the ENTRYPOINT of the container image is used.
+                                        Environment variable references are expanded
+                                        using the container's environment.
                                       items:
                                         type: string
                                       type: array
                                     env:
-                                      description: The environment variables to pass
-                                        to a container. See EKS Environment below.
+                                      description: Environment variables to pass to
+                                        a container. See EKS Environment below.
                                       items:
                                         properties:
                                           name:
-                                            description: Specifies the name of the
-                                              job definition.
+                                            description: Name of the job definition.
                                             type: string
                                           value:
-                                            description: The value of the environment
+                                            description: Value of the environment
                                               variable.
                                             type: string
                                         type: object
                                       type: array
                                     image:
-                                      description: The Docker image used to start
-                                        the container.
+                                      description: Docker image used to start the
+                                        container.
                                       type: string
                                     imagePullPolicy:
-                                      description: The image pull policy for the container.
+                                      description: Image pull policy for the container.
                                         Supported values are Always, IfNotPresent,
                                         and Never.
                                       type: string
                                     name:
-                                      description: The name of the container. If the
-                                        name isn't specified, the default name "Default"
+                                      description: Name of the container. If the name
+                                        isn't specified, the default name "Default"
                                         is used. Each container in a pod must have
                                         a unique name.
                                       type: string
                                     resources:
-                                      description: The type and amount of resources
-                                        to assign to a container. The supported resources
+                                      description: Type and amount of resources to
+                                        assign to a container. The supported resources
                                         include memory, cpu, and nvidia.com/gpu.
                                       items:
                                         properties:
@@ -630,7 +626,7 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: The security context for a job.
+                                      description: Security context for a job.
                                       items:
                                         properties:
                                           privileged:
@@ -646,17 +642,16 @@ spec:
                                         type: object
                                       type: array
                                     volumeMounts:
-                                      description: The volume mounts for the container.
+                                      description: Volume mounts for the container.
                                       items:
                                         properties:
                                           mountPath:
-                                            description: The path of the file or directory
+                                            description: Path of the file or directory
                                               on the host to mount into containers
                                               on the pod.
                                             type: string
                                           name:
-                                            description: Specifies the name of the
-                                              job definition.
+                                            description: Name of the job definition.
                                             type: string
                                           readOnly:
                                             type: boolean
@@ -665,9 +660,9 @@ spec:
                                   type: object
                                 type: array
                               dnsPolicy:
-                                description: The DNS policy for the pod. The default
-                                  value is ClusterFirst. If the host_network argument
-                                  is not specified, the default is ClusterFirstWithHostNet.
+                                description: DNS policy for the pod. The default value
+                                  is ClusterFirst. If the host_network argument is
+                                  not specified, the default is ClusterFirstWithHostNet.
                                   ClusterFirst indicates that any DNS query that does
                                   not match the configured cluster domain suffix is
                                   forwarded to the upstream nameserver inherited from
@@ -675,12 +670,12 @@ spec:
                                   in the Kubernetes documentation.
                                 type: string
                               hostNetwork:
-                                description: Indicates if the pod uses the hosts'
-                                  network IP address. The default value is true. Setting
-                                  this to false enables the Kubernetes pod networking
-                                  model. Most AWS Batch workloads are egress-only
-                                  and don't require the overhead of IP allocation
-                                  for each pod for incoming connections.
+                                description: Whether the pod uses the hosts' network
+                                  IP address. The default value is true. Setting this
+                                  to false enables the Kubernetes pod networking model.
+                                  Most AWS Batch workloads are egress-only and don't
+                                  require the overhead of IP allocation for each pod
+                                  for incoming connections.
                                 type: boolean
                               imagePullSecret:
                                 description: List of Kubernetes secret resources.
@@ -806,13 +801,15 @@ spec:
                                     labels:
                                       additionalProperties:
                                         type: string
+                                      description: Key-value pairs used to identify,
+                                        sort, and organize cube resources.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               serviceAccountName:
-                                description: The name of the service account that's
-                                  used to run the pod.
+                                description: Name of the service account that's used
+                                  to run the pod.
                                 type: string
                               shareProcessNamespace:
                                 description: Indicates if the processes in a container
@@ -820,53 +817,51 @@ spec:
                                   same pod.
                                 type: boolean
                               volumes:
-                                description: Specifies the volumes for a job definition
-                                  that uses Amazon EKS resources. AWS Batch supports
-                                  emptyDir, hostPath, and secret volume types.
+                                description: Volumes for a job definition that uses
+                                  Amazon EKS resources. AWS Batch supports emptyDir,
+                                  hostPath, and secret volume types.
                                 items:
                                   properties:
                                     emptyDir:
                                       items:
                                         properties:
                                           medium:
-                                            description: The medium to store the volume.
+                                            description: Medium to store the volume.
                                               The default value is an empty string,
                                               which uses the storage of the node.
                                             type: string
                                           sizeLimit:
-                                            description: The maximum size of the volume.
+                                            description: Maximum size of the volume.
                                               By default, there's no maximum size
                                               defined.
                                             type: string
                                         type: object
                                       type: array
                                     hostPath:
-                                      description: The path of the file or directory
-                                        on the host to mount into containers on the
-                                        pod.
+                                      description: Path of the file or directory on
+                                        the host to mount into containers on the pod.
                                       items:
                                         properties:
                                           path:
-                                            description: The path of the file or directory
+                                            description: Path of the file or directory
                                               on the host to mount into containers
                                               on the pod.
                                             type: string
                                         type: object
                                       type: array
                                     name:
-                                      description: Specifies the name of the job definition.
+                                      description: Name of the job definition.
                                       type: string
                                     secret:
                                       items:
                                         properties:
                                           optional:
-                                            description: Specifies whether the secret
-                                              or the secret's keys must be defined.
+                                            description: Whether the secret or the
+                                              secret's keys must be defined.
                                             type: boolean
                                           secretName:
-                                            description: The name of the secret. The
-                                              name must be allowed as a DNS subdomain
-                                              name.
+                                            description: Name of the secret. The name
+                                              must be allowed as a DNS subdomain name.
                                             type: string
                                         type: object
                                       type: array
@@ -877,22 +872,22 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: Specifies the name of the job definition.
+                    description: Name of the job definition.
                     type: string
                   nodeProperties:
-                    description: A valid node properties provided as a single valid
+                    description: Valid node properties provided as a single valid
                       JSON document. This parameter is required if the type parameter
                       is multinode.
                     type: string
                   parameters:
                     additionalProperties:
                       type: string
-                    description: Specifies the parameter substitution placeholders
-                      to set in the job definition.
+                    description: Parameter substitution placeholders to set in the
+                      job definition.
                     type: object
                     x-kubernetes-map-type: granular
                   platformCapabilities:
-                    description: The platform capabilities required by the job definition.
+                    description: Platform capabilities required by the job definition.
                       If no value is specified, it defaults to EC2. To run the job
                       on Fargate resources, specify FARGATE.
                     items:
@@ -900,42 +895,41 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   propagateTags:
-                    description: Specifies whether to propagate the tags from the
-                      job definition to the corresponding Amazon ECS task. Default
-                      is false.
+                    description: Whether to propagate the tags from the job definition
+                      to the corresponding Amazon ECS task. Default is false.
                     type: boolean
                   retryStrategy:
-                    description: Specifies the retry strategy to use for failed jobs
-                      that are submitted with this job definition. Maximum number
-                      of retry_strategy is 1.  Defined below.
+                    description: Retry strategy to use for failed jobs that are submitted
+                      with this job definition. Maximum number of retry_strategy is
+                      1.  Defined below.
                     items:
                       properties:
                         attempts:
-                          description: The number of times to move a job to the RUNNABLE
+                          description: Number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
                           type: number
                         evaluateOnExit:
-                          description: The evaluate on exit conditions under which
-                            the job should be retried or failed. If this parameter
-                            is specified, then the attempts parameter must also be
-                            specified. You may specify up to 5 configuration blocks.
+                          description: Evaluate on exit conditions under which the
+                            job should be retried or failed. If this parameter is
+                            specified, then the attempts parameter must also be specified.
+                            You may specify up to 5 configuration blocks.
                           items:
                             properties:
                               action:
-                                description: 'Specifies the action to take if all
-                                  of the specified conditions are met. The values
-                                  are not case sensitive. Valid values: retry, exit.'
+                                description: 'Action to take if all of the specified
+                                  conditions are met. The values are not case sensitive.
+                                  Valid values: retry, exit.'
                                 type: string
                               onExitCode:
-                                description: A glob pattern to match against the decimal
+                                description: Glob pattern to match against the decimal
                                   representation of the exit code returned for a job.
                                 type: string
                               onReason:
-                                description: A glob pattern to match against the reason
+                                description: Glob pattern to match against the reason
                                   returned for a job.
                                 type: string
                               onStatusReason:
-                                description: A glob pattern to match against the status
+                                description: Glob pattern to match against the status
                                   reason returned for a job.
                                 type: string
                             type: object
@@ -943,10 +937,10 @@ spec:
                       type: object
                     type: array
                   schedulingPriority:
-                    description: The scheduling priority of the job definition. This
-                      only affects jobs in job queues with a fair share policy. Jobs
-                      with a higher scheduling priority are scheduled before jobs
-                      with a lower scheduling priority. Allowed values 0 through 9999.
+                    description: Scheduling priority of the job definition. This only
+                      affects jobs in job queues with a fair share policy. Jobs with
+                      a higher scheduling priority are scheduled before jobs with
+                      a lower scheduling priority. Allowed values 0 through 9999.
                     type: number
                   tags:
                     additionalProperties:
@@ -955,21 +949,20 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: Specifies the timeout for jobs so that if a job runs
-                      longer, AWS Batch terminates the job. Maximum number of timeout
-                      is 1. Defined below.
+                    description: Timeout for jobs so that if a job runs longer, AWS
+                      Batch terminates the job. Maximum number of timeout is 1. Defined
+                      below.
                     items:
                       properties:
                         attemptDurationSeconds:
-                          description: The time duration in seconds after which AWS
-                            Batch terminates your jobs if they have not finished.
-                            The minimum value for the timeout is 60 seconds.
+                          description: Time duration in seconds after which AWS Batch
+                            terminates your jobs if they have not finished. The minimum
+                            value for the timeout is 60 seconds.
                           type: number
                       type: object
                     type: array
                   type:
-                    description: The type of job definition. Must be container or
-                      multinode.
+                    description: Type of job definition. Must be container or multinode.
                     type: string
                 type: object
               managementPolicies:
@@ -1154,16 +1147,15 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of the job definition, includes
-                      revision (:#).
+                    description: ARN of the job definition, includes revision (:#).
                     type: string
                   arnPrefix:
-                    description: The ARN without the revision number.
+                    description: ARN without the revision number.
                     type: string
                   containerProperties:
-                    description: A valid container properties provided as a single
-                      valid JSON document. This parameter is only valid if the type
-                      parameter is container.
+                    description: Valid container properties provided as a single valid
+                      JSON document. This parameter is only valid if the type parameter
+                      is container.
                     type: string
                   deregisterOnNewRevision:
                     description: When updating a job definition a new revision is
@@ -1176,22 +1168,22 @@ spec:
                       is container.
                     type: string
                   eksProperties:
-                    description: A valid eks properties. This parameter is only valid
+                    description: Valid eks properties. This parameter is only valid
                       if the type parameter is container.
                     items:
                       properties:
                         podProperties:
-                          description: The properties for the Kubernetes pod resources
+                          description: Properties for the Kubernetes pod resources
                             of a job. See pod_properties below.
                           items:
                             properties:
                               containers:
-                                description: The properties of the container that's
-                                  used on the Amazon EKS pod. See containers below.
+                                description: Properties of the container that's used
+                                  on the Amazon EKS pod. See containers below.
                                 items:
                                   properties:
                                     args:
-                                      description: An array of arguments to the entrypoint.
+                                      description: Array of arguments to the entrypoint.
                                         If this isn't specified, the CMD of the container
                                         image is used. This corresponds to the args
                                         member in the Entrypoint portion of the Pod
@@ -1201,47 +1193,46 @@ spec:
                                         type: string
                                       type: array
                                     command:
-                                      description: The entrypoint for the container.
-                                        This isn't run within a shell. If this isn't
-                                        specified, the ENTRYPOINT of the container
-                                        image is used. Environment variable references
-                                        are expanded using the container's environment.
+                                      description: Entrypoint for the container. This
+                                        isn't run within a shell. If this isn't specified,
+                                        the ENTRYPOINT of the container image is used.
+                                        Environment variable references are expanded
+                                        using the container's environment.
                                       items:
                                         type: string
                                       type: array
                                     env:
-                                      description: The environment variables to pass
-                                        to a container. See EKS Environment below.
+                                      description: Environment variables to pass to
+                                        a container. See EKS Environment below.
                                       items:
                                         properties:
                                           name:
-                                            description: Specifies the name of the
-                                              job definition.
+                                            description: Name of the job definition.
                                             type: string
                                           value:
-                                            description: The value of the environment
+                                            description: Value of the environment
                                               variable.
                                             type: string
                                         type: object
                                       type: array
                                     image:
-                                      description: The Docker image used to start
-                                        the container.
+                                      description: Docker image used to start the
+                                        container.
                                       type: string
                                     imagePullPolicy:
-                                      description: The image pull policy for the container.
+                                      description: Image pull policy for the container.
                                         Supported values are Always, IfNotPresent,
                                         and Never.
                                       type: string
                                     name:
-                                      description: The name of the container. If the
-                                        name isn't specified, the default name "Default"
+                                      description: Name of the container. If the name
+                                        isn't specified, the default name "Default"
                                         is used. Each container in a pod must have
                                         a unique name.
                                       type: string
                                     resources:
-                                      description: The type and amount of resources
-                                        to assign to a container. The supported resources
+                                      description: Type and amount of resources to
+                                        assign to a container. The supported resources
                                         include memory, cpu, and nvidia.com/gpu.
                                       items:
                                         properties:
@@ -1258,7 +1249,7 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: The security context for a job.
+                                      description: Security context for a job.
                                       items:
                                         properties:
                                           privileged:
@@ -1274,17 +1265,16 @@ spec:
                                         type: object
                                       type: array
                                     volumeMounts:
-                                      description: The volume mounts for the container.
+                                      description: Volume mounts for the container.
                                       items:
                                         properties:
                                           mountPath:
-                                            description: The path of the file or directory
+                                            description: Path of the file or directory
                                               on the host to mount into containers
                                               on the pod.
                                             type: string
                                           name:
-                                            description: Specifies the name of the
-                                              job definition.
+                                            description: Name of the job definition.
                                             type: string
                                           readOnly:
                                             type: boolean
@@ -1293,9 +1283,9 @@ spec:
                                   type: object
                                 type: array
                               dnsPolicy:
-                                description: The DNS policy for the pod. The default
-                                  value is ClusterFirst. If the host_network argument
-                                  is not specified, the default is ClusterFirstWithHostNet.
+                                description: DNS policy for the pod. The default value
+                                  is ClusterFirst. If the host_network argument is
+                                  not specified, the default is ClusterFirstWithHostNet.
                                   ClusterFirst indicates that any DNS query that does
                                   not match the configured cluster domain suffix is
                                   forwarded to the upstream nameserver inherited from
@@ -1303,12 +1293,12 @@ spec:
                                   in the Kubernetes documentation.
                                 type: string
                               hostNetwork:
-                                description: Indicates if the pod uses the hosts'
-                                  network IP address. The default value is true. Setting
-                                  this to false enables the Kubernetes pod networking
-                                  model. Most AWS Batch workloads are egress-only
-                                  and don't require the overhead of IP allocation
-                                  for each pod for incoming connections.
+                                description: Whether the pod uses the hosts' network
+                                  IP address. The default value is true. Setting this
+                                  to false enables the Kubernetes pod networking model.
+                                  Most AWS Batch workloads are egress-only and don't
+                                  require the overhead of IP allocation for each pod
+                                  for incoming connections.
                                 type: boolean
                               imagePullSecret:
                                 description: List of Kubernetes secret resources.
@@ -1434,13 +1424,15 @@ spec:
                                     labels:
                                       additionalProperties:
                                         type: string
+                                      description: Key-value pairs used to identify,
+                                        sort, and organize cube resources.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               serviceAccountName:
-                                description: The name of the service account that's
-                                  used to run the pod.
+                                description: Name of the service account that's used
+                                  to run the pod.
                                 type: string
                               shareProcessNamespace:
                                 description: Indicates if the processes in a container
@@ -1448,53 +1440,51 @@ spec:
                                   same pod.
                                 type: boolean
                               volumes:
-                                description: Specifies the volumes for a job definition
-                                  that uses Amazon EKS resources. AWS Batch supports
-                                  emptyDir, hostPath, and secret volume types.
+                                description: Volumes for a job definition that uses
+                                  Amazon EKS resources. AWS Batch supports emptyDir,
+                                  hostPath, and secret volume types.
                                 items:
                                   properties:
                                     emptyDir:
                                       items:
                                         properties:
                                           medium:
-                                            description: The medium to store the volume.
+                                            description: Medium to store the volume.
                                               The default value is an empty string,
                                               which uses the storage of the node.
                                             type: string
                                           sizeLimit:
-                                            description: The maximum size of the volume.
+                                            description: Maximum size of the volume.
                                               By default, there's no maximum size
                                               defined.
                                             type: string
                                         type: object
                                       type: array
                                     hostPath:
-                                      description: The path of the file or directory
-                                        on the host to mount into containers on the
-                                        pod.
+                                      description: Path of the file or directory on
+                                        the host to mount into containers on the pod.
                                       items:
                                         properties:
                                           path:
-                                            description: The path of the file or directory
+                                            description: Path of the file or directory
                                               on the host to mount into containers
                                               on the pod.
                                             type: string
                                         type: object
                                       type: array
                                     name:
-                                      description: Specifies the name of the job definition.
+                                      description: Name of the job definition.
                                       type: string
                                     secret:
                                       items:
                                         properties:
                                           optional:
-                                            description: Specifies whether the secret
-                                              or the secret's keys must be defined.
+                                            description: Whether the secret or the
+                                              secret's keys must be defined.
                                             type: boolean
                                           secretName:
-                                            description: The name of the secret. The
-                                              name must be allowed as a DNS subdomain
-                                              name.
+                                            description: Name of the secret. The name
+                                              must be allowed as a DNS subdomain name.
                                             type: string
                                         type: object
                                       type: array
@@ -1507,22 +1497,22 @@ spec:
                   id:
                     type: string
                   name:
-                    description: Specifies the name of the job definition.
+                    description: Name of the job definition.
                     type: string
                   nodeProperties:
-                    description: A valid node properties provided as a single valid
+                    description: Valid node properties provided as a single valid
                       JSON document. This parameter is required if the type parameter
                       is multinode.
                     type: string
                   parameters:
                     additionalProperties:
                       type: string
-                    description: Specifies the parameter substitution placeholders
-                      to set in the job definition.
+                    description: Parameter substitution placeholders to set in the
+                      job definition.
                     type: object
                     x-kubernetes-map-type: granular
                   platformCapabilities:
-                    description: The platform capabilities required by the job definition.
+                    description: Platform capabilities required by the job definition.
                       If no value is specified, it defaults to EC2. To run the job
                       on Fargate resources, specify FARGATE.
                     items:
@@ -1530,42 +1520,46 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   propagateTags:
-                    description: Specifies whether to propagate the tags from the
-                      job definition to the corresponding Amazon ECS task. Default
-                      is false.
+                    description: Whether to propagate the tags from the job definition
+                      to the corresponding Amazon ECS task. Default is false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retryStrategy:
-                    description: Specifies the retry strategy to use for failed jobs
-                      that are submitted with this job definition. Maximum number
-                      of retry_strategy is 1.  Defined below.
+                    description: Retry strategy to use for failed jobs that are submitted
+                      with this job definition. Maximum number of retry_strategy is
+                      1.  Defined below.
                     items:
                       properties:
                         attempts:
-                          description: The number of times to move a job to the RUNNABLE
+                          description: Number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
                           type: number
                         evaluateOnExit:
-                          description: The evaluate on exit conditions under which
-                            the job should be retried or failed. If this parameter
-                            is specified, then the attempts parameter must also be
-                            specified. You may specify up to 5 configuration blocks.
+                          description: Evaluate on exit conditions under which the
+                            job should be retried or failed. If this parameter is
+                            specified, then the attempts parameter must also be specified.
+                            You may specify up to 5 configuration blocks.
                           items:
                             properties:
                               action:
-                                description: 'Specifies the action to take if all
-                                  of the specified conditions are met. The values
-                                  are not case sensitive. Valid values: retry, exit.'
+                                description: 'Action to take if all of the specified
+                                  conditions are met. The values are not case sensitive.
+                                  Valid values: retry, exit.'
                                 type: string
                               onExitCode:
-                                description: A glob pattern to match against the decimal
+                                description: Glob pattern to match against the decimal
                                   representation of the exit code returned for a job.
                                 type: string
                               onReason:
-                                description: A glob pattern to match against the reason
+                                description: Glob pattern to match against the reason
                                   returned for a job.
                                 type: string
                               onStatusReason:
-                                description: A glob pattern to match against the status
+                                description: Glob pattern to match against the status
                                   reason returned for a job.
                                 type: string
                             type: object
@@ -1573,13 +1567,13 @@ spec:
                       type: object
                     type: array
                   revision:
-                    description: The revision of the job definition.
+                    description: Revision of the job definition.
                     type: number
                   schedulingPriority:
-                    description: The scheduling priority of the job definition. This
-                      only affects jobs in job queues with a fair share policy. Jobs
-                      with a higher scheduling priority are scheduled before jobs
-                      with a lower scheduling priority. Allowed values 0 through 9999.
+                    description: Scheduling priority of the job definition. This only
+                      affects jobs in job queues with a fair share policy. Jobs with
+                      a higher scheduling priority are scheduled before jobs with
+                      a lower scheduling priority. Allowed values 0 through 9999.
                     type: number
                   tags:
                     additionalProperties:
@@ -1590,27 +1584,25 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: Specifies the timeout for jobs so that if a job runs
-                      longer, AWS Batch terminates the job. Maximum number of timeout
-                      is 1. Defined below.
+                    description: Timeout for jobs so that if a job runs longer, AWS
+                      Batch terminates the job. Maximum number of timeout is 1. Defined
+                      below.
                     items:
                       properties:
                         attemptDurationSeconds:
-                          description: The time duration in seconds after which AWS
-                            Batch terminates your jobs if they have not finished.
-                            The minimum value for the timeout is 60 seconds.
+                          description: Time duration in seconds after which AWS Batch
+                            terminates your jobs if they have not finished. The minimum
+                            value for the timeout is 60 seconds.
                           type: number
                       type: object
                     type: array
                   type:
-                    description: The type of job definition. Must be container or
-                      multinode.
+                    description: Type of job definition. Must be container or multinode.
                     type: string
                 type: object
               conditions:

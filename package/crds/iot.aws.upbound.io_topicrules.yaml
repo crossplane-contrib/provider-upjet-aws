@@ -377,8 +377,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               deliveryStreamName:
                                 description: The delivery stream name.
@@ -425,8 +425,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               channelName:
                                 description: Name of AWS IOT Analytics channel.
@@ -442,8 +442,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               inputName:
                                 description: The name of the AWS IoT Events input.
@@ -812,7 +812,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         deliveryStreamName:
                           description: The delivery stream name.
@@ -858,7 +858,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         channelName:
                           description: Name of AWS IOT Analytics channel.
@@ -874,7 +874,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         inputName:
                           description: The name of the AWS IoT Events input.
@@ -952,8 +952,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   republish:
                     items:
@@ -1570,8 +1571,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               deliveryStreamName:
                                 description: The delivery stream name.
@@ -1618,8 +1619,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               channelName:
                                 description: Name of AWS IOT Analytics channel.
@@ -1635,8 +1636,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               inputName:
                                 description: The name of the AWS IoT Events input.
@@ -2005,7 +2006,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         deliveryStreamName:
                           description: The delivery stream name.
@@ -2051,7 +2052,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         channelName:
                           description: Name of AWS IOT Analytics channel.
@@ -2067,7 +2068,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         inputName:
                           description: The name of the AWS IoT Events input.
@@ -2932,8 +2933,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               deliveryStreamName:
                                 description: The delivery stream name.
@@ -2980,8 +2981,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               channelName:
                                 description: Name of AWS IOT Analytics channel.
@@ -2997,8 +2998,8 @@ spec:
                             properties:
                               batchMode:
                                 description: The payload that contains a JSON array
-                                  of records will be sent to Kinesis Firehose via
-                                  a batch call.
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
                                 type: boolean
                               inputName:
                                 description: The name of the AWS IoT Events input.
@@ -3215,7 +3216,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         deliveryStreamName:
                           description: The delivery stream name.
@@ -3264,7 +3265,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         channelName:
                           description: Name of AWS IOT Analytics channel.
@@ -3280,7 +3281,7 @@ spec:
                       properties:
                         batchMode:
                           description: The payload that contains a JSON array of records
-                            will be sent to Kinesis Firehose via a batch call.
+                            will be sent to CloudWatch via a batch call.
                           type: boolean
                         inputName:
                           description: The name of the AWS IoT Events input.
@@ -3357,6 +3358,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   republish:
                     items:
                       properties:

@@ -303,6 +303,10 @@ type LBTargetGroupObservation struct {
 	// Whether to enable support for proxy protocol v2 on Network Load Balancers. See doc for more information. Default is false.
 	ProxyProtocolV2 *bool `json:"proxyProtocolV2,omitempty" tf:"proxy_protocol_v2,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds.
 	SlowStart *float64 `json:"slowStart,omitempty" tf:"slow_start,omitempty"`
 
@@ -396,10 +400,10 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ProxyProtocolV2 *bool `json:"proxyProtocolV2,omitempty" tf:"proxy_protocol_v2,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds.
 	// +kubebuilder:validation:Optional
@@ -582,6 +586,35 @@ type TargetHealthStateParameters struct {
 	UnhealthyDrainingInterval *float64 `json:"unhealthyDrainingInterval,omitempty" tf:"unhealthy_draining_interval,omitempty"`
 }
 
+type UnhealthyStateRoutingInitParameters struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
+	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
+type UnhealthyStateRoutingObservation struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
+	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
+type UnhealthyStateRoutingParameters struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
+	// +kubebuilder:validation:Optional
+	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
+	// +kubebuilder:validation:Optional
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
 // LBTargetGroupSpec defines the desired state of LBTargetGroup
 type LBTargetGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
@@ -642,33 +675,4 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&LBTargetGroup{}, &LBTargetGroupList{})
-}
-
-type UnhealthyStateRoutingInitParameters struct {
-
-	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
-	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
-
-	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
-	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
-}
-
-type UnhealthyStateRoutingObservation struct {
-
-	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
-	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
-
-	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
-	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
-}
-
-type UnhealthyStateRoutingParameters struct {
-
-	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
-	// +kubebuilder:validation:Optional
-	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
-
-	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
-	// +kubebuilder:validation:Optional
-	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
 }

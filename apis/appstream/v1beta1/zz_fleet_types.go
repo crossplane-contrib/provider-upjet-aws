@@ -116,7 +116,7 @@ type FleetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 60 seconds.
+	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 0. Valid value is between 60 and 3600 seconds.
 	IdleDisconnectTimeoutInSeconds *float64 `json:"idleDisconnectTimeoutInSeconds,omitempty" tf:"idle_disconnect_timeout_in_seconds,omitempty"`
 
 	// ARN of the public, private, or shared image to use.
@@ -183,7 +183,7 @@ type FleetObservation struct {
 	// Unique identifier (ID) of the appstream fleet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 60 seconds.
+	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 0. Valid value is between 60 and 3600 seconds.
 	IdleDisconnectTimeoutInSeconds *float64 `json:"idleDisconnectTimeoutInSeconds,omitempty" tf:"idle_disconnect_timeout_in_seconds,omitempty"`
 
 	// ARN of the public, private, or shared image to use.
@@ -203,6 +203,10 @@ type FleetObservation struct {
 
 	// Unique name for the fleet.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// State of the fleet. Can be STARTING, RUNNING, STOPPING or STOPPED
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -265,7 +269,7 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 60 seconds.
+	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 0. Valid value is between 60 and 3600 seconds.
 	// +kubebuilder:validation:Optional
 	IdleDisconnectTimeoutInSeconds *float64 `json:"idleDisconnectTimeoutInSeconds,omitempty" tf:"idle_disconnect_timeout_in_seconds,omitempty"`
 
@@ -293,10 +297,10 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. If not specified, defaults to APP.
 	// +kubebuilder:validation:Optional

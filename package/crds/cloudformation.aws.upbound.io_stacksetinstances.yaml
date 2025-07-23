@@ -84,8 +84,8 @@ spec:
                       DELEGATED_ADMIN.'
                     type: string
                   deploymentTargets:
-                    description: The AWS Organizations accounts to which StackSets
-                      deploys. StackSets doesn't deploy stack instances to the organization
+                    description: AWS Organizations accounts to which StackSets deploys.
+                      StackSets doesn't deploy stack instances to the organization
                       management account, even if the organization management account
                       is in your organization or in an OU in your organization. Drift
                       detection is not possible for this argument. See deployment_targets
@@ -107,8 +107,8 @@ spec:
                           description: S3 URL of the file containing the list of accounts.
                           type: string
                         organizationalUnitIds:
-                          description: The organization root ID or organizational
-                            unit (OU) IDs to which StackSets deploys.
+                          description: Organization root ID or organizational unit
+                            (OU) IDs to which StackSets deploys.
                           items:
                             type: string
                           type: array
@@ -126,31 +126,31 @@ spec:
                             and SOFT_FAILURE_TOLERANCE.
                           type: string
                         failureToleranceCount:
-                          description: The number of accounts, per Region, for which
-                            this operation can fail before AWS CloudFormation stops
-                            the operation in that Region.
+                          description: Number of accounts, per Region, for which this
+                            operation can fail before AWS CloudFormation stops the
+                            operation in that Region.
                           type: number
                         failureTolerancePercentage:
-                          description: The percentage of accounts, per Region, for
-                            which this stack operation can fail before AWS CloudFormation
+                          description: Percentage of accounts, per Region, for which
+                            this stack operation can fail before AWS CloudFormation
                             stops the operation in that Region.
                           type: number
                         maxConcurrentCount:
-                          description: The maximum number of accounts in which to
-                            perform this operation at one time.
+                          description: Maximum number of accounts in which to perform
+                            this operation at one time.
                           type: number
                         maxConcurrentPercentage:
-                          description: The maximum percentage of accounts in which
-                            to perform this operation at one time.
+                          description: Maximum percentage of accounts in which to
+                            perform this operation at one time.
                           type: number
                         regionConcurrencyType:
-                          description: The concurrency type of deploying StackSets
-                            operations in Regions, could be in parallel or one Region
-                            at a time. Valid values are SEQUENTIAL and PARALLEL.
+                          description: Concurrency type of deploying StackSets operations
+                            in Regions, could be in parallel or one Region at a time.
+                            Valid values are SEQUENTIAL and PARALLEL.
                           type: string
                         regionOrder:
-                          description: The order of the Regions in where you want
-                            to perform the stack operation.
+                          description: Order of the Regions in where you want to perform
+                            the stack operation.
                           items:
                             type: string
                           type: array
@@ -165,13 +165,17 @@ spec:
                     x-kubernetes-map-type: granular
                   region:
                     description: |-
-                      Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+                      Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   retainStack:
                     description: You cannot reassociate a retained Stack or add an
                       existing, saved Stack to a new StackSet. Defaults to false.
                     type: boolean
+                  stackSetInstanceRegion:
+                    description: Target AWS Region to create a Stack based on the
+                      StackSet. Defaults to current region.
+                    type: string
                   stackSetName:
                     description: Name of the StackSet.
                     type: string
@@ -278,8 +282,8 @@ spec:
                       DELEGATED_ADMIN.'
                     type: string
                   deploymentTargets:
-                    description: The AWS Organizations accounts to which StackSets
-                      deploys. StackSets doesn't deploy stack instances to the organization
+                    description: AWS Organizations accounts to which StackSets deploys.
+                      StackSets doesn't deploy stack instances to the organization
                       management account, even if the organization management account
                       is in your organization or in an OU in your organization. Drift
                       detection is not possible for this argument. See deployment_targets
@@ -301,8 +305,8 @@ spec:
                           description: S3 URL of the file containing the list of accounts.
                           type: string
                         organizationalUnitIds:
-                          description: The organization root ID or organizational
-                            unit (OU) IDs to which StackSets deploys.
+                          description: Organization root ID or organizational unit
+                            (OU) IDs to which StackSets deploys.
                           items:
                             type: string
                           type: array
@@ -320,31 +324,31 @@ spec:
                             and SOFT_FAILURE_TOLERANCE.
                           type: string
                         failureToleranceCount:
-                          description: The number of accounts, per Region, for which
-                            this operation can fail before AWS CloudFormation stops
-                            the operation in that Region.
+                          description: Number of accounts, per Region, for which this
+                            operation can fail before AWS CloudFormation stops the
+                            operation in that Region.
                           type: number
                         failureTolerancePercentage:
-                          description: The percentage of accounts, per Region, for
-                            which this stack operation can fail before AWS CloudFormation
+                          description: Percentage of accounts, per Region, for which
+                            this stack operation can fail before AWS CloudFormation
                             stops the operation in that Region.
                           type: number
                         maxConcurrentCount:
-                          description: The maximum number of accounts in which to
-                            perform this operation at one time.
+                          description: Maximum number of accounts in which to perform
+                            this operation at one time.
                           type: number
                         maxConcurrentPercentage:
-                          description: The maximum percentage of accounts in which
-                            to perform this operation at one time.
+                          description: Maximum percentage of accounts in which to
+                            perform this operation at one time.
                           type: number
                         regionConcurrencyType:
-                          description: The concurrency type of deploying StackSets
-                            operations in Regions, could be in parallel or one Region
-                            at a time. Valid values are SEQUENTIAL and PARALLEL.
+                          description: Concurrency type of deploying StackSets operations
+                            in Regions, could be in parallel or one Region at a time.
+                            Valid values are SEQUENTIAL and PARALLEL.
                           type: string
                         regionOrder:
-                          description: The order of the Regions in where you want
-                            to perform the stack operation.
+                          description: Order of the Regions in where you want to perform
+                            the stack operation.
                           items:
                             type: string
                           type: array
@@ -361,6 +365,10 @@ spec:
                     description: You cannot reassociate a retained Stack or add an
                       existing, saved Stack to a new StackSet. Defaults to false.
                     type: boolean
+                  stackSetInstanceRegion:
+                    description: Target AWS Region to create a Stack based on the
+                      StackSet. Defaults to current region.
+                    type: string
                   stackSetName:
                     description: Name of the StackSet.
                     type: string
@@ -624,8 +632,8 @@ spec:
                       DELEGATED_ADMIN.'
                     type: string
                   deploymentTargets:
-                    description: The AWS Organizations accounts to which StackSets
-                      deploys. StackSets doesn't deploy stack instances to the organization
+                    description: AWS Organizations accounts to which StackSets deploys.
+                      StackSets doesn't deploy stack instances to the organization
                       management account, even if the organization management account
                       is in your organization or in an OU in your organization. Drift
                       detection is not possible for this argument. See deployment_targets
@@ -647,8 +655,8 @@ spec:
                           description: S3 URL of the file containing the list of accounts.
                           type: string
                         organizationalUnitIds:
-                          description: The organization root ID or organizational
-                            unit (OU) IDs to which StackSets deploys.
+                          description: Organization root ID or organizational unit
+                            (OU) IDs to which StackSets deploys.
                           items:
                             type: string
                           type: array
@@ -674,38 +682,38 @@ spec:
                             and SOFT_FAILURE_TOLERANCE.
                           type: string
                         failureToleranceCount:
-                          description: The number of accounts, per Region, for which
-                            this operation can fail before AWS CloudFormation stops
-                            the operation in that Region.
+                          description: Number of accounts, per Region, for which this
+                            operation can fail before AWS CloudFormation stops the
+                            operation in that Region.
                           type: number
                         failureTolerancePercentage:
-                          description: The percentage of accounts, per Region, for
-                            which this stack operation can fail before AWS CloudFormation
+                          description: Percentage of accounts, per Region, for which
+                            this stack operation can fail before AWS CloudFormation
                             stops the operation in that Region.
                           type: number
                         maxConcurrentCount:
-                          description: The maximum number of accounts in which to
-                            perform this operation at one time.
+                          description: Maximum number of accounts in which to perform
+                            this operation at one time.
                           type: number
                         maxConcurrentPercentage:
-                          description: The maximum percentage of accounts in which
-                            to perform this operation at one time.
+                          description: Maximum percentage of accounts in which to
+                            perform this operation at one time.
                           type: number
                         regionConcurrencyType:
-                          description: The concurrency type of deploying StackSets
-                            operations in Regions, could be in parallel or one Region
-                            at a time. Valid values are SEQUENTIAL and PARALLEL.
+                          description: Concurrency type of deploying StackSets operations
+                            in Regions, could be in parallel or one Region at a time.
+                            Valid values are SEQUENTIAL and PARALLEL.
                           type: string
                         regionOrder:
-                          description: The order of the Regions in where you want
-                            to perform the stack operation.
+                          description: Order of the Regions in where you want to perform
+                            the stack operation.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   organizationalUnitId:
-                    description: The organization root ID or organizational unit (OU)
+                    description: Organization root ID or organizational unit (OU)
                       ID in which the stack is deployed.
                     type: string
                   parameterOverrides:
@@ -715,6 +723,11 @@ spec:
                       the StackSet for this Instance.
                     type: object
                     x-kubernetes-map-type: granular
+                  region:
+                    description: |-
+                      Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retainStack:
                     description: You cannot reassociate a retained Stack or add an
                       existing, saved Stack to a new StackSet. Defaults to false.
@@ -733,14 +746,18 @@ spec:
                             on the StackSet. Defaults to current account.
                           type: string
                         organizationalUnitId:
-                          description: The organization root ID or organizational
-                            unit (OU) ID in which the stack is deployed.
+                          description: Organization root ID or organizational unit
+                            (OU) ID in which the stack is deployed.
                           type: string
                         stackId:
                           description: Stack identifier.
                           type: string
                       type: object
                     type: array
+                  stackSetInstanceRegion:
+                    description: Target AWS Region to create a Stack based on the
+                      StackSet. Defaults to current region.
+                    type: string
                   stackSetName:
                     description: Name of the StackSet.
                     type: string

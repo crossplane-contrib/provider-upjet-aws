@@ -15,10 +15,10 @@ import (
 
 type CommandInitParameters struct {
 
-	// –  The name you assign to this job. It must be unique in your account.
+	// The name you assign to this job. It must be unique in your account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
+	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.11 when glue_version is set to 5.0.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// In Ray jobs, runtime is used to specify the versions of Ray, Python and additional libraries available in your environment. This field is not used in other job types. For supported runtime environment values, see Working with Ray jobs in the Glue Developer Guide.
@@ -30,10 +30,10 @@ type CommandInitParameters struct {
 
 type CommandObservation struct {
 
-	// –  The name you assign to this job. It must be unique in your account.
+	// The name you assign to this job. It must be unique in your account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
+	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.11 when glue_version is set to 5.0.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// In Ray jobs, runtime is used to specify the versions of Ray, Python and additional libraries available in your environment. This field is not used in other job types. For supported runtime environment values, see Working with Ray jobs in the Glue Developer Guide.
@@ -45,11 +45,11 @@ type CommandObservation struct {
 
 type CommandParameters struct {
 
-	// –  The name you assign to this job. It must be unique in your account.
+	// The name you assign to this job. It must be unique in your account.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
+	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.11 when glue_version is set to 5.0.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
@@ -83,23 +83,32 @@ type ExecutionPropertyParameters struct {
 
 type JobInitParameters struct {
 
-	// –  The command of the job. Defined below.
+	// The command of the job. Defined below.
 	Command []CommandInitParameters `json:"command,omitempty" tf:"command,omitempty"`
 
-	// –  The list of connections used for this job.
+	// The list of connections used for this job.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Connection
 	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+	// References to Connection in glue to populate connections.
+	// +kubebuilder:validation:Optional
+	ConnectionsRefs []v1.Reference `json:"connectionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Connection in glue to populate connections.
+	// +kubebuilder:validation:Optional
+	ConnectionsSelector *v1.Selector `json:"connectionsSelector,omitempty" tf:"-"`
+
+	// The map of default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
 	// +mapType=granular
 	DefaultArguments map[string]*string `json:"defaultArguments,omitempty" tf:"default_arguments,omitempty"`
 
-	// –  Description of the job.
+	// Description of the job.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. Valid value: FLEX, STANDARD.
 	ExecutionClass *string `json:"executionClass,omitempty" tf:"execution_class,omitempty"`
 
-	// –  Execution property of the job. Defined below.
+	// Execution property of the job. Defined below.
 	ExecutionProperty []ExecutionPropertyInitParameters `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
 
 	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
@@ -108,16 +117,16 @@ type JobInitParameters struct {
 	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
 	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
 
-	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
+	// Specifies the day of the week and hour for the maintenance window for streaming jobs.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
+	// The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// –  The maximum number of times to retry this job if it fails.
+	// The maximum number of times to retry this job if it fails.
 	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
-	// overridable arguments for this job, specified as name-value pairs.
+	// Non-overridable arguments for this job, specified as name-value pairs.
 	// +mapType=granular
 	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
 
@@ -127,7 +136,7 @@ type JobInitParameters struct {
 	// The number of workers of a defined workerType that are allocated when a job runs.
 	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
 
-	// –  The ARN of the IAM role associated with this job.
+	// The ARN of the IAM role associated with this job.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -143,11 +152,14 @@ type JobInitParameters struct {
 	// The name of the Security Configuration to be associated with the job.
 	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
 
+	// The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository. Defined below.
+	SourceControlDetails []SourceControlDetailsInitParameters `json:"sourceControlDetails,omitempty" tf:"source_control_details,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
@@ -159,23 +171,23 @@ type JobObservation struct {
 	// Amazon Resource Name (ARN) of Glue Job
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  The command of the job. Defined below.
+	// The command of the job. Defined below.
 	Command []CommandObservation `json:"command,omitempty" tf:"command,omitempty"`
 
-	// –  The list of connections used for this job.
+	// The list of connections used for this job.
 	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+	// The map of default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
 	// +mapType=granular
 	DefaultArguments map[string]*string `json:"defaultArguments,omitempty" tf:"default_arguments,omitempty"`
 
-	// –  Description of the job.
+	// Description of the job.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. Valid value: FLEX, STANDARD.
 	ExecutionClass *string `json:"executionClass,omitempty" tf:"execution_class,omitempty"`
 
-	// –  Execution property of the job. Defined below.
+	// Execution property of the job. Defined below.
 	ExecutionProperty []ExecutionPropertyObservation `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
 
 	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
@@ -187,16 +199,16 @@ type JobObservation struct {
 	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
 	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
 
-	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
+	// Specifies the day of the week and hour for the maintenance window for streaming jobs.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
+	// The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// –  The maximum number of times to retry this job if it fails.
+	// The maximum number of times to retry this job if it fails.
 	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
-	// overridable arguments for this job, specified as name-value pairs.
+	// Non-overridable arguments for this job, specified as name-value pairs.
 	// +mapType=granular
 	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
 
@@ -206,11 +218,18 @@ type JobObservation struct {
 	// The number of workers of a defined workerType that are allocated when a job runs.
 	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
 
-	// –  The ARN of the IAM role associated with this job.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The ARN of the IAM role associated with this job.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The name of the Security Configuration to be associated with the job.
 	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
+
+	// The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository. Defined below.
+	SourceControlDetails []SourceControlDetailsObservation `json:"sourceControlDetails,omitempty" tf:"source_control_details,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -220,7 +239,7 @@ type JobObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
@@ -229,20 +248,29 @@ type JobObservation struct {
 
 type JobParameters struct {
 
-	// –  The command of the job. Defined below.
+	// The command of the job. Defined below.
 	// +kubebuilder:validation:Optional
 	Command []CommandParameters `json:"command,omitempty" tf:"command,omitempty"`
 
-	// –  The list of connections used for this job.
+	// The list of connections used for this job.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Connection
 	// +kubebuilder:validation:Optional
 	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+	// References to Connection in glue to populate connections.
+	// +kubebuilder:validation:Optional
+	ConnectionsRefs []v1.Reference `json:"connectionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Connection in glue to populate connections.
+	// +kubebuilder:validation:Optional
+	ConnectionsSelector *v1.Selector `json:"connectionsSelector,omitempty" tf:"-"`
+
+	// The map of default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	DefaultArguments map[string]*string `json:"defaultArguments,omitempty" tf:"default_arguments,omitempty"`
 
-	// –  Description of the job.
+	// Description of the job.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -250,7 +278,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionClass *string `json:"executionClass,omitempty" tf:"execution_class,omitempty"`
 
-	// –  Execution property of the job. Defined below.
+	// Execution property of the job. Defined below.
 	// +kubebuilder:validation:Optional
 	ExecutionProperty []ExecutionPropertyParameters `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
 
@@ -262,19 +290,19 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
 
-	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
+	// Specifies the day of the week and hour for the maintenance window for streaming jobs.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
+	// The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
 	// +kubebuilder:validation:Optional
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// –  The maximum number of times to retry this job if it fails.
+	// The maximum number of times to retry this job if it fails.
 	// +kubebuilder:validation:Optional
 	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
-	// overridable arguments for this job, specified as name-value pairs.
+	// Non-overridable arguments for this job, specified as name-value pairs.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
@@ -287,12 +315,12 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// –  The ARN of the IAM role associated with this job.
+	// The ARN of the IAM role associated with this job.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -310,12 +338,16 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
 
+	// The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository. Defined below.
+	// +kubebuilder:validation:Optional
+	SourceControlDetails []SourceControlDetailsParameters `json:"sourceControlDetails,omitempty" tf:"source_control_details,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
@@ -341,6 +373,92 @@ type NotificationPropertyParameters struct {
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
 	// +kubebuilder:validation:Optional
 	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+}
+
+type SourceControlDetailsInitParameters struct {
+
+	// The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN and AWS_SECRETS_MANAGER.
+	AuthStrategy *string `json:"authStrategy,omitempty" tf:"auth_strategy,omitempty"`
+
+	// The value of an authorization token.
+	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+
+	// A branch in the remote repository.
+	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// A folder in the remote repository.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// The last commit ID for a commit in the remote repository.
+	LastCommitID *string `json:"lastCommitId,omitempty" tf:"last_commit_id,omitempty"`
+
+	// The owner of the remote repository that contains the job artifacts.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The provider for the remote repository. Valid values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// The name of the remote repository that contains the job artifacts.
+	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
+}
+
+type SourceControlDetailsObservation struct {
+
+	// The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN and AWS_SECRETS_MANAGER.
+	AuthStrategy *string `json:"authStrategy,omitempty" tf:"auth_strategy,omitempty"`
+
+	// A branch in the remote repository.
+	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// A folder in the remote repository.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// The last commit ID for a commit in the remote repository.
+	LastCommitID *string `json:"lastCommitId,omitempty" tf:"last_commit_id,omitempty"`
+
+	// The owner of the remote repository that contains the job artifacts.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The provider for the remote repository. Valid values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// The name of the remote repository that contains the job artifacts.
+	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
+}
+
+type SourceControlDetailsParameters struct {
+
+	// The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token. Valid values are: PERSONAL_ACCESS_TOKEN and AWS_SECRETS_MANAGER.
+	// +kubebuilder:validation:Optional
+	AuthStrategy *string `json:"authStrategy,omitempty" tf:"auth_strategy,omitempty"`
+
+	// The value of an authorization token.
+	// +kubebuilder:validation:Optional
+	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+
+	// A branch in the remote repository.
+	// +kubebuilder:validation:Optional
+	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// A folder in the remote repository.
+	// +kubebuilder:validation:Optional
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// The last commit ID for a commit in the remote repository.
+	// +kubebuilder:validation:Optional
+	LastCommitID *string `json:"lastCommitId,omitempty" tf:"last_commit_id,omitempty"`
+
+	// The owner of the remote repository that contains the job artifacts.
+	// +kubebuilder:validation:Optional
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The provider for the remote repository. Valid values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.
+	// +kubebuilder:validation:Optional
+	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// The name of the remote repository that contains the job artifacts.
+	// +kubebuilder:validation:Optional
+	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 }
 
 // JobSpec defines the desired state of Job

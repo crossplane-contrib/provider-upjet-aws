@@ -429,16 +429,114 @@ spec:
                       type: object
                     type: array
                   authorizationType:
-                    description: Choose the type of authorization to use for the connection.
+                    description: Type of authorization to use for the connection.
                       One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
                     type: string
                   description:
-                    description: Enter a description for the connection. Maximum of
-                      512 characters.
+                    description: Description for the connection. Maximum of 512 characters.
                     type: string
+                  invocationConnectivityParameters:
+                    description: Parameters to use for invoking a private API. Documented
+                      below.
+                    items:
+                      properties:
+                        resourceParameters:
+                          description: The parameters for EventBridge to use when
+                            invoking the resource endpoint. Documented below.
+                          items:
+                            properties:
+                              resourceConfigurationArn:
+                                description: ARN of the Amazon VPC Lattice resource
+                                  configuration for the resource endpoint.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kmsKeyIdentifier:
+                    description: Identifier of the AWS KMS customer managed key for
+                      EventBridge to use, if you choose to use a customer managed
+                      key to encrypt this connection. The identifier can be the key
+                      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+                    type: string
+                  kmsKeyIdentifierRef:
+                    description: Reference to a Key in kms to populate kmsKeyIdentifier.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  kmsKeyIdentifierSelector:
+                    description: Selector for a Key in kms to populate kmsKeyIdentifier.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -818,13 +916,110 @@ spec:
                       type: object
                     type: array
                   authorizationType:
-                    description: Choose the type of authorization to use for the connection.
+                    description: Type of authorization to use for the connection.
                       One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
                     type: string
                   description:
-                    description: Enter a description for the connection. Maximum of
-                      512 characters.
+                    description: Description for the connection. Maximum of 512 characters.
                     type: string
+                  invocationConnectivityParameters:
+                    description: Parameters to use for invoking a private API. Documented
+                      below.
+                    items:
+                      properties:
+                        resourceParameters:
+                          description: The parameters for EventBridge to use when
+                            invoking the resource endpoint. Documented below.
+                          items:
+                            properties:
+                              resourceConfigurationArn:
+                                description: ARN of the Amazon VPC Lattice resource
+                                  configuration for the resource endpoint.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kmsKeyIdentifier:
+                    description: Identifier of the AWS KMS customer managed key for
+                      EventBridge to use, if you choose to use a customer managed
+                      key to encrypt this connection. The identifier can be the key
+                      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+                    type: string
+                  kmsKeyIdentifierRef:
+                    description: Reference to a Key in kms to populate kmsKeyIdentifier.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  kmsKeyIdentifierSelector:
+                    description: Selector for a Key in kms to populate kmsKeyIdentifier.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -1203,14 +1398,46 @@ spec:
                       type: object
                     type: array
                   authorizationType:
-                    description: Choose the type of authorization to use for the connection.
+                    description: Type of authorization to use for the connection.
                       One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
                     type: string
                   description:
-                    description: Enter a description for the connection. Maximum of
-                      512 characters.
+                    description: Description for the connection. Maximum of 512 characters.
                     type: string
                   id:
+                    type: string
+                  invocationConnectivityParameters:
+                    description: Parameters to use for invoking a private API. Documented
+                      below.
+                    items:
+                      properties:
+                        resourceParameters:
+                          description: The parameters for EventBridge to use when
+                            invoking the resource endpoint. Documented below.
+                          items:
+                            properties:
+                              resourceAssociationArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  connection.
+                                type: string
+                              resourceConfigurationArn:
+                                description: ARN of the Amazon VPC Lattice resource
+                                  configuration for the resource endpoint.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kmsKeyIdentifier:
+                    description: Identifier of the AWS KMS customer managed key for
+                      EventBridge to use, if you choose to use a customer managed
+                      key to encrypt this connection. The identifier can be the key
+                      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   secretArn:
                     description: The Amazon Resource Name (ARN) of the secret created

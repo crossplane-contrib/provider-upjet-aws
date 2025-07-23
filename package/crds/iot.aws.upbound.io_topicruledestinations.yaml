@@ -78,8 +78,9 @@ spec:
                       true.'
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcConfiguration:
                     description: Configuration of the virtual private cloud (VPC)
@@ -950,6 +951,11 @@ spec:
                       true.'
                     type: boolean
                   id:
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcConfiguration:
                     description: Configuration of the virtual private cloud (VPC)

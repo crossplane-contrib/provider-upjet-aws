@@ -213,8 +213,9 @@ spec:
                       set to provisioned.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -656,6 +657,11 @@ spec:
                       to provision for the file system. Only applicable with throughput_mode
                       set to provisioned.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sizeInBytes:
                     description: The latest known metered size (in bytes) of data
                       stored in the file system, the value is not the exact size that

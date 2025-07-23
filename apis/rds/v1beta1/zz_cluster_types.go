@@ -39,11 +39,14 @@ type ClusterInitParameters struct {
 	// The CA certificate identifier to use for the DB cluster's server certificate.
 	CACertificateIdentifier *string `json:"caCertificateIdentifier,omitempty" tf:"ca_certificate_identifier,omitempty"`
 
-	// – List of RDS Instances that are a part of this cluster
+	// List of RDS Instances that are a part of this cluster
 	// +listType=set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
-	// –  Copy all Cluster tags to snapshots. Default is false.
+	// Specifies the scalability mode of the Aurora DB cluster. When set to limitless, the cluster operates as an Aurora Limitless Database. When set to standard (the default), the cluster uses normal DB instance creation. Valid values: limitless, standard.
+	ClusterScalabilityType *string `json:"clusterScalabilityType,omitempty" tf:"cluster_scalability_type,omitempty"`
+
+	// Copy all Cluster tags to snapshots. Default is false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
 	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance classes are available in all AWS Regions, or for all database engines. For the full list of DB instance classes and availability for your engine, see DB instance class in the Amazon RDS User Guide.
@@ -89,6 +92,9 @@ type ClusterInitParameters struct {
 	// For use with RDS Custom.
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
+	// The mode of Database Insights to enable for the DB cluster. Valid values: standard, advanced.
+	DatabaseInsightsMode *string `json:"databaseInsightsMode,omitempty" tf:"database_insights_mode,omitempty"`
+
 	// Name for an automatically created database on cluster creation. There are different naming restrictions per database engine: RDS Naming Constraints
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -115,7 +121,7 @@ type ClusterInitParameters struct {
 	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -125,7 +131,7 @@ type ClusterInitParameters struct {
 	// The life cycle type for this DB instance. This setting is valid for cluster types Aurora DB clusters and Multi-AZ DB clusters. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
 	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
-	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
+	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. Specify an empty value ("") for no engine mode. See the RDS User Guide for limitations when using serverless.
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
 	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
@@ -163,6 +169,12 @@ type ClusterInitParameters struct {
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
+	// Only required unless manage_master_user_password is set to true, a snapshot_identifier, replication_source_identifier, or master_password is provided or unless a global_cluster_identifier is provided when the cluster is the "secondary" cluster of a global database) Password for the master DB user. Note that this may show up in logs. Please refer to the RDS Naming Constraints. Cannot be set if manage_master_user_password is set to true.
+	MasterPasswordWoSecretRef *v1.SecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
+
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key_id",true)
@@ -179,34 +191,50 @@ type ClusterInitParameters struct {
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
+	// Interval, in seconds, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
+
+	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Clusters.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate monitoringRoleArn.
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate monitoringRoleArn.
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Enables Performance Insights for the RDS Cluster
+	// Enables Performance Insights.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
+	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
-	// Port on which the DB accepts connections
+	// Port on which the DB accepts connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per region, e.g. 04:00-09:00.
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
 	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica.
+	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
 	// Nested attribute for point in time restore. More details below.
 	RestoreToPointInTime []ClusterRestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
-	// Port on which the DB accepts connections
+	// Port on which the DB accepts connections.
 	S3Import []ClusterS3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.
@@ -300,14 +328,17 @@ type ClusterObservation struct {
 	// Expiration date of the DB instance’s server certificate
 	CACertificateValidTill *string `json:"caCertificateValidTill,omitempty" tf:"ca_certificate_valid_till,omitempty"`
 
-	// – List of RDS Instances that are a part of this cluster
+	// List of RDS Instances that are a part of this cluster
 	// +listType=set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
 	// RDS Cluster Resource ID
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
-	// –  Copy all Cluster tags to snapshots. Default is false.
+	// Specifies the scalability mode of the Aurora DB cluster. When set to limitless, the cluster operates as an Aurora Limitless Database. When set to standard (the default), the cluster uses normal DB instance creation. Valid values: limitless, standard.
+	ClusterScalabilityType *string `json:"clusterScalabilityType,omitempty" tf:"cluster_scalability_type,omitempty"`
+
+	// Copy all Cluster tags to snapshots. Default is false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
 	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance classes are available in all AWS Regions, or for all database engines. For the full list of DB instance classes and availability for your engine, see DB instance class in the Amazon RDS User Guide.
@@ -325,6 +356,9 @@ type ClusterObservation struct {
 
 	// For use with RDS Custom.
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
+
+	// The mode of Database Insights to enable for the DB cluster. Valid values: standard, advanced.
+	DatabaseInsightsMode *string `json:"databaseInsightsMode,omitempty" tf:"database_insights_mode,omitempty"`
 
 	// Name for an automatically created database on cluster creation. There are different naming restrictions per database engine: RDS Naming Constraints
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -352,7 +386,7 @@ type ClusterObservation struct {
 	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -365,7 +399,7 @@ type ClusterObservation struct {
 	// The life cycle type for this DB instance. This setting is valid for cluster types Aurora DB clusters and Multi-AZ DB clusters. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
 	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
-	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
+	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. Specify an empty value ("") for no engine mode. See the RDS User Guide for limitations when using serverless.
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
 	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
@@ -402,6 +436,9 @@ type ClusterObservation struct {
 	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if master_password is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
+
 	// Block that specifies the master user secret. Only available when manage_master_user_password is set to true. Documented below.
 	MasterUserSecret []ClusterMasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
 
@@ -411,22 +448,28 @@ type ClusterObservation struct {
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
+	// Interval, in seconds, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
+
+	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Clusters.
+	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
+
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Enables Performance Insights for the RDS Cluster
+	// Enables Performance Insights.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
+	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
-	// Port on which the DB accepts connections
+	// Port on which the DB accepts connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per region, e.g. 04:00-09:00.
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
 	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
@@ -436,13 +479,17 @@ type ClusterObservation struct {
 	// load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
-	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
 	// Nested attribute for point in time restore. More details below.
 	RestoreToPointInTime []ClusterRestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
-	// Port on which the DB accepts connections
+	// Port on which the DB accepts connections.
 	S3Import []ClusterS3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.
@@ -517,12 +564,16 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	CACertificateIdentifier *string `json:"caCertificateIdentifier,omitempty" tf:"ca_certificate_identifier,omitempty"`
 
-	// – List of RDS Instances that are a part of this cluster
+	// List of RDS Instances that are a part of this cluster
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
-	// –  Copy all Cluster tags to snapshots. Default is false.
+	// Specifies the scalability mode of the Aurora DB cluster. When set to limitless, the cluster operates as an Aurora Limitless Database. When set to standard (the default), the cluster uses normal DB instance creation. Valid values: limitless, standard.
+	// +kubebuilder:validation:Optional
+	ClusterScalabilityType *string `json:"clusterScalabilityType,omitempty" tf:"cluster_scalability_type,omitempty"`
+
+	// Copy all Cluster tags to snapshots. Default is false.
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
@@ -574,6 +625,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
+	// The mode of Database Insights to enable for the DB cluster. Valid values: standard, advanced.
+	// +kubebuilder:validation:Optional
+	DatabaseInsightsMode *string `json:"databaseInsightsMode,omitempty" tf:"database_insights_mode,omitempty"`
+
 	// Name for an automatically created database on cluster creation. There are different naming restrictions per database engine: RDS Naming Constraints
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -608,7 +663,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
@@ -621,7 +676,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
-	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
+	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. Specify an empty value ("") for no engine mode. See the RDS User Guide for limitations when using serverless.
 	// +kubebuilder:validation:Optional
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
@@ -668,6 +723,14 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
+	// Only required unless manage_master_user_password is set to true, a snapshot_identifier, replication_source_identifier, or master_password is provided or unless a global_cluster_identifier is provided when the cluster is the "secondary" cluster of a global database) Password for the master DB user. Note that this may show up in logs. Please refer to the RDS Naming Constraints. Cannot be set if manage_master_user_password is set to true.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoSecretRef *v1.SecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// +kubebuilder:validation:Optional
+	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
+
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key_id",true)
@@ -686,27 +749,45 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
+	// Interval, in seconds, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	// +kubebuilder:validation:Optional
+	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
+
+	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Clusters.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate monitoringRoleArn.
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate monitoringRoleArn.
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Enables Performance Insights for the RDS Cluster
+	// Enables Performance Insights.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
+	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
-	// Port on which the DB accepts connections
+	// Port on which the DB accepts connections.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per region, e.g. 04:00-09:00.
 	// +kubebuilder:validation:Optional
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
@@ -714,12 +795,12 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica.
+	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
@@ -727,7 +808,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreToPointInTime []ClusterRestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
-	// Port on which the DB accepts connections
+	// Port on which the DB accepts connections.
 	// +kubebuilder:validation:Optional
 	S3Import []ClusterS3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 

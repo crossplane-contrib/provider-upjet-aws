@@ -320,6 +320,11 @@ func (in *LocationS3Observation) DeepCopyInto(out *LocationS3Observation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.S3BucketArn != nil {
 		in, out := &in.S3BucketArn, &out.S3BucketArn
 		*out = new(string)
@@ -1234,6 +1239,11 @@ func (in *TaskInitParameters) DeepCopyInto(out *TaskInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.TaskMode != nil {
+		in, out := &in.TaskMode, &out.TaskMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.TaskReportConfig != nil {
 		in, out := &in.TaskReportConfig, &out.TaskReportConfig
 		*out = make([]TaskReportConfigInitParameters, len(*in))
@@ -1334,6 +1344,11 @@ func (in *TaskObservation) DeepCopyInto(out *TaskObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Schedule != nil {
 		in, out := &in.Schedule, &out.Schedule
 		*out = make([]ScheduleObservation, len(*in))
@@ -1377,6 +1392,11 @@ func (in *TaskObservation) DeepCopyInto(out *TaskObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TaskMode != nil {
+		in, out := &in.TaskMode, &out.TaskMode
+		*out = new(string)
+		**out = **in
 	}
 	if in.TaskReportConfig != nil {
 		in, out := &in.TaskReportConfig, &out.TaskReportConfig
@@ -1498,6 +1518,11 @@ func (in *TaskParameters) DeepCopyInto(out *TaskParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TaskMode != nil {
+		in, out := &in.TaskMode, &out.TaskMode
+		*out = new(string)
+		**out = **in
 	}
 	if in.TaskReportConfig != nil {
 		in, out := &in.TaskReportConfig, &out.TaskReportConfig

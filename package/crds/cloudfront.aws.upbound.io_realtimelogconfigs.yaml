@@ -260,18 +260,12 @@ spec:
                   name:
                     description: The unique name to identify this real-time log configuration.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   samplingRate:
                     description: The sampling rate for this real-time log configuration.
                       The sampling rate determines the percentage of viewer requests
                       that are represented in the real-time log data. An integer between
                       1 and 100, inclusive.
                     type: number
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

@@ -1071,6 +1071,11 @@ func (in *DatasourceObservation) DeepCopyInto(out *DatasourceObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RelationalDatabaseConfig != nil {
 		in, out := &in.RelationalDatabaseConfig, &out.RelationalDatabaseConfig
 		*out = make([]RelationalDatabaseConfigObservation, len(*in))
@@ -1901,6 +1906,11 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RequestMappingTemplate != nil {
 		in, out := &in.RequestMappingTemplate, &out.RequestMappingTemplate
 		*out = new(string)
@@ -2429,6 +2439,11 @@ func (in *GraphQLAPIObservation) DeepCopyInto(out *GraphQLAPIObservation) {
 	if in.QueryDepthLimit != nil {
 		in, out := &in.QueryDepthLimit, &out.QueryDepthLimit
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.ResolverCountLimit != nil {
@@ -3993,6 +4008,11 @@ func (in *ResolverObservation) DeepCopyInto(out *ResolverObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RequestTemplate != nil {
 		in, out := &in.RequestTemplate, &out.RequestTemplate

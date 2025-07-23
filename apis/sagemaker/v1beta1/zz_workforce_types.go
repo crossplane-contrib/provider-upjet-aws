@@ -242,6 +242,10 @@ type WorkforceObservation struct {
 	// Use this parameter to configure a private workforce using your own OIDC Identity Provider. Conflicts with cognito_config. see OIDC Config details below.
 	OidcConfig []OidcConfigObservation `json:"oidcConfig,omitempty" tf:"oidc_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source Ip Config details below.
 	SourceIPConfig []SourceIPConfigObservation `json:"sourceIpConfig,omitempty" tf:"source_ip_config,omitempty"`
 
@@ -262,10 +266,10 @@ type WorkforceParameters struct {
 	// +kubebuilder:validation:Optional
 	OidcConfig []OidcConfigParameters `json:"oidcConfig,omitempty" tf:"oidc_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source Ip Config details below.
 	// +kubebuilder:validation:Optional
@@ -351,7 +355,7 @@ type WorkforceStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Workforce is the Schema for the Workforces API. Provides a SageMaker Workforce resource.
+// Workforce is the Schema for the Workforces API. Provides a SageMaker AI Workforce resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

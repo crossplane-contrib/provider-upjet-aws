@@ -222,7 +222,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CatalogTarget); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+			m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "CatalogTable", "CatalogTableList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -344,7 +344,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.CatalogTarget); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+			m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "CatalogTable", "CatalogTableList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -558,7 +558,27 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "Connection", "ConnectionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Connections),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.ConnectionsRefs,
+			Selector:      mg.Spec.ForProvider.ConnectionsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Connections")
+	}
+	mg.Spec.ForProvider.Connections = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ConnectionsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
@@ -578,6 +598,25 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "Connection", "ConnectionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Connections),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.ConnectionsRefs,
+			Selector:      mg.Spec.InitProvider.ConnectionsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Connections")
+	}
+	mg.Spec.InitProvider.Connections = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ConnectionsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {

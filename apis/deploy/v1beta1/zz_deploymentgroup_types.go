@@ -15,7 +15,7 @@ import (
 
 type AlarmConfigurationInitParameters struct {
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// A list of alarms configured for the deployment group.
 	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
@@ -28,7 +28,7 @@ type AlarmConfigurationInitParameters struct {
 
 type AlarmConfigurationObservation struct {
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// A list of alarms configured for the deployment group.
 	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
@@ -41,7 +41,7 @@ type AlarmConfigurationObservation struct {
 
 type AlarmConfigurationParameters struct {
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// A list of alarms configured for the deployment group.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
@@ -243,6 +243,10 @@ type DeploymentGroupObservation struct {
 	// Configuration block of Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. Valid values are UPDATE and IGNORE. Defaults to UPDATE.
 	OutdatedInstancesStrategy *string `json:"outdatedInstancesStrategy,omitempty" tf:"outdated_instances_strategy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The service role ARN that allows deployments.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
@@ -325,10 +329,10 @@ type DeploymentGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	OutdatedInstancesStrategy *string `json:"outdatedInstancesStrategy,omitempty" tf:"outdated_instances_strategy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The service role ARN that allows deployments.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -715,7 +719,7 @@ type OnPremisesInstanceTagFilterParameters struct {
 type ProdTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBListener
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBListener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
@@ -739,7 +743,7 @@ type ProdTrafficRouteObservation struct {
 type ProdTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBListener
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBListener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set

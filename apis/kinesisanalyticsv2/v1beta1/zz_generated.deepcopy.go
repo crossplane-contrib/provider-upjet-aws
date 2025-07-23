@@ -482,6 +482,11 @@ func (in *ApplicationObservation) DeepCopyInto(out *ApplicationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RuntimeEnvironment != nil {
 		in, out := &in.RuntimeEnvironment, &out.RuntimeEnvironment
 		*out = new(string)

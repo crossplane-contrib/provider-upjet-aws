@@ -83,13 +83,16 @@ type ServerlessClusterInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// VPC configuration information. See below.
-	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+	VPCConfig []ServerlessClusterVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ServerlessClusterObservation struct {
 
 	// The ARN of the serverless cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// One or more DNS names (or IP addresses) and SASL IAM port pairs. For example, boot-abcdefg.c2.kafka-serverless.eu-central-1.amazonaws.com:9098. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
+	BootstrapBrokersSaslIAM *string `json:"bootstrapBrokersSaslIam,omitempty" tf:"bootstrap_brokers_sasl_iam,omitempty"`
 
 	// Specifies client authentication information for the serverless cluster. See below.
 	ClientAuthentication []ServerlessClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
@@ -102,6 +105,10 @@ type ServerlessClusterObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -111,7 +118,7 @@ type ServerlessClusterObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// VPC configuration information. See below.
-	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+	VPCConfig []ServerlessClusterVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ServerlessClusterParameters struct {
@@ -124,10 +131,10 @@ type ServerlessClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -136,10 +143,10 @@ type ServerlessClusterParameters struct {
 
 	// VPC configuration information. See below.
 	// +kubebuilder:validation:Optional
-	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+	VPCConfig []ServerlessClusterVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
-type VPCConfigInitParameters struct {
+type ServerlessClusterVPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
@@ -172,7 +179,7 @@ type VPCConfigInitParameters struct {
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
-type VPCConfigObservation struct {
+type ServerlessClusterVPCConfigObservation struct {
 
 	// Specifies up to five security groups that control inbound and outbound traffic for the serverless cluster.
 	// +listType=set
@@ -183,7 +190,7 @@ type VPCConfigObservation struct {
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
-type VPCConfigParameters struct {
+type ServerlessClusterVPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional

@@ -129,7 +129,10 @@ spec:
                       type: object
                     type: array
                   acl:
-                    description: Canned ACL to apply to the bucket.
+                    description: 'Specifies the Canned ACL to apply to the bucket.
+                      Valid values: private, public-read, public-read-write, aws-exec-read,
+                      authenticated-read, bucket-owner-read, bucket-owner-full-control,
+                      log-delivery-write. Full details are available on the AWS documentation.'
                     type: string
                   bucket:
                     description: Bucket to which to apply the ACL.
@@ -212,8 +215,9 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -287,7 +291,10 @@ spec:
                       type: object
                     type: array
                   acl:
-                    description: Canned ACL to apply to the bucket.
+                    description: 'Specifies the Canned ACL to apply to the bucket.
+                      Valid values: private, public-read, public-read-write, aws-exec-read,
+                      authenticated-read, bucket-owner-read, bucket-owner-full-control,
+                      log-delivery-write. Full details are available on the AWS documentation.'
                     type: string
                   bucket:
                     description: Bucket to which to apply the ACL.
@@ -601,7 +608,10 @@ spec:
                       type: object
                     type: array
                   acl:
-                    description: Canned ACL to apply to the bucket.
+                    description: 'Specifies the Canned ACL to apply to the bucket.
+                      Valid values: private, public-read, public-read-write, aws-exec-read,
+                      authenticated-read, bucket-owner-read, bucket-owner-full-control,
+                      log-delivery-write. Full details are available on the AWS documentation.'
                     type: string
                   bucket:
                     description: Bucket to which to apply the ACL.
@@ -612,6 +622,11 @@ spec:
                   id:
                     description: The bucket, expected_bucket_owner (if configured),
                       and acl (if configured) separated by commas (,).
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

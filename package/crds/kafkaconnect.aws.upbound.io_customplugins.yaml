@@ -84,12 +84,12 @@ spec:
                     type: string
                   location:
                     description: Information about the location of a custom plugin.
-                      See below.
+                      See location Block for details.
                     items:
                       properties:
                         s3:
                           description: Information of the plugin file stored in Amazon
-                            S3. See below.
+                            S3. See s3 Block for details..
                           items:
                             properties:
                               bucketArn:
@@ -262,8 +262,9 @@ spec:
                     description: The name of the custom plugin..
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -297,12 +298,12 @@ spec:
                     type: string
                   location:
                     description: Information about the location of a custom plugin.
-                      See below.
+                      See location Block for details.
                     items:
                       properties:
                         s3:
                           description: Information of the plugin file stored in Amazon
-                            S3. See below.
+                            S3. See s3 Block for details..
                           items:
                             properties:
                               bucketArn:
@@ -677,12 +678,12 @@ spec:
                     type: number
                   location:
                     description: Information about the location of a custom plugin.
-                      See below.
+                      See location Block for details.
                     items:
                       properties:
                         s3:
                           description: Information of the plugin file stored in Amazon
-                            S3. See below.
+                            S3. See s3 Block for details..
                           items:
                             properties:
                               bucketArn:
@@ -701,6 +702,11 @@ spec:
                     type: array
                   name:
                     description: The name of the custom plugin..
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: the state of the custom plugin.

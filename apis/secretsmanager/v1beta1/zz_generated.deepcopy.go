@@ -840,6 +840,11 @@ func (in *SecretRotationObservation) DeepCopyInto(out *SecretRotationObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RotateImmediately != nil {
 		in, out := &in.RotateImmediately, &out.RotateImmediately
 		*out = new(bool)

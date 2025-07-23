@@ -171,7 +171,7 @@ type DefaultCacheBehaviorInitParameters struct {
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
-	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
+	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. The TTL defined in Cache Policy overrides this configuration.
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
@@ -183,13 +183,16 @@ type DefaultCacheBehaviorInitParameters struct {
 	// A config block that triggers a cloudfront function with specific actions (maximum 2).
 	FunctionAssociation []FunctionAssociationInitParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that sets the grpc config.
+	GRPCConfig []GRPCConfigInitParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
+
 	// A config block that triggers a lambda function with specific actions (maximum 4).
 	LambdaFunctionAssociation []LambdaFunctionAssociationInitParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
-	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
+	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers. The TTL defined in Cache Policy overrides this configuration.
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
-	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
+	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds. The TTL defined in Cache Policy overrides this configuration.
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
@@ -233,7 +236,7 @@ type DefaultCacheBehaviorObservation struct {
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
-	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
+	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. The TTL defined in Cache Policy overrides this configuration.
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
@@ -245,13 +248,16 @@ type DefaultCacheBehaviorObservation struct {
 	// A config block that triggers a cloudfront function with specific actions (maximum 2).
 	FunctionAssociation []FunctionAssociationObservation `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that sets the grpc config.
+	GRPCConfig []GRPCConfigObservation `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
+
 	// A config block that triggers a lambda function with specific actions (maximum 4).
 	LambdaFunctionAssociation []LambdaFunctionAssociationObservation `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
-	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
+	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers. The TTL defined in Cache Policy overrides this configuration.
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
-	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
+	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds. The TTL defined in Cache Policy overrides this configuration.
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
@@ -299,7 +305,7 @@ type DefaultCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
-	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
+	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. The TTL defined in Cache Policy overrides this configuration.
 	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
@@ -315,15 +321,19 @@ type DefaultCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionAssociation []FunctionAssociationParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that sets the grpc config.
+	// +kubebuilder:validation:Optional
+	GRPCConfig []GRPCConfigParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
+
 	// A config block that triggers a lambda function with specific actions (maximum 4).
 	// +kubebuilder:validation:Optional
 	LambdaFunctionAssociation []LambdaFunctionAssociationParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
-	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
+	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers. The TTL defined in Cache Policy overrides this configuration.
 	// +kubebuilder:validation:Optional
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
-	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
+	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds. The TTL defined in Cache Policy overrides this configuration.
 	// +kubebuilder:validation:Optional
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
@@ -390,7 +400,7 @@ type DistributionInitParameters struct {
 	// Whether the IPv6 is enabled for the distribution.
 	IsIPv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6_enabled,omitempty"`
 
-	// The logging configuration that controls how logs are written to your distribution (maximum one).
+	// The logging configuration that controls how logs are written to your distribution (maximum one). AWS provides two versions of access logs for CloudFront: Legacy and v2. This argument configures legacy version standard logs.
 	LoggingConfig []LoggingConfigInitParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
 	// Ordered list of cache behaviors resource for this distribution. List from top to bottom in order of precedence. The topmost cache behavior will have precedence 0.
@@ -482,7 +492,7 @@ type DistributionObservation struct {
 	// Date and time the distribution was last modified.
 	LastModifiedTime *string `json:"lastModifiedTime,omitempty" tf:"last_modified_time,omitempty"`
 
-	// The logging configuration that controls how logs are written to your distribution (maximum one).
+	// The logging configuration that controls how logs are written to your distribution (maximum one). AWS provides two versions of access logs for CloudFront: Legacy and v2. This argument configures legacy version standard logs.
 	LoggingConfig []LoggingConfigObservation `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
 	// Ordered list of cache behaviors resource for this distribution. List from top to bottom in order of precedence. The topmost cache behavior will have precedence 0.
@@ -572,7 +582,7 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	IsIPv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6_enabled,omitempty"`
 
-	// The logging configuration that controls how logs are written to your distribution (maximum one).
+	// The logging configuration that controls how logs are written to your distribution (maximum one). AWS provides two versions of access logs for CloudFront: Legacy and v2. This argument configures legacy version standard logs.
 	// +kubebuilder:validation:Optional
 	LoggingConfig []LoggingConfigParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
@@ -591,11 +601,6 @@ type DistributionParameters struct {
 	// Price class for this distribution. One of PriceClass_All, PriceClass_200, PriceClass_100.
 	// +kubebuilder:validation:Optional
 	PriceClass *string `json:"priceClass,omitempty" tf:"price_class,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 
 	// The restriction configuration for this distribution (maximum one).
 	// +kubebuilder:validation:Optional
@@ -762,6 +767,25 @@ type FunctionAssociationParameters struct {
 	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
 }
 
+type GRPCConfigInitParameters struct {
+
+	// Whether the distribution is enabled to accept end user requests for content.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type GRPCConfigObservation struct {
+
+	// Whether the distribution is enabled to accept end user requests for content.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type GRPCConfigParameters struct {
+
+	// Whether the distribution is enabled to accept end user requests for content.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type GeoRestrictionInitParameters struct {
 
 	// ISO 3166-1-alpha-2 codes for which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist). If the type is specified as none an empty array can be used.
@@ -851,7 +875,7 @@ type LambdaFunctionAssociationParameters struct {
 
 type LoggingConfigInitParameters struct {
 
-	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com.
+	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Whether to include cookies in access logs (default: false).
@@ -863,7 +887,7 @@ type LoggingConfigInitParameters struct {
 
 type LoggingConfigObservation struct {
 
-	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com.
+	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Whether to include cookies in access logs (default: false).
@@ -875,7 +899,7 @@ type LoggingConfigObservation struct {
 
 type LoggingConfigParameters struct {
 
-	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com.
+	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
@@ -1040,6 +1064,25 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
+type OrderedCacheBehaviorGRPCConfigInitParameters struct {
+
+	// Whether the distribution is enabled to accept end user requests for content.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type OrderedCacheBehaviorGRPCConfigObservation struct {
+
+	// Whether the distribution is enabled to accept end user requests for content.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type OrderedCacheBehaviorGRPCConfigParameters struct {
+
+	// Whether the distribution is enabled to accept end user requests for content.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type OrderedCacheBehaviorInitParameters struct {
 
 	// Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
@@ -1056,7 +1099,7 @@ type OrderedCacheBehaviorInitParameters struct {
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
-	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
+	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. The TTL defined in Cache Policy overrides this configuration.
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
@@ -1068,13 +1111,16 @@ type OrderedCacheBehaviorInitParameters struct {
 	// A config block that triggers a cloudfront function with specific actions (maximum 2).
 	FunctionAssociation []OrderedCacheBehaviorFunctionAssociationInitParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that sets the grpc config.
+	GRPCConfig []OrderedCacheBehaviorGRPCConfigInitParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
+
 	// A config block that triggers a lambda function with specific actions (maximum 4).
 	LambdaFunctionAssociation []OrderedCacheBehaviorLambdaFunctionAssociationInitParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
-	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
+	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers. The TTL defined in Cache Policy overrides this configuration.
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
-	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
+	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds. The TTL defined in Cache Policy overrides this configuration.
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
@@ -1180,7 +1226,7 @@ type OrderedCacheBehaviorObservation struct {
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
-	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
+	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. The TTL defined in Cache Policy overrides this configuration.
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
@@ -1192,13 +1238,16 @@ type OrderedCacheBehaviorObservation struct {
 	// A config block that triggers a cloudfront function with specific actions (maximum 2).
 	FunctionAssociation []OrderedCacheBehaviorFunctionAssociationObservation `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that sets the grpc config.
+	GRPCConfig []OrderedCacheBehaviorGRPCConfigObservation `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
+
 	// A config block that triggers a lambda function with specific actions (maximum 4).
 	LambdaFunctionAssociation []OrderedCacheBehaviorLambdaFunctionAssociationObservation `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
-	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
+	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers. The TTL defined in Cache Policy overrides this configuration.
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
-	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
+	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds. The TTL defined in Cache Policy overrides this configuration.
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
@@ -1249,7 +1298,7 @@ type OrderedCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
-	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
+	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. The TTL defined in Cache Policy overrides this configuration.
 	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
@@ -1265,15 +1314,19 @@ type OrderedCacheBehaviorParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionAssociation []OrderedCacheBehaviorFunctionAssociationParameters `json:"functionAssociation,omitempty" tf:"function_association,omitempty"`
 
+	// A config block that sets the grpc config.
+	// +kubebuilder:validation:Optional
+	GRPCConfig []OrderedCacheBehaviorGRPCConfigParameters `json:"grpcConfig,omitempty" tf:"grpc_config,omitempty"`
+
 	// A config block that triggers a lambda function with specific actions (maximum 4).
 	// +kubebuilder:validation:Optional
 	LambdaFunctionAssociation []OrderedCacheBehaviorLambdaFunctionAssociationParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
-	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
+	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers. The TTL defined in Cache Policy overrides this configuration.
 	// +kubebuilder:validation:Optional
 	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
-	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
+	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds. The TTL defined in Cache Policy overrides this configuration.
 	// +kubebuilder:validation:Optional
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 

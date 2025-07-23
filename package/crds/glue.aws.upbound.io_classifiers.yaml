@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   csvClassifier:
-                    description: A classifier for Csv content. Defined below.
+                    description: A classifier for CSV content. Defined below.
                     items:
                       properties:
                         allowSingleColumn:
@@ -96,7 +96,7 @@ spec:
                             type: string
                           type: array
                         delimiter:
-                          description: The delimiter used in the Csv to separate columns.
+                          description: The delimiter used in the CSV to separate columns.
                           type: string
                         disableValueTrimming:
                           description: Specifies whether to trim column values.
@@ -112,12 +112,13 @@ spec:
                             the column delimiter.
                           type: string
                         serde:
+                          description: The SerDe for processing CSV. Valid values
+                            are OpenCSVSerDe, LazySimpleSerDe, None.
                           type: string
                       type: object
                     type: array
                   grokClassifier:
-                    description: –  A classifier that uses grok patterns. Defined
-                      below.
+                    description: A classifier that uses grok patterns. Defined below.
                     items:
                       properties:
                         classification:
@@ -134,7 +135,7 @@ spec:
                       type: object
                     type: array
                   jsonClassifier:
-                    description: –  A classifier for JSON content. Defined below.
+                    description: A classifier for JSON content. Defined below.
                     items:
                       properties:
                         jsonPath:
@@ -145,11 +146,12 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   xmlClassifier:
-                    description: –  A classifier for XML content. Defined below.
+                    description: A classifier for XML content. Defined below.
                     items:
                       properties:
                         classification:
@@ -184,7 +186,7 @@ spec:
                   autoscaler.
                 properties:
                   csvClassifier:
-                    description: A classifier for Csv content. Defined below.
+                    description: A classifier for CSV content. Defined below.
                     items:
                       properties:
                         allowSingleColumn:
@@ -206,7 +208,7 @@ spec:
                             type: string
                           type: array
                         delimiter:
-                          description: The delimiter used in the Csv to separate columns.
+                          description: The delimiter used in the CSV to separate columns.
                           type: string
                         disableValueTrimming:
                           description: Specifies whether to trim column values.
@@ -222,12 +224,13 @@ spec:
                             the column delimiter.
                           type: string
                         serde:
+                          description: The SerDe for processing CSV. Valid values
+                            are OpenCSVSerDe, LazySimpleSerDe, None.
                           type: string
                       type: object
                     type: array
                   grokClassifier:
-                    description: –  A classifier that uses grok patterns. Defined
-                      below.
+                    description: A classifier that uses grok patterns. Defined below.
                     items:
                       properties:
                         classification:
@@ -244,7 +247,7 @@ spec:
                       type: object
                     type: array
                   jsonClassifier:
-                    description: –  A classifier for JSON content. Defined below.
+                    description: A classifier for JSON content. Defined below.
                     items:
                       properties:
                         jsonPath:
@@ -255,7 +258,7 @@ spec:
                       type: object
                     type: array
                   xmlClassifier:
-                    description: –  A classifier for XML content. Defined below.
+                    description: A classifier for XML content. Defined below.
                     items:
                       properties:
                         classification:
@@ -447,7 +450,7 @@ spec:
               atProvider:
                 properties:
                   csvClassifier:
-                    description: A classifier for Csv content. Defined below.
+                    description: A classifier for CSV content. Defined below.
                     items:
                       properties:
                         allowSingleColumn:
@@ -469,7 +472,7 @@ spec:
                             type: string
                           type: array
                         delimiter:
-                          description: The delimiter used in the Csv to separate columns.
+                          description: The delimiter used in the CSV to separate columns.
                           type: string
                         disableValueTrimming:
                           description: Specifies whether to trim column values.
@@ -485,12 +488,13 @@ spec:
                             the column delimiter.
                           type: string
                         serde:
+                          description: The SerDe for processing CSV. Valid values
+                            are OpenCSVSerDe, LazySimpleSerDe, None.
                           type: string
                       type: object
                     type: array
                   grokClassifier:
-                    description: –  A classifier that uses grok patterns. Defined
-                      below.
+                    description: A classifier that uses grok patterns. Defined below.
                     items:
                       properties:
                         classification:
@@ -510,7 +514,7 @@ spec:
                     description: Name of the classifier
                     type: string
                   jsonClassifier:
-                    description: –  A classifier for JSON content. Defined below.
+                    description: A classifier for JSON content. Defined below.
                     items:
                       properties:
                         jsonPath:
@@ -520,8 +524,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   xmlClassifier:
-                    description: –  A classifier for XML content. Defined below.
+                    description: A classifier for XML content. Defined below.
                     items:
                       properties:
                         classification:

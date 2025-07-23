@@ -74,7 +74,7 @@ spec:
                 properties:
                   accessConfig:
                     description: Configuration block for the access config associated
-                      with your cluster, see Amazon EKS Access Entries.
+                      with your cluster, see Amazon EKS Access Entries. Detailed below.
                     items:
                       properties:
                         authenticationMode:
@@ -83,7 +83,7 @@ spec:
                           type: string
                         bootstrapClusterCreatorAdminPermissions:
                           description: Whether or not to bootstrap the access config
-                            values to the cluster. Default is true.
+                            values to the cluster. Default is false.
                           type: boolean
                       type: object
                     type: array
@@ -129,8 +129,7 @@ spec:
                     x-kubernetes-list-type: set
                   encryptionConfig:
                     description: Configuration block with encryption configuration
-                      for the cluster. Only available on Kubernetes 1.13 and above
-                      clusters created after March 6, 2020. Detailed below.
+                      for the cluster. Detailed below.
                     items:
                       properties:
                         provider:
@@ -158,6 +157,10 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                  forceUpdateVersion:
+                    description: Force version update by overriding upgrade-blocking
+                      readiness checks when updating a cluster.
+                    type: boolean
                   kubernetesNetworkConfig:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
@@ -235,8 +238,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   remoteNetworkConfig:
                     description: Configuration block with remote network configuration
@@ -362,11 +366,16 @@ spec:
                     items:
                       properties:
                         blockStorage:
+                          description: Configuration block with block storage configuration
+                            for the cluster. Detailed below.
                           items:
                             properties:
                               enabled:
-                                description: Whether zonal shift is enabled for the
-                                  cluster.
+                                description: Indicates if the block storage capability
+                                  is enabled on your EKS Auto Mode cluster. If the
+                                  block storage capability is enabled, EKS Auto Mode
+                                  will create and delete block storage volumes in
+                                  your Amazon Web Services account.
                                 type: boolean
                             type: object
                           type: array
@@ -393,7 +402,7 @@ spec:
                       type: object
                     type: array
                   version:
-                    description: –  Desired Kubernetes master version. If you do not
+                    description: Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
                       is used and no upgrades will occur except those automatically
                       triggered by EKS. The value must be configured and increased
@@ -417,11 +426,6 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
-                        index:
-                          default: "0"
-                          description: This is an injected field with a default value
-                            for being able to merge items of the parent object list.
-                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -510,9 +514,10 @@ spec:
                               type: object
                           type: object
                         securityGroupIds:
-                          description: account elastic network interfaces that Amazon
-                            EKS creates to use to allow communication between your
-                            worker nodes and the Kubernetes control plane.
+                          description: List of security group IDs for the cross-account
+                            elastic network interfaces that Amazon EKS creates to
+                            use to allow communication between your worker nodes and
+                            the Kubernetes control plane.
                           items:
                             type: string
                           type: array
@@ -596,18 +601,16 @@ spec:
                               type: object
                           type: object
                         subnetIds:
-                          description: account elastic network interfaces in these
-                            subnets to allow communication between your worker nodes
-                            and the Kubernetes control plane.
+                          description: List of subnet IDs. Must be in at least two
+                            different availability zones. Amazon EKS creates cross-account
+                            elastic network interfaces in these subnets to allow communication
+                            between your worker nodes and the Kubernetes control plane.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   zonalShiftConfig:
                     description: Configuration block with zonal shift configuration
                       for the cluster. Detailed below.
@@ -636,7 +639,7 @@ spec:
                 properties:
                   accessConfig:
                     description: Configuration block for the access config associated
-                      with your cluster, see Amazon EKS Access Entries.
+                      with your cluster, see Amazon EKS Access Entries. Detailed below.
                     items:
                       properties:
                         authenticationMode:
@@ -645,7 +648,7 @@ spec:
                           type: string
                         bootstrapClusterCreatorAdminPermissions:
                           description: Whether or not to bootstrap the access config
-                            values to the cluster. Default is true.
+                            values to the cluster. Default is false.
                           type: boolean
                       type: object
                     type: array
@@ -691,8 +694,7 @@ spec:
                     x-kubernetes-list-type: set
                   encryptionConfig:
                     description: Configuration block with encryption configuration
-                      for the cluster. Only available on Kubernetes 1.13 and above
-                      clusters created after March 6, 2020. Detailed below.
+                      for the cluster. Detailed below.
                     items:
                       properties:
                         provider:
@@ -720,6 +722,10 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                  forceUpdateVersion:
+                    description: Force version update by overriding upgrade-blocking
+                      readiness checks when updating a cluster.
+                    type: boolean
                   kubernetesNetworkConfig:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
@@ -920,11 +926,16 @@ spec:
                     items:
                       properties:
                         blockStorage:
+                          description: Configuration block with block storage configuration
+                            for the cluster. Detailed below.
                           items:
                             properties:
                               enabled:
-                                description: Whether zonal shift is enabled for the
-                                  cluster.
+                                description: Indicates if the block storage capability
+                                  is enabled on your EKS Auto Mode cluster. If the
+                                  block storage capability is enabled, EKS Auto Mode
+                                  will create and delete block storage volumes in
+                                  your Amazon Web Services account.
                                 type: boolean
                             type: object
                           type: array
@@ -951,7 +962,7 @@ spec:
                       type: object
                     type: array
                   version:
-                    description: –  Desired Kubernetes master version. If you do not
+                    description: Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
                       is used and no upgrades will occur except those automatically
                       triggered by EKS. The value must be configured and increased
@@ -975,11 +986,6 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
-                        index:
-                          default: "0"
-                          description: This is an injected field with a default value
-                            for being able to merge items of the parent object list.
-                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -1068,9 +1074,10 @@ spec:
                               type: object
                           type: object
                         securityGroupIds:
-                          description: account elastic network interfaces that Amazon
-                            EKS creates to use to allow communication between your
-                            worker nodes and the Kubernetes control plane.
+                          description: List of security group IDs for the cross-account
+                            elastic network interfaces that Amazon EKS creates to
+                            use to allow communication between your worker nodes and
+                            the Kubernetes control plane.
                           items:
                             type: string
                           type: array
@@ -1154,18 +1161,16 @@ spec:
                               type: object
                           type: object
                         subnetIds:
-                          description: account elastic network interfaces in these
-                            subnets to allow communication between your worker nodes
-                            and the Kubernetes control plane.
+                          description: List of subnet IDs. Must be in at least two
+                            different availability zones. Amazon EKS creates cross-account
+                            elastic network interfaces in these subnets to allow communication
+                            between your worker nodes and the Kubernetes control plane.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   zonalShiftConfig:
                     description: Configuration block with zonal shift configuration
                       for the cluster. Detailed below.
@@ -1356,7 +1361,7 @@ spec:
                 properties:
                   accessConfig:
                     description: Configuration block for the access config associated
-                      with your cluster, see Amazon EKS Access Entries.
+                      with your cluster, see Amazon EKS Access Entries. Detailed below.
                     items:
                       properties:
                         authenticationMode:
@@ -1365,7 +1370,7 @@ spec:
                           type: string
                         bootstrapClusterCreatorAdminPermissions:
                           description: Whether or not to bootstrap the access config
-                            values to the cluster. Default is true.
+                            values to the cluster. Default is false.
                           type: boolean
                       type: object
                     type: array
@@ -1435,8 +1440,7 @@ spec:
                     x-kubernetes-list-type: set
                   encryptionConfig:
                     description: Configuration block with encryption configuration
-                      for the cluster. Only available on Kubernetes 1.13 and above
-                      clusters created after March 6, 2020. Detailed below.
+                      for the cluster. Detailed below.
                     items:
                       properties:
                         provider:
@@ -1467,6 +1471,10 @@ spec:
                   endpoint:
                     description: Endpoint for your Kubernetes API server.
                     type: string
+                  forceUpdateVersion:
+                    description: Force version update by overriding upgrade-blocking
+                      readiness checks when updating a cluster.
+                    type: boolean
                   id:
                     description: Name of the cluster.
                     type: string
@@ -1525,12 +1533,12 @@ spec:
                             to be created. The block must meet the following requirements:'
                           type: string
                         serviceIpv6Cidr:
-                          description: The CIDR block that Kubernetes pod and service
-                            IP addresses are assigned from if you specified ipv6 for
-                            ipFamily when you created the cluster. Kubernetes assigns
-                            service addresses from the unique local address range
-                            (fc00::/7) because you can't specify a custom IPv6 CIDR
-                            block when you create the cluster.
+                          description: (Computed) The CIDR block that Kubernetes pod
+                            and service IP addresses are assigned from if you specify
+                            ipv6 for ip_family when you create the cluster. Kubernetes
+                            assigns service addresses from the unique local address
+                            range (fc00::/7) because you can't specify a custom IPv6
+                            CIDR block when you create the cluster.
                           type: string
                       type: object
                     type: array
@@ -1576,6 +1584,11 @@ spec:
                     type: array
                   platformVersion:
                     description: Platform version for the cluster.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   remoteNetworkConfig:
                     description: Configuration block with remote network configuration
@@ -1631,11 +1644,16 @@ spec:
                     items:
                       properties:
                         blockStorage:
+                          description: Configuration block with block storage configuration
+                            for the cluster. Detailed below.
                           items:
                             properties:
                               enabled:
-                                description: Whether zonal shift is enabled for the
-                                  cluster.
+                                description: Indicates if the block storage capability
+                                  is enabled on your EKS Auto Mode cluster. If the
+                                  block storage capability is enabled, EKS Auto Mode
+                                  will create and delete block storage volumes in
+                                  your Amazon Web Services account.
                                 type: boolean
                             type: object
                           type: array
@@ -1669,7 +1687,7 @@ spec:
                       type: object
                     type: array
                   version:
-                    description: –  Desired Kubernetes master version. If you do not
+                    description: Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
                       is used and no upgrades will occur except those automatically
                       triggered by EKS. The value must be configured and increased
@@ -1686,9 +1704,9 @@ spec:
                     items:
                       properties:
                         clusterSecurityGroupId:
-                          description: Cluster security group that was created by
-                            Amazon EKS for the cluster. Managed node groups use this
-                            security group for control-plane-to-data-plane communication.
+                          description: (Computed) Cluster security group that is created
+                            by Amazon EKS for the cluster. Managed node groups use
+                            this security group for control-plane-to-data-plane communication.
                           type: string
                         endpointPrivateAccess:
                           description: Whether the Amazon EKS private API server endpoint
@@ -1698,11 +1716,6 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
-                        index:
-                          default: "0"
-                          description: This is an injected field with a default value
-                            for being able to merge items of the parent object list.
-                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -1712,29 +1725,29 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         securityGroupIds:
-                          description: account elastic network interfaces that Amazon
-                            EKS creates to use to allow communication between your
-                            worker nodes and the Kubernetes control plane.
+                          description: List of security group IDs for the cross-account
+                            elastic network interfaces that Amazon EKS creates to
+                            use to allow communication between your worker nodes and
+                            the Kubernetes control plane.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         subnetIds:
-                          description: account elastic network interfaces in these
-                            subnets to allow communication between your worker nodes
-                            and the Kubernetes control plane.
+                          description: List of subnet IDs. Must be in at least two
+                            different availability zones. Amazon EKS creates cross-account
+                            elastic network interfaces in these subnets to allow communication
+                            between your worker nodes and the Kubernetes control plane.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         vpcId:
-                          description: ID of the VPC associated with your cluster.
+                          description: (Computed) ID of the VPC associated with your
+                            cluster.
                           type: string
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   zonalShiftConfig:
                     description: Configuration block with zonal shift configuration
                       for the cluster. Detailed below.

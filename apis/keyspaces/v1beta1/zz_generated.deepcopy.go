@@ -1370,6 +1370,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SchemaDefinition != nil {
 		in, out := &in.SchemaDefinition, &out.SchemaDefinition
 		*out = make([]SchemaDefinitionObservation, len(*in))

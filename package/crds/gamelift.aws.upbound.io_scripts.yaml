@@ -77,8 +77,9 @@ spec:
                     description: Name of the script
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   storageLocation:
                     description: Information indicating where your game script files
@@ -801,6 +802,11 @@ spec:
                     type: string
                   name:
                     description: Name of the script
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   storageLocation:
                     description: Information indicating where your game script files

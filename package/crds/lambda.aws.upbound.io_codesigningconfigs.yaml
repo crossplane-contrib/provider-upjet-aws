@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: CodeSigningConfig is the Schema for the CodeSigningConfigs API.
-          Provides a Lambda Code Signing Config resource.
+          Manages an AWS Lambda Code Signing Config.
         properties:
           apiVersion:
             description: |-
@@ -74,14 +74,14 @@ spec:
               forProvider:
                 properties:
                   allowedPublishers:
-                    description: A configuration block of allowed publishers as signing
-                      profiles for this code signing configuration. Detailed below.
+                    description: Configuration block of allowed publishers as signing
+                      profiles for this code signing configuration. See below.
                     items:
                       properties:
                         signingProfileVersionArns:
-                          description: The Amazon Resource Name (ARN) for each of
-                            the signing profiles. A signing profile defines a trusted
-                            user who can sign a code package.
+                          description: Set of ARNs for each of the signing profiles.
+                            A signing profile defines a trusted user who can sign
+                            a code package. Maximum of 20 signing profiles.
                           items:
                             type: string
                           type: array
@@ -171,8 +171,8 @@ spec:
                     description: Descriptive name for this code signing configuration.
                     type: string
                   policies:
-                    description: A configuration block of code signing policies that
-                      define the actions to take if the validation checks fail. Detailed
+                    description: Configuration block of code signing policies that
+                      define the actions to take if the validation checks fail. See
                       below.
                     items:
                       properties:
@@ -187,8 +187,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -213,14 +214,14 @@ spec:
                   autoscaler.
                 properties:
                   allowedPublishers:
-                    description: A configuration block of allowed publishers as signing
-                      profiles for this code signing configuration. Detailed below.
+                    description: Configuration block of allowed publishers as signing
+                      profiles for this code signing configuration. See below.
                     items:
                       properties:
                         signingProfileVersionArns:
-                          description: The Amazon Resource Name (ARN) for each of
-                            the signing profiles. A signing profile defines a trusted
-                            user who can sign a code package.
+                          description: Set of ARNs for each of the signing profiles.
+                            A signing profile defines a trusted user who can sign
+                            a code package. Maximum of 20 signing profiles.
                           items:
                             type: string
                           type: array
@@ -310,8 +311,8 @@ spec:
                     description: Descriptive name for this code signing configuration.
                     type: string
                   policies:
-                    description: A configuration block of code signing policies that
-                      define the actions to take if the validation checks fail. Detailed
+                    description: Configuration block of code signing policies that
+                      define the actions to take if the validation checks fail. See
                       below.
                     items:
                       properties:
@@ -510,14 +511,14 @@ spec:
               atProvider:
                 properties:
                   allowedPublishers:
-                    description: A configuration block of allowed publishers as signing
-                      profiles for this code signing configuration. Detailed below.
+                    description: Configuration block of allowed publishers as signing
+                      profiles for this code signing configuration. See below.
                     items:
                       properties:
                         signingProfileVersionArns:
-                          description: The Amazon Resource Name (ARN) for each of
-                            the signing profiles. A signing profile defines a trusted
-                            user who can sign a code package.
+                          description: Set of ARNs for each of the signing profiles.
+                            A signing profile defines a trusted user who can sign
+                            a code package. Maximum of 20 signing profiles.
                           items:
                             type: string
                           type: array
@@ -525,8 +526,7 @@ spec:
                       type: object
                     type: array
                   arn:
-                    description: The Amazon Resource Name (ARN) of the code signing
-                      configuration.
+                    description: ARN of the code signing configuration.
                     type: string
                   configId:
                     description: Unique identifier for the code signing configuration.
@@ -537,12 +537,12 @@ spec:
                   id:
                     type: string
                   lastModified:
-                    description: The date and time that the code signing configuration
+                    description: Date and time that the code signing configuration
                       was last modified.
                     type: string
                   policies:
-                    description: A configuration block of code signing policies that
-                      define the actions to take if the validation checks fail. Detailed
+                    description: Configuration block of code signing policies that
+                      define the actions to take if the validation checks fail. See
                       below.
                     items:
                       properties:
@@ -556,6 +556,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -565,9 +570,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -238,7 +238,7 @@ spec:
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
                       that you want to configure for your SFTP server. See endpoint_details
-                      block below for details.
+                      Block below for details.
                     items:
                       properties:
                         addressAllocationIds:
@@ -525,7 +525,7 @@ spec:
                     type: boolean
                   function:
                     description: The ARN for a lambda function to use for the Identity
-                      provider.
+                      provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
                   hostKeySecretRef:
                     description: RSA, ECDSA, or ED25519 private key (e.g., as generated
@@ -685,7 +685,7 @@ spec:
                     type: object
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server. See protocol_details block below for details.
+                      server. See protocol_details Block below for details.
                     items:
                       properties:
                         as2Transports:
@@ -725,13 +725,14 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   s3StorageOptions:
                     description: Specifies whether or not performance for your Amazon
                       S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options block below for details.
+                      s3_storage_options Block below for details.
                     items:
                       properties:
                         directoryListingOptimization:
@@ -747,9 +748,10 @@ spec:
                       The available values are:'
                     type: string
                   sftpAuthenticationMethods:
-                    description: 'For SFTP-enabled servers, and for custom identity
-                      providers only. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD
-                      and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.'
+                    description: 'For SFTP-enabled servers with an identity_provider_type
+                      of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY,
+                      PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default
+                      value is: PUBLIC_KEY_OR_PASSWORD.'
                     type: string
                   structuredLogDestinations:
                     description: |-
@@ -771,13 +773,13 @@ spec:
                     type: string
                   workflowDetails:
                     description: Specifies the workflow details. See workflow_details
-                      block below for details.
+                      Block below for details.
                     items:
                       properties:
                         onPartialUpload:
                           description: A trigger that starts a workflow if a file
                             is only partially uploaded. See Workflow Detail below.
-                            See on_partial_upload block below for details.
+                            See on_partial_upload Block below for details.
                           items:
                             properties:
                               executionRole:
@@ -794,7 +796,7 @@ spec:
                         onUpload:
                           description: 'A trigger that starts a workflow: the workflow
                             begins to execute after a file is uploaded. See on_upload
-                            block below for details.'
+                            Block below for details.'
                           items:
                             properties:
                               executionRole:
@@ -991,7 +993,7 @@ spec:
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
                       that you want to configure for your SFTP server. See endpoint_details
-                      block below for details.
+                      Block below for details.
                     items:
                       properties:
                         addressAllocationIds:
@@ -1278,7 +1280,7 @@ spec:
                     type: boolean
                   function:
                     description: The ARN for a lambda function to use for the Identity
-                      provider.
+                      provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
                   hostKeySecretRef:
                     description: RSA, ECDSA, or ED25519 private key (e.g., as generated
@@ -1438,7 +1440,7 @@ spec:
                     type: object
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server. See protocol_details block below for details.
+                      server. See protocol_details Block below for details.
                     items:
                       properties:
                         as2Transports:
@@ -1480,7 +1482,7 @@ spec:
                   s3StorageOptions:
                     description: Specifies whether or not performance for your Amazon
                       S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options block below for details.
+                      s3_storage_options Block below for details.
                     items:
                       properties:
                         directoryListingOptimization:
@@ -1496,9 +1498,10 @@ spec:
                       The available values are:'
                     type: string
                   sftpAuthenticationMethods:
-                    description: 'For SFTP-enabled servers, and for custom identity
-                      providers only. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD
-                      and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.'
+                    description: 'For SFTP-enabled servers with an identity_provider_type
+                      of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY,
+                      PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default
+                      value is: PUBLIC_KEY_OR_PASSWORD.'
                     type: string
                   structuredLogDestinations:
                     description: |-
@@ -1520,13 +1523,13 @@ spec:
                     type: string
                   workflowDetails:
                     description: Specifies the workflow details. See workflow_details
-                      block below for details.
+                      Block below for details.
                     items:
                       properties:
                         onPartialUpload:
                           description: A trigger that starts a workflow if a file
                             is only partially uploaded. See Workflow Detail below.
-                            See on_partial_upload block below for details.
+                            See on_partial_upload Block below for details.
                           items:
                             properties:
                               executionRole:
@@ -1543,7 +1546,7 @@ spec:
                         onUpload:
                           description: 'A trigger that starts a workflow: the workflow
                             begins to execute after a file is uploaded. See on_upload
-                            block below for details.'
+                            Block below for details.'
                           items:
                             properties:
                               executionRole:
@@ -1755,7 +1758,7 @@ spec:
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
                       that you want to configure for your SFTP server. See endpoint_details
-                      block below for details.
+                      Block below for details.
                     items:
                       properties:
                         addressAllocationIds:
@@ -1812,7 +1815,7 @@ spec:
                     type: boolean
                   function:
                     description: The ARN for a lambda function to use for the Identity
-                      provider.
+                      provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
                   hostKeyFingerprint:
                     description: This value contains the message-digest algorithm
@@ -1849,7 +1852,7 @@ spec:
                     type: string
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server. See protocol_details block below for details.
+                      server. See protocol_details Block below for details.
                     items:
                       properties:
                         as2Transports:
@@ -1888,10 +1891,15 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   s3StorageOptions:
                     description: Specifies whether or not performance for your Amazon
                       S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options block below for details.
+                      s3_storage_options Block below for details.
                     items:
                       properties:
                         directoryListingOptimization:
@@ -1907,9 +1915,10 @@ spec:
                       The available values are:'
                     type: string
                   sftpAuthenticationMethods:
-                    description: 'For SFTP-enabled servers, and for custom identity
-                      providers only. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD
-                      and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.'
+                    description: 'For SFTP-enabled servers with an identity_provider_type
+                      of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY,
+                      PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default
+                      value is: PUBLIC_KEY_OR_PASSWORD.'
                     type: string
                   structuredLogDestinations:
                     description: |-
@@ -1939,13 +1948,13 @@ spec:
                     type: string
                   workflowDetails:
                     description: Specifies the workflow details. See workflow_details
-                      block below for details.
+                      Block below for details.
                     items:
                       properties:
                         onPartialUpload:
                           description: A trigger that starts a workflow if a file
                             is only partially uploaded. See Workflow Detail below.
-                            See on_partial_upload block below for details.
+                            See on_partial_upload Block below for details.
                           items:
                             properties:
                               executionRole:
@@ -1962,7 +1971,7 @@ spec:
                         onUpload:
                           description: 'A trigger that starts a workflow: the workflow
                             begins to execute after a file is uploaded. See on_upload
-                            block below for details.'
+                            Block below for details.'
                           items:
                             properties:
                               executionRole:

@@ -98,11 +98,6 @@ spec:
                     description: The document version you want to associate with the
                       target(s). Can be a specific version or the default version.
                     type: string
-                  instanceId:
-                    description: The instance ID to apply an SSM document to. Use
-                      targets with key InstanceIds for document schema versions 2.0
-                      and above. Use the targets attribute instead.
-                    type: string
                   maxConcurrency:
                     description: The maximum number of targets allowed to run the
                       association at the same time. You can specify a number, for
@@ -219,8 +214,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scheduleExpression:
                     description: A cron or rate expression that specifies when the
@@ -247,8 +243,8 @@ spec:
                             an EC2 tag.
                           type: string
                         values:
-                          description: A list of instance IDs or tag values. AWS currently
-                            limits this list size to one value.
+                          description: User-defined criteria that maps to Key. A list
+                            of instance IDs or tag values.
                           items:
                             type: string
                           type: array
@@ -378,11 +374,6 @@ spec:
                     description: The document version you want to associate with the
                       target(s). Can be a specific version or the default version.
                     type: string
-                  instanceId:
-                    description: The instance ID to apply an SSM document to. Use
-                      targets with key InstanceIds for document schema versions 2.0
-                      and above. Use the targets attribute instead.
-                    type: string
                   maxConcurrency:
                     description: The maximum number of targets allowed to run the
                       association at the same time. You can specify a number, for
@@ -523,8 +514,8 @@ spec:
                             an EC2 tag.
                           type: string
                         values:
-                          description: A list of instance IDs or tag values. AWS currently
-                            limits this list size to one value.
+                          description: User-defined criteria that maps to Key. A list
+                            of instance IDs or tag values.
                           items:
                             type: string
                           type: array
@@ -819,11 +810,6 @@ spec:
                     type: string
                   id:
                     type: string
-                  instanceId:
-                    description: The instance ID to apply an SSM document to. Use
-                      targets with key InstanceIds for document schema versions 2.0
-                      and above. Use the targets attribute instead.
-                    type: string
                   maxConcurrency:
                     description: The maximum number of targets allowed to run the
                       association at the same time. You can specify a number, for
@@ -865,6 +851,11 @@ spec:
                       the SSM document.
                     type: object
                     x-kubernetes-map-type: granular
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   scheduleExpression:
                     description: A cron or rate expression that specifies when the
                       association runs.
@@ -898,8 +889,8 @@ spec:
                             an EC2 tag.
                           type: string
                         values:
-                          description: A list of instance IDs or tag values. AWS currently
-                            limits this list size to one value.
+                          description: User-defined criteria that maps to Key. A list
+                            of instance IDs or tag values.
                           items:
                             type: string
                           type: array

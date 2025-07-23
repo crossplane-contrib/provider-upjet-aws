@@ -18,7 +18,7 @@ type AppInitParameters struct {
 	// Personal access token for a third-party source control system for an Amplify app. This token must have write access to the relevant repo to create a webhook and a read-only deploy key for the Amplify project. The token is not stored, so after applying this attribute can be removed and the setup token deleted.
 	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
-	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	AutoBranchCreationConfig []AutoBranchCreationConfigInitParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
 	// Automated branch creation glob patterns for an Amplify app.
@@ -34,10 +34,23 @@ type AppInitParameters struct {
 	// Cache configuration for the Amplify app. See cache_config Block for details.
 	CacheConfig []CacheConfigInitParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
-	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	// Custom rewrite and redirect rules for an Amplify app. See custom_rule Block for details.
 	CustomRule []CustomRuleInitParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
 	// Description for an Amplify app.
@@ -94,7 +107,7 @@ type AppObservation struct {
 	// ARN of the Amplify app.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	AutoBranchCreationConfig []AutoBranchCreationConfigObservation `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
 	// Automated branch creation glob patterns for an Amplify app.
@@ -107,10 +120,13 @@ type AppObservation struct {
 	// Cache configuration for the Amplify app. See cache_config Block for details.
 	CacheConfig []CacheConfigObservation `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
-	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	// Custom rewrite and redirect rules for an Amplify app. See custom_rule Block for details.
 	CustomRule []CustomRuleObservation `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
 	// Default domain for the Amplify app.
@@ -150,6 +166,10 @@ type AppObservation struct {
 	// Describes the information about a production branch for an Amplify app. A production_branch block is documented below.
 	ProductionBranch []ProductionBranchObservation `json:"productionBranch,omitempty" tf:"production_branch,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Repository for an Amplify app.
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 
@@ -168,7 +188,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
-	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	// +kubebuilder:validation:Optional
 	AutoBranchCreationConfig []AutoBranchCreationConfigParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
@@ -189,11 +209,25 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheConfig []CacheConfigParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
+
 	// The custom HTTP headers for an Amplify app.
 	// +kubebuilder:validation:Optional
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
-	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	// Custom rewrite and redirect rules for an Amplify app. See custom_rule Block for details.
 	// +kubebuilder:validation:Optional
 	CustomRule []CustomRuleParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
@@ -248,10 +282,10 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Repository for an Amplify app.
 	// +kubebuilder:validation:Optional

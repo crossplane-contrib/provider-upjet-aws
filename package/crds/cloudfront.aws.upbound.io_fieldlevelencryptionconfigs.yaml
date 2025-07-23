@@ -231,12 +231,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -591,6 +585,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The Field Level Encryption Config ARN.
+                    type: string
                   callerReference:
                     description: Internal value used by CloudFront to allow future
                       updates to the Field Level Encryption Config.

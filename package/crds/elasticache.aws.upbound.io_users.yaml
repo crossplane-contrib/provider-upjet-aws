@@ -111,7 +111,8 @@ spec:
                       type: object
                     type: array
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported values are redis, valkey (case
+                      insensitive).
                     type: string
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
@@ -139,8 +140,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -187,7 +189,8 @@ spec:
                       type: object
                     type: array
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported values are redis, valkey (case
+                      insensitive).
                     type: string
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
@@ -412,13 +415,19 @@ spec:
                       type: object
                     type: array
                   engine:
-                    description: The current supported value is REDIS.
+                    description: The current supported values are redis, valkey (case
+                      insensitive).
                     type: string
                   id:
                     type: string
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

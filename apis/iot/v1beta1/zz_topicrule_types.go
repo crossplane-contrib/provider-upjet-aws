@@ -911,7 +911,7 @@ type ErrorActionParameters struct {
 
 type FirehoseInitParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
@@ -926,7 +926,7 @@ type FirehoseInitParameters struct {
 
 type FirehoseObservation struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
@@ -941,7 +941,7 @@ type FirehoseObservation struct {
 
 type FirehoseParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
@@ -1086,7 +1086,7 @@ type HeaderParameters struct {
 
 type IotAnalyticsInitParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// Name of AWS IOT Analytics channel.
@@ -1098,7 +1098,7 @@ type IotAnalyticsInitParameters struct {
 
 type IotAnalyticsObservation struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// Name of AWS IOT Analytics channel.
@@ -1110,7 +1110,7 @@ type IotAnalyticsObservation struct {
 
 type IotAnalyticsParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
@@ -1125,7 +1125,7 @@ type IotAnalyticsParameters struct {
 
 type IotEventsInitParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The name of the AWS IoT Events input.
@@ -1140,7 +1140,7 @@ type IotEventsInitParameters struct {
 
 type IotEventsObservation struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The name of the AWS IoT Events input.
@@ -1155,7 +1155,7 @@ type IotEventsObservation struct {
 
 type IotEventsParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
@@ -1743,7 +1743,7 @@ type TimestreamTimestampParameters struct {
 
 type TopicRuleFirehoseInitParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
@@ -1758,7 +1758,7 @@ type TopicRuleFirehoseInitParameters struct {
 
 type TopicRuleFirehoseObservation struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
@@ -1773,7 +1773,7 @@ type TopicRuleFirehoseObservation struct {
 
 type TopicRuleFirehoseParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
@@ -1890,7 +1890,7 @@ type TopicRuleInitParameters struct {
 
 type TopicRuleIotAnalyticsInitParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// Name of AWS IOT Analytics channel.
@@ -1902,7 +1902,7 @@ type TopicRuleIotAnalyticsInitParameters struct {
 
 type TopicRuleIotAnalyticsObservation struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// Name of AWS IOT Analytics channel.
@@ -1914,7 +1914,7 @@ type TopicRuleIotAnalyticsObservation struct {
 
 type TopicRuleIotAnalyticsParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
@@ -1929,7 +1929,7 @@ type TopicRuleIotAnalyticsParameters struct {
 
 type TopicRuleIotEventsInitParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The name of the AWS IoT Events input.
@@ -1944,7 +1944,7 @@ type TopicRuleIotEventsInitParameters struct {
 
 type TopicRuleIotEventsObservation struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The name of the AWS IoT Events input.
@@ -1959,7 +1959,7 @@ type TopicRuleIotEventsObservation struct {
 
 type TopicRuleIotEventsParameters struct {
 
-	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
@@ -2149,6 +2149,10 @@ type TopicRuleObservation struct {
 
 	Lambda []TopicRuleLambdaObservation `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	Republish []TopicRuleRepublishObservation `json:"republish,omitempty" tf:"republish,omitempty"`
 
 	S3 []TopicRuleS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
@@ -2229,10 +2233,10 @@ type TopicRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Lambda []TopicRuleLambdaParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Republish []TopicRuleRepublishParameters `json:"republish,omitempty" tf:"republish,omitempty"`

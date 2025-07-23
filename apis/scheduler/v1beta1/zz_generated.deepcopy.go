@@ -1618,6 +1618,11 @@ func (in *ScheduleObservation) DeepCopyInto(out *ScheduleObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ScheduleExpression != nil {
 		in, out := &in.ScheduleExpression, &out.ScheduleExpression
 		*out = new(string)

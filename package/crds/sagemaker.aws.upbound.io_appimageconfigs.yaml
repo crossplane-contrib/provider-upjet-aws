@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AppImageConfig is the Schema for the AppImageConfigs API. Provides
-          a SageMaker App Image Config resource.
+          a SageMaker AI App Image Config resource.
         properties:
           apiVersion:
             description: |-
@@ -74,11 +74,8 @@ spec:
               forProvider:
                 properties:
                   codeEditorAppImageConfig:
-                    description: The CodeEditorAppImageConfig. You can only specify
-                      one image kernel in the AppImageConfig API. This kernel is shown
-                      to users before the image starts. After the image runs, all
-                      kernels are visible in Code Editor. See Code Editor App Image
-                      Config details below.
+                    description: The CodeEditorAppImageConfig. See Code Editor App
+                      Image Config details below.
                     items:
                       properties:
                         containerConfig:
@@ -132,11 +129,8 @@ spec:
                       type: object
                     type: array
                   jupyterLabImageConfig:
-                    description: The JupyterLabAppImageConfig. You can only specify
-                      one image kernel in the AppImageConfig API. This kernel is shown
-                      to users before the image starts. After the image runs, all
-                      kernels are visible in JupyterLab. See Jupyter Lab Image Config
-                      details below.
+                    description: The JupyterLabAppImageConfig. See Jupyter Lab Image
+                      Config details below.
                     items:
                       properties:
                         containerConfig:
@@ -191,8 +185,8 @@ spec:
                     type: array
                   kernelGatewayImageConfig:
                     description: The configuration for the file system and kernels
-                      in a SageMaker image running as a KernelGateway app. See Kernel
-                      Gateway Image Config details below.
+                      in a SageMaker AI image running as a KernelGateway app. See
+                      Kernel Gateway Image Config details below.
                     items:
                       properties:
                         fileSystemConfig:
@@ -233,8 +227,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -259,11 +254,8 @@ spec:
                   autoscaler.
                 properties:
                   codeEditorAppImageConfig:
-                    description: The CodeEditorAppImageConfig. You can only specify
-                      one image kernel in the AppImageConfig API. This kernel is shown
-                      to users before the image starts. After the image runs, all
-                      kernels are visible in Code Editor. See Code Editor App Image
-                      Config details below.
+                    description: The CodeEditorAppImageConfig. See Code Editor App
+                      Image Config details below.
                     items:
                       properties:
                         containerConfig:
@@ -317,11 +309,8 @@ spec:
                       type: object
                     type: array
                   jupyterLabImageConfig:
-                    description: The JupyterLabAppImageConfig. You can only specify
-                      one image kernel in the AppImageConfig API. This kernel is shown
-                      to users before the image starts. After the image runs, all
-                      kernels are visible in JupyterLab. See Jupyter Lab Image Config
-                      details below.
+                    description: The JupyterLabAppImageConfig. See Jupyter Lab Image
+                      Config details below.
                     items:
                       properties:
                         containerConfig:
@@ -376,8 +365,8 @@ spec:
                     type: array
                   kernelGatewayImageConfig:
                     description: The configuration for the file system and kernels
-                      in a SageMaker image running as a KernelGateway app. See Kernel
-                      Gateway Image Config details below.
+                      in a SageMaker AI image running as a KernelGateway app. See
+                      Kernel Gateway Image Config details below.
                     items:
                       properties:
                         fileSystemConfig:
@@ -601,11 +590,8 @@ spec:
                       this App Image Config.
                     type: string
                   codeEditorAppImageConfig:
-                    description: The CodeEditorAppImageConfig. You can only specify
-                      one image kernel in the AppImageConfig API. This kernel is shown
-                      to users before the image starts. After the image runs, all
-                      kernels are visible in Code Editor. See Code Editor App Image
-                      Config details below.
+                    description: The CodeEditorAppImageConfig. See Code Editor App
+                      Image Config details below.
                     items:
                       properties:
                         containerConfig:
@@ -662,11 +648,8 @@ spec:
                     description: The name of the App Image Config.
                     type: string
                   jupyterLabImageConfig:
-                    description: The JupyterLabAppImageConfig. You can only specify
-                      one image kernel in the AppImageConfig API. This kernel is shown
-                      to users before the image starts. After the image runs, all
-                      kernels are visible in JupyterLab. See Jupyter Lab Image Config
-                      details below.
+                    description: The JupyterLabAppImageConfig. See Jupyter Lab Image
+                      Config details below.
                     items:
                       properties:
                         containerConfig:
@@ -721,8 +704,8 @@ spec:
                     type: array
                   kernelGatewayImageConfig:
                     description: The configuration for the file system and kernels
-                      in a SageMaker image running as a KernelGateway app. See Kernel
-                      Gateway Image Config details below.
+                      in a SageMaker AI image running as a KernelGateway app. See
+                      Kernel Gateway Image Config details below.
                     items:
                       properties:
                         fileSystemConfig:
@@ -762,6 +745,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

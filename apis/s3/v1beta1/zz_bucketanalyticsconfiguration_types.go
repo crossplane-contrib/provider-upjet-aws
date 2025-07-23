@@ -83,6 +83,10 @@ type BucketAnalyticsConfigurationObservation struct {
 	// Unique identifier of the analytics configuration for the bucket.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration for the analytics data export (documented below).
 	StorageClassAnalysis []StorageClassAnalysisObservation `json:"storageClassAnalysis,omitempty" tf:"storage_class_analysis,omitempty"`
 }
@@ -111,10 +115,10 @@ type BucketAnalyticsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration for the analytics data export (documented below).
 	// +kubebuilder:validation:Optional

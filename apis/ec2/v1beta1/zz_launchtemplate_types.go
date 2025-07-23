@@ -13,93 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AcceleratorCountInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type AcceleratorCountObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type AcceleratorCountParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type AcceleratorTotalMemoryMibInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type AcceleratorTotalMemoryMibObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type AcceleratorTotalMemoryMibParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type BaselineEBSBandwidthMbpsInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type BaselineEBSBandwidthMbpsObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type BaselineEBSBandwidthMbpsParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
 type BlockDeviceMappingsInitParameters struct {
 
 	// The name of the device to mount.
@@ -184,6 +97,45 @@ type CapacityReservationSpecificationCapacityReservationTargetParameters struct 
 	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
 }
 
+type ConnectionTrackingSpecificationInitParameters struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
+type ConnectionTrackingSpecificationObservation struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
+type ConnectionTrackingSpecificationParameters struct {
+
+	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+	// +kubebuilder:validation:Optional
+	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	// +kubebuilder:validation:Optional
+	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
+
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	// +kubebuilder:validation:Optional
+	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
+}
+
 type EBSInitParameters struct {
 
 	// Whether the volume should be destroyed on instance termination.
@@ -218,6 +170,9 @@ type EBSInitParameters struct {
 	// The throughput to provision for a gp3 volume in MiB/s (specified as an integer, e.g., 500), with a maximum of 1,000 MiB/s.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
+	// The volume initialization rate in MiB/s (specified as an integer, e.g. 100), with a minimum of 100 MiB/s and maximum of 300 MiB/s.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
+
 	// The size of the volume in gigabytes.
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
@@ -249,6 +204,9 @@ type EBSObservation struct {
 
 	// The throughput to provision for a gp3 volume in MiB/s (specified as an integer, e.g., 500), with a maximum of 1,000 MiB/s.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// The volume initialization rate in MiB/s (specified as an integer, e.g. 100), with a minimum of 100 MiB/s and maximum of 300 MiB/s.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 
 	// The size of the volume in gigabytes.
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
@@ -298,6 +256,10 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
+	// The volume initialization rate in MiB/s (specified as an integer, e.g. 100), with a minimum of 100 MiB/s and maximum of 300 MiB/s.
+	// +kubebuilder:validation:Optional
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
+
 	// The size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
@@ -308,42 +270,52 @@ type EBSParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
-type ElasticGpuSpecificationsInitParameters struct {
+type EnaSrdSpecificationInitParameters struct {
 
-	// The Elastic GPU Type
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// Whether to enable ENA Express. ENA Express uses AWS Scalable Reliable Datagram (SRD) technology to improve the performance of TCP traffic.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configuration for ENA Express UDP optimization. See details below.
+	EnaSrdUDPSpecification []EnaSrdUDPSpecificationInitParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
 }
 
-type ElasticGpuSpecificationsObservation struct {
+type EnaSrdSpecificationObservation struct {
 
-	// The Elastic GPU Type
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// Whether to enable ENA Express. ENA Express uses AWS Scalable Reliable Datagram (SRD) technology to improve the performance of TCP traffic.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configuration for ENA Express UDP optimization. See details below.
+	EnaSrdUDPSpecification []EnaSrdUDPSpecificationObservation `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
 }
 
-type ElasticGpuSpecificationsParameters struct {
+type EnaSrdSpecificationParameters struct {
 
-	// The Elastic GPU Type
+	// Whether to enable ENA Express. ENA Express uses AWS Scalable Reliable Datagram (SRD) technology to improve the performance of TCP traffic.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
 
-type ElasticInferenceAcceleratorInitParameters struct {
-
-	// Accelerator type.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type ElasticInferenceAcceleratorObservation struct {
-
-	// Accelerator type.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type ElasticInferenceAcceleratorParameters struct {
-
-	// Accelerator type.
+	// Configuration for ENA Express UDP optimization. See details below.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
+	EnaSrdUDPSpecification []EnaSrdUDPSpecificationParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type EnaSrdUDPSpecificationInitParameters struct {
+
+	// Whether to enable UDP traffic optimization through ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdUDPSpecificationObservation struct {
+
+	// Whether to enable UDP traffic optimization through ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdUDPSpecificationParameters struct {
+
+	// Whether to enable UDP traffic optimization through ENA Express. Requires ena_srd_enabled to be true.
+	// +kubebuilder:validation:Optional
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
 }
 
 type HibernationOptionsInitParameters struct {
@@ -432,339 +404,265 @@ type IAMInstanceProfileParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
-type InstanceMarketOptionsSpotOptionsInitParameters struct {
+type InstanceRequirementsAcceleratorCountInitParameters struct {
 
-	// The required duration in minutes. This value must be a multiple of 60.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// The behavior when a Spot Instance is interrupted. Can be hibernate,
-	// stop, or terminate. (Default: terminate).
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price you're willing to pay for the Spot Instances.
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Can be one-time, or persistent.
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request.
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
-type InstanceMarketOptionsSpotOptionsObservation struct {
+type InstanceRequirementsAcceleratorCountObservation struct {
 
-	// The required duration in minutes. This value must be a multiple of 60.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// The behavior when a Spot Instance is interrupted. Can be hibernate,
-	// stop, or terminate. (Default: terminate).
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price you're willing to pay for the Spot Instances.
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Can be one-time, or persistent.
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request.
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
-type InstanceMarketOptionsSpotOptionsParameters struct {
+type InstanceRequirementsAcceleratorCountParameters struct {
 
-	// The required duration in minutes. This value must be a multiple of 60.
+	// Maximum.
 	// +kubebuilder:validation:Optional
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// The behavior when a Spot Instance is interrupted. Can be hibernate,
-	// stop, or terminate. (Default: terminate).
+	// Minimum.
 	// +kubebuilder:validation:Optional
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price you're willing to pay for the Spot Instances.
-	// +kubebuilder:validation:Optional
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Can be one-time, or persistent.
-	// +kubebuilder:validation:Optional
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request.
-	// +kubebuilder:validation:Optional
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
-type InstanceRequirementsInitParameters struct {
+type InstanceRequirementsAcceleratorTotalMemoryMibInitParameters struct {
 
-	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
-	AcceleratorCount []AcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// List of accelerator manufacturer names. Default is any manufacturer.
-	// +listType=set
-	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
-
-	// List of accelerator names. Default is any acclerator.
-	// +listType=set
-	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
-
-	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
-	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
-
-	// List of accelerator types. Default is any accelerator type.
-	// +listType=set
-	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
-
-	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
-	// +listType=set
-	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
-
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
-	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
-
-	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
-	BaselineEBSBandwidthMbps []BaselineEBSBandwidthMbpsInitParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
-
-	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
-	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
-
-	// List of CPU manufacturer names. Default is any manufacturer.
-	// +listType=set
-	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
-
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
-	// +listType=set
-	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
-
-	// List of instance generation names. Default is any generation.
-	// +listType=set
-	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
-
-	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
-	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
-
-	// List of local storage type names. Default any storage type.
-	// +listType=set
-	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
-
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
-	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
-
-	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
-	MemoryGibPerVcpu []MemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
-
-	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
-	MemoryMib []MemoryMibInitParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
-
-	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
-	NetworkBandwidthGbps []NetworkBandwidthGbpsInitParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
-
-	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
-	NetworkInterfaceCount []NetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
-
-	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
-	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
-
-	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
-	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
-
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
-	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
-
-	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
-	TotalLocalStorageGb []TotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
-
-	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
-	VcpuCount []VcpuCountInitParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
-type InstanceRequirementsObservation struct {
+type InstanceRequirementsAcceleratorTotalMemoryMibObservation struct {
 
-	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
-	AcceleratorCount []AcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// List of accelerator manufacturer names. Default is any manufacturer.
-	// +listType=set
-	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
-
-	// List of accelerator names. Default is any acclerator.
-	// +listType=set
-	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
-
-	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
-	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
-
-	// List of accelerator types. Default is any accelerator type.
-	// +listType=set
-	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
-
-	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
-	// +listType=set
-	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
-
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
-	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
-
-	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
-	BaselineEBSBandwidthMbps []BaselineEBSBandwidthMbpsObservation `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
-
-	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
-	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
-
-	// List of CPU manufacturer names. Default is any manufacturer.
-	// +listType=set
-	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
-
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
-	// +listType=set
-	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
-
-	// List of instance generation names. Default is any generation.
-	// +listType=set
-	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
-
-	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
-	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
-
-	// List of local storage type names. Default any storage type.
-	// +listType=set
-	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
-
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
-	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
-
-	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
-	MemoryGibPerVcpu []MemoryGibPerVcpuObservation `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
-
-	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
-	MemoryMib []MemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
-
-	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
-	NetworkBandwidthGbps []NetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
-
-	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
-	NetworkInterfaceCount []NetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
-
-	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
-	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
-
-	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
-	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
-
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
-	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
-
-	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
-	TotalLocalStorageGb []TotalLocalStorageGbObservation `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
-
-	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
-	VcpuCount []VcpuCountObservation `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
-type InstanceRequirementsParameters struct {
+type InstanceRequirementsAcceleratorTotalMemoryMibParameters struct {
 
-	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
+	// Maximum.
 	// +kubebuilder:validation:Optional
-	AcceleratorCount []AcceleratorCountParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// List of accelerator manufacturer names. Default is any manufacturer.
+	// Minimum.
 	// +kubebuilder:validation:Optional
-	// +listType=set
-	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// List of accelerator names. Default is any acclerator.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
+type InstanceRequirementsBaselineEBSBandwidthMbpsInitParameters struct {
 
-	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
-	// +kubebuilder:validation:Optional
-	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// List of accelerator types. Default is any accelerator type.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+type InstanceRequirementsBaselineEBSBandwidthMbpsObservation struct {
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
-	// +kubebuilder:validation:Optional
-	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
-	// +kubebuilder:validation:Optional
-	BaselineEBSBandwidthMbps []BaselineEBSBandwidthMbpsParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
-	// +kubebuilder:validation:Optional
-	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
+type InstanceRequirementsBaselineEBSBandwidthMbpsParameters struct {
 
-	// List of CPU manufacturer names. Default is any manufacturer.
+	// Maximum.
 	// +kubebuilder:validation:Optional
-	// +listType=set
-	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// Minimum.
 	// +kubebuilder:validation:Optional
-	// +listType=set
-	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// List of instance generation names. Default is any generation.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
+type InstanceRequirementsMemoryGibPerVcpuInitParameters struct {
 
-	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
-	// +kubebuilder:validation:Optional
-	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// List of local storage type names. Default any storage type.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
-	// +kubebuilder:validation:Optional
-	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+type InstanceRequirementsMemoryGibPerVcpuObservation struct {
 
-	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
-	// +kubebuilder:validation:Optional
-	MemoryGibPerVcpu []MemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
-	// +kubebuilder:validation:Optional
-	MemoryMib []MemoryMibParameters `json:"memoryMib" tf:"memory_mib,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
-	// +kubebuilder:validation:Optional
-	NetworkBandwidthGbps []NetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+type InstanceRequirementsMemoryGibPerVcpuParameters struct {
 
-	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
+	// Maximum.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceCount []NetworkInterfaceCountParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
+	// Minimum.
 	// +kubebuilder:validation:Optional
-	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
-	// +kubebuilder:validation:Optional
-	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
+type InstanceRequirementsMemoryMibInitParameters struct {
 
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
-	// +kubebuilder:validation:Optional
-	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
-	// +kubebuilder:validation:Optional
-	TotalLocalStorageGb []TotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
 
-	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
+type InstanceRequirementsMemoryMibObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsMemoryMibParameters struct {
+
+	// Maximum.
 	// +kubebuilder:validation:Optional
-	VcpuCount []VcpuCountParameters `json:"vcpuCount" tf:"vcpu_count,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsNetworkBandwidthGbpsInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsNetworkBandwidthGbpsObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsNetworkBandwidthGbpsParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsNetworkInterfaceCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsNetworkInterfaceCountObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsNetworkInterfaceCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsTotalLocalStorageGbInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsTotalLocalStorageGbObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsTotalLocalStorageGbParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsVcpuCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsVcpuCountObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsVcpuCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type LaunchTemplateCPUOptionsInitParameters struct {
@@ -920,13 +818,6 @@ type LaunchTemplateInitParameters_2 struct {
 	// If true, the launched EC2 instance will be EBS-optimized.
 	EBSOptimized *string `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
-	// The elastic GPU to attach to the instance. See Elastic GPU
-	// below for more details.
-	ElasticGpuSpecifications []ElasticGpuSpecificationsInitParameters `json:"elasticGpuSpecifications,omitempty" tf:"elastic_gpu_specifications,omitempty"`
-
-	// Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
-	ElasticInferenceAccelerator []ElasticInferenceAcceleratorInitParameters `json:"elasticInferenceAccelerator,omitempty" tf:"elastic_inference_accelerator,omitempty"`
-
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
 	EnclaveOptions []LaunchTemplateEnclaveOptionsInitParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
@@ -937,7 +828,7 @@ type LaunchTemplateInitParameters_2 struct {
 	// below for more details.
 	IAMInstanceProfile []IAMInstanceProfileInitParameters `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
-	// The AMI from which to launch the instance.
+	// The AMI from which to launch the instance or use a Systems Manager parameter convention e.g. resolve:ssm:parameter-name. See docs for more details.
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// Shutdown behavior for the instance. Can be stop or terminate.
@@ -949,7 +840,7 @@ type LaunchTemplateInitParameters_2 struct {
 	InstanceMarketOptions []LaunchTemplateInstanceMarketOptionsInitParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
 
 	// The attribute requirements for the type of instance. If present then instance_type cannot be present.
-	InstanceRequirements []InstanceRequirementsInitParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+	InstanceRequirements []LaunchTemplateInstanceRequirementsInitParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
 
 	// The type of the instance. If present then instance_requirements cannot be present.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
@@ -1039,7 +930,7 @@ type LaunchTemplateInstanceMarketOptionsInitParameters struct {
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// The options for Spot Instance
-	SpotOptions []InstanceMarketOptionsSpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	SpotOptions []LaunchTemplateInstanceMarketOptionsSpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
 }
 
 type LaunchTemplateInstanceMarketOptionsObservation struct {
@@ -1048,7 +939,7 @@ type LaunchTemplateInstanceMarketOptionsObservation struct {
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// The options for Spot Instance
-	SpotOptions []InstanceMarketOptionsSpotOptionsObservation `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	SpotOptions []LaunchTemplateInstanceMarketOptionsSpotOptionsObservation `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
 }
 
 type LaunchTemplateInstanceMarketOptionsParameters struct {
@@ -1059,7 +950,342 @@ type LaunchTemplateInstanceMarketOptionsParameters struct {
 
 	// The options for Spot Instance
 	// +kubebuilder:validation:Optional
-	SpotOptions []InstanceMarketOptionsSpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	SpotOptions []LaunchTemplateInstanceMarketOptionsSpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
+type LaunchTemplateInstanceMarketOptionsSpotOptionsInitParameters struct {
+
+	// The required duration in minutes. This value must be a multiple of 60.
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+
+	// The behavior when a Spot Instance is interrupted. Can be hibernate,
+	// stop, or terminate. (Default: terminate).
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Can be one-time, or persistent.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
+type LaunchTemplateInstanceMarketOptionsSpotOptionsObservation struct {
+
+	// The required duration in minutes. This value must be a multiple of 60.
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+
+	// The behavior when a Spot Instance is interrupted. Can be hibernate,
+	// stop, or terminate. (Default: terminate).
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Can be one-time, or persistent.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
+type LaunchTemplateInstanceMarketOptionsSpotOptionsParameters struct {
+
+	// The required duration in minutes. This value must be a multiple of 60.
+	// +kubebuilder:validation:Optional
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+
+	// The behavior when a Spot Instance is interrupted. Can be hibernate,
+	// stop, or terminate. (Default: terminate).
+	// +kubebuilder:validation:Optional
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	// +kubebuilder:validation:Optional
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Can be one-time, or persistent.
+	// +kubebuilder:validation:Optional
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request.
+	// +kubebuilder:validation:Optional
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
+type LaunchTemplateInstanceRequirementsInitParameters struct {
+
+	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
+	AcceleratorCount []InstanceRequirementsAcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+
+	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType=set
+	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
+
+	// List of accelerator names. Default is any acclerator.
+	// +listType=set
+	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
+
+	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
+	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+
+	// List of accelerator types. Default is any accelerator type.
+	// +listType=set
+	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType=set
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
+	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
+
+	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
+	BaselineEBSBandwidthMbps []InstanceRequirementsBaselineEBSBandwidthMbpsInitParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+
+	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
+	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
+
+	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType=set
+	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
+
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType=set
+	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
+
+	// List of instance generation names. Default is any generation.
+	// +listType=set
+	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
+
+	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
+	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
+
+	// List of local storage type names. Default any storage type.
+	// +listType=set
+	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
+	MemoryGibPerVcpu []InstanceRequirementsMemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
+	MemoryMib []InstanceRequirementsMemoryMibInitParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsInitParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+
+	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
+	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+
+	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
+	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
+	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+
+	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
+	VcpuCount []InstanceRequirementsVcpuCountInitParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+}
+
+type LaunchTemplateInstanceRequirementsObservation struct {
+
+	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
+	AcceleratorCount []InstanceRequirementsAcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+
+	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType=set
+	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
+
+	// List of accelerator names. Default is any acclerator.
+	// +listType=set
+	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
+
+	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
+	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+
+	// List of accelerator types. Default is any accelerator type.
+	// +listType=set
+	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType=set
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
+	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
+
+	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
+	BaselineEBSBandwidthMbps []InstanceRequirementsBaselineEBSBandwidthMbpsObservation `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+
+	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
+	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
+
+	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType=set
+	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
+
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType=set
+	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
+
+	// List of instance generation names. Default is any generation.
+	// +listType=set
+	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
+
+	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
+	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
+
+	// List of local storage type names. Default any storage type.
+	// +listType=set
+	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
+	MemoryGibPerVcpu []InstanceRequirementsMemoryGibPerVcpuObservation `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
+	MemoryMib []InstanceRequirementsMemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+
+	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
+	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+
+	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
+	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
+	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbObservation `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+
+	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
+	VcpuCount []InstanceRequirementsVcpuCountObservation `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+}
+
+type LaunchTemplateInstanceRequirementsParameters struct {
+
+	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	AcceleratorCount []InstanceRequirementsAcceleratorCountParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+
+	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
+
+	// List of accelerator names. Default is any acclerator.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
+
+	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+
+	// List of accelerator types. Default is any accelerator type.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
+	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// +kubebuilder:validation:Optional
+	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
+
+	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	BaselineEBSBandwidthMbps []InstanceRequirementsBaselineEBSBandwidthMbpsParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+
+	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
+	// +kubebuilder:validation:Optional
+	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
+
+	// List of CPU manufacturer names. Default is any manufacturer.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
+
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
+
+	// List of instance generation names. Default is any generation.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
+
+	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
+	// +kubebuilder:validation:Optional
+	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
+
+	// List of local storage type names. Default any storage type.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	// +kubebuilder:validation:Optional
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	MemoryGibPerVcpu []InstanceRequirementsMemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
+	// +kubebuilder:validation:Optional
+	MemoryMib []InstanceRequirementsMemoryMibParameters `json:"memoryMib" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+
+	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+
+	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
+	// +kubebuilder:validation:Optional
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
+	// +kubebuilder:validation:Optional
+	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
+	// +kubebuilder:validation:Optional
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+
+	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
+	// +kubebuilder:validation:Optional
+	VcpuCount []InstanceRequirementsVcpuCountParameters `json:"vcpuCount" tf:"vcpu_count,omitempty"`
 }
 
 type LaunchTemplateMaintenanceOptionsInitParameters struct {
@@ -1175,13 +1401,6 @@ type LaunchTemplateObservation_2 struct {
 	// If true, the launched EC2 instance will be EBS-optimized.
 	EBSOptimized *string `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
-	// The elastic GPU to attach to the instance. See Elastic GPU
-	// below for more details.
-	ElasticGpuSpecifications []ElasticGpuSpecificationsObservation `json:"elasticGpuSpecifications,omitempty" tf:"elastic_gpu_specifications,omitempty"`
-
-	// Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
-	ElasticInferenceAccelerator []ElasticInferenceAcceleratorObservation `json:"elasticInferenceAccelerator,omitempty" tf:"elastic_inference_accelerator,omitempty"`
-
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
 	EnclaveOptions []LaunchTemplateEnclaveOptionsObservation `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
@@ -1195,7 +1414,7 @@ type LaunchTemplateObservation_2 struct {
 	// The ID of the launch template.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The AMI from which to launch the instance.
+	// The AMI from which to launch the instance or use a Systems Manager parameter convention e.g. resolve:ssm:parameter-name. See docs for more details.
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// Shutdown behavior for the instance. Can be stop or terminate.
@@ -1207,7 +1426,7 @@ type LaunchTemplateObservation_2 struct {
 	InstanceMarketOptions []LaunchTemplateInstanceMarketOptionsObservation `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
 
 	// The attribute requirements for the type of instance. If present then instance_type cannot be present.
-	InstanceRequirements []InstanceRequirementsObservation `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+	InstanceRequirements []LaunchTemplateInstanceRequirementsObservation `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
 
 	// The type of the instance. If present then instance_requirements cannot be present.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
@@ -1248,6 +1467,10 @@ type LaunchTemplateObservation_2 struct {
 
 	// The ID of the RAM disk.
 	RAMDiskID *string `json:"ramDiskId,omitempty" tf:"ram_disk_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
@@ -1317,15 +1540,6 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	EBSOptimized *string `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
-	// The elastic GPU to attach to the instance. See Elastic GPU
-	// below for more details.
-	// +kubebuilder:validation:Optional
-	ElasticGpuSpecifications []ElasticGpuSpecificationsParameters `json:"elasticGpuSpecifications,omitempty" tf:"elastic_gpu_specifications,omitempty"`
-
-	// Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
-	// +kubebuilder:validation:Optional
-	ElasticInferenceAccelerator []ElasticInferenceAcceleratorParameters `json:"elasticInferenceAccelerator,omitempty" tf:"elastic_inference_accelerator,omitempty"`
-
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
 	// +kubebuilder:validation:Optional
 	EnclaveOptions []LaunchTemplateEnclaveOptionsParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
@@ -1339,7 +1553,7 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	IAMInstanceProfile []IAMInstanceProfileParameters `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
-	// The AMI from which to launch the instance.
+	// The AMI from which to launch the instance or use a Systems Manager parameter convention e.g. resolve:ssm:parameter-name. See docs for more details.
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
@@ -1355,7 +1569,7 @@ type LaunchTemplateParameters_2 struct {
 
 	// The attribute requirements for the type of instance. If present then instance_type cannot be present.
 	// +kubebuilder:validation:Optional
-	InstanceRequirements []InstanceRequirementsParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+	InstanceRequirements []LaunchTemplateInstanceRequirementsParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
 
 	// The type of the instance. If present then instance_requirements cannot be present.
 	// +kubebuilder:validation:Optional
@@ -1406,10 +1620,10 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	RAMDiskID *string `json:"ramDiskId,omitempty" tf:"ram_disk_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
@@ -1520,64 +1734,6 @@ type LicenseSpecificationParameters struct {
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn" tf:"license_configuration_arn,omitempty"`
 }
 
-type MemoryGibPerVcpuInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type MemoryGibPerVcpuObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type MemoryGibPerVcpuParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type MemoryMibInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type MemoryMibObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type MemoryMibParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min" tf:"min,omitempty"`
-}
-
 type MonitoringInitParameters struct {
 
 	// If true, the launched EC2 instance will have detailed monitoring enabled.
@@ -1597,74 +1753,16 @@ type MonitoringParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
-type NetworkBandwidthGbpsInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type NetworkBandwidthGbpsObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type NetworkBandwidthGbpsParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type NetworkInterfaceCountInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type NetworkInterfaceCountObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type NetworkInterfaceCountParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
 type NetworkInterfacesInitParameters struct {
 
-	// Associate a Carrier IP address with eth0 for a new network interface.
-	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
+
+	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
+	ConnectionTrackingSpecification []ConnectionTrackingSpecificationInitParameters `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
 
 	// Whether the network interface should be destroyed on instance termination.
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
@@ -1674,6 +1772,9 @@ type NetworkInterfacesInitParameters struct {
 
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
+	EnaSrdSpecification []EnaSrdSpecificationInitParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// The number of secondary private IPv4 addresses to assign to a network interface. Conflicts with ipv4_addresses
 	IPv4AddressCount *float64 `json:"ipv4AddressCount,omitempty" tf:"ipv4_address_count,omitempty"`
@@ -1721,6 +1822,7 @@ type NetworkInterfacesInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 
 	// The primary private IPv4 address.
@@ -1756,14 +1858,14 @@ type NetworkInterfacesInitParameters struct {
 
 type NetworkInterfacesObservation struct {
 
-	// Associate a Carrier IP address with eth0 for a new network interface.
-	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
+
+	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
+	ConnectionTrackingSpecification []ConnectionTrackingSpecificationObservation `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
 
 	// Whether the network interface should be destroyed on instance termination.
 	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
@@ -1773,6 +1875,9 @@ type NetworkInterfacesObservation struct {
 
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
+	EnaSrdSpecification []EnaSrdSpecificationObservation `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// The number of secondary private IPv4 addresses to assign to a network interface. Conflicts with ipv4_addresses
 	IPv4AddressCount *float64 `json:"ipv4AddressCount,omitempty" tf:"ipv4_address_count,omitempty"`
@@ -1811,6 +1916,7 @@ type NetworkInterfacesObservation struct {
 	// The ID of the network interface to attach.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 
 	// The primary private IPv4 address.
@@ -1826,16 +1932,17 @@ type NetworkInterfacesObservation struct {
 
 type NetworkInterfacesParameters struct {
 
-	// Associate a Carrier IP address with eth0 for a new network interface.
-	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	// +kubebuilder:validation:Optional
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
+
+	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
+	// +kubebuilder:validation:Optional
+	ConnectionTrackingSpecification []ConnectionTrackingSpecificationParameters `json:"connectionTrackingSpecification,omitempty" tf:"connection_tracking_specification,omitempty"`
 
 	// Whether the network interface should be destroyed on instance termination.
 	// +kubebuilder:validation:Optional
@@ -1848,6 +1955,10 @@ type NetworkInterfacesParameters struct {
 	// The integer index of the network interface attachment.
 	// +kubebuilder:validation:Optional
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
+	// +kubebuilder:validation:Optional
+	EnaSrdSpecification []EnaSrdSpecificationParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// The number of secondary private IPv4 addresses to assign to a network interface. Conflicts with ipv4_addresses
 	// +kubebuilder:validation:Optional
@@ -1906,6 +2017,7 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	// +kubebuilder:validation:Optional
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 
@@ -2062,64 +2174,6 @@ type TagSpecificationsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
-type TotalLocalStorageGbInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type TotalLocalStorageGbObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type TotalLocalStorageGbParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type VcpuCountInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type VcpuCountObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type VcpuCountParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 // LaunchTemplateSpec defines the desired state of LaunchTemplate

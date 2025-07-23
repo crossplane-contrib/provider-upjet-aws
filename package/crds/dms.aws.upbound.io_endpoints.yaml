@@ -114,10 +114,11 @@ spec:
                     type: string
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
-                      aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
-                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
+                      aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb,
+                      azure-sql-managed-instance, babelfish, db2, db2-zos, docdb,
+                      dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql,
+                      opensearch, oracle, postgres, redshift,redshift-serverless,
+                      s3, sqlserver, neptune ,sybase. Please note that some of engine
                       names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
@@ -189,6 +190,12 @@ spec:
                             from thousands of tables to the same partition, which
                             causes throttling. Default is false.
                           type: boolean
+                        saslMechanism:
+                          description: For SASL/SSL authentication, AWS DMS supports
+                            the scram-sha-512 mechanism by default. AWS DMS versions
+                            3.5.0 and later also support the PLAIN mechanism. To use
+                            the PLAIN mechanism, set this parameter to plain.
+                          type: string
                         saslPasswordSecretRef:
                           description: Secure password you created when you first
                             set up your MSK cluster to validate a client identity
@@ -301,6 +308,11 @@ spec:
                         streamArn:
                           description: ARN of the Kinesis data stream.
                           type: string
+                        useLargeIntegerValue:
+                          description: Use up to 18 digit int instead of casting ints
+                            as doubles, available from AWS DMS version 3.5.4. Default
+                            is false.
+                          type: boolean
                       type: object
                     type: array
                   kmsKeyArn:
@@ -309,10 +321,8 @@ spec:
                       kms_key_arn, then AWS DMS will use your default encryption key.
                       AWS KMS creates the default encryption key for your AWS account.
                       Your AWS account has a different default encryption key for
-                      each AWS region. To encrypt an S3 target with a KMS Key, use
-                      the parameter s3_settings.server_side_encryption_kms_key_id.
-                      When engine_name is redshift, kms_key_arn is the KMS Key for
-                      the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id
+                      each AWS region. When engine_name is redshift, kms_key_arn is
+                      the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id
                       encrypts the S3 intermediate storage.
                     type: string
                   kmsKeyArnRef:
@@ -602,195 +612,10 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                  s3Settings:
                     description: |-
-                      (Deprecated, use the aws_dms_s3_endpoint resource instead) Configuration block for S3 settings. See below.
-                      This argument is deprecated and will be removed in a future version; use aws_dms_s3_endpoint instead
-                    items:
-                      properties:
-                        addColumnName:
-                          description: Whether to add column name information to the
-                            .csv output file. Default is false.
-                          type: boolean
-                        bucketFolder:
-                          description: S3 object prefix.
-                          type: string
-                        bucketName:
-                          description: S3 bucket name.
-                          type: string
-                        cannedAclForObjects:
-                          description: Predefined (canned) access control list for
-                            objects created in an S3 bucket. Valid values include
-                            none, private, public-read, public-read-write, authenticated-read,
-                            aws-exec-read, bucket-owner-read, and bucket-owner-full-control.
-                            Default is none.
-                          type: string
-                        cdcInsertsAndUpdates:
-                          description: Whether to write insert and update operations
-                            to .csv or .parquet output files. Default is false.
-                          type: boolean
-                        cdcInsertsOnly:
-                          description: Whether to write insert operations to .csv
-                            or .parquet output files. Default is false.
-                          type: boolean
-                        cdcMaxBatchInterval:
-                          description: Maximum length of the interval, defined in
-                            seconds, after which to output a file to Amazon S3. Default
-                            is 60.
-                          type: number
-                        cdcMinFileSize:
-                          description: 'Minimum file size condition as defined in
-                            kilobytes to output a file to Amazon S3. Default is 32000.
-                            NOTE: Previously, this setting was measured in megabytes
-                            but now represents kilobytes. Update configurations accordingly.'
-                          type: number
-                        cdcPath:
-                          description: Folder path of CDC files. For an S3 source,
-                            this setting is required if a task captures change data;
-                            otherwise, it's optional. If cdc_path is set, AWS DMS
-                            reads CDC files from this path and replicates the data
-                            changes to the target endpoint. Supported in AWS DMS versions
-                            3.4.2 and later.
-                          type: string
-                        compressionType:
-                          description: Set to compress target files. Default is NONE.
-                            Valid values are GZIP and NONE.
-                          type: string
-                        csvDelimiter:
-                          description: Delimiter used to separate columns in the source
-                            files. Default is ,.
-                          type: string
-                        csvNoSupValue:
-                          description: String to use for all columns not included
-                            in the supplemental log.
-                          type: string
-                        csvNullValue:
-                          description: String to as null when writing to the target.
-                          type: string
-                        csvRowDelimiter:
-                          description: Delimiter used to separate rows in the source
-                            files. Default is \n.
-                          type: string
-                        dataFormat:
-                          description: Output format for the files that AWS DMS uses
-                            to create S3 objects. Valid values are csv and parquet.
-                            Default is csv.
-                          type: string
-                        dataPageSize:
-                          description: Size of one data page in bytes. Default is
-                            1048576 (1 MiB).
-                          type: number
-                        datePartitionDelimiter:
-                          description: Date separating delimiter to use during folder
-                            partitioning. Valid values are SLASH, UNDERSCORE, DASH,
-                            and NONE. Default is SLASH.
-                          type: string
-                        datePartitionEnabled:
-                          description: Partition S3 bucket folders based on transaction
-                            commit dates. Default is false.
-                          type: boolean
-                        datePartitionSequence:
-                          description: Date format to use during folder partitioning.
-                            Use this parameter when date_partition_enabled is set
-                            to true. Valid values are YYYYMMDD, YYYYMMDDHH, YYYYMM,
-                            MMYYYYDD, and DDMMYYYY. Default is YYYYMMDD.
-                          type: string
-                        dictPageSizeLimit:
-                          description: Maximum size in bytes of an encoded dictionary
-                            page of a column. Default is 1048576 (1 MiB).
-                          type: number
-                        enableStatistics:
-                          description: Whether to enable statistics for Parquet pages
-                            and row groups. Default is true.
-                          type: boolean
-                        encodingType:
-                          description: Type of encoding to use. Value values are rle_dictionary,
-                            plain, and plain_dictionary. Default is rle_dictionary.
-                          type: string
-                        encryptionMode:
-                          description: Server-side encryption mode that you want to
-                            encrypt your .csv or .parquet object files copied to S3.
-                            Valid values are SSE_S3 and SSE_KMS. Default is SSE_S3.
-                          type: string
-                        externalTableDefinition:
-                          description: JSON document that describes how AWS DMS should
-                            interpret the data.
-                          type: string
-                        glueCatalogGeneration:
-                          description: Whether to integrate AWS Glue Data Catalog
-                            with an Amazon S3 target. See Using AWS Glue Data Catalog
-                            with an Amazon S3 target for AWS DMS for more information.
-                            Default is false.
-                          type: boolean
-                        ignoreHeaderRows:
-                          description: When this value is set to 1, DMS ignores the
-                            first row header in a .csv file. Default is 0.
-                          type: number
-                        includeOpForFullLoad:
-                          description: Whether to enable a full load to write INSERT
-                            operations to the .csv output files only to indicate how
-                            the rows were added to the source database. Default is
-                            false.
-                          type: boolean
-                        maxFileSize:
-                          description: Maximum size (in KB) of any .csv file to be
-                            created while migrating to an S3 target during full load.
-                            Valid values are from 1 to 1048576. Default is 1048576
-                            (1 GB).
-                          type: number
-                        parquetTimestampInMillisecond:
-                          description: '- Specifies the precision of any TIMESTAMP
-                            column values written to an S3 object file in .parquet
-                            format. Default is false.'
-                          type: boolean
-                        parquetVersion:
-                          description: Version of the .parquet file format. Default
-                            is parquet-1-0. Valid values are parquet-1-0 and parquet-2-0.
-                          type: string
-                        preserveTransactions:
-                          description: Whether DMS saves the transaction order for
-                            a CDC load on the S3 target specified by cdc_path. Default
-                            is false.
-                          type: boolean
-                        rfc4180:
-                          description: For an S3 source, whether each leading double
-                            quotation mark has to be followed by an ending double
-                            quotation mark. Default is true.
-                          type: boolean
-                        rowGroupLength:
-                          description: Number of rows in a row group. Default is 10000.
-                          type: number
-                        serverSideEncryptionKmsKeyId:
-                          description: ARN or Id of KMS Key to use when encryption_mode
-                            is SSE_KMS.
-                          type: string
-                        serviceAccessRoleArn:
-                          description: ARN of the IAM Role with permissions to read
-                            from or write to the S3 Bucket.
-                          type: string
-                        timestampColumnName:
-                          description: Column to add with timestamp information to
-                            the endpoint data for an Amazon S3 target.
-                          type: string
-                        useCsvNoSupValue:
-                          description: Whether to use csv_no_sup_value for columns
-                            not included in the supplemental log.
-                          type: boolean
-                        useTaskStartTimeForFullLoadTimestamp:
-                          description: When set to true, uses the task start time
-                            as the timestamp column value instead of the time data
-                            is written to target. For full load, when set to true,
-                            each row of the timestamp column contains the task start
-                            time. For CDC loads, each row of the timestamp column
-                            contains the transaction commit time. When set to false,
-                            the full load timestamp in the timestamp column increments
-                            with the time data arrives at the target. Default is false.
-                          type: boolean
-                      type: object
-                    type: array
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   secretsManagerAccessRoleArn:
                     description: ARN of the IAM role that specifies AWS DMS as the
                       trusted entity and has the required permissions to access the
@@ -1026,10 +851,11 @@ spec:
                     type: string
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
-                      aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
-                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
+                      aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb,
+                      azure-sql-managed-instance, babelfish, db2, db2-zos, docdb,
+                      dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql,
+                      opensearch, oracle, postgres, redshift,redshift-serverless,
+                      s3, sqlserver, neptune ,sybase. Please note that some of engine
                       names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
@@ -1101,6 +927,12 @@ spec:
                             from thousands of tables to the same partition, which
                             causes throttling. Default is false.
                           type: boolean
+                        saslMechanism:
+                          description: For SASL/SSL authentication, AWS DMS supports
+                            the scram-sha-512 mechanism by default. AWS DMS versions
+                            3.5.0 and later also support the PLAIN mechanism. To use
+                            the PLAIN mechanism, set this parameter to plain.
+                          type: string
                         saslPasswordSecretRef:
                           description: Secure password you created when you first
                             set up your MSK cluster to validate a client identity
@@ -1213,6 +1045,11 @@ spec:
                         streamArn:
                           description: ARN of the Kinesis data stream.
                           type: string
+                        useLargeIntegerValue:
+                          description: Use up to 18 digit int instead of casting ints
+                            as doubles, available from AWS DMS version 3.5.4. Default
+                            is false.
+                          type: boolean
                       type: object
                     type: array
                   kmsKeyArn:
@@ -1221,10 +1058,8 @@ spec:
                       kms_key_arn, then AWS DMS will use your default encryption key.
                       AWS KMS creates the default encryption key for your AWS account.
                       Your AWS account has a different default encryption key for
-                      each AWS region. To encrypt an S3 target with a KMS Key, use
-                      the parameter s3_settings.server_side_encryption_kms_key_id.
-                      When engine_name is redshift, kms_key_arn is the KMS Key for
-                      the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id
+                      each AWS region. When engine_name is redshift, kms_key_arn is
+                      the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id
                       encrypts the S3 intermediate storage.
                     type: string
                   kmsKeyArnRef:
@@ -1511,192 +1346,6 @@ spec:
                             with permissions to read from or write to the S3 Bucket
                             for intermediate storage.
                           type: string
-                      type: object
-                    type: array
-                  s3Settings:
-                    description: |-
-                      (Deprecated, use the aws_dms_s3_endpoint resource instead) Configuration block for S3 settings. See below.
-                      This argument is deprecated and will be removed in a future version; use aws_dms_s3_endpoint instead
-                    items:
-                      properties:
-                        addColumnName:
-                          description: Whether to add column name information to the
-                            .csv output file. Default is false.
-                          type: boolean
-                        bucketFolder:
-                          description: S3 object prefix.
-                          type: string
-                        bucketName:
-                          description: S3 bucket name.
-                          type: string
-                        cannedAclForObjects:
-                          description: Predefined (canned) access control list for
-                            objects created in an S3 bucket. Valid values include
-                            none, private, public-read, public-read-write, authenticated-read,
-                            aws-exec-read, bucket-owner-read, and bucket-owner-full-control.
-                            Default is none.
-                          type: string
-                        cdcInsertsAndUpdates:
-                          description: Whether to write insert and update operations
-                            to .csv or .parquet output files. Default is false.
-                          type: boolean
-                        cdcInsertsOnly:
-                          description: Whether to write insert operations to .csv
-                            or .parquet output files. Default is false.
-                          type: boolean
-                        cdcMaxBatchInterval:
-                          description: Maximum length of the interval, defined in
-                            seconds, after which to output a file to Amazon S3. Default
-                            is 60.
-                          type: number
-                        cdcMinFileSize:
-                          description: 'Minimum file size condition as defined in
-                            kilobytes to output a file to Amazon S3. Default is 32000.
-                            NOTE: Previously, this setting was measured in megabytes
-                            but now represents kilobytes. Update configurations accordingly.'
-                          type: number
-                        cdcPath:
-                          description: Folder path of CDC files. For an S3 source,
-                            this setting is required if a task captures change data;
-                            otherwise, it's optional. If cdc_path is set, AWS DMS
-                            reads CDC files from this path and replicates the data
-                            changes to the target endpoint. Supported in AWS DMS versions
-                            3.4.2 and later.
-                          type: string
-                        compressionType:
-                          description: Set to compress target files. Default is NONE.
-                            Valid values are GZIP and NONE.
-                          type: string
-                        csvDelimiter:
-                          description: Delimiter used to separate columns in the source
-                            files. Default is ,.
-                          type: string
-                        csvNoSupValue:
-                          description: String to use for all columns not included
-                            in the supplemental log.
-                          type: string
-                        csvNullValue:
-                          description: String to as null when writing to the target.
-                          type: string
-                        csvRowDelimiter:
-                          description: Delimiter used to separate rows in the source
-                            files. Default is \n.
-                          type: string
-                        dataFormat:
-                          description: Output format for the files that AWS DMS uses
-                            to create S3 objects. Valid values are csv and parquet.
-                            Default is csv.
-                          type: string
-                        dataPageSize:
-                          description: Size of one data page in bytes. Default is
-                            1048576 (1 MiB).
-                          type: number
-                        datePartitionDelimiter:
-                          description: Date separating delimiter to use during folder
-                            partitioning. Valid values are SLASH, UNDERSCORE, DASH,
-                            and NONE. Default is SLASH.
-                          type: string
-                        datePartitionEnabled:
-                          description: Partition S3 bucket folders based on transaction
-                            commit dates. Default is false.
-                          type: boolean
-                        datePartitionSequence:
-                          description: Date format to use during folder partitioning.
-                            Use this parameter when date_partition_enabled is set
-                            to true. Valid values are YYYYMMDD, YYYYMMDDHH, YYYYMM,
-                            MMYYYYDD, and DDMMYYYY. Default is YYYYMMDD.
-                          type: string
-                        dictPageSizeLimit:
-                          description: Maximum size in bytes of an encoded dictionary
-                            page of a column. Default is 1048576 (1 MiB).
-                          type: number
-                        enableStatistics:
-                          description: Whether to enable statistics for Parquet pages
-                            and row groups. Default is true.
-                          type: boolean
-                        encodingType:
-                          description: Type of encoding to use. Value values are rle_dictionary,
-                            plain, and plain_dictionary. Default is rle_dictionary.
-                          type: string
-                        encryptionMode:
-                          description: Server-side encryption mode that you want to
-                            encrypt your .csv or .parquet object files copied to S3.
-                            Valid values are SSE_S3 and SSE_KMS. Default is SSE_S3.
-                          type: string
-                        externalTableDefinition:
-                          description: JSON document that describes how AWS DMS should
-                            interpret the data.
-                          type: string
-                        glueCatalogGeneration:
-                          description: Whether to integrate AWS Glue Data Catalog
-                            with an Amazon S3 target. See Using AWS Glue Data Catalog
-                            with an Amazon S3 target for AWS DMS for more information.
-                            Default is false.
-                          type: boolean
-                        ignoreHeaderRows:
-                          description: When this value is set to 1, DMS ignores the
-                            first row header in a .csv file. Default is 0.
-                          type: number
-                        includeOpForFullLoad:
-                          description: Whether to enable a full load to write INSERT
-                            operations to the .csv output files only to indicate how
-                            the rows were added to the source database. Default is
-                            false.
-                          type: boolean
-                        maxFileSize:
-                          description: Maximum size (in KB) of any .csv file to be
-                            created while migrating to an S3 target during full load.
-                            Valid values are from 1 to 1048576. Default is 1048576
-                            (1 GB).
-                          type: number
-                        parquetTimestampInMillisecond:
-                          description: '- Specifies the precision of any TIMESTAMP
-                            column values written to an S3 object file in .parquet
-                            format. Default is false.'
-                          type: boolean
-                        parquetVersion:
-                          description: Version of the .parquet file format. Default
-                            is parquet-1-0. Valid values are parquet-1-0 and parquet-2-0.
-                          type: string
-                        preserveTransactions:
-                          description: Whether DMS saves the transaction order for
-                            a CDC load on the S3 target specified by cdc_path. Default
-                            is false.
-                          type: boolean
-                        rfc4180:
-                          description: For an S3 source, whether each leading double
-                            quotation mark has to be followed by an ending double
-                            quotation mark. Default is true.
-                          type: boolean
-                        rowGroupLength:
-                          description: Number of rows in a row group. Default is 10000.
-                          type: number
-                        serverSideEncryptionKmsKeyId:
-                          description: ARN or Id of KMS Key to use when encryption_mode
-                            is SSE_KMS.
-                          type: string
-                        serviceAccessRoleArn:
-                          description: ARN of the IAM Role with permissions to read
-                            from or write to the S3 Bucket.
-                          type: string
-                        timestampColumnName:
-                          description: Column to add with timestamp information to
-                            the endpoint data for an Amazon S3 target.
-                          type: string
-                        useCsvNoSupValue:
-                          description: Whether to use csv_no_sup_value for columns
-                            not included in the supplemental log.
-                          type: boolean
-                        useTaskStartTimeForFullLoadTimestamp:
-                          description: When set to true, uses the task start time
-                            as the timestamp column value instead of the time data
-                            is written to target. For full load, when set to true,
-                            each row of the timestamp column contains the task start
-                            time. For CDC loads, each row of the timestamp column
-                            contains the transaction commit time. When set to false,
-                            the full load timestamp in the timestamp column increments
-                            with the time data arrives at the target. Default is false.
-                          type: boolean
                       type: object
                     type: array
                   secretsManagerAccessRoleArn:
@@ -2103,10 +1752,11 @@ spec:
                     type: string
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
-                      aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
-                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
+                      aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb,
+                      azure-sql-managed-instance, babelfish, db2, db2-zos, docdb,
+                      dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql,
+                      opensearch, oracle, postgres, redshift,redshift-serverless,
+                      s3, sqlserver, neptune ,sybase. Please note that some of engine
                       names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
@@ -2180,6 +1830,12 @@ spec:
                             from thousands of tables to the same partition, which
                             causes throttling. Default is false.
                           type: boolean
+                        saslMechanism:
+                          description: For SASL/SSL authentication, AWS DMS supports
+                            the scram-sha-512 mechanism by default. AWS DMS versions
+                            3.5.0 and later also support the PLAIN mechanism. To use
+                            the PLAIN mechanism, set this parameter to plain.
+                          type: string
                         saslUsername:
                           description: Secure user name you created when you first
                             set up your MSK cluster to validate a client identity
@@ -2254,6 +1910,11 @@ spec:
                         streamArn:
                           description: ARN of the Kinesis data stream.
                           type: string
+                        useLargeIntegerValue:
+                          description: Use up to 18 digit int instead of casting ints
+                            as doubles, available from AWS DMS version 3.5.4. Default
+                            is false.
+                          type: boolean
                       type: object
                     type: array
                   kmsKeyArn:
@@ -2262,10 +1923,8 @@ spec:
                       kms_key_arn, then AWS DMS will use your default encryption key.
                       AWS KMS creates the default encryption key for your AWS account.
                       Your AWS account has a different default encryption key for
-                      each AWS region. To encrypt an S3 target with a KMS Key, use
-                      the parameter s3_settings.server_side_encryption_kms_key_id.
-                      When engine_name is redshift, kms_key_arn is the KMS Key for
-                      the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id
+                      each AWS region. When engine_name is redshift, kms_key_arn is
+                      the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id
                       encrypts the S3 intermediate storage.
                     type: string
                   mongodbSettings:
@@ -2444,192 +2103,11 @@ spec:
                           type: string
                       type: object
                     type: array
-                  s3Settings:
+                  region:
                     description: |-
-                      (Deprecated, use the aws_dms_s3_endpoint resource instead) Configuration block for S3 settings. See below.
-                      This argument is deprecated and will be removed in a future version; use aws_dms_s3_endpoint instead
-                    items:
-                      properties:
-                        addColumnName:
-                          description: Whether to add column name information to the
-                            .csv output file. Default is false.
-                          type: boolean
-                        bucketFolder:
-                          description: S3 object prefix.
-                          type: string
-                        bucketName:
-                          description: S3 bucket name.
-                          type: string
-                        cannedAclForObjects:
-                          description: Predefined (canned) access control list for
-                            objects created in an S3 bucket. Valid values include
-                            none, private, public-read, public-read-write, authenticated-read,
-                            aws-exec-read, bucket-owner-read, and bucket-owner-full-control.
-                            Default is none.
-                          type: string
-                        cdcInsertsAndUpdates:
-                          description: Whether to write insert and update operations
-                            to .csv or .parquet output files. Default is false.
-                          type: boolean
-                        cdcInsertsOnly:
-                          description: Whether to write insert operations to .csv
-                            or .parquet output files. Default is false.
-                          type: boolean
-                        cdcMaxBatchInterval:
-                          description: Maximum length of the interval, defined in
-                            seconds, after which to output a file to Amazon S3. Default
-                            is 60.
-                          type: number
-                        cdcMinFileSize:
-                          description: 'Minimum file size condition as defined in
-                            kilobytes to output a file to Amazon S3. Default is 32000.
-                            NOTE: Previously, this setting was measured in megabytes
-                            but now represents kilobytes. Update configurations accordingly.'
-                          type: number
-                        cdcPath:
-                          description: Folder path of CDC files. For an S3 source,
-                            this setting is required if a task captures change data;
-                            otherwise, it's optional. If cdc_path is set, AWS DMS
-                            reads CDC files from this path and replicates the data
-                            changes to the target endpoint. Supported in AWS DMS versions
-                            3.4.2 and later.
-                          type: string
-                        compressionType:
-                          description: Set to compress target files. Default is NONE.
-                            Valid values are GZIP and NONE.
-                          type: string
-                        csvDelimiter:
-                          description: Delimiter used to separate columns in the source
-                            files. Default is ,.
-                          type: string
-                        csvNoSupValue:
-                          description: String to use for all columns not included
-                            in the supplemental log.
-                          type: string
-                        csvNullValue:
-                          description: String to as null when writing to the target.
-                          type: string
-                        csvRowDelimiter:
-                          description: Delimiter used to separate rows in the source
-                            files. Default is \n.
-                          type: string
-                        dataFormat:
-                          description: Output format for the files that AWS DMS uses
-                            to create S3 objects. Valid values are csv and parquet.
-                            Default is csv.
-                          type: string
-                        dataPageSize:
-                          description: Size of one data page in bytes. Default is
-                            1048576 (1 MiB).
-                          type: number
-                        datePartitionDelimiter:
-                          description: Date separating delimiter to use during folder
-                            partitioning. Valid values are SLASH, UNDERSCORE, DASH,
-                            and NONE. Default is SLASH.
-                          type: string
-                        datePartitionEnabled:
-                          description: Partition S3 bucket folders based on transaction
-                            commit dates. Default is false.
-                          type: boolean
-                        datePartitionSequence:
-                          description: Date format to use during folder partitioning.
-                            Use this parameter when date_partition_enabled is set
-                            to true. Valid values are YYYYMMDD, YYYYMMDDHH, YYYYMM,
-                            MMYYYYDD, and DDMMYYYY. Default is YYYYMMDD.
-                          type: string
-                        dictPageSizeLimit:
-                          description: Maximum size in bytes of an encoded dictionary
-                            page of a column. Default is 1048576 (1 MiB).
-                          type: number
-                        enableStatistics:
-                          description: Whether to enable statistics for Parquet pages
-                            and row groups. Default is true.
-                          type: boolean
-                        encodingType:
-                          description: Type of encoding to use. Value values are rle_dictionary,
-                            plain, and plain_dictionary. Default is rle_dictionary.
-                          type: string
-                        encryptionMode:
-                          description: Server-side encryption mode that you want to
-                            encrypt your .csv or .parquet object files copied to S3.
-                            Valid values are SSE_S3 and SSE_KMS. Default is SSE_S3.
-                          type: string
-                        externalTableDefinition:
-                          description: JSON document that describes how AWS DMS should
-                            interpret the data.
-                          type: string
-                        glueCatalogGeneration:
-                          description: Whether to integrate AWS Glue Data Catalog
-                            with an Amazon S3 target. See Using AWS Glue Data Catalog
-                            with an Amazon S3 target for AWS DMS for more information.
-                            Default is false.
-                          type: boolean
-                        ignoreHeaderRows:
-                          description: When this value is set to 1, DMS ignores the
-                            first row header in a .csv file. Default is 0.
-                          type: number
-                        includeOpForFullLoad:
-                          description: Whether to enable a full load to write INSERT
-                            operations to the .csv output files only to indicate how
-                            the rows were added to the source database. Default is
-                            false.
-                          type: boolean
-                        maxFileSize:
-                          description: Maximum size (in KB) of any .csv file to be
-                            created while migrating to an S3 target during full load.
-                            Valid values are from 1 to 1048576. Default is 1048576
-                            (1 GB).
-                          type: number
-                        parquetTimestampInMillisecond:
-                          description: '- Specifies the precision of any TIMESTAMP
-                            column values written to an S3 object file in .parquet
-                            format. Default is false.'
-                          type: boolean
-                        parquetVersion:
-                          description: Version of the .parquet file format. Default
-                            is parquet-1-0. Valid values are parquet-1-0 and parquet-2-0.
-                          type: string
-                        preserveTransactions:
-                          description: Whether DMS saves the transaction order for
-                            a CDC load on the S3 target specified by cdc_path. Default
-                            is false.
-                          type: boolean
-                        rfc4180:
-                          description: For an S3 source, whether each leading double
-                            quotation mark has to be followed by an ending double
-                            quotation mark. Default is true.
-                          type: boolean
-                        rowGroupLength:
-                          description: Number of rows in a row group. Default is 10000.
-                          type: number
-                        serverSideEncryptionKmsKeyId:
-                          description: ARN or Id of KMS Key to use when encryption_mode
-                            is SSE_KMS.
-                          type: string
-                        serviceAccessRoleArn:
-                          description: ARN of the IAM Role with permissions to read
-                            from or write to the S3 Bucket.
-                          type: string
-                        timestampColumnName:
-                          description: Column to add with timestamp information to
-                            the endpoint data for an Amazon S3 target.
-                          type: string
-                        useCsvNoSupValue:
-                          description: Whether to use csv_no_sup_value for columns
-                            not included in the supplemental log.
-                          type: boolean
-                        useTaskStartTimeForFullLoadTimestamp:
-                          description: When set to true, uses the task start time
-                            as the timestamp column value instead of the time data
-                            is written to target. For full load, when set to true,
-                            each row of the timestamp column contains the task start
-                            time. For CDC loads, each row of the timestamp column
-                            contains the transaction commit time. When set to false,
-                            the full load timestamp in the timestamp column increments
-                            with the time data arrives at the target. Default is false.
-                          type: boolean
-                      type: object
-                    type: array
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   secretsManagerAccessRoleArn:
                     description: ARN of the IAM role that specifies AWS DMS as the
                       trusted entity and has the required permissions to access the

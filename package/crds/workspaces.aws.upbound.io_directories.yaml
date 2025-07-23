@@ -73,6 +73,115 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  activeDirectoryConfig:
+                    description: Configuration for Active Directory integration when
+                      workspace_type is set to POOLS. Defined below.
+                    items:
+                      properties:
+                        domainName:
+                          description: Fully qualified domain name of the AWS Directory
+                            Service directory.
+                          type: string
+                        serviceAccountSecretArn:
+                          description: ARN of the Secrets Manager secret that contains
+                            the credentials for the service account. For more information,
+                            see Service Account Details.
+                          type: string
+                        serviceAccountSecretArnRef:
+                          description: Reference to a Secret in secretsmanager to
+                            populate serviceAccountSecretArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        serviceAccountSecretArnSelector:
+                          description: Selector for a Secret in secretsmanager to
+                            populate serviceAccountSecretArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
+                  certificateBasedAuthProperties:
+                    description: Configuration of certificate-based authentication
+                      (CBA) integration. Requires SAML authentication to be enabled.
+                      Defined below.
+                    items:
+                      properties:
+                        certificateAuthorityArn:
+                          description: The Amazon Resource Name (ARN) of the certificate
+                            manager private certificate authority (ACM-PCA) that is
+                            used for certificate-based authentication.
+                          type: string
+                        status:
+                          description: Status of certificate-based authentication.
+                            Default DISABLED.
+                          type: string
+                      type: object
+                    type: array
                   directoryId:
                     description: The directory identifier for registration in WorkSpaces
                       service.
@@ -237,11 +346,12 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   samlProperties:
-                    description: –  Configuration of SAML authentication integration.
+                    description: Configuration of SAML authentication integration.
                       Defined below.
                     items:
                       properties:
@@ -260,30 +370,31 @@ spec:
                       type: object
                     type: array
                   selfServicePermissions:
-                    description: service capabilities. Defined below.
+                    description: Permissions to enable or disable self-service capabilities
+                      when workspace_type is set to PERSONAL.. Defined below.
                     items:
                       properties:
                         changeComputeType:
-                          description: –  Whether WorkSpaces directory users can change
+                          description: Whether WorkSpaces directory users can change
                             the compute type (bundle) for their workspace. Default
                             false.
                           type: boolean
                         increaseVolumeSize:
-                          description: –  Whether WorkSpaces directory users can increase
+                          description: Whether WorkSpaces directory users can increase
                             the volume size of the drives on their workspace. Default
                             false.
                           type: boolean
                         rebuildWorkspace:
-                          description: –  Whether WorkSpaces directory users can rebuild
+                          description: Whether WorkSpaces directory users can rebuild
                             the operating system of a workspace to its original state.
                             Default false.
                           type: boolean
                         restartWorkspace:
-                          description: –  Whether WorkSpaces directory users can restart
+                          description: Whether WorkSpaces directory users can restart
                             their workspace. Default true.
                           type: boolean
                         switchRunningMode:
-                          description: –  Whether WorkSpaces directory users can switch
+                          description: Whether WorkSpaces directory users can switch
                             the running mode of their workspace. Default false.
                           type: boolean
                       type: object
@@ -379,52 +490,57 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  userIdentityType:
+                    description: Specifies the user identity type for the WorkSpaces
+                      directory. Valid values are CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE,
+                      AWS_IAM_IDENTITY_CENTER.
+                    type: string
                   workspaceAccessProperties:
-                    description: –  Specifies which devices and operating systems
-                      users can use to access their WorkSpaces. Defined below.
+                    description: Specifies which devices and operating systems users
+                      can use to access their WorkSpaces. Defined below.
                     items:
                       properties:
                         deviceTypeAndroid:
-                          description: –  Indicates whether users can use Android
-                            devices to access their WorkSpaces.
+                          description: Indicates whether users can use Android devices
+                            to access their WorkSpaces.
                           type: string
                         deviceTypeChromeos:
-                          description: –  Indicates whether users can use Chromebooks
+                          description: Indicates whether users can use Chromebooks
                             to access their WorkSpaces.
                           type: string
                         deviceTypeIos:
-                          description: –  Indicates whether users can use iOS devices
+                          description: Indicates whether users can use iOS devices
                             to access their WorkSpaces.
                           type: string
                         deviceTypeLinux:
-                          description: –  Indicates whether users can use Linux clients
+                          description: Indicates whether users can use Linux clients
                             to access their WorkSpaces.
                           type: string
                         deviceTypeOsx:
-                          description: –  Indicates whether users can use macOS clients
+                          description: Indicates whether users can use macOS clients
                             to access their WorkSpaces.
                           type: string
                         deviceTypeWeb:
-                          description: –  Indicates whether users can access their
-                            WorkSpaces through a web browser.
+                          description: Indicates whether users can access their WorkSpaces
+                            through a web browser.
                           type: string
                         deviceTypeWindows:
-                          description: –  Indicates whether users can use Windows
-                            clients to access their WorkSpaces.
+                          description: Indicates whether users can use Windows clients
+                            to access their WorkSpaces.
                           type: string
                         deviceTypeZeroclient:
-                          description: –  Indicates whether users can use zero client
+                          description: Indicates whether users can use zero client
                             devices to access their WorkSpaces.
                           type: string
                       type: object
                     type: array
                   workspaceCreationProperties:
-                    description: –  Default properties that are used for creating
-                      WorkSpaces. Defined below.
+                    description: Default properties that are used for creating WorkSpaces.
+                      Defined below.
                     items:
                       properties:
                         customSecurityGroupId:
-                          description: –  The identifier of your custom security group.
+                          description: The identifier of your custom security group.
                             Should relate to the same VPC, where workspaces reside
                             in.
                           type: string
@@ -505,25 +621,38 @@ spec:
                               type: object
                           type: object
                         defaultOu:
-                          description: –  The default organizational unit (OU) for
-                            your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
+                          description: The default organizational unit (OU) for your
+                            WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
                             pattern.
                           type: string
                         enableInternetAccess:
-                          description: –  Indicates whether internet access is enabled
+                          description: Indicates whether internet access is enabled
                             for your WorkSpaces.
                           type: boolean
                         enableMaintenanceMode:
-                          description: –  Indicates whether maintenance mode is enabled
-                            for your WorkSpaces. For more information, see WorkSpace
-                            Maintenance..
+                          description: Indicates whether maintenance mode is enabled
+                            for your WorkSpaces. Valid only if workspace_type is set
+                            to PERSONAL.
                           type: boolean
                         userEnabledAsLocalAdministrator:
-                          description: –  Indicates whether users are local administrators
-                            of their WorkSpaces.
+                          description: Indicates whether users are local administrators
+                            of their WorkSpaces. Valid only if workspace_type is set
+                            to PERSONAL.
                           type: boolean
                       type: object
                     type: array
+                  workspaceDirectoryDescription:
+                    description: The description of the WorkSpaces directory when
+                      workspace_type is set to POOLS.
+                    type: string
+                  workspaceDirectoryName:
+                    description: The name of the WorkSpaces directory when workspace_type
+                      is set to POOLS.
+                    type: string
+                  workspaceType:
+                    description: Specifies the type of WorkSpaces directory. Valid
+                      values are PERSONAL and POOLS. Default is PERSONAL.
+                    type: string
                 required:
                 - region
                 type: object
@@ -540,6 +669,115 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  activeDirectoryConfig:
+                    description: Configuration for Active Directory integration when
+                      workspace_type is set to POOLS. Defined below.
+                    items:
+                      properties:
+                        domainName:
+                          description: Fully qualified domain name of the AWS Directory
+                            Service directory.
+                          type: string
+                        serviceAccountSecretArn:
+                          description: ARN of the Secrets Manager secret that contains
+                            the credentials for the service account. For more information,
+                            see Service Account Details.
+                          type: string
+                        serviceAccountSecretArnRef:
+                          description: Reference to a Secret in secretsmanager to
+                            populate serviceAccountSecretArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        serviceAccountSecretArnSelector:
+                          description: Selector for a Secret in secretsmanager to
+                            populate serviceAccountSecretArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
+                  certificateBasedAuthProperties:
+                    description: Configuration of certificate-based authentication
+                      (CBA) integration. Requires SAML authentication to be enabled.
+                      Defined below.
+                    items:
+                      properties:
+                        certificateAuthorityArn:
+                          description: The Amazon Resource Name (ARN) of the certificate
+                            manager private certificate authority (ACM-PCA) that is
+                            used for certificate-based authentication.
+                          type: string
+                        status:
+                          description: Status of certificate-based authentication.
+                            Default DISABLED.
+                          type: string
+                      type: object
+                    type: array
                   directoryId:
                     description: The directory identifier for registration in WorkSpaces
                       service.
@@ -704,7 +942,7 @@ spec:
                         type: object
                     type: object
                   samlProperties:
-                    description: –  Configuration of SAML authentication integration.
+                    description: Configuration of SAML authentication integration.
                       Defined below.
                     items:
                       properties:
@@ -723,30 +961,31 @@ spec:
                       type: object
                     type: array
                   selfServicePermissions:
-                    description: service capabilities. Defined below.
+                    description: Permissions to enable or disable self-service capabilities
+                      when workspace_type is set to PERSONAL.. Defined below.
                     items:
                       properties:
                         changeComputeType:
-                          description: –  Whether WorkSpaces directory users can change
+                          description: Whether WorkSpaces directory users can change
                             the compute type (bundle) for their workspace. Default
                             false.
                           type: boolean
                         increaseVolumeSize:
-                          description: –  Whether WorkSpaces directory users can increase
+                          description: Whether WorkSpaces directory users can increase
                             the volume size of the drives on their workspace. Default
                             false.
                           type: boolean
                         rebuildWorkspace:
-                          description: –  Whether WorkSpaces directory users can rebuild
+                          description: Whether WorkSpaces directory users can rebuild
                             the operating system of a workspace to its original state.
                             Default false.
                           type: boolean
                         restartWorkspace:
-                          description: –  Whether WorkSpaces directory users can restart
+                          description: Whether WorkSpaces directory users can restart
                             their workspace. Default true.
                           type: boolean
                         switchRunningMode:
-                          description: –  Whether WorkSpaces directory users can switch
+                          description: Whether WorkSpaces directory users can switch
                             the running mode of their workspace. Default false.
                           type: boolean
                       type: object
@@ -842,52 +1081,57 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  userIdentityType:
+                    description: Specifies the user identity type for the WorkSpaces
+                      directory. Valid values are CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE,
+                      AWS_IAM_IDENTITY_CENTER.
+                    type: string
                   workspaceAccessProperties:
-                    description: –  Specifies which devices and operating systems
-                      users can use to access their WorkSpaces. Defined below.
+                    description: Specifies which devices and operating systems users
+                      can use to access their WorkSpaces. Defined below.
                     items:
                       properties:
                         deviceTypeAndroid:
-                          description: –  Indicates whether users can use Android
-                            devices to access their WorkSpaces.
+                          description: Indicates whether users can use Android devices
+                            to access their WorkSpaces.
                           type: string
                         deviceTypeChromeos:
-                          description: –  Indicates whether users can use Chromebooks
+                          description: Indicates whether users can use Chromebooks
                             to access their WorkSpaces.
                           type: string
                         deviceTypeIos:
-                          description: –  Indicates whether users can use iOS devices
+                          description: Indicates whether users can use iOS devices
                             to access their WorkSpaces.
                           type: string
                         deviceTypeLinux:
-                          description: –  Indicates whether users can use Linux clients
+                          description: Indicates whether users can use Linux clients
                             to access their WorkSpaces.
                           type: string
                         deviceTypeOsx:
-                          description: –  Indicates whether users can use macOS clients
+                          description: Indicates whether users can use macOS clients
                             to access their WorkSpaces.
                           type: string
                         deviceTypeWeb:
-                          description: –  Indicates whether users can access their
-                            WorkSpaces through a web browser.
+                          description: Indicates whether users can access their WorkSpaces
+                            through a web browser.
                           type: string
                         deviceTypeWindows:
-                          description: –  Indicates whether users can use Windows
-                            clients to access their WorkSpaces.
+                          description: Indicates whether users can use Windows clients
+                            to access their WorkSpaces.
                           type: string
                         deviceTypeZeroclient:
-                          description: –  Indicates whether users can use zero client
+                          description: Indicates whether users can use zero client
                             devices to access their WorkSpaces.
                           type: string
                       type: object
                     type: array
                   workspaceCreationProperties:
-                    description: –  Default properties that are used for creating
-                      WorkSpaces. Defined below.
+                    description: Default properties that are used for creating WorkSpaces.
+                      Defined below.
                     items:
                       properties:
                         customSecurityGroupId:
-                          description: –  The identifier of your custom security group.
+                          description: The identifier of your custom security group.
                             Should relate to the same VPC, where workspaces reside
                             in.
                           type: string
@@ -968,25 +1212,38 @@ spec:
                               type: object
                           type: object
                         defaultOu:
-                          description: –  The default organizational unit (OU) for
-                            your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
+                          description: The default organizational unit (OU) for your
+                            WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
                             pattern.
                           type: string
                         enableInternetAccess:
-                          description: –  Indicates whether internet access is enabled
+                          description: Indicates whether internet access is enabled
                             for your WorkSpaces.
                           type: boolean
                         enableMaintenanceMode:
-                          description: –  Indicates whether maintenance mode is enabled
-                            for your WorkSpaces. For more information, see WorkSpace
-                            Maintenance..
+                          description: Indicates whether maintenance mode is enabled
+                            for your WorkSpaces. Valid only if workspace_type is set
+                            to PERSONAL.
                           type: boolean
                         userEnabledAsLocalAdministrator:
-                          description: –  Indicates whether users are local administrators
-                            of their WorkSpaces.
+                          description: Indicates whether users are local administrators
+                            of their WorkSpaces. Valid only if workspace_type is set
+                            to PERSONAL.
                           type: boolean
                       type: object
                     type: array
+                  workspaceDirectoryDescription:
+                    description: The description of the WorkSpaces directory when
+                      workspace_type is set to POOLS.
+                    type: string
+                  workspaceDirectoryName:
+                    description: The name of the WorkSpaces directory when workspace_type
+                      is set to POOLS.
+                    type: string
+                  workspaceType:
+                    description: Specifies the type of WorkSpaces directory. Valid
+                      values are PERSONAL and POOLS. Default is PERSONAL.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -1160,9 +1417,42 @@ spec:
             properties:
               atProvider:
                 properties:
+                  activeDirectoryConfig:
+                    description: Configuration for Active Directory integration when
+                      workspace_type is set to POOLS. Defined below.
+                    items:
+                      properties:
+                        domainName:
+                          description: Fully qualified domain name of the AWS Directory
+                            Service directory.
+                          type: string
+                        serviceAccountSecretArn:
+                          description: ARN of the Secrets Manager secret that contains
+                            the credentials for the service account. For more information,
+                            see Service Account Details.
+                          type: string
+                      type: object
+                    type: array
                   alias:
                     description: The directory alias.
                     type: string
+                  certificateBasedAuthProperties:
+                    description: Configuration of certificate-based authentication
+                      (CBA) integration. Requires SAML authentication to be enabled.
+                      Defined below.
+                    items:
+                      properties:
+                        certificateAuthorityArn:
+                          description: The Amazon Resource Name (ARN) of the certificate
+                            manager private certificate authority (ACM-PCA) that is
+                            used for certificate-based authentication.
+                          type: string
+                        status:
+                          description: Status of certificate-based authentication.
+                            Default DISABLED.
+                          type: string
+                      type: object
+                    type: array
                   customerUserName:
                     description: The user name for the service account.
                     type: string
@@ -1197,13 +1487,18 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   registrationCode:
                     description: The registration code for the directory. This is
                       the code that users enter in their Amazon WorkSpaces client
                       application to connect to the directory.
                     type: string
                   samlProperties:
-                    description: –  Configuration of SAML authentication integration.
+                    description: Configuration of SAML authentication integration.
                       Defined below.
                     items:
                       properties:
@@ -1222,30 +1517,31 @@ spec:
                       type: object
                     type: array
                   selfServicePermissions:
-                    description: service capabilities. Defined below.
+                    description: Permissions to enable or disable self-service capabilities
+                      when workspace_type is set to PERSONAL.. Defined below.
                     items:
                       properties:
                         changeComputeType:
-                          description: –  Whether WorkSpaces directory users can change
+                          description: Whether WorkSpaces directory users can change
                             the compute type (bundle) for their workspace. Default
                             false.
                           type: boolean
                         increaseVolumeSize:
-                          description: –  Whether WorkSpaces directory users can increase
+                          description: Whether WorkSpaces directory users can increase
                             the volume size of the drives on their workspace. Default
                             false.
                           type: boolean
                         rebuildWorkspace:
-                          description: –  Whether WorkSpaces directory users can rebuild
+                          description: Whether WorkSpaces directory users can rebuild
                             the operating system of a workspace to its original state.
                             Default false.
                           type: boolean
                         restartWorkspace:
-                          description: –  Whether WorkSpaces directory users can restart
+                          description: Whether WorkSpaces directory users can restart
                             their workspace. Default true.
                           type: boolean
                         switchRunningMode:
-                          description: –  Whether WorkSpaces directory users can switch
+                          description: Whether WorkSpaces directory users can switch
                             the running mode of their workspace. Default false.
                           type: boolean
                       type: object
@@ -1271,78 +1567,96 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  userIdentityType:
+                    description: Specifies the user identity type for the WorkSpaces
+                      directory. Valid values are CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE,
+                      AWS_IAM_IDENTITY_CENTER.
+                    type: string
                   workspaceAccessProperties:
-                    description: –  Specifies which devices and operating systems
-                      users can use to access their WorkSpaces. Defined below.
+                    description: Specifies which devices and operating systems users
+                      can use to access their WorkSpaces. Defined below.
                     items:
                       properties:
                         deviceTypeAndroid:
-                          description: –  Indicates whether users can use Android
-                            devices to access their WorkSpaces.
+                          description: Indicates whether users can use Android devices
+                            to access their WorkSpaces.
                           type: string
                         deviceTypeChromeos:
-                          description: –  Indicates whether users can use Chromebooks
+                          description: Indicates whether users can use Chromebooks
                             to access their WorkSpaces.
                           type: string
                         deviceTypeIos:
-                          description: –  Indicates whether users can use iOS devices
+                          description: Indicates whether users can use iOS devices
                             to access their WorkSpaces.
                           type: string
                         deviceTypeLinux:
-                          description: –  Indicates whether users can use Linux clients
+                          description: Indicates whether users can use Linux clients
                             to access their WorkSpaces.
                           type: string
                         deviceTypeOsx:
-                          description: –  Indicates whether users can use macOS clients
+                          description: Indicates whether users can use macOS clients
                             to access their WorkSpaces.
                           type: string
                         deviceTypeWeb:
-                          description: –  Indicates whether users can access their
-                            WorkSpaces through a web browser.
+                          description: Indicates whether users can access their WorkSpaces
+                            through a web browser.
                           type: string
                         deviceTypeWindows:
-                          description: –  Indicates whether users can use Windows
-                            clients to access their WorkSpaces.
+                          description: Indicates whether users can use Windows clients
+                            to access their WorkSpaces.
                           type: string
                         deviceTypeZeroclient:
-                          description: –  Indicates whether users can use zero client
+                          description: Indicates whether users can use zero client
                             devices to access their WorkSpaces.
                           type: string
                       type: object
                     type: array
                   workspaceCreationProperties:
-                    description: –  Default properties that are used for creating
-                      WorkSpaces. Defined below.
+                    description: Default properties that are used for creating WorkSpaces.
+                      Defined below.
                     items:
                       properties:
                         customSecurityGroupId:
-                          description: –  The identifier of your custom security group.
+                          description: The identifier of your custom security group.
                             Should relate to the same VPC, where workspaces reside
                             in.
                           type: string
                         defaultOu:
-                          description: –  The default organizational unit (OU) for
-                            your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
+                          description: The default organizational unit (OU) for your
+                            WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
                             pattern.
                           type: string
                         enableInternetAccess:
-                          description: –  Indicates whether internet access is enabled
+                          description: Indicates whether internet access is enabled
                             for your WorkSpaces.
                           type: boolean
                         enableMaintenanceMode:
-                          description: –  Indicates whether maintenance mode is enabled
-                            for your WorkSpaces. For more information, see WorkSpace
-                            Maintenance..
+                          description: Indicates whether maintenance mode is enabled
+                            for your WorkSpaces. Valid only if workspace_type is set
+                            to PERSONAL.
                           type: boolean
                         userEnabledAsLocalAdministrator:
-                          description: –  Indicates whether users are local administrators
-                            of their WorkSpaces.
+                          description: Indicates whether users are local administrators
+                            of their WorkSpaces. Valid only if workspace_type is set
+                            to PERSONAL.
                           type: boolean
                       type: object
                     type: array
+                  workspaceDirectoryDescription:
+                    description: The description of the WorkSpaces directory when
+                      workspace_type is set to POOLS.
+                    type: string
+                  workspaceDirectoryName:
+                    description: The name of the WorkSpaces directory when workspace_type
+                      is set to POOLS.
+                    type: string
                   workspaceSecurityGroupId:
                     description: The identifier of the security group that is assigned
                       to new WorkSpaces.
+                    type: string
+                  workspaceType:
+                    description: Specifies the type of WorkSpaces directory. Valid
+                      values are PERSONAL and POOLS. Default is PERSONAL.
                     type: string
                 type: object
               conditions:

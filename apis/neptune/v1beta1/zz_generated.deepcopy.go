@@ -1387,6 +1387,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationSourceIdentifier != nil {
 		in, out := &in.ReplicationSourceIdentifier, &out.ReplicationSourceIdentifier
 		*out = new(string)

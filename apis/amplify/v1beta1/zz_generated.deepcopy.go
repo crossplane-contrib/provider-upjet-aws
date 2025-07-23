@@ -83,6 +83,21 @@ func (in *AppInitParameters) DeepCopyInto(out *AppInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ComputeRoleArnRef != nil {
+		in, out := &in.ComputeRoleArnRef, &out.ComputeRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ComputeRoleArnSelector != nil {
+		in, out := &in.ComputeRoleArnSelector, &out.ComputeRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
@@ -269,6 +284,11 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
@@ -353,6 +373,11 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Repository != nil {
 		in, out := &in.Repository, &out.Repository
@@ -445,6 +470,21 @@ func (in *AppParameters) DeepCopyInto(out *AppParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ComputeRoleArnRef != nil {
+		in, out := &in.ComputeRoleArnRef, &out.ComputeRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ComputeRoleArnSelector != nil {
+		in, out := &in.ComputeRoleArnSelector, &out.ComputeRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders

@@ -21,7 +21,7 @@ type DestinationInitParameters struct {
 
 type DestinationObservation struct {
 
-	// A Region to replicate to.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The account ID of the destination registry to replicate to.
@@ -30,7 +30,7 @@ type DestinationObservation struct {
 
 type DestinationParameters struct {
 
-	// A Region to replicate to.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
@@ -48,6 +48,10 @@ type ReplicationConfigurationInitParameters struct {
 type ReplicationConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The account ID of the destination registry to replicate to.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
@@ -57,11 +61,10 @@ type ReplicationConfigurationObservation struct {
 
 type ReplicationConfigurationParameters struct {
 
-	// A Region to replicate to.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Replication configuration for a registry. See Replication Configuration.
 	// +kubebuilder:validation:Optional

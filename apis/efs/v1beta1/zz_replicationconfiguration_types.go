@@ -36,7 +36,7 @@ type DestinationObservation struct {
 	// The Key ID, ARN, alias, or alias ARN of the KMS key that should be used to encrypt the replica file system. If omitted, the default KMS key for EFS /aws/elasticfilesystem will be used.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The region in which the replica should be created.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The status of the replication.
@@ -57,7 +57,7 @@ type DestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The region in which the replica should be created.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -94,6 +94,10 @@ type ReplicationConfigurationObservation struct {
 	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in the replication configuration.
 	OriginalSourceFileSystemArn *string `json:"originalSourceFileSystemArn,omitempty" tf:"original_source_file_system_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the current source file system in the replication configuration.
 	SourceFileSystemArn *string `json:"sourceFileSystemArn,omitempty" tf:"source_file_system_arn,omitempty"`
 
@@ -110,11 +114,10 @@ type ReplicationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// The region in which the replica should be created.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the file system that is to be replicated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.FileSystem

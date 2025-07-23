@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ContainerService is the Schema for the ContainerServices API.
-          Provides a resource to manage Lightsail container service
+          Manages a Lightsail container service for running containerized applications.
         properties:
           apiVersion:
             description: |-
@@ -74,56 +74,56 @@ spec:
               forProvider:
                 properties:
                   isDisabled:
-                    description: A Boolean value indicating whether the container
-                      service is disabled. Defaults to false.
+                    description: Whether to disable the container service. Defaults
+                      to false.
                     type: boolean
                   power:
-                    description: |-
-                      The power specification for the container service. The power specifies the amount of memory,
-                      the number of vCPUs, and the monthly price of each node of the container service.
-                      Possible values: nano, micro, small, medium, large, xlarge.
+                    description: 'Power specification for the container service. The
+                      power specifies the amount of memory, the number of vCPUs, and
+                      the monthly price of each node of the container service. Possible
+                      values: nano, micro, small, medium, large, xlarge.'
                     type: string
                   privateRegistryAccess:
-                    description: An object to describe the configuration for the container
-                      service to access private container image repositories, such
-                      as Amazon Elastic Container Registry (Amazon ECR) private repositories.
-                      See Private Registry Access below for more details.
+                    description: Configuration for the container service to access
+                      private container image repositories, such as Amazon Elastic
+                      Container Registry (Amazon ECR) private repositories. See below.
                     items:
                       properties:
                         ecrImagePullerRole:
-                          description: Describes a request to configure an Amazon
-                            Lightsail container service to access private container
-                            image repositories, such as Amazon Elastic Container Registry
-                            (Amazon ECR) private repositories. See ECR Image Puller
-                            Role below for more details.
+                          description: Configuration to access private container image
+                            repositories, such as Amazon Elastic Container Registry
+                            (Amazon ECR) private repositories. See below.
                           items:
                             properties:
                               isActive:
-                                description: A Boolean value that indicates whether
-                                  to activate the role. The default is false.
+                                description: Whether to activate the role. Defaults
+                                  to false.
                                 type: boolean
                             type: object
                           type: array
                       type: object
                     type: array
                   publicDomainNames:
-                    description: |-
-                      The public domain names to use with the container service, such as example.com
-                      and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
-                      specify are used when you create a deployment with a container configured as the public endpoint of your container
-                      service. If you don't specify public domain names, then you can use the default domain of the container service.
-                      Defined below.
+                    description: Public domain names to use with the container service,
+                      such as example.com and www.example.com. You can specify up
+                      to four public domain names for a container service. The domain
+                      names that you specify are used when you create a deployment
+                      with a container configured as the public endpoint of your container
+                      service. If you don't specify public domain names, then you
+                      can use the default domain of the container service. See below.
                     items:
                       properties:
                         certificate:
+                          description: 'Set of certificate configurations for the
+                            public domain names. Each element contains the following
+                            attributes:'
                           items:
                             properties:
                               certificateName:
-                                description: |-
-                                  The name for the container service. Names must be of length 1 to 63, and be
-                                  unique within each AWS Region in your Lightsail account.
+                                description: Name of the certificate.
                                 type: string
                               domainNames:
+                                description: List of domain names for the certificate.
                                 items:
                                   type: string
                                 type: array
@@ -132,13 +132,14 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scale:
-                    description: |-
-                      The scale specification for the container service. The scale specifies the allocated compute
-                      nodes of the container service.
+                    description: Scale specification for the container service. The
+                      scale specifies the allocated compute nodes of the container
+                      service.
                     type: number
                   tags:
                     additionalProperties:
@@ -163,56 +164,56 @@ spec:
                   autoscaler.
                 properties:
                   isDisabled:
-                    description: A Boolean value indicating whether the container
-                      service is disabled. Defaults to false.
+                    description: Whether to disable the container service. Defaults
+                      to false.
                     type: boolean
                   power:
-                    description: |-
-                      The power specification for the container service. The power specifies the amount of memory,
-                      the number of vCPUs, and the monthly price of each node of the container service.
-                      Possible values: nano, micro, small, medium, large, xlarge.
+                    description: 'Power specification for the container service. The
+                      power specifies the amount of memory, the number of vCPUs, and
+                      the monthly price of each node of the container service. Possible
+                      values: nano, micro, small, medium, large, xlarge.'
                     type: string
                   privateRegistryAccess:
-                    description: An object to describe the configuration for the container
-                      service to access private container image repositories, such
-                      as Amazon Elastic Container Registry (Amazon ECR) private repositories.
-                      See Private Registry Access below for more details.
+                    description: Configuration for the container service to access
+                      private container image repositories, such as Amazon Elastic
+                      Container Registry (Amazon ECR) private repositories. See below.
                     items:
                       properties:
                         ecrImagePullerRole:
-                          description: Describes a request to configure an Amazon
-                            Lightsail container service to access private container
-                            image repositories, such as Amazon Elastic Container Registry
-                            (Amazon ECR) private repositories. See ECR Image Puller
-                            Role below for more details.
+                          description: Configuration to access private container image
+                            repositories, such as Amazon Elastic Container Registry
+                            (Amazon ECR) private repositories. See below.
                           items:
                             properties:
                               isActive:
-                                description: A Boolean value that indicates whether
-                                  to activate the role. The default is false.
+                                description: Whether to activate the role. Defaults
+                                  to false.
                                 type: boolean
                             type: object
                           type: array
                       type: object
                     type: array
                   publicDomainNames:
-                    description: |-
-                      The public domain names to use with the container service, such as example.com
-                      and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
-                      specify are used when you create a deployment with a container configured as the public endpoint of your container
-                      service. If you don't specify public domain names, then you can use the default domain of the container service.
-                      Defined below.
+                    description: Public domain names to use with the container service,
+                      such as example.com and www.example.com. You can specify up
+                      to four public domain names for a container service. The domain
+                      names that you specify are used when you create a deployment
+                      with a container configured as the public endpoint of your container
+                      service. If you don't specify public domain names, then you
+                      can use the default domain of the container service. See below.
                     items:
                       properties:
                         certificate:
+                          description: 'Set of certificate configurations for the
+                            public domain names. Each element contains the following
+                            attributes:'
                           items:
                             properties:
                               certificateName:
-                                description: |-
-                                  The name for the container service. Names must be of length 1 to 63, and be
-                                  unique within each AWS Region in your Lightsail account.
+                                description: Name of the certificate.
                                 type: string
                               domainNames:
+                                description: List of domain names for the certificate.
                                 items:
                                   type: string
                                 type: array
@@ -221,9 +222,9 @@ spec:
                       type: object
                     type: array
                   scale:
-                    description: |-
-                      The scale specification for the container service. The scale specifies the allocated compute
-                      nodes of the container service.
+                    description: Scale specification for the container service. The
+                      scale specifies the allocated compute nodes of the container
+                      service.
                     type: number
                   tags:
                     additionalProperties:
@@ -414,88 +415,92 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the container service.
+                    description: ARN of the container service.
                     type: string
                   availabilityZone:
-                    description: The Availability Zone. Follows the format us-east-2a
+                    description: Availability Zone. Follows the format us-east-2a
                       (case-sensitive).
                     type: string
                   createdAt:
+                    description: Date and time when the container service was created.
                     type: string
                   id:
                     description: Same as name.
                     type: string
                   isDisabled:
-                    description: A Boolean value indicating whether the container
-                      service is disabled. Defaults to false.
+                    description: Whether to disable the container service. Defaults
+                      to false.
                     type: boolean
                   power:
-                    description: |-
-                      The power specification for the container service. The power specifies the amount of memory,
-                      the number of vCPUs, and the monthly price of each node of the container service.
-                      Possible values: nano, micro, small, medium, large, xlarge.
+                    description: 'Power specification for the container service. The
+                      power specifies the amount of memory, the number of vCPUs, and
+                      the monthly price of each node of the container service. Possible
+                      values: nano, micro, small, medium, large, xlarge.'
                     type: string
                   powerId:
-                    description: The ID of the power of the container service.
+                    description: Power ID of the container service.
                     type: string
                   principalArn:
-                    description: |-
-                      The principal ARN of the container service. The principal ARN can be used to create a trust
-                      relationship between your standard AWS account and your Lightsail container service. This allows you to give your
-                      service permission to access resources in your standard AWS account.
+                    description: Principal ARN of the container service. The principal
+                      ARN can be used to create a trust relationship between your
+                      standard AWS account and your Lightsail container service. This
+                      allows you to give your service permission to access resources
+                      in your standard AWS account.
                     type: string
                   privateDomainName:
-                    description: |-
-                      The private domain name of the container service. The private domain name is accessible only
-                      by other resources within the default virtual private cloud (VPC) of your Lightsail account.
+                    description: Private domain name of the container service. The
+                      private domain name is accessible only by other resources within
+                      the default virtual private cloud (VPC) of your Lightsail account.
                     type: string
                   privateRegistryAccess:
-                    description: An object to describe the configuration for the container
-                      service to access private container image repositories, such
-                      as Amazon Elastic Container Registry (Amazon ECR) private repositories.
-                      See Private Registry Access below for more details.
+                    description: Configuration for the container service to access
+                      private container image repositories, such as Amazon Elastic
+                      Container Registry (Amazon ECR) private repositories. See below.
                     items:
                       properties:
                         ecrImagePullerRole:
-                          description: Describes a request to configure an Amazon
-                            Lightsail container service to access private container
-                            image repositories, such as Amazon Elastic Container Registry
-                            (Amazon ECR) private repositories. See ECR Image Puller
-                            Role below for more details.
+                          description: Configuration to access private container image
+                            repositories, such as Amazon Elastic Container Registry
+                            (Amazon ECR) private repositories. See below.
                           items:
                             properties:
                               isActive:
-                                description: A Boolean value that indicates whether
-                                  to activate the role. The default is false.
+                                description: Whether to activate the role. Defaults
+                                  to false.
                                 type: boolean
                               principalArn:
-                                description: |-
-                                  The principal ARN of the container service. The principal ARN can be used to create a trust
-                                  relationship between your standard AWS account and your Lightsail container service. This allows you to give your
-                                  service permission to access resources in your standard AWS account.
+                                description: Principal ARN of the container service.
+                                  The principal ARN can be used to create a trust
+                                  relationship between your standard AWS account and
+                                  your Lightsail container service. This allows you
+                                  to give your service permission to access resources
+                                  in your standard AWS account.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   publicDomainNames:
-                    description: |-
-                      The public domain names to use with the container service, such as example.com
-                      and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
-                      specify are used when you create a deployment with a container configured as the public endpoint of your container
-                      service. If you don't specify public domain names, then you can use the default domain of the container service.
-                      Defined below.
+                    description: Public domain names to use with the container service,
+                      such as example.com and www.example.com. You can specify up
+                      to four public domain names for a container service. The domain
+                      names that you specify are used when you create a deployment
+                      with a container configured as the public endpoint of your container
+                      service. If you don't specify public domain names, then you
+                      can use the default domain of the container service. See below.
                     items:
                       properties:
                         certificate:
+                          description: 'Set of certificate configurations for the
+                            public domain names. Each element contains the following
+                            attributes:'
                           items:
                             properties:
                               certificateName:
-                                description: |-
-                                  The name for the container service. Names must be of length 1 to 63, and be
-                                  unique within each AWS Region in your Lightsail account.
+                                description: Name of the certificate.
                                 type: string
                               domainNames:
+                                description: List of domain names for the certificate.
                                 items:
                                   type: string
                                 type: array
@@ -503,17 +508,22 @@ spec:
                           type: array
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceType:
-                    description: The Lightsail resource type of the container service
+                    description: Lightsail resource type of the container service
                       (i.e., ContainerService).
                     type: string
                   scale:
-                    description: |-
-                      The scale specification for the container service. The scale specifies the allocated compute
-                      nodes of the container service.
+                    description: Scale specification for the container service. The
+                      scale specifies the allocated compute nodes of the container
+                      service.
                     type: number
                   state:
-                    description: The current state of the container service.
+                    description: Current state of the container service.
                     type: string
                   tags:
                     additionalProperties:
@@ -524,15 +534,14 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: |-
-                      A map of tags assigned to the resource, including those inherited from the provider
-                      default_tags configuration block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   url:
-                    description: |-
-                      The publicly accessible URL of the container service. If no public endpoint is specified in the
-                      currentDeployment, this URL returns a 404 response.
+                    description: Publicly accessible URL of the container service.
+                      If no public endpoint is specified in the currentDeployment,
+                      this URL returns a 404 response.
                     type: string
                 type: object
               conditions:

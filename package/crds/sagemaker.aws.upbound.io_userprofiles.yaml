@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: UserProfile is the Schema for the UserProfiles API. Provides
-          a SageMaker User Profile resource.
+          a SageMaker AI User Profile resource.
         properties:
           apiVersion:
             description: |-
@@ -151,8 +151,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   singleSignOnUserIdentifier:
                     description: A specifier for the type of value specified in single_sign_on_user_value.
@@ -195,7 +196,7 @@ spec:
                             properties:
                               directDeploySettings:
                                 description: The model deployment settings for the
-                                  SageMaker Canvas application. See Direct Deploy
+                                  SageMaker AI Canvas application. See Direct Deploy
                                   Settings below.
                                 items:
                                   properties:
@@ -209,17 +210,17 @@ spec:
                                 type: array
                               emrServerlessSettings:
                                 description: The settings for running Amazon EMR Serverless
-                                  jobs in SageMaker Canvas. See emr_serverless_settings
+                                  jobs in SageMaker AI Canvas. See emr_serverless_settings
                                   Block below.
                                 items:
                                   properties:
                                     executionRoleArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the AWS IAM role that is assumed for running
-                                        Amazon EMR Serverless jobs in SageMaker Canvas.
-                                        This role should have the necessary permissions
-                                        to read and write data attached and a trust
-                                        relationship with EMR Serverless.
+                                        Amazon EMR Serverless jobs in SageMaker AI
+                                        Canvas. This role should have the necessary
+                                        permissions to read and write data attached
+                                        and a trust relationship with EMR Serverless.
                                       type: string
                                     status:
                                       description: Describes whether time series forecasting
@@ -229,12 +230,14 @@ spec:
                                   type: object
                                 type: array
                               generativeAiSettings:
-                                properties:
-                                  amazonBedrockRoleArn:
-                                    description: The user profile Amazon Resource
-                                      Name (ARN).
-                                    type: string
-                                type: object
+                                items:
+                                  properties:
+                                    amazonBedrockRoleArn:
+                                      description: The user profile Amazon Resource
+                                        Name (ARN).
+                                      type: string
+                                  type: object
+                                type: array
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -277,17 +280,17 @@ spec:
                                 type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
-                                  Canvas application. See Model Register Settings
+                                  AI Canvas application. See Model Register Settings
                                   below.
                                 items:
                                   properties:
                                     crossAccountModelRegisterRoleArn:
                                       description: The Amazon Resource Name (ARN)
-                                        of the SageMaker model registry account. Required
-                                        only to register model versions created by
-                                        a different SageMaker Canvas AWS account than
-                                        the AWS account in which SageMaker model registry
-                                        is set up.
+                                        of the SageMaker AI model registry account.
+                                        Required only to register model versions created
+                                        by a different SageMaker AI Canvas AWS account
+                                        than the AWS account in which SageMaker AI
+                                        model registry is set up.
                                       type: string
                                     status:
                                       description: Describes whether the integration
@@ -326,7 +329,7 @@ spec:
                                 type: array
                               workspaceSettings:
                                 description: The workspace settings for the SageMaker
-                                  Canvas application. See Workspace Settings below.
+                                  AI Canvas application. See Workspace Settings below.
                                 items:
                                   properties:
                                     s3ArtifactPath:
@@ -365,10 +368,10 @@ spec:
                                       items:
                                         properties:
                                           idleTimeoutInMinutes:
-                                            description: The time that SageMaker waits
-                                              after the application becomes idle before
-                                              shutting it down. Valid values are between
-                                              60 and 525600.
+                                            description: The time that SageMaker AI
+                                              waits after the application becomes
+                                              idle before shutting it down. Valid
+                                              values are between 60 and 525600.
                                             type: number
                                           lifecycleManagement:
                                             description: Indicates whether idle shutdown
@@ -397,9 +400,9 @@ spec:
                                   override changes made in the default lifecycle configuration.
                                 type: string
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a CodeEditor app. see Custom
-                                  Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a CodeEditor app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -416,14 +419,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -431,11 +434,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -455,8 +459,8 @@ spec:
                         customFileSystemConfig:
                           description: The settings for assigning a custom file system
                             to a user profile. Permitted users can access this file
-                            system in Amazon SageMaker Studio. See Custom File System
-                            Config below.
+                            system in Amazon SageMaker AI Studio. See Custom File
+                            System Config below.
                           items:
                             properties:
                               efsFileSystemConfig:
@@ -470,9 +474,9 @@ spec:
                                       type: string
                                     fileSystemPath:
                                       description: The path to the file system directory
-                                        that is accessible in Amazon SageMaker Studio.
-                                        Permitted users can access only this directory
-                                        and below.
+                                        that is accessible in Amazon SageMaker AI
+                                        Studio. Permitted users can access only this
+                                        directory and below.
                                       type: string
                                   type: object
                                 type: array
@@ -521,10 +525,10 @@ spec:
                                       items:
                                         properties:
                                           idleTimeoutInMinutes:
-                                            description: The time that SageMaker waits
-                                              after the application becomes idle before
-                                              shutting it down. Valid values are between
-                                              60 and 525600.
+                                            description: The time that SageMaker AI
+                                              waits after the application becomes
+                                              idle before shutting it down. Valid
+                                              values are between 60 and 525600.
                                             type: number
                                           lifecycleManagement:
                                             description: Indicates whether idle shutdown
@@ -554,8 +558,9 @@ spec:
                                 type: string
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
-                                  automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  AI automatically displays to users for cloning in
+                                  the JupyterServer application. see Code Repository
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -564,9 +569,9 @@ spec:
                                   type: object
                                 type: array
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -583,14 +588,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -598,11 +603,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -613,8 +619,8 @@ spec:
                               emrSettings:
                                 description: The configuration parameters that specify
                                   the IAM roles assumed by the execution role of SageMaker
-                                  (assumable roles) and the cluster instances or job
-                                  execution environments (execution roles or runtime
+                                  AI (assumable roles) and the cluster instances or
+                                  job execution environments (execution roles or runtime
                                   roles) to manage and access resources required for
                                   running Amazon EMR clusters or Amazon EMR Serverless
                                   applications. see emr_settings Block below.
@@ -623,7 +629,7 @@ spec:
                                     assumableRoleArns:
                                       description: An array of Amazon Resource Names
                                         (ARNs) of the IAM roles that the execution
-                                        role of SageMaker can assume for performing
+                                        role of SageMaker AI can assume for performing
                                         operations or tasks related to Amazon EMR
                                         clusters or Amazon EMR Serverless applications.
                                         These roles define the permissions and access
@@ -634,7 +640,7 @@ spec:
                                         used in cross-account access scenarios, where
                                         the Amazon EMR resources (clusters or serverless
                                         applications) are located in a different AWS
-                                        account than the SageMaker domain.
+                                        account than the SageMaker AI domain.
                                       items:
                                         type: string
                                       type: array
@@ -671,8 +677,9 @@ spec:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
-                                  automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  AI automatically displays to users for cloning in
+                                  the JupyterServer application. see Code Repository
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -682,14 +689,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -697,11 +704,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -724,9 +732,9 @@ spec:
                           items:
                             properties:
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -743,14 +751,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -758,11 +766,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -785,9 +794,9 @@ spec:
                           items:
                             properties:
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -804,14 +813,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -819,11 +828,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -948,14 +958,14 @@ spec:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -963,11 +973,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1113,7 +1124,7 @@ spec:
                             properties:
                               directDeploySettings:
                                 description: The model deployment settings for the
-                                  SageMaker Canvas application. See Direct Deploy
+                                  SageMaker AI Canvas application. See Direct Deploy
                                   Settings below.
                                 items:
                                   properties:
@@ -1127,17 +1138,17 @@ spec:
                                 type: array
                               emrServerlessSettings:
                                 description: The settings for running Amazon EMR Serverless
-                                  jobs in SageMaker Canvas. See emr_serverless_settings
+                                  jobs in SageMaker AI Canvas. See emr_serverless_settings
                                   Block below.
                                 items:
                                   properties:
                                     executionRoleArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the AWS IAM role that is assumed for running
-                                        Amazon EMR Serverless jobs in SageMaker Canvas.
-                                        This role should have the necessary permissions
-                                        to read and write data attached and a trust
-                                        relationship with EMR Serverless.
+                                        Amazon EMR Serverless jobs in SageMaker AI
+                                        Canvas. This role should have the necessary
+                                        permissions to read and write data attached
+                                        and a trust relationship with EMR Serverless.
                                       type: string
                                     status:
                                       description: Describes whether time series forecasting
@@ -1147,12 +1158,14 @@ spec:
                                   type: object
                                 type: array
                               generativeAiSettings:
-                                properties:
-                                  amazonBedrockRoleArn:
-                                    description: The user profile Amazon Resource
-                                      Name (ARN).
-                                    type: string
-                                type: object
+                                items:
+                                  properties:
+                                    amazonBedrockRoleArn:
+                                      description: The user profile Amazon Resource
+                                        Name (ARN).
+                                      type: string
+                                  type: object
+                                type: array
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -1195,17 +1208,17 @@ spec:
                                 type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
-                                  Canvas application. See Model Register Settings
+                                  AI Canvas application. See Model Register Settings
                                   below.
                                 items:
                                   properties:
                                     crossAccountModelRegisterRoleArn:
                                       description: The Amazon Resource Name (ARN)
-                                        of the SageMaker model registry account. Required
-                                        only to register model versions created by
-                                        a different SageMaker Canvas AWS account than
-                                        the AWS account in which SageMaker model registry
-                                        is set up.
+                                        of the SageMaker AI model registry account.
+                                        Required only to register model versions created
+                                        by a different SageMaker AI Canvas AWS account
+                                        than the AWS account in which SageMaker AI
+                                        model registry is set up.
                                       type: string
                                     status:
                                       description: Describes whether the integration
@@ -1244,7 +1257,7 @@ spec:
                                 type: array
                               workspaceSettings:
                                 description: The workspace settings for the SageMaker
-                                  Canvas application. See Workspace Settings below.
+                                  AI Canvas application. See Workspace Settings below.
                                 items:
                                   properties:
                                     s3ArtifactPath:
@@ -1283,10 +1296,10 @@ spec:
                                       items:
                                         properties:
                                           idleTimeoutInMinutes:
-                                            description: The time that SageMaker waits
-                                              after the application becomes idle before
-                                              shutting it down. Valid values are between
-                                              60 and 525600.
+                                            description: The time that SageMaker AI
+                                              waits after the application becomes
+                                              idle before shutting it down. Valid
+                                              values are between 60 and 525600.
                                             type: number
                                           lifecycleManagement:
                                             description: Indicates whether idle shutdown
@@ -1315,9 +1328,9 @@ spec:
                                   override changes made in the default lifecycle configuration.
                                 type: string
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a CodeEditor app. see Custom
-                                  Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a CodeEditor app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -1334,14 +1347,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -1349,11 +1362,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1373,8 +1387,8 @@ spec:
                         customFileSystemConfig:
                           description: The settings for assigning a custom file system
                             to a user profile. Permitted users can access this file
-                            system in Amazon SageMaker Studio. See Custom File System
-                            Config below.
+                            system in Amazon SageMaker AI Studio. See Custom File
+                            System Config below.
                           items:
                             properties:
                               efsFileSystemConfig:
@@ -1388,9 +1402,9 @@ spec:
                                       type: string
                                     fileSystemPath:
                                       description: The path to the file system directory
-                                        that is accessible in Amazon SageMaker Studio.
-                                        Permitted users can access only this directory
-                                        and below.
+                                        that is accessible in Amazon SageMaker AI
+                                        Studio. Permitted users can access only this
+                                        directory and below.
                                       type: string
                                   type: object
                                 type: array
@@ -1439,10 +1453,10 @@ spec:
                                       items:
                                         properties:
                                           idleTimeoutInMinutes:
-                                            description: The time that SageMaker waits
-                                              after the application becomes idle before
-                                              shutting it down. Valid values are between
-                                              60 and 525600.
+                                            description: The time that SageMaker AI
+                                              waits after the application becomes
+                                              idle before shutting it down. Valid
+                                              values are between 60 and 525600.
                                             type: number
                                           lifecycleManagement:
                                             description: Indicates whether idle shutdown
@@ -1472,8 +1486,9 @@ spec:
                                 type: string
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
-                                  automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  AI automatically displays to users for cloning in
+                                  the JupyterServer application. see Code Repository
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -1482,9 +1497,9 @@ spec:
                                   type: object
                                 type: array
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -1501,14 +1516,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -1516,11 +1531,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1531,8 +1547,8 @@ spec:
                               emrSettings:
                                 description: The configuration parameters that specify
                                   the IAM roles assumed by the execution role of SageMaker
-                                  (assumable roles) and the cluster instances or job
-                                  execution environments (execution roles or runtime
+                                  AI (assumable roles) and the cluster instances or
+                                  job execution environments (execution roles or runtime
                                   roles) to manage and access resources required for
                                   running Amazon EMR clusters or Amazon EMR Serverless
                                   applications. see emr_settings Block below.
@@ -1541,7 +1557,7 @@ spec:
                                     assumableRoleArns:
                                       description: An array of Amazon Resource Names
                                         (ARNs) of the IAM roles that the execution
-                                        role of SageMaker can assume for performing
+                                        role of SageMaker AI can assume for performing
                                         operations or tasks related to Amazon EMR
                                         clusters or Amazon EMR Serverless applications.
                                         These roles define the permissions and access
@@ -1552,7 +1568,7 @@ spec:
                                         used in cross-account access scenarios, where
                                         the Amazon EMR resources (clusters or serverless
                                         applications) are located in a different AWS
-                                        account than the SageMaker domain.
+                                        account than the SageMaker AI domain.
                                       items:
                                         type: string
                                       type: array
@@ -1589,8 +1605,9 @@ spec:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
-                                  automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  AI automatically displays to users for cloning in
+                                  the JupyterServer application. see Code Repository
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -1600,14 +1617,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -1615,11 +1632,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1642,9 +1660,9 @@ spec:
                           items:
                             properties:
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -1661,14 +1679,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -1676,11 +1694,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1703,9 +1722,9 @@ spec:
                           items:
                             properties:
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -1722,14 +1741,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -1737,11 +1756,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1866,14 +1886,14 @@ spec:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -1881,11 +1901,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2086,7 +2107,11 @@ spec:
                       File System (EFS) volume.
                     type: string
                   id:
-                    description: The user profile Amazon Resource Name (ARN).
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   singleSignOnUserIdentifier:
                     description: A specifier for the type of value specified in single_sign_on_user_value.
@@ -2137,7 +2162,7 @@ spec:
                             properties:
                               directDeploySettings:
                                 description: The model deployment settings for the
-                                  SageMaker Canvas application. See Direct Deploy
+                                  SageMaker AI Canvas application. See Direct Deploy
                                   Settings below.
                                 items:
                                   properties:
@@ -2151,17 +2176,17 @@ spec:
                                 type: array
                               emrServerlessSettings:
                                 description: The settings for running Amazon EMR Serverless
-                                  jobs in SageMaker Canvas. See emr_serverless_settings
+                                  jobs in SageMaker AI Canvas. See emr_serverless_settings
                                   Block below.
                                 items:
                                   properties:
                                     executionRoleArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the AWS IAM role that is assumed for running
-                                        Amazon EMR Serverless jobs in SageMaker Canvas.
-                                        This role should have the necessary permissions
-                                        to read and write data attached and a trust
-                                        relationship with EMR Serverless.
+                                        Amazon EMR Serverless jobs in SageMaker AI
+                                        Canvas. This role should have the necessary
+                                        permissions to read and write data attached
+                                        and a trust relationship with EMR Serverless.
                                       type: string
                                     status:
                                       description: Describes whether time series forecasting
@@ -2171,12 +2196,14 @@ spec:
                                   type: object
                                 type: array
                               generativeAiSettings:
-                                properties:
-                                  amazonBedrockRoleArn:
-                                    description: The user profile Amazon Resource
-                                      Name (ARN).
-                                    type: string
-                                type: object
+                                items:
+                                  properties:
+                                    amazonBedrockRoleArn:
+                                      description: The user profile Amazon Resource
+                                        Name (ARN).
+                                      type: string
+                                  type: object
+                                type: array
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -2219,17 +2246,17 @@ spec:
                                 type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
-                                  Canvas application. See Model Register Settings
+                                  AI Canvas application. See Model Register Settings
                                   below.
                                 items:
                                   properties:
                                     crossAccountModelRegisterRoleArn:
                                       description: The Amazon Resource Name (ARN)
-                                        of the SageMaker model registry account. Required
-                                        only to register model versions created by
-                                        a different SageMaker Canvas AWS account than
-                                        the AWS account in which SageMaker model registry
-                                        is set up.
+                                        of the SageMaker AI model registry account.
+                                        Required only to register model versions created
+                                        by a different SageMaker AI Canvas AWS account
+                                        than the AWS account in which SageMaker AI
+                                        model registry is set up.
                                       type: string
                                     status:
                                       description: Describes whether the integration
@@ -2268,7 +2295,7 @@ spec:
                                 type: array
                               workspaceSettings:
                                 description: The workspace settings for the SageMaker
-                                  Canvas application. See Workspace Settings below.
+                                  AI Canvas application. See Workspace Settings below.
                                 items:
                                   properties:
                                     s3ArtifactPath:
@@ -2307,10 +2334,10 @@ spec:
                                       items:
                                         properties:
                                           idleTimeoutInMinutes:
-                                            description: The time that SageMaker waits
-                                              after the application becomes idle before
-                                              shutting it down. Valid values are between
-                                              60 and 525600.
+                                            description: The time that SageMaker AI
+                                              waits after the application becomes
+                                              idle before shutting it down. Valid
+                                              values are between 60 and 525600.
                                             type: number
                                           lifecycleManagement:
                                             description: Indicates whether idle shutdown
@@ -2339,9 +2366,9 @@ spec:
                                   override changes made in the default lifecycle configuration.
                                 type: string
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a CodeEditor app. see Custom
-                                  Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a CodeEditor app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -2358,14 +2385,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -2373,11 +2400,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2397,8 +2425,8 @@ spec:
                         customFileSystemConfig:
                           description: The settings for assigning a custom file system
                             to a user profile. Permitted users can access this file
-                            system in Amazon SageMaker Studio. See Custom File System
-                            Config below.
+                            system in Amazon SageMaker AI Studio. See Custom File
+                            System Config below.
                           items:
                             properties:
                               efsFileSystemConfig:
@@ -2412,9 +2440,9 @@ spec:
                                       type: string
                                     fileSystemPath:
                                       description: The path to the file system directory
-                                        that is accessible in Amazon SageMaker Studio.
-                                        Permitted users can access only this directory
-                                        and below.
+                                        that is accessible in Amazon SageMaker AI
+                                        Studio. Permitted users can access only this
+                                        directory and below.
                                       type: string
                                   type: object
                                 type: array
@@ -2463,10 +2491,10 @@ spec:
                                       items:
                                         properties:
                                           idleTimeoutInMinutes:
-                                            description: The time that SageMaker waits
-                                              after the application becomes idle before
-                                              shutting it down. Valid values are between
-                                              60 and 525600.
+                                            description: The time that SageMaker AI
+                                              waits after the application becomes
+                                              idle before shutting it down. Valid
+                                              values are between 60 and 525600.
                                             type: number
                                           lifecycleManagement:
                                             description: Indicates whether idle shutdown
@@ -2496,8 +2524,9 @@ spec:
                                 type: string
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
-                                  automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  AI automatically displays to users for cloning in
+                                  the JupyterServer application. see Code Repository
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -2506,9 +2535,9 @@ spec:
                                   type: object
                                 type: array
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -2525,14 +2554,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -2540,11 +2569,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2555,8 +2585,8 @@ spec:
                               emrSettings:
                                 description: The configuration parameters that specify
                                   the IAM roles assumed by the execution role of SageMaker
-                                  (assumable roles) and the cluster instances or job
-                                  execution environments (execution roles or runtime
+                                  AI (assumable roles) and the cluster instances or
+                                  job execution environments (execution roles or runtime
                                   roles) to manage and access resources required for
                                   running Amazon EMR clusters or Amazon EMR Serverless
                                   applications. see emr_settings Block below.
@@ -2565,7 +2595,7 @@ spec:
                                     assumableRoleArns:
                                       description: An array of Amazon Resource Names
                                         (ARNs) of the IAM roles that the execution
-                                        role of SageMaker can assume for performing
+                                        role of SageMaker AI can assume for performing
                                         operations or tasks related to Amazon EMR
                                         clusters or Amazon EMR Serverless applications.
                                         These roles define the permissions and access
@@ -2576,7 +2606,7 @@ spec:
                                         used in cross-account access scenarios, where
                                         the Amazon EMR resources (clusters or serverless
                                         applications) are located in a different AWS
-                                        account than the SageMaker domain.
+                                        account than the SageMaker AI domain.
                                       items:
                                         type: string
                                       type: array
@@ -2613,8 +2643,9 @@ spec:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
-                                  automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  AI automatically displays to users for cloning in
+                                  the JupyterServer application. see Code Repository
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -2624,14 +2655,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -2639,11 +2670,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2666,9 +2698,9 @@ spec:
                           items:
                             properties:
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -2685,14 +2717,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -2700,11 +2732,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2727,9 +2760,9 @@ spec:
                           items:
                             properties:
                               customImage:
-                                description: A list of custom SageMaker images that
-                                  are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                description: A list of custom SageMaker AI images
+                                  that are configured to run as a KernelGateway app.
+                                  see Custom Image below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -2746,14 +2779,14 @@ spec:
                                 type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -2761,11 +2794,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2890,14 +2924,14 @@ spec:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
-                                  Resource Name (ARN) of the SageMaker image created
+                                  Resource Name (ARN) of the SageMaker AI image created
                                   on the instance. see Default Resource Spec below.
                                 items:
                                   properties:
                                     instanceType:
                                       description: The instance type that the image
                                         version runs on.. For valid values see SageMaker
-                                        Instance Types.
+                                        AI Instance Types.
                                       type: string
                                     lifecycleConfigArn:
                                       description: The Amazon Resource Name (ARN)
@@ -2905,11 +2939,12 @@ spec:
                                         the Resource.
                                       type: string
                                     sagemakerImageArn:
-                                      description: The ARN of the SageMaker image
+                                      description: The ARN of the SageMaker AI image
                                         that the image version belongs to.
                                       type: string
                                     sagemakerImageVersionAlias:
-                                      description: The SageMaker Image Version Alias.
+                                      description: The SageMaker AI Image Version
+                                        Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created

@@ -151,6 +151,10 @@ type BotObservation struct {
 	// If you set the process_behavior element to BUILD, Amazon Lex builds the bot so that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but doesn't build it. Default is SAVE.
 	ProcessBehavior *string `json:"processBehavior,omitempty" tf:"process_behavior,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// When you send a request to create or update a bot, Amazon Lex sets the status response
 	// element to BUILDING. After Amazon Lex builds the bot, it sets status to READY. If Amazon Lex can't
 	// build the bot, it sets status to FAILED. Amazon Lex returns the reason for the failure in the
@@ -214,10 +218,10 @@ type BotParameters struct {
 	// +kubebuilder:validation:Optional
 	ProcessBehavior *string `json:"processBehavior,omitempty" tf:"process_behavior,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Available Voices in the Amazon Polly Developer Guide.
 	// +kubebuilder:validation:Optional

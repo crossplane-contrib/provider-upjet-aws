@@ -243,8 +243,9 @@ spec:
                       ARN or an AMI ID.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   systemsManagerAgent:
                     description: Configuration block for the Systems Manager Agent
@@ -253,7 +254,7 @@ spec:
                       properties:
                         uninstallAfterBuild:
                           description: Whether to remove the Systems Manager Agent
-                            after the image has been built. Defaults to false.
+                            after the image has been built.
                           type: boolean
                       type: object
                     type: array
@@ -469,7 +470,7 @@ spec:
                       properties:
                         uninstallAfterBuild:
                           description: Whether to remove the Systems Manager Agent
-                            after the image has been built. Defaults to false.
+                            after the image has been built.
                           type: boolean
                       type: object
                     type: array
@@ -790,6 +791,11 @@ spec:
                   platform:
                     description: Platform of the image recipe.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   systemsManagerAgent:
                     description: Configuration block for the Systems Manager Agent
                       installed by default by Image Builder. Detailed below.
@@ -797,7 +803,7 @@ spec:
                       properties:
                         uninstallAfterBuild:
                           description: Whether to remove the Systems Manager Agent
-                            after the image has been built. Defaults to false.
+                            after the image has been built.
                           type: boolean
                       type: object
                     type: array

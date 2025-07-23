@@ -170,9 +170,15 @@ spec:
                     description: Indicates if a Public S2S VPN or Private S2S VPN
                       over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
                     type: string
+                  presharedKeyStorage:
+                    description: Storage mode for the pre-shared key (PSK). Valid
+                      values are Standard (stored in the Site-to-Site VPN service)
+                      or SecretsManager (stored in AWS Secrets Manager).
+                    type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   remoteIpv4NetworkCidr:
                     description: The IPv4 CIDR on the AWS side of the VPN connection.
@@ -872,6 +878,11 @@ spec:
                   outsideIpAddressType:
                     description: Indicates if a Public S2S VPN or Private S2S VPN
                       over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
+                    type: string
+                  presharedKeyStorage:
+                    description: Storage mode for the pre-shared key (PSK). Valid
+                      values are Standard (stored in the Site-to-Site VPN service)
+                      or SecretsManager (stored in AWS Secrets Manager).
                     type: string
                   remoteIpv4NetworkCidr:
                     description: The IPv4 CIDR on the AWS side of the VPN connection.
@@ -1664,6 +1675,23 @@ spec:
                   outsideIpAddressType:
                     description: Indicates if a Public S2S VPN or Private S2S VPN
                       over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
+                    type: string
+                  presharedKeyArn:
+                    description: ARN of the Secrets Manager secret storing the pre-shared
+                      key(s) for the VPN connection. Note that even if it returns
+                      a valid Secrets Manager ARN, the pre-shared key(s) will not
+                      be stored in Secrets Manager unless the preshared_key_storage
+                      argument is set to SecretsManager.
+                    type: string
+                  presharedKeyStorage:
+                    description: Storage mode for the pre-shared key (PSK). Valid
+                      values are Standard (stored in the Site-to-Site VPN service)
+                      or SecretsManager (stored in AWS Secrets Manager).
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   remoteIpv4NetworkCidr:
                     description: The IPv4 CIDR on the AWS side of the VPN connection.

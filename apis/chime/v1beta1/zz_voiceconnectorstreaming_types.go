@@ -85,6 +85,10 @@ type VoiceConnectorStreamingObservation struct {
 	// The media insights configuration. See media_insights_configuration.
 	MediaInsightsConfiguration []MediaInsightsConfigurationObservation `json:"mediaInsightsConfiguration,omitempty" tf:"media_insights_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
 	// +listType=set
 	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
@@ -107,10 +111,10 @@ type VoiceConnectorStreamingParameters struct {
 	// +kubebuilder:validation:Optional
 	MediaInsightsConfiguration []MediaInsightsConfigurationParameters `json:"mediaInsightsConfiguration,omitempty" tf:"media_insights_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
 	// +kubebuilder:validation:Optional

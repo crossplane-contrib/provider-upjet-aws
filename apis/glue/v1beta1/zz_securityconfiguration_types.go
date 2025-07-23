@@ -193,29 +193,33 @@ type S3EncryptionParameters struct {
 
 type SecurityConfigurationInitParameters struct {
 
-	// –  Configuration block containing encryption configuration. Detailed below.
+	// Configuration block containing encryption configuration. Detailed below.
 	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 }
 
 type SecurityConfigurationObservation struct {
 
-	// –  Configuration block containing encryption configuration. Detailed below.
+	// Configuration block containing encryption configuration. Detailed below.
 	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Glue security configuration name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type SecurityConfigurationParameters struct {
 
-	// –  Configuration block containing encryption configuration. Detailed below.
+	// Configuration block containing encryption configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // SecurityConfigurationSpec defines the desired state of SecurityConfiguration

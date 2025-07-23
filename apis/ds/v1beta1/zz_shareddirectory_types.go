@@ -49,6 +49,10 @@ type SharedDirectoryObservation struct {
 	// Method used when sharing a directory. Valid values are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Identifier of the directory that is stored in the directory consumer account that corresponds to the shared directory in the owner account.
 	SharedDirectoryID *string `json:"sharedDirectoryId,omitempty" tf:"shared_directory_id,omitempty"`
 
@@ -80,10 +84,10 @@ type SharedDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	NotesSecretRef *v1.SecretKeySelector `json:"notesSecretRef,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Identifier for the directory consumer account with whom the directory is to be shared. See below.
 	// +kubebuilder:validation:Optional
