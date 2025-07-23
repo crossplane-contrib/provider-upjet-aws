@@ -452,6 +452,11 @@ func (in *DirectoryConfigObservation) DeepCopyInto(out *DirectoryConfigObservati
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceAccountCredentials != nil {
 		in, out := &in.ServiceAccountCredentials, &out.ServiceAccountCredentials
 		*out = new(ServiceAccountCredentialsObservation)
@@ -895,6 +900,11 @@ func (in *FleetObservation) DeepCopyInto(out *FleetObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1417,6 +1427,11 @@ func (in *ImageBuilderObservation) DeepCopyInto(out *ImageBuilderObservation) {
 	}
 	if in.InstanceType != nil {
 		in, out := &in.InstanceType, &out.InstanceType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2024,6 +2039,11 @@ func (in *StackObservation) DeepCopyInto(out *StackObservation) {
 	}
 	if in.RedirectURL != nil {
 		in, out := &in.RedirectURL, &out.RedirectURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -83,7 +83,7 @@ spec:
                     items:
                       properties:
                         fileFormat:
-                          description: 'The format for the flow log. Default value:
+                          description: 'File format for the flow log. Default value:
                             plain-text. Valid values: plain-text, parquet.'
                           type: string
                         hiveCompatiblePartitions:
@@ -98,11 +98,11 @@ spec:
                       type: object
                     type: array
                   eniId:
-                    description: Elastic Network Interface ID to attach to
+                    description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: The ARN for the IAM role that's used to post flow
-                      logs to a CloudWatch Logs log group
+                    description: ARN of the IAM role that's used to post flow logs
+                      to a CloudWatch Logs log group.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -179,8 +179,7 @@ spec:
                         type: object
                     type: object
                   logDestination:
-                    description: The ARN of the logging destination. Either log_destination
-                      or log_group_name must be set.
+                    description: ARN of the logging destination.
                     type: string
                   logDestinationRef:
                     description: Reference to a Group in cloudwatchlogs to populate
@@ -259,32 +258,27 @@ spec:
                         type: object
                     type: object
                   logDestinationType:
-                    description: 'The type of the logging destination. Valid values:
-                      cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
+                    description: 'Logging destination type. Valid values: cloud-watch-logs,
+                      s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
                     description: 'The fields to include in the flow log record. Accepted
                       format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
                       $${dstport}".'
                     type: string
-                  logGroupName:
-                    description: 'Deprecated: Use log_destination instead. The name
-                      of the CloudWatch log group. Either log_group_name or log_destination
-                      must be set.'
-                    type: string
                   maxAggregationInterval:
                     description: |-
-                      The maximum interval of time
-                      during which a flow of packets is captured and aggregated into a flow
-                      log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-                      minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+                      The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+                      Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+                      When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subnetId:
-                    description: Subnet ID to attach to
+                    description: Subnet ID to attach to.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -371,13 +365,13 @@ spec:
                       ALL.'
                     type: string
                   transitGatewayAttachmentId:
-                    description: Transit Gateway Attachment ID to attach to
+                    description: Transit Gateway Attachment ID to attach to.
                     type: string
                   transitGatewayId:
-                    description: Transit Gateway ID to attach to
+                    description: Transit Gateway ID to attach to.
                     type: string
                   vpcId:
-                    description: VPC ID to attach to
+                    description: VPC ID to attach to.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -479,7 +473,7 @@ spec:
                     items:
                       properties:
                         fileFormat:
-                          description: 'The format for the flow log. Default value:
+                          description: 'File format for the flow log. Default value:
                             plain-text. Valid values: plain-text, parquet.'
                           type: string
                         hiveCompatiblePartitions:
@@ -494,11 +488,11 @@ spec:
                       type: object
                     type: array
                   eniId:
-                    description: Elastic Network Interface ID to attach to
+                    description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: The ARN for the IAM role that's used to post flow
-                      logs to a CloudWatch Logs log group
+                    description: ARN of the IAM role that's used to post flow logs
+                      to a CloudWatch Logs log group.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -575,8 +569,7 @@ spec:
                         type: object
                     type: object
                   logDestination:
-                    description: The ARN of the logging destination. Either log_destination
-                      or log_group_name must be set.
+                    description: ARN of the logging destination.
                     type: string
                   logDestinationRef:
                     description: Reference to a Group in cloudwatchlogs to populate
@@ -655,28 +648,22 @@ spec:
                         type: object
                     type: object
                   logDestinationType:
-                    description: 'The type of the logging destination. Valid values:
-                      cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
+                    description: 'Logging destination type. Valid values: cloud-watch-logs,
+                      s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
                     description: 'The fields to include in the flow log record. Accepted
                       format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
                       $${dstport}".'
                     type: string
-                  logGroupName:
-                    description: 'Deprecated: Use log_destination instead. The name
-                      of the CloudWatch log group. Either log_group_name or log_destination
-                      must be set.'
-                    type: string
                   maxAggregationInterval:
                     description: |-
-                      The maximum interval of time
-                      during which a flow of packets is captured and aggregated into a flow
-                      log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-                      minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+                      The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+                      Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+                      When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
                   subnetId:
-                    description: Subnet ID to attach to
+                    description: Subnet ID to attach to.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -763,13 +750,13 @@ spec:
                       ALL.'
                     type: string
                   transitGatewayAttachmentId:
-                    description: Transit Gateway Attachment ID to attach to
+                    description: Transit Gateway Attachment ID to attach to.
                     type: string
                   transitGatewayId:
-                    description: Transit Gateway ID to attach to
+                    description: Transit Gateway ID to attach to.
                     type: string
                   vpcId:
-                    description: VPC ID to attach to
+                    description: VPC ID to attach to.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -1019,7 +1006,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Flow Log.
+                    description: ARN of the Flow Log.
                     type: string
                   deliverCrossAccountRole:
                     description: ARN of the IAM role that allows Amazon EC2 to publish
@@ -1031,7 +1018,7 @@ spec:
                     items:
                       properties:
                         fileFormat:
-                          description: 'The format for the flow log. Default value:
+                          description: 'File format for the flow log. Default value:
                             plain-text. Valid values: plain-text, parquet.'
                           type: string
                         hiveCompatiblePartitions:
@@ -1046,42 +1033,40 @@ spec:
                       type: object
                     type: array
                   eniId:
-                    description: Elastic Network Interface ID to attach to
+                    description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: The ARN for the IAM role that's used to post flow
-                      logs to a CloudWatch Logs log group
+                    description: ARN of the IAM role that's used to post flow logs
+                      to a CloudWatch Logs log group.
                     type: string
                   id:
-                    description: The Flow Log ID
+                    description: Flow Log ID.
                     type: string
                   logDestination:
-                    description: The ARN of the logging destination. Either log_destination
-                      or log_group_name must be set.
+                    description: ARN of the logging destination.
                     type: string
                   logDestinationType:
-                    description: 'The type of the logging destination. Valid values:
-                      cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
+                    description: 'Logging destination type. Valid values: cloud-watch-logs,
+                      s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
                     description: 'The fields to include in the flow log record. Accepted
                       format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
                       $${dstport}".'
                     type: string
-                  logGroupName:
-                    description: 'Deprecated: Use log_destination instead. The name
-                      of the CloudWatch log group. Either log_group_name or log_destination
-                      must be set.'
-                    type: string
                   maxAggregationInterval:
                     description: |-
-                      The maximum interval of time
-                      during which a flow of packets is captured and aggregated into a flow
-                      log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-                      minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+                      The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+                      Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+                      When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   subnetId:
-                    description: Subnet ID to attach to
+                    description: Subnet ID to attach to.
                     type: string
                   tags:
                     additionalProperties:
@@ -1102,13 +1087,13 @@ spec:
                       ALL.'
                     type: string
                   transitGatewayAttachmentId:
-                    description: Transit Gateway Attachment ID to attach to
+                    description: Transit Gateway Attachment ID to attach to.
                     type: string
                   transitGatewayId:
-                    description: Transit Gateway ID to attach to
+                    description: Transit Gateway ID to attach to.
                     type: string
                   vpcId:
-                    description: VPC ID to attach to
+                    description: VPC ID to attach to.
                     type: string
                 type: object
               conditions:
@@ -1236,7 +1221,7 @@ spec:
                       More details below.
                     properties:
                       fileFormat:
-                        description: 'The format for the flow log. Default value:
+                        description: 'File format for the flow log. Default value:
                           plain-text. Valid values: plain-text, parquet.'
                         type: string
                       hiveCompatiblePartitions:
@@ -1250,11 +1235,11 @@ spec:
                         type: boolean
                     type: object
                   eniId:
-                    description: Elastic Network Interface ID to attach to
+                    description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: The ARN for the IAM role that's used to post flow
-                      logs to a CloudWatch Logs log group
+                    description: ARN of the IAM role that's used to post flow logs
+                      to a CloudWatch Logs log group.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -1331,8 +1316,7 @@ spec:
                         type: object
                     type: object
                   logDestination:
-                    description: The ARN of the logging destination. Either log_destination
-                      or log_group_name must be set.
+                    description: ARN of the logging destination.
                     type: string
                   logDestinationRef:
                     description: Reference to a Group in cloudwatchlogs to populate
@@ -1411,32 +1395,27 @@ spec:
                         type: object
                     type: object
                   logDestinationType:
-                    description: 'The type of the logging destination. Valid values:
-                      cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
+                    description: 'Logging destination type. Valid values: cloud-watch-logs,
+                      s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
                     description: 'The fields to include in the flow log record. Accepted
                       format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
                       $${dstport}".'
                     type: string
-                  logGroupName:
-                    description: 'Deprecated: Use log_destination instead. The name
-                      of the CloudWatch log group. Either log_group_name or log_destination
-                      must be set.'
-                    type: string
                   maxAggregationInterval:
                     description: |-
-                      The maximum interval of time
-                      during which a flow of packets is captured and aggregated into a flow
-                      log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-                      minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+                      The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+                      Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+                      When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subnetId:
-                    description: Subnet ID to attach to
+                    description: Subnet ID to attach to.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -1523,13 +1502,13 @@ spec:
                       ALL.'
                     type: string
                   transitGatewayAttachmentId:
-                    description: Transit Gateway Attachment ID to attach to
+                    description: Transit Gateway Attachment ID to attach to.
                     type: string
                   transitGatewayId:
-                    description: Transit Gateway ID to attach to
+                    description: Transit Gateway ID to attach to.
                     type: string
                   vpcId:
-                    description: VPC ID to attach to
+                    description: VPC ID to attach to.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -1630,7 +1609,7 @@ spec:
                       More details below.
                     properties:
                       fileFormat:
-                        description: 'The format for the flow log. Default value:
+                        description: 'File format for the flow log. Default value:
                           plain-text. Valid values: plain-text, parquet.'
                         type: string
                       hiveCompatiblePartitions:
@@ -1644,11 +1623,11 @@ spec:
                         type: boolean
                     type: object
                   eniId:
-                    description: Elastic Network Interface ID to attach to
+                    description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: The ARN for the IAM role that's used to post flow
-                      logs to a CloudWatch Logs log group
+                    description: ARN of the IAM role that's used to post flow logs
+                      to a CloudWatch Logs log group.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -1725,8 +1704,7 @@ spec:
                         type: object
                     type: object
                   logDestination:
-                    description: The ARN of the logging destination. Either log_destination
-                      or log_group_name must be set.
+                    description: ARN of the logging destination.
                     type: string
                   logDestinationRef:
                     description: Reference to a Group in cloudwatchlogs to populate
@@ -1805,28 +1783,22 @@ spec:
                         type: object
                     type: object
                   logDestinationType:
-                    description: 'The type of the logging destination. Valid values:
-                      cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
+                    description: 'Logging destination type. Valid values: cloud-watch-logs,
+                      s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
                     description: 'The fields to include in the flow log record. Accepted
                       format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
                       $${dstport}".'
                     type: string
-                  logGroupName:
-                    description: 'Deprecated: Use log_destination instead. The name
-                      of the CloudWatch log group. Either log_group_name or log_destination
-                      must be set.'
-                    type: string
                   maxAggregationInterval:
                     description: |-
-                      The maximum interval of time
-                      during which a flow of packets is captured and aggregated into a flow
-                      log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-                      minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+                      The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+                      Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+                      When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
                   subnetId:
-                    description: Subnet ID to attach to
+                    description: Subnet ID to attach to.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -1913,13 +1885,13 @@ spec:
                       ALL.'
                     type: string
                   transitGatewayAttachmentId:
-                    description: Transit Gateway Attachment ID to attach to
+                    description: Transit Gateway Attachment ID to attach to.
                     type: string
                   transitGatewayId:
-                    description: Transit Gateway ID to attach to
+                    description: Transit Gateway ID to attach to.
                     type: string
                   vpcId:
-                    description: VPC ID to attach to
+                    description: VPC ID to attach to.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -2169,7 +2141,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Flow Log.
+                    description: ARN of the Flow Log.
                     type: string
                   deliverCrossAccountRole:
                     description: ARN of the IAM role that allows Amazon EC2 to publish
@@ -2180,7 +2152,7 @@ spec:
                       More details below.
                     properties:
                       fileFormat:
-                        description: 'The format for the flow log. Default value:
+                        description: 'File format for the flow log. Default value:
                           plain-text. Valid values: plain-text, parquet.'
                         type: string
                       hiveCompatiblePartitions:
@@ -2194,42 +2166,40 @@ spec:
                         type: boolean
                     type: object
                   eniId:
-                    description: Elastic Network Interface ID to attach to
+                    description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: The ARN for the IAM role that's used to post flow
-                      logs to a CloudWatch Logs log group
+                    description: ARN of the IAM role that's used to post flow logs
+                      to a CloudWatch Logs log group.
                     type: string
                   id:
-                    description: The Flow Log ID
+                    description: Flow Log ID.
                     type: string
                   logDestination:
-                    description: The ARN of the logging destination. Either log_destination
-                      or log_group_name must be set.
+                    description: ARN of the logging destination.
                     type: string
                   logDestinationType:
-                    description: 'The type of the logging destination. Valid values:
-                      cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
+                    description: 'Logging destination type. Valid values: cloud-watch-logs,
+                      s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
                     description: 'The fields to include in the flow log record. Accepted
                       format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
                       $${dstport}".'
                     type: string
-                  logGroupName:
-                    description: 'Deprecated: Use log_destination instead. The name
-                      of the CloudWatch log group. Either log_group_name or log_destination
-                      must be set.'
-                    type: string
                   maxAggregationInterval:
                     description: |-
-                      The maximum interval of time
-                      during which a flow of packets is captured and aggregated into a flow
-                      log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
-                      minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+                      The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+                      Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
+                      When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   subnetId:
-                    description: Subnet ID to attach to
+                    description: Subnet ID to attach to.
                     type: string
                   tags:
                     additionalProperties:
@@ -2250,13 +2220,13 @@ spec:
                       ALL.'
                     type: string
                   transitGatewayAttachmentId:
-                    description: Transit Gateway Attachment ID to attach to
+                    description: Transit Gateway Attachment ID to attach to.
                     type: string
                   transitGatewayId:
-                    description: Transit Gateway ID to attach to
+                    description: Transit Gateway ID to attach to.
                     type: string
                   vpcId:
-                    description: VPC ID to attach to
+                    description: VPC ID to attach to.
                     type: string
                 type: object
               conditions:

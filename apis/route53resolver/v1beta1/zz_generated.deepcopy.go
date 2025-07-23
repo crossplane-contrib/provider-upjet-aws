@@ -205,6 +205,11 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResolverEndpointType != nil {
 		in, out := &in.ResolverEndpointType, &out.ResolverEndpointType
 		*out = new(string)
@@ -656,6 +661,11 @@ func (in *RuleAssociationObservation) DeepCopyInto(out *RuleAssociationObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResolverRuleID != nil {
 		in, out := &in.ResolverRuleID, &out.ResolverRuleID
 		*out = new(string)
@@ -893,6 +903,11 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 	}
 	if in.OwnerID != nil {
 		in, out := &in.OwnerID, &out.OwnerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

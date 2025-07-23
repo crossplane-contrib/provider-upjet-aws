@@ -541,8 +541,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retryPolicy:
                     description: Parameters used when you are providing retry policies.
@@ -739,22 +740,22 @@ spec:
                     type: array
                   sagemakerPipelineTarget:
                     description: Parameters used when you are using the rule to invoke
-                      an Amazon SageMaker Pipeline. Documented below. A maximum of
-                      1 are allowed.
+                      an Amazon SageMaker AI Pipeline. Documented below. A maximum
+                      of 1 are allowed.
                     items:
                       properties:
                         pipelineParameterList:
                           description: List of Parameter names and values for SageMaker
-                            Model Building Pipeline execution.
+                            AI Model Building Pipeline execution.
                           items:
                             properties:
                               name:
                                 description: Name of parameter to start execution
-                                  of a SageMaker Model Building Pipeline.
+                                  of a SageMaker AI Model Building Pipeline.
                                 type: string
                               value:
                                 description: Value of parameter to start execution
-                                  of a SageMaker Model Building Pipeline.
+                                  of a SageMaker AI Model Building Pipeline.
                                 type: string
                             type: object
                           type: array
@@ -1452,22 +1453,22 @@ spec:
                     type: array
                   sagemakerPipelineTarget:
                     description: Parameters used when you are using the rule to invoke
-                      an Amazon SageMaker Pipeline. Documented below. A maximum of
-                      1 are allowed.
+                      an Amazon SageMaker AI Pipeline. Documented below. A maximum
+                      of 1 are allowed.
                     items:
                       properties:
                         pipelineParameterList:
                           description: List of Parameter names and values for SageMaker
-                            Model Building Pipeline execution.
+                            AI Model Building Pipeline execution.
                           items:
                             properties:
                               name:
                                 description: Name of parameter to start execution
-                                  of a SageMaker Model Building Pipeline.
+                                  of a SageMaker AI Model Building Pipeline.
                                 type: string
                               value:
                                 description: Value of parameter to start execution
-                                  of a SageMaker Model Building Pipeline.
+                                  of a SageMaker AI Model Building Pipeline.
                                 type: string
                             type: object
                           type: array
@@ -1982,6 +1983,11 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retryPolicy:
                     description: Parameters used when you are providing retry policies.
                       Documented below. A maximum of 1 are allowed.
@@ -2027,22 +2033,22 @@ spec:
                     type: array
                   sagemakerPipelineTarget:
                     description: Parameters used when you are using the rule to invoke
-                      an Amazon SageMaker Pipeline. Documented below. A maximum of
-                      1 are allowed.
+                      an Amazon SageMaker AI Pipeline. Documented below. A maximum
+                      of 1 are allowed.
                     items:
                       properties:
                         pipelineParameterList:
                           description: List of Parameter names and values for SageMaker
-                            Model Building Pipeline execution.
+                            AI Model Building Pipeline execution.
                           items:
                             properties:
                               name:
                                 description: Name of parameter to start execution
-                                  of a SageMaker Model Building Pipeline.
+                                  of a SageMaker AI Model Building Pipeline.
                                 type: string
                               value:
                                 description: Value of parameter to start execution
-                                  of a SageMaker Model Building Pipeline.
+                                  of a SageMaker AI Model Building Pipeline.
                                 type: string
                             type: object
                           type: array
@@ -2626,8 +2632,9 @@ spec:
                         type: boolean
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retryPolicy:
                     description: Parameters used when you are providing retry policies.
@@ -2822,21 +2829,21 @@ spec:
                     type: array
                   sagemakerPipelineTarget:
                     description: Parameters used when you are using the rule to invoke
-                      an Amazon SageMaker Pipeline. Documented below. A maximum of
-                      1 are allowed.
+                      an Amazon SageMaker AI Pipeline. Documented below. A maximum
+                      of 1 are allowed.
                     properties:
                       pipelineParameterList:
                         description: List of Parameter names and values for SageMaker
-                          Model Building Pipeline execution.
+                          AI Model Building Pipeline execution.
                         items:
                           properties:
                             name:
                               description: Name of parameter to start execution of
-                                a SageMaker Model Building Pipeline.
+                                a SageMaker AI Model Building Pipeline.
                               type: string
                             value:
                               description: Value of parameter to start execution of
-                                a SageMaker Model Building Pipeline.
+                                a SageMaker AI Model Building Pipeline.
                               type: string
                           type: object
                         type: array
@@ -3508,21 +3515,21 @@ spec:
                     type: array
                   sagemakerPipelineTarget:
                     description: Parameters used when you are using the rule to invoke
-                      an Amazon SageMaker Pipeline. Documented below. A maximum of
-                      1 are allowed.
+                      an Amazon SageMaker AI Pipeline. Documented below. A maximum
+                      of 1 are allowed.
                     properties:
                       pipelineParameterList:
                         description: List of Parameter names and values for SageMaker
-                          Model Building Pipeline execution.
+                          AI Model Building Pipeline execution.
                         items:
                           properties:
                             name:
                               description: Name of parameter to start execution of
-                                a SageMaker Model Building Pipeline.
+                                a SageMaker AI Model Building Pipeline.
                               type: string
                             value:
                               description: Value of parameter to start execution of
-                                a SageMaker Model Building Pipeline.
+                                a SageMaker AI Model Building Pipeline.
                               type: string
                           type: object
                         type: array
@@ -4013,6 +4020,11 @@ spec:
                           after the SQL statement runs.
                         type: boolean
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retryPolicy:
                     description: Parameters used when you are providing retry policies.
                       Documented below. A maximum of 1 are allowed.
@@ -4056,21 +4068,21 @@ spec:
                     type: array
                   sagemakerPipelineTarget:
                     description: Parameters used when you are using the rule to invoke
-                      an Amazon SageMaker Pipeline. Documented below. A maximum of
-                      1 are allowed.
+                      an Amazon SageMaker AI Pipeline. Documented below. A maximum
+                      of 1 are allowed.
                     properties:
                       pipelineParameterList:
                         description: List of Parameter names and values for SageMaker
-                          Model Building Pipeline execution.
+                          AI Model Building Pipeline execution.
                         items:
                           properties:
                             name:
                               description: Name of parameter to start execution of
-                                a SageMaker Model Building Pipeline.
+                                a SageMaker AI Model Building Pipeline.
                               type: string
                             value:
                               description: Value of parameter to start execution of
-                                a SageMaker Model Building Pipeline.
+                                a SageMaker AI Model Building Pipeline.
                               type: string
                           type: object
                         type: array

@@ -160,8 +160,9 @@ spec:
                       to be called in the AWS Region of the source DB instance.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retentionPeriod:
                     description: The retention period for the replicated automated
@@ -616,6 +617,11 @@ spec:
                     description: A URL that contains a Signature Version 4 signed
                       request for the StartDBInstanceAutomatedBackupsReplication action
                       to be called in the AWS Region of the source DB instance.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retentionPeriod:
                     description: The retention period for the replicated automated

@@ -16,7 +16,6 @@ spec:
         testing.upbound.io/example-name: example
     options:
     - protocol: GRE
-    region: us-west-1
     transportAttachmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -36,7 +35,6 @@ spec:
     coreNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     subnetArnsSelector:
       matchLabels:
         testing.upbound.io/example-name: example[*]

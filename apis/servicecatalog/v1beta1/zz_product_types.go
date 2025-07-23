@@ -30,7 +30,7 @@ type ProductInitParameters struct {
 	// Owner of the product.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// Configuration block for provisioning artifact (i.e., version) parameters. Detailed below.
+	// Configuration block for provisioning artifact (i.e., version) parameters. See provisioning_artifact_parameters Block for details.
 	ProvisioningArtifactParameters []ProvisioningArtifactParametersInitParameters `json:"provisioningArtifactParameters,omitempty" tf:"provisioning_artifact_parameters,omitempty"`
 
 	// Support information about the product.
@@ -79,8 +79,12 @@ type ProductObservation struct {
 	// Owner of the product.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// Configuration block for provisioning artifact (i.e., version) parameters. Detailed below.
+	// Configuration block for provisioning artifact (i.e., version) parameters. See provisioning_artifact_parameters Block for details.
 	ProvisioningArtifactParameters []ProvisioningArtifactParametersObservation `json:"provisioningArtifactParameters,omitempty" tf:"provisioning_artifact_parameters,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Status of the product.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -128,14 +132,14 @@ type ProductParameters struct {
 	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// Configuration block for provisioning artifact (i.e., version) parameters. Detailed below.
+	// Configuration block for provisioning artifact (i.e., version) parameters. See provisioning_artifact_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	ProvisioningArtifactParameters []ProvisioningArtifactParametersParameters `json:"provisioningArtifactParameters,omitempty" tf:"provisioning_artifact_parameters,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Support information about the product.
 	// +kubebuilder:validation:Optional

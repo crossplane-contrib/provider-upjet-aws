@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Alias is the Schema for the Aliass API. Creates a Lambda function
-          alias.
+        description: Alias is the Schema for the Aliass API. Manages an AWS Lambda
+          Alias.
         properties:
           apiVersion:
             description: |-
@@ -77,7 +77,7 @@ spec:
                     description: Description of the alias.
                     type: string
                   functionName:
-                    description: Lambda Function name or ARN.
+                    description: Name or ARN of the Lambda function.
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -158,20 +158,19 @@ spec:
                       the alias. Pattern: (\$LATEST|[0-9]+).'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingConfig:
-                    description: The Lambda alias' route configuration settings. Fields
-                      documented below
+                    description: Lambda alias' route configuration settings. See below.
                     items:
                       properties:
                         additionalVersionWeights:
                           additionalProperties:
                             type: number
-                          description: A map that defines the proportion of events
-                            that should be sent to different versions of a lambda
-                            function.
+                          description: Map that defines the proportion of events that
+                            should be sent to different versions of a Lambda function.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
@@ -200,16 +199,14 @@ spec:
                       the alias. Pattern: (\$LATEST|[0-9]+).'
                     type: string
                   routingConfig:
-                    description: The Lambda alias' route configuration settings. Fields
-                      documented below
+                    description: Lambda alias' route configuration settings. See below.
                     items:
                       properties:
                         additionalVersionWeights:
                           additionalProperties:
                             type: number
-                          description: A map that defines the proportion of events
-                            that should be sent to different versions of a lambda
-                            function.
+                          description: Map that defines the proportion of events that
+                            should be sent to different versions of a Lambda function.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
@@ -393,14 +390,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) identifying your Lambda
-                      function alias.
+                    description: ARN identifying your Lambda function alias.
                     type: string
                   description:
                     description: Description of the alias.
                     type: string
                   functionName:
-                    description: Lambda Function name or ARN.
+                    description: Name or ARN of the Lambda function.
                     type: string
                   functionVersion:
                     description: 'Lambda function version for which you are creating
@@ -409,20 +405,23 @@ spec:
                   id:
                     type: string
                   invokeArn:
-                    description: The ARN to be used for invoking Lambda Function from
-                      API Gateway - to be used in aws_api_gateway_integration's uri
+                    description: ARN to be used for invoking Lambda Function from
+                      API Gateway - to be used in aws_api_gateway_integration's uri.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingConfig:
-                    description: The Lambda alias' route configuration settings. Fields
-                      documented below
+                    description: Lambda alias' route configuration settings. See below.
                     items:
                       properties:
                         additionalVersionWeights:
                           additionalProperties:
                             type: number
-                          description: A map that defines the proportion of events
-                            that should be sent to different versions of a lambda
-                            function.
+                          description: Map that defines the proportion of events that
+                            should be sent to different versions of a Lambda function.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
@@ -505,8 +504,8 @@ spec:
     name: v1beta2
     schema:
       openAPIV3Schema:
-        description: Alias is the Schema for the Aliass API. Creates a Lambda function
-          alias.
+        description: Alias is the Schema for the Aliass API. Manages an AWS Lambda
+          Alias.
         properties:
           apiVersion:
             description: |-
@@ -548,7 +547,7 @@ spec:
                     description: Description of the alias.
                     type: string
                   functionName:
-                    description: Lambda Function name or ARN.
+                    description: Name or ARN of the Lambda function.
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -629,18 +628,18 @@ spec:
                       the alias. Pattern: (\$LATEST|[0-9]+).'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingConfig:
-                    description: The Lambda alias' route configuration settings. Fields
-                      documented below
+                    description: Lambda alias' route configuration settings. See below.
                     properties:
                       additionalVersionWeights:
                         additionalProperties:
                           type: number
-                        description: A map that defines the proportion of events that
-                          should be sent to different versions of a lambda function.
+                        description: Map that defines the proportion of events that
+                          should be sent to different versions of a Lambda function.
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
@@ -668,14 +667,13 @@ spec:
                       the alias. Pattern: (\$LATEST|[0-9]+).'
                     type: string
                   routingConfig:
-                    description: The Lambda alias' route configuration settings. Fields
-                      documented below
+                    description: Lambda alias' route configuration settings. See below.
                     properties:
                       additionalVersionWeights:
                         additionalProperties:
                           type: number
-                        description: A map that defines the proportion of events that
-                          should be sent to different versions of a lambda function.
+                        description: Map that defines the proportion of events that
+                          should be sent to different versions of a Lambda function.
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
@@ -858,14 +856,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) identifying your Lambda
-                      function alias.
+                    description: ARN identifying your Lambda function alias.
                     type: string
                   description:
                     description: Description of the alias.
                     type: string
                   functionName:
-                    description: Lambda Function name or ARN.
+                    description: Name or ARN of the Lambda function.
                     type: string
                   functionVersion:
                     description: 'Lambda function version for which you are creating
@@ -874,18 +871,22 @@ spec:
                   id:
                     type: string
                   invokeArn:
-                    description: The ARN to be used for invoking Lambda Function from
-                      API Gateway - to be used in aws_api_gateway_integration's uri
+                    description: ARN to be used for invoking Lambda Function from
+                      API Gateway - to be used in aws_api_gateway_integration's uri.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingConfig:
-                    description: The Lambda alias' route configuration settings. Fields
-                      documented below
+                    description: Lambda alias' route configuration settings. See below.
                     properties:
                       additionalVersionWeights:
                         additionalProperties:
                           type: number
-                        description: A map that defines the proportion of events that
-                          should be sent to different versions of a lambda function.
+                        description: Map that defines the proportion of events that
+                          should be sent to different versions of a Lambda function.
                         type: object
                         x-kubernetes-map-type: granular
                     type: object

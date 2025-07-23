@@ -67,6 +67,10 @@ type NamedQueryObservation struct {
 	// Text of the query itself. In other words, all query statements. Maximum length of 262144.
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Workgroup to which the query belongs. Defaults to primary
 	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 }
@@ -98,10 +102,10 @@ type NamedQueryParameters struct {
 	// +kubebuilder:validation:Optional
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Workgroup to which the query belongs. Defaults to primary
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/athena/v1beta2.Workgroup

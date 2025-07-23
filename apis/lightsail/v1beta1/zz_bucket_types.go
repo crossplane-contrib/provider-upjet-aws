@@ -15,10 +15,10 @@ import (
 
 type BucketInitParameters struct {
 
-	// - The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
+	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
-	// AWS by default will not delete an s3 bucket which is not empty, to prevent losing bucket data and affecting other resources in lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
+	// AWS by default will not delete a bucket which is not empty, to prevent losing bucket data and affecting other resources in Lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// Key-value map of resource tags.
@@ -28,57 +28,57 @@ type BucketInitParameters struct {
 
 type BucketObservation struct {
 
-	// The ARN of the lightsail bucket.
+	// ARN of the Lightsail bucket.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The resource Availability Zone. Follows the format us-east-2a (case-sensitive).
+	// Availability Zone. Follows the format us-east-2a (case-sensitive).
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// - The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
+	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
-	// The timestamp when the bucket was created.
+	// Date and time when the bucket was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// AWS by default will not delete an s3 bucket which is not empty, to prevent losing bucket data and affecting other resources in lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
+	// AWS by default will not delete a bucket which is not empty, to prevent losing bucket data and affecting other resources in Lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
-	// The name used for this bucket (matches name).
+	// Name used for this bucket (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Web Services Region name.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The support code for the resource. Include this code in your email to support when you have questions about a resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+	// Support code for the resource. Include this code in your email to support when you have questions about a resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// URL of the bucket.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type BucketParameters struct {
 
-	// - The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
+	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
 	// +kubebuilder:validation:Optional
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
-	// AWS by default will not delete an s3 bucket which is not empty, to prevent losing bucket data and affecting other resources in lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
+	// AWS by default will not delete a bucket which is not empty, to prevent losing bucket data and affecting other resources in Lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
 	// +kubebuilder:validation:Optional
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
-	// The Amazon Web Services Region name.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -113,7 +113,7 @@ type BucketStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Bucket is the Schema for the Buckets API. Provides a lightsail bucket
+// Bucket is the Schema for the Buckets API. Manages a Lightsail object storage bucket.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

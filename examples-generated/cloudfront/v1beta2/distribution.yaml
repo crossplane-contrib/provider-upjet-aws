@@ -87,7 +87,6 @@ spec:
           testing.upbound.io/example-name: default
       originId: ${local.s3_origin_id}
     priceClass: PriceClass_200
-    region: us-west-1
     restrictions:
     - geoRestriction:
       - locations:
@@ -114,7 +113,6 @@ metadata:
   name: b
 spec:
   forProvider:
-    region: us-west-1
     tags:
       Name: My bucket
 
@@ -134,4 +132,3 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: b
-    region: us-west-1

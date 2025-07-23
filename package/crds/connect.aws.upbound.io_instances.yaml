@@ -187,8 +187,9 @@ spec:
                     description: Specifies whether outbound calls are enabled.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -565,6 +566,11 @@ spec:
                   outboundCallsEnabled:
                     description: Specifies whether outbound calls are enabled.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   serviceRole:
                     description: The service role of the instance.
                     type: string

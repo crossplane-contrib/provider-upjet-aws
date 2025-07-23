@@ -267,6 +267,10 @@ type WorkgroupObservation struct {
 	// Workgroup name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// State of the workgroup. Valid values are DISABLED or ENABLED. Defaults to ENABLED.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -293,10 +297,10 @@ type WorkgroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// State of the workgroup. Valid values are DISABLED or ENABLED. Defaults to ENABLED.
 	// +kubebuilder:validation:Optional

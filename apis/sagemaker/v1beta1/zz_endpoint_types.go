@@ -34,19 +34,19 @@ type AlarmsParameters struct {
 
 type AutoRollbackConfigurationInitParameters struct {
 
-	// List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls back the deployment. See Alarms.
+	// List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker AI rolls back the deployment. See Alarms.
 	Alarms []AlarmsInitParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 }
 
 type AutoRollbackConfigurationObservation struct {
 
-	// List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls back the deployment. See Alarms.
+	// List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker AI rolls back the deployment. See Alarms.
 	Alarms []AlarmsObservation `json:"alarms,omitempty" tf:"alarms,omitempty"`
 }
 
 type AutoRollbackConfigurationParameters struct {
 
-	// List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls back the deployment. See Alarms.
+	// List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker AI rolls back the deployment. See Alarms.
 	// +kubebuilder:validation:Optional
 	Alarms []AlarmsParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 }
@@ -124,10 +124,10 @@ type DeploymentConfigInitParameters struct {
 	// Automatic rollback configuration for handling endpoint deployment failures and recovery. See Auto Rollback Configuration.
 	AutoRollbackConfiguration []AutoRollbackConfigurationInitParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
+	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker AI creates a new fleet during the deployment while maintaining the old fleet. SageMaker AI flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker AI uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
 	BlueGreenUpdatePolicy []BlueGreenUpdatePolicyInitParameters `json:"blueGreenUpdatePolicy,omitempty" tf:"blue_green_update_policy,omitempty"`
 
-	// Specifies a rolling deployment strategy for updating a SageMaker endpoint. See Rolling Update Policy.
+	// Specifies a rolling deployment strategy for updating a SageMaker AI endpoint. See Rolling Update Policy.
 	RollingUpdatePolicy []RollingUpdatePolicyInitParameters `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty"`
 }
 
@@ -136,10 +136,10 @@ type DeploymentConfigObservation struct {
 	// Automatic rollback configuration for handling endpoint deployment failures and recovery. See Auto Rollback Configuration.
 	AutoRollbackConfiguration []AutoRollbackConfigurationObservation `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
+	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker AI creates a new fleet during the deployment while maintaining the old fleet. SageMaker AI flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker AI uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
 	BlueGreenUpdatePolicy []BlueGreenUpdatePolicyObservation `json:"blueGreenUpdatePolicy,omitempty" tf:"blue_green_update_policy,omitempty"`
 
-	// Specifies a rolling deployment strategy for updating a SageMaker endpoint. See Rolling Update Policy.
+	// Specifies a rolling deployment strategy for updating a SageMaker AI endpoint. See Rolling Update Policy.
 	RollingUpdatePolicy []RollingUpdatePolicyObservation `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty"`
 }
 
@@ -149,11 +149,11 @@ type DeploymentConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoRollbackConfiguration []AutoRollbackConfigurationParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
+	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker AI creates a new fleet during the deployment while maintaining the old fleet. SageMaker AI flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker AI uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
 	// +kubebuilder:validation:Optional
 	BlueGreenUpdatePolicy []BlueGreenUpdatePolicyParameters `json:"blueGreenUpdatePolicy,omitempty" tf:"blue_green_update_policy,omitempty"`
 
-	// Specifies a rolling deployment strategy for updating a SageMaker endpoint. See Rolling Update Policy.
+	// Specifies a rolling deployment strategy for updating a SageMaker AI endpoint. See Rolling Update Policy.
 	// +kubebuilder:validation:Optional
 	RollingUpdatePolicy []RollingUpdatePolicyParameters `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty"`
 }
@@ -193,6 +193,10 @@ type EndpointObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -221,10 +225,10 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointConfigNameSelector *v1.Selector `json:"endpointConfigNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -330,7 +334,7 @@ type RollingUpdatePolicyInitParameters struct {
 	// Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback. See Rollback Maximum Batch Size.
 	RollbackMaximumBatchSize []RollbackMaximumBatchSizeInitParameters `json:"rollbackMaximumBatchSize,omitempty" tf:"rollback_maximum_batch_size,omitempty"`
 
-	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker AI monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
 }
 
@@ -345,7 +349,7 @@ type RollingUpdatePolicyObservation struct {
 	// Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback. See Rollback Maximum Batch Size.
 	RollbackMaximumBatchSize []RollbackMaximumBatchSizeObservation `json:"rollbackMaximumBatchSize,omitempty" tf:"rollback_maximum_batch_size,omitempty"`
 
-	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker AI monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
 }
 
@@ -363,7 +367,7 @@ type RollingUpdatePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	RollbackMaximumBatchSize []RollbackMaximumBatchSizeParameters `json:"rollbackMaximumBatchSize,omitempty" tf:"rollback_maximum_batch_size,omitempty"`
 
-	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker AI monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	// +kubebuilder:validation:Optional
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds" tf:"wait_interval_in_seconds,omitempty"`
 }
@@ -379,7 +383,7 @@ type TrafficRoutingConfigurationInitParameters struct {
 	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker AI monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
 }
 
@@ -394,7 +398,7 @@ type TrafficRoutingConfigurationObservation struct {
 	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker AI monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
 }
 
@@ -412,7 +416,7 @@ type TrafficRoutingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker AI monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	// +kubebuilder:validation:Optional
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds" tf:"wait_interval_in_seconds,omitempty"`
 }
@@ -444,7 +448,7 @@ type EndpointStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Endpoint is the Schema for the Endpoints API. Provides a SageMaker Endpoint resource.
+// Endpoint is the Schema for the Endpoints API. Provides a SageMaker AI Endpoint resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

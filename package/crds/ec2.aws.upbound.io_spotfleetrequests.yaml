@@ -815,8 +815,9 @@ spec:
                       of 0 and add capacity later.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replaceUnhealthyInstances:
                     description: Indicates whether Spot fleet should replace unhealthy
@@ -2423,6 +2424,11 @@ spec:
                       request type is maintain, you can specify a target capacity
                       of 0 and add capacity later.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replaceUnhealthyInstances:
                     description: Indicates whether Spot fleet should replace unhealthy
                       instances. Default false.
@@ -3344,8 +3350,9 @@ spec:
                       of 0 and add capacity later.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replaceUnhealthyInstances:
                     description: Indicates whether Spot fleet should replace unhealthy
@@ -4898,6 +4905,11 @@ spec:
                       request type is maintain, you can specify a target capacity
                       of 0 and add capacity later.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replaceUnhealthyInstances:
                     description: Indicates whether Spot fleet should replace unhealthy
                       instances. Default false.

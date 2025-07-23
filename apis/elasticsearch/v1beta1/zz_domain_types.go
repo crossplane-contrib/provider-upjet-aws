@@ -292,7 +292,7 @@ type DomainEndpointOptionsInitParameters struct {
 	// Whether or not to require HTTPS. Defaults to true.
 	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
 
-	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, and Policy-Min-TLS-1-2-PFS-2023-10.
 	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
 
@@ -310,7 +310,7 @@ type DomainEndpointOptionsObservation struct {
 	// Whether or not to require HTTPS. Defaults to true.
 	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
 
-	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, and Policy-Min-TLS-1-2-PFS-2023-10.
 	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
 
@@ -332,7 +332,7 @@ type DomainEndpointOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
 
-	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, and Policy-Min-TLS-1-2-PFS-2023-10.
 	// +kubebuilder:validation:Optional
 	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
@@ -440,6 +440,10 @@ type DomainObservation struct {
 	// Configuration block for node-to-node encryption options. Detailed below.
 	NodeToNodeEncryption []NodeToNodeEncryptionObservation `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running Elasticsearch 5.3 and later, Amazon ES takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions of Elasticsearch, Amazon ES takes daily automated snapshots.
 	SnapshotOptions []SnapshotOptionsObservation `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
 
@@ -506,10 +510,10 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeToNodeEncryption []NodeToNodeEncryptionParameters `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running Elasticsearch 5.3 and later, Amazon ES takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions of Elasticsearch, Amazon ES takes daily automated snapshots.
 	// +kubebuilder:validation:Optional

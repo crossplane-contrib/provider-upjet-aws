@@ -62,6 +62,10 @@ type ScheduleObservation struct {
 	// The recurring schedule for this action specified using the Unix cron syntax format.
 	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The date and time for the recurring schedule to start, in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
@@ -104,10 +108,10 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The date and time for the recurring schedule to start, in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").
 	// +kubebuilder:validation:Optional

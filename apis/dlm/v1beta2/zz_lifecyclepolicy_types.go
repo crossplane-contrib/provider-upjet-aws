@@ -443,6 +443,10 @@ type LifecyclePolicyObservation struct {
 	// See the policy_details configuration block. Max of 1.
 	PolicyDetails *PolicyDetailsObservation `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether the lifecycle policy should be enabled or disabled. ENABLED or DISABLED are valid values. Defaults to ENABLED.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -479,10 +483,10 @@ type LifecyclePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyDetails *PolicyDetailsParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether the lifecycle policy should be enabled or disabled. ENABLED or DISABLED are valid values. Defaults to ENABLED.
 	// +kubebuilder:validation:Optional

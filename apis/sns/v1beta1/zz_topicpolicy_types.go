@@ -44,6 +44,10 @@ type TopicPolicyObservation struct {
 
 	// The fully-formed AWS policy as JSON.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type TopicPolicyParameters struct {
@@ -66,10 +70,10 @@ type TopicPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // TopicPolicySpec defines the desired state of TopicPolicy

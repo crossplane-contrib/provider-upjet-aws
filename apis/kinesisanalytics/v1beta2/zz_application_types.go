@@ -78,6 +78,10 @@ type ApplicationObservation struct {
 	// See Reference Data Sources below for more details.
 	ReferenceDataSources *ReferenceDataSourcesObservation `json:"referenceDataSources,omitempty" tf:"reference_data_sources,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured.
 	// To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.
 	StartApplication *bool `json:"startApplication,omitempty" tf:"start_application,omitempty"`
@@ -125,10 +129,10 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ReferenceDataSources *ReferenceDataSourcesParameters `json:"referenceDataSources,omitempty" tf:"reference_data_sources,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured.
 	// To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.

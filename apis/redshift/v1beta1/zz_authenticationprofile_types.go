@@ -26,6 +26,10 @@ type AuthenticationProfileObservation struct {
 
 	// The name of the authentication profile.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AuthenticationProfileParameters struct {
@@ -34,10 +38,10 @@ type AuthenticationProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationProfileContent *string `json:"authenticationProfileContent,omitempty" tf:"authentication_profile_content,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // AuthenticationProfileSpec defines the desired state of AuthenticationProfile

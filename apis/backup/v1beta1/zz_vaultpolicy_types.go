@@ -44,6 +44,10 @@ type VaultPolicyObservation struct {
 
 	// The backup vault access policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type VaultPolicyParameters struct {
@@ -65,10 +69,10 @@ type VaultPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // VaultPolicySpec defines the desired state of VaultPolicy

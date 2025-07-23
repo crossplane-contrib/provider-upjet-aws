@@ -74,8 +74,9 @@ spec:
               forProvider:
                 properties:
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   repositoryName:
                     description: The name for the repository. This needs to be less
@@ -655,6 +656,11 @@ spec:
                     description: System-generated unique identifier.
                     type: string
                   id:
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   repositoryName:
                     description: The name for the repository. This needs to be less

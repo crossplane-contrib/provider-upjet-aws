@@ -261,6 +261,74 @@ type CustomResponseParameters struct {
 	ResponseHeader []ResponseHeaderParameters `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
 }
 
+type DataProtectionConfigInitParameters struct {
+
+	// A block for data protection configurations for specific web request field types. See data_protection block for details.
+	DataProtection []DataProtectionInitParameters `json:"dataProtection,omitempty" tf:"data_protection,omitempty"`
+}
+
+type DataProtectionConfigObservation struct {
+
+	// A block for data protection configurations for specific web request field types. See data_protection block for details.
+	DataProtection []DataProtectionObservation `json:"dataProtection,omitempty" tf:"data_protection,omitempty"`
+}
+
+type DataProtectionConfigParameters struct {
+
+	// A block for data protection configurations for specific web request field types. See data_protection block for details.
+	// +kubebuilder:validation:Optional
+	DataProtection []DataProtectionParameters `json:"dataProtection,omitempty" tf:"data_protection,omitempty"`
+}
+
+type DataProtectionInitParameters struct {
+
+	// Specifies how to protect the field. Valid values are SUBSTITUTION or HASH.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Boolean to specify whether to also exclude any rate-based rule details from the data protection you have enabled for a given field.
+	ExcludeRateBasedDetails *bool `json:"excludeRateBasedDetails,omitempty" tf:"exclude_rate_based_details,omitempty"`
+
+	// Boolean to specify whether to also exclude any rule match details from the data protection you have enabled for a given field. AWS WAF logs these details for non-terminating matching rules and for the terminating matching rule.
+	ExcludeRuleMatchDetails *bool `json:"excludeRuleMatchDetails,omitempty" tf:"exclude_rule_match_details,omitempty"`
+
+	// Specifies the field type and optional keys to apply the protection behavior to. See field block below for details.
+	Field *FieldInitParameters `json:"field,omitempty" tf:"field,omitempty"`
+}
+
+type DataProtectionObservation struct {
+
+	// Specifies how to protect the field. Valid values are SUBSTITUTION or HASH.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Boolean to specify whether to also exclude any rate-based rule details from the data protection you have enabled for a given field.
+	ExcludeRateBasedDetails *bool `json:"excludeRateBasedDetails,omitempty" tf:"exclude_rate_based_details,omitempty"`
+
+	// Boolean to specify whether to also exclude any rule match details from the data protection you have enabled for a given field. AWS WAF logs these details for non-terminating matching rules and for the terminating matching rule.
+	ExcludeRuleMatchDetails *bool `json:"excludeRuleMatchDetails,omitempty" tf:"exclude_rule_match_details,omitempty"`
+
+	// Specifies the field type and optional keys to apply the protection behavior to. See field block below for details.
+	Field *FieldObservation `json:"field,omitempty" tf:"field,omitempty"`
+}
+
+type DataProtectionParameters struct {
+
+	// Specifies how to protect the field. Valid values are SUBSTITUTION or HASH.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action" tf:"action,omitempty"`
+
+	// Boolean to specify whether to also exclude any rate-based rule details from the data protection you have enabled for a given field.
+	// +kubebuilder:validation:Optional
+	ExcludeRateBasedDetails *bool `json:"excludeRateBasedDetails,omitempty" tf:"exclude_rate_based_details,omitempty"`
+
+	// Boolean to specify whether to also exclude any rule match details from the data protection you have enabled for a given field. AWS WAF logs these details for non-terminating matching rules and for the terminating matching rule.
+	// +kubebuilder:validation:Optional
+	ExcludeRuleMatchDetails *bool `json:"excludeRuleMatchDetails,omitempty" tf:"exclude_rule_match_details,omitempty"`
+
+	// Specifies the field type and optional keys to apply the protection behavior to. See field block below for details.
+	// +kubebuilder:validation:Optional
+	Field *FieldParameters `json:"field" tf:"field,omitempty"`
+}
+
 type DefaultActionInitParameters struct {
 
 	// Specifies that AWS WAF should allow requests by default. See allow below for details.
@@ -288,6 +356,35 @@ type DefaultActionParameters struct {
 	// Specifies that AWS WAF should block requests by default. See block below for details.
 	// +kubebuilder:validation:Optional
 	Block *BlockParameters `json:"block,omitempty" tf:"block,omitempty"`
+}
+
+type FieldInitParameters struct {
+
+	// Array of strings to specify the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.
+	FieldKeys []*string `json:"fieldKeys,omitempty" tf:"field_keys,omitempty"`
+
+	// Specifies the web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
+	FieldType *string `json:"fieldType,omitempty" tf:"field_type,omitempty"`
+}
+
+type FieldObservation struct {
+
+	// Array of strings to specify the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.
+	FieldKeys []*string `json:"fieldKeys,omitempty" tf:"field_keys,omitempty"`
+
+	// Specifies the web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
+	FieldType *string `json:"fieldType,omitempty" tf:"field_type,omitempty"`
+}
+
+type FieldParameters struct {
+
+	// Array of strings to specify the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.
+	// +kubebuilder:validation:Optional
+	FieldKeys []*string `json:"fieldKeys,omitempty" tf:"field_keys,omitempty"`
+
+	// Specifies the web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
+	// +kubebuilder:validation:Optional
+	FieldType *string `json:"fieldType" tf:"field_type,omitempty"`
 }
 
 type ImmunityTimePropertyInitParameters struct {
@@ -498,13 +595,16 @@ type WebACLInitParameters struct {
 	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
 	CustomResponseBody []WebACLCustomResponseBodyInitParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
+	// Specifies data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
+	DataProtectionConfig *DataProtectionConfigInitParameters `json:"dataProtectionConfig,omitempty" tf:"data_protection_config,omitempty"`
+
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
 	DefaultAction *DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// Friendly description of the WebACL.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Friendly name of the WebACL.
+	// Friendly name of the WebACL. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A raw JSON string used to define the rules for allowing, blocking, or counting web requests. When this field is used, Crossplane cannot observe changes in the configuration through the AWS API; therefore, drift detection cannot be performed. Refer to the AWS documentation for the expected JSON structure: https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html
@@ -548,6 +648,9 @@ type WebACLObservation struct {
 	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
 	CustomResponseBody []WebACLCustomResponseBodyObservation `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
+	// Specifies data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
+	DataProtectionConfig *DataProtectionConfigObservation `json:"dataProtectionConfig,omitempty" tf:"data_protection_config,omitempty"`
+
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
 	DefaultAction *DefaultActionObservation `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
@@ -559,8 +662,12 @@ type WebACLObservation struct {
 
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`
 
-	// Friendly name of the WebACL.
+	// Friendly name of the WebACL. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// A raw JSON string used to define the rules for allowing, blocking, or counting web requests. When this field is used, Crossplane cannot observe changes in the configuration through the AWS API; therefore, drift detection cannot be performed. Refer to the AWS documentation for the expected JSON structure: https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
@@ -602,6 +709,10 @@ type WebACLParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomResponseBody []WebACLCustomResponseBodyParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
+	// Specifies data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
+	// +kubebuilder:validation:Optional
+	DataProtectionConfig *DataProtectionConfigParameters `json:"dataProtectionConfig,omitempty" tf:"data_protection_config,omitempty"`
+
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
 	// +kubebuilder:validation:Optional
 	DefaultAction *DefaultActionParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
@@ -610,14 +721,14 @@ type WebACLParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Friendly name of the WebACL.
+	// Friendly name of the WebACL. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A raw JSON string used to define the rules for allowing, blocking, or counting web requests. When this field is used, Crossplane cannot observe changes in the configuration through the AWS API; therefore, drift detection cannot be performed. Refer to the AWS documentation for the expected JSON structure: https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html
 	// +kubebuilder:validation:Optional
@@ -718,7 +829,6 @@ type WebACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction) || (has(self.initProvider) && has(self.initProvider.defaultAction))",message="spec.forProvider.defaultAction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || (has(self.initProvider) && has(self.initProvider.scope))",message="spec.forProvider.scope is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.visibilityConfig) || (has(self.initProvider) && has(self.initProvider.visibilityConfig))",message="spec.forProvider.visibilityConfig is a required parameter"
 	Spec   WebACLSpec   `json:"spec"`

@@ -178,15 +178,8 @@ spec:
                           type: array
                       type: object
                     type: array
-                  etag:
-                    description: The current version of the response headers policy.
-                    type: string
                   name:
                     description: A unique name to identify the response headers policy.
-                    type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
                     type: string
                   removeHeadersConfig:
                     description: A configuration for a set of HTTP headers to remove
@@ -359,8 +352,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -480,9 +471,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  etag:
-                    description: The current version of the response headers policy.
-                    type: string
                   name:
                     description: A unique name to identify the response headers policy.
                     type: string
@@ -836,6 +824,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The response headers policy ARN.
+                    type: string
                   comment:
                     description: A comment to describe the response headers policy.
                       The comment cannot be longer than 128 characters.
@@ -1330,15 +1321,8 @@ spec:
                           type: object
                         type: array
                     type: object
-                  etag:
-                    description: The current version of the response headers policy.
-                    type: string
                   name:
                     description: A unique name to identify the response headers policy.
-                    type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
                     type: string
                   removeHeadersConfig:
                     description: A configuration for a set of HTTP headers to remove
@@ -1489,8 +1473,6 @@ spec:
                           of 0.0. Maximum value of 100.0.'
                         type: number
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -1597,9 +1579,6 @@ spec:
                           type: object
                         type: array
                     type: object
-                  etag:
-                    description: The current version of the response headers policy.
-                    type: string
                   name:
                     description: A unique name to identify the response headers policy.
                     type: string
@@ -1931,6 +1910,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The response headers policy ARN.
+                    type: string
                   comment:
                     description: A comment to describe the response headers policy.
                       The comment cannot be longer than 128 characters.

@@ -156,6 +156,10 @@ type ConnectorObservation struct {
 	// The IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Name of the security policy for the connector.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
@@ -197,10 +201,10 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the security policy for the connector.
 	// +kubebuilder:validation:Optional

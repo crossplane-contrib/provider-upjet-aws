@@ -46,6 +46,10 @@ type IdentityPolicyObservation struct {
 
 	// JSON string of the policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type IdentityPolicyParameters struct {
@@ -72,10 +76,10 @@ type IdentityPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // IdentityPolicySpec defines the desired state of IdentityPolicy

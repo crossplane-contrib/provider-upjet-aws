@@ -142,6 +142,10 @@ type PoolObservation struct {
 	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
 	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
 
@@ -186,10 +190,10 @@ type PoolParameters struct {
 	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.SAMLProvider

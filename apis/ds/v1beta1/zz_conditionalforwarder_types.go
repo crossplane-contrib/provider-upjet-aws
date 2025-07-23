@@ -29,6 +29,10 @@ type ConditionalForwarderObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The fully qualified domain name of the remote domain for which forwarders will be used.
 	RemoteDomainName *string `json:"remoteDomainName,omitempty" tf:"remote_domain_name,omitempty"`
 }
@@ -53,10 +57,10 @@ type ConditionalForwarderParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The fully qualified domain name of the remote domain for which forwarders will be used.
 	// +kubebuilder:validation:Required

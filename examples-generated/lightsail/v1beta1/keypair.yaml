@@ -4,9 +4,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/keypair
   labels:
-    testing.upbound.io/example-name: lg_key_pair
-  name: lg-key-pair
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    name: lg_key_pair
+    name: example
     region: us-west-1

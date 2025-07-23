@@ -363,6 +363,11 @@ func (in *SecretObservation) DeepCopyInto(out *SecretObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Replica != nil {
 		in, out := &in.Replica, &out.Replica
 		*out = make([]ReplicaObservation, len(*in))
@@ -609,6 +614,11 @@ func (in *SecretPolicyObservation) DeepCopyInto(out *SecretPolicyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecretArn != nil {
 		in, out := &in.SecretArn, &out.SecretArn
 		*out = new(string)
@@ -827,6 +837,11 @@ func (in *SecretRotationObservation) DeepCopyInto(out *SecretRotationObservation
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1056,6 +1071,16 @@ func (in *SecretVersionInitParameters) DeepCopyInto(out *SecretVersionInitParame
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.SecretStringWoSecretRef != nil {
+		in, out := &in.SecretStringWoSecretRef, &out.SecretStringWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.SecretStringWoVersion != nil {
+		in, out := &in.SecretStringWoVersion, &out.SecretStringWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.VersionStages != nil {
 		in, out := &in.VersionStages, &out.VersionStages
 		*out = make([]*string, len(*in))
@@ -1119,14 +1144,29 @@ func (in *SecretVersionObservation) DeepCopyInto(out *SecretVersionObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.HasSecretStringWo != nil {
+		in, out := &in.HasSecretStringWo, &out.HasSecretStringWo
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
 	if in.SecretID != nil {
 		in, out := &in.SecretID, &out.SecretID
 		*out = new(string)
+		**out = **in
+	}
+	if in.SecretStringWoVersion != nil {
+		in, out := &in.SecretStringWoVersion, &out.SecretStringWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VersionID != nil {
@@ -1188,6 +1228,16 @@ func (in *SecretVersionParameters) DeepCopyInto(out *SecretVersionParameters) {
 	if in.SecretStringSecretRef != nil {
 		in, out := &in.SecretStringSecretRef, &out.SecretStringSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.SecretStringWoSecretRef != nil {
+		in, out := &in.SecretStringWoSecretRef, &out.SecretStringWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.SecretStringWoVersion != nil {
+		in, out := &in.SecretStringWoVersion, &out.SecretStringWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VersionStages != nil {

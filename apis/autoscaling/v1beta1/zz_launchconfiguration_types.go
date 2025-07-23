@@ -253,6 +253,10 @@ type LaunchConfigurationObservation struct {
 	// The tenancy of the instance. Valid values are default or dedicated, see AWS's Create Launch Configuration for more details.
 	PlacementTenancy *string `json:"placementTenancy,omitempty" tf:"placement_tenancy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Customize details about the root block device of the instance. See Block Devices below for details.
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
@@ -316,10 +320,10 @@ type LaunchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementTenancy *string `json:"placementTenancy,omitempty" tf:"placement_tenancy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Customize details about the root block device of the instance. See Block Devices below for details.
 	// +kubebuilder:validation:Optional

@@ -925,6 +925,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(OpenMonitoringObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StorageMode != nil {
 		in, out := &in.StorageMode, &out.StorageMode
 		*out = new(string)

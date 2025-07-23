@@ -15,34 +15,38 @@ import (
 
 type DomainEntryInitParameters struct {
 
-	// If the entry should be an alias Defaults to false
+	// Whether the entry should be an alias. Default: false.
 	IsAlias *bool `json:"isAlias,omitempty" tf:"is_alias,omitempty"`
 
-	// Target of the domain entry
+	// Target of the domain entry.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type DomainEntryObservation struct {
 
-	// The name of the Lightsail domain in which to create the entry
+	// Name of the Lightsail domain in which to create the entry.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// A combination of attributes to create a unique id: name,domain_name,type,target
+	// Combination of attributes to create a unique id: name,domain_name,type,target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// If the entry should be an alias Defaults to false
+	// Whether the entry should be an alias. Default: false.
 	IsAlias *bool `json:"isAlias,omitempty" tf:"is_alias,omitempty"`
 
-	// Target of the domain entry
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Target of the domain entry.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Type of record
+	// Type of record. Valid values: A, AAAA, CNAME, MX, NS, SOA, SRV, TXT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DomainEntryParameters struct {
 
-	// The name of the Lightsail domain in which to create the entry
+	// Name of the Lightsail domain in which to create the entry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
 	// +kubebuilder:validation:Optional
@@ -56,20 +60,20 @@ type DomainEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
-	// If the entry should be an alias Defaults to false
+	// Whether the entry should be an alias. Default: false.
 	// +kubebuilder:validation:Optional
 	IsAlias *bool `json:"isAlias,omitempty" tf:"is_alias,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Target of the domain entry
+	// Target of the domain entry.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Type of record
+	// Type of record. Valid values: A, AAAA, CNAME, MX, NS, SOA, SRV, TXT.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -101,7 +105,7 @@ type DomainEntryStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// DomainEntry is the Schema for the DomainEntrys API. Provides an Lightsail Domain Entry
+// DomainEntry is the Schema for the DomainEntrys API. Manages a Lightsail domain entry (DNS record).
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

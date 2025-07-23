@@ -74,7 +74,9 @@ spec:
               forProvider:
                 properties:
                   allocationId:
-                    description: The allocation ID. This is required for EC2-VPC.
+                    description: |-
+                      ID of the associated Elastic IP.
+                      This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -152,15 +154,14 @@ spec:
                     type: object
                   allowReassociation:
                     description: |-
-                      Whether to allow an Elastic IP to
-                      be re-associated. Defaults to true in VPC.
+                      Whether to allow an Elastic IP address to be re-associated.
+                      Defaults to true.
                     type: boolean
                   instanceId:
                     description: |-
-                      The ID of the instance. This is required for
-                      EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
-                      network interface ID, but not both. The operation fails if you specify an
-                      instance ID unless exactly one network interface is attached.
+                      ID of the instance.
+                      The instance must have exactly one attached network interface.
+                      You can specify either the instance ID or the network interface ID, but not both.
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance in ec2 to populate instanceId.
@@ -238,23 +239,22 @@ spec:
                     type: object
                   networkInterfaceId:
                     description: |-
-                      The ID of the network interface. If the
-                      instance has more than one network interface, you must specify a network
-                      interface ID.
+                      ID of the network interface.
+                      If the instance has more than one network interface, you must specify a network interface ID.
+                      You can specify either the instance ID or the network interface ID, but not both.
                     type: string
                   privateIpAddress:
                     description: |-
-                      The primary or secondary private IP address
-                      to associate with the Elastic IP address. If no private IP address is
-                      specified, the Elastic IP address is associated with the primary private IP
-                      address.
+                      Primary or secondary private IP address to associate with the Elastic IP address.
+                      If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
                     type: string
                   publicIp:
-                    description: The Elastic IP address. This is required for EC2-Classic.
+                    description: Address of the associated Elastic IP.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -273,7 +273,9 @@ spec:
                   autoscaler.
                 properties:
                   allocationId:
-                    description: The allocation ID. This is required for EC2-VPC.
+                    description: |-
+                      ID of the associated Elastic IP.
+                      This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -351,15 +353,14 @@ spec:
                     type: object
                   allowReassociation:
                     description: |-
-                      Whether to allow an Elastic IP to
-                      be re-associated. Defaults to true in VPC.
+                      Whether to allow an Elastic IP address to be re-associated.
+                      Defaults to true.
                     type: boolean
                   instanceId:
                     description: |-
-                      The ID of the instance. This is required for
-                      EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
-                      network interface ID, but not both. The operation fails if you specify an
-                      instance ID unless exactly one network interface is attached.
+                      ID of the instance.
+                      The instance must have exactly one attached network interface.
+                      You can specify either the instance ID or the network interface ID, but not both.
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance in ec2 to populate instanceId.
@@ -437,19 +438,17 @@ spec:
                     type: object
                   networkInterfaceId:
                     description: |-
-                      The ID of the network interface. If the
-                      instance has more than one network interface, you must specify a network
-                      interface ID.
+                      ID of the network interface.
+                      If the instance has more than one network interface, you must specify a network interface ID.
+                      You can specify either the instance ID or the network interface ID, but not both.
                     type: string
                   privateIpAddress:
                     description: |-
-                      The primary or secondary private IP address
-                      to associate with the Elastic IP address. If no private IP address is
-                      specified, the Elastic IP address is associated with the primary private IP
-                      address.
+                      Primary or secondary private IP address to associate with the Elastic IP address.
+                      If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
                     type: string
                   publicIp:
-                    description: The Elastic IP address. This is required for EC2-Classic.
+                    description: Address of the associated Elastic IP.
                     type: string
                 type: object
               managementPolicies:
@@ -625,37 +624,43 @@ spec:
               atProvider:
                 properties:
                   allocationId:
-                    description: The allocation ID. This is required for EC2-VPC.
+                    description: |-
+                      ID of the associated Elastic IP.
+                      This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
                     type: string
                   allowReassociation:
                     description: |-
-                      Whether to allow an Elastic IP to
-                      be re-associated. Defaults to true in VPC.
+                      Whether to allow an Elastic IP address to be re-associated.
+                      Defaults to true.
                     type: boolean
                   id:
+                    description: ID that represents the association of the Elastic
+                      IP address with an instance.
                     type: string
                   instanceId:
                     description: |-
-                      The ID of the instance. This is required for
-                      EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
-                      network interface ID, but not both. The operation fails if you specify an
-                      instance ID unless exactly one network interface is attached.
+                      ID of the instance.
+                      The instance must have exactly one attached network interface.
+                      You can specify either the instance ID or the network interface ID, but not both.
                     type: string
                   networkInterfaceId:
                     description: |-
-                      The ID of the network interface. If the
-                      instance has more than one network interface, you must specify a network
-                      interface ID.
+                      ID of the network interface.
+                      If the instance has more than one network interface, you must specify a network interface ID.
+                      You can specify either the instance ID or the network interface ID, but not both.
                     type: string
                   privateIpAddress:
                     description: |-
-                      The primary or secondary private IP address
-                      to associate with the Elastic IP address. If no private IP address is
-                      specified, the Elastic IP address is associated with the primary private IP
-                      address.
+                      Primary or secondary private IP address to associate with the Elastic IP address.
+                      If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
                     type: string
                   publicIp:
-                    description: The Elastic IP address. This is required for EC2-Classic.
+                    description: Address of the associated Elastic IP.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

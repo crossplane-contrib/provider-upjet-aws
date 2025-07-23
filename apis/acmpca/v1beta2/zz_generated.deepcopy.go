@@ -313,6 +313,11 @@ func (in *CertificateAuthorityObservation) DeepCopyInto(out *CertificateAuthorit
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RevocationConfiguration != nil {
 		in, out := &in.RevocationConfiguration, &out.RevocationConfiguration
 		*out = new(RevocationConfigurationObservation)
@@ -596,6 +601,11 @@ func (in *CertificateObservation) DeepCopyInto(out *CertificateObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

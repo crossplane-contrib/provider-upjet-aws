@@ -163,6 +163,10 @@ type SigningJobObservation struct {
 	// The version of the signing profile used to initiate the signing job.
 	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The IAM principal that requested the signing job.
 	RequestedBy *string `json:"requestedBy,omitempty" tf:"requested_by,omitempty"`
 
@@ -208,10 +212,10 @@ type SigningJobParameters struct {
 	// +kubebuilder:validation:Optional
 	ProfileNameSelector *v1.Selector `json:"profileNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The S3 bucket that contains the object to sign. See Source below for details.
 	// +kubebuilder:validation:Optional

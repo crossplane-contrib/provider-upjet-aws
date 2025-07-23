@@ -124,6 +124,9 @@ type CustomizedMetricSpecificationInitParameters struct {
 	// Namespace of the metric.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+
 	// Statistic of the metric.
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 
@@ -144,6 +147,9 @@ type CustomizedMetricSpecificationObservation struct {
 
 	// Namespace of the metric.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Statistic of the metric.
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
@@ -169,6 +175,10 @@ type CustomizedMetricSpecificationParameters struct {
 	// Namespace of the metric.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The period of the metric in seconds.
+	// +kubebuilder:validation:Optional
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Statistic of the metric.
 	// +kubebuilder:validation:Optional
@@ -768,6 +778,9 @@ type MetricsMetricStatInitParameters struct {
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
 	Metric *MetricsMetricStatMetricInitParameters `json:"metric,omitempty" tf:"metric,omitempty"`
 
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+
 	// Statistic of the metrics to return.
 	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
@@ -848,6 +861,9 @@ type MetricsMetricStatObservation struct {
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
 	Metric *MetricsMetricStatMetricObservation `json:"metric,omitempty" tf:"metric,omitempty"`
 
+	// The period of the metric in seconds.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+
 	// Statistic of the metrics to return.
 	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
@@ -860,6 +876,10 @@ type MetricsMetricStatParameters struct {
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
 	// +kubebuilder:validation:Optional
 	Metric *MetricsMetricStatMetricParameters `json:"metric" tf:"metric,omitempty"`
+
+	// The period of the metric in seconds.
+	// +kubebuilder:validation:Optional
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Statistic of the metrics to return.
 	// +kubebuilder:validation:Optional
@@ -983,6 +1003,10 @@ type PolicyObservation struct {
 	// Predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.
 	PredictiveScalingConfiguration *PredictiveScalingConfigurationObservation `json:"predictiveScalingConfiguration,omitempty" tf:"predictive_scaling_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
 	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 
@@ -1041,10 +1065,10 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PredictiveScalingConfiguration *PredictiveScalingConfigurationParameters `json:"predictiveScalingConfiguration,omitempty" tf:"predictive_scaling_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
 	// +kubebuilder:validation:Optional

@@ -43,11 +43,6 @@ type DelegationSetParameters struct {
 	// (helpful for identifying single delegation set amongst others)
 	// +kubebuilder:validation:Optional
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // DelegationSetSpec defines the desired state of DelegationSet

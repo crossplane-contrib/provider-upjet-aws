@@ -227,7 +227,7 @@ spec:
                     type: array
                   region:
                     description: |-
-                      Region of the target table.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   retention:
@@ -982,6 +982,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retention:
                     description: Retention time for this table.
                     type: number
@@ -1458,7 +1463,7 @@ spec:
                     type: array
                   region:
                     description: |-
-                      Region of the target table.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   retention:
@@ -2179,6 +2184,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retention:
                     description: Retention time for this table.
                     type: number

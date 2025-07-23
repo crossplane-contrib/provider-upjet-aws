@@ -63,6 +63,10 @@ type PortfolioShareObservation struct {
 	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Enables or disables Principal sharing when creating the portfolio share. If this flag is not provided, principal sharing is disabled.
 	SharePrincipals *bool `json:"sharePrincipals,omitempty" tf:"share_principals,omitempty"`
 
@@ -100,10 +104,10 @@ type PortfolioShareParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Enables or disables Principal sharing when creating the portfolio share. If this flag is not provided, principal sharing is disabled.
 	// +kubebuilder:validation:Optional

@@ -48,6 +48,10 @@ type PlacementGroupObservation struct {
 	// The ID of the placement group.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Determines how placement groups spread instances. Can only be used
 	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
@@ -72,10 +76,10 @@ type PlacementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Determines how placement groups spread instances. Can only be used
 	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.

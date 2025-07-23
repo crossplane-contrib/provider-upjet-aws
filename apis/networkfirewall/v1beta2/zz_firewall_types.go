@@ -65,6 +65,10 @@ type FirewallInitParameters struct {
 	// A friendly description of the firewall.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Set of types for which to collect analysis metrics. See Reporting on network traffic in Network Firewall for details on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults to [].
+	// +listType=set
+	EnabledAnalysisTypes []*string `json:"enabledAnalysisTypes,omitempty" tf:"enabled_analysis_types,omitempty"`
+
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	EncryptionConfiguration *EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
@@ -121,6 +125,10 @@ type FirewallObservation struct {
 	// A friendly description of the firewall.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Set of types for which to collect analysis metrics. See Reporting on network traffic in Network Firewall for details on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults to [].
+	// +listType=set
+	EnabledAnalysisTypes []*string `json:"enabledAnalysisTypes,omitempty" tf:"enabled_analysis_types,omitempty"`
+
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	EncryptionConfiguration *EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
@@ -138,6 +146,10 @@ type FirewallObservation struct {
 
 	// A friendly name of the firewall.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// A flag indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. Defaults to false.
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
@@ -170,6 +182,11 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Set of types for which to collect analysis metrics. See Reporting on network traffic in Network Firewall for details on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults to [].
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	EnabledAnalysisTypes []*string `json:"enabledAnalysisTypes,omitempty" tf:"enabled_analysis_types,omitempty"`
+
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration *EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
@@ -196,10 +213,10 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A flag indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -242,7 +259,7 @@ type FirewallStatusParameters struct {
 
 type SubnetMappingInitParameters struct {
 
-	// The subnet's IP address type. Valida values: "DUALSTACK", "IPV4".
+	// The subnet's IP address type. Valid values: "DUALSTACK", "IPV4".
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The unique identifier for the subnet.
@@ -261,7 +278,7 @@ type SubnetMappingInitParameters struct {
 
 type SubnetMappingObservation struct {
 
-	// The subnet's IP address type. Valida values: "DUALSTACK", "IPV4".
+	// The subnet's IP address type. Valid values: "DUALSTACK", "IPV4".
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The unique identifier for the subnet.
@@ -270,7 +287,7 @@ type SubnetMappingObservation struct {
 
 type SubnetMappingParameters struct {
 
-	// The subnet's IP address type. Valida values: "DUALSTACK", "IPV4".
+	// The subnet's IP address type. Valid values: "DUALSTACK", "IPV4".
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 

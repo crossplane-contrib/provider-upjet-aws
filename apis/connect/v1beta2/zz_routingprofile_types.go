@@ -168,6 +168,10 @@ type RoutingProfileObservation struct {
 	// One or more queue_configs blocks that specify the inbound queues associated with the routing profile. If no queue is added, the agent only can make outbound calls. The queue_configs block is documented below.
 	QueueConfigs []QueueConfigsObservation `json:"queueConfigs,omitempty" tf:"queue_configs,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The identifier for the Routing Profile.
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
@@ -226,10 +230,10 @@ type RoutingProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	QueueConfigs []QueueConfigsParameters `json:"queueConfigs,omitempty" tf:"queue_configs,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

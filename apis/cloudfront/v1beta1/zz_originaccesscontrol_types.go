@@ -33,6 +33,9 @@ type OriginAccessControlInitParameters struct {
 
 type OriginAccessControlObservation struct {
 
+	// The Origin Access Control ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The description of the Origin Access Control.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -68,11 +71,6 @@ type OriginAccessControlParameters struct {
 	// The type of origin that this Origin Access Control is for. Valid values are lambda, mediapackagev2, mediastore, and s3.
 	// +kubebuilder:validation:Optional
 	OriginAccessControlOriginType *string `json:"originAccessControlOriginType,omitempty" tf:"origin_access_control_origin_type,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 
 	// Specifies which requests CloudFront signs. Specify always for the most common use case. Allowed values: always, never, and no-override.
 	// +kubebuilder:validation:Optional

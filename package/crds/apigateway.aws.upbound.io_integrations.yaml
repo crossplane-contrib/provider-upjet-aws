@@ -276,8 +276,9 @@ spec:
                       used.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requestParameters:
                     additionalProperties:
@@ -452,8 +453,9 @@ spec:
                         type: object
                     type: object
                   timeoutMilliseconds:
-                    description: Custom timeout between 50 and 29,000 milliseconds.
-                      The default value is 29,000 milliseconds.
+                    description: Custom timeout between 50 and 300,000 milliseconds.
+                      The default value is 29,000 milliseconds. You need to raise
+                      a Service Quota Ticket to increase time beyond 29,000 milliseconds.
                     type: number
                   tlsConfig:
                     description: TLS configuration. See below.
@@ -486,7 +488,7 @@ spec:
                     description: |-
                       Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
                       For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
-                      e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
+                      e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
                     type: string
                   uriRef:
                     description: Reference to a Function in lambda to populate uri.
@@ -953,8 +955,9 @@ spec:
                         type: object
                     type: object
                   timeoutMilliseconds:
-                    description: Custom timeout between 50 and 29,000 milliseconds.
-                      The default value is 29,000 milliseconds.
+                    description: Custom timeout between 50 and 300,000 milliseconds.
+                      The default value is 29,000 milliseconds. You need to raise
+                      a Service Quota Ticket to increase time beyond 29,000 milliseconds.
                     type: number
                   tlsConfig:
                     description: TLS configuration. See below.
@@ -987,7 +990,7 @@ spec:
                     description: |-
                       Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
                       For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
-                      e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
+                      e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
                     type: string
                   uriRef:
                     description: Reference to a Function in lambda to populate uri.
@@ -1295,6 +1298,11 @@ spec:
                       WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is
                       used.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requestParameters:
                     additionalProperties:
                       type: string
@@ -1316,8 +1324,9 @@ spec:
                     description: ID of the associated REST API.
                     type: string
                   timeoutMilliseconds:
-                    description: Custom timeout between 50 and 29,000 milliseconds.
-                      The default value is 29,000 milliseconds.
+                    description: Custom timeout between 50 and 300,000 milliseconds.
+                      The default value is 29,000 milliseconds. You need to raise
+                      a Service Quota Ticket to increase time beyond 29,000 milliseconds.
                     type: number
                   tlsConfig:
                     description: TLS configuration. See below.
@@ -1350,7 +1359,7 @@ spec:
                     description: |-
                       Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
                       For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
-                      e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
+                      e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
                     type: string
                 type: object
               conditions:
@@ -1672,8 +1681,9 @@ spec:
                       used.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requestParameters:
                     additionalProperties:
@@ -2686,6 +2696,11 @@ spec:
                     description: Integration passthrough behavior (WHEN_NO_MATCH,
                       WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is
                       used.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requestParameters:
                     additionalProperties:

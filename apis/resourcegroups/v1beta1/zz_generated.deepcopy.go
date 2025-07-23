@@ -227,6 +227,11 @@ func (in *GroupObservation) DeepCopyInto(out *GroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceQuery != nil {
 		in, out := &in.ResourceQuery, &out.ResourceQuery
 		*out = make([]ResourceQueryObservation, len(*in))

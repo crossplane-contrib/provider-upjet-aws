@@ -174,12 +174,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -717,12 +711,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

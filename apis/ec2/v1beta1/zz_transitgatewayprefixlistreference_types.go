@@ -72,6 +72,10 @@ type TransitGatewayPrefixListReferenceObservation struct {
 	// EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore (_)
 	PrefixListOwnerID *string `json:"prefixListOwnerId,omitempty" tf:"prefix_list_owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Identifier of EC2 Transit Gateway Attachment.
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
@@ -99,10 +103,10 @@ type TransitGatewayPrefixListReferenceParameters struct {
 	// +kubebuilder:validation:Optional
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment

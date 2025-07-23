@@ -123,29 +123,29 @@ type SelfManagedActiveDirectoryParameters struct {
 
 type WindowsFileSystemDiskIopsConfigurationInitParameters struct {
 
-	// - The total number of SSD IOPS provisioned for the file system.
+	// The total number of SSD IOPS provisioned for the file system.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	// Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type WindowsFileSystemDiskIopsConfigurationObservation struct {
 
-	// - The total number of SSD IOPS provisioned for the file system.
+	// The total number of SSD IOPS provisioned for the file system.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	// Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type WindowsFileSystemDiskIopsConfigurationParameters struct {
 
-	// - The total number of SSD IOPS provisioned for the file system.
+	// The total number of SSD IOPS provisioned for the file system.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	// Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
@@ -169,7 +169,7 @@ type WindowsFileSystemInitParameters struct {
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See Audit Log Configuration below.
+	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
 	AuditLogConfiguration []AuditLogConfigurationInitParameters `json:"auditLogConfiguration,omitempty" tf:"audit_log_configuration,omitempty"`
 
 	// The number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
@@ -187,7 +187,7 @@ type WindowsFileSystemInitParameters struct {
 	// Specifies the file system deployment type, valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See Disk Iops Configuration below.
+	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
 	DiskIopsConfiguration []WindowsFileSystemDiskIopsConfigurationInitParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
 	// A map of tags to apply to the file system's final backup.
@@ -225,7 +225,7 @@ type WindowsFileSystemInitParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. See Self-Managed Active Directory below.
+	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. See self_managed_active_directory Block for details.
 	SelfManagedActiveDirectory []SelfManagedActiveDirectoryInitParameters `json:"selfManagedActiveDirectory,omitempty" tf:"self_managed_active_directory,omitempty"`
 
 	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to false.
@@ -255,7 +255,7 @@ type WindowsFileSystemInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
+	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
@@ -274,7 +274,7 @@ type WindowsFileSystemObservation struct {
 	// Amazon Resource Name of the file system.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See Audit Log Configuration below.
+	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
 	AuditLogConfiguration []AuditLogConfigurationObservation `json:"auditLogConfiguration,omitempty" tf:"audit_log_configuration,omitempty"`
 
 	// The number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
@@ -295,7 +295,7 @@ type WindowsFileSystemObservation struct {
 	// Specifies the file system deployment type, valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See Disk Iops Configuration below.
+	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
 	DiskIopsConfiguration []WindowsFileSystemDiskIopsConfigurationObservation `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
 	// A map of tags to apply to the file system's final backup.
@@ -321,6 +321,10 @@ type WindowsFileSystemObservation struct {
 	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// For MULTI_AZ_1 deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell. For SINGLE_AZ_1 deployment types, this is the DNS name of the file system.
 	RemoteAdministrationEndpoint *string `json:"remoteAdministrationEndpoint,omitempty" tf:"remote_administration_endpoint,omitempty"`
 
@@ -328,7 +332,7 @@ type WindowsFileSystemObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. See Self-Managed Active Directory below.
+	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. See self_managed_active_directory Block for details.
 	SelfManagedActiveDirectory []SelfManagedActiveDirectoryObservation `json:"selfManagedActiveDirectory,omitempty" tf:"self_managed_active_directory,omitempty"`
 
 	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to false.
@@ -351,7 +355,7 @@ type WindowsFileSystemObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
+	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// Identifier of the Virtual Private Cloud for the file system.
@@ -382,7 +386,7 @@ type WindowsFileSystemParameters struct {
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See Audit Log Configuration below.
+	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	AuditLogConfiguration []AuditLogConfigurationParameters `json:"auditLogConfiguration,omitempty" tf:"audit_log_configuration,omitempty"`
 
@@ -406,7 +410,7 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See Disk Iops Configuration below.
+	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	DiskIopsConfiguration []WindowsFileSystemDiskIopsConfigurationParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
@@ -433,10 +437,10 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
@@ -454,7 +458,7 @@ type WindowsFileSystemParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. See Self-Managed Active Directory below.
+	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. See self_managed_active_directory Block for details.
 	// +kubebuilder:validation:Optional
 	SelfManagedActiveDirectory []SelfManagedActiveDirectoryParameters `json:"selfManagedActiveDirectory,omitempty" tf:"self_managed_active_directory,omitempty"`
 
@@ -490,7 +494,7 @@ type WindowsFileSystemParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
+	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	// +kubebuilder:validation:Optional
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 

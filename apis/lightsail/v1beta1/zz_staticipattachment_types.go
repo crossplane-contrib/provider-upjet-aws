@@ -15,7 +15,7 @@ import (
 
 type StaticIPAttachmentInitParameters struct {
 
-	// The name of the Lightsail instance to attach the IP to
+	// Name of the Lightsail instance to attach the IP to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
@@ -28,7 +28,7 @@ type StaticIPAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
-	// The name of the allocated static IP
+	// Name of the allocated static IP.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.StaticIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
@@ -45,19 +45,23 @@ type StaticIPAttachmentInitParameters struct {
 type StaticIPAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The allocated static IP address
+	// Allocated static IP address.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// The name of the Lightsail instance to attach the IP to
+	// Name of the Lightsail instance to attach the IP to.
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
-	// The name of the allocated static IP
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Name of the allocated static IP.
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 }
 
 type StaticIPAttachmentParameters struct {
 
-	// The name of the Lightsail instance to attach the IP to
+	// Name of the Lightsail instance to attach the IP to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -71,12 +75,12 @@ type StaticIPAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The name of the allocated static IP
+	// Name of the allocated static IP.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.StaticIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -118,7 +122,7 @@ type StaticIPAttachmentStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// StaticIPAttachment is the Schema for the StaticIPAttachments API. Provides an Lightsail Static IP Attachment
+// StaticIPAttachment is the Schema for the StaticIPAttachments API. Manages a Lightsail Static IP Attachment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

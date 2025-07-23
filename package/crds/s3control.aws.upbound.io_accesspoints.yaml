@@ -161,7 +161,8 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: Name you want to assign to this access point.
+                    description: Name you want to assign to this access point. See
+                      the AWS documentation for naming conditions.
                     type: string
                   policy:
                     description: Valid JSON document that specifies the policy that
@@ -209,8 +210,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
@@ -402,7 +404,8 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: Name you want to assign to this access point.
+                    description: Name you want to assign to this access point. See
+                      the AWS documentation for naming conditions.
                     type: string
                   policy:
                     description: Valid JSON document that specifies the policy that
@@ -753,7 +756,8 @@ spec:
                       For S3 on Outposts Bucket, the ARN of the Access Point.
                     type: string
                   name:
-                    description: Name you want to assign to this access point.
+                    description: Name you want to assign to this access point. See
+                      the AWS documentation for naming conditions.
                     type: string
                   networkOrigin:
                     description: Indicates whether this access point allows access
@@ -807,6 +811,11 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
                       point to requests from the specified Virtual Private Cloud (VPC).
@@ -1070,8 +1079,9 @@ spec:
                         type: boolean
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
@@ -1660,6 +1670,11 @@ spec:
                           to specific accounts, is blocked. When set to true:'
                         type: boolean
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
                       point to requests from the specified Virtual Private Cloud (VPC).

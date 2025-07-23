@@ -150,8 +150,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
                     description: SAML authentication options for an AWS OpenSearch
@@ -545,6 +546,11 @@ spec:
                   id:
                     description: Name of the domain the SAML options are associated
                       with.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
                     description: SAML authentication options for an AWS OpenSearch
@@ -781,8 +787,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
                     description: SAML authentication options for an AWS OpenSearch
@@ -1164,6 +1171,11 @@ spec:
                   id:
                     description: Name of the domain the SAML options are associated
                       with.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
                     description: SAML authentication options for an AWS OpenSearch

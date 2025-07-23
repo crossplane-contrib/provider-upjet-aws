@@ -216,6 +216,11 @@ func (in *PlatformApplicationObservation) DeepCopyInto(out *PlatformApplicationO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SuccessFeedbackRoleArn != nil {
 		in, out := &in.SuccessFeedbackRoleArn, &out.SuccessFeedbackRoleArn
 		*out = new(string)
@@ -516,6 +521,11 @@ func (in *SMSPreferencesObservation) DeepCopyInto(out *SMSPreferencesObservation
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.UsageReportS3Bucket != nil {
 		in, out := &in.UsageReportS3Bucket, &out.UsageReportS3Bucket
 		*out = new(string)
@@ -710,6 +720,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
+		**out = **in
+	}
+	if in.FifoThroughputScope != nil {
+		in, out := &in.FifoThroughputScope, &out.FifoThroughputScope
 		*out = new(string)
 		**out = **in
 	}
@@ -986,6 +1001,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FifoThroughputScope != nil {
+		in, out := &in.FifoThroughputScope, &out.FifoThroughputScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.FifoTopic != nil {
 		in, out := &in.FifoTopic, &out.FifoTopic
 		*out = new(bool)
@@ -1053,6 +1073,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1180,6 +1205,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
+		**out = **in
+	}
+	if in.FifoThroughputScope != nil {
+		in, out := &in.FifoThroughputScope, &out.FifoThroughputScope
 		*out = new(string)
 		**out = **in
 	}
@@ -1495,6 +1525,11 @@ func (in *TopicPolicyObservation) DeepCopyInto(out *TopicPolicyObservation) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1854,6 +1889,11 @@ func (in *TopicSubscriptionObservation) DeepCopyInto(out *TopicSubscriptionObser
 	}
 	if in.RedrivePolicy != nil {
 		in, out := &in.RedrivePolicy, &out.RedrivePolicy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

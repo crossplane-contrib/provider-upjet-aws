@@ -43,6 +43,10 @@ type ResolverConfigObservation struct {
 	// The AWS account ID of the owner of the VPC that this resolver configuration applies to.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ID of the VPC that the configuration is for.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
@@ -53,10 +57,10 @@ type ResolverConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AutodefinedReverseFlag *string `json:"autodefinedReverseFlag,omitempty" tf:"autodefined_reverse_flag,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the VPC that the configuration is for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC

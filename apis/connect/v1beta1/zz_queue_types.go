@@ -140,6 +140,10 @@ type QueueObservation struct {
 	// +listType=set
 	QuickConnectIdsAssociated []*string `json:"quickConnectIdsAssociated,omitempty" tf:"quick_connect_ids_associated,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -203,10 +207,10 @@ type QueueParameters struct {
 	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
 	// +kubebuilder:validation:Optional

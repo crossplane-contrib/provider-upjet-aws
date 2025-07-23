@@ -51,6 +51,10 @@ type ResourceObservation struct {
 	// JSON string matching the CloudFormation resource type schema with current configuration. Underlying attributes can be referenced via the jsondecode() function, for example, jsondecode(data.aws_cloudcontrolapi_resource.example.properties)["example"].
 	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Amazon Resource Name (ARN) of the IAM Role to assume for operations.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -67,10 +71,10 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of the IAM Role to assume for operations.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

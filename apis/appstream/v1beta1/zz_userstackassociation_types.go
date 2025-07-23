@@ -27,6 +27,10 @@ type UserStackAssociationObservation struct {
 	// Unique ID of the appstream User Stack association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether a welcome email is sent to a user after the user is created in the user pool.
 	SendEmailNotification *bool `json:"sendEmailNotification,omitempty" tf:"send_email_notification,omitempty"`
 
@@ -53,10 +57,10 @@ type UserStackAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationTypeSelector *v1.Selector `json:"authenticationTypeSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether a welcome email is sent to a user after the user is created in the user pool.
 	// +kubebuilder:validation:Optional

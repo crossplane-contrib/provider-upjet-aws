@@ -76,7 +76,7 @@ spec:
                 properties:
                   region:
                     description: |-
-                      A Region to replicate to.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   replicationConfiguration:
@@ -96,7 +96,9 @@ spec:
                                 items:
                                   properties:
                                     region:
-                                      description: A Region to replicate to.
+                                      description: Region where this resource will
+                                        be managed. Defaults to the Region set in
+                                        the provider configuration.
                                       type: string
                                     registryId:
                                       description: The account ID of the destination
@@ -360,6 +362,11 @@ spec:
                 properties:
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   registryId:
                     description: The account ID of the destination registry to replicate
                       to.
@@ -381,7 +388,9 @@ spec:
                                 items:
                                   properties:
                                     region:
-                                      description: A Region to replicate to.
+                                      description: Region where this resource will
+                                        be managed. Defaults to the Region set in
+                                        the provider configuration.
                                       type: string
                                     registryId:
                                       description: The account ID of the destination
@@ -529,7 +538,7 @@ spec:
                 properties:
                   region:
                     description: |-
-                      A Region to replicate to.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   replicationConfiguration:
@@ -548,7 +557,9 @@ spec:
                               items:
                                 properties:
                                   region:
-                                    description: A Region to replicate to.
+                                    description: Region where this resource will be
+                                      managed. Defaults to the Region set in the provider
+                                      configuration.
                                     type: string
                                   registryId:
                                     description: The account ID of the destination
@@ -809,6 +820,11 @@ spec:
                 properties:
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   registryId:
                     description: The account ID of the destination registry to replicate
                       to.
@@ -829,7 +845,9 @@ spec:
                               items:
                                 properties:
                                   region:
-                                    description: A Region to replicate to.
+                                    description: Region where this resource will be
+                                      managed. Defaults to the Region set in the provider
+                                      configuration.
                                     type: string
                                   registryId:
                                     description: The account ID of the destination

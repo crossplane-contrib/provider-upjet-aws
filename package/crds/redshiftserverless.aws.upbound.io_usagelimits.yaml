@@ -91,8 +91,9 @@ spec:
                       monthly. The default is monthly.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
                     description: The Amazon Resource Name (ARN) of the Amazon Redshift
@@ -500,6 +501,11 @@ spec:
                     description: The time period that the amount applies to. A weekly
                       period begins on Sunday. Valid values are daily, weekly, and
                       monthly. The default is monthly.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
                     description: The Amazon Resource Name (ARN) of the Amazon Redshift

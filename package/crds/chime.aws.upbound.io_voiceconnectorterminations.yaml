@@ -100,8 +100,9 @@ spec:
                       calls can not be made.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.
@@ -510,6 +511,11 @@ spec:
                     type: boolean
                   id:
                     description: The Amazon Chime Voice Connector ID.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.

@@ -19,8 +19,15 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	AdminPasswordSecretKMSKeyID *string `json:"adminPasswordSecretKmsKeyId,omitempty" tf:"admin_password_secret_kms_key_id,omitempty"`
 
 	// The password of the administrator for the first database created in the namespace.
-	// Conflicts with manage_admin_password.
+	// Conflicts with manage_admin_password and admin_user_password_wo.
 	AdminUserPasswordSecretRef *v1.SecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
+
+	// The password of the administrator for the first database created in the namespace.
+	// Conflicts with manage_admin_password and admin_user_password.
+	AdminUserPasswordWo *string `json:"adminUserPasswordWo,omitempty" tf:"admin_user_password_wo,omitempty"`
+
+	// Used together with admin_user_password_wo to trigger an update. Increment this value when an update to the admin_user_password_wo is required
+	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
 	// The username of the administrator for the first database created in the namespace.
 	AdminUsernameSecretRef *v1.SecretKeySelector `json:"adminUsernameSecretRef,omitempty" tf:"-"`
@@ -73,7 +80,7 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// Whether to use AWS SecretManager to manage namespace's admin credentials.
-	// Conflicts with admin_user_password.
+	// Conflicts with admin_user_password and admin_user_password_wo.
 	ManageAdminPassword *bool `json:"manageAdminPassword,omitempty" tf:"manage_admin_password,omitempty"`
 
 	// Key-value map of resource tags.
@@ -83,11 +90,18 @@ type RedshiftServerlessNamespaceInitParameters struct {
 
 type RedshiftServerlessNamespaceObservation struct {
 
-	// Amazon Resource Name (ARN) of the Redshift Serverless Namespace.
+	// Amazon Resource Name (ARN) of namespace's admin user credentials secret.
 	AdminPasswordSecretArn *string `json:"adminPasswordSecretArn,omitempty" tf:"admin_password_secret_arn,omitempty"`
 
 	// ID of the KMS key used to encrypt the namespace's admin credentials secret.
 	AdminPasswordSecretKMSKeyID *string `json:"adminPasswordSecretKmsKeyId,omitempty" tf:"admin_password_secret_kms_key_id,omitempty"`
+
+	// The password of the administrator for the first database created in the namespace.
+	// Conflicts with manage_admin_password and admin_user_password.
+	AdminUserPasswordWo *string `json:"adminUserPasswordWo,omitempty" tf:"admin_user_password_wo,omitempty"`
+
+	// Used together with admin_user_password_wo to trigger an update. Increment this value when an update to the admin_user_password_wo is required
+	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Redshift Serverless Namespace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -113,11 +127,15 @@ type RedshiftServerlessNamespaceObservation struct {
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// Whether to use AWS SecretManager to manage namespace's admin credentials.
-	// Conflicts with admin_user_password.
+	// Conflicts with admin_user_password and admin_user_password_wo.
 	ManageAdminPassword *bool `json:"manageAdminPassword,omitempty" tf:"manage_admin_password,omitempty"`
 
 	// The Redshift Namespace ID.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -135,9 +153,18 @@ type RedshiftServerlessNamespaceParameters struct {
 	AdminPasswordSecretKMSKeyID *string `json:"adminPasswordSecretKmsKeyId,omitempty" tf:"admin_password_secret_kms_key_id,omitempty"`
 
 	// The password of the administrator for the first database created in the namespace.
-	// Conflicts with manage_admin_password.
+	// Conflicts with manage_admin_password and admin_user_password_wo.
 	// +kubebuilder:validation:Optional
 	AdminUserPasswordSecretRef *v1.SecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
+
+	// The password of the administrator for the first database created in the namespace.
+	// Conflicts with manage_admin_password and admin_user_password.
+	// +kubebuilder:validation:Optional
+	AdminUserPasswordWo *string `json:"adminUserPasswordWo,omitempty" tf:"admin_user_password_wo,omitempty"`
+
+	// Used together with admin_user_password_wo to trigger an update. Increment this value when an update to the admin_user_password_wo is required
+	// +kubebuilder:validation:Optional
+	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
 	// The username of the administrator for the first database created in the namespace.
 	// +kubebuilder:validation:Optional
@@ -196,14 +223,14 @@ type RedshiftServerlessNamespaceParameters struct {
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// Whether to use AWS SecretManager to manage namespace's admin credentials.
-	// Conflicts with admin_user_password.
+	// Conflicts with admin_user_password and admin_user_password_wo.
 	// +kubebuilder:validation:Optional
 	ManageAdminPassword *bool `json:"manageAdminPassword,omitempty" tf:"manage_admin_password,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

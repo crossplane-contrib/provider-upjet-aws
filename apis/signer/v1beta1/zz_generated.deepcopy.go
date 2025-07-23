@@ -569,6 +569,11 @@ func (in *SigningJobObservation) DeepCopyInto(out *SigningJobObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RequestedBy != nil {
 		in, out := &in.RequestedBy, &out.RequestedBy
 		*out = new(string)
@@ -903,6 +908,11 @@ func (in *SigningProfileObservation) DeepCopyInto(out *SigningProfileObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RevocationRecord != nil {
 		in, out := &in.RevocationRecord, &out.RevocationRecord
 		*out = make([]SigningProfileRevocationRecordObservation, len(*in))
@@ -1167,6 +1177,11 @@ func (in *SigningProfilePermissionObservation) DeepCopyInto(out *SigningProfileP
 	}
 	if in.ProfileVersion != nil {
 		in, out := &in.ProfileVersion, &out.ProfileVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

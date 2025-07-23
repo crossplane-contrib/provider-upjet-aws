@@ -181,9 +181,10 @@ spec:
                   loggingConfiguration:
                     description: Defines what execution history events are logged
                       and where they are logged. The logging_configuration parameter
-                      is only valid when type is set to EXPRESS. Defaults to OFF.
-                      For more information see Logging Express Workflows and Log Levels
-                      in the AWS Step Functions User Guide.
+                      is valid when type is set to STANDARD or EXPRESS. Defaults to
+                      OFF. For more information see Logging Express Workflows, Log
+                      Levels and Logging Configuration in the AWS Step Functions User
+                      Guide.
                     items:
                       properties:
                         includeExecutionData:
@@ -206,8 +207,9 @@ spec:
                       during creation. Default: false.'
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM role to
@@ -435,9 +437,10 @@ spec:
                   loggingConfiguration:
                     description: Defines what execution history events are logged
                       and where they are logged. The logging_configuration parameter
-                      is only valid when type is set to EXPRESS. Defaults to OFF.
-                      For more information see Logging Express Workflows and Log Levels
-                      in the AWS Step Functions User Guide.
+                      is valid when type is set to STANDARD or EXPRESS. Defaults to
+                      OFF. For more information see Logging Express Workflows, Log
+                      Levels and Logging Configuration in the AWS Step Functions User
+                      Guide.
                     items:
                       properties:
                         includeExecutionData:
@@ -784,9 +787,10 @@ spec:
                   loggingConfiguration:
                     description: Defines what execution history events are logged
                       and where they are logged. The logging_configuration parameter
-                      is only valid when type is set to EXPRESS. Defaults to OFF.
-                      For more information see Logging Express Workflows and Log Levels
-                      in the AWS Step Functions User Guide.
+                      is valid when type is set to STANDARD or EXPRESS. Defaults to
+                      OFF. For more information see Logging Express Workflows, Log
+                      Levels and Logging Configuration in the AWS Step Functions User
+                      Guide.
                     items:
                       properties:
                         includeExecutionData:
@@ -808,6 +812,11 @@ spec:
                     description: 'Set to true to publish a version of the state machine
                       during creation. Default: false.'
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   revisionId:
                     description: The ARN of the state machine.
                     type: string
@@ -1102,8 +1111,9 @@ spec:
                       during creation. Default: false.'
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM role to
@@ -1692,6 +1702,11 @@ spec:
                     description: 'Set to true to publish a version of the state machine
                       during creation. Default: false.'
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   revisionId:
                     description: The ARN of the state machine.
                     type: string

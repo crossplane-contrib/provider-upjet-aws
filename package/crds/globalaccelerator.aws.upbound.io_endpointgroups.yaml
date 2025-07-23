@@ -224,10 +224,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   thresholdCount:
                     description: The number of consecutive health checks required
                       to set the state of a healthy endpoint to unhealthy, or to set
@@ -238,8 +234,6 @@ spec:
                       Additional traffic is distributed to other endpoint groups for
                       this listener. The default value is 100.
                     type: number
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

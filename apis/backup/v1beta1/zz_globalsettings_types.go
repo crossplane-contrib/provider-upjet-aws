@@ -36,11 +36,6 @@ type GlobalSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // GlobalSettingsSpec defines the desired state of GlobalSettings

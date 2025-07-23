@@ -204,8 +204,9 @@ spec:
                     description: A name for your Amazon Kendra experience.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of a role with permission
@@ -772,6 +773,11 @@ spec:
                     type: string
                   name:
                     description: A name for your Amazon Kendra experience.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of a role with permission
@@ -1024,8 +1030,9 @@ spec:
                     description: A name for your Amazon Kendra experience.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of a role with permission
@@ -1578,6 +1585,11 @@ spec:
                     type: string
                   name:
                     description: A name for your Amazon Kendra experience.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of a role with permission

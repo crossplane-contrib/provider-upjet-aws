@@ -49,6 +49,10 @@ type ConfigurationObservation struct {
 	// Name of the configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Contents of the server.properties file. Supported properties are documented in the MSK Developer Guide.
 	ServerProperties *string `json:"serverProperties,omitempty" tf:"server_properties,omitempty"`
 }
@@ -68,10 +72,10 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Contents of the server.properties file. Supported properties are documented in the MSK Developer Guide.
 	// +kubebuilder:validation:Optional

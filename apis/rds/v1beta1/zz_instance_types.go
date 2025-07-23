@@ -117,6 +117,9 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
+	// The mode of Database Insights that is enabled for the instance. Valid values: standard, advanced .
+	DatabaseInsightsMode *string `json:"databaseInsightsMode,omitempty" tf:"database_insights_mode,omitempty"`
+
 	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
 	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
 
@@ -280,6 +283,12 @@ type InstanceInitParameters struct {
 	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
@@ -472,6 +481,9 @@ type InstanceObservation struct {
 	// for additional read replica contraints.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
+	// The mode of Database Insights that is enabled for the instance. Valid values: standard, advanced .
+	DatabaseInsightsMode *string `json:"databaseInsightsMode,omitempty" tf:"database_insights_mode,omitempty"`
+
 	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
 	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
 
@@ -615,6 +627,9 @@ type InstanceObservation struct {
 	// associate.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
+	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
@@ -630,6 +645,10 @@ type InstanceObservation struct {
 	// Bool to control if instance is publicly
 	// accessible. Default is false.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Specifies whether the replica is in either mounted or open-read-only mode. This attribute
 	// is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified. See Working with Oracle Read Replicas for more information.
@@ -824,6 +843,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
+	// The mode of Database Insights that is enabled for the instance. Valid values: standard, advanced .
+	// +kubebuilder:validation:Optional
+	DatabaseInsightsMode *string `json:"databaseInsightsMode,omitempty" tf:"database_insights_mode,omitempty"`
+
 	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
 	// +kubebuilder:validation:Optional
 	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
@@ -1022,6 +1045,14 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// +kubebuilder:validation:Optional
+	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
+	// +kubebuilder:validation:Optional
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
@@ -1043,10 +1074,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies whether the replica is in either mounted or open-read-only mode. This attribute
 	// is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified. See Working with Oracle Read Replicas for more information.

@@ -16,48 +16,62 @@ import (
 type AccessPolicyInitParameters struct {
 
 	// Description of the policy. Typically used to store information about the permissions defined in the policy.
+	// Description of the policy. Typically used to store information about the permissions defined in the policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// JSON policy document to use as the content for the new policy
+	// JSON policy document to use as the content for the new policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Type of access policy. Must be data.
+	// Type of access policy. Must be `data`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AccessPolicyObservation struct {
 
 	// Description of the policy. Typically used to store information about the permissions defined in the policy.
+	// Description of the policy. Typically used to store information about the permissions defined in the policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// JSON policy document to use as the content for the new policy
+	// JSON policy document to use as the content for the new policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Version of the policy.
+	// Version of the policy.
 	PolicyVersion *string `json:"policyVersion,omitempty" tf:"policy_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Type of access policy. Must be data.
+	// Type of access policy. Must be `data`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AccessPolicyParameters struct {
 
 	// Description of the policy. Typically used to store information about the permissions defined in the policy.
+	// Description of the policy. Typically used to store information about the permissions defined in the policy.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// JSON policy document to use as the content for the new policy
+	// JSON policy document to use as the content for the new policy.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Type of access policy. Must be data.
+	// Type of access policy. Must be `data`.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

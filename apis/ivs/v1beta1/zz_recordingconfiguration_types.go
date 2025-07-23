@@ -67,6 +67,10 @@ type RecordingConfigurationObservation struct {
 	// If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
 	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The current state of the Recording Configuration.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -96,10 +100,10 @@ type RecordingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

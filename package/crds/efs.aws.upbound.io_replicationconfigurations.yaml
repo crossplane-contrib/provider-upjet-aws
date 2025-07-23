@@ -96,13 +96,14 @@ spec:
                             will be used.
                           type: string
                         region:
-                          description: The region in which the replica should be created.
+                          description: Region where this resource will be managed.
+                            Defaults to the Region set in the provider configuration.
                           type: string
                       type: object
                     type: array
                   region:
                     description: |-
-                      The region in which the replica should be created.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceFileSystemId:
@@ -502,7 +503,8 @@ spec:
                             will be used.
                           type: string
                         region:
-                          description: The region in which the replica should be created.
+                          description: Region where this resource will be managed.
+                            Defaults to the Region set in the provider configuration.
                           type: string
                         status:
                           description: The status of the replication.
@@ -514,6 +516,11 @@ spec:
                   originalSourceFileSystemArn:
                     description: The Amazon Resource Name (ARN) of the original source
                       Amazon EFS file system in the replication configuration.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceFileSystemArn:
                     description: The Amazon Resource Name (ARN) of the current source
@@ -664,12 +671,13 @@ spec:
                           will be used.
                         type: string
                       region:
-                        description: The region in which the replica should be created.
+                        description: Region where this resource will be managed. Defaults
+                          to the Region set in the provider configuration.
                         type: string
                     type: object
                   region:
                     description: |-
-                      The region in which the replica should be created.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceFileSystemId:
@@ -1064,7 +1072,8 @@ spec:
                           will be used.
                         type: string
                       region:
-                        description: The region in which the replica should be created.
+                        description: Region where this resource will be managed. Defaults
+                          to the Region set in the provider configuration.
                         type: string
                       status:
                         description: The status of the replication.
@@ -1075,6 +1084,11 @@ spec:
                   originalSourceFileSystemArn:
                     description: The Amazon Resource Name (ARN) of the original source
                       Amazon EFS file system in the replication configuration.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceFileSystemArn:
                     description: The Amazon Resource Name (ARN) of the current source

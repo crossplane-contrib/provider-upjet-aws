@@ -622,6 +622,11 @@ func (in *ConnectorObservation) DeepCopyInto(out *ConnectorObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceExecutionRoleArn != nil {
 		in, out := &in.ServiceExecutionRoleArn, &out.ServiceExecutionRoleArn
 		*out = new(string)
@@ -1035,6 +1040,11 @@ func (in *CustomPluginObservation_2) DeepCopyInto(out *CustomPluginObservation_2
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

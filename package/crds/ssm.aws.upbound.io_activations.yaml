@@ -164,8 +164,9 @@ spec:
                     description: The default name of the registered managed instance.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   registrationLimit:
                     description: The maximum number of managed instances you want
@@ -489,6 +490,11 @@ spec:
                     type: string
                   name:
                     description: The default name of the registered managed instance.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   registrationCount:
                     description: The number of managed instances that are currently

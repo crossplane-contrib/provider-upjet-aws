@@ -172,8 +172,9 @@ spec:
                       be more than 140 characters.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -525,6 +526,11 @@ spec:
                   name:
                     description: A unique name of the custom vocabulary. Must not
                       be more than 140 characters.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: The current state of the custom vocabulary. Valid

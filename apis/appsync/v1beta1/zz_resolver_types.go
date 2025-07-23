@@ -48,7 +48,7 @@ type CachingConfigParameters struct {
 type PipelineConfigInitParameters struct {
 
 	// A list of Function objects.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("function_id",true)
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 
@@ -70,7 +70,7 @@ type PipelineConfigObservation struct {
 type PipelineConfigParameters struct {
 
 	// A list of Function objects.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("function_id",true)
 	// +kubebuilder:validation:Optional
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
@@ -157,6 +157,10 @@ type ResolverObservation struct {
 	// The caching configuration for the resolver. See Pipeline Config.
 	PipelineConfig []PipelineConfigObservation `json:"pipelineConfig,omitempty" tf:"pipeline_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Request mapping template for UNIT resolver or 'before mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
 	RequestTemplate *string `json:"requestTemplate,omitempty" tf:"request_template,omitempty"`
 
@@ -226,10 +230,10 @@ type ResolverParameters struct {
 	// +kubebuilder:validation:Optional
 	PipelineConfig []PipelineConfigParameters `json:"pipelineConfig,omitempty" tf:"pipeline_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Request mapping template for UNIT resolver or 'before mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
 	// +kubebuilder:validation:Optional

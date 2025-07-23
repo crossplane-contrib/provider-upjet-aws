@@ -266,6 +266,10 @@ type ConnectorObservation struct {
 	// Specifies which plugins to use for the connector. See plugin Block for details.
 	Plugin []PluginObservation `json:"plugin,omitempty" tf:"plugin,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
@@ -327,10 +331,10 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Plugin []PluginParameters `json:"plugin,omitempty" tf:"plugin,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

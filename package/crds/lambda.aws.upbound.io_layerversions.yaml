@@ -34,9 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LayerVersion is the Schema for the LayerVersions API. Provides
-          a Lambda Layer Version resource. Lambda Layers allow you to reuse shared
-          bits of code across multiple lambda functions.
+        description: LayerVersion is the Schema for the LayerVersions API. Manages
+          an AWS Lambda Layer Version.
         properties:
           apiVersion:
             description: |-
@@ -92,27 +91,178 @@ spec:
                     description: Description of what your Lambda Layer does.
                     type: string
                   filename:
-                    description: prefixed options cannot be used.
+                    description: Path to the function's deployment package within
+                      the local filesystem. If defined, The s3_-prefixed options cannot
+                      be used.
                     type: string
                   layerName:
-                    description: Unique name for your Lambda Layer
+                    description: Unique name for your Lambda Layer.
                     type: string
                   licenseInfo:
                     description: License info for your Lambda Layer. See License Info.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   s3Bucket:
                     description: S3 bucket location containing the function's deployment
                       package. Conflicts with filename. This bucket must reside in
                       the same AWS region where you are creating the Lambda function.
                     type: string
+                  s3BucketRef:
+                    description: Reference to a Object in s3 to populate s3Bucket.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  s3BucketSelector:
+                    description: Selector for a Object in s3 to populate s3Bucket.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   s3Key:
                     description: S3 key of an object containing the function's deployment
                       package. Conflicts with filename.
                     type: string
+                  s3KeyRef:
+                    description: Reference to a Object in s3 to populate s3Key.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  s3KeySelector:
+                    description: Selector for a Object in s3 to populate s3Key.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   s3ObjectVersion:
                     description: Object version containing the function's deployment
                       package. Conflicts with filename.
@@ -129,8 +279,8 @@ spec:
                     description: Virtual attribute used to trigger replacement when
                       source code changes. Must be set to a base64-encoded SHA256
                       hash of the package file specified with either filename or s3_key.
-                      The usual way to set this is ${filebase64sha256("file.11.12
-                      or later) or ${base64sha256(file("file.11.11 and earlier), where
+                      The usual way to set this is filebase64sha256("file.11.12 or
+                      later) or base64sha256(file("file.11.11 and earlier), where
                       "file.zip" is the local filename of the lambda layer source
                       archive.
                     type: string
@@ -168,10 +318,12 @@ spec:
                     description: Description of what your Lambda Layer does.
                     type: string
                   filename:
-                    description: prefixed options cannot be used.
+                    description: Path to the function's deployment package within
+                      the local filesystem. If defined, The s3_-prefixed options cannot
+                      be used.
                     type: string
                   layerName:
-                    description: Unique name for your Lambda Layer
+                    description: Unique name for your Lambda Layer.
                     type: string
                   licenseInfo:
                     description: License info for your Lambda Layer. See License Info.
@@ -181,10 +333,158 @@ spec:
                       package. Conflicts with filename. This bucket must reside in
                       the same AWS region where you are creating the Lambda function.
                     type: string
+                  s3BucketRef:
+                    description: Reference to a Object in s3 to populate s3Bucket.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  s3BucketSelector:
+                    description: Selector for a Object in s3 to populate s3Bucket.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   s3Key:
                     description: S3 key of an object containing the function's deployment
                       package. Conflicts with filename.
                     type: string
+                  s3KeyRef:
+                    description: Reference to a Object in s3 to populate s3Key.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  s3KeySelector:
+                    description: Selector for a Object in s3 to populate s3Key.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   s3ObjectVersion:
                     description: Object version containing the function's deployment
                       package. Conflicts with filename.
@@ -201,8 +501,8 @@ spec:
                     description: Virtual attribute used to trigger replacement when
                       source code changes. Must be set to a base64-encoded SHA256
                       hash of the package file specified with either filename or s3_key.
-                      The usual way to set this is ${filebase64sha256("file.11.12
-                      or later) or ${base64sha256(file("file.11.11 and earlier), where
+                      The usual way to set this is filebase64sha256("file.11.12 or
+                      later) or base64sha256(file("file.11.11 and earlier), where
                       "file.zip" is the local filename of the lambda layer source
                       archive.
                     type: string
@@ -412,7 +712,9 @@ spec:
                     description: Description of what your Lambda Layer does.
                     type: string
                   filename:
-                    description: prefixed options cannot be used.
+                    description: Path to the function's deployment package within
+                      the local filesystem. If defined, The s3_-prefixed options cannot
+                      be used.
                     type: string
                   id:
                     type: string
@@ -420,10 +722,15 @@ spec:
                     description: ARN of the Lambda Layer without version.
                     type: string
                   layerName:
-                    description: Unique name for your Lambda Layer
+                    description: Unique name for your Lambda Layer.
                     type: string
                   licenseInfo:
                     description: License info for your Lambda Layer. See License Info.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   s3Bucket:
                     description: S3 bucket location containing the function's deployment
@@ -456,8 +763,8 @@ spec:
                     description: Virtual attribute used to trigger replacement when
                       source code changes. Must be set to a base64-encoded SHA256
                       hash of the package file specified with either filename or s3_key.
-                      The usual way to set this is ${filebase64sha256("file.11.12
-                      or later) or ${base64sha256(file("file.11.11 and earlier), where
+                      The usual way to set this is filebase64sha256("file.11.12 or
+                      later) or base64sha256(file("file.11.11 and earlier), where
                       "file.zip" is the local filename of the lambda layer source
                       archive.
                     type: string

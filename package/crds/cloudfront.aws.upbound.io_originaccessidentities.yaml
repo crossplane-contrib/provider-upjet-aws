@@ -76,12 +76,6 @@ spec:
                   comment:
                     description: An optional comment for the origin access identity.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -273,6 +267,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The origin access identity ARN.
+                    type: string
                   callerReference:
                     description: |-
                       Internal value used by CloudFront to allow future
@@ -297,8 +294,7 @@ spec:
                       Example: arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2QWRUHAPOMQZL.
                     type: string
                   id:
-                    description: 'The identifier for the distribution. For example:
-                      EDFDVBD632BHDS5.'
+                    description: The identifier for the origin access identity.
                     type: string
                   s3CanonicalUserId:
                     description: |-

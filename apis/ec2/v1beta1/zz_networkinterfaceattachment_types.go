@@ -61,6 +61,10 @@ type NetworkInterfaceAttachmentObservation struct {
 	// ENI ID to attach.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The status of the Network Interface Attachment.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -99,10 +103,10 @@ type NetworkInterfaceAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // NetworkInterfaceAttachmentSpec defines the desired state of NetworkInterfaceAttachment

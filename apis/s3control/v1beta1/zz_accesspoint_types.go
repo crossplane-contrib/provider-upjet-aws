@@ -34,7 +34,7 @@ type AccessPointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Name you want to assign to this access point.
+	// Name you want to assign to this access point. See the AWS documentation for naming conditions.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Valid JSON document that specifies the policy that you want to apply to this access point. Removing policy from your configuration or setting policy to null or an empty string (i.e., policy = "") will not delete the policy since it could have been set by aws_s3control_access_point_policy. To remove the policy, set it to "{}" (an empty JSON document).
@@ -78,7 +78,7 @@ type AccessPointObservation struct {
 	// For Access Point of an AWS Partition S3 Bucket, the AWS account ID and access point name separated by a colon (:). For S3 on Outposts Bucket, the ARN of the Access Point.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name you want to assign to this access point.
+	// Name you want to assign to this access point. See the AWS documentation for naming conditions.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Indicates whether this access point allows access from the public Internet. Values are VPC (the access point doesn't allow access from the public Internet) and Internet (the access point allows access from the public Internet, subject to the access point and bucket access policies).
@@ -89,6 +89,10 @@ type AccessPointObservation struct {
 
 	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. Detailed below.
 	PublicAccessBlockConfiguration []PublicAccessBlockConfigurationObservation `json:"publicAccessBlockConfiguration,omitempty" tf:"public_access_block_configuration,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Configuration block to restrict access to this access point to requests from the specified Virtual Private Cloud (VPC). Required for S3 on Outposts. Detailed below.
 	VPCConfiguration []VPCConfigurationObservation `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
@@ -118,7 +122,7 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Name you want to assign to this access point.
+	// Name you want to assign to this access point. See the AWS documentation for naming conditions.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -130,10 +134,10 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicAccessBlockConfiguration []PublicAccessBlockConfigurationParameters `json:"publicAccessBlockConfiguration,omitempty" tf:"public_access_block_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block to restrict access to this access point to requests from the specified Virtual Private Cloud (VPC). Required for S3 on Outposts. Detailed below.
 	// +kubebuilder:validation:Optional

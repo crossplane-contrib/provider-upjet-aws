@@ -205,8 +205,9 @@ spec:
                     - namespace
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
@@ -676,6 +677,11 @@ spec:
                     description: true if a Private certificate eligible for managed
                       renewal is within the early_renewal_duration period.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   renewalEligibility:
                     description: Whether the certificate is eligible for managed renewal.
                     type: string
@@ -998,8 +1004,9 @@ spec:
                     - namespace
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
@@ -1465,6 +1472,11 @@ spec:
                     description: true if a Private certificate eligible for managed
                       renewal is within the early_renewal_duration period.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   renewalEligibility:
                     description: Whether the certificate is eligible for managed renewal.
                     type: string

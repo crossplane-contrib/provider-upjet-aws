@@ -143,6 +143,10 @@ type PlanObservation struct {
 	// The display name of a backup plan.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
@@ -168,10 +172,10 @@ type PlanParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
 	// +kubebuilder:validation:Optional

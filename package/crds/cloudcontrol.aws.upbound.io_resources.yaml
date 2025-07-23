@@ -78,8 +78,9 @@ spec:
                       type schema with desired configuration.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role to assume
@@ -510,6 +511,11 @@ spec:
                       type schema with current configuration. Underlying attributes
                       can be referenced via the jsondecode() function, for example,
                       jsondecode(data.aws_cloudcontrolapi_resource.example.properties)["example"].
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role to assume

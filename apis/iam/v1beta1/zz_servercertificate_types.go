@@ -15,10 +15,12 @@ import (
 
 type ServerCertificateInitParameters struct {
 
-	// encoded format.
+	// The contents of the public key certificate in
+	// PEM-encoded format.
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
-	// encoded public key certificates
+	// The contents of the certificate chain.
+	// This is typically a concatenation of the PEM-encoded public key certificates
 	// of the chain.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
@@ -28,7 +30,7 @@ type ServerCertificateInitParameters struct {
 	// See IAM Identifiers for more details on IAM Paths.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// encoded format.
+	// The contents of the private key in PEM-encoded format.
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Key-value map of resource tags.
@@ -41,10 +43,12 @@ type ServerCertificateObservation struct {
 	// The Amazon Resource Name (ARN) specifying the server certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// encoded format.
+	// The contents of the public key certificate in
+	// PEM-encoded format.
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
-	// encoded public key certificates
+	// The contents of the certificate chain.
+	// This is typically a concatenation of the PEM-encoded public key certificates
 	// of the chain.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
@@ -74,11 +78,13 @@ type ServerCertificateObservation struct {
 
 type ServerCertificateParameters struct {
 
-	// encoded format.
+	// The contents of the public key certificate in
+	// PEM-encoded format.
 	// +kubebuilder:validation:Optional
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
-	// encoded public key certificates
+	// The contents of the certificate chain.
+	// This is typically a concatenation of the PEM-encoded public key certificates
 	// of the chain.
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
@@ -90,7 +96,7 @@ type ServerCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// encoded format.
+	// The contents of the private key in PEM-encoded format.
 	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 

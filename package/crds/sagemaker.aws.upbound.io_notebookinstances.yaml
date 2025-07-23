@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: NotebookInstance is the Schema for the NotebookInstances API.
-          Provides a SageMaker Notebook Instance resource.
+          Provides a SageMaker AI Notebook Instance resource.
         properties:
           apiVersion:
             description: |-
@@ -73,16 +73,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  acceleratorTypes:
-                    description: 'A list of Elastic Inference (EI) instance types
-                      to associate with this notebook instance. See Elastic Inference
-                      Accelerator for more details. Valid values: ml.eia1.medium,
-                      ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large,
-                      ml.eia2.xlarge.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: |-
                       An array of up to three Git repositories to associate with the notebook instance.
@@ -179,9 +169,9 @@ spec:
                       Requires security_groups and subnet_id to be set. Supported
                       values: Enabled (Default) or Disabled. If set to Disabled, the
                       notebook instance will be able to access resources only in your
-                      VPC, and will not be able to connect to Amazon SageMaker training
-                      and endpoint services unless your configure a NAT Gateway in
-                      your VPC.'
+                      VPC, and will not be able to connect to Amazon SageMaker AI
+                      training and endpoint services unless your configure a NAT Gateway
+                      in your VPC.'
                     type: string
                   instanceMetadataServiceConfiguration:
                     description: Information on the IMDS configuration of the notebook
@@ -202,7 +192,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker uses to encrypt the model artifacts at rest
+                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
                       using Amazon S3 server-side encryption.
                     type: string
                   kmsKeyIdRef:
@@ -286,17 +276,18 @@ spec:
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
                       runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, or  notebook-al2-v2, depending on which version
-                      of Amazon Linux you require.
+                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
+                      on which version of Amazon Linux you require.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
-                      instance which allows SageMaker to call other services on your
-                      behalf.
+                      instance which allows SageMaker AI to call other services on
+                      your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -485,16 +476,6 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  acceleratorTypes:
-                    description: 'A list of Elastic Inference (EI) instance types
-                      to associate with this notebook instance. See Elastic Inference
-                      Accelerator for more details. Valid values: ml.eia1.medium,
-                      ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large,
-                      ml.eia2.xlarge.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: |-
                       An array of up to three Git repositories to associate with the notebook instance.
@@ -591,9 +572,9 @@ spec:
                       Requires security_groups and subnet_id to be set. Supported
                       values: Enabled (Default) or Disabled. If set to Disabled, the
                       notebook instance will be able to access resources only in your
-                      VPC, and will not be able to connect to Amazon SageMaker training
-                      and endpoint services unless your configure a NAT Gateway in
-                      your VPC.'
+                      VPC, and will not be able to connect to Amazon SageMaker AI
+                      training and endpoint services unless your configure a NAT Gateway
+                      in your VPC.'
                     type: string
                   instanceMetadataServiceConfiguration:
                     description: Information on the IMDS configuration of the notebook
@@ -614,7 +595,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker uses to encrypt the model artifacts at rest
+                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
                       using Amazon S3 server-side encryption.
                     type: string
                   kmsKeyIdRef:
@@ -698,13 +679,13 @@ spec:
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
                       runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, or  notebook-al2-v2, depending on which version
-                      of Amazon Linux you require.
+                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
+                      on which version of Amazon Linux you require.
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
-                      instance which allows SageMaker to call other services on your
-                      behalf.
+                      instance which allows SageMaker AI to call other services on
+                      your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -1055,16 +1036,6 @@ spec:
             properties:
               atProvider:
                 properties:
-                  acceleratorTypes:
-                    description: 'A list of Elastic Inference (EI) instance types
-                      to associate with this notebook instance. See Elastic Inference
-                      Accelerator for more details. Valid values: ml.eia1.medium,
-                      ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large,
-                      ml.eia2.xlarge.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: |-
                       An array of up to three Git repositories to associate with the notebook instance.
@@ -1089,9 +1060,9 @@ spec:
                       Requires security_groups and subnet_id to be set. Supported
                       values: Enabled (Default) or Disabled. If set to Disabled, the
                       notebook instance will be able to access resources only in your
-                      VPC, and will not be able to connect to Amazon SageMaker training
-                      and endpoint services unless your configure a NAT Gateway in
-                      your VPC.'
+                      VPC, and will not be able to connect to Amazon SageMaker AI
+                      training and endpoint services unless your configure a NAT Gateway
+                      in your VPC.'
                     type: string
                   id:
                     description: The name of the notebook instance.
@@ -1115,7 +1086,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker uses to encrypt the model artifacts at rest
+                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
                       using Amazon S3 server-side encryption.
                     type: string
                   lifecycleConfigName:
@@ -1123,20 +1094,25 @@ spec:
                       with the notebook instance.
                     type: string
                   networkInterfaceId:
-                    description: The network interface ID that Amazon SageMaker created
-                      at the time of creating the instance. Only available when setting
-                      subnet_id.
+                    description: The network interface ID that Amazon SageMaker AI
+                      created at the time of creating the instance. Only available
+                      when setting subnet_id.
                     type: string
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
                       runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, or  notebook-al2-v2, depending on which version
-                      of Amazon Linux you require.
+                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
+                      on which version of Amazon Linux you require.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
-                      instance which allows SageMaker to call other services on your
-                      behalf.
+                      instance which allows SageMaker AI to call other services on
+                      your behalf.
                     type: string
                   rootAccess:
                     description: Whether root access is Enabled or Disabled for users
@@ -1252,7 +1228,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: NotebookInstance is the Schema for the NotebookInstances API.
-          Provides a SageMaker Notebook Instance resource.
+          Provides a SageMaker AI Notebook Instance resource.
         properties:
           apiVersion:
             description: |-
@@ -1290,16 +1266,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  acceleratorTypes:
-                    description: 'A list of Elastic Inference (EI) instance types
-                      to associate with this notebook instance. See Elastic Inference
-                      Accelerator for more details. Valid values: ml.eia1.medium,
-                      ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large,
-                      ml.eia2.xlarge.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: |-
                       An array of up to three Git repositories to associate with the notebook instance.
@@ -1396,9 +1362,9 @@ spec:
                       Requires security_groups and subnet_id to be set. Supported
                       values: Enabled (Default) or Disabled. If set to Disabled, the
                       notebook instance will be able to access resources only in your
-                      VPC, and will not be able to connect to Amazon SageMaker training
-                      and endpoint services unless your configure a NAT Gateway in
-                      your VPC.'
+                      VPC, and will not be able to connect to Amazon SageMaker AI
+                      training and endpoint services unless your configure a NAT Gateway
+                      in your VPC.'
                     type: string
                   instanceMetadataServiceConfiguration:
                     description: Information on the IMDS configuration of the notebook
@@ -1417,7 +1383,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker uses to encrypt the model artifacts at rest
+                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
                       using Amazon S3 server-side encryption.
                     type: string
                   kmsKeyIdRef:
@@ -1505,13 +1471,14 @@ spec:
                       on which version of Amazon Linux you require.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
-                      instance which allows SageMaker to call other services on your
-                      behalf.
+                      instance which allows SageMaker AI to call other services on
+                      your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -1700,16 +1667,6 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  acceleratorTypes:
-                    description: 'A list of Elastic Inference (EI) instance types
-                      to associate with this notebook instance. See Elastic Inference
-                      Accelerator for more details. Valid values: ml.eia1.medium,
-                      ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large,
-                      ml.eia2.xlarge.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: |-
                       An array of up to three Git repositories to associate with the notebook instance.
@@ -1806,9 +1763,9 @@ spec:
                       Requires security_groups and subnet_id to be set. Supported
                       values: Enabled (Default) or Disabled. If set to Disabled, the
                       notebook instance will be able to access resources only in your
-                      VPC, and will not be able to connect to Amazon SageMaker training
-                      and endpoint services unless your configure a NAT Gateway in
-                      your VPC.'
+                      VPC, and will not be able to connect to Amazon SageMaker AI
+                      training and endpoint services unless your configure a NAT Gateway
+                      in your VPC.'
                     type: string
                   instanceMetadataServiceConfiguration:
                     description: Information on the IMDS configuration of the notebook
@@ -1827,7 +1784,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker uses to encrypt the model artifacts at rest
+                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
                       using Amazon S3 server-side encryption.
                     type: string
                   kmsKeyIdRef:
@@ -1916,8 +1873,8 @@ spec:
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
-                      instance which allows SageMaker to call other services on your
-                      behalf.
+                      instance which allows SageMaker AI to call other services on
+                      your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -2268,16 +2225,6 @@ spec:
             properties:
               atProvider:
                 properties:
-                  acceleratorTypes:
-                    description: 'A list of Elastic Inference (EI) instance types
-                      to associate with this notebook instance. See Elastic Inference
-                      Accelerator for more details. Valid values: ml.eia1.medium,
-                      ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large,
-                      ml.eia2.xlarge.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: |-
                       An array of up to three Git repositories to associate with the notebook instance.
@@ -2302,9 +2249,9 @@ spec:
                       Requires security_groups and subnet_id to be set. Supported
                       values: Enabled (Default) or Disabled. If set to Disabled, the
                       notebook instance will be able to access resources only in your
-                      VPC, and will not be able to connect to Amazon SageMaker training
-                      and endpoint services unless your configure a NAT Gateway in
-                      your VPC.'
+                      VPC, and will not be able to connect to Amazon SageMaker AI
+                      training and endpoint services unless your configure a NAT Gateway
+                      in your VPC.'
                     type: string
                   id:
                     description: The name of the notebook instance.
@@ -2326,7 +2273,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker uses to encrypt the model artifacts at rest
+                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
                       using Amazon S3 server-side encryption.
                     type: string
                   lifecycleConfigName:
@@ -2334,9 +2281,9 @@ spec:
                       with the notebook instance.
                     type: string
                   networkInterfaceId:
-                    description: The network interface ID that Amazon SageMaker created
-                      at the time of creating the instance. Only available when setting
-                      subnet_id.
+                    description: The network interface ID that Amazon SageMaker AI
+                      created at the time of creating the instance. Only available
+                      when setting subnet_id.
                     type: string
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
@@ -2344,10 +2291,15 @@ spec:
                       notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
                       on which version of Amazon Linux you require.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
-                      instance which allows SageMaker to call other services on your
-                      behalf.
+                      instance which allows SageMaker AI to call other services on
+                      your behalf.
                     type: string
                   rootAccess:
                     description: Whether root access is Enabled or Disabled for users

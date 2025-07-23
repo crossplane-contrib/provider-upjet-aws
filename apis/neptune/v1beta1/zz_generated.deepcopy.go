@@ -211,6 +211,11 @@ func (in *ClusterEndpointObservation) DeepCopyInto(out *ClusterEndpointObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StaticMembers != nil {
 		in, out := &in.StaticMembers, &out.StaticMembers
 		*out = make([]*string, len(*in))
@@ -943,6 +948,11 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SkipFinalSnapshot != nil {
 		in, out := &in.SkipFinalSnapshot, &out.SkipFinalSnapshot
 		*out = new(bool)
@@ -1377,6 +1387,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationSourceIdentifier != nil {
 		in, out := &in.ReplicationSourceIdentifier, &out.ReplicationSourceIdentifier
 		*out = new(string)
@@ -1600,6 +1615,11 @@ func (in *ClusterParameterGroupObservation) DeepCopyInto(out *ClusterParameterGr
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -2152,6 +2172,11 @@ func (in *ClusterSnapshotObservation) DeepCopyInto(out *ClusterSnapshotObservati
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SnapshotType != nil {
 		in, out := &in.SnapshotType, &out.SnapshotType
 		*out = new(string)
@@ -2474,6 +2499,11 @@ func (in *EventSubscriptionObservation) DeepCopyInto(out *EventSubscriptionObser
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2876,6 +2906,11 @@ func (in *GlobalClusterObservation) DeepCopyInto(out *GlobalClusterObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceDBClusterIdentifier != nil {
 		in, out := &in.SourceDBClusterIdentifier, &out.SourceDBClusterIdentifier
 		*out = new(string)
@@ -3129,6 +3164,11 @@ func (in *ParameterGroupObservation) DeepCopyInto(out *ParameterGroupObservation
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -3650,6 +3690,11 @@ func (in *SubnetGroupObservation) DeepCopyInto(out *SubnetGroupObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -141,8 +141,9 @@ spec:
                     description: The provider of the service used in the custom action
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   settings:
                     description: The settings for an action type.
@@ -566,6 +567,11 @@ spec:
                     type: string
                   providerName:
                     description: The provider of the service used in the custom action
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   settings:
                     description: The settings for an action type.
@@ -791,8 +797,9 @@ spec:
                     description: The provider of the service used in the custom action
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   settings:
                     description: The settings for an action type.
@@ -1204,6 +1211,11 @@ spec:
                     type: string
                   providerName:
                     description: The provider of the service used in the custom action
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   settings:
                     description: The settings for an action type.

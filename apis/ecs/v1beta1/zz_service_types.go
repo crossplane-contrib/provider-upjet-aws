@@ -19,10 +19,10 @@ type AlarmsInitParameters struct {
 	// +listType=set
 	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
 
-	// Determines whether to use the CloudWatch alarm option in the service deployment process.
+	// Whether to use the CloudWatch alarm option in the service deployment process.
 	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 
-	// Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+	// Whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 	Rollback *bool `json:"rollback,omitempty" tf:"rollback,omitempty"`
 }
 
@@ -32,10 +32,10 @@ type AlarmsObservation struct {
 	// +listType=set
 	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
 
-	// Determines whether to use the CloudWatch alarm option in the service deployment process.
+	// Whether to use the CloudWatch alarm option in the service deployment process.
 	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 
-	// Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+	// Whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 	Rollback *bool `json:"rollback,omitempty" tf:"rollback,omitempty"`
 }
 
@@ -46,11 +46,11 @@ type AlarmsParameters struct {
 	// +listType=set
 	AlarmNames []*string `json:"alarmNames" tf:"alarm_names,omitempty"`
 
-	// Determines whether to use the CloudWatch alarm option in the service deployment process.
+	// Whether to use the CloudWatch alarm option in the service deployment process.
 	// +kubebuilder:validation:Optional
 	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
-	// Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+	// Whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 	// +kubebuilder:validation:Optional
 	Rollback *bool `json:"rollback" tf:"rollback,omitempty"`
 }
@@ -96,29 +96,29 @@ type CapacityProviderStrategyParameters struct {
 
 type ClientAliasInitParameters struct {
 
-	// The name that you use in the applications of client tasks to connect to this service.
+	// Name that you use in the applications of client tasks to connect to this service.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ClientAliasObservation struct {
 
-	// The name that you use in the applications of client tasks to connect to this service.
+	// Name that you use in the applications of client tasks to connect to this service.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ClientAliasParameters struct {
 
-	// The name that you use in the applications of client tasks to connect to this service.
+	// Name that you use in the applications of client tasks to connect to this service.
 	// +kubebuilder:validation:Optional
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
 }
@@ -173,19 +173,19 @@ type DeploymentControllerParameters struct {
 
 type IssuerCertAuthorityInitParameters struct {
 
-	// The ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
+	// ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
 	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn,omitempty" tf:"aws_pca_authority_arn,omitempty"`
 }
 
 type IssuerCertAuthorityObservation struct {
 
-	// The ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
+	// ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
 	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn,omitempty" tf:"aws_pca_authority_arn,omitempty"`
 }
 
 type IssuerCertAuthorityParameters struct {
 
-	// The ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
+	// ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
 	// +kubebuilder:validation:Optional
 	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn" tf:"aws_pca_authority_arn,omitempty"`
 }
@@ -271,7 +271,7 @@ type ManagedEBSVolumeInitParameters struct {
 	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon ECS infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role.
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Size of the volume in GiB. You must specify either a size_in_gb or a snapshot_id. You can optionally specify a volume size greater than or equal to the snapshot size.
@@ -284,7 +284,10 @@ type ManagedEBSVolumeInitParameters struct {
 	TagSpecifications []TagSpecificationsInitParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume Initialization Rate in MiB/s. You must also specify a snapshot_id.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -304,7 +307,7 @@ type ManagedEBSVolumeObservation struct {
 	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon ECS infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role.
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Size of the volume in GiB. You must specify either a size_in_gb or a snapshot_id. You can optionally specify a volume size greater than or equal to the snapshot size.
@@ -317,7 +320,10 @@ type ManagedEBSVolumeObservation struct {
 	TagSpecifications []TagSpecificationsObservation `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume Initialization Rate in MiB/s. You must also specify a snapshot_id.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -341,7 +347,7 @@ type ManagedEBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon ECS infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role.
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 
@@ -359,7 +365,11 @@ type ManagedEBSVolumeParameters struct {
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	// +kubebuilder:validation:Optional
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume Initialization Rate in MiB/s. You must also specify a snapshot_id.
+	// +kubebuilder:validation:Optional
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 
 	// Volume type.
 	// +kubebuilder:validation:Optional
@@ -524,139 +534,139 @@ type PlacementConstraintsParameters struct {
 
 type SecretOptionInitParameters struct {
 
-	// The name of the secret.
+	// Name of the secret.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
+	// Secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
 	ValueFrom *string `json:"valueFrom,omitempty" tf:"value_from,omitempty"`
 }
 
 type SecretOptionObservation struct {
 
-	// The name of the secret.
+	// Name of the secret.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
+	// Secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
 	ValueFrom *string `json:"valueFrom,omitempty" tf:"value_from,omitempty"`
 }
 
 type SecretOptionParameters struct {
 
-	// The name of the secret.
+	// Name of the secret.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
+	// Secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
 	// +kubebuilder:validation:Optional
 	ValueFrom *string `json:"valueFrom" tf:"value_from,omitempty"`
 }
 
 type ServiceConnectConfigurationInitParameters struct {
 
-	// Specifies whether to use Service Connect with this service.
+	// Whether to use Service Connect with this service.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The log configuration for the container. See below.
+	// Log configuration for the container. See below.
 	LogConfiguration []ServiceConnectConfigurationLogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
+	// Namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The list of Service Connect service objects. See below.
+	// List of Service Connect service objects. See below.
 	Service []ServiceConnectConfigurationServiceInitParameters `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type ServiceConnectConfigurationLogConfigurationInitParameters struct {
 
-	// The log driver to use for the container.
+	// Log driver to use for the container.
 	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
 
-	// The configuration options to send to the log driver.
+	// Configuration options to send to the log driver.
 	// +mapType=granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
-	// The secrets to pass to the log configuration. See below.
+	// Secrets to pass to the log configuration. See below.
 	SecretOption []SecretOptionInitParameters `json:"secretOption,omitempty" tf:"secret_option,omitempty"`
 }
 
 type ServiceConnectConfigurationLogConfigurationObservation struct {
 
-	// The log driver to use for the container.
+	// Log driver to use for the container.
 	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
 
-	// The configuration options to send to the log driver.
+	// Configuration options to send to the log driver.
 	// +mapType=granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
-	// The secrets to pass to the log configuration. See below.
+	// Secrets to pass to the log configuration. See below.
 	SecretOption []SecretOptionObservation `json:"secretOption,omitempty" tf:"secret_option,omitempty"`
 }
 
 type ServiceConnectConfigurationLogConfigurationParameters struct {
 
-	// The log driver to use for the container.
+	// Log driver to use for the container.
 	// +kubebuilder:validation:Optional
 	LogDriver *string `json:"logDriver" tf:"log_driver,omitempty"`
 
-	// The configuration options to send to the log driver.
+	// Configuration options to send to the log driver.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
-	// The secrets to pass to the log configuration. See below.
+	// Secrets to pass to the log configuration. See below.
 	// +kubebuilder:validation:Optional
 	SecretOption []SecretOptionParameters `json:"secretOption,omitempty" tf:"secret_option,omitempty"`
 }
 
 type ServiceConnectConfigurationObservation struct {
 
-	// Specifies whether to use Service Connect with this service.
+	// Whether to use Service Connect with this service.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The log configuration for the container. See below.
+	// Log configuration for the container. See below.
 	LogConfiguration []ServiceConnectConfigurationLogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
+	// Namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The list of Service Connect service objects. See below.
+	// List of Service Connect service objects. See below.
 	Service []ServiceConnectConfigurationServiceObservation `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type ServiceConnectConfigurationParameters struct {
 
-	// Specifies whether to use Service Connect with this service.
+	// Whether to use Service Connect with this service.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The log configuration for the container. See below.
+	// Log configuration for the container. See below.
 	// +kubebuilder:validation:Optional
 	LogConfiguration []ServiceConnectConfigurationLogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
+	// Namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The list of Service Connect service objects. See below.
+	// List of Service Connect service objects. See below.
 	// +kubebuilder:validation:Optional
 	Service []ServiceConnectConfigurationServiceParameters `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type ServiceConnectConfigurationServiceInitParameters struct {
 
-	// The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
 	ClientAlias []ClientAliasInitParameters `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
 
-	// The name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
+	// Name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
 	DiscoveryName *string `json:"discoveryName,omitempty" tf:"discovery_name,omitempty"`
 
-	// The port number for the Service Connect proxy to listen on.
+	// Port number for the Service Connect proxy to listen on.
 	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
 
-	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	// Name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
 
-	// The configuration for enabling Transport Layer Security (TLS)
+	// Configuration for enabling Transport Layer Security (TLS)
 	TLS []TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// Configuration timeouts for Service Connect
@@ -665,19 +675,19 @@ type ServiceConnectConfigurationServiceInitParameters struct {
 
 type ServiceConnectConfigurationServiceObservation struct {
 
-	// The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
 	ClientAlias []ClientAliasObservation `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
 
-	// The name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
+	// Name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
 	DiscoveryName *string `json:"discoveryName,omitempty" tf:"discovery_name,omitempty"`
 
-	// The port number for the Service Connect proxy to listen on.
+	// Port number for the Service Connect proxy to listen on.
 	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
 
-	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	// Name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
 
-	// The configuration for enabling Transport Layer Security (TLS)
+	// Configuration for enabling Transport Layer Security (TLS)
 	TLS []TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// Configuration timeouts for Service Connect
@@ -686,23 +696,23 @@ type ServiceConnectConfigurationServiceObservation struct {
 
 type ServiceConnectConfigurationServiceParameters struct {
 
-	// The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
 	// +kubebuilder:validation:Optional
 	ClientAlias []ClientAliasParameters `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
 
-	// The name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
+	// Name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
 	// +kubebuilder:validation:Optional
 	DiscoveryName *string `json:"discoveryName,omitempty" tf:"discovery_name,omitempty"`
 
-	// The port number for the Service Connect proxy to listen on.
+	// Port number for the Service Connect proxy to listen on.
 	// +kubebuilder:validation:Optional
 	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
 
-	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	// Name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
 	// +kubebuilder:validation:Optional
 	PortName *string `json:"portName" tf:"port_name,omitempty"`
 
-	// The configuration for enabling Transport Layer Security (TLS)
+	// Configuration for enabling Transport Layer Security (TLS)
 	// +kubebuilder:validation:Optional
 	TLS []TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
@@ -749,10 +759,10 @@ type ServiceInitParameters struct {
 	// Number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy.
 	DesiredCount *float64 `json:"desiredCount,omitempty" tf:"desired_count,omitempty"`
 
-	// Specifies whether to enable Amazon ECS managed tags for the tasks within the service.
+	// Whether to enable Amazon ECS managed tags for the tasks within the service.
 	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
 
-	// Specifies whether to enable Amazon ECS Exec for the tasks within the service.
+	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
 	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
@@ -795,13 +805,13 @@ type ServiceInitParameters struct {
 	// Platform version on which to run your service. Only applicable for launch_type set to FARGATE. Defaults to LATEST. More information about Fargate platform versions can be found in the AWS ECS User Guide.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
-	// Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
+	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// Scheduling strategy to use for the service. The valid values are REPLICA and DAEMON. Defaults to REPLICA. Note that Tasks using the Fargate launch type or the .
 	SchedulingStrategy *string `json:"schedulingStrategy,omitempty" tf:"scheduling_strategy,omitempty"`
 
-	// The ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
+	// ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
 	ServiceConnectConfiguration []ServiceConnectConfigurationInitParameters `json:"serviceConnectConfiguration,omitempty" tf:"service_connect_configuration,omitempty"`
 
 	// Service discovery registries for the service. The maximum number of service_registries blocks is 1. See below.
@@ -831,7 +841,7 @@ type ServiceInitParameters struct {
 	VPCLatticeConfigurations []VPCLatticeConfigurationsInitParameters `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
 
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
-	VolumeConfiguration *VolumeConfigurationInitParameters `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
+	VolumeConfiguration []VolumeConfigurationInitParameters `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
 
 	// Default false.
 	WaitForSteadyState *bool `json:"waitForSteadyState,omitempty" tf:"wait_for_steady_state,omitempty"`
@@ -841,6 +851,9 @@ type ServiceObservation struct {
 
 	// Information about the CloudWatch alarms. See below.
 	Alarms []AlarmsObservation `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// ARN that identifies the service.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
@@ -866,10 +879,10 @@ type ServiceObservation struct {
 	// Number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy.
 	DesiredCount *float64 `json:"desiredCount,omitempty" tf:"desired_count,omitempty"`
 
-	// Specifies whether to enable Amazon ECS managed tags for the tasks within the service.
+	// Whether to enable Amazon ECS managed tags for the tasks within the service.
 	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
 
-	// Specifies whether to enable Amazon ECS Exec for the tasks within the service.
+	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
 	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
@@ -884,7 +897,6 @@ type ServiceObservation struct {
 	// ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the awsvpc network mode. If using awsvpc network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here.
 	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
 
-	// ARN that identifies the service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts with capacity_provider_strategy.
@@ -905,13 +917,17 @@ type ServiceObservation struct {
 	// Platform version on which to run your service. Only applicable for launch_type set to FARGATE. Defaults to LATEST. More information about Fargate platform versions can be found in the AWS ECS User Guide.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
-	// Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
+	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Scheduling strategy to use for the service. The valid values are REPLICA and DAEMON. Defaults to REPLICA. Note that Tasks using the Fargate launch type or the .
 	SchedulingStrategy *string `json:"schedulingStrategy,omitempty" tf:"scheduling_strategy,omitempty"`
 
-	// The ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
+	// ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
 	ServiceConnectConfiguration []ServiceConnectConfigurationObservation `json:"serviceConnectConfiguration,omitempty" tf:"service_connect_configuration,omitempty"`
 
 	// Service discovery registries for the service. The maximum number of service_registries blocks is 1. See below.
@@ -936,7 +952,7 @@ type ServiceObservation struct {
 	VPCLatticeConfigurations []VPCLatticeConfigurationsObservation `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
 
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
-	VolumeConfiguration *VolumeConfigurationObservation `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
+	VolumeConfiguration []VolumeConfigurationObservation `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
 
 	// Default false.
 	WaitForSteadyState *bool `json:"waitForSteadyState,omitempty" tf:"wait_for_steady_state,omitempty"`
@@ -989,11 +1005,11 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	DesiredCount *float64 `json:"desiredCount,omitempty" tf:"desired_count,omitempty"`
 
-	// Specifies whether to enable Amazon ECS managed tags for the tasks within the service.
+	// Whether to enable Amazon ECS managed tags for the tasks within the service.
 	// +kubebuilder:validation:Optional
 	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
 
-	// Specifies whether to enable Amazon ECS Exec for the tasks within the service.
+	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	// +kubebuilder:validation:Optional
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
@@ -1047,20 +1063,20 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
-	// Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
+	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	// +kubebuilder:validation:Optional
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Scheduling strategy to use for the service. The valid values are REPLICA and DAEMON. Defaults to REPLICA. Note that Tasks using the Fargate launch type or the .
 	// +kubebuilder:validation:Optional
 	SchedulingStrategy *string `json:"schedulingStrategy,omitempty" tf:"scheduling_strategy,omitempty"`
 
-	// The ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
+	// ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
 	// +kubebuilder:validation:Optional
 	ServiceConnectConfiguration []ServiceConnectConfigurationParameters `json:"serviceConnectConfiguration,omitempty" tf:"service_connect_configuration,omitempty"`
 
@@ -1097,7 +1113,7 @@ type ServiceParameters struct {
 
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
 	// +kubebuilder:validation:Optional
-	VolumeConfiguration *VolumeConfigurationParameters `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
+	VolumeConfiguration []VolumeConfigurationParameters `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
 
 	// Default false.
 	// +kubebuilder:validation:Optional
@@ -1155,72 +1171,72 @@ type ServiceRegistriesParameters struct {
 
 type TLSInitParameters struct {
 
-	// The details of the certificate authority which will issue the certificate.
+	// Details of the certificate authority which will issue the certificate.
 	IssuerCertAuthority []IssuerCertAuthorityInitParameters `json:"issuerCertAuthority,omitempty" tf:"issuer_cert_authority,omitempty"`
 
-	// The KMS key used to encrypt the private key in Secrets Manager.
+	// KMS key used to encrypt the private key in Secrets Manager.
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
-	// The ARN of the IAM Role that's associated with the Service Connect TLS.
+	// ARN of the IAM Role that's associated with the Service Connect TLS.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type TLSObservation struct {
 
-	// The details of the certificate authority which will issue the certificate.
+	// Details of the certificate authority which will issue the certificate.
 	IssuerCertAuthority []IssuerCertAuthorityObservation `json:"issuerCertAuthority,omitempty" tf:"issuer_cert_authority,omitempty"`
 
-	// The KMS key used to encrypt the private key in Secrets Manager.
+	// KMS key used to encrypt the private key in Secrets Manager.
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
-	// The ARN of the IAM Role that's associated with the Service Connect TLS.
+	// ARN of the IAM Role that's associated with the Service Connect TLS.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type TLSParameters struct {
 
-	// The details of the certificate authority which will issue the certificate.
+	// Details of the certificate authority which will issue the certificate.
 	// +kubebuilder:validation:Optional
 	IssuerCertAuthority []IssuerCertAuthorityParameters `json:"issuerCertAuthority" tf:"issuer_cert_authority,omitempty"`
 
-	// The KMS key used to encrypt the private key in Secrets Manager.
+	// KMS key used to encrypt the private key in Secrets Manager.
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
-	// The ARN of the IAM Role that's associated with the Service Connect TLS.
+	// ARN of the IAM Role that's associated with the Service Connect TLS.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type TagSpecificationsInitParameters struct {
 
-	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// The type of volume resource. Valid values, volume.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TagSpecificationsObservation struct {
 
-	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// The type of volume resource. Valid values, volume.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TagSpecificationsParameters struct {
 
-	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	// +kubebuilder:validation:Optional
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
@@ -1228,7 +1244,7 @@ type TagSpecificationsParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 
-	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -1236,29 +1252,29 @@ type TagSpecificationsParameters struct {
 
 type TimeoutInitParameters struct {
 
-	// The amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
+	// Amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
 	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
 
-	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
+	// Amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
 	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
 }
 
 type TimeoutObservation struct {
 
-	// The amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
+	// Amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
 	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
 
-	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
+	// Amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
 	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
 }
 
 type TimeoutParameters struct {
 
-	// The amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
+	// Amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
 
-	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
+	// Amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
 	// +kubebuilder:validation:Optional
 	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
 }
@@ -1305,7 +1321,7 @@ type VPCLatticeConfigurationsParameters struct {
 type VolumeConfigurationInitParameters struct {
 
 	// Configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. See below.
-	ManagedEBSVolume *ManagedEBSVolumeInitParameters `json:"managedEbsVolume,omitempty" tf:"managed_ebs_volume,omitempty"`
+	ManagedEBSVolume []ManagedEBSVolumeInitParameters `json:"managedEbsVolume,omitempty" tf:"managed_ebs_volume,omitempty"`
 
 	// Name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -1314,7 +1330,7 @@ type VolumeConfigurationInitParameters struct {
 type VolumeConfigurationObservation struct {
 
 	// Configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. See below.
-	ManagedEBSVolume *ManagedEBSVolumeObservation `json:"managedEbsVolume,omitempty" tf:"managed_ebs_volume,omitempty"`
+	ManagedEBSVolume []ManagedEBSVolumeObservation `json:"managedEbsVolume,omitempty" tf:"managed_ebs_volume,omitempty"`
 
 	// Name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -1324,7 +1340,7 @@ type VolumeConfigurationParameters struct {
 
 	// Configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. See below.
 	// +kubebuilder:validation:Optional
-	ManagedEBSVolume *ManagedEBSVolumeParameters `json:"managedEbsVolume" tf:"managed_ebs_volume,omitempty"`
+	ManagedEBSVolume []ManagedEBSVolumeParameters `json:"managedEbsVolume" tf:"managed_ebs_volume,omitempty"`
 
 	// Name of the volume.
 	// +kubebuilder:validation:Optional

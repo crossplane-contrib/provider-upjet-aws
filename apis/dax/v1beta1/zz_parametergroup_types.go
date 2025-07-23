@@ -18,7 +18,7 @@ type ParameterGroupInitParameters struct {
 	// A description of the parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  The parameters of the parameter group.
+	// The parameters of the parameter group.
 	Parameters []ParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -30,8 +30,12 @@ type ParameterGroupObservation struct {
 	// The name of the parameter group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  The parameters of the parameter group.
+	// The parameters of the parameter group.
 	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ParameterGroupParameters struct {
@@ -40,14 +44,14 @@ type ParameterGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  The parameters of the parameter group.
+	// The parameters of the parameter group.
 	// +kubebuilder:validation:Optional
 	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type ParametersInitParameters struct {

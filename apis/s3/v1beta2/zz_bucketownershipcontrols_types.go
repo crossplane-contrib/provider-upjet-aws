@@ -40,6 +40,10 @@ type BucketOwnershipControlsObservation struct {
 	// S3 Bucket name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block(s) with Ownership Controls rules. Detailed below.
 	Rule *BucketOwnershipControlsRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
@@ -60,10 +64,10 @@ type BucketOwnershipControlsParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block(s) with Ownership Controls rules. Detailed below.
 	// +kubebuilder:validation:Optional

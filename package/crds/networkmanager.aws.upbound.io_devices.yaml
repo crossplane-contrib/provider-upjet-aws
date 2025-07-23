@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Device is the Schema for the Devices API. Creates a device in
-          a global network.
+        description: Device is the Schema for the Devices API. Manages a Network Manager
+          Device.
         properties:
           apiVersion:
             description: |-
@@ -74,25 +74,25 @@ spec:
               forProvider:
                 properties:
                   awsLocation:
-                    description: The AWS location of the device. Documented below.
+                    description: AWS location of the device. Documented below.
                     items:
                       properties:
                         subnetArn:
-                          description: The Amazon Resource Name (ARN) of the subnet
-                            that the device is located in.
+                          description: ARN of the subnet that the device is located
+                            in.
                           type: string
                         zone:
-                          description: The Zone that the device is located in. Specify
+                          description: Zone that the device is located in. Specify
                             the ID of an Availability Zone, Local Zone, Wavelength
                             Zone, or an Outpost.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: A description of the device.
+                    description: Description of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -171,32 +171,28 @@ spec:
                         type: object
                     type: object
                   location:
-                    description: The location of the device. Documented below.
+                    description: Location of the device. Documented below.
                     items:
                       properties:
                         address:
-                          description: The physical address.
+                          description: Physical address.
                           type: string
                         latitude:
-                          description: The latitude.
+                          description: Latitude.
                           type: string
                         longitude:
-                          description: The longitude.
+                          description: Longitude.
                           type: string
                       type: object
                     type: array
                   model:
-                    description: The model of device.
-                    type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: Model of device.
                     type: string
                   serialNumber:
-                    description: The serial number of the device.
+                    description: Serial number of the device.
                     type: string
                   siteId:
-                    description: The ID of the site.
+                    description: ID of the site.
                     type: string
                   siteIdRef:
                     description: Reference to a Site in networkmanager to populate
@@ -281,13 +277,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of device.
+                    description: Type of device.
                     type: string
                   vendor:
-                    description: The vendor of the device.
+                    description: Vendor of the device.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -303,25 +297,25 @@ spec:
                   autoscaler.
                 properties:
                   awsLocation:
-                    description: The AWS location of the device. Documented below.
+                    description: AWS location of the device. Documented below.
                     items:
                       properties:
                         subnetArn:
-                          description: The Amazon Resource Name (ARN) of the subnet
-                            that the device is located in.
+                          description: ARN of the subnet that the device is located
+                            in.
                           type: string
                         zone:
-                          description: The Zone that the device is located in. Specify
+                          description: Zone that the device is located in. Specify
                             the ID of an Availability Zone, Local Zone, Wavelength
                             Zone, or an Outpost.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: A description of the device.
+                    description: Description of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -400,28 +394,28 @@ spec:
                         type: object
                     type: object
                   location:
-                    description: The location of the device. Documented below.
+                    description: Location of the device. Documented below.
                     items:
                       properties:
                         address:
-                          description: The physical address.
+                          description: Physical address.
                           type: string
                         latitude:
-                          description: The latitude.
+                          description: Latitude.
                           type: string
                         longitude:
-                          description: The longitude.
+                          description: Longitude.
                           type: string
                       type: object
                     type: array
                   model:
-                    description: The model of device.
+                    description: Model of device.
                     type: string
                   serialNumber:
-                    description: The serial number of the device.
+                    description: Serial number of the device.
                     type: string
                   siteId:
-                    description: The ID of the site.
+                    description: ID of the site.
                     type: string
                   siteIdRef:
                     description: Reference to a Site in networkmanager to populate
@@ -506,10 +500,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of device.
+                    description: Type of device.
                     type: string
                   vendor:
-                    description: The vendor of the device.
+                    description: Vendor of the device.
                     type: string
                 type: object
               managementPolicies:
@@ -685,54 +679,54 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the device.
+                    description: ARN of the device.
                     type: string
                   awsLocation:
-                    description: The AWS location of the device. Documented below.
+                    description: AWS location of the device. Documented below.
                     items:
                       properties:
                         subnetArn:
-                          description: The Amazon Resource Name (ARN) of the subnet
-                            that the device is located in.
+                          description: ARN of the subnet that the device is located
+                            in.
                           type: string
                         zone:
-                          description: The Zone that the device is located in. Specify
+                          description: Zone that the device is located in. Specify
                             the ID of an Availability Zone, Local Zone, Wavelength
                             Zone, or an Outpost.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: A description of the device.
+                    description: Description of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   id:
                     type: string
                   location:
-                    description: The location of the device. Documented below.
+                    description: Location of the device. Documented below.
                     items:
                       properties:
                         address:
-                          description: The physical address.
+                          description: Physical address.
                           type: string
                         latitude:
-                          description: The latitude.
+                          description: Latitude.
                           type: string
                         longitude:
-                          description: The longitude.
+                          description: Longitude.
                           type: string
                       type: object
                     type: array
                   model:
-                    description: The model of device.
+                    description: Model of device.
                     type: string
                   serialNumber:
-                    description: The serial number of the device.
+                    description: Serial number of the device.
                     type: string
                   siteId:
-                    description: The ID of the site.
+                    description: ID of the site.
                     type: string
                   tags:
                     additionalProperties:
@@ -743,16 +737,15 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of device.
+                    description: Type of device.
                     type: string
                   vendor:
-                    description: The vendor of the device.
+                    description: Vendor of the device.
                     type: string
                 type: object
               conditions:
@@ -832,8 +825,8 @@ spec:
     name: v1beta2
     schema:
       openAPIV3Schema:
-        description: Device is the Schema for the Devices API. Creates a device in
-          a global network.
+        description: Device is the Schema for the Devices API. Manages a Network Manager
+          Device.
         properties:
           apiVersion:
             description: |-
@@ -872,23 +865,23 @@ spec:
               forProvider:
                 properties:
                   awsLocation:
-                    description: The AWS location of the device. Documented below.
+                    description: AWS location of the device. Documented below.
                     properties:
                       subnetArn:
-                        description: The Amazon Resource Name (ARN) of the subnet
-                          that the device is located in.
+                        description: ARN of the subnet that the device is located
+                          in.
                         type: string
                       zone:
-                        description: The Zone that the device is located in. Specify
-                          the ID of an Availability Zone, Local Zone, Wavelength Zone,
+                        description: Zone that the device is located in. Specify the
+                          ID of an Availability Zone, Local Zone, Wavelength Zone,
                           or an Outpost.
                         type: string
                     type: object
                   description:
-                    description: A description of the device.
+                    description: Description of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -967,30 +960,26 @@ spec:
                         type: object
                     type: object
                   location:
-                    description: The location of the device. Documented below.
+                    description: Location of the device. Documented below.
                     properties:
                       address:
-                        description: The physical address.
+                        description: Physical address.
                         type: string
                       latitude:
-                        description: The latitude.
+                        description: Latitude.
                         type: string
                       longitude:
-                        description: The longitude.
+                        description: Longitude.
                         type: string
                     type: object
                   model:
-                    description: The model of device.
-                    type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: Model of device.
                     type: string
                   serialNumber:
-                    description: The serial number of the device.
+                    description: Serial number of the device.
                     type: string
                   siteId:
-                    description: The ID of the site.
+                    description: ID of the site.
                     type: string
                   siteIdRef:
                     description: Reference to a Site in networkmanager to populate
@@ -1075,13 +1064,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of device.
+                    description: Type of device.
                     type: string
                   vendor:
-                    description: The vendor of the device.
+                    description: Vendor of the device.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -1097,23 +1084,23 @@ spec:
                   autoscaler.
                 properties:
                   awsLocation:
-                    description: The AWS location of the device. Documented below.
+                    description: AWS location of the device. Documented below.
                     properties:
                       subnetArn:
-                        description: The Amazon Resource Name (ARN) of the subnet
-                          that the device is located in.
+                        description: ARN of the subnet that the device is located
+                          in.
                         type: string
                       zone:
-                        description: The Zone that the device is located in. Specify
-                          the ID of an Availability Zone, Local Zone, Wavelength Zone,
+                        description: Zone that the device is located in. Specify the
+                          ID of an Availability Zone, Local Zone, Wavelength Zone,
                           or an Outpost.
                         type: string
                     type: object
                   description:
-                    description: A description of the device.
+                    description: Description of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -1192,26 +1179,26 @@ spec:
                         type: object
                     type: object
                   location:
-                    description: The location of the device. Documented below.
+                    description: Location of the device. Documented below.
                     properties:
                       address:
-                        description: The physical address.
+                        description: Physical address.
                         type: string
                       latitude:
-                        description: The latitude.
+                        description: Latitude.
                         type: string
                       longitude:
-                        description: The longitude.
+                        description: Longitude.
                         type: string
                     type: object
                   model:
-                    description: The model of device.
+                    description: Model of device.
                     type: string
                   serialNumber:
-                    description: The serial number of the device.
+                    description: Serial number of the device.
                     type: string
                   siteId:
-                    description: The ID of the site.
+                    description: ID of the site.
                     type: string
                   siteIdRef:
                     description: Reference to a Site in networkmanager to populate
@@ -1296,10 +1283,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of device.
+                    description: Type of device.
                     type: string
                   vendor:
-                    description: The vendor of the device.
+                    description: Vendor of the device.
                     type: string
                 type: object
               managementPolicies:
@@ -1475,50 +1462,50 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the device.
+                    description: ARN of the device.
                     type: string
                   awsLocation:
-                    description: The AWS location of the device. Documented below.
+                    description: AWS location of the device. Documented below.
                     properties:
                       subnetArn:
-                        description: The Amazon Resource Name (ARN) of the subnet
-                          that the device is located in.
+                        description: ARN of the subnet that the device is located
+                          in.
                         type: string
                       zone:
-                        description: The Zone that the device is located in. Specify
-                          the ID of an Availability Zone, Local Zone, Wavelength Zone,
+                        description: Zone that the device is located in. Specify the
+                          ID of an Availability Zone, Local Zone, Wavelength Zone,
                           or an Outpost.
                         type: string
                     type: object
                   description:
-                    description: A description of the device.
+                    description: Description of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   id:
                     type: string
                   location:
-                    description: The location of the device. Documented below.
+                    description: Location of the device. Documented below.
                     properties:
                       address:
-                        description: The physical address.
+                        description: Physical address.
                         type: string
                       latitude:
-                        description: The latitude.
+                        description: Latitude.
                         type: string
                       longitude:
-                        description: The longitude.
+                        description: Longitude.
                         type: string
                     type: object
                   model:
-                    description: The model of device.
+                    description: Model of device.
                     type: string
                   serialNumber:
-                    description: The serial number of the device.
+                    description: Serial number of the device.
                     type: string
                   siteId:
-                    description: The ID of the site.
+                    description: ID of the site.
                     type: string
                   tags:
                     additionalProperties:
@@ -1529,16 +1516,15 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of device.
+                    description: Type of device.
                     type: string
                   vendor:
-                    description: The vendor of the device.
+                    description: Vendor of the device.
                     type: string
                 type: object
               conditions:

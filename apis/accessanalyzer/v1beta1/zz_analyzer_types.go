@@ -13,16 +13,35 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AnalysisRuleInitParameters struct {
+
+	// List of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings. See exclusion Block for details.
+	Exclusion []ExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+}
+
+type AnalysisRuleObservation struct {
+
+	// List of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings. See exclusion Block for details.
+	Exclusion []ExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+}
+
+type AnalysisRuleParameters struct {
+
+	// List of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings. See exclusion Block for details.
+	// +kubebuilder:validation:Optional
+	Exclusion []ExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+}
+
 type AnalyzerInitParameters struct {
 
-	// A block that specifies the configuration of the analyzer. Documented below
+	// A block that specifies the configuration of the analyzer. See configuration Block for details.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
+	// Type that represents the zone of trust or scope for the analyzer. Valid values are ACCOUNT, ACCOUNT_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS, ORGANIZATION, ORGANIZATION_INTERNAL_ACCESS, ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -31,11 +50,15 @@ type AnalyzerObservation struct {
 	// ARN of the Analyzer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A block that specifies the configuration of the analyzer. Documented below
+	// A block that specifies the configuration of the analyzer. See configuration Block for details.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// Analyzer name.
+	// Name of the analyzer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -45,65 +68,104 @@ type AnalyzerObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
+	// Type that represents the zone of trust or scope for the analyzer. Valid values are ACCOUNT, ACCOUNT_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS, ORGANIZATION, ORGANIZATION_INTERNAL_ACCESS, ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AnalyzerParameters struct {
 
-	// A block that specifies the configuration of the analyzer. Documented below
+	// A block that specifies the configuration of the analyzer. See configuration Block for details.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
+	// Type that represents the zone of trust or scope for the analyzer. Valid values are ACCOUNT, ACCOUNT_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS, ORGANIZATION, ORGANIZATION_INTERNAL_ACCESS, ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ConfigurationInitParameters struct {
 
-	// A block that specifies the configuration of an unused access analyzer for an AWS organization or account. Documented below
+	// Specifies the configuration of an unused access analyzer for an AWS organization or account. See unused_access Block for details.
 	UnusedAccess []UnusedAccessInitParameters `json:"unusedAccess,omitempty" tf:"unused_access,omitempty"`
 }
 
 type ConfigurationObservation struct {
 
-	// A block that specifies the configuration of an unused access analyzer for an AWS organization or account. Documented below
+	// Specifies the configuration of an unused access analyzer for an AWS organization or account. See unused_access Block for details.
 	UnusedAccess []UnusedAccessObservation `json:"unusedAccess,omitempty" tf:"unused_access,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
-	// A block that specifies the configuration of an unused access analyzer for an AWS organization or account. Documented below
+	// Specifies the configuration of an unused access analyzer for an AWS organization or account. See unused_access Block for details.
 	// +kubebuilder:validation:Optional
 	UnusedAccess []UnusedAccessParameters `json:"unusedAccess,omitempty" tf:"unused_access,omitempty"`
 }
 
+type ExclusionInitParameters struct {
+
+	// List of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// List of key-value pairs for resource tags to exclude from the analysis.
+	ResourceTags []map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+}
+
+type ExclusionObservation struct {
+
+	// List of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// List of key-value pairs for resource tags to exclude from the analysis.
+	ResourceTags []map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+}
+
+type ExclusionParameters struct {
+
+	// List of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.
+	// +kubebuilder:validation:Optional
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// List of key-value pairs for resource tags to exclude from the analysis.
+	// +kubebuilder:validation:Optional
+	ResourceTags []map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+}
+
 type UnusedAccessInitParameters struct {
 
-	// The specified access age in days for which to generate findings for unused access.
+	// Information about analysis rules for the analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule. See analysis_rule Block for Unused Access Analyzer for details.
+	AnalysisRule []AnalysisRuleInitParameters `json:"analysisRule,omitempty" tf:"analysis_rule,omitempty"`
+
+	// Specified access age in days for which to generate findings for unused access.
 	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
 }
 
 type UnusedAccessObservation struct {
 
-	// The specified access age in days for which to generate findings for unused access.
+	// Information about analysis rules for the analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule. See analysis_rule Block for Unused Access Analyzer for details.
+	AnalysisRule []AnalysisRuleObservation `json:"analysisRule,omitempty" tf:"analysis_rule,omitempty"`
+
+	// Specified access age in days for which to generate findings for unused access.
 	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
 }
 
 type UnusedAccessParameters struct {
 
-	// The specified access age in days for which to generate findings for unused access.
+	// Information about analysis rules for the analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule. See analysis_rule Block for Unused Access Analyzer for details.
+	// +kubebuilder:validation:Optional
+	AnalysisRule []AnalysisRuleParameters `json:"analysisRule,omitempty" tf:"analysis_rule,omitempty"`
+
+	// Specified access age in days for which to generate findings for unused access.
 	// +kubebuilder:validation:Optional
 	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
 }

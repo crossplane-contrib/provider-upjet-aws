@@ -22,7 +22,7 @@ type LogDestinationConfigInitParameters struct {
 	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The type of log to send. Valid values: ALERT or FLOW. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
+	// The type of log to send. Valid values: ALERT or FLOW or TLS. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 }
 
@@ -35,7 +35,7 @@ type LogDestinationConfigObservation struct {
 	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The type of log to send. Valid values: ALERT or FLOW. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
+	// The type of log to send. Valid values: ALERT or FLOW or TLS. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 }
 
@@ -50,7 +50,7 @@ type LogDestinationConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestinationType *string `json:"logDestinationType" tf:"log_destination_type,omitempty"`
 
-	// The type of log to send. Valid values: ALERT or FLOW. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
+	// The type of log to send. Valid values: ALERT or FLOW or TLS. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
 	// +kubebuilder:validation:Optional
 	LogType *string `json:"logType" tf:"log_type,omitempty"`
 }
@@ -76,19 +76,19 @@ type LoggingConfigurationInitParameters struct {
 
 type LoggingConfigurationLoggingConfigurationInitParameters struct {
 
-	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only two blocks can be specified; one for FLOW logs and one for ALERT logs.
+	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only Three blocks can be specified; one for FLOW logs and one for ALERT logs and one for TLS logs.
 	LogDestinationConfig []LogDestinationConfigInitParameters `json:"logDestinationConfig,omitempty" tf:"log_destination_config,omitempty"`
 }
 
 type LoggingConfigurationLoggingConfigurationObservation struct {
 
-	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only two blocks can be specified; one for FLOW logs and one for ALERT logs.
+	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only Three blocks can be specified; one for FLOW logs and one for ALERT logs and one for TLS logs.
 	LogDestinationConfig []LogDestinationConfigObservation `json:"logDestinationConfig,omitempty" tf:"log_destination_config,omitempty"`
 }
 
 type LoggingConfigurationLoggingConfigurationParameters struct {
 
-	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only two blocks can be specified; one for FLOW logs and one for ALERT logs.
+	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only Three blocks can be specified; one for FLOW logs and one for ALERT logs and one for TLS logs.
 	// +kubebuilder:validation:Optional
 	LogDestinationConfig []LogDestinationConfigParameters `json:"logDestinationConfig" tf:"log_destination_config,omitempty"`
 }
@@ -103,6 +103,10 @@ type LoggingConfigurationObservation struct {
 
 	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
 	LoggingConfiguration []LoggingConfigurationLoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type LoggingConfigurationParameters struct {
@@ -125,10 +129,10 @@ type LoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration []LoggingConfigurationLoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // LoggingConfigurationSpec defines the desired state of LoggingConfiguration

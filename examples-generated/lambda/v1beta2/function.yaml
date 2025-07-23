@@ -4,21 +4,25 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta2/function
   labels:
-    testing.upbound.io/example-name: test_lambda
-  name: test-lambda
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     environment:
     - variables:
-        foo: bar
-    filename: lambda_function_payload.zip
-    handler: index.test
+        ENVIRONMENT: production
+        LOG_LEVEL: info
+    filename: ${data.archive_file.example.output_path}
+    handler: index.handler
     region: us-west-1
     roleSelector:
       matchLabels:
-        testing.upbound.io/example-name: iam_for_lambda
-    runtime: nodejs18.x
-    sourceCodeHash: ${data.archive_file.lambda.output_base64sha256}
+        testing.upbound.io/example-name: example
+    runtime: nodejs20.x
+    sourceCodeHash: ${data.archive_file.example.output_base64sha256}
+    tags:
+      Application: example
+      Environment: production
 
 ---
 
@@ -28,8 +32,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta2/function
   labels:
-    testing.upbound.io/example-name: iam_for_lambda
-  name: iam-for-lambda
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1

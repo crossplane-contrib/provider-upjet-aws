@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   databaseName:
-                    description: –  The name of the Timestream database.
+                    description: The name of the Timestream database.
                     type: string
                   databaseNameRef:
                     description: Reference to a Database in timestreamwrite to populate
@@ -201,8 +201,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retentionProperties:
                     description: The retention duration for the memory store and magnetic
@@ -567,7 +568,7 @@ spec:
                     description: The ARN that uniquely identifies this table.
                     type: string
                   databaseName:
-                    description: –  The name of the Timestream database.
+                    description: The name of the Timestream database.
                     type: string
                   id:
                     description: The table_name and database_name separated by a colon
@@ -621,6 +622,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionProperties:
                     description: The retention duration for the memory store and magnetic
                       store. See Retention Properties below for more details. If not
@@ -809,7 +815,7 @@ spec:
               forProvider:
                 properties:
                   databaseName:
-                    description: –  The name of the Timestream database.
+                    description: The name of the Timestream database.
                     type: string
                   databaseNameRef:
                     description: Reference to a Database in timestreamwrite to populate
@@ -927,8 +933,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retentionProperties:
                     description: The retention duration for the memory store and magnetic
@@ -1268,7 +1275,7 @@ spec:
                     description: The ARN that uniquely identifies this table.
                     type: string
                   databaseName:
-                    description: –  The name of the Timestream database.
+                    description: The name of the Timestream database.
                     type: string
                   id:
                     description: The table_name and database_name separated by a colon
@@ -1313,6 +1320,11 @@ spec:
                             type: object
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionProperties:
                     description: The retention duration for the memory store and magnetic
                       store. See Retention Properties below for more details. If not

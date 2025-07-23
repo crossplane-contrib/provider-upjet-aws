@@ -201,7 +201,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins. Defaults
-                      to 60 seconds.
+                      to 0. Valid value is between 60 and 3600 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -224,8 +224,9 @@ spec:
                     description: Unique name for the fleet.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   streamView:
                     description: AppStream 2.0 view that is displayed to your users
@@ -482,7 +483,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins. Defaults
-                      to 60 seconds.
+                      to 0. Valid value is between 60 and 3600 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -876,7 +877,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins. Defaults
-                      to 60 seconds.
+                      to 0. Valid value is between 60 and 3600 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -897,6 +898,11 @@ spec:
                     type: number
                   name:
                     description: Unique name for the fleet.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: State of the fleet. Can be STARTING, RUNNING, STOPPING
@@ -1204,8 +1210,9 @@ spec:
                     description: Unique name for the fleet.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   streamView:
                     description: AppStream 2.0 view that is displayed to your users
@@ -1865,6 +1872,11 @@ spec:
                     type: number
                   name:
                     description: Unique name for the fleet.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: State of the fleet. Can be STARTING, RUNNING, STOPPING

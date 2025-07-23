@@ -62,6 +62,10 @@ type AssessmentTemplateObservation struct {
 	// The name of the assessment template.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The rules to be used during the run.
 	// +listType=set
 	RulesPackageArns []*string `json:"rulesPackageArns,omitempty" tf:"rules_package_arns,omitempty"`
@@ -92,10 +96,10 @@ type AssessmentTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The rules to be used during the run.
 	// +kubebuilder:validation:Optional

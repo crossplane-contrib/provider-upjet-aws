@@ -38,6 +38,10 @@ type TriggerObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The name for the repository. This needs to be less than 100 characters.
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
@@ -47,10 +51,10 @@ type TriggerObservation struct {
 
 type TriggerParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name for the repository. This needs to be less than 100 characters.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codecommit/v1beta1.Repository

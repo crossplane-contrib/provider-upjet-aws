@@ -240,8 +240,9 @@ spec:
                       IAM and IAM_PATTERN. Default is IAM.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -620,6 +621,11 @@ spec:
                     description: Principal type. Setting this argument empty (e.g.,
                       principal_type = "") will result in an error. Valid values are
                       IAM and IAM_PATTERN. Default is IAM.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

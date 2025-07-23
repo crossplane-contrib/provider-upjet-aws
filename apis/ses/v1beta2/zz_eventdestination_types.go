@@ -107,6 +107,10 @@ type EventDestinationObservation struct {
 	// +listType=set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Send the events to an SNS Topic destination
 	SnsDestination *SnsDestinationObservation `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
@@ -143,10 +147,10 @@ type EventDestinationParameters struct {
 	// +listType=set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Send the events to an SNS Topic destination
 	// +kubebuilder:validation:Optional

@@ -160,8 +160,9 @@ spec:
                       255 characters in length.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   spec:
                     description: Route specification to apply.
@@ -2466,6 +2467,11 @@ spec:
                   name:
                     description: Name to use for the route. Must be between 1 and
                       255 characters in length.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceOwner:
                     description: Resource owner's AWS account ID.
@@ -3449,8 +3455,9 @@ spec:
                       255 characters in length.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   spec:
                     description: Route specification to apply.
@@ -5511,6 +5518,11 @@ spec:
                   name:
                     description: Name to use for the route. Must be between 1 and
                       255 characters in length.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceOwner:
                     description: Resource owner's AWS account ID.

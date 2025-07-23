@@ -24,16 +24,20 @@ type ServicecatalogPortfolioStatusObservation struct {
 	// The AWS Region the Servicecatalog portfolio status resides in.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether Service Catalog is enabled or disabled in SageMaker. Valid values are Enabled and Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ServicecatalogPortfolioStatusParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether Service Catalog is enabled or disabled in SageMaker. Valid values are Enabled and Disabled.
 	// +kubebuilder:validation:Optional
@@ -67,7 +71,7 @@ type ServicecatalogPortfolioStatusStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ServicecatalogPortfolioStatus is the Schema for the ServicecatalogPortfolioStatuss API. Manages status of Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
+// ServicecatalogPortfolioStatus is the Schema for the ServicecatalogPortfolioStatuss API. Manages status of Service Catalog in SageMaker. Service Catalog is used to create SageMaker AI projects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

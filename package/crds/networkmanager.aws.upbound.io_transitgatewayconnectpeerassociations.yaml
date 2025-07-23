@@ -35,8 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayConnectPeerAssociation is the Schema for the TransitGatewayConnectPeerAssociations
-          API. Associates a transit gateway Connect peer with a device, and optionally,
-          with a link.
+          API. Manages a Network Manager transit gateway Connect peer association.
         properties:
           apiVersion:
             description: |-
@@ -76,7 +75,7 @@ spec:
               forProvider:
                 properties:
                   deviceId:
-                    description: The ID of the device.
+                    description: ID of the device.
                     type: string
                   deviceIdRef:
                     description: Reference to a Device in networkmanager to populate
@@ -155,7 +154,7 @@ spec:
                         type: object
                     type: object
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -234,14 +233,10 @@ spec:
                         type: object
                     type: object
                   linkId:
-                    description: The ID of the link.
-                    type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: ID of the link.
                     type: string
                   transitGatewayConnectPeerArn:
-                    description: The Amazon Resource Name (ARN) of the Connect peer.
+                    description: ARN of the Connect peer.
                     type: string
                   transitGatewayConnectPeerArnRef:
                     description: Reference to a TransitGatewayConnectPeer in ec2 to
@@ -319,8 +314,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -336,7 +329,7 @@ spec:
                   autoscaler.
                 properties:
                   deviceId:
-                    description: The ID of the device.
+                    description: ID of the device.
                     type: string
                   deviceIdRef:
                     description: Reference to a Device in networkmanager to populate
@@ -415,7 +408,7 @@ spec:
                         type: object
                     type: object
                   linkId:
-                    description: The ID of the link.
+                    description: ID of the link.
                     type: string
                 type: object
               managementPolicies:
@@ -592,18 +585,18 @@ spec:
               atProvider:
                 properties:
                   deviceId:
-                    description: The ID of the device.
+                    description: ID of the device.
                     type: string
                   globalNetworkId:
-                    description: The ID of the global network.
+                    description: ID of the global network.
                     type: string
                   id:
                     type: string
                   linkId:
-                    description: The ID of the link.
+                    description: ID of the link.
                     type: string
                   transitGatewayConnectPeerArn:
-                    description: The Amazon Resource Name (ARN) of the Connect peer.
+                    description: ARN of the Connect peer.
                     type: string
                 type: object
               conditions:

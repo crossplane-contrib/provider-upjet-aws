@@ -170,6 +170,11 @@ func (in *ChannelObservation) DeepCopyInto(out *ChannelObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -523,6 +528,11 @@ func (in *RecordingConfigurationObservation) DeepCopyInto(out *RecordingConfigur
 	if in.RecordingReconnectWindowSeconds != nil {
 		in, out := &in.RecordingReconnectWindowSeconds, &out.RecordingReconnectWindowSeconds
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.State != nil {

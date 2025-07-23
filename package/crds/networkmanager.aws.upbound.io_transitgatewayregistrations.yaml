@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: TransitGatewayRegistration is the Schema for the TransitGatewayRegistrations
-          API. Registers a transit gateway to a global network.
+          API. Manages a Network Manager transit gateway registration.
         properties:
           apiVersion:
             description: |-
@@ -75,7 +75,7 @@ spec:
               forProvider:
                 properties:
                   globalNetworkId:
-                    description: The ID of the Global Network to register to.
+                    description: ID of the Global Network to register to.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -153,12 +153,8 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   transitGatewayArn:
-                    description: The ARN of the Transit Gateway to register.
+                    description: ARN of the Transit Gateway to register.
                     type: string
                   transitGatewayArnRef:
                     description: Reference to a TransitGateway in ec2 to populate
@@ -236,8 +232,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -426,12 +420,12 @@ spec:
               atProvider:
                 properties:
                   globalNetworkId:
-                    description: The ID of the Global Network to register to.
+                    description: ID of the Global Network to register to.
                     type: string
                   id:
                     type: string
                   transitGatewayArn:
-                    description: The ARN of the Transit Gateway to register.
+                    description: ARN of the Transit Gateway to register.
                     type: string
                 type: object
               conditions:

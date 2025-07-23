@@ -75,7 +75,8 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphqlApi. Defined below.
+                      the GraphQL API. See additional_authentication_provider Block
+                      for details.
                     items:
                       properties:
                         authenticationType:
@@ -84,7 +85,8 @@ spec:
                           type: string
                         lambdaAuthorizerConfig:
                           description: Nested argument containing Lambda authorizer
-                            configuration. Defined below.
+                            configuration. See lambda_authorizer_config Block for
+                            details.
                           items:
                             properties:
                               authorizerResultTtlInSeconds:
@@ -110,7 +112,7 @@ spec:
                           type: array
                         openidConnectConfig:
                           description: Nested argument containing OpenID Connect configuration.
-                            Defined below.
+                            See openid_connect_config Block for details.
                           items:
                             properties:
                               authTtl:
@@ -138,8 +140,8 @@ spec:
                             type: object
                           type: array
                         userPoolConfig:
-                          description: Amazon Cognito User Pool configuration. Defined
-                            below.
+                          description: Amazon Cognito User Pool configuration. See
+                            user_pool_config Block for details.
                           items:
                             properties:
                               appIdClientRegex:
@@ -195,7 +197,7 @@ spec:
                     type: string
                   lambdaAuthorizerConfig:
                     description: Nested argument containing Lambda authorizer configuration.
-                      Defined below.
+                      See lambda_authorizer_config Block for details.
                     items:
                       properties:
                         authorizerResultTtlInSeconds:
@@ -219,7 +221,7 @@ spec:
                     type: array
                   logConfig:
                     description: Nested argument containing logging configuration.
-                      Defined below.
+                      See log_config Block for details.
                     items:
                       properties:
                         cloudwatchLogsRoleArn:
@@ -392,11 +394,11 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: User-supplied name for the GraphqlApi.
+                    description: User-supplied name for the GraphQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
-                      Defined below.
+                      See openid_connect_config Block for details.
                     items:
                       properties:
                         authTtl:
@@ -431,8 +433,9 @@ spec:
                       if the operation falls out of bounds.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resolverCountLimit:
                     description: The maximum number of resolvers that can be invoked
@@ -451,7 +454,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userPoolConfig:
-                    description: Amazon Cognito User Pool configuration. Defined below.
+                    description: Amazon Cognito User Pool configuration. See user_pool_config
+                      Block for details.
                     items:
                       properties:
                         appIdClientRegex:
@@ -576,7 +580,8 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphqlApi. Defined below.
+                      the GraphQL API. See additional_authentication_provider Block
+                      for details.
                     items:
                       properties:
                         authenticationType:
@@ -585,7 +590,8 @@ spec:
                           type: string
                         lambdaAuthorizerConfig:
                           description: Nested argument containing Lambda authorizer
-                            configuration. Defined below.
+                            configuration. See lambda_authorizer_config Block for
+                            details.
                           items:
                             properties:
                               authorizerResultTtlInSeconds:
@@ -611,7 +617,7 @@ spec:
                           type: array
                         openidConnectConfig:
                           description: Nested argument containing OpenID Connect configuration.
-                            Defined below.
+                            See openid_connect_config Block for details.
                           items:
                             properties:
                               authTtl:
@@ -639,8 +645,8 @@ spec:
                             type: object
                           type: array
                         userPoolConfig:
-                          description: Amazon Cognito User Pool configuration. Defined
-                            below.
+                          description: Amazon Cognito User Pool configuration. See
+                            user_pool_config Block for details.
                           items:
                             properties:
                               appIdClientRegex:
@@ -696,7 +702,7 @@ spec:
                     type: string
                   lambdaAuthorizerConfig:
                     description: Nested argument containing Lambda authorizer configuration.
-                      Defined below.
+                      See lambda_authorizer_config Block for details.
                     items:
                       properties:
                         authorizerResultTtlInSeconds:
@@ -720,7 +726,7 @@ spec:
                     type: array
                   logConfig:
                     description: Nested argument containing logging configuration.
-                      Defined below.
+                      See log_config Block for details.
                     items:
                       properties:
                         cloudwatchLogsRoleArn:
@@ -893,11 +899,11 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: User-supplied name for the GraphqlApi.
+                    description: User-supplied name for the GraphQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
-                      Defined below.
+                      See openid_connect_config Block for details.
                     items:
                       properties:
                         authTtl:
@@ -948,7 +954,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userPoolConfig:
-                    description: Amazon Cognito User Pool configuration. Defined below.
+                    description: Amazon Cognito User Pool configuration. See user_pool_config
+                      Block for details.
                     items:
                       properties:
                         appIdClientRegex:
@@ -1239,7 +1246,8 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphqlApi. Defined below.
+                      the GraphQL API. See additional_authentication_provider Block
+                      for details.
                     items:
                       properties:
                         authenticationType:
@@ -1248,7 +1256,8 @@ spec:
                           type: string
                         lambdaAuthorizerConfig:
                           description: Nested argument containing Lambda authorizer
-                            configuration. Defined below.
+                            configuration. See lambda_authorizer_config Block for
+                            details.
                           items:
                             properties:
                               authorizerResultTtlInSeconds:
@@ -1274,7 +1283,7 @@ spec:
                           type: array
                         openidConnectConfig:
                           description: Nested argument containing OpenID Connect configuration.
-                            Defined below.
+                            See openid_connect_config Block for details.
                           items:
                             properties:
                               authTtl:
@@ -1302,8 +1311,8 @@ spec:
                             type: object
                           type: array
                         userPoolConfig:
-                          description: Amazon Cognito User Pool configuration. Defined
-                            below.
+                          description: Amazon Cognito User Pool configuration. See
+                            user_pool_config Block for details.
                           items:
                             properties:
                               appIdClientRegex:
@@ -1365,7 +1374,7 @@ spec:
                     type: string
                   lambdaAuthorizerConfig:
                     description: Nested argument containing Lambda authorizer configuration.
-                      Defined below.
+                      See lambda_authorizer_config Block for details.
                     items:
                       properties:
                         authorizerResultTtlInSeconds:
@@ -1389,7 +1398,7 @@ spec:
                     type: array
                   logConfig:
                     description: Nested argument containing logging configuration.
-                      Defined below.
+                      See log_config Block for details.
                     items:
                       properties:
                         cloudwatchLogsRoleArn:
@@ -1414,11 +1423,11 @@ spec:
                       MERGED.
                     type: string
                   name:
-                    description: User-supplied name for the GraphqlApi.
+                    description: User-supplied name for the GraphQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
-                      Defined below.
+                      See openid_connect_config Block for details.
                     items:
                       properties:
                         authTtl:
@@ -1452,6 +1461,11 @@ spec:
                       1 and 75 nested levels. This field will produce a limit error
                       if the operation falls out of bounds.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolverCountLimit:
                     description: The maximum number of resolvers that can be invoked
                       in a single request. The default value is 0 (or unspecified),
@@ -1478,12 +1492,13 @@ spec:
                   uris:
                     additionalProperties:
                       type: string
-                    description: Map of URIs associated with the APIE.g., uris["GRAPHQL"]
+                    description: Map of URIs associated with the API E.g., uris["GRAPHQL"]
                       = https://ID.appsync-api.REGION.amazonaws.com/graphql
                     type: object
                     x-kubernetes-map-type: granular
                   userPoolConfig:
-                    description: Amazon Cognito User Pool configuration. Defined below.
+                    description: Amazon Cognito User Pool configuration. See user_pool_config
+                      Block for details.
                     items:
                       properties:
                         appIdClientRegex:
@@ -1973,8 +1988,9 @@ spec:
                       if the operation falls out of bounds.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resolverCountLimit:
                     description: The maximum number of resolvers that can be invoked
@@ -2960,6 +2976,11 @@ spec:
                       1 and 75 nested levels. This field will produce a limit error
                       if the operation falls out of bounds.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolverCountLimit:
                     description: The maximum number of resolvers that can be invoked
                       in a single request. The default value is 0 (or unspecified),

@@ -15,7 +15,8 @@ import (
 
 type EIPAssociationInitParameters struct {
 
-	// The allocation ID. This is required for EC2-VPC.
+	// ID of the associated Elastic IP.
+	// This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
@@ -28,14 +29,13 @@ type EIPAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
-	// Whether to allow an Elastic IP to
-	// be re-associated. Defaults to true in VPC.
+	// Whether to allow an Elastic IP address to be re-associated.
+	// Defaults to true.
 	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
 
-	// The ID of the instance. This is required for
-	// EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
-	// network interface ID, but not both. The operation fails if you specify an
-	// instance ID unless exactly one network interface is attached.
+	// ID of the instance.
+	// The instance must have exactly one attached network interface.
+	// You can specify either the instance ID or the network interface ID, but not both.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -48,56 +48,58 @@ type EIPAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the network interface. If the
-	// instance has more than one network interface, you must specify a network
-	// interface ID.
+	// ID of the network interface.
+	// If the instance has more than one network interface, you must specify a network interface ID.
+	// You can specify either the instance ID or the network interface ID, but not both.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// The primary or secondary private IP address
-	// to associate with the Elastic IP address. If no private IP address is
-	// specified, the Elastic IP address is associated with the primary private IP
-	// address.
+	// Primary or secondary private IP address to associate with the Elastic IP address.
+	// If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The Elastic IP address. This is required for EC2-Classic.
+	// Address of the associated Elastic IP.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 }
 
 type EIPAssociationObservation struct {
 
-	// The allocation ID. This is required for EC2-VPC.
+	// ID of the associated Elastic IP.
+	// This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
-	// Whether to allow an Elastic IP to
-	// be re-associated. Defaults to true in VPC.
+	// Whether to allow an Elastic IP address to be re-associated.
+	// Defaults to true.
 	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
 
+	// ID that represents the association of the Elastic IP address with an instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the instance. This is required for
-	// EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
-	// network interface ID, but not both. The operation fails if you specify an
-	// instance ID unless exactly one network interface is attached.
+	// ID of the instance.
+	// The instance must have exactly one attached network interface.
+	// You can specify either the instance ID or the network interface ID, but not both.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// The ID of the network interface. If the
-	// instance has more than one network interface, you must specify a network
-	// interface ID.
+	// ID of the network interface.
+	// If the instance has more than one network interface, you must specify a network interface ID.
+	// You can specify either the instance ID or the network interface ID, but not both.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// The primary or secondary private IP address
-	// to associate with the Elastic IP address. If no private IP address is
-	// specified, the Elastic IP address is associated with the primary private IP
-	// address.
+	// Primary or secondary private IP address to associate with the Elastic IP address.
+	// If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The Elastic IP address. This is required for EC2-Classic.
+	// Address of the associated Elastic IP.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type EIPAssociationParameters struct {
 
-	// The allocation ID. This is required for EC2-VPC.
+	// ID of the associated Elastic IP.
+	// This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -111,15 +113,14 @@ type EIPAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
-	// Whether to allow an Elastic IP to
-	// be re-associated. Defaults to true in VPC.
+	// Whether to allow an Elastic IP address to be re-associated.
+	// Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
 
-	// The ID of the instance. This is required for
-	// EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
-	// network interface ID, but not both. The operation fails if you specify an
-	// instance ID unless exactly one network interface is attached.
+	// ID of the instance.
+	// The instance must have exactly one attached network interface.
+	// You can specify either the instance ID or the network interface ID, but not both.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -133,27 +134,25 @@ type EIPAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the network interface. If the
-	// instance has more than one network interface, you must specify a network
-	// interface ID.
+	// ID of the network interface.
+	// If the instance has more than one network interface, you must specify a network interface ID.
+	// You can specify either the instance ID or the network interface ID, but not both.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// The primary or secondary private IP address
-	// to associate with the Elastic IP address. If no private IP address is
-	// specified, the Elastic IP address is associated with the primary private IP
-	// address.
+	// Primary or secondary private IP address to associate with the Elastic IP address.
+	// If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The Elastic IP address. This is required for EC2-Classic.
+	// Address of the associated Elastic IP.
 	// +kubebuilder:validation:Optional
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // EIPAssociationSpec defines the desired state of EIPAssociation

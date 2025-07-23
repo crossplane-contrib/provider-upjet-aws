@@ -24,16 +24,20 @@ type StandardsSubscriptionObservation struct {
 	// The ARN of a resource that represents your subscription to a supported standard.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ARN of a standard - see below.
 	StandardsArn *string `json:"standardsArn,omitempty" tf:"standards_arn,omitempty"`
 }
 
 type StandardsSubscriptionParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of a standard - see below.
 	// +kubebuilder:validation:Optional

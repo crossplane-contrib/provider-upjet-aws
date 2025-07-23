@@ -15,26 +15,19 @@ import (
 
 type ContainerServiceInitParameters struct {
 
-	// A Boolean value indicating whether the container service is disabled. Defaults to false.
+	// Whether to disable the container service. Defaults to false.
 	IsDisabled *bool `json:"isDisabled,omitempty" tf:"is_disabled,omitempty"`
 
-	// The power specification for the container service. The power specifies the amount of memory,
-	// the number of vCPUs, and the monthly price of each node of the container service.
-	// Possible values: nano, micro, small, medium, large, xlarge.
+	// Power specification for the container service. The power specifies the amount of memory, the number of vCPUs, and the monthly price of each node of the container service. Possible values: nano, micro, small, medium, large, xlarge.
 	Power *string `json:"power,omitempty" tf:"power,omitempty"`
 
-	// An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See Private Registry Access below for more details.
+	// Configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See below.
 	PrivateRegistryAccess []PrivateRegistryAccessInitParameters `json:"privateRegistryAccess,omitempty" tf:"private_registry_access,omitempty"`
 
-	// The public domain names to use with the container service, such as example.com
-	// and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
-	// specify are used when you create a deployment with a container configured as the public endpoint of your container
-	// service. If you don't specify public domain names, then you can use the default domain of the container service.
-	// Defined below.
+	// Public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service. See below.
 	PublicDomainNames []PublicDomainNamesInitParameters `json:"publicDomainNames,omitempty" tf:"public_domain_names,omitempty"`
 
-	// The scale specification for the container service. The scale specifies the allocated compute
-	// nodes of the container service.
+	// Scale specification for the container service. The scale specifies the allocated compute nodes of the container service.
 	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
 	// Key-value map of resource tags.
@@ -44,102 +37,88 @@ type ContainerServiceInitParameters struct {
 
 type ContainerServiceObservation struct {
 
-	// The Amazon Resource Name (ARN) of the container service.
+	// ARN of the container service.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Availability Zone. Follows the format us-east-2a (case-sensitive).
+	// Availability Zone. Follows the format us-east-2a (case-sensitive).
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// Date and time when the container service was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A Boolean value indicating whether the container service is disabled. Defaults to false.
+	// Whether to disable the container service. Defaults to false.
 	IsDisabled *bool `json:"isDisabled,omitempty" tf:"is_disabled,omitempty"`
 
-	// The power specification for the container service. The power specifies the amount of memory,
-	// the number of vCPUs, and the monthly price of each node of the container service.
-	// Possible values: nano, micro, small, medium, large, xlarge.
+	// Power specification for the container service. The power specifies the amount of memory, the number of vCPUs, and the monthly price of each node of the container service. Possible values: nano, micro, small, medium, large, xlarge.
 	Power *string `json:"power,omitempty" tf:"power,omitempty"`
 
-	// The ID of the power of the container service.
+	// Power ID of the container service.
 	PowerID *string `json:"powerId,omitempty" tf:"power_id,omitempty"`
 
-	// The principal ARN of the container service. The principal ARN can be used to create a trust
-	// relationship between your standard AWS account and your Lightsail container service. This allows you to give your
-	// service permission to access resources in your standard AWS account.
+	// Principal ARN of the container service. The principal ARN can be used to create a trust relationship between your standard AWS account and your Lightsail container service. This allows you to give your service permission to access resources in your standard AWS account.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
-	// The private domain name of the container service. The private domain name is accessible only
-	// by other resources within the default virtual private cloud (VPC) of your Lightsail account.
+	// Private domain name of the container service. The private domain name is accessible only by other resources within the default virtual private cloud (VPC) of your Lightsail account.
 	PrivateDomainName *string `json:"privateDomainName,omitempty" tf:"private_domain_name,omitempty"`
 
-	// An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See Private Registry Access below for more details.
+	// Configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See below.
 	PrivateRegistryAccess []PrivateRegistryAccessObservation `json:"privateRegistryAccess,omitempty" tf:"private_registry_access,omitempty"`
 
-	// The public domain names to use with the container service, such as example.com
-	// and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
-	// specify are used when you create a deployment with a container configured as the public endpoint of your container
-	// service. If you don't specify public domain names, then you can use the default domain of the container service.
-	// Defined below.
+	// Public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service. See below.
 	PublicDomainNames []PublicDomainNamesObservation `json:"publicDomainNames,omitempty" tf:"public_domain_names,omitempty"`
 
-	// The Lightsail resource type of the container service (i.e., ContainerService).
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Lightsail resource type of the container service (i.e., ContainerService).
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// The scale specification for the container service. The scale specifies the allocated compute
-	// nodes of the container service.
+	// Scale specification for the container service. The scale specifies the allocated compute nodes of the container service.
 	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
-	// The current state of the container service.
+	// Current state of the container service.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider
-	// default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The publicly accessible URL of the container service. If no public endpoint is specified in the
-	// currentDeployment, this URL returns a 404 response.
+	// Publicly accessible URL of the container service. If no public endpoint is specified in the currentDeployment, this URL returns a 404 response.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type ContainerServiceParameters struct {
 
-	// A Boolean value indicating whether the container service is disabled. Defaults to false.
+	// Whether to disable the container service. Defaults to false.
 	// +kubebuilder:validation:Optional
 	IsDisabled *bool `json:"isDisabled,omitempty" tf:"is_disabled,omitempty"`
 
-	// The power specification for the container service. The power specifies the amount of memory,
-	// the number of vCPUs, and the monthly price of each node of the container service.
-	// Possible values: nano, micro, small, medium, large, xlarge.
+	// Power specification for the container service. The power specifies the amount of memory, the number of vCPUs, and the monthly price of each node of the container service. Possible values: nano, micro, small, medium, large, xlarge.
 	// +kubebuilder:validation:Optional
 	Power *string `json:"power,omitempty" tf:"power,omitempty"`
 
-	// An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See Private Registry Access below for more details.
+	// Configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See below.
 	// +kubebuilder:validation:Optional
 	PrivateRegistryAccess []PrivateRegistryAccessParameters `json:"privateRegistryAccess,omitempty" tf:"private_registry_access,omitempty"`
 
-	// The public domain names to use with the container service, such as example.com
-	// and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
-	// specify are used when you create a deployment with a container configured as the public endpoint of your container
-	// service. If you don't specify public domain names, then you can use the default domain of the container service.
-	// Defined below.
+	// Public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service. See below.
 	// +kubebuilder:validation:Optional
 	PublicDomainNames []PublicDomainNamesParameters `json:"publicDomainNames,omitempty" tf:"public_domain_names,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The scale specification for the container service. The scale specifies the allocated compute
-	// nodes of the container service.
+	// Scale specification for the container service. The scale specifies the allocated compute nodes of the container service.
 	// +kubebuilder:validation:Optional
 	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
@@ -151,86 +130,89 @@ type ContainerServiceParameters struct {
 
 type EcrImagePullerRoleInitParameters struct {
 
-	// A Boolean value that indicates whether to activate the role. The default is false.
+	// Whether to activate the role. Defaults to false.
 	IsActive *bool `json:"isActive,omitempty" tf:"is_active,omitempty"`
 }
 
 type EcrImagePullerRoleObservation struct {
 
-	// A Boolean value that indicates whether to activate the role. The default is false.
+	// Whether to activate the role. Defaults to false.
 	IsActive *bool `json:"isActive,omitempty" tf:"is_active,omitempty"`
 
-	// The principal ARN of the container service. The principal ARN can be used to create a trust
-	// relationship between your standard AWS account and your Lightsail container service. This allows you to give your
-	// service permission to access resources in your standard AWS account.
+	// Principal ARN of the container service. The principal ARN can be used to create a trust relationship between your standard AWS account and your Lightsail container service. This allows you to give your service permission to access resources in your standard AWS account.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 }
 
 type EcrImagePullerRoleParameters struct {
 
-	// A Boolean value that indicates whether to activate the role. The default is false.
+	// Whether to activate the role. Defaults to false.
 	// +kubebuilder:validation:Optional
 	IsActive *bool `json:"isActive,omitempty" tf:"is_active,omitempty"`
 }
 
 type PrivateRegistryAccessInitParameters struct {
 
-	// Describes a request to configure an Amazon Lightsail container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See ECR Image Puller Role below for more details.
+	// Configuration to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See below.
 	EcrImagePullerRole []EcrImagePullerRoleInitParameters `json:"ecrImagePullerRole,omitempty" tf:"ecr_image_puller_role,omitempty"`
 }
 
 type PrivateRegistryAccessObservation struct {
 
-	// Describes a request to configure an Amazon Lightsail container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See ECR Image Puller Role below for more details.
+	// Configuration to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See below.
 	EcrImagePullerRole []EcrImagePullerRoleObservation `json:"ecrImagePullerRole,omitempty" tf:"ecr_image_puller_role,omitempty"`
 }
 
 type PrivateRegistryAccessParameters struct {
 
-	// Describes a request to configure an Amazon Lightsail container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See ECR Image Puller Role below for more details.
+	// Configuration to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See below.
 	// +kubebuilder:validation:Optional
 	EcrImagePullerRole []EcrImagePullerRoleParameters `json:"ecrImagePullerRole,omitempty" tf:"ecr_image_puller_role,omitempty"`
 }
 
 type PublicDomainNamesCertificateInitParameters struct {
 
-	// The name for the container service. Names must be of length 1 to 63, and be
-	// unique within each AWS Region in your Lightsail account.
+	// Name of the certificate.
 	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
+	// List of domain names for the certificate.
 	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
 }
 
 type PublicDomainNamesCertificateObservation struct {
 
-	// The name for the container service. Names must be of length 1 to 63, and be
-	// unique within each AWS Region in your Lightsail account.
+	// Name of the certificate.
 	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
+	// List of domain names for the certificate.
 	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
 }
 
 type PublicDomainNamesCertificateParameters struct {
 
-	// The name for the container service. Names must be of length 1 to 63, and be
-	// unique within each AWS Region in your Lightsail account.
+	// Name of the certificate.
 	// +kubebuilder:validation:Optional
 	CertificateName *string `json:"certificateName" tf:"certificate_name,omitempty"`
 
+	// List of domain names for the certificate.
 	// +kubebuilder:validation:Optional
 	DomainNames []*string `json:"domainNames" tf:"domain_names,omitempty"`
 }
 
 type PublicDomainNamesInitParameters struct {
+
+	// Set of certificate configurations for the public domain names. Each element contains the following attributes:
 	Certificate []PublicDomainNamesCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 }
 
 type PublicDomainNamesObservation struct {
+
+	// Set of certificate configurations for the public domain names. Each element contains the following attributes:
 	Certificate []PublicDomainNamesCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
 }
 
 type PublicDomainNamesParameters struct {
 
+	// Set of certificate configurations for the public domain names. Each element contains the following attributes:
 	// +kubebuilder:validation:Optional
 	Certificate []PublicDomainNamesCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 }
@@ -262,7 +244,7 @@ type ContainerServiceStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ContainerService is the Schema for the ContainerServices API. Provides a resource to manage Lightsail container service
+// ContainerService is the Schema for the ContainerServices API. Manages a Lightsail container service for running containerized applications.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

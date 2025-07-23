@@ -350,6 +350,10 @@ type ClassificationJobObservation struct {
 	// A custom name for the job. The name can contain as many as 500 characters. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The S3 buckets that contain the objects to analyze, and the scope of that analysis. (documented below)
 	S3JobDefinition *S3JobDefinitionObservation `json:"s3JobDefinition,omitempty" tf:"s3_job_definition,omitempty"`
 
@@ -363,6 +367,7 @@ type ClassificationJobObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -396,10 +401,10 @@ type ClassificationJobParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The S3 buckets that contain the objects to analyze, and the scope of that analysis. (documented below)
 	// +kubebuilder:validation:Optional

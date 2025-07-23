@@ -15,13 +15,13 @@ import (
 
 type AppImageConfigInitParameters struct {
 
-	// The CodeEditorAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in Code Editor. See Code Editor App Image Config details below.
+	// The CodeEditorAppImageConfig. See Code Editor App Image Config details below.
 	CodeEditorAppImageConfig *CodeEditorAppImageConfigInitParameters `json:"codeEditorAppImageConfig,omitempty" tf:"code_editor_app_image_config,omitempty"`
 
-	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyter Lab Image Config details below.
+	// The JupyterLabAppImageConfig. See Jupyter Lab Image Config details below.
 	JupyterLabImageConfig *JupyterLabImageConfigInitParameters `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// The configuration for the file system and kernels in a SageMaker AI image running as a KernelGateway app. See Kernel Gateway Image Config details below.
 	KernelGatewayImageConfig *KernelGatewayImageConfigInitParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
 	// Key-value map of resource tags.
@@ -34,17 +34,21 @@ type AppImageConfigObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this App Image Config.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The CodeEditorAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in Code Editor. See Code Editor App Image Config details below.
+	// The CodeEditorAppImageConfig. See Code Editor App Image Config details below.
 	CodeEditorAppImageConfig *CodeEditorAppImageConfigObservation `json:"codeEditorAppImageConfig,omitempty" tf:"code_editor_app_image_config,omitempty"`
 
 	// The name of the App Image Config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyter Lab Image Config details below.
+	// The JupyterLabAppImageConfig. See Jupyter Lab Image Config details below.
 	JupyterLabImageConfig *JupyterLabImageConfigObservation `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// The configuration for the file system and kernels in a SageMaker AI image running as a KernelGateway app. See Kernel Gateway Image Config details below.
 	KernelGatewayImageConfig *KernelGatewayImageConfigObservation `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -57,22 +61,22 @@ type AppImageConfigObservation struct {
 
 type AppImageConfigParameters struct {
 
-	// The CodeEditorAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in Code Editor. See Code Editor App Image Config details below.
+	// The CodeEditorAppImageConfig. See Code Editor App Image Config details below.
 	// +kubebuilder:validation:Optional
 	CodeEditorAppImageConfig *CodeEditorAppImageConfigParameters `json:"codeEditorAppImageConfig,omitempty" tf:"code_editor_app_image_config,omitempty"`
 
-	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyter Lab Image Config details below.
+	// The JupyterLabAppImageConfig. See Jupyter Lab Image Config details below.
 	// +kubebuilder:validation:Optional
 	JupyterLabImageConfig *JupyterLabImageConfigParameters `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// The configuration for the file system and kernels in a SageMaker AI image running as a KernelGateway app. See Kernel Gateway Image Config details below.
 	// +kubebuilder:validation:Optional
 	KernelGatewayImageConfig *KernelGatewayImageConfigParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -423,7 +427,7 @@ type AppImageConfigStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// AppImageConfig is the Schema for the AppImageConfigs API. Provides a SageMaker App Image Config resource.
+// AppImageConfig is the Schema for the AppImageConfigs API. Provides a SageMaker AI App Image Config resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -271,6 +271,11 @@ func (in *AutoScalingConfigurationVersionObservation) DeepCopyInto(out *AutoScal
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -920,6 +925,11 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 	}
 	if in.ProviderType != nil {
 		in, out := &in.ProviderType, &out.ProviderType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1987,6 +1997,11 @@ func (in *ObservabilityConfigurationObservation) DeepCopyInto(out *Observability
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -2415,6 +2430,11 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.ServiceID != nil {
 		in, out := &in.ServiceID, &out.ServiceID
@@ -3019,6 +3039,11 @@ func (in *VPCConnectorObservation) DeepCopyInto(out *VPCConnectorObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

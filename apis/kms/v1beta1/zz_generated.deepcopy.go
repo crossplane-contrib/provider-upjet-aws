@@ -115,6 +115,11 @@ func (in *AliasObservation) DeepCopyInto(out *AliasObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TargetKeyArn != nil {
 		in, out := &in.TargetKeyArn, &out.TargetKeyArn
 		*out = new(string)
@@ -344,6 +349,11 @@ func (in *CiphertextObservation) DeepCopyInto(out *CiphertextObservation) {
 	}
 	if in.KeyID != nil {
 		in, out := &in.KeyID, &out.KeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -775,6 +785,11 @@ func (in *ExternalKeyObservation) DeepCopyInto(out *ExternalKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1139,6 +1154,11 @@ func (in *GrantObservation) DeepCopyInto(out *GrantObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.RetireOnDelete != nil {
 		in, out := &in.RetireOnDelete, &out.RetireOnDelete
@@ -1506,6 +1526,11 @@ func (in *KeyObservation) DeepCopyInto(out *KeyObservation) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1897,6 +1922,11 @@ func (in *ReplicaExternalKeyObservation) DeepCopyInto(out *ReplicaExternalKeyObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2257,6 +2287,11 @@ func (in *ReplicaKeyObservation) DeepCopyInto(out *ReplicaKeyObservation) {
 	}
 	if in.PrimaryKeyArn != nil {
 		in, out := &in.PrimaryKeyArn, &out.PrimaryKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

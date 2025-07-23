@@ -340,6 +340,11 @@ func (in *CompositeAlarmObservation) DeepCopyInto(out *CompositeAlarmObservation
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -628,6 +633,11 @@ func (in *DashboardObservation) DeepCopyInto(out *DashboardObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1326,6 +1336,11 @@ func (in *MetricAlarmObservation) DeepCopyInto(out *MetricAlarmObservation) {
 	if in.Period != nil {
 		in, out := &in.Period, &out.Period
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.Statistic != nil {
@@ -2157,6 +2172,11 @@ func (in *MetricStreamObservation) DeepCopyInto(out *MetricStreamObservation) {
 	}
 	if in.OutputFormat != nil {
 		in, out := &in.OutputFormat, &out.OutputFormat
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

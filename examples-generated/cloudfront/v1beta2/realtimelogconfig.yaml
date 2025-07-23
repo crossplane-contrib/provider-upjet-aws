@@ -21,7 +21,6 @@ spec:
     - timestamp
     - c-ip
     name: example
-    region: us-west-1
     samplingRate: 75
 
 ---

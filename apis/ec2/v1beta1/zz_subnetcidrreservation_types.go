@@ -51,6 +51,10 @@ type SubnetCidrReservationObservation struct {
 	// ID of the AWS account that owns this CIDR reservation.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The type of reservation to create. Valid values: explicit, prefix
 	ReservationType *string `json:"reservationType,omitempty" tf:"reservation_type,omitempty"`
 
@@ -68,10 +72,10 @@ type SubnetCidrReservationParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The type of reservation to create. Valid values: explicit, prefix
 	// +kubebuilder:validation:Optional

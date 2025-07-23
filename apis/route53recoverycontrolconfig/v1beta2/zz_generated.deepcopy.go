@@ -428,11 +428,6 @@ func (in *SafetyRuleParameters) DeepCopyInto(out *SafetyRuleParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.RuleConfig != nil {
 		in, out := &in.RuleConfig, &out.RuleConfig
 		*out = new(RuleConfigParameters)

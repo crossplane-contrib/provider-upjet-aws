@@ -87,8 +87,9 @@ spec:
                     description: Migration type. Can be one of full-load | cdc | full-load-and-cdc.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicationInstanceArn:
                     description: ARN of the replication instance.
@@ -837,6 +838,11 @@ spec:
                     type: string
                   migrationType:
                     description: Migration type. Can be one of full-load | cdc | full-load-and-cdc.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicationInstanceArn:
                     description: ARN of the replication instance.

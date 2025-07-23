@@ -58,6 +58,10 @@ type AccessPointObservation struct {
 	// Operating system user and group applied to all file system requests made using the access point. Detailed below.
 	PosixUser *PosixUserObservation `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Directory on the Amazon EFS file system that the access point provides access to. Detailed below.
 	RootDirectory *RootDirectoryObservation `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
@@ -89,10 +93,10 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	PosixUser *PosixUserParameters `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Directory on the Amazon EFS file system that the access point provides access to. Detailed below.
 	// +kubebuilder:validation:Optional

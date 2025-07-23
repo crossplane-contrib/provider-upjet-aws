@@ -60,6 +60,10 @@ type UploadObservation struct {
 	// The ARN of the project for the upload.
 	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The upload's upload type. See AWS Docs for valid list of values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -91,10 +95,10 @@ type UploadParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectArnSelector *v1.Selector `json:"projectArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The upload's upload type. See AWS Docs for valid list of values.
 	// +kubebuilder:validation:Optional

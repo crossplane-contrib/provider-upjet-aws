@@ -556,6 +556,11 @@ func (in *KeyspaceObservation) DeepCopyInto(out *KeyspaceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationSpecification != nil {
 		in, out := &in.ReplicationSpecification, &out.ReplicationSpecification
 		*out = new(ReplicationSpecificationObservation)
@@ -1364,6 +1369,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.SchemaDefinition != nil {
 		in, out := &in.SchemaDefinition, &out.SchemaDefinition

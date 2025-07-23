@@ -393,7 +393,7 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLensConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.StorageLensConfiguration[i3].Exclude); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -441,7 +441,7 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLensConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.StorageLensConfiguration[i3].Exclude); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}

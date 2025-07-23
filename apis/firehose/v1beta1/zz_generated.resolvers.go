@@ -347,7 +347,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IcebergConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.IcebergConfiguration[i3].DestinationTableConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogDatabase", "CatalogDatabaseList")
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "CatalogDatabase", "CatalogDatabaseList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -370,7 +370,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IcebergConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.IcebergConfiguration[i3].DestinationTableConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "CatalogTable", "CatalogTableList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -414,7 +414,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IcebergConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.IcebergConfiguration[i3].S3Configuration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1247,7 +1247,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IcebergConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.IcebergConfiguration[i3].DestinationTableConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogDatabase", "CatalogDatabaseList")
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "CatalogDatabase", "CatalogDatabaseList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1270,7 +1270,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IcebergConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.IcebergConfiguration[i3].DestinationTableConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta1", "CatalogTable", "CatalogTableList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1314,7 +1314,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IcebergConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.IcebergConfiguration[i3].S3Configuration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}

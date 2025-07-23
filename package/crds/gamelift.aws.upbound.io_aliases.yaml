@@ -80,8 +80,9 @@ spec:
                     description: Name of the alias.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingStrategy:
                     description: Specifies the fleet and/or routing type to use for
@@ -346,6 +347,11 @@ spec:
                     type: string
                   name:
                     description: Name of the alias.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingStrategy:
                     description: Specifies the fleet and/or routing type to use for
@@ -503,8 +509,9 @@ spec:
                     description: Name of the alias.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingStrategy:
                     description: Specifies the fleet and/or routing type to use for
@@ -763,6 +770,11 @@ spec:
                     type: string
                   name:
                     description: Name of the alias.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingStrategy:
                     description: Specifies the fleet and/or routing type to use for

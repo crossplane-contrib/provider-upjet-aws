@@ -97,8 +97,9 @@ spec:
                       Benchmark v1.2.0. Defaults to true.'
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -340,6 +341,11 @@ spec:
                     type: boolean
                   id:
                     description: AWS Account ID.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

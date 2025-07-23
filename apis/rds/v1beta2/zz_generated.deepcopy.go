@@ -155,6 +155,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 			}
 		}
 	}
+	if in.ClusterScalabilityType != nil {
+		in, out := &in.ClusterScalabilityType, &out.ClusterScalabilityType
+		*out = new(string)
+		**out = **in
+	}
 	if in.CopyTagsToSnapshot != nil {
 		in, out := &in.CopyTagsToSnapshot, &out.CopyTagsToSnapshot
 		*out = new(bool)
@@ -212,6 +217,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.DBSystemID != nil {
 		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
 		*out = new(string)
 		**out = **in
 	}
@@ -331,6 +341,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.MasterPasswordWoSecretRef != nil {
+		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUserSecretKMSKeyID != nil {
 		in, out := &in.MasterUserSecretKMSKeyID, &out.MasterUserSecretKMSKeyID
 		*out = new(string)
@@ -350,6 +370,26 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
 		**out = **in
+	}
+	if in.MonitoringInterval != nil {
+		in, out := &in.MonitoringInterval, &out.MonitoringInterval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MonitoringRoleArn != nil {
+		in, out := &in.MonitoringRoleArn, &out.MonitoringRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitoringRoleArnRef != nil {
+		in, out := &in.MonitoringRoleArnRef, &out.MonitoringRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.MonitoringRoleArnSelector != nil {
+		in, out := &in.MonitoringRoleArnSelector, &out.MonitoringRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
@@ -649,6 +689,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterScalabilityType != nil {
+		in, out := &in.ClusterScalabilityType, &out.ClusterScalabilityType
+		*out = new(string)
+		**out = **in
+	}
 	if in.CopyTagsToSnapshot != nil {
 		in, out := &in.CopyTagsToSnapshot, &out.CopyTagsToSnapshot
 		*out = new(bool)
@@ -676,6 +721,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.DBSystemID != nil {
 		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
 		*out = new(string)
 		**out = **in
 	}
@@ -811,6 +861,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUserSecret != nil {
 		in, out := &in.MasterUserSecret, &out.MasterUserSecret
 		*out = make([]ClusterMasterUserSecretObservation, len(*in))
@@ -825,6 +880,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitoringInterval != nil {
+		in, out := &in.MonitoringInterval, &out.MonitoringInterval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MonitoringRoleArn != nil {
+		in, out := &in.MonitoringRoleArn, &out.MonitoringRoleArn
 		*out = new(string)
 		**out = **in
 	}
@@ -865,6 +930,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.ReaderEndpoint != nil {
 		in, out := &in.ReaderEndpoint, &out.ReaderEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1033,6 +1103,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 			}
 		}
 	}
+	if in.ClusterScalabilityType != nil {
+		in, out := &in.ClusterScalabilityType, &out.ClusterScalabilityType
+		*out = new(string)
+		**out = **in
+	}
 	if in.CopyTagsToSnapshot != nil {
 		in, out := &in.CopyTagsToSnapshot, &out.CopyTagsToSnapshot
 		*out = new(bool)
@@ -1090,6 +1165,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.DBSystemID != nil {
 		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
 		*out = new(string)
 		**out = **in
 	}
@@ -1209,6 +1289,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.MasterPasswordWoSecretRef != nil {
+		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.MasterPasswordWoVersion != nil {
+		in, out := &in.MasterPasswordWoVersion, &out.MasterPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MasterUserSecretKMSKeyID != nil {
 		in, out := &in.MasterUserSecretKMSKeyID, &out.MasterUserSecretKMSKeyID
 		*out = new(string)
@@ -1228,6 +1318,26 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
 		**out = **in
+	}
+	if in.MonitoringInterval != nil {
+		in, out := &in.MonitoringInterval, &out.MonitoringInterval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MonitoringRoleArn != nil {
+		in, out := &in.MonitoringRoleArn, &out.MonitoringRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitoringRoleArnRef != nil {
+		in, out := &in.MonitoringRoleArnRef, &out.MonitoringRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.MonitoringRoleArnSelector != nil {
+		in, out := &in.MonitoringRoleArnSelector, &out.MonitoringRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
@@ -1945,6 +2055,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DedicatedLogVolume != nil {
 		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
 		*out = new(bool)
@@ -2160,6 +2275,16 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoSecretRef != nil {
+		in, out := &in.PasswordWoSecretRef, &out.PasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerformanceInsightsEnabled != nil {
@@ -2439,6 +2564,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DedicatedLogVolume != nil {
 		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
 		*out = new(bool)
@@ -2650,6 +2780,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PerformanceInsightsEnabled != nil {
 		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
 		*out = new(bool)
@@ -2673,6 +2808,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	if in.PubliclyAccessible != nil {
 		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.ReplicaMode != nil {
@@ -2915,6 +3055,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DatabaseInsightsMode != nil {
+		in, out := &in.DatabaseInsightsMode, &out.DatabaseInsightsMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DedicatedLogVolume != nil {
 		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
 		*out = new(bool)
@@ -3130,6 +3275,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoSecretRef != nil {
+		in, out := &in.PasswordWoSecretRef, &out.PasswordWoSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerformanceInsightsEnabled != nil {
@@ -3561,6 +3716,11 @@ func (in *ProxyDefaultTargetGroupObservation) DeepCopyInto(out *ProxyDefaultTarg
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

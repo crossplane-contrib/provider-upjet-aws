@@ -82,8 +82,9 @@ spec:
                     description: Name of the scheduled action.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceId:
                     description: 'Identifier of the resource associated with the scheduled
@@ -865,6 +866,11 @@ spec:
                     type: string
                   name:
                     description: Name of the scheduled action.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceId:
                     description: 'Identifier of the resource associated with the scheduled
@@ -1043,8 +1049,9 @@ spec:
                     description: Name of the scheduled action.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceId:
                     description: 'Identifier of the resource associated with the scheduled
@@ -1822,6 +1829,11 @@ spec:
                     type: string
                   name:
                     description: Name of the scheduled action.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceId:
                     description: 'Identifier of the resource associated with the scheduled

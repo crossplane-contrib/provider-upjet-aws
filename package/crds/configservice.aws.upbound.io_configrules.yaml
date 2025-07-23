@@ -95,8 +95,9 @@ spec:
                       evaluations for a rule.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scope:
                     description: Scope defines which resources can trigger an evaluation
@@ -712,6 +713,11 @@ spec:
                   maximumExecutionFrequency:
                     description: The maximum frequency with which AWS Config runs
                       evaluations for a rule.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   ruleId:
                     description: The ID of the config rule
@@ -974,8 +980,9 @@ spec:
                       evaluations for a rule.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scope:
                     description: Scope defines which resources can trigger an evaluation
@@ -1575,6 +1582,11 @@ spec:
                   maximumExecutionFrequency:
                     description: The maximum frequency with which AWS Config runs
                       evaluations for a rule.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   ruleId:
                     description: The ID of the config rule

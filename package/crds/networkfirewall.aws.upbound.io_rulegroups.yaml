@@ -106,8 +106,9 @@ spec:
                     description: A friendly name of the rule group.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   ruleGroup:
                     description: A configuration block that defines the rule group
@@ -318,12 +319,11 @@ spec:
                                   type: object
                                 type: array
                               rulesString:
-                                description: The fully qualified name of a file in
-                                  an S3 bucket that contains Suricata compatible intrusion
-                                  preventions system (IPS) rules or the Suricata rules
-                                  as a string. These rules contain stateful inspection
-                                  criteria and the action to take for traffic that
-                                  matches the criteria.
+                                description: Stateful inspection criteria, provided
+                                  in Suricata compatible rules. These rules contain
+                                  the inspection criteria and the action to take for
+                                  traffic that matches the criteria, so this type
+                                  of rule group doesn’t have a separate action setting.
                                 type: string
                               statefulRule:
                                 description: Set of configuration blocks containing
@@ -947,12 +947,11 @@ spec:
                                   type: object
                                 type: array
                               rulesString:
-                                description: The fully qualified name of a file in
-                                  an S3 bucket that contains Suricata compatible intrusion
-                                  preventions system (IPS) rules or the Suricata rules
-                                  as a string. These rules contain stateful inspection
-                                  criteria and the action to take for traffic that
-                                  matches the criteria.
+                                description: Stateful inspection criteria, provided
+                                  in Suricata compatible rules. These rules contain
+                                  the inspection criteria and the action to take for
+                                  traffic that matches the criteria, so this type
+                                  of rule group doesn’t have a separate action setting.
                                 type: string
                               statefulRule:
                                 description: Set of configuration blocks containing
@@ -1545,6 +1544,11 @@ spec:
                   name:
                     description: A friendly name of the rule group.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleGroup:
                     description: A configuration block that defines the rule group
                       rules. Required unless rules is specified. See Rule Group below
@@ -1677,12 +1681,11 @@ spec:
                                   type: object
                                 type: array
                               rulesString:
-                                description: The fully qualified name of a file in
-                                  an S3 bucket that contains Suricata compatible intrusion
-                                  preventions system (IPS) rules or the Suricata rules
-                                  as a string. These rules contain stateful inspection
-                                  criteria and the action to take for traffic that
-                                  matches the criteria.
+                                description: Stateful inspection criteria, provided
+                                  in Suricata compatible rules. These rules contain
+                                  the inspection criteria and the action to take for
+                                  traffic that matches the criteria, so this type
+                                  of rule group doesn’t have a separate action setting.
                                 type: string
                               statefulRule:
                                 description: Set of configuration blocks containing
@@ -2208,8 +2211,9 @@ spec:
                     description: A friendly name of the rule group.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   ruleGroup:
                     description: A configuration block that defines the rule group
@@ -2403,12 +2407,11 @@ spec:
                                 x-kubernetes-list-type: set
                             type: object
                           rulesString:
-                            description: The fully qualified name of a file in an
-                              S3 bucket that contains Suricata compatible intrusion
-                              preventions system (IPS) rules or the Suricata rules
-                              as a string. These rules contain stateful inspection
+                            description: Stateful inspection criteria, provided in
+                              Suricata compatible rules. These rules contain the inspection
                               criteria and the action to take for traffic that matches
-                              the criteria.
+                              the criteria, so this type of rule group doesn’t have
+                              a separate action setting.
                             type: string
                           statefulRule:
                             description: Set of configuration blocks containing stateful
@@ -2962,12 +2965,11 @@ spec:
                                 x-kubernetes-list-type: set
                             type: object
                           rulesString:
-                            description: The fully qualified name of a file in an
-                              S3 bucket that contains Suricata compatible intrusion
-                              preventions system (IPS) rules or the Suricata rules
-                              as a string. These rules contain stateful inspection
+                            description: Stateful inspection criteria, provided in
+                              Suricata compatible rules. These rules contain the inspection
                               criteria and the action to take for traffic that matches
-                              the criteria.
+                              the criteria, so this type of rule group doesn’t have
+                              a separate action setting.
                             type: string
                           statefulRule:
                             description: Set of configuration blocks containing stateful
@@ -3507,6 +3509,11 @@ spec:
                   name:
                     description: A friendly name of the rule group.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleGroup:
                     description: A configuration block that defines the rule group
                       rules. Required unless rules is specified. See Rule Group below
@@ -3623,12 +3630,11 @@ spec:
                                 x-kubernetes-list-type: set
                             type: object
                           rulesString:
-                            description: The fully qualified name of a file in an
-                              S3 bucket that contains Suricata compatible intrusion
-                              preventions system (IPS) rules or the Suricata rules
-                              as a string. These rules contain stateful inspection
+                            description: Stateful inspection criteria, provided in
+                              Suricata compatible rules. These rules contain the inspection
                               criteria and the action to take for traffic that matches
-                              the criteria.
+                              the criteria, so this type of rule group doesn’t have
+                              a separate action setting.
                             type: string
                           statefulRule:
                             description: Set of configuration blocks containing stateful

@@ -143,6 +143,11 @@ func (in *AliasObservation) DeepCopyInto(out *AliasObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoutingStrategy != nil {
 		in, out := &in.RoutingStrategy, &out.RoutingStrategy
 		*out = make([]RoutingStrategyObservation, len(*in))
@@ -414,6 +419,11 @@ func (in *BuildObservation) DeepCopyInto(out *BuildObservation) {
 	}
 	if in.OperatingSystem != nil {
 		in, out := &in.OperatingSystem, &out.OperatingSystem
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1014,6 +1024,11 @@ func (in *FleetObservation) DeepCopyInto(out *FleetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceCreationLimitPolicy != nil {
 		in, out := &in.ResourceCreationLimitPolicy, &out.ResourceCreationLimitPolicy
 		*out = make([]ResourceCreationLimitPolicyObservation, len(*in))
@@ -1437,6 +1452,11 @@ func (in *GameSessionQueueObservation) DeepCopyInto(out *GameSessionQueueObserva
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -2076,6 +2096,11 @@ func (in *ScriptObservation) DeepCopyInto(out *ScriptObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

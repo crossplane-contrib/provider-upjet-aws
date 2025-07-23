@@ -169,8 +169,9 @@ spec:
                         type: object
                     type: object
                   copyTagsToSnapshot:
-                    description: defined tags from the DB instance to snapshots of
-                      the DB instance. Default false.
+                    description: Indicates whether to copy all of the user-defined
+                      tags from the DB instance to snapshots of the DB instance. Default
+                      false.
                     type: boolean
                   customIamInstanceProfile:
                     description: Instance profile associated with the underlying Amazon
@@ -448,8 +449,10 @@ spec:
                         type: object
                     type: object
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights is enabled
-                      or not.
+                    description: 'Specifies whether Performance Insights is enabled
+                      or not. NOTE: When Performance Insights is configured at the
+                      cluster level through aws_rds_cluster, this argument cannot
+                      be set to a value that conflicts with the cluster''s configuration.'
                     type: boolean
                   performanceInsightsKmsKeyId:
                     description: ARN for the KMS key to encrypt Performance Insights
@@ -557,8 +560,9 @@ spec:
                       for more details on controlling this property.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -678,8 +682,9 @@ spec:
                         type: object
                     type: object
                   copyTagsToSnapshot:
-                    description: defined tags from the DB instance to snapshots of
-                      the DB instance. Default false.
+                    description: Indicates whether to copy all of the user-defined
+                      tags from the DB instance to snapshots of the DB instance. Default
+                      false.
                     type: boolean
                   customIamInstanceProfile:
                     description: Instance profile associated with the underlying Amazon
@@ -957,8 +962,10 @@ spec:
                         type: object
                     type: object
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights is enabled
-                      or not.
+                    description: 'Specifies whether Performance Insights is enabled
+                      or not. NOTE: When Performance Insights is configured at the
+                      cluster level through aws_rds_cluster, this argument cannot
+                      be set to a value that conflicts with the cluster''s configuration.'
                     type: boolean
                   performanceInsightsKmsKeyId:
                     description: ARN for the KMS key to encrypt Performance Insights
@@ -1278,8 +1285,9 @@ spec:
                       this instance.
                     type: string
                   copyTagsToSnapshot:
-                    description: defined tags from the DB instance to snapshots of
-                      the DB instance. Default false.
+                    description: Indicates whether to copy all of the user-defined
+                      tags from the DB instance to snapshots of the DB instance. Default
+                      false.
                     type: boolean
                   customIamInstanceProfile:
                     description: Instance profile associated with the underlying Amazon
@@ -1352,8 +1360,10 @@ spec:
                     description: Network type of the DB instance.
                     type: string
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights is enabled
-                      or not.
+                    description: 'Specifies whether Performance Insights is enabled
+                      or not. NOTE: When Performance Insights is configured at the
+                      cluster level through aws_rds_cluster, this argument cannot
+                      be set to a value that conflicts with the cluster''s configuration.'
                     type: boolean
                   performanceInsightsKmsKeyId:
                     description: ARN for the KMS key to encrypt Performance Insights
@@ -1389,6 +1399,11 @@ spec:
                       Default false. See the documentation on Creating DB Instances
                       for more details on controlling this property.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted.
                     type: boolean
@@ -1406,7 +1421,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   writer:
-                    description: – Boolean indicating if this instance is writable.
+                    description: Boolean indicating if this instance is writable.
                       False indicates this instance is a read replica.
                     type: boolean
                 type: object

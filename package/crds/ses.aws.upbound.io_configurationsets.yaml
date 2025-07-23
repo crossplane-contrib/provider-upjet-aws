@@ -90,8 +90,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reputationMetricsEnabled:
                     description: Whether or not Amazon SES publishes reputation metrics
@@ -366,6 +367,11 @@ spec:
                     description: Date and time at which the reputation metrics for
                       the configuration set were last reset. Resetting these metrics
                       is known as a fresh start.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reputationMetricsEnabled:
                     description: Whether or not Amazon SES publishes reputation metrics
@@ -520,8 +526,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reputationMetricsEnabled:
                     description: Whether or not Amazon SES publishes reputation metrics
@@ -788,6 +795,11 @@ spec:
                     description: Date and time at which the reputation metrics for
                       the configuration set were last reset. Resetting these metrics
                       is known as a fresh start.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reputationMetricsEnabled:
                     description: Whether or not Amazon SES publishes reputation metrics

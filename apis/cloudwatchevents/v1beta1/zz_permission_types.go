@@ -118,6 +118,10 @@ type PermissionObservation struct {
 	// The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify * to permit any account to put events to your default event bus, optionally limited by condition.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// An identifier string for the external account that you are granting permissions to.
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 }
@@ -150,10 +154,10 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// An identifier string for the external account that you are granting permissions to.
 	// +kubebuilder:validation:Optional

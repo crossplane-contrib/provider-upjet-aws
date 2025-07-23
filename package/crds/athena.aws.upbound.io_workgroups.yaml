@@ -258,8 +258,9 @@ spec:
                       if the workgroup contains any named queries.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: State of the workgroup. Valid values are DISABLED
@@ -773,6 +774,11 @@ spec:
                   id:
                     description: Workgroup name
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   state:
                     description: State of the workgroup. Valid values are DISABLED
                       or ENABLED. Defaults to ENABLED.
@@ -1079,8 +1085,9 @@ spec:
                       if the workgroup contains any named queries.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: State of the workgroup. Valid values are DISABLED
@@ -1567,6 +1574,11 @@ spec:
                     type: boolean
                   id:
                     description: Workgroup name
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: State of the workgroup. Valid values are DISABLED

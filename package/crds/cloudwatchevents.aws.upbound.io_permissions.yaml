@@ -259,8 +259,9 @@ spec:
                       limited by condition.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   statementId:
                     description: An identifier string for the external account that
@@ -687,6 +688,11 @@ spec:
                       any account to put events to your default event bus, optionally
                       limited by condition.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   statementId:
                     description: An identifier string for the external account that
                       you are granting permissions to.
@@ -992,8 +998,9 @@ spec:
                       limited by condition.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   statementId:
                     description: An identifier string for the external account that
@@ -1415,6 +1422,11 @@ spec:
                       to put events to your default event bus. Specify * to permit
                       any account to put events to your default event bus, optionally
                       limited by condition.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   statementId:
                     description: An identifier string for the external account that

@@ -332,6 +332,11 @@ func (in *HTTPNamespaceObservation) DeepCopyInto(out *HTTPNamespaceObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -750,6 +755,11 @@ func (in *PrivateDNSNamespaceObservation) DeepCopyInto(out *PrivateDNSNamespaceO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1020,6 +1030,11 @@ func (in *PublicDNSNamespaceObservation) DeepCopyInto(out *PublicDNSNamespaceObs
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1335,6 +1350,11 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 	}
 	if in.NamespaceID != nil {
 		in, out := &in.NamespaceID, &out.NamespaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

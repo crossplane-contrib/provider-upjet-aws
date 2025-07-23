@@ -25,7 +25,7 @@ type DeploymentTargetsInitParameters struct {
 	// S3 URL of the file containing the list of accounts.
 	AccountsURL *string `json:"accountsUrl,omitempty" tf:"accounts_url,omitempty"`
 
-	// The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
+	// Organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 	// +listType=set
 	OrganizationalUnitIds []*string `json:"organizationalUnitIds,omitempty" tf:"organizational_unit_ids,omitempty"`
 }
@@ -42,7 +42,7 @@ type DeploymentTargetsObservation struct {
 	// S3 URL of the file containing the list of accounts.
 	AccountsURL *string `json:"accountsUrl,omitempty" tf:"accounts_url,omitempty"`
 
-	// The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
+	// Organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 	// +listType=set
 	OrganizationalUnitIds []*string `json:"organizationalUnitIds,omitempty" tf:"organizational_unit_ids,omitempty"`
 }
@@ -62,7 +62,7 @@ type DeploymentTargetsParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountsURL *string `json:"accountsUrl,omitempty" tf:"accounts_url,omitempty"`
 
-	// The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
+	// Organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	OrganizationalUnitIds []*string `json:"organizationalUnitIds,omitempty" tf:"organizational_unit_ids,omitempty"`
@@ -76,7 +76,7 @@ type StackInstanceSummariesObservation struct {
 	// Target AWS Account ID to create a Stack based on the StackSet. Defaults to current account.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The organization root ID or organizational unit (OU) ID in which the stack is deployed.
+	// Organization root ID or organizational unit (OU) ID in which the stack is deployed.
 	OrganizationalUnitID *string `json:"organizationalUnitId,omitempty" tf:"organizational_unit_id,omitempty"`
 
 	// Stack identifier.
@@ -94,7 +94,7 @@ type StackSetInstanceInitParameters struct {
 	// Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. Valid values: SELF (default), DELEGATED_ADMIN.
 	CallAs *string `json:"callAs,omitempty" tf:"call_as,omitempty"`
 
-	// The AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.
+	// AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.
 	DeploymentTargets []DeploymentTargetsInitParameters `json:"deploymentTargets,omitempty" tf:"deployment_targets,omitempty"`
 
 	// Preferences for how AWS CloudFormation performs a stack set operation.
@@ -106,6 +106,9 @@ type StackSetInstanceInitParameters struct {
 
 	// You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false.
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
+
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
 
 	// Name of the StackSet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudformation/v1beta1.StackSet
@@ -128,7 +131,7 @@ type StackSetInstanceObservation struct {
 	// Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. Valid values: SELF (default), DELEGATED_ADMIN.
 	CallAs *string `json:"callAs,omitempty" tf:"call_as,omitempty"`
 
-	// The AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.
+	// AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.
 	DeploymentTargets []DeploymentTargetsObservation `json:"deploymentTargets,omitempty" tf:"deployment_targets,omitempty"`
 
 	// Unique identifier for the resource. If deployment_targets is set, this is a comma-delimited string combining stack set name, organizational unit IDs (/-delimited), and region (ie. mystack,ou-123/ou-456,us-east-1). Otherwise, this is a comma-delimited string combining stack set name, AWS account ID, and region (ie. mystack,123456789012,us-east-1).
@@ -137,12 +140,16 @@ type StackSetInstanceObservation struct {
 	// Preferences for how AWS CloudFormation performs a stack set operation.
 	OperationPreferences []StackSetInstanceOperationPreferencesObservation `json:"operationPreferences,omitempty" tf:"operation_preferences,omitempty"`
 
-	// The organization root ID or organizational unit (OU) ID in which the stack is deployed.
+	// Organization root ID or organizational unit (OU) ID in which the stack is deployed.
 	OrganizationalUnitID *string `json:"organizationalUnitId,omitempty" tf:"organizational_unit_id,omitempty"`
 
 	// Key-value map of input parameters to override from the StackSet for this Instance.
 	// +mapType=granular
 	ParameterOverrides map[string]*string `json:"parameterOverrides,omitempty" tf:"parameter_overrides,omitempty"`
+
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false.
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
@@ -154,6 +161,9 @@ type StackSetInstanceObservation struct {
 	// List of stack instances created from an organizational unit deployment target. This will only be populated when `deployment_targets` is set.
 	StackInstanceSummaries []StackInstanceSummariesObservation `json:"stackInstanceSummaries,omitempty" tf:"stack_instance_summaries,omitempty"`
 
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
+
 	// Name of the StackSet.
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 }
@@ -163,22 +173,22 @@ type StackSetInstanceOperationPreferencesInitParameters struct {
 	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
 	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
 
-	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
+	// Number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
 
-	// The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region.
+	// Percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureTolerancePercentage *float64 `json:"failureTolerancePercentage,omitempty" tf:"failure_tolerance_percentage,omitempty"`
 
-	// The maximum number of accounts in which to perform this operation at one time.
+	// Maximum number of accounts in which to perform this operation at one time.
 	MaxConcurrentCount *float64 `json:"maxConcurrentCount,omitempty" tf:"max_concurrent_count,omitempty"`
 
-	// The maximum percentage of accounts in which to perform this operation at one time.
+	// Maximum percentage of accounts in which to perform this operation at one time.
 	MaxConcurrentPercentage *float64 `json:"maxConcurrentPercentage,omitempty" tf:"max_concurrent_percentage,omitempty"`
 
-	// The concurrency type of deploying StackSets operations in Regions, could be in parallel or one Region at a time. Valid values are SEQUENTIAL and PARALLEL.
+	// Concurrency type of deploying StackSets operations in Regions, could be in parallel or one Region at a time. Valid values are SEQUENTIAL and PARALLEL.
 	RegionConcurrencyType *string `json:"regionConcurrencyType,omitempty" tf:"region_concurrency_type,omitempty"`
 
-	// The order of the Regions in where you want to perform the stack operation.
+	// Order of the Regions in where you want to perform the stack operation.
 	RegionOrder []*string `json:"regionOrder,omitempty" tf:"region_order,omitempty"`
 }
 
@@ -187,22 +197,22 @@ type StackSetInstanceOperationPreferencesObservation struct {
 	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
 	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
 
-	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
+	// Number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
 
-	// The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region.
+	// Percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureTolerancePercentage *float64 `json:"failureTolerancePercentage,omitempty" tf:"failure_tolerance_percentage,omitempty"`
 
-	// The maximum number of accounts in which to perform this operation at one time.
+	// Maximum number of accounts in which to perform this operation at one time.
 	MaxConcurrentCount *float64 `json:"maxConcurrentCount,omitempty" tf:"max_concurrent_count,omitempty"`
 
-	// The maximum percentage of accounts in which to perform this operation at one time.
+	// Maximum percentage of accounts in which to perform this operation at one time.
 	MaxConcurrentPercentage *float64 `json:"maxConcurrentPercentage,omitempty" tf:"max_concurrent_percentage,omitempty"`
 
-	// The concurrency type of deploying StackSets operations in Regions, could be in parallel or one Region at a time. Valid values are SEQUENTIAL and PARALLEL.
+	// Concurrency type of deploying StackSets operations in Regions, could be in parallel or one Region at a time. Valid values are SEQUENTIAL and PARALLEL.
 	RegionConcurrencyType *string `json:"regionConcurrencyType,omitempty" tf:"region_concurrency_type,omitempty"`
 
-	// The order of the Regions in where you want to perform the stack operation.
+	// Order of the Regions in where you want to perform the stack operation.
 	RegionOrder []*string `json:"regionOrder,omitempty" tf:"region_order,omitempty"`
 }
 
@@ -212,27 +222,27 @@ type StackSetInstanceOperationPreferencesParameters struct {
 	// +kubebuilder:validation:Optional
 	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
 
-	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
+	// Number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	// +kubebuilder:validation:Optional
 	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
 
-	// The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region.
+	// Percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region.
 	// +kubebuilder:validation:Optional
 	FailureTolerancePercentage *float64 `json:"failureTolerancePercentage,omitempty" tf:"failure_tolerance_percentage,omitempty"`
 
-	// The maximum number of accounts in which to perform this operation at one time.
+	// Maximum number of accounts in which to perform this operation at one time.
 	// +kubebuilder:validation:Optional
 	MaxConcurrentCount *float64 `json:"maxConcurrentCount,omitempty" tf:"max_concurrent_count,omitempty"`
 
-	// The maximum percentage of accounts in which to perform this operation at one time.
+	// Maximum percentage of accounts in which to perform this operation at one time.
 	// +kubebuilder:validation:Optional
 	MaxConcurrentPercentage *float64 `json:"maxConcurrentPercentage,omitempty" tf:"max_concurrent_percentage,omitempty"`
 
-	// The concurrency type of deploying StackSets operations in Regions, could be in parallel or one Region at a time. Valid values are SEQUENTIAL and PARALLEL.
+	// Concurrency type of deploying StackSets operations in Regions, could be in parallel or one Region at a time. Valid values are SEQUENTIAL and PARALLEL.
 	// +kubebuilder:validation:Optional
 	RegionConcurrencyType *string `json:"regionConcurrencyType,omitempty" tf:"region_concurrency_type,omitempty"`
 
-	// The order of the Regions in where you want to perform the stack operation.
+	// Order of the Regions in where you want to perform the stack operation.
 	// +kubebuilder:validation:Optional
 	RegionOrder []*string `json:"regionOrder,omitempty" tf:"region_order,omitempty"`
 }
@@ -247,7 +257,7 @@ type StackSetInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CallAs *string `json:"callAs,omitempty" tf:"call_as,omitempty"`
 
-	// The AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.
+	// AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.
 	// +kubebuilder:validation:Optional
 	DeploymentTargets []DeploymentTargetsParameters `json:"deploymentTargets,omitempty" tf:"deployment_targets,omitempty"`
 
@@ -260,15 +270,18 @@ type StackSetInstanceParameters struct {
 	// +mapType=granular
 	ParameterOverrides map[string]*string `json:"parameterOverrides,omitempty" tf:"parameter_overrides,omitempty"`
 
-	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region. Use stack_set_instance_region instead.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false.
 	// +kubebuilder:validation:Optional
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
+
+	// Target AWS Region to create a Stack based on the StackSet. Defaults to current region.
+	// +kubebuilder:validation:Optional
+	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
 
 	// Name of the StackSet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudformation/v1beta1.StackSet

@@ -251,6 +251,11 @@ func (in *LedgerObservation) DeepCopyInto(out *LedgerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -565,6 +570,11 @@ func (in *StreamObservation) DeepCopyInto(out *StreamObservation) {
 	}
 	if in.LedgerName != nil {
 		in, out := &in.LedgerName, &out.LedgerName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

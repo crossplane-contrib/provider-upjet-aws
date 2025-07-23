@@ -718,6 +718,11 @@ func (in *StackSetInstanceInitParameters) DeepCopyInto(out *StackSetInstanceInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StackSetInstanceRegion != nil {
+		in, out := &in.StackSetInstanceRegion, &out.StackSetInstanceRegion
+		*out = new(string)
+		**out = **in
+	}
 	if in.StackSetName != nil {
 		in, out := &in.StackSetName, &out.StackSetName
 		*out = new(string)
@@ -826,6 +831,11 @@ func (in *StackSetInstanceObservation) DeepCopyInto(out *StackSetInstanceObserva
 			(*out)[key] = outVal
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetainStack != nil {
 		in, out := &in.RetainStack, &out.RetainStack
 		*out = new(bool)
@@ -842,6 +852,11 @@ func (in *StackSetInstanceObservation) DeepCopyInto(out *StackSetInstanceObserva
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.StackSetInstanceRegion != nil {
+		in, out := &in.StackSetInstanceRegion, &out.StackSetInstanceRegion
+		*out = new(string)
+		**out = **in
 	}
 	if in.StackSetName != nil {
 		in, out := &in.StackSetName, &out.StackSetName
@@ -1077,6 +1092,11 @@ func (in *StackSetInstanceParameters) DeepCopyInto(out *StackSetInstanceParamete
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StackSetInstanceRegion != nil {
+		in, out := &in.StackSetInstanceRegion, &out.StackSetInstanceRegion
+		*out = new(string)
+		**out = **in
+	}
 	if in.StackSetName != nil {
 		in, out := &in.StackSetName, &out.StackSetName
 		*out = new(string)
@@ -1248,6 +1268,11 @@ func (in *StackSetObservation) DeepCopyInto(out *StackSetObservation) {
 	}
 	if in.PermissionModel != nil {
 		in, out := &in.PermissionModel, &out.PermissionModel
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

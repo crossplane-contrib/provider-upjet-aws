@@ -40,6 +40,10 @@ type IPGroupObservation struct {
 	// The name of the IP group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// One or more pairs specifying the IP group rule (in CIDR format) from which web requests originate.
 	Rules []RulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
 
@@ -62,10 +66,10 @@ type IPGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// One or more pairs specifying the IP group rule (in CIDR format) from which web requests originate.
 	// +kubebuilder:validation:Optional

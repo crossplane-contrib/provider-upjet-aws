@@ -21,7 +21,7 @@ func (mg *Workforce) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Workforce
 func (tr *Workforce) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"oidc_config[*].client_secret": "oidcConfig[*].clientSecretSecretRef"}
+	return map[string]string{"oidc_config[*].client_secret": "oidcConfig.clientSecretSecretRef"}
 }
 
 // GetObservation of this Workforce

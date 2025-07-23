@@ -63,6 +63,10 @@ type UserGroupObservation struct {
 	// The precedence of the user group.
 	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ARN of the IAM role to be associated with the user group.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -84,10 +88,10 @@ type UserGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the IAM role to be associated with the user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

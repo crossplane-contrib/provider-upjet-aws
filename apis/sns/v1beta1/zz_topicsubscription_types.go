@@ -126,6 +126,10 @@ type TopicSubscriptionObservation struct {
 	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
 	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
 
@@ -184,10 +188,10 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
 	// +kubebuilder:validation:Optional

@@ -443,6 +443,10 @@ type LifecyclePolicyObservation struct {
 	// See the policy_details configuration block. Max of 1.
 	PolicyDetails []PolicyDetailsObservation `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Whether the lifecycle policy should be enabled or disabled. ENABLED or DISABLED are valid values. Defaults to ENABLED.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -479,10 +483,10 @@ type LifecyclePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyDetails []PolicyDetailsParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Whether the lifecycle policy should be enabled or disabled. ENABLED or DISABLED are valid values. Defaults to ENABLED.
 	// +kubebuilder:validation:Optional
@@ -885,10 +889,10 @@ type ShareRuleInitParameters struct {
 	// +listType=set
 	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
 
-	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
+	// The period after which snapshots that are shared with other AWS accounts are automatically unshared.
 	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
 
-	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value. Conflicts with cron_expression. Must be set if interval is set.
+	// The unit of time for the automatic unsharing interval. Valid values are DAYS, WEEKS, MONTHS, YEARS.
 	UnshareIntervalUnit *string `json:"unshareIntervalUnit,omitempty" tf:"unshare_interval_unit,omitempty"`
 }
 
@@ -898,10 +902,10 @@ type ShareRuleObservation struct {
 	// +listType=set
 	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
 
-	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
+	// The period after which snapshots that are shared with other AWS accounts are automatically unshared.
 	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
 
-	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value. Conflicts with cron_expression. Must be set if interval is set.
+	// The unit of time for the automatic unsharing interval. Valid values are DAYS, WEEKS, MONTHS, YEARS.
 	UnshareIntervalUnit *string `json:"unshareIntervalUnit,omitempty" tf:"unshare_interval_unit,omitempty"`
 }
 
@@ -912,11 +916,11 @@ type ShareRuleParameters struct {
 	// +listType=set
 	TargetAccounts []*string `json:"targetAccounts" tf:"target_accounts,omitempty"`
 
-	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
+	// The period after which snapshots that are shared with other AWS accounts are automatically unshared.
 	// +kubebuilder:validation:Optional
 	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
 
-	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value. Conflicts with cron_expression. Must be set if interval is set.
+	// The unit of time for the automatic unsharing interval. Valid values are DAYS, WEEKS, MONTHS, YEARS.
 	// +kubebuilder:validation:Optional
 	UnshareIntervalUnit *string `json:"unshareIntervalUnit,omitempty" tf:"unshare_interval_unit,omitempty"`
 }

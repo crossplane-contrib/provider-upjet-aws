@@ -82,8 +82,9 @@ spec:
                       the Resolver dashboard in the Route 53 console.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resolverEndpointId:
                     description: |-
@@ -182,8 +183,8 @@ spec:
                     items:
                       properties:
                         ip:
-                          description: One IP address that you want to forward DNS
-                            queries to. You can specify only IPv4 addresses.
+                          description: One IPv4 address that you want to forward DNS
+                            queries to.
                           type: string
                         ipv6:
                           description: One IPv6 address that you want to forward DNS
@@ -321,8 +322,8 @@ spec:
                     items:
                       properties:
                         ip:
-                          description: One IP address that you want to forward DNS
-                            queries to. You can specify only IPv4 addresses.
+                          description: One IPv4 address that you want to forward DNS
+                            queries to.
                           type: string
                         ipv6:
                           description: One IPv6 address that you want to forward DNS
@@ -539,6 +540,11 @@ spec:
                     description: When a rule is shared with another AWS account, the
                       account ID of the account that the rule is shared with.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resolverEndpointId:
                     description: |-
                       ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
@@ -572,8 +578,8 @@ spec:
                     items:
                       properties:
                         ip:
-                          description: One IP address that you want to forward DNS
-                            queries to. You can specify only IPv4 addresses.
+                          description: One IPv4 address that you want to forward DNS
+                            queries to.
                           type: string
                         ipv6:
                           description: One IPv6 address that you want to forward DNS

@@ -46,6 +46,10 @@ type InstanceStateObservation struct {
 	// ID of the instance.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// - State of the instance. Valid values are stopped, running.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
@@ -70,10 +74,10 @@ type InstanceStateParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// - State of the instance. Valid values are stopped, running.
 	// +kubebuilder:validation:Optional

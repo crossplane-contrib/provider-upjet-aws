@@ -41,6 +41,10 @@ type DirectoryConfigObservation struct {
 	// +listType=set
 	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for the name of the directory and organizational unit (OU) to use to join the directory config to a Microsoft Active Directory domain. See service_account_credentials below.
 	ServiceAccountCredentials []ServiceAccountCredentialsObservation `json:"serviceAccountCredentials,omitempty" tf:"service_account_credentials,omitempty"`
 }
@@ -56,10 +60,10 @@ type DirectoryConfigParameters struct {
 	// +listType=set
 	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for the name of the directory and organizational unit (OU) to use to join the directory config to a Microsoft Active Directory domain. See service_account_credentials below.
 	// +kubebuilder:validation:Optional
