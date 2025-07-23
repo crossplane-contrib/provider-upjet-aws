@@ -144,6 +144,7 @@ func GetProvider(ctx context.Context, generationProvider bool, skipDefaultTags b
 		NamePrefixRemoval(),
 		DocumentationForTags(),
 		injectFieldRenamingConversionFunctions(),
+		injectPluginFrameworkCustomStateEmptyCheck(),
 	}
 	if !skipDefaultTags {
 		defaultResourceOptions = append(defaultResourceOptions, AddExternalTagsField())
@@ -252,7 +253,7 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 	// index field causing unexpected merging results and drop of the whole
 	// spec.forProvider.vpcConfig object. This is surfaced with an error like
 	// below:
-	/// cannot patch the managed resource via server-side apply: Cluster.eks.aws.upbound.io
+	// cannot patch the managed resource via server-side apply: Cluster.eks.aws.upbound.io
 	//  "some-eks-cluster" is invalid: [spec.forProvider.vpcConfig: Invalid
 	//  value: "null": spec.forProvider.vpcConfig in body must be of type array: "null",
 	//  <nil>: Invalid value: "null": some validation rules were not checked because

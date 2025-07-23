@@ -5,8 +5,13 @@
 package config
 
 import (
+	"context"
 	"strings"
 
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	rschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"gopkg.in/yaml.v3"
 
@@ -194,4 +199,53 @@ func injectFieldRenamingConversionFunctions() config.ResourceOption {
 			}
 		}
 	}
+}
+
+func injectPluginFrameworkCustomStateEmptyCheck() config.ResourceOption {
+	return func(r *config.Resource) {
+		if r.TerraformPluginFrameworkResource != nil {
+			r.TerraformPluginFrameworkStateEmptyCheckFn = tfStateVlueIsEmpty
+		}
+	}
+}
+
+func tfStateVlueIsEmpty(ctx context.Context, tfStateValue tftypes.Value, resourceSchema rschema.Schema) (bool, error) {
+	sdkState := tfsdk.State{
+		Raw:    tfStateValue.Copy(),
+		Schema: resourceSchema,
+	}
+	var isEmpty bool
+	var region string
+	sdkState.GetAttribute(ctx, path.Root("region"), &region)
+	if region != "" {
+		sdkState.SetAttribute(ctx, path.Root("region"), (*string)(nil))
+		isEmpty = true
+		tftypes.Walk(sdkState.Raw, func(attributePath *tftypes.AttributePath, value tftypes.Value) (bool, error) {
+			if len(attributePath.Steps()) != 1 {
+				return true, nil
+			}
+
+			valType := value.Type()
+			switch {
+			case valType.Is(tftypes.Set{}), valType.Is(tftypes.List{}), valType.Is(tftypes.Tuple{}):
+				if value.IsKnown() && !value.IsNull() {
+					destVal := make([]tftypes.Value, 0)
+					if err := value.As(&destVal); err != nil {
+						return true, nil
+					}
+					if len(destVal) > 0 {
+						isEmpty = false
+						return false, nil
+					}
+				}
+			default:
+				if value.IsKnown() && !value.IsNull() {
+					isEmpty = false
+					return false, nil
+				}
+			}
+			return true, nil
+		})
+	}
+	return isEmpty, nil
 }

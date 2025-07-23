@@ -448,4 +448,4 @@ replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terrafo
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/turkenf/terraform-provider-aws v0.0.0-20250717192126-a1f654af5b42
 
-replace github.com/crossplane/upjet => github.com/sergenyalcin/upjet v0.0.0-20250721124919-f1399a85304c
+replace github.com/crossplane/upjet => ../upjet

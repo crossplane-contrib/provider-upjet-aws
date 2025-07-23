@@ -119,7 +119,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
-	"aws_s3_bucket_lifecycle_configuration": config.IdentifierFromProvider,
+	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
@@ -3276,6 +3276,22 @@ func rdsInstanceState() config.ExternalName {
 		idStr, ok := id.(string)
 		if !ok {
 			return "", errors.New("identifier field must be a string")
+		}
+		return idStr, nil
+	}
+	return e
+}
+
+func s3LifecycleConfiguration() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["bucket"]
+		if !ok {
+			return "", errors.New("bucket field missing from tfstate")
+		}
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("bucket field must be a string")
 		}
 		return idStr, nil
 	}

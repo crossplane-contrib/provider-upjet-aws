@@ -43,6 +43,15 @@ func (l *BucketInventoryList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this BucketLifecycleConfigurationList.
+func (l *BucketLifecycleConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this BucketList.
 func (l *BucketList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
