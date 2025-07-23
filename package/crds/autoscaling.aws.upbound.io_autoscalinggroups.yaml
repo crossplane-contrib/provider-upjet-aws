@@ -98,6 +98,39 @@ spec:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
                     type: boolean
+                  capacityReservationSpecification:
+                    description: Demand Capacity Reservations. See Capacity Reservation
+                      Specification below for more details.
+                    items:
+                      properties:
+                        capacityReservationPreference:
+                          description: Capacity Reservation preference helps you use
+                            Capacity Reservations efficiently by prioritizing reserved
+                            capacity in a Capacity Reservation before using On-Demand
+                            capacity. Valid values are default, capacity-reservations-only,
+                            capacity-reservations-first and none. Default is default.
+                          type: string
+                        capacityReservationTarget:
+                          description: Describes a target Capacity Reservation or
+                            Capacity Reservation resource group.
+                          items:
+                            properties:
+                              capacityReservationIds:
+                                description: List of On-Demand Capacity Reservation
+                                  Ids. Conflicts with capacity_reservation_resource_group_arns.
+                                items:
+                                  type: string
+                                type: array
+                              capacityReservationResourceGroupArns:
+                                description: List of On-Demand Capacity Reservation
+                                  Resource Group Arns. Conflicts with capacity_reservation_ids.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   context:
                     description: Reserved.
                     type: string
@@ -1151,8 +1184,9 @@ spec:
                       in the Amazon EC2 Auto Scaling User Guide.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceLinkedRoleArn:
                     description: linked role that the ASG will use to call other AWS
@@ -1473,6 +1507,39 @@ spec:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
                     type: boolean
+                  capacityReservationSpecification:
+                    description: Demand Capacity Reservations. See Capacity Reservation
+                      Specification below for more details.
+                    items:
+                      properties:
+                        capacityReservationPreference:
+                          description: Capacity Reservation preference helps you use
+                            Capacity Reservations efficiently by prioritizing reserved
+                            capacity in a Capacity Reservation before using On-Demand
+                            capacity. Valid values are default, capacity-reservations-only,
+                            capacity-reservations-first and none. Default is default.
+                          type: string
+                        capacityReservationTarget:
+                          description: Describes a target Capacity Reservation or
+                            Capacity Reservation resource group.
+                          items:
+                            properties:
+                              capacityReservationIds:
+                                description: List of On-Demand Capacity Reservation
+                                  Ids. Conflicts with capacity_reservation_resource_group_arns.
+                                items:
+                                  type: string
+                                type: array
+                              capacityReservationResourceGroupArns:
+                                description: List of On-Demand Capacity Reservation
+                                  Resource Group Arns. Conflicts with capacity_reservation_ids.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   context:
                     description: Reserved.
                     type: string
@@ -3013,6 +3080,39 @@ spec:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
                     type: boolean
+                  capacityReservationSpecification:
+                    description: Demand Capacity Reservations. See Capacity Reservation
+                      Specification below for more details.
+                    items:
+                      properties:
+                        capacityReservationPreference:
+                          description: Capacity Reservation preference helps you use
+                            Capacity Reservations efficiently by prioritizing reserved
+                            capacity in a Capacity Reservation before using On-Demand
+                            capacity. Valid values are default, capacity-reservations-only,
+                            capacity-reservations-first and none. Default is default.
+                          type: string
+                        capacityReservationTarget:
+                          description: Describes a target Capacity Reservation or
+                            Capacity Reservation resource group.
+                          items:
+                            properties:
+                              capacityReservationIds:
+                                description: List of On-Demand Capacity Reservation
+                                  Ids. Conflicts with capacity_reservation_resource_group_arns.
+                                items:
+                                  type: string
+                                type: array
+                              capacityReservationResourceGroupArns:
+                                description: List of On-Demand Capacity Reservation
+                                  Resource Group Arns. Conflicts with capacity_reservation_ids.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   context:
                     description: Reserved.
                     type: string
@@ -3698,6 +3798,11 @@ spec:
                       in protection
                       in the Amazon EC2 Auto Scaling User Guide.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   serviceLinkedRoleArn:
                     description: linked role that the ASG will use to call other AWS
                       services
@@ -3978,6 +4083,39 @@ spec:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
                     type: boolean
+                  capacityReservationSpecification:
+                    description: Demand Capacity Reservations. See Capacity Reservation
+                      Specification below for more details.
+                    items:
+                      properties:
+                        capacityReservationPreference:
+                          description: Capacity Reservation preference helps you use
+                            Capacity Reservations efficiently by prioritizing reserved
+                            capacity in a Capacity Reservation before using On-Demand
+                            capacity. Valid values are default, capacity-reservations-only,
+                            capacity-reservations-first and none. Default is default.
+                          type: string
+                        capacityReservationTarget:
+                          description: Describes a target Capacity Reservation or
+                            Capacity Reservation resource group.
+                          items:
+                            properties:
+                              capacityReservationIds:
+                                description: List of On-Demand Capacity Reservation
+                                  Ids. Conflicts with capacity_reservation_resource_group_arns.
+                                items:
+                                  type: string
+                                type: array
+                              capacityReservationResourceGroupArns:
+                                description: List of On-Demand Capacity Reservation
+                                  Resource Group Arns. Conflicts with capacity_reservation_ids.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   context:
                     description: Reserved.
                     type: string
@@ -5035,8 +5173,9 @@ spec:
                       in the Amazon EC2 Auto Scaling User Guide.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceLinkedRoleArn:
                     description: ARN of the service-linked role that the ASG will
@@ -5352,6 +5491,39 @@ spec:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
                     type: boolean
+                  capacityReservationSpecification:
+                    description: Demand Capacity Reservations. See Capacity Reservation
+                      Specification below for more details.
+                    items:
+                      properties:
+                        capacityReservationPreference:
+                          description: Capacity Reservation preference helps you use
+                            Capacity Reservations efficiently by prioritizing reserved
+                            capacity in a Capacity Reservation before using On-Demand
+                            capacity. Valid values are default, capacity-reservations-only,
+                            capacity-reservations-first and none. Default is default.
+                          type: string
+                        capacityReservationTarget:
+                          description: Describes a target Capacity Reservation or
+                            Capacity Reservation resource group.
+                          items:
+                            properties:
+                              capacityReservationIds:
+                                description: List of On-Demand Capacity Reservation
+                                  Ids. Conflicts with capacity_reservation_resource_group_arns.
+                                items:
+                                  type: string
+                                type: array
+                              capacityReservationResourceGroupArns:
+                                description: List of On-Demand Capacity Reservation
+                                  Resource Group Arns. Conflicts with capacity_reservation_ids.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   context:
                     description: Reserved.
                     type: string
@@ -6891,6 +7063,39 @@ spec:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
                     type: boolean
+                  capacityReservationSpecification:
+                    description: Demand Capacity Reservations. See Capacity Reservation
+                      Specification below for more details.
+                    items:
+                      properties:
+                        capacityReservationPreference:
+                          description: Capacity Reservation preference helps you use
+                            Capacity Reservations efficiently by prioritizing reserved
+                            capacity in a Capacity Reservation before using On-Demand
+                            capacity. Valid values are default, capacity-reservations-only,
+                            capacity-reservations-first and none. Default is default.
+                          type: string
+                        capacityReservationTarget:
+                          description: Describes a target Capacity Reservation or
+                            Capacity Reservation resource group.
+                          items:
+                            properties:
+                              capacityReservationIds:
+                                description: List of On-Demand Capacity Reservation
+                                  Ids. Conflicts with capacity_reservation_resource_group_arns.
+                                items:
+                                  type: string
+                                type: array
+                              capacityReservationResourceGroupArns:
+                                description: List of On-Demand Capacity Reservation
+                                  Resource Group Arns. Conflicts with capacity_reservation_ids.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   context:
                     description: Reserved.
                     type: string
@@ -7580,6 +7785,11 @@ spec:
                       on scale in, see Using instance scale-in protection
                       in the Amazon EC2 Auto Scaling User Guide.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   serviceLinkedRoleArn:
                     description: ARN of the service-linked role that the ASG will
                       use to call other AWS services

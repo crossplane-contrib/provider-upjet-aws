@@ -428,8 +428,9 @@ spec:
                       type: string
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicasPerNodeGroup:
                     description: |-
@@ -1655,6 +1656,11 @@ spec:
                   readerEndpointAddress:
                     description: (Redis only) Address of the endpoint for the reader
                       node in the replication group, if the cluster mode is disabled.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicasPerNodeGroup:
                     description: |-
