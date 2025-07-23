@@ -73,17 +73,17 @@ spec:
               forProvider:
                 properties:
                   command:
-                    description: –  The command of the job. Defined below.
+                    description: The command of the job. Defined below.
                     items:
                       properties:
                         name:
-                          description: –  The name you assign to this job. It must
-                            be unique in your account.
+                          description: The name you assign to this job. It must be
+                            unique in your account.
                           type: string
                         pythonVersion:
                           description: The Python version being used to execute a
                             Python shell job. Allowed values are 2, 3 or 3.9. Version
-                            3 refers to Python 3.6.
+                            3 refers to Python 3.11 when glue_version is set to 5.0.
                           type: string
                         runtime:
                           description: In Ray jobs, runtime is used to specify the
@@ -99,24 +99,103 @@ spec:
                       type: object
                     type: array
                   connections:
-                    description: –  The list of connections used for this job.
+                    description: The list of connections used for this job.
                     items:
                       type: string
                     type: array
+                  connectionsRefs:
+                    description: References to Connection in glue to populate connections.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  connectionsSelector:
+                    description: Selector for a list of Connection in glue to populate
+                      connections.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   defaultArguments:
                     additionalProperties:
                       type: string
-                    description: execution script consumes, as well as arguments that
-                      AWS Glue itself consumes. For information about how to specify
-                      and consume your own Job arguments, see the Calling AWS Glue
-                      APIs in Python topic in the developer guide. For information
-                      about the key-value pairs that AWS Glue consumes to set up your
-                      job, see the Special Parameters Used by AWS Glue topic in the
-                      developer guide.
+                    description: The map of default arguments for this job. You can
+                      specify arguments here that your own job-execution script consumes,
+                      as well as arguments that AWS Glue itself consumes. For information
+                      about how to specify and consume your own Job arguments, see
+                      the Calling AWS Glue APIs in Python topic in the developer guide.
+                      For information about the key-value pairs that AWS Glue consumes
+                      to set up your job, see the Special Parameters Used by AWS Glue
+                      topic in the developer guide.
                     type: object
                     x-kubernetes-map-type: granular
                   description:
-                    description: –  Description of the job.
+                    description: Description of the job.
                     type: string
                   executionClass:
                     description: 'Indicates whether the job is run with a standard
@@ -125,7 +204,7 @@ spec:
                       and dedicated resources. Valid value: FLEX, STANDARD.'
                     type: string
                   executionProperty:
-                    description: –  Execution property of the job. Defined below.
+                    description: Execution property of the job. Defined below.
                     items:
                       properties:
                         maxConcurrentRuns:
@@ -146,25 +225,25 @@ spec:
                       job runs will not be considered for queueing.
                     type: boolean
                   maintenanceWindow:
-                    description: –  Specifies the day of the week and hour for the
-                      maintenance window for streaming jobs.
+                    description: Specifies the day of the week and hour for the maintenance
+                      window for streaming jobs.
                     type: string
                   maxCapacity:
-                    description: –  The maximum number of AWS Glue data processing
-                      units (DPUs) that can be allocated when this job runs. Required
-                      when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
+                    description: The maximum number of AWS Glue data processing units
+                      (DPUs) that can be allocated when this job runs. Required when
+                      pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
                       and worker_type arguments instead with glue_version 2.0 and
                       above.
                     type: number
                   maxRetries:
-                    description: –  The maximum number of times to retry this job
-                      if it fails.
+                    description: The maximum number of times to retry this job if
+                      it fails.
                     type: number
                   nonOverridableArguments:
                     additionalProperties:
                       type: string
-                    description: overridable arguments for this job, specified as
-                      name-value pairs.
+                    description: Non-overridable arguments for this job, specified
+                      as name-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   notificationProperty:
@@ -182,11 +261,12 @@ spec:
                       are allocated when a job runs.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: –  The ARN of the IAM role associated with this job.
+                    description: The ARN of the IAM role associated with this job.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -266,6 +346,59 @@ spec:
                     description: The name of the Security Configuration to be associated
                       with the job.
                     type: string
+                  sourceControlDetails:
+                    description: The details for a source control configuration for
+                      a job, allowing synchronization of job artifacts to or from
+                      a remote repository. Defined below.
+                    items:
+                      properties:
+                        authStrategy:
+                          description: 'The type of authentication, which can be an
+                            authentication token stored in Amazon Web Services Secrets
+                            Manager, or a personal access token. Valid values are:
+                            PERSONAL_ACCESS_TOKEN and AWS_SECRETS_MANAGER.'
+                          type: string
+                        authTokenSecretRef:
+                          description: The value of an authorization token.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        branch:
+                          description: A branch in the remote repository.
+                          type: string
+                        folder:
+                          description: A folder in the remote repository.
+                          type: string
+                        lastCommitId:
+                          description: The last commit ID for a commit in the remote
+                            repository.
+                          type: string
+                        owner:
+                          description: The owner of the remote repository that contains
+                            the job artifacts.
+                          type: string
+                        provider:
+                          description: 'The provider for the remote repository. Valid
+                            values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
+                          type: string
+                        repository:
+                          description: The name of the remote repository that contains
+                            the job artifacts.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -273,9 +406,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: –  The job timeout in minutes. The default is 2880
-                      minutes (48 hours) for glueetl and pythonshell jobs, and null
-                      (unlimited) for gluestreaming jobs.
+                    description: The job timeout in minutes. The default is 2880 minutes
+                      (48 hours) for glueetl and pythonshell jobs, and null (unlimited)
+                      for gluestreaming jobs.
                     type: number
                   workerType:
                     description: The type of predefined worker that is allocated when
@@ -299,17 +432,17 @@ spec:
                   autoscaler.
                 properties:
                   command:
-                    description: –  The command of the job. Defined below.
+                    description: The command of the job. Defined below.
                     items:
                       properties:
                         name:
-                          description: –  The name you assign to this job. It must
-                            be unique in your account.
+                          description: The name you assign to this job. It must be
+                            unique in your account.
                           type: string
                         pythonVersion:
                           description: The Python version being used to execute a
                             Python shell job. Allowed values are 2, 3 or 3.9. Version
-                            3 refers to Python 3.6.
+                            3 refers to Python 3.11 when glue_version is set to 5.0.
                           type: string
                         runtime:
                           description: In Ray jobs, runtime is used to specify the
@@ -325,24 +458,103 @@ spec:
                       type: object
                     type: array
                   connections:
-                    description: –  The list of connections used for this job.
+                    description: The list of connections used for this job.
                     items:
                       type: string
                     type: array
+                  connectionsRefs:
+                    description: References to Connection in glue to populate connections.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  connectionsSelector:
+                    description: Selector for a list of Connection in glue to populate
+                      connections.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   defaultArguments:
                     additionalProperties:
                       type: string
-                    description: execution script consumes, as well as arguments that
-                      AWS Glue itself consumes. For information about how to specify
-                      and consume your own Job arguments, see the Calling AWS Glue
-                      APIs in Python topic in the developer guide. For information
-                      about the key-value pairs that AWS Glue consumes to set up your
-                      job, see the Special Parameters Used by AWS Glue topic in the
-                      developer guide.
+                    description: The map of default arguments for this job. You can
+                      specify arguments here that your own job-execution script consumes,
+                      as well as arguments that AWS Glue itself consumes. For information
+                      about how to specify and consume your own Job arguments, see
+                      the Calling AWS Glue APIs in Python topic in the developer guide.
+                      For information about the key-value pairs that AWS Glue consumes
+                      to set up your job, see the Special Parameters Used by AWS Glue
+                      topic in the developer guide.
                     type: object
                     x-kubernetes-map-type: granular
                   description:
-                    description: –  Description of the job.
+                    description: Description of the job.
                     type: string
                   executionClass:
                     description: 'Indicates whether the job is run with a standard
@@ -351,7 +563,7 @@ spec:
                       and dedicated resources. Valid value: FLEX, STANDARD.'
                     type: string
                   executionProperty:
-                    description: –  Execution property of the job. Defined below.
+                    description: Execution property of the job. Defined below.
                     items:
                       properties:
                         maxConcurrentRuns:
@@ -372,25 +584,25 @@ spec:
                       job runs will not be considered for queueing.
                     type: boolean
                   maintenanceWindow:
-                    description: –  Specifies the day of the week and hour for the
-                      maintenance window for streaming jobs.
+                    description: Specifies the day of the week and hour for the maintenance
+                      window for streaming jobs.
                     type: string
                   maxCapacity:
-                    description: –  The maximum number of AWS Glue data processing
-                      units (DPUs) that can be allocated when this job runs. Required
-                      when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
+                    description: The maximum number of AWS Glue data processing units
+                      (DPUs) that can be allocated when this job runs. Required when
+                      pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
                       and worker_type arguments instead with glue_version 2.0 and
                       above.
                     type: number
                   maxRetries:
-                    description: –  The maximum number of times to retry this job
-                      if it fails.
+                    description: The maximum number of times to retry this job if
+                      it fails.
                     type: number
                   nonOverridableArguments:
                     additionalProperties:
                       type: string
-                    description: overridable arguments for this job, specified as
-                      name-value pairs.
+                    description: Non-overridable arguments for this job, specified
+                      as name-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   notificationProperty:
@@ -408,7 +620,7 @@ spec:
                       are allocated when a job runs.
                     type: number
                   roleArn:
-                    description: –  The ARN of the IAM role associated with this job.
+                    description: The ARN of the IAM role associated with this job.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -488,6 +700,59 @@ spec:
                     description: The name of the Security Configuration to be associated
                       with the job.
                     type: string
+                  sourceControlDetails:
+                    description: The details for a source control configuration for
+                      a job, allowing synchronization of job artifacts to or from
+                      a remote repository. Defined below.
+                    items:
+                      properties:
+                        authStrategy:
+                          description: 'The type of authentication, which can be an
+                            authentication token stored in Amazon Web Services Secrets
+                            Manager, or a personal access token. Valid values are:
+                            PERSONAL_ACCESS_TOKEN and AWS_SECRETS_MANAGER.'
+                          type: string
+                        authTokenSecretRef:
+                          description: The value of an authorization token.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        branch:
+                          description: A branch in the remote repository.
+                          type: string
+                        folder:
+                          description: A folder in the remote repository.
+                          type: string
+                        lastCommitId:
+                          description: The last commit ID for a commit in the remote
+                            repository.
+                          type: string
+                        owner:
+                          description: The owner of the remote repository that contains
+                            the job artifacts.
+                          type: string
+                        provider:
+                          description: 'The provider for the remote repository. Valid
+                            values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
+                          type: string
+                        repository:
+                          description: The name of the remote repository that contains
+                            the job artifacts.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -495,9 +760,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: –  The job timeout in minutes. The default is 2880
-                      minutes (48 hours) for glueetl and pythonshell jobs, and null
-                      (unlimited) for gluestreaming jobs.
+                    description: The job timeout in minutes. The default is 2880 minutes
+                      (48 hours) for glueetl and pythonshell jobs, and null (unlimited)
+                      for gluestreaming jobs.
                     type: number
                   workerType:
                     description: The type of predefined worker that is allocated when
@@ -686,17 +951,17 @@ spec:
                     description: Amazon Resource Name (ARN) of Glue Job
                     type: string
                   command:
-                    description: –  The command of the job. Defined below.
+                    description: The command of the job. Defined below.
                     items:
                       properties:
                         name:
-                          description: –  The name you assign to this job. It must
-                            be unique in your account.
+                          description: The name you assign to this job. It must be
+                            unique in your account.
                           type: string
                         pythonVersion:
                           description: The Python version being used to execute a
                             Python shell job. Allowed values are 2, 3 or 3.9. Version
-                            3 refers to Python 3.6.
+                            3 refers to Python 3.11 when glue_version is set to 5.0.
                           type: string
                         runtime:
                           description: In Ray jobs, runtime is used to specify the
@@ -712,24 +977,25 @@ spec:
                       type: object
                     type: array
                   connections:
-                    description: –  The list of connections used for this job.
+                    description: The list of connections used for this job.
                     items:
                       type: string
                     type: array
                   defaultArguments:
                     additionalProperties:
                       type: string
-                    description: execution script consumes, as well as arguments that
-                      AWS Glue itself consumes. For information about how to specify
-                      and consume your own Job arguments, see the Calling AWS Glue
-                      APIs in Python topic in the developer guide. For information
-                      about the key-value pairs that AWS Glue consumes to set up your
-                      job, see the Special Parameters Used by AWS Glue topic in the
-                      developer guide.
+                    description: The map of default arguments for this job. You can
+                      specify arguments here that your own job-execution script consumes,
+                      as well as arguments that AWS Glue itself consumes. For information
+                      about how to specify and consume your own Job arguments, see
+                      the Calling AWS Glue APIs in Python topic in the developer guide.
+                      For information about the key-value pairs that AWS Glue consumes
+                      to set up your job, see the Special Parameters Used by AWS Glue
+                      topic in the developer guide.
                     type: object
                     x-kubernetes-map-type: granular
                   description:
-                    description: –  Description of the job.
+                    description: Description of the job.
                     type: string
                   executionClass:
                     description: 'Indicates whether the job is run with a standard
@@ -738,7 +1004,7 @@ spec:
                       and dedicated resources. Valid value: FLEX, STANDARD.'
                     type: string
                   executionProperty:
-                    description: –  Execution property of the job. Defined below.
+                    description: Execution property of the job. Defined below.
                     items:
                       properties:
                         maxConcurrentRuns:
@@ -762,25 +1028,25 @@ spec:
                       job runs will not be considered for queueing.
                     type: boolean
                   maintenanceWindow:
-                    description: –  Specifies the day of the week and hour for the
-                      maintenance window for streaming jobs.
+                    description: Specifies the day of the week and hour for the maintenance
+                      window for streaming jobs.
                     type: string
                   maxCapacity:
-                    description: –  The maximum number of AWS Glue data processing
-                      units (DPUs) that can be allocated when this job runs. Required
-                      when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
+                    description: The maximum number of AWS Glue data processing units
+                      (DPUs) that can be allocated when this job runs. Required when
+                      pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
                       and worker_type arguments instead with glue_version 2.0 and
                       above.
                     type: number
                   maxRetries:
-                    description: –  The maximum number of times to retry this job
-                      if it fails.
+                    description: The maximum number of times to retry this job if
+                      it fails.
                     type: number
                   nonOverridableArguments:
                     additionalProperties:
                       type: string
-                    description: overridable arguments for this job, specified as
-                      name-value pairs.
+                    description: Non-overridable arguments for this job, specified
+                      as name-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   notificationProperty:
@@ -797,13 +1063,54 @@ spec:
                     description: The number of workers of a defined workerType that
                       are allocated when a job runs.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
-                    description: –  The ARN of the IAM role associated with this job.
+                    description: The ARN of the IAM role associated with this job.
                     type: string
                   securityConfiguration:
                     description: The name of the Security Configuration to be associated
                       with the job.
                     type: string
+                  sourceControlDetails:
+                    description: The details for a source control configuration for
+                      a job, allowing synchronization of job artifacts to or from
+                      a remote repository. Defined below.
+                    items:
+                      properties:
+                        authStrategy:
+                          description: 'The type of authentication, which can be an
+                            authentication token stored in Amazon Web Services Secrets
+                            Manager, or a personal access token. Valid values are:
+                            PERSONAL_ACCESS_TOKEN and AWS_SECRETS_MANAGER.'
+                          type: string
+                        branch:
+                          description: A branch in the remote repository.
+                          type: string
+                        folder:
+                          description: A folder in the remote repository.
+                          type: string
+                        lastCommitId:
+                          description: The last commit ID for a commit in the remote
+                            repository.
+                          type: string
+                        owner:
+                          description: The owner of the remote repository that contains
+                            the job artifacts.
+                          type: string
+                        provider:
+                          description: 'The provider for the remote repository. Valid
+                            values are: GITHUB, GITLAB, BITBUCKET, and AWS_CODE_COMMIT.'
+                          type: string
+                        repository:
+                          description: The name of the remote repository that contains
+                            the job artifacts.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -819,9 +1126,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
-                    description: –  The job timeout in minutes. The default is 2880
-                      minutes (48 hours) for glueetl and pythonshell jobs, and null
-                      (unlimited) for gluestreaming jobs.
+                    description: The job timeout in minutes. The default is 2880 minutes
+                      (48 hours) for glueetl and pythonshell jobs, and null (unlimited)
+                      for gluestreaming jobs.
                     type: number
                   workerType:
                     description: The type of predefined worker that is allocated when

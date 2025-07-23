@@ -111,18 +111,12 @@ spec:
                   name:
                     description: The name of the accelerator.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -359,6 +353,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The Amazon Resource Name (ARN) of the accelerator.
+                    type: string
                   attributes:
                     description: The attributes of the accelerator. Fields documented
                       below.

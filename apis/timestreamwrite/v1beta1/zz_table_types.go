@@ -218,7 +218,7 @@ type TableObservation struct {
 	// The ARN that uniquely identifies this table.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  The name of the Timestream database.
+	// The name of the Timestream database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The table_name and database_name separated by a colon (:).
@@ -226,6 +226,10 @@ type TableObservation struct {
 
 	// Contains properties to set on the table when enabling magnetic store writes. See Magnetic Store Write Properties below for more details.
 	MagneticStoreWriteProperties []MagneticStoreWritePropertiesObservation `json:"magneticStoreWriteProperties,omitempty" tf:"magnetic_store_write_properties,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
 	RetentionProperties []RetentionPropertiesObservation `json:"retentionProperties,omitempty" tf:"retention_properties,omitempty"`
@@ -247,7 +251,7 @@ type TableObservation struct {
 
 type TableParameters struct {
 
-	// –  The name of the Timestream database.
+	// The name of the Timestream database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -264,10 +268,10 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	MagneticStoreWriteProperties []MagneticStoreWritePropertiesParameters `json:"magneticStoreWriteProperties,omitempty" tf:"magnetic_store_write_properties,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
 	// +kubebuilder:validation:Optional

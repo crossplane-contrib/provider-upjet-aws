@@ -1970,6 +1970,11 @@ func (in *CustomizedMetricSpecificationInitParameters) DeepCopyInto(out *Customi
 		*out = new(string)
 		**out = **in
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Statistic != nil {
 		in, out := &in.Statistic, &out.Statistic
 		*out = new(string)
@@ -2019,6 +2024,11 @@ func (in *CustomizedMetricSpecificationObservation) DeepCopyInto(out *Customized
 		*out = new(string)
 		**out = **in
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Statistic != nil {
 		in, out := &in.Statistic, &out.Statistic
 		*out = new(string)
@@ -2066,6 +2076,11 @@ func (in *CustomizedMetricSpecificationParameters) DeepCopyInto(out *CustomizedM
 	if in.Namespace != nil {
 		in, out := &in.Namespace, &out.Namespace
 		*out = new(string)
+		**out = **in
+	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Statistic != nil {
@@ -2829,6 +2844,11 @@ func (in *GroupTagObservation) DeepCopyInto(out *GroupTagObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4394,6 +4414,11 @@ func (in *LaunchConfigurationObservation) DeepCopyInto(out *LaunchConfigurationO
 	}
 	if in.PlacementTenancy != nil {
 		in, out := &in.PlacementTenancy, &out.PlacementTenancy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -6404,6 +6429,11 @@ func (in *MetricsMetricStatInitParameters) DeepCopyInto(out *MetricsMetricStatIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Stat != nil {
 		in, out := &in.Stat, &out.Stat
 		*out = new(string)
@@ -6607,6 +6637,11 @@ func (in *MetricsMetricStatObservation) DeepCopyInto(out *MetricsMetricStatObser
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Stat != nil {
 		in, out := &in.Stat, &out.Stat
 		*out = new(string)
@@ -6638,6 +6673,11 @@ func (in *MetricsMetricStatParameters) DeepCopyInto(out *MetricsMetricStatParame
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Stat != nil {
 		in, out := &in.Stat, &out.Stat
@@ -7769,6 +7809,11 @@ func (in *PolicyObservation) DeepCopyInto(out *PolicyObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScalingAdjustment != nil {
 		in, out := &in.ScalingAdjustment, &out.ScalingAdjustment

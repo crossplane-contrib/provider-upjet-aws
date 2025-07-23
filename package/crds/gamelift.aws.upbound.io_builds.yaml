@@ -82,8 +82,9 @@ spec:
                       WINDOWS_2016, AMAZON_LINUX_2023.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   storageLocation:
                     description: Information indicating where your game build files
@@ -814,6 +815,11 @@ spec:
                     description: 'Operating system that the game server binaries are
                       built to run on. Valid values: WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2,
                       WINDOWS_2016, AMAZON_LINUX_2023.'
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   storageLocation:
                     description: Information indicating where your game build files

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: DeviceFleet is the Schema for the DeviceFleets API. Provides
-          a SageMaker Device Fleet resource.
+          a SageMaker AI Device Fleet resource.
         properties:
           apiVersion:
             description: |-
@@ -88,9 +88,9 @@ spec:
                       properties:
                         kmsKeyId:
                           description: The AWS Key Management Service (AWS KMS) key
-                            that Amazon SageMaker uses to encrypt data on the storage
+                            that Amazon SageMaker AI uses to encrypt data on the storage
                             volume after compilation job. If you don't provide a KMS
-                            key ID, Amazon SageMaker uses the default KMS key for
+                            key ID, Amazon SageMaker AI uses the default KMS key for
                             Amazon S3 for your role's account.
                           type: string
                         s3OutputLocation:
@@ -99,8 +99,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) that has access to
@@ -217,9 +218,9 @@ spec:
                       properties:
                         kmsKeyId:
                           description: The AWS Key Management Service (AWS KMS) key
-                            that Amazon SageMaker uses to encrypt data on the storage
+                            that Amazon SageMaker AI uses to encrypt data on the storage
                             volume after compilation job. If you don't provide a KMS
-                            key ID, Amazon SageMaker uses the default KMS key for
+                            key ID, Amazon SageMaker AI uses the default KMS key for
                             Amazon S3 for your role's account.
                           type: string
                         s3OutputLocation:
@@ -513,9 +514,9 @@ spec:
                       properties:
                         kmsKeyId:
                           description: The AWS Key Management Service (AWS KMS) key
-                            that Amazon SageMaker uses to encrypt data on the storage
+                            that Amazon SageMaker AI uses to encrypt data on the storage
                             volume after compilation job. If you don't provide a KMS
-                            key ID, Amazon SageMaker uses the default KMS key for
+                            key ID, Amazon SageMaker AI uses the default KMS key for
                             Amazon S3 for your role's account.
                           type: string
                         s3OutputLocation:
@@ -523,6 +524,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) that has access to
                       AWS Internet of Things (IoT).

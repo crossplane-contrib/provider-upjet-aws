@@ -15,10 +15,10 @@ import (
 
 type AppMonitorConfigurationInitParameters struct {
 
-	// If you set this to true, RUM web client sets two cookies, a session cookie  and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
+	// If you set this to true, RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
 	AllowCookies *bool `json:"allowCookies,omitempty" tf:"allow_cookies,omitempty"`
 
-	// If you set this to true, RUM enables X-Ray tracing for the user sessions  that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests.
+	// If you set this to true, RUM enables X-Ray tracing for the user sessions that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests.
 	EnableXray *bool `json:"enableXray,omitempty" tf:"enable_xray,omitempty"`
 
 	// A list of URLs in your website or application to exclude from RUM data collection.
@@ -49,10 +49,10 @@ type AppMonitorConfigurationInitParameters struct {
 
 type AppMonitorConfigurationObservation struct {
 
-	// If you set this to true, RUM web client sets two cookies, a session cookie  and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
+	// If you set this to true, RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
 	AllowCookies *bool `json:"allowCookies,omitempty" tf:"allow_cookies,omitempty"`
 
-	// If you set this to true, RUM enables X-Ray tracing for the user sessions  that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests.
+	// If you set this to true, RUM enables X-Ray tracing for the user sessions that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests.
 	EnableXray *bool `json:"enableXray,omitempty" tf:"enable_xray,omitempty"`
 
 	// A list of URLs in your website or application to exclude from RUM data collection.
@@ -83,11 +83,11 @@ type AppMonitorConfigurationObservation struct {
 
 type AppMonitorConfigurationParameters struct {
 
-	// If you set this to true, RUM web client sets two cookies, a session cookie  and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
+	// If you set this to true, RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
 	// +kubebuilder:validation:Optional
 	AllowCookies *bool `json:"allowCookies,omitempty" tf:"allow_cookies,omitempty"`
 
-	// If you set this to true, RUM enables X-Ray tracing for the user sessions  that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests.
+	// If you set this to true, RUM enables X-Ray tracing for the user sessions that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests.
 	// +kubebuilder:validation:Optional
 	EnableXray *bool `json:"enableXray,omitempty" tf:"enable_xray,omitempty"`
 
@@ -132,11 +132,14 @@ type AppMonitorInitParameters struct {
 	// Specifies whether this app monitor allows the web client to define and send custom events. If you omit this parameter, custom events are DISABLED. See custom_events below.
 	CustomEvents []CustomEventsInitParameters `json:"customEvents,omitempty" tf:"custom_events,omitempty"`
 
-	// Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter  specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges. Default value is false.
+	// Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges. Default value is false.
 	CwLogEnabled *bool `json:"cwLogEnabled,omitempty" tf:"cw_log_enabled,omitempty"`
 
-	// The top-level internet domain name for which your application has administrative authority.
+	// The top-level internet domain name for which your application has administrative authority. Exactly one of domain or domain_list must be specified.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// A list of internet domain names for which your application has administrative authority. Exactly one of domain or domain_list must be specified.
+	DomainList []*string `json:"domainList,omitempty" tf:"domain_list,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -157,17 +160,24 @@ type AppMonitorObservation struct {
 	// Specifies whether this app monitor allows the web client to define and send custom events. If you omit this parameter, custom events are DISABLED. See custom_events below.
 	CustomEvents []CustomEventsObservation `json:"customEvents,omitempty" tf:"custom_events,omitempty"`
 
-	// Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter  specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges. Default value is false.
+	// Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges. Default value is false.
 	CwLogEnabled *bool `json:"cwLogEnabled,omitempty" tf:"cw_log_enabled,omitempty"`
 
 	// The name of the log group where the copies are stored.
 	CwLogGroup *string `json:"cwLogGroup,omitempty" tf:"cw_log_group,omitempty"`
 
-	// The top-level internet domain name for which your application has administrative authority.
+	// The top-level internet domain name for which your application has administrative authority. Exactly one of domain or domain_list must be specified.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// A list of internet domain names for which your application has administrative authority. Exactly one of domain or domain_list must be specified.
+	DomainList []*string `json:"domainList,omitempty" tf:"domain_list,omitempty"`
 
 	// The CloudWatch RUM name as it is the identifier of a RUM.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -188,18 +198,22 @@ type AppMonitorParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomEvents []CustomEventsParameters `json:"customEvents,omitempty" tf:"custom_events,omitempty"`
 
-	// Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter  specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges. Default value is false.
+	// Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges. Default value is false.
 	// +kubebuilder:validation:Optional
 	CwLogEnabled *bool `json:"cwLogEnabled,omitempty" tf:"cw_log_enabled,omitempty"`
 
-	// The top-level internet domain name for which your application has administrative authority.
+	// The top-level internet domain name for which your application has administrative authority. Exactly one of domain or domain_list must be specified.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// A list of internet domain names for which your application has administrative authority. Exactly one of domain or domain_list must be specified.
+	// +kubebuilder:validation:Optional
+	DomainList []*string `json:"domainList,omitempty" tf:"domain_list,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -262,9 +276,8 @@ type AppMonitorStatus struct {
 type AppMonitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domain) || (has(self.initProvider) && has(self.initProvider.domain))",message="spec.forProvider.domain is a required parameter"
-	Spec   AppMonitorSpec   `json:"spec"`
-	Status AppMonitorStatus `json:"status,omitempty"`
+	Spec              AppMonitorSpec   `json:"spec"`
+	Status            AppMonitorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

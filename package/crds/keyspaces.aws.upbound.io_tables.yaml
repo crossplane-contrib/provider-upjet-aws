@@ -227,8 +227,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   schemaDefinition:
                     description: Describes the schema of the table.
@@ -813,6 +814,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schemaDefinition:
                     description: Describes the schema of the table.
                     items:

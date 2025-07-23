@@ -34,10 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Function is the Schema for the Functions API. Provides a Lambda
-          Function resource. Lambda allows you to trigger execution of code in response
-          to events in AWS, enabling serverless backend solutions. The Lambda Function
-          itself includes source code and runtime configuration.
+        description: Function is the Schema for the Functions API. Manages an AWS
+          Lambda Function.
         properties:
           apiVersion:
             description: |-
@@ -78,69 +76,132 @@ spec:
                   architectures:
                     description: Instruction set architecture for your Lambda function.
                       Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"].
-                      Removing this attribute, function's architecture stay the same.
+                      Removing this attribute, function's architecture stays the same.
                     items:
                       type: string
                     type: array
                   codeSigningConfigArn:
-                    description: To enable code signing for this function, specify
-                      the ARN of a code-signing configuration. A code-signing configuration
-                      includes a set of signing profiles, which define the trusted
-                      publishers for this function.
+                    description: ARN of a code-signing configuration to enable code
+                      signing for this function.
                     type: string
                   deadLetterConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for dead letter queue. See below.
                     items:
                       properties:
                         targetArn:
                           description: ARN of an SNS topic or SQS queue to notify
-                            when an invocation fails. If this option is used, the
-                            function's IAM role must be granted suitable access to
-                            write to the target object, which means allowing either
-                            the sns:Publish or sqs:SendMessage action on this ARN,
-                            depending on which service is targeted.
+                            when an invocation fails.
                           type: string
+                        targetArnRef:
+                          description: Reference to a Queue in sqs to populate targetArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        targetArnSelector:
+                          description: Selector for a Queue in sqs to populate targetArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   description:
                     description: Description of what your Lambda Function does.
                     type: string
                   environment:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for environment variables. See
+                      below.
                     items:
                       properties:
                         variables:
                           additionalProperties:
                             type: string
-                          description: Map of environment variables that are accessible
-                            from the function code during execution. If provided at
-                            least one key must be present.
+                          description: Map of environment variables available to your
+                            Lambda function during execution.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
                     type: array
                   ephemeralStorage:
-                    description: The amount of Ephemeral storage(/tmp) to allocate
-                      for the Lambda Function in MB. This parameter is used to expand
-                      the total amount of Ephemeral storage available, beyond the
-                      default amount of 512MB. Detailed below.
+                    description: Amount of ephemeral storage (/tmp) to allocate for
+                      the Lambda Function. See below.
                     items:
                       properties:
                         size:
-                          description: The size of the Lambda function Ephemeral storage(/tmp)
-                            represented in MB. The minimum supported ephemeral_storage
-                            value defaults to 512MB and the maximum supported value
-                            is 10240MB.
+                          description: Amount of ephemeral storage (/tmp) in MB. Valid
+                            between 512 MB and 10,240 MB (10 GB).
                           type: number
                       type: object
                     type: array
                   fileSystemConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for EFS file system. See below.
                     items:
                       properties:
                         arn:
-                          description: Amazon Resource Name (ARN) of the Amazon EFS
-                            Access Point that provides access to the file system.
+                          description: ARN of the Amazon EFS Access Point.
                           type: string
                         arnRef:
                           description: Reference to a AccessPoint in efs to populate
@@ -220,44 +281,44 @@ spec:
                           type: object
                         localMountPath:
                           description: Path where the function can access the file
-                            system, starting with /mnt/.
+                            system. Must start with /mnt/.
                           type: string
                       type: object
                     type: array
                   handler:
-                    description: Function entrypoint in your code.
+                    description: Function entry point in your code. Required if package_type
+                      is Zip.
                     type: string
                   imageConfig:
-                    description: Configuration block. Detailed below.
+                    description: Container image configuration values. See below.
                     items:
                       properties:
                         command:
-                          description: Parameters that you want to pass in with entry_point.
+                          description: Parameters to pass to the container image.
                           items:
                             type: string
                           type: array
                         entryPoint:
-                          description: Entry point to your application, which is typically
-                            the location of the runtime executable.
+                          description: Entry point to your application.
                           items:
                             type: string
                           type: array
                         workingDirectory:
-                          description: Working directory.
+                          description: Working directory for the container image.
                           type: string
                       type: object
                     type: array
                   imageUri:
                     description: ECR image URI containing the function's deployment
-                      package. Exactly one of filename, image_uri,  or s3_bucket must
-                      be specified.
+                      package. Conflicts with filename and s3_bucket. One of filename,
+                      image_uri, or s3_bucket must be specified.
                     type: string
                   kmsKeyArn:
-                    description: Amazon Resource Name (ARN) of the AWS Key Management
-                      Service (KMS) key that is used to encrypt environment variables.
-                      If this configuration is not provided when environment variables
-                      are in use, AWS Lambda uses a default service key. To fix the
-                      perpetual difference, remove this configuration.
+                    description: ARN of the AWS Key Management Service key used to
+                      encrypt environment variables. If not provided when environment
+                      variables are in use, AWS Lambda uses a default service key.
+                      If provided when environment variables are not in use, the AWS
+                      Lambda API does not save this configuration.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -335,7 +396,7 @@ spec:
                     type: object
                   layers:
                     description: List of Lambda Layer Version ARNs (maximum of 5)
-                      to attach to your Lambda Function. See Lambda Layers
+                      to attach to your Lambda Function.
                     items:
                       type: string
                     type: array
@@ -419,33 +480,30 @@ spec:
                         type: object
                     type: object
                   loggingConfig:
-                    description: Configuration block used to specify advanced logging
-                      settings. Detailed below.
+                    description: Configuration block for advanced logging settings.
+                      See below.
                     items:
                       properties:
                         applicationLogLevel:
-                          description: for JSON structured logs, choose the detail
-                            level of the logs your application sends to CloudWatch
-                            when using supported logging libraries.
+                          description: 'Detail level of application logs. Valid values:
+                            TRACE, DEBUG, INFO, WARN, ERROR, FATAL.'
                           type: string
                         logFormat:
-                          description: select between Text and structured JSON format
-                            for your function's logs.
+                          description: 'Log format. Valid values: Text, JSON.'
                           type: string
                         logGroup:
-                          description: the CloudWatch log group your function sends
-                            logs to.
+                          description: CloudWatch log group where logs are sent.
                           type: string
                         systemLogLevel:
-                          description: for JSON structured logs, choose the detail
-                            level of the Lambda platform event logs sent to CloudWatch,
-                            such as ERROR, DEBUG, or INFO.
+                          description: 'Detail level of Lambda platform logs. Valid
+                            values: DEBUG, INFO, WARN.'
                           type: string
                       type: object
                     type: array
                   memorySize:
                     description: Amount of memory in MB your Lambda Function can use
-                      at runtime. Defaults to 128. See Limits
+                      at runtime. Valid value between 128 MB to 10,240 MB (10 GB),
+                      in 1 MB increments. Defaults to 128.
                     type: number
                   packageType:
                     description: Lambda deployment package type. Valid values are
@@ -456,20 +514,13 @@ spec:
                       Function Version. Defaults to false.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: AWS no longer supports this operation. This attribute
-                      now has no effect and will be removed in a future major version.
-                      Whether to replace the security groups on associated lambda
-                      network interfaces upon destruction. Removing these security
-                      groups from orphaned network interfaces can speed up security
-                      group deletion times by avoiding a dependency on AWS's internal
-                      cleanup operations. By default, the ENI security groups will
-                      be replaced with the default security group in the function's
-                      VPC. Set the replacement_security_group_ids attribute to use
-                      a custom list of security groups for replacement.
+                    description: Whether to replace the security groups on the function's
+                      VPC configuration prior to destruction. Default is false.
                     type: boolean
                   replacementSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
@@ -550,9 +601,9 @@ spec:
                         type: object
                     type: object
                   replacementSecurityGroupIds:
-                    description: List of security group IDs to assign to orphaned
-                      Lambda function network interfaces upon destruction. replace_security_groups_on_destroy
-                      must be set to true to use this attribute.
+                    description: List of security group IDs to assign to the function's
+                      VPC configuration prior to destruction. Required if replace_security_groups_on_destroy
+                      is true.
                     items:
                       type: string
                     type: array
@@ -561,12 +612,11 @@ spec:
                     description: Amount of reserved concurrent executions for this
                       lambda function. A value of 0 disables lambda from being triggered
                       and -1 removes any concurrency limitations. Defaults to Unreserved
-                      Concurrency Limits -1. See Managing Concurrency
+                      Concurrency Limits -1.
                     type: number
                   role:
-                    description: Amazon Resource Name (ARN) of the function's execution
-                      role. The role provides the function's identity and access to
-                      AWS services and resources.
+                    description: ARN of the function's execution role. The role provides
+                      the function's identity and access to AWS services and resources.
                     type: string
                   roleRef:
                     description: Reference to a Role in iam to populate role.
@@ -643,15 +693,13 @@ spec:
                         type: object
                     type: object
                   runtime:
-                    description: Identifier of the function's runtime. See Runtimes
-                      for valid values.
+                    description: Identifier of the function's runtime. Required if
+                      package_type is Zip. See Runtimes for valid values.
                     type: string
                   s3Bucket:
                     description: S3 bucket location containing the function's deployment
-                      package. This bucket must reside in the same AWS region where
-                      you are creating the Lambda function. Exactly one of filename,
-                      image_uri, or s3_bucket must be specified. When s3_bucket is
-                      set, s3_key is required.
+                      package. Conflicts with filename and image_uri. One of filename,
+                      image_uri, or s3_bucket must be specified.
                     type: string
                   s3BucketRef:
                     description: Reference to a Bucket in s3 to populate s3Bucket.
@@ -729,21 +777,24 @@ spec:
                     type: object
                   s3Key:
                     description: S3 key of an object containing the function's deployment
-                      package. When s3_bucket is set, s3_key is required.
+                      package. Required if s3_bucket is set.
                     type: string
                   s3ObjectVersion:
                     description: Object version containing the function's deployment
                       package. Conflicts with filename and image_uri.
                     type: string
                   skipDestroy:
+                    description: Whether to retain the old version of a previously
+                      deployed Lambda Layer. Default is false.
                     type: boolean
                   snapStart:
-                    description: Snap start settings block. Detailed below.
+                    description: Configuration block for snap start settings. See
+                      below.
                     items:
                       properties:
                         applyOn:
-                          description: Conditions where snap start is enabled. Valid
-                            values are PublishedVersions.
+                          description: 'When to apply snap start optimization. Valid
+                            value: PublishedVersions.'
                           type: string
                       type: object
                     type: array
@@ -762,31 +813,26 @@ spec:
                     x-kubernetes-map-type: granular
                   timeout:
                     description: Amount of time your Lambda Function has to run in
-                      seconds. Defaults to 3. See Limits.
+                      seconds. Defaults to 3. Valid between 1 and 900.
                     type: number
                   tracingConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for X-Ray tracing. See below.
                     items:
                       properties:
                         mode:
-                          description: Whether to sample and trace a subset of incoming
-                            requests with AWS X-Ray. Valid values are PassThrough
-                            and Active. If PassThrough, Lambda will only trace the
-                            request from an upstream service if it contains a tracing
-                            header with "sampled=1". If Active, Lambda will respect
-                            any tracing header it receives from an upstream service.
-                            If no tracing header is received, Lambda will call X-Ray
-                            for a tracing decision.
+                          description: 'X-Ray tracing mode. Valid values: Active,
+                            PassThrough.'
                           type: string
                       type: object
                     type: array
                   vpcConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for VPC. See below.
                     items:
                       properties:
                         ipv6AllowedForDualStack:
-                          description: Allows outbound IPv6 traffic on VPC functions
-                            that are connected to dual-stack subnets. Default is false.
+                          description: 'Whether to allow outbound IPv6 traffic on
+                            VPC functions connected to dual-stack subnets. Default:
+                            false.'
                           type: boolean
                         securityGroupIdRefs:
                           description: References to SecurityGroup in ec2 to populate
@@ -980,69 +1026,132 @@ spec:
                   architectures:
                     description: Instruction set architecture for your Lambda function.
                       Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"].
-                      Removing this attribute, function's architecture stay the same.
+                      Removing this attribute, function's architecture stays the same.
                     items:
                       type: string
                     type: array
                   codeSigningConfigArn:
-                    description: To enable code signing for this function, specify
-                      the ARN of a code-signing configuration. A code-signing configuration
-                      includes a set of signing profiles, which define the trusted
-                      publishers for this function.
+                    description: ARN of a code-signing configuration to enable code
+                      signing for this function.
                     type: string
                   deadLetterConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for dead letter queue. See below.
                     items:
                       properties:
                         targetArn:
                           description: ARN of an SNS topic or SQS queue to notify
-                            when an invocation fails. If this option is used, the
-                            function's IAM role must be granted suitable access to
-                            write to the target object, which means allowing either
-                            the sns:Publish or sqs:SendMessage action on this ARN,
-                            depending on which service is targeted.
+                            when an invocation fails.
                           type: string
+                        targetArnRef:
+                          description: Reference to a Queue in sqs to populate targetArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        targetArnSelector:
+                          description: Selector for a Queue in sqs to populate targetArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   description:
                     description: Description of what your Lambda Function does.
                     type: string
                   environment:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for environment variables. See
+                      below.
                     items:
                       properties:
                         variables:
                           additionalProperties:
                             type: string
-                          description: Map of environment variables that are accessible
-                            from the function code during execution. If provided at
-                            least one key must be present.
+                          description: Map of environment variables available to your
+                            Lambda function during execution.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
                     type: array
                   ephemeralStorage:
-                    description: The amount of Ephemeral storage(/tmp) to allocate
-                      for the Lambda Function in MB. This parameter is used to expand
-                      the total amount of Ephemeral storage available, beyond the
-                      default amount of 512MB. Detailed below.
+                    description: Amount of ephemeral storage (/tmp) to allocate for
+                      the Lambda Function. See below.
                     items:
                       properties:
                         size:
-                          description: The size of the Lambda function Ephemeral storage(/tmp)
-                            represented in MB. The minimum supported ephemeral_storage
-                            value defaults to 512MB and the maximum supported value
-                            is 10240MB.
+                          description: Amount of ephemeral storage (/tmp) in MB. Valid
+                            between 512 MB and 10,240 MB (10 GB).
                           type: number
                       type: object
                     type: array
                   fileSystemConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for EFS file system. See below.
                     items:
                       properties:
                         arn:
-                          description: Amazon Resource Name (ARN) of the Amazon EFS
-                            Access Point that provides access to the file system.
+                          description: ARN of the Amazon EFS Access Point.
                           type: string
                         arnRef:
                           description: Reference to a AccessPoint in efs to populate
@@ -1122,44 +1231,44 @@ spec:
                           type: object
                         localMountPath:
                           description: Path where the function can access the file
-                            system, starting with /mnt/.
+                            system. Must start with /mnt/.
                           type: string
                       type: object
                     type: array
                   handler:
-                    description: Function entrypoint in your code.
+                    description: Function entry point in your code. Required if package_type
+                      is Zip.
                     type: string
                   imageConfig:
-                    description: Configuration block. Detailed below.
+                    description: Container image configuration values. See below.
                     items:
                       properties:
                         command:
-                          description: Parameters that you want to pass in with entry_point.
+                          description: Parameters to pass to the container image.
                           items:
                             type: string
                           type: array
                         entryPoint:
-                          description: Entry point to your application, which is typically
-                            the location of the runtime executable.
+                          description: Entry point to your application.
                           items:
                             type: string
                           type: array
                         workingDirectory:
-                          description: Working directory.
+                          description: Working directory for the container image.
                           type: string
                       type: object
                     type: array
                   imageUri:
                     description: ECR image URI containing the function's deployment
-                      package. Exactly one of filename, image_uri,  or s3_bucket must
-                      be specified.
+                      package. Conflicts with filename and s3_bucket. One of filename,
+                      image_uri, or s3_bucket must be specified.
                     type: string
                   kmsKeyArn:
-                    description: Amazon Resource Name (ARN) of the AWS Key Management
-                      Service (KMS) key that is used to encrypt environment variables.
-                      If this configuration is not provided when environment variables
-                      are in use, AWS Lambda uses a default service key. To fix the
-                      perpetual difference, remove this configuration.
+                    description: ARN of the AWS Key Management Service key used to
+                      encrypt environment variables. If not provided when environment
+                      variables are in use, AWS Lambda uses a default service key.
+                      If provided when environment variables are not in use, the AWS
+                      Lambda API does not save this configuration.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -1237,7 +1346,7 @@ spec:
                     type: object
                   layers:
                     description: List of Lambda Layer Version ARNs (maximum of 5)
-                      to attach to your Lambda Function. See Lambda Layers
+                      to attach to your Lambda Function.
                     items:
                       type: string
                     type: array
@@ -1321,33 +1430,30 @@ spec:
                         type: object
                     type: object
                   loggingConfig:
-                    description: Configuration block used to specify advanced logging
-                      settings. Detailed below.
+                    description: Configuration block for advanced logging settings.
+                      See below.
                     items:
                       properties:
                         applicationLogLevel:
-                          description: for JSON structured logs, choose the detail
-                            level of the logs your application sends to CloudWatch
-                            when using supported logging libraries.
+                          description: 'Detail level of application logs. Valid values:
+                            TRACE, DEBUG, INFO, WARN, ERROR, FATAL.'
                           type: string
                         logFormat:
-                          description: select between Text and structured JSON format
-                            for your function's logs.
+                          description: 'Log format. Valid values: Text, JSON.'
                           type: string
                         logGroup:
-                          description: the CloudWatch log group your function sends
-                            logs to.
+                          description: CloudWatch log group where logs are sent.
                           type: string
                         systemLogLevel:
-                          description: for JSON structured logs, choose the detail
-                            level of the Lambda platform event logs sent to CloudWatch,
-                            such as ERROR, DEBUG, or INFO.
+                          description: 'Detail level of Lambda platform logs. Valid
+                            values: DEBUG, INFO, WARN.'
                           type: string
                       type: object
                     type: array
                   memorySize:
                     description: Amount of memory in MB your Lambda Function can use
-                      at runtime. Defaults to 128. See Limits
+                      at runtime. Valid value between 128 MB to 10,240 MB (10 GB),
+                      in 1 MB increments. Defaults to 128.
                     type: number
                   packageType:
                     description: Lambda deployment package type. Valid values are
@@ -1358,16 +1464,8 @@ spec:
                       Function Version. Defaults to false.
                     type: boolean
                   replaceSecurityGroupsOnDestroy:
-                    description: AWS no longer supports this operation. This attribute
-                      now has no effect and will be removed in a future major version.
-                      Whether to replace the security groups on associated lambda
-                      network interfaces upon destruction. Removing these security
-                      groups from orphaned network interfaces can speed up security
-                      group deletion times by avoiding a dependency on AWS's internal
-                      cleanup operations. By default, the ENI security groups will
-                      be replaced with the default security group in the function's
-                      VPC. Set the replacement_security_group_ids attribute to use
-                      a custom list of security groups for replacement.
+                    description: Whether to replace the security groups on the function's
+                      VPC configuration prior to destruction. Default is false.
                     type: boolean
                   replacementSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
@@ -1448,9 +1546,9 @@ spec:
                         type: object
                     type: object
                   replacementSecurityGroupIds:
-                    description: List of security group IDs to assign to orphaned
-                      Lambda function network interfaces upon destruction. replace_security_groups_on_destroy
-                      must be set to true to use this attribute.
+                    description: List of security group IDs to assign to the function's
+                      VPC configuration prior to destruction. Required if replace_security_groups_on_destroy
+                      is true.
                     items:
                       type: string
                     type: array
@@ -1459,12 +1557,11 @@ spec:
                     description: Amount of reserved concurrent executions for this
                       lambda function. A value of 0 disables lambda from being triggered
                       and -1 removes any concurrency limitations. Defaults to Unreserved
-                      Concurrency Limits -1. See Managing Concurrency
+                      Concurrency Limits -1.
                     type: number
                   role:
-                    description: Amazon Resource Name (ARN) of the function's execution
-                      role. The role provides the function's identity and access to
-                      AWS services and resources.
+                    description: ARN of the function's execution role. The role provides
+                      the function's identity and access to AWS services and resources.
                     type: string
                   roleRef:
                     description: Reference to a Role in iam to populate role.
@@ -1541,15 +1638,13 @@ spec:
                         type: object
                     type: object
                   runtime:
-                    description: Identifier of the function's runtime. See Runtimes
-                      for valid values.
+                    description: Identifier of the function's runtime. Required if
+                      package_type is Zip. See Runtimes for valid values.
                     type: string
                   s3Bucket:
                     description: S3 bucket location containing the function's deployment
-                      package. This bucket must reside in the same AWS region where
-                      you are creating the Lambda function. Exactly one of filename,
-                      image_uri, or s3_bucket must be specified. When s3_bucket is
-                      set, s3_key is required.
+                      package. Conflicts with filename and image_uri. One of filename,
+                      image_uri, or s3_bucket must be specified.
                     type: string
                   s3BucketRef:
                     description: Reference to a Bucket in s3 to populate s3Bucket.
@@ -1627,21 +1722,24 @@ spec:
                     type: object
                   s3Key:
                     description: S3 key of an object containing the function's deployment
-                      package. When s3_bucket is set, s3_key is required.
+                      package. Required if s3_bucket is set.
                     type: string
                   s3ObjectVersion:
                     description: Object version containing the function's deployment
                       package. Conflicts with filename and image_uri.
                     type: string
                   skipDestroy:
+                    description: Whether to retain the old version of a previously
+                      deployed Lambda Layer. Default is false.
                     type: boolean
                   snapStart:
-                    description: Snap start settings block. Detailed below.
+                    description: Configuration block for snap start settings. See
+                      below.
                     items:
                       properties:
                         applyOn:
-                          description: Conditions where snap start is enabled. Valid
-                            values are PublishedVersions.
+                          description: 'When to apply snap start optimization. Valid
+                            value: PublishedVersions.'
                           type: string
                       type: object
                     type: array
@@ -1660,31 +1758,26 @@ spec:
                     x-kubernetes-map-type: granular
                   timeout:
                     description: Amount of time your Lambda Function has to run in
-                      seconds. Defaults to 3. See Limits.
+                      seconds. Defaults to 3. Valid between 1 and 900.
                     type: number
                   tracingConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for X-Ray tracing. See below.
                     items:
                       properties:
                         mode:
-                          description: Whether to sample and trace a subset of incoming
-                            requests with AWS X-Ray. Valid values are PassThrough
-                            and Active. If PassThrough, Lambda will only trace the
-                            request from an upstream service if it contains a tracing
-                            header with "sampled=1". If Active, Lambda will respect
-                            any tracing header it receives from an upstream service.
-                            If no tracing header is received, Lambda will call X-Ray
-                            for a tracing decision.
+                          description: 'X-Ray tracing mode. Valid values: Active,
+                            PassThrough.'
                           type: string
                       type: object
                     type: array
                   vpcConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for VPC. See below.
                     items:
                       properties:
                         ipv6AllowedForDualStack:
-                          description: Allows outbound IPv6 traffic on VPC functions
-                            that are connected to dual-stack subnets. Default is false.
+                          description: 'Whether to allow outbound IPv6 traffic on
+                            VPC functions connected to dual-stack subnets. Default:
+                            false.'
                           type: boolean
                         securityGroupIdRefs:
                           description: References to SecurityGroup in ec2 to populate
@@ -2035,35 +2128,28 @@ spec:
                   architectures:
                     description: Instruction set architecture for your Lambda function.
                       Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"].
-                      Removing this attribute, function's architecture stay the same.
+                      Removing this attribute, function's architecture stays the same.
                     items:
                       type: string
                     type: array
                   arn:
-                    description: Amazon Resource Name (ARN) identifying your Lambda
-                      Function.
+                    description: ARN identifying your Lambda Function.
                     type: string
                   codeSha256:
                     description: Base64-encoded representation of raw SHA-256 sum
                       of the zip file.
                     type: string
                   codeSigningConfigArn:
-                    description: To enable code signing for this function, specify
-                      the ARN of a code-signing configuration. A code-signing configuration
-                      includes a set of signing profiles, which define the trusted
-                      publishers for this function.
+                    description: ARN of a code-signing configuration to enable code
+                      signing for this function.
                     type: string
                   deadLetterConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for dead letter queue. See below.
                     items:
                       properties:
                         targetArn:
                           description: ARN of an SNS topic or SQS queue to notify
-                            when an invocation fails. If this option is used, the
-                            function's IAM role must be granted suitable access to
-                            write to the target object, which means allowing either
-                            the sns:Publish or sqs:SendMessage action on this ARN,
-                            depending on which service is targeted.
+                            when an invocation fails.
                           type: string
                       type: object
                     type: array
@@ -2071,126 +2157,118 @@ spec:
                     description: Description of what your Lambda Function does.
                     type: string
                   environment:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for environment variables. See
+                      below.
                     items:
                       properties:
                         variables:
                           additionalProperties:
                             type: string
-                          description: Map of environment variables that are accessible
-                            from the function code during execution. If provided at
-                            least one key must be present.
+                          description: Map of environment variables available to your
+                            Lambda function during execution.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
                     type: array
                   ephemeralStorage:
-                    description: The amount of Ephemeral storage(/tmp) to allocate
-                      for the Lambda Function in MB. This parameter is used to expand
-                      the total amount of Ephemeral storage available, beyond the
-                      default amount of 512MB. Detailed below.
+                    description: Amount of ephemeral storage (/tmp) to allocate for
+                      the Lambda Function. See below.
                     items:
                       properties:
                         size:
-                          description: The size of the Lambda function Ephemeral storage(/tmp)
-                            represented in MB. The minimum supported ephemeral_storage
-                            value defaults to 512MB and the maximum supported value
-                            is 10240MB.
+                          description: Amount of ephemeral storage (/tmp) in MB. Valid
+                            between 512 MB and 10,240 MB (10 GB).
                           type: number
                       type: object
                     type: array
                   fileSystemConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for EFS file system. See below.
                     items:
                       properties:
                         arn:
-                          description: Amazon Resource Name (ARN) of the Amazon EFS
-                            Access Point that provides access to the file system.
+                          description: ARN of the Amazon EFS Access Point.
                           type: string
                         localMountPath:
                           description: Path where the function can access the file
-                            system, starting with /mnt/.
+                            system. Must start with /mnt/.
                           type: string
                       type: object
                     type: array
                   handler:
-                    description: Function entrypoint in your code.
+                    description: Function entry point in your code. Required if package_type
+                      is Zip.
                     type: string
                   id:
                     type: string
                   imageConfig:
-                    description: Configuration block. Detailed below.
+                    description: Container image configuration values. See below.
                     items:
                       properties:
                         command:
-                          description: Parameters that you want to pass in with entry_point.
+                          description: Parameters to pass to the container image.
                           items:
                             type: string
                           type: array
                         entryPoint:
-                          description: Entry point to your application, which is typically
-                            the location of the runtime executable.
+                          description: Entry point to your application.
                           items:
                             type: string
                           type: array
                         workingDirectory:
-                          description: Working directory.
+                          description: Working directory for the container image.
                           type: string
                       type: object
                     type: array
                   imageUri:
                     description: ECR image URI containing the function's deployment
-                      package. Exactly one of filename, image_uri,  or s3_bucket must
-                      be specified.
+                      package. Conflicts with filename and s3_bucket. One of filename,
+                      image_uri, or s3_bucket must be specified.
                     type: string
                   invokeArn:
                     description: ARN to be used for invoking Lambda Function from
                       API Gateway - to be used in aws_api_gateway_integration's uri.
                     type: string
                   kmsKeyArn:
-                    description: Amazon Resource Name (ARN) of the AWS Key Management
-                      Service (KMS) key that is used to encrypt environment variables.
-                      If this configuration is not provided when environment variables
-                      are in use, AWS Lambda uses a default service key. To fix the
-                      perpetual difference, remove this configuration.
+                    description: ARN of the AWS Key Management Service key used to
+                      encrypt environment variables. If not provided when environment
+                      variables are in use, AWS Lambda uses a default service key.
+                      If provided when environment variables are not in use, the AWS
+                      Lambda API does not save this configuration.
                     type: string
                   lastModified:
                     description: Date this resource was last modified.
                     type: string
                   layers:
                     description: List of Lambda Layer Version ARNs (maximum of 5)
-                      to attach to your Lambda Function. See Lambda Layers
+                      to attach to your Lambda Function.
                     items:
                       type: string
                     type: array
                   loggingConfig:
-                    description: Configuration block used to specify advanced logging
-                      settings. Detailed below.
+                    description: Configuration block for advanced logging settings.
+                      See below.
                     items:
                       properties:
                         applicationLogLevel:
-                          description: for JSON structured logs, choose the detail
-                            level of the logs your application sends to CloudWatch
-                            when using supported logging libraries.
+                          description: 'Detail level of application logs. Valid values:
+                            TRACE, DEBUG, INFO, WARN, ERROR, FATAL.'
                           type: string
                         logFormat:
-                          description: select between Text and structured JSON format
-                            for your function's logs.
+                          description: 'Log format. Valid values: Text, JSON.'
                           type: string
                         logGroup:
-                          description: the CloudWatch log group your function sends
-                            logs to.
+                          description: CloudWatch log group where logs are sent.
                           type: string
                         systemLogLevel:
-                          description: for JSON structured logs, choose the detail
-                            level of the Lambda platform event logs sent to CloudWatch,
-                            such as ERROR, DEBUG, or INFO.
+                          description: 'Detail level of Lambda platform logs. Valid
+                            values: DEBUG, INFO, WARN.'
                           type: string
                       type: object
                     type: array
                   memorySize:
                     description: Amount of memory in MB your Lambda Function can use
-                      at runtime. Defaults to 128. See Limits
+                      at runtime. Valid value between 128 MB to 10,240 MB (10 GB),
+                      in 1 MB increments. Defaults to 128.
                     type: number
                   packageType:
                     description: Lambda deployment package type. Valid values are
@@ -2209,22 +2287,19 @@ spec:
                       be used for invoking Lambda Function from API Gateway - to be
                       used in aws_api_gateway_integration's uri.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: AWS no longer supports this operation. This attribute
-                      now has no effect and will be removed in a future major version.
-                      Whether to replace the security groups on associated lambda
-                      network interfaces upon destruction. Removing these security
-                      groups from orphaned network interfaces can speed up security
-                      group deletion times by avoiding a dependency on AWS's internal
-                      cleanup operations. By default, the ENI security groups will
-                      be replaced with the default security group in the function's
-                      VPC. Set the replacement_security_group_ids attribute to use
-                      a custom list of security groups for replacement.
+                    description: Whether to replace the security groups on the function's
+                      VPC configuration prior to destruction. Default is false.
                     type: boolean
                   replacementSecurityGroupIds:
-                    description: List of security group IDs to assign to orphaned
-                      Lambda function network interfaces upon destruction. replace_security_groups_on_destroy
-                      must be set to true to use this attribute.
+                    description: List of security group IDs to assign to the function's
+                      VPC configuration prior to destruction. Required if replace_security_groups_on_destroy
+                      is true.
                     items:
                       type: string
                     type: array
@@ -2233,27 +2308,24 @@ spec:
                     description: Amount of reserved concurrent executions for this
                       lambda function. A value of 0 disables lambda from being triggered
                       and -1 removes any concurrency limitations. Defaults to Unreserved
-                      Concurrency Limits -1. See Managing Concurrency
+                      Concurrency Limits -1.
                     type: number
                   role:
-                    description: Amazon Resource Name (ARN) of the function's execution
-                      role. The role provides the function's identity and access to
-                      AWS services and resources.
+                    description: ARN of the function's execution role. The role provides
+                      the function's identity and access to AWS services and resources.
                     type: string
                   runtime:
-                    description: Identifier of the function's runtime. See Runtimes
-                      for valid values.
+                    description: Identifier of the function's runtime. Required if
+                      package_type is Zip. See Runtimes for valid values.
                     type: string
                   s3Bucket:
                     description: S3 bucket location containing the function's deployment
-                      package. This bucket must reside in the same AWS region where
-                      you are creating the Lambda function. Exactly one of filename,
-                      image_uri, or s3_bucket must be specified. When s3_bucket is
-                      set, s3_key is required.
+                      package. Conflicts with filename and image_uri. One of filename,
+                      image_uri, or s3_bucket must be specified.
                     type: string
                   s3Key:
                     description: S3 key of an object containing the function's deployment
-                      package. When s3_bucket is set, s3_key is required.
+                      package. Required if s3_bucket is set.
                     type: string
                   s3ObjectVersion:
                     description: Object version containing the function's deployment
@@ -2266,14 +2338,17 @@ spec:
                     description: ARN of the signing profile version.
                     type: string
                   skipDestroy:
+                    description: Whether to retain the old version of a previously
+                      deployed Lambda Layer. Default is false.
                     type: boolean
                   snapStart:
-                    description: Snap start settings block. Detailed below.
+                    description: Configuration block for snap start settings. See
+                      below.
                     items:
                       properties:
                         applyOn:
-                          description: Conditions where snap start is enabled. Valid
-                            values are PublishedVersions.
+                          description: 'When to apply snap start optimization. Valid
+                            value: PublishedVersions.'
                           type: string
                         optimizationStatus:
                           description: Optimization status of the snap start configuration.
@@ -2300,28 +2375,21 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   timeout:
                     description: Amount of time your Lambda Function has to run in
-                      seconds. Defaults to 3. See Limits.
+                      seconds. Defaults to 3. Valid between 1 and 900.
                     type: number
                   tracingConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for X-Ray tracing. See below.
                     items:
                       properties:
                         mode:
-                          description: Whether to sample and trace a subset of incoming
-                            requests with AWS X-Ray. Valid values are PassThrough
-                            and Active. If PassThrough, Lambda will only trace the
-                            request from an upstream service if it contains a tracing
-                            header with "sampled=1". If Active, Lambda will respect
-                            any tracing header it receives from an upstream service.
-                            If no tracing header is received, Lambda will call X-Ray
-                            for a tracing decision.
+                          description: 'X-Ray tracing mode. Valid values: Active,
+                            PassThrough.'
                           type: string
                       type: object
                     type: array
@@ -2329,12 +2397,13 @@ spec:
                     description: Latest published version of your Lambda Function.
                     type: string
                   vpcConfig:
-                    description: Configuration block. Detailed below.
+                    description: Configuration block for VPC. See below.
                     items:
                       properties:
                         ipv6AllowedForDualStack:
-                          description: Allows outbound IPv6 traffic on VPC functions
-                            that are connected to dual-stack subnets. Default is false.
+                          description: 'Whether to allow outbound IPv6 traffic on
+                            VPC functions connected to dual-stack subnets. Default:
+                            false.'
                           type: boolean
                         securityGroupIds:
                           description: List of security group IDs associated with

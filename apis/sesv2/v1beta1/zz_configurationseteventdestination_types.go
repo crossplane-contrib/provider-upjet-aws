@@ -15,19 +15,19 @@ import (
 
 type CloudWatchDestinationInitParameters struct {
 
-	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
+	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
 	DimensionConfiguration []DimensionConfigurationInitParameters `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
 }
 
 type CloudWatchDestinationObservation struct {
 
-	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
+	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
 	DimensionConfiguration []DimensionConfigurationObservation `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
 }
 
 type CloudWatchDestinationParameters struct {
 
-	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
+	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	DimensionConfiguration []DimensionConfigurationParameters `json:"dimensionConfiguration" tf:"dimension_configuration,omitempty"`
 }
@@ -49,7 +49,7 @@ type ConfigurationSetEventDestinationInitParameters struct {
 	// A name that identifies the event destination within the configuration set.
 	EventDestination []EventDestinationInitParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination below.
+	// An object that defines the event destination. See event_destination Block for details.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 }
 
@@ -61,11 +61,15 @@ type ConfigurationSetEventDestinationObservation struct {
 	// A name that identifies the event destination within the configuration set.
 	EventDestination []EventDestinationObservation `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination below.
+	// An object that defines the event destination. See event_destination Block for details.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
 	// A pipe-delimited string combining configuration_set_name and event_destination_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ConfigurationSetEventDestinationParameters struct {
@@ -87,14 +91,14 @@ type ConfigurationSetEventDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	EventDestination []EventDestinationParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination below.
+	// An object that defines the event destination. See event_destination Block for details.
 	// +kubebuilder:validation:Optional
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type DimensionConfigurationInitParameters struct {
@@ -157,7 +161,7 @@ type EventBridgeDestinationParameters struct {
 
 type EventDestinationInitParameters struct {
 
-	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination below
+	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
 	CloudWatchDestination []CloudWatchDestinationInitParameters `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
 
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
@@ -165,22 +169,23 @@ type EventDestinationInitParameters struct {
 
 	EventBridgeDestination []EventBridgeDestinationInitParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
-	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
+	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
 	KinesisFirehoseDestination []KinesisFirehoseDestinationInitParameters `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
 
 	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
+	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination below.
+	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination []PinpointDestinationInitParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
-	// An object that defines an Amazon SNS destination for email events. See sns_destination below.
+	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
 	SnsDestination []SnsDestinationInitParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationObservation struct {
 
-	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination below
+	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
 	CloudWatchDestination []CloudWatchDestinationObservation `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
 
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
@@ -188,22 +193,23 @@ type EventDestinationObservation struct {
 
 	EventBridgeDestination []EventBridgeDestinationObservation `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
-	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
+	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
 	KinesisFirehoseDestination []KinesisFirehoseDestinationObservation `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
 
 	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
+	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination below.
+	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination []PinpointDestinationObservation `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
-	// An object that defines an Amazon SNS destination for email events. See sns_destination below.
+	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
 	SnsDestination []SnsDestinationObservation `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationParameters struct {
 
-	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination below
+	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
 	// +kubebuilder:validation:Optional
 	CloudWatchDestination []CloudWatchDestinationParameters `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
 
@@ -214,19 +220,20 @@ type EventDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	EventBridgeDestination []EventBridgeDestinationParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
-	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
+	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
 	// +kubebuilder:validation:Optional
 	KinesisFirehoseDestination []KinesisFirehoseDestinationParameters `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
 
 	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination below.
+	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
 	// +kubebuilder:validation:Optional
 	PinpointDestination []PinpointDestinationParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
-	// An object that defines an Amazon SNS destination for email events. See sns_destination below.
+	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
 	// +kubebuilder:validation:Optional
 	SnsDestination []SnsDestinationParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }

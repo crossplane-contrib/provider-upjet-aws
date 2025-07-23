@@ -120,25 +120,6 @@ type CapacityProviderStrategyParameters struct {
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
-type DeadLetterConfigInitParameters struct {
-
-	// - ARN of the SQS queue specified as the target for the dead-letter queue.
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-}
-
-type DeadLetterConfigObservation struct {
-
-	// - ARN of the SQS queue specified as the target for the dead-letter queue.
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-}
-
-type DeadLetterConfigParameters struct {
-
-	// - ARN of the SQS queue specified as the target for the dead-letter queue.
-	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-}
-
 type EcsTargetInitParameters struct {
 
 	// The capacity provider strategy to use for the task. If a capacity_provider_strategy specified, the launch_type parameter must be omitted. If no capacity_provider_strategy or launch_type is specified, the default capacity provider strategy for the cluster is used. Can be one or more. See below.
@@ -473,29 +454,29 @@ type OrderedPlacementStrategyParameters struct {
 
 type PipelineParameterListInitParameters struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterListObservation struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterListParameters struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -658,19 +639,19 @@ type RunCommandTargetsParameters struct {
 
 type SagemakerPipelineTargetInitParameters struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution.
 	PipelineParameterList []PipelineParameterListInitParameters `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
 }
 
 type SagemakerPipelineTargetObservation struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution.
 	PipelineParameterList []PipelineParameterListObservation `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
 }
 
 type SagemakerPipelineTargetParameters struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution.
 	// +kubebuilder:validation:Optional
 	PipelineParameterList []PipelineParameterListParameters `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
 }
@@ -694,6 +675,25 @@ type SqsTargetParameters struct {
 	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
 }
 
+type TargetDeadLetterConfigInitParameters struct {
+
+	// - ARN of the SQS queue specified as the target for the dead-letter queue.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type TargetDeadLetterConfigObservation struct {
+
+	// - ARN of the SQS queue specified as the target for the dead-letter queue.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type TargetDeadLetterConfigParameters struct {
+
+	// - ARN of the SQS queue specified as the target for the dead-letter queue.
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
 type TargetInitParameters struct {
 
 	// Parameters used when you are using the rule to invoke an AppSync GraphQL API mutation. Documented below. A maximum of 1 are allowed.
@@ -706,7 +706,7 @@ type TargetInitParameters struct {
 	BatchTarget []BatchTargetInitParameters `json:"batchTarget,omitempty" tf:"batch_target,omitempty"`
 
 	// Parameters used when you are providing a dead letter config. Documented below. A maximum of 1 are allowed.
-	DeadLetterConfig []DeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
+	DeadLetterConfig []TargetDeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Parameters used when you are using the rule to invoke Amazon ECS Task. Documented below. A maximum of 1 are allowed.
 	EcsTarget []EcsTargetInitParameters `json:"ecsTarget,omitempty" tf:"ecs_target,omitempty"`
@@ -776,7 +776,7 @@ type TargetInitParameters struct {
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsInitParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
-	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker AI Pipeline. Documented below. A maximum of 1 are allowed.
 	SagemakerPipelineTarget []SagemakerPipelineTargetInitParameters `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
@@ -798,7 +798,7 @@ type TargetObservation struct {
 	BatchTarget []BatchTargetObservation `json:"batchTarget,omitempty" tf:"batch_target,omitempty"`
 
 	// Parameters used when you are providing a dead letter config. Documented below. A maximum of 1 are allowed.
-	DeadLetterConfig []DeadLetterConfigObservation `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
+	DeadLetterConfig []TargetDeadLetterConfigObservation `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Parameters used when you are using the rule to invoke Amazon ECS Task. Documented below. A maximum of 1 are allowed.
 	EcsTarget []EcsTargetObservation `json:"ecsTarget,omitempty" tf:"ecs_target,omitempty"`
@@ -830,6 +830,10 @@ type TargetObservation struct {
 	// Parameters used when you are using the rule to invoke an Amazon Redshift Statement. Documented below. A maximum of 1 are allowed.
 	RedshiftTarget []RedshiftTargetObservation `json:"redshiftTarget,omitempty" tf:"redshift_target,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Parameters used when you are providing retry policies. Documented below. A maximum of 1 are allowed.
 	RetryPolicy []RetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
@@ -842,7 +846,7 @@ type TargetObservation struct {
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsObservation `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
-	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker AI Pipeline. Documented below. A maximum of 1 are allowed.
 	SagemakerPipelineTarget []SagemakerPipelineTargetObservation `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
@@ -868,7 +872,7 @@ type TargetParameters struct {
 
 	// Parameters used when you are providing a dead letter config. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
-	DeadLetterConfig []DeadLetterConfigParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
+	DeadLetterConfig []TargetDeadLetterConfigParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Parameters used when you are using the rule to invoke Amazon ECS Task. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
@@ -916,10 +920,10 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	RedshiftTarget []RedshiftTargetParameters `json:"redshiftTarget,omitempty" tf:"redshift_target,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Parameters used when you are providing retry policies. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
@@ -956,7 +960,7 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	RunCommandTargets []RunCommandTargetsParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
-	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker AI Pipeline. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
 	SagemakerPipelineTarget []SagemakerPipelineTargetParameters `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
 

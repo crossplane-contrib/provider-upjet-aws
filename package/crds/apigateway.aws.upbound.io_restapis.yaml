@@ -126,6 +126,13 @@ spec:
                       including endpoint type. Defined below.
                     items:
                       properties:
+                        ipAddressType:
+                          description: 'The IP address types that can invoke an API
+                            (RestApi). Valid values: ipv4, dualstack. Use ipv4 to
+                            allow only IPv4 addresses to invoke an API, or use dualstack
+                            to allow both IPv4 and IPv6 addresses to invoke an API.
+                            For the PRIVATE endpoint type, only dualstack is supported.'
+                          type: string
                         types:
                           description: 'List of endpoint types. This resource currently
                             only supports managing a single value. Valid values: EDGE,
@@ -275,8 +282,9 @@ spec:
                       value.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -353,6 +361,13 @@ spec:
                       including endpoint type. Defined below.
                     items:
                       properties:
+                        ipAddressType:
+                          description: 'The IP address types that can invoke an API
+                            (RestApi). Valid values: ipv4, dualstack. Use ipv4 to
+                            allow only IPv4 addresses to invoke an API, or use dualstack
+                            to allow both IPv4 and IPv6 addresses to invoke an API.
+                            For the PRIVATE endpoint type, only dualstack is supported.'
+                          type: string
                         types:
                           description: 'List of endpoint types. This resource currently
                             only supports managing a single value. Valid values: EDGE,
@@ -744,6 +759,13 @@ spec:
                       including endpoint type. Defined below.
                     items:
                       properties:
+                        ipAddressType:
+                          description: 'The IP address types that can invoke an API
+                            (RestApi). Valid values: ipv4, dualstack. Use ipv4 to
+                            allow only IPv4 addresses to invoke an API, or use dualstack
+                            to allow both IPv4 and IPv6 addresses to invoke an API.
+                            For the PRIVATE endpoint type, only dualstack is supported.'
+                          type: string
                         types:
                           description: 'List of endpoint types. This resource currently
                             only supports managing a single value. Valid values: EDGE,
@@ -830,6 +852,11 @@ spec:
                       If the argument value is provided and is different than the
                       OpenAPI value, the argument value will override the OpenAPI
                       value.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootResourceId:
                     description: Resource ID of the REST API's root

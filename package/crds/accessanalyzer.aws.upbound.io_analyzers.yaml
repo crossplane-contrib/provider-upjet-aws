@@ -75,26 +75,66 @@ spec:
                 properties:
                   configuration:
                     description: A block that specifies the configuration of the analyzer.
-                      Documented below
+                      See configuration Block for details.
                     items:
                       properties:
                         unusedAccess:
-                          description: A block that specifies the configuration of
-                            an unused access analyzer for an AWS organization or account.
-                            Documented below
+                          description: Specifies the configuration of an unused access
+                            analyzer for an AWS organization or account. See unused_access
+                            Block for details.
                           items:
                             properties:
+                              analysisRule:
+                                description: Information about analysis rules for
+                                  the analyzer. Analysis rules determine which entities
+                                  will generate findings based on the criteria you
+                                  define when you create the rule. See analysis_rule
+                                  Block for Unused Access Analyzer for details.
+                                items:
+                                  properties:
+                                    exclusion:
+                                      description: List of rules for the analyzer
+                                        containing criteria to exclude from analysis.
+                                        Entities that meet the rule criteria will
+                                        not generate findings. See exclusion Block
+                                        for details.
+                                      items:
+                                        properties:
+                                          accountIds:
+                                            description: List of AWS account IDs to
+                                              apply to the analysis rule criteria.
+                                              The accounts cannot include the organization
+                                              analyzer owner account. Account IDs
+                                              can only be applied to the analysis
+                                              rule criteria for organization-level
+                                              analyzers.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceTags:
+                                            description: List of key-value pairs for
+                                              resource tags to exclude from the analysis.
+                                            items:
+                                              additionalProperties:
+                                                type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               unusedAccessAge:
-                                description: The specified access age in days for
-                                  which to generate findings for unused access.
+                                description: Specified access age in days for which
+                                  to generate findings for unused access.
                                 type: number
                             type: object
                           type: array
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -103,9 +143,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION,
-                      ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults
-                      to ACCOUNT.
+                    description: Type that represents the zone of trust or scope for
+                      the analyzer. Valid values are ACCOUNT, ACCOUNT_INTERNAL_ACCESS,
+                      ACCOUNT_UNUSED_ACCESS, ORGANIZATION, ORGANIZATION_INTERNAL_ACCESS,
+                      ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
                     type: string
                 required:
                 - region
@@ -125,18 +166,57 @@ spec:
                 properties:
                   configuration:
                     description: A block that specifies the configuration of the analyzer.
-                      Documented below
+                      See configuration Block for details.
                     items:
                       properties:
                         unusedAccess:
-                          description: A block that specifies the configuration of
-                            an unused access analyzer for an AWS organization or account.
-                            Documented below
+                          description: Specifies the configuration of an unused access
+                            analyzer for an AWS organization or account. See unused_access
+                            Block for details.
                           items:
                             properties:
+                              analysisRule:
+                                description: Information about analysis rules for
+                                  the analyzer. Analysis rules determine which entities
+                                  will generate findings based on the criteria you
+                                  define when you create the rule. See analysis_rule
+                                  Block for Unused Access Analyzer for details.
+                                items:
+                                  properties:
+                                    exclusion:
+                                      description: List of rules for the analyzer
+                                        containing criteria to exclude from analysis.
+                                        Entities that meet the rule criteria will
+                                        not generate findings. See exclusion Block
+                                        for details.
+                                      items:
+                                        properties:
+                                          accountIds:
+                                            description: List of AWS account IDs to
+                                              apply to the analysis rule criteria.
+                                              The accounts cannot include the organization
+                                              analyzer owner account. Account IDs
+                                              can only be applied to the analysis
+                                              rule criteria for organization-level
+                                              analyzers.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceTags:
+                                            description: List of key-value pairs for
+                                              resource tags to exclude from the analysis.
+                                            items:
+                                              additionalProperties:
+                                                type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               unusedAccessAge:
-                                description: The specified access age in days for
-                                  which to generate findings for unused access.
+                                description: Specified access age in days for which
+                                  to generate findings for unused access.
                                 type: number
                             type: object
                           type: array
@@ -149,9 +229,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION,
-                      ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults
-                      to ACCOUNT.
+                    description: Type that represents the zone of trust or scope for
+                      the analyzer. Valid values are ACCOUNT, ACCOUNT_INTERNAL_ACCESS,
+                      ACCOUNT_UNUSED_ACCESS, ORGANIZATION, ORGANIZATION_INTERNAL_ACCESS,
+                      ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
                     type: string
                 type: object
               managementPolicies:
@@ -331,25 +412,69 @@ spec:
                     type: string
                   configuration:
                     description: A block that specifies the configuration of the analyzer.
-                      Documented below
+                      See configuration Block for details.
                     items:
                       properties:
                         unusedAccess:
-                          description: A block that specifies the configuration of
-                            an unused access analyzer for an AWS organization or account.
-                            Documented below
+                          description: Specifies the configuration of an unused access
+                            analyzer for an AWS organization or account. See unused_access
+                            Block for details.
                           items:
                             properties:
+                              analysisRule:
+                                description: Information about analysis rules for
+                                  the analyzer. Analysis rules determine which entities
+                                  will generate findings based on the criteria you
+                                  define when you create the rule. See analysis_rule
+                                  Block for Unused Access Analyzer for details.
+                                items:
+                                  properties:
+                                    exclusion:
+                                      description: List of rules for the analyzer
+                                        containing criteria to exclude from analysis.
+                                        Entities that meet the rule criteria will
+                                        not generate findings. See exclusion Block
+                                        for details.
+                                      items:
+                                        properties:
+                                          accountIds:
+                                            description: List of AWS account IDs to
+                                              apply to the analysis rule criteria.
+                                              The accounts cannot include the organization
+                                              analyzer owner account. Account IDs
+                                              can only be applied to the analysis
+                                              rule criteria for organization-level
+                                              analyzers.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceTags:
+                                            description: List of key-value pairs for
+                                              resource tags to exclude from the analysis.
+                                            items:
+                                              additionalProperties:
+                                                type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               unusedAccessAge:
-                                description: The specified access age in days for
-                                  which to generate findings for unused access.
+                                description: Specified access age in days for which
+                                  to generate findings for unused access.
                                 type: number
                             type: object
                           type: array
                       type: object
                     type: array
                   id:
-                    description: Analyzer name.
+                    description: Name of the analyzer.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -365,9 +490,10 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION,
-                      ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults
-                      to ACCOUNT.
+                    description: Type that represents the zone of trust or scope for
+                      the analyzer. Valid values are ACCOUNT, ACCOUNT_INTERNAL_ACCESS,
+                      ACCOUNT_UNUSED_ACCESS, ORGANIZATION, ORGANIZATION_INTERNAL_ACCESS,
+                      ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
                     type: string
                 type: object
               conditions:

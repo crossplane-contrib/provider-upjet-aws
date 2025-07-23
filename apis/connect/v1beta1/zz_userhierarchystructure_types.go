@@ -226,6 +226,10 @@ type UserHierarchyStructureObservation struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type UserHierarchyStructureParameters struct {
@@ -248,10 +252,10 @@ type UserHierarchyStructureParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // UserHierarchyStructureSpec defines the desired state of UserHierarchyStructure

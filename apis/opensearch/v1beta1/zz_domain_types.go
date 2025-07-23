@@ -134,6 +134,9 @@ type ClusterConfigInitParameters struct {
 	// Whether a multi-AZ domain is turned on with a standby AZ. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service.
 	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
 
+	// List of node options for the domain.
+	NodeOptions []NodeOptionsInitParameters `json:"nodeOptions,omitempty" tf:"node_options,omitempty"`
+
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
 	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
 
@@ -172,6 +175,9 @@ type ClusterConfigObservation struct {
 
 	// Whether a multi-AZ domain is turned on with a standby AZ. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service.
 	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
+
+	// List of node options for the domain.
+	NodeOptions []NodeOptionsObservation `json:"nodeOptions,omitempty" tf:"node_options,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
 	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
@@ -218,6 +224,10 @@ type ClusterConfigParameters struct {
 	// Whether a multi-AZ domain is turned on with a standby AZ. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service.
 	// +kubebuilder:validation:Optional
 	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
+
+	// List of node options for the domain.
+	// +kubebuilder:validation:Optional
+	NodeOptions []NodeOptionsParameters `json:"nodeOptions,omitempty" tf:"node_options,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
 	// +kubebuilder:validation:Optional
@@ -488,9 +498,6 @@ type DomainObservation struct {
 	// The IP address type for the endpoint. Valid values are ipv4 and dualstack.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// (Deprecated) Domain-specific endpoint for kibana without https scheme. Use the dashboard_endpoint attribute instead.
-	KibanaEndpoint *string `json:"kibanaEndpoint,omitempty" tf:"kibana_endpoint,omitempty"`
-
 	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
 	LogPublishingOptions []LogPublishingOptionsObservation `json:"logPublishingOptions,omitempty" tf:"log_publishing_options,omitempty"`
 
@@ -499,6 +506,10 @@ type DomainObservation struct {
 
 	// Configuration to add Off Peak update options. (documentation). Detailed below.
 	OffPeakWindowOptions []OffPeakWindowOptionsObservation `json:"offPeakWindowOptions,omitempty" tf:"off_peak_window_options,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	SnapshotOptions []SnapshotOptionsObservation `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
@@ -577,10 +588,10 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	OffPeakWindowOptions []OffPeakWindowOptionsParameters `json:"offPeakWindowOptions,omitempty" tf:"off_peak_window_options,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	// +kubebuilder:validation:Optional
@@ -869,6 +880,74 @@ type MasterUserOptionsParameters struct {
 	// Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
 	// +kubebuilder:validation:Optional
 	MasterUserPasswordSecretRef *v1.SecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
+}
+
+type NodeConfigInitParameters struct {
+
+	// Number of nodes of a particular node type in the cluster.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// Whether a particular node type is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The instance type of a particular node type in the cluster.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type NodeConfigObservation struct {
+
+	// Number of nodes of a particular node type in the cluster.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// Whether a particular node type is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The instance type of a particular node type in the cluster.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type NodeConfigParameters struct {
+
+	// Number of nodes of a particular node type in the cluster.
+	// +kubebuilder:validation:Optional
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// Whether a particular node type is enabled.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The instance type of a particular node type in the cluster.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type NodeOptionsInitParameters struct {
+
+	// Container to specify sizing of a node type.
+	NodeConfig []NodeConfigInitParameters `json:"nodeConfig,omitempty" tf:"node_config,omitempty"`
+
+	// Type of node this configuration describes. Valid values: coordinator.
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+}
+
+type NodeOptionsObservation struct {
+
+	// Container to specify sizing of a node type.
+	NodeConfig []NodeConfigObservation `json:"nodeConfig,omitempty" tf:"node_config,omitempty"`
+
+	// Type of node this configuration describes. Valid values: coordinator.
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+}
+
+type NodeOptionsParameters struct {
+
+	// Container to specify sizing of a node type.
+	// +kubebuilder:validation:Optional
+	NodeConfig []NodeConfigParameters `json:"nodeConfig,omitempty" tf:"node_config,omitempty"`
+
+	// Type of node this configuration describes. Valid values: coordinator.
+	// +kubebuilder:validation:Optional
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 }
 
 type NodeToNodeEncryptionInitParameters struct {

@@ -895,6 +895,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetentionProperties != nil {
 		in, out := &in.RetentionProperties, &out.RetentionProperties
 		*out = make([]RetentionPropertiesObservation, len(*in))

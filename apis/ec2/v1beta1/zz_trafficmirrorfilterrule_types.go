@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type DestinationPortRangeInitParameters struct {
+type TrafficMirrorFilterRuleDestinationPortRangeInitParameters struct {
 
 	// Starting port of the range
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
@@ -22,7 +22,7 @@ type DestinationPortRangeInitParameters struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type DestinationPortRangeObservation struct {
+type TrafficMirrorFilterRuleDestinationPortRangeObservation struct {
 
 	// Starting port of the range
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
@@ -31,36 +31,7 @@ type DestinationPortRangeObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type DestinationPortRangeParameters struct {
-
-	// Starting port of the range
-	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
-
-	// Ending port of the range
-	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
-}
-
-type SourcePortRangeInitParameters struct {
-
-	// Starting port of the range
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
-
-	// Ending port of the range
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
-}
-
-type SourcePortRangeObservation struct {
-
-	// Starting port of the range
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
-
-	// Ending port of the range
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
-}
-
-type SourcePortRangeParameters struct {
+type TrafficMirrorFilterRuleDestinationPortRangeParameters struct {
 
 	// Starting port of the range
 	// +kubebuilder:validation:Optional
@@ -80,7 +51,7 @@ type TrafficMirrorFilterRuleInitParameters struct {
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
 	// Destination port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
-	DestinationPortRange []DestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+	DestinationPortRange []TrafficMirrorFilterRuleDestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
 	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -95,7 +66,7 @@ type TrafficMirrorFilterRuleInitParameters struct {
 	SourceCidrBlock *string `json:"sourceCidrBlock,omitempty" tf:"source_cidr_block,omitempty"`
 
 	// Source port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
-	SourcePortRange []SourcePortRangeInitParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+	SourcePortRange []TrafficMirrorFilterRuleSourcePortRangeInitParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 
 	// Direction of traffic to be captured. Valid values are ingress and egress
 	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
@@ -126,13 +97,17 @@ type TrafficMirrorFilterRuleObservation struct {
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
 	// Destination port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
-	DestinationPortRange []DestinationPortRangeObservation `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+	DestinationPortRange []TrafficMirrorFilterRuleDestinationPortRangeObservation `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// Name of the traffic mirror filter rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
 	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
@@ -144,7 +119,7 @@ type TrafficMirrorFilterRuleObservation struct {
 	SourceCidrBlock *string `json:"sourceCidrBlock,omitempty" tf:"source_cidr_block,omitempty"`
 
 	// Source port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
-	SourcePortRange []SourcePortRangeObservation `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+	SourcePortRange []TrafficMirrorFilterRuleSourcePortRangeObservation `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 
 	// Direction of traffic to be captured. Valid values are ingress and egress
 	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
@@ -165,16 +140,16 @@ type TrafficMirrorFilterRuleParameters struct {
 
 	// Destination port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
 	// +kubebuilder:validation:Optional
-	DestinationPortRange []DestinationPortRangeParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+	DestinationPortRange []TrafficMirrorFilterRuleDestinationPortRangeParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
 	// +kubebuilder:validation:Optional
 	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
 	// +kubebuilder:validation:Optional
@@ -190,7 +165,7 @@ type TrafficMirrorFilterRuleParameters struct {
 
 	// Source port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
 	// +kubebuilder:validation:Optional
-	SourcePortRange []SourcePortRangeParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+	SourcePortRange []TrafficMirrorFilterRuleSourcePortRangeParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 
 	// Direction of traffic to be captured. Valid values are ingress and egress
 	// +kubebuilder:validation:Optional
@@ -209,6 +184,35 @@ type TrafficMirrorFilterRuleParameters struct {
 	// Selector for a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
 	// +kubebuilder:validation:Optional
 	TrafficMirrorFilterIDSelector *v1.Selector `json:"trafficMirrorFilterIdSelector,omitempty" tf:"-"`
+}
+
+type TrafficMirrorFilterRuleSourcePortRangeInitParameters struct {
+
+	// Starting port of the range
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// Ending port of the range
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type TrafficMirrorFilterRuleSourcePortRangeObservation struct {
+
+	// Starting port of the range
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// Ending port of the range
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type TrafficMirrorFilterRuleSourcePortRangeParameters struct {
+
+	// Starting port of the range
+	// +kubebuilder:validation:Optional
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// Ending port of the range
+	// +kubebuilder:validation:Optional
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 // TrafficMirrorFilterRuleSpec defines the desired state of TrafficMirrorFilterRule

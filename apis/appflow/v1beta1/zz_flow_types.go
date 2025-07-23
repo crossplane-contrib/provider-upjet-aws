@@ -701,6 +701,10 @@ type FlowObservation struct {
 	// A Catalog that determines the configuration that Amazon AppFlow uses when it catalogs the data that’s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
 	MetadataCatalogConfig []MetadataCatalogConfigObservation `json:"metadataCatalogConfig,omitempty" tf:"metadata_catalog_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Source Flow Config that controls how Amazon AppFlow retrieves data from the source connector.
 	SourceFlowConfig []SourceFlowConfigObservation `json:"sourceFlowConfig,omitempty" tf:"source_flow_config,omitempty"`
 
@@ -737,10 +741,10 @@ type FlowParameters struct {
 	// +kubebuilder:validation:Optional
 	MetadataCatalogConfig []MetadataCatalogConfigParameters `json:"metadataCatalogConfig,omitempty" tf:"metadata_catalog_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Source Flow Config that controls how Amazon AppFlow retrieves data from the source connector.
 	// +kubebuilder:validation:Optional
@@ -1406,6 +1410,9 @@ type SalesforceErrorHandlingConfigParameters struct {
 
 type SalesforceInitParameters struct {
 
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
+
 	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	ErrorHandlingConfig []SalesforceErrorHandlingConfigInitParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
@@ -1421,6 +1428,9 @@ type SalesforceInitParameters struct {
 
 type SalesforceObservation struct {
 
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
+
 	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	ErrorHandlingConfig []SalesforceErrorHandlingConfigObservation `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
@@ -1435,6 +1445,10 @@ type SalesforceObservation struct {
 }
 
 type SalesforceParameters struct {
+
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	// +kubebuilder:validation:Optional
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
 
 	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
@@ -2056,6 +2070,9 @@ type SourceConnectorPropertiesS3Parameters struct {
 
 type SourceConnectorPropertiesSalesforceInitParameters struct {
 
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
+
 	// Flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
 	EnableDynamicFieldUpdate *bool `json:"enableDynamicFieldUpdate,omitempty" tf:"enable_dynamic_field_update,omitempty"`
 
@@ -2068,6 +2085,9 @@ type SourceConnectorPropertiesSalesforceInitParameters struct {
 
 type SourceConnectorPropertiesSalesforceObservation struct {
 
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
+
 	// Flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
 	EnableDynamicFieldUpdate *bool `json:"enableDynamicFieldUpdate,omitempty" tf:"enable_dynamic_field_update,omitempty"`
 
@@ -2079,6 +2099,10 @@ type SourceConnectorPropertiesSalesforceObservation struct {
 }
 
 type SourceConnectorPropertiesSalesforceParameters struct {
+
+	// Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.
+	// +kubebuilder:validation:Optional
+	DataTransferAPI *string `json:"dataTransferApi,omitempty" tf:"data_transfer_api,omitempty"`
 
 	// Flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
 	// +kubebuilder:validation:Optional

@@ -18,7 +18,7 @@ type AccessConfigInitParameters struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	// Whether or not to bootstrap the access config values to the cluster. Default is false.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type AccessConfigObservation struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	// Whether or not to bootstrap the access config values to the cluster. Default is false.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -37,26 +37,26 @@ type AccessConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	// Whether or not to bootstrap the access config values to the cluster. Default is false.
 	// +kubebuilder:validation:Optional
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
 type BlockStorageInitParameters struct {
 
-	// Whether zonal shift is enabled for the cluster.
+	// Indicates if the block storage capability is enabled on your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create and delete block storage volumes in your Amazon Web Services account.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlockStorageObservation struct {
 
-	// Whether zonal shift is enabled for the cluster.
+	// Indicates if the block storage capability is enabled on your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create and delete block storage volumes in your Amazon Web Services account.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlockStorageParameters struct {
 
-	// Whether zonal shift is enabled for the cluster.
+	// Indicates if the block storage capability is enabled on your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create and delete block storage volumes in your Amazon Web Services account.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -75,7 +75,7 @@ type CertificateAuthorityParameters struct {
 
 type ClusterInitParameters struct {
 
-	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries. Detailed below.
 	AccessConfig []AccessConfigInitParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
@@ -88,8 +88,11 @@ type ClusterInitParameters struct {
 	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
 
-	// Configuration block with encryption configuration for the cluster. Only available on Kubernetes 1.13 and above clusters created after March 6, 2020. Detailed below.
+	// Configuration block with encryption configuration for the cluster. Detailed below.
 	EncryptionConfig []EncryptionConfigInitParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+
+	// Force version update by overriding upgrade-blocking readiness checks when updating a cluster.
+	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
 
 	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	KubernetesNetworkConfig []KubernetesNetworkConfigInitParameters `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
@@ -124,11 +127,9 @@ type ClusterInitParameters struct {
 	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
-	// +listType=map
-	// +listMapKey=index
 	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
-	// –  Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
+	// Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Configuration block with zonal shift configuration for the cluster. Detailed below.
@@ -137,7 +138,7 @@ type ClusterInitParameters struct {
 
 type ClusterObservation struct {
 
-	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries. Detailed below.
 	AccessConfig []AccessConfigObservation `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// ARN of the cluster.
@@ -162,11 +163,14 @@ type ClusterObservation struct {
 	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
 
-	// Configuration block with encryption configuration for the cluster. Only available on Kubernetes 1.13 and above clusters created after March 6, 2020. Detailed below.
+	// Configuration block with encryption configuration for the cluster. Detailed below.
 	EncryptionConfig []EncryptionConfigObservation `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 
 	// Endpoint for your Kubernetes API server.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Force version update by overriding upgrade-blocking readiness checks when updating a cluster.
+	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
 
 	// Name of the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -182,6 +186,10 @@ type ClusterObservation struct {
 
 	// Platform version for the cluster.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Configuration block with remote network configuration for EKS Hybrid Nodes. Detailed below.
 	RemoteNetworkConfig []RemoteNetworkConfigObservation `json:"remoteNetworkConfig,omitempty" tf:"remote_network_config,omitempty"`
@@ -207,11 +215,9 @@ type ClusterObservation struct {
 	UpgradePolicy []UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
-	// +listType=map
-	// +listMapKey=index
 	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
-	// –  Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
+	// Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Configuration block with zonal shift configuration for the cluster. Detailed below.
@@ -220,7 +226,7 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries. Detailed below.
 	// +kubebuilder:validation:Optional
 	AccessConfig []AccessConfigParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
@@ -237,9 +243,13 @@ type ClusterParameters struct {
 	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
 
-	// Configuration block with encryption configuration for the cluster. Only available on Kubernetes 1.13 and above clusters created after March 6, 2020. Detailed below.
+	// Configuration block with encryption configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	EncryptionConfig []EncryptionConfigParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+
+	// Force version update by overriding upgrade-blocking readiness checks when updating a cluster.
+	// +kubebuilder:validation:Optional
+	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
 
 	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -249,10 +259,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	OutpostConfig []OutpostConfigParameters `json:"outpostConfig,omitempty" tf:"outpost_config,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block with remote network configuration for EKS Hybrid Nodes. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -287,11 +297,9 @@ type ClusterParameters struct {
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
 	// +kubebuilder:validation:Optional
-	// +listType=map
-	// +listMapKey=index
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
-	// –  Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
+	// Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -447,7 +455,7 @@ type KubernetesNetworkConfigObservation struct {
 	// The CIDR block to assign Kubernetes pod and service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created. The block must meet the following requirements:
 	ServiceIPv4Cidr *string `json:"serviceIpv4Cidr,omitempty" tf:"service_ipv4_cidr,omitempty"`
 
-	// The CIDR block that Kubernetes pod and service IP addresses are assigned from if you specified ipv6 for ipFamily when you created the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
+	// (Computed) The CIDR block that Kubernetes pod and service IP addresses are assigned from if you specify ipv6 for ip_family when you create the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
 	ServiceIPv6Cidr *string `json:"serviceIpv6Cidr,omitempty" tf:"service_ipv6_cidr,omitempty"`
 }
 
@@ -616,15 +624,20 @@ type RemotePodNetworksParameters struct {
 }
 
 type StorageConfigInitParameters struct {
+
+	// Configuration block with block storage configuration for the cluster. Detailed below.
 	BlockStorage []BlockStorageInitParameters `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
 }
 
 type StorageConfigObservation struct {
+
+	// Configuration block with block storage configuration for the cluster. Detailed below.
 	BlockStorage []BlockStorageObservation `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
 }
 
 type StorageConfigParameters struct {
 
+	// Configuration block with block storage configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	BlockStorage []BlockStorageParameters `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
 }
@@ -656,10 +669,6 @@ type VPCConfigInitParameters struct {
 	// Whether the Amazon EKS public API server endpoint is enabled. Default is true.
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
-	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:="0"
-	Index *string `json:"index,omitempty" tf:"-"`
-
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +listType=set
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
@@ -672,7 +681,7 @@ type VPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
+	// List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -687,7 +696,7 @@ type VPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+	// List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -697,7 +706,7 @@ type VPCConfigInitParameters struct {
 
 type VPCConfigObservation struct {
 
-	// Cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
+	// (Computed) Cluster security group that is created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
 	ClusterSecurityGroupID *string `json:"clusterSecurityGroupId,omitempty" tf:"cluster_security_group_id,omitempty"`
 
 	// Whether the Amazon EKS private API server endpoint is enabled. Default is false.
@@ -706,23 +715,19 @@ type VPCConfigObservation struct {
 	// Whether the Amazon EKS public API server endpoint is enabled. Default is true.
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
-	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:="0"
-	Index *string `json:"index,omitempty" tf:"-"`
-
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +listType=set
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
 
-	// account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
+	// List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+	// List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// ID of the VPC associated with your cluster.
+	// (Computed) ID of the VPC associated with your cluster.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
@@ -736,11 +741,6 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
-	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:validation:Optional
-	// +kubebuilder:default:="0"
-	Index *string `json:"index" tf:"-"`
-
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -754,7 +754,7 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
+	// List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -770,13 +770,32 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+	// List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+}
+
+type ZonalShiftConfigInitParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ZonalShiftConfigObservation struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ZonalShiftConfigParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster
@@ -839,23 +858,4 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&Cluster{}, &ClusterList{})
-}
-
-type ZonalShiftConfigInitParameters struct {
-
-	// Whether zonal shift is enabled for the cluster.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type ZonalShiftConfigObservation struct {
-
-	// Whether zonal shift is enabled for the cluster.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type ZonalShiftConfigParameters struct {
-
-	// Whether zonal shift is enabled for the cluster.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }

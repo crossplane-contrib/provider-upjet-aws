@@ -34,8 +34,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Broker is the Schema for the Brokers API. Provides an MQ Broker
-          Resource
+        description: Broker is the Schema for the Brokers API. Manages an AWS MQ broker
         properties:
           apiVersion:
             description: |-
@@ -74,9 +73,8 @@ spec:
               forProvider:
                 properties:
                   applyImmediately:
-                    description: Specifies whether any broker modifications are applied
-                      immediately, or during the next maintenance window. Default
-                      is false.
+                    description: Whether to apply broker modifications immediately.
+                      Default is false.
                     type: boolean
                   authenticationStrategy:
                     description: Authentication strategy used to secure the broker.
@@ -96,7 +94,7 @@ spec:
                     items:
                       properties:
                         id:
-                          description: The Configuration ID.
+                          description: Configuration ID.
                           type: string
                         idRef:
                           description: Reference to a Configuration in mq to populate
@@ -180,13 +178,12 @@ spec:
                       type: object
                     type: array
                   dataReplicationMode:
-                    description: Defines whether this broker is a part of a data replication
+                    description: Whether this broker is part of a data replication
                       pair. Valid values are CRDR and NONE.
                     type: string
                   dataReplicationPrimaryBrokerArn:
-                    description: The Amazon Resource Name (ARN) of the primary broker
-                      that is used to replicate data from in a data replication pair,
-                      and is applied to the replica broker. Must be set when data_replication_mode
+                    description: ARN of the primary broker used to replicate data
+                      in a data replication pair. Required when data_replication_mode
                       is CRDR.
                     type: string
                   dataReplicationPrimaryBrokerArnRef:
@@ -273,17 +270,16 @@ spec:
                     items:
                       properties:
                         kmsKeyId:
-                          description: Amazon Resource Name (ARN) of Key Management
-                            Service (KMS) Customer Master Key (CMK) to use for encryption
-                            at rest. Requires setting use_aws_owned_key to false.
-                            To perform drift detection when AWS-managed CMKs or customer-managed
+                          description: ARN of KMS CMK to use for encryption at rest.
+                            Requires setting use_aws_owned_key to false. To perform
+                            drift detection when AWS-managed CMKs or customer-managed
                             CMKs are in use, this value must be configured.
                           type: string
                         useAwsOwnedKey:
-                          description: Whether to enable an AWS-owned KMS CMK that
-                            is not in your account. Defaults to true. Setting to false
-                            without configuring kms_key_id will create an AWS-managed
-                            CMK aliased to aws/mq in your account.
+                          description: Whether to enable an AWS-owned KMS CMK not
+                            in your account. Defaults to true. Setting to false without
+                            configuring kms_key_id creates an AWS-managed CMK aliased
+                            to aws/mq in your account.
                           type: boolean
                       type: object
                     type: array
@@ -292,8 +288,7 @@ spec:
                       and RabbitMQ.
                     type: string
                   engineVersion:
-                    description: Version of the broker engine. See the AmazonMQ Broker
-                      Engine docs for supported versions. For example, 5.17.6.
+                    description: Version of the broker engine.
                     type: string
                   hostInstanceType:
                     description: Broker's instance type. For example, mq.t3.micro,
@@ -301,25 +296,24 @@ spec:
                     type: string
                   ldapServerMetadata:
                     description: Configuration block for the LDAP server used to authenticate
-                      and authorize connections to the broker. Not supported for engine_type
-                      RabbitMQ. Detailed below. (Currently, AWS may not process changes
-                      to LDAP server metadata.)
+                      and authorize connections. Not supported for engine_type RabbitMQ.
+                      Detailed below.
                     items:
                       properties:
                         hosts:
-                          description: List of a fully qualified domain name of the
-                            LDAP server and an optional failover server.
+                          description: List of fully qualified domain names of the
+                            LDAP server and optional failover server.
                           items:
                             type: string
                           type: array
                         roleBase:
                           description: Fully qualified name of the directory to search
-                            for a user’s groups.
+                            for a user's groups.
                           type: string
                         roleName:
-                          description: Specifies the LDAP attribute that identifies
-                            the group name attribute in the object returned from the
-                            group membership query.
+                          description: LDAP attribute that identifies the group name
+                            attribute in the object returned from the group membership
+                            query.
                           type: string
                         roleSearchMatching:
                           description: Search criteria for groups.
@@ -353,8 +347,8 @@ spec:
                             you want to search for users.
                           type: string
                         userRoleName:
-                          description: Specifies the name of the LDAP attribute for
-                            the user group membership.
+                          description: Name of the LDAP attribute for the user group
+                            membership.
                           type: string
                         userSearchMatching:
                           description: Search criteria for users.
@@ -366,19 +360,18 @@ spec:
                       type: object
                     type: array
                   logs:
-                    description: Configuration block for the logging configuration
-                      of the broker. Detailed below.
+                    description: Configuration block for the logging configuration.
+                      Detailed below.
                     items:
                       properties:
                         audit:
-                          description: Enables audit logging. Auditing is only possible
-                            for engine_type of ActiveMQ. User management action made
-                            using JMX or the ActiveMQ Web Console is logged. Defaults
-                            to false.
+                          description: Whether to enable audit logging. Only possible
+                            for engine_type of ActiveMQ. Logs user management actions
+                            via JMX or ActiveMQ Web Console. Defaults to false.
                           type: string
                         general:
-                          description: Enables general logging via CloudWatch. Defaults
-                            to false.
+                          description: Whether to enable general logging via CloudWatch.
+                            Defaults to false.
                           type: boolean
                       type: object
                     type: array
@@ -405,8 +398,9 @@ spec:
                       of the VPC that hosts the broker's subnets.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroups.
@@ -494,9 +488,9 @@ spec:
                     x-kubernetes-list-type: set
                   storageType:
                     description: Storage type of the broker. For engine_type ActiveMQ,
-                      the valid values are efs and ebs, and the AWS-default is efs.
-                      For engine_type RabbitMQ, only ebs is supported. When using
-                      ebs, only the mq.m5 broker instance type family is supported.
+                      valid values are efs and ebs (AWS-default is efs). For engine_type
+                      RabbitMQ, only ebs is supported. When using ebs, only the mq.m5
+                      broker instance type family is supported.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -610,9 +604,9 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         passwordSecretRef:
-                          description: Password of the user. It must be 12 to 250
-                            characters long, at least 4 unique characters, and must
-                            not contain commas.
+                          description: Password of the user. Must be 12 to 250 characters
+                            long, contain at least 4 unique characters, and must not
+                            contain commas.
                           properties:
                             key:
                               description: The key to select.
@@ -629,8 +623,8 @@ spec:
                           - namespace
                           type: object
                         replicationUser:
-                          description: Whether to set set replication user. Defaults
-                            to false.
+                          description: Whether to set replication user. Defaults to
+                            false.
                           type: boolean
                         username:
                           description: Username of the user.
@@ -654,9 +648,8 @@ spec:
                   autoscaler.
                 properties:
                   applyImmediately:
-                    description: Specifies whether any broker modifications are applied
-                      immediately, or during the next maintenance window. Default
-                      is false.
+                    description: Whether to apply broker modifications immediately.
+                      Default is false.
                     type: boolean
                   authenticationStrategy:
                     description: Authentication strategy used to secure the broker.
@@ -676,7 +669,7 @@ spec:
                     items:
                       properties:
                         id:
-                          description: The Configuration ID.
+                          description: Configuration ID.
                           type: string
                         idRef:
                           description: Reference to a Configuration in mq to populate
@@ -760,13 +753,12 @@ spec:
                       type: object
                     type: array
                   dataReplicationMode:
-                    description: Defines whether this broker is a part of a data replication
+                    description: Whether this broker is part of a data replication
                       pair. Valid values are CRDR and NONE.
                     type: string
                   dataReplicationPrimaryBrokerArn:
-                    description: The Amazon Resource Name (ARN) of the primary broker
-                      that is used to replicate data from in a data replication pair,
-                      and is applied to the replica broker. Must be set when data_replication_mode
+                    description: ARN of the primary broker used to replicate data
+                      in a data replication pair. Required when data_replication_mode
                       is CRDR.
                     type: string
                   dataReplicationPrimaryBrokerArnRef:
@@ -853,17 +845,16 @@ spec:
                     items:
                       properties:
                         kmsKeyId:
-                          description: Amazon Resource Name (ARN) of Key Management
-                            Service (KMS) Customer Master Key (CMK) to use for encryption
-                            at rest. Requires setting use_aws_owned_key to false.
-                            To perform drift detection when AWS-managed CMKs or customer-managed
+                          description: ARN of KMS CMK to use for encryption at rest.
+                            Requires setting use_aws_owned_key to false. To perform
+                            drift detection when AWS-managed CMKs or customer-managed
                             CMKs are in use, this value must be configured.
                           type: string
                         useAwsOwnedKey:
-                          description: Whether to enable an AWS-owned KMS CMK that
-                            is not in your account. Defaults to true. Setting to false
-                            without configuring kms_key_id will create an AWS-managed
-                            CMK aliased to aws/mq in your account.
+                          description: Whether to enable an AWS-owned KMS CMK not
+                            in your account. Defaults to true. Setting to false without
+                            configuring kms_key_id creates an AWS-managed CMK aliased
+                            to aws/mq in your account.
                           type: boolean
                       type: object
                     type: array
@@ -872,8 +863,7 @@ spec:
                       and RabbitMQ.
                     type: string
                   engineVersion:
-                    description: Version of the broker engine. See the AmazonMQ Broker
-                      Engine docs for supported versions. For example, 5.17.6.
+                    description: Version of the broker engine.
                     type: string
                   hostInstanceType:
                     description: Broker's instance type. For example, mq.t3.micro,
@@ -881,25 +871,24 @@ spec:
                     type: string
                   ldapServerMetadata:
                     description: Configuration block for the LDAP server used to authenticate
-                      and authorize connections to the broker. Not supported for engine_type
-                      RabbitMQ. Detailed below. (Currently, AWS may not process changes
-                      to LDAP server metadata.)
+                      and authorize connections. Not supported for engine_type RabbitMQ.
+                      Detailed below.
                     items:
                       properties:
                         hosts:
-                          description: List of a fully qualified domain name of the
-                            LDAP server and an optional failover server.
+                          description: List of fully qualified domain names of the
+                            LDAP server and optional failover server.
                           items:
                             type: string
                           type: array
                         roleBase:
                           description: Fully qualified name of the directory to search
-                            for a user’s groups.
+                            for a user's groups.
                           type: string
                         roleName:
-                          description: Specifies the LDAP attribute that identifies
-                            the group name attribute in the object returned from the
-                            group membership query.
+                          description: LDAP attribute that identifies the group name
+                            attribute in the object returned from the group membership
+                            query.
                           type: string
                         roleSearchMatching:
                           description: Search criteria for groups.
@@ -933,8 +922,8 @@ spec:
                             you want to search for users.
                           type: string
                         userRoleName:
-                          description: Specifies the name of the LDAP attribute for
-                            the user group membership.
+                          description: Name of the LDAP attribute for the user group
+                            membership.
                           type: string
                         userSearchMatching:
                           description: Search criteria for users.
@@ -946,19 +935,18 @@ spec:
                       type: object
                     type: array
                   logs:
-                    description: Configuration block for the logging configuration
-                      of the broker. Detailed below.
+                    description: Configuration block for the logging configuration.
+                      Detailed below.
                     items:
                       properties:
                         audit:
-                          description: Enables audit logging. Auditing is only possible
-                            for engine_type of ActiveMQ. User management action made
-                            using JMX or the ActiveMQ Web Console is logged. Defaults
-                            to false.
+                          description: Whether to enable audit logging. Only possible
+                            for engine_type of ActiveMQ. Logs user management actions
+                            via JMX or ActiveMQ Web Console. Defaults to false.
                           type: string
                         general:
-                          description: Enables general logging via CloudWatch. Defaults
-                            to false.
+                          description: Whether to enable general logging via CloudWatch.
+                            Defaults to false.
                           type: boolean
                       type: object
                     type: array
@@ -1070,9 +1058,9 @@ spec:
                     x-kubernetes-list-type: set
                   storageType:
                     description: Storage type of the broker. For engine_type ActiveMQ,
-                      the valid values are efs and ebs, and the AWS-default is efs.
-                      For engine_type RabbitMQ, only ebs is supported. When using
-                      ebs, only the mq.m5 broker instance type family is supported.
+                      valid values are efs and ebs (AWS-default is efs). For engine_type
+                      RabbitMQ, only ebs is supported. When using ebs, only the mq.m5
+                      broker instance type family is supported.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -1186,9 +1174,9 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         passwordSecretRef:
-                          description: Password of the user. It must be 12 to 250
-                            characters long, at least 4 unique characters, and must
-                            not contain commas.
+                          description: Password of the user. Must be 12 to 250 characters
+                            long, contain at least 4 unique characters, and must not
+                            contain commas.
                           properties:
                             key:
                               description: The key to select.
@@ -1205,8 +1193,8 @@ spec:
                           - namespace
                           type: object
                         replicationUser:
-                          description: Whether to set set replication user. Defaults
-                            to false.
+                          description: Whether to set replication user. Defaults to
+                            false.
                           type: boolean
                         username:
                           description: Username of the user.
@@ -1410,9 +1398,8 @@ spec:
               atProvider:
                 properties:
                   applyImmediately:
-                    description: Specifies whether any broker modifications are applied
-                      immediately, or during the next maintenance window. Default
-                      is false.
+                    description: Whether to apply broker modifications immediately.
+                      Default is false.
                     type: boolean
                   arn:
                     description: ARN of the broker.
@@ -1435,7 +1422,7 @@ spec:
                     items:
                       properties:
                         id:
-                          description: The Configuration ID.
+                          description: Configuration ID.
                           type: string
                         revision:
                           description: Revision of the Configuration.
@@ -1443,13 +1430,12 @@ spec:
                       type: object
                     type: array
                   dataReplicationMode:
-                    description: Defines whether this broker is a part of a data replication
+                    description: Whether this broker is part of a data replication
                       pair. Valid values are CRDR and NONE.
                     type: string
                   dataReplicationPrimaryBrokerArn:
-                    description: The Amazon Resource Name (ARN) of the primary broker
-                      that is used to replicate data from in a data replication pair,
-                      and is applied to the replica broker. Must be set when data_replication_mode
+                    description: ARN of the primary broker used to replicate data
+                      in a data replication pair. Required when data_replication_mode
                       is CRDR.
                     type: string
                   deploymentMode:
@@ -1462,17 +1448,16 @@ spec:
                     items:
                       properties:
                         kmsKeyId:
-                          description: Amazon Resource Name (ARN) of Key Management
-                            Service (KMS) Customer Master Key (CMK) to use for encryption
-                            at rest. Requires setting use_aws_owned_key to false.
-                            To perform drift detection when AWS-managed CMKs or customer-managed
+                          description: ARN of KMS CMK to use for encryption at rest.
+                            Requires setting use_aws_owned_key to false. To perform
+                            drift detection when AWS-managed CMKs or customer-managed
                             CMKs are in use, this value must be configured.
                           type: string
                         useAwsOwnedKey:
-                          description: Whether to enable an AWS-owned KMS CMK that
-                            is not in your account. Defaults to true. Setting to false
-                            without configuring kms_key_id will create an AWS-managed
-                            CMK aliased to aws/mq in your account.
+                          description: Whether to enable an AWS-owned KMS CMK not
+                            in your account. Defaults to true. Setting to false without
+                            configuring kms_key_id creates an AWS-managed CMK aliased
+                            to aws/mq in your account.
                           type: boolean
                       type: object
                     type: array
@@ -1481,8 +1466,7 @@ spec:
                       and RabbitMQ.
                     type: string
                   engineVersion:
-                    description: Version of the broker engine. See the AmazonMQ Broker
-                      Engine docs for supported versions. For example, 5.17.6.
+                    description: Version of the broker engine.
                     type: string
                   hostInstanceType:
                     description: Broker's instance type. For example, mq.t3.micro,
@@ -1497,8 +1481,8 @@ spec:
                     items:
                       properties:
                         consoleUrl:
-                          description: The URL of the ActiveMQ Web Console or the
-                            RabbitMQ Management UI depending on engine_type.
+                          description: URL of the ActiveMQ Web Console or the RabbitMQ
+                            Management UI depending on engine_type.
                           type: string
                         endpoints:
                           description: 'Broker''s wire-level protocol endpoints in
@@ -1514,25 +1498,24 @@ spec:
                     type: array
                   ldapServerMetadata:
                     description: Configuration block for the LDAP server used to authenticate
-                      and authorize connections to the broker. Not supported for engine_type
-                      RabbitMQ. Detailed below. (Currently, AWS may not process changes
-                      to LDAP server metadata.)
+                      and authorize connections. Not supported for engine_type RabbitMQ.
+                      Detailed below.
                     items:
                       properties:
                         hosts:
-                          description: List of a fully qualified domain name of the
-                            LDAP server and an optional failover server.
+                          description: List of fully qualified domain names of the
+                            LDAP server and optional failover server.
                           items:
                             type: string
                           type: array
                         roleBase:
                           description: Fully qualified name of the directory to search
-                            for a user’s groups.
+                            for a user's groups.
                           type: string
                         roleName:
-                          description: Specifies the LDAP attribute that identifies
-                            the group name attribute in the object returned from the
-                            group membership query.
+                          description: LDAP attribute that identifies the group name
+                            attribute in the object returned from the group membership
+                            query.
                           type: string
                         roleSearchMatching:
                           description: Search criteria for groups.
@@ -1549,8 +1532,8 @@ spec:
                             you want to search for users.
                           type: string
                         userRoleName:
-                          description: Specifies the name of the LDAP attribute for
-                            the user group membership.
+                          description: Name of the LDAP attribute for the user group
+                            membership.
                           type: string
                         userSearchMatching:
                           description: Search criteria for users.
@@ -1562,19 +1545,18 @@ spec:
                       type: object
                     type: array
                   logs:
-                    description: Configuration block for the logging configuration
-                      of the broker. Detailed below.
+                    description: Configuration block for the logging configuration.
+                      Detailed below.
                     items:
                       properties:
                         audit:
-                          description: Enables audit logging. Auditing is only possible
-                            for engine_type of ActiveMQ. User management action made
-                            using JMX or the ActiveMQ Web Console is logged. Defaults
-                            to false.
+                          description: Whether to enable audit logging. Only possible
+                            for engine_type of ActiveMQ. Logs user management actions
+                            via JMX or ActiveMQ Web Console. Defaults to false.
                           type: string
                         general:
-                          description: Enables general logging via CloudWatch. Defaults
-                            to false.
+                          description: Whether to enable general logging via CloudWatch.
+                            Defaults to false.
                           type: boolean
                       type: object
                     type: array
@@ -1597,13 +1579,18 @@ spec:
                       type: object
                     type: array
                   pendingDataReplicationMode:
-                    description: The data replication mode that will be applied after
+                    description: Data replication mode that will be applied after
                       reboot.
                     type: string
                   publiclyAccessible:
                     description: Whether to enable connections from applications outside
                       of the VPC that hosts the broker's subnets.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroups:
                     description: List of security group IDs assigned to the broker.
                     items:
@@ -1612,9 +1599,9 @@ spec:
                     x-kubernetes-list-type: set
                   storageType:
                     description: Storage type of the broker. For engine_type ActiveMQ,
-                      the valid values are efs and ebs, and the AWS-default is efs.
-                      For engine_type RabbitMQ, only ebs is supported. When using
-                      ebs, only the mq.m5 broker instance type family is supported.
+                      valid values are efs and ebs (AWS-default is efs). For engine_type
+                      RabbitMQ, only ebs is supported. When using ebs, only the mq.m5
+                      broker instance type family is supported.
                     type: string
                   subnetIds:
                     description: List of subnet IDs in which to launch the broker.
@@ -1633,9 +1620,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   user:
@@ -1658,8 +1644,8 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         replicationUser:
-                          description: Whether to set set replication user. Defaults
-                            to false.
+                          description: Whether to set replication user. Defaults to
+                            false.
                           type: boolean
                         username:
                           description: Username of the user.

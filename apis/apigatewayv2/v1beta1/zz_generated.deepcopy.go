@@ -80,6 +80,11 @@ func (in *APIInitParameters) DeepCopyInto(out *APIInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -504,6 +509,11 @@ func (in *APIObservation) DeepCopyInto(out *APIObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -511,6 +521,11 @@ func (in *APIObservation) DeepCopyInto(out *APIObservation) {
 	}
 	if in.ProtocolType != nil {
 		in, out := &in.ProtocolType, &out.ProtocolType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -616,6 +631,11 @@ func (in *APIParameters) DeepCopyInto(out *APIParameters) {
 	if in.FailOnWarnings != nil {
 		in, out := &in.FailOnWarnings, &out.FailOnWarnings
 		*out = new(bool)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1006,6 +1026,11 @@ func (in *AuthorizerObservation) DeepCopyInto(out *AuthorizerObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1740,6 +1765,11 @@ func (in *DomainNameConfigurationInitParameters) DeepCopyInto(out *DomainNameCon
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.OwnershipVerificationCertificateArn != nil {
 		in, out := &in.OwnershipVerificationCertificateArn, &out.OwnershipVerificationCertificateArn
 		*out = new(string)
@@ -1777,6 +1807,11 @@ func (in *DomainNameConfigurationObservation) DeepCopyInto(out *DomainNameConfig
 	}
 	if in.HostedZoneID != nil {
 		in, out := &in.HostedZoneID, &out.HostedZoneID
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
 		*out = new(string)
 		**out = **in
 	}
@@ -1827,6 +1862,11 @@ func (in *DomainNameConfigurationParameters) DeepCopyInto(out *DomainNameConfigu
 	}
 	if in.EndpointType != nil {
 		in, out := &in.EndpointType, &out.EndpointType
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
 		*out = new(string)
 		**out = **in
 	}
@@ -1960,6 +2000,11 @@ func (in *DomainNameObservation) DeepCopyInto(out *DomainNameObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -2390,6 +2435,11 @@ func (in *IntegrationObservation) DeepCopyInto(out *IntegrationObservation) {
 	}
 	if in.PayloadFormatVersion != nil {
 		in, out := &in.PayloadFormatVersion, &out.PayloadFormatVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -4708,6 +4758,11 @@ func (in *StageObservation) DeepCopyInto(out *StageObservation) {
 	}
 	if in.InvokeURL != nil {
 		in, out := &in.InvokeURL, &out.InvokeURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

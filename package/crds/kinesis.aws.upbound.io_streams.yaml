@@ -162,8 +162,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retentionPeriod:
                     description: Length of time data records are accessible after
@@ -173,7 +174,7 @@ spec:
                     type: number
                   shardCount:
                     description: |-
-                      –  The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
+                      The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
                       Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
                     type: number
                   shardLevelMetrics:
@@ -314,7 +315,7 @@ spec:
                     type: number
                   shardCount:
                     description: |-
-                      –  The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
+                      The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
                       Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
                     type: number
                   shardLevelMetrics:
@@ -537,6 +538,11 @@ spec:
                       for encryption. You can also use a Kinesis-owned master key
                       by specifying the alias alias/aws/kinesis.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionPeriod:
                     description: Length of time data records are accessible after
                       they are added to the stream. The maximum value of a stream's
@@ -545,7 +551,7 @@ spec:
                     type: number
                   shardCount:
                     description: |-
-                      –  The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
+                      The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
                       Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
                     type: number
                   shardLevelMetrics:

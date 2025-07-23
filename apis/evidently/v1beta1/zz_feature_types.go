@@ -84,6 +84,10 @@ type FeatureObservation struct {
 	// The name or ARN of the project that is to contain the new feature.
 	Project *string `json:"project,omitempty" tf:"project,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The current state of the feature. Valid values are AVAILABLE and UPDATING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -135,10 +139,10 @@ type FeatureParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectSelector *v1.Selector `json:"projectSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

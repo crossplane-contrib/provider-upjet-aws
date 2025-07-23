@@ -3233,6 +3233,11 @@ func (in *ScheduledActionObservation) DeepCopyInto(out *ScheduledActionObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Schedule != nil {
 		in, out := &in.Schedule, &out.Schedule
 		*out = new(string)

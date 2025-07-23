@@ -319,6 +319,17 @@ func (in *AppMonitorInitParameters) DeepCopyInto(out *AppMonitorInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainList != nil {
+		in, out := &in.DomainList, &out.DomainList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -421,8 +432,24 @@ func (in *AppMonitorObservation) DeepCopyInto(out *AppMonitorObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainList != nil {
+		in, out := &in.DomainList, &out.DomainList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -496,6 +523,17 @@ func (in *AppMonitorParameters) DeepCopyInto(out *AppMonitorParameters) {
 		in, out := &in.Domain, &out.Domain
 		*out = new(string)
 		**out = **in
+	}
+	if in.DomainList != nil {
+		in, out := &in.DomainList, &out.DomainList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

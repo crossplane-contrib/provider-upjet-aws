@@ -167,6 +167,11 @@ func (in *AccessPointObservation) DeepCopyInto(out *AccessPointObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RootDirectory != nil {
 		in, out := &in.RootDirectory, &out.RootDirectory
 		*out = make([]RootDirectoryObservation, len(*in))
@@ -491,6 +496,11 @@ func (in *BackupPolicyObservation) DeepCopyInto(out *BackupPolicyObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1007,6 +1017,11 @@ func (in *FileSystemObservation) DeepCopyInto(out *FileSystemObservation) {
 	if in.ProvisionedThroughputInMibps != nil {
 		in, out := &in.ProvisionedThroughputInMibps, &out.ProvisionedThroughputInMibps
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.SizeInBytes != nil {
@@ -2121,6 +2136,11 @@ func (in *ReplicationConfigurationObservation) DeepCopyInto(out *ReplicationConf
 	}
 	if in.OriginalSourceFileSystemArn != nil {
 		in, out := &in.OriginalSourceFileSystemArn, &out.OriginalSourceFileSystemArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

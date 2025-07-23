@@ -44,13 +44,13 @@ type BandwidthParameters struct {
 
 type LinkInitParameters struct {
 
-	// The upload speed and download speed in Mbps. Documented below.
+	// Upload speed and download speed in Mbps. See below.
 	Bandwidth []BandwidthInitParameters `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
-	// A description of the link.
+	// Description of the link.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -63,10 +63,10 @@ type LinkInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The provider of the link.
+	// Provider of the link.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
-	// The ID of the site.
+	// ID of the site.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Site
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
@@ -82,55 +82,55 @@ type LinkInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the link.
+	// Type of the link.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinkObservation struct {
 
-	// Link Amazon Resource Name (ARN).
+	// Link ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The upload speed and download speed in Mbps. Documented below.
+	// Upload speed and download speed in Mbps. See below.
 	Bandwidth []BandwidthObservation `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
-	// A description of the link.
+	// Description of the link.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The provider of the link.
+	// Provider of the link.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
-	// The ID of the site.
+	// ID of the site.
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of the link.
+	// Type of the link.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinkParameters struct {
 
-	// The upload speed and download speed in Mbps. Documented below.
+	// Upload speed and download speed in Mbps. See below.
 	// +kubebuilder:validation:Optional
 	Bandwidth []BandwidthParameters `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
-	// A description of the link.
+	// Description of the link.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -144,16 +144,11 @@ type LinkParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The provider of the link.
+	// Provider of the link.
 	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
-	// The ID of the site.
+	// ID of the site.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Site
 	// +kubebuilder:validation:Optional
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
@@ -171,7 +166,7 @@ type LinkParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the link.
+	// Type of the link.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -203,7 +198,7 @@ type LinkStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Link is the Schema for the Links API. Creates a link for a site.
+// Link is the Schema for the Links API. Manages a Network Manager link.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -113,12 +113,35 @@ func (mg *EventSourceMapping) ResolveReferences(ctx context.Context, c client.Re
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationConfig[i3].OnFailure); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationArnRef,
+					Selector:     mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationArn")
+			}
+			mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.DestinationConfig[i3].OnFailure[i4].DestinationArnRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionName),
 			Extract:      common.ARNExtractor(),
@@ -151,12 +174,35 @@ func (mg *EventSourceMapping) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DestinationConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.DestinationConfig[i3].OnFailure); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationConfig[i3].OnFailure[i4].DestinationArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.DestinationConfig[i3].OnFailure[i4].DestinationArnRef,
+					Selector:     mg.Spec.InitProvider.DestinationConfig[i3].OnFailure[i4].DestinationArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.DestinationConfig[i3].OnFailure[i4].DestinationArn")
+			}
+			mg.Spec.InitProvider.DestinationConfig[i3].OnFailure[i4].DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.DestinationConfig[i3].OnFailure[i4].DestinationArnRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionName),
 			Extract:      common.ARNExtractor(),
@@ -203,6 +249,27 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DeadLetterConfig); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeadLetterConfig[i3].TargetArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.DeadLetterConfig[i3].TargetArnRef,
+				Selector:     mg.Spec.ForProvider.DeadLetterConfig[i3].TargetArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DeadLetterConfig[i3].TargetArn")
+		}
+		mg.Spec.ForProvider.DeadLetterConfig[i3].TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DeadLetterConfig[i3].TargetArnRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FileSystemConfig); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("efs.aws.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
@@ -359,6 +426,27 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DeadLetterConfig); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeadLetterConfig[i3].TargetArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.DeadLetterConfig[i3].TargetArnRef,
+				Selector:     mg.Spec.InitProvider.DeadLetterConfig[i3].TargetArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DeadLetterConfig[i3].TargetArn")
+		}
+		mg.Spec.InitProvider.DeadLetterConfig[i3].TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DeadLetterConfig[i3].TargetArnRef = rsp.ResolvedReference
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.FileSystemConfig); i3++ {

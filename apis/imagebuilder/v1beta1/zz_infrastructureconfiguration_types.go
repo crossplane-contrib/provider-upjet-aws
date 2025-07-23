@@ -55,6 +55,9 @@ type InfrastructureConfigurationInitParameters struct {
 	// Name for the configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Configuration block with placement settings that define where the instances that are launched from your image will run. Detailed below.
+	Placement []PlacementInitParameters `json:"placement,omitempty" tf:"placement,omitempty"`
+
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
 	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
@@ -143,6 +146,13 @@ type InfrastructureConfigurationObservation struct {
 	// Name for the configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Configuration block with placement settings that define where the instances that are launched from your image will run. Detailed below.
+	Placement []PlacementObservation `json:"placement,omitempty" tf:"placement,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
 	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
@@ -218,10 +228,14 @@ type InfrastructureConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Configuration block with placement settings that define where the instances that are launched from your image will run. Detailed below.
+	// +kubebuilder:validation:Optional
+	Placement []PlacementParameters `json:"placement,omitempty" tf:"placement,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
 	// +kubebuilder:validation:Optional
@@ -327,6 +341,55 @@ type LoggingParameters struct {
 	// Configuration block with S3 logging settings. Detailed below.
 	// +kubebuilder:validation:Optional
 	S3Logs []S3LogsParameters `json:"s3Logs" tf:"s3_logs,omitempty"`
+}
+
+type PlacementInitParameters struct {
+
+	// Availability Zone where your build and test instances will launch.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// ID of the Dedicated Host on which build and test instances run. Conflicts with host_resource_group_arn.
+	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
+
+	// ARN of the host resource group in which to launch build and test instances. Conflicts with host_id.
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
+
+	// Placement tenancy of the instance. Valid values: default, dedicated and host.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+}
+
+type PlacementObservation struct {
+
+	// Availability Zone where your build and test instances will launch.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// ID of the Dedicated Host on which build and test instances run. Conflicts with host_resource_group_arn.
+	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
+
+	// ARN of the host resource group in which to launch build and test instances. Conflicts with host_id.
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
+
+	// Placement tenancy of the instance. Valid values: default, dedicated and host.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+}
+
+type PlacementParameters struct {
+
+	// Availability Zone where your build and test instances will launch.
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// ID of the Dedicated Host on which build and test instances run. Conflicts with host_resource_group_arn.
+	// +kubebuilder:validation:Optional
+	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
+
+	// ARN of the host resource group in which to launch build and test instances. Conflicts with host_id.
+	// +kubebuilder:validation:Optional
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
+
+	// Placement tenancy of the instance. Valid values: default, dedicated and host.
+	// +kubebuilder:validation:Optional
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 }
 
 type S3LogsInitParameters struct {

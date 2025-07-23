@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   encryptionConfiguration:
-                    description: –  Configuration block containing encryption configuration.
+                    description: Configuration block containing encryption configuration.
                       Detailed below.
                     items:
                       properties:
@@ -353,8 +353,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -373,7 +374,7 @@ spec:
                   autoscaler.
                 properties:
                   encryptionConfiguration:
-                    description: –  Configuration block containing encryption configuration.
+                    description: Configuration block containing encryption configuration.
                       Detailed below.
                     items:
                       properties:
@@ -831,7 +832,7 @@ spec:
               atProvider:
                 properties:
                   encryptionConfiguration:
-                    description: –  Configuration block containing encryption configuration.
+                    description: Configuration block containing encryption configuration.
                       Detailed below.
                     items:
                       properties:
@@ -883,6 +884,11 @@ spec:
                     type: array
                   id:
                     description: Glue security configuration name
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

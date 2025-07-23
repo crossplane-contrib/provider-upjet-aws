@@ -840,6 +840,11 @@ func (in *ContainerServiceObservation) DeepCopyInto(out *ContainerServiceObserva
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceType != nil {
 		in, out := &in.ResourceType, &out.ResourceType
 		*out = new(string)
@@ -2300,6 +2305,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	if in.RAMSize != nil {
 		in, out := &in.RAMSize, &out.RAMSize
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {

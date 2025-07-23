@@ -21,7 +21,7 @@ type CustomPluginInitParameters_2 struct {
 	// A summary description of the custom plugin.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Information about the location of a custom plugin. See below.
+	// Information about the location of a custom plugin. See location Block for details.
 	Location []LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Key-value map of resource tags.
@@ -45,11 +45,15 @@ type CustomPluginObservation_2 struct {
 	// an ID of the latest successfully created revision of the custom plugin.
 	LatestRevision *float64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
 
-	// Information about the location of a custom plugin. See below.
+	// Information about the location of a custom plugin. See location Block for details.
 	Location []LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the custom plugin..
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// the state of the custom plugin.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -73,7 +77,7 @@ type CustomPluginParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Information about the location of a custom plugin. See below.
+	// Information about the location of a custom plugin. See location Block for details.
 	// +kubebuilder:validation:Optional
 	Location []LocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -81,10 +85,10 @@ type CustomPluginParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -94,19 +98,19 @@ type CustomPluginParameters_2 struct {
 
 type LocationInitParameters struct {
 
-	// Information of the plugin file stored in Amazon S3. See below.
+	// Information of the plugin file stored in Amazon S3. See s3 Block for details..
 	S3 []LocationS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type LocationObservation struct {
 
-	// Information of the plugin file stored in Amazon S3. See below.
+	// Information of the plugin file stored in Amazon S3. See s3 Block for details..
 	S3 []LocationS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type LocationParameters struct {
 
-	// Information of the plugin file stored in Amazon S3. See below.
+	// Information of the plugin file stored in Amazon S3. See s3 Block for details..
 	// +kubebuilder:validation:Optional
 	S3 []LocationS3Parameters `json:"s3" tf:"s3,omitempty"`
 }

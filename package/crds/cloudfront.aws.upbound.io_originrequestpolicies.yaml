@@ -141,12 +141,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -414,6 +408,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The origin request policy ARN.
+                    type: string
                   comment:
                     description: Comment to describe the origin request policy.
                     type: string

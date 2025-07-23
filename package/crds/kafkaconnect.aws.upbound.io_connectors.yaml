@@ -76,12 +76,12 @@ spec:
                 properties:
                   capacity:
                     description: Information about the capacity allocated to the connector.
-                      See below.
+                      See capacity Block for details.
                     items:
                       properties:
                         autoscaling:
                           description: Information about the auto scaling parameters
-                            for the connector. See below.
+                            for the connector. See autoscaling Block for details.
                           items:
                             properties:
                               maxWorkerCount:
@@ -99,19 +99,19 @@ spec:
                                 type: number
                               scaleInPolicy:
                                 description: The scale-in policy for the connector.
-                                  See below.
+                                  See scale_in_policy Block for details.
                                 items:
                                   properties:
                                     cpuUtilizationPercentage:
-                                      description: The CPU utilization percentage
+                                      description: Specifies the CPU utilization percentage
                                         threshold at which you want connector scale
-                                        out to be triggered.
+                                        in to be triggered.
                                       type: number
                                   type: object
                                 type: array
                               scaleOutPolicy:
                                 description: The scale-out policy for the connector.
-                                  See below.
+                                  See scale_out_policy Block for details.
                                 items:
                                   properties:
                                     cpuUtilizationPercentage:
@@ -125,7 +125,7 @@ spec:
                           type: array
                         provisionedCapacity:
                           description: Details about a fixed capacity allocated to
-                            a connector. See below.
+                            a connector. See provisioned_capacity Block for details.
                           items:
                             properties:
                               mcuCount:
@@ -153,12 +153,12 @@ spec:
                     type: string
                   kafkaCluster:
                     description: Specifies which Apache Kafka cluster to connect to.
-                      See below.
+                      See kafka_cluster Block for details.
                     items:
                       properties:
                         apacheKafkaCluster:
                           description: The Apache Kafka cluster to which the connector
-                            is connected.
+                            is connected. See apache_kafka_cluster Block for details.
                           items:
                             properties:
                               bootstrapServers:
@@ -166,7 +166,8 @@ spec:
                                 type: string
                               vpc:
                                 description: Details of an Amazon VPC which has network
-                                  connectivity to the Apache Kafka cluster.
+                                  connectivity to the Apache Kafka cluster. See vpc
+                                  Block for details.
                                 items:
                                   properties:
                                     securityGroupRefs:
@@ -347,7 +348,8 @@ spec:
                     type: array
                   kafkaClusterClientAuthentication:
                     description: Details of the client authentication used by the
-                      Apache Kafka cluster. See below.
+                      Apache Kafka cluster. See kafka_cluster_client_authentication
+                      Block for details.
                     items:
                       properties:
                         authenticationType:
@@ -360,7 +362,7 @@ spec:
                     type: array
                   kafkaClusterEncryptionInTransit:
                     description: Details of encryption in transit to the Apache Kafka
-                      cluster. See below.
+                      cluster. See kafka_cluster_encryption_in_transit Block for details.
                     items:
                       properties:
                         encryptionType:
@@ -375,23 +377,25 @@ spec:
                       with both the Apache Kafka cluster's version and the plugins.
                     type: string
                   logDelivery:
-                    description: Details about log delivery. See below.
+                    description: Details about log delivery. See log_delivery Block
+                      for details.
                     items:
                       properties:
                         workerLogDelivery:
                           description: The workers can send worker logs to different
                             destination types. This configuration specifies the details
-                            of these destinations. See below.
+                            of these destinations. See worker_log_delivery Block for
+                            details.
                           items:
                             properties:
                               cloudwatchLogs:
                                 description: Details about delivering logs to Amazon
-                                  CloudWatch Logs. See below.
+                                  CloudWatch Logs. See cloudwatch_logs Block for details.
                                 items:
                                   properties:
                                     enabled:
-                                      description: Specifies whether connector logs
-                                        get sent to the specified Amazon S3 destination.
+                                      description: Whether log delivery to Amazon
+                                        CloudWatch Logs is enabled.
                                       type: boolean
                                     logGroup:
                                       description: The name of the CloudWatch log
@@ -477,7 +481,7 @@ spec:
                                 type: array
                               firehose:
                                 description: Details about delivering logs to Amazon
-                                  Kinesis Data Firehose. See below.
+                                  Kinesis Data Firehose. See firehose Block for details.
                                 items:
                                   properties:
                                     deliveryStream:
@@ -569,7 +573,7 @@ spec:
                                 type: array
                               s3:
                                 description: Details about delivering logs to Amazon
-                                  S3. See below.
+                                  S3. See s3 Block for deetails.
                                 items:
                                   properties:
                                     bucket:
@@ -671,16 +675,17 @@ spec:
                     type: string
                   plugin:
                     description: Specifies which plugins to use for the connector.
-                      See below.
+                      See plugin Block for details.
                     items:
                       properties:
                         customPlugin:
-                          description: Details about a custom plugin. See below.
+                          description: Details about a custom plugin. See custom_plugin
+                            Block for details.
                           items:
                             properties:
                               arn:
                                 description: The Amazon Resource Name (ARN) of the
-                                  worker configuration.
+                                  custom plugin.
                                 type: string
                               arnRef:
                                 description: Reference to a CustomPlugin in kafkaconnect
@@ -759,15 +764,16 @@ spec:
                                     type: object
                                 type: object
                               revision:
-                                description: The revision of the worker configuration.
+                                description: The revision of the custom plugin.
                                 type: number
                             type: object
                           type: array
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceExecutionRoleArn:
                     description: The Amazon Resource Name (ARN) of the IAM role used
@@ -859,7 +865,7 @@ spec:
                     x-kubernetes-map-type: granular
                   workerConfiguration:
                     description: Specifies which worker configuration to use with
-                      the connector. See below.
+                      the connector. See worker_configuration Block for details.
                     items:
                       properties:
                         arn:
@@ -966,12 +972,12 @@ spec:
                 properties:
                   capacity:
                     description: Information about the capacity allocated to the connector.
-                      See below.
+                      See capacity Block for details.
                     items:
                       properties:
                         autoscaling:
                           description: Information about the auto scaling parameters
-                            for the connector. See below.
+                            for the connector. See autoscaling Block for details.
                           items:
                             properties:
                               maxWorkerCount:
@@ -989,19 +995,19 @@ spec:
                                 type: number
                               scaleInPolicy:
                                 description: The scale-in policy for the connector.
-                                  See below.
+                                  See scale_in_policy Block for details.
                                 items:
                                   properties:
                                     cpuUtilizationPercentage:
-                                      description: The CPU utilization percentage
+                                      description: Specifies the CPU utilization percentage
                                         threshold at which you want connector scale
-                                        out to be triggered.
+                                        in to be triggered.
                                       type: number
                                   type: object
                                 type: array
                               scaleOutPolicy:
                                 description: The scale-out policy for the connector.
-                                  See below.
+                                  See scale_out_policy Block for details.
                                 items:
                                   properties:
                                     cpuUtilizationPercentage:
@@ -1015,7 +1021,7 @@ spec:
                           type: array
                         provisionedCapacity:
                           description: Details about a fixed capacity allocated to
-                            a connector. See below.
+                            a connector. See provisioned_capacity Block for details.
                           items:
                             properties:
                               mcuCount:
@@ -1043,12 +1049,12 @@ spec:
                     type: string
                   kafkaCluster:
                     description: Specifies which Apache Kafka cluster to connect to.
-                      See below.
+                      See kafka_cluster Block for details.
                     items:
                       properties:
                         apacheKafkaCluster:
                           description: The Apache Kafka cluster to which the connector
-                            is connected.
+                            is connected. See apache_kafka_cluster Block for details.
                           items:
                             properties:
                               bootstrapServers:
@@ -1056,7 +1062,8 @@ spec:
                                 type: string
                               vpc:
                                 description: Details of an Amazon VPC which has network
-                                  connectivity to the Apache Kafka cluster.
+                                  connectivity to the Apache Kafka cluster. See vpc
+                                  Block for details.
                                 items:
                                   properties:
                                     securityGroupRefs:
@@ -1237,7 +1244,8 @@ spec:
                     type: array
                   kafkaClusterClientAuthentication:
                     description: Details of the client authentication used by the
-                      Apache Kafka cluster. See below.
+                      Apache Kafka cluster. See kafka_cluster_client_authentication
+                      Block for details.
                     items:
                       properties:
                         authenticationType:
@@ -1250,7 +1258,7 @@ spec:
                     type: array
                   kafkaClusterEncryptionInTransit:
                     description: Details of encryption in transit to the Apache Kafka
-                      cluster. See below.
+                      cluster. See kafka_cluster_encryption_in_transit Block for details.
                     items:
                       properties:
                         encryptionType:
@@ -1265,23 +1273,25 @@ spec:
                       with both the Apache Kafka cluster's version and the plugins.
                     type: string
                   logDelivery:
-                    description: Details about log delivery. See below.
+                    description: Details about log delivery. See log_delivery Block
+                      for details.
                     items:
                       properties:
                         workerLogDelivery:
                           description: The workers can send worker logs to different
                             destination types. This configuration specifies the details
-                            of these destinations. See below.
+                            of these destinations. See worker_log_delivery Block for
+                            details.
                           items:
                             properties:
                               cloudwatchLogs:
                                 description: Details about delivering logs to Amazon
-                                  CloudWatch Logs. See below.
+                                  CloudWatch Logs. See cloudwatch_logs Block for details.
                                 items:
                                   properties:
                                     enabled:
-                                      description: Specifies whether connector logs
-                                        get sent to the specified Amazon S3 destination.
+                                      description: Whether log delivery to Amazon
+                                        CloudWatch Logs is enabled.
                                       type: boolean
                                     logGroup:
                                       description: The name of the CloudWatch log
@@ -1367,7 +1377,7 @@ spec:
                                 type: array
                               firehose:
                                 description: Details about delivering logs to Amazon
-                                  Kinesis Data Firehose. See below.
+                                  Kinesis Data Firehose. See firehose Block for details.
                                 items:
                                   properties:
                                     deliveryStream:
@@ -1459,7 +1469,7 @@ spec:
                                 type: array
                               s3:
                                 description: Details about delivering logs to Amazon
-                                  S3. See below.
+                                  S3. See s3 Block for deetails.
                                 items:
                                   properties:
                                     bucket:
@@ -1558,16 +1568,17 @@ spec:
                     type: array
                   plugin:
                     description: Specifies which plugins to use for the connector.
-                      See below.
+                      See plugin Block for details.
                     items:
                       properties:
                         customPlugin:
-                          description: Details about a custom plugin. See below.
+                          description: Details about a custom plugin. See custom_plugin
+                            Block for details.
                           items:
                             properties:
                               arn:
                                 description: The Amazon Resource Name (ARN) of the
-                                  worker configuration.
+                                  custom plugin.
                                 type: string
                               arnRef:
                                 description: Reference to a CustomPlugin in kafkaconnect
@@ -1646,7 +1657,7 @@ spec:
                                     type: object
                                 type: object
                               revision:
-                                description: The revision of the worker configuration.
+                                description: The revision of the custom plugin.
                                 type: number
                             type: object
                           type: array
@@ -1742,7 +1753,7 @@ spec:
                     x-kubernetes-map-type: granular
                   workerConfiguration:
                     description: Specifies which worker configuration to use with
-                      the connector. See below.
+                      the connector. See worker_configuration Block for details.
                     items:
                       properties:
                         arn:
@@ -2035,16 +2046,16 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the custom plugin.
+                    description: The Amazon Resource Name (ARN) of the connector.
                     type: string
                   capacity:
                     description: Information about the capacity allocated to the connector.
-                      See below.
+                      See capacity Block for details.
                     items:
                       properties:
                         autoscaling:
                           description: Information about the auto scaling parameters
-                            for the connector. See below.
+                            for the connector. See autoscaling Block for details.
                           items:
                             properties:
                               maxWorkerCount:
@@ -2062,19 +2073,19 @@ spec:
                                 type: number
                               scaleInPolicy:
                                 description: The scale-in policy for the connector.
-                                  See below.
+                                  See scale_in_policy Block for details.
                                 items:
                                   properties:
                                     cpuUtilizationPercentage:
-                                      description: The CPU utilization percentage
+                                      description: Specifies the CPU utilization percentage
                                         threshold at which you want connector scale
-                                        out to be triggered.
+                                        in to be triggered.
                                       type: number
                                   type: object
                                 type: array
                               scaleOutPolicy:
                                 description: The scale-out policy for the connector.
-                                  See below.
+                                  See scale_out_policy Block for details.
                                 items:
                                   properties:
                                     cpuUtilizationPercentage:
@@ -2088,7 +2099,7 @@ spec:
                           type: array
                         provisionedCapacity:
                           description: Details about a fixed capacity allocated to
-                            a connector. See below.
+                            a connector. See provisioned_capacity Block for details.
                           items:
                             properties:
                               mcuCount:
@@ -2118,12 +2129,12 @@ spec:
                     type: string
                   kafkaCluster:
                     description: Specifies which Apache Kafka cluster to connect to.
-                      See below.
+                      See kafka_cluster Block for details.
                     items:
                       properties:
                         apacheKafkaCluster:
                           description: The Apache Kafka cluster to which the connector
-                            is connected.
+                            is connected. See apache_kafka_cluster Block for details.
                           items:
                             properties:
                               bootstrapServers:
@@ -2131,7 +2142,8 @@ spec:
                                 type: string
                               vpc:
                                 description: Details of an Amazon VPC which has network
-                                  connectivity to the Apache Kafka cluster.
+                                  connectivity to the Apache Kafka cluster. See vpc
+                                  Block for details.
                                 items:
                                   properties:
                                     securityGroups:
@@ -2154,7 +2166,8 @@ spec:
                     type: array
                   kafkaClusterClientAuthentication:
                     description: Details of the client authentication used by the
-                      Apache Kafka cluster. See below.
+                      Apache Kafka cluster. See kafka_cluster_client_authentication
+                      Block for details.
                     items:
                       properties:
                         authenticationType:
@@ -2167,7 +2180,7 @@ spec:
                     type: array
                   kafkaClusterEncryptionInTransit:
                     description: Details of encryption in transit to the Apache Kafka
-                      cluster. See below.
+                      cluster. See kafka_cluster_encryption_in_transit Block for details.
                     items:
                       properties:
                         encryptionType:
@@ -2182,23 +2195,25 @@ spec:
                       with both the Apache Kafka cluster's version and the plugins.
                     type: string
                   logDelivery:
-                    description: Details about log delivery. See below.
+                    description: Details about log delivery. See log_delivery Block
+                      for details.
                     items:
                       properties:
                         workerLogDelivery:
                           description: The workers can send worker logs to different
                             destination types. This configuration specifies the details
-                            of these destinations. See below.
+                            of these destinations. See worker_log_delivery Block for
+                            details.
                           items:
                             properties:
                               cloudwatchLogs:
                                 description: Details about delivering logs to Amazon
-                                  CloudWatch Logs. See below.
+                                  CloudWatch Logs. See cloudwatch_logs Block for details.
                                 items:
                                   properties:
                                     enabled:
-                                      description: Specifies whether connector logs
-                                        get sent to the specified Amazon S3 destination.
+                                      description: Whether log delivery to Amazon
+                                        CloudWatch Logs is enabled.
                                       type: boolean
                                     logGroup:
                                       description: The name of the CloudWatch log
@@ -2208,7 +2223,7 @@ spec:
                                 type: array
                               firehose:
                                 description: Details about delivering logs to Amazon
-                                  Kinesis Data Firehose. See below.
+                                  Kinesis Data Firehose. See firehose Block for details.
                                 items:
                                   properties:
                                     deliveryStream:
@@ -2224,7 +2239,7 @@ spec:
                                 type: array
                               s3:
                                 description: Details about delivering logs to Amazon
-                                  S3. See below.
+                                  S3. See s3 Block for deetails.
                                 items:
                                   properties:
                                     bucket:
@@ -2250,24 +2265,30 @@ spec:
                     type: string
                   plugin:
                     description: Specifies which plugins to use for the connector.
-                      See below.
+                      See plugin Block for details.
                     items:
                       properties:
                         customPlugin:
-                          description: Details about a custom plugin. See below.
+                          description: Details about a custom plugin. See custom_plugin
+                            Block for details.
                           items:
                             properties:
                               arn:
                                 description: The Amazon Resource Name (ARN) of the
-                                  worker configuration.
+                                  custom plugin.
                                 type: string
                               revision:
-                                description: The revision of the worker configuration.
+                                description: The revision of the custom plugin.
                                 type: number
                             type: object
                           type: array
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   serviceExecutionRoleArn:
                     description: The Amazon Resource Name (ARN) of the IAM role used
                       by the connector to access the Amazon Web Services resources
@@ -2295,7 +2316,7 @@ spec:
                     type: string
                   workerConfiguration:
                     description: Specifies which worker configuration to use with
-                      the connector. See below.
+                      the connector. See worker_configuration Block for details.
                     items:
                       properties:
                         arn:

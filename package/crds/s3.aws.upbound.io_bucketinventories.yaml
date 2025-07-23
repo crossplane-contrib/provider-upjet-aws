@@ -316,8 +316,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   schedule:
                     description: Specifies the schedule for generating inventory results
@@ -883,6 +884,11 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   schedule:
                     description: Specifies the schedule for generating inventory results
                       (documented below).

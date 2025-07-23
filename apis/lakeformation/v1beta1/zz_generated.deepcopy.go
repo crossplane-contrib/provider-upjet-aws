@@ -1509,6 +1509,11 @@ func (in *PermissionsObservation) DeepCopyInto(out *PermissionsObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Table != nil {
 		in, out := &in.Table, &out.Table
 		*out = make([]TableObservation, len(*in))

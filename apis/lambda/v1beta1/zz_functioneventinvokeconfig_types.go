@@ -15,7 +15,7 @@ import (
 
 type DestinationConfigOnFailureInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// ARN of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -31,13 +31,13 @@ type DestinationConfigOnFailureInitParameters struct {
 
 type DestinationConfigOnFailureObservation struct {
 
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// ARN of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 }
 
 type DestinationConfigOnFailureParameters struct {
 
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// ARN of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -54,39 +54,39 @@ type DestinationConfigOnFailureParameters struct {
 
 type FunctionEventInvokeConfigDestinationConfigInitParameters struct {
 
-	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
+	// Configuration block with destination configuration for failed asynchronous invocations. See below.
 	OnFailure []DestinationConfigOnFailureInitParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
-	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
+	// Configuration block with destination configuration for successful asynchronous invocations. See below.
 	OnSuccess []OnSuccessInitParameters `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
 type FunctionEventInvokeConfigDestinationConfigObservation struct {
 
-	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
+	// Configuration block with destination configuration for failed asynchronous invocations. See below.
 	OnFailure []DestinationConfigOnFailureObservation `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
-	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
+	// Configuration block with destination configuration for successful asynchronous invocations. See below.
 	OnSuccess []OnSuccessObservation `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
 type FunctionEventInvokeConfigDestinationConfigParameters struct {
 
-	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
+	// Configuration block with destination configuration for failed asynchronous invocations. See below.
 	// +kubebuilder:validation:Optional
 	OnFailure []DestinationConfigOnFailureParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
-	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
+	// Configuration block with destination configuration for successful asynchronous invocations. See below.
 	// +kubebuilder:validation:Optional
 	OnSuccess []OnSuccessParameters `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
 }
 
 type FunctionEventInvokeConfigInitParameters struct {
 
-	// Configuration block with destination configuration. See below for details.
+	// Configuration block with destination configuration. See below.
 	DestinationConfig []FunctionEventInvokeConfigDestinationConfigInitParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
-	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
+	// Name or ARN of the Lambda Function, omitting any version or alias qualifier.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
@@ -101,13 +101,13 @@ type FunctionEventInvokeConfigInitParameters struct {
 
 type FunctionEventInvokeConfigObservation struct {
 
-	// Configuration block with destination configuration. See below for details.
+	// Configuration block with destination configuration. See below.
 	DestinationConfig []FunctionEventInvokeConfigDestinationConfigObservation `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
-	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
+	// Name or ARN of the Lambda Function, omitting any version or alias qualifier.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// Fully qualified Lambda Function name or Amazon Resource Name (ARN)
+	// Fully qualified Lambda Function name or ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
@@ -118,15 +118,19 @@ type FunctionEventInvokeConfigObservation struct {
 
 	// Lambda Function published version, $LATEST, or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type FunctionEventInvokeConfigParameters struct {
 
-	// Configuration block with destination configuration. See below for details.
+	// Configuration block with destination configuration. See below.
 	// +kubebuilder:validation:Optional
 	DestinationConfig []FunctionEventInvokeConfigDestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
-	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
+	// Name or ARN of the Lambda Function, omitting any version or alias qualifier.
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
@@ -142,15 +146,15 @@ type FunctionEventInvokeConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type OnSuccessInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// ARN of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -166,13 +170,13 @@ type OnSuccessInitParameters struct {
 
 type OnSuccessObservation struct {
 
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// ARN of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 }
 
 type OnSuccessParameters struct {
 
-	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// ARN of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -214,7 +218,7 @@ type FunctionEventInvokeConfigStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// FunctionEventInvokeConfig is the Schema for the FunctionEventInvokeConfigs API. Manages an asynchronous invocation configuration for a Lambda Function or Alias.
+// FunctionEventInvokeConfig is the Schema for the FunctionEventInvokeConfigs API. Manages an AWS Lambda Function Event Invoke Config.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

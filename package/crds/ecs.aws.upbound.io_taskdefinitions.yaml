@@ -85,6 +85,11 @@ spec:
                     description: Number of cpu units used by the task. If the requires_compatibilities
                       is FARGATE this field is required.
                     type: string
+                  enableFaultInjection:
+                    description: Enables fault injection and allows for fault injection
+                      requests to be accepted from the task's containers. Default
+                      is false.
+                    type: boolean
                   ephemeralStorage:
                     description: The amount of ephemeral storage to allocate for the
                       task. This parameter is used to expand the total amount of ephemeral
@@ -180,21 +185,6 @@ spec:
                   family:
                     description: A unique name for your task definition.
                     type: string
-                  inferenceAccelerator:
-                    description: Configuration block(s) with Inference Accelerators
-                      settings. Detailed below.
-                    items:
-                      properties:
-                        deviceName:
-                          description: Elastic Inference accelerator device name.
-                            The deviceName must also be referenced in a container
-                            definition as a ResourceRequirement.
-                          type: string
-                        deviceType:
-                          description: Elastic Inference accelerator type to use.
-                          type: string
-                      type: object
-                    type: array
                   ipcMode:
                     description: IPC resource namespace to be used for the containers
                       in the task The valid values are host, task, and none.
@@ -254,8 +244,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   requiresCompatibilities:
                     description: Set of launch types required by the task. The valid
@@ -296,8 +287,10 @@ spec:
                       task to make calls to other AWS services.
                     type: string
                   trackLatest:
-                    description: Whether should track latest task definition or the
-                      one created with the resource. Default is false.
+                    description: Whether should track latest ACTIVE task definition
+                      on AWS or the one created with the resource stored in state.
+                      Default is false. Useful in the event the task definition is
+                      modified outside of this resource.
                     type: boolean
                   volume:
                     description: Configuration block for volumes that containers in
@@ -484,6 +477,11 @@ spec:
                     description: Number of cpu units used by the task. If the requires_compatibilities
                       is FARGATE this field is required.
                     type: string
+                  enableFaultInjection:
+                    description: Enables fault injection and allows for fault injection
+                      requests to be accepted from the task's containers. Default
+                      is false.
+                    type: boolean
                   ephemeralStorage:
                     description: The amount of ephemeral storage to allocate for the
                       task. This parameter is used to expand the total amount of ephemeral
@@ -579,21 +577,6 @@ spec:
                   family:
                     description: A unique name for your task definition.
                     type: string
-                  inferenceAccelerator:
-                    description: Configuration block(s) with Inference Accelerators
-                      settings. Detailed below.
-                    items:
-                      properties:
-                        deviceName:
-                          description: Elastic Inference accelerator device name.
-                            The deviceName must also be referenced in a container
-                            definition as a ResourceRequirement.
-                          type: string
-                        deviceType:
-                          description: Elastic Inference accelerator type to use.
-                          type: string
-                      type: object
-                    type: array
                   ipcMode:
                     description: IPC resource namespace to be used for the containers
                       in the task The valid values are host, task, and none.
@@ -691,8 +674,10 @@ spec:
                       task to make calls to other AWS services.
                     type: string
                   trackLatest:
-                    description: Whether should track latest task definition or the
-                      one created with the resource. Default is false.
+                    description: Whether should track latest ACTIVE task definition
+                      on AWS or the one created with the resource stored in state.
+                      Default is false. Useful in the event the task definition is
+                      modified outside of this resource.
                     type: boolean
                   volume:
                     description: Configuration block for volumes that containers in
@@ -1056,6 +1041,11 @@ spec:
                     description: Number of cpu units used by the task. If the requires_compatibilities
                       is FARGATE this field is required.
                     type: string
+                  enableFaultInjection:
+                    description: Enables fault injection and allows for fault injection
+                      requests to be accepted from the task's containers. Default
+                      is false.
+                    type: boolean
                   ephemeralStorage:
                     description: The amount of ephemeral storage to allocate for the
                       task. This parameter is used to expand the total amount of ephemeral
@@ -1079,21 +1069,6 @@ spec:
                     type: string
                   id:
                     type: string
-                  inferenceAccelerator:
-                    description: Configuration block(s) with Inference Accelerators
-                      settings. Detailed below.
-                    items:
-                      properties:
-                        deviceName:
-                          description: Elastic Inference accelerator device name.
-                            The deviceName must also be referenced in a container
-                            definition as a ResourceRequirement.
-                          type: string
-                        deviceType:
-                          description: Elastic Inference accelerator type to use.
-                          type: string
-                      type: object
-                    type: array
                   ipcMode:
                     description: IPC resource namespace to be used for the containers
                       in the task The valid values are host, task, and none.
@@ -1152,6 +1127,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   requiresCompatibilities:
                     description: Set of launch types required by the task. The valid
                       values are EC2 and FARGATE.
@@ -1201,8 +1181,10 @@ spec:
                       task to make calls to other AWS services.
                     type: string
                   trackLatest:
-                    description: Whether should track latest task definition or the
-                      one created with the resource. Default is false.
+                    description: Whether should track latest ACTIVE task definition
+                      on AWS or the one created with the resource stored in state.
+                      Default is false. Useful in the event the task definition is
+                      modified outside of this resource.
                     type: boolean
                   volume:
                     description: Configuration block for volumes that containers in

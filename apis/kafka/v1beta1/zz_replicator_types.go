@@ -113,7 +113,7 @@ type KafkaClusterInitParameters struct {
 	AmazonMskCluster *AmazonMskClusterInitParameters `json:"amazonMskCluster,omitempty" tf:"amazon_msk_cluster,omitempty"`
 
 	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
-	VPCConfig *KafkaClusterVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+	VPCConfig *VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type KafkaClusterObservation struct {
@@ -122,7 +122,7 @@ type KafkaClusterObservation struct {
 	AmazonMskCluster *AmazonMskClusterObservation `json:"amazonMskCluster,omitempty" tf:"amazon_msk_cluster,omitempty"`
 
 	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
-	VPCConfig *KafkaClusterVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+	VPCConfig *VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type KafkaClusterParameters struct {
@@ -133,80 +133,7 @@ type KafkaClusterParameters struct {
 
 	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
 	// +kubebuilder:validation:Optional
-	VPCConfig *KafkaClusterVPCConfigParameters `json:"vpcConfig" tf:"vpc_config,omitempty"`
-}
-
-type KafkaClusterVPCConfigInitParameters struct {
-
-	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +listType=set
-	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
-
-	// References to SecurityGroup in ec2 to populate securityGroupsIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
-
-	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
-	// +listType=set
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
-
-	// References to Subnet in ec2 to populate subnetIds.
-	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of Subnet in ec2 to populate subnetIds.
-	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
-}
-
-type KafkaClusterVPCConfigObservation struct {
-
-	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
-	// +listType=set
-	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
-
-	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
-	// +listType=set
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
-}
-
-type KafkaClusterVPCConfigParameters struct {
-
-	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
-
-	// References to SecurityGroup in ec2 to populate securityGroupsIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
-
-	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
-
-	// References to Subnet in ec2 to populate subnetIds.
-	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of Subnet in ec2 to populate subnetIds.
-	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	VPCConfig *VPCConfigParameters `json:"vpcConfig" tf:"vpc_config,omitempty"`
 }
 
 type ReplicationInfoListInitParameters struct {
@@ -545,6 +472,79 @@ type TopicReplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	TopicsToReplicate []*string `json:"topicsToReplicate" tf:"topics_to_replicate,omitempty"`
+}
+
+type VPCConfigInitParameters struct {
+
+	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+
+	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+}
+
+type VPCConfigObservation struct {
+
+	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+}
+
+type VPCConfigParameters struct {
+
+	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+
+	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ReplicatorSpec defines the desired state of Replicator

@@ -39,6 +39,10 @@ type GroupTagObservation struct {
 	// ASG name and key, separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Tag to create. The tag block is documented below.
 	Tag []GroupTagTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 }
@@ -58,10 +62,10 @@ type GroupTagParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Tag to create. The tag block is documented below.
 	// +kubebuilder:validation:Optional

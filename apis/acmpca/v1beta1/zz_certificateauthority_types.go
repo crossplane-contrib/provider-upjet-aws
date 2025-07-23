@@ -115,6 +115,10 @@ type CertificateAuthorityObservation struct {
 	// Number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
 	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Nested argument containing revocation configuration. Defined below.
 	RevocationConfiguration []RevocationConfigurationObservation `json:"revocationConfiguration,omitempty" tf:"revocation_configuration,omitempty"`
 
@@ -154,10 +158,10 @@ type CertificateAuthorityParameters struct {
 	// +kubebuilder:validation:Optional
 	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Nested argument containing revocation configuration. Defined below.
 	// +kubebuilder:validation:Optional

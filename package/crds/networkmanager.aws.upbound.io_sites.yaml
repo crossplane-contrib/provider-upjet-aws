@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Site is the Schema for the Sites API. Creates a site in a global
-          network.
+        description: Site is the Schema for the Sites API. Manages a Network Manager
+          site.
         properties:
           apiVersion:
             description: |-
@@ -77,7 +77,7 @@ spec:
                     description: Description of the Site.
                     type: string
                   globalNetworkId:
-                    description: The ID of the Global Network to create the site in.
+                    description: ID of the Global Network to create the site in.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -156,7 +156,7 @@ spec:
                         type: object
                     type: object
                   location:
-                    description: The site location as documented below.
+                    description: Site location. See below.
                     items:
                       properties:
                         address:
@@ -170,18 +170,12 @@ spec:
                           type: string
                       type: object
                     type: array
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -200,7 +194,7 @@ spec:
                     description: Description of the Site.
                     type: string
                   globalNetworkId:
-                    description: The ID of the Global Network to create the site in.
+                    description: ID of the Global Network to create the site in.
                     type: string
                   globalNetworkIdRef:
                     description: Reference to a GlobalNetwork in networkmanager to
@@ -279,7 +273,7 @@ spec:
                         type: object
                     type: object
                   location:
-                    description: The site location as documented below.
+                    description: Site location. See below.
                     items:
                       properties:
                         address:
@@ -473,18 +467,18 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Site Amazon Resource Name (ARN)
+                    description: Site ARN.
                     type: string
                   description:
                     description: Description of the Site.
                     type: string
                   globalNetworkId:
-                    description: The ID of the Global Network to create the site in.
+                    description: ID of the Global Network to create the site in.
                     type: string
                   id:
                     type: string
                   location:
-                    description: The site location as documented below.
+                    description: Site location. See below.
                     items:
                       properties:
                         address:
@@ -507,9 +501,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

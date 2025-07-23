@@ -60,6 +60,10 @@ type BackupPolicyObservation struct {
 
 	// The ID that identifies the file system (e.g., fs-ccfc0d65).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type BackupPolicyParameters struct {
@@ -81,10 +85,10 @@ type BackupPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // BackupPolicySpec defines the desired state of BackupPolicy

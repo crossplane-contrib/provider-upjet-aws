@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: EndpointConfiguration is the Schema for the EndpointConfigurations
-          API. Provides a SageMaker Endpoint Configuration resource.
+          API. Provides a SageMaker AI Endpoint Configuration resource.
         properties:
           apiVersion:
             description: |-
@@ -80,15 +80,15 @@ spec:
                       properties:
                         clientConfig:
                           description: Configures the behavior of the client used
-                            by Amazon SageMaker to interact with the model container
+                            by Amazon SageMaker AI to interact with the model container
                             during asynchronous inference.
                           items:
                             properties:
                               maxConcurrentInvocationsPerInstance:
                                 description: The maximum number of concurrent requests
-                                  sent by the SageMaker client to the model container.
-                                  If no value is provided, Amazon SageMaker will choose
-                                  an optimal value for you.
+                                  sent by the SageMaker AI client to the model container.
+                                  If no value is provided, Amazon SageMaker AI will
+                                  choose an optimal value for you.
                                 type: number
                             type: object
                           type: array
@@ -100,7 +100,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that Amazon
-                                  SageMaker uses to encrypt the asynchronous inference
+                                  SageMaker AI uses to encrypt the asynchronous inference
                                   output in Amazon S3.
                                 type: string
                               notificationConfig:
@@ -144,22 +144,27 @@ spec:
                     type: array
                   dataCaptureConfig:
                     description: Specifies the parameters to capture input/output
-                      of SageMaker models endpoints. Fields are documented below.
+                      of SageMaker AI models endpoints. Fields are documented below.
                     items:
                       properties:
                         captureContentTypeHeader:
-                          description: The content type headers to capture. Fields
-                            are documented below.
+                          description: |-
+                            The content type headers to capture.
+                            See capture_content_type_header below.
                           items:
                             properties:
                               csvContentTypes:
-                                description: The CSV content type headers to capture.
+                                description: |-
+                                  The CSV content type headers to capture.
+                                  One of csv_content_types or json_content_types is required.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               jsonContentTypes:
-                                description: The JSON content type headers to capture.
+                                description: |-
+                                  The JSON content type headers to capture.
+                                  One of json_content_types or csv_content_types is required.
                                 items:
                                   type: string
                                 type: array
@@ -173,7 +178,7 @@ spec:
                             properties:
                               captureMode:
                                 description: Specifies the data to be captured. Should
-                                  be one of Input or Output.
+                                  be one of Input, Output or InputAndOutput.
                                 type: string
                             type: object
                           type: array
@@ -190,16 +195,16 @@ spec:
                           type: number
                         kmsKeyId:
                           description: Amazon Resource Name (ARN) of a AWS Key Management
-                            Service key that Amazon SageMaker uses to encrypt the
+                            Service key that Amazon SageMaker AI uses to encrypt the
                             captured data on Amazon S3.
                           type: string
                       type: object
                     type: array
                   kmsKeyArn:
                     description: Amazon Resource Name (ARN) of a AWS Key Management
-                      Service key that Amazon SageMaker uses to encrypt data on the
-                      storage volume attached to the ML compute instance that hosts
-                      the endpoint.
+                      Service key that Amazon SageMaker AI uses to encrypt data on
+                      the storage volume attached to the ML compute instance that
+                      hosts the endpoint.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -287,10 +292,10 @@ spec:
                           type: string
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: The timeout value, in seconds, for your inference
-                            container to pass health check by SageMaker Hosting. For
-                            more information about health check, see How Your Container
-                            Should Respond to Health Check (Ping) Requests. Valid
-                            values between 60 and 3600.
+                            container to pass health check by SageMaker AI Hosting.
+                            For more information about health check, see How Your
+                            Container Should Respond to Health Check (Ping) Requests.
+                            Valid values between 60 and 3600.
                           type: number
                         coreDumpConfig:
                           description: Specifies configuration for a core dump from
@@ -305,7 +310,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that SageMaker
-                                  uses to encrypt the core dump data at rest using
+                                  AI uses to encrypt the core dump data at rest using
                                   Amazon S3 server-side encryption.
                                 type: string
                             type: object
@@ -491,8 +496,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   shadowProductionVariants:
                     description: Array of ProductionVariant objects. There is one
@@ -509,10 +515,10 @@ spec:
                           type: string
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: The timeout value, in seconds, for your inference
-                            container to pass health check by SageMaker Hosting. For
-                            more information about health check, see How Your Container
-                            Should Respond to Health Check (Ping) Requests. Valid
-                            values between 60 and 3600.
+                            container to pass health check by SageMaker AI Hosting.
+                            For more information about health check, see How Your
+                            Container Should Respond to Health Check (Ping) Requests.
+                            Valid values between 60 and 3600.
                           type: number
                         coreDumpConfig:
                           description: Specifies configuration for a core dump from
@@ -527,7 +533,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that SageMaker
-                                  uses to encrypt the core dump data at rest using
+                                  AI uses to encrypt the core dump data at rest using
                                   Amazon S3 server-side encryption.
                                 type: string
                             type: object
@@ -665,15 +671,15 @@ spec:
                       properties:
                         clientConfig:
                           description: Configures the behavior of the client used
-                            by Amazon SageMaker to interact with the model container
+                            by Amazon SageMaker AI to interact with the model container
                             during asynchronous inference.
                           items:
                             properties:
                               maxConcurrentInvocationsPerInstance:
                                 description: The maximum number of concurrent requests
-                                  sent by the SageMaker client to the model container.
-                                  If no value is provided, Amazon SageMaker will choose
-                                  an optimal value for you.
+                                  sent by the SageMaker AI client to the model container.
+                                  If no value is provided, Amazon SageMaker AI will
+                                  choose an optimal value for you.
                                 type: number
                             type: object
                           type: array
@@ -685,7 +691,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that Amazon
-                                  SageMaker uses to encrypt the asynchronous inference
+                                  SageMaker AI uses to encrypt the asynchronous inference
                                   output in Amazon S3.
                                 type: string
                               notificationConfig:
@@ -729,22 +735,27 @@ spec:
                     type: array
                   dataCaptureConfig:
                     description: Specifies the parameters to capture input/output
-                      of SageMaker models endpoints. Fields are documented below.
+                      of SageMaker AI models endpoints. Fields are documented below.
                     items:
                       properties:
                         captureContentTypeHeader:
-                          description: The content type headers to capture. Fields
-                            are documented below.
+                          description: |-
+                            The content type headers to capture.
+                            See capture_content_type_header below.
                           items:
                             properties:
                               csvContentTypes:
-                                description: The CSV content type headers to capture.
+                                description: |-
+                                  The CSV content type headers to capture.
+                                  One of csv_content_types or json_content_types is required.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               jsonContentTypes:
-                                description: The JSON content type headers to capture.
+                                description: |-
+                                  The JSON content type headers to capture.
+                                  One of json_content_types or csv_content_types is required.
                                 items:
                                   type: string
                                 type: array
@@ -758,7 +769,7 @@ spec:
                             properties:
                               captureMode:
                                 description: Specifies the data to be captured. Should
-                                  be one of Input or Output.
+                                  be one of Input, Output or InputAndOutput.
                                 type: string
                             type: object
                           type: array
@@ -775,16 +786,16 @@ spec:
                           type: number
                         kmsKeyId:
                           description: Amazon Resource Name (ARN) of a AWS Key Management
-                            Service key that Amazon SageMaker uses to encrypt the
+                            Service key that Amazon SageMaker AI uses to encrypt the
                             captured data on Amazon S3.
                           type: string
                       type: object
                     type: array
                   kmsKeyArn:
                     description: Amazon Resource Name (ARN) of a AWS Key Management
-                      Service key that Amazon SageMaker uses to encrypt data on the
-                      storage volume attached to the ML compute instance that hosts
-                      the endpoint.
+                      Service key that Amazon SageMaker AI uses to encrypt data on
+                      the storage volume attached to the ML compute instance that
+                      hosts the endpoint.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -872,10 +883,10 @@ spec:
                           type: string
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: The timeout value, in seconds, for your inference
-                            container to pass health check by SageMaker Hosting. For
-                            more information about health check, see How Your Container
-                            Should Respond to Health Check (Ping) Requests. Valid
-                            values between 60 and 3600.
+                            container to pass health check by SageMaker AI Hosting.
+                            For more information about health check, see How Your
+                            Container Should Respond to Health Check (Ping) Requests.
+                            Valid values between 60 and 3600.
                           type: number
                         coreDumpConfig:
                           description: Specifies configuration for a core dump from
@@ -890,7 +901,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that SageMaker
-                                  uses to encrypt the core dump data at rest using
+                                  AI uses to encrypt the core dump data at rest using
                                   Amazon S3 server-side encryption.
                                 type: string
                             type: object
@@ -1090,10 +1101,10 @@ spec:
                           type: string
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: The timeout value, in seconds, for your inference
-                            container to pass health check by SageMaker Hosting. For
-                            more information about health check, see How Your Container
-                            Should Respond to Health Check (Ping) Requests. Valid
-                            values between 60 and 3600.
+                            container to pass health check by SageMaker AI Hosting.
+                            For more information about health check, see How Your
+                            Container Should Respond to Health Check (Ping) Requests.
+                            Valid values between 60 and 3600.
                           type: number
                         coreDumpConfig:
                           description: Specifies configuration for a core dump from
@@ -1108,7 +1119,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that SageMaker
-                                  uses to encrypt the core dump data at rest using
+                                  AI uses to encrypt the core dump data at rest using
                                   Amazon S3 server-side encryption.
                                 type: string
                             type: object
@@ -1413,15 +1424,15 @@ spec:
                       properties:
                         clientConfig:
                           description: Configures the behavior of the client used
-                            by Amazon SageMaker to interact with the model container
+                            by Amazon SageMaker AI to interact with the model container
                             during asynchronous inference.
                           items:
                             properties:
                               maxConcurrentInvocationsPerInstance:
                                 description: The maximum number of concurrent requests
-                                  sent by the SageMaker client to the model container.
-                                  If no value is provided, Amazon SageMaker will choose
-                                  an optimal value for you.
+                                  sent by the SageMaker AI client to the model container.
+                                  If no value is provided, Amazon SageMaker AI will
+                                  choose an optimal value for you.
                                 type: number
                             type: object
                           type: array
@@ -1433,7 +1444,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that Amazon
-                                  SageMaker uses to encrypt the asynchronous inference
+                                  SageMaker AI uses to encrypt the asynchronous inference
                                   output in Amazon S3.
                                 type: string
                               notificationConfig:
@@ -1477,22 +1488,27 @@ spec:
                     type: array
                   dataCaptureConfig:
                     description: Specifies the parameters to capture input/output
-                      of SageMaker models endpoints. Fields are documented below.
+                      of SageMaker AI models endpoints. Fields are documented below.
                     items:
                       properties:
                         captureContentTypeHeader:
-                          description: The content type headers to capture. Fields
-                            are documented below.
+                          description: |-
+                            The content type headers to capture.
+                            See capture_content_type_header below.
                           items:
                             properties:
                               csvContentTypes:
-                                description: The CSV content type headers to capture.
+                                description: |-
+                                  The CSV content type headers to capture.
+                                  One of csv_content_types or json_content_types is required.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               jsonContentTypes:
-                                description: The JSON content type headers to capture.
+                                description: |-
+                                  The JSON content type headers to capture.
+                                  One of json_content_types or csv_content_types is required.
                                 items:
                                   type: string
                                 type: array
@@ -1506,7 +1522,7 @@ spec:
                             properties:
                               captureMode:
                                 description: Specifies the data to be captured. Should
-                                  be one of Input or Output.
+                                  be one of Input, Output or InputAndOutput.
                                 type: string
                             type: object
                           type: array
@@ -1523,7 +1539,7 @@ spec:
                           type: number
                         kmsKeyId:
                           description: Amazon Resource Name (ARN) of a AWS Key Management
-                            Service key that Amazon SageMaker uses to encrypt the
+                            Service key that Amazon SageMaker AI uses to encrypt the
                             captured data on Amazon S3.
                           type: string
                       type: object
@@ -1532,9 +1548,9 @@ spec:
                     type: string
                   kmsKeyArn:
                     description: Amazon Resource Name (ARN) of a AWS Key Management
-                      Service key that Amazon SageMaker uses to encrypt data on the
-                      storage volume attached to the ML compute instance that hosts
-                      the endpoint.
+                      Service key that Amazon SageMaker AI uses to encrypt data on
+                      the storage volume attached to the ML compute instance that
+                      hosts the endpoint.
                     type: string
                   productionVariants:
                     description: An list of ProductionVariant objects, one for each
@@ -1548,10 +1564,10 @@ spec:
                           type: string
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: The timeout value, in seconds, for your inference
-                            container to pass health check by SageMaker Hosting. For
-                            more information about health check, see How Your Container
-                            Should Respond to Health Check (Ping) Requests. Valid
-                            values between 60 and 3600.
+                            container to pass health check by SageMaker AI Hosting.
+                            For more information about health check, see How Your
+                            Container Should Respond to Health Check (Ping) Requests.
+                            Valid values between 60 and 3600.
                           type: number
                         coreDumpConfig:
                           description: Specifies configuration for a core dump from
@@ -1566,7 +1582,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that SageMaker
-                                  uses to encrypt the core dump data at rest using
+                                  AI uses to encrypt the core dump data at rest using
                                   Amazon S3 server-side encryption.
                                 type: string
                             type: object
@@ -1675,6 +1691,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   shadowProductionVariants:
                     description: Array of ProductionVariant objects. There is one
                       for each model that you want to host at this endpoint in shadow
@@ -1690,10 +1711,10 @@ spec:
                           type: string
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: The timeout value, in seconds, for your inference
-                            container to pass health check by SageMaker Hosting. For
-                            more information about health check, see How Your Container
-                            Should Respond to Health Check (Ping) Requests. Valid
-                            values between 60 and 3600.
+                            container to pass health check by SageMaker AI Hosting.
+                            For more information about health check, see How Your
+                            Container Should Respond to Health Check (Ping) Requests.
+                            Valid values between 60 and 3600.
                           type: number
                         coreDumpConfig:
                           description: Specifies configuration for a core dump from
@@ -1708,7 +1729,7 @@ spec:
                               kmsKeyId:
                                 description: The Amazon Web Services Key Management
                                   Service (Amazon Web Services KMS) key that SageMaker
-                                  uses to encrypt the core dump data at rest using
+                                  AI uses to encrypt the core dump data at rest using
                                   Amazon S3 server-side encryption.
                                 type: string
                             type: object

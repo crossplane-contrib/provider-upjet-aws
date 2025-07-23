@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FilterAtDestinationDestinationPortRangeInitParameters struct {
+type DestinationPortRangeInitParameters struct {
 
 	// The first port in the range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
@@ -22,7 +22,7 @@ type FilterAtDestinationDestinationPortRangeInitParameters struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type FilterAtDestinationDestinationPortRangeObservation struct {
+type DestinationPortRangeObservation struct {
 
 	// The first port in the range.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
@@ -31,7 +31,7 @@ type FilterAtDestinationDestinationPortRangeObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type FilterAtDestinationDestinationPortRangeParameters struct {
+type DestinationPortRangeParameters struct {
 
 	// The first port in the range.
 	// +kubebuilder:validation:Optional
@@ -48,13 +48,13 @@ type FilterAtDestinationInitParameters struct {
 	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
 	// The destination port range. See below for details.
-	DestinationPortRange *FilterAtDestinationDestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+	DestinationPortRange *DestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// IP address of the source resource.
 	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
 
 	// The source port range. See below for details.
-	SourcePortRange *FilterAtDestinationSourcePortRangeInitParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+	SourcePortRange *SourcePortRangeInitParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 }
 
 type FilterAtDestinationObservation struct {
@@ -63,13 +63,13 @@ type FilterAtDestinationObservation struct {
 	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
 	// The destination port range. See below for details.
-	DestinationPortRange *FilterAtDestinationDestinationPortRangeObservation `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+	DestinationPortRange *DestinationPortRangeObservation `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// IP address of the source resource.
 	SourceAddress *string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
 
 	// The source port range. See below for details.
-	SourcePortRange *FilterAtDestinationSourcePortRangeObservation `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+	SourcePortRange *SourcePortRangeObservation `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 }
 
 type FilterAtDestinationParameters struct {
@@ -80,7 +80,7 @@ type FilterAtDestinationParameters struct {
 
 	// The destination port range. See below for details.
 	// +kubebuilder:validation:Optional
-	DestinationPortRange *FilterAtDestinationDestinationPortRangeParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+	DestinationPortRange *DestinationPortRangeParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// IP address of the source resource.
 	// +kubebuilder:validation:Optional
@@ -88,36 +88,7 @@ type FilterAtDestinationParameters struct {
 
 	// The source port range. See below for details.
 	// +kubebuilder:validation:Optional
-	SourcePortRange *FilterAtDestinationSourcePortRangeParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
-}
-
-type FilterAtDestinationSourcePortRangeInitParameters struct {
-
-	// The first port in the range.
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
-
-	// The last port in the range.
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
-}
-
-type FilterAtDestinationSourcePortRangeObservation struct {
-
-	// The first port in the range.
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
-
-	// The last port in the range.
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
-}
-
-type FilterAtDestinationSourcePortRangeParameters struct {
-
-	// The first port in the range.
-	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
-
-	// The last port in the range.
-	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	SourcePortRange *SourcePortRangeParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 }
 
 type FilterAtSourceDestinationPortRangeInitParameters struct {
@@ -392,6 +363,35 @@ type NetworkInsightsPathParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type SourcePortRangeInitParameters struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type SourcePortRangeObservation struct {
+
+	// The first port in the range.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type SourcePortRangeParameters struct {
+
+	// The first port in the range.
+	// +kubebuilder:validation:Optional
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range.
+	// +kubebuilder:validation:Optional
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 // NetworkInsightsPathSpec defines the desired state of NetworkInsightsPath

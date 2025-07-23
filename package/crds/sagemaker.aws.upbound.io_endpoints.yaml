@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Endpoint is the Schema for the Endpoints API. Provides a SageMaker
-          Endpoint resource.
+          AI Endpoint resource.
         properties:
           apiVersion:
             description: |-
@@ -89,7 +89,7 @@ spec:
                                 description: List of CloudWatch alarms in your account
                                   that are configured to monitor metrics on an endpoint.
                                   If any alarms are tripped during a deployment, SageMaker
-                                  rolls back the deployment. See Alarms.
+                                  AI rolls back the deployment. See Alarms.
                                 items:
                                   properties:
                                     alarmName:
@@ -102,14 +102,14 @@ spec:
                           type: array
                         blueGreenUpdatePolicy:
                           description: Update policy for a blue/green deployment.
-                            If this update policy is specified, SageMaker creates
+                            If this update policy is specified, SageMaker AI creates
                             a new fleet during the deployment while maintaining the
-                            old fleet. SageMaker flips traffic to the new fleet according
-                            to the specified traffic routing configuration. Only one
-                            update policy should be used in the deployment configuration.
-                            If no update policy is specified, SageMaker uses a blue/green
-                            deployment strategy with all at once traffic shifting
-                            by default. See Blue Green Update Config.
+                            old fleet. SageMaker AI flips traffic to the new fleet
+                            according to the specified traffic routing configuration.
+                            Only one update policy should be used in the deployment
+                            configuration. If no update policy is specified, SageMaker
+                            AI uses a blue/green deployment strategy with all at once
+                            traffic shifting by default. See Blue Green Update Config.
                           items:
                             properties:
                               maximumExecutionTimeoutInSeconds:
@@ -178,8 +178,8 @@ spec:
                                       type: string
                                     waitIntervalInSeconds:
                                       description: The length of the baking period,
-                                        during which SageMaker monitors alarms for
-                                        each batch on the new fleet. Valid values
+                                        during which SageMaker AI monitors alarms
+                                        for each batch on the new fleet. Valid values
                                         are between 0 and 3600.
                                       type: number
                                   type: object
@@ -188,7 +188,7 @@ spec:
                           type: array
                         rollingUpdatePolicy:
                           description: Specifies a rolling deployment strategy for
-                            updating a SageMaker endpoint. See Rolling Update Policy.
+                            updating a SageMaker AI endpoint. See Rolling Update Policy.
                           items:
                             properties:
                               maximumBatchSize:
@@ -241,8 +241,9 @@ spec:
                                 type: array
                               waitIntervalInSeconds:
                                 description: The length of the baking period, during
-                                  which SageMaker monitors alarms for each batch on
-                                  the new fleet. Valid values are between 0 and 3600.
+                                  which SageMaker AI monitors alarms for each batch
+                                  on the new fleet. Valid values are between 0 and
+                                  3600.
                                 type: number
                             type: object
                           type: array
@@ -328,8 +329,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -369,7 +371,7 @@ spec:
                                 description: List of CloudWatch alarms in your account
                                   that are configured to monitor metrics on an endpoint.
                                   If any alarms are tripped during a deployment, SageMaker
-                                  rolls back the deployment. See Alarms.
+                                  AI rolls back the deployment. See Alarms.
                                 items:
                                   properties:
                                     alarmName:
@@ -382,14 +384,14 @@ spec:
                           type: array
                         blueGreenUpdatePolicy:
                           description: Update policy for a blue/green deployment.
-                            If this update policy is specified, SageMaker creates
+                            If this update policy is specified, SageMaker AI creates
                             a new fleet during the deployment while maintaining the
-                            old fleet. SageMaker flips traffic to the new fleet according
-                            to the specified traffic routing configuration. Only one
-                            update policy should be used in the deployment configuration.
-                            If no update policy is specified, SageMaker uses a blue/green
-                            deployment strategy with all at once traffic shifting
-                            by default. See Blue Green Update Config.
+                            old fleet. SageMaker AI flips traffic to the new fleet
+                            according to the specified traffic routing configuration.
+                            Only one update policy should be used in the deployment
+                            configuration. If no update policy is specified, SageMaker
+                            AI uses a blue/green deployment strategy with all at once
+                            traffic shifting by default. See Blue Green Update Config.
                           items:
                             properties:
                               maximumExecutionTimeoutInSeconds:
@@ -458,8 +460,8 @@ spec:
                                       type: string
                                     waitIntervalInSeconds:
                                       description: The length of the baking period,
-                                        during which SageMaker monitors alarms for
-                                        each batch on the new fleet. Valid values
+                                        during which SageMaker AI monitors alarms
+                                        for each batch on the new fleet. Valid values
                                         are between 0 and 3600.
                                       type: number
                                   type: object
@@ -468,7 +470,7 @@ spec:
                           type: array
                         rollingUpdatePolicy:
                           description: Specifies a rolling deployment strategy for
-                            updating a SageMaker endpoint. See Rolling Update Policy.
+                            updating a SageMaker AI endpoint. See Rolling Update Policy.
                           items:
                             properties:
                               maximumBatchSize:
@@ -521,8 +523,9 @@ spec:
                                 type: array
                               waitIntervalInSeconds:
                                 description: The length of the baking period, during
-                                  which SageMaker monitors alarms for each batch on
-                                  the new fleet. Valid values are between 0 and 3600.
+                                  which SageMaker AI monitors alarms for each batch
+                                  on the new fleet. Valid values are between 0 and
+                                  3600.
                                 type: number
                             type: object
                           type: array
@@ -806,7 +809,7 @@ spec:
                                 description: List of CloudWatch alarms in your account
                                   that are configured to monitor metrics on an endpoint.
                                   If any alarms are tripped during a deployment, SageMaker
-                                  rolls back the deployment. See Alarms.
+                                  AI rolls back the deployment. See Alarms.
                                 items:
                                   properties:
                                     alarmName:
@@ -819,14 +822,14 @@ spec:
                           type: array
                         blueGreenUpdatePolicy:
                           description: Update policy for a blue/green deployment.
-                            If this update policy is specified, SageMaker creates
+                            If this update policy is specified, SageMaker AI creates
                             a new fleet during the deployment while maintaining the
-                            old fleet. SageMaker flips traffic to the new fleet according
-                            to the specified traffic routing configuration. Only one
-                            update policy should be used in the deployment configuration.
-                            If no update policy is specified, SageMaker uses a blue/green
-                            deployment strategy with all at once traffic shifting
-                            by default. See Blue Green Update Config.
+                            old fleet. SageMaker AI flips traffic to the new fleet
+                            according to the specified traffic routing configuration.
+                            Only one update policy should be used in the deployment
+                            configuration. If no update policy is specified, SageMaker
+                            AI uses a blue/green deployment strategy with all at once
+                            traffic shifting by default. See Blue Green Update Config.
                           items:
                             properties:
                               maximumExecutionTimeoutInSeconds:
@@ -895,8 +898,8 @@ spec:
                                       type: string
                                     waitIntervalInSeconds:
                                       description: The length of the baking period,
-                                        during which SageMaker monitors alarms for
-                                        each batch on the new fleet. Valid values
+                                        during which SageMaker AI monitors alarms
+                                        for each batch on the new fleet. Valid values
                                         are between 0 and 3600.
                                       type: number
                                   type: object
@@ -905,7 +908,7 @@ spec:
                           type: array
                         rollingUpdatePolicy:
                           description: Specifies a rolling deployment strategy for
-                            updating a SageMaker endpoint. See Rolling Update Policy.
+                            updating a SageMaker AI endpoint. See Rolling Update Policy.
                           items:
                             properties:
                               maximumBatchSize:
@@ -958,8 +961,9 @@ spec:
                                 type: array
                               waitIntervalInSeconds:
                                 description: The length of the baking period, during
-                                  which SageMaker monitors alarms for each batch on
-                                  the new fleet. Valid values are between 0 and 3600.
+                                  which SageMaker AI monitors alarms for each batch
+                                  on the new fleet. Valid values are between 0 and
+                                  3600.
                                 type: number
                             type: object
                           type: array
@@ -969,6 +973,11 @@ spec:
                     description: The name of the endpoint configuration to use.
                     type: string
                   id:
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

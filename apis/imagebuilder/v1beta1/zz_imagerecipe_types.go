@@ -294,6 +294,10 @@ type ImageRecipeObservation struct {
 	// Platform of the image recipe.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for the Systems Manager Agent installed by default by Image Builder. Detailed below.
 	SystemsManagerAgent []SystemsManagerAgentObservation `json:"systemsManagerAgent,omitempty" tf:"systems_manager_agent,omitempty"`
 
@@ -337,10 +341,10 @@ type ImageRecipeParameters struct {
 	// +kubebuilder:validation:Optional
 	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for the Systems Manager Agent installed by default by Image Builder. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -366,19 +370,19 @@ type ImageRecipeParameters struct {
 
 type SystemsManagerAgentInitParameters struct {
 
-	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
+	// Whether to remove the Systems Manager Agent after the image has been built.
 	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty" tf:"uninstall_after_build,omitempty"`
 }
 
 type SystemsManagerAgentObservation struct {
 
-	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
+	// Whether to remove the Systems Manager Agent after the image has been built.
 	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty" tf:"uninstall_after_build,omitempty"`
 }
 
 type SystemsManagerAgentParameters struct {
 
-	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
+	// Whether to remove the Systems Manager Agent after the image has been built.
 	// +kubebuilder:validation:Optional
 	UninstallAfterBuild *bool `json:"uninstallAfterBuild" tf:"uninstall_after_build,omitempty"`
 }

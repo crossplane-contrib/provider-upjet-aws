@@ -1022,6 +1022,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SnapshotOptions != nil {
 		in, out := &in.SnapshotOptions, &out.SnapshotOptions
 		*out = make([]SnapshotOptionsObservation, len(*in))
@@ -1509,6 +1514,11 @@ func (in *DomainSAMLOptionsObservation) DeepCopyInto(out *DomainSAMLOptionsObser
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

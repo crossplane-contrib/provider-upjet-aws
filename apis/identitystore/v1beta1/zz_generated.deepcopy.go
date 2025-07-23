@@ -1258,6 +1258,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Timezone != nil {
 		in, out := &in.Timezone, &out.Timezone
 		*out = new(string)
