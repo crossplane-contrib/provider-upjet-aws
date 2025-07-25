@@ -1859,6 +1859,11 @@ func (in *DefaultActionInitParameters) DeepCopyInto(out *DefaultActionInitParame
 		*out = new(ForwardInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.Order != nil {
 		in, out := &in.Order, &out.Order
 		*out = new(float64)
@@ -1924,6 +1929,11 @@ func (in *DefaultActionObservation) DeepCopyInto(out *DefaultActionObservation) 
 		*out = new(ForwardObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.Order != nil {
 		in, out := &in.Order, &out.Order
 		*out = new(float64)
@@ -1978,6 +1988,11 @@ func (in *DefaultActionParameters) DeepCopyInto(out *DefaultActionParameters) {
 		in, out := &in.Forward, &out.Forward
 		*out = new(ForwardParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
 	}
 	if in.Order != nil {
 		in, out := &in.Order, &out.Order
