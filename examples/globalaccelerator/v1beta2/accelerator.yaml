@@ -12,7 +12,6 @@ spec:
   forProvider:
     ipAddressType: IPV4
     name: sample-accelerator
-    region: eu-west-1
   writeConnectionSecretToRef:
     name: accelerator
     namespace: upbound-system

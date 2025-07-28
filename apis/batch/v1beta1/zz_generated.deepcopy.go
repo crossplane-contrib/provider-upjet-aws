@@ -53,11 +53,6 @@ func (in *ComputeEnvironmentInitParameters) DeepCopyInto(out *ComputeEnvironment
 		*out = new(EksConfigurationInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.ServiceRole != nil {
 		in, out := &in.ServiceRole, &out.ServiceRole
 		*out = new(string)
@@ -173,11 +168,6 @@ func (in *ComputeEnvironmentObservation) DeepCopyInto(out *ComputeEnvironmentObs
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -367,11 +357,6 @@ func (in *ComputeEnvironmentParameters) DeepCopyInto(out *ComputeEnvironmentPara
 		in, out := &in.EksConfiguration, &out.EksConfiguration
 		*out = new(EksConfigurationParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

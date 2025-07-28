@@ -12,7 +12,6 @@ metadata:
   name: example-policy
 spec:
   forProvider:
-    region: us-west-1
     comment: test comment
     defaultTtl: 50
     maxTtl: 100

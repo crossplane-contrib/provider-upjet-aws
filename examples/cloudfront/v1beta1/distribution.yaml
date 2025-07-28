@@ -12,7 +12,6 @@ metadata:
   name: example-distribution
 spec:
   forProvider:
-    region: us-west-1
     comment: Some comment
     defaultCacheBehavior:
       - allowedMethods:
@@ -113,7 +112,6 @@ metadata:
   name: example-monitoring-subscription
 spec:
   forProvider:
-    region: us-west-1
     distributionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: distribution

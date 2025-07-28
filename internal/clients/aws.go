@@ -39,8 +39,39 @@ type SetupConfig struct {
 	Logger            logging.Logger
 }
 
-// iamRegions holds the region used for signing IAM credentials for each AWS partition.
-var iamRegions = getIAMDefaultSigningRegions()
+// globalResources maps specific Kubernetes resource names to their corresponding AWS service names.
+// These individual resources are global in nature (not region-specific) but still
+// require a region to be set for Terraform AWS provider compatibility.
+// Format: "group/kind" -> "service"
+var globalResources = map[string]string{
+	// Add specific global resources here as needed
+	// Example: "backup.aws.upbound.io/GlobalSettings": "backup",
+	"backup.aws.upbound.io/GlobalSettings":              "backup",
+	"directconnect.aws.upbound.io/Gateway":              "directconnect",
+	"directconnect.aws.upbound.io/GatewayAssociation":   "directconnect",
+	"ec2.aws.upbound.io/SerialConsoleAccess":            "ec2",
+	"s3control.aws.upbound.io/AccountPublicAccessBlock": "s3control",
+}
+
+// globalGroups maps Kubernetes API group names to their corresponding AWS service names.
+// These groups contain resources that are global in nature (not region-specific) but still
+// require a region to be set for Terraform AWS provider compatibility.
+var globalGroups = map[string]string{
+	"account.aws.upbound.io":                      "account",
+	"budgets.aws.upbound.io":                      "budgets",
+	"ce.aws.upbound.io":                           "ce",
+	"cloudfront.aws.upbound.io":                   "cloudfront",
+	"cur.aws.upbound.io":                          "cur",
+	"globalaccelerator.aws.upbound.io":            "globalaccelerator",
+	"iam.aws.upbound.io":                          "iam",
+	"networkmanager.aws.upbound.io":               "networkmanager",
+	"organizations.aws.upbound.io":                "organizations",
+	"rolesanywhere.aws.upbound.io":                "rolesanywhere",
+	"route53.aws.upbound.io":                      "route53",
+	"route53recoverycontrolconfig.aws.upbound.io": "route53recoverycontrolconfig",
+	"route53recoveryreadiness.aws.upbound.io":     "route53recoveryreadiness",
+	"waf.aws.upbound.io":                          "waf",
+}
 
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	credsCache := NewAWSCredentialsProviderCache(WithCacheLogger(config.Logger))
@@ -157,31 +188,92 @@ func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (
 }
 
 // getAWSConfigWithDefaultRegion is a utility function that wraps the
-// GetAWSConfigWithoutTracking and fills empty region in the returned for
-// "iam.aws.upbound.io" group with a default "us-east-1" region. Although
-// this does not have an effect on the resource, as IAM group resources
-// has no concept of region, this is done to conform with the TF AWS config
+// GetAWSConfigWithoutTracking and fills empty region in the returned config for
+// global API groups with appropriate partition-specific regions. Although
+// this does not have an effect on the resource, as global group resources
+// have no concept of region, this is done to conform with the TF AWS config
 // which requires non-empty region
 func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ProviderConfig) (*aws.Config, error) {
 	cfg, err := GetAWSConfigWithoutTracking(ctx, c, obj, pc)
 	if err != nil {
 		return nil, err
 	}
-	if cfg.Region == "" && obj.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
-		cfg.Region = getIAMRegion(pc)
+	// For global API groups, set an appropriate default region when none is specified
+	if cfg.Region == "" {
+		gvk := obj.GetObjectKind().GroupVersionKind()
+		if region := getGlobalRegion(gvk.Group, gvk.Kind, pc); region != "" {
+			cfg.Region = region
+		}
 	}
 	return cfg, nil
 }
 
-func getIAMRegion(pc *v1beta1.ProviderConfig) string {
-	defaultRegion := "us-east-1"
-	if pc == nil || pc.Spec.Endpoint == nil || pc.Spec.Endpoint.PartitionID == nil {
-		return defaultRegion
+// getGlobalRegion returns the appropriate region for global resources and API groups
+// based on the partition. It first checks for resource-level configuration, then falls
+// back to group-level configuration. It uses the generated partitions map to find
+// the service-specific region, falling back to partition-specific defaults.
+func getGlobalRegion(group, kind string, pc *v1beta1.ProviderConfig) string {
+	var serviceName string
+	var isGlobal bool
+
+	// First, check for resource-level configuration
+	resourceKey := group + "/" + kind
+	serviceName, isGlobal = globalResources[resourceKey]
+
+	// If not found at resource level, check group-level configuration
+	if !isGlobal {
+		serviceName, isGlobal = globalGroups[group]
 	}
-	if region, ok := iamRegions[*pc.Spec.Endpoint.PartitionID]; ok {
-		return region
+
+	// If neither resource nor group is marked as global, return empty string
+	if !isGlobal {
+		return ""
 	}
-	return defaultRegion
+
+	// Determine the AWS partition, defaulting to "aws" if not explicitly configured
+	partitionID := "aws" // default partition
+	if pc != nil && pc.Spec.Endpoint != nil && pc.Spec.Endpoint.PartitionID != nil {
+		partitionID = *pc.Spec.Endpoint.PartitionID
+	}
+
+	// Look up the service-specific default region for the determined partition
+	if partition, exists := partitions[partitionID]; exists {
+		if region, found := partition.serviceToDefaultRegions[serviceName]; found {
+			return region
+		}
+		// Fallback to partition-specific default region
+		return getPartitionDefaultRegion(partitionID)
+	}
+
+	// Ultimate fallback to us-east-1 if partition is not found
+	return "us-east-1"
+}
+
+// getPartitionDefaultRegion returns the default region for a given partition
+// when a service-specific region is not available in the partitions map.
+func getPartitionDefaultRegion(partitionID string) string {
+	switch partitionID {
+	case "aws":
+		return "us-east-1"
+	case "aws-cn":
+		return "cn-northwest-1"
+	case "aws-iso":
+		return "us-iso-east-1"
+	case "aws-iso-b":
+		return "us-isob-east-1"
+	case "aws-iso-e":
+		return "eu-isoe-west-1"
+	case "aws-iso-f":
+		return "us-isof-south-1"
+	case "aws-us-gov":
+		return "us-gov-west-1"
+	case "aws-eusc":
+		// aws-eusc doesn't have any services defined, but we need a fallback
+		return "eusc-de-east-1"
+	default:
+		// For unknown partitions, fallback to us-east-1
+		return "us-east-1"
+	}
 }
 
 type metaOnlyPrimary struct {

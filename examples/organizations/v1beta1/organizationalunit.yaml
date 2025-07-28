@@ -15,4 +15,3 @@ spec:
   forProvider:
     name: example
     parentId: <parent-id>
-    region: us-west-1

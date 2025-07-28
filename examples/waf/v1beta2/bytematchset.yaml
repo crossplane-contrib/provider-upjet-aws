@@ -20,4 +20,3 @@ spec:
       targetString: badrefer1
       textTransformation: NONE
     name: tf_waf_byte_match_set
-    region: us-west-1

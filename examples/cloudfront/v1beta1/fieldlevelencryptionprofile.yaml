@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-apiVersion: cloudfront.aws.upbound.io/v1beta2
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: FieldLevelEncryptionProfile
 metadata:
   annotations:
-    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionprofile
+    meta.upbound.io/example-id: cloudfront/v1beta1/fieldlevelencryptionprofile
   labels:
     testing.upbound.io/example-name: example-field-level-encryption-profile
   name: example-field-level-encryption-profile
@@ -30,7 +30,7 @@ apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: PublicKey
 metadata:
   annotations:
-    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionprofile
+    meta.upbound.io/example-id: cloudfront/v1beta1/fieldlevelencryptionprofile
   labels:
     testing.upbound.io/example-name: example-field-level-encryption-profile
   name: example-public-key-prof

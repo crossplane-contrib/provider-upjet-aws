@@ -24,7 +24,6 @@ spec:
       subnetsRefs:
       - name: sample
       type: EC2
-    name: sample
     region: us-west-1
     serviceRoleSelector:
       matchLabels:

@@ -204,7 +204,7 @@ func injectFieldRenamingConversionFunctions() config.ResourceOption {
 func injectPluginFrameworkCustomStateEmptyCheck() config.ResourceOption {
 	return func(r *config.Resource) {
 		if r.TerraformPluginFrameworkResource != nil {
-			r.TerraformPluginFrameworkStateEmptyCheckFn = tfStateVlueIsEmpty
+			r.TerraformPluginFrameworkIsStateEmptyFn = tfStateVlueIsEmpty
 		}
 	}
 }

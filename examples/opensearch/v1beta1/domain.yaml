@@ -15,7 +15,7 @@ spec:
     name: example-domain
     namespace: default
   forProvider:
-    domainName: ${Rand.RFC1123Subdomain}
+    domainName: example-tf-xp-v2
     engineVersion: OpenSearch_1.0
     region: us-west-1
     clusterConfig:

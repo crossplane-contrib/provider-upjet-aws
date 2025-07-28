@@ -16,5 +16,4 @@ spec:
     emailAddress: test@example.com
     name: Example
     phoneNumber: "+1234567890"
-    region: us-west-1
     title: Example

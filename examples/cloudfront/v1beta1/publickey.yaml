@@ -10,7 +10,6 @@ metadata:
     testing.upbound.io/example-name: publickey
 spec:
   forProvider:
-    region: us-west-1
     comment: test public key
     encodedKeySecretRef:
       name: publickeysecret
@@ -43,7 +42,6 @@ metadata:
   name: example-key-group
 spec:
   forProvider:
-    region: us-west-1
     comment: example key group
     itemSelector:
       matchLabels:
@@ -58,7 +56,6 @@ metadata:
     testing.upbound.io/example-name: publickey
 spec:
   forProvider:
-    region: us-west-1
     comment: test comment
     encryptionEntities:
       - items:
@@ -79,7 +76,6 @@ metadata:
     testing.upbound.io/example-name: publickey
 spec:
   forProvider:
-    region: us-west-1
     comment: test comment
     contentTypeProfileConfig:
       - contentTypeProfiles:

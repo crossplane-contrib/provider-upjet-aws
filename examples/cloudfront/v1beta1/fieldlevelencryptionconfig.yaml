@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-apiVersion: cloudfront.aws.upbound.io/v1beta2
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: FieldLevelEncryptionConfig
 metadata:
   annotations:
-    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionconfig
+    meta.upbound.io/example-id: cloudfront/v1beta1/fieldlevelencryptionconfig
   labels:
     testing.upbound.io/example-name: example-field-level-encryption-config
   name: example-field-level-encryption-config
@@ -14,15 +14,15 @@ spec:
   forProvider:
     comment: test comment
     contentTypeProfileConfig:
-      contentTypeProfiles:
-        items:
+    - contentTypeProfiles:
+      - items:
           - contentType: application/x-www-form-urlencoded
             format: URLEncoded
       forwardWhenContentTypeIsUnknown: true
     queryArgProfileConfig:
-      forwardWhenQueryArgProfileIsUnknown: true
+    - forwardWhenQueryArgProfileIsUnknown: true
       queryArgProfiles:
-        items:
+      - items:
           - profileIdSelector:
               matchLabels:
                 testing.upbound.io/example-name: example-field-level-encryption-config
@@ -30,11 +30,11 @@ spec:
 
 ---
 
-apiVersion: cloudfront.aws.upbound.io/v1beta2
+apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: FieldLevelEncryptionProfile
 metadata:
   annotations:
-    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionconfig
+    meta.upbound.io/example-id: cloudfront/v1beta1/fieldlevelencryptionconfig
   name: example-field-level-encryption-profile
   labels:
     testing.upbound.io/example-name: example-field-level-encryption-config
@@ -42,9 +42,9 @@ spec:
   forProvider:
     comment: test comment
     encryptionEntities:
-      items:
+    - items:
         - fieldPatterns:
-            items:
+          - items:
               - DateOfBirth
           providerId: testprovider
           publicKeyIdSelector:
@@ -58,7 +58,7 @@ apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: PublicKey
 metadata:
   annotations:
-    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionconfig
+    meta.upbound.io/example-id: cloudfront/v1beta1/fieldlevelencryptionconfig
   labels:
     testing.upbound.io/example-name: example-field-level-encryption-config
   name: example-public-key-config

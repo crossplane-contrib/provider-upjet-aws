@@ -32,7 +32,6 @@ spec:
   forProvider:
     amazonSideAsn: "64512"
     name: example
-    region: us-east-1
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC

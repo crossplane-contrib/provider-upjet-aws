@@ -23,7 +23,6 @@ spec:
       - timestamp
       - c-ip
     name: example-${Rand.RFC1123Subdomain}
-    region: us-west-1
     samplingRate: 75
 ---
 apiVersion: iam.aws.upbound.io/v1beta1

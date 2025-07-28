@@ -18,4 +18,3 @@ spec:
     - type: "Country"
       value: "CA"
     name: "geo_match_set"
-    region: us-west-1

@@ -26,12 +26,11 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: example
         roles:
-          - ${aws_iam_role.example.name}
+          - example
     executionRoleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     notificationType: ACTUAL
-    region: us-west-1
     subscriber:
     - address: example@example.example
       subscriptionType: EMAIL
@@ -49,7 +48,6 @@ spec:
     budgetType: USAGE
     limitAmount: "10.0"
     limitUnit: dollars
-    region: us-west-1
     timePeriodStart: 2006-01-02_15:04
     timeUnit: MONTHLY
 ---

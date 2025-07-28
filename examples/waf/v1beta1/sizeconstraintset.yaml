@@ -13,7 +13,6 @@ metadata:
 spec:
   forProvider:
     name: "tfsize_constraints"
-    region: us-west-1
     sizeConstraints:
     - comparisonOperator: "EQ"
       size: 4096
