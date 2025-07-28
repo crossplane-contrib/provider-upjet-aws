@@ -329,6 +329,11 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        index:
+                          default: default
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         order:
                           description: |-
                             Order for the action.
@@ -459,6 +464,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                   loadBalancerArn:
                     description: ARN of the load balancer.
                     type: string
@@ -862,6 +870,11 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        index:
+                          default: default
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         order:
                           description: |-
                             Order for the action.
@@ -992,6 +1005,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                   loadBalancerArn:
                     description: ARN of the load balancer.
                     type: string
@@ -1461,6 +1477,11 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        index:
+                          default: default
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         order:
                           description: |-
                             Order for the action.
@@ -1515,6 +1536,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                   id:
                     description: ARN of the listener (matches arn).
                     type: string
