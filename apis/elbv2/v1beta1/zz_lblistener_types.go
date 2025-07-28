@@ -241,6 +241,10 @@ type DefaultActionInitParameters struct {
 	// Detailed below.
 	Forward []ForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// Order for the action.
 	// The action with the lowest value for order is performed first.
 	// Valid values are between 1 and 50000.
@@ -286,6 +290,10 @@ type DefaultActionObservation struct {
 	// Detailed below.
 	Forward []ForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// Order for the action.
 	// The action with the lowest value for order is performed first.
 	// Valid values are between 1 and 50000.
@@ -325,6 +333,11 @@ type DefaultActionParameters struct {
 	// Detailed below.
 	// +kubebuilder:validation:Optional
 	Forward []ForwardParameters `json:"forward,omitempty" tf:"forward,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default:=default
+	Index *string `json:"index" tf:"-"`
 
 	// Order for the action.
 	// The action with the lowest value for order is performed first.
@@ -435,6 +448,8 @@ type LBListenerInitParameters struct {
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Configuration block for default actions. Detailed below.
+	// +listType=map
+	// +listMapKey=index
 	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
@@ -481,6 +496,8 @@ type LBListenerObservation struct {
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Configuration block for default actions. Detailed below.
+	// +listType=map
+	// +listMapKey=index
 	DefaultAction []DefaultActionObservation `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the listener (matches arn).
@@ -525,6 +542,8 @@ type LBListenerParameters struct {
 
 	// Configuration block for default actions. Detailed below.
 	// +kubebuilder:validation:Optional
+	// +listType=map
+	// +listMapKey=index
 	DefaultAction []DefaultActionParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
