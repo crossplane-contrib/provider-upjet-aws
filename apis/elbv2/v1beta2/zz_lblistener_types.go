@@ -238,6 +238,10 @@ type DefaultActionInitParameters struct {
 	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. See below.
 	Forward *ForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -274,6 +278,10 @@ type DefaultActionObservation struct {
 	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. See below.
 	Forward *ForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -304,6 +312,11 @@ type DefaultActionParameters struct {
 	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. See below.
 	// +kubebuilder:validation:Optional
 	Forward *ForwardParameters `json:"forward,omitempty" tf:"forward,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default:=default
+	Index *string `json:"index" tf:"-"`
 
 	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	// +kubebuilder:validation:Optional
@@ -408,6 +421,8 @@ type LBListenerInitParameters struct {
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Configuration block for default actions. See below.
+	// +listType=map
+	// +listMapKey=index
 	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
@@ -454,6 +469,8 @@ type LBListenerObservation struct {
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Configuration block for default actions. See below.
+	// +listType=map
+	// +listMapKey=index
 	DefaultAction []DefaultActionObservation `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the listener (matches arn).
@@ -498,6 +515,8 @@ type LBListenerParameters struct {
 
 	// Configuration block for default actions. See below.
 	// +kubebuilder:validation:Optional
+	// +listType=map
+	// +listMapKey=index
 	DefaultAction []DefaultActionParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.

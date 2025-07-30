@@ -52,6 +52,18 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			},
 		}
 
+		r.ServerSideApplyMergeStrategies["default_action"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
+		}
+
 		// lb_listener schema allows to configure "default_action" with type
 		// "forward", in 2 different ways.
 		// 1. you can specify, default_action.0.forward, which allows configuring
