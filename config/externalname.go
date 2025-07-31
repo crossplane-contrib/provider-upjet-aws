@@ -2905,6 +2905,12 @@ func appConfigEnvironment() config.ExternalName {
 			}
 		}
 	}
+	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		if len(externalName) == 0 {
+			return "tbdeid0:tbdeid0", nil
+		}
+		return externalName, nil
+	}
 	return e
 }
 
