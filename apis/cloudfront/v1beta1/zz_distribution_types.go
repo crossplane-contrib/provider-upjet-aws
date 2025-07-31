@@ -376,6 +376,9 @@ type DistributionInitParameters struct {
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
+	// ID of the Anycast static IP list that is associated with the distribution.
+	AnycastIPListID *string `json:"anycastIpListId,omitempty" tf:"anycast_ip_list_id,omitempty"`
+
 	// Any comments you want to include about the distribution.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -443,6 +446,9 @@ type DistributionObservation struct {
 	// Extra CNAMEs (alternate domain names), if any, for this distribution.
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
+
+	// ID of the Anycast static IP list that is associated with the distribution.
+	AnycastIPListID *string `json:"anycastIpListId,omitempty" tf:"anycast_ip_list_id,omitempty"`
 
 	// ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -549,6 +555,10 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
+
+	// ID of the Anycast static IP list that is associated with the distribution.
+	// +kubebuilder:validation:Optional
+	AnycastIPListID *string `json:"anycastIpListId,omitempty" tf:"anycast_ip_list_id,omitempty"`
 
 	// Any comments you want to include about the distribution.
 	// +kubebuilder:validation:Optional

@@ -78,6 +78,65 @@ spec:
                       See configuration Block for details.
                     items:
                       properties:
+                        internalAccess:
+                          description: Specifies the configuration of an internal
+                            access analyzer for an AWS organization or account. This
+                            configuration determines how the analyzer evaluates access
+                            within your AWS environment. See internal_access Block
+                            for details.
+                          items:
+                            properties:
+                              analysisRule:
+                                description: Information about analysis rules for
+                                  the internal access analyzer. These rules determine
+                                  which resources and access patterns will be analyzed.
+                                  See analysis_rule Block for Internal Access Analyzer
+                                  for details.
+                                items:
+                                  properties:
+                                    inclusion:
+                                      description: List of rules for the internal
+                                        access analyzer containing criteria to include
+                                        in analysis. Only resources that meet the
+                                        rule criteria will generate findings. See
+                                        inclusion Block for details.
+                                      items:
+                                        properties:
+                                          accountIds:
+                                            description: List of AWS account IDs to
+                                              apply to the internal access analysis
+                                              rule criteria. Account IDs can only
+                                              be applied to the analysis rule criteria
+                                              for organization-level analyzers.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceArns:
+                                            description: List of resource ARNs to
+                                              apply to the internal access analysis
+                                              rule criteria. The analyzer will only
+                                              generate findings for resources that
+                                              match these ARNs.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceTypes:
+                                            description: List of resource types to
+                                              apply to the internal access analysis
+                                              rule criteria. The analyzer will only
+                                              generate findings for resources of these
+                                              types. Refer to InternalAccessAnalysisRuleCriteria
+                                              in the AWS IAM Access Analyzer API Reference
+                                              for valid values.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         unusedAccess:
                           description: Specifies the configuration of an unused access
                             analyzer for an AWS organization or account. See unused_access
@@ -169,6 +228,65 @@ spec:
                       See configuration Block for details.
                     items:
                       properties:
+                        internalAccess:
+                          description: Specifies the configuration of an internal
+                            access analyzer for an AWS organization or account. This
+                            configuration determines how the analyzer evaluates access
+                            within your AWS environment. See internal_access Block
+                            for details.
+                          items:
+                            properties:
+                              analysisRule:
+                                description: Information about analysis rules for
+                                  the internal access analyzer. These rules determine
+                                  which resources and access patterns will be analyzed.
+                                  See analysis_rule Block for Internal Access Analyzer
+                                  for details.
+                                items:
+                                  properties:
+                                    inclusion:
+                                      description: List of rules for the internal
+                                        access analyzer containing criteria to include
+                                        in analysis. Only resources that meet the
+                                        rule criteria will generate findings. See
+                                        inclusion Block for details.
+                                      items:
+                                        properties:
+                                          accountIds:
+                                            description: List of AWS account IDs to
+                                              apply to the internal access analysis
+                                              rule criteria. Account IDs can only
+                                              be applied to the analysis rule criteria
+                                              for organization-level analyzers.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceArns:
+                                            description: List of resource ARNs to
+                                              apply to the internal access analysis
+                                              rule criteria. The analyzer will only
+                                              generate findings for resources that
+                                              match these ARNs.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceTypes:
+                                            description: List of resource types to
+                                              apply to the internal access analysis
+                                              rule criteria. The analyzer will only
+                                              generate findings for resources of these
+                                              types. Refer to InternalAccessAnalysisRuleCriteria
+                                              in the AWS IAM Access Analyzer API Reference
+                                              for valid values.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         unusedAccess:
                           description: Specifies the configuration of an unused access
                             analyzer for an AWS organization or account. See unused_access
@@ -415,6 +533,65 @@ spec:
                       See configuration Block for details.
                     items:
                       properties:
+                        internalAccess:
+                          description: Specifies the configuration of an internal
+                            access analyzer for an AWS organization or account. This
+                            configuration determines how the analyzer evaluates access
+                            within your AWS environment. See internal_access Block
+                            for details.
+                          items:
+                            properties:
+                              analysisRule:
+                                description: Information about analysis rules for
+                                  the internal access analyzer. These rules determine
+                                  which resources and access patterns will be analyzed.
+                                  See analysis_rule Block for Internal Access Analyzer
+                                  for details.
+                                items:
+                                  properties:
+                                    inclusion:
+                                      description: List of rules for the internal
+                                        access analyzer containing criteria to include
+                                        in analysis. Only resources that meet the
+                                        rule criteria will generate findings. See
+                                        inclusion Block for details.
+                                      items:
+                                        properties:
+                                          accountIds:
+                                            description: List of AWS account IDs to
+                                              apply to the internal access analysis
+                                              rule criteria. Account IDs can only
+                                              be applied to the analysis rule criteria
+                                              for organization-level analyzers.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceArns:
+                                            description: List of resource ARNs to
+                                              apply to the internal access analysis
+                                              rule criteria. The analyzer will only
+                                              generate findings for resources that
+                                              match these ARNs.
+                                            items:
+                                              type: string
+                                            type: array
+                                          resourceTypes:
+                                            description: List of resource types to
+                                              apply to the internal access analysis
+                                              rule criteria. The analyzer will only
+                                              generate findings for resources of these
+                                              types. Refer to InternalAccessAnalysisRuleCriteria
+                                              in the AWS IAM Access Analyzer API Reference
+                                              for valid values.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         unusedAccess:
                           description: Specifies the configuration of an unused access
                             analyzer for an AWS organization or account. See unused_access
@@ -616,6 +793,56 @@ spec:
                     description: A block that specifies the configuration of the analyzer.
                       See configuration Block for details.
                     properties:
+                      internalAccess:
+                        description: Specifies the configuration of an internal access
+                          analyzer for an AWS organization or account. This configuration
+                          determines how the analyzer evaluates access within your
+                          AWS environment. See internal_access Block for details.
+                        properties:
+                          analysisRule:
+                            description: Information about analysis rules for the
+                              internal access analyzer. These rules determine which
+                              resources and access patterns will be analyzed. See
+                              analysis_rule Block for Internal Access Analyzer for
+                              details.
+                            properties:
+                              inclusion:
+                                description: List of rules for the internal access
+                                  analyzer containing criteria to include in analysis.
+                                  Only resources that meet the rule criteria will
+                                  generate findings. See inclusion Block for details.
+                                items:
+                                  properties:
+                                    accountIds:
+                                      description: List of AWS account IDs to apply
+                                        to the internal access analysis rule criteria.
+                                        Account IDs can only be applied to the analysis
+                                        rule criteria for organization-level analyzers.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceArns:
+                                      description: List of resource ARNs to apply
+                                        to the internal access analysis rule criteria.
+                                        The analyzer will only generate findings for
+                                        resources that match these ARNs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceTypes:
+                                      description: List of resource types to apply
+                                        to the internal access analysis rule criteria.
+                                        The analyzer will only generate findings for
+                                        resources of these types. Refer to InternalAccessAnalysisRuleCriteria
+                                        in the AWS IAM Access Analyzer API Reference
+                                        for valid values.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
                       unusedAccess:
                         description: Specifies the configuration of an unused access
                           analyzer for an AWS organization or account. See unused_access
@@ -699,6 +926,56 @@ spec:
                     description: A block that specifies the configuration of the analyzer.
                       See configuration Block for details.
                     properties:
+                      internalAccess:
+                        description: Specifies the configuration of an internal access
+                          analyzer for an AWS organization or account. This configuration
+                          determines how the analyzer evaluates access within your
+                          AWS environment. See internal_access Block for details.
+                        properties:
+                          analysisRule:
+                            description: Information about analysis rules for the
+                              internal access analyzer. These rules determine which
+                              resources and access patterns will be analyzed. See
+                              analysis_rule Block for Internal Access Analyzer for
+                              details.
+                            properties:
+                              inclusion:
+                                description: List of rules for the internal access
+                                  analyzer containing criteria to include in analysis.
+                                  Only resources that meet the rule criteria will
+                                  generate findings. See inclusion Block for details.
+                                items:
+                                  properties:
+                                    accountIds:
+                                      description: List of AWS account IDs to apply
+                                        to the internal access analysis rule criteria.
+                                        Account IDs can only be applied to the analysis
+                                        rule criteria for organization-level analyzers.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceArns:
+                                      description: List of resource ARNs to apply
+                                        to the internal access analysis rule criteria.
+                                        The analyzer will only generate findings for
+                                        resources that match these ARNs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceTypes:
+                                      description: List of resource types to apply
+                                        to the internal access analysis rule criteria.
+                                        The analyzer will only generate findings for
+                                        resources of these types. Refer to InternalAccessAnalysisRuleCriteria
+                                        in the AWS IAM Access Analyzer API Reference
+                                        for valid values.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
                       unusedAccess:
                         description: Specifies the configuration of an unused access
                           analyzer for an AWS organization or account. See unused_access
@@ -937,6 +1214,56 @@ spec:
                     description: A block that specifies the configuration of the analyzer.
                       See configuration Block for details.
                     properties:
+                      internalAccess:
+                        description: Specifies the configuration of an internal access
+                          analyzer for an AWS organization or account. This configuration
+                          determines how the analyzer evaluates access within your
+                          AWS environment. See internal_access Block for details.
+                        properties:
+                          analysisRule:
+                            description: Information about analysis rules for the
+                              internal access analyzer. These rules determine which
+                              resources and access patterns will be analyzed. See
+                              analysis_rule Block for Internal Access Analyzer for
+                              details.
+                            properties:
+                              inclusion:
+                                description: List of rules for the internal access
+                                  analyzer containing criteria to include in analysis.
+                                  Only resources that meet the rule criteria will
+                                  generate findings. See inclusion Block for details.
+                                items:
+                                  properties:
+                                    accountIds:
+                                      description: List of AWS account IDs to apply
+                                        to the internal access analysis rule criteria.
+                                        Account IDs can only be applied to the analysis
+                                        rule criteria for organization-level analyzers.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceArns:
+                                      description: List of resource ARNs to apply
+                                        to the internal access analysis rule criteria.
+                                        The analyzer will only generate findings for
+                                        resources that match these ARNs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    resourceTypes:
+                                      description: List of resource types to apply
+                                        to the internal access analysis rule criteria.
+                                        The analyzer will only generate findings for
+                                        resources of these types. Refer to InternalAccessAnalysisRuleCriteria
+                                        in the AWS IAM Access Analyzer API Reference
+                                        for valid values.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
                       unusedAccess:
                         description: Specifies the configuration of an unused access
                           analyzer for an AWS organization or account. See unused_access

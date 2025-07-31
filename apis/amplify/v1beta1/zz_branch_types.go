@@ -42,6 +42,9 @@ type BranchInitParameters struct {
 	// Enables pull request previews for this branch.
 	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
 
+	// Enables skew protection for the branch.
+	EnableSkewProtection *bool `json:"enableSkewProtection,omitempty" tf:"enable_skew_protection,omitempty"`
+
 	// Environment variables for the branch.
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
@@ -103,6 +106,9 @@ type BranchObservation struct {
 
 	// Enables pull request previews for this branch.
 	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
+
+	// Enables skew protection for the branch.
+	EnableSkewProtection *bool `json:"enableSkewProtection,omitempty" tf:"enable_skew_protection,omitempty"`
 
 	// Environment variables for the branch.
 	// +mapType=granular
@@ -189,6 +195,10 @@ type BranchParameters struct {
 	// Enables pull request previews for this branch.
 	// +kubebuilder:validation:Optional
 	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
+
+	// Enables skew protection for the branch.
+	// +kubebuilder:validation:Optional
+	EnableSkewProtection *bool `json:"enableSkewProtection,omitempty" tf:"enable_skew_protection,omitempty"`
 
 	// Environment variables for the branch.
 	// +kubebuilder:validation:Optional

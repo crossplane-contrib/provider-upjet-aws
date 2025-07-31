@@ -24,6 +24,10 @@ type DirectoryBucketInitParameters struct {
 	// Bucket location. See Location below for more details.
 	Location []LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Bucket type. Valid values: Directory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -49,6 +53,14 @@ type DirectoryBucketObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	// Bucket type. Valid values: Directory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -71,6 +83,11 @@ type DirectoryBucketParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Bucket type. Valid values: Directory.
 	// +kubebuilder:validation:Optional

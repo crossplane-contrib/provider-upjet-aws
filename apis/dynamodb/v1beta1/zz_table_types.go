@@ -763,6 +763,9 @@ type TableParameters struct {
 
 type TableReplicaInitParameters struct {
 
+	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
+	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
+
 	// ARN of the CMK that should be used for the AWS KMS encryption.
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
 	// Note: This attribute will not be populated with the ARN of default keys.
@@ -788,6 +791,9 @@ type TableReplicaObservation struct {
 
 	// ARN of the replica
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
+	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption.
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
@@ -817,6 +823,10 @@ type TableReplicaObservation struct {
 }
 
 type TableReplicaParameters struct {
+
+	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
+	// +kubebuilder:validation:Optional
+	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption.
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.

@@ -190,6 +190,16 @@ spec:
                             See Stateful Rule Group Reference below for details.
                           items:
                             properties:
+                              deepThreatInspection:
+                                description: Whether to enable deep threat inspection,
+                                  which allows AWS to analyze service logs of network
+                                  traffic processed by these rule groups to identify
+                                  threat indicators across customers. AWS will use
+                                  these threat indicators to improve the active threat
+                                  defense managed rule groups and protect the security
+                                  of AWS customers and services. This only applies
+                                  to active threat defense maanaged rule groups.
+                                type: string
                               override:
                                 description: Configuration block for override values
                                 items:
@@ -599,6 +609,16 @@ spec:
                             See Stateful Rule Group Reference below for details.
                           items:
                             properties:
+                              deepThreatInspection:
+                                description: Whether to enable deep threat inspection,
+                                  which allows AWS to analyze service logs of network
+                                  traffic processed by these rule groups to identify
+                                  threat indicators across customers. AWS will use
+                                  these threat indicators to improve the active threat
+                                  defense managed rule groups and protect the security
+                                  of AWS customers and services. This only applies
+                                  to active threat defense maanaged rule groups.
+                                type: string
                               override:
                                 description: Configuration block for override values
                                 items:
@@ -1169,6 +1189,16 @@ spec:
                             See Stateful Rule Group Reference below for details.
                           items:
                             properties:
+                              deepThreatInspection:
+                                description: Whether to enable deep threat inspection,
+                                  which allows AWS to analyze service logs of network
+                                  traffic processed by these rule groups to identify
+                                  threat indicators across customers. AWS will use
+                                  these threat indicators to improve the active threat
+                                  defense managed rule groups and protect the security
+                                  of AWS customers and services. This only applies
+                                  to active threat defense maanaged rule groups.
+                                type: string
                               override:
                                 description: Configuration block for override values
                                 items:
@@ -1527,6 +1557,16 @@ spec:
                           See Stateful Rule Group Reference below for details.
                         items:
                           properties:
+                            deepThreatInspection:
+                              description: Whether to enable deep threat inspection,
+                                which allows AWS to analyze service logs of network
+                                traffic processed by these rule groups to identify
+                                threat indicators across customers. AWS will use these
+                                threat indicators to improve the active threat defense
+                                managed rule groups and protect the security of AWS
+                                customers and services. This only applies to active
+                                threat defense maanaged rule groups.
+                              type: string
                             override:
                               description: Configuration block for override values
                               properties:
@@ -1913,6 +1953,16 @@ spec:
                           See Stateful Rule Group Reference below for details.
                         items:
                           properties:
+                            deepThreatInspection:
+                              description: Whether to enable deep threat inspection,
+                                which allows AWS to analyze service logs of network
+                                traffic processed by these rule groups to identify
+                                threat indicators across customers. AWS will use these
+                                threat indicators to improve the active threat defense
+                                managed rule groups and protect the security of AWS
+                                customers and services. This only applies to active
+                                threat defense maanaged rule groups.
+                              type: string
                             override:
                               description: Configuration block for override values
                               properties:
@@ -2460,6 +2510,16 @@ spec:
                           See Stateful Rule Group Reference below for details.
                         items:
                           properties:
+                            deepThreatInspection:
+                              description: Whether to enable deep threat inspection,
+                                which allows AWS to analyze service logs of network
+                                traffic processed by these rule groups to identify
+                                threat indicators across customers. AWS will use these
+                                threat indicators to improve the active threat defense
+                                managed rule groups and protect the security of AWS
+                                customers and services. This only applies to active
+                                threat defense maanaged rule groups.
+                              type: string
                             override:
                               description: Configuration block for override values
                               properties:

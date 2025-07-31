@@ -5076,6 +5076,11 @@ func (in *JobInitParameters) DeepCopyInto(out *JobInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.JobMode != nil {
+		in, out := &in.JobMode, &out.JobMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.JobRunQueuingEnabled != nil {
 		in, out := &in.JobRunQueuingEnabled, &out.JobRunQueuingEnabled
 		*out = new(bool)
@@ -5282,6 +5287,11 @@ func (in *JobObservation) DeepCopyInto(out *JobObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.JobMode != nil {
+		in, out := &in.JobMode, &out.JobMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.JobRunQueuingEnabled != nil {
 		in, out := &in.JobRunQueuingEnabled, &out.JobRunQueuingEnabled
 		*out = new(bool)
@@ -5466,6 +5476,11 @@ func (in *JobParameters) DeepCopyInto(out *JobParameters) {
 	}
 	if in.GlueVersion != nil {
 		in, out := &in.GlueVersion, &out.GlueVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.JobMode != nil {
+		in, out := &in.JobMode, &out.JobMode
 		*out = new(string)
 		**out = **in
 	}

@@ -400,6 +400,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  jobConfig:
+                    description: Used to configure the Amplify Application build settings.
+                      See job_config Block for details.
+                    items:
+                      properties:
+                        buildComputeType:
+                          description: 'Size of the build instance. Valid values:
+                            STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.'
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: Name for an Amplify app.
                     type: string
@@ -784,6 +795,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  jobConfig:
+                    description: Used to configure the Amplify Application build settings.
+                      See job_config Block for details.
+                    items:
+                      properties:
+                        buildComputeType:
+                          description: 'Size of the build instance. Valid values:
+                            STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.'
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: Name for an Amplify app.
                     type: string
@@ -1129,6 +1151,17 @@ spec:
                   id:
                     description: Unique ID of the Amplify app.
                     type: string
+                  jobConfig:
+                    description: Used to configure the Amplify Application build settings.
+                      See job_config Block for details.
+                    items:
+                      properties:
+                        buildComputeType:
+                          description: 'Size of the build instance. Valid values:
+                            STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.'
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: Name for an Amplify app.
                     type: string
@@ -1617,6 +1650,15 @@ spec:
                             type: string
                         type: object
                     type: object
+                  jobConfig:
+                    description: Used to configure the Amplify Application build settings.
+                      See job_config Block for details.
+                    properties:
+                      buildComputeType:
+                        description: 'Size of the build instance. Valid values: STANDARD_8GB,
+                          LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.'
+                        type: string
+                    type: object
                   name:
                     description: Name for an Amplify app.
                     type: string
@@ -1997,6 +2039,15 @@ spec:
                             type: string
                         type: object
                     type: object
+                  jobConfig:
+                    description: Used to configure the Amplify Application build settings.
+                      See job_config Block for details.
+                    properties:
+                      buildComputeType:
+                        description: 'Size of the build instance. Valid values: STANDARD_8GB,
+                          LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.'
+                        type: string
+                    type: object
                   name:
                     description: Name for an Amplify app.
                     type: string
@@ -2338,6 +2389,15 @@ spec:
                   id:
                     description: Unique ID of the Amplify app.
                     type: string
+                  jobConfig:
+                    description: Used to configure the Amplify Application build settings.
+                      See job_config Block for details.
+                    properties:
+                      buildComputeType:
+                        description: 'Size of the build instance. Valid values: STANDARD_8GB,
+                          LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.'
+                        type: string
+                    type: object
                   name:
                     description: Name for an Amplify app.
                     type: string

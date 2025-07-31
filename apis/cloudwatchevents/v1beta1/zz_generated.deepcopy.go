@@ -444,6 +444,21 @@ func (in *ArchiveInitParameters) DeepCopyInto(out *ArchiveInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIdentifierRef != nil {
+		in, out := &in.KMSKeyIdentifierRef, &out.KMSKeyIdentifierRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIdentifierSelector != nil {
+		in, out := &in.KMSKeyIdentifierSelector, &out.KMSKeyIdentifierSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RetentionDays != nil {
 		in, out := &in.RetentionDays, &out.RetentionDays
 		*out = new(float64)
@@ -521,6 +536,11 @@ func (in *ArchiveObservation) DeepCopyInto(out *ArchiveObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -568,6 +588,21 @@ func (in *ArchiveParameters) DeepCopyInto(out *ArchiveParameters) {
 	}
 	if in.EventSourceArnSelector != nil {
 		in, out := &in.EventSourceArnSelector, &out.EventSourceArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIdentifierRef != nil {
+		in, out := &in.KMSKeyIdentifierRef, &out.KMSKeyIdentifierRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIdentifierSelector != nil {
+		in, out := &in.KMSKeyIdentifierSelector, &out.KMSKeyIdentifierSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}

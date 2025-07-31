@@ -30,6 +30,9 @@ type StreamConsumerInitParameters struct {
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StreamConsumerObservation struct {
@@ -52,6 +55,12 @@ type StreamConsumerObservation struct {
 
 	// Amazon Resource Name (ARN) of the data stream the consumer is registered with.
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type StreamConsumerParameters struct {
@@ -78,6 +87,10 @@ type StreamConsumerParameters struct {
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // StreamConsumerSpec defines the desired state of StreamConsumer

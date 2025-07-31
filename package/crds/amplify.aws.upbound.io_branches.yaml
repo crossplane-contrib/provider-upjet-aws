@@ -193,6 +193,9 @@ spec:
                   enablePullRequestPreview:
                     description: Enables pull request previews for this branch.
                     type: boolean
+                  enableSkewProtection:
+                    description: Enables skew protection for the branch.
+                    type: boolean
                   environmentVariables:
                     additionalProperties:
                       type: string
@@ -281,6 +284,9 @@ spec:
                     type: boolean
                   enablePullRequestPreview:
                     description: Enables pull request previews for this branch.
+                    type: boolean
+                  enableSkewProtection:
+                    description: Enables skew protection for the branch.
                     type: boolean
                   environmentVariables:
                     additionalProperties:
@@ -526,6 +532,9 @@ spec:
                     type: boolean
                   enablePullRequestPreview:
                     description: Enables pull request previews for this branch.
+                    type: boolean
+                  enableSkewProtection:
+                    description: Enables skew protection for the branch.
                     type: boolean
                   environmentVariables:
                     additionalProperties:

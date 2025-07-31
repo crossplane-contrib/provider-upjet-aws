@@ -85,6 +85,9 @@ type AppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
+	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	JobConfig []JobConfigInitParameters `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
+
 	// Name for an Amplify app.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -156,6 +159,9 @@ type AppObservation struct {
 
 	// Unique ID of the Amplify app.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	JobConfig []JobConfigObservation `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
 
 	// Name for an Amplify app.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -269,6 +275,10 @@ type AppParameters struct {
 	// Selector for a Role in iam to populate iamServiceRoleArn.
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
+
+	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	// +kubebuilder:validation:Optional
+	JobConfig []JobConfigParameters `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
 
 	// Name for an Amplify app.
 	// +kubebuilder:validation:Optional
@@ -472,6 +482,25 @@ type CustomRuleParameters struct {
 	// Target pattern for a URL rewrite or redirect rule.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target" tf:"target,omitempty"`
+}
+
+type JobConfigInitParameters struct {
+
+	// Size of the build instance. Valid values: STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.
+	BuildComputeType *string `json:"buildComputeType,omitempty" tf:"build_compute_type,omitempty"`
+}
+
+type JobConfigObservation struct {
+
+	// Size of the build instance. Valid values: STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.
+	BuildComputeType *string `json:"buildComputeType,omitempty" tf:"build_compute_type,omitempty"`
+}
+
+type JobConfigParameters struct {
+
+	// Size of the build instance. Valid values: STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.
+	// +kubebuilder:validation:Optional
+	BuildComputeType *string `json:"buildComputeType,omitempty" tf:"build_compute_type,omitempty"`
 }
 
 type ProductionBranchInitParameters struct {

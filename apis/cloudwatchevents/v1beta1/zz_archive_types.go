@@ -34,6 +34,19 @@ type ArchiveInitParameters struct {
 	// +kubebuilder:validation:Optional
 	EventSourceArnSelector *v1.Selector `json:"eventSourceArnSelector,omitempty" tf:"-"`
 
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierRef *v1.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierSelector *v1.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+
 	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
@@ -53,6 +66,9 @@ type ArchiveObservation struct {
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -85,6 +101,20 @@ type ArchiveParameters struct {
 	// Selector for a Bus in cloudwatchevents to populate eventSourceArn.
 	// +kubebuilder:validation:Optional
 	EventSourceArnSelector *v1.Selector `json:"eventSourceArnSelector,omitempty" tf:"-"`
+
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierRef *v1.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierSelector *v1.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

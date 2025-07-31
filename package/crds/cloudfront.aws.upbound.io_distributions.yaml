@@ -80,6 +80,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -1156,6 +1160,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -2412,6 +2420,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   arn:
                     description: 'ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
                       where 123456789012 is your AWS account ID.'
@@ -3384,6 +3396,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -4418,6 +4434,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -5632,6 +5652,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   arn:
                     description: 'ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
                       where 123456789012 is your AWS account ID.'

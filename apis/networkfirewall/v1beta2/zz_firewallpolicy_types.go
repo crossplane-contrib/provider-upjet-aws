@@ -431,6 +431,9 @@ type StatefulEngineOptionsParameters struct {
 
 type StatefulRuleGroupReferenceInitParameters struct {
 
+	// Whether to enable deep threat inspection, which allows AWS to analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. AWS will use these threat indicators to improve the active threat defense managed rule groups and protect the security of AWS customers and services. This only applies to active threat defense maanaged rule groups.
+	DeepThreatInspection *string `json:"deepThreatInspection,omitempty" tf:"deep_threat_inspection,omitempty"`
+
 	// Configuration block for override values
 	Override *OverrideInitParameters `json:"override,omitempty" tf:"override,omitempty"`
 
@@ -453,6 +456,9 @@ type StatefulRuleGroupReferenceInitParameters struct {
 
 type StatefulRuleGroupReferenceObservation struct {
 
+	// Whether to enable deep threat inspection, which allows AWS to analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. AWS will use these threat indicators to improve the active threat defense managed rule groups and protect the security of AWS customers and services. This only applies to active threat defense maanaged rule groups.
+	DeepThreatInspection *string `json:"deepThreatInspection,omitempty" tf:"deep_threat_inspection,omitempty"`
+
 	// Configuration block for override values
 	Override *OverrideObservation `json:"override,omitempty" tf:"override,omitempty"`
 
@@ -464,6 +470,10 @@ type StatefulRuleGroupReferenceObservation struct {
 }
 
 type StatefulRuleGroupReferenceParameters struct {
+
+	// Whether to enable deep threat inspection, which allows AWS to analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. AWS will use these threat indicators to improve the active threat defense managed rule groups and protect the security of AWS customers and services. This only applies to active threat defense maanaged rule groups.
+	// +kubebuilder:validation:Optional
+	DeepThreatInspection *string `json:"deepThreatInspection,omitempty" tf:"deep_threat_inspection,omitempty"`
 
 	// Configuration block for override values
 	// +kubebuilder:validation:Optional

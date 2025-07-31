@@ -120,9 +120,8 @@ type DomainPermissionsPolicyStatus struct {
 type DomainPermissionsPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDocument) || (has(self.initProvider) && has(self.initProvider.policyDocument))",message="spec.forProvider.policyDocument is a required parameter"
-	Spec   DomainPermissionsPolicySpec   `json:"spec"`
-	Status DomainPermissionsPolicyStatus `json:"status,omitempty"`
+	Spec              DomainPermissionsPolicySpec   `json:"spec"`
+	Status            DomainPermissionsPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

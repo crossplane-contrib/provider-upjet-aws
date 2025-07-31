@@ -218,6 +218,10 @@ spec:
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
                     type: string
+                  jobMode:
+                    description: Describes how a job was created. Valid values are
+                      SCRIPT, NOTEBOOK and VISUAL.
+                    type: string
                   jobRunQueuingEnabled:
                     description: Specifies whether job run queuing is enabled for
                       the job runs for this job. A value of true means job run queuing
@@ -576,6 +580,10 @@ spec:
                     description: The version of glue to use, for example "1.0". Ray
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
+                    type: string
+                  jobMode:
+                    description: Describes how a job was created. Valid values are
+                      SCRIPT, NOTEBOOK and VISUAL.
                     type: string
                   jobRunQueuingEnabled:
                     description: Specifies whether job run queuing is enabled for
@@ -1020,6 +1028,10 @@ spec:
                     type: string
                   id:
                     description: Job name
+                    type: string
+                  jobMode:
+                    description: Describes how a job was created. Valid values are
+                      SCRIPT, NOTEBOOK and VISUAL.
                     type: string
                   jobRunQueuingEnabled:
                     description: Specifies whether job run queuing is enabled for
@@ -1393,6 +1405,10 @@ spec:
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
                     type: string
+                  jobMode:
+                    description: Describes how a job was created. Valid values are
+                      SCRIPT, NOTEBOOK and VISUAL.
+                    type: string
                   jobRunQueuingEnabled:
                     description: Specifies whether job run queuing is enabled for
                       the job runs for this job. A value of true means job run queuing
@@ -1743,6 +1759,10 @@ spec:
                     description: The version of glue to use, for example "1.0". Ray
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
+                    type: string
+                  jobMode:
+                    description: Describes how a job was created. Valid values are
+                      SCRIPT, NOTEBOOK and VISUAL.
                     type: string
                   jobRunQueuingEnabled:
                     description: Specifies whether job run queuing is enabled for
@@ -2179,6 +2199,10 @@ spec:
                     type: string
                   id:
                     description: Job name
+                    type: string
+                  jobMode:
+                    description: Describes how a job was created. Valid values are
+                      SCRIPT, NOTEBOOK and VISUAL.
                     type: string
                   jobRunQueuingEnabled:
                     description: Specifies whether job run queuing is enabled for

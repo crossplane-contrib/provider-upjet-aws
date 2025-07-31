@@ -2275,6 +2275,11 @@ func (in *DistributionInitParameters) DeepCopyInto(out *DistributionInitParamete
 			}
 		}
 	}
+	if in.AnycastIPListID != nil {
+		in, out := &in.AnycastIPListID, &out.AnycastIPListID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Comment != nil {
 		in, out := &in.Comment, &out.Comment
 		*out = new(string)
@@ -2451,6 +2456,11 @@ func (in *DistributionObservation) DeepCopyInto(out *DistributionObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.AnycastIPListID != nil {
+		in, out := &in.AnycastIPListID, &out.AnycastIPListID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Arn != nil {
 		in, out := &in.Arn, &out.Arn
@@ -2671,6 +2681,11 @@ func (in *DistributionParameters) DeepCopyInto(out *DistributionParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.AnycastIPListID != nil {
+		in, out := &in.AnycastIPListID, &out.AnycastIPListID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Comment != nil {
 		in, out := &in.Comment, &out.Comment
