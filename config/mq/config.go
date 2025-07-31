@@ -67,6 +67,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				"user",
 			},
 		}
+		r.LateInitializer.IgnoredFields = append(r.LateInitializer.IgnoredFields, "maintenance_window_start_time")
 	})
 
 	p.AddResourceConfigurator("aws_mq_user", func(r *config.Resource) {
