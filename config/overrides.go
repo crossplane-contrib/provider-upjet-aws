@@ -209,7 +209,7 @@ func injectPluginFrameworkCustomStateEmptyCheck() config.ResourceOption {
 	}
 }
 
-func tfStateVlueIsEmpty(ctx context.Context, tfStateValue tftypes.Value, resourceSchema rschema.Schema) (bool, error) {
+func tfStateVlueIsEmpty(ctx context.Context, tfStateValue tftypes.Value, resourceSchema rschema.Schema) (bool, error) { //nolint:gocyclo // easier to follow as a unit
 	sdkState := tfsdk.State{
 		Raw:    tfStateValue.Copy(),
 		Schema: resourceSchema,
@@ -220,7 +220,7 @@ func tfStateVlueIsEmpty(ctx context.Context, tfStateValue tftypes.Value, resourc
 	if region != "" {
 		sdkState.SetAttribute(ctx, path.Root("region"), (*string)(nil))
 		isEmpty = true
-		tftypes.Walk(sdkState.Raw, func(attributePath *tftypes.AttributePath, value tftypes.Value) (bool, error) {
+		if err := tftypes.Walk(sdkState.Raw, func(attributePath *tftypes.AttributePath, value tftypes.Value) (bool, error) {
 			if len(attributePath.Steps()) != 1 {
 				return true, nil
 			}
@@ -231,7 +231,7 @@ func tfStateVlueIsEmpty(ctx context.Context, tfStateValue tftypes.Value, resourc
 				if value.IsKnown() && !value.IsNull() {
 					destVal := make([]tftypes.Value, 0)
 					if err := value.As(&destVal); err != nil {
-						return true, nil
+						return true, err
 					}
 					if len(destVal) > 0 {
 						isEmpty = false
@@ -245,7 +245,9 @@ func tfStateVlueIsEmpty(ctx context.Context, tfStateValue tftypes.Value, resourc
 				}
 			}
 			return true, nil
-		})
+		}); err != nil {
+			return false, err
+		}
 	}
 	return isEmpty, nil
 }
