@@ -379,23 +379,6 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: tfAwsConnsClient})
 	ps.FrameworkProvider = fwProvider
 
-	/*
-		// Register AWS SDK v1 call counter. Unlike AWS SDK v2, v1 doesn't
-		// store service ID (EC2, IAM, etc.) and operation name
-		// (DescribeVPCs, etc.) in request context. Therefore, it's not
-		// possible to implement this session handler's functionality with
-		// an http.RoundTripper. To learn how SDK v1 session handler phases
-		// map to SDK v2 middleware stack steps, see:
-		// https://aws.github.io/aws-sdk-go-v2/docs/migrating/#handler-phases
-		tfAwsConnsClient.Session().Handlers.Send.PushBack(func(r *awsrequest.Request) {
-			// In case of API errors (or no errors), r.Error is nil.
-			// In case of connection errors, r.Error is non-nil.
-			if r.Error == nil {
-				metrics.ExternalAPICalls.WithLabelValues(r.ClientInfo.ServiceID, r.Operation.Name).Inc()
-			}
-		})
-	*/
-
 	// Register AWS SDK v2 call counter
 	tfAwsConnsClient.AppendAPIOptions(withExternalAPICallCounter)
 
