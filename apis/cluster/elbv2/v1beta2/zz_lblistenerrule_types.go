@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionAuthenticateCognitoInitParameters struct {
@@ -33,7 +33,7 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// The ARN of the Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolArn.
@@ -46,7 +46,7 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// The ID of the Cognito user pool client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolClient
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
 
 	// Reference to a UserPoolClient in cognitoidp to populate userPoolClientId.
@@ -59,7 +59,7 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// The domain prefix or fully-qualified domain name of the Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain",false)
 	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPoolDomain.
@@ -124,7 +124,7 @@ type ActionAuthenticateCognitoParameters struct {
 
 	// The ARN of the Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
 
@@ -138,7 +138,7 @@ type ActionAuthenticateCognitoParameters struct {
 
 	// The ID of the Cognito user pool client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolClient
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
 
@@ -152,7 +152,7 @@ type ActionAuthenticateCognitoParameters struct {
 
 	// The domain prefix or fully-qualified domain name of the Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain",false)
 	// +kubebuilder:validation:Optional
 	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
 
@@ -382,7 +382,7 @@ type ActionInitParameters struct {
 	// To route to one or more target groups, use a forward block instead.
 	// Cannot be specified with forward.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
@@ -468,7 +468,7 @@ type ActionParameters struct {
 	// To route to one or more target groups, use a forward block instead.
 	// Cannot be specified with forward.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
@@ -656,7 +656,7 @@ type ForwardTargetGroupInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a LBTargetGroup in elbv2 to populate arn.
@@ -684,7 +684,7 @@ type ForwardTargetGroupParameters struct {
 
 	// The Amazon Resource Name (ARN) of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -787,7 +787,7 @@ type LBListenerRuleInitParameters struct {
 
 	// The ARN of the listener to which to attach the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBListener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
 	// Reference to a LBListener in elbv2 to populate listenerArn.
@@ -851,7 +851,7 @@ type LBListenerRuleParameters struct {
 
 	// The ARN of the listener to which to attach the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBListener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 

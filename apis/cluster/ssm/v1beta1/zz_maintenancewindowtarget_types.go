@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MaintenanceWindowTargetInitParameters struct {
@@ -33,7 +33,7 @@ type MaintenanceWindowTargetInitParameters struct {
 
 	// The Id of the maintenance window to register the target with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 
 	// Reference to a MaintenanceWindow in ssm to populate windowId.
@@ -104,7 +104,7 @@ type MaintenanceWindowTargetParameters struct {
 
 	// The Id of the maintenance window to register the target with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 

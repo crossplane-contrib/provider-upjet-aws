@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DefaultRouteTableInitParameters struct {
 
 	// ID of the default route table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("default_route_table_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("default_route_table_id",true)
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate defaultRouteTableId.
@@ -81,7 +81,7 @@ type DefaultRouteTableParameters struct {
 
 	// ID of the default route table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("default_route_table_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("default_route_table_id",true)
 	// +kubebuilder:validation:Optional
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
@@ -126,7 +126,7 @@ type RouteInitParameters struct {
 
 	// Identifier of a VPC Egress Only Internet Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EgressOnlyInternetGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id"`
 
 	// Reference to a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
@@ -139,7 +139,7 @@ type RouteInitParameters struct {
 
 	// Identifier of a VPC internet gateway or a virtual private gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.InternetGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id"`
 
 	// Reference to a InternetGateway in ec2 to populate gatewayId.
@@ -227,7 +227,7 @@ type RouteParameters struct {
 
 	// Identifier of a VPC Egress Only Internet Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EgressOnlyInternetGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id"`
 
@@ -241,7 +241,7 @@ type RouteParameters struct {
 
 	// Identifier of a VPC internet gateway or a virtual private gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.InternetGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id"`
 

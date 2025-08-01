@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type VPCAttachmentInitParameters struct {
@@ -50,7 +50,7 @@ type VPCAttachmentInitParameters struct {
 
 	// ARN of the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcArn.
@@ -186,7 +186,7 @@ type VPCAttachmentParameters struct {
 
 	// ARN of the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
 

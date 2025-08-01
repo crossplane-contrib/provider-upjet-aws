@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GlobalNodeGroupsInitParameters struct {
@@ -67,7 +67,7 @@ type GlobalReplicationGroupInitParameters struct {
 
 	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2.ReplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrimaryReplicationGroupID *string `json:"primaryReplicationGroupId,omitempty" tf:"primary_replication_group_id,omitempty"`
 
 	// Reference to a ReplicationGroup in elasticache to populate primaryReplicationGroupId.
@@ -201,7 +201,7 @@ type GlobalReplicationGroupParameters struct {
 
 	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2.ReplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryReplicationGroupID *string `json:"primaryReplicationGroupId,omitempty" tf:"primary_replication_group_id,omitempty"`
 

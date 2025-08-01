@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ReplicationTaskInitParameters struct {
@@ -26,7 +26,7 @@ type ReplicationTaskInitParameters struct {
 
 	// ARN of the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("replication_instance_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("replication_instance_arn",true)
 	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
 
 	// Reference to a ReplicationInstance in dms to populate replicationInstanceArn.
@@ -45,7 +45,7 @@ type ReplicationTaskInitParameters struct {
 
 	// ARN that uniquely identifies the source endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
 
 	// Reference to a Endpoint in dms to populate sourceEndpointArn.
@@ -68,7 +68,7 @@ type ReplicationTaskInitParameters struct {
 
 	// ARN that uniquely identifies the target endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`
 
 	// Reference to a Endpoint in dms to populate targetEndpointArn.
@@ -154,7 +154,7 @@ type ReplicationTaskParameters struct {
 
 	// ARN of the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("replication_instance_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("replication_instance_arn",true)
 	// +kubebuilder:validation:Optional
 	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
 
@@ -176,7 +176,7 @@ type ReplicationTaskParameters struct {
 
 	// ARN that uniquely identifies the source endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
 
@@ -203,7 +203,7 @@ type ReplicationTaskParameters struct {
 
 	// ARN that uniquely identifies the target endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ClusterEndpointInitParameters struct {
 
 	// The cluster identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in rds to populate clusterIdentifier.
@@ -33,7 +33,7 @@ type ClusterEndpointInitParameters struct {
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
 
@@ -47,7 +47,7 @@ type ClusterEndpointInitParameters struct {
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
 
@@ -106,7 +106,7 @@ type ClusterEndpointParameters struct {
 
 	// The cluster identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -124,7 +124,7 @@ type ClusterEndpointParameters struct {
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
@@ -144,7 +144,7 @@ type ClusterEndpointParameters struct {
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InputDataConfigInitParameters struct {
 
 	// IAM role with access to S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DataAccessRoleArn *string `json:"dataAccessRoleArn,omitempty" tf:"data_access_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate dataAccessRoleArn.
@@ -51,7 +51,7 @@ type InputDataConfigParameters struct {
 
 	// IAM role with access to S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DataAccessRoleArn *string `json:"dataAccessRoleArn,omitempty" tf:"data_access_role_arn,omitempty"`
 

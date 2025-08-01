@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConditionInitParameters struct {
@@ -23,7 +23,7 @@ type ConditionInitParameters struct {
 
 	// Value for the key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Organization
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
 	// Reference to a Organization in organizations to populate value.
@@ -59,7 +59,7 @@ type ConditionParameters struct {
 
 	// Value for the key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Organization
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 

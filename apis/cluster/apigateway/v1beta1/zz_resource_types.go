@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ResourceInitParameters struct {
 
 	// ID of the parent API resource
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("root_resource_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("root_resource_id",true)
 	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
 
 	// Reference to a RestAPI in apigateway to populate parentId.
@@ -33,7 +33,7 @@ type ResourceInitParameters struct {
 
 	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
@@ -71,7 +71,7 @@ type ResourceParameters struct {
 
 	// ID of the parent API resource
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("root_resource_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("root_resource_id",true)
 	// +kubebuilder:validation:Optional
 	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
 
@@ -94,7 +94,7 @@ type ResourceParameters struct {
 
 	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 

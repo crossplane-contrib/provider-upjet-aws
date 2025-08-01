@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutomationParametersInitParameters struct {
@@ -38,7 +38,7 @@ type AutomationParametersParameterInitParameters struct {
 
 	// The array of strings.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
 	// References to Instance in ec2 to populate values.
@@ -67,7 +67,7 @@ type AutomationParametersParameterParameters struct {
 
 	// The array of strings.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
@@ -194,7 +194,7 @@ type MaintenanceWindowTaskInitParameters struct {
 
 	// The ARN of the task to execute.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TaskArn *string `json:"taskArn,omitempty" tf:"task_arn,omitempty"`
 
 	// Reference to a Function in lambda to populate taskArn.
@@ -213,7 +213,7 @@ type MaintenanceWindowTaskInitParameters struct {
 
 	// The Id of the maintenance window to register the task with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 
 	// Reference to a MaintenanceWindow in ssm to populate windowId.
@@ -328,7 +328,7 @@ type MaintenanceWindowTaskParameters struct {
 
 	// The ARN of the task to execute.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TaskArn *string `json:"taskArn,omitempty" tf:"task_arn,omitempty"`
 
@@ -350,7 +350,7 @@ type MaintenanceWindowTaskParameters struct {
 
 	// The Id of the maintenance window to register the task with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 
@@ -368,7 +368,7 @@ type MaintenanceWindowTaskTargetsInitParameters struct {
 
 	// The array of strings.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
 	// References to Instance in ec2 to populate values.
@@ -394,7 +394,7 @@ type MaintenanceWindowTaskTargetsParameters struct {
 
 	// The array of strings.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
@@ -411,7 +411,7 @@ type NotificationConfigInitParameters struct {
 
 	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	NotificationArn *string `json:"notificationArn,omitempty" tf:"notification_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate notificationArn.
@@ -445,7 +445,7 @@ type NotificationConfigParameters struct {
 
 	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	NotificationArn *string `json:"notificationArn,omitempty" tf:"notification_arn,omitempty"`
 
@@ -488,7 +488,7 @@ type RunCommandParametersInitParameters struct {
 
 	// The name of the Amazon S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OutputS3Bucket *string `json:"outputS3Bucket,omitempty" tf:"output_s3_bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate outputS3Bucket.
@@ -507,7 +507,7 @@ type RunCommandParametersInitParameters struct {
 
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate serviceRoleArn.
@@ -615,7 +615,7 @@ type RunCommandParametersParameters struct {
 
 	// The name of the Amazon S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OutputS3Bucket *string `json:"outputS3Bucket,omitempty" tf:"output_s3_bucket,omitempty"`
 
@@ -637,7 +637,7 @@ type RunCommandParametersParameters struct {
 
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 

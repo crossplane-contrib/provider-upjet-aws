@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SnapshotScheduleAssociationInitParameters struct {
 
 	// The cluster identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
@@ -30,7 +30,7 @@ type SnapshotScheduleAssociationInitParameters struct {
 
 	// The snapshot schedule identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.SnapshotSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ScheduleIdentifier *string `json:"scheduleIdentifier,omitempty" tf:"schedule_identifier,omitempty"`
 
 	// Reference to a SnapshotSchedule in redshift to populate scheduleIdentifier.
@@ -61,7 +61,7 @@ type SnapshotScheduleAssociationParameters struct {
 
 	// The cluster identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -80,7 +80,7 @@ type SnapshotScheduleAssociationParameters struct {
 
 	// The snapshot schedule identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.SnapshotSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ScheduleIdentifier *string `json:"scheduleIdentifier,omitempty" tf:"schedule_identifier,omitempty"`
 

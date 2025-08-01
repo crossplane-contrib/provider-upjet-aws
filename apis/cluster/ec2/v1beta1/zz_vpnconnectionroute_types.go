@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type VPNConnectionRouteInitParameters struct {
@@ -20,7 +20,7 @@ type VPNConnectionRouteInitParameters struct {
 
 	// The ID of the VPN connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.VPNConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
 
 	// Reference to a VPNConnection in ec2 to populate vpnConnectionId.
@@ -60,7 +60,7 @@ type VPNConnectionRouteParameters struct {
 
 	// The ID of the VPN connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.VPNConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
 

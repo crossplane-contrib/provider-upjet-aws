@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LicenseAssociationInitParameters struct {
@@ -23,7 +23,7 @@ type LicenseAssociationInitParameters struct {
 
 	// The workspace id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/grafana/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Reference to a Workspace in grafana to populate workspaceId.
@@ -76,7 +76,7 @@ type LicenseAssociationParameters struct {
 
 	// The workspace id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/grafana/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

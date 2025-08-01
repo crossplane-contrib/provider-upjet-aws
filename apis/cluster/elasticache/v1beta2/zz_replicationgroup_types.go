@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LogDeliveryConfigurationInitParameters struct {
@@ -114,7 +114,7 @@ type ReplicationGroupInitParameters struct {
 
 	// The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter cannot be set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta1.GlobalReplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("global_replication_group_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("global_replication_group_id",true)
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
 
 	// Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
@@ -500,7 +500,7 @@ type ReplicationGroupParameters struct {
 
 	// The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter cannot be set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta1.GlobalReplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("global_replication_group_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("global_replication_group_id",true)
 	// +kubebuilder:validation:Optional
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
 

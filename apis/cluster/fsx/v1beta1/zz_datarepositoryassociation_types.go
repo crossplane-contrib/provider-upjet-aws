@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutoExportPolicyInitParameters struct {
@@ -64,7 +64,7 @@ type DataRepositoryAssociationInitParameters struct {
 
 	// The ID of the Amazon FSx file system to on which to create a data repository association.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/fsx/v1beta1.LustreFileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// Reference to a LustreFileSystem in fsx to populate fileSystemId.
@@ -152,7 +152,7 @@ type DataRepositoryAssociationParameters struct {
 
 	// The ID of the Amazon FSx file system to on which to create a data repository association.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/fsx/v1beta1.LustreFileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 

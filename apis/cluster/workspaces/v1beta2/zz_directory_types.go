@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActiveDirectoryConfigInitParameters struct {
@@ -20,7 +20,7 @@ type ActiveDirectoryConfigInitParameters struct {
 
 	// ARN of the Secrets Manager secret that contains the credentials for the service account. For more information, see Service Account Details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceAccountSecretArn *string `json:"serviceAccountSecretArn,omitempty" tf:"service_account_secret_arn,omitempty"`
 
 	// Reference to a Secret in secretsmanager to populate serviceAccountSecretArn.
@@ -49,7 +49,7 @@ type ActiveDirectoryConfigParameters struct {
 
 	// ARN of the Secrets Manager secret that contains the credentials for the service account. For more information, see Service Account Details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceAccountSecretArn *string `json:"serviceAccountSecretArn,omitempty" tf:"service_account_secret_arn,omitempty"`
 
@@ -101,7 +101,7 @@ type DirectoryInitParameters struct {
 
 	// The directory identifier for registration in WorkSpaces service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta2.Directory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
 
 	// Reference to a Directory in ds to populate directoryId.
@@ -114,7 +114,7 @@ type DirectoryInitParameters struct {
 
 	// The identifiers of the IP access control groups associated with the directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/workspaces/v1beta1.IPGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
@@ -266,7 +266,7 @@ type DirectoryParameters struct {
 
 	// The directory identifier for registration in WorkSpaces service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta2.Directory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
 
@@ -280,7 +280,7 @@ type DirectoryParameters struct {
 
 	// The identifiers of the IP access control groups associated with the directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/workspaces/v1beta1.IPGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
@@ -543,7 +543,7 @@ type WorkspaceCreationPropertiesInitParameters struct {
 
 	// The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CustomSecurityGroupID *string `json:"customSecurityGroupId,omitempty" tf:"custom_security_group_id,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate customSecurityGroupId.
@@ -589,7 +589,7 @@ type WorkspaceCreationPropertiesParameters struct {
 
 	// The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CustomSecurityGroupID *string `json:"customSecurityGroupId,omitempty" tf:"custom_security_group_id,omitempty"`
 

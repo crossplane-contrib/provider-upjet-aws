@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	backup "github.com/upbound/provider-aws/internal/controller/cluster/fsx/backup"
 	datarepositoryassociation "github.com/upbound/provider-aws/internal/controller/cluster/fsx/datarepositoryassociation"

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PortfolioShareInitParameters struct {
@@ -20,7 +20,7 @@ type PortfolioShareInitParameters struct {
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
@@ -88,7 +88,7 @@ type PortfolioShareParameters struct {
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 

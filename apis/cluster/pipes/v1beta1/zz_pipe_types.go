@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActivemqBrokerParametersInitParameters struct {
@@ -251,7 +251,7 @@ type CloudwatchLogsLogDestinationInitParameters struct {
 
 	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupArn.
@@ -273,7 +273,7 @@ type CloudwatchLogsLogDestinationParameters struct {
 
 	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
@@ -1533,7 +1533,7 @@ type PipeInitParameters struct {
 
 	// Enrichment resource of the pipe (typically an ARN). Read more about enrichment in the User Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.APIDestination
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Enrichment *string `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
 
 	// Parameters to configure enrichment for your pipe. Detailed below.
@@ -1568,7 +1568,7 @@ type PipeInitParameters struct {
 
 	// Source resource of the pipe. This field typically requires an ARN (Amazon Resource Name). However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Parameters to configure a source for the pipe. Detailed below.
@@ -1588,7 +1588,7 @@ type PipeInitParameters struct {
 
 	// Target resource of the pipe (typically an ARN).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Parameters to configure a target for your pipe. Detailed below.
@@ -1669,7 +1669,7 @@ type PipeParameters struct {
 
 	// Enrichment resource of the pipe (typically an ARN). Read more about enrichment in the User Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.APIDestination
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Enrichment *string `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
 
@@ -1714,7 +1714,7 @@ type PipeParameters struct {
 
 	// Source resource of the pipe. This field typically requires an ARN (Amazon Resource Name). However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
@@ -1737,7 +1737,7 @@ type PipeParameters struct {
 
 	// Target resource of the pipe (typically an ARN).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 

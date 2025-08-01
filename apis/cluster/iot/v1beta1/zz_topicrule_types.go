@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CloudwatchAlarmInitParameters struct {
@@ -1445,7 +1445,7 @@ type SnsInitParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -1458,7 +1458,7 @@ type SnsInitParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate targetArn.
@@ -1490,7 +1490,7 @@ type SnsParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -1504,7 +1504,7 @@ type SnsParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -2365,7 +2365,7 @@ type TopicRuleSnsInitParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -2378,7 +2378,7 @@ type TopicRuleSnsInitParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate targetArn.
@@ -2410,7 +2410,7 @@ type TopicRuleSnsParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -2424,7 +2424,7 @@ type TopicRuleSnsParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 

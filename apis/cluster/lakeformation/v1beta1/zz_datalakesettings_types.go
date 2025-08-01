@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CreateDatabaseDefaultPermissionsInitParameters struct {
@@ -81,7 +81,7 @@ type DataLakeSettingsInitParameters struct {
 
 	// Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
@@ -177,7 +177,7 @@ type DataLakeSettingsParameters struct {
 
 	// Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`

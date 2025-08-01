@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type WorkspaceAPIKeyInitParameters struct {
@@ -26,7 +26,7 @@ type WorkspaceAPIKeyInitParameters struct {
 
 	// The ID of the workspace that the API key is valid for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/grafana/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Reference to a Workspace in grafana to populate workspaceId.
@@ -79,7 +79,7 @@ type WorkspaceAPIKeyParameters struct {
 
 	// The ID of the workspace that the API key is valid for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/grafana/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EntryInitParameters struct {
 
 	// CIDR block of this entry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCIPv4CidrBlockAssociation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
 	// Reference to a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
@@ -45,7 +45,7 @@ type EntryParameters struct {
 
 	// CIDR block of this entry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCIPv4CidrBlockAssociation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 

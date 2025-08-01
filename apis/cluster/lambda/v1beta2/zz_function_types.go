@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DeadLetterConfigInitParameters struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// Reference to a Queue in sqs to populate targetArn.
@@ -39,7 +39,7 @@ type DeadLetterConfigParameters struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -97,7 +97,7 @@ type FileSystemConfigInitParameters struct {
 
 	// ARN of the Amazon EFS Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a AccessPoint in efs to populate arn.
@@ -125,7 +125,7 @@ type FileSystemConfigParameters struct {
 
 	// ARN of the Amazon EFS Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -188,7 +188,7 @@ type FunctionInitParameters struct {
 
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
 	// References to LayerVersion in lambda to populate layers.
@@ -484,7 +484,7 @@ type FunctionParameters struct {
 
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 

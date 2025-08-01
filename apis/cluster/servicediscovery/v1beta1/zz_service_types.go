@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DNSConfigInitParameters struct {
@@ -20,7 +20,7 @@ type DNSConfigInitParameters struct {
 
 	// The ID of the namespace to use for DNS configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicediscovery/v1beta1.PrivateDNSNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// Reference to a PrivateDNSNamespace in servicediscovery to populate namespaceId.
@@ -55,7 +55,7 @@ type DNSConfigParameters struct {
 
 	// The ID of the namespace to use for DNS configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicediscovery/v1beta1.PrivateDNSNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type VPCIpamPoolCidrAllocationInitParameters struct {
@@ -27,7 +27,7 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 
 	// The ID of the pool to which you want to assign a CIDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCIpamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
 
 	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
@@ -97,7 +97,7 @@ type VPCIpamPoolCidrAllocationParameters struct {
 
 	// The ID of the pool to which you want to assign a CIDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCIpamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
 

@@ -7,8 +7,8 @@ package config
 import (
 	"strings"
 
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/types/name"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/types/name"
 )
 
 // GroupKindOverrides overrides the group and kind of the resource if it matches

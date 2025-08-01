@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AmazonManagedKafkaEventSourceConfigInitParameters struct {
@@ -516,7 +516,7 @@ type OnFailureInitParameters struct {
 
 	// ARN of the destination resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// Reference to a Queue in sqs to populate destinationArn.
@@ -538,7 +538,7 @@ type OnFailureParameters struct {
 
 	// ARN of the destination resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 

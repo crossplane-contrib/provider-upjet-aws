@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TransitGatewayPrefixListReferenceInitParameters struct {
@@ -20,7 +20,7 @@ type TransitGatewayPrefixListReferenceInitParameters struct {
 
 	// Identifier of EC2 Prefix List.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
@@ -33,7 +33,7 @@ type TransitGatewayPrefixListReferenceInitParameters struct {
 
 	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
@@ -46,7 +46,7 @@ type TransitGatewayPrefixListReferenceInitParameters struct {
 
 	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayRouteTableId.
@@ -91,7 +91,7 @@ type TransitGatewayPrefixListReferenceParameters struct {
 
 	// Identifier of EC2 Prefix List.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
@@ -110,7 +110,7 @@ type TransitGatewayPrefixListReferenceParameters struct {
 
 	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
@@ -124,7 +124,7 @@ type TransitGatewayPrefixListReferenceParameters struct {
 
 	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 

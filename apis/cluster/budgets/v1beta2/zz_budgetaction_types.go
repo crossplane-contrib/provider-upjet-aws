@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionThresholdInitParameters struct {
@@ -255,7 +255,7 @@ type IAMActionDefinitionInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the policy to be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
 	// Reference to a Policy in iam to populate policyArn.
@@ -311,7 +311,7 @@ type IAMActionDefinitionParameters struct {
 
 	// The Amazon Resource Name (ARN) of the policy to be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 

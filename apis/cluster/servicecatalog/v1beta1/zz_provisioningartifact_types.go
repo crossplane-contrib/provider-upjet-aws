@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ProvisioningArtifactInitParameters struct {
@@ -35,7 +35,7 @@ type ProvisioningArtifactInitParameters struct {
 
 	// Identifier of the product.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta2.Product
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
 	// Reference to a Product in servicecatalog to populate productId.
@@ -130,7 +130,7 @@ type ProvisioningArtifactParameters struct {
 
 	// Identifier of the product.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta2.Product
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InstanceRoleAssociationInitParameters struct {
 
 	// DB Instance Identifier to associate with the IAM Role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
 	// Reference to a Instance in rds to populate dbInstanceIdentifier.
@@ -68,7 +68,7 @@ type InstanceRoleAssociationParameters struct {
 
 	// DB Instance Identifier to associate with the IAM Role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 

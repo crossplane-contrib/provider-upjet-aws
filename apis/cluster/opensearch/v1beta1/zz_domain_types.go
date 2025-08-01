@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdvancedSecurityOptionsInitParameters struct {
@@ -752,7 +752,7 @@ type LogPublishingOptionsInitParameters struct {
 
 	// ARN of the Cloudwatch log group to which log needs to be published.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
@@ -786,7 +786,7 @@ type LogPublishingOptionsParameters struct {
 
 	// ARN of the Cloudwatch log group to which log needs to be published.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 

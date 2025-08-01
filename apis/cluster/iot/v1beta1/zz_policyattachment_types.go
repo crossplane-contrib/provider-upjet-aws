@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PolicyAttachmentInitParameters struct {
@@ -29,7 +29,7 @@ type PolicyAttachmentInitParameters struct {
 
 	// The identity to which the policy is attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Reference to a Certificate in iot to populate target.
@@ -77,7 +77,7 @@ type PolicyAttachmentParameters struct {
 
 	// The identity to which the policy is attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 

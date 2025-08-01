@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type UsageLimitInitParameters struct {
@@ -23,7 +23,7 @@ type UsageLimitInitParameters struct {
 
 	// The identifier of the cluster that you want to limit usage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
@@ -99,7 +99,7 @@ type UsageLimitParameters struct {
 
 	// The identifier of the cluster that you want to limit usage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 

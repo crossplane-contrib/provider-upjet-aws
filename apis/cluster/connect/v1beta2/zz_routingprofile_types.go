@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MediaConcurrenciesInitParameters struct {
@@ -101,7 +101,7 @@ type RoutingProfileInitParameters struct {
 
 	// Specifies the default outbound queue for the Routing Profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta3.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("queue_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("queue_id",true)
 	DefaultOutboundQueueID *string `json:"defaultOutboundQueueId,omitempty" tf:"default_outbound_queue_id,omitempty"`
 
 	// Reference to a Queue in connect to populate defaultOutboundQueueId.
@@ -117,7 +117,7 @@ type RoutingProfileInitParameters struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Reference to a Instance in connect to populate instanceId.
@@ -188,7 +188,7 @@ type RoutingProfileParameters struct {
 
 	// Specifies the default outbound queue for the Routing Profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta3.Queue
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("queue_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("queue_id",true)
 	// +kubebuilder:validation:Optional
 	DefaultOutboundQueueID *string `json:"defaultOutboundQueueId,omitempty" tf:"default_outbound_queue_id,omitempty"`
 
@@ -206,7 +206,7 @@ type RoutingProfileParameters struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 

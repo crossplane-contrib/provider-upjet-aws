@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InvitationAccepterInitParameters struct {
 
 	// ARN of the behavior graph that the member account is accepting the invitation for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/detective/v1beta1.Graph
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("graph_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("graph_arn",true)
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
 	// Reference to a Graph in detective to populate graphArn.
@@ -46,7 +46,7 @@ type InvitationAccepterParameters struct {
 
 	// ARN of the behavior graph that the member account is accepting the invitation for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/detective/v1beta1.Graph
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("graph_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("graph_arn",true)
 	// +kubebuilder:validation:Optional
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ContentSourceConfigurationInitParameters struct {
@@ -112,7 +112,7 @@ type ExperienceInitParameters struct {
 
 	// The identifier of the index for your Amazon Kendra experience.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta1.Index
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
 	// Reference to a Index in kendra to populate indexId.
@@ -189,7 +189,7 @@ type ExperienceParameters struct {
 
 	// The identifier of the index for your Amazon Kendra experience.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta1.Index
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ClusterRoleAssociationInitParameters struct {
 
 	// DB Cluster Identifier to associate with the IAM Role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in rds to populate dbClusterIdentifier.
@@ -68,7 +68,7 @@ type ClusterRoleAssociationParameters struct {
 
 	// DB Cluster Identifier to associate with the IAM Role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 

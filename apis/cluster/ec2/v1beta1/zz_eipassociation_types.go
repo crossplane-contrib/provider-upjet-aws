@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EIPAssociationInitParameters struct {
@@ -18,7 +18,7 @@ type EIPAssociationInitParameters struct {
 	// ID of the associated Elastic IP.
 	// This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
 	// Reference to a EIP in ec2 to populate allocationId.
@@ -37,7 +37,7 @@ type EIPAssociationInitParameters struct {
 	// The instance must have exactly one attached network interface.
 	// You can specify either the instance ID or the network interface ID, but not both.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Reference to a Instance in ec2 to populate instanceId.
@@ -101,7 +101,7 @@ type EIPAssociationParameters struct {
 	// ID of the associated Elastic IP.
 	// This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
@@ -122,7 +122,7 @@ type EIPAssociationParameters struct {
 	// The instance must have exactly one attached network interface.
 	// You can specify either the instance ID or the network interface ID, but not both.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 

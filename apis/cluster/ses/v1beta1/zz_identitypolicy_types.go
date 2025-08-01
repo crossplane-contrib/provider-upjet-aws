@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type IdentityPolicyInitParameters struct {
 
 	// Name or Amazon Resource Name (ARN) of the SES Identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ses/v1beta1.DomainIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Reference to a DomainIdentity in ses to populate identity.
@@ -56,7 +56,7 @@ type IdentityPolicyParameters struct {
 
 	// Name or Amazon Resource Name (ARN) of the SES Identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ses/v1beta1.DomainIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 

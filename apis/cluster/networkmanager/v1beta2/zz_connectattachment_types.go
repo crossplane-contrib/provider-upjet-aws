@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConnectAttachmentInitParameters struct {
@@ -29,7 +29,7 @@ type ConnectAttachmentInitParameters struct {
 
 	// Region where the edge is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.VPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("edge_location",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("edge_location",true)
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
 
 	// Reference to a VPCAttachment in networkmanager to populate edgeLocation.
@@ -49,7 +49,7 @@ type ConnectAttachmentInitParameters struct {
 
 	// ID of the attachment between the two connections.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.VPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 
 	// Reference to a VPCAttachment in networkmanager to populate transportAttachmentId.
@@ -130,7 +130,7 @@ type ConnectAttachmentParameters struct {
 
 	// Region where the edge is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.VPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("edge_location",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("edge_location",true)
 	// +kubebuilder:validation:Optional
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
 
@@ -153,7 +153,7 @@ type ConnectAttachmentParameters struct {
 
 	// ID of the attachment between the two connections.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.VPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 

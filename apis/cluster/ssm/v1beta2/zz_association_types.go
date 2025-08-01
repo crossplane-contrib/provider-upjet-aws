@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssociationInitParameters struct {
@@ -263,7 +263,7 @@ type TargetsInitParameters struct {
 
 	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
 	// References to Instance in ec2 to populate values.
@@ -292,7 +292,7 @@ type TargetsParameters struct {
 
 	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 

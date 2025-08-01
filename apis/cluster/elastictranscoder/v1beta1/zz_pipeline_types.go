@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ContentConfigInitParameters struct {
 
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -45,7 +45,7 @@ type ContentConfigParameters struct {
 
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -163,7 +163,7 @@ type PipelineInitParameters struct {
 
 	// The Amazon S3 bucket in which you saved the media files that you want to transcode and the graphics that you want to use as watermarks.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InputBucket *string `json:"inputBucket,omitempty" tf:"input_bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate inputBucket.
@@ -185,7 +185,7 @@ type PipelineInitParameters struct {
 
 	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Reference to a Role in iam to populate role.
@@ -262,7 +262,7 @@ type PipelineParameters struct {
 
 	// The Amazon S3 bucket in which you saved the media files that you want to transcode and the graphics that you want to use as watermarks.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InputBucket *string `json:"inputBucket,omitempty" tf:"input_bucket,omitempty"`
 
@@ -293,7 +293,7 @@ type PipelineParameters struct {
 
 	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -318,7 +318,7 @@ type ThumbnailConfigInitParameters struct {
 
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -346,7 +346,7 @@ type ThumbnailConfigParameters struct {
 
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

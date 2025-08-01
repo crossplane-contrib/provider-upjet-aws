@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuditLogConfigurationInitParameters struct {
@@ -154,7 +154,7 @@ type WindowsFileSystemInitParameters struct {
 
 	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
 
 	// Reference to a Directory in ds to populate activeDirectoryId.
@@ -369,7 +369,7 @@ type WindowsFileSystemParameters struct {
 
 	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
 

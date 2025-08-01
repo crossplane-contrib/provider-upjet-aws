@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RuleGroupNamespaceInitParameters struct {
@@ -67,7 +67,7 @@ type RuleGroupNamespaceParameters struct {
 
 	// ID of the prometheus workspace the rule group namespace should be linked to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amp/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

@@ -4,7 +4,7 @@
 
 package servicediscovery
 
-import "github.com/crossplane/upjet/pkg/config"
+import "github.com/crossplane/upjet/v2/pkg/config"
 
 // Configure adds configurations for the servicediscovery group.
 func Configure(p *config.Provider) { //nolint:gocyclo

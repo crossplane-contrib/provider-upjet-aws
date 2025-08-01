@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type VPCIpamPoolInitParameters struct {
@@ -67,7 +67,7 @@ type VPCIpamPoolInitParameters struct {
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCIpamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`
 
 	// Reference to a VPCIpamPool in ec2 to populate sourceIpamPoolId.
@@ -227,7 +227,7 @@ type VPCIpamPoolParameters struct {
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCIpamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`
 

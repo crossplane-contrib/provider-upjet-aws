@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssessmentTargetInitParameters struct {
@@ -20,7 +20,7 @@ type AssessmentTargetInitParameters struct {
 
 	// Inspector Resource Group Amazon Resource Name (ARN) stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/inspector/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceGroupArn *string `json:"resourceGroupArn,omitempty" tf:"resource_group_arn,omitempty"`
 
 	// Reference to a ResourceGroup in inspector to populate resourceGroupArn.
@@ -63,7 +63,7 @@ type AssessmentTargetParameters struct {
 
 	// Inspector Resource Group Amazon Resource Name (ARN) stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/inspector/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceGroupArn *string `json:"resourceGroupArn,omitempty" tf:"resource_group_arn,omitempty"`
 

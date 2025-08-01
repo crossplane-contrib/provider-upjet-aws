@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SharedDirectoryInitParameters struct {
 
 	// Identifier of the Managed Microsoft AD directory that you want to share with other accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
 
 	// Reference to a Directory in ds to populate directoryId.
@@ -64,7 +64,7 @@ type SharedDirectoryParameters struct {
 
 	// Identifier of the Managed Microsoft AD directory that you want to share with other accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
 

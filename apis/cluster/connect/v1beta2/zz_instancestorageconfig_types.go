@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EncryptionConfigInitParameters struct {
@@ -20,7 +20,7 @@ type EncryptionConfigInitParameters struct {
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in kms to populate keyId.
@@ -49,7 +49,7 @@ type EncryptionConfigParameters struct {
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -66,7 +66,7 @@ type InstanceStorageConfigInitParameters struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Reference to a Instance in connect to populate instanceId.
@@ -110,7 +110,7 @@ type InstanceStorageConfigParameters struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -140,7 +140,7 @@ type KinesisFirehoseConfigInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
 
 	// Reference to a DeliveryStream in firehose to populate firehoseArn.
@@ -162,7 +162,7 @@ type KinesisFirehoseConfigParameters struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
 
@@ -179,7 +179,7 @@ type KinesisStreamConfigInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the data stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
 	// Reference to a Stream in kinesis to populate streamArn.
@@ -201,7 +201,7 @@ type KinesisStreamConfigParameters struct {
 
 	// The Amazon Resource Name (ARN) of the data stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
@@ -260,7 +260,7 @@ type S3ConfigEncryptionConfigInitParameters struct {
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in kms to populate keyId.
@@ -289,7 +289,7 @@ type S3ConfigEncryptionConfigParameters struct {
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -306,7 +306,7 @@ type S3ConfigInitParameters struct {
 
 	// The S3 bucket name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketName.
@@ -340,7 +340,7 @@ type S3ConfigParameters struct {
 
 	// The S3 bucket name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 

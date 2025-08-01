@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ImageVersionInitParameters struct {
@@ -27,7 +27,7 @@ type ImageVersionInitParameters struct {
 
 	// The name of the image. Must be unique to your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// Reference to a Image in sagemaker to populate imageName.
@@ -126,7 +126,7 @@ type ImageVersionParameters struct {
 
 	// The name of the image. Must be unique to your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 

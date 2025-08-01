@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MethodSettingsInitParameters struct {
@@ -20,7 +20,7 @@ type MethodSettingsInitParameters struct {
 
 	// ID of the REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
@@ -36,7 +36,7 @@ type MethodSettingsInitParameters struct {
 
 	// Name of the stage
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.Stage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("stage_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("stage_name",false)
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// Reference to a Stage in apigateway to populate stageName.
@@ -81,7 +81,7 @@ type MethodSettingsParameters struct {
 
 	// ID of the REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -99,7 +99,7 @@ type MethodSettingsParameters struct {
 
 	// Name of the stage
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.Stage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("stage_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("stage_name",false)
 	// +kubebuilder:validation:Optional
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 

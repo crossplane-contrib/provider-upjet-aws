@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CustomErrorResponseInitParameters struct {
@@ -1032,7 +1032,7 @@ type OrderedCacheBehaviorFunctionAssociationInitParameters struct {
 
 	// ARN of the CloudFront function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
 	// Reference to a Function in cloudfront to populate functionArn.
@@ -1061,7 +1061,7 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 
 	// ARN of the CloudFront function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
@@ -1171,7 +1171,7 @@ type OrderedCacheBehaviorLambdaFunctionAssociationInitParameters struct {
 
 	// ARN of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("qualified_arn",true)
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// Reference to a Function in lambda to populate lambdaArn.
@@ -1207,7 +1207,7 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 
 	// ARN of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("qualified_arn",true)
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
@@ -1435,7 +1435,7 @@ type OriginInitParameters struct {
 
 	// Unique identifier of a CloudFront origin access control for this origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.OriginAccessControl
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OriginAccessControlID *string `json:"originAccessControlId,omitempty" tf:"origin_access_control_id,omitempty"`
 
 	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
@@ -1522,7 +1522,7 @@ type OriginParameters struct {
 
 	// Unique identifier of a CloudFront origin access control for this origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.OriginAccessControl
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OriginAccessControlID *string `json:"originAccessControlId,omitempty" tf:"origin_access_control_id,omitempty"`
 
@@ -1602,7 +1602,7 @@ type S3OriginConfigInitParameters struct {
 
 	// The CloudFront origin access identity to associate with the origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.OriginAccessIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
 	OriginAccessIdentity *string `json:"originAccessIdentity,omitempty" tf:"origin_access_identity,omitempty"`
 
 	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
@@ -1624,7 +1624,7 @@ type S3OriginConfigParameters struct {
 
 	// The CloudFront origin access identity to associate with the origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.OriginAccessIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
 	// +kubebuilder:validation:Optional
 	OriginAccessIdentity *string `json:"originAccessIdentity,omitempty" tf:"origin_access_identity,omitempty"`
 

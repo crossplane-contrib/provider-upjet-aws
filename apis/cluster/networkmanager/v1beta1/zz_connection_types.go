@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConnectionInitParameters struct {
 
 	// ID of the second device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Device
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectedDeviceID *string `json:"connectedDeviceId,omitempty" tf:"connected_device_id,omitempty"`
 
 	// Reference to a Device in networkmanager to populate connectedDeviceId.
@@ -36,7 +36,7 @@ type ConnectionInitParameters struct {
 
 	// ID of the first device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Device
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
 	// Reference to a Device in networkmanager to populate deviceId.
@@ -49,7 +49,7 @@ type ConnectionInitParameters struct {
 
 	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
@@ -106,7 +106,7 @@ type ConnectionParameters struct {
 
 	// ID of the second device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Device
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectedDeviceID *string `json:"connectedDeviceId,omitempty" tf:"connected_device_id,omitempty"`
 
@@ -128,7 +128,7 @@ type ConnectionParameters struct {
 
 	// ID of the first device in the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Device
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
@@ -142,7 +142,7 @@ type ConnectionParameters struct {
 
 	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 

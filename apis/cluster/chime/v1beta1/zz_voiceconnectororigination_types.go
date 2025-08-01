@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RouteInitParameters struct {
@@ -82,7 +82,7 @@ type VoiceConnectorOriginationInitParameters struct {
 
 	// The Amazon Chime Voice Connector ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/chime/v1beta1.VoiceConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 
 	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
@@ -130,7 +130,7 @@ type VoiceConnectorOriginationParameters struct {
 
 	// The Amazon Chime Voice Connector ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/chime/v1beta1.VoiceConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 

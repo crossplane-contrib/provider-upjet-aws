@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApplicationCodeConfigurationInitParameters struct {
@@ -375,7 +375,7 @@ type CloudwatchLoggingOptionsInitParameters struct {
 
 	// The ARN of the CloudWatch log stream to receive application messages.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LogStreamArn *string `json:"logStreamArn,omitempty" tf:"log_stream_arn,omitempty"`
 
 	// Reference to a Stream in cloudwatchlogs to populate logStreamArn.
@@ -400,7 +400,7 @@ type CloudwatchLoggingOptionsParameters struct {
 
 	// The ARN of the CloudWatch log stream to receive application messages.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LogStreamArn *string `json:"logStreamArn,omitempty" tf:"log_stream_arn,omitempty"`
 
@@ -810,7 +810,7 @@ type KinesisFirehoseOutputInitParameters struct {
 
 	// The ARN of the Lambda function that operates on records in the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta1.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Reference to a DeliveryStream in firehose to populate resourceArn.
@@ -832,7 +832,7 @@ type KinesisFirehoseOutputParameters struct {
 
 	// The ARN of the Lambda function that operates on records in the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta1.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -907,7 +907,7 @@ type LambdaOutputInitParameters struct {
 
 	// The ARN of the Lambda function that operates on records in the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Reference to a Function in lambda to populate resourceArn.
@@ -929,7 +929,7 @@ type LambdaOutputParameters struct {
 
 	// The ARN of the Lambda function that operates on records in the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -1493,7 +1493,7 @@ type S3ContentLocationInitParameters struct {
 
 	// The file key for the object containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
 
 	// Reference to a Object in s3 to populate fileKey.
@@ -1538,7 +1538,7 @@ type S3ContentLocationParameters struct {
 
 	// The file key for the object containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
 
@@ -1559,7 +1559,7 @@ type S3ReferenceDataSourceInitParameters struct {
 
 	// The ARN for the S3 bucket containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketArn.
@@ -1587,7 +1587,7 @@ type S3ReferenceDataSourceParameters struct {
 
 	// The ARN for the S3 bucket containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
@@ -1647,7 +1647,7 @@ type VPCConfigurationInitParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -1661,7 +1661,7 @@ type VPCConfigurationInitParameters struct {
 
 	// The Subnet IDs used by the VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -1695,7 +1695,7 @@ type VPCConfigurationParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -1710,7 +1710,7 @@ type VPCConfigurationParameters struct {
 
 	// The Subnet IDs used by the VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`

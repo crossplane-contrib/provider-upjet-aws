@@ -14,8 +14,8 @@ import (
 	"strings"
 
 	"github.com/alecthomas/kingpin/v2"
-	ujconfig "github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/pipeline"
+	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/pipeline"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 
 	"github.com/upbound/provider-aws/config"

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DestinationInitParameters struct {
@@ -69,7 +69,7 @@ type ReplicationConfigurationInitParameters struct {
 
 	// The ID of the file system that is to be replicated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta1.FileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceFileSystemID *string `json:"sourceFileSystemId,omitempty" tf:"source_file_system_id,omitempty"`
 
 	// Reference to a FileSystem in efs to populate sourceFileSystemId.
@@ -121,7 +121,7 @@ type ReplicationConfigurationParameters struct {
 
 	// The ID of the file system that is to be replicated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta1.FileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceFileSystemID *string `json:"sourceFileSystemId,omitempty" tf:"source_file_system_id,omitempty"`
 

@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	keyspace "github.com/upbound/provider-aws/internal/controller/cluster/keyspaces/keyspace"
 	table "github.com/upbound/provider-aws/internal/controller/cluster/keyspaces/table"

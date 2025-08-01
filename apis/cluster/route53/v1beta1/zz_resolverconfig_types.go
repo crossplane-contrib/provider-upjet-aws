@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ResolverConfigInitParameters struct {
@@ -20,7 +20,7 @@ type ResolverConfigInitParameters struct {
 
 	// The ID of the VPC that the configuration is for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate resourceId.
@@ -64,7 +64,7 @@ type ResolverConfigParameters struct {
 
 	// The ID of the VPC that the configuration is for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 

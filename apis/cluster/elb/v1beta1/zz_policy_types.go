@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PolicyAttributeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("policy_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_name",false)
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
 	// Reference to a Policy in elb to populate value.
@@ -41,7 +41,7 @@ type PolicyAttributeParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("policy_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_name",false)
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 

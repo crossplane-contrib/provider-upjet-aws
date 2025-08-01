@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type IdentityNotificationTopicInitParameters struct {
@@ -35,7 +35,7 @@ type IdentityNotificationTopicInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate topicArn.
@@ -97,7 +97,7 @@ type IdentityNotificationTopicParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 

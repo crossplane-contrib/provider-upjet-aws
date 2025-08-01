@@ -5,8 +5,8 @@
 package s3
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/registry"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/registry"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
@@ -98,14 +98,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_s3_bucket_analytics_configuration", func(r *config.Resource) {
 		r.References["storage_class_analysis.data_export.destination.s3_bucket_destination.bucket_arn"] = config.Reference{
 			TerraformName: "aws_s3_bucket",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_replication_configuration", func(r *config.Resource) {
 		r.References["rule.destination.bucket"] = config.Reference{
 			TerraformName: "aws_s3_bucket",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 		r.References["rule.destination.encryption_configuration.replica_kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",
@@ -115,7 +115,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_s3_bucket_inventory", func(r *config.Resource) {
 		r.References["destination.bucket.bucket_arn"] = config.Reference{
 			TerraformName: "aws_s3_bucket",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 	})
 

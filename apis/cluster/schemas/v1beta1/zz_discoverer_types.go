@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DiscovererInitParameters struct {
@@ -20,7 +20,7 @@ type DiscovererInitParameters struct {
 
 	// The ARN of the event bus to discover event schemas on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 
 	// Reference to a Bus in cloudwatchevents to populate sourceArn.
@@ -76,7 +76,7 @@ type DiscovererParameters struct {
 
 	// The ARN of the event bus to discover event schemas on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 

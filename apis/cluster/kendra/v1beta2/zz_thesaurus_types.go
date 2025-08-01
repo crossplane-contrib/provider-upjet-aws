@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ThesaurusInitParameters struct {
@@ -20,7 +20,7 @@ type ThesaurusInitParameters struct {
 
 	// The identifier of the index for a thesaurus.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta2.Index
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
 	// Reference to a Index in kendra to populate indexId.
@@ -105,7 +105,7 @@ type ThesaurusParameters struct {
 
 	// The identifier of the index for a thesaurus.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta2.Index
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
@@ -154,7 +154,7 @@ type ThesaurusSourceS3PathInitParameters struct {
 
 	// The name of the S3 bucket that contains the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -167,7 +167,7 @@ type ThesaurusSourceS3PathInitParameters struct {
 
 	// The name of the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Reference to a Object in s3 to populate key.
@@ -192,7 +192,7 @@ type ThesaurusSourceS3PathParameters struct {
 
 	// The name of the S3 bucket that contains the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -206,7 +206,7 @@ type ThesaurusSourceS3PathParameters struct {
 
 	// The name of the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 

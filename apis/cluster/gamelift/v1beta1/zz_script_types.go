@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ScriptInitParameters struct {
@@ -110,7 +110,7 @@ type ScriptStorageLocationInitParameters struct {
 
 	// Name of the zip file containing your script files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Reference to a Object in s3 to populate key.
@@ -170,7 +170,7 @@ type ScriptStorageLocationParameters struct {
 
 	// Name of the zip file containing your script files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 

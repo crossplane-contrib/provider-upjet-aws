@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AliasInitParameters struct {
@@ -269,7 +269,7 @@ type RecordInitParameters struct {
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("public_ip",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("public_ip",true)
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
@@ -418,7 +418,7 @@ type RecordParameters struct {
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("public_ip",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("public_ip",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NotificationRuleInitParameters struct {
@@ -28,7 +28,7 @@ type NotificationRuleInitParameters struct {
 
 	// The ARN of the resource to associate with the notification rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codecommit/v1beta1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
 	// Reference to a Repository in codecommit to populate resource.
@@ -114,7 +114,7 @@ type NotificationRuleParameters struct {
 
 	// The ARN of the resource to associate with the notification rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codecommit/v1beta1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
@@ -144,7 +144,7 @@ type TargetInitParameters struct {
 
 	// The ARN of notification rule target. For example, a SNS Topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// Reference to a Topic in sns to populate address.
@@ -175,7 +175,7 @@ type TargetParameters struct {
 
 	// The ARN of notification rule target. For example, a SNS Topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MemberInitParameters struct {
 
 	// AWS account ID for member account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/guardduty/v1beta2.Detector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("account_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("account_id",true)
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Reference to a Detector in guardduty to populate accountId.
@@ -30,7 +30,7 @@ type MemberInitParameters struct {
 
 	// The detector ID of the GuardDuty account where you want to create member accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/guardduty/v1beta2.Detector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
 
 	// Reference to a Detector in guardduty to populate detectorId.
@@ -88,7 +88,7 @@ type MemberParameters struct {
 
 	// AWS account ID for member account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/guardduty/v1beta2.Detector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("account_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("account_id",true)
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
@@ -102,7 +102,7 @@ type MemberParameters struct {
 
 	// The detector ID of the GuardDuty account where you want to create member accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/guardduty/v1beta2.Detector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
 

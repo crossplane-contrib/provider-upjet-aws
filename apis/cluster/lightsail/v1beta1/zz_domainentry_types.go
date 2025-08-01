@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DomainEntryInitParameters struct {
@@ -48,7 +48,7 @@ type DomainEntryParameters struct {
 
 	// Name of the Lightsail domain in which to create the entry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lightsail/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",false)
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 

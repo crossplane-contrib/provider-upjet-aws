@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConnectionInitParameters struct {
@@ -116,7 +116,7 @@ type PhysicalConnectionRequirementsInitParameters struct {
 
 	// The availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an api requirement.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("availability_zone",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("availability_zone",false)
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate availabilityZone.
@@ -129,7 +129,7 @@ type PhysicalConnectionRequirementsInitParameters struct {
 
 	// The security group ID list used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 
@@ -143,7 +143,7 @@ type PhysicalConnectionRequirementsInitParameters struct {
 
 	// The subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -172,7 +172,7 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// The availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an api requirement.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("availability_zone",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("availability_zone",false)
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
@@ -186,7 +186,7 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// The security group ID list used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
@@ -201,7 +201,7 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// The subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

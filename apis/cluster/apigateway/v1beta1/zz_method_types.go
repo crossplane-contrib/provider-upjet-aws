@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MethodInitParameters struct {
@@ -27,7 +27,7 @@ type MethodInitParameters struct {
 
 	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Authorizer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
 	// Reference to a Authorizer in apigateway to populate authorizerId.
@@ -60,7 +60,7 @@ type MethodInitParameters struct {
 
 	// API resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Resource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a Resource in apigateway to populate resourceId.
@@ -73,7 +73,7 @@ type MethodInitParameters struct {
 
 	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
@@ -150,7 +150,7 @@ type MethodParameters struct {
 
 	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Authorizer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
@@ -194,7 +194,7 @@ type MethodParameters struct {
 
 	// API resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Resource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -208,7 +208,7 @@ type MethodParameters struct {
 
 	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 

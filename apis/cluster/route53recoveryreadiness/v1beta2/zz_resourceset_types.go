@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DNSTargetResourceInitParameters struct {
@@ -181,7 +181,7 @@ type ResourcesInitParameters struct {
 
 	// ARN of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta2.MetricAlarm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Reference to a MetricAlarm in cloudwatch to populate resourceArn.
@@ -220,7 +220,7 @@ type ResourcesParameters struct {
 
 	// ARN of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta2.MetricAlarm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 

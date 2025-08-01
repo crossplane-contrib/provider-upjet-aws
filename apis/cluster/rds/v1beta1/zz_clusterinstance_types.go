@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ClusterInstanceInitParameters struct {
@@ -29,7 +29,7 @@ type ClusterInstanceInitParameters struct {
 
 	// Identifier of the aws_rds_cluster in which to launch this instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in rds to populate clusterIdentifier.
@@ -266,7 +266,7 @@ type ClusterInstanceParameters struct {
 
 	// Identifier of the aws_rds_cluster in which to launch this instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DBInstanceAutomatedBackupsReplicationInitParameters struct {
@@ -35,7 +35,7 @@ type DBInstanceAutomatedBackupsReplicationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceDBInstanceArn *string `json:"sourceDbInstanceArn,omitempty" tf:"source_db_instance_arn,omitempty"`
 
 	// Reference to a Instance in rds to populate sourceDbInstanceArn.
@@ -99,7 +99,7 @@ type DBInstanceAutomatedBackupsReplicationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SourceDBInstanceArn *string `json:"sourceDbInstanceArn,omitempty" tf:"source_db_instance_arn,omitempty"`
 

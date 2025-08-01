@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EBSSnapshotCopyInitParameters struct {
@@ -44,7 +44,7 @@ type EBSSnapshotCopyInitParameters struct {
 
 	// The ARN for the snapshot to be copied.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSSnapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceSnapshotID *string `json:"sourceSnapshotId,omitempty" tf:"source_snapshot_id,omitempty"`
 
 	// Reference to a EBSSnapshot in ec2 to populate sourceSnapshotId.
@@ -174,7 +174,7 @@ type EBSSnapshotCopyParameters struct {
 
 	// The ARN for the snapshot to be copied.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSSnapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceSnapshotID *string `json:"sourceSnapshotId,omitempty" tf:"source_snapshot_id,omitempty"`
 

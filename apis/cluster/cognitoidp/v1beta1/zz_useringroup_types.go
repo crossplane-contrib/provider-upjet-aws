@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type UserInGroupInitParameters struct {
 
 	// The name of the group to which the user is to be added.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Reference to a UserGroup in cognitoidp to populate groupName.
@@ -30,7 +30,7 @@ type UserInGroupInitParameters struct {
 
 	// The user pool ID of the user and group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -76,7 +76,7 @@ type UserInGroupParameters struct {
 
 	// The name of the group to which the user is to be added.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
@@ -95,7 +95,7 @@ type UserInGroupParameters struct {
 
 	// The user pool ID of the user and group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

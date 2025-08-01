@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ResourcePolicyInitParameters struct {
@@ -20,7 +20,7 @@ type ResourcePolicyInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshiftserverless/v1beta1.Snapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Reference to a Snapshot in redshiftserverless to populate resourceArn.
@@ -61,7 +61,7 @@ type ResourcePolicyParameters struct {
 
 	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshiftserverless/v1beta1.Snapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 

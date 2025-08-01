@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdditionalAuthenticationProviderInitParameters struct {
@@ -427,7 +427,7 @@ type GraphQLAPIUserPoolConfigInitParameters struct {
 
 	// User pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -470,7 +470,7 @@ type GraphQLAPIUserPoolConfigParameters struct {
 
 	// User pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
@@ -526,7 +526,7 @@ type LogConfigInitParameters struct {
 
 	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CloudwatchLogsRoleArn *string `json:"cloudwatchLogsRoleArn,omitempty" tf:"cloudwatch_logs_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate cloudwatchLogsRoleArn.
@@ -560,7 +560,7 @@ type LogConfigParameters struct {
 
 	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CloudwatchLogsRoleArn *string `json:"cloudwatchLogsRoleArn,omitempty" tf:"cloudwatch_logs_role_arn,omitempty"`
 

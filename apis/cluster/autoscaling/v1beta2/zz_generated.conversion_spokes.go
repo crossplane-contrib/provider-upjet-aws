@@ -7,8 +7,8 @@
 package v1beta2
 
 import (
-	ujconversion "github.com/crossplane/upjet/pkg/controller/conversion"
-	"github.com/crossplane/upjet/pkg/resource"
+	ujconversion "github.com/crossplane/upjet/v2/pkg/controller/conversion"
+	"github.com/crossplane/upjet/v2/pkg/resource"
 	"github.com/pkg/errors"
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 )

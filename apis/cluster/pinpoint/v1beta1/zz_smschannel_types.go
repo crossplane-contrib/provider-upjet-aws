@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SMSChannelInitParameters struct {
 
 	// ID of the application.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/pinpoint/v1beta2.App
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("application_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("application_id",true)
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// Reference to a App in pinpoint to populate applicationId.
@@ -69,7 +69,7 @@ type SMSChannelParameters struct {
 
 	// ID of the application.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/pinpoint/v1beta2.App
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("application_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("application_id",true)
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 

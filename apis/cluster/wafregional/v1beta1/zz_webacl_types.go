@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
@@ -55,7 +55,7 @@ type LoggingConfigurationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta1.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
 	// Reference to a DeliveryStream in firehose to populate logDestination.
@@ -83,7 +83,7 @@ type LoggingConfigurationParameters struct {
 
 	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta1.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
@@ -272,7 +272,7 @@ type WebACLRuleInitParameters struct {
 
 	// ID of the associated WAF (Regional) rule (e.g., aws_wafregional_rule). WAF (Global) rules cannot be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 
 	// Reference to a Rule in wafregional to populate ruleId.
@@ -323,7 +323,7 @@ type WebACLRuleParameters struct {
 
 	// ID of the associated WAF (Regional) rule (e.g., aws_wafregional_rule). WAF (Global) rules cannot be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 

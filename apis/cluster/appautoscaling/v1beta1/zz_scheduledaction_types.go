@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ScalableTargetActionInitParameters struct {
@@ -52,7 +52,7 @@ type ScheduledActionInitParameters struct {
 
 	// Identifier of the resource associated with the scheduled action. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appautoscaling/v1beta1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_id",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_id",false)
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a Target in appautoscaling to populate resourceId.
@@ -65,7 +65,7 @@ type ScheduledActionInitParameters struct {
 
 	// Scalable dimension. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appautoscaling/v1beta1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("scalable_dimension",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("scalable_dimension",false)
 	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
 
 	// Reference to a Target in appautoscaling to populate scalableDimension.
@@ -84,7 +84,7 @@ type ScheduledActionInitParameters struct {
 
 	// Namespace of the AWS service. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference Example: ecs
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appautoscaling/v1beta1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("service_namespace",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_namespace",false)
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
 
 	// Reference to a Target in appautoscaling to populate serviceNamespace.
@@ -158,7 +158,7 @@ type ScheduledActionParameters struct {
 
 	// Identifier of the resource associated with the scheduled action. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appautoscaling/v1beta1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_id",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_id",false)
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -172,7 +172,7 @@ type ScheduledActionParameters struct {
 
 	// Scalable dimension. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appautoscaling/v1beta1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("scalable_dimension",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("scalable_dimension",false)
 	// +kubebuilder:validation:Optional
 	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
 
@@ -194,7 +194,7 @@ type ScheduledActionParameters struct {
 
 	// Namespace of the AWS service. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference Example: ecs
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appautoscaling/v1beta1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("service_namespace",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_namespace",false)
 	// +kubebuilder:validation:Optional
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
 

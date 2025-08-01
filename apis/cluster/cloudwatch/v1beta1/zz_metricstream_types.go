@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ExcludeFilterInitParameters struct {
@@ -113,7 +113,7 @@ type MetricStreamInitParameters struct {
 
 	// ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
 
 	// Reference to a DeliveryStream in firehose to populate firehoseArn.
@@ -218,7 +218,7 @@ type MetricStreamParameters struct {
 
 	// ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NATGatewayInitParameters_2 struct {
 
 	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
 	// Reference to a EIP in ec2 to populate allocationId.
@@ -36,7 +36,7 @@ type NATGatewayInitParameters_2 struct {
 
 	// A list of secondary allocation EIP IDs for this NAT Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
 
@@ -126,7 +126,7 @@ type NATGatewayParameters_2 struct {
 
 	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
@@ -153,7 +153,7 @@ type NATGatewayParameters_2 struct {
 
 	// A list of secondary allocation EIP IDs for this NAT Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`

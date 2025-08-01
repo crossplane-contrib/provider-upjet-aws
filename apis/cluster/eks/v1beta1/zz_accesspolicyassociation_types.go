@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccessPolicyAssociationInitParameters struct {
@@ -58,7 +58,7 @@ type AccessPolicyAssociationParameters struct {
 	PolicyArn *string `json:"policyArn" tf:"policy_arn,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta1.AccessEntry
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("principal_arn",true)
 	// +kubebuilder:validation:Optional
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 

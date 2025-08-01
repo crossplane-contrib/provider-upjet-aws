@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EnvironmentInitParameters struct {
 
 	// AppConfig application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// Reference to a Application in appconfig to populate applicationId.
@@ -86,7 +86,7 @@ type EnvironmentParameters struct {
 
 	// AppConfig application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
@@ -125,7 +125,7 @@ type MonitorInitParameters struct {
 
 	// ARN of the Amazon CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta2.MetricAlarm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AlarmArn *string `json:"alarmArn,omitempty" tf:"alarm_arn,omitempty"`
 
 	// Reference to a MetricAlarm in cloudwatch to populate alarmArn.
@@ -138,7 +138,7 @@ type MonitorInitParameters struct {
 
 	// ARN of an IAM role for AWS AppConfig to monitor alarm_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AlarmRoleArn *string `json:"alarmRoleArn,omitempty" tf:"alarm_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate alarmRoleArn.
@@ -163,7 +163,7 @@ type MonitorParameters struct {
 
 	// ARN of the Amazon CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta2.MetricAlarm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AlarmArn *string `json:"alarmArn,omitempty" tf:"alarm_arn,omitempty"`
 
@@ -177,7 +177,7 @@ type MonitorParameters struct {
 
 	// ARN of an IAM role for AWS AppConfig to monitor alarm_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AlarmRoleArn *string `json:"alarmRoleArn,omitempty" tf:"alarm_role_arn,omitempty"`
 

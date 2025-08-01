@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type APIDestinationInitParameters struct {
 
 	// ARN of the EventBridge Connection to use for the API Destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta2.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
 
 	// Reference to a Connection in cloudwatchevents to populate connectionArn.
@@ -72,7 +72,7 @@ type APIDestinationParameters struct {
 
 	// ARN of the EventBridge Connection to use for the API Destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta2.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
 

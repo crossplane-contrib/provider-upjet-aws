@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AwsCloudMapInitParameters struct {
@@ -22,7 +22,7 @@ type AwsCloudMapInitParameters struct {
 	// Name of the AWS Cloud Map namespace to use.
 	// Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicediscovery/v1beta1.HTTPNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
 	// Reference to a HTTPNamespace in servicediscovery to populate namespaceName.
@@ -61,7 +61,7 @@ type AwsCloudMapParameters struct {
 	// Name of the AWS Cloud Map namespace to use.
 	// Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicediscovery/v1beta1.HTTPNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
@@ -2019,7 +2019,7 @@ type VirtualNodeInitParameters struct {
 
 	// Name of the service mesh in which to create the virtual node. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.Mesh
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 
 	// Reference to a Mesh in appmesh to populate meshName.
@@ -2090,7 +2090,7 @@ type VirtualNodeParameters struct {
 
 	// Name of the service mesh in which to create the virtual node. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.Mesh
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 

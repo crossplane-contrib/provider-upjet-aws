@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SSHKeyInitParameters struct {
@@ -20,7 +20,7 @@ type SSHKeyInitParameters struct {
 
 	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/transfer/v1beta2.Server
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
 	// Reference to a Server in transfer to populate serverId.
@@ -77,7 +77,7 @@ type SSHKeyParameters struct {
 
 	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/transfer/v1beta2.Server
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 

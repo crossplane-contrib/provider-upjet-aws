@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SchemaInitParameters struct {
@@ -26,7 +26,7 @@ type SchemaInitParameters struct {
 
 	// The ARN of the Glue Registry to create the schema in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta1.Registry
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
 
 	// Reference to a Registry in glue to populate registryArn.
@@ -120,7 +120,7 @@ type SchemaParameters struct {
 
 	// The ARN of the Glue Registry to create the schema in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta1.Registry
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
 

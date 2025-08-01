@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DeploymentInitParameters struct {
 
 	// Application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// Reference to a Application in appconfig to populate applicationId.
@@ -30,7 +30,7 @@ type DeploymentInitParameters struct {
 
 	// Configuration profile ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.ConfigurationProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("configuration_profile_id",true)
 	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
 
 	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
@@ -43,7 +43,7 @@ type DeploymentInitParameters struct {
 
 	// Configuration version to deploy. Can be at most 1024 characters.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.HostedConfigurationVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version_number",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version_number",true)
 	ConfigurationVersion *string `json:"configurationVersion,omitempty" tf:"configuration_version,omitempty"`
 
 	// Reference to a HostedConfigurationVersion in appconfig to populate configurationVersion.
@@ -56,7 +56,7 @@ type DeploymentInitParameters struct {
 
 	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.DeploymentStrategy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeploymentStrategyID *string `json:"deploymentStrategyId,omitempty" tf:"deployment_strategy_id,omitempty"`
 
 	// Reference to a DeploymentStrategy in appconfig to populate deploymentStrategyId.
@@ -72,7 +72,7 @@ type DeploymentInitParameters struct {
 
 	// Environment ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Environment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("environment_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("environment_id",true)
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
 	// Reference to a Environment in appconfig to populate environmentId.
@@ -85,7 +85,7 @@ type DeploymentInitParameters struct {
 
 	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this to encrypt the configuration data using a customer managed key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
@@ -156,7 +156,7 @@ type DeploymentParameters struct {
 
 	// Application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
@@ -170,7 +170,7 @@ type DeploymentParameters struct {
 
 	// Configuration profile ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.ConfigurationProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("configuration_profile_id",true)
 	// +kubebuilder:validation:Optional
 	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
 
@@ -184,7 +184,7 @@ type DeploymentParameters struct {
 
 	// Configuration version to deploy. Can be at most 1024 characters.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.HostedConfigurationVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version_number",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version_number",true)
 	// +kubebuilder:validation:Optional
 	ConfigurationVersion *string `json:"configurationVersion,omitempty" tf:"configuration_version,omitempty"`
 
@@ -198,7 +198,7 @@ type DeploymentParameters struct {
 
 	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.DeploymentStrategy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeploymentStrategyID *string `json:"deploymentStrategyId,omitempty" tf:"deployment_strategy_id,omitempty"`
 
@@ -216,7 +216,7 @@ type DeploymentParameters struct {
 
 	// Environment ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Environment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("environment_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("environment_id",true)
 	// +kubebuilder:validation:Optional
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
@@ -230,7 +230,7 @@ type DeploymentParameters struct {
 
 	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this to encrypt the configuration data using a customer managed key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthenticationConfigurationInitParameters struct {
@@ -20,7 +20,7 @@ type AuthenticationConfigurationInitParameters struct {
 
 	// ARN of the App Runner connection that enables the App Runner service to connect to a source repository. Required for GitHub code repositories.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apprunner/v1beta1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
 
 	// Reference to a Connection in apprunner to populate connectionArn.
@@ -49,7 +49,7 @@ type AuthenticationConfigurationParameters struct {
 
 	// ARN of the App Runner connection that enables the App Runner service to connect to a source repository. Required for GitHub code repositories.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apprunner/v1beta1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
 
@@ -222,7 +222,7 @@ type EgressConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apprunner/v1beta1.VPCConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	VPCConnectorArn *string `json:"vpcConnectorArn,omitempty" tf:"vpc_connector_arn,omitempty"`
 
 	// Reference to a VPCConnector in apprunner to populate vpcConnectorArn.
@@ -251,7 +251,7 @@ type EgressConfigurationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apprunner/v1beta1.VPCConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	VPCConnectorArn *string `json:"vpcConnectorArn,omitempty" tf:"vpc_connector_arn,omitempty"`
 
@@ -581,7 +581,7 @@ type ServiceObservabilityConfigurationInitParameters struct {
 
 	// ARN of the observability configuration that is associated with the service. Specified only when observability_enabled is true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apprunner/v1beta1.ObservabilityConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ObservabilityConfigurationArn *string `json:"observabilityConfigurationArn,omitempty" tf:"observability_configuration_arn,omitempty"`
 
 	// Reference to a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
@@ -609,7 +609,7 @@ type ServiceObservabilityConfigurationParameters struct {
 
 	// ARN of the observability configuration that is associated with the service. Specified only when observability_enabled is true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apprunner/v1beta1.ObservabilityConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ObservabilityConfigurationArn *string `json:"observabilityConfigurationArn,omitempty" tf:"observability_configuration_arn,omitempty"`
 

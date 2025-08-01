@@ -5,7 +5,7 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this EnvironmentEC2.
 func (mg *EnvironmentEC2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {

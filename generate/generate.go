@@ -20,7 +20,7 @@
 //go:generate bash -c "find ../cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete"
 
 // Scrape metadata from Terraform registry
-//go:generate go run github.com/crossplane/upjet/cmd/scraper -n hashicorp/terraform-provider-aws -r ../.work/terraform-provider-aws/website/docs/r -o ../config/provider-metadata.yaml
+//go:generate go run github.com/crossplane/upjet/v2/cmd/scraper -n hashicorp/terraform-provider-aws -r ../.work/terraform-provider-aws/website/docs/r -o ../config/provider-metadata.yaml
 
 // NOTE(muvaf): Some of Terraform AWS provider files have "!generate" build tag
 // that prevent us from using it for generator program.
@@ -36,8 +36,8 @@
 
 // Run upjet's transformer for the generated resolvers to get rid of the cross
 // API-group imports and to prevent import cycles
-//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.upbound.io -a github.com/upbound/provider-aws/internal/apis -s -p ../apis/cluster/...
-//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.m.upbound.io -a github.com/upbound/provider-aws/internal/apis -s -p ../apis/namespaced/...
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g aws.upbound.io -a github.com/upbound/provider-aws/internal/apis -s -p ../apis/cluster/...
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g aws.m.upbound.io -a github.com/upbound/provider-aws/internal/apis -s -p ../apis/namespaced/...
 
 package generate
 
@@ -46,7 +46,7 @@ import (
 
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
 
-	_ "github.com/crossplane/upjet/cmd/scraper"
+	_ "github.com/crossplane/upjet/v2/cmd/scraper"
 
-	_ "github.com/crossplane/upjet/cmd/resolver"
+	_ "github.com/crossplane/upjet/v2/cmd/resolver"
 )

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SigningProfilePermissionInitParameters struct {
@@ -23,7 +23,7 @@ type SigningProfilePermissionInitParameters struct {
 
 	// The signing profile version that a permission applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/signer/v1beta2.SigningProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",true)
 	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
 
 	// Reference to a SigningProfile in signer to populate profileVersion.
@@ -90,7 +90,7 @@ type SigningProfilePermissionParameters struct {
 
 	// The signing profile version that a permission applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/signer/v1beta2.SigningProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",true)
 	// +kubebuilder:validation:Optional
 	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
 

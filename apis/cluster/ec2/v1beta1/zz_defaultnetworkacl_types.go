@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DefaultNetworkACLInitParameters struct {
 
 	// Network ACL ID to manage. This attribute is exported from aws_vpc, or manually found via the AWS Console.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("default_network_acl_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("default_network_acl_id",true)
 	DefaultNetworkACLID *string `json:"defaultNetworkAclId,omitempty" tf:"default_network_acl_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate defaultNetworkAclId.
@@ -98,7 +98,7 @@ type DefaultNetworkACLParameters struct {
 
 	// Network ACL ID to manage. This attribute is exported from aws_vpc, or manually found via the AWS Console.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("default_network_acl_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("default_network_acl_id",true)
 	// +kubebuilder:validation:Optional
 	DefaultNetworkACLID *string `json:"defaultNetworkAclId,omitempty" tf:"default_network_acl_id,omitempty"`
 
@@ -251,7 +251,7 @@ type IngressInitParameters struct {
 
 	// The CIDR block to match. This must be a valid network mask.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.DefaultVPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",true)
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
 	// Reference to a DefaultVPC in ec2 to populate cidrBlock.
@@ -322,7 +322,7 @@ type IngressParameters struct {
 
 	// The CIDR block to match. This must be a valid network mask.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.DefaultVPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",true)
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 

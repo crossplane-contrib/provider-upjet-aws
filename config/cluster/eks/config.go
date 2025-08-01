@@ -5,7 +5,7 @@
 package eks
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 
 	"github.com/upbound/provider-aws/config/cluster/common"
 )
@@ -117,7 +117,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			// the principal arn from the Access Entry, we provide an easy means of ordered creation.
 			"principal_arn": {
 				TerraformName: "aws_eks_access_entry",
-				Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_arn",true)`,
+				Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("principal_arn",true)`,
 			},
 		}
 	})

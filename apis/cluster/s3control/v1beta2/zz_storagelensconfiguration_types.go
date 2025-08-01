@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccountLevelDetailedStatusCodeMetricsInitParameters struct {
@@ -383,7 +383,7 @@ type ExcludeInitParameters struct {
 
 	// List of S3 bucket ARNs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
@@ -415,7 +415,7 @@ type ExcludeParameters struct {
 
 	// List of S3 bucket ARNs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
@@ -495,7 +495,7 @@ type S3BucketDestinationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a Bucket in s3 to populate arn.
@@ -548,7 +548,7 @@ type S3BucketDestinationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 

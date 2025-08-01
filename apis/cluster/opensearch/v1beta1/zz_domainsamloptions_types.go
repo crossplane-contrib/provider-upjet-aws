@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DomainSAMLOptionsInitParameters struct {
 
 	// Name of the domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/opensearch/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",false)
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Reference to a Domain in opensearch to populate domainName.
@@ -52,7 +52,7 @@ type DomainSAMLOptionsParameters struct {
 
 	// Name of the domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/opensearch/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",false)
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 

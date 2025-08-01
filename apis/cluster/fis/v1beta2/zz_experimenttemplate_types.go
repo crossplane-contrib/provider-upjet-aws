@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
@@ -89,7 +89,7 @@ type CloudwatchDashboardInitParameters struct {
 
 	// The ARN of the CloudWatch dashboard.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta1.Dashboard
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("dashboard_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dashboard_arn",true)
 	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
 
 	// Reference to a Dashboard in cloudwatch to populate dashboardArn.
@@ -111,7 +111,7 @@ type CloudwatchDashboardParameters struct {
 
 	// The ARN of the CloudWatch dashboard.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta1.Dashboard
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("dashboard_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dashboard_arn",true)
 	// +kubebuilder:validation:Optional
 	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
 

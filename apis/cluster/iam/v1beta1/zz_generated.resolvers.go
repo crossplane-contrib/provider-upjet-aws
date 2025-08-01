@@ -8,9 +8,9 @@ package v1beta1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	resource "github.com/crossplane/upjet/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RuleAssociationInitParameters struct {
@@ -20,7 +20,7 @@ type RuleAssociationInitParameters struct {
 
 	// The ID of the resolver rule that you want to associate with the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53resolver/v1beta1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
 
 	// Reference to a Rule in route53resolver to populate resolverRuleId.
@@ -76,7 +76,7 @@ type RuleAssociationParameters struct {
 
 	// The ID of the resolver rule that you want to associate with the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53resolver/v1beta1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
 

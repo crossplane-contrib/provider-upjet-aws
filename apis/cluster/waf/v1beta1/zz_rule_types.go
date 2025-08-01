@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RuleInitParameters struct {
@@ -79,7 +79,7 @@ type RulePredicatesInitParameters struct {
 
 	// A unique identifier for a predicate in the rule, such as Byte Match Set ID or IPSet ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/waf/v1beta1.IPSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
 
 	// Reference to a IPSet in waf to populate dataId.
@@ -119,7 +119,7 @@ type RulePredicatesParameters struct {
 
 	// A unique identifier for a predicate in the rule, such as Byte Match Set ID or IPSet ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/waf/v1beta1.IPSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
 

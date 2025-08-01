@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssessmentTemplateInitParameters struct {
@@ -34,7 +34,7 @@ type AssessmentTemplateInitParameters struct {
 
 	// The assessment target ARN to attach the template to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/inspector/v1beta1.AssessmentTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// Reference to a AssessmentTarget in inspector to populate targetArn.
@@ -113,7 +113,7 @@ type AssessmentTemplateParameters struct {
 
 	// The assessment target ARN to attach the template to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/inspector/v1beta1.AssessmentTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -133,7 +133,7 @@ type EventSubscriptionInitParameters struct {
 
 	// The ARN of the SNS topic to which notifications are sent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate topicArn.
@@ -162,7 +162,7 @@ type EventSubscriptionParameters struct {
 
 	// The ARN of the SNS topic to which notifications are sent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 

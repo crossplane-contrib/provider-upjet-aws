@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BrokerInitParameters struct {
@@ -35,7 +35,7 @@ type BrokerInitParameters struct {
 
 	// ARN of the primary broker used to replicate data in a data replication pair. Required when data_replication_mode is CRDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/mq/v1beta1.Broker
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DataReplicationPrimaryBrokerArn *string `json:"dataReplicationPrimaryBrokerArn,omitempty" tf:"data_replication_primary_broker_arn,omitempty"`
 
 	// Reference to a Broker in mq to populate dataReplicationPrimaryBrokerArn.
@@ -231,7 +231,7 @@ type BrokerParameters struct {
 
 	// ARN of the primary broker used to replicate data in a data replication pair. Required when data_replication_mode is CRDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/mq/v1beta1.Broker
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DataReplicationPrimaryBrokerArn *string `json:"dataReplicationPrimaryBrokerArn,omitempty" tf:"data_replication_primary_broker_arn,omitempty"`
 
@@ -334,7 +334,7 @@ type ConfigurationInitParameters struct {
 
 	// Configuration ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/mq/v1beta1.Configuration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Reference to a Configuration in mq to populate id.
@@ -362,7 +362,7 @@ type ConfigurationParameters struct {
 
 	// Configuration ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/mq/v1beta1.Configuration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

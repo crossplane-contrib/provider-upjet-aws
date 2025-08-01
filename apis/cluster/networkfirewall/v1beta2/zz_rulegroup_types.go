@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionDefinitionPublishMetricActionInitParameters struct {
@@ -201,7 +201,7 @@ type IPSetReferenceInitParameters struct {
 
 	// Set of Managed Prefix IP ARN(s)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ReferenceArn *string `json:"referenceArn,omitempty" tf:"reference_arn,omitempty"`
 
 	// Reference to a ManagedPrefixList in ec2 to populate referenceArn.
@@ -223,7 +223,7 @@ type IPSetReferenceParameters struct {
 
 	// Set of Managed Prefix IP ARN(s)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ReferenceArn *string `json:"referenceArn,omitempty" tf:"reference_arn,omitempty"`
 

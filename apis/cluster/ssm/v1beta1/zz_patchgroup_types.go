@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PatchGroupInitParameters struct {
 
 	// The ID of the patch baseline to register the patch group with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
@@ -52,7 +52,7 @@ type PatchGroupParameters struct {
 
 	// The ID of the patch baseline to register the patch group with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
 

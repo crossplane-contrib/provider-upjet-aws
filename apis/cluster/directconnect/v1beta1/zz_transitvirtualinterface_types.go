@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TransitVirtualInterfaceInitParameters struct {
@@ -29,7 +29,7 @@ type TransitVirtualInterfaceInitParameters struct {
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a Connection in directconnect to populate connectionId.
@@ -45,7 +45,7 @@ type TransitVirtualInterfaceInitParameters struct {
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
@@ -157,7 +157,7 @@ type TransitVirtualInterfaceParameters struct {
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -175,7 +175,7 @@ type TransitVirtualInterfaceParameters struct {
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 

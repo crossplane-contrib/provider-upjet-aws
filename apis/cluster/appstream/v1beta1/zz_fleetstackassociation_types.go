@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FleetStackAssociationInitParameters struct {
@@ -36,7 +36,7 @@ type FleetStackAssociationParameters struct {
 
 	// Name of the fleet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appstream/v1beta2.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	FleetName *string `json:"fleetName,omitempty" tf:"fleet_name,omitempty"`
 
@@ -55,7 +55,7 @@ type FleetStackAssociationParameters struct {
 
 	// Name of the stack.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appstream/v1beta2.Stack
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 

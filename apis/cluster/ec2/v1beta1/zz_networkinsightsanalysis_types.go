@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ACLInitParameters struct {
@@ -745,7 +745,7 @@ type NetworkInsightsAnalysisInitParameters struct {
 
 	// ID of the Network Insights Path to run an analysis on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.NetworkInsightsPath
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkInsightsPathID *string `json:"networkInsightsPathId,omitempty" tf:"network_insights_path_id,omitempty"`
 
 	// Reference to a NetworkInsightsPath in ec2 to populate networkInsightsPathId.
@@ -831,7 +831,7 @@ type NetworkInsightsAnalysisParameters struct {
 
 	// ID of the Network Insights Path to run an analysis on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.NetworkInsightsPath
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkInsightsPathID *string `json:"networkInsightsPathId,omitempty" tf:"network_insights_path_id,omitempty"`
 

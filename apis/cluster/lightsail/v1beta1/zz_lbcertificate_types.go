@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DomainValidationRecordsInitParameters struct {
@@ -82,7 +82,7 @@ type LBCertificateParameters struct {
 
 	// Load balancer name where you want to create the SSL/TLS certificate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lightsail/v1beta1.LB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
 

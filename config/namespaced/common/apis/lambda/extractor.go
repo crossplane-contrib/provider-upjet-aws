@@ -5,8 +5,8 @@
 package lambda
 
 import (
-	"github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/upbound/provider-aws/apis/namespaced/lambda/v1beta1"

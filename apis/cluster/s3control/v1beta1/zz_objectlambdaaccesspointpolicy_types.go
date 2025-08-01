@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ObjectLambdaAccessPointPolicyInitParameters struct {
@@ -20,7 +20,7 @@ type ObjectLambdaAccessPointPolicyInitParameters struct {
 
 	// The name of the Object Lambda Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.ObjectLambdaAccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a ObjectLambdaAccessPoint in s3control to populate name.
@@ -65,7 +65,7 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 
 	// The name of the Object Lambda Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.ObjectLambdaAccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

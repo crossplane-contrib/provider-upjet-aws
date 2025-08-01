@@ -3,7 +3,7 @@ package kafkaconnect
 import (
 	"time"
 
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 
 	"github.com/upbound/provider-aws/config/cluster/common"
 )
@@ -32,7 +32,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["log_delivery.worker_log_delivery.firehose.delivery_stream"] = config.Reference{
 			TerraformName: "aws_kinesis_firehose_delivery_stream",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
 		}
 		r.References["worker_configuration.arn"] = config.Reference{
 			TerraformName: "aws_mskconnect_worker_configuration",

@@ -5,7 +5,7 @@
 package kinesisanalytics2
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 
 	"github.com/upbound/provider-aws/config/cluster/common"
 )
@@ -23,7 +23,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["application_configuration.sql_application_configuration.reference_data_source.s3_reference_data_source.bucket_arn"] = config.Reference{
 			TerraformName: "aws_s3_bucket",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 		r.References["application_configuration.sql_application_configuration.input.kinesis_streams_input.resource_arn"] = config.Reference{
 			TerraformName: "aws_kinesis_stream",

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TransitGatewayPeeringAttachmentAccepterInitParameters struct {
@@ -21,7 +21,7 @@ type TransitGatewayPeeringAttachmentAccepterInitParameters struct {
 
 	// The ID of the EC2 Transit Gateway Peering Attachment to manage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayPeeringAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
 	// Reference to a TransitGatewayPeeringAttachment in ec2 to populate transitGatewayAttachmentId.
@@ -80,7 +80,7 @@ type TransitGatewayPeeringAttachmentAccepterParameters struct {
 
 	// The ID of the EC2 Transit Gateway Peering Attachment to manage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayPeeringAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccessControlListConfigurationInitParameters struct {
@@ -55,7 +55,7 @@ type BasicAuthenticationInitParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// Reference to a Secret in secretsmanager to populate credentials.
@@ -89,7 +89,7 @@ type BasicAuthenticationParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
@@ -299,7 +299,7 @@ type DataSourceInitParameters struct {
 
 	// The identifier of the index for your Amazon Kendra data source.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta1.Index
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
 	// Reference to a Index in kendra to populate indexId.
@@ -419,7 +419,7 @@ type DataSourceParameters struct {
 
 	// The identifier of the index for your Amazon Kendra data source.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kendra/v1beta1.Index
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
@@ -788,7 +788,7 @@ type ProxyConfigurationInitParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// Reference to a Secret in secretsmanager to populate credentials.
@@ -822,7 +822,7 @@ type ProxyConfigurationParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
@@ -850,7 +850,7 @@ type S3ConfigurationInitParameters struct {
 
 	// The name of the bucket that contains the documents.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketName.
@@ -909,7 +909,7 @@ type S3ConfigurationParameters struct {
 
 	// The name of the bucket that contains the documents.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type IntegrationResponseInitParameters struct {
@@ -20,7 +20,7 @@ type IntegrationResponseInitParameters struct {
 
 	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Method
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("http_method",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	// Reference to a Method in apigateway to populate httpMethod.
@@ -33,7 +33,7 @@ type IntegrationResponseInitParameters struct {
 
 	// API resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Resource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a Resource in apigateway to populate resourceId.
@@ -54,7 +54,7 @@ type IntegrationResponseInitParameters struct {
 
 	// ID of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
@@ -70,7 +70,7 @@ type IntegrationResponseInitParameters struct {
 
 	// HTTP status code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.MethodResponse
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("status_code",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("status_code",false)
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
 	// Reference to a MethodResponse in apigateway to populate statusCode.
@@ -125,7 +125,7 @@ type IntegrationResponseParameters struct {
 
 	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Method
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("http_method",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
@@ -144,7 +144,7 @@ type IntegrationResponseParameters struct {
 
 	// API resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.Resource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -168,7 +168,7 @@ type IntegrationResponseParameters struct {
 
 	// ID of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -186,7 +186,7 @@ type IntegrationResponseParameters struct {
 
 	// HTTP status code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.MethodResponse
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("status_code",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("status_code",false)
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 

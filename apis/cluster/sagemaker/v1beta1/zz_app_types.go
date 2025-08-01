@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AppInitParameters struct {
@@ -23,7 +23,7 @@ type AppInitParameters struct {
 
 	// The domain ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
 	// Reference to a Domain in sagemaker to populate domainId.
@@ -46,7 +46,7 @@ type AppInitParameters struct {
 
 	// The user profile name. At least one of user_profile_name or space_name required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.UserProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("user_profile_name",false)
 	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
 
 	// Reference to a UserProfile in sagemaker to populate userProfileName.
@@ -109,7 +109,7 @@ type AppParameters struct {
 
 	// The domain ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
@@ -141,7 +141,7 @@ type AppParameters struct {
 
 	// The user profile name. At least one of user_profile_name or space_name required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.UserProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("user_profile_name",false)
 	// +kubebuilder:validation:Optional
 	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
 

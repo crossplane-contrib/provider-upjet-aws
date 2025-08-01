@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AmazonMskClusterInitParameters struct {
 
 	// The ARN of an Amazon MSK cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
 
 	// Reference to a Cluster in kafka to populate mskClusterArn.
@@ -39,7 +39,7 @@ type AmazonMskClusterParameters struct {
 
 	// The ARN of an Amazon MSK cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
 
@@ -143,7 +143,7 @@ type ReplicationInfoListInitParameters struct {
 
 	// The ARN of the source Kafka cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceKafkaClusterArn *string `json:"sourceKafkaClusterArn,omitempty" tf:"source_kafka_cluster_arn,omitempty"`
 
 	// Reference to a Cluster in kafka to populate sourceKafkaClusterArn.
@@ -159,7 +159,7 @@ type ReplicationInfoListInitParameters struct {
 
 	// The ARN of the target Kafka cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetKafkaClusterArn *string `json:"targetKafkaClusterArn,omitempty" tf:"target_kafka_cluster_arn,omitempty"`
 
 	// Reference to a Cluster in kafka to populate targetKafkaClusterArn.
@@ -204,7 +204,7 @@ type ReplicationInfoListParameters struct {
 
 	// The ARN of the source Kafka cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SourceKafkaClusterArn *string `json:"sourceKafkaClusterArn,omitempty" tf:"source_kafka_cluster_arn,omitempty"`
 
@@ -222,7 +222,7 @@ type ReplicationInfoListParameters struct {
 
 	// The ARN of the target Kafka cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetKafkaClusterArn *string `json:"targetKafkaClusterArn,omitempty" tf:"target_kafka_cluster_arn,omitempty"`
 
@@ -478,7 +478,7 @@ type VPCConfigInitParameters struct {
 
 	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
@@ -519,7 +519,7 @@ type VPCConfigParameters struct {
 
 	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`

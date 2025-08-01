@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	connection "github.com/upbound/provider-aws/internal/controller/cluster/codestarconnections/connection"
 	host "github.com/upbound/provider-aws/internal/controller/cluster/codestarconnections/host"

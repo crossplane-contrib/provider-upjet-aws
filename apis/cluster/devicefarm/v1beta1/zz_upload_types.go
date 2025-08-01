@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type UploadInitParameters struct {
@@ -23,7 +23,7 @@ type UploadInitParameters struct {
 
 	// The ARN of the project for the upload.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/devicefarm/v1beta1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
 
 	// Reference to a Project in devicefarm to populate projectArn.
@@ -83,7 +83,7 @@ type UploadParameters struct {
 
 	// The ARN of the project for the upload.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/devicefarm/v1beta1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
 

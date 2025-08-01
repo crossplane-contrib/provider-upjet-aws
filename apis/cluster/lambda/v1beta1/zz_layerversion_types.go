@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LayerVersionInitParameters struct {
@@ -37,7 +37,7 @@ type LayerVersionInitParameters struct {
 
 	// S3 bucket location containing the function's deployment package. Conflicts with filename. This bucket must reside in the same AWS region where you are creating the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
 	// Reference to a Object in s3 to populate s3Bucket.
@@ -50,7 +50,7 @@ type LayerVersionInitParameters struct {
 
 	// S3 key of an object containing the function's deployment package. Conflicts with filename.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 
 	// Reference to a Object in s3 to populate s3Key.
@@ -174,7 +174,7 @@ type LayerVersionParameters struct {
 
 	// S3 bucket location containing the function's deployment package. Conflicts with filename. This bucket must reside in the same AWS region where you are creating the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
@@ -188,7 +188,7 @@ type LayerVersionParameters struct {
 
 	// S3 key of an object containing the function's deployment package. Conflicts with filename.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 

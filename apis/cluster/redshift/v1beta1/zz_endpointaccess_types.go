@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EndpointAccessInitParameters struct {
@@ -32,7 +32,7 @@ type EndpointAccessInitParameters struct {
 
 	// The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.SubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Reference to a SubnetGroup in redshift to populate subnetGroupName.
@@ -117,7 +117,7 @@ type EndpointAccessParameters struct {
 
 	// The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshift/v1beta1.SubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 

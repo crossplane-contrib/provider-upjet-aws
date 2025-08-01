@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ClusterEndpointInitParameters struct {
@@ -116,7 +116,7 @@ type ClusterInitParameters struct {
 
 	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/memorydb/v1beta1.SubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Reference to a SubnetGroup in memorydb to populate subnetGroupName.
@@ -348,7 +348,7 @@ type ClusterParameters struct {
 
 	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/memorydb/v1beta1.SubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LayerVersionPermissionInitParameters struct {
@@ -20,7 +20,7 @@ type LayerVersionPermissionInitParameters struct {
 
 	// Name or ARN of the Lambda Layer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("layer_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("layer_name",false)
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
 	// Reference to a LayerVersion in lambda to populate layerName.
@@ -45,7 +45,7 @@ type LayerVersionPermissionInitParameters struct {
 
 	// Version of Lambda Layer to grant access to. Note: permissions only apply to a single version of a layer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",true)
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 
 	// Reference to a LayerVersion in lambda to populate versionNumber.
@@ -102,7 +102,7 @@ type LayerVersionPermissionParameters struct {
 
 	// Name or ARN of the Lambda Layer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("layer_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("layer_name",false)
 	// +kubebuilder:validation:Optional
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
@@ -137,7 +137,7 @@ type LayerVersionPermissionParameters struct {
 
 	// Version of Lambda Layer to grant access to. Note: permissions only apply to a single version of a layer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",true)
 	// +kubebuilder:validation:Optional
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 

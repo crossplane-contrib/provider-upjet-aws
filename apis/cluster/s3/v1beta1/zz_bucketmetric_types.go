@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BucketMetricFilterInitParameters struct {
 
 	// S3 Access Point ARN for filtering (singular).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta1.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AccessPoint *string `json:"accessPoint,omitempty" tf:"access_point,omitempty"`
 
 	// Reference to a AccessPoint in s3control to populate accessPoint.
@@ -53,7 +53,7 @@ type BucketMetricFilterParameters struct {
 
 	// S3 Access Point ARN for filtering (singular).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta1.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AccessPoint *string `json:"accessPoint,omitempty" tf:"access_point,omitempty"`
 
@@ -79,7 +79,7 @@ type BucketMetricInitParameters struct {
 
 	// Name of the bucket to put metric configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -119,7 +119,7 @@ type BucketMetricParameters struct {
 
 	// Name of the bucket to put metric configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

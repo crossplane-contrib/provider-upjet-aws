@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccessLogFileInitParameters struct {
@@ -106,7 +106,7 @@ type CertificateAcmInitParameters struct {
 
 	// ARN for the certificate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Reference to a Certificate in acm to populate certificateArn.
@@ -128,7 +128,7 @@ type CertificateAcmParameters struct {
 
 	// ARN for the certificate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 

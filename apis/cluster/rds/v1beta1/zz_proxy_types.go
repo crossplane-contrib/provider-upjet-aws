@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthInitParameters struct {
@@ -29,7 +29,7 @@ type AuthInitParameters struct {
 
 	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
@@ -85,7 +85,7 @@ type AuthParameters struct {
 
 	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
@@ -153,7 +153,7 @@ type ProxyInitParameters struct {
 
 	// One or more VPC subnet IDs to associate with the new proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 
@@ -280,7 +280,7 @@ type ProxyParameters struct {
 
 	// One or more VPC subnet IDs to associate with the new proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`

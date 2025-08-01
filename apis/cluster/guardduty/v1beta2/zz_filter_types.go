@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CriterionInitParameters struct {
@@ -158,7 +158,7 @@ type FilterParameters struct {
 
 	// ID of a GuardDuty detector, attached to your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/guardduty/v1beta2.Detector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
 

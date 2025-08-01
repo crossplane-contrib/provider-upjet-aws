@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BlueGreenUpdateInitParameters struct {
@@ -213,7 +213,7 @@ type InstanceInitParameters struct {
 
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key_id",true)
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate masterUserSecretKmsKeyId.
@@ -312,7 +312,7 @@ type InstanceInitParameters struct {
 	// Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
 	// See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
 
 	// Reference to a Instance in rds to populate replicateSourceDb.
@@ -941,7 +941,7 @@ type InstanceParameters struct {
 
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key_id",true)
 	// +kubebuilder:validation:Optional
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
 
@@ -1063,7 +1063,7 @@ type InstanceParameters struct {
 	// Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
 	// See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
 

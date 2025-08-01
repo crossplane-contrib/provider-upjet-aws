@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EBSSnapshotInitParameters struct {
@@ -36,7 +36,7 @@ type EBSSnapshotInitParameters struct {
 
 	// The Volume ID of which to make a snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSVolume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
 	// Reference to a EBSVolume in ec2 to populate volumeId.
@@ -139,7 +139,7 @@ type EBSSnapshotParameters struct {
 
 	// The Volume ID of which to make a snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSVolume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 

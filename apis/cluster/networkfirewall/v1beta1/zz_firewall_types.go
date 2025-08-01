@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AttachmentInitParameters struct {
@@ -74,7 +74,7 @@ type FirewallInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta1.FirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FirewallPolicyArn *string `json:"firewallPolicyArn,omitempty" tf:"firewall_policy_arn,omitempty"`
 
 	// Reference to a FirewallPolicy in networkfirewall to populate firewallPolicyArn.
@@ -193,7 +193,7 @@ type FirewallParameters struct {
 
 	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta1.FirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FirewallPolicyArn *string `json:"firewallPolicyArn,omitempty" tf:"firewall_policy_arn,omitempty"`
 
@@ -264,7 +264,7 @@ type SubnetMappingInitParameters struct {
 
 	// The unique identifier for the subnet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -293,7 +293,7 @@ type SubnetMappingParameters struct {
 
 	// The unique identifier for the subnet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

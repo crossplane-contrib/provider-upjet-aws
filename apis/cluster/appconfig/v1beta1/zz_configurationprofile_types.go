@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConfigurationProfileInitParameters struct {
 
 	// Application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// Reference to a Application in appconfig to populate applicationId.
@@ -116,7 +116,7 @@ type ConfigurationProfileParameters struct {
 
 	// Application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 

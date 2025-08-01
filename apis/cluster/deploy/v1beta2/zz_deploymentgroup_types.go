@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AlarmConfigurationInitParameters struct {
@@ -720,7 +720,7 @@ type ProdTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBListener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 
@@ -744,7 +744,7 @@ type ProdTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBListener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
@@ -781,7 +781,7 @@ type TargetGroupInitParameters struct {
 
 	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a LBTargetGroup in elbv2 to populate name.
@@ -842,7 +842,7 @@ type TargetGroupParameters struct {
 
 	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -917,7 +917,7 @@ type TriggerConfigurationInitParameters struct {
 
 	// The ARN of the SNS topic through which notifications are sent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TriggerTargetArn *string `json:"triggerTargetArn,omitempty" tf:"trigger_target_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate triggerTargetArn.
@@ -955,7 +955,7 @@ type TriggerConfigurationParameters struct {
 
 	// The ARN of the SNS topic through which notifications are sent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TriggerTargetArn *string `json:"triggerTargetArn,omitempty" tf:"trigger_target_arn,omitempty"`
 

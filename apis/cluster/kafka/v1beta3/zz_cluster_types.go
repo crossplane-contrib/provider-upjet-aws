@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BrokerLogsInitParameters struct {
@@ -677,7 +677,7 @@ type FirehoseInitParameters struct {
 
 	// Name of the Kinesis Data Firehose delivery stream to deliver logs to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStream.
@@ -705,7 +705,7 @@ type FirehoseParameters struct {
 
 	// Name of the Kinesis Data Firehose delivery stream to deliver logs to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 

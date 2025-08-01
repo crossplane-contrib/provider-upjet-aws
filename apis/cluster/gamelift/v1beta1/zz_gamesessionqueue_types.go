@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GameSessionQueueInitParameters struct {
@@ -20,7 +20,7 @@ type GameSessionQueueInitParameters struct {
 
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/gamelift/v1beta2.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// References to Fleet in gamelift to populate destinations.
@@ -98,7 +98,7 @@ type GameSessionQueueParameters struct {
 
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/gamelift/v1beta2.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 

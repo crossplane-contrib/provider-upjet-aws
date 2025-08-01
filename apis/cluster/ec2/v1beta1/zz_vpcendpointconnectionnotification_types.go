@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type VPCEndpointConnectionNotificationInitParameters struct {
@@ -21,7 +21,7 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 
 	// The ARN of the SNS topic for the notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ConnectionNotificationArn *string `json:"connectionNotificationArn,omitempty" tf:"connection_notification_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate connectionNotificationArn.
@@ -37,7 +37,7 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 
 	// The ID of the VPC Endpoint Service to receive notifications for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCEndpointService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 
 	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
@@ -87,7 +87,7 @@ type VPCEndpointConnectionNotificationParameters struct {
 
 	// The ARN of the SNS topic for the notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ConnectionNotificationArn *string `json:"connectionNotificationArn,omitempty" tf:"connection_notification_arn,omitempty"`
 
@@ -110,7 +110,7 @@ type VPCEndpointConnectionNotificationParameters struct {
 
 	// The ID of the VPC Endpoint Service to receive notifications for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCEndpointService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 

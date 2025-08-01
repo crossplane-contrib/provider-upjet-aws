@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DomainNameInitParameters struct {
 
 	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when an edge-optimized domain name is desired. Conflicts with certificate_name, certificate_body, certificate_chain, certificate_private_key, regional_certificate_arn, and regional_certificate_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta1.CertificateValidation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("certificate_arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("certificate_arn",false)
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Reference to a CertificateValidation in acm to populate certificateArn.
@@ -57,7 +57,7 @@ type DomainNameInitParameters struct {
 
 	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when a regional domain name is desired. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta1.CertificateValidation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("certificate_arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("certificate_arn",false)
 	RegionalCertificateArn *string `json:"regionalCertificateArn,omitempty" tf:"regional_certificate_arn,omitempty"`
 
 	// Reference to a CertificateValidation in acm to populate regionalCertificateArn.
@@ -158,7 +158,7 @@ type DomainNameParameters struct {
 
 	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when an edge-optimized domain name is desired. Conflicts with certificate_name, certificate_body, certificate_chain, certificate_private_key, regional_certificate_arn, and regional_certificate_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta1.CertificateValidation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("certificate_arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("certificate_arn",false)
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
@@ -213,7 +213,7 @@ type DomainNameParameters struct {
 
 	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when a regional domain name is desired. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta1.CertificateValidation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("certificate_arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("certificate_arn",false)
 	// +kubebuilder:validation:Optional
 	RegionalCertificateArn *string `json:"regionalCertificateArn,omitempty" tf:"regional_certificate_arn,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GlobalClusterInitParameters struct {
@@ -35,7 +35,7 @@ type GlobalClusterInitParameters struct {
 
 	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation. NOTE: After initial creation, this argument can be removed and replaced with engine and engine_version. This allows upgrading the engine version of the Global Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in rds to populate sourceDbClusterIdentifier.
@@ -158,7 +158,7 @@ type GlobalClusterParameters struct {
 
 	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation. NOTE: After initial creation, this argument can be removed and replaced with engine and engine_version. This allows upgrading the engine version of the Global Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
 

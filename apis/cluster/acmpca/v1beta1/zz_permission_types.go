@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PermissionInitParameters struct {
@@ -21,7 +21,7 @@ type PermissionInitParameters struct {
 
 	// ARN of the CA that grants the permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acmpca/v1beta2.CertificateAuthority
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
@@ -73,7 +73,7 @@ type PermissionParameters struct {
 
 	// ARN of the CA that grants the permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acmpca/v1beta2.CertificateAuthority
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 

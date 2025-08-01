@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	accesskey "github.com/upbound/provider-aws/internal/controller/cluster/iam/accesskey"
 	accountalias "github.com/upbound/provider-aws/internal/controller/cluster/iam/accountalias"

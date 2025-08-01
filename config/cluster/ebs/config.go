@@ -5,7 +5,7 @@
 package ebs
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 )
 
 // Configure adds configurations for the ebs group.

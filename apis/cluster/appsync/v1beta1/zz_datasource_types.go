@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthorizationConfigInitParameters struct {
@@ -163,7 +163,7 @@ type DatasourceParameters struct {
 
 	// API ID for the GraphQL API for the data source.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta1.GraphQLAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 

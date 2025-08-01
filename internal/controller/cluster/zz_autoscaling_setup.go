@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	attachment "github.com/upbound/provider-aws/internal/controller/cluster/autoscaling/attachment"
 	autoscalinggroup "github.com/upbound/provider-aws/internal/controller/cluster/autoscaling/autoscalinggroup"

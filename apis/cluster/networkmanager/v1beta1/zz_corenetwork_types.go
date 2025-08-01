@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CoreNetworkInitParameters struct {
@@ -30,7 +30,7 @@ type CoreNetworkInitParameters struct {
 
 	// ID of the global network that a core network will be a part of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
@@ -112,7 +112,7 @@ type CoreNetworkParameters struct {
 
 	// ID of the global network that a core network will be a part of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 

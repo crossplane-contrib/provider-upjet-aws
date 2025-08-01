@@ -3,8 +3,8 @@ package clients
 import (
 	"context"
 	"encoding/json"
-	"github.com/crossplane/crossplane-runtime/pkg/errors"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"

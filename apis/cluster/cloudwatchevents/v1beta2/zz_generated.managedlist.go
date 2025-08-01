@@ -5,7 +5,7 @@
 
 package v1beta2
 
-import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
+import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
 // GetItems of this ConnectionList.
 func (l *ConnectionList) GetItems() []resource.Managed {

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ArchiveInitParameters struct {
@@ -23,7 +23,7 @@ type ArchiveInitParameters struct {
 
 	// ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
 
 	// Reference to a Bus in cloudwatchevents to populate eventSourceArn.
@@ -36,7 +36,7 @@ type ArchiveInitParameters struct {
 
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
@@ -90,7 +90,7 @@ type ArchiveParameters struct {
 
 	// ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchevents/v1beta1.Bus
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
 
@@ -104,7 +104,7 @@ type ArchiveParameters struct {
 
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 

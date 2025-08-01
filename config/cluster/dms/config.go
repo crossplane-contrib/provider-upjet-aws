@@ -5,7 +5,7 @@
 package dms
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/config/cluster/common"

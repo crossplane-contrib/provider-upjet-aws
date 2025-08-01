@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MetricAlarmInitParameters struct {
@@ -20,7 +20,7 @@ type MetricAlarmInitParameters struct {
 
 	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
@@ -74,7 +74,7 @@ type MetricAlarmInitParameters struct {
 
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
@@ -211,7 +211,7 @@ type MetricAlarmParameters struct {
 
 	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
@@ -277,7 +277,7 @@ type MetricAlarmParameters struct {
 
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`

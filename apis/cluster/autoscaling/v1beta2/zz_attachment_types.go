@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AttachmentInitParameters struct {
@@ -29,7 +29,7 @@ type AttachmentInitParameters struct {
 
 	// Name of the ELB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
 	// Reference to a ELB in elb to populate elb.
@@ -42,7 +42,7 @@ type AttachmentInitParameters struct {
 
 	// ARN of a load balancer target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LBTargetGroupArn *string `json:"lbTargetGroupArn,omitempty" tf:"lb_target_group_arn,omitempty"`
 
 	// Reference to a LBTargetGroup in elbv2 to populate lbTargetGroupArn.
@@ -89,7 +89,7 @@ type AttachmentParameters struct {
 
 	// Name of the ELB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
@@ -103,7 +103,7 @@ type AttachmentParameters struct {
 
 	// ARN of a load balancer target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LBTargetGroupArn *string `json:"lbTargetGroupArn,omitempty" tf:"lb_target_group_arn,omitempty"`
 

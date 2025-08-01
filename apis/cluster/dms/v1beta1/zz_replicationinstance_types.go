@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ReplicationInstanceInitParameters struct {
@@ -62,7 +62,7 @@ type ReplicationInstanceInitParameters struct {
 
 	// A subnet group to associate with the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationSubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReplicationSubnetGroupID *string `json:"replicationSubnetGroupId,omitempty" tf:"replication_subnet_group_id,omitempty"`
 
 	// Reference to a ReplicationSubnetGroup in dms to populate replicationSubnetGroupId.
@@ -228,7 +228,7 @@ type ReplicationInstanceParameters struct {
 
 	// A subnet group to associate with the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationSubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationSubnetGroupID *string `json:"replicationSubnetGroupId,omitempty" tf:"replication_subnet_group_id,omitempty"`
 

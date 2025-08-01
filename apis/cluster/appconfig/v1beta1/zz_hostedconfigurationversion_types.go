@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type HostedConfigurationVersionInitParameters struct {
 
 	// Application ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// Reference to a Application in appconfig to populate applicationId.
@@ -30,7 +30,7 @@ type HostedConfigurationVersionInitParameters struct {
 
 	// Configuration profile ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.ConfigurationProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("configuration_profile_id",true)
 	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
 
 	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
@@ -83,7 +83,7 @@ type HostedConfigurationVersionParameters struct {
 
 	// Application ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
@@ -97,7 +97,7 @@ type HostedConfigurationVersionParameters struct {
 
 	// Configuration profile ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appconfig/v1beta1.ConfigurationProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("configuration_profile_id",true)
 	// +kubebuilder:validation:Optional
 	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
 

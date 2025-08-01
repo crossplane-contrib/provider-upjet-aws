@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RegexMatchSetInitParameters struct {
@@ -102,7 +102,7 @@ type RegexMatchTupleInitParameters struct {
 
 	// The ID of a Regex Pattern Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.RegexPatternSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RegexPatternSetID *string `json:"regexPatternSetId,omitempty" tf:"regex_pattern_set_id,omitempty"`
 
 	// Reference to a RegexPatternSet in wafregional to populate regexPatternSetId.
@@ -143,7 +143,7 @@ type RegexMatchTupleParameters struct {
 
 	// The ID of a Regex Pattern Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.RegexPatternSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RegexPatternSetID *string `json:"regexPatternSetId,omitempty" tf:"regex_pattern_set_id,omitempty"`
 

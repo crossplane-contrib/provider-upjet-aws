@@ -24,9 +24,9 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/fieldpath"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
 	"github.com/upbound/provider-aws/apis/namespaced/v1beta1"
 	"github.com/upbound/provider-aws/internal/version"

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DataCellsFilterInitParameters struct {
@@ -66,7 +66,7 @@ type DataLocationInitParameters struct {
 
 	// Amazon Resource Name (ARN) that uniquely identifies the data location resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lakeformation/v1beta1.Resource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a Resource in lakeformation to populate arn.
@@ -94,7 +94,7 @@ type DataLocationParameters struct {
 
 	// Amazon Resource Name (ARN) that uniquely identifies the data location resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lakeformation/v1beta1.Resource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 

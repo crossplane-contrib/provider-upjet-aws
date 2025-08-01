@@ -11,10 +11,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/config/conversion"
-	"github.com/crossplane/upjet/pkg/types/comments"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config/conversion"
+	"github.com/crossplane/upjet/v2/pkg/types/comments"
 
 	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta1"
 	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2"

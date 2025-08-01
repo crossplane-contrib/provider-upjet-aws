@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PrincipalAssociationInitParameters struct {
 
 	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Organization
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Reference to a Organization in organizations to populate principal.
@@ -30,7 +30,7 @@ type PrincipalAssociationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ram/v1beta1.ResourceShare
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
 
 	// Reference to a ResourceShare in ram to populate resourceShareArn.
@@ -62,7 +62,7 @@ type PrincipalAssociationParameters struct {
 
 	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/organizations/v1beta1.Organization
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
@@ -81,7 +81,7 @@ type PrincipalAssociationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ram/v1beta1.ResourceShare
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
 

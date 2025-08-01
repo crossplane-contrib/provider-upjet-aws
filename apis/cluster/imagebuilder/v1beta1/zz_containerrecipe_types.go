@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BlockDeviceMappingInitParameters struct {
@@ -66,7 +66,7 @@ type ContainerRecipeComponentInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/imagebuilder/v1beta1.Component
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
 
 	// Reference to a Component in imagebuilder to populate componentArn.
@@ -94,7 +94,7 @@ type ContainerRecipeComponentParameters struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/imagebuilder/v1beta1.Component
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
 

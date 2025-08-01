@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
@@ -104,7 +104,7 @@ type ActionTargetVirtualServiceInitParameters struct {
 
 	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
 
 	// Reference to a VirtualService in appmesh to populate virtualServiceName.
@@ -126,7 +126,7 @@ type ActionTargetVirtualServiceParameters struct {
 
 	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
 
@@ -188,7 +188,7 @@ type GatewayRouteInitParameters struct {
 
 	// Name of the virtual gateway to associate the gateway route with. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualGatewayName *string `json:"virtualGatewayName,omitempty" tf:"virtual_gateway_name,omitempty"`
 
 	// Reference to a VirtualGateway in appmesh to populate virtualGatewayName.
@@ -275,7 +275,7 @@ type GatewayRouteParameters struct {
 
 	// Name of the virtual gateway to associate the gateway route with. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualGatewayName *string `json:"virtualGatewayName,omitempty" tf:"virtual_gateway_name,omitempty"`
 

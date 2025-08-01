@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AppLifecycleManagementIdleSettingsInitParameters struct {
@@ -712,7 +712,7 @@ type DefaultUserSettingsInitParameters struct {
 
 	// The execution role ARN for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
 	// Reference to a Role in iam to populate executionRole.
@@ -995,7 +995,7 @@ type DefaultUserSettingsKernelGatewayAppSettingsCustomImageInitParameters struct
 
 	// The name of the Custom Image.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.ImageVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("image_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("image_name",false)
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// Reference to a ImageVersion in sagemaker to populate imageName.
@@ -1039,7 +1039,7 @@ type DefaultUserSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 
 	// The name of the Custom Image.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.ImageVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("image_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("image_name",false)
 	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
@@ -1243,7 +1243,7 @@ type DefaultUserSettingsParameters struct {
 
 	// The execution role ARN for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ZoneAssociationInitParameters struct {
@@ -32,7 +32,7 @@ type ZoneAssociationInitParameters struct {
 
 	// The private hosted zone to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("zone_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("zone_id",true)
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in route53 to populate zoneId.
@@ -83,7 +83,7 @@ type ZoneAssociationParameters struct {
 
 	// The private hosted zone to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("zone_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("zone_id",true)
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

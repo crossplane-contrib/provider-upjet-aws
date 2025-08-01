@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutoscalingGroupsInitParameters struct {
@@ -140,7 +140,7 @@ type NodeGroupInitParameters struct {
 
 	// Kubernetes version. Defaults to EKS Cluster Kubernetes version.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",false)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Reference to a Cluster in eks to populate version.
@@ -343,7 +343,7 @@ type NodeGroupParameters struct {
 
 	// Kubernetes version. Defaults to EKS Cluster Kubernetes version.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",false)
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 

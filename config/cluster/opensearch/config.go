@@ -5,7 +5,7 @@
 package opensearch
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/config/cluster/common"
@@ -59,7 +59,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_opensearch_domain_policy", func(r *config.Resource) {
 		r.References["domain_name"] = config.Reference{
 			TerraformName: "aws_opensearch_domain",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",true)`,
 		}
 	})
 

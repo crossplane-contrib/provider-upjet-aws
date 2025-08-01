@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LaunchSpecificationEBSBlockDeviceInitParameters struct {
@@ -139,7 +139,7 @@ type LaunchSpecificationInitParameters struct {
 
 	// takes aws_iam_instance_profile attribute arn as input.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.InstanceProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	IAMInstanceProfileArn *string `json:"iamInstanceProfileArn,omitempty" tf:"iam_instance_profile_arn,omitempty"`
 
 	// Reference to a InstanceProfile in iam to populate iamInstanceProfileArn.
@@ -261,7 +261,7 @@ type LaunchSpecificationParameters struct {
 
 	// takes aws_iam_instance_profile attribute arn as input.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.InstanceProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	IAMInstanceProfileArn *string `json:"iamInstanceProfileArn,omitempty" tf:"iam_instance_profile_arn,omitempty"`
 
@@ -381,7 +381,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 
 	// The ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Reference to a LaunchTemplate in ec2 to populate id.
@@ -397,7 +397,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 
 	// Template version. Unlike the autoscaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("latest_version",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("latest_version",true)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Reference to a LaunchTemplate in ec2 to populate version.
@@ -425,7 +425,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 
 	// The ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -443,7 +443,7 @@ type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 
 	// Template version. Unlike the autoscaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("latest_version",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("latest_version",true)
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 

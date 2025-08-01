@@ -4,7 +4,7 @@
 
 package elb
 
-import "github.com/crossplane/upjet/pkg/config"
+import "github.com/crossplane/upjet/v2/pkg/config"
 
 // Configure adds configurations for the elb group.
 func Configure(p *config.Provider) { //nolint:gocyclo

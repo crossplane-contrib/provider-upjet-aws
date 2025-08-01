@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ResourceShareAccepterInitParameters struct {
 
 	// The ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ram/v1beta1.PrincipalAssociation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_share_arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_share_arn",false)
 	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`
 
 	// Reference to a PrincipalAssociation in ram to populate shareArn.
@@ -70,7 +70,7 @@ type ResourceShareAccepterParameters struct {
 
 	// The ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ram/v1beta1.PrincipalAssociation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_share_arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_share_arn",false)
 	// +kubebuilder:validation:Optional
 	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`
 

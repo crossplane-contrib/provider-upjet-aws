@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TableReplicaInitParameters_2 struct {
@@ -20,7 +20,7 @@ type TableReplicaInitParameters_2 struct {
 
 	// ARN of the main or global table which this resource will replicate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
 
 	// Reference to a Table in dynamodb to populate globalTableArn.
@@ -98,7 +98,7 @@ type TableReplicaParameters_2 struct {
 
 	// ARN of the main or global table which this resource will replicate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
 

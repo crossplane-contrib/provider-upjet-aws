@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdvancedEventSelectorInitParameters struct {
@@ -277,7 +277,7 @@ type TrailInitParameters struct {
 
 	// Name of the S3 bucket designated for publishing log files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
@@ -440,7 +440,7 @@ type TrailParameters struct {
 
 	// Name of the S3 bucket designated for publishing log files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 

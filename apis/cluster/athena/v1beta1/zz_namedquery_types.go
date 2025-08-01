@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NamedQueryInitParameters struct {
@@ -38,7 +38,7 @@ type NamedQueryInitParameters struct {
 
 	// Workgroup to which the query belongs. Defaults to primary
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/athena/v1beta2.Workgroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 
 	// Reference to a Workgroup in athena to populate workgroup.
@@ -109,7 +109,7 @@ type NamedQueryParameters struct {
 
 	// Workgroup to which the query belongs. Defaults to primary
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/athena/v1beta2.Workgroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 

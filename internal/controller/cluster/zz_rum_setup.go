@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	appmonitor "github.com/upbound/provider-aws/internal/controller/cluster/rum/appmonitor"
 	metricsdestination "github.com/upbound/provider-aws/internal/controller/cluster/rum/metricsdestination"

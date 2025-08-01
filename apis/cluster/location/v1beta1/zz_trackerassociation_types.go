@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TrackerAssociationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/location/v1beta1.GeofenceCollection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("collection_arn",true)
 	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
 
 	// Reference to a GeofenceCollection in location to populate consumerArn.
@@ -60,7 +60,7 @@ type TrackerAssociationParameters struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/location/v1beta1.GeofenceCollection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("collection_arn",true)
 	// +kubebuilder:validation:Optional
 	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
 

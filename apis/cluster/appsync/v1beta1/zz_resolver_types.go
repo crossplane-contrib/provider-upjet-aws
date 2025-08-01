@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CachingConfigInitParameters struct {
@@ -49,7 +49,7 @@ type PipelineConfigInitParameters struct {
 
 	// A list of Function objects.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("function_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("function_id",true)
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 
 	// References to Function in appsync to populate functions.
@@ -71,7 +71,7 @@ type PipelineConfigParameters struct {
 
 	// A list of Function objects.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("function_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("function_id",true)
 	// +kubebuilder:validation:Optional
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 
@@ -181,7 +181,7 @@ type ResolverParameters struct {
 
 	// API ID for the GraphQL API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appsync/v1beta1.GraphQLAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 

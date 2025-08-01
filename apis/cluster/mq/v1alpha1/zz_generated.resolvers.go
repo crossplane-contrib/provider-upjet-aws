@@ -8,10 +8,10 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	errors "github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this User.

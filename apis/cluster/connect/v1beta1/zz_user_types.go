@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type IdentityInfoInitParameters struct {
@@ -75,7 +75,7 @@ type UserInitParameters struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Reference to a Instance in connect to populate instanceId.
@@ -97,7 +97,7 @@ type UserInitParameters struct {
 
 	// The identifier of the routing profile for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta2.RoutingProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("routing_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("routing_profile_id",true)
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
 	// Reference to a RoutingProfile in connect to populate routingProfileId.
@@ -110,7 +110,7 @@ type UserInitParameters struct {
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.SecurityProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("security_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("security_profile_id",true)
 	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
 
@@ -193,7 +193,7 @@ type UserParameters struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -224,7 +224,7 @@ type UserParameters struct {
 
 	// The identifier of the routing profile for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta2.RoutingProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("routing_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("routing_profile_id",true)
 	// +kubebuilder:validation:Optional
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
@@ -238,7 +238,7 @@ type UserParameters struct {
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/connect/v1beta1.SecurityProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("security_profile_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("security_profile_id",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`

@@ -5,9 +5,9 @@
 package kafka
 
 import (
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/config/conversion"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 
 	"github.com/upbound/provider-aws/apis/cluster/kafka/v1beta1"
 	"github.com/upbound/provider-aws/apis/cluster/kafka/v1beta2"

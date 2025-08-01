@@ -7,7 +7,7 @@ package wafv2
 import (
 	"strings"
 
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 )
 
 // Configure adds configurations for the wafv2 group.

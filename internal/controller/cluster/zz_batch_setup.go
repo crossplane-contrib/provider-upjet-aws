@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	computeenvironment "github.com/upbound/provider-aws/internal/controller/cluster/batch/computeenvironment"
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/cluster/batch/jobdefinition"

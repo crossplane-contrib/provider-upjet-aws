@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	ipset "github.com/upbound/provider-aws/internal/controller/cluster/wafv2/ipset"
 	regexpatternset "github.com/upbound/provider-aws/internal/controller/cluster/wafv2/regexpatternset"

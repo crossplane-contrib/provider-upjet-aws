@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EnvironmentMembershipInitParameters struct {
@@ -45,7 +45,7 @@ type EnvironmentMembershipParameters struct {
 
 	// The ID of the environment that contains the environment member you want to add.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloud9/v1beta1.EnvironmentEC2
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
@@ -68,7 +68,7 @@ type EnvironmentMembershipParameters struct {
 
 	// The Amazon Resource Name (ARN) of the environment member you want to add.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DomainServiceAccessPolicyInitParameters struct {
@@ -20,7 +20,7 @@ type DomainServiceAccessPolicyInitParameters struct {
 
 	// The CloudSearch domain name the policy applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudsearch/v1beta2.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Reference to a Domain in cloudsearch to populate domainName.
@@ -55,7 +55,7 @@ type DomainServiceAccessPolicyParameters struct {
 
 	// The CloudSearch domain name the policy applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudsearch/v1beta2.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 

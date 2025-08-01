@@ -10,8 +10,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/types/comments"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/types/comments"
 
 	"github.com/upbound/provider-aws/config/namespaced/common"
 	"github.com/upbound/provider-aws/config/namespaced/rds/utils"

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SnapshotInitParameters struct {
 
 	// The namespace to create a snapshot for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshiftserverless/v1beta1.Workgroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("namespace_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("namespace_name",false)
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
 	// Reference to a Workgroup in redshiftserverless to populate namespaceName.
@@ -75,7 +75,7 @@ type SnapshotParameters struct {
 
 	// The namespace to create a snapshot for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshiftserverless/v1beta1.Workgroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("namespace_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("namespace_name",false)
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 

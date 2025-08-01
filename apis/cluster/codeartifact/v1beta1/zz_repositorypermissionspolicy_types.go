@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RepositoryPermissionsPolicyInitParameters struct {
@@ -57,7 +57,7 @@ type RepositoryPermissionsPolicyParameters struct {
 
 	// The name of the domain on which to set the resource policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codeartifact/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain",true)
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
@@ -88,7 +88,7 @@ type RepositoryPermissionsPolicyParameters struct {
 
 	// The name of the repository to set the resource policy on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codeartifact/v1beta1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("repository",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("repository",true)
 	// +kubebuilder:validation:Optional
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 

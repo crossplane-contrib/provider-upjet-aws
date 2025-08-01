@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagedPrefixListEntryInitParameters struct {
 
 	// CIDR block of this entry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
 	// Reference to a VPC in ec2 to populate cidr.
@@ -33,7 +33,7 @@ type ManagedPrefixListEntryInitParameters struct {
 
 	// The ID of the prefix list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
@@ -68,7 +68,7 @@ type ManagedPrefixListEntryParameters struct {
 
 	// CIDR block of this entry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
@@ -86,7 +86,7 @@ type ManagedPrefixListEntryParameters struct {
 
 	// The ID of the prefix list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 

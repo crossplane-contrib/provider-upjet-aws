@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	environmentec2 "github.com/upbound/provider-aws/internal/controller/cluster/cloud9/environmentec2"
 	environmentmembership "github.com/upbound/provider-aws/internal/controller/cluster/cloud9/environmentmembership"

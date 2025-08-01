@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DestinationOptionsInitParameters struct {
@@ -78,7 +78,7 @@ type FlowLogInitParameters struct {
 
 	// ARN of the logging destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate logDestination.
@@ -230,7 +230,7 @@ type FlowLogParameters struct {
 
 	// ARN of the logging destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 

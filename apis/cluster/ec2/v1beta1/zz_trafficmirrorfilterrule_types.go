@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TrafficMirrorFilterRuleDestinationPortRangeInitParameters struct {
@@ -73,7 +73,7 @@ type TrafficMirrorFilterRuleInitParameters struct {
 
 	// ID of the traffic mirror filter to which this rule should be added
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TrafficMirrorFilter
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TrafficMirrorFilterID *string `json:"trafficMirrorFilterId,omitempty" tf:"traffic_mirror_filter_id,omitempty"`
 
 	// Reference to a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
@@ -173,7 +173,7 @@ type TrafficMirrorFilterRuleParameters struct {
 
 	// ID of the traffic mirror filter to which this rule should be added
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TrafficMirrorFilter
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TrafficMirrorFilterID *string `json:"trafficMirrorFilterId,omitempty" tf:"traffic_mirror_filter_id,omitempty"`
 

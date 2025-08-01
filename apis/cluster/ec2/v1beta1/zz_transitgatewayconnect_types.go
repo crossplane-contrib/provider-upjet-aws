@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TransitGatewayConnectInitParameters struct {
@@ -30,7 +30,7 @@ type TransitGatewayConnectInitParameters struct {
 
 	// Identifier of EC2 Transit Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
@@ -43,7 +43,7 @@ type TransitGatewayConnectInitParameters struct {
 
 	// The underlaying VPC attachment
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transportAttachmentId.
@@ -114,7 +114,7 @@ type TransitGatewayConnectParameters struct {
 
 	// Identifier of EC2 Transit Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
@@ -128,7 +128,7 @@ type TransitGatewayConnectParameters struct {
 
 	// The underlaying VPC attachment
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 

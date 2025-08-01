@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type UsagePlanKeyInitParameters struct {
 
 	// Identifier of the API key resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.APIKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a APIKey in apigateway to populate keyId.
@@ -33,7 +33,7 @@ type UsagePlanKeyInitParameters struct {
 
 	// Id of the usage plan resource representing to associate the key to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.UsagePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
 
 	// Reference to a UsagePlan in apigateway to populate usagePlanId.
@@ -74,7 +74,7 @@ type UsagePlanKeyParameters struct {
 
 	// Identifier of the API key resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta1.APIKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -97,7 +97,7 @@ type UsagePlanKeyParameters struct {
 
 	// Id of the usage plan resource representing to associate the key to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.UsagePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthorizerInitParameters struct {
 
 	// The ARN of the authorizer's Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AuthorizerFunctionArn *string `json:"authorizerFunctionArn,omitempty" tf:"authorizer_function_arn,omitempty"`
 
 	// Reference to a Function in lambda to populate authorizerFunctionArn.
@@ -86,7 +86,7 @@ type AuthorizerParameters struct {
 
 	// The ARN of the authorizer's Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AuthorizerFunctionArn *string `json:"authorizerFunctionArn,omitempty" tf:"authorizer_function_arn,omitempty"`
 

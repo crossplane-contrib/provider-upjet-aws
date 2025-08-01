@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConstraintInitParameters struct {
@@ -26,7 +26,7 @@ type ConstraintInitParameters struct {
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
@@ -39,7 +39,7 @@ type ConstraintInitParameters struct {
 
 	// Product identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta2.Product
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
 	// Reference to a Product in servicecatalog to populate productId.
@@ -103,7 +103,7 @@ type ConstraintParameters struct {
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
@@ -117,7 +117,7 @@ type ConstraintParameters struct {
 
 	// Product identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta2.Product
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 

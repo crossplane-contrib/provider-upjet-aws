@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LocationS3InitParameters struct {
@@ -21,7 +21,7 @@ type LocationS3InitParameters struct {
 
 	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
 
 	// Reference to a Bucket in s3 to populate s3BucketArn.
@@ -99,7 +99,7 @@ type LocationS3Parameters struct {
 
 	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
 
@@ -133,7 +133,7 @@ type S3ConfigInitParameters struct {
 
 	// ARN of the IAM Role used to connect to the S3 Bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate bucketAccessRoleArn.
@@ -155,7 +155,7 @@ type S3ConfigParameters struct {
 
 	// ARN of the IAM Role used to connect to the S3 Bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
 

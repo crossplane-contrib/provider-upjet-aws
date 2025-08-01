@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccessPointPolicyInitParameters struct {
 
 	// The ARN of the access point that you want to associate with the specified policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
 	// Reference to a AccessPoint in s3control to populate accessPointArn.
@@ -55,7 +55,7 @@ type AccessPointPolicyParameters struct {
 
 	// The ARN of the access point that you want to associate with the specified policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 

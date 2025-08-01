@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CacheNodesInitParameters struct {
@@ -118,7 +118,7 @@ type ClusterInitParameters struct {
 
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2.ReplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
 
 	// Reference to a ReplicationGroup in elasticache to populate replicationGroupId.
@@ -412,7 +412,7 @@ type ClusterParameters struct {
 
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2.ReplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
 

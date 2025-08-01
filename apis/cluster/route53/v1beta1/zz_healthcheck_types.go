@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type HealthCheckInitParameters struct {
@@ -20,7 +20,7 @@ type HealthCheckInitParameters struct {
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.HealthCheck
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
 
@@ -198,7 +198,7 @@ type HealthCheckParameters struct {
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.HealthCheck
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`

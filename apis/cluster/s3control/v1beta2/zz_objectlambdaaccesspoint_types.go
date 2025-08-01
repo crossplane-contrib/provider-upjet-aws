@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AwsLambdaInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
 	// Reference to a Function in lambda to populate functionArn.
@@ -45,7 +45,7 @@ type AwsLambdaParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
@@ -73,7 +73,7 @@ type ConfigurationInitParameters struct {
 
 	// Standard access point associated with the Object Lambda Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SupportingAccessPoint *string `json:"supportingAccessPoint,omitempty" tf:"supporting_access_point,omitempty"`
 
 	// Reference to a AccessPoint in s3control to populate supportingAccessPoint.
@@ -117,7 +117,7 @@ type ConfigurationParameters struct {
 
 	// Standard access point associated with the Object Lambda Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.AccessPoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SupportingAccessPoint *string `json:"supportingAccessPoint,omitempty" tf:"supporting_access_point,omitempty"`
 

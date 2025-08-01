@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ScramSecretAssociationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
 	// Reference to a Cluster in kafka to populate clusterArn.
@@ -65,7 +65,7 @@ type ScramSecretAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MonitoringSubscriptionInitParameters struct {
 
 	// The ID of the distribution that you are enabling metrics for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta2.Distribution
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DistributionID *string `json:"distributionId,omitempty" tf:"distribution_id,omitempty"`
 
 	// Reference to a Distribution in cloudfront to populate distributionId.
@@ -67,7 +67,7 @@ type MonitoringSubscriptionParameters struct {
 
 	// The ID of the distribution that you are enabling metrics for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta2.Distribution
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DistributionID *string `json:"distributionId,omitempty" tf:"distribution_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PermissionSetInlinePolicyInitParameters struct {
@@ -50,7 +50,7 @@ type PermissionSetInlinePolicyParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Permission Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssoadmin/v1beta1.PermissionSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 

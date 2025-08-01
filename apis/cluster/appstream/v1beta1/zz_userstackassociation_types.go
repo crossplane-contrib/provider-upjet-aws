@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type UserStackAssociationInitParameters struct {
@@ -45,7 +45,7 @@ type UserStackAssociationParameters struct {
 
 	// Authentication type for the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appstream/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("authentication_type",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("authentication_type",false)
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
@@ -68,7 +68,7 @@ type UserStackAssociationParameters struct {
 
 	// Name of the stack that is associated with the user.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appstream/v1beta2.Stack
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 

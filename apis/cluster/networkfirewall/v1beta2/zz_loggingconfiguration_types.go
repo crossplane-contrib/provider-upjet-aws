@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LogDestinationConfigInitParameters struct {
@@ -59,7 +59,7 @@ type LoggingConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta2.Firewall
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
 
 	// Reference to a Firewall in networkfirewall to populate firewallArn.
@@ -113,7 +113,7 @@ type LoggingConfigurationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkfirewall/v1beta2.Firewall
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
 

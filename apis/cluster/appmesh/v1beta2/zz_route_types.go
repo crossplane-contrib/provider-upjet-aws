@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionWeightedTargetInitParameters struct {
@@ -140,7 +140,7 @@ type HTTPRouteActionWeightedTargetInitParameters struct {
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Reference to a VirtualNode in appmesh to populate virtualNode.
@@ -175,7 +175,7 @@ type HTTPRouteActionWeightedTargetParameters struct {
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
@@ -1153,7 +1153,7 @@ type RouteInitParameters struct {
 
 	// Name of the service mesh in which to create the route. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.Mesh
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 
 	// Reference to a Mesh in appmesh to populate meshName.
@@ -1179,7 +1179,7 @@ type RouteInitParameters struct {
 
 	// Name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualRouter
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
 
 	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
@@ -1240,7 +1240,7 @@ type RouteParameters struct {
 
 	// Name of the service mesh in which to create the route. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.Mesh
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 
@@ -1276,7 +1276,7 @@ type RouteParameters struct {
 
 	// Name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualRouter
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
 
@@ -1758,7 +1758,7 @@ type TCPRouteActionWeightedTargetInitParameters struct {
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Reference to a VirtualNode in appmesh to populate virtualNode.
@@ -1793,7 +1793,7 @@ type TCPRouteActionWeightedTargetParameters struct {
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appmesh/v1beta2.VirtualNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 

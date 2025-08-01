@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EncryptionEntitiesInitParameters struct {
@@ -27,7 +27,7 @@ type EncryptionEntitiesItemsInitParameters struct {
 
 	// The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.PublicKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PublicKeyID *string `json:"publicKeyId,omitempty" tf:"public_key_id,omitempty"`
 
 	// Reference to a PublicKey in cloudfront to populate publicKeyId.
@@ -63,7 +63,7 @@ type EncryptionEntitiesItemsParameters struct {
 
 	// The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta1.PublicKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicKeyID *string `json:"publicKeyId,omitempty" tf:"public_key_id,omitempty"`
 

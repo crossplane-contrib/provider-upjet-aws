@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CanvasAppSettingsDirectDeploySettingsInitParameters struct {
@@ -229,7 +229,7 @@ type UserProfileInitParameters struct {
 
 	// The ID of the associated Domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
 	// Reference to a Domain in sagemaker to populate domainId.
@@ -299,7 +299,7 @@ type UserProfileParameters struct {
 
 	// The ID of the associated Domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 

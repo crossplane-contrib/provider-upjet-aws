@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InviteAccepterInitParameters struct {
 
 	// The account ID of the master Security Hub account whose invitation you're accepting.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/securityhub/v1beta1.Member
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("master_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("master_id",true)
 	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
 
 	// Reference to a Member in securityhub to populate masterId.
@@ -47,7 +47,7 @@ type InviteAccepterParameters struct {
 
 	// The account ID of the master Security Hub account whose invitation you're accepting.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/securityhub/v1beta1.Member
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("master_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("master_id",true)
 	// +kubebuilder:validation:Optional
 	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AcceleratorCountInitParameters struct {
@@ -198,7 +198,7 @@ type AutoscalingGroupInitParameters struct {
 
 	// Name of the placement group into which you'll launch your instances, if any.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.PlacementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
 	// Reference to a PlacementGroup in ec2 to populate placementGroup.
@@ -571,7 +571,7 @@ type AutoscalingGroupParameters struct {
 
 	// Name of the placement group into which you'll launch your instances, if any.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.PlacementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
@@ -1266,7 +1266,7 @@ type LaunchTemplateInitParameters struct {
 
 	// ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Reference to a LaunchTemplate in ec2 to populate id.
@@ -1300,7 +1300,7 @@ type LaunchTemplateParameters struct {
 
 	// ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -1325,7 +1325,7 @@ type LaunchTemplateSpecificationInitParameters struct {
 
 	// ID of the launch template. Conflicts with launch_template_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
@@ -1359,7 +1359,7 @@ type LaunchTemplateSpecificationParameters struct {
 
 	// ID of the launch template. Conflicts with launch_template_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 
@@ -1573,7 +1573,7 @@ type OverrideLaunchTemplateSpecificationInitParameters struct {
 
 	// ID of the launch template. Conflicts with launch_template_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
@@ -1607,7 +1607,7 @@ type OverrideLaunchTemplateSpecificationParameters struct {
 
 	// ID of the launch template. Conflicts with launch_template_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.LaunchTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
 

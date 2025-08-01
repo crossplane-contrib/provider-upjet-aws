@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ThingPrincipalAttachmentInitParameters struct {
 
 	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Reference to a Certificate in iot to populate principal.
@@ -59,7 +59,7 @@ type ThingPrincipalAttachmentParameters struct {
 
 	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 

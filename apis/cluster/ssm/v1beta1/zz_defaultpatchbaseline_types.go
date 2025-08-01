@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DefaultPatchBaselineInitParameters struct {
@@ -19,7 +19,7 @@ type DefaultPatchBaselineInitParameters struct {
 	// Can be an ID or an ARN.
 	// When specifying an AWS-provided patch baseline, must be the ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
@@ -46,7 +46,7 @@ type DefaultPatchBaselineInitParameters struct {
 	// UBUNTU, and
 	// WINDOWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("operating_system",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("operating_system",false)
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
 	// Reference to a PatchBaseline in ssm to populate operatingSystem.
@@ -95,7 +95,7 @@ type DefaultPatchBaselineParameters struct {
 	// Can be an ID or an ARN.
 	// When specifying an AWS-provided patch baseline, must be the ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
 
@@ -123,7 +123,7 @@ type DefaultPatchBaselineParameters struct {
 	// UBUNTU, and
 	// WINDOWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssm/v1beta1.PatchBaseline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("operating_system",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("operating_system",false)
 	// +kubebuilder:validation:Optional
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 

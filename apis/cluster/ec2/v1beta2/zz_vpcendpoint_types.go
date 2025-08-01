@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DNSEntryInitParameters struct {
@@ -67,7 +67,7 @@ type SubnetConfigurationInitParameters struct {
 
 	// The ID of the VPC endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -103,7 +103,7 @@ type SubnetConfigurationParameters struct {
 
 	// The ID of the VPC endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -139,7 +139,7 @@ type VPCEndpointInitParameters struct {
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCEndpointService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("service_name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
 	// Reference to a VPCEndpointService in ec2 to populate serviceName.
@@ -306,7 +306,7 @@ type VPCEndpointParameters struct {
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCEndpointService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("service_name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 

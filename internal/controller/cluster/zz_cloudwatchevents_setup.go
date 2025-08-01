@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	apidestination "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchevents/apidestination"
 	archive "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchevents/archive"

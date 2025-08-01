@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AppsyncTargetInitParameters struct {
@@ -180,7 +180,7 @@ type EcsTargetInitParameters struct {
 
 	// The ARN of the task definition to use if the event target is an Amazon ECS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ecs/v1beta2.TaskDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
 
 	// Reference to a TaskDefinition in ecs to populate taskDefinitionArn.
@@ -288,7 +288,7 @@ type EcsTargetParameters struct {
 
 	// The ARN of the task definition to use if the event target is an Amazon ECS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ecs/v1beta2.TaskDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
 

@@ -5,7 +5,7 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetProviderConfigReference of this ProviderConfigUsage.
 func (p *ProviderConfigUsage) GetProviderConfigReference() xpv1.Reference {

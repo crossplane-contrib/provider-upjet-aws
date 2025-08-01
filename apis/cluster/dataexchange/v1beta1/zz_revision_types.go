@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RevisionInitParameters struct {
@@ -20,7 +20,7 @@ type RevisionInitParameters struct {
 
 	// The dataset id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dataexchange/v1beta1.DataSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataSetID *string `json:"dataSetId,omitempty" tf:"data_set_id,omitempty"`
 
 	// Reference to a DataSet in dataexchange to populate dataSetId.
@@ -74,7 +74,7 @@ type RevisionParameters struct {
 
 	// The dataset id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dataexchange/v1beta1.DataSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataSetID *string `json:"dataSetId,omitempty" tf:"data_set_id,omitempty"`
 

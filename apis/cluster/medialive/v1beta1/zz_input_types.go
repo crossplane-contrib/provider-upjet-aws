@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InputDestinationsInitParameters struct {
@@ -61,7 +61,7 @@ type InputInitParameters struct {
 
 	// List of input security groups.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.InputSecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InputSecurityGroups []*string `json:"inputSecurityGroups,omitempty" tf:"input_security_groups,omitempty"`
 
 	// References to InputSecurityGroup in medialive to populate inputSecurityGroups.
@@ -176,7 +176,7 @@ type InputParameters struct {
 
 	// List of input security groups.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.InputSecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InputSecurityGroups []*string `json:"inputSecurityGroups,omitempty" tf:"input_security_groups,omitempty"`
 

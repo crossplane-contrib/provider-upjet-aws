@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AacSettingsInitParameters struct {
@@ -5171,7 +5171,7 @@ type InputAttachmentsInitParameters struct {
 
 	// The ID of the input.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.Input
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
 
 	// Reference to a Input in medialive to populate inputId.
@@ -5213,7 +5213,7 @@ type InputAttachmentsParameters struct {
 
 	// The ID of the input.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.Input
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SnapshotCreateVolumePermissionInitParameters struct {
@@ -20,7 +20,7 @@ type SnapshotCreateVolumePermissionInitParameters struct {
 
 	// A snapshot ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSSnapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
@@ -61,7 +61,7 @@ type SnapshotCreateVolumePermissionParameters struct {
 
 	// A snapshot ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSSnapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TagInitParameters struct {
@@ -20,7 +20,7 @@ type TagInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the Transfer Family resource to tag.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/transfer/v1beta2.Server
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Reference to a Server in transfer to populate resourceArn.
@@ -67,7 +67,7 @@ type TagParameters struct {
 
 	// Amazon Resource Name (ARN) of the Transfer Family resource to tag.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/transfer/v1beta2.Server
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 

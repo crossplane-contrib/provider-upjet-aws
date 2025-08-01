@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LBCookieStickinessPolicyInitParameters struct {
@@ -27,7 +27,7 @@ type LBCookieStickinessPolicyInitParameters struct {
 	// The load balancer to which the policy
 	// should be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
 	// Reference to a ELB in elb to populate loadBalancer.
@@ -84,7 +84,7 @@ type LBCookieStickinessPolicyParameters struct {
 	// The load balancer to which the policy
 	// should be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 

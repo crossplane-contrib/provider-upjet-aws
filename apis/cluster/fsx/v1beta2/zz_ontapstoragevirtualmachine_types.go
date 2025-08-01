@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActiveDirectoryConfigurationInitParameters struct {
@@ -118,7 +118,7 @@ type OntapStorageVirtualMachineInitParameters struct {
 
 	// The ID of the Amazon FSx ONTAP File System that this SVM will be created on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/fsx/v1beta2.OntapFileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// Reference to a OntapFileSystem in fsx to populate fileSystemId.
@@ -193,7 +193,7 @@ type OntapStorageVirtualMachineParameters struct {
 
 	// The ID of the Amazon FSx ONTAP File System that this SVM will be created on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/fsx/v1beta2.OntapFileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 

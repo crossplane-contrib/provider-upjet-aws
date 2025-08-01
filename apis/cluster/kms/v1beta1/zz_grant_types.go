@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConstraintsInitParameters struct {
@@ -59,7 +59,7 @@ type GrantInitParameters struct {
 
 	// The principal that is given permission to perform the operations that the grant permits in ARN format.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	GranteePrincipal *string `json:"granteePrincipal,omitempty" tf:"grantee_principal,omitempty"`
 
 	// Reference to a Role in iam to populate granteePrincipal.
@@ -150,7 +150,7 @@ type GrantParameters struct {
 
 	// The principal that is given permission to perform the operations that the grant permits in ARN format.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	GranteePrincipal *string `json:"granteePrincipal,omitempty" tf:"grantee_principal,omitempty"`
 

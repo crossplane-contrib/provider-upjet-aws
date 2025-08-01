@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GatewayAssociationProposalInitParameters struct {
@@ -21,7 +21,7 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPNGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AssociatedGatewayID *string `json:"associatedGatewayId,omitempty" tf:"associated_gateway_id,omitempty"`
 
 	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
@@ -34,7 +34,7 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// Direct Connect Gateway identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
@@ -47,7 +47,7 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// AWS Account identifier of the Direct Connect Gateway's owner.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("owner_account_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("owner_account_id",true)
 	DxGatewayOwnerAccountID *string `json:"dxGatewayOwnerAccountId,omitempty" tf:"dx_gateway_owner_account_id,omitempty"`
 
 	// Reference to a Gateway in directconnect to populate dxGatewayOwnerAccountId.
@@ -97,7 +97,7 @@ type GatewayAssociationProposalParameters struct {
 
 	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPNGateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AssociatedGatewayID *string `json:"associatedGatewayId,omitempty" tf:"associated_gateway_id,omitempty"`
 
@@ -111,7 +111,7 @@ type GatewayAssociationProposalParameters struct {
 
 	// Direct Connect Gateway identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 
@@ -125,7 +125,7 @@ type GatewayAssociationProposalParameters struct {
 
 	// AWS Account identifier of the Direct Connect Gateway's owner.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("owner_account_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("owner_account_id",true)
 	// +kubebuilder:validation:Optional
 	DxGatewayOwnerAccountID *string `json:"dxGatewayOwnerAccountId,omitempty" tf:"dx_gateway_owner_account_id,omitempty"`
 

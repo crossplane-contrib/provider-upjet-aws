@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BasePathMappingInitParameters struct {
 
 	// ID of the API to connect.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a RestAPI in apigateway to populate apiId.
@@ -33,7 +33,7 @@ type BasePathMappingInitParameters struct {
 
 	// Already-registered domain name to connect the API to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.DomainName
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",false)
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The identifier for the domain name resource. Supported only for private custom domain names.
@@ -49,7 +49,7 @@ type BasePathMappingInitParameters struct {
 
 	// Name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.Stage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("stage_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("stage_name",false)
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// Reference to a Stage in apigateway to populate stageName.
@@ -89,7 +89,7 @@ type BasePathMappingParameters struct {
 
 	// ID of the API to connect.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -107,7 +107,7 @@ type BasePathMappingParameters struct {
 
 	// Already-registered domain name to connect the API to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.DomainName
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",false)
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
@@ -130,7 +130,7 @@ type BasePathMappingParameters struct {
 
 	// Name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigateway/v1beta2.Stage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("stage_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("stage_name",false)
 	// +kubebuilder:validation:Optional
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
