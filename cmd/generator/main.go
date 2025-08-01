@@ -13,13 +13,12 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/alecthomas/kingpin/v2"
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/pipeline"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
-	"gopkg.in/alecthomas/kingpin.v2"
 
-	configcluster "github.com/upbound/provider-aws/config/cluster"
-	confignamespaced "github.com/upbound/provider-aws/config/namespaced"
+	"github.com/upbound/provider-aws/config"
 )
 
 func main() {
@@ -40,9 +39,9 @@ func main() {
 	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
 	kingpin.FatalIfError(err, "Cannot get the Terraform framework and SDK providers")
 
-	pc, err := configcluster.GetProvider(context.Background(), fwProvider, sdkProvider, true, false)
+	pc, err := config.GetProvider(context.Background(), fwProvider, sdkProvider, true, false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider cluster scoped configuration")
-	pns, err := confignamespaced.GetProvider(context.Background(), fwProvider, sdkProvider, true, false)
+	pns, err := config.GetProviderNamespaced(context.Background(), fwProvider, sdkProvider, true, false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 

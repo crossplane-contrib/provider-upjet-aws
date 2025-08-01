@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/alecthomas/kingpin/v2"
 	changelogsv1alpha1 "github.com/crossplane/crossplane-runtime/apis/changelogs/proto/v1alpha1"
 	xpcontroller "github.com/crossplane/crossplane-runtime/pkg/controller"
 	"github.com/crossplane/crossplane-runtime/pkg/feature"
@@ -25,7 +26,6 @@ import (
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"gopkg.in/alecthomas/kingpin.v2"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/cache"
@@ -36,8 +36,7 @@ import (
 
 	clusterapis "github.com/upbound/provider-aws/apis/cluster"
 	namespacedapis "github.com/upbound/provider-aws/apis/namespaced"
-	clusterconfig "github.com/upbound/provider-aws/config/cluster"
-	namespacedconfig "github.com/upbound/provider-aws/config/namespaced"
+	config "github.com/upbound/provider-aws/config"
 	resolverapis "github.com/upbound/provider-aws/internal/apis"
 	"github.com/upbound/provider-aws/internal/bootcheck"
 	"github.com/upbound/provider-aws/internal/clients"
@@ -183,9 +182,9 @@ func main() {
 	ctx := context.Background()
 	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
 	kingpin.FatalIfError(err, "Cannot get the Terraform framework and SDK providers")
-	clusterProvider, err := clusterconfig.GetProvider(ctx, fwProvider, sdkProvider, false, *skipDefaultTags)
+	clusterProvider, err := config.GetProvider(ctx, fwProvider, sdkProvider, false, *skipDefaultTags)
 	kingpin.FatalIfError(err, "Cannot initialize the cluster provider configuration")
-	namespacedProvider, err := namespacedconfig.GetProvider(ctx, fwProvider, sdkProvider, false, *skipDefaultTags)
+	namespacedProvider, err := config.GetProviderNamespaced(ctx, fwProvider, sdkProvider, false, *skipDefaultTags)
 	kingpin.FatalIfError(err, "Cannot initialize the namespaced provider configuration")
 
 	clusterSetupConfig := &clients.SetupConfig{
