@@ -59,6 +59,16 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 			managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name)))))
 }
 
+// SetupGated adds a controller that reconciles ClusterAuth.
+func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
+	o.Options.Gate.Register(func() {
+		if err := Setup(mgr, o); err != nil {
+			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", v1beta1.ClusterAuth_GroupVersionKind.String())
+		}
+	}, v1beta1.ClusterAuth_GroupVersionKind)
+	return nil
+}
+
 type connector struct {
 	kube               client.Client
 	newEKSClientFn     func(cfg aws.Config, optFns ...func(*eks.Options)) *eks.Client
