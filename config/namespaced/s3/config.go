@@ -122,10 +122,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_s3_bucket_lifecycle_configuration", func(r *config.Resource) {
 		r.MetaResource.ArgumentDocs["rule.filter.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.`
 		r.MetaResource.ArgumentDocs["rule.filter.and.prefix"] = `- (Optional) Prefix identifying one or more objects to which the rule applies.`
-		r.Version = "v1beta2"
-		r.PreviousVersions = []string{"v1beta1"}
-		r.SetCRDStorageVersion("v1beta1")
-		r.ControllerReconcileVersion = "v1beta1"
 
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
