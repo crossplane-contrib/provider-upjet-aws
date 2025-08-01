@@ -21,7 +21,7 @@ func (mg *DirectoryConfig) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this DirectoryConfig
 func (tr *DirectoryConfig) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"service_account_credentials[*].account_password": "serviceAccountCredentials[*].accountPasswordSecretRef"}
+	return map[string]string{"service_account_credentials[*].account_password": "serviceAccountCredentials.accountPasswordSecretRef"}
 }
 
 // GetObservation of this DirectoryConfig

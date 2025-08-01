@@ -36,6 +36,10 @@ type BackendEnvironmentObservation struct {
 	// Unique ID of the Amplify backend environment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// AWS CloudFormation stack name of a backend environment.
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 }
@@ -60,10 +64,10 @@ type BackendEnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentArtifacts *string `json:"deploymentArtifacts,omitempty" tf:"deployment_artifacts,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// AWS CloudFormation stack name of a backend environment.
 	// +kubebuilder:validation:Optional

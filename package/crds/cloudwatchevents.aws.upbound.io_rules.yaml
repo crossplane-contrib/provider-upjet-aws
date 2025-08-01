@@ -77,9 +77,8 @@ spec:
                     description: The description of the rule.
                     type: string
                   eventBusName:
-                    description: |-
-                      The name or ARN of the event bus to associate with this rule.
-                      If you omit this, the default event bus is used.
+                    description: The name or ARN of the event bus to associate with
+                      this rule. If you omit this, the default event bus is used.
                     type: string
                   eventBusNameRef:
                     description: Reference to a Bus in cloudwatchevents to populate
@@ -170,14 +169,13 @@ spec:
                       to false.
                     type: boolean
                   isEnabled:
-                    description: |-
-                      Whether the rule should be enabled.
-                      Defaults to true.
+                    description: Whether the rule should be enabled. Defaults to true.
                       Conflicts with state.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) associated with the
@@ -265,13 +263,12 @@ spec:
                       Schedule Expressions for Rules.
                     type: string
                   state:
-                    description: |-
-                      State of the rule.
-                      Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-                      When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail.
-                      To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-                      Defaults to ENABLED.
-                      Conflicts with is_enabled.
+                    description: State of the rule. Valid values are DISABLED, ENABLED,
+                      and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. When state
+                      is ENABLED, the rule is enabled for all events except those
+                      delivered by CloudTrail. To also enable the rule for events
+                      delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
+                      Defaults to ENABLED. Conflicts with is_enabled.
                     type: string
                   tags:
                     additionalProperties:
@@ -299,9 +296,8 @@ spec:
                     description: The description of the rule.
                     type: string
                   eventBusName:
-                    description: |-
-                      The name or ARN of the event bus to associate with this rule.
-                      If you omit this, the default event bus is used.
+                    description: The name or ARN of the event bus to associate with
+                      this rule. If you omit this, the default event bus is used.
                     type: string
                   eventBusNameRef:
                     description: Reference to a Bus in cloudwatchevents to populate
@@ -392,9 +388,7 @@ spec:
                       to false.
                     type: boolean
                   isEnabled:
-                    description: |-
-                      Whether the rule should be enabled.
-                      Defaults to true.
+                    description: Whether the rule should be enabled. Defaults to true.
                       Conflicts with state.
                     type: boolean
                   roleArn:
@@ -483,13 +477,12 @@ spec:
                       Schedule Expressions for Rules.
                     type: string
                   state:
-                    description: |-
-                      State of the rule.
-                      Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-                      When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail.
-                      To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-                      Defaults to ENABLED.
-                      Conflicts with is_enabled.
+                    description: State of the rule. Valid values are DISABLED, ENABLED,
+                      and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. When state
+                      is ENABLED, the rule is enabled for all events except those
+                      delivered by CloudTrail. To also enable the rule for events
+                      delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
+                      Defaults to ENABLED. Conflicts with is_enabled.
                     type: string
                   tags:
                     additionalProperties:
@@ -677,9 +670,8 @@ spec:
                     description: The description of the rule.
                     type: string
                   eventBusName:
-                    description: |-
-                      The name or ARN of the event bus to associate with this rule.
-                      If you omit this, the default event bus is used.
+                    description: The name or ARN of the event bus to associate with
+                      this rule. If you omit this, the default event bus is used.
                     type: string
                   eventPattern:
                     description: 'The event pattern described a JSON object. At least
@@ -697,11 +689,14 @@ spec:
                     description: The name of the rule.
                     type: string
                   isEnabled:
-                    description: |-
-                      Whether the rule should be enabled.
-                      Defaults to true.
+                    description: Whether the rule should be enabled. Defaults to true.
                       Conflicts with state.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) associated with the
                       role that is used for target invocation.
@@ -714,13 +709,12 @@ spec:
                       Schedule Expressions for Rules.
                     type: string
                   state:
-                    description: |-
-                      State of the rule.
-                      Valid values are DISABLED, ENABLED, and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-                      When state is ENABLED, the rule is enabled for all events except those delivered by CloudTrail.
-                      To also enable the rule for events delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
-                      Defaults to ENABLED.
-                      Conflicts with is_enabled.
+                    description: State of the rule. Valid values are DISABLED, ENABLED,
+                      and ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS. When state
+                      is ENABLED, the rule is enabled for all events except those
+                      delivered by CloudTrail. To also enable the rule for events
+                      delivered by CloudTrail, set state to ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS.
+                      Defaults to ENABLED. Conflicts with is_enabled.
                     type: string
                   tags:
                     additionalProperties:

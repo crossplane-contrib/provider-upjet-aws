@@ -408,6 +408,10 @@ type ScalingPlanObservation struct {
 	// Name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Scaling instructions. More details can be found in the AWS Auto Scaling API Reference.
 	ScalingInstruction []ScalingInstructionObservation `json:"scalingInstruction,omitempty" tf:"scaling_instruction,omitempty"`
 
@@ -425,10 +429,10 @@ type ScalingPlanParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Scaling instructions. More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Optional

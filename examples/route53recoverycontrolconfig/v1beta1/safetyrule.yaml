@@ -18,7 +18,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: daisyguttridge
-    region: us-west-1
     ruleConfig:
     - inverted: false
       threshold: 1
@@ -42,7 +41,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: tinlicker
-    region: us-west-1
 ---
 apiVersion: route53recoverycontrolconfig.aws.upbound.io/v1beta1
 kind: ControlPanel
@@ -58,7 +56,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: balmorhea
-    region: us-west-1
 ---
 apiVersion: route53recoverycontrolconfig.aws.upbound.io/v1beta1
 kind: Cluster
@@ -71,4 +68,3 @@ metadata:
 spec:
   forProvider:
     name: georgefitzgerald
-    region: us-west-1

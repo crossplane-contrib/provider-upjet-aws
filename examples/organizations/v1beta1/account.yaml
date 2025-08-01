@@ -16,4 +16,3 @@ spec:
   forProvider:
     email: <new-account-email>
     name: my_new_account
-    region: us-west-1

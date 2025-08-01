@@ -5,59 +5,46 @@
 package config
 
 import (
+	"context"
 	"strings"
 
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	rschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
-	"github.com/crossplane/upjet/pkg/types"
-	"github.com/crossplane/upjet/pkg/types/comments"
 	"github.com/crossplane/upjet/pkg/types/name"
 
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// RegionAddition adds region to the spec of all resources except iam group which
-// does not have a region notion.
-func RegionAddition() config.ResourceOption { //nolint:gocyclo
+// RegionRequired makes the region field required for resources that have it in their schema.
+func RegionRequired() config.ResourceOption { //nolint:gocyclo
 	return func(r *config.Resource) {
-		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
-			return
-		}
-		c := "Region is the region you'd like your resource to be created in.\n"
-		comment, err := comments.New(c, comments.WithTFTag("-"))
-		if err != nil {
-			panic(errors.Wrap(err, "cannot build comment for region"))
-		}
+		// Only process resources that already have a region field
+		if s, ok := r.TerraformResource.Schema["region"]; ok {
+			// Make existing region field required
+			s.Required = true
+			s.Optional = false
+			s.Computed = false
+			s.Description = "Region is the region you'd like your resource to be created in."
 
-		// check if the underlying Terraform resource already has "region"
-		// as a (state) attribute
-		if s, ok := r.TerraformResource.Schema["region"]; ok && types.IsObservation(s) {
-			r.SchemaElementOptions.SetAddToObservation("region")
-		}
-
-		r.TerraformResource.Schema["region"] = &schema.Schema{
-			Type:        schema.TypeString,
-			Required:    true,
-			Description: comment.String(),
-		}
-		if r.MetaResource == nil {
-			return
-		}
-		for _, ex := range r.MetaResource.Examples {
-			defaultRegion := "us-west-1"
-			if err := ex.SetPathValue("region", defaultRegion); err != nil {
-				panic(err)
-			}
-			for k := range ex.Dependencies {
-				if strings.HasPrefix(k, "aws_iam") {
-					continue
-				}
-				if err := ex.Dependencies.SetPathValue(k, "region", defaultRegion); err != nil {
-					panic(err)
+			// Add region to generated examples only if schema has region field
+			if r.MetaResource != nil {
+				for _, ex := range r.MetaResource.Examples {
+					defaultRegion := "us-west-1"
+					if err := ex.SetPathValue("region", defaultRegion); err != nil {
+						panic(err)
+					}
+					for k := range ex.Dependencies {
+						if err := ex.Dependencies.SetPathValue(k, "region", defaultRegion); err != nil {
+							panic(err)
+						}
+					}
 				}
 			}
 		}
@@ -212,4 +199,55 @@ func injectFieldRenamingConversionFunctions() config.ResourceOption {
 			}
 		}
 	}
+}
+
+func injectPluginFrameworkCustomStateEmptyCheck() config.ResourceOption {
+	return func(r *config.Resource) {
+		if r.TerraformPluginFrameworkResource != nil {
+			r.TerraformPluginFrameworkIsStateEmptyFn = tfStateVlueIsEmpty
+		}
+	}
+}
+
+func tfStateVlueIsEmpty(ctx context.Context, tfStateValue tftypes.Value, resourceSchema rschema.Schema) (bool, error) { //nolint:gocyclo // easier to follow as a unit
+	sdkState := tfsdk.State{
+		Raw:    tfStateValue.Copy(),
+		Schema: resourceSchema,
+	}
+	var isEmpty bool
+	var region string
+	sdkState.GetAttribute(ctx, path.Root("region"), &region)
+	if region != "" {
+		sdkState.SetAttribute(ctx, path.Root("region"), (*string)(nil))
+		isEmpty = true
+		if err := tftypes.Walk(sdkState.Raw, func(attributePath *tftypes.AttributePath, value tftypes.Value) (bool, error) {
+			if len(attributePath.Steps()) != 1 {
+				return true, nil
+			}
+
+			valType := value.Type()
+			switch {
+			case valType.Is(tftypes.Set{}), valType.Is(tftypes.List{}), valType.Is(tftypes.Tuple{}):
+				if value.IsKnown() && !value.IsNull() {
+					destVal := make([]tftypes.Value, 0)
+					if err := value.As(&destVal); err != nil {
+						return true, err
+					}
+					if len(destVal) > 0 {
+						isEmpty = false
+						return false, nil
+					}
+				}
+			default:
+				if value.IsKnown() && !value.IsNull() {
+					isEmpty = false
+					return false, nil
+				}
+			}
+			return true, nil
+		}); err != nil {
+			return false, err
+		}
+	}
+	return isEmpty, nil
 }

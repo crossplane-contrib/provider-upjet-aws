@@ -49,11 +49,6 @@ type RegionParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// The region name to manage.
 	// +kubebuilder:validation:Required
 	RegionName *string `json:"regionName" tf:"region_name,omitempty"`

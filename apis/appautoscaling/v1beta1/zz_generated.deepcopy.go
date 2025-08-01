@@ -750,6 +750,11 @@ func (in *PolicyObservation) DeepCopyInto(out *PolicyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceID != nil {
 		in, out := &in.ResourceID, &out.ResourceID
 		*out = new(string)
@@ -1231,6 +1236,11 @@ func (in *ScheduledActionObservation) DeepCopyInto(out *ScheduledActionObservati
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1877,6 +1887,11 @@ func (in *TargetObservation) DeepCopyInto(out *TargetObservation) {
 	if in.MinCapacity != nil {
 		in, out := &in.MinCapacity, &out.MinCapacity
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.ResourceID != nil {

@@ -94,6 +94,10 @@ type SlotTypeObservation struct {
 	// The date when the $LATEST version of this slot type was updated.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Determines the slot resolution strategy that Amazon Lex
 	// uses to return slot type values. ORIGINAL_VALUE returns the value entered by the user if the user
 	// value is similar to the slot value. TOP_RESOLUTION returns the first value in the resolution list
@@ -122,10 +126,10 @@ type SlotTypeParameters struct {
 	// +kubebuilder:validation:Optional
 	EnumerationValue []EnumerationValueParameters `json:"enumerationValue,omitempty" tf:"enumeration_value,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Determines the slot resolution strategy that Amazon Lex
 	// uses to return slot type values. ORIGINAL_VALUE returns the value entered by the user if the user

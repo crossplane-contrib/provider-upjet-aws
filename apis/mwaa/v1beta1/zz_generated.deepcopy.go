@@ -439,6 +439,11 @@ func (in *EnvironmentObservation) DeepCopyInto(out *EnvironmentObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RequirementsS3ObjectVersion != nil {
 		in, out := &in.RequirementsS3ObjectVersion, &out.RequirementsS3ObjectVersion
 		*out = new(string)

@@ -91,8 +91,9 @@ spec:
                       not begin or end with a hyphen.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -347,6 +348,11 @@ spec:
                       per region per account, can have a maximum of 32 characters,
                       must contain only alphanumeric characters or hyphens, and must
                       not begin or end with a hyphen.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

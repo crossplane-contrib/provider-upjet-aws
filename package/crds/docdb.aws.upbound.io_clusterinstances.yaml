@@ -170,8 +170,8 @@ spec:
                         type: object
                     type: object
                   copyTagsToSnapshot:
-                    description: –  Copy all DB instance tags to snapshots. Default
-                      is false.
+                    description: Copy all DB instance tags to snapshots. Default is
+                      false.
                     type: boolean
                   enablePerformanceInsights:
                     description: A value that indicates whether to enable Performance
@@ -205,8 +205,9 @@ spec:
                       get promoter to writer.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -327,8 +328,8 @@ spec:
                         type: object
                     type: object
                   copyTagsToSnapshot:
-                    description: –  Copy all DB instance tags to snapshots. Default
-                      is false.
+                    description: Copy all DB instance tags to snapshots. Default is
+                      false.
                     type: boolean
                   enablePerformanceInsights:
                     description: A value that indicates whether to enable Performance
@@ -571,8 +572,8 @@ spec:
                       to launch this instance.
                     type: string
                   copyTagsToSnapshot:
-                    description: –  Copy all DB instance tags to snapshots. Default
-                      is false.
+                    description: Copy all DB instance tags to snapshots. Default is
+                      false.
                     type: boolean
                   dbSubnetGroupName:
                     description: The DB subnet group to associate with this DB instance.
@@ -633,6 +634,11 @@ spec:
                     type: number
                   publiclyAccessible:
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted.
                     type: boolean
@@ -651,7 +657,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   writer:
-                    description: – Boolean indicating if this instance is writable.
+                    description: Boolean indicating if this instance is writable.
                       False indicates this instance is a read replica.
                     type: boolean
                 type: object

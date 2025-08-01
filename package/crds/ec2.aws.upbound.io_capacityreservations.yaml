@@ -122,8 +122,9 @@ spec:
                       group in which to create the Capacity Reservation.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -454,6 +455,11 @@ spec:
                   placementGroupArn:
                     description: The Amazon Resource Name (ARN) of the cluster placement
                       group in which to create the Capacity Reservation.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

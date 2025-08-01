@@ -26,7 +26,7 @@ type MemberInitParameters struct {
 
 	// ARN of the behavior graph to invite the member accounts to contribute their data to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("graph_arn",true)
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
 	// Reference to a Graph in detective to populate graphArn.
@@ -69,6 +69,10 @@ type MemberObservation struct {
 	// A custom message to include in the invitation. Amazon Detective adds this message to the standard content that it sends for an invitation.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Current membership status of the member account.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -95,7 +99,7 @@ type MemberParameters struct {
 
 	// ARN of the behavior graph to invite the member accounts to contribute their data to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("graph_arn",true)
 	// +kubebuilder:validation:Optional
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
@@ -111,10 +115,10 @@ type MemberParameters struct {
 	// +kubebuilder:validation:Optional
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // MemberSpec defines the desired state of Member

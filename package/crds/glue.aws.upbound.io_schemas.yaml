@@ -83,11 +83,12 @@ spec:
                       are AVRO, JSON and PROTOBUF.
                     type: string
                   description:
-                    description: –  A description of the schema.
+                    description: A description of the schema.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   registryArn:
                     description: The ARN of the Glue Registry to create the schema
@@ -172,7 +173,7 @@ spec:
                       for schema_name.
                     type: string
                   schemaName:
-                    description: –  The Name of the schema.
+                    description: The Name of the schema.
                     type: string
                   tags:
                     additionalProperties:
@@ -206,7 +207,7 @@ spec:
                       are AVRO, JSON and PROTOBUF.
                     type: string
                   description:
-                    description: –  A description of the schema.
+                    description: A description of the schema.
                     type: string
                   registryArn:
                     description: The ARN of the Glue Registry to create the schema
@@ -291,7 +292,7 @@ spec:
                       for schema_name.
                     type: string
                   schemaName:
-                    description: –  The Name of the schema.
+                    description: The Name of the schema.
                     type: string
                   tags:
                     additionalProperties:
@@ -502,7 +503,7 @@ spec:
                       are AVRO, JSON and PROTOBUF.
                     type: string
                   description:
-                    description: –  A description of the schema.
+                    description: A description of the schema.
                     type: string
                   id:
                     description: Amazon Resource Name (ARN) of the schema.
@@ -515,6 +516,11 @@ spec:
                     description: The next version of the schema associated with the
                       returned schema definition.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   registryArn:
                     description: The ARN of the Glue Registry to create the schema
                       in.
@@ -531,7 +537,7 @@ spec:
                       for schema_name.
                     type: string
                   schemaName:
-                    description: –  The Name of the schema.
+                    description: The Name of the schema.
                     type: string
                   tags:
                     additionalProperties:

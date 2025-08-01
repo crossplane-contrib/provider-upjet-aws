@@ -13,7 +13,6 @@ spec:
     name: www
     records:
     - dev.upbound.io
-    region: us-west-1
     ttl: 5
     type: CNAME
     zoneIdRef:
@@ -32,4 +31,3 @@ metadata:
 spec:
   forProvider:
     name: mycompany.test
-    region: us-west-1

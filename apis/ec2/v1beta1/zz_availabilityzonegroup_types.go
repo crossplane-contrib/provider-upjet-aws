@@ -26,6 +26,10 @@ type AvailabilityZoneGroupObservation struct {
 
 	// Indicates whether to enable or disable Availability Zone Group. Valid values: opted-in or not-opted-in.
 	OptInStatus *string `json:"optInStatus,omitempty" tf:"opt_in_status,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AvailabilityZoneGroupParameters struct {
@@ -34,10 +38,10 @@ type AvailabilityZoneGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	OptInStatus *string `json:"optInStatus,omitempty" tf:"opt_in_status,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // AvailabilityZoneGroupSpec defines the desired state of AvailabilityZoneGroup

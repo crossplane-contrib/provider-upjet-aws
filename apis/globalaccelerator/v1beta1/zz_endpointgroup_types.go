@@ -186,11 +186,6 @@ type EndpointGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PortOverride []PortOverrideParameters `json:"portOverride,omitempty" tf:"port_override,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.
 	// +kubebuilder:validation:Optional
 	ThresholdCount *float64 `json:"thresholdCount,omitempty" tf:"threshold_count,omitempty"`

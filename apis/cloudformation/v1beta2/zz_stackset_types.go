@@ -225,6 +225,10 @@ type StackSetObservation struct {
 	// Describes how the IAM roles required for your StackSet are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.
 	PermissionModel *string `json:"permissionModel,omitempty" tf:"permission_model,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Unique identifier of the StackSet.
 	StackSetID *string `json:"stackSetId,omitempty" tf:"stack_set_id,omitempty"`
 
@@ -297,10 +301,10 @@ type StackSetParameters struct {
 	// +kubebuilder:validation:Optional
 	PermissionModel *string `json:"permissionModel,omitempty" tf:"permission_model,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

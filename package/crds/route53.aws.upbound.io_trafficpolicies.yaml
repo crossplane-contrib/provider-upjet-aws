@@ -84,12 +84,6 @@ spec:
                   name:
                     description: Name of the traffic policy.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -297,6 +291,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: Amazon Resource Name (ARN) of the traffic policy.
+                    type: string
                   comment:
                     description: Comment for the traffic policy.
                     type: string
@@ -306,7 +303,7 @@ spec:
                       see the AWS Route53 Traffic Policy document format
                     type: string
                   id:
-                    description: ID of the traffic policy
+                    description: ID of the traffic policy.
                     type: string
                   name:
                     description: Name of the traffic policy.

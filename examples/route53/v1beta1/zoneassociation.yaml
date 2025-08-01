@@ -12,7 +12,6 @@ metadata:
   name: secondary
 spec:
   forProvider:
-    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary
@@ -35,7 +34,6 @@ metadata:
 spec:
   forProvider:
     name: upbound.rocks
-    region: us-west-1
     vpc:
     - vpcIdSelector:
         matchLabels:
@@ -53,7 +51,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary

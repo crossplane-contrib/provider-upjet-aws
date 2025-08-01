@@ -53,7 +53,7 @@ type AuthenticationConfigurationParameters struct {
 
 type BasicAuthenticationInitParameters struct {
 
-	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
@@ -66,28 +66,28 @@ type BasicAuthenticationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
-	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	// The port number of the website host you want to connect to via a web proxy server. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type BasicAuthenticationObservation struct {
 
-	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	// The port number of the website host you want to connect to via a web proxy server. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type BasicAuthenticationParameters struct {
 
-	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -101,11 +101,11 @@ type BasicAuthenticationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
-	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host" tf:"host,omitempty"`
 
-	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	// The port number of the website host you want to connect to via a web proxy server. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
 }
@@ -200,29 +200,39 @@ type ConditionParameters struct {
 
 type ConfigurationInitParameters struct {
 
-	// A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
+	// (Deprecated, Required if type is set to S3) A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
 	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
+	TemplateConfiguration []TemplateConfigurationInitParameters `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
+
+	// (Deprecated, Required if type is set to WEBCRAWLER) A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
 	WebCrawlerConfiguration []WebCrawlerConfigurationInitParameters `json:"webCrawlerConfiguration,omitempty" tf:"web_crawler_configuration,omitempty"`
 }
 
 type ConfigurationObservation struct {
 
-	// A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
+	// (Deprecated, Required if type is set to S3) A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
 	S3Configuration []S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
+	TemplateConfiguration []TemplateConfigurationObservation `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
+
+	// (Deprecated, Required if type is set to WEBCRAWLER) A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
 	WebCrawlerConfiguration []WebCrawlerConfigurationObservation `json:"webCrawlerConfiguration,omitempty" tf:"web_crawler_configuration,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
-	// A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
+	// (Deprecated, Required if type is set to S3) A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
 	// +kubebuilder:validation:Optional
 	S3Configuration []S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
+	// +kubebuilder:validation:Optional
+	TemplateConfiguration []TemplateConfigurationParameters `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
+
+	// (Deprecated, Required if type is set to WEBCRAWLER) A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
 	// +kubebuilder:validation:Optional
 	WebCrawlerConfiguration []WebCrawlerConfigurationParameters `json:"webCrawlerConfiguration,omitempty" tf:"web_crawler_configuration,omitempty"`
 }
@@ -338,7 +348,7 @@ type DataSourceObservation struct {
 	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration block when the type parameter is set to CUSTOM. Detailed below.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The Unix timestamp of when the Data Source was created.
+	// The Unix time stamp of when the Data Source was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// A block with the configuration information for altering document metadata and content during the document ingestion process. For more information on how to create, modify and delete document metadata, or make other content alterations when you ingest documents into Amazon Kendra, see Customizing document metadata during the ingestion process. Detailed below.
@@ -350,7 +360,7 @@ type DataSourceObservation struct {
 	// A description for the Data Source connector.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the Data Source to fail.
+	// When the Status field value is FAILED, contains a description of the error that caused the Data Source to fail.
 	ErrorMessage *string `json:"errorMessage,omitempty" tf:"error_message,omitempty"`
 
 	// The unique identifiers of the Data Source and index separated by a slash (/).
@@ -364,6 +374,10 @@ type DataSourceObservation struct {
 
 	// A name for your data source connector.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -385,7 +399,7 @@ type DataSourceObservation struct {
 	// The type of data source repository. For an updated list of values, refer to Valid Values for Type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The Unix timestamp of when the Data Source was last updated.
+	// The Unix time stamp of when the Data Source was last updated.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
@@ -425,10 +439,10 @@ type DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -772,7 +786,7 @@ type PreExtractionHookConfigurationParameters struct {
 
 type ProxyConfigurationInitParameters struct {
 
-	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
@@ -785,28 +799,28 @@ type ProxyConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
-	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	// The port number of the website host you want to connect to via a web proxy server. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ProxyConfigurationObservation struct {
 
-	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	// The port number of the website host you want to connect to via a web proxy server. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ProxyConfigurationParameters struct {
 
-	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -820,11 +834,11 @@ type ProxyConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
-	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host" tf:"host,omitempty"`
 
-	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	// The port number of the website host you want to connect to via a web proxy server. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
 }
@@ -1069,6 +1083,25 @@ type TargetParameters struct {
 	TargetDocumentAttributeValueDeletion *bool `json:"targetDocumentAttributeValueDeletion,omitempty" tf:"target_document_attribute_value_deletion,omitempty"`
 }
 
+type TemplateConfigurationInitParameters struct {
+
+	// JSON string containing a data source template schema.
+	Template *string `json:"template,omitempty" tf:"template,omitempty"`
+}
+
+type TemplateConfigurationObservation struct {
+
+	// JSON string containing a data source template schema.
+	Template *string `json:"template,omitempty" tf:"template,omitempty"`
+}
+
+type TemplateConfigurationParameters struct {
+
+	// JSON string containing a data source template schema.
+	// +kubebuilder:validation:Optional
+	Template *string `json:"template" tf:"template,omitempty"`
+}
+
 type UrlsInitParameters struct {
 
 	// A block that specifies the configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs. Detailed below.
@@ -1103,7 +1136,7 @@ type WebCrawlerConfigurationInitParameters struct {
 	// A block with the configuration information required to connect to websites using authentication. You can connect to websites using basic authentication of user name and password. You use a secret in AWS Secrets Manager to store your authentication credentials. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Detailed below.
 	AuthenticationConfiguration []AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
-	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
+	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels - index level (i.e. seed in this example), sections level, and subsections level - and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
 	CrawlDepth *float64 `json:"crawlDepth,omitempty" tf:"crawl_depth,omitempty"`
 
 	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger than this size (in MB) are skipped/not crawled. The default maximum size of a webpage or attachment is set to 50 MB. Minimum value of 1.0e-06. Maximum value of 50.
@@ -1135,7 +1168,7 @@ type WebCrawlerConfigurationObservation struct {
 	// A block with the configuration information required to connect to websites using authentication. You can connect to websites using basic authentication of user name and password. You use a secret in AWS Secrets Manager to store your authentication credentials. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Detailed below.
 	AuthenticationConfiguration []AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
-	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
+	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels - index level (i.e. seed in this example), sections level, and subsections level - and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
 	CrawlDepth *float64 `json:"crawlDepth,omitempty" tf:"crawl_depth,omitempty"`
 
 	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger than this size (in MB) are skipped/not crawled. The default maximum size of a webpage or attachment is set to 50 MB. Minimum value of 1.0e-06. Maximum value of 50.
@@ -1168,7 +1201,7 @@ type WebCrawlerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration []AuthenticationConfigurationParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
-	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
+	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels - index level (i.e. seed in this example), sections level, and subsections level - and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
 	// +kubebuilder:validation:Optional
 	CrawlDepth *float64 `json:"crawlDepth,omitempty" tf:"crawl_depth,omitempty"`
 

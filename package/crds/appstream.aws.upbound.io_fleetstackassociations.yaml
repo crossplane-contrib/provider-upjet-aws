@@ -151,8 +151,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   stackName:
                     description: Name of the stack.
@@ -427,6 +428,11 @@ spec:
                     description: Unique ID of the appstream stack fleet association,
                       composed of the fleet_name and stack_name separated by a slash
                       (/).
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   stackName:
                     description: Name of the stack.

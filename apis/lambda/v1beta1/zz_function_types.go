@@ -15,40 +15,60 @@ import (
 
 type DeadLetterConfigInitParameters struct {
 
-	// ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted.
+	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Queue in sqs to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type DeadLetterConfigObservation struct {
 
-	// ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted.
+	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 }
 
 type DeadLetterConfigParameters struct {
 
-	// ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted.
+	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
-	TargetArn *string `json:"targetArn" tf:"target_arn,omitempty"`
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Queue in sqs to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type EnvironmentInitParameters struct {
 
-	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	// Map of environment variables available to your Lambda function during execution.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
 type EnvironmentObservation struct {
 
-	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	// Map of environment variables available to your Lambda function during execution.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
 type EnvironmentParameters struct {
 
-	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	// Map of environment variables available to your Lambda function during execution.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
@@ -56,26 +76,26 @@ type EnvironmentParameters struct {
 
 type EphemeralStorageInitParameters struct {
 
-	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
+	// Amount of ephemeral storage (/tmp) in MB. Valid between 512 MB and 10,240 MB (10 GB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type EphemeralStorageObservation struct {
 
-	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
+	// Amount of ephemeral storage (/tmp) in MB. Valid between 512 MB and 10,240 MB (10 GB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type EphemeralStorageParameters struct {
 
-	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
+	// Amount of ephemeral storage (/tmp) in MB. Valid between 512 MB and 10,240 MB (10 GB).
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type FileSystemConfigInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the Amazon EFS Access Point that provides access to the file system.
+	// ARN of the Amazon EFS Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -88,22 +108,22 @@ type FileSystemConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
-	// Path where the function can access the file system, starting with /mnt/.
+	// Path where the function can access the file system. Must start with /mnt/.
 	LocalMountPath *string `json:"localMountPath,omitempty" tf:"local_mount_path,omitempty"`
 }
 
 type FileSystemConfigObservation struct {
 
-	// Amazon Resource Name (ARN) of the Amazon EFS Access Point that provides access to the file system.
+	// ARN of the Amazon EFS Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Path where the function can access the file system, starting with /mnt/.
+	// Path where the function can access the file system. Must start with /mnt/.
 	LocalMountPath *string `json:"localMountPath,omitempty" tf:"local_mount_path,omitempty"`
 }
 
 type FileSystemConfigParameters struct {
 
-	// Amazon Resource Name (ARN) of the Amazon EFS Access Point that provides access to the file system.
+	// ARN of the Amazon EFS Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -117,44 +137,44 @@ type FileSystemConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
-	// Path where the function can access the file system, starting with /mnt/.
+	// Path where the function can access the file system. Must start with /mnt/.
 	// +kubebuilder:validation:Optional
 	LocalMountPath *string `json:"localMountPath" tf:"local_mount_path,omitempty"`
 }
 
 type FunctionInitParameters struct {
 
-	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stay the same.
+	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stays the same.
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
-	// To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
+	// ARN of a code-signing configuration to enable code signing for this function.
 	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for dead letter queue. See below.
 	DeadLetterConfig []DeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Description of what your Lambda Function does.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for environment variables. See below.
 	Environment []EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The amount of Ephemeral storage(/tmp) to allocate for the Lambda Function in MB. This parameter is used to expand the total amount of Ephemeral storage available, beyond the default amount of 512MB. Detailed below.
+	// Amount of ephemeral storage (/tmp) to allocate for the Lambda Function. See below.
 	EphemeralStorage []EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for EFS file system. See below.
 	FileSystemConfig []FileSystemConfigInitParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 
-	// Function entrypoint in your code.
+	// Function entry point in your code. Required if package_type is Zip.
 	Handler *string `json:"handler,omitempty" tf:"handler,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Container image configuration values. See below.
 	ImageConfig []ImageConfigInitParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
-	// ECR image URI containing the function's deployment package. Exactly one of filename, image_uri,  or s3_bucket must be specified.
+	// ECR image URI containing the function's deployment package. Conflicts with filename and s3_bucket. One of filename, image_uri, or s3_bucket must be specified.
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
-	// Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. To fix the perpetual difference, remove this configuration.
+	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -166,7 +186,7 @@ type FunctionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
+	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
@@ -179,10 +199,10 @@ type FunctionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LayersSelector *v1.Selector `json:"layersSelector,omitempty" tf:"-"`
 
-	// Configuration block used to specify advanced logging settings. Detailed below.
+	// Configuration block for advanced logging settings. See below.
 	LoggingConfig []LoggingConfigInitParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
-	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
+	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 10,240 MB (10 GB), in 1 MB increments. Defaults to 128.
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
 	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
@@ -191,7 +211,7 @@ type FunctionInitParameters struct {
 	// Whether to publish creation/change as new Lambda Function Version. Defaults to false.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// Whether to replace the security groups on the function's VPC configuration prior to destruction. Default is false.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
@@ -202,17 +222,17 @@ type FunctionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// List of security group IDs to assign to the function's VPC configuration prior to destruction. Required if replace_security_groups_on_destroy is true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
 	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
-	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
+	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1.
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
-	// Amazon Resource Name (ARN) of the function's execution role. The role provides the function's identity and access to AWS services and resources.
+	// ARN of the function's execution role. The role provides the function's identity and access to AWS services and resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -225,10 +245,10 @@ type FunctionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
-	// Identifier of the function's runtime. See Runtimes for valid values.
+	// Identifier of the function's runtime. Required if package_type is Zip. See Runtimes for valid values.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// S3 bucket location containing the function's deployment package. This bucket must reside in the same AWS region where you are creating the Lambda function. Exactly one of filename, image_uri, or s3_bucket must be specified. When s3_bucket is set, s3_key is required.
+	// S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri. One of filename, image_uri, or s3_bucket must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
@@ -240,15 +260,16 @@ type FunctionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// S3 key of an object containing the function's deployment package. When s3_bucket is set, s3_key is required.
+	// S3 key of an object containing the function's deployment package. Required if s3_bucket is set.
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 
 	// Object version containing the function's deployment package. Conflicts with filename and image_uri.
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
 
+	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// Snap start settings block. Detailed below.
+	// Configuration block for snap start settings. See below.
 	SnapStart []SnapStartInitParameters `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
 
 	// Used to trigger updates. Must be set to a base64 encoded SHA256 hash of the package file specified with either filename or s3_key. If you have specified this field manually, it should be the actual (computed) hash of the underlying lambda function specified in the filename, image_uri, s3_bucket fields.
@@ -258,72 +279,72 @@ type FunctionInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
+	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. Valid between 1 and 900.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for X-Ray tracing. See below.
 	TracingConfig []TracingConfigInitParameters `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for VPC. See below.
 	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type FunctionObservation struct {
 
-	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stay the same.
+	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stays the same.
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
-	// Amazon Resource Name (ARN) identifying your Lambda Function.
+	// ARN identifying your Lambda Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Base64-encoded representation of raw SHA-256 sum of the zip file.
 	CodeSha256 *string `json:"codeSha256,omitempty" tf:"code_sha256,omitempty"`
 
-	// To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
+	// ARN of a code-signing configuration to enable code signing for this function.
 	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for dead letter queue. See below.
 	DeadLetterConfig []DeadLetterConfigObservation `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
 	// Description of what your Lambda Function does.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for environment variables. See below.
 	Environment []EnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The amount of Ephemeral storage(/tmp) to allocate for the Lambda Function in MB. This parameter is used to expand the total amount of Ephemeral storage available, beyond the default amount of 512MB. Detailed below.
+	// Amount of ephemeral storage (/tmp) to allocate for the Lambda Function. See below.
 	EphemeralStorage []EphemeralStorageObservation `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for EFS file system. See below.
 	FileSystemConfig []FileSystemConfigObservation `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 
-	// Function entrypoint in your code.
+	// Function entry point in your code. Required if package_type is Zip.
 	Handler *string `json:"handler,omitempty" tf:"handler,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Container image configuration values. See below.
 	ImageConfig []ImageConfigObservation `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
-	// ECR image URI containing the function's deployment package. Exactly one of filename, image_uri,  or s3_bucket must be specified.
+	// ECR image URI containing the function's deployment package. Conflicts with filename and s3_bucket. One of filename, image_uri, or s3_bucket must be specified.
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
 	// ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	InvokeArn *string `json:"invokeArn,omitempty" tf:"invoke_arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. To fix the perpetual difference, remove this configuration.
+	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Date this resource was last modified.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 
-	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
+	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
-	// Configuration block used to specify advanced logging settings. Detailed below.
+	// Configuration block for advanced logging settings. See below.
 	LoggingConfig []LoggingConfigObservation `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
-	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
+	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 10,240 MB (10 GB), in 1 MB increments. Defaults to 128.
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
 	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
@@ -338,26 +359,30 @@ type FunctionObservation struct {
 	// Qualified ARN (ARN with lambda version number) to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	QualifiedInvokeArn *string `json:"qualifiedInvokeArn,omitempty" tf:"qualified_invoke_arn,omitempty"`
 
-	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Whether to replace the security groups on the function's VPC configuration prior to destruction. Default is false.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
-	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// List of security group IDs to assign to the function's VPC configuration prior to destruction. Required if replace_security_groups_on_destroy is true.
 	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
-	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
+	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1.
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
-	// Amazon Resource Name (ARN) of the function's execution role. The role provides the function's identity and access to AWS services and resources.
+	// ARN of the function's execution role. The role provides the function's identity and access to AWS services and resources.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
-	// Identifier of the function's runtime. See Runtimes for valid values.
+	// Identifier of the function's runtime. Required if package_type is Zip. See Runtimes for valid values.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// S3 bucket location containing the function's deployment package. This bucket must reside in the same AWS region where you are creating the Lambda function. Exactly one of filename, image_uri, or s3_bucket must be specified. When s3_bucket is set, s3_key is required.
+	// S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri. One of filename, image_uri, or s3_bucket must be specified.
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
-	// S3 key of an object containing the function's deployment package. When s3_bucket is set, s3_key is required.
+	// S3 key of an object containing the function's deployment package. Required if s3_bucket is set.
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 
 	// Object version containing the function's deployment package. Conflicts with filename and image_uri.
@@ -369,9 +394,10 @@ type FunctionObservation struct {
 	// ARN of the signing profile version.
 	SigningProfileVersionArn *string `json:"signingProfileVersionArn,omitempty" tf:"signing_profile_version_arn,omitempty"`
 
+	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// Snap start settings block. Detailed below.
+	// Configuration block for snap start settings. See below.
 	SnapStart []SnapStartObservation `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
 
 	// Used to trigger updates. Must be set to a base64 encoded SHA256 hash of the package file specified with either filename or s3_key. If you have specified this field manually, it should be the actual (computed) hash of the underlying lambda function specified in the filename, image_uri, s3_bucket fields.
@@ -384,17 +410,17 @@ type FunctionObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
+	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. Valid between 1 and 900.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for X-Ray tracing. See below.
 	TracingConfig []TracingConfigObservation `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for VPC. See below.
 	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
 	// Latest published version of your Lambda Function.
@@ -403,15 +429,15 @@ type FunctionObservation struct {
 
 type FunctionParameters struct {
 
-	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stay the same.
+	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stays the same.
 	// +kubebuilder:validation:Optional
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
-	// To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
+	// ARN of a code-signing configuration to enable code signing for this function.
 	// +kubebuilder:validation:Optional
 	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for dead letter queue. See below.
 	// +kubebuilder:validation:Optional
 	DeadLetterConfig []DeadLetterConfigParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
@@ -419,31 +445,31 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for environment variables. See below.
 	// +kubebuilder:validation:Optional
 	Environment []EnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The amount of Ephemeral storage(/tmp) to allocate for the Lambda Function in MB. This parameter is used to expand the total amount of Ephemeral storage available, beyond the default amount of 512MB. Detailed below.
+	// Amount of ephemeral storage (/tmp) to allocate for the Lambda Function. See below.
 	// +kubebuilder:validation:Optional
 	EphemeralStorage []EphemeralStorageParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for EFS file system. See below.
 	// +kubebuilder:validation:Optional
 	FileSystemConfig []FileSystemConfigParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 
-	// Function entrypoint in your code.
+	// Function entry point in your code. Required if package_type is Zip.
 	// +kubebuilder:validation:Optional
 	Handler *string `json:"handler,omitempty" tf:"handler,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Container image configuration values. See below.
 	// +kubebuilder:validation:Optional
 	ImageConfig []ImageConfigParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
-	// ECR image URI containing the function's deployment package. Exactly one of filename, image_uri,  or s3_bucket must be specified.
+	// ECR image URI containing the function's deployment package. Conflicts with filename and s3_bucket. One of filename, image_uri, or s3_bucket must be specified.
 	// +kubebuilder:validation:Optional
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
-	// Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. To fix the perpetual difference, remove this configuration.
+	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -456,7 +482,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
+	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -470,11 +496,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	LayersSelector *v1.Selector `json:"layersSelector,omitempty" tf:"-"`
 
-	// Configuration block used to specify advanced logging settings. Detailed below.
+	// Configuration block for advanced logging settings. See below.
 	// +kubebuilder:validation:Optional
 	LoggingConfig []LoggingConfigParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
-	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
+	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 10,240 MB (10 GB), in 1 MB increments. Defaults to 128.
 	// +kubebuilder:validation:Optional
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
@@ -486,12 +512,12 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// Whether to replace the security groups on the function's VPC configuration prior to destruction. Default is false.
 	// +kubebuilder:validation:Optional
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
@@ -503,7 +529,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// List of security group IDs to assign to the function's VPC configuration prior to destruction. Required if replace_security_groups_on_destroy is true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
@@ -511,11 +537,11 @@ type FunctionParameters struct {
 	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
-	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
+	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1.
 	// +kubebuilder:validation:Optional
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
-	// Amazon Resource Name (ARN) of the function's execution role. The role provides the function's identity and access to AWS services and resources.
+	// ARN of the function's execution role. The role provides the function's identity and access to AWS services and resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -529,11 +555,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
-	// Identifier of the function's runtime. See Runtimes for valid values.
+	// Identifier of the function's runtime. Required if package_type is Zip. See Runtimes for valid values.
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// S3 bucket location containing the function's deployment package. This bucket must reside in the same AWS region where you are creating the Lambda function. Exactly one of filename, image_uri, or s3_bucket must be specified. When s3_bucket is set, s3_key is required.
+	// S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri. One of filename, image_uri, or s3_bucket must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
@@ -546,7 +572,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// S3 key of an object containing the function's deployment package. When s3_bucket is set, s3_key is required.
+	// S3 key of an object containing the function's deployment package. Required if s3_bucket is set.
 	// +kubebuilder:validation:Optional
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 
@@ -554,10 +580,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
 
+	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
-	// Snap start settings block. Detailed below.
+	// Configuration block for snap start settings. See below.
 	// +kubebuilder:validation:Optional
 	SnapStart []SnapStartParameters `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
 
@@ -570,116 +597,116 @@ type FunctionParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
+	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. Valid between 1 and 900.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for X-Ray tracing. See below.
 	// +kubebuilder:validation:Optional
 	TracingConfig []TracingConfigParameters `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
 
-	// Configuration block. Detailed below.
+	// Configuration block for VPC. See below.
 	// +kubebuilder:validation:Optional
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ImageConfigInitParameters struct {
 
-	// Parameters that you want to pass in with entry_point.
+	// Parameters to pass to the container image.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Entry point to your application, which is typically the location of the runtime executable.
+	// Entry point to your application.
 	EntryPoint []*string `json:"entryPoint,omitempty" tf:"entry_point,omitempty"`
 
-	// Working directory.
+	// Working directory for the container image.
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
 type ImageConfigObservation struct {
 
-	// Parameters that you want to pass in with entry_point.
+	// Parameters to pass to the container image.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Entry point to your application, which is typically the location of the runtime executable.
+	// Entry point to your application.
 	EntryPoint []*string `json:"entryPoint,omitempty" tf:"entry_point,omitempty"`
 
-	// Working directory.
+	// Working directory for the container image.
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
 type ImageConfigParameters struct {
 
-	// Parameters that you want to pass in with entry_point.
+	// Parameters to pass to the container image.
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Entry point to your application, which is typically the location of the runtime executable.
+	// Entry point to your application.
 	// +kubebuilder:validation:Optional
 	EntryPoint []*string `json:"entryPoint,omitempty" tf:"entry_point,omitempty"`
 
-	// Working directory.
+	// Working directory for the container image.
 	// +kubebuilder:validation:Optional
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
 type LoggingConfigInitParameters struct {
 
-	// for JSON structured logs, choose the detail level of the logs your application sends to CloudWatch when using supported logging libraries.
+	// Detail level of application logs. Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL.
 	ApplicationLogLevel *string `json:"applicationLogLevel,omitempty" tf:"application_log_level,omitempty"`
 
-	// select between Text and structured JSON format for your function's logs.
+	// Log format. Valid values: Text, JSON.
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// the CloudWatch log group your function sends logs to.
+	// CloudWatch log group where logs are sent.
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
-	// for JSON structured logs, choose the detail level of the Lambda platform event logs sent to CloudWatch, such as ERROR, DEBUG, or INFO.
+	// Detail level of Lambda platform logs. Valid values: DEBUG, INFO, WARN.
 	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
 }
 
 type LoggingConfigObservation struct {
 
-	// for JSON structured logs, choose the detail level of the logs your application sends to CloudWatch when using supported logging libraries.
+	// Detail level of application logs. Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL.
 	ApplicationLogLevel *string `json:"applicationLogLevel,omitempty" tf:"application_log_level,omitempty"`
 
-	// select between Text and structured JSON format for your function's logs.
+	// Log format. Valid values: Text, JSON.
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// the CloudWatch log group your function sends logs to.
+	// CloudWatch log group where logs are sent.
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
-	// for JSON structured logs, choose the detail level of the Lambda platform event logs sent to CloudWatch, such as ERROR, DEBUG, or INFO.
+	// Detail level of Lambda platform logs. Valid values: DEBUG, INFO, WARN.
 	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
 }
 
 type LoggingConfigParameters struct {
 
-	// for JSON structured logs, choose the detail level of the logs your application sends to CloudWatch when using supported logging libraries.
+	// Detail level of application logs. Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL.
 	// +kubebuilder:validation:Optional
 	ApplicationLogLevel *string `json:"applicationLogLevel,omitempty" tf:"application_log_level,omitempty"`
 
-	// select between Text and structured JSON format for your function's logs.
+	// Log format. Valid values: Text, JSON.
 	// +kubebuilder:validation:Optional
 	LogFormat *string `json:"logFormat" tf:"log_format,omitempty"`
 
-	// the CloudWatch log group your function sends logs to.
+	// CloudWatch log group where logs are sent.
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
-	// for JSON structured logs, choose the detail level of the Lambda platform event logs sent to CloudWatch, such as ERROR, DEBUG, or INFO.
+	// Detail level of Lambda platform logs. Valid values: DEBUG, INFO, WARN.
 	// +kubebuilder:validation:Optional
 	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
 }
 
 type SnapStartInitParameters struct {
 
-	// Conditions where snap start is enabled. Valid values are PublishedVersions.
+	// When to apply snap start optimization. Valid value: PublishedVersions.
 	ApplyOn *string `json:"applyOn,omitempty" tf:"apply_on,omitempty"`
 }
 
 type SnapStartObservation struct {
 
-	// Conditions where snap start is enabled. Valid values are PublishedVersions.
+	// When to apply snap start optimization. Valid value: PublishedVersions.
 	ApplyOn *string `json:"applyOn,omitempty" tf:"apply_on,omitempty"`
 
 	// Optimization status of the snap start configuration. Valid values are On and Off.
@@ -688,33 +715,33 @@ type SnapStartObservation struct {
 
 type SnapStartParameters struct {
 
-	// Conditions where snap start is enabled. Valid values are PublishedVersions.
+	// When to apply snap start optimization. Valid value: PublishedVersions.
 	// +kubebuilder:validation:Optional
 	ApplyOn *string `json:"applyOn" tf:"apply_on,omitempty"`
 }
 
 type TracingConfigInitParameters struct {
 
-	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
+	// X-Ray tracing mode. Valid values: Active, PassThrough.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type TracingConfigObservation struct {
 
-	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
+	// X-Ray tracing mode. Valid values: Active, PassThrough.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type TracingConfigParameters struct {
 
-	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
+	// X-Ray tracing mode. Valid values: Active, PassThrough.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type VPCConfigInitParameters struct {
 
-	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. Default is false.
+	// Whether to allow outbound IPv6 traffic on VPC functions connected to dual-stack subnets. Default: false.
 	IPv6AllowedForDualStack *bool `json:"ipv6AllowedForDualStack,omitempty" tf:"ipv6_allowed_for_dual_stack,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -750,7 +777,7 @@ type VPCConfigInitParameters struct {
 
 type VPCConfigObservation struct {
 
-	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. Default is false.
+	// Whether to allow outbound IPv6 traffic on VPC functions connected to dual-stack subnets. Default: false.
 	IPv6AllowedForDualStack *bool `json:"ipv6AllowedForDualStack,omitempty" tf:"ipv6_allowed_for_dual_stack,omitempty"`
 
 	// List of security group IDs associated with the Lambda function.
@@ -767,7 +794,7 @@ type VPCConfigObservation struct {
 
 type VPCConfigParameters struct {
 
-	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. Default is false.
+	// Whether to allow outbound IPv6 traffic on VPC functions connected to dual-stack subnets. Default: false.
 	// +kubebuilder:validation:Optional
 	IPv6AllowedForDualStack *bool `json:"ipv6AllowedForDualStack,omitempty" tf:"ipv6_allowed_for_dual_stack,omitempty"`
 
@@ -831,7 +858,7 @@ type FunctionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Function is the Schema for the Functions API. Provides a Lambda Function resource. Lambda allows you to trigger execution of code in response to events in AWS, enabling serverless backend solutions. The Lambda Function itself includes source code and runtime configuration.
+// Function is the Schema for the Functions API. Manages an AWS Lambda Function.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

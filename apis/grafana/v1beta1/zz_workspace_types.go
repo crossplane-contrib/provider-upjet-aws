@@ -94,13 +94,13 @@ type WorkspaceInitParameters struct {
 	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
 	// The workspace description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to 9.4.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to the latest version.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	// The Grafana workspace name.
@@ -159,7 +159,7 @@ type WorkspaceObservation struct {
 	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
 	// The workspace description.
@@ -168,7 +168,7 @@ type WorkspaceObservation struct {
 	// The endpoint of the Grafana workspace.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to 9.4.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to the latest version.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -190,6 +190,10 @@ type WorkspaceObservation struct {
 
 	// The permission type of the workspace. If SERVICE_MANAGED is specified, the IAM roles and IAM policy attachments are generated automatically. If CUSTOMER_MANAGED is specified, the IAM roles and IAM policy attachments will not be created.
 	PermissionType *string `json:"permissionType,omitempty" tf:"permission_type,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The IAM role ARN that the workspace assumes.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -225,7 +229,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
 	// +kubebuilder:validation:Optional
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
@@ -233,7 +237,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to 9.4.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to the latest version.
 	// +kubebuilder:validation:Optional
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
@@ -261,10 +265,10 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	PermissionType *string `json:"permissionType,omitempty" tf:"permission_type,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The IAM role ARN that the workspace assumes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

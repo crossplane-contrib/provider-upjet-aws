@@ -21,6 +21,9 @@ type OriginAccessIdentityInitParameters struct {
 
 type OriginAccessIdentityObservation struct {
 
+	// The origin access identity ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Internal value used by CloudFront to allow future
 	// updates to the origin access identity.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
@@ -40,7 +43,7 @@ type OriginAccessIdentityObservation struct {
 	// Example: arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2QWRUHAPOMQZL.
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
-	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// The identifier for the origin access identity.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Amazon S3 canonical user ID for the origin
@@ -54,11 +57,6 @@ type OriginAccessIdentityParameters struct {
 	// An optional comment for the origin access identity.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // OriginAccessIdentitySpec defines the desired state of OriginAccessIdentity

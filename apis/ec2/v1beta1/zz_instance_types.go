@@ -344,14 +344,8 @@ type InstanceInitParameters struct {
 	// AZ to start the instance in.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	// The CPU options for the instance. See CPU Options below for more details.
 	CPUOptions []CPUOptionsInitParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	CapacityReservationSpecification []CapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -469,13 +463,13 @@ type InstanceInitParameters struct {
 	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
-	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
-	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate of the EC2 instance when set to true. Defaults to false if not set.
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -500,31 +494,80 @@ type InstanceInitParameters struct {
 
 type InstanceMarketOptionsInitParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
-	SpotOptions []SpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	SpotOptions []InstanceMarketOptionsSpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
 }
 
 type InstanceMarketOptionsObservation struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
-	SpotOptions []SpotOptionsObservation `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	SpotOptions []InstanceMarketOptionsSpotOptionsObservation `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
 }
 
 type InstanceMarketOptionsParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
 	// +kubebuilder:validation:Optional
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
 	// +kubebuilder:validation:Optional
-	SpotOptions []SpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	SpotOptions []InstanceMarketOptionsSpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
+type InstanceMarketOptionsSpotOptionsInitParameters struct {
+
+	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price that you're willing to pay for a Spot Instance.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
+type InstanceMarketOptionsSpotOptionsObservation struct {
+
+	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price that you're willing to pay for a Spot Instance.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
+type InstanceMarketOptionsSpotOptionsParameters struct {
+
+	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
+	// +kubebuilder:validation:Optional
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price that you're willing to pay for a Spot Instance.
+	// +kubebuilder:validation:Optional
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
+	// +kubebuilder:validation:Optional
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
+	// +kubebuilder:validation:Optional
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
 type InstanceNetworkInterfaceInitParameters struct {
@@ -608,14 +651,8 @@ type InstanceObservation struct {
 	// AZ to start the instance in.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	// The CPU options for the instance. See CPU Options below for more details.
 	CPUOptions []CPUOptionsObservation `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	CapacityReservationSpecification []CapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -731,6 +768,10 @@ type InstanceObservation struct {
 	// Public IP address assigned to the instance, if applicable. NOTE: If you are using an aws_eip with your instance, you should refer to the EIP's address directly and not use public_ip as this field will change after the EIP is attached.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
@@ -762,13 +803,13 @@ type InstanceObservation struct {
 	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
-	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
-	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate of the EC2 instance when set to true. Defaults to false if not set.
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
 	// List of security group IDs to associate with.
@@ -794,17 +835,9 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	// +kubebuilder:validation:Optional
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
-
 	// The CPU options for the instance. See CPU Options below for more details.
 	// +kubebuilder:validation:Optional
 	CPUOptions []CPUOptionsParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
-
-	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	// +kubebuilder:validation:Optional
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	// +kubebuilder:validation:Optional
@@ -922,10 +955,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
 	// +kubebuilder:validation:Optional
@@ -962,15 +995,15 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
-	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	// +kubebuilder:validation:Optional
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
-	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate of the EC2 instance when set to true. Defaults to false if not set.
 	// +kubebuilder:validation:Optional
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
@@ -1065,7 +1098,7 @@ type MetadataOptionsInitParameters struct {
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
 	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
@@ -1083,7 +1116,7 @@ type MetadataOptionsObservation struct {
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
 	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
@@ -1104,7 +1137,7 @@ type MetadataOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required.
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
@@ -1279,55 +1312,6 @@ type RootBlockDeviceParameters struct {
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to the volume type that the AMI uses.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
-}
-
-type SpotOptionsInitParameters struct {
-
-	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price that you're willing to pay for a Spot Instance.
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
-}
-
-type SpotOptionsObservation struct {
-
-	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price that you're willing to pay for a Spot Instance.
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
-}
-
-type SpotOptionsParameters struct {
-
-	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
-	// +kubebuilder:validation:Optional
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price that you're willing to pay for a Spot Instance.
-	// +kubebuilder:validation:Optional
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
-	// +kubebuilder:validation:Optional
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
-	// +kubebuilder:validation:Optional
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
 // InstanceSpec defines the desired state of Instance

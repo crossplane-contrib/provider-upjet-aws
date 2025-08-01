@@ -73,11 +73,14 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: Name of the interface endpoint.
+                    description: |-
+                      Name of the interface endpoint.
+                      Name of the interface endpoint.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -158,9 +161,9 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: One or more security groups that define the ports,
-                      protocols, and sources for inbound traffic that you are authorizing
-                      into your endpoint. Up to 5 security groups can be provided.
+                    description: |-
+                      One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
+                      One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
                     items:
                       type: string
                     type: array
@@ -244,15 +247,17 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: One or more subnet IDs from which you'll access OpenSearch
-                      Serverless. Up to 6 subnets can be provided.
+                    description: |-
+                      One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
+                      One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   vpcId:
-                    description: ID of the VPC from which you'll access OpenSearch
-                      Serverless.
+                    description: |-
+                      ID of the VPC from which you'll access OpenSearch Serverless.
+                      ID of the VPC from which you'll access OpenSearch Serverless.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -345,7 +350,9 @@ spec:
                   autoscaler.
                 properties:
                   name:
-                    description: Name of the interface endpoint.
+                    description: |-
+                      Name of the interface endpoint.
+                      Name of the interface endpoint.
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -426,9 +433,9 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: One or more security groups that define the ports,
-                      protocols, and sources for inbound traffic that you are authorizing
-                      into your endpoint. Up to 5 security groups can be provided.
+                    description: |-
+                      One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
+                      One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
                     items:
                       type: string
                     type: array
@@ -512,15 +519,17 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: One or more subnet IDs from which you'll access OpenSearch
-                      Serverless. Up to 6 subnets can be provided.
+                    description: |-
+                      One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
+                      One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   vpcId:
-                    description: ID of the VPC from which you'll access OpenSearch
-                      Serverless.
+                    description: |-
+                      ID of the VPC from which you'll access OpenSearch Serverless.
+                      ID of the VPC from which you'll access OpenSearch Serverless.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -778,26 +787,35 @@ spec:
                     description: Unique identified of the Vpc Endpoint.
                     type: string
                   name:
-                    description: Name of the interface endpoint.
+                    description: |-
+                      Name of the interface endpoint.
+                      Name of the interface endpoint.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupIds:
-                    description: One or more security groups that define the ports,
-                      protocols, and sources for inbound traffic that you are authorizing
-                      into your endpoint. Up to 5 security groups can be provided.
+                    description: |-
+                      One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
+                      One or more security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint. Up to 5 security groups can be provided.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   subnetIds:
-                    description: One or more subnet IDs from which you'll access OpenSearch
-                      Serverless. Up to 6 subnets can be provided.
+                    description: |-
+                      One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
+                      One or more subnet IDs from which you'll access OpenSearch Serverless. Up to 6 subnets can be provided.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   vpcId:
-                    description: ID of the VPC from which you'll access OpenSearch
-                      Serverless.
+                    description: |-
+                      ID of the VPC from which you'll access OpenSearch Serverless.
+                      ID of the VPC from which you'll access OpenSearch Serverless.
                     type: string
                 type: object
               conditions:

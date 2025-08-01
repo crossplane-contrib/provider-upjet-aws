@@ -298,6 +298,10 @@ type WorkteamObservation struct {
 	// Configures notification of workers regarding available or expiring work items. see Notification Configuration details below.
 	NotificationConfiguration *NotificationConfigurationObservation `json:"notificationConfiguration,omitempty" tf:"notification_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The subdomain for your OIDC Identity Provider.
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 
@@ -330,10 +334,10 @@ type WorkteamParameters struct {
 	// +kubebuilder:validation:Optional
 	NotificationConfiguration *NotificationConfigurationParameters `json:"notificationConfiguration,omitempty" tf:"notification_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -385,7 +389,7 @@ type WorkteamStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Workteam is the Schema for the Workteams API. Provides a SageMaker Workteam resource.
+// Workteam is the Schema for the Workteams API. Provides a SageMaker AI Workteam resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -8,7 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: alternate
@@ -29,7 +28,6 @@ metadata:
 spec:
   forProvider:
     name: example.com
-    region: us-west-1
     vpc:
     - vpcIdSelector:
         matchLabels:
@@ -48,7 +46,6 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.alternate}
-    region: us-west-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -72,7 +69,6 @@ spec:
     enableDnsHostnames: true
     enableDnsSupport: true
     provider: ${aws.alternate}
-    region: us-west-1
 
 ---
 
@@ -89,4 +85,3 @@ spec:
     cidrBlock: 10.6.0.0/16
     enableDnsHostnames: true
     enableDnsSupport: true
-    region: us-west-1

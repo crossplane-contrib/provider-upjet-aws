@@ -18,18 +18,18 @@ type TransitGatewayRegistrationInitParameters struct {
 
 type TransitGatewayRegistrationObservation struct {
 
-	// The ID of the Global Network to register to.
+	// ID of the Global Network to register to.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the Transit Gateway to register.
+	// ARN of the Transit Gateway to register.
 	TransitGatewayArn *string `json:"transitGatewayArn,omitempty" tf:"transit_gateway_arn,omitempty"`
 }
 
 type TransitGatewayRegistrationParameters struct {
 
-	// The ID of the Global Network to register to.
+	// ID of the Global Network to register to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -43,12 +43,7 @@ type TransitGatewayRegistrationParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
-	// The ARN of the Transit Gateway to register.
+	// ARN of the Transit Gateway to register.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -90,7 +85,7 @@ type TransitGatewayRegistrationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// TransitGatewayRegistration is the Schema for the TransitGatewayRegistrations API. Registers a transit gateway to a global network.
+// TransitGatewayRegistration is the Schema for the TransitGatewayRegistrations API. Manages a Network Manager transit gateway registration.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

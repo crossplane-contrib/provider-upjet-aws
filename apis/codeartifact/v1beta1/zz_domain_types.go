@@ -59,6 +59,10 @@ type DomainObservation struct {
 	// The AWS account ID that owns the domain.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The number of repositories in the domain.
 	RepositoryCount *float64 `json:"repositoryCount,omitempty" tf:"repository_count,omitempty"`
 
@@ -94,10 +98,10 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionKeySelector *v1.Selector `json:"encryptionKeySelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

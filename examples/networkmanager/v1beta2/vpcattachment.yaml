@@ -15,7 +15,6 @@ spec:
     coreNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     subnetArnsSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -97,7 +96,6 @@ spec:
           }
         ]
       }
-    region: us-west-1
 
 ---
 
@@ -112,4 +110,3 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1

@@ -385,6 +385,11 @@ func (in *DataCatalogObservation) DeepCopyInto(out *DataCatalogObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -722,6 +727,11 @@ func (in *DatabaseObservation) DeepCopyInto(out *DatabaseObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -1134,6 +1144,11 @@ func (in *NamedQueryObservation) DeepCopyInto(out *NamedQueryObservation) {
 	}
 	if in.Query != nil {
 		in, out := &in.Query, &out.Query
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1665,6 +1680,11 @@ func (in *WorkgroupObservation) DeepCopyInto(out *WorkgroupObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

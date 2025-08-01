@@ -673,6 +673,10 @@ type StorageLensConfigurationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The S3 Storage Lens configuration. See Storage Lens Configuration below for more details.
 	StorageLensConfiguration *StorageLensConfigurationStorageLensConfigurationObservation `json:"storageLensConfiguration,omitempty" tf:"storage_lens_configuration,omitempty"`
 
@@ -695,10 +699,10 @@ type StorageLensConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigID *string `json:"configId,omitempty" tf:"config_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The S3 Storage Lens configuration. See Storage Lens Configuration below for more details.
 	// +kubebuilder:validation:Optional

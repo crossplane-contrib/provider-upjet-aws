@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -151,15 +151,14 @@ spec:
                         type: object
                     type: object
                   kubernetesGroups:
-                    description: –  List of string which can optionally specify the
-                      Kubernetes groups the user would belong to when creating an
-                      access entry.
+                    description: List of string which can optionally specify the Kubernetes
+                      groups the user would belong to when creating an access entry.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   principalArn:
-                    description: –  The IAM Principal ARN which requires Authentication
+                    description: The IAM Principal ARN which requires Authentication
                       access to the EKS cluster.
                     type: string
                   principalArnFromRoleRef:
@@ -237,8 +236,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -272,9 +272,8 @@ spec:
                   autoscaler.
                 properties:
                   kubernetesGroups:
-                    description: –  List of string which can optionally specify the
-                      Kubernetes groups the user would belong to when creating an
-                      access entry.
+                    description: List of string which can optionally specify the Kubernetes
+                      groups the user would belong to when creating an access entry.
                     items:
                       type: string
                     type: array
@@ -471,7 +470,7 @@ spec:
                     description: Amazon Resource Name (ARN) of the Access Entry.
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   createdAt:
                     description: Date and time in RFC3339 format that the EKS add-on
@@ -480,9 +479,8 @@ spec:
                   id:
                     type: string
                   kubernetesGroups:
-                    description: –  List of string which can optionally specify the
-                      Kubernetes groups the user would belong to when creating an
-                      access entry.
+                    description: List of string which can optionally specify the Kubernetes
+                      groups the user would belong to when creating an access entry.
                     items:
                       type: string
                     type: array
@@ -492,8 +490,13 @@ spec:
                       was updated.
                     type: string
                   principalArn:
-                    description: –  The IAM Principal ARN which requires Authentication
+                    description: The IAM Principal ARN which requires Authentication
                       access to the EKS cluster.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

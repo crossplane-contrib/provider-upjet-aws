@@ -78,12 +78,12 @@ spec:
                       cross-account. Valid values are TRUE and FALSE.
                     type: string
                   policy:
-                    description: –  The policy to be applied to the aws glue data
-                      catalog.
+                    description: The policy to be applied to the aws glue data catalog.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -106,8 +106,7 @@ spec:
                       cross-account. Valid values are TRUE and FALSE.
                     type: string
                   policy:
-                    description: –  The policy to be applied to the aws glue data
-                      catalog.
+                    description: The policy to be applied to the aws glue data catalog.
                     type: string
                 type: object
               managementPolicies:
@@ -294,8 +293,12 @@ spec:
                   id:
                     type: string
                   policy:
-                    description: –  The policy to be applied to the aws glue data
-                      catalog.
+                    description: The policy to be applied to the aws glue data catalog.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

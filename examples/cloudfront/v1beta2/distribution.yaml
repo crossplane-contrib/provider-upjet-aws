@@ -89,7 +89,6 @@ spec:
       domainName: app.my.cloud
       originId: customOrigin
     priceClass: PriceClass_200
-    region: us-west-1
     restrictions:
       geoRestriction:
         locations:
@@ -119,4 +118,3 @@ spec:
     monitoringSubscription:
       realtimeMetricsSubscriptionConfig:
         realtimeMetricsSubscriptionStatus: Enabled
-    region: us-west-1

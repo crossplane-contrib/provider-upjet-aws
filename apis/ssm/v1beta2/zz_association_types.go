@@ -30,9 +30,6 @@ type AssociationInitParameters struct {
 	// The document version you want to associate with the target(s). Can be a specific version or the default version.
 	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
 
-	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above. Use the targets attribute instead.
-	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
-
 	// The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
@@ -100,9 +97,6 @@ type AssociationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above. Use the targets attribute instead.
-	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
-
 	// The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
@@ -118,6 +112,10 @@ type AssociationObservation struct {
 	// A block of arbitrary string parameters to pass to the SSM document.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// A cron or rate expression that specifies when the association runs.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
@@ -162,10 +160,6 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
 
-	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above. Use the targets attribute instead.
-	// +kubebuilder:validation:Optional
-	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
-
 	// The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	// +kubebuilder:validation:Optional
 	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
@@ -196,10 +190,10 @@ type AssociationParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A cron or rate expression that specifies when the association runs.
 	// +kubebuilder:validation:Optional
@@ -267,7 +261,7 @@ type TargetsInitParameters struct {
 	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
+	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
@@ -286,7 +280,7 @@ type TargetsObservation struct {
 	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
+	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -296,7 +290,7 @@ type TargetsParameters struct {
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
+	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

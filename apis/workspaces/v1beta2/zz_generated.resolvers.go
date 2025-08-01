@@ -26,12 +26,33 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	if mg.Spec.ForProvider.ActiveDirectoryConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArnRef,
+				Selector:     mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArn")
+		}
+		mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArnRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ds.aws.upbound.io", "v1beta2", "Directory", "DirectoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
@@ -103,6 +124,27 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		}
 		mg.Spec.ForProvider.WorkspaceCreationProperties.CustomSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.WorkspaceCreationProperties.CustomSecurityGroupIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.ActiveDirectoryConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArnRef,
+				Selector:     mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArn")
+		}
+		mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArnRef = rsp.ResolvedReference
 
 	}
 	{

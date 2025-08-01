@@ -80,8 +80,9 @@ spec:
                       partition.  Valid values are 1 - 7 (default is 2).
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   spreadLevel:
                     description: |-
@@ -327,6 +328,11 @@ spec:
                     type: number
                   placementGroupId:
                     description: The ID of the placement group.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   spreadLevel:
                     description: |-

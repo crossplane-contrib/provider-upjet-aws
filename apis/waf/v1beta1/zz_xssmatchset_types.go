@@ -43,11 +43,6 @@ type XSSMatchSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// The parts of web requests that you want to inspect for cross-site scripting attacks.
 	// +kubebuilder:validation:Optional
 	XSSMatchTuples []XSSMatchTuplesParameters `json:"xssMatchTuples,omitempty" tf:"xss_match_tuples,omitempty"`

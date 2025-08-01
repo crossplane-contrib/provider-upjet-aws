@@ -165,8 +165,9 @@ spec:
                       or Delivery.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   topicArn:
                     description: The Amazon Resource Name (ARN) of the Amazon SNS
@@ -624,6 +625,11 @@ spec:
                     description: 'The type of notifications that will be published
                       to the specified Amazon SNS topic. Valid Values: Bounce, Complaint
                       or Delivery.'
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   topicArn:
                     description: The Amazon Resource Name (ARN) of the Amazon SNS

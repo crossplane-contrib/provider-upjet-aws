@@ -8,7 +8,6 @@ metadata:
   name: example-function
 spec:
   forProvider:
-    region: us-west-1
     codeSecretRef:
       name: codesecret
       namespace: upbound-system

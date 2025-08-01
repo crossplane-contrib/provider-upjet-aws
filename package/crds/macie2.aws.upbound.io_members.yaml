@@ -96,8 +96,9 @@ spec:
                     description: Send an invitation to a member
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: Specifies the status for the account. To enable Amazon
@@ -381,6 +382,11 @@ spec:
                   masterAccountId:
                     description: The AWS account ID for the account.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   relationshipStatus:
                     description: The current status of the relationship between the
                       account and the administrator account.
@@ -399,6 +405,9 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                     x-kubernetes-map-type: granular
                   updatedAt:

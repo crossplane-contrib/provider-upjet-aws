@@ -155,6 +155,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ScalingParameters != nil {
 		in, out := &in.ScalingParameters, &out.ScalingParameters
 		*out = make([]ScalingParametersObservation, len(*in))
@@ -334,6 +339,11 @@ func (in *DomainServiceAccessPolicyObservation) DeepCopyInto(out *DomainServiceA
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

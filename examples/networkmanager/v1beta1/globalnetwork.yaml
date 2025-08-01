@@ -13,4 +13,3 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1

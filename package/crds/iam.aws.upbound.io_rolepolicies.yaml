@@ -74,8 +74,9 @@ spec:
               forProvider:
                 properties:
                   policy:
-                    description: The inline policy document. This is a JSON formatted
-                      string
+                    description: |-
+                      The inline policy document.
+                      This is a JSON formatted string
                     type: string
                   role:
                     description: The name of the IAM role to attach to the policy.
@@ -169,8 +170,9 @@ spec:
                   autoscaler.
                 properties:
                   policy:
-                    description: The inline policy document. This is a JSON formatted
-                      string
+                    description: |-
+                      The inline policy document.
+                      This is a JSON formatted string
                     type: string
                 type: object
               managementPolicies:
@@ -351,11 +353,11 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The role policy ID, in the form of role_name:role_policy_name.
                     type: string
                   policy:
-                    description: The inline policy document. This is a JSON formatted
-                      string
+                    description: |-
+                      The inline policy document.
+                      This is a JSON formatted string
                     type: string
                   role:
                     description: The name of the IAM role to attach to the policy.

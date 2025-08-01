@@ -133,8 +133,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   role:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
@@ -772,6 +773,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   role:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
                       the service to control your user’s access to your Amazon S3
@@ -969,8 +975,9 @@ spec:
                         type: number
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   role:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
@@ -1604,6 +1611,11 @@ spec:
                           by this user.
                         type: number
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   role:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
                       the service to control your user’s access to your Amazon S3

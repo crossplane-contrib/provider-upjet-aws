@@ -32,11 +32,6 @@ type SerialConsoleAccessParameters struct {
 	// Whether or not serial console access is enabled. Valid values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // SerialConsoleAccessSpec defines the desired state of SerialConsoleAccess

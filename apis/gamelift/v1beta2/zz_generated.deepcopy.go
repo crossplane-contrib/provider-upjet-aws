@@ -141,6 +141,11 @@ func (in *AliasObservation) DeepCopyInto(out *AliasObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoutingStrategy != nil {
 		in, out := &in.RoutingStrategy, &out.RoutingStrategy
 		*out = new(RoutingStrategyObservation)
@@ -406,6 +411,11 @@ func (in *BuildObservation) DeepCopyInto(out *BuildObservation) {
 	}
 	if in.OperatingSystem != nil {
 		in, out := &in.OperatingSystem, &out.OperatingSystem
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -991,6 +1001,11 @@ func (in *FleetObservation) DeepCopyInto(out *FleetObservation) {
 	}
 	if in.OperatingSystem != nil {
 		in, out := &in.OperatingSystem, &out.OperatingSystem
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1608,6 +1623,11 @@ func (in *ScriptObservation) DeepCopyInto(out *ScriptObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

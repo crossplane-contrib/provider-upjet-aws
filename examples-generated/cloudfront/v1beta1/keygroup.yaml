@@ -12,7 +12,6 @@ spec:
     itemRefs:
     - name: example
     name: example-key-group
-    region: us-west-1
 
 ---
 
@@ -32,4 +31,3 @@ spec:
       name: example-secret
       namespace: upbound-system
     name: example-key
-    region: us-west-1

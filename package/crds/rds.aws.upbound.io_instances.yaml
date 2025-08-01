@@ -163,6 +163,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -763,6 +767,29 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWoSecretRef:
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Cannot
+                      be set if manage_master_user_password is set to true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -788,8 +815,9 @@ spec:
                       accessible. Default is false.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicaMode:
                     description: |-
@@ -1191,6 +1219,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -1791,6 +1823,29 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWoSecretRef:
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Cannot
+                      be set if manage_master_user_password is set to true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -2384,6 +2439,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -2648,6 +2707,10 @@ spec:
                       Name of the DB parameter group to
                       associate.
                     type: string
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -2672,6 +2735,11 @@ spec:
                       Bool to control if instance is publicly
                       accessible. Default is false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicaMode:
                     description: |-
                       Specifies whether the replica is in either mounted or open-read-only mode. This attribute
@@ -3046,6 +3114,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -3637,6 +3709,29 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWoSecretRef:
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Cannot
+                      be set if manage_master_user_password is set to true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -3662,8 +3757,9 @@ spec:
                       accessible. Default is false.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicaMode:
                     description: |-
@@ -4058,6 +4154,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -4649,6 +4749,29 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWoSecretRef:
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Cannot
+                      be set if manage_master_user_password is set to true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -5235,6 +5358,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -5490,6 +5617,10 @@ spec:
                   parameterGroupName:
                     description: Name of the DB parameter group to associate.
                     type: string
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -5514,6 +5645,11 @@ spec:
                       Bool to control if instance is publicly
                       accessible. Default is false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicaMode:
                     description: |-
                       Specifies whether the replica is in either mounted or open-read-only mode. This attribute
@@ -5811,8 +5947,7 @@ spec:
                     type: boolean
                   autoGeneratePassword:
                     description: |-
-                      Password for the master DB user. Note that this may show up in
-                      logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+                      Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
                       If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
                     type: boolean
                   autoMinorVersionUpgrade:
@@ -5866,8 +6001,7 @@ spec:
                       Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
                     type: string
                   copyTagsToSnapshot:
-                    description: –  Copy all Instance tags to snapshots. Default is
-                      false.
+                    description: Copy all Instance tags to snapshots. Default is false.
                     type: boolean
                   customIamInstanceProfile:
                     description: The instance profile associated with the underlying
@@ -5878,6 +6012,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -6174,7 +6312,8 @@ spec:
                     type: string
                   manageMasterUserPassword:
                     description: Set to true to allow RDS to manage the master user
-                      password in Secrets Manager. Cannot be set if password is provided.
+                      password in Secrets Manager. Cannot be set if password or password_wo
+                      is provided.
                     type: boolean
                   masterUserSecretKmsKeyId:
                     description: The Amazon Web Services KMS key identifier is the
@@ -6258,11 +6397,13 @@ spec:
                         type: object
                     type: object
                   maxAllocatedStorage:
-                    description: When configured, the upper limit to which Amazon
-                      RDS can automatically scale the storage of the DB instance.
-                      Configuring this will automatically ignore differences to allocated_storage.
-                      Must be greater than or equal to allocated_storage or 0 to disable
-                      Storage Autoscaling.
+                    description: Specifies the maximum storage (in GiB) that Amazon
+                      RDS can automatically scale to for this DB instance. By default,
+                      Storage Autoscaling is disabled. To enable Storage Autoscaling,
+                      set max_allocated_storage to greater than or equal to allocated_storage.
+                      Setting max_allocated_storage to 0 explicitly disables Storage
+                      Autoscaling. When configured, changes to allocated_storage will
+                      be automatically ignored as the storage can dynamically scale.
                     type: number
                   monitoringInterval:
                     description: |-
@@ -6449,8 +6590,7 @@ spec:
                     type: object
                   passwordSecretRef:
                     description: |-
-                      Password for the master DB user. Note that this may show up in
-                      logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+                      Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
                       Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
                     properties:
                       key:
@@ -6467,6 +6607,29 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWoSecretRef:
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Cannot
+                      be set if manage_master_user_password is set to true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -6492,8 +6655,9 @@ spec:
                       accessible. Default is false.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicaMode:
                     description: |-
@@ -6867,8 +7031,7 @@ spec:
                       Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
                     type: string
                   copyTagsToSnapshot:
-                    description: –  Copy all Instance tags to snapshots. Default is
-                      false.
+                    description: Copy all Instance tags to snapshots. Default is false.
                     type: boolean
                   customIamInstanceProfile:
                     description: The instance profile associated with the underlying
@@ -6879,6 +7042,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -7175,7 +7342,8 @@ spec:
                     type: string
                   manageMasterUserPassword:
                     description: Set to true to allow RDS to manage the master user
-                      password in Secrets Manager. Cannot be set if password is provided.
+                      password in Secrets Manager. Cannot be set if password or password_wo
+                      is provided.
                     type: boolean
                   masterUserSecretKmsKeyId:
                     description: The Amazon Web Services KMS key identifier is the
@@ -7259,11 +7427,13 @@ spec:
                         type: object
                     type: object
                   maxAllocatedStorage:
-                    description: When configured, the upper limit to which Amazon
-                      RDS can automatically scale the storage of the DB instance.
-                      Configuring this will automatically ignore differences to allocated_storage.
-                      Must be greater than or equal to allocated_storage or 0 to disable
-                      Storage Autoscaling.
+                    description: Specifies the maximum storage (in GiB) that Amazon
+                      RDS can automatically scale to for this DB instance. By default,
+                      Storage Autoscaling is disabled. To enable Storage Autoscaling,
+                      set max_allocated_storage to greater than or equal to allocated_storage.
+                      Setting max_allocated_storage to 0 explicitly disables Storage
+                      Autoscaling. When configured, changes to allocated_storage will
+                      be automatically ignored as the storage can dynamically scale.
                     type: number
                   monitoringInterval:
                     description: |-
@@ -7450,8 +7620,7 @@ spec:
                     type: object
                   passwordSecretRef:
                     description: |-
-                      Password for the master DB user. Note that this may show up in
-                      logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+                      Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
                       Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
                     properties:
                       key:
@@ -7468,6 +7637,29 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWoSecretRef:
+                    description: Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Cannot
+                      be set if manage_master_user_password is set to true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -8033,8 +8225,7 @@ spec:
                       Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
                     type: string
                   copyTagsToSnapshot:
-                    description: –  Copy all Instance tags to snapshots. Default is
-                      false.
+                    description: Copy all Instance tags to snapshots. Default is false.
                     type: boolean
                   customIamInstanceProfile:
                     description: The instance profile associated with the underlying
@@ -8045,6 +8236,10 @@ spec:
                       (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
                       on Outposts for more information.
                     type: boolean
+                  databaseInsightsMode:
+                    description: 'The mode of Database Insights that is enabled for
+                      the instance. Valid values: standard, advanced .'
+                    type: string
                   dbName:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -8230,7 +8425,8 @@ spec:
                     type: string
                   manageMasterUserPassword:
                     description: Set to true to allow RDS to manage the master user
-                      password in Secrets Manager. Cannot be set if password is provided.
+                      password in Secrets Manager. Cannot be set if password or password_wo
+                      is provided.
                     type: boolean
                   masterUserSecret:
                     description: A block that specifies the master user secret. Only
@@ -8259,11 +8455,13 @@ spec:
                       key for your Amazon Web Services account is used.
                     type: string
                   maxAllocatedStorage:
-                    description: When configured, the upper limit to which Amazon
-                      RDS can automatically scale the storage of the DB instance.
-                      Configuring this will automatically ignore differences to allocated_storage.
-                      Must be greater than or equal to allocated_storage or 0 to disable
-                      Storage Autoscaling.
+                    description: Specifies the maximum storage (in GiB) that Amazon
+                      RDS can automatically scale to for this DB instance. By default,
+                      Storage Autoscaling is disabled. To enable Storage Autoscaling,
+                      set max_allocated_storage to greater than or equal to allocated_storage.
+                      Setting max_allocated_storage to 0 explicitly disables Storage
+                      Autoscaling. When configured, changes to allocated_storage will
+                      be automatically ignored as the storage can dynamically scale.
                     type: number
                   monitoringInterval:
                     description: |-
@@ -8298,6 +8496,10 @@ spec:
                   parameterGroupName:
                     description: Name of the DB parameter group to associate.
                     type: string
+                  passwordWoVersion:
+                    description: Used together with password_wo to trigger an update.
+                      Increment this value when an update to password_wo is required.
+                    type: number
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -8322,6 +8524,11 @@ spec:
                       Bool to control if instance is publicly
                       accessible. Default is false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicaMode:
                     description: |-
                       Specifies whether the replica is in either mounted or open-read-only mode. This attribute

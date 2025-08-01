@@ -61,6 +61,10 @@ type ServiceQuotaObservation struct {
 	// Name of the quota.
 	QuotaName *string `json:"quotaName,omitempty" tf:"quota_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Service code and quota code, separated by a front slash (/)
 	RequestID *string `json:"requestId,omitempty" tf:"request_id,omitempty"`
 
@@ -85,10 +89,10 @@ type ServiceQuotaParameters struct {
 	// +kubebuilder:validation:Optional
 	QuotaCode *string `json:"quotaCode,omitempty" tf:"quota_code,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Code of the service to track. For example: vpc. Available values can be found with the AWS CLI service-quotas list-services command.
 	// +kubebuilder:validation:Optional

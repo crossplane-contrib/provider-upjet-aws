@@ -102,6 +102,9 @@ type AutoscalingGroupInitParameters struct {
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 
+	// Demand Capacity Reservations. See Capacity Reservation Specification below for more details.
+	CapacityReservationSpecification []CapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
+
 	// Reserved.
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
@@ -282,6 +285,9 @@ type AutoscalingGroupObservation struct {
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 
+	// Demand Capacity Reservations. See Capacity Reservation Specification below for more details.
+	CapacityReservationSpecification []CapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
+
 	// Reserved.
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
@@ -385,6 +391,10 @@ type AutoscalingGroupObservation struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ARN of the service-linked role that the ASG will use to call other AWS services
 	ServiceLinkedRoleArn *string `json:"serviceLinkedRoleArn,omitempty" tf:"service_linked_role_arn,omitempty"`
 
@@ -441,6 +451,10 @@ type AutoscalingGroupParameters struct {
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
 	// +kubebuilder:validation:Optional
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
+
+	// Demand Capacity Reservations. See Capacity Reservation Specification below for more details.
+	// +kubebuilder:validation:Optional
+	CapacityReservationSpecification []CapacityReservationSpecificationParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
 	// Reserved.
 	// +kubebuilder:validation:Optional
@@ -577,10 +591,10 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of the service-linked role that the ASG will use to call other AWS services
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -691,6 +705,64 @@ type BaselineEBSBandwidthMbpsParameters struct {
 	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type CapacityReservationSpecificationInitParameters struct {
+
+	// Capacity Reservation preference helps you use Capacity Reservations efficiently by prioritizing reserved capacity in a Capacity Reservation before using On-Demand capacity. Valid values are default, capacity-reservations-only, capacity-reservations-first and none. Default is default.
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// Describes a target Capacity Reservation or Capacity Reservation resource group.
+	CapacityReservationTarget []CapacityReservationTargetInitParameters `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
+}
+
+type CapacityReservationSpecificationObservation struct {
+
+	// Capacity Reservation preference helps you use Capacity Reservations efficiently by prioritizing reserved capacity in a Capacity Reservation before using On-Demand capacity. Valid values are default, capacity-reservations-only, capacity-reservations-first and none. Default is default.
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// Describes a target Capacity Reservation or Capacity Reservation resource group.
+	CapacityReservationTarget []CapacityReservationTargetObservation `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
+}
+
+type CapacityReservationSpecificationParameters struct {
+
+	// Capacity Reservation preference helps you use Capacity Reservations efficiently by prioritizing reserved capacity in a Capacity Reservation before using On-Demand capacity. Valid values are default, capacity-reservations-only, capacity-reservations-first and none. Default is default.
+	// +kubebuilder:validation:Optional
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// Describes a target Capacity Reservation or Capacity Reservation resource group.
+	// +kubebuilder:validation:Optional
+	CapacityReservationTarget []CapacityReservationTargetParameters `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
+}
+
+type CapacityReservationTargetInitParameters struct {
+
+	// List of On-Demand Capacity Reservation Ids. Conflicts with capacity_reservation_resource_group_arns.
+	CapacityReservationIds []*string `json:"capacityReservationIds,omitempty" tf:"capacity_reservation_ids,omitempty"`
+
+	// List of On-Demand Capacity Reservation Resource Group Arns. Conflicts with capacity_reservation_ids.
+	CapacityReservationResourceGroupArns []*string `json:"capacityReservationResourceGroupArns,omitempty" tf:"capacity_reservation_resource_group_arns,omitempty"`
+}
+
+type CapacityReservationTargetObservation struct {
+
+	// List of On-Demand Capacity Reservation Ids. Conflicts with capacity_reservation_resource_group_arns.
+	CapacityReservationIds []*string `json:"capacityReservationIds,omitempty" tf:"capacity_reservation_ids,omitempty"`
+
+	// List of On-Demand Capacity Reservation Resource Group Arns. Conflicts with capacity_reservation_ids.
+	CapacityReservationResourceGroupArns []*string `json:"capacityReservationResourceGroupArns,omitempty" tf:"capacity_reservation_resource_group_arns,omitempty"`
+}
+
+type CapacityReservationTargetParameters struct {
+
+	// List of On-Demand Capacity Reservation Ids. Conflicts with capacity_reservation_resource_group_arns.
+	// +kubebuilder:validation:Optional
+	CapacityReservationIds []*string `json:"capacityReservationIds,omitempty" tf:"capacity_reservation_ids,omitempty"`
+
+	// List of On-Demand Capacity Reservation Resource Group Arns. Conflicts with capacity_reservation_ids.
+	// +kubebuilder:validation:Optional
+	CapacityReservationResourceGroupArns []*string `json:"capacityReservationResourceGroupArns,omitempty" tf:"capacity_reservation_resource_group_arns,omitempty"`
 }
 
 type InitialLifecycleHookInitParameters struct {

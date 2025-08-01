@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FeatureGroup is the Schema for the FeatureGroups API. Provides
-          a SageMaker Feature Group resource.
+          a SageMaker AI Feature Group resource.
         properties:
           apiVersion:
             description: |-
@@ -209,8 +209,9 @@ spec:
                       per identifier value will be stored in the Online Store.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM execution
@@ -882,6 +883,11 @@ spec:
                     description: The name of the Feature whose value uniquely identifies
                       a Record defined in the Feature Store. Only the latest record
                       per identifier value will be stored in the Online Store.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM execution
@@ -992,7 +998,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FeatureGroup is the Schema for the FeatureGroups API. Provides
-          a SageMaker Feature Group resource.
+          a SageMaker AI Feature Group resource.
         properties:
           apiVersion:
             description: |-
@@ -1149,8 +1155,9 @@ spec:
                       per identifier value will be stored in the Online Store.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM execution
@@ -1784,6 +1791,11 @@ spec:
                     description: The name of the Feature whose value uniquely identifies
                       a Record defined in the Feature Store. Only the latest record
                       per identifier value will be stored in the Online Store.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM execution

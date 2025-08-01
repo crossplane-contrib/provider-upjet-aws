@@ -18,21 +18,21 @@ type LinkAssociationInitParameters struct {
 
 type LinkAssociationObservation struct {
 
-	// The ID of the device.
+	// ID of the device.
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the link.
+	// ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 }
 
 type LinkAssociationParameters struct {
 
-	// The ID of the device.
+	// ID of the device.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
@@ -45,7 +45,7 @@ type LinkAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
-	// The ID of the global network.
+	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -59,7 +59,7 @@ type LinkAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
-	// The ID of the link.
+	// ID of the link.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Link
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -72,11 +72,6 @@ type LinkAssociationParameters struct {
 	// Selector for a Link in networkmanager to populate linkId.
 	// +kubebuilder:validation:Optional
 	LinkIDSelector *v1.Selector `json:"linkIdSelector,omitempty" tf:"-"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // LinkAssociationSpec defines the desired state of LinkAssociation
@@ -106,7 +101,7 @@ type LinkAssociationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LinkAssociation is the Schema for the LinkAssociations API. Associates a link to a device.
+// LinkAssociation is the Schema for the LinkAssociations API. Manages a Network Manager link association.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

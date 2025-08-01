@@ -75,11 +75,6 @@ type IPSetParameters struct {
 	// The name or description of the IPSet.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // IPSetSpec defines the desired state of IPSet

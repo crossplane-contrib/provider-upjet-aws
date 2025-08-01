@@ -68,11 +68,6 @@ func (in *AssociationInitParameters) DeepCopyInto(out *AssociationInitParameters
 		*out = new(string)
 		**out = **in
 	}
-	if in.InstanceID != nil {
-		in, out := &in.InstanceID, &out.InstanceID
-		*out = new(string)
-		**out = **in
-	}
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
 		*out = new(string)
@@ -244,11 +239,6 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.InstanceID != nil {
-		in, out := &in.InstanceID, &out.InstanceID
-		*out = new(string)
-		**out = **in
-	}
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
 		*out = new(string)
@@ -284,6 +274,11 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScheduleExpression != nil {
 		in, out := &in.ScheduleExpression, &out.ScheduleExpression
@@ -376,11 +371,6 @@ func (in *AssociationParameters) DeepCopyInto(out *AssociationParameters) {
 	}
 	if in.DocumentVersion != nil {
 		in, out := &in.DocumentVersion, &out.DocumentVersion
-		*out = new(string)
-		**out = **in
-	}
-	if in.InstanceID != nil {
-		in, out := &in.InstanceID, &out.InstanceID
 		*out = new(string)
 		**out = **in
 	}
@@ -968,6 +958,11 @@ func (in *MaintenanceWindowTaskObservation) DeepCopyInto(out *MaintenanceWindowT
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.ServiceRoleArn != nil {
@@ -1702,6 +1697,11 @@ func (in *ResourceDataSyncObservation) DeepCopyInto(out *ResourceDataSyncObserva
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

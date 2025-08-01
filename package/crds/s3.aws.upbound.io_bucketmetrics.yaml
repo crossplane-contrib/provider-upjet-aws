@@ -250,8 +250,9 @@ spec:
                       the bucket. Must be less than or equal to 64 characters in length.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -651,6 +652,11 @@ spec:
                     description: Unique identifier of the metrics configuration for
                       the bucket. Must be less than or equal to 64 characters in length.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -943,8 +949,9 @@ spec:
                       the bucket. Must be less than or equal to 64 characters in length.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -1339,6 +1346,11 @@ spec:
                   name:
                     description: Unique identifier of the metrics configuration for
                       the bucket. Must be less than or equal to 64 characters in length.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

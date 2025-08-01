@@ -24,6 +24,10 @@ type FleetStackAssociationObservation struct {
 	// Unique ID of the appstream stack fleet association, composed of the fleet_name and stack_name separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Name of the stack.
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 }
@@ -44,10 +48,10 @@ type FleetStackAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	FleetNameSelector *v1.Selector `json:"fleetNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the stack.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appstream/v1beta2.Stack

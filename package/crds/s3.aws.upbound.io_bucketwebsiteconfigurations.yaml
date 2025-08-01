@@ -193,8 +193,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingRule:
                     description: List of rules that define when a redirect is applied
@@ -672,6 +673,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routingRule:
                     description: List of rules that define when a redirect is applied
                       and the redirect behavior. See below.
@@ -970,8 +976,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingRule:
                     description: List of rules that define when a redirect is applied
@@ -1429,6 +1436,11 @@ spec:
                           Valid values: http, https.'
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routingRule:
                     description: List of rules that define when a redirect is applied
                       and the redirect behavior. See below.

@@ -201,6 +201,11 @@ func (in *EnvironmentEC2Observation) DeepCopyInto(out *EnvironmentEC2Observation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
@@ -470,6 +475,11 @@ func (in *EnvironmentMembershipObservation) DeepCopyInto(out *EnvironmentMembers
 	}
 	if in.Permissions != nil {
 		in, out := &in.Permissions, &out.Permissions
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

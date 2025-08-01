@@ -310,8 +310,9 @@ spec:
                       object lock will expire.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serverSideEncryption:
                     description: Server-side encryption of the object in S3. Valid
@@ -885,6 +886,11 @@ spec:
                   objectLockRetainUntilDate:
                     description: Date and time, in RFC3339 format, when this object's
                       object lock will expire.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serverSideEncryption:
                     description: Server-side encryption of the object in S3. Valid

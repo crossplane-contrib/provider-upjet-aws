@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LBAttachment is the Schema for the LBAttachments API. Attaches
-          a Lightsail Instance to a Lightsail Load Balancer
+        description: LBAttachment is the Schema for the LBAttachments API. Manages
+          a Lightsail Load Balancer Attachment.
         properties:
           apiVersion:
             description: |-
@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   instanceName:
-                    description: The name of the instance to attach to the load balancer.
+                    description: Name of the instance to attach to the load balancer.
                     type: string
                   instanceNameRef:
                     description: Reference to a Instance in lightsail to populate
@@ -153,7 +153,7 @@ spec:
                         type: object
                     type: object
                   lbName:
-                    description: The name of the Lightsail load balancer.
+                    description: Name of the Lightsail load balancer.
                     type: string
                   lbNameRef:
                     description: Reference to a LB in lightsail to populate lbName.
@@ -230,8 +230,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -250,7 +251,7 @@ spec:
                   autoscaler.
                 properties:
                   instanceName:
-                    description: The name of the instance to attach to the load balancer.
+                    description: Name of the instance to attach to the load balancer.
                     type: string
                   instanceNameRef:
                     description: Reference to a Instance in lightsail to populate
@@ -329,7 +330,7 @@ spec:
                         type: object
                     type: object
                   lbName:
-                    description: The name of the Lightsail load balancer.
+                    description: Name of the Lightsail load balancer.
                     type: string
                   lbNameRef:
                     description: Reference to a LB in lightsail to populate lbName.
@@ -579,14 +580,19 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: 'A combination of attributes to create a unique id:
-                      lb_name,instance_name'
+                    description: 'Combination of attributes to create a unique ID:
+                      lb_name,instance_name.'
                     type: string
                   instanceName:
-                    description: The name of the instance to attach to the load balancer.
+                    description: Name of the instance to attach to the load balancer.
                     type: string
                   lbName:
-                    description: The name of the Lightsail load balancer.
+                    description: Name of the Lightsail load balancer.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:

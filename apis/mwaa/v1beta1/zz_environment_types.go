@@ -57,7 +57,7 @@ type EnvironmentInitParameters struct {
 	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
-	// Environment class for the cluster. Possible options are mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
+	// Environment class for the cluster. Possible options are mw1.micro, mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
 	EnvironmentClass *string `json:"environmentClass,omitempty" tf:"environment_class,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
@@ -88,13 +88,13 @@ type EnvironmentInitParameters struct {
 	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
+	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
 	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
-	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
+	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
 	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
@@ -168,7 +168,7 @@ type EnvironmentObservation struct {
 	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
-	// Environment class for the cluster. Possible options are mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
+	// Environment class for the cluster. Possible options are mw1.micro, mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
 	EnvironmentClass *string `json:"environmentClass,omitempty" tf:"environment_class,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
@@ -184,13 +184,13 @@ type EnvironmentObservation struct {
 	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	LoggingConfiguration *LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
+	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
 	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
-	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
+	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
 	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
@@ -204,6 +204,10 @@ type EnvironmentObservation struct {
 
 	// The relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	PluginsS3Path *string `json:"pluginsS3Path,omitempty" tf:"plugins_s3_path,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The requirements.txt file version you want to use.
 	RequirementsS3ObjectVersion *string `json:"requirementsS3ObjectVersion,omitempty" tf:"requirements_s3_object_version,omitempty"`
@@ -268,7 +272,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
-	// Environment class for the cluster. Possible options are mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
+	// Environment class for the cluster. Possible options are mw1.micro, mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
 	// +kubebuilder:validation:Optional
 	EnvironmentClass *string `json:"environmentClass,omitempty" tf:"environment_class,omitempty"`
 
@@ -303,7 +307,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration *LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
+	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	// +kubebuilder:validation:Optional
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
@@ -311,7 +315,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
-	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
+	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	// +kubebuilder:validation:Optional
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
@@ -331,10 +335,10 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PluginsS3Path *string `json:"pluginsS3Path,omitempty" tf:"plugins_s3_path,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The requirements.txt file version you want to use.
 	// +kubebuilder:validation:Optional

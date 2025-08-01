@@ -447,6 +447,10 @@ type RiskConfigurationObservation struct {
 	// The user pool ID or the user pool ID and Client Id separated by a : if the configuration is client specific.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The configuration to override the risk decision. See details below.
 	RiskExceptionConfiguration *RiskExceptionConfigurationObservation `json:"riskExceptionConfiguration,omitempty" tf:"risk_exception_configuration,omitempty"`
 
@@ -468,10 +472,10 @@ type RiskConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationParameters `json:"compromisedCredentialsRiskConfiguration,omitempty" tf:"compromised_credentials_risk_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The configuration to override the risk decision. See details below.
 	// +kubebuilder:validation:Optional

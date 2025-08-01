@@ -107,16 +107,10 @@ spec:
                     description: Whether to publish creation/change as Live CloudFront
                       Function Version. Defaults to true.
                     type: boolean
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   runtime:
                     description: Identifier of the function's runtime. Valid values
                       are cloudfront-js-1.0 and cloudfront-js-2.0.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

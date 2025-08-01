@@ -167,8 +167,9 @@ spec:
                       snapshot.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceRegion:
                     description: The region of the source snapshot.
@@ -687,6 +688,11 @@ spec:
                     description: Indicates whether to permanently restore an archived
                       snapshot.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   sourceRegion:
                     description: The region of the source snapshot.
                     type: string

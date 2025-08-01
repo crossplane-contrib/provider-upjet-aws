@@ -1057,6 +1057,10 @@ type WorkflowObservation struct {
 	// Specifies the steps (actions) to take if errors are encountered during execution of the workflow. See Workflow Steps below.
 	OnExceptionSteps []OnExceptionStepsObservation `json:"onExceptionSteps,omitempty" tf:"on_exception_steps,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Specifies the details for the steps that are in the specified workflow. See Workflow Steps below.
 	Steps []StepsObservation `json:"steps,omitempty" tf:"steps,omitempty"`
 
@@ -1079,10 +1083,10 @@ type WorkflowParameters struct {
 	// +kubebuilder:validation:Optional
 	OnExceptionSteps []OnExceptionStepsParameters `json:"onExceptionSteps,omitempty" tf:"on_exception_steps,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies the details for the steps that are in the specified workflow. See Workflow Steps below.
 	// +kubebuilder:validation:Optional

@@ -15,6 +15,9 @@ import (
 
 type QueueInitParameters struct {
 
+	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
+
 	// A description of the queue
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -37,6 +40,9 @@ type QueueObservation struct {
 	// The Arn of the queue
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
+
 	// A description of the queue
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -45,6 +51,10 @@ type QueueObservation struct {
 
 	// Specifies whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
 	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// A detail pricing plan of the  reserved queue. See below.
 	ReservationPlanSettings *ReservationPlanSettingsObservation `json:"reservationPlanSettings,omitempty" tf:"reservation_plan_settings,omitempty"`
@@ -63,6 +73,10 @@ type QueueObservation struct {
 
 type QueueParameters struct {
 
+	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	// +kubebuilder:validation:Optional
+	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
+
 	// A description of the queue
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -71,10 +85,10 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Optional
 	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A detail pricing plan of the  reserved queue. See below.
 	// +kubebuilder:validation:Optional

@@ -181,11 +181,27 @@ type ConnectionInitParameters struct {
 	// Parameters used for authorization. A maximum of 1 are allowed. Documented below.
 	AuthParameters *AuthParametersInitParameters `json:"authParameters,omitempty" tf:"auth_parameters,omitempty"`
 
-	// Choose the type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
+	// Type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// Enter a description for the connection. Maximum of 512 characters.
+	// Description for the connection. Maximum of 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Parameters to use for invoking a private API. Documented below.
+	InvocationConnectivityParameters *InvocationConnectivityParametersInitParameters `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
+
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierRef *v1.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierSelector *v1.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 }
 
 type ConnectionObservation struct {
@@ -196,13 +212,23 @@ type ConnectionObservation struct {
 	// Parameters used for authorization. A maximum of 1 are allowed. Documented below.
 	AuthParameters *AuthParametersObservation `json:"authParameters,omitempty" tf:"auth_parameters,omitempty"`
 
-	// Choose the type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
+	// Type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// Enter a description for the connection. Maximum of 512 characters.
+	// Description for the connection. Maximum of 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Parameters to use for invoking a private API. Documented below.
+	InvocationConnectivityParameters *InvocationConnectivityParametersObservation `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
+
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the secret created from the authorization parameters specified for the connection.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
@@ -214,18 +240,36 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthParameters *AuthParametersParameters `json:"authParameters,omitempty" tf:"auth_parameters,omitempty"`
 
-	// Choose the type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
+	// Type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
 	// +kubebuilder:validation:Optional
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// Enter a description for the connection. Maximum of 512 characters.
+	// Description for the connection. Maximum of 512 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Parameters to use for invoking a private API. Documented below.
+	// +kubebuilder:validation:Optional
+	InvocationConnectivityParameters *InvocationConnectivityParametersParameters `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
+
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierRef *v1.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierSelector *v1.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type HeaderInitParameters struct {
@@ -262,6 +306,25 @@ type HeaderParameters struct {
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+}
+
+type InvocationConnectivityParametersInitParameters struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	ResourceParameters *ResourceParametersInitParameters `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+}
+
+type InvocationConnectivityParametersObservation struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	ResourceParameters *ResourceParametersObservation `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+}
+
+type InvocationConnectivityParametersParameters struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	// +kubebuilder:validation:Optional
+	ResourceParameters *ResourceParametersParameters `json:"resourceParameters" tf:"resource_parameters,omitempty"`
 }
 
 type InvocationHTTPParametersInitParameters struct {
@@ -533,6 +596,28 @@ type QueryStringParameters struct {
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+}
+
+type ResourceParametersInitParameters struct {
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type ResourceParametersObservation struct {
+
+	// The Amazon Resource Name (ARN) of the connection.
+	ResourceAssociationArn *string `json:"resourceAssociationArn,omitempty" tf:"resource_association_arn,omitempty"`
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type ResourceParametersParameters struct {
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn" tf:"resource_configuration_arn,omitempty"`
 }
 
 // ConnectionSpec defines the desired state of Connection

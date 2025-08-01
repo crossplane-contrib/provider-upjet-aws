@@ -103,8 +103,9 @@ spec:
                       bars, colons, or forward slashes.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scalingInstruction:
                     description: Scaling instructions. More details can be found in
@@ -728,6 +729,11 @@ spec:
                   name:
                     description: Name of the scaling plan. Names cannot contain vertical
                       bars, colons, or forward slashes.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scalingInstruction:
                     description: Scaling instructions. More details can be found in
@@ -1058,8 +1064,9 @@ spec:
                       bars, colons, or forward slashes.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scalingInstruction:
                     description: Scaling instructions. More details can be found in
@@ -1663,6 +1670,11 @@ spec:
                   name:
                     description: Name of the scaling plan. Names cannot contain vertical
                       bars, colons, or forward slashes.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   scalingInstruction:
                     description: Scaling instructions. More details can be found in

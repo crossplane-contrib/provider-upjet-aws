@@ -34,6 +34,10 @@ type StudioLifecycleConfigObservation struct {
 	// The name of the Studio Lifecycle Config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer, JupyterLab, CodeEditor and KernelGateway.
 	StudioLifecycleConfigAppType *string `json:"studioLifecycleConfigAppType,omitempty" tf:"studio_lifecycle_config_app_type,omitempty"`
 
@@ -51,10 +55,10 @@ type StudioLifecycleConfigObservation struct {
 
 type StudioLifecycleConfigParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer, JupyterLab, CodeEditor and KernelGateway.
 	// +kubebuilder:validation:Optional
@@ -97,7 +101,7 @@ type StudioLifecycleConfigStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// StudioLifecycleConfig is the Schema for the StudioLifecycleConfigs API. Provides a SageMaker Studio Lifecycle Config resource.
+// StudioLifecycleConfig is the Schema for the StudioLifecycleConfigs API. Provides a SageMaker AI Studio Lifecycle Config resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

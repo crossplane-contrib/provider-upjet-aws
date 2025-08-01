@@ -130,6 +130,11 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceArn != nil {
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
@@ -409,6 +414,11 @@ func (in *LicenseConfigurationObservation) DeepCopyInto(out *LicenseConfiguratio
 	}
 	if in.OwnerAccountID != nil {
 		in, out := &in.OwnerAccountID, &out.OwnerAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

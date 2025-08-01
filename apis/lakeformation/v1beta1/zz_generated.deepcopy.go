@@ -587,6 +587,11 @@ func (in *DataLakeSettingsObservation) DeepCopyInto(out *DataLakeSettingsObserva
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TrustedResourceOwners != nil {
 		in, out := &in.TrustedResourceOwners, &out.TrustedResourceOwners
 		*out = make([]*string, len(*in))
@@ -1504,6 +1509,11 @@ func (in *PermissionsObservation) DeepCopyInto(out *PermissionsObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Table != nil {
 		in, out := &in.Table, &out.Table
 		*out = make([]TableObservation, len(*in))
@@ -1800,6 +1810,11 @@ func (in *ResourceObservation) DeepCopyInto(out *ResourceObservation) {
 	}
 	if in.LastModified != nil {
 		in, out := &in.LastModified, &out.LastModified
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

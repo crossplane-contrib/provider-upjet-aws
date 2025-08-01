@@ -15,6 +15,5 @@ spec:
     budgetType: USAGE
     limitAmount: "10.0"
     limitUnit: dollars
-    region: us-west-1
     timePeriodStart: 2006-01-02_15:04
     timeUnit: MONTHLY

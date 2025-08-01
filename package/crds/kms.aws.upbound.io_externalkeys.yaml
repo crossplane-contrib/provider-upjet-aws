@@ -123,8 +123,9 @@ spec:
                       a key policy, AWS KMS attaches a default key policy to the CMK.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -433,6 +434,11 @@ spec:
                   policy:
                     description: A key policy JSON document. If you do not provide
                       a key policy, AWS KMS attaches a default key policy to the CMK.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

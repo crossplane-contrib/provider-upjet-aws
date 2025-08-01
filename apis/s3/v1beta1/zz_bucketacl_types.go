@@ -73,7 +73,7 @@ type AccessControlPolicyParameters struct {
 
 type BucketACLInitParameters struct {
 
-	// Canned ACL to apply to the bucket.
+	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
@@ -98,7 +98,7 @@ type BucketACLInitParameters struct {
 
 type BucketACLObservation struct {
 
-	// Canned ACL to apply to the bucket.
+	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
@@ -112,11 +112,15 @@ type BucketACLObservation struct {
 
 	// The bucket, expected_bucket_owner (if configured), and acl (if configured) separated by commas (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type BucketACLParameters struct {
 
-	// Canned ACL to apply to the bucket.
+	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -142,10 +146,10 @@ type BucketACLParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type GranteeInitParameters struct {

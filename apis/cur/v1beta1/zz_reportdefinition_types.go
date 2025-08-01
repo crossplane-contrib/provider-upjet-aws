@@ -19,7 +19,7 @@ type ReportDefinitionInitParameters struct {
 	// +listType=set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.
 	// +listType=set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
@@ -47,7 +47,7 @@ type ReportDefinitionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// Report path prefix. Limited to 256 characters.
+	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 
 	// Region of the existing S3 bucket to hold generated reports.
@@ -67,7 +67,7 @@ type ReportDefinitionObservation struct {
 	// +listType=set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.
 	// +listType=set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
@@ -91,7 +91,7 @@ type ReportDefinitionObservation struct {
 	// Name of the existing S3 bucket to hold generated reports.
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
-	// Report path prefix. Limited to 256 characters.
+	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 
 	// Region of the existing S3 bucket to hold generated reports.
@@ -116,7 +116,7 @@ type ReportDefinitionParameters struct {
 	// +listType=set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
@@ -132,11 +132,6 @@ type ReportDefinitionParameters struct {
 	// Set to true to update your reports after they have been finalized if AWS detects charges related to previous months.
 	// +kubebuilder:validation:Optional
 	RefreshClosedReports *bool `json:"refreshClosedReports,omitempty" tf:"refresh_closed_reports,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 
 	// Overwrite the previous version of each report or to deliver the report in addition to the previous versions. Valid values are: CREATE_NEW_REPORT and OVERWRITE_REPORT.
 	// +kubebuilder:validation:Optional
@@ -155,7 +150,7 @@ type ReportDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// Report path prefix. Limited to 256 characters.
+	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	// +kubebuilder:validation:Optional
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 
@@ -212,6 +207,7 @@ type ReportDefinition struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.additionalSchemaElements) || (has(self.initProvider) && has(self.initProvider.additionalSchemaElements))",message="spec.forProvider.additionalSchemaElements is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.compression) || (has(self.initProvider) && has(self.initProvider.compression))",message="spec.forProvider.compression is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.format) || (has(self.initProvider) && has(self.initProvider.format))",message="spec.forProvider.format is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Prefix) || (has(self.initProvider) && has(self.initProvider.s3Prefix))",message="spec.forProvider.s3Prefix is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Region) || (has(self.initProvider) && has(self.initProvider.s3Region))",message="spec.forProvider.s3Region is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeUnit) || (has(self.initProvider) && has(self.initProvider.timeUnit))",message="spec.forProvider.timeUnit is a required parameter"
 	Spec   ReportDefinitionSpec   `json:"spec"`

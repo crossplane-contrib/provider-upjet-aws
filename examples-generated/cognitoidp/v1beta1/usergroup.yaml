@@ -47,3 +47,4 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.group_role.json}
+    region: us-west-1

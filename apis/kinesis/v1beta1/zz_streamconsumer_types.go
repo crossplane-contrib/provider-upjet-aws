@@ -18,7 +18,7 @@ type StreamConsumerInitParameters struct {
 	// Name of the stream consumer.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  Amazon Resource Name (ARN) of the data stream the consumer is registered with.
+	// Amazon Resource Name (ARN) of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
@@ -30,6 +30,9 @@ type StreamConsumerInitParameters struct {
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StreamConsumerObservation struct {
@@ -46,8 +49,18 @@ type StreamConsumerObservation struct {
 	// Name of the stream consumer.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  Amazon Resource Name (ARN) of the data stream the consumer is registered with.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Amazon Resource Name (ARN) of the data stream the consumer is registered with.
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type StreamConsumerParameters struct {
@@ -56,12 +69,12 @@ type StreamConsumerParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// –  Amazon Resource Name (ARN) of the data stream the consumer is registered with.
+	// Amazon Resource Name (ARN) of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
@@ -74,6 +87,10 @@ type StreamConsumerParameters struct {
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // StreamConsumerSpec defines the desired state of StreamConsumer

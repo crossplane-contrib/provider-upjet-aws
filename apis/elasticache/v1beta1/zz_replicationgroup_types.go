@@ -399,6 +399,10 @@ type ReplicationGroupObservation struct {
 	// (Redis only) Address of the endpoint for the primary node in the replication group, if the cluster mode is disabled.
 	PrimaryEndpointAddress *string `json:"primaryEndpointAddress,omitempty" tf:"primary_endpoint_address,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// (Redis only) Address of the endpoint for the reader node in the replication group, if the cluster mode is disabled.
 	ReaderEndpointAddress *string `json:"readerEndpointAddress,omitempty" tf:"reader_endpoint_address,omitempty"`
 
@@ -603,10 +607,10 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PreferredCacheClusterAzs []*string `json:"preferredCacheClusterAzs,omitempty" tf:"preferred_cache_cluster_azs,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.

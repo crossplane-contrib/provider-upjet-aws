@@ -44,6 +44,10 @@ type ApprovalRuleTemplateObservation struct {
 	// The Amazon Resource Name (ARN) of the user who made the most recent changes to the approval rule template.
 	LastModifiedUser *string `json:"lastModifiedUser,omitempty" tf:"last_modified_user,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The SHA-256 hash signature for the content of the approval rule template.
 	RuleContentSha256 *string `json:"ruleContentSha256,omitempty" tf:"rule_content_sha256,omitempty"`
 }
@@ -58,10 +62,10 @@ type ApprovalRuleTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ApprovalRuleTemplateSpec defines the desired state of ApprovalRuleTemplate

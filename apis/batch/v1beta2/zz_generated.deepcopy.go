@@ -1677,6 +1677,11 @@ func (in *JobDefinitionObservation) DeepCopyInto(out *JobDefinitionObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetryStrategy != nil {
 		in, out := &in.RetryStrategy, &out.RetryStrategy
 		*out = new(RetryStrategyObservation)
@@ -2528,6 +2533,11 @@ func (in *SchedulingPolicyObservation) DeepCopyInto(out *SchedulingPolicyObserva
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

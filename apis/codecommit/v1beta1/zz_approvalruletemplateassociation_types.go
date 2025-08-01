@@ -24,6 +24,10 @@ type ApprovalRuleTemplateAssociationObservation struct {
 	// The name of the approval rule template and name of the repository, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The name of the repository that you want to associate with the template.
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 }
@@ -43,10 +47,10 @@ type ApprovalRuleTemplateAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ApprovalRuleTemplateNameSelector *v1.Selector `json:"approvalRuleTemplateNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the repository that you want to associate with the template.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codecommit/v1beta1.Repository

@@ -335,8 +335,9 @@ spec:
                       the protocol number
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupId:
                     description: Security group to apply this rule to.
@@ -1173,6 +1174,11 @@ spec:
                   protocol:
                     description: Protocol. If not icmp, icmpv6, tcp, udp, or all use
                       the protocol number
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupId:
                     description: Security group to apply this rule to.

@@ -155,8 +155,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
                     description: The ID of the VPC to which we would like to associate
@@ -590,6 +591,11 @@ spec:
                     type: string
                   id:
                     description: The ID of the DHCP Options Set Association.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
                     description: The ID of the VPC to which we would like to associate

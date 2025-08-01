@@ -66,6 +66,10 @@ type ConfigurationSetEventDestinationObservation struct {
 
 	// A pipe-delimited string combining configuration_set_name and event_destination_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ConfigurationSetEventDestinationParameters struct {
@@ -91,10 +95,10 @@ type ConfigurationSetEventDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 type DimensionConfigurationInitParameters struct {

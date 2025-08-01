@@ -13,7 +13,7 @@ spec:
     findingCriteria:
     - criterion:
       - eq:
-        - ${data.aws_region.current.name}
+        - ${data.aws_region.current.region}
         field: region
     name: NAME OF THE FINDINGS FILTER
     position: 1

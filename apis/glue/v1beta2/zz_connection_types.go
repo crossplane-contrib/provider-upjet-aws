@@ -14,15 +14,17 @@ import (
 )
 
 type ConnectionInitParameters struct {
+	AthenaProperties map[string]*string `json:"athenaPropertiesSecretRef,omitempty" tf:"-"`
+
 	ConnectionProperties map[string]*string `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// –  Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
+	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
-	// –  Description of the connection.
+	// Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  List of criteria that can be used in selecting this connection.
+	// List of criteria that can be used in selecting this connection.
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
 	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
@@ -38,23 +40,27 @@ type ConnectionObservation struct {
 	// ARN of the Glue Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+	// ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// –  Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
+	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
-	// –  Description of the connection.
+	// Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Catalog ID and name of the connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  List of criteria that can be used in selecting this connection.
+	// List of criteria that can be used in selecting this connection.
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
 	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsObservation `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -67,23 +73,27 @@ type ConnectionObservation struct {
 
 type ConnectionParameters struct {
 
-	// –  ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+	// Map of key-value pairs used as connection properties specific to the Athena compute environment.
+	// +kubebuilder:validation:Optional
+	AthenaPropertiesSecretRef *v1.SecretReference `json:"athenaPropertiesSecretRef,omitempty" tf:"-"`
+
+	// ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
-	// value pairs used as parameters for this connection. For more information, see the AWS Documentation.
+	// Map of key-value pairs used as parameters for this connection. For more information, see the AWS Documentation.
 	// +kubebuilder:validation:Optional
 	ConnectionPropertiesSecretRef *v1.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// –  Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
+	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
-	// –  Description of the connection.
+	// Description of the connection.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  List of criteria that can be used in selecting this connection.
+	// List of criteria that can be used in selecting this connection.
 	// +kubebuilder:validation:Optional
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
@@ -91,10 +101,10 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsParameters `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

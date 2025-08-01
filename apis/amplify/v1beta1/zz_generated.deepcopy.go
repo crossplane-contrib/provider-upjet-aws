@@ -83,6 +83,21 @@ func (in *AppInitParameters) DeepCopyInto(out *AppInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ComputeRoleArnRef != nil {
+		in, out := &in.ComputeRoleArnRef, &out.ComputeRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ComputeRoleArnSelector != nil {
+		in, out := &in.ComputeRoleArnSelector, &out.ComputeRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
@@ -150,6 +165,13 @@ func (in *AppInitParameters) DeepCopyInto(out *AppInitParameters) {
 		in, out := &in.IAMServiceRoleArnSelector, &out.IAMServiceRoleArnSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.JobConfig != nil {
+		in, out := &in.JobConfig, &out.JobConfig
+		*out = make([]JobConfigInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -269,6 +291,11 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
@@ -337,6 +364,13 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.JobConfig != nil {
+		in, out := &in.JobConfig, &out.JobConfig
+		*out = make([]JobConfigObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -353,6 +387,11 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Repository != nil {
 		in, out := &in.Repository, &out.Repository
@@ -446,6 +485,21 @@ func (in *AppParameters) DeepCopyInto(out *AppParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ComputeRoleArn != nil {
+		in, out := &in.ComputeRoleArn, &out.ComputeRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ComputeRoleArnRef != nil {
+		in, out := &in.ComputeRoleArnRef, &out.ComputeRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ComputeRoleArnSelector != nil {
+		in, out := &in.ComputeRoleArnSelector, &out.ComputeRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CustomHeaders != nil {
 		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
@@ -513,6 +567,13 @@ func (in *AppParameters) DeepCopyInto(out *AppParameters) {
 		in, out := &in.IAMServiceRoleArnSelector, &out.IAMServiceRoleArnSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.JobConfig != nil {
+		in, out := &in.JobConfig, &out.JobConfig
+		*out = make([]JobConfigParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -932,6 +993,11 @@ func (in *BackendEnvironmentObservation) DeepCopyInto(out *BackendEnvironmentObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StackName != nil {
 		in, out := &in.StackName, &out.StackName
 		*out = new(string)
@@ -1101,6 +1167,11 @@ func (in *BranchInitParameters) DeepCopyInto(out *BranchInitParameters) {
 	}
 	if in.EnablePullRequestPreview != nil {
 		in, out := &in.EnablePullRequestPreview, &out.EnablePullRequestPreview
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableSkewProtection != nil {
+		in, out := &in.EnableSkewProtection, &out.EnableSkewProtection
 		*out = new(bool)
 		**out = **in
 	}
@@ -1280,6 +1351,11 @@ func (in *BranchObservation) DeepCopyInto(out *BranchObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableSkewProtection != nil {
+		in, out := &in.EnableSkewProtection, &out.EnableSkewProtection
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnvironmentVariables != nil {
 		in, out := &in.EnvironmentVariables, &out.EnvironmentVariables
 		*out = make(map[string]*string, len(*in))
@@ -1308,6 +1384,11 @@ func (in *BranchObservation) DeepCopyInto(out *BranchObservation) {
 	}
 	if in.PullRequestEnvironmentName != nil {
 		in, out := &in.PullRequestEnvironmentName, &out.PullRequestEnvironmentName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1430,6 +1511,11 @@ func (in *BranchParameters) DeepCopyInto(out *BranchParameters) {
 	}
 	if in.EnablePullRequestPreview != nil {
 		in, out := &in.EnablePullRequestPreview, &out.EnablePullRequestPreview
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableSkewProtection != nil {
+		in, out := &in.EnableSkewProtection, &out.EnableSkewProtection
 		*out = new(bool)
 		**out = **in
 	}
@@ -1703,6 +1789,66 @@ func (in *CustomRuleParameters) DeepCopy() *CustomRuleParameters {
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *JobConfigInitParameters) DeepCopyInto(out *JobConfigInitParameters) {
+	*out = *in
+	if in.BuildComputeType != nil {
+		in, out := &in.BuildComputeType, &out.BuildComputeType
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new JobConfigInitParameters.
+func (in *JobConfigInitParameters) DeepCopy() *JobConfigInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(JobConfigInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *JobConfigObservation) DeepCopyInto(out *JobConfigObservation) {
+	*out = *in
+	if in.BuildComputeType != nil {
+		in, out := &in.BuildComputeType, &out.BuildComputeType
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new JobConfigObservation.
+func (in *JobConfigObservation) DeepCopy() *JobConfigObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(JobConfigObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *JobConfigParameters) DeepCopyInto(out *JobConfigParameters) {
+	*out = *in
+	if in.BuildComputeType != nil {
+		in, out := &in.BuildComputeType, &out.BuildComputeType
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new JobConfigParameters.
+func (in *JobConfigParameters) DeepCopy() *JobConfigParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(JobConfigParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ProductionBranchInitParameters) DeepCopyInto(out *ProductionBranchInitParameters) {
 	*out = *in
 }
@@ -1901,6 +2047,11 @@ func (in *WebhookObservation) DeepCopyInto(out *WebhookObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

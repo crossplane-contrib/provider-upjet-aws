@@ -134,6 +134,10 @@ type TrafficMirrorFilterRuleObservation struct {
 	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
 	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
@@ -171,10 +175,10 @@ type TrafficMirrorFilterRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
 	// +kubebuilder:validation:Optional

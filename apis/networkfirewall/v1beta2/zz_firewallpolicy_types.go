@@ -227,6 +227,10 @@ type FirewallPolicyObservation struct {
 	// The Amazon Resource Name (ARN) that identifies the firewall policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -253,10 +257,10 @@ type FirewallPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicy *FirewallPolicyFirewallPolicyParameters `json:"firewallPolicy,omitempty" tf:"firewall_policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -427,6 +431,9 @@ type StatefulEngineOptionsParameters struct {
 
 type StatefulRuleGroupReferenceInitParameters struct {
 
+	// Whether to enable deep threat inspection, which allows AWS to analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. AWS will use these threat indicators to improve the active threat defense managed rule groups and protect the security of AWS customers and services. This only applies to active threat defense maanaged rule groups.
+	DeepThreatInspection *string `json:"deepThreatInspection,omitempty" tf:"deep_threat_inspection,omitempty"`
+
 	// Configuration block for override values
 	Override *OverrideInitParameters `json:"override,omitempty" tf:"override,omitempty"`
 
@@ -449,6 +456,9 @@ type StatefulRuleGroupReferenceInitParameters struct {
 
 type StatefulRuleGroupReferenceObservation struct {
 
+	// Whether to enable deep threat inspection, which allows AWS to analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. AWS will use these threat indicators to improve the active threat defense managed rule groups and protect the security of AWS customers and services. This only applies to active threat defense maanaged rule groups.
+	DeepThreatInspection *string `json:"deepThreatInspection,omitempty" tf:"deep_threat_inspection,omitempty"`
+
 	// Configuration block for override values
 	Override *OverrideObservation `json:"override,omitempty" tf:"override,omitempty"`
 
@@ -460,6 +470,10 @@ type StatefulRuleGroupReferenceObservation struct {
 }
 
 type StatefulRuleGroupReferenceParameters struct {
+
+	// Whether to enable deep threat inspection, which allows AWS to analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. AWS will use these threat indicators to improve the active threat defense managed rule groups and protect the security of AWS customers and services. This only applies to active threat defense maanaged rule groups.
+	// +kubebuilder:validation:Optional
+	DeepThreatInspection *string `json:"deepThreatInspection,omitempty" tf:"deep_threat_inspection,omitempty"`
 
 	// Configuration block for override values
 	// +kubebuilder:validation:Optional

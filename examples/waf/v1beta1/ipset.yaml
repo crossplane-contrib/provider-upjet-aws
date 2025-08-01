@@ -18,4 +18,3 @@ spec:
     - type: "IPV4"
       value: "192.0.2.44/32"
     name: "tfIPSet"
-    region: us-west-1

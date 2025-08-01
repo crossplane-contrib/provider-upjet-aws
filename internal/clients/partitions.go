@@ -15,15 +15,3 @@ type awsRegion struct { //nolint:unused
 	id          string
 	description string
 }
-
-func getIAMDefaultSigningRegions() map[string]string {
-	var partitionToDefaultRegion = map[string]string{}
-	for name, partition := range partitions {
-		reg, ok := partition.serviceToDefaultRegions["iam"]
-		if !ok {
-			continue
-		}
-		partitionToDefaultRegion[name] = reg
-	}
-	return partitionToDefaultRegion
-}

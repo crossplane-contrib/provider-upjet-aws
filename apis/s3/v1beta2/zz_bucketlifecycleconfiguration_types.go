@@ -43,7 +43,9 @@ type AndInitParameters struct {
 	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
+	// Key-value map of resource tags.
+	// All of these tags must exist in the object's tag set in order for the rule to apply.
+	// If set, must contain at least one key-value pair.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -59,7 +61,9 @@ type AndObservation struct {
 	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
+	// Key-value map of resource tags.
+	// All of these tags must exist in the object's tag set in order for the rule to apply.
+	// If set, must contain at least one key-value pair.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -78,7 +82,9 @@ type AndParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
+	// Key-value map of resource tags.
+	// All of these tags must exist in the object's tag set in order for the rule to apply.
+	// If set, must contain at least one key-value pair.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -120,6 +126,10 @@ type BucketLifecycleConfigurationObservation struct {
 	// and status)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketLifecycleConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
@@ -147,10 +157,10 @@ type BucketLifecycleConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of configuration blocks describing the rules managing the replication. See below.
 	// +kubebuilder:validation:Optional
@@ -164,24 +174,31 @@ type BucketLifecycleConfigurationParameters struct {
 type BucketLifecycleConfigurationRuleInitParameters struct {
 
 	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. See below.
-	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadInitParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
+	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadInitParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
-	Expiration *RuleExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration []RuleExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below. If not specified, the rule will default to using prefix.
-	Filter *RuleFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+	// Configuration block used to identify objects that a Lifecycle Rule applies to.
+	// See below.
+	// If not specified, the rule will default to using prefix.
+	// One of filter or prefix should be specified.
+	Filter []RuleFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block that specifies when noncurrent object versions expire. See below.
-	NoncurrentVersionExpiration *RuleNoncurrentVersionExpirationInitParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+	NoncurrentVersionExpiration []RuleNoncurrentVersionExpirationInitParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionInitParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// DEPRECATED Use filter instead.
+	// This has been deprecated by Amazon S3.
+	// Prefix identifying one or more objects to which the rule applies.
+	// Defaults to an empty string ("") if filter is not specified.
+	// One of prefix or filter should be specified.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Whether the rule is currently being applied. Valid values: Enabled or Disabled.
@@ -194,24 +211,31 @@ type BucketLifecycleConfigurationRuleInitParameters struct {
 type BucketLifecycleConfigurationRuleObservation struct {
 
 	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. See below.
-	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadObservation `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
+	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadObservation `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
-	Expiration *RuleExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration []RuleExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below. If not specified, the rule will default to using prefix.
-	Filter *RuleFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+	// Configuration block used to identify objects that a Lifecycle Rule applies to.
+	// See below.
+	// If not specified, the rule will default to using prefix.
+	// One of filter or prefix should be specified.
+	Filter []RuleFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block that specifies when noncurrent object versions expire. See below.
-	NoncurrentVersionExpiration *RuleNoncurrentVersionExpirationObservation `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+	NoncurrentVersionExpiration []RuleNoncurrentVersionExpirationObservation `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionObservation `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// DEPRECATED Use filter instead.
+	// This has been deprecated by Amazon S3.
+	// Prefix identifying one or more objects to which the rule applies.
+	// Defaults to an empty string ("") if filter is not specified.
+	// One of prefix or filter should be specified.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Whether the rule is currently being applied. Valid values: Enabled or Disabled.
@@ -225,15 +249,18 @@ type BucketLifecycleConfigurationRuleParameters struct {
 
 	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. See below.
 	// +kubebuilder:validation:Optional
-	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
+	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
 	// +kubebuilder:validation:Optional
-	Expiration *RuleExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
+	Expiration []RuleExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below. If not specified, the rule will default to using prefix.
+	// Configuration block used to identify objects that a Lifecycle Rule applies to.
+	// See below.
+	// If not specified, the rule will default to using prefix.
+	// One of filter or prefix should be specified.
 	// +kubebuilder:validation:Optional
-	Filter *RuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter []RuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	// +kubebuilder:validation:Optional
@@ -241,13 +268,17 @@ type BucketLifecycleConfigurationRuleParameters struct {
 
 	// Configuration block that specifies when noncurrent object versions expire. See below.
 	// +kubebuilder:validation:Optional
-	NoncurrentVersionExpiration *RuleNoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+	NoncurrentVersionExpiration []RuleNoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// DEPRECATED Use filter instead.
+	// This has been deprecated by Amazon S3.
+	// Prefix identifying one or more objects to which the rule applies.
+	// Defaults to an empty string ("") if filter is not specified.
+	// One of prefix or filter should be specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -302,52 +333,52 @@ type RuleExpirationParameters struct {
 type RuleFilterInitParameters struct {
 
 	// Configuration block used to apply a logical AND to two or more predicates. See below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
-	And *AndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+	And []AndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
 
 	// Minimum object size (in bytes) to which the rule applies.
-	ObjectSizeGreaterThan *string `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
 
 	// Maximum object size (in bytes) to which the rule applies.
-	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
 	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Configuration block for specifying a tag key and value. See below.
-	Tag *TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type RuleFilterObservation struct {
 
 	// Configuration block used to apply a logical AND to two or more predicates. See below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
-	And *AndObservation `json:"and,omitempty" tf:"and,omitempty"`
+	And []AndObservation `json:"and,omitempty" tf:"and,omitempty"`
 
 	// Minimum object size (in bytes) to which the rule applies.
-	ObjectSizeGreaterThan *string `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
 
 	// Maximum object size (in bytes) to which the rule applies.
-	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
 	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Configuration block for specifying a tag key and value. See below.
-	Tag *TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type RuleFilterParameters struct {
 
 	// Configuration block used to apply a logical AND to two or more predicates. See below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
 	// +kubebuilder:validation:Optional
-	And *AndParameters `json:"and,omitempty" tf:"and,omitempty"`
+	And []AndParameters `json:"and,omitempty" tf:"and,omitempty"`
 
 	// Minimum object size (in bytes) to which the rule applies.
 	// +kubebuilder:validation:Optional
-	ObjectSizeGreaterThan *string `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
 
 	// Maximum object size (in bytes) to which the rule applies.
 	// +kubebuilder:validation:Optional
-	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
 	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
 	// +kubebuilder:validation:Optional
@@ -355,13 +386,13 @@ type RuleFilterParameters struct {
 
 	// Configuration block for specifying a tag key and value. See below.
 	// +kubebuilder:validation:Optional
-	Tag *TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type RuleNoncurrentVersionExpirationInitParameters struct {
 
 	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
-	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
@@ -370,7 +401,7 @@ type RuleNoncurrentVersionExpirationInitParameters struct {
 type RuleNoncurrentVersionExpirationObservation struct {
 
 	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
-	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
@@ -380,17 +411,17 @@ type RuleNoncurrentVersionExpirationParameters struct {
 
 	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
 	// +kubebuilder:validation:Optional
-	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
-	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+	NoncurrentDays *float64 `json:"noncurrentDays" tf:"noncurrent_days,omitempty"`
 }
 
 type RuleNoncurrentVersionTransitionInitParameters struct {
 
 	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
-	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
@@ -402,7 +433,7 @@ type RuleNoncurrentVersionTransitionInitParameters struct {
 type RuleNoncurrentVersionTransitionObservation struct {
 
 	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
-	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
@@ -415,11 +446,11 @@ type RuleNoncurrentVersionTransitionParameters struct {
 
 	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
 	// +kubebuilder:validation:Optional
-	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
 	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
-	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+	NoncurrentDays *float64 `json:"noncurrentDays" tf:"noncurrent_days,omitempty"`
 
 	// Class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Optional
@@ -529,9 +560,8 @@ type BucketLifecycleConfigurationStatus struct {
 type BucketLifecycleConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || (has(self.initProvider) && has(self.initProvider.rule))",message="spec.forProvider.rule is a required parameter"
-	Spec   BucketLifecycleConfigurationSpec   `json:"spec"`
-	Status BucketLifecycleConfigurationStatus `json:"status,omitempty"`
+	Spec              BucketLifecycleConfigurationSpec   `json:"spec"`
+	Status            BucketLifecycleConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

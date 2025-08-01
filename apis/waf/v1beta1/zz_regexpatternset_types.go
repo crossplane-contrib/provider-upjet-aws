@@ -49,11 +49,6 @@ type RegexPatternSetParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	RegexPatternStrings []*string `json:"regexPatternStrings,omitempty" tf:"regex_pattern_strings,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 // RegexPatternSetSpec defines the desired state of RegexPatternSet

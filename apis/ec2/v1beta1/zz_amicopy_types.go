@@ -155,6 +155,8 @@ type AMICopyObservation struct {
 	// ID of the created AMI.
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
+	LastLaunchedTime *string `json:"lastLaunchedTime,omitempty" tf:"last_launched_time,omitempty"`
+
 	ManageEBSSnapshots *bool `json:"manageEbsSnapshots,omitempty" tf:"manage_ebs_snapshots,omitempty"`
 
 	// Region-unique name for the AMI.
@@ -171,6 +173,10 @@ type AMICopyObservation struct {
 
 	// ID of the created AMI.
 	RamdiskID *string `json:"ramdiskId,omitempty" tf:"ramdisk_id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Region-unique name for the AMI.
 	RootDeviceName *string `json:"rootDeviceName,omitempty" tf:"root_device_name,omitempty"`
@@ -196,6 +202,8 @@ type AMICopyObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
+
+	UefiData *string `json:"uefiData,omitempty" tf:"uefi_data,omitempty"`
 
 	UsageOperation *string `json:"usageOperation,omitempty" tf:"usage_operation,omitempty"`
 
@@ -242,10 +250,10 @@ type AMICopyParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Id of the AMI to copy. This id must be valid in the region
 	// given by source_ami_region.

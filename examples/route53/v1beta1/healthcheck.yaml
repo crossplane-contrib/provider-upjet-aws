@@ -13,7 +13,6 @@ spec:
     failureThreshold: 5
     fqdn: mycompany.test
     port: 80
-    region: us-west-1
     requestInterval: 30
     resourcePath: /
     tags:

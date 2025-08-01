@@ -74,8 +74,9 @@ spec:
               forProvider:
                 properties:
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   standardsArn:
                     description: The ARN of a standard - see below.
@@ -281,6 +282,11 @@ spec:
                   id:
                     description: The ARN of a resource that represents your subscription
                       to a supported standard.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   standardsArn:
                     description: The ARN of a standard - see below.

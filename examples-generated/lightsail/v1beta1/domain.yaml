@@ -4,9 +4,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lightsail/v1beta1/domain
   labels:
-    testing.upbound.io/example-name: domain_test
-  name: domain-test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    domainName: mydomain.com
+    domainName: example.com
     region: us-west-1

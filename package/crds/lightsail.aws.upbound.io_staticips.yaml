@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: StaticIP is the Schema for the StaticIPs API. Provides an Lightsail
-          Static IP
+        description: StaticIP is the Schema for the StaticIPs API. Manages a Lightsail
+          Static IP.
         properties:
           apiVersion:
             description: |-
@@ -74,11 +74,12 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: The name for the allocated static IP
+                    description: Name for the allocated static IP.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -97,7 +98,7 @@ spec:
                   autoscaler.
                 properties:
                   name:
-                    description: The name for the allocated static IP
+                    description: Name for the allocated static IP.
                     type: string
                 type: object
               managementPolicies:
@@ -278,18 +279,26 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Lightsail static IP
+                    description: ARN of the Lightsail static IP.
                     type: string
                   id:
                     type: string
                   ipAddress:
-                    description: The allocated static IP address
+                    description: Allocated static IP address.
                     type: string
                   name:
-                    description: The name for the allocated static IP
+                    description: Name for the allocated static IP.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   supportCode:
-                    description: The support code.
+                    description: Support code for the static IP. Include this code
+                      in your email to support when you have questions about a static
+                      IP in Lightsail. This code enables our support team to look
+                      up your Lightsail information more easily.
                     type: string
                 type: object
               conditions:

@@ -15,13 +15,13 @@ import (
 
 type PermissionInitParameters struct {
 
-	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
+	// Lambda action to allow in this statement (e.g., lambda:InvokeFunction)
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The Event Source Token to validate.  Used with Alexa Skills.
+	// Event Source Token for Alexa Skills
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
-	// Name of the Lambda function whose resource policy you are updating
+	// Name of the Lambda function
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
@@ -33,16 +33,16 @@ type PermissionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
-	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE. Only supported for lambda:InvokeFunctionUrl action.
+	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
-	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
+	// AWS service or account that invokes the function (e.g., s3.amazonaws.com, sns.amazonaws.com, AWS account ID, or AWS IAM principal)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
-	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
+	// AWS Organizations ID to grant permission to all accounts under this organization
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
 
-	// Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
+	// Lambda function version or alias name
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Alias
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
@@ -54,76 +54,72 @@ type PermissionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
-	// This parameter is used when allowing cross-account access, or for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
+	// AWS account ID of the source owner for cross-account access, S3, or SES
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 
-	// When the principal is an AWS service, the ARN of the specific resource within that service to grant permission to.
-	// Without this, any resource from principal will be granted permission – even if that resource is from another account.
-	// For S3, this should be the ARN of the S3 Bucket.
-	// For EventBridge events, this should be the ARN of the EventBridge Rule.
-	// For API Gateway, this should be the ARN of the API, as described here.
+	// ARN of the source resource granting permission to invoke the Lambda function
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 
-	// A unique statement identifier.
+	// Statement identifier
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
-	// A statement identifier prefix. Conflicts with statement_id.
+	// Statement identifier prefix. Conflicts with statement_id
 	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
 }
 
 type PermissionObservation struct {
 
-	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
+	// Lambda action to allow in this statement (e.g., lambda:InvokeFunction)
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The Event Source Token to validate.  Used with Alexa Skills.
+	// Event Source Token for Alexa Skills
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
-	// Name of the Lambda function whose resource policy you are updating
+	// Name of the Lambda function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE. Only supported for lambda:InvokeFunctionUrl action.
+	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
+	// AWS service or account that invokes the function (e.g., s3.amazonaws.com, sns.amazonaws.com, AWS account ID, or AWS IAM principal)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
-	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
+	// AWS Organizations ID to grant permission to all accounts under this organization
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
 
-	// Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
+	// Lambda function version or alias name
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// This parameter is used when allowing cross-account access, or for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// AWS account ID of the source owner for cross-account access, S3, or SES
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 
-	// When the principal is an AWS service, the ARN of the specific resource within that service to grant permission to.
-	// Without this, any resource from principal will be granted permission – even if that resource is from another account.
-	// For S3, this should be the ARN of the S3 Bucket.
-	// For EventBridge events, this should be the ARN of the EventBridge Rule.
-	// For API Gateway, this should be the ARN of the API, as described here.
+	// ARN of the source resource granting permission to invoke the Lambda function
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 
-	// A unique statement identifier.
+	// Statement identifier
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
-	// A statement identifier prefix. Conflicts with statement_id.
+	// Statement identifier prefix. Conflicts with statement_id
 	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
 }
 
 type PermissionParameters struct {
 
-	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
+	// Lambda action to allow in this statement (e.g., lambda:InvokeFunction)
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The Event Source Token to validate.  Used with Alexa Skills.
+	// Event Source Token for Alexa Skills
 	// +kubebuilder:validation:Optional
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
-	// Name of the Lambda function whose resource policy you are updating
+	// Name of the Lambda function
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -136,19 +132,19 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
-	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE. Only supported for lambda:InvokeFunctionUrl action.
+	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
 	// +kubebuilder:validation:Optional
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
-	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
+	// AWS service or account that invokes the function (e.g., s3.amazonaws.com, sns.amazonaws.com, AWS account ID, or AWS IAM principal)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
-	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
+	// AWS Organizations ID to grant permission to all accounts under this organization
 	// +kubebuilder:validation:Optional
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
 
-	// Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
+	// Lambda function version or alias name
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Alias
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -161,28 +157,24 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// This parameter is used when allowing cross-account access, or for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
+	// AWS account ID of the source owner for cross-account access, S3, or SES
 	// +kubebuilder:validation:Optional
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 
-	// When the principal is an AWS service, the ARN of the specific resource within that service to grant permission to.
-	// Without this, any resource from principal will be granted permission – even if that resource is from another account.
-	// For S3, this should be the ARN of the S3 Bucket.
-	// For EventBridge events, this should be the ARN of the EventBridge Rule.
-	// For API Gateway, this should be the ARN of the API, as described here.
+	// ARN of the source resource granting permission to invoke the Lambda function
 	// +kubebuilder:validation:Optional
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 
-	// A unique statement identifier.
+	// Statement identifier
 	// +kubebuilder:validation:Optional
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
-	// A statement identifier prefix. Conflicts with statement_id.
+	// Statement identifier prefix. Conflicts with statement_id
 	// +kubebuilder:validation:Optional
 	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
 }
@@ -214,7 +206,7 @@ type PermissionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Permission is the Schema for the Permissions API. Creates a Lambda function permission.
+// Permission is the Schema for the Permissions API. Manages an AWS Lambda permission.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

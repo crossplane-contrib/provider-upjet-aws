@@ -13,286 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CapacityRebalanceInitParameters struct {
-
-	// The replacement strategy to use. Only available for spot fleets with fleet_type set to maintain. Valid values: launch.
-	ReplacementStrategy *string `json:"replacementStrategy,omitempty" tf:"replacement_strategy,omitempty"`
-}
-
-type CapacityRebalanceObservation struct {
-
-	// The replacement strategy to use. Only available for spot fleets with fleet_type set to maintain. Valid values: launch.
-	ReplacementStrategy *string `json:"replacementStrategy,omitempty" tf:"replacement_strategy,omitempty"`
-}
-
-type CapacityRebalanceParameters struct {
-
-	// The replacement strategy to use. Only available for spot fleets with fleet_type set to maintain. Valid values: launch.
-	// +kubebuilder:validation:Optional
-	ReplacementStrategy *string `json:"replacementStrategy,omitempty" tf:"replacement_strategy,omitempty"`
-}
-
-type InstanceRequirementsAcceleratorCountInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsAcceleratorCountObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsAcceleratorCountParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsAcceleratorTotalMemoryMibInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsAcceleratorTotalMemoryMibObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsAcceleratorTotalMemoryMibParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsBaselineEBSBandwidthMbpsInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsBaselineEBSBandwidthMbpsObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsBaselineEBSBandwidthMbpsParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsMemoryGibPerVcpuInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsMemoryGibPerVcpuObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsMemoryGibPerVcpuParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsMemoryMibInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsMemoryMibObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsMemoryMibParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsNetworkBandwidthGbpsInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsNetworkBandwidthGbpsObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsNetworkBandwidthGbpsParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsNetworkInterfaceCountInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsNetworkInterfaceCountObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsNetworkInterfaceCountParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsTotalLocalStorageGbInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsTotalLocalStorageGbObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsTotalLocalStorageGbParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsVcpuCountInitParameters struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsVcpuCountObservation struct {
-
-	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
-type InstanceRequirementsVcpuCountParameters struct {
-
-	// Maximum.
-	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
-
-	// Minimum.
-	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
-}
-
 type LaunchSpecificationEBSBlockDeviceInitParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
@@ -657,36 +377,7 @@ type LaunchSpecificationRootBlockDeviceParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
-type LaunchTemplateConfigInitParameters struct {
-
-	// Launch template specification. See Launch Template Specification below for more details.
-	LaunchTemplateSpecification []LaunchTemplateSpecificationInitParameters `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
-
-	// One or more override configurations. See Overrides below for more details.
-	Overrides []OverridesInitParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
-}
-
-type LaunchTemplateConfigObservation struct {
-
-	// Launch template specification. See Launch Template Specification below for more details.
-	LaunchTemplateSpecification []LaunchTemplateSpecificationObservation `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
-
-	// One or more override configurations. See Overrides below for more details.
-	Overrides []OverridesObservation `json:"overrides,omitempty" tf:"overrides,omitempty"`
-}
-
-type LaunchTemplateConfigParameters struct {
-
-	// Launch template specification. See Launch Template Specification below for more details.
-	// +kubebuilder:validation:Optional
-	LaunchTemplateSpecification []LaunchTemplateSpecificationParameters `json:"launchTemplateSpecification" tf:"launch_template_specification,omitempty"`
-
-	// One or more override configurations. See Overrides below for more details.
-	// +kubebuilder:validation:Optional
-	Overrides []OverridesParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
-}
-
-type LaunchTemplateSpecificationInitParameters struct {
+type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 
 	// The ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
@@ -718,7 +409,7 @@ type LaunchTemplateSpecificationInitParameters struct {
 	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
-type LaunchTemplateSpecificationObservation struct {
+type LaunchTemplateConfigLaunchTemplateSpecificationObservation struct {
 
 	// The ID of the launch template. Conflicts with name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -730,7 +421,7 @@ type LaunchTemplateSpecificationObservation struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
-type LaunchTemplateSpecificationParameters struct {
+type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 
 	// The ID of the launch template. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
@@ -789,10 +480,97 @@ type OverridesInitParameters struct {
 	WeightedCapacity *float64 `json:"weightedCapacity,omitempty" tf:"weighted_capacity,omitempty"`
 }
 
+type OverridesInstanceRequirementsAcceleratorCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsAcceleratorCountObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsAcceleratorCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsAcceleratorTotalMemoryMibInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsAcceleratorTotalMemoryMibObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsAcceleratorTotalMemoryMibParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsBaselineEBSBandwidthMbpsInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsBaselineEBSBandwidthMbpsObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsBaselineEBSBandwidthMbpsParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type OverridesInstanceRequirementsInitParameters struct {
 
 	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
-	AcceleratorCount []InstanceRequirementsAcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+	AcceleratorCount []OverridesInstanceRequirementsAcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
 	// +listType=set
@@ -803,7 +581,7 @@ type OverridesInstanceRequirementsInitParameters struct {
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
-	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+	AcceleratorTotalMemoryMib []OverridesInstanceRequirementsAcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
 	// +listType=set
@@ -817,7 +595,7 @@ type OverridesInstanceRequirementsInitParameters struct {
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
-	BaselineEBSBandwidthMbps []InstanceRequirementsBaselineEBSBandwidthMbpsInitParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+	BaselineEBSBandwidthMbps []OverridesInstanceRequirementsBaselineEBSBandwidthMbpsInitParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
 
 	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
@@ -842,16 +620,16 @@ type OverridesInstanceRequirementsInitParameters struct {
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
-	MemoryGibPerVcpu []InstanceRequirementsMemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+	MemoryGibPerVcpu []OverridesInstanceRequirementsMemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
-	MemoryMib []InstanceRequirementsMemoryMibInitParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+	MemoryMib []OverridesInstanceRequirementsMemoryMibInitParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
 
 	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
-	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsInitParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+	NetworkBandwidthGbps []OverridesInstanceRequirementsNetworkBandwidthGbpsInitParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
-	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+	NetworkInterfaceCount []OverridesInstanceRequirementsNetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
 	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
 	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
@@ -863,16 +641,132 @@ type OverridesInstanceRequirementsInitParameters struct {
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
-	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+	TotalLocalStorageGb []OverridesInstanceRequirementsTotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
 	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
-	VcpuCount []InstanceRequirementsVcpuCountInitParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+	VcpuCount []OverridesInstanceRequirementsVcpuCountInitParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+}
+
+type OverridesInstanceRequirementsMemoryGibPerVcpuInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsMemoryGibPerVcpuObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsMemoryGibPerVcpuParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsMemoryMibInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsMemoryMibObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsMemoryMibParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsNetworkBandwidthGbpsInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsNetworkBandwidthGbpsObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsNetworkBandwidthGbpsParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsNetworkInterfaceCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsNetworkInterfaceCountObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsNetworkInterfaceCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type OverridesInstanceRequirementsObservation struct {
 
 	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
-	AcceleratorCount []InstanceRequirementsAcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+	AcceleratorCount []OverridesInstanceRequirementsAcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
 	// +listType=set
@@ -883,7 +777,7 @@ type OverridesInstanceRequirementsObservation struct {
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
-	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+	AcceleratorTotalMemoryMib []OverridesInstanceRequirementsAcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
 	// +listType=set
@@ -897,7 +791,7 @@ type OverridesInstanceRequirementsObservation struct {
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
-	BaselineEBSBandwidthMbps []InstanceRequirementsBaselineEBSBandwidthMbpsObservation `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+	BaselineEBSBandwidthMbps []OverridesInstanceRequirementsBaselineEBSBandwidthMbpsObservation `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
 
 	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
@@ -922,16 +816,16 @@ type OverridesInstanceRequirementsObservation struct {
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
-	MemoryGibPerVcpu []InstanceRequirementsMemoryGibPerVcpuObservation `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+	MemoryGibPerVcpu []OverridesInstanceRequirementsMemoryGibPerVcpuObservation `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
-	MemoryMib []InstanceRequirementsMemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+	MemoryMib []OverridesInstanceRequirementsMemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
 
 	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
-	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+	NetworkBandwidthGbps []OverridesInstanceRequirementsNetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
-	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+	NetworkInterfaceCount []OverridesInstanceRequirementsNetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
 	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
 	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
@@ -943,17 +837,17 @@ type OverridesInstanceRequirementsObservation struct {
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
-	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbObservation `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+	TotalLocalStorageGb []OverridesInstanceRequirementsTotalLocalStorageGbObservation `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
 	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
-	VcpuCount []InstanceRequirementsVcpuCountObservation `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+	VcpuCount []OverridesInstanceRequirementsVcpuCountObservation `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
 }
 
 type OverridesInstanceRequirementsParameters struct {
 
 	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
-	AcceleratorCount []InstanceRequirementsAcceleratorCountParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+	AcceleratorCount []OverridesInstanceRequirementsAcceleratorCountParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
 	// +kubebuilder:validation:Optional
@@ -967,7 +861,7 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
-	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+	AcceleratorTotalMemoryMib []OverridesInstanceRequirementsAcceleratorTotalMemoryMibParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
 	// +kubebuilder:validation:Optional
@@ -985,7 +879,7 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
-	BaselineEBSBandwidthMbps []InstanceRequirementsBaselineEBSBandwidthMbpsParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+	BaselineEBSBandwidthMbps []OverridesInstanceRequirementsBaselineEBSBandwidthMbpsParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
 
 	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
 	// +kubebuilder:validation:Optional
@@ -1017,19 +911,19 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
-	MemoryGibPerVcpu []InstanceRequirementsMemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+	MemoryGibPerVcpu []OverridesInstanceRequirementsMemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	// +kubebuilder:validation:Optional
-	MemoryMib []InstanceRequirementsMemoryMibParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+	MemoryMib []OverridesInstanceRequirementsMemoryMibParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
 
 	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
-	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+	NetworkBandwidthGbps []OverridesInstanceRequirementsNetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+	NetworkInterfaceCount []OverridesInstanceRequirementsNetworkInterfaceCountParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
 	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
 	// +kubebuilder:validation:Optional
@@ -1045,11 +939,69 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
-	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+	TotalLocalStorageGb []OverridesInstanceRequirementsTotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
 	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
 	// +kubebuilder:validation:Optional
-	VcpuCount []InstanceRequirementsVcpuCountParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+	VcpuCount []OverridesInstanceRequirementsVcpuCountParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+}
+
+type OverridesInstanceRequirementsTotalLocalStorageGbInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsTotalLocalStorageGbObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsTotalLocalStorageGbParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsVcpuCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsVcpuCountObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type OverridesInstanceRequirementsVcpuCountParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type OverridesObservation struct {
@@ -1149,7 +1101,7 @@ type SpotFleetRequestInitParameters struct {
 	LaunchSpecification []LaunchSpecificationInitParameters `json:"launchSpecification,omitempty" tf:"launch_specification,omitempty"`
 
 	// Launch template configuration block. See Launch Template Configs below for more details. Conflicts with launch_specification. At least one of launch_specification or launch_template_config is required.
-	LaunchTemplateConfig []LaunchTemplateConfigInitParameters `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
+	LaunchTemplateConfig []SpotFleetRequestLaunchTemplateConfigInitParameters `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
 
 	// A list of elastic load balancer names to add to the Spot fleet.
 	// +listType=set
@@ -1207,6 +1159,35 @@ type SpotFleetRequestInitParameters struct {
 	WaitForFulfillment *bool `json:"waitForFulfillment,omitempty" tf:"wait_for_fulfillment,omitempty"`
 }
 
+type SpotFleetRequestLaunchTemplateConfigInitParameters struct {
+
+	// Launch template specification. See Launch Template Specification below for more details.
+	LaunchTemplateSpecification []LaunchTemplateConfigLaunchTemplateSpecificationInitParameters `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
+
+	// One or more override configurations. See Overrides below for more details.
+	Overrides []OverridesInitParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
+}
+
+type SpotFleetRequestLaunchTemplateConfigObservation struct {
+
+	// Launch template specification. See Launch Template Specification below for more details.
+	LaunchTemplateSpecification []LaunchTemplateConfigLaunchTemplateSpecificationObservation `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
+
+	// One or more override configurations. See Overrides below for more details.
+	Overrides []OverridesObservation `json:"overrides,omitempty" tf:"overrides,omitempty"`
+}
+
+type SpotFleetRequestLaunchTemplateConfigParameters struct {
+
+	// Launch template specification. See Launch Template Specification below for more details.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateSpecification []LaunchTemplateConfigLaunchTemplateSpecificationParameters `json:"launchTemplateSpecification" tf:"launch_template_specification,omitempty"`
+
+	// One or more override configurations. See Overrides below for more details.
+	// +kubebuilder:validation:Optional
+	Overrides []OverridesParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
+}
+
 type SpotFleetRequestObservation struct {
 
 	// Indicates how to allocate the target capacity across
@@ -1254,7 +1235,7 @@ type SpotFleetRequestObservation struct {
 	LaunchSpecification []LaunchSpecificationObservation `json:"launchSpecification,omitempty" tf:"launch_specification,omitempty"`
 
 	// Launch template configuration block. See Launch Template Configs below for more details. Conflicts with launch_specification. At least one of launch_specification or launch_template_config is required.
-	LaunchTemplateConfig []LaunchTemplateConfigObservation `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
+	LaunchTemplateConfig []SpotFleetRequestLaunchTemplateConfigObservation `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
 
 	// A list of elastic load balancer names to add to the Spot fleet.
 	// +listType=set
@@ -1268,6 +1249,10 @@ type SpotFleetRequestObservation struct {
 
 	// The number of On-Demand units to request. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
 	OnDemandTargetCapacity *float64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Indicates whether Spot fleet should replace unhealthy instances. Default false.
 	ReplaceUnhealthyInstances *bool `json:"replaceUnhealthyInstances,omitempty" tf:"replace_unhealthy_instances,omitempty"`
@@ -1370,7 +1355,7 @@ type SpotFleetRequestParameters struct {
 
 	// Launch template configuration block. See Launch Template Configs below for more details. Conflicts with launch_specification. At least one of launch_specification or launch_template_config is required.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateConfig []LaunchTemplateConfigParameters `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
+	LaunchTemplateConfig []SpotFleetRequestLaunchTemplateConfigParameters `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
 
 	// A list of elastic load balancer names to add to the Spot fleet.
 	// +kubebuilder:validation:Optional
@@ -1389,10 +1374,10 @@ type SpotFleetRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	OnDemandTargetCapacity *float64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Indicates whether Spot fleet should replace unhealthy instances. Default false.
 	// +kubebuilder:validation:Optional
@@ -1449,23 +1434,42 @@ type SpotFleetRequestParameters struct {
 	WaitForFulfillment *bool `json:"waitForFulfillment,omitempty" tf:"wait_for_fulfillment,omitempty"`
 }
 
+type SpotMaintenanceStrategiesCapacityRebalanceInitParameters struct {
+
+	// The replacement strategy to use. Only available for spot fleets with fleet_type set to maintain. Valid values: launch.
+	ReplacementStrategy *string `json:"replacementStrategy,omitempty" tf:"replacement_strategy,omitempty"`
+}
+
+type SpotMaintenanceStrategiesCapacityRebalanceObservation struct {
+
+	// The replacement strategy to use. Only available for spot fleets with fleet_type set to maintain. Valid values: launch.
+	ReplacementStrategy *string `json:"replacementStrategy,omitempty" tf:"replacement_strategy,omitempty"`
+}
+
+type SpotMaintenanceStrategiesCapacityRebalanceParameters struct {
+
+	// The replacement strategy to use. Only available for spot fleets with fleet_type set to maintain. Valid values: launch.
+	// +kubebuilder:validation:Optional
+	ReplacementStrategy *string `json:"replacementStrategy,omitempty" tf:"replacement_strategy,omitempty"`
+}
+
 type SpotMaintenanceStrategiesInitParameters struct {
 
 	// Nested argument containing the capacity rebalance for your fleet request. Defined below.
-	CapacityRebalance []CapacityRebalanceInitParameters `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
+	CapacityRebalance []SpotMaintenanceStrategiesCapacityRebalanceInitParameters `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 }
 
 type SpotMaintenanceStrategiesObservation struct {
 
 	// Nested argument containing the capacity rebalance for your fleet request. Defined below.
-	CapacityRebalance []CapacityRebalanceObservation `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
+	CapacityRebalance []SpotMaintenanceStrategiesCapacityRebalanceObservation `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 }
 
 type SpotMaintenanceStrategiesParameters struct {
 
 	// Nested argument containing the capacity rebalance for your fleet request. Defined below.
 	// +kubebuilder:validation:Optional
-	CapacityRebalance []CapacityRebalanceParameters `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
+	CapacityRebalance []SpotMaintenanceStrategiesCapacityRebalanceParameters `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 }
 
 // SpotFleetRequestSpec defines the desired state of SpotFleetRequest

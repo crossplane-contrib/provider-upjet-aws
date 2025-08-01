@@ -8,5 +8,4 @@ metadata:
   name: example-origin-access-identity
 spec:
   forProvider:
-    region: us-west-1
     comment: Some comment

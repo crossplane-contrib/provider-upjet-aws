@@ -106,8 +106,9 @@ spec:
                       enable. Default value: disable.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupReferencingSupport:
                     description: 'Whether Security Group Referencing Support is enabled.
@@ -421,6 +422,11 @@ spec:
                     type: string
                   propagationDefaultRouteTableId:
                     description: Identifier of the default propagation route table
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupReferencingSupport:
                     description: 'Whether Security Group Referencing Support is enabled.

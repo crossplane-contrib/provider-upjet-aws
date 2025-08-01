@@ -159,8 +159,9 @@ spec:
                       device.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   versioningConfiguration:
                     description: Configuration block for the versioning parameters.
@@ -491,6 +492,11 @@ spec:
                     description: Concatenation of the authentication device's serial
                       number, a space, and the value that is displayed on your authentication
                       device.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   versioningConfiguration:
                     description: Configuration block for the versioning parameters.
@@ -713,8 +719,9 @@ spec:
                       device.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   versioningConfiguration:
                     description: Configuration block for the versioning parameters.
@@ -1041,6 +1048,11 @@ spec:
                     description: Concatenation of the authentication device's serial
                       number, a space, and the value that is displayed on your authentication
                       device.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   versioningConfiguration:
                     description: Configuration block for the versioning parameters.

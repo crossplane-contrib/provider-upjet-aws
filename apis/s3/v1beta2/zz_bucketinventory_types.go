@@ -115,6 +115,10 @@ type BucketInventoryObservation struct {
 	// +listType=set
 	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Specifies the schedule for generating inventory results (documented below).
 	Schedule *ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
@@ -160,10 +164,10 @@ type BucketInventoryParameters struct {
 	// +listType=set
 	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies the schedule for generating inventory results (documented below).
 	// +kubebuilder:validation:Optional

@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   availabilityZone:
-                    description: The AZ where the EBS volume will exist.
+                    description: Availability zone where the EBS volume will exist.
                     type: string
                   encrypted:
                     description: If true, the disk will be encrypted.
@@ -85,12 +85,12 @@ spec:
                       default set to false
                     type: boolean
                   iops:
-                    description: The amount of IOPS to provision for the disk. Only
-                      valid for type of io1, io2 or gp3.
+                    description: Amount of IOPS to provision for the disk. Only valid
+                      for type of io1, io2 or gp3.
                     type: number
                   kmsKeyId:
-                    description: The ARN for the KMS encryption key. When specifying
-                      kms_key_id, encrypted needs to be set to true.
+                    description: ARN for the KMS encryption key. When specifying kms_key_id,
+                      encrypted needs to be set to true.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -171,14 +171,15 @@ spec:
                       Multi-Attach is supported on io1 and io2 volumes.
                     type: boolean
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost.
+                    description: Amazon Resource Name (ARN) of the Outpost.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   size:
-                    description: The size of the drive in GiBs.
+                    description: Size of the drive in GiBs.
                     type: number
                   snapshotId:
                     description: A snapshot to base the EBS volume off of.
@@ -190,12 +191,12 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   throughput:
-                    description: The throughput that the volume supports, in MiB/s.
-                      Only valid for type of gp3.
+                    description: Throughput that the volume supports, in MiB/s. Only
+                      valid for type of gp3.
                     type: number
                   type:
-                    description: 'The type of EBS volume. Can be standard, gp2, gp3,
-                      io1, io2, sc1 or st1 (Default: gp2).'
+                    description: 'Type of EBS volume. Can be standard, gp2, gp3, io1,
+                      io2, sc1 or st1 (Default: gp2).'
                     type: string
                 required:
                 - region
@@ -214,7 +215,7 @@ spec:
                   autoscaler.
                 properties:
                   availabilityZone:
-                    description: The AZ where the EBS volume will exist.
+                    description: Availability zone where the EBS volume will exist.
                     type: string
                   encrypted:
                     description: If true, the disk will be encrypted.
@@ -225,12 +226,12 @@ spec:
                       default set to false
                     type: boolean
                   iops:
-                    description: The amount of IOPS to provision for the disk. Only
-                      valid for type of io1, io2 or gp3.
+                    description: Amount of IOPS to provision for the disk. Only valid
+                      for type of io1, io2 or gp3.
                     type: number
                   kmsKeyId:
-                    description: The ARN for the KMS encryption key. When specifying
-                      kms_key_id, encrypted needs to be set to true.
+                    description: ARN for the KMS encryption key. When specifying kms_key_id,
+                      encrypted needs to be set to true.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -311,10 +312,10 @@ spec:
                       Multi-Attach is supported on io1 and io2 volumes.
                     type: boolean
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost.
+                    description: Amazon Resource Name (ARN) of the Outpost.
                     type: string
                   size:
-                    description: The size of the drive in GiBs.
+                    description: Size of the drive in GiBs.
                     type: number
                   snapshotId:
                     description: A snapshot to base the EBS volume off of.
@@ -326,12 +327,12 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   throughput:
-                    description: The throughput that the volume supports, in MiB/s.
-                      Only valid for type of gp3.
+                    description: Throughput that the volume supports, in MiB/s. Only
+                      valid for type of gp3.
                     type: number
                   type:
-                    description: 'The type of EBS volume. Can be standard, gp2, gp3,
-                      io1, io2, sc1 or st1 (Default: gp2).'
+                    description: 'Type of EBS volume. Can be standard, gp2, gp3, io1,
+                      io2, sc1 or st1 (Default: gp2).'
                     type: string
                 type: object
               managementPolicies:
@@ -512,10 +513,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The volume ARN (e.g., arn:aws:ec2:us-east-1:123456789012:volume/vol-59fcb34e).
+                    description: Volume ARN (e.g., arn:aws:ec2:us-east-1:123456789012:volume/vol-59fcb34e).
                     type: string
                   availabilityZone:
-                    description: The AZ where the EBS volume will exist.
+                    description: Availability zone where the EBS volume will exist.
+                    type: string
+                  createTime:
+                    description: Timestamp when volume creation was initiated.
                     type: string
                   encrypted:
                     description: If true, the disk will be encrypted.
@@ -526,25 +530,30 @@ spec:
                       default set to false
                     type: boolean
                   id:
-                    description: The volume ID (e.g., vol-59fcb34e).
+                    description: Volume ID (e.g., vol-59fcb34e).
                     type: string
                   iops:
-                    description: The amount of IOPS to provision for the disk. Only
-                      valid for type of io1, io2 or gp3.
+                    description: Amount of IOPS to provision for the disk. Only valid
+                      for type of io1, io2 or gp3.
                     type: number
                   kmsKeyId:
-                    description: The ARN for the KMS encryption key. When specifying
-                      kms_key_id, encrypted needs to be set to true.
+                    description: ARN for the KMS encryption key. When specifying kms_key_id,
+                      encrypted needs to be set to true.
                     type: string
                   multiAttachEnabled:
                     description: Specifies whether to enable Amazon EBS Multi-Attach.
                       Multi-Attach is supported on io1 and io2 volumes.
                     type: boolean
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost.
+                    description: Amazon Resource Name (ARN) of the Outpost.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   size:
-                    description: The size of the drive in GiBs.
+                    description: Size of the drive in GiBs.
                     type: number
                   snapshotId:
                     description: A snapshot to base the EBS volume off of.
@@ -564,12 +573,12 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   throughput:
-                    description: The throughput that the volume supports, in MiB/s.
-                      Only valid for type of gp3.
+                    description: Throughput that the volume supports, in MiB/s. Only
+                      valid for type of gp3.
                     type: number
                   type:
-                    description: 'The type of EBS volume. Can be standard, gp2, gp3,
-                      io1, io2, sc1 or st1 (Default: gp2).'
+                    description: 'Type of EBS volume. Can be standard, gp2, gp3, io1,
+                      io2, sc1 or st1 (Default: gp2).'
                     type: string
                 type: object
               conditions:

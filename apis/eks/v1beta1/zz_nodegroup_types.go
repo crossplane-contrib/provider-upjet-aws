@@ -33,7 +33,7 @@ type LaunchTemplateInitParameters struct {
 	// Name of the EC2 Launch Template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	// EC2 Launch Template version number.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -45,7 +45,7 @@ type LaunchTemplateObservation struct {
 	// Name of the EC2 Launch Template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	// EC2 Launch Template version number.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -59,7 +59,7 @@ type LaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	// EC2 Launch Template version number.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -88,7 +88,10 @@ type NodeGroupInitParameters struct {
 	// Configuration block with Launch Template settings. See launch_template below for details. Conflicts with remote_access.
 	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
+	// The node auto repair configuration for the node group. See node_repair_config below for details.
+	NodeRepairConfig []NodeRepairConfigInitParameters `json:"nodeRepairConfig,omitempty" tf:"node_repair_config,omitempty"`
+
+	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
@@ -101,7 +104,7 @@ type NodeGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeRoleArnSelector *v1.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
 
-	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
+	// AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
 	// Configuration block with remote access settings. See remote_access below for details. Conflicts with launch_template.
@@ -135,7 +138,7 @@ type NodeGroupInitParameters struct {
 	// Configuration block with update settings. See update_config below for details.
 	UpdateConfig []UpdateConfigInitParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 
-	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
+	// Kubernetes version. Defaults to EKS Cluster Kubernetes version.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",false)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -160,7 +163,7 @@ type NodeGroupObservation struct {
 	// Type of capacity associated with the EKS Node Group. Valid values: ON_DEMAND, SPOT.
 	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
@@ -182,10 +185,17 @@ type NodeGroupObservation struct {
 	// Configuration block with Launch Template settings. See launch_template below for details. Conflicts with remote_access.
 	LaunchTemplate []LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
+	// The node auto repair configuration for the node group. See node_repair_config below for details.
+	NodeRepairConfig []NodeRepairConfigObservation `json:"nodeRepairConfig,omitempty" tf:"node_repair_config,omitempty"`
+
+	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
 
-	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
 	// Configuration block with remote access settings. See remote_access below for details. Conflicts with launch_template.
@@ -218,7 +228,7 @@ type NodeGroupObservation struct {
 	// Configuration block with update settings. See update_config below for details.
 	UpdateConfig []UpdateConfigObservation `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 
-	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
+	// Kubernetes version. Defaults to EKS Cluster Kubernetes version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -232,7 +242,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
 
-	// –  Name of the EKS Cluster.
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=ExternalNameIfClusterActive()
 	// +kubebuilder:validation:Optional
@@ -267,7 +277,11 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
+	// The node auto repair configuration for the node group. See node_repair_config below for details.
+	// +kubebuilder:validation:Optional
+	NodeRepairConfig []NodeRepairConfigParameters `json:"nodeRepairConfig,omitempty" tf:"node_repair_config,omitempty"`
+
+	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -281,12 +295,12 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeRoleArnSelector *v1.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
+	// AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	// +kubebuilder:validation:Optional
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
@@ -327,7 +341,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	UpdateConfig []UpdateConfigParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 
-	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
+	// Kubernetes version. Defaults to EKS Cluster Kubernetes version.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",false)
 	// +kubebuilder:validation:Optional
@@ -340,6 +354,25 @@ type NodeGroupParameters struct {
 	// Selector for a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
 	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
+}
+
+type NodeRepairConfigInitParameters struct {
+
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type NodeRepairConfigObservation struct {
+
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type NodeRepairConfigParameters struct {
+
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type RemoteAccessInitParameters struct {

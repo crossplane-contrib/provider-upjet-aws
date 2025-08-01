@@ -10,11 +10,14 @@ spec:
   forProvider:
     region: us-west-1
     resourceTypeManagementPreference:
-      DynamoDB: true
-      EFS: true
+      CloudFormation: true
+      DSQL: true
+      DynamoDB: false
+      EFS: false
     resourceTypeOptInPreference:
       Aurora: true
       CloudFormation: true
+      DSQL: true
       DocumentDB: true
       DynamoDB: true
       EBS: true
@@ -22,9 +25,10 @@ spec:
       EFS: true
       FSx: true
       Neptune: true
-      RDS: true
+      RDS: false
       Redshift: true
-      S3: true
-      SAP HANA on Amazon EC2: true
-      Storage Gateway: true
-      VirtualMachine: true
+      Redshift Serverless: false
+      S3: false
+      SAP HANA on Amazon EC2: false
+      Storage Gateway: false
+      VirtualMachine: false

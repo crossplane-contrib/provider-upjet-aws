@@ -90,16 +90,11 @@ spec:
                   phoneNumber:
                     description: Phone number for the alternate contact.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   title:
                     description: Title for the alternate contact.
                     type: string
                 required:
                 - alternateContactType
-                - region
                 type: object
               initProvider:
                 description: |-

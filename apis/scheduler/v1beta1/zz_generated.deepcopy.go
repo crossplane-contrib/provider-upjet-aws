@@ -1327,6 +1327,11 @@ func (in *ScheduleGroupObservation) DeepCopyInto(out *ScheduleGroupObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -1610,6 +1615,11 @@ func (in *ScheduleObservation) DeepCopyInto(out *ScheduleObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

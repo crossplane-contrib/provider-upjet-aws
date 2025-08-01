@@ -162,10 +162,6 @@ spec:
                   name:
                     description: This is the name of the hosted zone.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -262,8 +258,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

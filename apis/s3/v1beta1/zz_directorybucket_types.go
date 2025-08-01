@@ -15,7 +15,7 @@ import (
 
 type DirectoryBucketInitParameters struct {
 
-	// Data redundancy. Valid values: SingleAvailabilityZone.
+	// Data redundancy. Valid values: SingleAvailabilityZone, SingleLocalZone. The default value depends on the value of the location.type attribute.
 	DataRedundancy *string `json:"dataRedundancy,omitempty" tf:"data_redundancy,omitempty"`
 
 	// Boolean that indicates all objects should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true. If setting this field in the same operation that would require replacing the bucket or destroying the bucket, this flag will not work.
@@ -23,6 +23,10 @@ type DirectoryBucketInitParameters struct {
 
 	// Bucket location. See Location below for more details.
 	Location []LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Bucket type. Valid values: Directory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -33,17 +37,29 @@ type DirectoryBucketObservation struct {
 	// ARN of the bucket.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Data redundancy. Valid values: SingleAvailabilityZone.
+	// Data redundancy. Valid values: SingleAvailabilityZone, SingleLocalZone. The default value depends on the value of the location.type attribute.
 	DataRedundancy *string `json:"dataRedundancy,omitempty" tf:"data_redundancy,omitempty"`
 
 	// Boolean that indicates all objects should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true. If setting this field in the same operation that would require replacing the bucket or destroying the bucket, this flag will not work.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// Name of the bucket.
+	// (Deprecated, use bucket instead) Name of the bucket.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Bucket location. See Location below for more details.
 	Location []LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Bucket type. Valid values: Directory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -51,7 +67,7 @@ type DirectoryBucketObservation struct {
 
 type DirectoryBucketParameters struct {
 
-	// Data redundancy. Valid values: SingleAvailabilityZone.
+	// Data redundancy. Valid values: SingleAvailabilityZone, SingleLocalZone. The default value depends on the value of the location.type attribute.
 	// +kubebuilder:validation:Optional
 	DataRedundancy *string `json:"dataRedundancy,omitempty" tf:"data_redundancy,omitempty"`
 
@@ -63,10 +79,15 @@ type DirectoryBucketParameters struct {
 	// +kubebuilder:validation:Optional
 	Location []LocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Bucket type. Valid values: Directory.
 	// +kubebuilder:validation:Optional

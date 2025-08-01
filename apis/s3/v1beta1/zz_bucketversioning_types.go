@@ -52,6 +52,10 @@ type BucketVersioningObservation struct {
 	// Concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
 	Mfa *string `json:"mfa,omitempty" tf:"mfa,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for the versioning parameters. See below.
 	VersioningConfiguration []VersioningConfigurationObservation `json:"versioningConfiguration,omitempty" tf:"versioning_configuration,omitempty"`
 }
@@ -80,10 +84,10 @@ type BucketVersioningParameters struct {
 	// +kubebuilder:validation:Optional
 	Mfa *string `json:"mfa,omitempty" tf:"mfa,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for the versioning parameters. See below.
 	// +kubebuilder:validation:Optional

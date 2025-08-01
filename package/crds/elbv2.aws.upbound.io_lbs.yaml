@@ -258,13 +258,37 @@ spec:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
-                    description: Type of IP addresses used by the subnets for your
-                      load balancer. The possible values are ipv4 and dualstack.
+                    description: 'Type of IP addresses used by the subnets for your
+                      load balancer. The possible values depend upon the load balancer
+                      type: ipv4 (all load balancer types), dualstack (all load balancer
+                      types), and dualstack-without-public-ipv4 (type application
+                      only).'
                     type: string
+                  ipamPools:
+                    description: . The IPAM pools to use with the load balancer.  Only
+                      valid for Load Balancers of type application. See ipam_pools
+                      for more information.
+                    items:
+                      properties:
+                        ipv4IpamPoolId:
+                          description: The ID of the IPv4 IPAM pool.
+                          type: string
+                      type: object
+                    type: array
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
                       are application, gateway, or network. The default value is application.
                     type: string
+                  minimumLoadBalancerCapacity:
+                    description: Minimum capacity for a load balancer. Only valid
+                      for Load Balancers of type application or network.
+                    items:
+                      properties:
+                        capacityUnits:
+                          description: The number of capacity units.
+                          type: number
+                      type: object
+                    type: array
                   name:
                     description: Name of the LB. This name must be unique within your
                       AWS account, can have a maximum of 32 characters, must contain
@@ -277,8 +301,9 @@ spec:
                       without any change. Defaults to false.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroups.
@@ -770,13 +795,37 @@ spec:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
-                    description: Type of IP addresses used by the subnets for your
-                      load balancer. The possible values are ipv4 and dualstack.
+                    description: 'Type of IP addresses used by the subnets for your
+                      load balancer. The possible values depend upon the load balancer
+                      type: ipv4 (all load balancer types), dualstack (all load balancer
+                      types), and dualstack-without-public-ipv4 (type application
+                      only).'
                     type: string
+                  ipamPools:
+                    description: . The IPAM pools to use with the load balancer.  Only
+                      valid for Load Balancers of type application. See ipam_pools
+                      for more information.
+                    items:
+                      properties:
+                        ipv4IpamPoolId:
+                          description: The ID of the IPv4 IPAM pool.
+                          type: string
+                      type: object
+                    type: array
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
                       are application, gateway, or network. The default value is application.
                     type: string
+                  minimumLoadBalancerCapacity:
+                    description: Minimum capacity for a load balancer. Only valid
+                      for Load Balancers of type application or network.
+                    items:
+                      properties:
+                        capacityUnits:
+                          description: The number of capacity units.
+                          type: number
+                      type: object
+                    type: array
                   name:
                     description: Name of the LB. This name must be unique within your
                       AWS account, can have a maximum of 32 characters, must contain
@@ -1267,7 +1316,7 @@ spec:
                       type: object
                     type: array
                   arn:
-                    description: ARN of the load balancer (matches id).
+                    description: ARN of the load balancer.
                     type: string
                   arnSuffix:
                     description: ARN suffix for use with CloudWatch Metrics.
@@ -1362,7 +1411,6 @@ spec:
                       Balancers of type network. The possible values are on and off.
                     type: string
                   id:
-                    description: ARN of the load balancer (matches arn).
                     type: string
                   idleTimeout:
                     description: 'Time in seconds that the connection is allowed to
@@ -1373,13 +1421,37 @@ spec:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
-                    description: Type of IP addresses used by the subnets for your
-                      load balancer. The possible values are ipv4 and dualstack.
+                    description: 'Type of IP addresses used by the subnets for your
+                      load balancer. The possible values depend upon the load balancer
+                      type: ipv4 (all load balancer types), dualstack (all load balancer
+                      types), and dualstack-without-public-ipv4 (type application
+                      only).'
                     type: string
+                  ipamPools:
+                    description: . The IPAM pools to use with the load balancer.  Only
+                      valid for Load Balancers of type application. See ipam_pools
+                      for more information.
+                    items:
+                      properties:
+                        ipv4IpamPoolId:
+                          description: The ID of the IPv4 IPAM pool.
+                          type: string
+                      type: object
+                    type: array
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
                       are application, gateway, or network. The default value is application.
                     type: string
+                  minimumLoadBalancerCapacity:
+                    description: Minimum capacity for a load balancer. Only valid
+                      for Load Balancers of type application or network.
+                    items:
+                      properties:
+                        capacityUnits:
+                          description: The number of capacity units.
+                          type: number
+                      type: object
+                    type: array
                   name:
                     description: Name of the LB. This name must be unique within your
                       AWS account, can have a maximum of 32 characters, must contain
@@ -1391,6 +1463,11 @@ spec:
                       the Host header in the HTTP request and send it to the target
                       without any change. Defaults to false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroups:
                     description: List of security group IDs to assign to the LB. Only
                       valid for Load Balancers of type application or network. For
@@ -1453,7 +1530,6 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: ARN of the load balancer (matches arn).
                     type: string
                   xffHeaderProcessingMode:
                     description: Determines how the load balancer modifies the X-Forwarded-For
@@ -1770,10 +1846,27 @@ spec:
                       types), and dualstack-without-public-ipv4 (type application
                       only).'
                     type: string
+                  ipamPools:
+                    description: . The IPAM pools to use with the load balancer.  Only
+                      valid for Load Balancers of type application. See ipam_pools
+                      for more information.
+                    properties:
+                      ipv4IpamPoolId:
+                        description: The ID of the IPv4 IPAM pool.
+                        type: string
+                    type: object
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
                       are application, gateway, or network. The default value is application.
                     type: string
+                  minimumLoadBalancerCapacity:
+                    description: Minimum capacity for a load balancer. Only valid
+                      for Load Balancers of type application or network.
+                    properties:
+                      capacityUnits:
+                        description: The number of capacity units.
+                        type: number
+                    type: object
                   name:
                     description: Name of the LB. This name must be unique within your
                       AWS account, can have a maximum of 32 characters, must contain
@@ -1786,8 +1879,9 @@ spec:
                       without any change. Defaults to false.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroups.
@@ -2281,10 +2375,27 @@ spec:
                       types), and dualstack-without-public-ipv4 (type application
                       only).'
                     type: string
+                  ipamPools:
+                    description: . The IPAM pools to use with the load balancer.  Only
+                      valid for Load Balancers of type application. See ipam_pools
+                      for more information.
+                    properties:
+                      ipv4IpamPoolId:
+                        description: The ID of the IPv4 IPAM pool.
+                        type: string
+                    type: object
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
                       are application, gateway, or network. The default value is application.
                     type: string
+                  minimumLoadBalancerCapacity:
+                    description: Minimum capacity for a load balancer. Only valid
+                      for Load Balancers of type application or network.
+                    properties:
+                      capacityUnits:
+                        description: The number of capacity units.
+                        type: number
+                    type: object
                   name:
                     description: Name of the LB. This name must be unique within your
                       AWS account, can have a maximum of 32 characters, must contain
@@ -2773,7 +2884,7 @@ spec:
                         type: string
                     type: object
                   arn:
-                    description: ARN of the load balancer (matches id).
+                    description: ARN of the load balancer.
                     type: string
                   arnSuffix:
                     description: ARN suffix for use with CloudWatch Metrics.
@@ -2866,7 +2977,6 @@ spec:
                       Balancers of type network. The possible values are on and off.
                     type: string
                   id:
-                    description: ARN of the load balancer (matches arn).
                     type: string
                   idleTimeout:
                     description: 'Time in seconds that the connection is allowed to
@@ -2883,10 +2993,27 @@ spec:
                       types), and dualstack-without-public-ipv4 (type application
                       only).'
                     type: string
+                  ipamPools:
+                    description: . The IPAM pools to use with the load balancer.  Only
+                      valid for Load Balancers of type application. See ipam_pools
+                      for more information.
+                    properties:
+                      ipv4IpamPoolId:
+                        description: The ID of the IPv4 IPAM pool.
+                        type: string
+                    type: object
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
                       are application, gateway, or network. The default value is application.
                     type: string
+                  minimumLoadBalancerCapacity:
+                    description: Minimum capacity for a load balancer. Only valid
+                      for Load Balancers of type application or network.
+                    properties:
+                      capacityUnits:
+                        description: The number of capacity units.
+                        type: number
+                    type: object
                   name:
                     description: Name of the LB. This name must be unique within your
                       AWS account, can have a maximum of 32 characters, must contain
@@ -2898,6 +3025,11 @@ spec:
                       the Host header in the HTTP request and send it to the target
                       without any change. Defaults to false.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   securityGroups:
                     description: List of security group IDs to assign to the LB. Only
                       valid for Load Balancers of type application or network. For
@@ -2960,7 +3092,6 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: ARN of the load balancer (matches arn).
                     type: string
                   xffHeaderProcessingMode:
                     description: Determines how the load balancer modifies the X-Forwarded-For

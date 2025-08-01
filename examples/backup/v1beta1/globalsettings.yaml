@@ -10,6 +10,5 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource requires you to use the management user, not an IAM user, which makes it incompatible for Uptest."
 spec:
   forProvider:
-    region: us-west-1
     globalSettings:
       isCrossAccountBackupEnabled: "true"

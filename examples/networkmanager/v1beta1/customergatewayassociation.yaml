@@ -21,7 +21,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: CustomerGateway
@@ -63,7 +62,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     siteIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -79,7 +77,6 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1
 ---
 apiVersion: networkmanager.aws.upbound.io/v1beta1
 kind: Site
@@ -94,7 +91,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
 ---
 apiVersion: networkmanager.aws.upbound.io/v1beta1
 kind: TransitGatewayRegistration
@@ -109,7 +105,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     transitGatewayArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -12,4 +12,3 @@ spec:
     - cloudtrail.amazonaws.com
     - config.amazonaws.com
     featureSet: ALL
-    region: us-west-1

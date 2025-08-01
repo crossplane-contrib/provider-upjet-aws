@@ -295,6 +295,27 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        ssmParameterConfiguration:
+                          description: Configuration block with SSM parameter configuration
+                            to use as AMI id output. Detailed below.
+                          items:
+                            properties:
+                              amiAccountId:
+                                description: AWS account ID that will own the parameter
+                                  in the given region. This account must be specified
+                                  as a target account in the distribution settings.
+                                type: string
+                              dataType:
+                                description: Data type of the SSM parameter. Valid
+                                  values are text and aws:ec2:image. AWS recommends
+                                  using aws:ec2:image.
+                                type: string
+                              parameterName:
+                                description: Name of the SSM parameter that will store
+                                  the AMI ID after distribution.
+                                type: string
+                            type: object
+                          type: array
                       required:
                       - region
                       type: object
@@ -304,7 +325,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      AWS Region for the distribution.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
@@ -544,6 +565,27 @@ spec:
                                 type: string
                               s3Prefix:
                                 description: The prefix for the exported image.
+                                type: string
+                            type: object
+                          type: array
+                        ssmParameterConfiguration:
+                          description: Configuration block with SSM parameter configuration
+                            to use as AMI id output. Detailed below.
+                          items:
+                            properties:
+                              amiAccountId:
+                                description: AWS account ID that will own the parameter
+                                  in the given region. This account must be specified
+                                  as a target account in the distribution settings.
+                                type: string
+                              dataType:
+                                description: Data type of the SSM parameter. Valid
+                                  values are text and aws:ec2:image. AWS recommends
+                                  using aws:ec2:image.
+                                type: string
+                              parameterName:
+                                description: Name of the SSM parameter that will store
+                                  the AMI ID after distribution.
                                 type: string
                             type: object
                           type: array
@@ -971,12 +1013,38 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        ssmParameterConfiguration:
+                          description: Configuration block with SSM parameter configuration
+                            to use as AMI id output. Detailed below.
+                          items:
+                            properties:
+                              amiAccountId:
+                                description: AWS account ID that will own the parameter
+                                  in the given region. This account must be specified
+                                  as a target account in the distribution settings.
+                                type: string
+                              dataType:
+                                description: Data type of the SSM parameter. Valid
+                                  values are text and aws:ec2:image. AWS recommends
+                                  using aws:ec2:image.
+                                type: string
+                              parameterName:
+                                description: Name of the SSM parameter that will store
+                                  the AMI ID after distribution.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   id:
                     type: string
                   name:
                     description: Name of the distribution configuration.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -1311,6 +1379,27 @@ spec:
                               description: The prefix for the exported image.
                               type: string
                           type: object
+                        ssmParameterConfiguration:
+                          description: Configuration block with SSM parameter configuration
+                            to use as AMI id output. Detailed below.
+                          items:
+                            properties:
+                              amiAccountId:
+                                description: AWS account ID that will own the parameter
+                                  in the given region. This account must be specified
+                                  as a target account in the distribution settings.
+                                type: string
+                              dataType:
+                                description: Data type of the SSM parameter. Valid
+                                  values are text and aws:ec2:image. AWS recommends
+                                  using aws:ec2:image.
+                                type: string
+                              parameterName:
+                                description: Name of the SSM parameter that will store
+                                  the AMI ID after distribution.
+                                type: string
+                            type: object
+                          type: array
                       required:
                       - region
                       type: object
@@ -1320,7 +1409,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      AWS Region for the distribution.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
@@ -1543,6 +1632,27 @@ spec:
                               description: The prefix for the exported image.
                               type: string
                           type: object
+                        ssmParameterConfiguration:
+                          description: Configuration block with SSM parameter configuration
+                            to use as AMI id output. Detailed below.
+                          items:
+                            properties:
+                              amiAccountId:
+                                description: AWS account ID that will own the parameter
+                                  in the given region. This account must be specified
+                                  as a target account in the distribution settings.
+                                type: string
+                              dataType:
+                                description: Data type of the SSM parameter. Valid
+                                  values are text and aws:ec2:image. AWS recommends
+                                  using aws:ec2:image.
+                                type: string
+                              parameterName:
+                                description: Name of the SSM parameter that will store
+                                  the AMI ID after distribution.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   name:
@@ -1947,12 +2057,38 @@ spec:
                               description: The prefix for the exported image.
                               type: string
                           type: object
+                        ssmParameterConfiguration:
+                          description: Configuration block with SSM parameter configuration
+                            to use as AMI id output. Detailed below.
+                          items:
+                            properties:
+                              amiAccountId:
+                                description: AWS account ID that will own the parameter
+                                  in the given region. This account must be specified
+                                  as a target account in the distribution settings.
+                                type: string
+                              dataType:
+                                description: Data type of the SSM parameter. Valid
+                                  values are text and aws:ec2:image. AWS recommends
+                                  using aws:ec2:image.
+                                type: string
+                              parameterName:
+                                description: Name of the SSM parameter that will store
+                                  the AMI ID after distribution.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   id:
                     type: string
                   name:
                     description: Name of the distribution configuration.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

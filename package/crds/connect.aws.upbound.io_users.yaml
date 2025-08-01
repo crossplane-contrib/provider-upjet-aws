@@ -119,6 +119,11 @@ spec:
                             using Amazon Connect or SAML for identity management.
                             Minimum length of 1. Maximum length of 100.
                           type: string
+                        secondaryEmail:
+                          description: The secondary email address. If present, email
+                            notifications will be sent to this email address instead
+                            of the primary one.
+                          type: string
                       type: object
                     type: array
                   instanceId:
@@ -248,8 +253,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingProfileId:
                     description: The identifier of the routing profile for the user.
@@ -485,6 +491,11 @@ spec:
                           description: The last name. This is required if you are
                             using Amazon Connect or SAML for identity management.
                             Minimum length of 1. Maximum length of 100.
+                          type: string
+                        secondaryEmail:
+                          description: The secondary email address. If present, email
+                            notifications will be sent to this email address instead
+                            of the primary one.
                           type: string
                       type: object
                     type: array
@@ -964,10 +975,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.phoneConfig)
                 || (has(self.initProvider) && has(self.initProvider.phoneConfig))'
-            - message: spec.forProvider.securityProfileIds is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.securityProfileIds)
-                || (has(self.initProvider) && has(self.initProvider.securityProfileIds))'
           status:
             description: UserStatus defines the observed state of User.
             properties:
@@ -1027,6 +1034,11 @@ spec:
                             using Amazon Connect or SAML for identity management.
                             Minimum length of 1. Maximum length of 100.
                           type: string
+                        secondaryEmail:
+                          description: The secondary email address. If present, email
+                            notifications will be sent to this email address instead
+                            of the primary one.
+                          type: string
                       type: object
                     type: array
                   instanceId:
@@ -1062,6 +1074,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routingProfileId:
                     description: The identifier of the routing profile for the user.
                     type: string
@@ -1252,6 +1269,11 @@ spec:
                           Amazon Connect or SAML for identity management. Minimum
                           length of 1. Maximum length of 100.
                         type: string
+                      secondaryEmail:
+                        description: The secondary email address. If present, email
+                          notifications will be sent to this email address instead
+                          of the primary one.
+                        type: string
                     type: object
                   instanceId:
                     description: Specifies the identifier of the hosting Amazon Connect
@@ -1378,8 +1400,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   routingProfileId:
                     description: The identifier of the routing profile for the user.
@@ -1613,6 +1636,11 @@ spec:
                         description: The last name. This is required if you are using
                           Amazon Connect or SAML for identity management. Minimum
                           length of 1. Maximum length of 100.
+                        type: string
+                      secondaryEmail:
+                        description: The secondary email address. If present, email
+                          notifications will be sent to this email address instead
+                          of the primary one.
                         type: string
                     type: object
                   instanceId:
@@ -2146,6 +2174,11 @@ spec:
                           Amazon Connect or SAML for identity management. Minimum
                           length of 1. Maximum length of 100.
                         type: string
+                      secondaryEmail:
+                        description: The secondary email address. If present, email
+                          notifications will be sent to this email address instead
+                          of the primary one.
+                        type: string
                     type: object
                   instanceId:
                     description: Specifies the identifier of the hosting Amazon Connect
@@ -2178,6 +2211,11 @@ spec:
                           SOFT_PHONE.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   routingProfileId:
                     description: The identifier of the routing profile for the user.
                     type: string

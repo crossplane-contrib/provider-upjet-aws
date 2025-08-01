@@ -44,6 +44,12 @@ type AuthorizerConfigParameters struct {
 
 type DomainConfigurationInitParameters struct {
 
+	// An enumerated string that speciﬁes the application-layer protocol. Valid values are SECURE_MQTT, MQTT_WSS, HTTPS or DEFAULT.
+	ApplicationProtocol *string `json:"applicationProtocol,omitempty" tf:"application_protocol,omitempty"`
+
+	// An enumerated string that speciﬁes the authentication type. Valid values are CUSTOM_AUTH_X509, CUSTOM_AUTH, AWS_X509, AWS_SIGV4 or DEFAULT.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
 	// An object that specifies the authorization service for a domain. See the authorizer_config Block below for details.
 	AuthorizerConfig *AuthorizerConfigInitParameters `json:"authorizerConfig,omitempty" tf:"authorizer_config,omitempty"`
 
@@ -83,8 +89,14 @@ type DomainConfigurationInitParameters struct {
 
 type DomainConfigurationObservation struct {
 
+	// An enumerated string that speciﬁes the application-layer protocol. Valid values are SECURE_MQTT, MQTT_WSS, HTTPS or DEFAULT.
+	ApplicationProtocol *string `json:"applicationProtocol,omitempty" tf:"application_protocol,omitempty"`
+
 	// The ARN of the domain configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// An enumerated string that speciﬁes the authentication type. Valid values are CUSTOM_AUTH_X509, CUSTOM_AUTH, AWS_X509, AWS_SIGV4 or DEFAULT.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// An object that specifies the authorization service for a domain. See the authorizer_config Block below for details.
 	AuthorizerConfig *AuthorizerConfigObservation `json:"authorizerConfig,omitempty" tf:"authorizer_config,omitempty"`
@@ -97,6 +109,10 @@ type DomainConfigurationObservation struct {
 
 	// The name of the created domain configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for Amazon Web Services-managed domains. When using a custom domain_name, the cert must include it.
 	// +listType=set
@@ -125,6 +141,14 @@ type DomainConfigurationObservation struct {
 
 type DomainConfigurationParameters struct {
 
+	// An enumerated string that speciﬁes the application-layer protocol. Valid values are SECURE_MQTT, MQTT_WSS, HTTPS or DEFAULT.
+	// +kubebuilder:validation:Optional
+	ApplicationProtocol *string `json:"applicationProtocol,omitempty" tf:"application_protocol,omitempty"`
+
+	// An enumerated string that speciﬁes the authentication type. Valid values are CUSTOM_AUTH_X509, CUSTOM_AUTH, AWS_X509, AWS_SIGV4 or DEFAULT.
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
 	// An object that specifies the authorization service for a domain. See the authorizer_config Block below for details.
 	// +kubebuilder:validation:Optional
 	AuthorizerConfig *AuthorizerConfigParameters `json:"authorizerConfig,omitempty" tf:"authorizer_config,omitempty"`
@@ -133,10 +157,10 @@ type DomainConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for Amazon Web Services-managed domains. When using a custom domain_name, the cert must include it.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta2.Certificate

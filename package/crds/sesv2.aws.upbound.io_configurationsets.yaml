@@ -75,7 +75,7 @@ spec:
                   deliveryOptions:
                     description: An object that defines the dedicated IP pool that
                       is used to send emails that you send using the configuration
-                      set.
+                      set. See delivery_options Block for details.
                     items:
                       properties:
                         maxDeliverySeconds:
@@ -97,13 +97,15 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
                       collects reputation metrics for the emails that you send that
-                      use the configuration set.
+                      use the configuration set. See reputation_options Block for
+                      details.
                     items:
                       properties:
                         reputationMetricsEnabled:
@@ -116,7 +118,8 @@ spec:
                     type: array
                   sendingOptions:
                     description: An object that defines whether or not Amazon SES
-                      can send email that you send using the configuration set.
+                      can send email that you send using the configuration set. See
+                      sending_options Block for details.
                     items:
                       properties:
                         sendingEnabled:
@@ -128,7 +131,8 @@ spec:
                     type: array
                   suppressionOptions:
                     description: An object that contains information about the suppression
-                      list preferences for your account.
+                      list preferences for your account. See suppression_options Block
+                      for details.
                     items:
                       properties:
                         suppressedReasons:
@@ -149,6 +153,7 @@ spec:
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
+                      See tracking_options Block for details.
                     items:
                       properties:
                         customRedirectDomain:
@@ -164,12 +169,14 @@ spec:
                     type: array
                   vdmOptions:
                     description: An object that defines the VDM settings that apply
-                      to emails that you send using the configuration set.
+                      to emails that you send using the configuration set. See vdm_options
+                      Block for details.
                     items:
                       properties:
                         dashboardOptions:
                           description: Specifies additional settings for your VDM
-                            configuration as applicable to the Dashboard.
+                            configuration as applicable to the Dashboard. See dashboard_options
+                            Block for details.
                           items:
                             properties:
                               engagementMetrics:
@@ -180,7 +187,8 @@ spec:
                           type: array
                         guardianOptions:
                           description: Specifies additional settings for your VDM
-                            configuration as applicable to the Guardian.
+                            configuration as applicable to the Guardian. See guardian_options
+                            Block for details.
                           items:
                             properties:
                               optimizedSharedDelivery:
@@ -210,7 +218,7 @@ spec:
                   deliveryOptions:
                     description: An object that defines the dedicated IP pool that
                       is used to send emails that you send using the configuration
-                      set.
+                      set. See delivery_options Block for details.
                     items:
                       properties:
                         maxDeliverySeconds:
@@ -234,7 +242,8 @@ spec:
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
                       collects reputation metrics for the emails that you send that
-                      use the configuration set.
+                      use the configuration set. See reputation_options Block for
+                      details.
                     items:
                       properties:
                         reputationMetricsEnabled:
@@ -247,7 +256,8 @@ spec:
                     type: array
                   sendingOptions:
                     description: An object that defines whether or not Amazon SES
-                      can send email that you send using the configuration set.
+                      can send email that you send using the configuration set. See
+                      sending_options Block for details.
                     items:
                       properties:
                         sendingEnabled:
@@ -259,7 +269,8 @@ spec:
                     type: array
                   suppressionOptions:
                     description: An object that contains information about the suppression
-                      list preferences for your account.
+                      list preferences for your account. See suppression_options Block
+                      for details.
                     items:
                       properties:
                         suppressedReasons:
@@ -280,6 +291,7 @@ spec:
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
+                      See tracking_options Block for details.
                     items:
                       properties:
                         customRedirectDomain:
@@ -295,12 +307,14 @@ spec:
                     type: array
                   vdmOptions:
                     description: An object that defines the VDM settings that apply
-                      to emails that you send using the configuration set.
+                      to emails that you send using the configuration set. See vdm_options
+                      Block for details.
                     items:
                       properties:
                         dashboardOptions:
                           description: Specifies additional settings for your VDM
-                            configuration as applicable to the Dashboard.
+                            configuration as applicable to the Dashboard. See dashboard_options
+                            Block for details.
                           items:
                             properties:
                               engagementMetrics:
@@ -311,7 +325,8 @@ spec:
                           type: array
                         guardianOptions:
                           description: Specifies additional settings for your VDM
-                            configuration as applicable to the Guardian.
+                            configuration as applicable to the Guardian. See guardian_options
+                            Block for details.
                           items:
                             properties:
                               optimizedSharedDelivery:
@@ -501,7 +516,7 @@ spec:
                   deliveryOptions:
                     description: An object that defines the dedicated IP pool that
                       is used to send emails that you send using the configuration
-                      set.
+                      set. See delivery_options Block for details.
                     items:
                       properties:
                         maxDeliverySeconds:
@@ -524,10 +539,16 @@ spec:
                     type: array
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
                       collects reputation metrics for the emails that you send that
-                      use the configuration set.
+                      use the configuration set. See reputation_options Block for
+                      details.
                     items:
                       properties:
                         lastFreshStart:
@@ -546,7 +567,8 @@ spec:
                     type: array
                   sendingOptions:
                     description: An object that defines whether or not Amazon SES
-                      can send email that you send using the configuration set.
+                      can send email that you send using the configuration set. See
+                      sending_options Block for details.
                     items:
                       properties:
                         sendingEnabled:
@@ -558,7 +580,8 @@ spec:
                     type: array
                   suppressionOptions:
                     description: An object that contains information about the suppression
-                      list preferences for your account.
+                      list preferences for your account. See suppression_options Block
+                      for details.
                     items:
                       properties:
                         suppressedReasons:
@@ -584,6 +607,7 @@ spec:
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
+                      See tracking_options Block for details.
                     items:
                       properties:
                         customRedirectDomain:
@@ -599,12 +623,14 @@ spec:
                     type: array
                   vdmOptions:
                     description: An object that defines the VDM settings that apply
-                      to emails that you send using the configuration set.
+                      to emails that you send using the configuration set. See vdm_options
+                      Block for details.
                     items:
                       properties:
                         dashboardOptions:
                           description: Specifies additional settings for your VDM
-                            configuration as applicable to the Dashboard.
+                            configuration as applicable to the Dashboard. See dashboard_options
+                            Block for details.
                           items:
                             properties:
                               engagementMetrics:
@@ -615,7 +641,8 @@ spec:
                           type: array
                         guardianOptions:
                           description: Specifies additional settings for your VDM
-                            configuration as applicable to the Guardian.
+                            configuration as applicable to the Guardian. See guardian_options
+                            Block for details.
                           items:
                             properties:
                               optimizedSharedDelivery:
@@ -764,8 +791,9 @@ spec:
                         type: string
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
@@ -1168,6 +1196,11 @@ spec:
                         type: string
                     type: object
                   id:
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES

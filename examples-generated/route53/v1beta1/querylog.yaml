@@ -11,7 +11,6 @@ spec:
     cloudwatchLogGroupArnSelector:
       matchLabels:
         testing.upbound.io/example-name: aws_route53_example_com
-    region: us-west-1
     zoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example_com
@@ -29,7 +28,6 @@ metadata:
 spec:
   forProvider:
     provider: ${aws.us-east-1}
-    region: us-west-1
     retentionInDays: 30
 
 ---
@@ -46,7 +44,6 @@ spec:
   forProvider:
     policyDocument: ${data.aws_iam_policy_document.route53-query-logging-policy.json}
     provider: ${aws.us-east-1}
-    region: us-west-1
 
 ---
 
@@ -61,4 +58,3 @@ metadata:
 spec:
   forProvider:
     name: example.com
-    region: us-west-1

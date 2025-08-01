@@ -109,6 +109,25 @@ type ConnectionLogsParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
+type IpamPoolsInitParameters struct {
+
+	// The ID of the IPv4 IPAM pool.
+	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
+}
+
+type IpamPoolsObservation struct {
+
+	// The ID of the IPv4 IPAM pool.
+	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
+}
+
+type IpamPoolsParameters struct {
+
+	// The ID of the IPv4 IPAM pool.
+	// +kubebuilder:validation:Optional
+	IPv4IpamPoolID *string `json:"ipv4IpamPoolId" tf:"ipv4_ipam_pool_id,omitempty"`
+}
+
 type LBInitParameters struct {
 
 	// Access Logs block. See below.
@@ -165,8 +184,14 @@ type LBInitParameters struct {
 	// If true, the LB will be internal. Defaults to false.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
+	// . The IPAM pools to use with the load balancer.  Only valid for Load Balancers of type application. See ipam_pools for more information.
+	IpamPools *IpamPoolsInitParameters `json:"ipamPools,omitempty" tf:"ipam_pools,omitempty"`
+
 	// Type of load balancer to create. Possible values are application, gateway, or network. The default value is application.
 	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
+
+	// Minimum capacity for a load balancer. Only valid for Load Balancers of type application or network.
+	MinimumLoadBalancerCapacity *MinimumLoadBalancerCapacityInitParameters `json:"minimumLoadBalancerCapacity,omitempty" tf:"minimum_load_balancer_capacity,omitempty"`
 
 	// Name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -220,7 +245,7 @@ type LBObservation struct {
 	// Access Logs block. See below.
 	AccessLogs *AccessLogsObservation `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
-	// ARN of the load balancer (matches id).
+	// ARN of the load balancer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ARN suffix for use with CloudWatch Metrics.
@@ -271,7 +296,6 @@ type LBObservation struct {
 	// Whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
 	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
 
-	// ARN of the load balancer (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Type of IP addresses used by the subnets for your load balancer. The possible values depend upon the load balancer type: ipv4 (all load balancer types), dualstack (all load balancer types), and dualstack-without-public-ipv4 (type application only).
@@ -283,14 +307,24 @@ type LBObservation struct {
 	// If true, the LB will be internal. Defaults to false.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
+	// . The IPAM pools to use with the load balancer.  Only valid for Load Balancers of type application. See ipam_pools for more information.
+	IpamPools *IpamPoolsObservation `json:"ipamPools,omitempty" tf:"ipam_pools,omitempty"`
+
 	// Type of load balancer to create. Possible values are application, gateway, or network. The default value is application.
 	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
+
+	// Minimum capacity for a load balancer. Only valid for Load Balancers of type application or network.
+	MinimumLoadBalancerCapacity *MinimumLoadBalancerCapacityObservation `json:"minimumLoadBalancerCapacity,omitempty" tf:"minimum_load_balancer_capacity,omitempty"`
 
 	// Name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
 	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +listType=set
@@ -311,7 +345,6 @@ type LBObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// ARN of the load balancer (matches arn).
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Determines how the load balancer modifies the X-Forwarded-For header in the HTTP request before sending the request to the target. The possible values are append, preserve, and remove. Only valid for Load Balancers of type application. The default is append.
@@ -395,9 +428,17 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
+	// . The IPAM pools to use with the load balancer.  Only valid for Load Balancers of type application. See ipam_pools for more information.
+	// +kubebuilder:validation:Optional
+	IpamPools *IpamPoolsParameters `json:"ipamPools,omitempty" tf:"ipam_pools,omitempty"`
+
 	// Type of load balancer to create. Possible values are application, gateway, or network. The default value is application.
 	// +kubebuilder:validation:Optional
 	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
+
+	// Minimum capacity for a load balancer. Only valid for Load Balancers of type application or network.
+	// +kubebuilder:validation:Optional
+	MinimumLoadBalancerCapacity *MinimumLoadBalancerCapacityParameters `json:"minimumLoadBalancerCapacity,omitempty" tf:"minimum_load_balancer_capacity,omitempty"`
 
 	// Name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	// +kubebuilder:validation:Optional
@@ -407,10 +448,10 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
@@ -456,6 +497,25 @@ type LBParameters struct {
 	// Determines how the load balancer modifies the X-Forwarded-For header in the HTTP request before sending the request to the target. The possible values are append, preserve, and remove. Only valid for Load Balancers of type application. The default is append.
 	// +kubebuilder:validation:Optional
 	XffHeaderProcessingMode *string `json:"xffHeaderProcessingMode,omitempty" tf:"xff_header_processing_mode,omitempty"`
+}
+
+type MinimumLoadBalancerCapacityInitParameters struct {
+
+	// The number of capacity units.
+	CapacityUnits *float64 `json:"capacityUnits,omitempty" tf:"capacity_units,omitempty"`
+}
+
+type MinimumLoadBalancerCapacityObservation struct {
+
+	// The number of capacity units.
+	CapacityUnits *float64 `json:"capacityUnits,omitempty" tf:"capacity_units,omitempty"`
+}
+
+type MinimumLoadBalancerCapacityParameters struct {
+
+	// The number of capacity units.
+	// +kubebuilder:validation:Optional
+	CapacityUnits *float64 `json:"capacityUnits" tf:"capacity_units,omitempty"`
 }
 
 type SubnetMappingInitParameters struct {

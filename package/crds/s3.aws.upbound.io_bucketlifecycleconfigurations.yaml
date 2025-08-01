@@ -158,8 +158,9 @@ spec:
                       an HTTP 403 (Access Denied) error.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rule:
                     description: List of configuration blocks describing the rules
@@ -207,9 +208,11 @@ spec:
                             type: object
                           type: array
                         filter:
-                          description: Configuration block used to identify objects
-                            that a Lifecycle Rule applies to. See below. If not specified,
-                            the rule will default to using prefix.
+                          description: |-
+                            Configuration block used to identify objects that a Lifecycle Rule applies to.
+                            See below.
+                            If not specified, the rule will default to using prefix.
+                            One of filter or prefix should be specified.
                           items:
                             properties:
                               and:
@@ -234,9 +237,10 @@ spec:
                                     tags:
                                       additionalProperties:
                                         type: string
-                                      description: Key-value map of resource tags.
-                                        All of these tags must exist in the object's
-                                        tag set in order for the rule to apply.
+                                      description: |-
+                                        Key-value map of resource tags.
+                                        All of these tags must exist in the object's tag set in order for the rule to apply.
+                                        If set, must contain at least one key-value pair.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
@@ -244,11 +248,11 @@ spec:
                               objectSizeGreaterThan:
                                 description: Minimum object size (in bytes) to which
                                   the rule applies.
-                                type: string
+                                type: number
                               objectSizeLessThan:
                                 description: Maximum object size (in bytes) to which
                                   the rule applies.
-                                type: string
+                                type: number
                               prefix:
                                 description: Prefix identifying one or more objects
                                   to which the rule applies. Defaults to an empty
@@ -281,7 +285,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -298,7 +302,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -311,10 +315,12 @@ spec:
                             type: object
                           type: array
                         prefix:
-                          description: DEPRECATED Use filter instead. This has been
-                            deprecated by Amazon S3. Prefix identifying one or more
-                            objects to which the rule applies. Defaults to an empty
-                            string ("") if filter is not specified.
+                          description: |-
+                            DEPRECATED Use filter instead.
+                            This has been deprecated by Amazon S3.
+                            Prefix identifying one or more objects to which the rule applies.
+                            Defaults to an empty string ("") if filter is not specified.
+                            One of prefix or filter should be specified.
                           type: string
                         status:
                           description: 'Whether the rule is currently being applied.
@@ -502,9 +508,11 @@ spec:
                             type: object
                           type: array
                         filter:
-                          description: Configuration block used to identify objects
-                            that a Lifecycle Rule applies to. See below. If not specified,
-                            the rule will default to using prefix.
+                          description: |-
+                            Configuration block used to identify objects that a Lifecycle Rule applies to.
+                            See below.
+                            If not specified, the rule will default to using prefix.
+                            One of filter or prefix should be specified.
                           items:
                             properties:
                               and:
@@ -529,9 +537,10 @@ spec:
                                     tags:
                                       additionalProperties:
                                         type: string
-                                      description: Key-value map of resource tags.
-                                        All of these tags must exist in the object's
-                                        tag set in order for the rule to apply.
+                                      description: |-
+                                        Key-value map of resource tags.
+                                        All of these tags must exist in the object's tag set in order for the rule to apply.
+                                        If set, must contain at least one key-value pair.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
@@ -539,11 +548,11 @@ spec:
                               objectSizeGreaterThan:
                                 description: Minimum object size (in bytes) to which
                                   the rule applies.
-                                type: string
+                                type: number
                               objectSizeLessThan:
                                 description: Maximum object size (in bytes) to which
                                   the rule applies.
-                                type: string
+                                type: number
                               prefix:
                                 description: Prefix identifying one or more objects
                                   to which the rule applies. Defaults to an empty
@@ -576,7 +585,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -593,7 +602,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -606,10 +615,12 @@ spec:
                             type: object
                           type: array
                         prefix:
-                          description: DEPRECATED Use filter instead. This has been
-                            deprecated by Amazon S3. Prefix identifying one or more
-                            objects to which the rule applies. Defaults to an empty
-                            string ("") if filter is not specified.
+                          description: |-
+                            DEPRECATED Use filter instead.
+                            This has been deprecated by Amazon S3.
+                            Prefix identifying one or more objects to which the rule applies.
+                            Defaults to an empty string ("") if filter is not specified.
+                            One of prefix or filter should be specified.
                           type: string
                         status:
                           description: 'Whether the rule is currently being applied.
@@ -820,11 +831,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.rule is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
-                || (has(self.initProvider) && has(self.initProvider.rule))'
           status:
             description: BucketLifecycleConfigurationStatus defines the observed state
               of BucketLifecycleConfiguration.
@@ -842,6 +848,11 @@ spec:
                     type: string
                   id:
                     description: and status)
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rule:
                     description: List of configuration blocks describing the rules
@@ -889,9 +900,11 @@ spec:
                             type: object
                           type: array
                         filter:
-                          description: Configuration block used to identify objects
-                            that a Lifecycle Rule applies to. See below. If not specified,
-                            the rule will default to using prefix.
+                          description: |-
+                            Configuration block used to identify objects that a Lifecycle Rule applies to.
+                            See below.
+                            If not specified, the rule will default to using prefix.
+                            One of filter or prefix should be specified.
                           items:
                             properties:
                               and:
@@ -916,9 +929,10 @@ spec:
                                     tags:
                                       additionalProperties:
                                         type: string
-                                      description: Key-value map of resource tags.
-                                        All of these tags must exist in the object's
-                                        tag set in order for the rule to apply.
+                                      description: |-
+                                        Key-value map of resource tags.
+                                        All of these tags must exist in the object's tag set in order for the rule to apply.
+                                        If set, must contain at least one key-value pair.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
@@ -926,11 +940,11 @@ spec:
                               objectSizeGreaterThan:
                                 description: Minimum object size (in bytes) to which
                                   the rule applies.
-                                type: string
+                                type: number
                               objectSizeLessThan:
                                 description: Maximum object size (in bytes) to which
                                   the rule applies.
-                                type: string
+                                type: number
                               prefix:
                                 description: Prefix identifying one or more objects
                                   to which the rule applies. Defaults to an empty
@@ -963,7 +977,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -980,7 +994,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -993,10 +1007,12 @@ spec:
                             type: object
                           type: array
                         prefix:
-                          description: DEPRECATED Use filter instead. This has been
-                            deprecated by Amazon S3. Prefix identifying one or more
-                            objects to which the rule applies. Defaults to an empty
-                            string ("") if filter is not specified.
+                          description: |-
+                            DEPRECATED Use filter instead.
+                            This has been deprecated by Amazon S3.
+                            Prefix identifying one or more objects to which the rule applies.
+                            Defaults to an empty string ("") if filter is not specified.
+                            One of prefix or filter should be specified.
                           type: string
                         status:
                           description: 'Whether the rule is currently being applied.
@@ -1241,8 +1257,9 @@ spec:
                       an HTTP 403 (Access Denied) error.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rule:
                     description: List of configuration blocks describing the rules
@@ -1254,94 +1271,107 @@ spec:
                             since the initiation of an incomplete multipart upload
                             that Amazon S3 will wait before permanently removing all
                             parts of the upload. See below.
-                          properties:
-                            daysAfterInitiation:
-                              description: Number of days after which Amazon S3 aborts
-                                an incomplete multipart upload.
-                              type: number
-                          type: object
+                          items:
+                            properties:
+                              daysAfterInitiation:
+                                description: Number of days after which Amazon S3
+                                  aborts an incomplete multipart upload.
+                                type: number
+                            type: object
+                          type: array
                         expiration:
                           description: Configuration block that specifies the expiration
                             for the lifecycle of the object in the form of date, days
                             and, whether the object has a delete marker. See below.
-                          properties:
-                            date:
-                              description: Date objects are transitioned to the specified
-                                storage class. The date value must be in RFC3339 full-date
-                                format e.g. 2023-08-22.
-                              type: string
-                            days:
-                              description: Number of days after creation when objects
-                                are transitioned to the specified storage class. The
-                                value must be a positive integer. If both days and
-                                date are not specified, defaults to 0. Valid values
-                                depend on storage_class, see Transition objects using
-                                Amazon S3 Lifecycle for more details.
-                              type: number
-                            expiredObjectDeleteMarker:
-                              description: Indicates whether Amazon S3 will remove
-                                a delete marker with no noncurrent versions. If set
-                                to true, the delete marker will be expired; if set
-                                to false the policy takes no action.
-                              type: boolean
-                          type: object
+                          items:
+                            properties:
+                              date:
+                                description: Date objects are transitioned to the
+                                  specified storage class. The date value must be
+                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                type: string
+                              days:
+                                description: Number of days after creation when objects
+                                  are transitioned to the specified storage class.
+                                  The value must be a positive integer. If both days
+                                  and date are not specified, defaults to 0. Valid
+                                  values depend on storage_class, see Transition objects
+                                  using Amazon S3 Lifecycle for more details.
+                                type: number
+                              expiredObjectDeleteMarker:
+                                description: Indicates whether Amazon S3 will remove
+                                  a delete marker with no noncurrent versions. If
+                                  set to true, the delete marker will be expired;
+                                  if set to false the policy takes no action.
+                                type: boolean
+                            type: object
+                          type: array
                         filter:
-                          description: Configuration block used to identify objects
-                            that a Lifecycle Rule applies to. See below. If not specified,
-                            the rule will default to using prefix.
-                          properties:
-                            and:
-                              description: Configuration block used to apply a logical
-                                AND to two or more predicates. See below. The Lifecycle
-                                Rule will apply to any object matching all the predicates
-                                configured inside the and block.
-                              properties:
-                                objectSizeGreaterThan:
-                                  description: Minimum object size (in bytes) to which
-                                    the rule applies.
-                                  type: number
-                                objectSizeLessThan:
-                                  description: Maximum object size (in bytes) to which
-                                    the rule applies.
-                                  type: number
-                                prefix:
-                                  description: Prefix identifying one or more objects
-                                    to which the rule applies.
-                                  type: string
-                                tags:
-                                  additionalProperties:
-                                    type: string
-                                  description: Key-value map of resource tags. All
-                                    of these tags must exist in the object's tag set
-                                    in order for the rule to apply.
+                          description: |-
+                            Configuration block used to identify objects that a Lifecycle Rule applies to.
+                            See below.
+                            If not specified, the rule will default to using prefix.
+                            One of filter or prefix should be specified.
+                          items:
+                            properties:
+                              and:
+                                description: Configuration block used to apply a logical
+                                  AND to two or more predicates. See below. The Lifecycle
+                                  Rule will apply to any object matching all the predicates
+                                  configured inside the and block.
+                                items:
+                                  properties:
+                                    objectSizeGreaterThan:
+                                      description: Minimum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    objectSizeLessThan:
+                                      description: Maximum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    prefix:
+                                      description: Prefix identifying one or more
+                                        objects to which the rule applies.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      description: |-
+                                        Key-value map of resource tags.
+                                        All of these tags must exist in the object's tag set in order for the rule to apply.
+                                        If set, must contain at least one key-value pair.
+                                      type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
-                                  x-kubernetes-map-type: granular
-                              type: object
-                            objectSizeGreaterThan:
-                              description: Minimum object size (in bytes) to which
-                                the rule applies.
-                              type: string
-                            objectSizeLessThan:
-                              description: Maximum object size (in bytes) to which
-                                the rule applies.
-                              type: string
-                            prefix:
-                              description: Prefix identifying one or more objects
-                                to which the rule applies. Defaults to an empty string
-                                ("") if not specified.
-                              type: string
-                            tag:
-                              description: Configuration block for specifying a tag
-                                key and value. See below.
-                              properties:
-                                key:
-                                  description: Name of the object key.
-                                  type: string
-                                value:
-                                  description: Value of the tag.
-                                  type: string
-                              type: object
-                          type: object
+                                type: array
+                              objectSizeGreaterThan:
+                                description: Minimum object size (in bytes) to which
+                                  the rule applies.
+                                type: number
+                              objectSizeLessThan:
+                                description: Maximum object size (in bytes) to which
+                                  the rule applies.
+                                type: number
+                              prefix:
+                                description: Prefix identifying one or more objects
+                                  to which the rule applies. Defaults to an empty
+                                  string ("") if not specified.
+                                type: string
+                              tag:
+                                description: Configuration block for specifying a
+                                  tag key and value. See below.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Name of the object key.
+                                      type: string
+                                    value:
+                                      description: Value of the tag.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         id:
                           description: Unique identifier for the rule. The value cannot
                             be longer than 255 characters.
@@ -1349,16 +1379,18 @@ spec:
                         noncurrentVersionExpiration:
                           description: Configuration block that specifies when noncurrent
                             object versions expire. See below.
-                          properties:
-                            newerNoncurrentVersions:
-                              description: Number of noncurrent versions Amazon S3
-                                will retain. Must be a non-zero positive integer.
-                              type: string
-                            noncurrentDays:
-                              description: Number of days an object is noncurrent
-                                before Amazon S3 can perform the associated action.
-                              type: number
-                          type: object
+                          items:
+                            properties:
+                              newerNoncurrentVersions:
+                                description: Number of noncurrent versions Amazon
+                                  S3 will retain. Must be a non-zero positive integer.
+                                type: number
+                              noncurrentDays:
+                                description: Number of days an object is noncurrent
+                                  before Amazon S3 can perform the associated action.
+                                type: number
+                            type: object
+                          type: array
                         noncurrentVersionTransition:
                           description: Set of configuration blocks that specify the
                             transition rule for the lifecycle rule that describes
@@ -1369,7 +1401,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -1382,10 +1414,12 @@ spec:
                             type: object
                           type: array
                         prefix:
-                          description: DEPRECATED Use filter instead. This has been
-                            deprecated by Amazon S3. Prefix identifying one or more
-                            objects to which the rule applies. Defaults to an empty
-                            string ("") if filter is not specified.
+                          description: |-
+                            DEPRECATED Use filter instead.
+                            This has been deprecated by Amazon S3.
+                            Prefix identifying one or more objects to which the rule applies.
+                            Defaults to an empty string ("") if filter is not specified.
+                            One of prefix or filter should be specified.
                           type: string
                         status:
                           description: 'Whether the rule is currently being applied.
@@ -1537,94 +1571,107 @@ spec:
                             since the initiation of an incomplete multipart upload
                             that Amazon S3 will wait before permanently removing all
                             parts of the upload. See below.
-                          properties:
-                            daysAfterInitiation:
-                              description: Number of days after which Amazon S3 aborts
-                                an incomplete multipart upload.
-                              type: number
-                          type: object
+                          items:
+                            properties:
+                              daysAfterInitiation:
+                                description: Number of days after which Amazon S3
+                                  aborts an incomplete multipart upload.
+                                type: number
+                            type: object
+                          type: array
                         expiration:
                           description: Configuration block that specifies the expiration
                             for the lifecycle of the object in the form of date, days
                             and, whether the object has a delete marker. See below.
-                          properties:
-                            date:
-                              description: Date objects are transitioned to the specified
-                                storage class. The date value must be in RFC3339 full-date
-                                format e.g. 2023-08-22.
-                              type: string
-                            days:
-                              description: Number of days after creation when objects
-                                are transitioned to the specified storage class. The
-                                value must be a positive integer. If both days and
-                                date are not specified, defaults to 0. Valid values
-                                depend on storage_class, see Transition objects using
-                                Amazon S3 Lifecycle for more details.
-                              type: number
-                            expiredObjectDeleteMarker:
-                              description: Indicates whether Amazon S3 will remove
-                                a delete marker with no noncurrent versions. If set
-                                to true, the delete marker will be expired; if set
-                                to false the policy takes no action.
-                              type: boolean
-                          type: object
+                          items:
+                            properties:
+                              date:
+                                description: Date objects are transitioned to the
+                                  specified storage class. The date value must be
+                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                type: string
+                              days:
+                                description: Number of days after creation when objects
+                                  are transitioned to the specified storage class.
+                                  The value must be a positive integer. If both days
+                                  and date are not specified, defaults to 0. Valid
+                                  values depend on storage_class, see Transition objects
+                                  using Amazon S3 Lifecycle for more details.
+                                type: number
+                              expiredObjectDeleteMarker:
+                                description: Indicates whether Amazon S3 will remove
+                                  a delete marker with no noncurrent versions. If
+                                  set to true, the delete marker will be expired;
+                                  if set to false the policy takes no action.
+                                type: boolean
+                            type: object
+                          type: array
                         filter:
-                          description: Configuration block used to identify objects
-                            that a Lifecycle Rule applies to. See below. If not specified,
-                            the rule will default to using prefix.
-                          properties:
-                            and:
-                              description: Configuration block used to apply a logical
-                                AND to two or more predicates. See below. The Lifecycle
-                                Rule will apply to any object matching all the predicates
-                                configured inside the and block.
-                              properties:
-                                objectSizeGreaterThan:
-                                  description: Minimum object size (in bytes) to which
-                                    the rule applies.
-                                  type: number
-                                objectSizeLessThan:
-                                  description: Maximum object size (in bytes) to which
-                                    the rule applies.
-                                  type: number
-                                prefix:
-                                  description: Prefix identifying one or more objects
-                                    to which the rule applies.
-                                  type: string
-                                tags:
-                                  additionalProperties:
-                                    type: string
-                                  description: Key-value map of resource tags. All
-                                    of these tags must exist in the object's tag set
-                                    in order for the rule to apply.
+                          description: |-
+                            Configuration block used to identify objects that a Lifecycle Rule applies to.
+                            See below.
+                            If not specified, the rule will default to using prefix.
+                            One of filter or prefix should be specified.
+                          items:
+                            properties:
+                              and:
+                                description: Configuration block used to apply a logical
+                                  AND to two or more predicates. See below. The Lifecycle
+                                  Rule will apply to any object matching all the predicates
+                                  configured inside the and block.
+                                items:
+                                  properties:
+                                    objectSizeGreaterThan:
+                                      description: Minimum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    objectSizeLessThan:
+                                      description: Maximum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    prefix:
+                                      description: Prefix identifying one or more
+                                        objects to which the rule applies.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      description: |-
+                                        Key-value map of resource tags.
+                                        All of these tags must exist in the object's tag set in order for the rule to apply.
+                                        If set, must contain at least one key-value pair.
+                                      type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
-                                  x-kubernetes-map-type: granular
-                              type: object
-                            objectSizeGreaterThan:
-                              description: Minimum object size (in bytes) to which
-                                the rule applies.
-                              type: string
-                            objectSizeLessThan:
-                              description: Maximum object size (in bytes) to which
-                                the rule applies.
-                              type: string
-                            prefix:
-                              description: Prefix identifying one or more objects
-                                to which the rule applies. Defaults to an empty string
-                                ("") if not specified.
-                              type: string
-                            tag:
-                              description: Configuration block for specifying a tag
-                                key and value. See below.
-                              properties:
-                                key:
-                                  description: Name of the object key.
-                                  type: string
-                                value:
-                                  description: Value of the tag.
-                                  type: string
-                              type: object
-                          type: object
+                                type: array
+                              objectSizeGreaterThan:
+                                description: Minimum object size (in bytes) to which
+                                  the rule applies.
+                                type: number
+                              objectSizeLessThan:
+                                description: Maximum object size (in bytes) to which
+                                  the rule applies.
+                                type: number
+                              prefix:
+                                description: Prefix identifying one or more objects
+                                  to which the rule applies. Defaults to an empty
+                                  string ("") if not specified.
+                                type: string
+                              tag:
+                                description: Configuration block for specifying a
+                                  tag key and value. See below.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Name of the object key.
+                                      type: string
+                                    value:
+                                      description: Value of the tag.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         id:
                           description: Unique identifier for the rule. The value cannot
                             be longer than 255 characters.
@@ -1632,16 +1679,18 @@ spec:
                         noncurrentVersionExpiration:
                           description: Configuration block that specifies when noncurrent
                             object versions expire. See below.
-                          properties:
-                            newerNoncurrentVersions:
-                              description: Number of noncurrent versions Amazon S3
-                                will retain. Must be a non-zero positive integer.
-                              type: string
-                            noncurrentDays:
-                              description: Number of days an object is noncurrent
-                                before Amazon S3 can perform the associated action.
-                              type: number
-                          type: object
+                          items:
+                            properties:
+                              newerNoncurrentVersions:
+                                description: Number of noncurrent versions Amazon
+                                  S3 will retain. Must be a non-zero positive integer.
+                                type: number
+                              noncurrentDays:
+                                description: Number of days an object is noncurrent
+                                  before Amazon S3 can perform the associated action.
+                                type: number
+                            type: object
+                          type: array
                         noncurrentVersionTransition:
                           description: Set of configuration blocks that specify the
                             transition rule for the lifecycle rule that describes
@@ -1652,7 +1701,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -1665,10 +1714,12 @@ spec:
                             type: object
                           type: array
                         prefix:
-                          description: DEPRECATED Use filter instead. This has been
-                            deprecated by Amazon S3. Prefix identifying one or more
-                            objects to which the rule applies. Defaults to an empty
-                            string ("") if filter is not specified.
+                          description: |-
+                            DEPRECATED Use filter instead.
+                            This has been deprecated by Amazon S3.
+                            Prefix identifying one or more objects to which the rule applies.
+                            Defaults to an empty string ("") if filter is not specified.
+                            One of prefix or filter should be specified.
                           type: string
                         status:
                           description: 'Whether the rule is currently being applied.
@@ -1879,11 +1930,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.rule is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
-                || (has(self.initProvider) && has(self.initProvider.rule))'
           status:
             description: BucketLifecycleConfigurationStatus defines the observed state
               of BucketLifecycleConfiguration.
@@ -1902,6 +1948,11 @@ spec:
                   id:
                     description: and status)
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rule:
                     description: List of configuration blocks describing the rules
                       managing the replication. See below.
@@ -1912,94 +1963,107 @@ spec:
                             since the initiation of an incomplete multipart upload
                             that Amazon S3 will wait before permanently removing all
                             parts of the upload. See below.
-                          properties:
-                            daysAfterInitiation:
-                              description: Number of days after which Amazon S3 aborts
-                                an incomplete multipart upload.
-                              type: number
-                          type: object
+                          items:
+                            properties:
+                              daysAfterInitiation:
+                                description: Number of days after which Amazon S3
+                                  aborts an incomplete multipart upload.
+                                type: number
+                            type: object
+                          type: array
                         expiration:
                           description: Configuration block that specifies the expiration
                             for the lifecycle of the object in the form of date, days
                             and, whether the object has a delete marker. See below.
-                          properties:
-                            date:
-                              description: Date objects are transitioned to the specified
-                                storage class. The date value must be in RFC3339 full-date
-                                format e.g. 2023-08-22.
-                              type: string
-                            days:
-                              description: Number of days after creation when objects
-                                are transitioned to the specified storage class. The
-                                value must be a positive integer. If both days and
-                                date are not specified, defaults to 0. Valid values
-                                depend on storage_class, see Transition objects using
-                                Amazon S3 Lifecycle for more details.
-                              type: number
-                            expiredObjectDeleteMarker:
-                              description: Indicates whether Amazon S3 will remove
-                                a delete marker with no noncurrent versions. If set
-                                to true, the delete marker will be expired; if set
-                                to false the policy takes no action.
-                              type: boolean
-                          type: object
+                          items:
+                            properties:
+                              date:
+                                description: Date objects are transitioned to the
+                                  specified storage class. The date value must be
+                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                type: string
+                              days:
+                                description: Number of days after creation when objects
+                                  are transitioned to the specified storage class.
+                                  The value must be a positive integer. If both days
+                                  and date are not specified, defaults to 0. Valid
+                                  values depend on storage_class, see Transition objects
+                                  using Amazon S3 Lifecycle for more details.
+                                type: number
+                              expiredObjectDeleteMarker:
+                                description: Indicates whether Amazon S3 will remove
+                                  a delete marker with no noncurrent versions. If
+                                  set to true, the delete marker will be expired;
+                                  if set to false the policy takes no action.
+                                type: boolean
+                            type: object
+                          type: array
                         filter:
-                          description: Configuration block used to identify objects
-                            that a Lifecycle Rule applies to. See below. If not specified,
-                            the rule will default to using prefix.
-                          properties:
-                            and:
-                              description: Configuration block used to apply a logical
-                                AND to two or more predicates. See below. The Lifecycle
-                                Rule will apply to any object matching all the predicates
-                                configured inside the and block.
-                              properties:
-                                objectSizeGreaterThan:
-                                  description: Minimum object size (in bytes) to which
-                                    the rule applies.
-                                  type: number
-                                objectSizeLessThan:
-                                  description: Maximum object size (in bytes) to which
-                                    the rule applies.
-                                  type: number
-                                prefix:
-                                  description: Prefix identifying one or more objects
-                                    to which the rule applies.
-                                  type: string
-                                tags:
-                                  additionalProperties:
-                                    type: string
-                                  description: Key-value map of resource tags. All
-                                    of these tags must exist in the object's tag set
-                                    in order for the rule to apply.
+                          description: |-
+                            Configuration block used to identify objects that a Lifecycle Rule applies to.
+                            See below.
+                            If not specified, the rule will default to using prefix.
+                            One of filter or prefix should be specified.
+                          items:
+                            properties:
+                              and:
+                                description: Configuration block used to apply a logical
+                                  AND to two or more predicates. See below. The Lifecycle
+                                  Rule will apply to any object matching all the predicates
+                                  configured inside the and block.
+                                items:
+                                  properties:
+                                    objectSizeGreaterThan:
+                                      description: Minimum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    objectSizeLessThan:
+                                      description: Maximum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    prefix:
+                                      description: Prefix identifying one or more
+                                        objects to which the rule applies.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      description: |-
+                                        Key-value map of resource tags.
+                                        All of these tags must exist in the object's tag set in order for the rule to apply.
+                                        If set, must contain at least one key-value pair.
+                                      type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
-                                  x-kubernetes-map-type: granular
-                              type: object
-                            objectSizeGreaterThan:
-                              description: Minimum object size (in bytes) to which
-                                the rule applies.
-                              type: string
-                            objectSizeLessThan:
-                              description: Maximum object size (in bytes) to which
-                                the rule applies.
-                              type: string
-                            prefix:
-                              description: Prefix identifying one or more objects
-                                to which the rule applies. Defaults to an empty string
-                                ("") if not specified.
-                              type: string
-                            tag:
-                              description: Configuration block for specifying a tag
-                                key and value. See below.
-                              properties:
-                                key:
-                                  description: Name of the object key.
-                                  type: string
-                                value:
-                                  description: Value of the tag.
-                                  type: string
-                              type: object
-                          type: object
+                                type: array
+                              objectSizeGreaterThan:
+                                description: Minimum object size (in bytes) to which
+                                  the rule applies.
+                                type: number
+                              objectSizeLessThan:
+                                description: Maximum object size (in bytes) to which
+                                  the rule applies.
+                                type: number
+                              prefix:
+                                description: Prefix identifying one or more objects
+                                  to which the rule applies. Defaults to an empty
+                                  string ("") if not specified.
+                                type: string
+                              tag:
+                                description: Configuration block for specifying a
+                                  tag key and value. See below.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Name of the object key.
+                                      type: string
+                                    value:
+                                      description: Value of the tag.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         id:
                           description: Unique identifier for the rule. The value cannot
                             be longer than 255 characters.
@@ -2007,16 +2071,18 @@ spec:
                         noncurrentVersionExpiration:
                           description: Configuration block that specifies when noncurrent
                             object versions expire. See below.
-                          properties:
-                            newerNoncurrentVersions:
-                              description: Number of noncurrent versions Amazon S3
-                                will retain. Must be a non-zero positive integer.
-                              type: string
-                            noncurrentDays:
-                              description: Number of days an object is noncurrent
-                                before Amazon S3 can perform the associated action.
-                              type: number
-                          type: object
+                          items:
+                            properties:
+                              newerNoncurrentVersions:
+                                description: Number of noncurrent versions Amazon
+                                  S3 will retain. Must be a non-zero positive integer.
+                                type: number
+                              noncurrentDays:
+                                description: Number of days an object is noncurrent
+                                  before Amazon S3 can perform the associated action.
+                                type: number
+                            type: object
+                          type: array
                         noncurrentVersionTransition:
                           description: Set of configuration blocks that specify the
                             transition rule for the lifecycle rule that describes
@@ -2027,7 +2093,7 @@ spec:
                               newerNoncurrentVersions:
                                 description: Number of noncurrent versions Amazon
                                   S3 will retain. Must be a non-zero positive integer.
-                                type: string
+                                type: number
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
@@ -2040,10 +2106,12 @@ spec:
                             type: object
                           type: array
                         prefix:
-                          description: DEPRECATED Use filter instead. This has been
-                            deprecated by Amazon S3. Prefix identifying one or more
-                            objects to which the rule applies. Defaults to an empty
-                            string ("") if filter is not specified.
+                          description: |-
+                            DEPRECATED Use filter instead.
+                            This has been deprecated by Amazon S3.
+                            Prefix identifying one or more objects to which the rule applies.
+                            Defaults to an empty string ("") if filter is not specified.
+                            One of prefix or filter should be specified.
                           type: string
                         status:
                           description: 'Whether the rule is currently being applied.

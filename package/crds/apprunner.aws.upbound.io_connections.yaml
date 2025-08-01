@@ -77,8 +77,9 @@ spec:
                     description: 'Source repository provider. Valid values: GITHUB.'
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -296,6 +297,11 @@ spec:
                     type: string
                   providerType:
                     description: 'Source repository provider. Valid values: GITHUB.'
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: Current state of the App Runner connection. When

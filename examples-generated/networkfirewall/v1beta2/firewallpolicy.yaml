@@ -18,7 +18,7 @@ spec:
         resourceArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
-      tlsInspectionConfigurationArn: arn:aws:network-firewall:REGION:ACCT:tls-configuration/example
+      tlsInspectionConfigurationArn: arn:${data.aws_partition.current.partition}:network-firewall:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:tls-configuration/example
     region: us-west-1
     tags:
       Tag1: Value1

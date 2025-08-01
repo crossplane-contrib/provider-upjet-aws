@@ -15,7 +15,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
 
 ---
 
@@ -30,4 +29,3 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1

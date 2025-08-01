@@ -309,7 +309,7 @@ spec:
                     description: List of authentication flows. The available options
                       include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH,
                       ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH,
-                      ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
+                      ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, and ALLOW_USER_AUTH.
                     items:
                       type: string
                     type: array
@@ -347,6 +347,22 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  refreshTokenRotation:
+                    description: A block that specifies the configuration of refresh
+                      token rotation. Detailed below.
+                    items:
+                      properties:
+                        feature:
+                          description: The state of refresh token rotation for the
+                            current app client. Valid values are ENABLED or DISABLED.
+                          type: string
+                        retryGracePeriodSeconds:
+                          description: A period of time in seconds that the user has
+                            to use the old refresh token before it is invalidated.
+                            Valid values are between 0 and 60.
+                          type: number
+                      type: object
+                    type: array
                   refreshTokenValidity:
                     description: Time limit, between 60 minutes and 10 years, after
                       which the refresh token is no longer valid and cannot be used.
@@ -354,8 +370,9 @@ spec:
                       a value in token_validity_units.refresh_token.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   supportedIdentityProviders:
                     description: List of provider names for the identity providers
@@ -723,7 +740,7 @@ spec:
                     description: List of authentication flows. The available options
                       include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH,
                       ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH,
-                      ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
+                      ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, and ALLOW_USER_AUTH.
                     items:
                       type: string
                     type: array
@@ -761,6 +778,22 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  refreshTokenRotation:
+                    description: A block that specifies the configuration of refresh
+                      token rotation. Detailed below.
+                    items:
+                      properties:
+                        feature:
+                          description: The state of refresh token rotation for the
+                            current app client. Valid values are ENABLED or DISABLED.
+                          type: string
+                        retryGracePeriodSeconds:
+                          description: A period of time in seconds that the user has
+                            to use the old refresh token before it is invalidated.
+                            Valid values are between 0 and 60.
+                          type: number
+                      type: object
+                    type: array
                   refreshTokenValidity:
                     description: Time limit, between 60 minutes and 10 years, after
                       which the refresh token is no longer valid and cannot be used.
@@ -1145,7 +1178,7 @@ spec:
                     description: List of authentication flows. The available options
                       include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH,
                       ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH,
-                      ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
+                      ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, and ALLOW_USER_AUTH.
                     items:
                       type: string
                     type: array
@@ -1186,12 +1219,33 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  refreshTokenRotation:
+                    description: A block that specifies the configuration of refresh
+                      token rotation. Detailed below.
+                    items:
+                      properties:
+                        feature:
+                          description: The state of refresh token rotation for the
+                            current app client. Valid values are ENABLED or DISABLED.
+                          type: string
+                        retryGracePeriodSeconds:
+                          description: A period of time in seconds that the user has
+                            to use the old refresh token before it is invalidated.
+                            Valid values are between 0 and 60.
+                          type: number
+                      type: object
+                    type: array
                   refreshTokenValidity:
                     description: Time limit, between 60 minutes and 10 years, after
                       which the refresh token is no longer valid and cannot be used.
                       By default, the unit is days. The unit can be overridden by
                       a value in token_validity_units.refresh_token.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   supportedIdentityProviders:
                     description: List of provider names for the identity providers
                       that are supported on this client. It uses the provider_name

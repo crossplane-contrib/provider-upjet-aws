@@ -153,8 +153,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tag:
                     description: Tag to create. The tag block is documented below.
@@ -466,6 +467,11 @@ spec:
                     type: string
                   id:
                     description: ASG name and key, separated by a comma (,)
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tag:
                     description: Tag to create. The tag block is documented below.
@@ -680,8 +686,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tag:
                     description: Tag to create. The tag block is documented below.
@@ -989,6 +996,11 @@ spec:
                     type: string
                   id:
                     description: ASG name and key, separated by a comma (,)
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tag:
                     description: Tag to create. The tag block is documented below.

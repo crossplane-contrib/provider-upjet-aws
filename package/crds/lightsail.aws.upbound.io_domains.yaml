@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Domain is the Schema for the Domains API. Provides an Lightsail
-          Domain
+        description: Domain is the Schema for the Domains API. Manages a Lightsail
+          domain for DNS management.
         properties:
           apiVersion:
             description: |-
@@ -74,11 +74,12 @@ spec:
               forProvider:
                 properties:
                   domainName:
-                    description: The name of the Lightsail domain to manage
+                    description: Name of the Lightsail domain to manage.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -97,7 +98,7 @@ spec:
                   autoscaler.
                 properties:
                   domainName:
-                    description: The name of the Lightsail domain to manage
+                    description: Name of the Lightsail domain to manage.
                     type: string
                 type: object
               managementPolicies:
@@ -278,13 +279,18 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Lightsail domain
+                    description: ARN of the Lightsail domain.
                     type: string
                   domainName:
-                    description: The name of the Lightsail domain to manage
+                    description: Name of the Lightsail domain to manage.
                     type: string
                   id:
-                    description: The name used for this domain
+                    description: Name used for this domain.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 type: object
               conditions:
