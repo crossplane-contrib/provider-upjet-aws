@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -36,6 +35,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +55,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKey),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyRef,
 			Selector:     mg.Spec.ForProvider.KMSKeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +76,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkConfiguration.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.NetworkConfiguration.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.ForProvider.NetworkConfiguration.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -96,6 +98,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkConfiguration.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.NetworkConfiguration.SubnetIdsRefs,
 				Selector:      mg.Spec.ForProvider.NetworkConfiguration.SubnetIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -116,6 +119,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceBucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceBucketArnRef,
 			Selector:     mg.Spec.ForProvider.SourceBucketArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +139,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +159,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKey),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyRef,
 			Selector:     mg.Spec.InitProvider.KMSKeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -174,6 +180,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.NetworkConfiguration.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.InitProvider.NetworkConfiguration.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -195,6 +202,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.NetworkConfiguration.SubnetIdsRefs,
 				Selector:      mg.Spec.InitProvider.NetworkConfiguration.SubnetIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -215,6 +223,7 @@ func (mg *Environment) ResolveReferences( // ResolveReferences of this Environme
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceBucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceBucketArnRef,
 			Selector:     mg.Spec.InitProvider.SourceBucketArnSelector,
 			To:           reference.To{List: l, Managed: m},

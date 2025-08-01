@@ -27,11 +27,6 @@ func (mg *Accelerator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Accelerator.
-func (mg *Accelerator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Accelerator.
 func (mg *Accelerator) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *Accelerator) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Accelerator.
 func (mg *Accelerator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Accelerator.
-func (mg *Accelerator) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Accelerator.
@@ -87,11 +77,6 @@ func (mg *EndpointGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this EndpointGroup.
-func (mg *EndpointGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this EndpointGroup.
 func (mg *EndpointGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *EndpointGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EndpointGroup.
 func (mg *EndpointGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this EndpointGroup.
-func (mg *EndpointGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this EndpointGroup.
@@ -147,11 +127,6 @@ func (mg *Listener) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Listener.
-func (mg *Listener) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Listener.
 func (mg *Listener) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *Listener) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Listener.
 func (mg *Listener) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Listener.
-func (mg *Listener) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Listener.

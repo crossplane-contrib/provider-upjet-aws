@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *AssessmentTarget) ResolveReferences( // ResolveReferences of this Asse
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *AssessmentTarget) ResolveReferences( // ResolveReferences of this Asse
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +86,7 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSubscription[i3].TopicArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EventSubscription[i3].TopicArnRef,
 				Selector:     mg.Spec.ForProvider.EventSubscription[i3].TopicArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -105,6 +107,7 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetArnRef,
 			Selector:     mg.Spec.ForProvider.TargetArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -125,6 +128,7 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventSubscription[i3].TopicArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EventSubscription[i3].TopicArnRef,
 				Selector:     mg.Spec.InitProvider.EventSubscription[i3].TopicArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -145,6 +149,7 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetArnRef,
 			Selector:     mg.Spec.InitProvider.TargetArnSelector,
 			To:           reference.To{List: l, Managed: m},

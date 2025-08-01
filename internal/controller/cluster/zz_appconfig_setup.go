@@ -38,3 +38,23 @@ func Setup_appconfig(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_appconfig creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_appconfig(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		application.SetupGated,
+		configurationprofile.SetupGated,
+		deployment.SetupGated,
+		deploymentstrategy.SetupGated,
+		environment.SetupGated,
+		extension.SetupGated,
+		extensionassociation.SetupGated,
+		hostedconfigurationversion.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

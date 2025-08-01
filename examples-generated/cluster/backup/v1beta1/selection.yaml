@@ -1,0 +1,49 @@
+apiVersion: backup.aws.upbound.io/v1beta1
+kind: Selection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/selection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    iamRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/selection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/selection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -27,11 +27,6 @@ func (mg *Bot) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Bot.
-func (mg *Bot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Bot.
 func (mg *Bot) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *Bot) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Bot.
 func (mg *Bot) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Bot.
-func (mg *Bot) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Bot.
@@ -87,11 +77,6 @@ func (mg *BotAlias) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotAlias.
-func (mg *BotAlias) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotAlias.
 func (mg *BotAlias) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *BotAlias) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotAlias.
 func (mg *BotAlias) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotAlias.
-func (mg *BotAlias) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotAlias.
@@ -147,11 +127,6 @@ func (mg *Intent) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Intent.
-func (mg *Intent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Intent.
 func (mg *Intent) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *Intent) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Intent.
 func (mg *Intent) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Intent.
-func (mg *Intent) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Intent.

@@ -27,11 +27,6 @@ func (mg *BGPPeer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BGPPeer.
-func (mg *BGPPeer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BGPPeer.
 func (mg *BGPPeer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *BGPPeer) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BGPPeer.
 func (mg *BGPPeer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BGPPeer.
-func (mg *BGPPeer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BGPPeer.
@@ -87,11 +77,6 @@ func (mg *Connection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Connection.
-func (mg *Connection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Connection.
 func (mg *Connection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *Connection) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Connection.
 func (mg *Connection) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Connection.
-func (mg *Connection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Connection.
@@ -147,11 +127,6 @@ func (mg *ConnectionAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ConnectionAssociation.
-func (mg *ConnectionAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ConnectionAssociation.
 func (mg *ConnectionAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *ConnectionAssociation) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this ConnectionAssociation.
 func (mg *ConnectionAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ConnectionAssociation.
-func (mg *ConnectionAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ConnectionAssociation.
@@ -207,11 +177,6 @@ func (mg *Gateway) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Gateway.
-func (mg *Gateway) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Gateway.
 func (mg *Gateway) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *Gateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Gateway.
 func (mg *Gateway) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Gateway.
-func (mg *Gateway) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Gateway.
@@ -267,11 +227,6 @@ func (mg *GatewayAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this GatewayAssociation.
-func (mg *GatewayAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this GatewayAssociation.
 func (mg *GatewayAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *GatewayAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this GatewayAssociation.
 func (mg *GatewayAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this GatewayAssociation.
-func (mg *GatewayAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this GatewayAssociation.
@@ -327,11 +277,6 @@ func (mg *GatewayAssociationProposal) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this GatewayAssociationProposal.
-func (mg *GatewayAssociationProposal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this GatewayAssociationProposal.
 func (mg *GatewayAssociationProposal) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *GatewayAssociationProposal) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this GatewayAssociationProposal.
 func (mg *GatewayAssociationProposal) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this GatewayAssociationProposal.
-func (mg *GatewayAssociationProposal) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this GatewayAssociationProposal.
@@ -387,11 +327,6 @@ func (mg *HostedPrivateVirtualInterface) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this HostedPrivateVirtualInterface.
-func (mg *HostedPrivateVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this HostedPrivateVirtualInterface.
 func (mg *HostedPrivateVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *HostedPrivateVirtualInterface) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this HostedPrivateVirtualInterface.
 func (mg *HostedPrivateVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this HostedPrivateVirtualInterface.
-func (mg *HostedPrivateVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this HostedPrivateVirtualInterface.
@@ -447,11 +377,6 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) GetProviderConfigReference() *x
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this HostedPrivateVirtualInterfaceAccepter.
-func (mg *HostedPrivateVirtualInterfaceAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this HostedPrivateVirtualInterfaceAccepter.
 func (mg *HostedPrivateVirtualInterfaceAccepter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) SetManagementPolicies(r xpv1.Ma
 // SetProviderConfigReference of this HostedPrivateVirtualInterfaceAccepter.
 func (mg *HostedPrivateVirtualInterfaceAccepter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this HostedPrivateVirtualInterfaceAccepter.
-func (mg *HostedPrivateVirtualInterfaceAccepter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this HostedPrivateVirtualInterfaceAccepter.
@@ -507,11 +427,6 @@ func (mg *HostedPublicVirtualInterface) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this HostedPublicVirtualInterface.
-func (mg *HostedPublicVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this HostedPublicVirtualInterface.
 func (mg *HostedPublicVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *HostedPublicVirtualInterface) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this HostedPublicVirtualInterface.
 func (mg *HostedPublicVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this HostedPublicVirtualInterface.
-func (mg *HostedPublicVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this HostedPublicVirtualInterface.
@@ -567,11 +477,6 @@ func (mg *HostedPublicVirtualInterfaceAccepter) GetProviderConfigReference() *xp
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this HostedPublicVirtualInterfaceAccepter.
-func (mg *HostedPublicVirtualInterfaceAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this HostedPublicVirtualInterfaceAccepter.
 func (mg *HostedPublicVirtualInterfaceAccepter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *HostedPublicVirtualInterfaceAccepter) SetManagementPolicies(r xpv1.Man
 // SetProviderConfigReference of this HostedPublicVirtualInterfaceAccepter.
 func (mg *HostedPublicVirtualInterfaceAccepter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this HostedPublicVirtualInterfaceAccepter.
-func (mg *HostedPublicVirtualInterfaceAccepter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this HostedPublicVirtualInterfaceAccepter.
@@ -627,11 +527,6 @@ func (mg *HostedTransitVirtualInterface) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this HostedTransitVirtualInterface.
-func (mg *HostedTransitVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this HostedTransitVirtualInterface.
 func (mg *HostedTransitVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -655,11 +550,6 @@ func (mg *HostedTransitVirtualInterface) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this HostedTransitVirtualInterface.
 func (mg *HostedTransitVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this HostedTransitVirtualInterface.
-func (mg *HostedTransitVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this HostedTransitVirtualInterface.
@@ -687,11 +577,6 @@ func (mg *HostedTransitVirtualInterfaceAccepter) GetProviderConfigReference() *x
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this HostedTransitVirtualInterfaceAccepter.
-func (mg *HostedTransitVirtualInterfaceAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this HostedTransitVirtualInterfaceAccepter.
 func (mg *HostedTransitVirtualInterfaceAccepter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -715,11 +600,6 @@ func (mg *HostedTransitVirtualInterfaceAccepter) SetManagementPolicies(r xpv1.Ma
 // SetProviderConfigReference of this HostedTransitVirtualInterfaceAccepter.
 func (mg *HostedTransitVirtualInterfaceAccepter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this HostedTransitVirtualInterfaceAccepter.
-func (mg *HostedTransitVirtualInterfaceAccepter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this HostedTransitVirtualInterfaceAccepter.
@@ -747,11 +627,6 @@ func (mg *Lag) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Lag.
-func (mg *Lag) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Lag.
 func (mg *Lag) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -775,11 +650,6 @@ func (mg *Lag) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Lag.
 func (mg *Lag) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Lag.
-func (mg *Lag) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Lag.
@@ -807,11 +677,6 @@ func (mg *PrivateVirtualInterface) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PrivateVirtualInterface.
-func (mg *PrivateVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PrivateVirtualInterface.
 func (mg *PrivateVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -835,11 +700,6 @@ func (mg *PrivateVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this PrivateVirtualInterface.
 func (mg *PrivateVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PrivateVirtualInterface.
-func (mg *PrivateVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PrivateVirtualInterface.
@@ -867,11 +727,6 @@ func (mg *PublicVirtualInterface) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PublicVirtualInterface.
-func (mg *PublicVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PublicVirtualInterface.
 func (mg *PublicVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -895,11 +750,6 @@ func (mg *PublicVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this PublicVirtualInterface.
 func (mg *PublicVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PublicVirtualInterface.
-func (mg *PublicVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PublicVirtualInterface.
@@ -927,11 +777,6 @@ func (mg *TransitVirtualInterface) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this TransitVirtualInterface.
-func (mg *TransitVirtualInterface) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this TransitVirtualInterface.
 func (mg *TransitVirtualInterface) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -955,11 +800,6 @@ func (mg *TransitVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this TransitVirtualInterface.
 func (mg *TransitVirtualInterface) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this TransitVirtualInterface.
-func (mg *TransitVirtualInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this TransitVirtualInterface.

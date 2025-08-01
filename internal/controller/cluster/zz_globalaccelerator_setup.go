@@ -28,3 +28,18 @@ func Setup_globalaccelerator(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_globalaccelerator creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_globalaccelerator(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accelerator.SetupGated,
+		endpointgroup.SetupGated,
+		listener.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -27,11 +27,6 @@ func (mg *ConfigurationSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ConfigurationSet.
-func (mg *ConfigurationSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ConfigurationSet.
 func (mg *ConfigurationSet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *ConfigurationSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ConfigurationSet.
 func (mg *ConfigurationSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ConfigurationSet.
-func (mg *ConfigurationSet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ConfigurationSet.
@@ -87,11 +77,6 @@ func (mg *EventDestination) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this EventDestination.
-func (mg *EventDestination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this EventDestination.
 func (mg *EventDestination) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *EventDestination) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EventDestination.
 func (mg *EventDestination) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this EventDestination.
-func (mg *EventDestination) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this EventDestination.

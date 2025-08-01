@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -35,6 +34,7 @@ func (mg *RegexMatchSet) ResolveReferences( // ResolveReferences of this RegexMa
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetIDRef,
 				Selector:     mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *RegexMatchSet) ResolveReferences( // ResolveReferences of this RegexMa
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDRef,
 				Selector:     mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -90,6 +91,7 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingConfiguration.LogDestination),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LoggingConfiguration.LogDestinationRef,
 				Selector:     mg.Spec.ForProvider.LoggingConfiguration.LogDestinationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -111,6 +113,7 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rules[i3].RuleID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Rules[i3].RuleIDRef,
 				Selector:     mg.Spec.ForProvider.Rules[i3].RuleIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -132,6 +135,7 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingConfiguration.LogDestination),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LoggingConfiguration.LogDestinationRef,
 				Selector:     mg.Spec.InitProvider.LoggingConfiguration.LogDestinationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -153,6 +157,7 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rules[i3].RuleID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Rules[i3].RuleIDRef,
 				Selector:     mg.Spec.InitProvider.Rules[i3].RuleIDSelector,
 				To:           reference.To{List: l, Managed: m},

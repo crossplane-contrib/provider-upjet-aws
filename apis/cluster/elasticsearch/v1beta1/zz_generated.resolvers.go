@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Domain.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Domain) ResolveReferences( // ResolveReferences of this Domain.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -37,6 +35,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef,
 				Selector:     mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -58,6 +57,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIdsRefs,
 				Selector:      mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -79,6 +79,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef,
 				Selector:     mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -100,6 +101,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIdsRefs,
 				Selector:      mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -133,6 +135,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -152,6 +155,7 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DomainNameRef,
 			Selector:     mg.Spec.InitProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},

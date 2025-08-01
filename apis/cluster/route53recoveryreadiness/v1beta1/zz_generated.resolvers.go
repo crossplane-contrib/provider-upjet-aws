@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -35,6 +34,7 @@ func (mg *ResourceSet) ResolveReferences( // ResolveReferences of this ResourceS
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Resources[i3].ResourceArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Resources[i3].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.Resources[i3].ResourceArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *ResourceSet) ResolveReferences( // ResolveReferences of this ResourceS
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Resources[i3].ResourceArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Resources[i3].ResourceArnRef,
 				Selector:     mg.Spec.InitProvider.Resources[i3].ResourceArnSelector,
 				To:           reference.To{List: l, Managed: m},

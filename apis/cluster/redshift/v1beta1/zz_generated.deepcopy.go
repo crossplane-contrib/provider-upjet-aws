@@ -2175,7 +2175,7 @@ func (in *HSMConfigurationInitParameters) DeepCopyInto(out *HSMConfigurationInit
 		*out = new(string)
 		**out = **in
 	}
-	out.HSMPartitionPasswordSecretRef = in.HSMPartitionPasswordSecretRef
+	in.HSMPartitionPasswordSecretRef.DeepCopyInto(&out.HSMPartitionPasswordSecretRef)
 	if in.HSMServerPublicCertificate != nil {
 		in, out := &in.HSMServerPublicCertificate, &out.HSMServerPublicCertificate
 		*out = new(string)
@@ -2341,7 +2341,7 @@ func (in *HSMConfigurationParameters) DeepCopyInto(out *HSMConfigurationParamete
 		*out = new(string)
 		**out = **in
 	}
-	out.HSMPartitionPasswordSecretRef = in.HSMPartitionPasswordSecretRef
+	in.HSMPartitionPasswordSecretRef.DeepCopyInto(&out.HSMPartitionPasswordSecretRef)
 	if in.HSMServerPublicCertificate != nil {
 		in, out := &in.HSMServerPublicCertificate, &out.HSMServerPublicCertificate
 		*out = new(string)

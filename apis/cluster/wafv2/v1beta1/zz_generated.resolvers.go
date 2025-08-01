@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *WebACLAssociation) ResolveReferences( // ResolveReferences of this Web
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *WebACLAssociation) ResolveReferences( // ResolveReferences of this Web
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebACLArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WebACLArnRef,
 			Selector:     mg.Spec.ForProvider.WebACLArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +86,7 @@ func (mg *WebACLLoggingConfiguration) ResolveReferences(ctx context.Context, c c
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.LogDestinationConfigs),
 			Extract:       resource.ExtractParamPath("arn", false),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.LogDestinationConfigsRefs,
 			Selector:      mg.Spec.ForProvider.LogDestinationConfigsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -104,6 +106,7 @@ func (mg *WebACLLoggingConfiguration) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +126,7 @@ func (mg *WebACLLoggingConfiguration) ResolveReferences(ctx context.Context, c c
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.LogDestinationConfigs),
 			Extract:       resource.ExtractParamPath("arn", false),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.LogDestinationConfigsRefs,
 			Selector:      mg.Spec.InitProvider.LogDestinationConfigsSelector,
 			To:            reference.To{List: l, Managed: m},

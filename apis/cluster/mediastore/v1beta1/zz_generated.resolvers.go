@@ -32,6 +32,7 @@ func (mg *ContainerPolicy) ResolveReferences( // ResolveReferences of this Conta
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerNameRef,
 			Selector:     mg.Spec.ForProvider.ContainerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -51,6 +52,7 @@ func (mg *ContainerPolicy) ResolveReferences( // ResolveReferences of this Conta
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ContainerNameRef,
 			Selector:     mg.Spec.InitProvider.ContainerNameSelector,
 			To:           reference.To{List: l, Managed: m},

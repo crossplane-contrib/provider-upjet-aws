@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *ContributorInsights) ResolveReferences( // ResolveReferences of this C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TableNameRef,
 			Selector:     mg.Spec.ForProvider.TableNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *ContributorInsights) ResolveReferences( // ResolveReferences of this C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TableNameRef,
 			Selector:     mg.Spec.InitProvider.TableNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +86,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StreamArnRef,
 			Selector:     mg.Spec.ForProvider.StreamArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +106,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TableNameRef,
 			Selector:     mg.Spec.ForProvider.TableNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +126,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StreamArnRef,
 			Selector:     mg.Spec.InitProvider.StreamArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +146,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TableNameRef,
 			Selector:     mg.Spec.InitProvider.TableNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -173,6 +178,7 @@ func (mg *ResourcePolicy) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -204,6 +210,7 @@ func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TableNameRef,
 			Selector:     mg.Spec.ForProvider.TableNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -223,6 +230,7 @@ func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TableNameRef,
 			Selector:     mg.Spec.InitProvider.TableNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -254,6 +262,7 @@ func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalTableArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GlobalTableArnRef,
 			Selector:     mg.Spec.ForProvider.GlobalTableArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -273,6 +282,7 @@ func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -292,6 +302,7 @@ func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalTableArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GlobalTableArnRef,
 			Selector:     mg.Spec.InitProvider.GlobalTableArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -311,6 +322,7 @@ func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},

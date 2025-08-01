@@ -1,0 +1,53 @@
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/usergroup
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Managed by Terraform
+    name: user-group
+    precedence: 42
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: group_role
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/usergroup
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: identity pool
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/usergroup
+  labels:
+    testing.upbound.io/example-name: group_role
+  name: group-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.group_role.json}
+    region: us-west-1

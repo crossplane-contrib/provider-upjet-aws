@@ -1,0 +1,18 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPNGatewayRoutePropagation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpngatewayroutepropagation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vpnGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

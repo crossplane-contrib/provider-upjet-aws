@@ -1,0 +1,23 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Fleet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/fleet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    launchTemplateConfig:
+    - launchTemplateSpecification:
+      - launchTemplateIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        versionSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    region: us-west-1
+    targetCapacitySpecification:
+    - defaultTargetCapacityType: spot
+      totalTargetCapacity: 5

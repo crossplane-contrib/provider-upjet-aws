@@ -1,0 +1,191 @@
+apiVersion: batch.aws.m.upbound.io/v1beta1
+kind: ComputeEnvironment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+  namespace: upbound-system
+spec:
+  forProvider:
+    computeResources:
+    - instanceRoleSelector:
+        matchLabels:
+          testing.upbound.io/example-name: ecs_instance_role
+      instanceType:
+      - c4.large
+      maxVcpus: 16
+      minVcpus: 0
+      placementGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample
+      securityGroupIdsRefs:
+      - name: sample
+      subnetsRefs:
+      - name: sample
+      type: EC2
+    region: us-west-1
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_batch_service_role
+    type: MANAGED
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: InstanceProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: ecs_instance_role
+  name: ecs-instance-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: aws_batch_service_role
+  name: aws-batch-service-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.batch_assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: ecs_instance_role
+  name: ecs-instance-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.ec2_assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: aws_batch_service_role
+  name: aws-batch-service-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_batch_service_role
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: ecs_instance_role
+  name: ecs-instance-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ecs_instance_role
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: PlacementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    strategy: cluster
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: aws_batch_compute_environment_security_group
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 10.1.1.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 10.1.0.0/16
+    region: us-west-1

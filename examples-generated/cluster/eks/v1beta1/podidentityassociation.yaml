@@ -1,0 +1,54 @@
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: PodIdentityAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespace: example
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceAccount: example-sa
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example_s3
+  name: example-s3
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

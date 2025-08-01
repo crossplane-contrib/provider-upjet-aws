@@ -36,3 +36,22 @@ func Setup_appstream(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_appstream creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_appstream(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		directoryconfig.SetupGated,
+		fleet.SetupGated,
+		fleetstackassociation.SetupGated,
+		imagebuilder.SetupGated,
+		stack.SetupGated,
+		user.SetupGated,
+		userstackassociation.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

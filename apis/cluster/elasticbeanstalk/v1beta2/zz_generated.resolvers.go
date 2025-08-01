@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -35,6 +34,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppversionLifecycle.ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AppversionLifecycle.ServiceRoleRef,
 				Selector:     mg.Spec.ForProvider.AppversionLifecycle.ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppversionLifecycle.ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AppversionLifecycle.ServiceRoleRef,
 				Selector:     mg.Spec.InitProvider.AppversionLifecycle.ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},

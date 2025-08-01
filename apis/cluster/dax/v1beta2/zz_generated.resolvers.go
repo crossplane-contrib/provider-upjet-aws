@@ -9,17 +9,15 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Cluster.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +54,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -74,6 +74,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -93,6 +94,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},

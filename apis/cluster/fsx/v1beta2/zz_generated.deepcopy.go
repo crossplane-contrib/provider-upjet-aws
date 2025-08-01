@@ -3456,7 +3456,7 @@ func (in *SelfManagedActiveDirectoryConfigurationInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -3549,7 +3549,7 @@ func (in *SelfManagedActiveDirectoryConfigurationParameters) DeepCopyInto(out *S
 		*out = new(string)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -3596,7 +3596,7 @@ func (in *SelfManagedActiveDirectoryInitParameters) DeepCopyInto(out *SelfManage
 		*out = new(string)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -3689,7 +3689,7 @@ func (in *SelfManagedActiveDirectoryParameters) DeepCopyInto(out *SelfManagedAct
 		*out = new(string)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)

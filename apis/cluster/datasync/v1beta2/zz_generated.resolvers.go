@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3BucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.S3BucketArnRef,
 			Selector:     mg.Spec.ForProvider.S3BucketArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +55,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Config.BucketAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.S3Config.BucketAccessRoleArnRef,
 				Selector:     mg.Spec.ForProvider.S3Config.BucketAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -75,6 +76,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3BucketArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.S3BucketArnRef,
 			Selector:     mg.Spec.InitProvider.S3BucketArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -95,6 +97,7 @@ func (mg *LocationS3) ResolveReferences( // ResolveReferences of this LocationS3
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Config.BucketAccessRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.S3Config.BucketAccessRoleArnRef,
 				Selector:     mg.Spec.InitProvider.S3Config.BucketAccessRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -128,6 +131,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLogGroupArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudwatchLogGroupArnRef,
 			Selector:     mg.Spec.ForProvider.CloudwatchLogGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -147,6 +151,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DestinationLocationArnRef,
 			Selector:     mg.Spec.ForProvider.DestinationLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -166,6 +171,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceLocationArnRef,
 			Selector:     mg.Spec.ForProvider.SourceLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -185,6 +191,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLogGroupArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudwatchLogGroupArnRef,
 			Selector:     mg.Spec.InitProvider.CloudwatchLogGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -204,6 +211,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DestinationLocationArnRef,
 			Selector:     mg.Spec.InitProvider.DestinationLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -223,6 +231,7 @@ func (mg *Task) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceLocationArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceLocationArnRef,
 			Selector:     mg.Spec.InitProvider.SourceLocationArnSelector,
 			To:           reference.To{List: l, Managed: m},

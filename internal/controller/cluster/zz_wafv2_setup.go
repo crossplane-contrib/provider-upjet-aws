@@ -34,3 +34,21 @@ func Setup_wafv2(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_wafv2 creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_wafv2(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		ipset.SetupGated,
+		regexpatternset.SetupGated,
+		rulegroup.SetupGated,
+		webacl.SetupGated,
+		webaclassociation.SetupGated,
+		webaclloggingconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

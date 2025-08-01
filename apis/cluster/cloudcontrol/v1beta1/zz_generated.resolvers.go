@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Resource.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Resource) ResolveReferences( // ResolveReferences of this Resource.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

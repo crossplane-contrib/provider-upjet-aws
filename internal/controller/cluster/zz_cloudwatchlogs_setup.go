@@ -38,3 +38,23 @@ func Setup_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_cloudwatchlogs creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		definition.SetupGated,
+		destination.SetupGated,
+		destinationpolicy.SetupGated,
+		group.SetupGated,
+		metricfilter.SetupGated,
+		resourcepolicy.SetupGated,
+		stream.SetupGated,
+		subscriptionfilter.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -9,16 +9,14 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this User.
+	errors "github.com/pkg/errors"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *User) ResolveReferences( // ResolveReferences of this User.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -34,6 +32,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BrokerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BrokerIDRef,
 			Selector:     mg.Spec.ForProvider.BrokerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +52,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BrokerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BrokerIDRef,
 			Selector:     mg.Spec.InitProvider.BrokerIDSelector,
 			To:           reference.To{List: l, Managed: m},

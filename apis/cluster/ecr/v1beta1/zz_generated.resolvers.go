@@ -9,9 +9,8 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Repository),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RepositoryRef,
 			Selector:     mg.Spec.ForProvider.RepositorySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Repository),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RepositoryRef,
 			Selector:     mg.Spec.InitProvider.RepositorySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *PullThroughCacheRule) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CustomRoleArnRef,
 			Selector:     mg.Spec.ForProvider.CustomRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *PullThroughCacheRule) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CustomRoleArnRef,
 			Selector:     mg.Spec.InitProvider.CustomRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +138,7 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKey),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyRef,
 				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -156,6 +160,7 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKey),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyRef,
 				Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -189,6 +194,7 @@ func (mg *RepositoryPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Repository),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RepositoryRef,
 			Selector:     mg.Spec.ForProvider.RepositorySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -208,6 +214,7 @@ func (mg *RepositoryPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Repository),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RepositoryRef,
 			Selector:     mg.Spec.InitProvider.RepositorySelector,
 			To:           reference.To{List: l, Managed: m},

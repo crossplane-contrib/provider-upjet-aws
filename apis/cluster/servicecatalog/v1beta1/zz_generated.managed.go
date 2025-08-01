@@ -27,11 +27,6 @@ func (mg *BudgetResourceAssociation) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BudgetResourceAssociation.
-func (mg *BudgetResourceAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BudgetResourceAssociation.
 func (mg *BudgetResourceAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *BudgetResourceAssociation) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this BudgetResourceAssociation.
 func (mg *BudgetResourceAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BudgetResourceAssociation.
-func (mg *BudgetResourceAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BudgetResourceAssociation.
@@ -87,11 +77,6 @@ func (mg *Constraint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Constraint.
-func (mg *Constraint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Constraint.
 func (mg *Constraint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *Constraint) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Constraint.
 func (mg *Constraint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Constraint.
-func (mg *Constraint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Constraint.
@@ -147,11 +127,6 @@ func (mg *Portfolio) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Portfolio.
-func (mg *Portfolio) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Portfolio.
 func (mg *Portfolio) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *Portfolio) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Portfolio.
 func (mg *Portfolio) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Portfolio.
-func (mg *Portfolio) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Portfolio.
@@ -207,11 +177,6 @@ func (mg *PortfolioShare) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PortfolioShare.
-func (mg *PortfolioShare) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PortfolioShare.
 func (mg *PortfolioShare) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *PortfolioShare) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this PortfolioShare.
 func (mg *PortfolioShare) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PortfolioShare.
-func (mg *PortfolioShare) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PortfolioShare.
@@ -267,11 +227,6 @@ func (mg *PrincipalPortfolioAssociation) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PrincipalPortfolioAssociation.
-func (mg *PrincipalPortfolioAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PrincipalPortfolioAssociation.
 func (mg *PrincipalPortfolioAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *PrincipalPortfolioAssociation) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this PrincipalPortfolioAssociation.
 func (mg *PrincipalPortfolioAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PrincipalPortfolioAssociation.
-func (mg *PrincipalPortfolioAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PrincipalPortfolioAssociation.
@@ -327,11 +277,6 @@ func (mg *Product) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Product.
-func (mg *Product) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Product.
 func (mg *Product) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *Product) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Product.
 func (mg *Product) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Product.
-func (mg *Product) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Product.
@@ -387,11 +327,6 @@ func (mg *ProductPortfolioAssociation) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ProductPortfolioAssociation.
-func (mg *ProductPortfolioAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ProductPortfolioAssociation.
 func (mg *ProductPortfolioAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *ProductPortfolioAssociation) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this ProductPortfolioAssociation.
 func (mg *ProductPortfolioAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ProductPortfolioAssociation.
-func (mg *ProductPortfolioAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ProductPortfolioAssociation.
@@ -447,11 +377,6 @@ func (mg *ProvisioningArtifact) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ProvisioningArtifact.
-func (mg *ProvisioningArtifact) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ProvisioningArtifact.
 func (mg *ProvisioningArtifact) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *ProvisioningArtifact) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this ProvisioningArtifact.
 func (mg *ProvisioningArtifact) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ProvisioningArtifact.
-func (mg *ProvisioningArtifact) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ProvisioningArtifact.
@@ -507,11 +427,6 @@ func (mg *ServiceAction) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ServiceAction.
-func (mg *ServiceAction) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ServiceAction.
 func (mg *ServiceAction) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *ServiceAction) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ServiceAction.
 func (mg *ServiceAction) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ServiceAction.
-func (mg *ServiceAction) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ServiceAction.
@@ -567,11 +477,6 @@ func (mg *TagOption) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this TagOption.
-func (mg *TagOption) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this TagOption.
 func (mg *TagOption) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *TagOption) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this TagOption.
 func (mg *TagOption) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this TagOption.
-func (mg *TagOption) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this TagOption.
@@ -627,11 +527,6 @@ func (mg *TagOptionResourceAssociation) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this TagOptionResourceAssociation.
-func (mg *TagOptionResourceAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this TagOptionResourceAssociation.
 func (mg *TagOptionResourceAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -655,11 +550,6 @@ func (mg *TagOptionResourceAssociation) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this TagOptionResourceAssociation.
 func (mg *TagOptionResourceAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this TagOptionResourceAssociation.
-func (mg *TagOptionResourceAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this TagOptionResourceAssociation.

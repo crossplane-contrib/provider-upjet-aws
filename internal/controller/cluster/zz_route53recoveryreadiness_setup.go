@@ -30,3 +30,19 @@ func Setup_route53recoveryreadiness(mgr ctrl.Manager, o controller.Options) erro
 	}
 	return nil
 }
+
+// SetupGated_route53recoveryreadiness creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_route53recoveryreadiness(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cell.SetupGated,
+		readinesscheck.SetupGated,
+		recoverygroup.SetupGated,
+		resourceset.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

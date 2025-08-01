@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *SMSChannel) ResolveReferences( // ResolveReferences of this SMSChannel
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
 			Extract:      resource.ExtractParamPath("application_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *SMSChannel) ResolveReferences( // ResolveReferences of this SMSChannel
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
 			Extract:      resource.ExtractParamPath("application_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},

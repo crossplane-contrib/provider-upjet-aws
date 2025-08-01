@@ -9,7 +9,6 @@ package maintenancewindowtask
 import (
 	"time"
 
-	"github.com/crossplane/crossplane-runtime/v2/pkg/connection"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/event"
 	xpfeature "github.com/crossplane/crossplane-runtime/v2/pkg/feature"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/ratelimiter"
@@ -26,14 +25,20 @@ import (
 	features "github.com/upbound/provider-aws/internal/features"
 )
 
+// SetupGated adds a controller that reconciles MaintenanceWindowTask managed resources.
+func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
+	o.Options.Gate.Register(func() {
+		if err := Setup(mgr, o); err != nil {
+			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", v1beta1.MaintenanceWindowTask_GroupVersionKind.String())
+		}
+	}, v1beta1.MaintenanceWindowTask_GroupVersionKind)
+	return nil
+}
+
 // Setup adds a controller that reconciles MaintenanceWindowTask managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.MaintenanceWindowTask_GroupVersionKind.String())
 	var initializers managed.InitializerChain
-	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
-	if o.SecretStoreConfigGVK != nil {
-		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK, connection.WithTLSConfig(o.ESSOptions.TLSConfig)))
-	}
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.MaintenanceWindowTask_GroupVersionKind)))
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.MaintenanceWindowTask_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
@@ -49,7 +54,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithFinalizer(tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
-		managed.WithConnectionPublishers(cps...),
 		managed.WithPollInterval(o.PollInterval),
 	}
 	if o.PollJitter != 0 {

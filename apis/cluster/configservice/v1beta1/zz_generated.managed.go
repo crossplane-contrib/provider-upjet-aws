@@ -27,11 +27,6 @@ func (mg *AWSConfigurationRecorderStatus) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this AWSConfigurationRecorderStatus.
-func (mg *AWSConfigurationRecorderStatus) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this AWSConfigurationRecorderStatus.
 func (mg *AWSConfigurationRecorderStatus) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *AWSConfigurationRecorderStatus) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this AWSConfigurationRecorderStatus.
 func (mg *AWSConfigurationRecorderStatus) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this AWSConfigurationRecorderStatus.
-func (mg *AWSConfigurationRecorderStatus) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this AWSConfigurationRecorderStatus.
@@ -87,11 +77,6 @@ func (mg *ConfigRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ConfigRule.
-func (mg *ConfigRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ConfigRule.
 func (mg *ConfigRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *ConfigRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ConfigRule.
 func (mg *ConfigRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ConfigRule.
-func (mg *ConfigRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ConfigRule.
@@ -147,11 +127,6 @@ func (mg *ConfigurationAggregator) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ConfigurationAggregator.
-func (mg *ConfigurationAggregator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ConfigurationAggregator.
 func (mg *ConfigurationAggregator) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *ConfigurationAggregator) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this ConfigurationAggregator.
 func (mg *ConfigurationAggregator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ConfigurationAggregator.
-func (mg *ConfigurationAggregator) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ConfigurationAggregator.
@@ -207,11 +177,6 @@ func (mg *ConfigurationRecorder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ConfigurationRecorder.
-func (mg *ConfigurationRecorder) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ConfigurationRecorder.
 func (mg *ConfigurationRecorder) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *ConfigurationRecorder) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this ConfigurationRecorder.
 func (mg *ConfigurationRecorder) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ConfigurationRecorder.
-func (mg *ConfigurationRecorder) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ConfigurationRecorder.
@@ -267,11 +227,6 @@ func (mg *ConformancePack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ConformancePack.
-func (mg *ConformancePack) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ConformancePack.
 func (mg *ConformancePack) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *ConformancePack) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ConformancePack.
 func (mg *ConformancePack) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ConformancePack.
-func (mg *ConformancePack) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ConformancePack.
@@ -327,11 +277,6 @@ func (mg *DeliveryChannel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DeliveryChannel.
-func (mg *DeliveryChannel) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DeliveryChannel.
 func (mg *DeliveryChannel) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *DeliveryChannel) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DeliveryChannel.
 func (mg *DeliveryChannel) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DeliveryChannel.
-func (mg *DeliveryChannel) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DeliveryChannel.
@@ -387,11 +327,6 @@ func (mg *RemediationConfiguration) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RemediationConfiguration.
-func (mg *RemediationConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RemediationConfiguration.
 func (mg *RemediationConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *RemediationConfiguration) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this RemediationConfiguration.
 func (mg *RemediationConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RemediationConfiguration.
-func (mg *RemediationConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RemediationConfiguration.

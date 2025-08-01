@@ -27,11 +27,6 @@ func (mg *HTTPNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this HTTPNamespace.
-func (mg *HTTPNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this HTTPNamespace.
 func (mg *HTTPNamespace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *HTTPNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HTTPNamespace.
 func (mg *HTTPNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this HTTPNamespace.
-func (mg *HTTPNamespace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this HTTPNamespace.
@@ -87,11 +77,6 @@ func (mg *PrivateDNSNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PrivateDNSNamespace.
 func (mg *PrivateDNSNamespace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *PrivateDNSNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this PrivateDNSNamespace.
 func (mg *PrivateDNSNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PrivateDNSNamespace.
@@ -147,11 +127,6 @@ func (mg *PublicDNSNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PublicDNSNamespace.
 func (mg *PublicDNSNamespace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *PublicDNSNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this PublicDNSNamespace.
 func (mg *PublicDNSNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PublicDNSNamespace.
@@ -207,11 +177,6 @@ func (mg *Service) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Service.
-func (mg *Service) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Service.
 func (mg *Service) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *Service) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Service.
 func (mg *Service) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Service.
-func (mg *Service) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Service.

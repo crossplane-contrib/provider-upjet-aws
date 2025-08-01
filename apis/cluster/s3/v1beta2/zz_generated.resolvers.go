@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *BucketACL) ResolveReferences( // ResolveReferences of this BucketACL.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *BucketACL) ResolveReferences( // ResolveReferences of this BucketACL.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *BucketAnalyticsConfiguration) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -107,6 +109,7 @@ func (mg *BucketAnalyticsConfiguration) ResolveReferences(ctx context.Context, c
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageClassAnalysis.DataExport.Destination.S3BucketDestination.BucketArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.StorageClassAnalysis.DataExport.Destination.S3BucketDestination.BucketArnRef,
 							Selector:     mg.Spec.ForProvider.StorageClassAnalysis.DataExport.Destination.S3BucketDestination.BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -130,6 +133,7 @@ func (mg *BucketAnalyticsConfiguration) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -153,6 +157,7 @@ func (mg *BucketAnalyticsConfiguration) ResolveReferences(ctx context.Context, c
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageClassAnalysis.DataExport.Destination.S3BucketDestination.BucketArn),
 							Extract:      resource.ExtractParamPath("arn", true),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.StorageClassAnalysis.DataExport.Destination.S3BucketDestination.BucketArnRef,
 							Selector:     mg.Spec.InitProvider.StorageClassAnalysis.DataExport.Destination.S3BucketDestination.BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -189,6 +194,7 @@ func (mg *BucketIntelligentTieringConfiguration) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -208,6 +214,7 @@ func (mg *BucketIntelligentTieringConfiguration) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -239,6 +246,7 @@ func (mg *BucketInventory) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -260,6 +268,7 @@ func (mg *BucketInventory) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destination.Bucket.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Destination.Bucket.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.Destination.Bucket.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -281,6 +290,7 @@ func (mg *BucketInventory) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -302,6 +312,7 @@ func (mg *BucketInventory) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Destination.Bucket.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Destination.Bucket.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.Destination.Bucket.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -336,6 +347,7 @@ func (mg *BucketLifecycleConfiguration) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -355,6 +367,7 @@ func (mg *BucketLifecycleConfiguration) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -386,6 +399,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -405,6 +419,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetBucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetBucketRef,
 			Selector:     mg.Spec.ForProvider.TargetBucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -424,6 +439,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -443,6 +459,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetBucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetBucketRef,
 			Selector:     mg.Spec.InitProvider.TargetBucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -474,6 +491,7 @@ func (mg *BucketMetric) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -494,6 +512,7 @@ func (mg *BucketMetric) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Filter.AccessPoint),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Filter.AccessPointRef,
 				Selector:     mg.Spec.ForProvider.Filter.AccessPointSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -514,6 +533,7 @@ func (mg *BucketMetric) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -534,6 +554,7 @@ func (mg *BucketMetric) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Filter.AccessPoint),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Filter.AccessPointRef,
 				Selector:     mg.Spec.InitProvider.Filter.AccessPointSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -567,6 +588,7 @@ func (mg *BucketObjectLockConfiguration) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -586,6 +608,7 @@ func (mg *BucketObjectLockConfiguration) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -617,6 +640,7 @@ func (mg *BucketOwnershipControls) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -636,6 +660,7 @@ func (mg *BucketOwnershipControls) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -667,6 +692,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -686,6 +712,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Role),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleRef,
 			Selector:     mg.Spec.ForProvider.RoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -707,6 +734,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].Destination.Bucket),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Rule[i3].Destination.BucketRef,
 					Selector:     mg.Spec.ForProvider.Rule[i3].Destination.BucketSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -731,6 +759,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].Destination.EncryptionConfiguration.ReplicaKMSKeyID),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Rule[i3].Destination.EncryptionConfiguration.ReplicaKMSKeyIDRef,
 						Selector:     mg.Spec.ForProvider.Rule[i3].Destination.EncryptionConfiguration.ReplicaKMSKeyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -753,6 +782,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -772,6 +802,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleRef,
 			Selector:     mg.Spec.InitProvider.RoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -793,6 +824,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].Destination.Bucket),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Rule[i3].Destination.BucketRef,
 					Selector:     mg.Spec.InitProvider.Rule[i3].Destination.BucketSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -817,6 +849,7 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].Destination.EncryptionConfiguration.ReplicaKMSKeyID),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Rule[i3].Destination.EncryptionConfiguration.ReplicaKMSKeyIDRef,
 						Selector:     mg.Spec.InitProvider.Rule[i3].Destination.EncryptionConfiguration.ReplicaKMSKeyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -852,6 +885,7 @@ func (mg *BucketServerSideEncryptionConfiguration) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -873,6 +907,7 @@ func (mg *BucketServerSideEncryptionConfiguration) ResolveReferences(ctx context
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].ApplyServerSideEncryptionByDefault.KMSMasterKeyID),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Rule[i3].ApplyServerSideEncryptionByDefault.KMSMasterKeyIDRef,
 					Selector:     mg.Spec.ForProvider.Rule[i3].ApplyServerSideEncryptionByDefault.KMSMasterKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -894,6 +929,7 @@ func (mg *BucketServerSideEncryptionConfiguration) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -915,6 +951,7 @@ func (mg *BucketServerSideEncryptionConfiguration) ResolveReferences(ctx context
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].ApplyServerSideEncryptionByDefault.KMSMasterKeyID),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Rule[i3].ApplyServerSideEncryptionByDefault.KMSMasterKeyIDRef,
 					Selector:     mg.Spec.InitProvider.Rule[i3].ApplyServerSideEncryptionByDefault.KMSMasterKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -949,6 +986,7 @@ func (mg *BucketVersioning) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -968,6 +1006,7 @@ func (mg *BucketVersioning) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -999,6 +1038,7 @@ func (mg *BucketWebsiteConfiguration) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1018,6 +1058,7 @@ func (mg *BucketWebsiteConfiguration) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1049,6 +1090,7 @@ func (mg *Object) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1068,6 +1110,7 @@ func (mg *Object) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1087,6 +1130,7 @@ func (mg *Object) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1106,6 +1150,7 @@ func (mg *Object) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},

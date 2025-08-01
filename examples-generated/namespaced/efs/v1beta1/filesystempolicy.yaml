@@ -1,0 +1,32 @@
+apiVersion: efs.aws.m.upbound.io/v1beta1
+kind: FileSystemPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: fs
+    policy: ${data.aws_iam_policy_document.policy.json}
+    region: us-west-1
+
+---
+
+apiVersion: efs.aws.m.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: fs
+  name: fs
+  namespace: upbound-system
+spec:
+  forProvider:
+    creationToken: my-product
+    region: us-west-1

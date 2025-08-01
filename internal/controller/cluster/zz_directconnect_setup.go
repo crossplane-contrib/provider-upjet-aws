@@ -54,3 +54,31 @@ func Setup_directconnect(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_directconnect creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_directconnect(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		bgppeer.SetupGated,
+		connection.SetupGated,
+		connectionassociation.SetupGated,
+		gateway.SetupGated,
+		gatewayassociation.SetupGated,
+		gatewayassociationproposal.SetupGated,
+		hostedprivatevirtualinterface.SetupGated,
+		hostedprivatevirtualinterfaceaccepter.SetupGated,
+		hostedpublicvirtualinterface.SetupGated,
+		hostedpublicvirtualinterfaceaccepter.SetupGated,
+		hostedtransitvirtualinterface.SetupGated,
+		hostedtransitvirtualinterfaceaccepter.SetupGated,
+		lag.SetupGated,
+		privatevirtualinterface.SetupGated,
+		publicvirtualinterface.SetupGated,
+		transitvirtualinterface.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

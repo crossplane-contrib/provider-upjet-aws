@@ -38,3 +38,23 @@ func Setup_elasticache(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_elasticache creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_elasticache(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cluster.SetupGated,
+		globalreplicationgroup.SetupGated,
+		parametergroup.SetupGated,
+		replicationgroup.SetupGated,
+		serverlesscache.SetupGated,
+		subnetgroup.SetupGated,
+		user.SetupGated,
+		usergroup.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

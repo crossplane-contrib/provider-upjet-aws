@@ -9,17 +9,15 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Stream.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Stream) ResolveReferences( // ResolveReferences of this Stream.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisConfiguration.StreamArn),
 				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.KinesisConfiguration.StreamArnRef,
 				Selector:     mg.Spec.ForProvider.KinesisConfiguration.StreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +55,7 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LedgerName),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LedgerNameRef,
 			Selector:     mg.Spec.ForProvider.LedgerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +75,7 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -95,6 +96,7 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KinesisConfiguration.StreamArn),
 				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.KinesisConfiguration.StreamArnRef,
 				Selector:     mg.Spec.InitProvider.KinesisConfiguration.StreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -115,6 +117,7 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LedgerName),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LedgerNameRef,
 			Selector:     mg.Spec.InitProvider.LedgerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -134,6 +137,7 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

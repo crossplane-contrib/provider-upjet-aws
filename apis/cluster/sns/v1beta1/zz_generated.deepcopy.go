@@ -93,7 +93,7 @@ func (in *PlatformApplicationInitParameters) DeepCopyInto(out *PlatformApplicati
 		*out = new(string)
 		**out = **in
 	}
-	out.PlatformCredentialSecretRef = in.PlatformCredentialSecretRef
+	in.PlatformCredentialSecretRef.DeepCopyInto(&out.PlatformCredentialSecretRef)
 	if in.PlatformPrincipalSecretRef != nil {
 		in, out := &in.PlatformPrincipalSecretRef, &out.PlatformPrincipalSecretRef
 		*out = new(v1.SecretKeySelector)
@@ -296,7 +296,7 @@ func (in *PlatformApplicationParameters) DeepCopyInto(out *PlatformApplicationPa
 		*out = new(string)
 		**out = **in
 	}
-	out.PlatformCredentialSecretRef = in.PlatformCredentialSecretRef
+	in.PlatformCredentialSecretRef.DeepCopyInto(&out.PlatformCredentialSecretRef)
 	if in.PlatformPrincipalSecretRef != nil {
 		in, out := &in.PlatformPrincipalSecretRef, &out.PlatformPrincipalSecretRef
 		*out = new(v1.SecretKeySelector)

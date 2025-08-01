@@ -1,0 +1,90 @@
+apiVersion: transfer.aws.upbound.io/v1beta1
+kind: SSHKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/sshkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    body: ${trimspace(tls_private_key.example.public_key_openssh)}
+    region: us-west-1
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    userNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/sshkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/sshkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: transfer.aws.upbound.io/v1beta2
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/sshkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identityProviderType: SERVICE_MANAGED
+    region: us-west-1
+    tags:
+      NAME: tf-acc-test-transfer-server
+
+---
+
+apiVersion: transfer.aws.upbound.io/v1beta2
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/sshkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      NAME: tftestuser

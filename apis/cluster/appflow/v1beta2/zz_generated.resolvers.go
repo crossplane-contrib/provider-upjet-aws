@@ -9,17 +9,15 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Flow.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Flow) ResolveReferences( // ResolveReferences of this Flow.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -38,6 +36,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -63,6 +62,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.ForProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -88,6 +88,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -113,6 +114,7 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketName),
 						Extract:      resource.ExtractParamPath("bucket", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameRef,
 						Selector:     mg.Spec.InitProvider.SourceFlowConfig.SourceConnectorProperties.S3.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},

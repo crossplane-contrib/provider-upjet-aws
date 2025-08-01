@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *AlertManagerDefinition) ResolveReferences( // ResolveReferences of thi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *AlertManagerDefinition) ResolveReferences( // ResolveReferences of thi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *RuleGroupNamespace) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -115,6 +117,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -134,6 +137,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},

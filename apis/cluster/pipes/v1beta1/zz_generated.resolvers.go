@@ -9,18 +9,16 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Pipe.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Pipe) ResolveReferences( // ResolveReferences of this Pipe.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Enrichment),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnrichmentRef,
 			Selector:     mg.Spec.ForProvider.EnrichmentSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -57,6 +56,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnRef,
 					Selector:     mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -78,6 +78,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -97,6 +98,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceRef,
 			Selector:     mg.Spec.ForProvider.SourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -116,6 +118,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetRef,
 			Selector:     mg.Spec.ForProvider.TargetSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +138,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Enrichment),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EnrichmentRef,
 			Selector:     mg.Spec.InitProvider.EnrichmentSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -156,6 +160,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnRef,
 					Selector:     mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -177,6 +182,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -196,6 +202,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceRef,
 			Selector:     mg.Spec.InitProvider.SourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -215,6 +222,7 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetRef,
 			Selector:     mg.Spec.InitProvider.TargetSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *DevicePool) ResolveReferences( // ResolveReferences of this DevicePool
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProjectArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProjectArnRef,
 			Selector:     mg.Spec.ForProvider.ProjectArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *DevicePool) ResolveReferences( // ResolveReferences of this DevicePool
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProjectArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProjectArnRef,
 			Selector:     mg.Spec.InitProvider.ProjectArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *NetworkProfile) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProjectArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProjectArnRef,
 			Selector:     mg.Spec.ForProvider.ProjectArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *NetworkProfile) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProjectArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProjectArnRef,
 			Selector:     mg.Spec.InitProvider.ProjectArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -136,6 +139,7 @@ func (mg *TestGridProject) ResolveReferences(ctx context.Context, c client.Reade
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -157,6 +161,7 @@ func (mg *TestGridProject) ResolveReferences(ctx context.Context, c client.Reade
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -178,6 +183,7 @@ func (mg *TestGridProject) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCConfig[i3].VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VPCConfig[i3].VPCIDRef,
 				Selector:     mg.Spec.ForProvider.VPCConfig[i3].VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -199,6 +205,7 @@ func (mg *TestGridProject) ResolveReferences(ctx context.Context, c client.Reade
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -220,6 +227,7 @@ func (mg *TestGridProject) ResolveReferences(ctx context.Context, c client.Reade
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -241,6 +249,7 @@ func (mg *TestGridProject) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCConfig[i3].VPCID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VPCConfig[i3].VPCIDRef,
 				Selector:     mg.Spec.InitProvider.VPCConfig[i3].VPCIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -274,6 +283,7 @@ func (mg *Upload) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProjectArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProjectArnRef,
 			Selector:     mg.Spec.ForProvider.ProjectArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -293,6 +303,7 @@ func (mg *Upload) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProjectArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProjectArnRef,
 			Selector:     mg.Spec.InitProvider.ProjectArnSelector,
 			To:           reference.To{List: l, Managed: m},

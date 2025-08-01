@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +55,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].DeliveryStreamArn),
 					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].DeliveryStreamArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].DeliveryStreamArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -78,6 +79,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -101,6 +103,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination[i3].PinpointDestination[i4].ApplicationArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination[i3].PinpointDestination[i4].ApplicationArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination[i3].PinpointDestination[i4].ApplicationArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -124,6 +127,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination[i3].SnsDestination[i4].TopicArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventDestination[i3].SnsDestination[i4].TopicArnRef,
 					Selector:     mg.Spec.ForProvider.EventDestination[i3].SnsDestination[i4].TopicArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -145,6 +149,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -166,6 +171,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination[i3].KinesisFirehoseDestination[i4].DeliveryStreamArn),
 					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination[i3].KinesisFirehoseDestination[i4].DeliveryStreamArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination[i3].KinesisFirehoseDestination[i4].DeliveryStreamArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -189,6 +195,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -212,6 +219,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination[i3].PinpointDestination[i4].ApplicationArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination[i3].PinpointDestination[i4].ApplicationArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination[i3].PinpointDestination[i4].ApplicationArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -235,6 +243,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences( // ResolveReferen
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventDestination[i3].SnsDestination[i4].TopicArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventDestination[i3].SnsDestination[i4].TopicArnRef,
 					Selector:     mg.Spec.InitProvider.EventDestination[i3].SnsDestination[i4].TopicArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -269,6 +278,7 @@ func (mg *EmailIdentity) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -288,6 +298,7 @@ func (mg *EmailIdentity) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},

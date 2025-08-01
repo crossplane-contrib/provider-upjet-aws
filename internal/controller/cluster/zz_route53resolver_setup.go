@@ -28,3 +28,18 @@ func Setup_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_route53resolver creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_route53resolver(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		endpoint.SetupGated,
+		rule.SetupGated,
+		ruleassociation.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

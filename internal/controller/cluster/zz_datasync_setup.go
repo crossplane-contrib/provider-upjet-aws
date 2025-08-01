@@ -26,3 +26,17 @@ func Setup_datasync(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_datasync creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_datasync(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		locations3.SetupGated,
+		task.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

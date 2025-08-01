@@ -12,13 +12,12 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Feature.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Feature) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Feature) ResolveReferences( // ResolveReferences of this Feature.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -34,6 +33,7 @@ func (mg *Feature) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Project),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProjectRef,
 			Selector:     mg.Spec.ForProvider.ProjectSelector,
 			To:           reference.To{List: l, Managed: m},

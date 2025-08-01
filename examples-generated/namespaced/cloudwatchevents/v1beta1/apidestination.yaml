@@ -1,0 +1,19 @@
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
+kind: APIDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchevents/v1beta1/apidestination
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    description: An API Destination
+    httpMethod: POST
+    invocationEndpoint: https://api.destination.com/endpoint
+    invocationRateLimitPerSecond: 20
+    region: us-west-1

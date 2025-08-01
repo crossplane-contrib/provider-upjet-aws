@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -39,6 +38,7 @@ func (mg *GatewayRoute) ResolveReferences( // ResolveReferences of this GatewayR
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Spec.HTTPRoute.Action.Target.VirtualService.VirtualServiceName),
 								Extract:      resource.ExtractParamPath("name", false),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.ForProvider.Spec.HTTPRoute.Action.Target.VirtualService.VirtualServiceNameRef,
 								Selector:     mg.Spec.ForProvider.Spec.HTTPRoute.Action.Target.VirtualService.VirtualServiceNameSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -63,6 +63,7 @@ func (mg *GatewayRoute) ResolveReferences( // ResolveReferences of this GatewayR
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualGatewayName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualGatewayNameRef,
 			Selector:     mg.Spec.ForProvider.VirtualGatewayNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -87,6 +88,7 @@ func (mg *GatewayRoute) ResolveReferences( // ResolveReferences of this GatewayR
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec.HTTPRoute.Action.Target.VirtualService.VirtualServiceName),
 								Extract:      resource.ExtractParamPath("name", false),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.InitProvider.Spec.HTTPRoute.Action.Target.VirtualService.VirtualServiceNameRef,
 								Selector:     mg.Spec.InitProvider.Spec.HTTPRoute.Action.Target.VirtualService.VirtualServiceNameSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -111,6 +113,7 @@ func (mg *GatewayRoute) ResolveReferences( // ResolveReferences of this GatewayR
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualGatewayName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualGatewayNameRef,
 			Selector:     mg.Spec.InitProvider.VirtualGatewayNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +145,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MeshNameRef,
 			Selector:     mg.Spec.ForProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -165,6 +169,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Spec.HTTPRoute.Action.WeightedTarget[i6].VirtualNode),
 							Extract:      resource.ExtractParamPath("name", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.Spec.HTTPRoute.Action.WeightedTarget[i6].VirtualNodeRef,
 							Selector:     mg.Spec.ForProvider.Spec.HTTPRoute.Action.WeightedTarget[i6].VirtualNodeSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -192,6 +197,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Spec.TCPRoute.Action.WeightedTarget[i6].VirtualNode),
 							Extract:      resource.ExtractParamPath("name", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.Spec.TCPRoute.Action.WeightedTarget[i6].VirtualNodeRef,
 							Selector:     mg.Spec.ForProvider.Spec.TCPRoute.Action.WeightedTarget[i6].VirtualNodeSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -215,6 +221,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualRouterName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualRouterNameRef,
 			Selector:     mg.Spec.ForProvider.VirtualRouterNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -234,6 +241,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MeshNameRef,
 			Selector:     mg.Spec.InitProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -257,6 +265,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec.HTTPRoute.Action.WeightedTarget[i6].VirtualNode),
 							Extract:      resource.ExtractParamPath("name", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.Spec.HTTPRoute.Action.WeightedTarget[i6].VirtualNodeRef,
 							Selector:     mg.Spec.InitProvider.Spec.HTTPRoute.Action.WeightedTarget[i6].VirtualNodeSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -284,6 +293,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec.TCPRoute.Action.WeightedTarget[i6].VirtualNode),
 							Extract:      resource.ExtractParamPath("name", false),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.Spec.TCPRoute.Action.WeightedTarget[i6].VirtualNodeRef,
 							Selector:     mg.Spec.InitProvider.Spec.TCPRoute.Action.WeightedTarget[i6].VirtualNodeSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -307,6 +317,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualRouterName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualRouterNameRef,
 			Selector:     mg.Spec.InitProvider.VirtualRouterNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -343,6 +354,7 @@ func (mg *VirtualGateway) ResolveReferences(ctx context.Context, c client.Reader
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Spec.Listener[i4].TLS.Certificate.Acm.CertificateArn),
 								Extract:      resource.ExtractParamPath("arn", true),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.ForProvider.Spec.Listener[i4].TLS.Certificate.Acm.CertificateArnRef,
 								Selector:     mg.Spec.ForProvider.Spec.Listener[i4].TLS.Certificate.Acm.CertificateArnSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -372,6 +384,7 @@ func (mg *VirtualGateway) ResolveReferences(ctx context.Context, c client.Reader
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec.Listener[i4].TLS.Certificate.Acm.CertificateArn),
 								Extract:      resource.ExtractParamPath("arn", true),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.InitProvider.Spec.Listener[i4].TLS.Certificate.Acm.CertificateArnRef,
 								Selector:     mg.Spec.InitProvider.Spec.Listener[i4].TLS.Certificate.Acm.CertificateArnSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -409,6 +422,7 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MeshNameRef,
 			Selector:     mg.Spec.ForProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -431,6 +445,7 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Spec.ServiceDiscovery.AwsCloudMap.NamespaceName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Spec.ServiceDiscovery.AwsCloudMap.NamespaceNameRef,
 						Selector:     mg.Spec.ForProvider.Spec.ServiceDiscovery.AwsCloudMap.NamespaceNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -453,6 +468,7 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MeshNameRef,
 			Selector:     mg.Spec.InitProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -475,6 +491,7 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec.ServiceDiscovery.AwsCloudMap.NamespaceName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Spec.ServiceDiscovery.AwsCloudMap.NamespaceNameRef,
 						Selector:     mg.Spec.InitProvider.Spec.ServiceDiscovery.AwsCloudMap.NamespaceNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -510,6 +527,7 @@ func (mg *VirtualRouter) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MeshNameRef,
 			Selector:     mg.Spec.ForProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -529,6 +547,7 @@ func (mg *VirtualRouter) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MeshNameRef,
 			Selector:     mg.Spec.InitProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -560,6 +579,7 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MeshNameRef,
 			Selector:     mg.Spec.ForProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -582,6 +602,7 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Spec.Provider.VirtualNode.VirtualNodeName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Spec.Provider.VirtualNode.VirtualNodeNameRef,
 						Selector:     mg.Spec.ForProvider.Spec.Provider.VirtualNode.VirtualNodeNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -607,6 +628,7 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Spec.Provider.VirtualRouter.VirtualRouterName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Spec.Provider.VirtualRouter.VirtualRouterNameRef,
 						Selector:     mg.Spec.ForProvider.Spec.Provider.VirtualRouter.VirtualRouterNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -629,6 +651,7 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MeshNameRef,
 			Selector:     mg.Spec.InitProvider.MeshNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -651,6 +674,7 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec.Provider.VirtualNode.VirtualNodeName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Spec.Provider.VirtualNode.VirtualNodeNameRef,
 						Selector:     mg.Spec.InitProvider.Spec.Provider.VirtualNode.VirtualNodeNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -676,6 +700,7 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec.Provider.VirtualRouter.VirtualRouterName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Spec.Provider.VirtualRouter.VirtualRouterNameRef,
 						Selector:     mg.Spec.InitProvider.Spec.Provider.VirtualRouter.VirtualRouterNameSelector,
 						To:           reference.To{List: l, Managed: m},

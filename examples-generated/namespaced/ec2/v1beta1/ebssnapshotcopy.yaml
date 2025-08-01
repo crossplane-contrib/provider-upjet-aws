@@ -1,0 +1,57 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSSnapshotCopy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/ebssnapshotcopy
+  labels:
+    testing.upbound.io/example-name: example_copy
+  name: example-copy
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    sourceRegion: us-west-2
+    sourceSnapshotIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_snapshot
+    tags:
+      Name: HelloWorld_copy_snap
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSSnapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/ebssnapshotcopy
+  labels:
+    testing.upbound.io/example-name: example_snapshot
+  name: example-snapshot
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: HelloWorld_snap
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSVolume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/ebssnapshotcopy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    region: us-west-1
+    size: 40
+    tags:
+      Name: HelloWorld

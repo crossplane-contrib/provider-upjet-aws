@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -36,6 +35,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArnRef,
 				Selector:     mg.Spec.ForProvider.ActiveDirectoryConfig.ServiceAccountSecretArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DirectoryIDRef,
 			Selector:     mg.Spec.ForProvider.DirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +76,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IPGroupIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.IPGroupIdsRefs,
 			Selector:      mg.Spec.ForProvider.IPGroupIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -94,6 +96,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -114,6 +117,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceCreationProperties.CustomSecurityGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.WorkspaceCreationProperties.CustomSecurityGroupIDRef,
 				Selector:     mg.Spec.ForProvider.WorkspaceCreationProperties.CustomSecurityGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -135,6 +139,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArnRef,
 				Selector:     mg.Spec.InitProvider.ActiveDirectoryConfig.ServiceAccountSecretArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -155,6 +160,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DirectoryIDRef,
 			Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -174,6 +180,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IPGroupIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.IPGroupIdsRefs,
 			Selector:      mg.Spec.InitProvider.IPGroupIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -193,6 +200,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -213,6 +221,7 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceCreationProperties.CustomSecurityGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.WorkspaceCreationProperties.CustomSecurityGroupIDRef,
 				Selector:     mg.Spec.InitProvider.WorkspaceCreationProperties.CustomSecurityGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},

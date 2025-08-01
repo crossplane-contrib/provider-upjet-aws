@@ -1,0 +1,36 @@
+apiVersion: waf.aws.upbound.io/v1beta2
+kind: RegexMatchSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: waf/v1beta2/regexmatchset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    regexMatchTuple:
+    - fieldToMatch:
+      - data: User-Agent
+        type: HEADER
+      regexPatternSetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      textTransformation: NONE
+
+---
+
+apiVersion: waf.aws.upbound.io/v1beta1
+kind: RegexPatternSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: waf/v1beta2/regexmatchset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    regexPatternStrings:
+    - one
+    - two

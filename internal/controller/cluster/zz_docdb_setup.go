@@ -36,3 +36,22 @@ func Setup_docdb(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_docdb creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_docdb(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cluster.SetupGated,
+		clusterinstance.SetupGated,
+		clusterparametergroup.SetupGated,
+		clustersnapshot.SetupGated,
+		eventsubscription.SetupGated,
+		globalcluster.SetupGated,
+		subnetgroup.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

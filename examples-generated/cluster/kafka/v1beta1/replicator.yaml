@@ -1,0 +1,55 @@
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: Replicator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: test-description
+    kafkaCluster:
+    - amazonMskCluster:
+      - mskClusterArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: source
+      vpcConfig:
+      - securityGroupsIdsRefs:
+        - name: source
+        subnetIdsSelector:
+          matchLabels:
+            testing.upbound.io/example-name: source[*]
+    - amazonMskCluster:
+      - mskClusterArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: target
+      vpcConfig:
+      - securityGroupsIdsRefs:
+        - name: target
+        subnetIdsSelector:
+          matchLabels:
+            testing.upbound.io/example-name: target[*]
+    region: us-west-1
+    replicationInfoList:
+    - consumerGroupReplication:
+      - consumerGroupsToReplicate:
+        - .*
+      sourceKafkaClusterArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: source
+      targetCompressionType: NONE
+      targetKafkaClusterArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: target
+      topicReplication:
+      - startingPosition:
+        - type: LATEST
+        topicNameConfiguration:
+        - type: PREFIXED_WITH_SOURCE_CLUSTER_ALIAS
+        topicsToReplicate:
+        - .*
+    replicatorName: test-name
+    serviceExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source

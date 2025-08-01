@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *SecretRotation) ResolveReferences( // ResolveReferences of this Secret
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RotationLambdaArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RotationLambdaArnRef,
 			Selector:     mg.Spec.ForProvider.RotationLambdaArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *SecretRotation) ResolveReferences( // ResolveReferences of this Secret
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SecretIDRef,
 			Selector:     mg.Spec.ForProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +73,7 @@ func (mg *SecretRotation) ResolveReferences( // ResolveReferences of this Secret
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RotationLambdaArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RotationLambdaArnRef,
 			Selector:     mg.Spec.InitProvider.RotationLambdaArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *SecretRotation) ResolveReferences( // ResolveReferences of this Secret
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SecretIDRef,
 			Selector:     mg.Spec.InitProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},

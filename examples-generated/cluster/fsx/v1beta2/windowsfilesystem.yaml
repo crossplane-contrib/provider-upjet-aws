@@ -1,0 +1,21 @@
+apiVersion: fsx.aws.upbound.io/v1beta2
+kind: WindowsFileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: fsx/v1beta2/windowsfilesystem
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    activeDirectoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kmsKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    storageCapacity: 32
+    subnetIdRefs:
+    - name: example
+    throughputCapacity: 32

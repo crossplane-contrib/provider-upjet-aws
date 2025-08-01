@@ -68,3 +68,38 @@ func Setup_iam(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_iam creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_iam(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accesskey.SetupGated,
+		accountalias.SetupGated,
+		accountpasswordpolicy.SetupGated,
+		group.SetupGated,
+		groupmembership.SetupGated,
+		grouppolicyattachment.SetupGated,
+		instanceprofile.SetupGated,
+		openidconnectprovider.SetupGated,
+		policy.SetupGated,
+		role.SetupGated,
+		rolepolicy.SetupGated,
+		rolepolicyattachment.SetupGated,
+		samlprovider.SetupGated,
+		servercertificate.SetupGated,
+		servicelinkedrole.SetupGated,
+		servicespecificcredential.SetupGated,
+		signingcertificate.SetupGated,
+		user.SetupGated,
+		usergroupmembership.SetupGated,
+		userloginprofile.SetupGated,
+		userpolicyattachment.SetupGated,
+		usersshkey.SetupGated,
+		virtualmfadevice.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -26,3 +26,17 @@ func Setup_mediastore(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_mediastore creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_mediastore(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		container.SetupGated,
+		containerpolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -40,3 +40,24 @@ func Setup_neptune(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_neptune creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_neptune(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cluster.SetupGated,
+		clusterendpoint.SetupGated,
+		clusterinstance.SetupGated,
+		clusterparametergroup.SetupGated,
+		clustersnapshot.SetupGated,
+		eventsubscription.SetupGated,
+		globalcluster.SetupGated,
+		parametergroup.SetupGated,
+		subnetgroup.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

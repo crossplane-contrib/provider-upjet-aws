@@ -33,6 +33,7 @@ func (mg *InviteAccepter) ResolveReferences( // ResolveReferences of this Invite
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterID),
 			Extract:      resource.ExtractParamPath("master_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MasterIDRef,
 			Selector:     mg.Spec.ForProvider.MasterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -52,6 +53,7 @@ func (mg *InviteAccepter) ResolveReferences( // ResolveReferences of this Invite
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MasterID),
 			Extract:      resource.ExtractParamPath("master_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MasterIDRef,
 			Selector:     mg.Spec.InitProvider.MasterIDSelector,
 			To:           reference.To{List: l, Managed: m},

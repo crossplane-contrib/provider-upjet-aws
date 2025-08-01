@@ -1,0 +1,72 @@
+apiVersion: codestarnotifications.aws.m.upbound.io/v1beta1
+kind: NotificationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codestarnotifications/v1beta1/notificationrule
+  labels:
+    testing.upbound.io/example-name: commits
+  name: commits
+  namespace: upbound-system
+spec:
+  forProvider:
+    detailType: BASIC
+    eventTypeIds:
+    - codecommit-repository-comments-on-commits
+    name: example-code-repo-commits
+    region: us-west-1
+    resourceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: code
+    target:
+    - addressSelector:
+        matchLabels:
+          testing.upbound.io/example-name: notif
+
+---
+
+apiVersion: codecommit.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codestarnotifications/v1beta1/notificationrule
+  labels:
+    testing.upbound.io/example-name: code
+  name: code
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codestarnotifications/v1beta1/notificationrule
+  labels:
+    testing.upbound.io/example-name: notif
+  name: notif
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: TopicPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codestarnotifications/v1beta1/notificationrule
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    arnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: notif
+    policy: ${data.aws_iam_policy_document.notif_access.json}
+    region: us-west-1

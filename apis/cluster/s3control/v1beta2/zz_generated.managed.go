@@ -27,11 +27,6 @@ func (mg *AccessPoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this AccessPoint.
-func (mg *AccessPoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this AccessPoint.
 func (mg *AccessPoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *AccessPoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AccessPoint.
 func (mg *AccessPoint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this AccessPoint.
-func (mg *AccessPoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this AccessPoint.
@@ -87,11 +77,6 @@ func (mg *MultiRegionAccessPoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MultiRegionAccessPoint.
-func (mg *MultiRegionAccessPoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MultiRegionAccessPoint.
 func (mg *MultiRegionAccessPoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *MultiRegionAccessPoint) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this MultiRegionAccessPoint.
 func (mg *MultiRegionAccessPoint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MultiRegionAccessPoint.
-func (mg *MultiRegionAccessPoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MultiRegionAccessPoint.
@@ -147,11 +127,6 @@ func (mg *MultiRegionAccessPointPolicy) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MultiRegionAccessPointPolicy.
-func (mg *MultiRegionAccessPointPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MultiRegionAccessPointPolicy.
 func (mg *MultiRegionAccessPointPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *MultiRegionAccessPointPolicy) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this MultiRegionAccessPointPolicy.
 func (mg *MultiRegionAccessPointPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MultiRegionAccessPointPolicy.
-func (mg *MultiRegionAccessPointPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MultiRegionAccessPointPolicy.
@@ -207,11 +177,6 @@ func (mg *ObjectLambdaAccessPoint) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ObjectLambdaAccessPoint.
-func (mg *ObjectLambdaAccessPoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ObjectLambdaAccessPoint.
 func (mg *ObjectLambdaAccessPoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *ObjectLambdaAccessPoint) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this ObjectLambdaAccessPoint.
 func (mg *ObjectLambdaAccessPoint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ObjectLambdaAccessPoint.
-func (mg *ObjectLambdaAccessPoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ObjectLambdaAccessPoint.
@@ -267,11 +227,6 @@ func (mg *StorageLensConfiguration) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this StorageLensConfiguration.
-func (mg *StorageLensConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this StorageLensConfiguration.
 func (mg *StorageLensConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *StorageLensConfiguration) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this StorageLensConfiguration.
 func (mg *StorageLensConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this StorageLensConfiguration.
-func (mg *StorageLensConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this StorageLensConfiguration.

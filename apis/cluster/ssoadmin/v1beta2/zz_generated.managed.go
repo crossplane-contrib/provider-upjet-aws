@@ -27,11 +27,6 @@ func (mg *CustomerManagedPolicyAttachment) GetProviderConfigReference() *xpv1.Re
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this CustomerManagedPolicyAttachment.
-func (mg *CustomerManagedPolicyAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this CustomerManagedPolicyAttachment.
 func (mg *CustomerManagedPolicyAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *CustomerManagedPolicyAttachment) SetManagementPolicies(r xpv1.Manageme
 // SetProviderConfigReference of this CustomerManagedPolicyAttachment.
 func (mg *CustomerManagedPolicyAttachment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this CustomerManagedPolicyAttachment.
-func (mg *CustomerManagedPolicyAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this CustomerManagedPolicyAttachment.
@@ -87,11 +77,6 @@ func (mg *PermissionsBoundaryAttachment) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PermissionsBoundaryAttachment.
-func (mg *PermissionsBoundaryAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PermissionsBoundaryAttachment.
 func (mg *PermissionsBoundaryAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *PermissionsBoundaryAttachment) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this PermissionsBoundaryAttachment.
 func (mg *PermissionsBoundaryAttachment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PermissionsBoundaryAttachment.
-func (mg *PermissionsBoundaryAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PermissionsBoundaryAttachment.

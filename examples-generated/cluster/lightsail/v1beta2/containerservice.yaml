@@ -1,0 +1,17 @@
+apiVersion: lightsail.aws.upbound.io/v1beta2
+kind: ContainerService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta2/containerservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    isDisabled: false
+    power: nano
+    region: us-west-1
+    scale: 1
+    tags:
+      foo1: bar1
+      foo2: ""

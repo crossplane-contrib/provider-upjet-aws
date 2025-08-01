@@ -9,9 +9,8 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -33,6 +32,7 @@ func (mg *Certificate) ResolveReferences( // ResolveReferences of this Certifica
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateAuthorityArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateAuthorityArnRef,
 			Selector:     mg.Spec.ForProvider.CertificateAuthorityArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -52,6 +52,7 @@ func (mg *Certificate) ResolveReferences( // ResolveReferences of this Certifica
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateAuthorityArnRef,
 			Selector:     mg.Spec.InitProvider.CertificateAuthorityArnSelector,
 			To:           reference.To{List: l, Managed: m},

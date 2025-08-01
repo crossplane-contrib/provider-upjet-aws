@@ -27,11 +27,6 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this CognitoIdentityPoolProviderPrincipalTag.
-func (mg *CognitoIdentityPoolProviderPrincipalTag) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this CognitoIdentityPoolProviderPrincipalTag.
 func (mg *CognitoIdentityPoolProviderPrincipalTag) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this CognitoIdentityPoolProviderPrincipalTag.
 func (mg *CognitoIdentityPoolProviderPrincipalTag) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this CognitoIdentityPoolProviderPrincipalTag.
-func (mg *CognitoIdentityPoolProviderPrincipalTag) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this CognitoIdentityPoolProviderPrincipalTag.
@@ -87,11 +77,6 @@ func (mg *Pool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Pool.
-func (mg *Pool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Pool.
 func (mg *Pool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *Pool) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Pool.
 func (mg *Pool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Pool.
-func (mg *Pool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Pool.
@@ -147,11 +127,6 @@ func (mg *PoolRolesAttachment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PoolRolesAttachment.
-func (mg *PoolRolesAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PoolRolesAttachment.
 func (mg *PoolRolesAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *PoolRolesAttachment) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this PoolRolesAttachment.
 func (mg *PoolRolesAttachment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PoolRolesAttachment.
-func (mg *PoolRolesAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PoolRolesAttachment.

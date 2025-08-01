@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Resource),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceRef,
 			Selector:     mg.Spec.ForProvider.ResourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target[i3].Address),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Target[i3].AddressRef,
 				Selector:     mg.Spec.ForProvider.Target[i3].AddressSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -74,6 +75,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Resource),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceRef,
 			Selector:     mg.Spec.InitProvider.ResourceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,6 +96,7 @@ func (mg *NotificationRule) ResolveReferences( // ResolveReferences of this Noti
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target[i3].Address),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Target[i3].AddressRef,
 				Selector:     mg.Spec.InitProvider.Target[i3].AddressSelector,
 				To:           reference.To{List: l, Managed: m},

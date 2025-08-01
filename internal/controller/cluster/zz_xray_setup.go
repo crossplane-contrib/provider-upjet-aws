@@ -28,3 +28,18 @@ func Setup_xray(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_xray creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_xray(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		encryptionconfig.SetupGated,
+		group.SetupGated,
+		samplingrule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

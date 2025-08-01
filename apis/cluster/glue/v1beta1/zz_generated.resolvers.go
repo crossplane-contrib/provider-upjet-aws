@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *CatalogTable) ResolveReferences( // ResolveReferences of this CatalogT
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -68,6 +68,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZone),
 				Extract:      resource.ExtractParamPath("availability_zone", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneRef,
 				Selector:     mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -89,6 +90,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListRefs,
 				Selector:      mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -110,6 +112,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -131,6 +134,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZone),
 				Extract:      resource.ExtractParamPath("availability_zone", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneRef,
 				Selector:     mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -152,6 +156,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListRefs,
 				Selector:      mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -173,6 +178,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -208,6 +214,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogTarget[i3].DatabaseName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CatalogTarget[i3].DatabaseNameRef,
 				Selector:     mg.Spec.ForProvider.CatalogTarget[i3].DatabaseNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -229,6 +236,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CatalogTarget[i3].Tables),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.CatalogTarget[i3].TablesRefs,
 				Selector:      mg.Spec.ForProvider.CatalogTarget[i3].TablesSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -249,6 +257,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -269,6 +278,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.JdbcTarget[i3].ConnectionName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.JdbcTarget[i3].ConnectionNameRef,
 				Selector:     mg.Spec.ForProvider.JdbcTarget[i3].ConnectionNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -290,6 +300,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MongodbTarget[i3].ConnectionName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.MongodbTarget[i3].ConnectionNameRef,
 				Selector:     mg.Spec.ForProvider.MongodbTarget[i3].ConnectionNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -310,6 +321,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Role),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleRef,
 			Selector:     mg.Spec.ForProvider.RoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -330,6 +342,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CatalogTarget[i3].DatabaseName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CatalogTarget[i3].DatabaseNameRef,
 				Selector:     mg.Spec.InitProvider.CatalogTarget[i3].DatabaseNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -351,6 +364,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CatalogTarget[i3].Tables),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.CatalogTarget[i3].TablesRefs,
 				Selector:      mg.Spec.InitProvider.CatalogTarget[i3].TablesSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -371,6 +385,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseNameRef,
 			Selector:     mg.Spec.InitProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -391,6 +406,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.JdbcTarget[i3].ConnectionName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.JdbcTarget[i3].ConnectionNameRef,
 				Selector:     mg.Spec.InitProvider.JdbcTarget[i3].ConnectionNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -412,6 +428,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MongodbTarget[i3].ConnectionName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.MongodbTarget[i3].ConnectionNameRef,
 				Selector:     mg.Spec.InitProvider.MongodbTarget[i3].ConnectionNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -432,6 +449,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleRef,
 			Selector:     mg.Spec.InitProvider.RoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -465,6 +483,7 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyID),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef,
 					Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -488,6 +507,7 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyID),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDRef,
 					Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -511,6 +531,7 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyID),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef,
 					Selector:     mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -534,6 +555,7 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyID),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDRef,
 					Selector:     mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -569,6 +591,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Connections),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.ConnectionsRefs,
 			Selector:      mg.Spec.ForProvider.ConnectionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -588,6 +611,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -607,6 +631,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Connections),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ConnectionsRefs,
 			Selector:      mg.Spec.InitProvider.ConnectionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -626,6 +651,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -657,6 +683,7 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegistryArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RegistryArnRef,
 			Selector:     mg.Spec.ForProvider.RegistryArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -676,6 +703,7 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RegistryArnRef,
 			Selector:     mg.Spec.InitProvider.RegistryArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -709,6 +737,7 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnRef,
 					Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -732,6 +761,7 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnRef,
 					Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -755,6 +785,7 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef,
 					Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -778,6 +809,7 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnRef,
 					Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -801,6 +833,7 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnRef,
 					Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -824,6 +857,7 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef,
 					Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -859,6 +893,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].CrawlerName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Actions[i3].CrawlerNameRef,
 				Selector:     mg.Spec.ForProvider.Actions[i3].CrawlerNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -880,6 +915,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].JobName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Actions[i3].JobNameRef,
 				Selector:     mg.Spec.ForProvider.Actions[i3].JobNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -902,6 +938,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Predicate[i3].Conditions[i4].CrawlerName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Predicate[i3].Conditions[i4].CrawlerNameRef,
 					Selector:     mg.Spec.ForProvider.Predicate[i3].Conditions[i4].CrawlerNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -925,6 +962,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobNameRef,
 					Selector:     mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -947,6 +985,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].CrawlerName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Actions[i3].CrawlerNameRef,
 				Selector:     mg.Spec.InitProvider.Actions[i3].CrawlerNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -968,6 +1007,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].JobName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Actions[i3].JobNameRef,
 				Selector:     mg.Spec.InitProvider.Actions[i3].JobNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -990,6 +1030,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerNameRef,
 					Selector:     mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1013,6 +1054,7 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobNameRef,
 					Selector:     mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1047,6 +1089,7 @@ func (mg *UserDefinedFunction) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -11,13 +11,12 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Table.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Table) ResolveReferences( // ResolveReferences of this Table.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -33,6 +32,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyspaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyspaceNameRef,
 			Selector:     mg.Spec.ForProvider.KeyspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -52,6 +52,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyspaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyspaceNameRef,
 			Selector:     mg.Spec.InitProvider.KeyspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},

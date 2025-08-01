@@ -1,0 +1,48 @@
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: TopicSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
+  labels:
+    testing.upbound.io/example-name: user_updates_sqs_target
+  name: user-updates-sqs-target
+spec:
+  forProvider:
+    endpointSelector:
+      matchLabels:
+        testing.upbound.io/example-name: user_updates_queue
+    protocol: sqs
+    region: us-west-1
+    topicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: user_updates
+
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
+  labels:
+    testing.upbound.io/example-name: user_updates
+  name: user-updates
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topicsubscription
+  labels:
+    testing.upbound.io/example-name: user_updates_queue
+  name: user-updates-queue
+spec:
+  forProvider:
+    name: user-updates-queue
+    policy: ${data.aws_iam_policy_document.sqs_queue_policy.json}
+    region: us-west-1

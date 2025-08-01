@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisDestination.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.KinesisDestination.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.KinesisDestination.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -75,6 +76,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisDestination.StreamArn),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.KinesisDestination.StreamArnRef,
 				Selector:     mg.Spec.ForProvider.KinesisDestination.StreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -96,6 +98,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnsDestination.TopicArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SnsDestination.TopicArnRef,
 				Selector:     mg.Spec.ForProvider.SnsDestination.TopicArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -116,6 +119,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationSetNameRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -136,6 +140,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KinesisDestination.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.KinesisDestination.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.KinesisDestination.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -157,6 +162,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KinesisDestination.StreamArn),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.KinesisDestination.StreamArnRef,
 				Selector:     mg.Spec.InitProvider.KinesisDestination.StreamArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -178,6 +184,7 @@ func (mg *EventDestination) ResolveReferences( // ResolveReferences of this Even
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnsDestination.TopicArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SnsDestination.TopicArnRef,
 				Selector:     mg.Spec.InitProvider.SnsDestination.TopicArnSelector,
 				To:           reference.To{List: l, Managed: m},

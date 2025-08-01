@@ -50,3 +50,29 @@ func Setup_glue(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_glue creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_glue(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		catalogdatabase.SetupGated,
+		catalogtable.SetupGated,
+		classifier.SetupGated,
+		connection.SetupGated,
+		crawler.SetupGated,
+		datacatalogencryptionsettings.SetupGated,
+		job.SetupGated,
+		registry.SetupGated,
+		resourcepolicy.SetupGated,
+		schema.SetupGated,
+		securityconfiguration.SetupGated,
+		trigger.SetupGated,
+		userdefinedfunction.SetupGated,
+		workflow.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

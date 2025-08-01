@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -36,6 +35,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BudgetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BudgetNameRef,
 			Selector:     mg.Spec.ForProvider.BudgetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -57,6 +57,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Definition[i3].IAMActionDefinition[i4].PolicyArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Definition[i3].IAMActionDefinition[i4].PolicyArnRef,
 					Selector:     mg.Spec.ForProvider.Definition[i3].IAMActionDefinition[i4].PolicyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -80,6 +81,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Definition[i3].IAMActionDefinition[i4].Roles),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.Definition[i3].IAMActionDefinition[i4].RolesRefs,
 					Selector:      mg.Spec.ForProvider.Definition[i3].IAMActionDefinition[i4].RolesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -101,6 +103,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -120,6 +123,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BudgetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BudgetNameRef,
 			Selector:     mg.Spec.InitProvider.BudgetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,6 +145,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArnRef,
 					Selector:     mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -164,6 +169,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].Roles),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].RolesRefs,
 					Selector:      mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].RolesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -185,6 +191,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

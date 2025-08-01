@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -37,6 +36,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef,
 					Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -60,6 +60,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
 					Extract:      resource.ExtractParamPath("qualified_arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
 					Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -82,6 +83,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].OriginAccessControlID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDRef,
 				Selector:     mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -104,6 +106,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity),
 					Extract:      resource.ExtractParamPath("cloudfront_access_identity_path", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentityRef,
 					Selector:     mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentitySelector,
 					To:           reference.To{List: l, Managed: m},
@@ -127,6 +130,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef,
 					Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -150,6 +154,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
 					Extract:      resource.ExtractParamPath("qualified_arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
 					Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -172,6 +177,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Origin[i3].OriginAccessControlID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDRef,
 				Selector:     mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -194,6 +200,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity),
 					Extract:      resource.ExtractParamPath("cloudfront_access_identity_path", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentityRef,
 					Selector:     mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentitySelector,
 					To:           reference.To{List: l, Managed: m},
@@ -231,6 +238,7 @@ func (mg *FieldLevelEncryptionConfig) ResolveReferences(ctx context.Context, c c
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueryArgProfileConfig.QueryArgProfiles.Items[i5].ProfileID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.QueryArgProfileConfig.QueryArgProfiles.Items[i5].ProfileIDRef,
 						Selector:     mg.Spec.ForProvider.QueryArgProfileConfig.QueryArgProfiles.Items[i5].ProfileIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -256,6 +264,7 @@ func (mg *FieldLevelEncryptionConfig) ResolveReferences(ctx context.Context, c c
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueryArgProfileConfig.QueryArgProfiles.Items[i5].ProfileID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.QueryArgProfileConfig.QueryArgProfiles.Items[i5].ProfileIDRef,
 						Selector:     mg.Spec.InitProvider.QueryArgProfileConfig.QueryArgProfiles.Items[i5].ProfileIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -293,6 +302,7 @@ func (mg *FieldLevelEncryptionProfile) ResolveReferences(ctx context.Context, c 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionEntities.Items[i4].PublicKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EncryptionEntities.Items[i4].PublicKeyIDRef,
 					Selector:     mg.Spec.ForProvider.EncryptionEntities.Items[i4].PublicKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -316,6 +326,7 @@ func (mg *FieldLevelEncryptionProfile) ResolveReferences(ctx context.Context, c 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionEntities.Items[i4].PublicKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EncryptionEntities.Items[i4].PublicKeyIDRef,
 					Selector:     mg.Spec.InitProvider.EncryptionEntities.Items[i4].PublicKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -350,6 +361,7 @@ func (mg *MonitoringSubscription) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DistributionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DistributionIDRef,
 			Selector:     mg.Spec.ForProvider.DistributionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -369,6 +381,7 @@ func (mg *MonitoringSubscription) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DistributionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DistributionIDRef,
 			Selector:     mg.Spec.InitProvider.DistributionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -402,6 +415,7 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Endpoint.KinesisStreamConfig.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Endpoint.KinesisStreamConfig.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.Endpoint.KinesisStreamConfig.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -425,6 +439,7 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Endpoint.KinesisStreamConfig.StreamArn),
 					Extract:      common.TerraformID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Endpoint.KinesisStreamConfig.StreamArnRef,
 					Selector:     mg.Spec.ForProvider.Endpoint.KinesisStreamConfig.StreamArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -448,6 +463,7 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Endpoint.KinesisStreamConfig.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Endpoint.KinesisStreamConfig.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.Endpoint.KinesisStreamConfig.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -471,6 +487,7 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Endpoint.KinesisStreamConfig.StreamArn),
 					Extract:      common.TerraformID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Endpoint.KinesisStreamConfig.StreamArnRef,
 					Selector:     mg.Spec.InitProvider.Endpoint.KinesisStreamConfig.StreamArnSelector,
 					To:           reference.To{List: l, Managed: m},

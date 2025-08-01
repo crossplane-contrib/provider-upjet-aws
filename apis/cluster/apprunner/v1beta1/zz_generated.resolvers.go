@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Service.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Service) ResolveReferences( // ResolveReferences of this Service.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -37,6 +35,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnRef,
 					Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -59,6 +58,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnRef,
 				Selector:     mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -81,6 +81,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnRef,
 					Selector:     mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -104,6 +105,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnRef,
 					Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -126,6 +128,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnRef,
 				Selector:     mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -148,6 +151,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnRef,
 					Selector:     mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -182,6 +186,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -201,6 +206,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetRefs,
 			Selector:      mg.Spec.ForProvider.SubnetSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -220,6 +226,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -239,6 +246,7 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetRefs,
 			Selector:      mg.Spec.InitProvider.SubnetSelector,
 			To:            reference.To{List: l, Managed: m},

@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Secret.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Secret) ResolveReferences( // ResolveReferences of this Secret.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +85,7 @@ func (mg *SecretPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SecretArnRef,
 			Selector:     mg.Spec.ForProvider.SecretArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +105,7 @@ func (mg *SecretPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SecretArnRef,
 			Selector:     mg.Spec.InitProvider.SecretArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +137,7 @@ func (mg *SecretRotation) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RotationLambdaArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RotationLambdaArnRef,
 			Selector:     mg.Spec.ForProvider.RotationLambdaArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +157,7 @@ func (mg *SecretRotation) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SecretIDRef,
 			Selector:     mg.Spec.ForProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -173,6 +177,7 @@ func (mg *SecretRotation) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RotationLambdaArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RotationLambdaArnRef,
 			Selector:     mg.Spec.InitProvider.RotationLambdaArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -192,6 +197,7 @@ func (mg *SecretRotation) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SecretIDRef,
 			Selector:     mg.Spec.InitProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -223,6 +229,7 @@ func (mg *SecretVersion) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SecretIDRef,
 			Selector:     mg.Spec.ForProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -242,6 +249,7 @@ func (mg *SecretVersion) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SecretIDRef,
 			Selector:     mg.Spec.InitProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},

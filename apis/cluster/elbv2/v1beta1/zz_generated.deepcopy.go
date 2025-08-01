@@ -410,7 +410,7 @@ func (in *ActionAuthenticateOidcInitParameters) DeepCopyInto(out *ActionAuthenti
 		*out = new(string)
 		**out = **in
 	}
-	out.ClientSecretSecretRef = in.ClientSecretSecretRef
+	in.ClientSecretSecretRef.DeepCopyInto(&out.ClientSecretSecretRef)
 	if in.Issuer != nil {
 		in, out := &in.Issuer, &out.Issuer
 		*out = new(string)
@@ -563,7 +563,7 @@ func (in *ActionAuthenticateOidcParameters) DeepCopyInto(out *ActionAuthenticate
 		*out = new(string)
 		**out = **in
 	}
-	out.ClientSecretSecretRef = in.ClientSecretSecretRef
+	in.ClientSecretSecretRef.DeepCopyInto(&out.ClientSecretSecretRef)
 	if in.Issuer != nil {
 		in, out := &in.Issuer, &out.Issuer
 		*out = new(string)
@@ -1365,7 +1365,7 @@ func (in *AuthenticateOidcInitParameters) DeepCopyInto(out *AuthenticateOidcInit
 		*out = new(string)
 		**out = **in
 	}
-	out.ClientSecretSecretRef = in.ClientSecretSecretRef
+	in.ClientSecretSecretRef.DeepCopyInto(&out.ClientSecretSecretRef)
 	if in.Issuer != nil {
 		in, out := &in.Issuer, &out.Issuer
 		*out = new(string)
@@ -1518,7 +1518,7 @@ func (in *AuthenticateOidcParameters) DeepCopyInto(out *AuthenticateOidcParamete
 		*out = new(string)
 		**out = **in
 	}
-	out.ClientSecretSecretRef = in.ClientSecretSecretRef
+	in.ClientSecretSecretRef.DeepCopyInto(&out.ClientSecretSecretRef)
 	if in.Issuer != nil {
 		in, out := &in.Issuer, &out.Issuer
 		*out = new(string)

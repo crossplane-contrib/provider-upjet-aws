@@ -1,0 +1,25 @@
+apiVersion: cloudfront.aws.upbound.io/v1beta2
+kind: FieldLevelEncryptionConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionconfig
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    comment: test comment
+    contentTypeProfileConfig:
+    - contentTypeProfiles:
+      - items:
+        - contentType: application/x-www-form-urlencoded
+          format: URLEncoded
+      forwardWhenContentTypeIsUnknown: true
+    queryArgProfileConfig:
+    - forwardWhenQueryArgProfileIsUnknown: true
+      queryArgProfiles:
+      - items:
+        - profileIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: test
+          queryArg: Arg1

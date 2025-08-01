@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -57,6 +57,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef,
 						Selector:     mg.Spec.ForProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -79,6 +80,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -101,6 +103,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef,
 						Selector:     mg.Spec.InitProvider.PolicyDetails.Schedule[i4].CrossRegionCopyRule[i5].CmkArnSelector,
 						To:           reference.To{List: l, Managed: m},

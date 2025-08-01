@@ -48,3 +48,28 @@ func Setup_networkmanager(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_networkmanager creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_networkmanager(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		attachmentaccepter.SetupGated,
+		connectattachment.SetupGated,
+		connection.SetupGated,
+		corenetwork.SetupGated,
+		customergatewayassociation.SetupGated,
+		device.SetupGated,
+		globalnetwork.SetupGated,
+		link.SetupGated,
+		linkassociation.SetupGated,
+		site.SetupGated,
+		transitgatewayconnectpeerassociation.SetupGated,
+		transitgatewayregistration.SetupGated,
+		vpcattachment.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

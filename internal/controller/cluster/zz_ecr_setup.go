@@ -36,3 +36,22 @@ func Setup_ecr(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_ecr creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_ecr(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		lifecyclepolicy.SetupGated,
+		pullthroughcacherule.SetupGated,
+		registrypolicy.SetupGated,
+		registryscanningconfiguration.SetupGated,
+		replicationconfiguration.SetupGated,
+		repository.SetupGated,
+		repositorypolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

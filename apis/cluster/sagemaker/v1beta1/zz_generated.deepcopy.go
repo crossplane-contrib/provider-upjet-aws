@@ -16037,7 +16037,7 @@ func (in *OidcConfigInitParameters) DeepCopyInto(out *OidcConfigInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	out.ClientSecretSecretRef = in.ClientSecretSecretRef
+	in.ClientSecretSecretRef.DeepCopyInto(&out.ClientSecretSecretRef)
 	if in.Issuer != nil {
 		in, out := &in.Issuer, &out.Issuer
 		*out = new(string)
@@ -16180,7 +16180,7 @@ func (in *OidcConfigParameters) DeepCopyInto(out *OidcConfigParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.ClientSecretSecretRef = in.ClientSecretSecretRef
+	in.ClientSecretSecretRef.DeepCopyInto(&out.ClientSecretSecretRef)
 	if in.Issuer != nil {
 		in, out := &in.Issuer, &out.Issuer
 		*out = new(string)

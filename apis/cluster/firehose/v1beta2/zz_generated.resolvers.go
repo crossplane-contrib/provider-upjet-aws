@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -37,6 +36,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration.DomainArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration.DomainArnRef,
 				Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration.DomainArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -58,6 +58,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -80,6 +81,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -126,6 +129,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -149,6 +153,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
 					Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -172,6 +177,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs,
 					Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -194,6 +200,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration.BucketArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExtendedS3Configuration.BucketArnRef,
 				Selector:     mg.Spec.ForProvider.ExtendedS3Configuration.BucketArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -217,6 +224,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.RoleArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.RoleArnRef,
 						Selector:     mg.Spec.ForProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.RoleArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -242,6 +250,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.TableName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.TableNameRef,
 						Selector:     mg.Spec.ForProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.TableNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -265,6 +274,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration.RoleArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExtendedS3Configuration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.ExtendedS3Configuration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -286,6 +296,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPEndpointConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.HTTPEndpointConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.HTTPEndpointConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -308,6 +319,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPEndpointConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.HTTPEndpointConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.HTTPEndpointConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -331,6 +343,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPEndpointConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.HTTPEndpointConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.HTTPEndpointConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -354,6 +367,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameRef,
 					Selector:     mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -377,6 +391,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameRef,
 					Selector:     mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -399,6 +414,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.IcebergConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.IcebergConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -421,6 +437,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -444,6 +461,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -466,6 +484,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration.DomainArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OpensearchConfiguration.DomainArnRef,
 				Selector:     mg.Spec.ForProvider.OpensearchConfiguration.DomainArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -487,6 +506,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OpensearchConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.OpensearchConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -509,6 +529,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OpensearchConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.OpensearchConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -532,6 +553,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OpensearchConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.OpensearchConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -555,6 +577,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -578,6 +601,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
 					Selector:      mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -601,6 +625,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs,
 					Selector:      mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -623,6 +648,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration.CollectionEndpoint),
 				Extract:      resource.ExtractParamPath("collection_endpoint", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration.CollectionEndpointRef,
 				Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration.CollectionEndpointSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -644,6 +670,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -666,6 +693,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -689,6 +717,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -711,6 +740,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.RedshiftConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.RedshiftConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -733,6 +763,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration.S3BackupConfiguration.BucketArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.RedshiftConfiguration.S3BackupConfiguration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.RedshiftConfiguration.S3BackupConfiguration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -756,6 +787,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration.S3BackupConfiguration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.RedshiftConfiguration.S3BackupConfiguration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.RedshiftConfiguration.S3BackupConfiguration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -779,6 +811,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.RedshiftConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.RedshiftConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -802,6 +835,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.RedshiftConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.RedshiftConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -824,6 +858,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnowflakeConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SnowflakeConfiguration.RoleArnRef,
 				Selector:     mg.Spec.ForProvider.SnowflakeConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -846,6 +881,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnowflakeConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SnowflakeConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.SnowflakeConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -869,6 +905,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnowflakeConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SnowflakeConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.SnowflakeConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -892,6 +929,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SplunkConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SplunkConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.ForProvider.SplunkConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -915,6 +953,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SplunkConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SplunkConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.ForProvider.SplunkConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -937,6 +976,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ElasticsearchConfiguration.DomainArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ElasticsearchConfiguration.DomainArnRef,
 				Selector:     mg.Spec.InitProvider.ElasticsearchConfiguration.DomainArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -958,6 +998,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ElasticsearchConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ElasticsearchConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.ElasticsearchConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -980,6 +1021,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ElasticsearchConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ElasticsearchConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.ElasticsearchConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1003,6 +1045,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ElasticsearchConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ElasticsearchConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.ElasticsearchConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1026,6 +1069,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1049,6 +1093,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
 					Selector:      mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -1072,6 +1117,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs,
 					Selector:      mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -1094,6 +1140,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExtendedS3Configuration.BucketArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExtendedS3Configuration.BucketArnRef,
 				Selector:     mg.Spec.InitProvider.ExtendedS3Configuration.BucketArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1117,6 +1164,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.RoleArn),
 						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.RoleArnRef,
 						Selector:     mg.Spec.InitProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.RoleArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1142,6 +1190,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.TableName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.TableNameRef,
 						Selector:     mg.Spec.InitProvider.ExtendedS3Configuration.DataFormatConversionConfiguration.SchemaConfiguration.TableNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1165,6 +1214,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExtendedS3Configuration.RoleArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExtendedS3Configuration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.ExtendedS3Configuration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1186,6 +1236,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPEndpointConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.HTTPEndpointConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.HTTPEndpointConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1208,6 +1259,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPEndpointConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.HTTPEndpointConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.HTTPEndpointConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1231,6 +1283,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPEndpointConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.HTTPEndpointConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.HTTPEndpointConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1254,6 +1307,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameRef,
 					Selector:     mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1277,6 +1331,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameRef,
 					Selector:     mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1299,6 +1354,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.IcebergConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.IcebergConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1321,6 +1377,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1344,6 +1401,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1366,6 +1424,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchConfiguration.DomainArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OpensearchConfiguration.DomainArnRef,
 				Selector:     mg.Spec.InitProvider.OpensearchConfiguration.DomainArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1387,6 +1446,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OpensearchConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.OpensearchConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1409,6 +1469,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OpensearchConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.OpensearchConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1432,6 +1493,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OpensearchConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.OpensearchConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1455,6 +1517,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1478,6 +1541,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
 					Selector:      mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -1501,6 +1565,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIds),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs,
 					Selector:      mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -1523,6 +1588,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchserverlessConfiguration.CollectionEndpoint),
 				Extract:      resource.ExtractParamPath("collection_endpoint", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OpensearchserverlessConfiguration.CollectionEndpointRef,
 				Selector:     mg.Spec.InitProvider.OpensearchserverlessConfiguration.CollectionEndpointSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1544,6 +1610,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchserverlessConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OpensearchserverlessConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.OpensearchserverlessConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1566,6 +1633,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchserverlessConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OpensearchserverlessConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.OpensearchserverlessConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1589,6 +1657,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchserverlessConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OpensearchserverlessConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.OpensearchserverlessConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1611,6 +1680,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedshiftConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.RedshiftConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.RedshiftConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1633,6 +1703,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedshiftConfiguration.S3BackupConfiguration.BucketArn),
 					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.RedshiftConfiguration.S3BackupConfiguration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.RedshiftConfiguration.S3BackupConfiguration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1656,6 +1727,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedshiftConfiguration.S3BackupConfiguration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.RedshiftConfiguration.S3BackupConfiguration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.RedshiftConfiguration.S3BackupConfiguration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1679,6 +1751,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedshiftConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.RedshiftConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.RedshiftConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1702,6 +1775,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedshiftConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.RedshiftConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.RedshiftConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1724,6 +1798,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnowflakeConfiguration.RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SnowflakeConfiguration.RoleArnRef,
 				Selector:     mg.Spec.InitProvider.SnowflakeConfiguration.RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1746,6 +1821,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnowflakeConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SnowflakeConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.SnowflakeConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1769,6 +1845,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnowflakeConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SnowflakeConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.SnowflakeConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1792,6 +1869,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SplunkConfiguration.S3Configuration.BucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SplunkConfiguration.S3Configuration.BucketArnRef,
 					Selector:     mg.Spec.InitProvider.SplunkConfiguration.S3Configuration.BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1815,6 +1893,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SplunkConfiguration.S3Configuration.RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SplunkConfiguration.S3Configuration.RoleArnRef,
 					Selector:     mg.Spec.InitProvider.SplunkConfiguration.S3Configuration.RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},

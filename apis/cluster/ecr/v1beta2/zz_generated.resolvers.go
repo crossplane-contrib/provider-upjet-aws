@@ -9,9 +9,8 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *Repository) ResolveReferences( // ResolveReferences of this Repository
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKey),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyRef,
 				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeySelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *Repository) ResolveReferences( // ResolveReferences of this Repository
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKey),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyRef,
 				Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeySelector,
 				To:           reference.To{List: l, Managed: m},

@@ -70,3 +70,39 @@ func Setup_s3(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_s3 creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_s3(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		bucket.SetupGated,
+		bucketaccelerateconfiguration.SetupGated,
+		bucketacl.SetupGated,
+		bucketanalyticsconfiguration.SetupGated,
+		bucketcorsconfiguration.SetupGated,
+		bucketintelligenttieringconfiguration.SetupGated,
+		bucketinventory.SetupGated,
+		bucketlifecycleconfiguration.SetupGated,
+		bucketlogging.SetupGated,
+		bucketmetric.SetupGated,
+		bucketnotification.SetupGated,
+		bucketobject.SetupGated,
+		bucketobjectlockconfiguration.SetupGated,
+		bucketownershipcontrols.SetupGated,
+		bucketpolicy.SetupGated,
+		bucketpublicaccessblock.SetupGated,
+		bucketreplicationconfiguration.SetupGated,
+		bucketrequestpaymentconfiguration.SetupGated,
+		bucketserversideencryptionconfiguration.SetupGated,
+		bucketversioning.SetupGated,
+		bucketwebsiteconfiguration.SetupGated,
+		directorybucket.SetupGated,
+		object.SetupGated,
+		objectcopy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

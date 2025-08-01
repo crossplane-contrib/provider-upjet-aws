@@ -26,3 +26,17 @@ func Setup_licensemanager(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_licensemanager creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_licensemanager(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		association.SetupGated,
+		licenseconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Filter.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Filter) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Filter) ResolveReferences( // ResolveReferences of this Filter.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Filter) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DetectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DetectorIDRef,
 			Selector:     mg.Spec.ForProvider.DetectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -66,6 +65,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
 			Extract:      resource.ExtractParamPath("account_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountIDRef,
 			Selector:     mg.Spec.ForProvider.AccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +85,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DetectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DetectorIDRef,
 			Selector:     mg.Spec.ForProvider.DetectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +105,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
 			Extract:      resource.ExtractParamPath("account_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AccountIDRef,
 			Selector:     mg.Spec.InitProvider.AccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +125,7 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DetectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DetectorIDRef,
 			Selector:     mg.Spec.InitProvider.DetectorIDSelector,
 			To:           reference.To{List: l, Managed: m},

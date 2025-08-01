@@ -9,18 +9,16 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Cluster.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -37,6 +35,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBClusterParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBClusterParameterGroupNameRef,
 			Selector:     mg.Spec.ForProvider.DBClusterParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -56,6 +55,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBInstanceParameterGroupNameRef,
 			Selector:     mg.Spec.ForProvider.DBInstanceParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +75,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBSubnetGroupNameRef,
 			Selector:     mg.Spec.ForProvider.DBSubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,6 +95,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -113,6 +115,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterUserSecretKMSKeyID),
 			Extract:      resource.ExtractParamPath("key_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.MasterUserSecretKMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -132,6 +135,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MonitoringRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MonitoringRoleArnRef,
 			Selector:     mg.Spec.ForProvider.MonitoringRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -152,6 +156,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifier),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifierRef,
 				Selector:     mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -173,6 +178,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Import.BucketName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.S3Import.BucketNameRef,
 				Selector:     mg.Spec.ForProvider.S3Import.BucketNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -193,6 +199,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -212,6 +219,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBClusterParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBClusterParameterGroupNameRef,
 			Selector:     mg.Spec.InitProvider.DBClusterParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -231,6 +239,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBInstanceParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBInstanceParameterGroupNameRef,
 			Selector:     mg.Spec.InitProvider.DBInstanceParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -250,6 +259,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBSubnetGroupNameRef,
 			Selector:     mg.Spec.InitProvider.DBSubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -269,6 +279,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -288,6 +299,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MasterUserSecretKMSKeyID),
 			Extract:      resource.ExtractParamPath("key_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MasterUserSecretKMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.MasterUserSecretKMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -307,6 +319,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MonitoringRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MonitoringRoleArnRef,
 			Selector:     mg.Spec.InitProvider.MonitoringRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -327,6 +340,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifier),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifierRef,
 				Selector:     mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -348,6 +362,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Import.BucketName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.S3Import.BucketNameRef,
 				Selector:     mg.Spec.InitProvider.S3Import.BucketNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -368,6 +383,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -400,6 +416,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBSubnetGroupNameRef,
 			Selector:     mg.Spec.ForProvider.DBSubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -419,6 +436,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -438,6 +456,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterUserSecretKMSKeyID),
 			Extract:      resource.ExtractParamPath("key_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.MasterUserSecretKMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -457,6 +476,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MonitoringRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MonitoringRoleArnRef,
 			Selector:     mg.Spec.ForProvider.MonitoringRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -476,6 +496,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ParameterGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -495,6 +516,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicateSourceDB),
 			Extract:      resource.ExtractParamPath("identifier", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ReplicateSourceDBRef,
 			Selector:     mg.Spec.ForProvider.ReplicateSourceDBSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -514,6 +536,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -533,6 +556,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBSubnetGroupNameRef,
 			Selector:     mg.Spec.InitProvider.DBSubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -552,6 +576,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -571,6 +596,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MasterUserSecretKMSKeyID),
 			Extract:      resource.ExtractParamPath("key_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MasterUserSecretKMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.MasterUserSecretKMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -590,6 +616,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MonitoringRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MonitoringRoleArnRef,
 			Selector:     mg.Spec.InitProvider.MonitoringRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -609,6 +636,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ParameterGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -628,6 +656,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicateSourceDB),
 			Extract:      resource.ExtractParamPath("identifier", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ReplicateSourceDBRef,
 			Selector:     mg.Spec.InitProvider.ReplicateSourceDBSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -647,6 +676,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -678,6 +708,7 @@ func (mg *ProxyDefaultTargetGroup) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBProxyName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBProxyNameRef,
 			Selector:     mg.Spec.ForProvider.DBProxyNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -697,6 +728,7 @@ func (mg *ProxyDefaultTargetGroup) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBProxyName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBProxyNameRef,
 			Selector:     mg.Spec.InitProvider.DBProxyNameSelector,
 			To:           reference.To{List: l, Managed: m},

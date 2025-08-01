@@ -1,0 +1,14 @@
+apiVersion: mediapackage.aws.m.upbound.io/v1beta1
+kind: Channel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mediapackage/v1beta1/channel
+  labels:
+    testing.upbound.io/example-name: kittens
+  name: kittens
+  namespace: upbound-system
+spec:
+  forProvider:
+    channelId: kitten-channel
+    description: A channel dedicated to amusing videos of kittens.
+    region: us-west-1

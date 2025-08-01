@@ -48,3 +48,28 @@ func Setup_ses(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_ses creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_ses(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		activereceiptruleset.SetupGated,
+		configurationset.SetupGated,
+		domaindkim.SetupGated,
+		domainidentity.SetupGated,
+		domainmailfrom.SetupGated,
+		emailidentity.SetupGated,
+		eventdestination.SetupGated,
+		identitynotificationtopic.SetupGated,
+		identitypolicy.SetupGated,
+		receiptfilter.SetupGated,
+		receiptrule.SetupGated,
+		receiptruleset.SetupGated,
+		template.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

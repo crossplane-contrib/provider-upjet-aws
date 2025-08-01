@@ -34,3 +34,21 @@ func Setup_redshiftserverless(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_redshiftserverless creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_redshiftserverless(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		endpointaccess.SetupGated,
+		redshiftserverlessnamespace.SetupGated,
+		resourcepolicy.SetupGated,
+		snapshot.SetupGated,
+		usagelimit.SetupGated,
+		workgroup.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -9,18 +9,16 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Alias.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Alias) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Alias) ResolveReferences( // ResolveReferences of this Alias.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Alias) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetKeyIDRef,
 			Selector:     mg.Spec.ForProvider.TargetKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +54,7 @@ func (mg *Alias) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetKeyIDRef,
 			Selector:     mg.Spec.InitProvider.TargetKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +86,7 @@ func (mg *Ciphertext) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +106,7 @@ func (mg *Ciphertext) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -136,6 +138,7 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GranteePrincipal),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GranteePrincipalRef,
 			Selector:     mg.Spec.ForProvider.GranteePrincipalSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -155,6 +158,7 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -174,6 +178,7 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GranteePrincipal),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GranteePrincipalRef,
 			Selector:     mg.Spec.InitProvider.GranteePrincipalSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -193,6 +198,7 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -224,6 +230,7 @@ func (mg *ReplicaExternalKey) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryKeyArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrimaryKeyArnRef,
 			Selector:     mg.Spec.ForProvider.PrimaryKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -243,6 +250,7 @@ func (mg *ReplicaExternalKey) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryKeyArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrimaryKeyArnRef,
 			Selector:     mg.Spec.InitProvider.PrimaryKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -274,6 +282,7 @@ func (mg *ReplicaKey) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryKeyArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrimaryKeyArnRef,
 			Selector:     mg.Spec.ForProvider.PrimaryKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -293,6 +302,7 @@ func (mg *ReplicaKey) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryKeyArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrimaryKeyArnRef,
 			Selector:     mg.Spec.InitProvider.PrimaryKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},

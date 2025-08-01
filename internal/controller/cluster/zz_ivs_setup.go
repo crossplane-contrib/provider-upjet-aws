@@ -26,3 +26,17 @@ func Setup_ivs(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_ivs creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_ivs(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		channel.SetupGated,
+		recordingconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

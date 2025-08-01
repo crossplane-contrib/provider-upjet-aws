@@ -44,3 +44,26 @@ func Setup_servicecatalog(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_servicecatalog creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_servicecatalog(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		budgetresourceassociation.SetupGated,
+		constraint.SetupGated,
+		portfolio.SetupGated,
+		portfolioshare.SetupGated,
+		principalportfolioassociation.SetupGated,
+		product.SetupGated,
+		productportfolioassociation.SetupGated,
+		provisioningartifact.SetupGated,
+		serviceaction.SetupGated,
+		tagoption.SetupGated,
+		tagoptionresourceassociation.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

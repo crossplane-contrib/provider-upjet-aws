@@ -54,3 +54,31 @@ func Setup_iot(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_iot creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_iot(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		authorizer.SetupGated,
+		certificate.SetupGated,
+		domainconfiguration.SetupGated,
+		indexingconfiguration.SetupGated,
+		loggingoptions.SetupGated,
+		policy.SetupGated,
+		policyattachment.SetupGated,
+		provisioningtemplate.SetupGated,
+		rolealias.SetupGated,
+		thing.SetupGated,
+		thinggroup.SetupGated,
+		thinggroupmembership.SetupGated,
+		thingprincipalattachment.SetupGated,
+		thingtype.SetupGated,
+		topicrule.SetupGated,
+		topicruledestination.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

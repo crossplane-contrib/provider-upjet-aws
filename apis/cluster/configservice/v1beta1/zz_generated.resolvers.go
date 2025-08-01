@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -36,6 +35,7 @@ func (mg *ConfigRule) ResolveReferences( // ResolveReferences of this ConfigRule
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].SourceIdentifier),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Source[i3].SourceIdentifierRef,
 				Selector:     mg.Spec.ForProvider.Source[i3].SourceIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +57,7 @@ func (mg *ConfigRule) ResolveReferences( // ResolveReferences of this ConfigRule
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].SourceIdentifier),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Source[i3].SourceIdentifierRef,
 				Selector:     mg.Spec.InitProvider.Source[i3].SourceIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -91,6 +92,7 @@ func (mg *ConfigurationAggregator) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrganizationAggregationSource[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OrganizationAggregationSource[i3].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.OrganizationAggregationSource[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -112,6 +114,7 @@ func (mg *ConfigurationAggregator) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArnRef,
 				Selector:     mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -145,6 +148,7 @@ func (mg *ConfigurationRecorder) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -164,6 +168,7 @@ func (mg *ConfigurationRecorder) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -195,6 +200,7 @@ func (mg *DeliveryChannel) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3BucketName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.S3BucketNameRef,
 			Selector:     mg.Spec.ForProvider.S3BucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -214,6 +220,7 @@ func (mg *DeliveryChannel) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3BucketName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.S3BucketNameRef,
 			Selector:     mg.Spec.InitProvider.S3BucketNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -1,0 +1,18 @@
+apiVersion: servicecatalog.aws.m.upbound.io/v1beta1
+kind: BudgetResourceAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicecatalog/v1beta1/budgetresourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    budgetNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

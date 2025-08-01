@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *PrivateDNSNamespace) ResolveReferences( // ResolveReferences of this P
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPC),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VPCRef,
 			Selector:     mg.Spec.ForProvider.VPCSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *PrivateDNSNamespace) ResolveReferences( // ResolveReferences of this P
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPC),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VPCRef,
 			Selector:     mg.Spec.InitProvider.VPCSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +86,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSConfig[i3].NamespaceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DNSConfig[i3].NamespaceIDRef,
 				Selector:     mg.Spec.ForProvider.DNSConfig[i3].NamespaceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -106,6 +108,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSConfig[i3].NamespaceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DNSConfig[i3].NamespaceIDRef,
 				Selector:     mg.Spec.InitProvider.DNSConfig[i3].NamespaceIDSelector,
 				To:           reference.To{List: l, Managed: m},

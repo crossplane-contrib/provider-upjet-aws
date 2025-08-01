@@ -26,3 +26,17 @@ func Setup_codestarconnections(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_codestarconnections creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_codestarconnections(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		connection.SetupGated,
+		host.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

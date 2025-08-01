@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -35,6 +34,7 @@ func (mg *Permissions) ResolveReferences( // ResolveReferences of this Permissio
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataLocation.Arn),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DataLocation.ArnRef,
 				Selector:     mg.Spec.ForProvider.DataLocation.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *Permissions) ResolveReferences( // ResolveReferences of this Permissio
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database.NameRef,
 				Selector:     mg.Spec.ForProvider.Database.NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -77,6 +78,7 @@ func (mg *Permissions) ResolveReferences( // ResolveReferences of this Permissio
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableWithColumns.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.TableWithColumns.NameRef,
 				Selector:     mg.Spec.ForProvider.TableWithColumns.NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -98,6 +100,7 @@ func (mg *Permissions) ResolveReferences( // ResolveReferences of this Permissio
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataLocation.Arn),
 				Extract:      resource.ExtractParamPath("arn", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DataLocation.ArnRef,
 				Selector:     mg.Spec.InitProvider.DataLocation.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -119,6 +122,7 @@ func (mg *Permissions) ResolveReferences( // ResolveReferences of this Permissio
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database.NameRef,
 				Selector:     mg.Spec.InitProvider.Database.NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -140,6 +144,7 @@ func (mg *Permissions) ResolveReferences( // ResolveReferences of this Permissio
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableWithColumns.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.TableWithColumns.NameRef,
 				Selector:     mg.Spec.InitProvider.TableWithColumns.NameSelector,
 				To:           reference.To{List: l, Managed: m},

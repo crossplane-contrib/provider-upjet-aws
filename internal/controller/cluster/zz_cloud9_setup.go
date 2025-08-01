@@ -26,3 +26,17 @@ func Setup_cloud9(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_cloud9 creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cloud9(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		environmentec2.SetupGated,
+		environmentmembership.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -1,0 +1,73 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: UserGroupMembership
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+  namespace: upbound-system
+spec:
+  forProvider:
+    groupRefs:
+    - name: group1
+    - name: group2
+    userSelector:
+      matchLabels:
+        testing.upbound.io/example-name: user1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
+  labels:
+    testing.upbound.io/example-name: group1
+  name: group1
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
+  labels:
+    testing.upbound.io/example-name: group2
+  name: group2
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
+  labels:
+    testing.upbound.io/example-name: group3
+  name: group3
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
+  labels:
+    testing.upbound.io/example-name: user1
+  name: user1
+  namespace: upbound-system
+spec:
+  forProvider: {}

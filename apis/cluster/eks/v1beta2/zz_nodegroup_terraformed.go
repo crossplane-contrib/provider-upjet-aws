@@ -84,7 +84,7 @@ func (tr *NodeGroup) GetInitParameters() (map[string]any, error) {
 func (tr *NodeGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *NodeGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[stri
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *NodeGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[stri
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil
@@ -122,7 +122,7 @@ func (tr *NodeGroup) LateInitialize(attrs []byte) (bool, error) {
 	opts = append(opts, resource.WithNameFilter("Version"))
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return false, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return false, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	opts = append(opts, resource.WithConditionalFilter("ScalingConfig", initParams))
 

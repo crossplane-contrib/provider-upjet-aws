@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -38,6 +37,7 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExperimentReportConfiguration.DataSources.CloudwatchDashboard[i5].DashboardArn),
 						Extract:      resource.ExtractParamPath("dashboard_arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.ExperimentReportConfiguration.DataSources.CloudwatchDashboard[i5].DashboardArnRef,
 						Selector:     mg.Spec.ForProvider.ExperimentReportConfiguration.DataSources.CloudwatchDashboard[i5].DashboardArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -63,6 +63,7 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExperimentReportConfiguration.Outputs.S3Configuration.BucketName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.ExperimentReportConfiguration.Outputs.S3Configuration.BucketNameRef,
 						Selector:     mg.Spec.ForProvider.ExperimentReportConfiguration.Outputs.S3Configuration.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -85,6 +86,7 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -107,6 +109,7 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExperimentReportConfiguration.DataSources.CloudwatchDashboard[i5].DashboardArn),
 						Extract:      resource.ExtractParamPath("dashboard_arn", true),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.ExperimentReportConfiguration.DataSources.CloudwatchDashboard[i5].DashboardArnRef,
 						Selector:     mg.Spec.InitProvider.ExperimentReportConfiguration.DataSources.CloudwatchDashboard[i5].DashboardArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -132,6 +135,7 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExperimentReportConfiguration.Outputs.S3Configuration.BucketName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.ExperimentReportConfiguration.Outputs.S3Configuration.BucketNameRef,
 						Selector:     mg.Spec.InitProvider.ExperimentReportConfiguration.Outputs.S3Configuration.BucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -154,6 +158,7 @@ func (mg *ExperimentTemplate) ResolveReferences( // ResolveReferences of this Ex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

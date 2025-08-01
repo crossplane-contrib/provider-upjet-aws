@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -36,6 +35,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeResources.InstanceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ComputeResources.InstanceRoleRef,
 				Selector:     mg.Spec.ForProvider.ComputeResources.InstanceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +57,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeResources.PlacementGroup),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ComputeResources.PlacementGroupRef,
 				Selector:     mg.Spec.ForProvider.ComputeResources.PlacementGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -78,6 +79,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ComputeResources.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.ComputeResources.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.ForProvider.ComputeResources.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -99,6 +101,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ComputeResources.Subnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.ComputeResources.SubnetsRefs,
 				Selector:      mg.Spec.ForProvider.ComputeResources.SubnetsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -119,6 +122,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRole),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceRoleRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -139,6 +143,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeResources.InstanceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ComputeResources.InstanceRoleRef,
 				Selector:     mg.Spec.InitProvider.ComputeResources.InstanceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -160,6 +165,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeResources.PlacementGroup),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ComputeResources.PlacementGroupRef,
 				Selector:     mg.Spec.InitProvider.ComputeResources.PlacementGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -181,6 +187,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ComputeResources.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.ComputeResources.SecurityGroupIdsRefs,
 				Selector:      mg.Spec.InitProvider.ComputeResources.SecurityGroupIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -202,6 +209,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ComputeResources.Subnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.ComputeResources.SubnetsRefs,
 				Selector:      mg.Spec.InitProvider.ComputeResources.SubnetsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -222,6 +230,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRole),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceRoleRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -254,6 +263,7 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeEnvironmentOrder[i3].ComputeEnvironment),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentRef,
 				Selector:     mg.Spec.ForProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -274,6 +284,7 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SchedulingPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SchedulingPolicyArnRef,
 			Selector:     mg.Spec.ForProvider.SchedulingPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -294,6 +305,7 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeEnvironmentOrder[i3].ComputeEnvironment),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentRef,
 				Selector:     mg.Spec.InitProvider.ComputeEnvironmentOrder[i3].ComputeEnvironmentSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -314,6 +326,7 @@ func (mg *JobQueue) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SchedulingPolicyArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SchedulingPolicyArnRef,
 			Selector:     mg.Spec.InitProvider.SchedulingPolicyArnSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -27,11 +27,6 @@ func (mg *ScalingPlan) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ScalingPlan.
-func (mg *ScalingPlan) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ScalingPlan.
 func (mg *ScalingPlan) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *ScalingPlan) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ScalingPlan.
 func (mg *ScalingPlan) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ScalingPlan.
-func (mg *ScalingPlan) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ScalingPlan.

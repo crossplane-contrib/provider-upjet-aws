@@ -40,3 +40,24 @@ func Setup_elb(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_elb creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_elb(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		appcookiestickinesspolicy.SetupGated,
+		attachment.SetupGated,
+		backendserverpolicy.SetupGated,
+		elb.SetupGated,
+		lbcookiestickinesspolicy.SetupGated,
+		lbsslnegotiationpolicy.SetupGated,
+		listenerpolicy.SetupGated,
+		policy.SetupGated,
+		proxyprotocolpolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

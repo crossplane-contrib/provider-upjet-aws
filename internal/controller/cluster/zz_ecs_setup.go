@@ -34,3 +34,21 @@ func Setup_ecs(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_ecs creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_ecs(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accountsettingdefault.SetupGated,
+		capacityprovider.SetupGated,
+		cluster.SetupGated,
+		clustercapacityproviders.SetupGated,
+		service.SetupGated,
+		taskdefinition.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

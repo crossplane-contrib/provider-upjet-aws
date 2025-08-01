@@ -28,3 +28,18 @@ func Setup_cloudformation(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_cloudformation creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cloudformation(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		stack.SetupGated,
+		stackset.SetupGated,
+		stacksetinstance.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -1,0 +1,17 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPCIpam
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipam
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: My IPAM
+    operatingRegions:
+    - regionName: ${data.aws_region.current.region}
+    region: us-west-1
+    tags:
+      Test: Main

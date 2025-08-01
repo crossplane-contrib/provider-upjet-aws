@@ -27,11 +27,6 @@ func (mg *DataRepositoryAssociation) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DataRepositoryAssociation.
 func (mg *DataRepositoryAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *DataRepositoryAssociation) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this DataRepositoryAssociation.
 func (mg *DataRepositoryAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DataRepositoryAssociation.
@@ -87,11 +77,6 @@ func (mg *LustreFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LustreFileSystem.
-func (mg *LustreFileSystem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LustreFileSystem.
 func (mg *LustreFileSystem) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *LustreFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LustreFileSystem.
 func (mg *LustreFileSystem) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LustreFileSystem.
-func (mg *LustreFileSystem) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LustreFileSystem.
@@ -147,11 +127,6 @@ func (mg *OntapFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this OntapFileSystem.
-func (mg *OntapFileSystem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this OntapFileSystem.
 func (mg *OntapFileSystem) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *OntapFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this OntapFileSystem.
 func (mg *OntapFileSystem) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this OntapFileSystem.
-func (mg *OntapFileSystem) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this OntapFileSystem.
@@ -207,11 +177,6 @@ func (mg *OntapStorageVirtualMachine) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this OntapStorageVirtualMachine.
 func (mg *OntapStorageVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *OntapStorageVirtualMachine) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this OntapStorageVirtualMachine.
 func (mg *OntapStorageVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this OntapStorageVirtualMachine.
@@ -267,11 +227,6 @@ func (mg *WindowsFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this WindowsFileSystem.
-func (mg *WindowsFileSystem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this WindowsFileSystem.
 func (mg *WindowsFileSystem) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *WindowsFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this WindowsFileSystem.
 func (mg *WindowsFileSystem) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this WindowsFileSystem.
-func (mg *WindowsFileSystem) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this WindowsFileSystem.

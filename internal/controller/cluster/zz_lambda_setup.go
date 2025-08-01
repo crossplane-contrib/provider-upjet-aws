@@ -44,3 +44,26 @@ func Setup_lambda(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_lambda creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_lambda(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		alias.SetupGated,
+		codesigningconfig.SetupGated,
+		eventsourcemapping.SetupGated,
+		function.SetupGated,
+		functioneventinvokeconfig.SetupGated,
+		functionurl.SetupGated,
+		invocation.SetupGated,
+		layerversion.SetupGated,
+		layerversionpermission.SetupGated,
+		permission.SetupGated,
+		provisionedconcurrencyconfig.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

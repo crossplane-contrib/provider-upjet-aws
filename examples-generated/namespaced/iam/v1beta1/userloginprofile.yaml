@@ -1,0 +1,31 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: UserLoginProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userloginprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    pgpKey: keybase:some_person_that_exists
+    userSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userloginprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    path: /

@@ -511,7 +511,7 @@ func (in *CertificateInitParameters) DeepCopyInto(out *CertificateInitParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.CertificateSigningRequestSecretRef = in.CertificateSigningRequestSecretRef
+	in.CertificateSigningRequestSecretRef.DeepCopyInto(&out.CertificateSigningRequestSecretRef)
 	if in.SigningAlgorithm != nil {
 		in, out := &in.SigningAlgorithm, &out.SigningAlgorithm
 		*out = new(string)
@@ -659,7 +659,7 @@ func (in *CertificateParameters) DeepCopyInto(out *CertificateParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.CertificateSigningRequestSecretRef = in.CertificateSigningRequestSecretRef
+	in.CertificateSigningRequestSecretRef.DeepCopyInto(&out.CertificateSigningRequestSecretRef)
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

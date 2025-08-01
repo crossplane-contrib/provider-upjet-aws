@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *AccessPoint) ResolveReferences( // ResolveReferences of this AccessPoi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FileSystemIDRef,
 			Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *AccessPoint) ResolveReferences( // ResolveReferences of this AccessPoi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FileSystemIDRef,
 			Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +86,7 @@ func (mg *BackupPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FileSystemIDRef,
 			Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +106,7 @@ func (mg *BackupPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FileSystemIDRef,
 			Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +138,7 @@ func (mg *FileSystem) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +158,7 @@ func (mg *FileSystem) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -185,6 +190,7 @@ func (mg *FileSystemPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FileSystemIDRef,
 			Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -204,6 +210,7 @@ func (mg *FileSystemPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FileSystemIDRef,
 			Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -236,6 +243,7 @@ func (mg *MountTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FileSystemIDRef,
 			Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -255,6 +263,7 @@ func (mg *MountTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupsRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -274,6 +283,7 @@ func (mg *MountTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -293,6 +303,7 @@ func (mg *MountTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FileSystemIDRef,
 			Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -312,6 +323,7 @@ func (mg *MountTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupsRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -331,6 +343,7 @@ func (mg *MountTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -362,6 +375,7 @@ func (mg *ReplicationConfiguration) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceFileSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceFileSystemIDRef,
 			Selector:     mg.Spec.ForProvider.SourceFileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -381,6 +395,7 @@ func (mg *ReplicationConfiguration) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceFileSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceFileSystemIDRef,
 			Selector:     mg.Spec.InitProvider.SourceFileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},

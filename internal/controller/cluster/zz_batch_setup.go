@@ -30,3 +30,19 @@ func Setup_batch(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_batch creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_batch(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		computeenvironment.SetupGated,
+		jobdefinition.SetupGated,
+		jobqueue.SetupGated,
+		schedulingpolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

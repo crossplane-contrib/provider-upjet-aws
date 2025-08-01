@@ -1,0 +1,16 @@
+apiVersion: networkmanager.aws.upbound.io/v1beta1
+kind: AttachmentAccepter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/attachmentaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    attachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    attachmentTypeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,20 @@
+apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
+kind: VPCLink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/vpclink
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+    securityGroupIdRefs:
+    - name: aws_security_group
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_subnets
+    tags:
+      Usage: example

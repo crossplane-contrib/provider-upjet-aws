@@ -2638,7 +2638,7 @@ func (in *HostedConfigurationVersionInitParameters) DeepCopyInto(out *HostedConf
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ContentSecretRef = in.ContentSecretRef
+	in.ContentSecretRef.DeepCopyInto(&out.ContentSecretRef)
 	if in.ContentType != nil {
 		in, out := &in.ContentType, &out.ContentType
 		*out = new(string)
@@ -2781,7 +2781,7 @@ func (in *HostedConfigurationVersionParameters) DeepCopyInto(out *HostedConfigur
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ContentSecretRef = in.ContentSecretRef
+	in.ContentSecretRef.DeepCopyInto(&out.ContentSecretRef)
 	if in.ContentType != nil {
 		in, out := &in.ContentType, &out.ContentType
 		*out = new(string)

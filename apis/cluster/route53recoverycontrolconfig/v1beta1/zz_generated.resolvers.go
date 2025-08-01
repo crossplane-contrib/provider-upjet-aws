@@ -34,6 +34,7 @@ func (mg *ControlPanel) ResolveReferences( // ResolveReferences of this ControlP
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ClusterArnRef,
 			Selector:     mg.Spec.ForProvider.ClusterArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *ControlPanel) ResolveReferences( // ResolveReferences of this ControlP
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ClusterArnRef,
 			Selector:     mg.Spec.InitProvider.ClusterArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +86,7 @@ func (mg *RoutingControl) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ClusterArnRef,
 			Selector:     mg.Spec.ForProvider.ClusterArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +106,7 @@ func (mg *RoutingControl) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ControlPanelArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ControlPanelArnRef,
 			Selector:     mg.Spec.ForProvider.ControlPanelArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +126,7 @@ func (mg *RoutingControl) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ClusterArnRef,
 			Selector:     mg.Spec.InitProvider.ClusterArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,6 +146,7 @@ func (mg *RoutingControl) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ControlPanelArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ControlPanelArnRef,
 			Selector:     mg.Spec.InitProvider.ControlPanelArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -173,6 +179,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AssertedControls),
 			Extract:       common.TerraformID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AssertedControlsRefs,
 			Selector:      mg.Spec.ForProvider.AssertedControlsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -192,6 +199,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ControlPanelArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ControlPanelArnRef,
 			Selector:     mg.Spec.ForProvider.ControlPanelArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -211,6 +219,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.GatingControls),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.GatingControlsRefs,
 			Selector:      mg.Spec.ForProvider.GatingControlsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -230,6 +239,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.TargetControls),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.TargetControlsRefs,
 			Selector:      mg.Spec.ForProvider.TargetControlsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -249,6 +259,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AssertedControls),
 			Extract:       common.TerraformID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AssertedControlsRefs,
 			Selector:      mg.Spec.InitProvider.AssertedControlsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -268,6 +279,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ControlPanelArn),
 			Extract:      common.TerraformID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ControlPanelArnRef,
 			Selector:     mg.Spec.InitProvider.ControlPanelArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -287,6 +299,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.GatingControls),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.GatingControlsRefs,
 			Selector:      mg.Spec.InitProvider.GatingControlsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -306,6 +319,7 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.TargetControls),
 			Extract:       resource.ExtractParamPath("arn", true),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.TargetControlsRefs,
 			Selector:      mg.Spec.InitProvider.TargetControlsSelector,
 			To:            reference.To{List: l, Managed: m},

@@ -1,0 +1,35 @@
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Ciphertext
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/ciphertext
+  labels:
+    testing.upbound.io/example-name: oauth
+  name: oauth
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: oauth_config
+    plaintextSecretRef:
+      key: example-key
+      name: example-secret
+    region: us-west-1
+
+---
+
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/ciphertext
+  labels:
+    testing.upbound.io/example-name: oauth_config
+  name: oauth-config
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: oauth config
+    isEnabled: true
+    region: us-west-1

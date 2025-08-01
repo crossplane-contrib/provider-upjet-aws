@@ -1,0 +1,40 @@
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: InstancePublicPorts
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/instancepublicports
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    instanceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    portInfo:
+    - fromPort: 80
+      protocol: tcp
+      toPort: 80
+    - cidrs:
+      - 192.168.1.0/24
+      fromPort: 443
+      protocol: tcp
+      toPort: 443
+    region: us-west-1
+
+---
+
+apiVersion: lightsail.aws.upbound.io/v1beta2
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/instancepublicports
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    availabilityZone: ${data.aws_availability_zones.available.names[0]}
+    blueprintId: amazon_linux_2
+    bundleId: nano_3_0
+    region: us-west-1

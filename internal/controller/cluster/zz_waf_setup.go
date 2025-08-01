@@ -44,3 +44,26 @@ func Setup_waf(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_waf creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_waf(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		bytematchset.SetupGated,
+		geomatchset.SetupGated,
+		ipset.SetupGated,
+		ratebasedrule.SetupGated,
+		regexmatchset.SetupGated,
+		regexpatternset.SetupGated,
+		rule.SetupGated,
+		sizeconstraintset.SetupGated,
+		sqlinjectionmatchset.SetupGated,
+		webacl.SetupGated,
+		xssmatchset.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

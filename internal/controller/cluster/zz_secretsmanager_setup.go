@@ -30,3 +30,19 @@ func Setup_secretsmanager(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_secretsmanager creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_secretsmanager(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		secret.SetupGated,
+		secretpolicy.SetupGated,
+		secretrotation.SetupGated,
+		secretversion.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

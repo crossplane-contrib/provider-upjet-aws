@@ -9,9 +9,8 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *CapacityProvider) ResolveReferences( // ResolveReferences of this Capa
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoScalingGroupProvider.AutoScalingGroupArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AutoScalingGroupProvider.AutoScalingGroupArnRef,
 				Selector:     mg.Spec.ForProvider.AutoScalingGroupProvider.AutoScalingGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *CapacityProvider) ResolveReferences( // ResolveReferences of this Capa
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutoScalingGroupProvider.AutoScalingGroupArn),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AutoScalingGroupProvider.AutoScalingGroupArnRef,
 				Selector:     mg.Spec.InitProvider.AutoScalingGroupProvider.AutoScalingGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -90,6 +91,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Cluster),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ClusterRef,
 			Selector:     mg.Spec.ForProvider.ClusterSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -109,6 +111,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRole),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IAMRoleRef,
 			Selector:     mg.Spec.ForProvider.IAMRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +132,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancer[i3].TargetGroupArn),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LoadBalancer[i3].TargetGroupArnRef,
 				Selector:     mg.Spec.ForProvider.LoadBalancer[i3].TargetGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -150,6 +154,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkConfiguration.SecurityGroups),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.NetworkConfiguration.SecurityGroupRefs,
 				Selector:      mg.Spec.ForProvider.NetworkConfiguration.SecurityGroupSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -171,6 +176,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkConfiguration.Subnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.NetworkConfiguration.SubnetRefs,
 				Selector:      mg.Spec.ForProvider.NetworkConfiguration.SubnetSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -191,6 +197,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskDefinition),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TaskDefinitionRef,
 			Selector:     mg.Spec.ForProvider.TaskDefinitionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -210,6 +217,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Cluster),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ClusterRef,
 			Selector:     mg.Spec.InitProvider.ClusterSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -229,6 +237,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRole),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IAMRoleRef,
 			Selector:     mg.Spec.InitProvider.IAMRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -249,6 +258,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArn),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArnRef,
 				Selector:     mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -270,6 +280,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration.SecurityGroups),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.NetworkConfiguration.SecurityGroupRefs,
 				Selector:      mg.Spec.InitProvider.NetworkConfiguration.SecurityGroupSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -291,6 +302,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration.Subnets),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.NetworkConfiguration.SubnetRefs,
 				Selector:      mg.Spec.InitProvider.NetworkConfiguration.SubnetSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -311,6 +323,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskDefinition),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TaskDefinitionRef,
 			Selector:     mg.Spec.InitProvider.TaskDefinitionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -342,6 +355,7 @@ func (mg *TaskDefinition) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -361,6 +375,7 @@ func (mg *TaskDefinition) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},

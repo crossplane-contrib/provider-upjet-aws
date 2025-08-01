@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *DataRepositoryAssociation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FileSystemIDRef,
 			Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *DataRepositoryAssociation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FileSystemIDRef,
 			Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +87,7 @@ func (mg *LustreFileSystem) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +107,7 @@ func (mg *LustreFileSystem) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -124,6 +127,7 @@ func (mg *LustreFileSystem) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -143,6 +147,7 @@ func (mg *LustreFileSystem) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -162,6 +167,7 @@ func (mg *LustreFileSystem) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -181,6 +187,7 @@ func (mg *LustreFileSystem) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -213,6 +220,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -232,6 +240,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PreferredSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PreferredSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.PreferredSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -251,6 +260,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -270,6 +280,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -289,6 +300,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -308,6 +320,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PreferredSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PreferredSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.PreferredSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -327,6 +340,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -346,6 +360,7 @@ func (mg *OntapFileSystem) ResolveReferences(ctx context.Context, c client.Reade
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -377,6 +392,7 @@ func (mg *OntapStorageVirtualMachine) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FileSystemIDRef,
 			Selector:     mg.Spec.ForProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -396,6 +412,7 @@ func (mg *OntapStorageVirtualMachine) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FileSystemIDRef,
 			Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -428,6 +445,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActiveDirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ActiveDirectoryIDRef,
 			Selector:     mg.Spec.ForProvider.ActiveDirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -447,6 +465,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -466,6 +485,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -485,6 +505,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -504,6 +525,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ActiveDirectoryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ActiveDirectoryIDRef,
 			Selector:     mg.Spec.InitProvider.ActiveDirectoryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -523,6 +545,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -542,6 +565,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -561,6 +585,7 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},

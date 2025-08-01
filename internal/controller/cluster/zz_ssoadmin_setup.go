@@ -36,3 +36,22 @@ func Setup_ssoadmin(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_ssoadmin creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_ssoadmin(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accountassignment.SetupGated,
+		customermanagedpolicyattachment.SetupGated,
+		instanceaccesscontrolattributes.SetupGated,
+		managedpolicyattachment.SetupGated,
+		permissionsboundaryattachment.SetupGated,
+		permissionset.SetupGated,
+		permissionsetinlinepolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -74,7 +74,7 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 			}
 		}
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.ReplicationUser != nil {
 		in, out := &in.ReplicationUser, &out.ReplicationUser
 		*out = new(bool)
@@ -219,7 +219,7 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 			}
 		}
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

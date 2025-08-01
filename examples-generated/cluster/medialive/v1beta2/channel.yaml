@@ -1,0 +1,57 @@
+apiVersion: medialive.aws.upbound.io/v1beta2
+kind: Channel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: medialive/v1beta2/channel
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    channelClass: STANDARD
+    destinations:
+    - id: destination
+      settings:
+      - url: s3://${aws_s3_bucket.main.id}/test1
+      - url: s3://${aws_s3_bucket.main2.id}/test2
+    encoderSettings:
+    - audioDescriptions:
+      - audioSelectorName: example audio selector
+        name: audio-selector
+      outputGroups:
+      - outputGroupSettings:
+        - archiveGroupSettings:
+          - destination:
+            - destinationRefId: destination
+        outputs:
+        - audioDescriptionNames:
+          - audio-selector
+          outputName: example-name
+          outputSettings:
+          - archiveOutputSettings:
+            - containerSettings:
+              - m2tsSettings:
+                - audioBufferModel: ATSC
+                  bufferModel: MULTIPLEX
+                  rateMode: CBR
+              extension: m2ts
+              nameModifier: _1
+          videoDescriptionName: example-video
+      timecodeConfig:
+      - source: EMBEDDED
+      videoDescriptions:
+      - name: example-video
+    inputAttachments:
+    - inputAttachmentName: example-input
+      inputIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    inputSpecification:
+    - codec: AVC
+      inputResolution: HD
+      maximumBitrate: MAX_20_MBPS
+    name: example-channel
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

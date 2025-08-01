@@ -42,3 +42,25 @@ func Setup_backup(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_backup creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_backup(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		framework.SetupGated,
+		globalsettings.SetupGated,
+		plan.SetupGated,
+		regionsettings.SetupGated,
+		reportplan.SetupGated,
+		selection.SetupGated,
+		vault.SetupGated,
+		vaultlockconfiguration.SetupGated,
+		vaultnotifications.SetupGated,
+		vaultpolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

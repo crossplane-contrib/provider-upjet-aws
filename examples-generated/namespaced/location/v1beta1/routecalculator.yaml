@@ -1,0 +1,13 @@
+apiVersion: location.aws.m.upbound.io/v1beta1
+kind: RouteCalculator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: location/v1beta1/routecalculator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataSource: Here
+    region: us-west-1

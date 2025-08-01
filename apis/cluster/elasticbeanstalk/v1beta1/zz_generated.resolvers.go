@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -35,6 +34,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppversionLifecycle[i3].ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AppversionLifecycle[i3].ServiceRoleRef,
 				Selector:     mg.Spec.ForProvider.AppversionLifecycle[i3].ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRole),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRoleRef,
 				Selector:     mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -89,6 +90,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -108,6 +110,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Key),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyRef,
 			Selector:     mg.Spec.ForProvider.KeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -127,6 +130,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -146,6 +150,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Key),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyRef,
 			Selector:     mg.Spec.InitProvider.KeySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -177,6 +182,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Application),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationRef,
 			Selector:     mg.Spec.ForProvider.ApplicationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -196,6 +202,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Application),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationRef,
 			Selector:     mg.Spec.InitProvider.ApplicationSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -9,10 +9,9 @@ package v1beta3
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *HoursOfOperation) ResolveReferences( // ResolveReferences of this Hour
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceIDRef,
 			Selector:     mg.Spec.ForProvider.InstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *HoursOfOperation) ResolveReferences( // ResolveReferences of this Hour
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceIDRef,
 			Selector:     mg.Spec.InitProvider.InstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HoursOfOperationID),
 			Extract:      resource.ExtractParamPath("hours_of_operation_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.HoursOfOperationIDRef,
 			Selector:     mg.Spec.ForProvider.HoursOfOperationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceIDRef,
 			Selector:     mg.Spec.ForProvider.InstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +125,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HoursOfOperationID),
 			Extract:      resource.ExtractParamPath("hours_of_operation_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.HoursOfOperationIDRef,
 			Selector:     mg.Spec.InitProvider.HoursOfOperationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,6 +145,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceIDRef,
 			Selector:     mg.Spec.InitProvider.InstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},

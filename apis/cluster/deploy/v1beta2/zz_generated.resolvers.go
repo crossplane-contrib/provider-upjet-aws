@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -36,6 +35,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppNameRef,
 			Selector:     mg.Spec.ForProvider.AppNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EcsService.ClusterName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EcsService.ClusterNameRef,
 				Selector:     mg.Spec.ForProvider.EcsService.ClusterNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -77,6 +78,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EcsService.ServiceName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EcsService.ServiceNameRef,
 				Selector:     mg.Spec.ForProvider.EcsService.ServiceNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -99,6 +101,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancerInfo.ELBInfo[i4].Name),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.LoadBalancerInfo.ELBInfo[i4].NameRef,
 					Selector:     mg.Spec.ForProvider.LoadBalancerInfo.ELBInfo[i4].NameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -123,6 +126,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.LoadBalancerInfo.TargetGroupPairInfo.ProdTrafficRoute.ListenerArns),
 						Extract:       resource.ExtractParamPath("arn", true),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.ForProvider.LoadBalancerInfo.TargetGroupPairInfo.ProdTrafficRoute.ListenerArnsRefs,
 						Selector:      mg.Spec.ForProvider.LoadBalancerInfo.TargetGroupPairInfo.ProdTrafficRoute.ListenerArnsSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -148,6 +152,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadBalancerInfo.TargetGroupPairInfo.TargetGroup[i5].Name),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.LoadBalancerInfo.TargetGroupPairInfo.TargetGroup[i5].NameRef,
 						Selector:     mg.Spec.ForProvider.LoadBalancerInfo.TargetGroupPairInfo.TargetGroup[i5].NameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -170,6 +175,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -190,6 +196,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TriggerConfiguration[i3].TriggerTargetArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.TriggerConfiguration[i3].TriggerTargetArnRef,
 				Selector:     mg.Spec.ForProvider.TriggerConfiguration[i3].TriggerTargetArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -211,6 +218,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EcsService.ClusterName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EcsService.ClusterNameRef,
 				Selector:     mg.Spec.InitProvider.EcsService.ClusterNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -232,6 +240,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EcsService.ServiceName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EcsService.ServiceNameRef,
 				Selector:     mg.Spec.InitProvider.EcsService.ServiceNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -254,6 +263,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoadBalancerInfo.ELBInfo[i4].Name),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.LoadBalancerInfo.ELBInfo[i4].NameRef,
 					Selector:     mg.Spec.InitProvider.LoadBalancerInfo.ELBInfo[i4].NameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -278,6 +288,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 						CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.LoadBalancerInfo.TargetGroupPairInfo.ProdTrafficRoute.ListenerArns),
 						Extract:       resource.ExtractParamPath("arn", true),
+						Namespace:     mg.GetNamespace(),
 						References:    mg.Spec.InitProvider.LoadBalancerInfo.TargetGroupPairInfo.ProdTrafficRoute.ListenerArnsRefs,
 						Selector:      mg.Spec.InitProvider.LoadBalancerInfo.TargetGroupPairInfo.ProdTrafficRoute.ListenerArnsSelector,
 						To:            reference.To{List: l, Managed: m},
@@ -303,6 +314,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoadBalancerInfo.TargetGroupPairInfo.TargetGroup[i5].Name),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.LoadBalancerInfo.TargetGroupPairInfo.TargetGroup[i5].NameRef,
 						Selector:     mg.Spec.InitProvider.LoadBalancerInfo.TargetGroupPairInfo.TargetGroup[i5].NameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -325,6 +337,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -345,6 +358,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArnRef,
 				Selector:     mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArnSelector,
 				To:           reference.To{List: l, Managed: m},

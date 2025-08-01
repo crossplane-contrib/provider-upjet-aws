@@ -28,3 +28,18 @@ func Setup_transcribe(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_transcribe creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_transcribe(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		languagemodel.SetupGated,
+		vocabulary.SetupGated,
+		vocabularyfilter.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

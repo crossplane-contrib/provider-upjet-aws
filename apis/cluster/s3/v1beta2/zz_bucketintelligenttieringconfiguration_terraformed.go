@@ -84,7 +84,7 @@ func (tr *BucketIntelligentTieringConfiguration) GetInitParameters() (map[string
 func (tr *BucketIntelligentTieringConfiguration) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *BucketIntelligentTieringConfiguration) GetMergedParameters(shouldMerge
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *BucketIntelligentTieringConfiguration) GetMergedParameters(shouldMerge
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

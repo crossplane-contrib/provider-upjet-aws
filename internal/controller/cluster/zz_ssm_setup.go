@@ -46,3 +46,27 @@ func Setup_ssm(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_ssm creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_ssm(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		activation.SetupGated,
+		association.SetupGated,
+		defaultpatchbaseline.SetupGated,
+		document.SetupGated,
+		maintenancewindow.SetupGated,
+		maintenancewindowtarget.SetupGated,
+		maintenancewindowtask.SetupGated,
+		parameter.SetupGated,
+		patchbaseline.SetupGated,
+		patchgroup.SetupGated,
+		resourcedatasync.SetupGated,
+		servicesetting.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

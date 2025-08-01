@@ -54,3 +54,31 @@ func Setup_lightsail(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_lightsail creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_lightsail(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		bucket.SetupGated,
+		certificate.SetupGated,
+		containerservice.SetupGated,
+		disk.SetupGated,
+		diskattachment.SetupGated,
+		domain.SetupGated,
+		domainentry.SetupGated,
+		instance.SetupGated,
+		instancepublicports.SetupGated,
+		keypair.SetupGated,
+		lb.SetupGated,
+		lbattachment.SetupGated,
+		lbcertificate.SetupGated,
+		lbstickinesspolicy.SetupGated,
+		staticip.SetupGated,
+		staticipattachment.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

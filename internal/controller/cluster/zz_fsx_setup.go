@@ -34,3 +34,21 @@ func Setup_fsx(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_fsx creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_fsx(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		backup.SetupGated,
+		datarepositoryassociation.SetupGated,
+		lustrefilesystem.SetupGated,
+		ontapfilesystem.SetupGated,
+		ontapstoragevirtualmachine.SetupGated,
+		windowsfilesystem.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

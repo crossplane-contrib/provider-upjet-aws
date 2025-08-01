@@ -9,18 +9,16 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Database.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Database) ResolveReferences( // ResolveReferences of this Database.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +54,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -89,6 +89,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnRef,
 						Selector:     mg.Spec.ForProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -114,6 +115,7 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArn),
 						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnRef,
 						Selector:     mg.Spec.InitProvider.Configuration.ResultConfiguration.EncryptionConfiguration.KMSKeyArnSelector,
 						To:           reference.To{List: l, Managed: m},

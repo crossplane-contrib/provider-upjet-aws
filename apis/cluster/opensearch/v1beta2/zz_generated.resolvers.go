@@ -9,18 +9,16 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Domain.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Domain) ResolveReferences( // ResolveReferences of this Domain.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -38,6 +36,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptAtRest.KMSKeyID),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptAtRest.KMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.EncryptAtRest.KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -59,6 +58,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef,
 				Selector:     mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -80,6 +80,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCOptions.SecurityGroupIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCOptions.SecurityGroupIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -101,6 +102,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.VPCOptions.SubnetIDRefs,
 				Selector:      mg.Spec.ForProvider.VPCOptions.SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -122,6 +124,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptAtRest.KMSKeyID),
 				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptAtRest.KMSKeyIDRef,
 				Selector:     mg.Spec.InitProvider.EncryptAtRest.KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -143,6 +146,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef,
 				Selector:     mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -164,6 +168,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions.SecurityGroupIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCOptions.SecurityGroupIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCOptions.SecurityGroupIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -185,6 +190,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions.SubnetIds),
 				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.VPCOptions.SubnetIDRefs,
 				Selector:      mg.Spec.InitProvider.VPCOptions.SubnetIDSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -218,6 +224,7 @@ func (mg *DomainSAMLOptions) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
 			Extract:      resource.ExtractParamPath("domain_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -237,6 +244,7 @@ func (mg *DomainSAMLOptions) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
 			Extract:      resource.ExtractParamPath("domain_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DomainNameRef,
 			Selector:     mg.Spec.InitProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},

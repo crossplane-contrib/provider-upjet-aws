@@ -1,0 +1,54 @@
+apiVersion: guardduty.aws.m.upbound.io/v1beta1
+kind: Member
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guardduty/v1beta1/member
+  labels:
+    testing.upbound.io/example-name: member
+  name: member
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: member
+    detectorIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    email: required@example.com
+    invitationMessage: please accept guardduty invitation
+    invite: true
+    region: us-west-1
+
+---
+
+apiVersion: guardduty.aws.m.upbound.io/v1beta1
+kind: Detector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guardduty/v1beta1/member
+  labels:
+    testing.upbound.io/example-name: member
+  name: member
+  namespace: upbound-system
+spec:
+  forProvider:
+    enable: true
+    provider: ${aws.dev}
+    region: us-west-1
+
+---
+
+apiVersion: guardduty.aws.m.upbound.io/v1beta1
+kind: Detector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guardduty/v1beta1/member
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+  namespace: upbound-system
+spec:
+  forProvider:
+    enable: true
+    region: us-west-1

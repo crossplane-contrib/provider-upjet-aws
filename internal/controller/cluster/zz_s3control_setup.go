@@ -38,3 +38,23 @@ func Setup_s3control(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_s3control creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_s3control(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accesspoint.SetupGated,
+		accesspointpolicy.SetupGated,
+		accountpublicaccessblock.SetupGated,
+		multiregionaccesspoint.SetupGated,
+		multiregionaccesspointpolicy.SetupGated,
+		objectlambdaaccesspoint.SetupGated,
+		objectlambdaaccesspointpolicy.SetupGated,
+		storagelensconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

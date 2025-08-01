@@ -27,11 +27,6 @@ func (mg *NetworkPerformanceMetricSubscription) GetProviderConfigReference() *xp
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this NetworkPerformanceMetricSubscription.
-func (mg *NetworkPerformanceMetricSubscription) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this NetworkPerformanceMetricSubscription.
 func (mg *NetworkPerformanceMetricSubscription) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *NetworkPerformanceMetricSubscription) SetManagementPolicies(r xpv1.Man
 // SetProviderConfigReference of this NetworkPerformanceMetricSubscription.
 func (mg *NetworkPerformanceMetricSubscription) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this NetworkPerformanceMetricSubscription.
-func (mg *NetworkPerformanceMetricSubscription) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this NetworkPerformanceMetricSubscription.

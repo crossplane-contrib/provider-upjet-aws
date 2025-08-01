@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ELB),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ELBRef,
 			Selector:     mg.Spec.ForProvider.ELBSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +74,7 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LBTargetGroupArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LBTargetGroupArnRef,
 			Selector:     mg.Spec.ForProvider.LBTargetGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +94,7 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.InitProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -111,6 +114,7 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ELB),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ELBRef,
 			Selector:     mg.Spec.InitProvider.ELBSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,6 +134,7 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LBTargetGroupArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LBTargetGroupArnRef,
 			Selector:     mg.Spec.InitProvider.LBTargetGroupArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -162,6 +167,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchConfiguration),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LaunchConfigurationRef,
 			Selector:     mg.Spec.ForProvider.LaunchConfigurationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -182,6 +188,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplate[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.LaunchTemplate[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.LaunchTemplate[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -205,6 +212,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateIDRef,
 						Selector:     mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -231,6 +239,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateIDRef,
 							Selector:     mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -254,6 +263,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PlacementGroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PlacementGroupRef,
 			Selector:     mg.Spec.ForProvider.PlacementGroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -273,6 +283,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceLinkedRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceLinkedRoleArnRef,
 			Selector:     mg.Spec.ForProvider.ServiceLinkedRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -292,6 +303,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCZoneIdentifier),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.VPCZoneIdentifierRefs,
 			Selector:      mg.Spec.ForProvider.VPCZoneIdentifierSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -311,6 +323,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LaunchConfiguration),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LaunchConfigurationRef,
 			Selector:     mg.Spec.InitProvider.LaunchConfigurationSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -331,6 +344,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LaunchTemplate[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.LaunchTemplate[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.LaunchTemplate[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -354,6 +368,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateIDRef,
 						Selector:     mg.Spec.InitProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -380,6 +395,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateIDRef,
 							Selector:     mg.Spec.InitProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -403,6 +419,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PlacementGroup),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PlacementGroupRef,
 			Selector:     mg.Spec.InitProvider.PlacementGroupSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -422,6 +439,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceLinkedRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceLinkedRoleArnRef,
 			Selector:     mg.Spec.InitProvider.ServiceLinkedRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -441,6 +459,7 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCZoneIdentifier),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.VPCZoneIdentifierRefs,
 			Selector:      mg.Spec.InitProvider.VPCZoneIdentifierSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -472,6 +491,7 @@ func (mg *GroupTag) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -491,6 +511,7 @@ func (mg *GroupTag) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.InitProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -522,6 +543,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutoscalingGroupNameRef,
 			Selector:     mg.Spec.ForProvider.AutoscalingGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

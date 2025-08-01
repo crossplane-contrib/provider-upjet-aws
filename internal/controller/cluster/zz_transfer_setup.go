@@ -34,3 +34,21 @@ func Setup_transfer(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_transfer creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_transfer(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		connector.SetupGated,
+		server.SetupGated,
+		sshkey.SetupGated,
+		tag.SetupGated,
+		user.SetupGated,
+		workflow.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

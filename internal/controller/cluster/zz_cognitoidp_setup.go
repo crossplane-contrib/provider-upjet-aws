@@ -42,3 +42,25 @@ func Setup_cognitoidp(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_cognitoidp creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cognitoidp(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		identityprovider.SetupGated,
+		resourceserver.SetupGated,
+		riskconfiguration.SetupGated,
+		user.SetupGated,
+		usergroup.SetupGated,
+		useringroup.SetupGated,
+		userpool.SetupGated,
+		userpoolclient.SetupGated,
+		userpooldomain.SetupGated,
+		userpooluicustomization.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

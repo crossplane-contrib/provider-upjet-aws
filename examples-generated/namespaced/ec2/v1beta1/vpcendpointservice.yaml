@@ -1,0 +1,15 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPCEndpointService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    acceptanceRequired: false
+    networkLoadBalancerArnsRefs:
+    - name: example
+    region: us-west-1

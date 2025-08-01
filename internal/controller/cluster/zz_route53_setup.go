@@ -44,3 +44,26 @@ func Setup_route53(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_route53 creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_route53(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		delegationset.SetupGated,
+		healthcheck.SetupGated,
+		hostedzonednssec.SetupGated,
+		querylog.SetupGated,
+		record.SetupGated,
+		resolverconfig.SetupGated,
+		trafficpolicy.SetupGated,
+		trafficpolicyinstance.SetupGated,
+		vpcassociationauthorization.SetupGated,
+		zone.SetupGated,
+		zoneassociation.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

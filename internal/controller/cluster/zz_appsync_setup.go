@@ -34,3 +34,21 @@ func Setup_appsync(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_appsync creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_appsync(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		apicache.SetupGated,
+		apikey.SetupGated,
+		datasource.SetupGated,
+		function.SetupGated,
+		graphqlapi.SetupGated,
+		resolver.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

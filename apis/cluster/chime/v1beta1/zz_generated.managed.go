@@ -27,11 +27,6 @@ func (mg *VoiceConnector) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnector.
-func (mg *VoiceConnector) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnector.
 func (mg *VoiceConnector) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *VoiceConnector) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this VoiceConnector.
 func (mg *VoiceConnector) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnector.
-func (mg *VoiceConnector) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnector.
@@ -87,11 +77,6 @@ func (mg *VoiceConnectorGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnectorGroup.
 func (mg *VoiceConnectorGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *VoiceConnectorGroup) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this VoiceConnectorGroup.
 func (mg *VoiceConnectorGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorGroup.
@@ -147,11 +127,6 @@ func (mg *VoiceConnectorLogging) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnectorLogging.
 func (mg *VoiceConnectorLogging) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *VoiceConnectorLogging) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this VoiceConnectorLogging.
 func (mg *VoiceConnectorLogging) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorLogging.
@@ -207,11 +177,6 @@ func (mg *VoiceConnectorOrigination) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnectorOrigination.
 func (mg *VoiceConnectorOrigination) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *VoiceConnectorOrigination) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this VoiceConnectorOrigination.
 func (mg *VoiceConnectorOrigination) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorOrigination.
@@ -267,11 +227,6 @@ func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *VoiceConnectorStreaming) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorStreaming.
@@ -327,11 +277,6 @@ func (mg *VoiceConnectorTermination) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnectorTermination.
 func (mg *VoiceConnectorTermination) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *VoiceConnectorTermination) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this VoiceConnectorTermination.
 func (mg *VoiceConnectorTermination) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorTermination.
@@ -387,11 +327,6 @@ func (mg *VoiceConnectorTerminationCredentials) GetProviderConfigReference() *xp
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnectorTerminationCredentials.
 func (mg *VoiceConnectorTerminationCredentials) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *VoiceConnectorTerminationCredentials) SetManagementPolicies(r xpv1.Man
 // SetProviderConfigReference of this VoiceConnectorTerminationCredentials.
 func (mg *VoiceConnectorTerminationCredentials) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorTerminationCredentials.

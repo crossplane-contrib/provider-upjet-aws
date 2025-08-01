@@ -32,3 +32,20 @@ func Setup_location(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_location creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_location(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		geofencecollection.SetupGated,
+		placeindex.SetupGated,
+		routecalculator.SetupGated,
+		tracker.SetupGated,
+		trackerassociation.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

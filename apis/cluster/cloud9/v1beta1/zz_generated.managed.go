@@ -27,11 +27,6 @@ func (mg *EnvironmentEC2) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this EnvironmentEC2.
-func (mg *EnvironmentEC2) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this EnvironmentEC2.
 func (mg *EnvironmentEC2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *EnvironmentEC2) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EnvironmentEC2.
 func (mg *EnvironmentEC2) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this EnvironmentEC2.
-func (mg *EnvironmentEC2) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this EnvironmentEC2.
@@ -87,11 +77,6 @@ func (mg *EnvironmentMembership) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this EnvironmentMembership.
-func (mg *EnvironmentMembership) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this EnvironmentMembership.
 func (mg *EnvironmentMembership) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *EnvironmentMembership) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this EnvironmentMembership.
 func (mg *EnvironmentMembership) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this EnvironmentMembership.
-func (mg *EnvironmentMembership) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this EnvironmentMembership.

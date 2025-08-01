@@ -34,3 +34,21 @@ func Setup_opensearchserverless(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_opensearchserverless creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_opensearchserverless(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accesspolicy.SetupGated,
+		collection.SetupGated,
+		lifecyclepolicy.SetupGated,
+		securityconfig.SetupGated,
+		securitypolicy.SetupGated,
+		vpcendpoint.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

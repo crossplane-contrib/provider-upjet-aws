@@ -27,11 +27,6 @@ func (mg *Bucket) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Bucket.
-func (mg *Bucket) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Bucket.
 func (mg *Bucket) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *Bucket) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Bucket.
 func (mg *Bucket) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Bucket.
-func (mg *Bucket) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Bucket.
@@ -87,11 +77,6 @@ func (mg *BucketACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketACL.
-func (mg *BucketACL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketACL.
 func (mg *BucketACL) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *BucketACL) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BucketACL.
 func (mg *BucketACL) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketACL.
-func (mg *BucketACL) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketACL.
@@ -147,11 +127,6 @@ func (mg *BucketAnalyticsConfiguration) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketAnalyticsConfiguration.
-func (mg *BucketAnalyticsConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketAnalyticsConfiguration.
 func (mg *BucketAnalyticsConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *BucketAnalyticsConfiguration) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this BucketAnalyticsConfiguration.
 func (mg *BucketAnalyticsConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketAnalyticsConfiguration.
-func (mg *BucketAnalyticsConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketAnalyticsConfiguration.
@@ -207,11 +177,6 @@ func (mg *BucketIntelligentTieringConfiguration) GetProviderConfigReference() *x
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketIntelligentTieringConfiguration.
-func (mg *BucketIntelligentTieringConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketIntelligentTieringConfiguration.
 func (mg *BucketIntelligentTieringConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *BucketIntelligentTieringConfiguration) SetManagementPolicies(r xpv1.Ma
 // SetProviderConfigReference of this BucketIntelligentTieringConfiguration.
 func (mg *BucketIntelligentTieringConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketIntelligentTieringConfiguration.
-func (mg *BucketIntelligentTieringConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketIntelligentTieringConfiguration.
@@ -267,11 +227,6 @@ func (mg *BucketInventory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketInventory.
-func (mg *BucketInventory) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketInventory.
 func (mg *BucketInventory) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *BucketInventory) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BucketInventory.
 func (mg *BucketInventory) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketInventory.
-func (mg *BucketInventory) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketInventory.
@@ -327,11 +277,6 @@ func (mg *BucketLifecycleConfiguration) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketLifecycleConfiguration.
-func (mg *BucketLifecycleConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketLifecycleConfiguration.
 func (mg *BucketLifecycleConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *BucketLifecycleConfiguration) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this BucketLifecycleConfiguration.
 func (mg *BucketLifecycleConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketLifecycleConfiguration.
-func (mg *BucketLifecycleConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketLifecycleConfiguration.
@@ -387,11 +327,6 @@ func (mg *BucketLogging) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketLogging.
-func (mg *BucketLogging) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketLogging.
 func (mg *BucketLogging) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *BucketLogging) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BucketLogging.
 func (mg *BucketLogging) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketLogging.
-func (mg *BucketLogging) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketLogging.
@@ -447,11 +377,6 @@ func (mg *BucketMetric) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketMetric.
-func (mg *BucketMetric) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketMetric.
 func (mg *BucketMetric) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *BucketMetric) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BucketMetric.
 func (mg *BucketMetric) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketMetric.
-func (mg *BucketMetric) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketMetric.
@@ -507,11 +427,6 @@ func (mg *BucketObjectLockConfiguration) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketObjectLockConfiguration.
-func (mg *BucketObjectLockConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketObjectLockConfiguration.
 func (mg *BucketObjectLockConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *BucketObjectLockConfiguration) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this BucketObjectLockConfiguration.
 func (mg *BucketObjectLockConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketObjectLockConfiguration.
-func (mg *BucketObjectLockConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketObjectLockConfiguration.
@@ -567,11 +477,6 @@ func (mg *BucketOwnershipControls) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketOwnershipControls.
-func (mg *BucketOwnershipControls) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketOwnershipControls.
 func (mg *BucketOwnershipControls) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *BucketOwnershipControls) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this BucketOwnershipControls.
 func (mg *BucketOwnershipControls) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketOwnershipControls.
-func (mg *BucketOwnershipControls) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketOwnershipControls.
@@ -627,11 +527,6 @@ func (mg *BucketReplicationConfiguration) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketReplicationConfiguration.
-func (mg *BucketReplicationConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketReplicationConfiguration.
 func (mg *BucketReplicationConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -655,11 +550,6 @@ func (mg *BucketReplicationConfiguration) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this BucketReplicationConfiguration.
 func (mg *BucketReplicationConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketReplicationConfiguration.
-func (mg *BucketReplicationConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketReplicationConfiguration.
@@ -687,11 +577,6 @@ func (mg *BucketServerSideEncryptionConfiguration) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketServerSideEncryptionConfiguration.
-func (mg *BucketServerSideEncryptionConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketServerSideEncryptionConfiguration.
 func (mg *BucketServerSideEncryptionConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -715,11 +600,6 @@ func (mg *BucketServerSideEncryptionConfiguration) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this BucketServerSideEncryptionConfiguration.
 func (mg *BucketServerSideEncryptionConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketServerSideEncryptionConfiguration.
-func (mg *BucketServerSideEncryptionConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketServerSideEncryptionConfiguration.
@@ -747,11 +627,6 @@ func (mg *BucketVersioning) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketVersioning.
-func (mg *BucketVersioning) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketVersioning.
 func (mg *BucketVersioning) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -775,11 +650,6 @@ func (mg *BucketVersioning) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BucketVersioning.
 func (mg *BucketVersioning) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketVersioning.
-func (mg *BucketVersioning) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketVersioning.
@@ -807,11 +677,6 @@ func (mg *BucketWebsiteConfiguration) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BucketWebsiteConfiguration.
-func (mg *BucketWebsiteConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BucketWebsiteConfiguration.
 func (mg *BucketWebsiteConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -835,11 +700,6 @@ func (mg *BucketWebsiteConfiguration) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this BucketWebsiteConfiguration.
 func (mg *BucketWebsiteConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BucketWebsiteConfiguration.
-func (mg *BucketWebsiteConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BucketWebsiteConfiguration.
@@ -867,11 +727,6 @@ func (mg *Object) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Object.
-func (mg *Object) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Object.
 func (mg *Object) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -895,11 +750,6 @@ func (mg *Object) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Object.
 func (mg *Object) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Object.
-func (mg *Object) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Object.

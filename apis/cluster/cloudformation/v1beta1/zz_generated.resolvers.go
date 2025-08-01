@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/config/cluster/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Stack.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Stack) ResolveReferences( // ResolveReferences of this Stack.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
 			Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +85,7 @@ func (mg *StackSet) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AdministrationRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AdministrationRoleArnRef,
 			Selector:     mg.Spec.ForProvider.AdministrationRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +105,7 @@ func (mg *StackSet) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AdministrationRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AdministrationRoleArnRef,
 			Selector:     mg.Spec.InitProvider.AdministrationRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +137,7 @@ func (mg *StackSetInstance) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StackSetNameRef,
 			Selector:     mg.Spec.ForProvider.StackSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +157,7 @@ func (mg *StackSetInstance) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackSetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StackSetNameRef,
 			Selector:     mg.Spec.InitProvider.StackSetNameSelector,
 			To:           reference.To{List: l, Managed: m},

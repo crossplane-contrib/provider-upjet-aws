@@ -28,3 +28,18 @@ func Setup_amp(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_amp creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_amp(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		alertmanagerdefinition.SetupGated,
+		rulegroupnamespace.SetupGated,
+		workspace.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

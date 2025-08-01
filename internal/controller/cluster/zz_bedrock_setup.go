@@ -24,3 +24,16 @@ func Setup_bedrock(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_bedrock creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_bedrock(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		inferenceprofile.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

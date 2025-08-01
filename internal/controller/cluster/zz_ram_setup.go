@@ -30,3 +30,19 @@ func Setup_ram(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_ram creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_ram(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		principalassociation.SetupGated,
+		resourceassociation.SetupGated,
+		resourceshare.SetupGated,
+		resourceshareaccepter.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

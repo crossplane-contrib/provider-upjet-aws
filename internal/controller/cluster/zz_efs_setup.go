@@ -34,3 +34,21 @@ func Setup_efs(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_efs creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_efs(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accesspoint.SetupGated,
+		backuppolicy.SetupGated,
+		filesystem.SetupGated,
+		filesystempolicy.SetupGated,
+		mounttarget.SetupGated,
+		replicationconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

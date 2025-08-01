@@ -9,16 +9,14 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this ELB.
+	errors "github.com/pkg/errors"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *ELB) ResolveReferences( // ResolveReferences of this ELB.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -34,6 +32,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Instances),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.InstancesRefs,
 			Selector:      mg.Spec.ForProvider.InstancesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -53,6 +52,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetsRefs,
 			Selector:      mg.Spec.ForProvider.SubnetsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -72,6 +72,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Instances),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.InstancesRefs,
 			Selector:      mg.Spec.InitProvider.InstancesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -91,6 +92,7 @@ func (mg *ELB) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Subnets),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetsRefs,
 			Selector:      mg.Spec.InitProvider.SubnetsSelector,
 			To:            reference.To{List: l, Managed: m},

@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *ConfigurationProfile) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *ConfigurationProfile) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RetrievalRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RetrievalRoleArnRef,
 			Selector:     mg.Spec.ForProvider.RetrievalRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +74,7 @@ func (mg *ConfigurationProfile) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +94,7 @@ func (mg *ConfigurationProfile) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RetrievalRoleArn),
 			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RetrievalRoleArnRef,
 			Selector:     mg.Spec.InitProvider.RetrievalRoleArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +126,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +146,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationProfileID),
 			Extract:      resource.ExtractParamPath("configuration_profile_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -161,6 +166,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationVersion),
 			Extract:      resource.ExtractParamPath("version_number", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationVersionRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationVersionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -180,6 +186,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeploymentStrategyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DeploymentStrategyIDRef,
 			Selector:     mg.Spec.ForProvider.DeploymentStrategyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -199,6 +206,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnvironmentID),
 			Extract:      resource.ExtractParamPath("environment_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.EnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -218,6 +226,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyIdentifier),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIdentifierRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIdentifierSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -237,6 +246,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -256,6 +266,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationProfileID),
 			Extract:      resource.ExtractParamPath("configuration_profile_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -275,6 +286,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationVersion),
 			Extract:      resource.ExtractParamPath("version_number", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationVersionRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationVersionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -294,6 +306,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeploymentStrategyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DeploymentStrategyIDRef,
 			Selector:     mg.Spec.InitProvider.DeploymentStrategyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -313,6 +326,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EnvironmentID),
 			Extract:      resource.ExtractParamPath("environment_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EnvironmentIDRef,
 			Selector:     mg.Spec.InitProvider.EnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -332,6 +346,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyIdentifier),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIdentifierRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIdentifierSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -363,6 +378,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -383,6 +399,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Monitor[i3].AlarmArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Monitor[i3].AlarmArnRef,
 				Selector:     mg.Spec.ForProvider.Monitor[i3].AlarmArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -404,6 +421,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Monitor[i3].AlarmRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Monitor[i3].AlarmRoleArnRef,
 				Selector:     mg.Spec.ForProvider.Monitor[i3].AlarmRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -424,6 +442,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -444,6 +463,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Monitor[i3].AlarmArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Monitor[i3].AlarmArnRef,
 				Selector:     mg.Spec.InitProvider.Monitor[i3].AlarmArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -465,6 +485,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Monitor[i3].AlarmRoleArn),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Monitor[i3].AlarmRoleArnRef,
 				Selector:     mg.Spec.InitProvider.Monitor[i3].AlarmRoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -500,6 +521,7 @@ func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArnRef,
 					Selector:     mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -523,6 +545,7 @@ func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URI),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URIRef,
 					Selector:     mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URISelector,
 					To:           reference.To{List: l, Managed: m},
@@ -546,6 +569,7 @@ func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ActionPoint[i3].Action[i4].RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ActionPoint[i3].Action[i4].RoleArnRef,
 					Selector:     mg.Spec.InitProvider.ActionPoint[i3].Action[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -569,6 +593,7 @@ func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ActionPoint[i3].Action[i4].URI),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ActionPoint[i3].Action[i4].URIRef,
 					Selector:     mg.Spec.InitProvider.ActionPoint[i3].Action[i4].URISelector,
 					To:           reference.To{List: l, Managed: m},
@@ -603,6 +628,7 @@ func (mg *ExtensionAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtensionArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExtensionArnRef,
 			Selector:     mg.Spec.ForProvider.ExtensionArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -622,6 +648,7 @@ func (mg *ExtensionAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -641,6 +668,7 @@ func (mg *ExtensionAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExtensionArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExtensionArnRef,
 			Selector:     mg.Spec.InitProvider.ExtensionArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -660,6 +688,7 @@ func (mg *ExtensionAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -691,6 +720,7 @@ func (mg *HostedConfigurationVersion) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -710,6 +740,7 @@ func (mg *HostedConfigurationVersion) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationProfileID),
 			Extract:      resource.ExtractParamPath("configuration_profile_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfigurationProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -729,6 +760,7 @@ func (mg *HostedConfigurationVersion) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -748,6 +780,7 @@ func (mg *HostedConfigurationVersion) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationProfileID),
 			Extract:      resource.ExtractParamPath("configuration_profile_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfigurationProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ConfigurationProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},

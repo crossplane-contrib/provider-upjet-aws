@@ -68,3 +68,38 @@ func Setup_sagemaker(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_sagemaker creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_sagemaker(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		app.SetupGated,
+		appimageconfig.SetupGated,
+		coderepository.SetupGated,
+		device.SetupGated,
+		devicefleet.SetupGated,
+		domain.SetupGated,
+		endpoint.SetupGated,
+		endpointconfiguration.SetupGated,
+		featuregroup.SetupGated,
+		image.SetupGated,
+		imageversion.SetupGated,
+		mlflowtrackingserver.SetupGated,
+		model.SetupGated,
+		modelpackagegroup.SetupGated,
+		modelpackagegrouppolicy.SetupGated,
+		notebookinstance.SetupGated,
+		notebookinstancelifecycleconfiguration.SetupGated,
+		servicecatalogportfoliostatus.SetupGated,
+		space.SetupGated,
+		studiolifecycleconfig.SetupGated,
+		userprofile.SetupGated,
+		workforce.SetupGated,
+		workteam.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

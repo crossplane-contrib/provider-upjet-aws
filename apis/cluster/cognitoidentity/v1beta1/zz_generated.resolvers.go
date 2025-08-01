@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityPoolID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IdentityPoolIDRef,
 			Selector:     mg.Spec.ForProvider.IdentityPoolIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityProviderName),
 			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IdentityProviderNameRef,
 			Selector:     mg.Spec.ForProvider.IdentityProviderNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +74,7 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
 			Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +94,7 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityProviderName),
 			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IdentityProviderNameRef,
 			Selector:     mg.Spec.InitProvider.IdentityProviderNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -125,6 +128,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientID),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDRef,
 				Selector:     mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -145,6 +149,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SAMLProviderArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SAMLProviderArnsRefs,
 			Selector:      mg.Spec.ForProvider.SAMLProviderArnsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -165,6 +170,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientID),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDRef,
 				Selector:     mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -185,6 +191,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SAMLProviderArns),
 			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SAMLProviderArnsRefs,
 			Selector:      mg.Spec.InitProvider.SAMLProviderArnsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -216,6 +223,7 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityPoolID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IdentityPoolIDRef,
 			Selector:     mg.Spec.ForProvider.IdentityPoolIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -237,6 +245,7 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
 					Selector:     mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -258,6 +267,7 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
 			Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -279,6 +289,7 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
 					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
 					Selector:     mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},

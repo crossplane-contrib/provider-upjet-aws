@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *DiskAttachment) ResolveReferences( // ResolveReferences of this DiskAt
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DiskName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DiskNameRef,
 			Selector:     mg.Spec.ForProvider.DiskNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *DiskAttachment) ResolveReferences( // ResolveReferences of this DiskAt
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceNameRef,
 			Selector:     mg.Spec.ForProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +73,7 @@ func (mg *DiskAttachment) ResolveReferences( // ResolveReferences of this DiskAt
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DiskName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DiskNameRef,
 			Selector:     mg.Spec.InitProvider.DiskNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *DiskAttachment) ResolveReferences( // ResolveReferences of this DiskAt
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceNameRef,
 			Selector:     mg.Spec.InitProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +125,7 @@ func (mg *DomainEntry) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
 			Extract:      resource.ExtractParamPath("domain_name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -153,6 +157,7 @@ func (mg *InstancePublicPorts) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceNameRef,
 			Selector:     mg.Spec.ForProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -172,6 +177,7 @@ func (mg *InstancePublicPorts) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceNameRef,
 			Selector:     mg.Spec.InitProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -203,6 +209,7 @@ func (mg *LBAttachment) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceNameRef,
 			Selector:     mg.Spec.ForProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -222,6 +229,7 @@ func (mg *LBAttachment) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LBName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LBNameRef,
 			Selector:     mg.Spec.ForProvider.LBNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -241,6 +249,7 @@ func (mg *LBAttachment) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceNameRef,
 			Selector:     mg.Spec.InitProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -260,6 +269,7 @@ func (mg *LBAttachment) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LBName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LBNameRef,
 			Selector:     mg.Spec.InitProvider.LBNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -291,6 +301,7 @@ func (mg *LBCertificate) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LBName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LBNameRef,
 			Selector:     mg.Spec.ForProvider.LBNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -322,6 +333,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceNameRef,
 			Selector:     mg.Spec.ForProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -341,6 +353,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StaticIPName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StaticIPNameRef,
 			Selector:     mg.Spec.ForProvider.StaticIPNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -360,6 +373,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceNameRef,
 			Selector:     mg.Spec.InitProvider.InstanceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -379,6 +393,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StaticIPName),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StaticIPNameRef,
 			Selector:     mg.Spec.InitProvider.StaticIPNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Broker.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Broker) ResolveReferences( // ResolveReferences of this Broker.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -37,6 +35,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Configuration[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.Configuration[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +56,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataReplicationPrimaryBrokerArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataReplicationPrimaryBrokerArnRef,
 			Selector:     mg.Spec.ForProvider.DataReplicationPrimaryBrokerArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -76,6 +76,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SecurityGroupRefs,
 			Selector:      mg.Spec.ForProvider.SecurityGroupSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -95,6 +96,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -115,6 +117,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Configuration[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.Configuration[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -135,6 +138,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataReplicationPrimaryBrokerArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataReplicationPrimaryBrokerArnRef,
 			Selector:     mg.Spec.InitProvider.DataReplicationPrimaryBrokerArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +158,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SecurityGroupRefs,
 			Selector:      mg.Spec.InitProvider.SecurityGroupSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -173,6 +178,7 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.SubnetIDRefs,
 			Selector:      mg.Spec.InitProvider.SubnetIDSelector,
 			To:            reference.To{List: l, Managed: m},

@@ -9,16 +9,14 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Cluster.
+	errors "github.com/pkg/errors"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IAMRoles),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.IAMRoleRefs,
 			Selector:      mg.Spec.ForProvider.IAMRoleSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +73,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NeptuneClusterParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NeptuneClusterParameterGroupNameRef,
 			Selector:     mg.Spec.ForProvider.NeptuneClusterParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +93,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NeptuneSubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NeptuneSubnetGroupNameRef,
 			Selector:     mg.Spec.ForProvider.NeptuneSubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -111,6 +113,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicationSourceIdentifier),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ReplicationSourceIdentifierRef,
 			Selector:     mg.Spec.ForProvider.ReplicationSourceIdentifierSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,6 +133,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnapshotIdentifier),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SnapshotIdentifierRef,
 			Selector:     mg.Spec.ForProvider.SnapshotIdentifierSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -149,6 +153,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -168,6 +173,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IAMRoles),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.IAMRoleRefs,
 			Selector:      mg.Spec.InitProvider.IAMRoleSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -187,6 +193,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -206,6 +213,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NeptuneClusterParameterGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NeptuneClusterParameterGroupNameRef,
 			Selector:     mg.Spec.InitProvider.NeptuneClusterParameterGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -225,6 +233,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NeptuneSubnetGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NeptuneSubnetGroupNameRef,
 			Selector:     mg.Spec.InitProvider.NeptuneSubnetGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -244,6 +253,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicationSourceIdentifier),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ReplicationSourceIdentifierRef,
 			Selector:     mg.Spec.InitProvider.ReplicationSourceIdentifierSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -263,6 +273,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnapshotIdentifier),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SnapshotIdentifierRef,
 			Selector:     mg.Spec.InitProvider.SnapshotIdentifierSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -282,6 +293,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.VPCSecurityGroupIDRefs,
 			Selector:      mg.Spec.InitProvider.VPCSecurityGroupIDSelector,
 			To:            reference.To{List: l, Managed: m},

@@ -9,9 +9,8 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
-	errors "github.com/pkg/errors"
-
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	errors "github.com/pkg/errors"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -33,6 +32,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RepositoryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RepositoryNameRef,
 			Selector:     mg.Spec.ForProvider.RepositoryNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -52,6 +52,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RepositoryNameRef,
 			Selector:     mg.Spec.InitProvider.RepositoryNameSelector,
 			To:           reference.To{List: l, Managed: m},

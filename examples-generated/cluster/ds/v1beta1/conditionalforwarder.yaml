@@ -1,0 +1,18 @@
+apiVersion: ds.aws.upbound.io/v1beta1
+kind: ConditionalForwarder
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ds/v1beta1/conditionalforwarder
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    directoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ad
+    dnsIps:
+    - 8.8.8.8
+    - 8.8.4.4
+    region: us-west-1
+    remoteDomainName: example.com

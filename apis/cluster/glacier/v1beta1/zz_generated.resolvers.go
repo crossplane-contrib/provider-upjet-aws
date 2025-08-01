@@ -9,17 +9,15 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Vault.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Vault) ResolveReferences( // ResolveReferences of this Vault.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Notification[i3].SnsTopic),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Notification[i3].SnsTopicRef,
 				Selector:     mg.Spec.ForProvider.Notification[i3].SnsTopicSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +56,7 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Notification[i3].SnsTopic),
 				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Notification[i3].SnsTopicRef,
 				Selector:     mg.Spec.InitProvider.Notification[i3].SnsTopicSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -90,6 +90,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VaultNameRef,
 			Selector:     mg.Spec.ForProvider.VaultNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -109,6 +110,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VaultNameRef,
 			Selector:     mg.Spec.InitProvider.VaultNameSelector,
 			To:           reference.To{List: l, Managed: m},

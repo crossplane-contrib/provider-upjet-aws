@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Principal),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrincipalRef,
 			Selector:     mg.Spec.ForProvider.PrincipalSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +73,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Principal),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrincipalRef,
 			Selector:     mg.Spec.InitProvider.PrincipalSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *PrincipalAssociation) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +125,7 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.ForProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,6 +145,7 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceShareArn),
 			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceShareArnRef,
 			Selector:     mg.Spec.InitProvider.ResourceShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -172,6 +177,7 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareArn),
 			Extract:      resource.ExtractParamPath("resource_share_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ShareArnRef,
 			Selector:     mg.Spec.ForProvider.ShareArnSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -191,6 +197,7 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareArn),
 			Extract:      resource.ExtractParamPath("resource_share_arn", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ShareArnRef,
 			Selector:     mg.Spec.InitProvider.ShareArnSelector,
 			To:           reference.To{List: l, Managed: m},

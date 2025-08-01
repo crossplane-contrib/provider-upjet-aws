@@ -34,3 +34,21 @@ func Setup_macie2(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_macie2 creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_macie2(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		account.SetupGated,
+		classificationjob.SetupGated,
+		customdataidentifier.SetupGated,
+		findingsfilter.SetupGated,
+		invitationaccepter.SetupGated,
+		member.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

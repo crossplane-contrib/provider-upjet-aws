@@ -1,0 +1,42 @@
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/function
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    environment:
+    - variables:
+        ENVIRONMENT: production
+        LOG_LEVEL: info
+    filename: ${data.archive_file.example.output_path}
+    handler: index.handler
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    runtime: nodejs20.x
+    sourceCodeHash: ${data.archive_file.example.output_base64sha256}
+    tags:
+      Application: example
+      Environment: production
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/function
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1

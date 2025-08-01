@@ -32,3 +32,20 @@ func Setup_sns(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_sns creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_sns(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		platformapplication.SetupGated,
+		smspreferences.SetupGated,
+		topic.SetupGated,
+		topicpolicy.SetupGated,
+		topicsubscription.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

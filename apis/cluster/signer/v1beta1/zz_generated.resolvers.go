@@ -9,10 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -34,6 +33,7 @@ func (mg *SigningJob) ResolveReferences( // ResolveReferences of this SigningJob
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileNameRef,
 			Selector:     mg.Spec.ForProvider.ProfileNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *SigningJob) ResolveReferences( // ResolveReferences of this SigningJob
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileNameRef,
 			Selector:     mg.Spec.InitProvider.ProfileNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileNameRef,
 			Selector:     mg.Spec.ForProvider.ProfileNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileVersion),
 			Extract:      resource.ExtractParamPath("version", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileVersionRef,
 			Selector:     mg.Spec.ForProvider.ProfileVersionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +125,7 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileVersion),
 			Extract:      resource.ExtractParamPath("version", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileVersionRef,
 			Selector:     mg.Spec.InitProvider.ProfileVersionSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -27,11 +27,6 @@ func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *VoiceConnectorStreaming) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorStreaming.

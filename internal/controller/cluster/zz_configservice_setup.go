@@ -36,3 +36,22 @@ func Setup_configservice(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_configservice creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_configservice(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		awsconfigurationrecorderstatus.SetupGated,
+		configrule.SetupGated,
+		configurationaggregator.SetupGated,
+		configurationrecorder.SetupGated,
+		conformancepack.SetupGated,
+		deliverychannel.SetupGated,
+		remediationconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

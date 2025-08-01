@@ -30,3 +30,19 @@ func Setup_route53recoverycontrolconfig(mgr ctrl.Manager, o controller.Options) 
 	}
 	return nil
 }
+
+// SetupGated_route53recoverycontrolconfig creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_route53recoverycontrolconfig(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cluster.SetupGated,
+		controlpanel.SetupGated,
+		routingcontrol.SetupGated,
+		safetyrule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

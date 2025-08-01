@@ -28,3 +28,18 @@ func Setup_deploy(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_deploy creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_deploy(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		app.SetupGated,
+		deploymentconfig.SetupGated,
+		deploymentgroup.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

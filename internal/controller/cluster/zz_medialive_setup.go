@@ -30,3 +30,19 @@ func Setup_medialive(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_medialive creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_medialive(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		channel.SetupGated,
+		input.SetupGated,
+		inputsecuritygroup.SetupGated,
+		multiplex.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -66,3 +66,37 @@ func Setup_rds(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_rds creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_rds(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cluster.SetupGated,
+		clusteractivitystream.SetupGated,
+		clusterendpoint.SetupGated,
+		clusterinstance.SetupGated,
+		clusterparametergroup.SetupGated,
+		clusterroleassociation.SetupGated,
+		clustersnapshot.SetupGated,
+		dbinstanceautomatedbackupsreplication.SetupGated,
+		dbsnapshotcopy.SetupGated,
+		eventsubscription.SetupGated,
+		globalcluster.SetupGated,
+		instance.SetupGated,
+		instanceroleassociation.SetupGated,
+		instancestate.SetupGated,
+		optiongroup.SetupGated,
+		parametergroup.SetupGated,
+		proxy.SetupGated,
+		proxydefaulttargetgroup.SetupGated,
+		proxyendpoint.SetupGated,
+		proxytarget.SetupGated,
+		snapshot.SetupGated,
+		subnetgroup.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

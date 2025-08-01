@@ -36,3 +36,22 @@ func Setup_imagebuilder(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_imagebuilder creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_imagebuilder(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		component.SetupGated,
+		containerrecipe.SetupGated,
+		distributionconfiguration.SetupGated,
+		image.SetupGated,
+		imagepipeline.SetupGated,
+		imagerecipe.SetupGated,
+		infrastructureconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

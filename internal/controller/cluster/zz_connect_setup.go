@@ -52,3 +52,30 @@ func Setup_connect(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_connect creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_connect(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		botassociation.SetupGated,
+		contactflow.SetupGated,
+		contactflowmodule.SetupGated,
+		hoursofoperation.SetupGated,
+		instance.SetupGated,
+		instancestorageconfig.SetupGated,
+		lambdafunctionassociation.SetupGated,
+		phonenumber.SetupGated,
+		queue.SetupGated,
+		quickconnect.SetupGated,
+		routingprofile.SetupGated,
+		securityprofile.SetupGated,
+		user.SetupGated,
+		userhierarchystructure.SetupGated,
+		vocabulary.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

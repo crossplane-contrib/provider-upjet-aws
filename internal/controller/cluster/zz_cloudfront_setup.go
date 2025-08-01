@@ -48,3 +48,28 @@ func Setup_cloudfront(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_cloudfront creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cloudfront(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cachepolicy.SetupGated,
+		distribution.SetupGated,
+		fieldlevelencryptionconfig.SetupGated,
+		fieldlevelencryptionprofile.SetupGated,
+		function.SetupGated,
+		keygroup.SetupGated,
+		monitoringsubscription.SetupGated,
+		originaccesscontrol.SetupGated,
+		originaccessidentity.SetupGated,
+		originrequestpolicy.SetupGated,
+		publickey.SetupGated,
+		realtimelogconfig.SetupGated,
+		responseheaderspolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

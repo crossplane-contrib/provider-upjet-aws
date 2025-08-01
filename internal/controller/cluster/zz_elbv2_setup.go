@@ -36,3 +36,22 @@ func Setup_elbv2(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_elbv2 creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_elbv2(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		lb.SetupGated,
+		lblistener.SetupGated,
+		lblistenercertificate.SetupGated,
+		lblistenerrule.SetupGated,
+		lbtargetgroup.SetupGated,
+		lbtargetgroupattachment.SetupGated,
+		lbtruststore.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

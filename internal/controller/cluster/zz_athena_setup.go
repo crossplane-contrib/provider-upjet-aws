@@ -30,3 +30,19 @@ func Setup_athena(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_athena creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_athena(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		database.SetupGated,
+		datacatalog.SetupGated,
+		namedquery.SetupGated,
+		workgroup.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

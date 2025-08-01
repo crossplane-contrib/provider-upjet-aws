@@ -32,6 +32,7 @@ func (mg *SigningJob) ResolveReferences( // ResolveReferences of this SigningJob
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileNameRef,
 			Selector:     mg.Spec.ForProvider.ProfileNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -51,6 +52,7 @@ func (mg *SigningJob) ResolveReferences( // ResolveReferences of this SigningJob
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileNameRef,
 			Selector:     mg.Spec.InitProvider.ProfileNameSelector,
 			To:           reference.To{List: l, Managed: m},

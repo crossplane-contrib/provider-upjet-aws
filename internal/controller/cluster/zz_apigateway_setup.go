@@ -70,3 +70,39 @@ func Setup_apigateway(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_apigateway creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_apigateway(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		account.SetupGated,
+		apikey.SetupGated,
+		authorizer.SetupGated,
+		basepathmapping.SetupGated,
+		clientcertificate.SetupGated,
+		deployment.SetupGated,
+		documentationpart.SetupGated,
+		documentationversion.SetupGated,
+		domainname.SetupGated,
+		gatewayresponse.SetupGated,
+		integration.SetupGated,
+		integrationresponse.SetupGated,
+		method.SetupGated,
+		methodresponse.SetupGated,
+		methodsettings.SetupGated,
+		model.SetupGated,
+		requestvalidator.SetupGated,
+		resource.SetupGated,
+		restapi.SetupGated,
+		restapipolicy.SetupGated,
+		stage.SetupGated,
+		usageplan.SetupGated,
+		usageplankey.SetupGated,
+		vpclink.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -9,17 +9,15 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Policy.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Policy) ResolveReferences( // ResolveReferences of this Policy.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractParamPath("resource_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScalableDimension),
 			Extract:      resource.ExtractParamPath("scalable_dimension", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScalableDimensionRef,
 			Selector:     mg.Spec.ForProvider.ScalableDimensionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +73,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceNamespace),
 			Extract:      resource.ExtractParamPath("service_namespace", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceNamespaceRef,
 			Selector:     mg.Spec.ForProvider.ServiceNamespaceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +105,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractParamPath("resource_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +125,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScalableDimension),
 			Extract:      resource.ExtractParamPath("scalable_dimension", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScalableDimensionRef,
 			Selector:     mg.Spec.ForProvider.ScalableDimensionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +145,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceNamespace),
 			Extract:      resource.ExtractParamPath("service_namespace", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceNamespaceRef,
 			Selector:     mg.Spec.ForProvider.ServiceNamespaceSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -161,6 +165,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      resource.ExtractParamPath("resource_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -180,6 +185,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScalableDimension),
 			Extract:      resource.ExtractParamPath("scalable_dimension", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ScalableDimensionRef,
 			Selector:     mg.Spec.InitProvider.ScalableDimensionSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -199,6 +205,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceNamespace),
 			Extract:      resource.ExtractParamPath("service_namespace", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServiceNamespaceRef,
 			Selector:     mg.Spec.InitProvider.ServiceNamespaceSelector,
 			To:           reference.To{List: l, Managed: m},

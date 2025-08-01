@@ -1,0 +1,17 @@
+apiVersion: quicksight.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    email: author1@example.com
+    iamArn: arn:aws:iam::123456789012:role/AuthorRole
+    identityType: IAM
+    region: us-west-1
+    sessionName: author1
+    userRole: AUTHOR

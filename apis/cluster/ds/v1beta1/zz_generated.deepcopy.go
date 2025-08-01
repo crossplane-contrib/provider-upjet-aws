@@ -504,7 +504,7 @@ func (in *DirectoryInitParameters) DeepCopyInto(out *DirectoryInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.ShortName != nil {
 		in, out := &in.ShortName, &out.ShortName
 		*out = new(string)
@@ -764,7 +764,7 @@ func (in *DirectoryParameters) DeepCopyInto(out *DirectoryParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

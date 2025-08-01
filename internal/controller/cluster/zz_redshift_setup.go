@@ -48,3 +48,28 @@ func Setup_redshift(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_redshift creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_redshift(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		authenticationprofile.SetupGated,
+		cluster.SetupGated,
+		endpointaccess.SetupGated,
+		eventsubscription.SetupGated,
+		hsmclientcertificate.SetupGated,
+		hsmconfiguration.SetupGated,
+		parametergroup.SetupGated,
+		scheduledaction.SetupGated,
+		snapshotcopygrant.SetupGated,
+		snapshotschedule.SetupGated,
+		snapshotscheduleassociation.SetupGated,
+		subnetgroup.SetupGated,
+		usagelimit.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
