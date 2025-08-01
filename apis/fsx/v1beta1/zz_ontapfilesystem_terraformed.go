@@ -118,6 +118,9 @@ func (tr *OntapFileSystem) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	// This is a manual change as adding the ignore in config.go only affects the latest version
+	// and using the newer version will have a performance impact
+	opts = append(opts, resource.WithNameFilter("DiskIopsConfiguration"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)
