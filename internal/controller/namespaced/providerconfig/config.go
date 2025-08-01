@@ -61,3 +61,12 @@ func setupClusterProviderConfig(mgr ctrl.Manager, o controller.Options) error {
 			providerconfig.WithLogger(o.Logger.WithValues("controller", name)),
 			providerconfig.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name)))))
 }
+
+func SetupGated(mgr ctrl.Manager, o controller.Options) error {
+	o.Options.Gate.Register(func() {
+		if err := Setup(mgr, o); err != nil {
+			mgr.GetLogger().Error(err, "unable to setup reconcilers", "gvk", v1beta1.ClusterProviderConfigGroupVersionKind.String(), "gvk", v1beta1.ProviderConfigGroupVersionKind.String())
+		}
+	}, v1beta1.ClusterProviderConfigGroupVersionKind, v1beta1.ProviderConfigGroupVersionKind, v1beta1.ProviderConfigUsageGroupVersionKind)
+	return nil
+}
