@@ -1,0 +1,166 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appflow.aws.m.upbound.io/v1beta1
+kind: Flow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: This resource depends on BucketPolicy. This resource is skipping because the BucketPolicy resource was skipped.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    destinationFlowConfig:
+      - connectorType: S3
+        destinationConnectorProperties:
+          s3:
+            bucketNameSelector:
+              matchLabels:
+                testing.upbound.io/example-name: example_destination
+            s3OutputFormatConfig:
+              prefixConfig:
+                prefixType: PATH
+    region: us-west-1
+    sourceFlowConfig:
+      connectorType: S3
+      sourceConnectorProperties:
+        s3:
+          bucketNameSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example_source
+          bucketPrefix: example
+    task:
+      - connectorOperator:
+          - s3: NO_OP
+        destinationField: exampleField
+        sourceFields:
+          - exampleField
+        taskType: Map
+    triggerConfig:
+      triggerType: OnDemand
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: This resource is skipping because the parent resource was skipped.
+  labels:
+    testing.upbound.io/example-name: example_destination
+  name: example-destination-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: This resource is skipping because the parent resource was skipped.
+  labels:
+    testing.upbound.io/example-name: example_source
+  name: example-source-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: The bucket ARN in policy should be changed manually.
+  labels:
+    testing.upbound.io/example-name: example_destination
+  name: example-destination
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_destination
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "AllowAppFlowDestinationActions",
+                  "Effect": "Allow",
+                  "Principal": {
+                    "Service": "appflow.amazonaws.com"
+                  },
+                  "Action": [
+                    "s3:PutObject",
+                    "s3:AbortMultipartUpload",
+                    "s3:ListMultipartUploadParts",
+                    "s3:ListBucketMultipartUploads",
+                    "s3:GetBucketAcl",
+                    "s3:PutObjectAcl"
+                  ],
+                  "Resource": [
+                    "arn:aws:s3:::<bucket name>",
+                    "arn:aws:s3:::<bucket name>/*"
+                  ]
+              }
+          ]
+      }
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: The bucket ARN in policy should be changed manually.
+  labels:
+    testing.upbound.io/example-name: example_source
+  name: example-source
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_source
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "AllowAppFlowSourceActions",
+                  "Effect": "Allow",
+                  "Principal": {
+                    "Service": "appflow.amazonaws.com"
+                  },
+                  "Action": [
+                      "s3:ListBucket",
+                      "s3:GetObject"
+                  ],
+                  "Resource": [
+                     "arn:aws:s3:::<bucket name>",
+                     "arn:aws:s3:::<bucket name>/*"
+                  ]
+
+              }
+          ]
+      }
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: This resource is skipping because the parent resource was skipped.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_source
+    contentBase64: dGhpcyBpcyBhIHRleHQg
+    key: object_key
+    region: us-west-1

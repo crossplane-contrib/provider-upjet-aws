@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/stage
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: example
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+    region: us-west-1
+---
+apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/stage
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: auth-api
+spec:
+  forProvider:
+    name: test-http-api
+    protocolType: HTTP
+    region: us-west-1

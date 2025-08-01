@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: keyspaces.aws.m.upbound.io/v1beta1
+kind: Keyspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyspaces/v1beta1/keyspace
+  labels:
+    testing.upbound.io/example-name: keyspacelabel
+  name: keyspacename
+spec:
+  forProvider:
+    region: us-west-1

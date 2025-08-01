@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ecs.aws.m.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/service
+    upjet.upbound.io/manual-intervention: Resourrce stuck in update loop
+  name: sample-service
+spec:
+  forProvider:
+    clusterSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cluster
+    launchType: EC2
+    propagateTags: TASK_DEFINITION
+    region: us-west-1
+    taskDefinitionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-definition
+---
+apiVersion: ecs.aws.m.upbound.io/v1beta1
+kind: TaskDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example-definition
+  name: sample-task
+spec:
+  forProvider:
+    containerDefinitions: |-
+      [
+        {
+          "name": "first",
+          "image": "service-first",
+          "cpu": 10,
+          "memory": 512,
+          "essential":true
+        }
+      ]
+    family: sampleservice
+    region: us-west-1
+---
+apiVersion: ecs.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example-cluster
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

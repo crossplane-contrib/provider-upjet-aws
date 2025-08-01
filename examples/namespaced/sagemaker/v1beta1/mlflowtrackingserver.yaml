@@ -1,0 +1,105 @@
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: MlflowTrackingServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example-mlflowtrackingserver
+  name: example
+spec:
+  forProvider:
+    artifactStoreUri: s3://sagemaker-bucketname303/
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-role-mlflowtrackingserver-role
+    trackingServerName: example
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+  labels:
+    testing.upbound.io/example-name: example-role-mlflowtrackingserver-role
+  name: example-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "sagemaker.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+  labels:
+    testing.upbound.io/example-name: example-rpa-mlflowtrackingserver
+  name: example-policy-attachment
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-policy-mlflowtrackingserver
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-role-mlflowtrackingserver-role
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+  labels:
+    testing.upbound.io/example-name: example-policy-mlflowtrackingserver
+  name: sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+              "Sid": "VisualEditor0",
+              "Effect": "Allow",
+              "Action": [
+                "s3:Get*",
+                "s3:Put*",
+                "sagemaker:AddTags",
+                "sagemaker:CreateModelPackageGroup",
+                "sagemaker:CreateModelPackage",
+                "sagemaker:DescribeModelPackageGroup",
+                "sagemaker:UpdateModelPackage",
+                "s3:List*"
+            ],
+              "Resource": "*"
+          }
+        ]
+      }
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: sagemaker-bucketname303
+    meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+  name: sagemaker-bucketname303
+  labels:
+    testing.upbound.io/example-name: sagemaker-bucketname303
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: sagemaker-bucketname303

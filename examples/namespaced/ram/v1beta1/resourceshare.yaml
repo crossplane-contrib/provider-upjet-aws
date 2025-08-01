@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ram.aws.m.upbound.io/v1beta1
+kind: ResourceShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceshare
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allowExternalPrincipals: true
+    name: example
+    region: us-west-1
+    tags:
+      Environment: Production

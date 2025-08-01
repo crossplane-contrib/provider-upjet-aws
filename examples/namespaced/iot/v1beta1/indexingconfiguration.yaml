@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: iot.aws.m.upbound.io/v1beta1
+kind: IndexingConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/indexingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    thingIndexingConfiguration:
+      customField: null
+      thingIndexingMode: REGISTRY_AND_SHADOW

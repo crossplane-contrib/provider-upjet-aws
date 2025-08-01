@@ -1,0 +1,119 @@
+apiVersion: redshift.aws.m.upbound.io/v1beta1
+kind: EndpointAccess
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example-endpointaccess
+  name: example-endpointaccess
+spec:
+  forProvider:
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-endpointaccess
+    region: us-east-2
+    subnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-endpointaccess
+---
+apiVersion: redshift.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example-endpointaccess
+  name: example-endpointaccess-c
+spec:
+  forProvider:
+    clusterType: single-node
+    databaseName: mydb
+    masterPasswordSecretRef:
+      key: example-key
+      name: cluster-secret
+    masterUsername: exampleuser
+    nodeType: ra3.xlplus
+    region: us-east-2
+    skipFinalSnapshot: true
+---
+apiVersion: redshift.aws.m.upbound.io/v1beta1
+kind: SubnetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example-endpointaccess
+  name: example-endpointaccess-sg
+spec:
+  forProvider:
+    region: us-east-2
+    subnetIdRefs:
+      - name: foo
+      - name: bar
+    tags:
+      environment: Production
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 10.1.2.0/24
+    region: us-east-2
+    tags:
+      Name: tf-dbsubnet-test-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    availabilityZone: us-east-2c
+    cidrBlock: 10.1.1.0/24
+    region: us-east-2
+    tags:
+      Name: tf-dbsubnet-test-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    cidrBlock: 10.1.0.0/16
+    region: us-east-2
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-cluster.sh
+  labels:
+    testing.upbound.io/example-name: cluster-secret
+  name: cluster-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: "Upbound!1"

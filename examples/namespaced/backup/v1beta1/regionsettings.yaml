@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: RegionSettings
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceTypeManagementPreference:
+      EFS: true
+      DynamoDB: true
+    resourceTypeOptInPreference:
+      EFS: true
+      DynamoDB: true
+      EBS: true
+      EC2: true
+      FSx: true
+      S3: true
+      Aurora: true
+      RDS: true
+      Storage Gateway: true
+      VirtualMachine: true
+      Neptune: true

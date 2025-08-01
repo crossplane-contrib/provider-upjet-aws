@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: ClusterActivityStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusteractivitystream
+  labels:
+    testing.upbound.io/example-name: default-cas
+  name: default-cas
+spec:
+  forProvider:
+    kmsKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default-cas
+    mode: async
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default-cas
+---
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusteractivitystream
+  labels:
+    testing.upbound.io/example-name: default-cas
+  name: example-cas
+spec:
+  forProvider:
+    region: us-west-1
+    engine: aurora-postgresql
+    masterUsername: cpadmin
+    masterPasswordSecretRef:
+      name: sample-cluster-password
+      key: password
+    skipFinalSnapshot: true
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: upbound-system
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusteractivitystream
+  labels:
+    testing.upbound.io/example-name: default-cas
+  name: default-cas
+spec:
+  forProvider:
+    description: AWS KMS Key to encrypt Database Activity Stream
+    region: us-west-1
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusteractivitystream
+  name: sample-cluster-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass0!

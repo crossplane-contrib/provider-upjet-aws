@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
+kind: EndpointAccess
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    workgroupName: example
+    subnetIdRefs:
+      - name: subnet
+---
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespaceName: concurrency-scaling
+    region: us-west-1
+---
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
+kind: RedshiftServerlessNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example
+  name: concurrency-scaling
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/endpointaccess
+  name: subnet
+spec:
+  forProvider:
+    availabilityZone: us-west-1b
+    cidrBlock: 10.0.2.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/endpointaccess
+  labels:
+    testing.upbound.io/example-name: example
+  name: vpc
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1

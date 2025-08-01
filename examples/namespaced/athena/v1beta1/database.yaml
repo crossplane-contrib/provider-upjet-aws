@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: athena.aws.m.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/database
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: upbound-example
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/database
+  labels:
+    testing.upbound.io/example-name: upbound-example
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-west-1

@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: DomainName
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The DomainName resource needs valid certificates."
+  labels:
+    testing.upbound.io/example-name: domainname
+  name: example
+spec:
+  forProvider:
+    certificateBody: <content of 'example.crt'>
+    certificateChain: <content of ca.crt>
+    certificateName: example-api
+    certificatePrivateKeySecretRef:
+      key: attribute.example.key
+      name: example-secret
+    domainName: example.com
+    region: us-west-1

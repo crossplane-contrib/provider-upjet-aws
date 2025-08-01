@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+## General IAMRole/Policy for Glue Job/Crawler
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: glue-role
+  labels:
+    testing.upbound.io/example-name: glue-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": [
+                        "glue.amazonaws.com"
+                    ]
+                },
+                "Action": [
+                    "sts:AssumeRole"
+                ]
+            }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  name: glue-policy
+  labels:
+    testing.upbound.io/example-name: glue-policy
+spec:
+  forProvider:
+    description: glue-policy
+    policy: "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"glue:*\",\n                \"s3:GetBucketLocation\",\n                \"s3:ListBucket\",\n                \"s3:ListAllMyBuckets\",\n                \"s3:GetBucketAcl\",\n                \"ec2:DescribeVpcEndpoints\",\n                \"ec2:DescribeRouteTables\",\n                \"ec2:CreateNetworkInterface\",\n                \"ec2:DeleteNetworkInterface\",                             \n                \"ec2:DescribeNetworkInterfaces\",\n                \"ec2:DescribeSecurityGroups\",\n                \"ec2:DescribeSubnets\",\n                \"ec2:DescribeVpcAttribute\",\n                \"iam:ListRolePolicies\",\n                \"iam:GetRole\",\n                \"iam:GetRolePolicy\",\n                \"cloudwatch:PutMetricData\"                \n            ],\n            \"Resource\": [\n                \"*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"s3:CreateBucket\",\n                \"s3:PutBucketPublicAccessBlock\"\n            ],\n            \"Resource\": [\n                \"arn:aws:s3:::aws-glue-*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"s3:GetObject\",\n                \"s3:PutObject\",\n                \"s3:DeleteObject\"                         \n            ],\n            \"Resource\": [\n                \"arn:aws:s3:::aws-glue-*/*\",\n                \"arn:aws:s3:::*/*aws-glue-*/*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"s3:GetObject\"\n            ],\n            \"Resource\": [\n                \"arn:aws:s3:::crawler-public*\",\n                \"arn:aws:s3:::aws-glue-*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"logs:CreateLogGroup\",\n                \"logs:CreateLogStream\",\n                \"logs:PutLogEvents\",\n                \"logs:AssociateKmsKey\"                \n            ],\n            \"Resource\": [\n                \"arn:aws:logs:*:*:/aws-glue/*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"ec2:CreateTags\",\n                \"ec2:DeleteTags\"\n            ],\n            \"Condition\": {\n                \"ForAllValues:StringEquals\": {\n                    \"aws:TagKeys\": [\n                        \"aws-glue-service-resource\"\n                    ]\n                }\n            },\n            \"Resource\": [\n                \"arn:aws:ec2:*:*:network-interface/*\",\n                \"arn:aws:ec2:*:*:security-group/*\",\n                \"arn:aws:ec2:*:*:instance/*\"\n            ]\n        }\n    ]\n}\n"
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: glue
+  labels:
+    testing.upbound.io/example-name: glue
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: glue-policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: glue-role

@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: applicationinsights.aws.m.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: applicationinsights/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: resourcegroups.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: applicationinsights/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceQuery:
+      - query: "\t{\n\t\t\"ResourceTypeFilters\": [\n\t\t  \"AWS::EC2::Instance\"\n\t\t],\n\t\t\"TagFilters\": [\n\t\t  {\n\t\t\t\"Key\": \"Stage\",\n\t\t\t\"Values\": [\n\t\t\t  \"Test\"\n\t\t\t]\n\t\t  }\n\t\t]\n\t  }\n"

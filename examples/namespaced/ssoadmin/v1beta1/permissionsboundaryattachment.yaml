@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
+kind: PermissionsBoundaryAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsboundaryattachment
+    upjet.upbound.io/manual-intervention: This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed).
+  labels:
+    testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+  name: ssoadmin-permissions-boundary-attachment
+spec:
+  forProvider:
+    instanceArn: ARN of a manually created SSO instance in the same region specified below
+    permissionSetArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+    permissionsBoundary:
+      customerManagedPolicyReference:
+        nameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+        path: /
+    region: us-east-1
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsboundaryattachment
+  labels:
+    testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+  name: ssoadmin-permissions-boundary-attachment
+spec:
+  forProvider:
+    description: My test policy
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "ec2:Describe*",
+            "Resource": "*"
+          }
+        ]
+      }
+---
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
+kind: PermissionSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsboundaryattachment
+    upjet.upbound.io/manual-intervention: This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed).
+  labels:
+    testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+  name: ssoadmin-permissions-boundary-attachment
+spec:
+  forProvider:
+    instanceArn: ARN of a manually created SSO instance in the same region specified below
+    name: example-pba
+    region: us-east-1

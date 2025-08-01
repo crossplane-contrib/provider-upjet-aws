@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: deploy.aws.m.upbound.io/v1beta1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deploy/v1beta1/deploymentconfig
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    minimumHealthyHosts:
+      type: HOST_COUNT
+      value: 2
+    region: us-west-1

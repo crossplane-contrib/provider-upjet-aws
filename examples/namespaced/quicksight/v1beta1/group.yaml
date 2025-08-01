@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: quicksight.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/group
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    awsAccountId: "${data.aws_account_id}"
+    groupName: tf-example
+    region: us-east-1
+    namespace: default

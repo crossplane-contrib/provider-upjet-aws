@@ -1,0 +1,111 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: kinesisanalyticsv2.aws.m.upbound.io/v1beta1
+kind: ApplicationSnapshot
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
+spec:
+  forProvider:
+    region: us-west-1
+    applicationNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-application
+---
+apiVersion: kinesisanalyticsv2.aws.m.upbound.io/v1beta1
+kind: Application
+metadata:
+  name: example-application
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
+  labels:
+    testing.upbound.io/example-name: example-application
+spec:
+  forProvider:
+    region: us-west-1
+    startApplication: true
+    applicationConfiguration:
+      - applicationCodeConfiguration:
+          - codeContent:
+              - s3ContentLocation:
+                  - bucketArnSelector:
+                      matchLabels:
+                        testing.upbound.io/example-name: s3
+                    fileKeySelector:
+                      matchLabels:
+                        testing.upbound.io/example-name: s3object
+            codeContentType: ZIPFILE
+        environmentProperties:
+          - propertyGroup:
+              - propertyGroupId: PROPERTY-GROUP-1
+                propertyMap:
+                  Key1: Value1
+              - propertyGroupId: PROPERTY-GROUP-2
+                propertyMap:
+                  KeyA: ValueA
+                  KeyB: ValueB
+    runtimeEnvironment: FLINK-1_8
+    serviceExecutionRoleRef:
+      name: kinesis-app-role
+    tags:
+      Environment: test
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: kinesis-app-role
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
+spec:
+  forProvider:
+    managedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "kinesisanalytics.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: ${Rand.RFC1123Subdomain}
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
+  labels:
+    testing.upbound.io/example-name: s3
+spec:
+  forProvider:
+    region: us-west-1
+    objectLockEnabled: true
+    tags:
+      Name: SampleBucket
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
+  labels:
+    testing.upbound.io/example-name: s3object
+  name: object
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
+    key: HelloWorld.zip
+    region: us-west-1
+    contentBase64: |
+      UEsDBBQAAAAIAOoLS1eWM9spKgIAAOsCAAAOABwASGVsbG9Xb3JsZC5qYXJVVAkAA7fQJWXS0CVldXgLAAEE9QEAAAQUAAAAC/BmZuFiYOBgYHjJ7R3OgAQ4GVgYfF1DHHU9/dz0/51iYAgAKhVh4ODgwFAqAsRwpb6Ofp5ursEher5un33PnPbx1tW7yOutq3XuzPnNQQZXjB88/eR75szl0nOeOnrbgj54nD15kv+8/inPh0+L9Lx8dTx9L5au2hJkYBRy4cOJ876+Wl661588ffSUCWg/O4dyu2mZH9A2HwZk90xFc48AEHuk5uTkh+cX5aToJeckFhfnTjjtddhBpO3/ZTVf4eDg6Oj1rLs1tih9Y9Rq4ni0aIXASu5wT+spmjs9fFjkvcW59GoY5L1sjDlCX+icy/3337pg3z57O8Y5Cx8vaNnEeri1k2vhPo55TYkiKp8flu4QuDwnwHJi5xl/zqf/EpIWc91uepzE+85+5/8/M7pnhGYeXHYt4v+JkorJJ1W+f/Zh+biiq9TpbZBLYFVJwfS0i2teL+jj5eYV980RmqWdw/LasTTw0J1/P86fmnP888WEpIW+BSbhwZzHKq2EWfJ1hAtDjyw8kdds8KhTkH2S5dt/f7UEgv9sObHskZPWxu0uctqmuzI+7r2i3XjlqEVe4fWHPnPOHi6/wC3ektsnaqtz+BhfWf1S21zWN+ERvbek9yy9czFnsv+anuqq0//4QcE7eXe2pCIjA8NqRlDwMjJxMeBOG6gALaUwMokwINIKcqyJoGjTxpFykE0AxS6ywwRQTNiNJa4DvFnZQHLMQAiSl2IC8QBQSwECHgMUAAAACADqC0tXljPbKSoCAADrAgAADgAYAAAAAAAAAAAApIEAAAAASGVsbG9Xb3JsZC5qYXJVVAUAA7fQJWV1eAsAAQT1AQAABBQAAABQSwUGAAAAAAEAAQBUAAAAcgIAAAAA

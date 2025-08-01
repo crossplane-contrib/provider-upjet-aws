@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/route
+    uptest.upbound.io/disable-import: "true"
+  name: route
+spec:
+  forProvider:
+    region: us-west-1
+    destinationCidrBlock: 0.0.0.0/0
+    gatewayIdRef:
+      name: routegw
+    routeTableIdRef:
+      name: table
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/route
+  labels:
+    testing.upbound.io/example-name: table
+  name: table
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: example
+    vpcIdRef:
+      name: route-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/route
+  name: routegw
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: main
+    vpcIdRef:
+      name: route-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/route
+  labels:
+    testing.upbound.io/example-name: route-vpc
+  name: route-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

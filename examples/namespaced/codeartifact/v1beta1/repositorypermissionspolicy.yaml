@@ -1,0 +1,62 @@
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
+kind: RepositoryPermissionsPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/repositorypermissionspolicy
+  labels:
+    testing.upbound.io/example-name: repositorypermissionspolicy-example
+  name: repositorypermissionspolicy-example
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: repositorypermissionspolicy-example
+    policyDocument: |
+      {
+        "Version":"2012-10-17",
+        "Statement":[
+          {
+            "Action":[
+              "codeartifact:ReadFromRepository"
+            ],
+            "Effect":"Allow",
+            "Principal":{
+              "AWS":"arn:aws:iam::${data.aws_account_id}:root"
+            },
+            "Resource":"*"
+          }
+        ]
+      }
+    region: us-east-1
+    repositorySelector:
+      matchLabels:
+        testing.upbound.io/example-name: repositorypermissionspolicy-example
+---
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/repositorypermissionspolicy
+  labels:
+    testing.upbound.io/example-name: repositorypermissionspolicy-example
+  name: repositorypermissionspolicy-example
+spec:
+  forProvider:
+    domain: repositorypermissionspolicy-example
+    region: us-east-1
+---
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/repositorypermissionspolicy
+  labels:
+    testing.upbound.io/example-name: repositorypermissionspolicy-example
+  name: repositorypermissionspolicy-example
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: repositorypermissionspolicy-example
+    region: us-east-1
+    repository: repositorypermissionspolicy-example

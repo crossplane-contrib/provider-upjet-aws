@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sesv2.aws.m.upbound.io/v1beta1
+kind: ConfigurationSetEventDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/configurationseteventdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    configurationSetNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventDestination:
+      cloudWatchDestination:
+        dimensionConfiguration:
+          - defaultDimensionValue: example
+            dimensionName: example
+            dimensionValueSource: MESSAGE_TAG
+      enabled: true
+      matchingEventTypes:
+        - SEND
+    eventDestinationName: example
+    region: us-west-1
+---
+apiVersion: sesv2.aws.m.upbound.io/v1beta1
+kind: ConfigurationSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/configurationseteventdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

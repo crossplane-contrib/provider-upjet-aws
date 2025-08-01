@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
+kind: Permission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchevents/v1beta1/permission
+  name: devaccountaccess
+spec:
+  forProvider:
+    eventBusNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: access
+    principal: ${data.aws_account_id}
+    region: us-west-1
+    statementId: DevAccountAccess
+---
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
+kind: Bus
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchevents/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: access
+  name: access
+spec:
+  forProvider:
+    region: us-west-1

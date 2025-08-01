@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: wafregional.aws.m.upbound.io/v1beta1
+kind: XSSMatchSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafregional/v1beta1/xssmatchset
+  labels:
+    testing.upbound.io/example-name: xss_match_set
+  name: xss-match-set
+spec:
+  forProvider:
+    name: xss_match_set
+    region: us-west-1
+    xssMatchTuple:
+      - fieldToMatch:
+          type: URI
+        textTransformation: NONE
+      - fieldToMatch:
+          type: QUERY_STRING
+        textTransformation: NONE

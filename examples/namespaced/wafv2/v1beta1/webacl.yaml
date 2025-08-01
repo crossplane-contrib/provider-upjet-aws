@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: wafv2.aws.m.upbound.io/v1beta1
+kind: WebACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-test
+spec:
+  forProvider:
+    defaultAction:
+      allow: {}
+    description: Example of a managed rule.
+    name: managed-rule-example-test
+    region: us-west-1
+    ruleJson: |
+      [
+        {
+          "Name": "rule-1",
+          "Priority": 1,
+          "Statement": {
+            "ManagedRuleGroupStatement": {
+              "VendorName": "AWS",
+              "Name": "AWSManagedRulesCommonRuleSet",
+              "ScopeDownStatement": {
+                "GeoMatchStatement": {
+                  "CountryCodes": [
+                    "US",
+                    "NL"
+                  ]
+                }
+              },
+              "RuleActionOverrides": [
+                {
+                  "Name": "SizeRestrictions_QUERYSTRING",
+                  "ActionToUse": {
+                    "Count": {}
+                  }
+                },
+                {
+                  "Name": "NoUserAgent_HEADER",
+                  "ActionToUse": {
+                    "Count": {}
+                  }
+                }
+              ]
+            }
+          },
+          "OverrideAction": {
+            "Count": {}
+          },
+          "VisibilityConfig": {
+            "SampledRequestsEnabled": false,
+            "CloudWatchMetricsEnabled": false,
+            "MetricName": "friendly-rule-metric-name"
+          }
+        }
+      ]
+    scope: REGIONAL
+    tags:
+      Tag1: Value1
+      Tag2: Value2
+    tokenDomains:
+      - mywebsite.com
+      - myotherwebsite.com
+    visibilityConfig:
+      cloudwatchMetricsEnabled: false
+      metricName: friendly-metric-name
+      sampledRequestsEnabled: false

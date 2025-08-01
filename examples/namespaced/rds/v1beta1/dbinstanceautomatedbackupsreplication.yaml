@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: DBInstanceAutomatedBackupsReplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/dbinstanceautomatedbackupsreplication
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-dbiabr
+spec:
+  forProvider:
+    region: us-east-2
+    retentionPeriod: 7
+    sourceDbInstanceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default-test
+---
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/dbinstanceautomatedbackupsreplication
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: default-test
+  name: default-dbiabr
+spec:
+  forProvider:
+    backupRetentionPeriod: 7
+    allocatedStorage: 10
+    dbName: mydb
+    engine: mysql
+    engineVersion: "5.7"
+    instanceClass: db.t3.micro
+    parameterGroupName: default.mysql5.7
+    autoGeneratePassword: true
+    passwordSecretRef:
+      key: password
+      name: example-dbinstance
+    region: us-west-1
+    skipFinalSnapshot: true
+    username: foo
+  writeConnectionSecretToRef:
+    name: example-dbinstance-out
+    namespace: default

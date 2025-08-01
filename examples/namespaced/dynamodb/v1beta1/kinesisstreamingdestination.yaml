@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
+kind: KinesisStreamingDestination
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
+spec:
+  forProvider:
+    region: us-west-1
+    streamArnRef:
+      name: example
+    tableNameRef:
+      name: example
+---
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
+kind: Stream
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
+spec:
+  forProvider:
+    region: us-west-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+      - IncomingBytes
+      - OutgoingBytes
+    streamModeDetails:
+      - streamMode: PROVISIONED
+    tags:
+      Environment: test

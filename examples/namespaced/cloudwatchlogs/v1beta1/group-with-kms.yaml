@@ -1,0 +1,55 @@
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: sample-logs-key
+  name: sample-logs-key
+spec:
+  forProvider:
+    region: us-east-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Id": "key-default-1",
+        "Statement": [
+          {
+            "Sid": "EnableIAMUserPermissions",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+          },
+          {
+            "Sid": "AllowCloudWatchLogs",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "logs.us-east-1.amazonaws.com"
+            },
+            "Action": [
+              "kms:Encrypt",
+              "kms:Decrypt",
+              "kms:ReEncrypt*",
+              "kms:GenerateDataKey*",
+              "kms:Describe*"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+---
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-with-kms
+  name: example-with-kms
+spec:
+  forProvider:
+    kmsKeyIdRef:
+      name: sample-logs-key
+    region: us-east-1
+    retentionInDays: 5

@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: sample-key
+  name: sample-key
+spec:
+  forProvider:
+    region: us-east-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7

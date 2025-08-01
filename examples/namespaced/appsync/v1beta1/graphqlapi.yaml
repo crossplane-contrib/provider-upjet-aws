@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appsync.aws.m.upbound.io/v1beta1
+kind: GraphQLAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appsync/v1beta1/graphqlapi
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authenticationType: API_KEY
+    name: example
+    region: us-west-1

@@ -1,0 +1,95 @@
+apiVersion: iot.aws.m.upbound.io/v1beta1
+kind: Authorizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authorizerFunctionArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda-authorizer
+    region: us-east-1
+    signingDisabled: false
+    status: ACTIVE
+    tags:
+      Name: example
+    tokenKeyName: Token-Header
+    tokenSigningPublicKeysSecretRef:
+      key: signing-token-key
+      name: signing-token-secret
+---
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Permission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
+  name: example-lambda-permission
+spec:
+  forProvider:
+    region: us-east-1
+    action: lambda:InvokeFunction
+    functionNameRef:
+      name: lambda-authorizer
+    principal: iot.amazonaws.com
+    statementId: AllowExecutionFromIotCore
+---
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: lambda-authorizer
+  name: lambda-authorizer
+spec:
+  forProvider:
+    handler: index.py
+    packageType: Zip
+    region: us-east-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    runtime: python3.9
+    s3Bucket: official-provider-test-data
+    s3Key: hello-python.zip
+    timeout: 60
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": ["lambda.amazonaws.com"]
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: signing-token-secret
+  namespace: upbound-system
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/authorizer
+data:
+  # base64 of the demo key used in the AWS documentation --> https://docs.aws.amazon.com/iot/latest/developerguide/custom-auth-tutorial.html#custom-auth-tutorial-authorizer-resource
+  signing-token-key: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQ0lqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FnOEFNSUlDQ2dLQ0FnRUF2RUJ6T2s0dmhOKzNMZ3NsdkVXdApzTENxTm10NURhbWFzM2JtaVRSdnEyZ2pSSjZLWEdUR1FDaHFBckFKd0wxYTlka1M5K21hYVhDM3ZjNnh6eDl6ClFQdS92UU9lNXR5enoxTXNLZG10Rkd4TXFRM3FqRVhBTVBMRU9tcXlVS1BQNW1mZjU4azZlUFNmWEFuekJIMHEKbGcySGlvZWZycFU1T1NBbnB1UkFqWUtvZktqYmMyVnJuNk4yRzdoVitJZlRCdkNFbGYwY3NhbFMvUms0cGhENQpvYTRZMEdISVNSbmV2eXBnNUM4bjlScno5MVBXR3FQNk0vcTVETkpKWGpNeWxlRzkyaFFndTFONjk2Ym41RHc4CkZoZWRzekZhNmIyeDZ4ckl0WkZ6ZXdOUWtQTUxNRmhOclFJSXl2c2h0VC9GMUxWQ1M1K3Y4QVE4VUdHRGZabXYKUWVxQU1BRjdXZ2FnRE1YY2ZnS1NWVTh5aWQyc0ltNTZxc0NMTXZEMlNxOExnenBleTlONU9OMW8xQ3ZsZHd2YwpLckpKdGd3VzZoVnFSR3VTaG5vd25McGdHODZNNm5lWjVzUk1iVk5aTzhPemNvYkxuZ0owSWJ3OUtrY1Vka2xXCmd2WjZIRUpxQlkyWEU3MGlFWEFNUExFVFBIemhxdks2RWkxSEd4cEhzWHg2Qk5mdDU4MkoxVnBnWWpYaGE4b2EKL05ON2w3WmJqL2V1QWI0MUlWdG1YOEpyRDl6NjEzZDFpTTVMOEhsdUpsVXpuNjJRK1ZlTlYydGRBN01mUGZNQwo4YnRHWWxhZEZBbml0VGhhejYrRjBWU0JKUHU3cFpRb0xucXlFcDV6TE10RitrRmwyeU9CbUdBUDBSQml2UmQ5CkpXQlVDRzBicWNMUVBlUXlqYlhTT2ZVQ0F3RUFBUT09Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ==

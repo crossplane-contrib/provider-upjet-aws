@@ -1,0 +1,119 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: ClusterRoleAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-cra
+spec:
+  forProvider:
+    region: us-west-1
+    dbClusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cra
+    featureName: s3Import
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cra
+---
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: example-cluster-cra
+spec:
+  forProvider:
+    region: us-west-1
+    engine: aurora-postgresql
+    masterUsername: cpadmin
+    masterPasswordSecretRef:
+      name: sample-cluster-password
+      key: password
+    skipFinalSnapshot: true
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: upbound-system
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: sample-policy-cra
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:*",
+                "s3-object-lambda:*"
+              ],
+              "Resource": "*"
+            }
+          ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: sample-role-cra
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "rds.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: sample-role-attach-cra
+spec:
+  forProvider:
+    policyArnRef:
+      name: sample-policy-cra
+    roleRef:
+      name: sample-role-cra
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  name: sample-cluster-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass0!

@@ -1,0 +1,169 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
+  labels:
+    testing.upbound.io/example-name: lambda-example
+  name: lambda-example
+spec:
+  forProvider:
+    lambdaConfig:
+      createAuthChallengeSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      customEmailSender:
+        lambdaArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: lambda-example
+        lambdaVersion: V1_0
+      customMessageSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      customSmsSender:
+        lambdaArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: lambda-example
+        lambdaVersion: V1_0
+      defineAuthChallengeSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      kmsKeyIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      postAuthenticationSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      postConfirmationSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      preAuthenticationSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      preSignUpSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      preTokenGenerationSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      userMigrationSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+      verifyAuthChallengeResponseSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lambda-example
+    name: lambda-example
+    region: eu-west-1
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
+  labels:
+    testing.upbound.io/example-name: lambda-example
+  name: lambda-example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "cognito-idp.amazonaws.com",
+                "lambda.amazonaws.com"
+              ]
+            }
+          }
+        ]
+      }
+    inlinePolicy:
+      - name: sns-publish
+        policy: |
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "sns:publish"
+                ],
+                "Resource": [
+                  "*"
+                ]
+              }
+            ]
+          }
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
+  labels:
+    testing.upbound.io/example-name: lambda-example
+  name: lambda-example
+spec:
+  forProvider:
+    region: eu-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketObject
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
+  labels:
+    testing.upbound.io/example-name: lambda-example
+  name: lambda-example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda-example
+    contentBase64: UEsDBBQAAAAIAFd7c1eDOfFtMAAAADEAAAAIABwAaW5kZXguanNVVAkAA7WZWmWrmVpldXgLAAEE6AMAAAToAwAAS60oyC8qKdbLSMxLyUktUrBV0NBUsLVTSM7PK87PSdXLyU/XUPfLB/FLUvNK1DUBUEsBAh4DFAAAAAgAV3tzV4M58W0wAAAAMQAAAAgAGAAAAAAAAQAAALSBAAAAAGluZGV4LmpzVVQFAAO1mVpldXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEATgAAAHIAAAAAAA==
+    contentType: application/zip
+    key: lambda.zip
+    region: eu-west-1
+---
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
+  labels:
+    testing.upbound.io/example-name: lambda-example
+  name: lambda-example
+spec:
+  forProvider:
+    handler: handler
+    region: eu-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda-example
+    runtime: nodejs18.x
+    s3BucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda-example
+    s3Key: lambda.zip
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
+  labels:
+    testing.upbound.io/example-name: lambda-example
+  name: lambda-example
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    region: eu-west-1

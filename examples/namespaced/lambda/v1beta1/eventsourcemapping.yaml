@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: EventSourceMapping
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/eventsourcemapping
+  name: example
+spec:
+  forProvider:
+    eventSourceArn: null
+    functionNameRef:
+      name: example
+    region: us-west-1
+    startingPosition: LATEST

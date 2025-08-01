@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: signer.aws.m.upbound.io/v1beta1
+kind: SigningProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signer/v1beta1/signingprofile
+  name: example
+spec:
+  forProvider:
+    platformId: AWSLambda-SHA384-ECDSA
+    region: us-west-1

@@ -1,0 +1,299 @@
+apiVersion: kafka.aws.m.upbound.io/v1beta1
+kind: Replicator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: test-description
+    kafkaCluster:
+      - amazonMskCluster:
+          mskClusterArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: source
+        vpcConfig:
+          securityGroupsIdsRefs:
+            - name: source-sg
+          subnetIdsRefs:
+            - name: source-subnet-1
+            - name: source-subnet-2
+      - amazonMskCluster:
+          mskClusterArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: target
+        vpcConfig:
+          securityGroupsIdsRefs:
+            - name: target-sg
+          subnetIdsRefs:
+            - name: target-subnet-1
+            - name: target-subnet-2
+    region: us-east-2
+    replicationInfoList:
+      consumerGroupReplication:
+        - consumerGroupsToReplicate:
+            - .*
+      sourceKafkaClusterArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: source
+      targetCompressionType: NONE
+      targetKafkaClusterArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: target
+      topicReplication:
+        - startingPosition:
+            type: LATEST
+          topicNameConfiguration:
+            type: PREFIXED_WITH_SOURCE_CLUSTER_ALIAS
+          topicsToReplicate:
+            - .*
+    replicatorName: test-name
+    serviceExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+---
+apiVersion: kafka.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    brokerNodeGroupInfo:
+      - clientSubnetsRefs:
+          - name: source-subnet-1
+          - name: source-subnet-2
+        instanceType: kafka.t3.small
+        securityGroupsRefs:
+          - name: source-sg
+        storageInfo:
+          - ebsStorageInfo:
+              - volumeSize: 1000
+    clusterName: ${Rand.RFC1123Subdomain}
+    kafkaVersion: 3.2.0
+    numberOfBrokerNodes: 2
+    region: us-east-2
+---
+apiVersion: kafka.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: target
+  name: target
+spec:
+  forProvider:
+    brokerNodeGroupInfo:
+      - clientSubnetsRefs:
+          - name: target-subnet-1
+          - name: target-subnet-2
+        instanceType: kafka.t3.small
+        securityGroupsRefs:
+          - name: target-sg
+        storageInfo:
+          - ebsStorageInfo:
+              - volumeSize: 1000
+    clusterName: ${Rand.RFC1123Subdomain}
+    kafkaVersion: 3.2.0
+    numberOfBrokerNodes: 2
+    region: us-east-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  labels:
+    testing.upbound.io/example-name: source-sg
+  name: source-sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  labels:
+    testing.upbound.io/example-name: target-sg
+  name: target-sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  name: source-subnet-1
+  labels:
+    testing.upbound.io/example-name: source-subnet-1
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source-vpc
+    cidrBlock: 10.0.1.0/24
+    availabilityZone: us-east-2a
+    region: us-east-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  name: source-subnet-2
+  labels:
+    testing.upbound.io/example-name: source-subnet-2
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source-vpc
+    cidrBlock: 10.0.2.0/24
+    availabilityZone: us-east-2b
+    region: us-east-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  name: target-subnet-1
+  labels:
+    testing.upbound.io/example-name: target-subnet-1
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target-vpc
+    cidrBlock: 10.1.1.0/24
+    availabilityZone: us-east-2a
+    region: us-east-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  name: target-subnet-2
+  labels:
+    testing.upbound.io/example-name: target-subnet-2
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target-vpc
+    cidrBlock: 10.1.2.0/24
+    availabilityZone: us-east-2b
+    region: us-east-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  name: source-vpc
+  labels:
+    testing.upbound.io/example-name: source-vpc
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-east-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  name: target-vpc
+  labels:
+    testing.upbound.io/example-name: target-vpc
+spec:
+  forProvider:
+    cidrBlock: 10.1.0.0/16
+    region: us-east-2
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "kafka.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-policy-attachment
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/replicator
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "kafka:*",
+              "ec2:DescribeSubnets",
+              "ec2:DescribeSecurityGroups",
+              "ec2:DescribeVpcs"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }

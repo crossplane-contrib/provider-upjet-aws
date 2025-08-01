@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: neptune.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/cluster
+  name: sample-cluster
+spec:
+  forProvider:
+    applyImmediately: true
+    backupRetentionPeriod: 5
+    engine: neptune
+    iamDatabaseAuthenticationEnabled: true
+    preferredBackupWindow: 07:00-09:00
+    region: eu-central-1
+    skipFinalSnapshot: true

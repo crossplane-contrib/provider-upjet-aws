@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: wafv2.aws.m.upbound.io/v1beta1
+kind: RuleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/rulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-rg
+spec:
+  forProvider:
+    capacity: 2
+    name: example-rule-group
+    region: us-west-1
+    ruleJson: |
+      [
+        {
+          "Name": "rule-1",
+          "Priority": 1,
+          "Statement": {
+            "GeoMatchStatement": {
+              "CountryCodes": [
+                "US",
+                "NL"
+              ]
+            }
+          },
+          "Action": {
+            "Allow": {}
+          },
+          "VisibilityConfig": {
+            "SampledRequestsEnabled": false,
+            "CloudWatchMetricsEnabled": false,
+            "MetricName": "friendly-rule-metric-name"
+          }
+        }
+      ]
+    scope: REGIONAL
+    visibilityConfig:
+      cloudwatchMetricsEnabled: false
+      metricName: friendly-metric-name
+      sampledRequestsEnabled: false

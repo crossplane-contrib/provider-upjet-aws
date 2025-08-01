@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: CodeSigningConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/codesigningconfig
+  name: example
+spec:
+  forProvider:
+    allowedPublishers:
+      signingProfileVersionArnsRefs:
+        - name: example
+    description: My awesome code signing config.
+    policies:
+      untrustedArtifactOnDeployment: Warn
+    region: us-west-1

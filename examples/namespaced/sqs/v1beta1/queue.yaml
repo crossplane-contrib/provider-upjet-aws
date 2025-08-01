@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    name: upbound-sqs
+    delaySeconds: 90
+    maxMessageSize: 2048
+    messageRetentionSeconds: 86400
+    receiveWaitTimeSeconds: 10
+    region: us-west-1
+    tags:
+      Environment: production
+  writeConnectionSecretToRef:
+    name: "sqs-example"
+    namespace: "upbound-system"

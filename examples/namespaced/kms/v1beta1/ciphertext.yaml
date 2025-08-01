@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Ciphertext
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+spec:
+  forProvider:
+    region: us-east-1
+    keyIdRef:
+      name: sample-key
+    plaintextSecretRef:
+      key: example-key
+      name: example-secret

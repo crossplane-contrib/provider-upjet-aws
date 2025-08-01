@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: OpenIDConnectProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/openidconnectprovider
+  name: example
+spec:
+  forProvider:
+    clientIdList:
+      - some-audience
+    thumbprintList:
+      - 15e29108718111e59b3dad31954647e3c344a231
+    url: https://accounts.google.com

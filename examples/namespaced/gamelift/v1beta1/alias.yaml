@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: gamelift.aws.m.upbound.io/v1beta1
+kind: Alias
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gamelift/v1beta1/alias
+  name: example
+spec:
+  forProvider:
+    description: Example Description
+    name: example-alias
+    region: us-west-1
+    routingStrategy:
+      message: Example Message
+      type: TERMINAL

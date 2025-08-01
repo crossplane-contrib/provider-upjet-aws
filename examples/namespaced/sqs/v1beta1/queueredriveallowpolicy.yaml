@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: QueueRedriveAllowPolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "It requires a real queue arn to be specified."
+    meta.upbound.io/example-id: sqs/v1beta1/queueredriveallowpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: qrapexample
+spec:
+  forProvider:
+    redriveAllowPolicy: |-
+      ${jsonencode({
+          redrivePermission = "byQueue",
+          sourceQueueArns   = ["arn:aws:sqs:us-east-1:153891904029:srcqueue"]
+        })}
+    region: us-east-1
+    queueUrlSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queueredriveallowpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: examplequeue
+    region: us-east-1
+---
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queueredriveallowpolicy
+  labels:
+    testing.upbound.io/example-name: src
+  name: src
+spec:
+  forProvider:
+    name: srcqueue
+    redrivePolicy: |-
+      ${jsonencode({
+          deadLetterTargetArn = "arn:aws:sqs:us-east-1:153891904029:examplequeue"
+          maxReceiveCount     = 4
+        })}
+    region: us-east-1

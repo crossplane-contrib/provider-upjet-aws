@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: FunctionEventInvokeConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/functioneventinvokeconfig
+  name: example
+spec:
+  forProvider:
+    destinationConfig:
+      onFailure:
+        destinationRef:
+          name: example
+    functionName: example
+    region: us-west-1

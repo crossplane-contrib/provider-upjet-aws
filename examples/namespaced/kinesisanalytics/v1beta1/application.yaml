@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kinesisanalytics.aws.m.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
+  name: kinesis-analytics-application-test
+spec:
+  forProvider:
+    inputs:
+      kinesisStream:
+        resourceArnRef:
+          name: example
+        roleArnRef:
+          name: kinesis-app-role
+      namePrefix: test_prefix
+      parallelism:
+        count: 1
+      schema:
+        recordColumns:
+          - mapping: $.test
+            name: test
+            sqlType: VARCHAR(8)
+        recordEncoding: UTF-8
+        recordFormat:
+          mappingParameters:
+            json:
+              recordRowPath: $
+    region: us-west-1
+---
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
+kind: Stream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+      - IncomingBytes
+      - OutgoingBytes
+    streamModeDetails:
+      streamMode: PROVISIONED
+    tags:
+      Environment: test
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
+  name: kinesis-app-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "kinesisanalytics.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }

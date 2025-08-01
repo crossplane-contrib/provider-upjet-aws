@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/cluster
+  name: example
+spec:
+  forProvider:
+    autoGeneratePassword: true
+    dbClusterParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci-cluster
+    dbInstanceParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci-cluster-instance
+    engine: aurora-postgresql
+    masterPasswordSecretRef:
+      key: password
+      name: sample-cluster-password
+    masterUsername: cpadmin
+    region: us-west-1
+    skipFinalSnapshot: true
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: upbound-system
+---
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example-ci-cluster
+  name: example-ci-cluster
+spec:
+  forProvider:
+    description: RDS custom cluster parameter group
+    family: aurora-postgresql16
+    parameter:
+      - applyMethod: immediate
+        name: application_name
+        value: example-rds-cluster
+    region: us-west-1
+---
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example-ci-cluster-instance
+  name: example-parametergroup-ci-cluster-instance
+spec:
+  forProvider:
+    description: example
+    family: aurora-postgresql16
+    parameter:
+      - applyMethod: immediate
+        name: application_name
+        value: example-cluster-instance
+    region: us-west-1

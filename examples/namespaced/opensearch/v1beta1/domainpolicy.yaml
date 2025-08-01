@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: opensearch.aws.m.upbound.io/v1beta1
+kind: DomainPolicy
+metadata:
+  name: example-domainpolicy
+spec:
+  forProvider:
+    domainNameRef:
+      name: example-domainpolicy
+    accessPolicies: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Action": "es:*",
+                  "Principal": "*",
+                  "Effect": "Allow",
+                  "Condition": {
+                      "IpAddress": {"aws:SourceIp": "127.0.0.1/32"}
+                  },
+                  "Resource": "*"
+              }
+          ]
+      }
+    region: us-west-2
+---
+apiVersion: opensearch.aws.m.upbound.io/v1beta1
+kind: Domain
+metadata:
+  name: example-domainpolicy
+  annotations:
+    uptest.upbound.io/timeout: "2400"
+spec:
+  forProvider:
+    domainName: example
+    engineVersion: OpenSearch_1.0
+    region: us-west-2
+    clusterConfig:
+      - instanceType: t3.small.search
+    ebsOptions:
+      - ebsEnabled: true
+        volumeType: gp2
+        volumeSize: 10

@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterendpoint
+  labels:
+    testing.upbound.io/example-name: default-ce
+  name: kms-test
+spec:
+  forProvider:
+    engine: aurora-postgresql
+    autoGeneratePassword: true
+    masterPasswordSecretRef:
+      key: password
+      name: sample-cluster-password
+    masterUsername: cpadmin
+    region: us-west-1
+    skipFinalSnapshot: true
+    storageEncrypted: true
+    kmsKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-key
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: upbound-system
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: sample-key
+  name: sample-key
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: Created with Crossplane
+    region: us-west-1

@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: GlobalSettings
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires you to use the management user, not an IAM user, which makes it incompatible for Uptest."
+spec:
+  forProvider:
+    globalSettings:
+      isCrossAccountBackupEnabled: "true"

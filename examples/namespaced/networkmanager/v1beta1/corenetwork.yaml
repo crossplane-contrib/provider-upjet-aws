@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: CoreNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/corenetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: corenetworkname
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: GlobalNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/corenetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: globalnetworkname
+spec:
+  forProvider:
+    description: example

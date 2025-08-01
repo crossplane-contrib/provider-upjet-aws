@@ -1,0 +1,160 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kafka.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    brokerNodeGroupInfo:
+      clientSubnetsRefs:
+        - name: subnet-az1
+        - name: subnet-az2
+      instanceType: kafka.t3.small
+      securityGroupsRefs:
+        - name: sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 1000
+    clusterName: ${Rand.RFC1123Subdomain}
+    configurationInfo:
+      arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      revision: 1
+    encryptionInfo:
+      encryptionAtRestKmsKeyArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: kms
+    kafkaVersion: 2.6.0
+    numberOfBrokerNodes: 2
+    openMonitoring:
+      prometheus:
+        jmxExporter:
+          enabledInBroker: true
+        nodeExporter:
+          enabledInBroker: true
+    region: us-east-2
+    tags:
+      foo: bar
+---
+apiVersion: kafka.aws.m.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    kafkaVersions:
+      - 2.6.0
+    name: ${Rand.RFC1123Subdomain}
+    region: us-east-2
+    serverProperties: |
+      auto.create.topics.enable = true
+      delete.topic.enable = true
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: kms
+  name: kms
+spec:
+  forProvider:
+    description: example
+    region: us-east-2
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: bucket
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-east-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: sg
+  name: sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  name: subnet-az1
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  name: subnet-az2
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: vpc
+  name: vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2
+---
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  name: test
+spec:
+  forProvider:
+    region: us-east-2
+    tags:
+      Application: serviceA
+      Environment: production

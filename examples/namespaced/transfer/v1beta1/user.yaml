@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: transfer.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
+  name: example
+spec:
+  forProvider:
+    homeDirectoryMappings:
+      - entry: /test.pdf
+        target: /bucket3/test-path/tftestuser.pdf
+    homeDirectoryType: LOGICAL
+    region: us-west-1
+    roleRef:
+      name: example
+    serverIdRef:
+      name: example

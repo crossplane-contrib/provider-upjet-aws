@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    policy: |-
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "glue:CreateTable"
+            ],
+            "Principal": {"AWS": [
+              "arn:aws:iam::${data.aws_account_id}:root"
+            ]},
+            "Resource": [
+              "arn:aws:glue:us-east-1:${data.aws_account_id}:catalog"
+            ]
+          }
+        ]
+      }

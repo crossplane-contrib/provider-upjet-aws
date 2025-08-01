@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: neptune.aws.m.upbound.io/v1beta1
+kind: ClusterEndpoint
+metadata:
+  name: sample-endpoint
+spec:
+  forProvider:
+    region: eu-central-1
+    clusterIdentifierRef:
+      name: sample-cluster
+    endpointType: READER

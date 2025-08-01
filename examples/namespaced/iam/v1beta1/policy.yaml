@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: policy
+  name: sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+              "Sid": "VisualEditor0",
+              "Effect": "Allow",
+              "Action": "elastic-inference:Connect",
+              "Resource": "*"
+          }
+        ]
+      }

@@ -1,0 +1,90 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kafka.aws.m.upbound.io/v1beta1
+kind: ServerlessCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clientAuthentication:
+      sasl:
+        iam:
+          enabled: true
+    clusterName: Example
+    region: us-east-2
+    vpcConfig:
+      - securityGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: sg
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: subnets
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: sg
+  name: sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: subnets
+  name: subnet-az1
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: subnets
+  name: subnet-az2
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: vpc
+  name: vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    enableDnsHostnames: true
+    region: us-east-2

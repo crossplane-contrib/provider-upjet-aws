@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: mediapackage.aws.m.upbound.io/v1beta1
+kind: Channel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mediapackage/v1beta1/channel
+  labels:
+    testing.upbound.io/example-name: sample-channel
+  name: sample-channel
+spec:
+  forProvider:
+    channelId: sample-channel
+    description: A sample channel.
+    region: us-west-1

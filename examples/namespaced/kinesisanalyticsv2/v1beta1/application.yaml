@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kinesisanalyticsv2.aws.m.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
+  name: example-application
+spec:
+  forProvider:
+    applicationConfiguration:
+      applicationCodeConfiguration:
+        codeContentType: ZIPFILE
+      environmentProperties:
+        propertyGroup:
+          - propertyGroupId: PROPERTY-GROUP-1
+            propertyMap:
+              Key1: Value1
+          - propertyGroupId: PROPERTY-GROUP-2
+            propertyMap:
+              KeyA: ValueA
+              KeyB: ValueB
+    region: us-west-1
+    runtimeEnvironment: FLINK-1_8
+    serviceExecutionRoleRef:
+      name: kinesis-app-role
+    tags:
+      Environment: test
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
+  name: kinesis-app-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "kinesisanalytics.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }

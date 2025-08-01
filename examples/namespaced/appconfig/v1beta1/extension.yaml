@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: appconfig.aws.m.upbound.io/v1beta1
+kind: Extension
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfig/v1beta1/extension
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    actionPoint:
+      - action:
+          - name: test
+            roleArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: test
+            uriSelector:
+              matchLabels:
+                testing.upbound.io/example-name: test
+        point: ON_DEPLOYMENT_COMPLETE
+    description: test description
+    name: test
+    region: us-west-1
+    tags:
+      Type: AppConfig Extension
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfig/v1beta1/extension
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "appconfig.amazonaws.com"
+              ]
+            },
+            "Action": [
+              "sts:AssumeRole"
+            ]
+          }
+        ]
+      }
+---
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfig/v1beta1/extension
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    region: us-west-1

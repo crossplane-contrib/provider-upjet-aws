@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: OptionGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    engineName: sqlserver-ee
+    majorEngineVersion: "11.00"
+    option:
+      - optionName: TDE
+    optionGroupDescription: Upbound Option Group

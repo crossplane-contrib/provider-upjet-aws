@@ -1,0 +1,103 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/endpoint
+    upjet.upbound.io/manual-intervention: This resource is skipping because the EndpointConfiguration resource on which this resource depends was skipped.
+  labels:
+    testing.upbound.io/example-name: e
+  name: e
+spec:
+  forProvider:
+    endpointConfigNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec
+    region: us-east-1
+    tags:
+      Name: foo
+---
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: EndpointConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/endpoint
+    upjet.upbound.io/manual-intervention: It requires an image which can be create/deleted only using AWS CLI
+  labels:
+    testing.upbound.io/example-name: ec
+  name: ec
+spec:
+  forProvider:
+    productionVariants:
+      - initialInstanceCount: 1
+        instanceType: ml.t2.medium
+        modelNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        variantName: variant-1
+    region: us-east-1
+    tags:
+      Name: foo
+---
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: Model
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/endpoint
+    upjet.upbound.io/manual-intervention: It requires an image which can be create/deleted only using AWS CLI
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    primaryContainer:
+      image: ${data.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/sagemaker-scikit-learn:latest
+    region: us-east-1
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/endpoint
+    upjet.upbound.io/manual-intervention: It requires an image which can be create/deleted only using AWS CLI
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "sagemaker.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/endpoint
+    upjet.upbound.io/manual-intervention: It requires an image which can be create/deleted only using AWS CLI
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonSageMakerFullAccess
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

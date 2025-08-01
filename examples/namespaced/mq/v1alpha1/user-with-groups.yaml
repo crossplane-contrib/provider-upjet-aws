@@ -1,0 +1,134 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: mq.aws.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: mquser1
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    brokerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    consoleAccess: false
+    passwordSecretRef:
+      key: password
+      name: mq-admin-secret
+    username: mquser1
+    groups:
+      - users
+      - dev
+    region: us-west-1
+---
+apiVersion: mq.aws.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: mquser2
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    brokerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    consoleAccess: false
+    passwordSecretRef:
+      key: password
+      name: mq-admin-secret
+    username: mquser2
+    groups:
+      - users
+      - dev
+    region: us-west-1
+---
+apiVersion: mq.aws.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: mquser3
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    brokerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    consoleAccess: false
+    passwordSecretRef:
+      key: password
+      name: mq-admin-secret
+    username: mquser3
+    groups:
+      - users
+      - dev
+    region: us-west-1
+---
+apiVersion: mq.aws.m.upbound.io/v1beta1
+kind: Broker
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-test
+spec:
+  forProvider:
+    applyImmediately: true
+    brokerName: example-test-broker
+    engineType: ActiveMQ
+    engineVersion: "5.18"
+    autoMinorVersionUpgrade: true
+    hostInstanceType: mq.m5.large
+    region: us-west-1
+    securityGroupRefs:
+      - name: sg-test
+  providerConfigRef:
+    name: default
+  initProvider:
+    user:
+      - passwordSecretRef:
+          key: password
+          name: mq-admin-secret
+        username: admin
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-broker.sh
+  labels:
+    testing.upbound.io/example-name: mq-secret
+  name: mq-admin-secret
+  namespace: upbound-system
+stringData:
+  password: Upboundtest!
+type: Opaque
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+  name: sg-test
+spec:
+  forProvider:
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    region: us-west-1
+    tags:
+      Name: allow_tls

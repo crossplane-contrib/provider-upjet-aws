@@ -1,0 +1,121 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: networkfirewall.aws.m.upbound.io/v1beta1
+kind: FirewallPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
+  labels:
+    testing.upbound.io/example-name: example-default-policy
+  name: example-default-policy
+spec:
+  forProvider:
+    firewallPolicy:
+      statefulRuleGroupReference:
+        - resourceArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example-allow-domainlist
+        - resourceArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example-deny
+      statelessDefaultActions:
+        - aws:forward_to_sfe
+      statelessFragmentDefaultActions:
+        - aws:pass
+      statelessRuleGroupReference:
+        - priority: 2
+          resourceArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example-forward-all
+    region: us-west-1
+---
+apiVersion: networkfirewall.aws.m.upbound.io/v1beta1
+kind: RuleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
+  labels:
+    testing.upbound.io/example-name: example-forward-all
+  name: example-forward-all
+spec:
+  forProvider:
+    capacity: 1
+    name: example-forward-all
+    region: us-west-1
+    ruleGroup:
+      rulesSource:
+        statelessRulesAndCustomActions:
+          statelessRule:
+            - priority: 1
+              ruleDefinition:
+                actions:
+                  - aws:forward_to_sfe
+                matchAttributes:
+                  destination:
+                    - addressDefinition: 0.0.0.0/0
+                  source:
+                    - addressDefinition: 0.0.0.0/0
+    type: STATELESS
+---
+apiVersion: networkfirewall.aws.m.upbound.io/v1beta1
+kind: RuleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
+  labels:
+    testing.upbound.io/example-name: example-allow-domainlist
+  name: example-allow-domainlist
+spec:
+  forProvider:
+    capacity: 1000
+    name: example-allow-domainlist
+    region: us-west-1
+    ruleGroup:
+      ruleVariables:
+        ipSets:
+          - ipSet:
+              definition:
+                - 10.0.0.0/8
+            key: HOME_NET
+      rulesSource:
+        rulesSourceList:
+          generatedRulesType: ALLOWLIST
+          targetTypes:
+            - TLS_SNI
+            - HTTP_HOST
+          targets:
+            - xpkg.upbound.io
+    type: STATEFUL
+---
+apiVersion: networkfirewall.aws.m.upbound.io/v1beta1
+kind: RuleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
+  labels:
+    testing.upbound.io/example-name: example-deny
+  name: example-deny
+spec:
+  forProvider:
+    capacity: 300
+    name: example-deny
+    region: us-west-1
+    ruleGroup:
+      ruleVariables:
+        ipSets:
+          - ipSet:
+              definition:
+                - 10.0.0.0/8
+            key: UP_NET
+          - ipSet:
+              definition:
+                - 172.16.0.0/16
+            key: TGW_NET
+      rulesSource:
+        rulesString: |
+          drop ip $TGW_NET,$UP_NET any <> $EXTERNAL_NET any (msg: "Drop non-TCP traffic."; ip_proto:!TCP;sid:1003; rev:1;)
+          drop tcp $TGW_NET any -> $EXTERNAL_NET [!443] (msg:"Drop All non-TCP:443"; sid:1002; priority:2; rev:1;)
+          drop tcp $UP_NET any -> $EXTERNAL_NET [!443] (msg:"Drop All non-TCP:443"; sid:1001; priority:1; rev:1;)
+    type: STATEFUL

@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: Trigger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/trigger
+  name: example
+spec:
+  forProvider:
+    actions:
+      - jobName: example
+    predicate:
+      conditions:
+        - jobName: another
+          state: SUCCEEDED
+    region: us-east-1
+    type: CONDITIONAL

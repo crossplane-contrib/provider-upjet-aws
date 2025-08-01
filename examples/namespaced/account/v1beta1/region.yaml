@@ -1,0 +1,12 @@
+apiVersion: account.aws.m.upbound.io/v1beta1
+kind: Region
+metadata:
+  annotations:
+    meta.upbound.io/example-id: account/v1beta1/region
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    regionName: ap-southeast-3

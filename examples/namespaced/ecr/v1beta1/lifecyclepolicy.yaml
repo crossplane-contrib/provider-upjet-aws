@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: LifecyclePolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    policy: |
+      {
+          "rules": [
+              {
+                  "rulePriority": 1,
+                  "description": "Expire images older than 14 days",
+                  "selection": {
+                      "tagStatus": "untagged",
+                      "countType": "sinceImagePushed",
+                      "countUnit": "days",
+                      "countNumber": 14
+                  },
+                  "action": {
+                      "type": "expire"
+                  }
+              }
+          ]
+      }
+    repository: upbound-sample-repository
+  providerConfigRef:
+    name: default

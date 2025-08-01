@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: evidently.aws.m.upbound.io/v1beta1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: evidently/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: evidently_project
+  name: evidently-project
+spec:
+  forProvider:
+    description: Example Description
+    name: evidentlyproject
+    region: us-east-1
+    tags:
+      Key1: example Project

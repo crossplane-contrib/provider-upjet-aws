@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: route53.aws.m.upbound.io/v1beta1
+kind: ZoneAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/zoneassociation
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  providerConfigRef:
+    name: peer
+    kind: ClusterProviderConfig
+---
+apiVersion: route53.aws.m.upbound.io/v1beta1
+kind: Zone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/zoneassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: upbound.rocks
+    vpc:
+      - vpcIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: primary
+---
+apiVersion: route53.aws.m.upbound.io/v1beta1
+kind: VPCAssociationAuthorization
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/zoneassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/zoneassociation
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    cidrBlock: 10.6.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    region: us-west-1
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/zoneassociation
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    cidrBlock: 10.7.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    region: us-west-1
+  providerConfigRef:
+    name: peer
+    kind: ClusterProviderConfig

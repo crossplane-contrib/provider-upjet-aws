@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: glacier.aws.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glacier/v1beta1/vault
+  labels:
+    testing.upbound.io/example-name: my_archive
+  name: my-archive
+spec:
+  forProvider:
+    notification:
+      events:
+        - ArchiveRetrievalCompleted
+        - InventoryRetrievalCompleted
+      snsTopicSelector:
+        matchLabels:
+          testing.upbound.io/example-name: aws_sns_topic
+    region: us-west-1
+    tags:
+      Test: MyArchive
+---
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glacier/v1beta1/vault
+  labels:
+    testing.upbound.io/example-name: aws_sns_topic
+  name: aws-sns-topic
+spec:
+  forProvider:
+    region: us-west-1

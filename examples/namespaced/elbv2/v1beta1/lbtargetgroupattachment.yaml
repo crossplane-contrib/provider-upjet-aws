@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
+kind: LBTargetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroup
+  labels:
+    testing.upbound.io/example-name: elbv2
+  name: test
+spec:
+  forProvider:
+    name: example-lb-tg
+    port: 80
+    protocol: HTTP
+    region: us-west-1
+    targetType: ip
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+---
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
+kind: LBTargetGroupAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroup
+  labels:
+    testing.upbound.io/example-name: elbv2
+  name: test
+spec:
+  forProvider:
+    port: 80
+    region: us-west-1
+    targetGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+    targetId: 172.16.10.25

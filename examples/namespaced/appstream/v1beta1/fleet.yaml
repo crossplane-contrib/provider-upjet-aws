@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appstream.aws.m.upbound.io/v1beta1
+kind: Fleet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta1/fleet
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    computeCapacity:
+      desiredInstances: 1
+    description: test fleet
+    displayName: test-fleet
+    enableDefaultInternetAccess: false
+    fleetType: ON_DEMAND
+    idleDisconnectTimeoutInSeconds: 60
+    imageName: Amazon-AppStream2-Sample-Image-03-11-2023
+    instanceType: stream.standard.large
+    maxUserDurationInSeconds: 960
+    name: test-fleet
+    region: us-east-1
+    tags:
+      TagName: tag-value
+    vpcConfig:
+      subnetIdRefs:
+        - name: sample-subnet1
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta1/fleet
+  name: sample-subnet1
+spec:
+  forProvider:
+    availabilityZone: us-east-1b
+    cidrBlock: 172.16.10.0/24
+    region: us-east-1
+    vpcIdRef:
+      name: sample-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta1/fleet
+  name: sample-vpc
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-east-1
+    tags:
+      Name: DemoVpc

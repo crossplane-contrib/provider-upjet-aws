@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: efs.aws.m.upbound.io/v1beta1
+kind: AccessPoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/accesspoint
+  labels:
+    testing.upbound.io/example-name: test
+  name: example
+spec:
+  forProvider:
+    fileSystemIdRef:
+      name: example
+    region: us-west-1

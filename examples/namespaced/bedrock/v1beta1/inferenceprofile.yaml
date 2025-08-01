@@ -1,0 +1,17 @@
+apiVersion: bedrock.aws.m.upbound.io/v1beta1
+kind: InferenceProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/inferenceprofile
+  labels:
+    testing.upbound.io/example-name: example-titan-app
+  name: example-titan-app
+spec:
+  forProvider:
+    description: Profile with tag for cost allocation tracking
+    modelSource:
+      - copyFrom: arn:aws:bedrock:us-west-2::foundation-model/amazon.titan-embed-g1-text-02 # Titan Text Embeddings V2 model enabled in testing account
+    name: titan-app
+    region: us-west-2
+    tags:
+      ProjectID: "123"

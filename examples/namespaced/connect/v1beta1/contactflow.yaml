@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: connect.aws.m.upbound.io/v1beta1
+kind: ContactFlow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/contactflow
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    content: "{\n    \"Version\": \"2019-10-30\",\n    \"StartAction\": \"12345678-1234-1234-1234-123456789012\",\n    \"Actions\": [\n        {\n            \"Identifier\": \"12345678-1234-1234-1234-123456789012\",\n            \"Type\": \"MessageParticipant\",\n            \"Transitions\": {\n                \"NextAction\": \"abcdef-abcd-abcd-abcd-abcdefghijkl\",\n                \"Errors\": [],\n                \"Conditions\": []\n            },\n            \"Parameters\": {\n                \"Text\": \"Thanks for calling the sample flow!\"\n            }\n        },\n        {\n            \"Identifier\": \"abcdef-abcd-abcd-abcd-abcdefghijkl\",\n            \"Type\": \"DisconnectParticipant\",\n            \"Transitions\": {},\n            \"Parameters\": {}\n        }\n    ]\n} \n"
+    description: Test Contact Flow Description
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Test
+    region: us-east-1
+    tags:
+      Application: Terraform
+      Method: Create
+      Name: Test Contact Flow
+    type: CONTACT_FLOW
+---
+apiVersion: connect.aws.m.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/contactflow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identityManagementType: CONNECT_MANAGED
+    inboundCallsEnabled: true
+    instanceAlias: friendly-name-connect-${Rand.RFC1123Subdomain}
+    outboundCallsEnabled: true
+    region: us-east-1

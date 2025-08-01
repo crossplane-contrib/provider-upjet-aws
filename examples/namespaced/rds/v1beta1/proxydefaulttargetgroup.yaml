@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: ProxyDefaultTargetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/proxydefaulttargetgroup
+    upjet.upbound.io/manual-intervention: This resource has a reference to Proxy, which needs manual intervention.
+  name: example
+spec:
+  forProvider:
+    connectionPoolConfig:
+      connectionBorrowTimeout: 120
+      initQuery: SET x=1, y=2
+      maxConnectionsPercent: 100
+      maxIdleConnectionsPercent: 50
+      sessionPinningFilters:
+        - EXCLUDE_VARIABLE_SETS
+    dbProxyName: example
+    region: us-west-1

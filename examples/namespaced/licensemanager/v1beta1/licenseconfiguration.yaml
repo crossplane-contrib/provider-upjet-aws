@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: licensemanager.aws.m.upbound.io/v1beta1
+kind: LicenseConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    description: Example
+    licenseCount: 10
+    licenseCountHardLimit: true
+    licenseCountingType: Socket
+    licenseRules:
+      - '#minimumSockets=2'
+    name: Example
+    tags:
+      foo: barr

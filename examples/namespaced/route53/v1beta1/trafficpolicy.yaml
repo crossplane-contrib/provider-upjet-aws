@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: route53.aws.m.upbound.io/v1beta1
+kind: TrafficPolicy
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    comment: example comment
+    document: |
+      {
+        "AWSPolicyFormatVersion": "2015-10-01",
+        "RecordType": "A",
+        "Endpoints": {
+          "endpoint-start-NkPh": {
+            "Type": "value",
+            "Value": "10.0.0.2"
+          }
+        },
+        "StartEndpoint": "endpoint-start-NkPh"
+      }
+    name: example

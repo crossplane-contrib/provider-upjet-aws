@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
+kind: Accelerator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: globalaccelerator/v1beta1/accelerator
+  name: sample-accelerator
+spec:
+  forProvider:
+    ipAddressType: IPV4
+    name: sample-accelerator
+  writeConnectionSecretToRef:
+    name: accelerator
+    namespace: upbound-system
