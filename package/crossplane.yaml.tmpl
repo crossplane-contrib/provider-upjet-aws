@@ -29,6 +29,8 @@ metadata:
     friendly-name.meta.crossplane.io: Provider AWS ({{ .Service }})
     auth.upbound.io/group: {{ .ProviderAuthGroup }}.upbound.io
 spec:
+  capabilities:
+    - SafeStart
 {{ if ne .Service "monolith" }}
   crossplane:
     version: ">=v1.12.1-0"
