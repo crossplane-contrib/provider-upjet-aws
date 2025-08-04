@@ -8,7 +8,6 @@ import (
 	"context"
 	_ "embed"
 	"fmt"
-	"github.com/upbound/provider-aws/config/cluster"
 	"regexp"
 	"strconv"
 	"strings"
@@ -22,6 +21,7 @@ import (
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/util/sets"
 
+	"github.com/upbound/provider-aws/config/cluster"
 	"github.com/upbound/provider-aws/hack"
 )
 

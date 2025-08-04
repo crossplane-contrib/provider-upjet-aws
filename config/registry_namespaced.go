@@ -7,7 +7,6 @@ package config
 import (
 	"context"
 	_ "embed"
-	"github.com/upbound/provider-aws/config/namespaced"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry/reference"
@@ -15,6 +14,8 @@ import (
 	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
+
+	"github.com/upbound/provider-aws/config/namespaced"
 	"github.com/upbound/provider-aws/hack"
 )
 
