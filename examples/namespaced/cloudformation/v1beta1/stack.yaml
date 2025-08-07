@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: network
   name: network
+  namespace: upbound-system
 spec:
   forProvider:
     name: networking-stack

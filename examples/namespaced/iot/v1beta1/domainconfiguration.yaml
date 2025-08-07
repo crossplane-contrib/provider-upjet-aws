@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: iot
   name: iot
+  namespace: upbound-system
 spec:
   forProvider:
     domainName: iot.example.com
@@ -23,6 +24,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: certificate
   name: example-dns
+  namespace: upbound-system
 spec:
   forProvider:
     domainName: example-dns.upbound-providers.io
@@ -40,6 +42,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: certificate
   name: example-dns
+  namespace: upbound-system
 spec:
   forProvider:
     certificateArnSelector:

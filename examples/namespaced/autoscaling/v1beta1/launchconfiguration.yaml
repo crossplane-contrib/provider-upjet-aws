@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: as_conf
   name: as-conf
+  namespace: upbound-system
 spec:
   forProvider:
     imageId: ami-0454207e5367abf01

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     addressFamily: ipv4
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bandwidth: 1Gbps

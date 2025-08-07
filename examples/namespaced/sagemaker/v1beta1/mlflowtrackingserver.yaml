@@ -7,6 +7,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-mlflowtrackingserver
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     artifactStoreUri: s3://sagemaker-bucketname303/
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-role-mlflowtrackingserver-role
   name: example-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -48,6 +50,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-rpa-mlflowtrackingserver
   name: example-policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -65,6 +68,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-policy-mlflowtrackingserver
   name: sample-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -98,6 +102,7 @@ metadata:
   name: sagemaker-bucketname303
   labels:
     testing.upbound.io/example-name: sagemaker-bucketname303
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

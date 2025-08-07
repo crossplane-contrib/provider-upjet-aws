@@ -10,6 +10,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
   name: auth-api
+  namespace: upbound-system
 spec:
   forProvider:
     name: test-http-api
@@ -24,6 +25,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -43,6 +45,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -61,6 +64,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -77,6 +81,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
   name: test-authorizer
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -100,6 +105,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:

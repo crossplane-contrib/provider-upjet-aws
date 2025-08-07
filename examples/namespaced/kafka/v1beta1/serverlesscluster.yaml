@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     clientAuthentication:
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sg
   name: sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -49,6 +51,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: subnets
   name: subnet-az1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2a
@@ -66,6 +69,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: subnets
   name: subnet-az2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2b
@@ -83,6 +87,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpc
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22

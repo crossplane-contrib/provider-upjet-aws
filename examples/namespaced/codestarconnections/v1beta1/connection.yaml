@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connection-example
   name: connection-example
+  namespace: upbound-system
 spec:
   forProvider:
     name: example-connection

@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -23,6 +24,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -34,6 +36,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -48,6 +51,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

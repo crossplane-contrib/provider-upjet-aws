@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: ${aws_vpc.foo.cidr_block}

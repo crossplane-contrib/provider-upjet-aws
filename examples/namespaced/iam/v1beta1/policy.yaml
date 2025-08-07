@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: sample-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |

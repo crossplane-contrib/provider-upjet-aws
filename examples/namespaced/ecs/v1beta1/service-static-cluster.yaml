@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-service
   name: example-service
+  namespace: upbound-system
 spec:
   forProvider:
     cluster: example-cluster-service
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-service-definition
   name: example-service-definition
+  namespace: upbound-system
 spec:
   forProvider:
     containerDefinitions: |-
@@ -52,6 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-cluster-service
   name: example-cluster-service
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -10,6 +10,7 @@ metadata:
   name: sample-access-key-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: user
+  namespace: upbound-system
 spec:
   forProvider:
     userSelector:
@@ -27,5 +28,6 @@ metadata:
   name: sample-user-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: accesskey
+  namespace: upbound-system
 spec:
   forProvider: {}

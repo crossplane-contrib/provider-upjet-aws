@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     maxConcurrency: "2"
@@ -40,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     ami: ami-005c26e61b65bc5a4
@@ -58,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -73,6 +76,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: subnetattach
   name: subnetattach
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -90,6 +94,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpcattach
   name: vpcattach
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
@@ -103,6 +108,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     environment:
@@ -124,6 +130,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -149,6 +156,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     cutoff: 1

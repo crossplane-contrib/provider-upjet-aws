@@ -8,6 +8,7 @@ metadata:
   name: test-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: vault
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -21,6 +22,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vault
   name: kmskey
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 10
@@ -33,6 +35,7 @@ metadata:
   name: example
   labels:
     testing.upbound.io/example-name: vault
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -56,6 +59,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vault
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: example-${Rand.RFC1123Subdomain}
@@ -77,6 +81,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vault
   name: example-backup-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -99,6 +104,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vault
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
@@ -110,6 +116,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: VaultLockConfiguration
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -126,6 +133,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vault
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     backupVaultEvents:
@@ -145,6 +153,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vault
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     displayName: backup-vault-events

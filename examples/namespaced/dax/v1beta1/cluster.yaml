@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dax/v1beta1/cluster
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     iamRoleArnRef:
@@ -22,6 +23,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dax/v1beta1/cluster
   name: dax-cluster-example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

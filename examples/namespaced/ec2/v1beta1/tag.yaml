@@ -8,6 +8,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Requires a valid resourceId as ARN."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     key: karpenter.sh/discovery

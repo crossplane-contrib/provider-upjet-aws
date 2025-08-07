@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     imageRecipeArnSelector:
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     blockDeviceMapping:
@@ -54,6 +56,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: example description
@@ -71,6 +74,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     roleSelector:
@@ -85,6 +89,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

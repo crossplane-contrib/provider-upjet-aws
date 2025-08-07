@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ecs/v1beta1/taskdefinition
   name: sample-task
+  namespace: upbound-system
 spec:
   forProvider:
     containerDefinitions: |-

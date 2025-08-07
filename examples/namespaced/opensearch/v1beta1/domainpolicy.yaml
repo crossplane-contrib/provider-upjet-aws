@@ -6,6 +6,7 @@ apiVersion: opensearch.aws.m.upbound.io/v1beta1
 kind: DomainPolicy
 metadata:
   name: example-domainpolicy
+  namespace: upbound-system
 spec:
   forProvider:
     domainNameRef:
@@ -33,6 +34,7 @@ metadata:
   name: example-domainpolicy
   annotations:
     uptest.upbound.io/timeout: "2400"
+  namespace: upbound-system
 spec:
   forProvider:
     domainName: example

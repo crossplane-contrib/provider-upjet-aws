@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     identityInfo:
@@ -41,6 +42,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: user
   name: user
+  namespace: upbound-system
 spec:
   forProvider:
     description: example description
@@ -63,6 +65,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: user
   name: user
+  namespace: upbound-system
 spec:
   forProvider:
     identityManagementType: CONNECT_MANAGED
@@ -79,6 +82,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: user
   name: user
+  namespace: upbound-system
 spec:
   forProvider:
     defaultOutboundQueueIdSelector:
@@ -104,6 +108,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: user
   name: user
+  namespace: upbound-system
 spec:
   forProvider:
     description: Example Description
@@ -126,6 +131,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: user
   name: user
+  namespace: upbound-system
 spec:
   forProvider:
     config:

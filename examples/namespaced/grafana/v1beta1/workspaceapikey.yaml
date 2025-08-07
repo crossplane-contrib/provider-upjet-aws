@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: key
   name: key
+  namespace: upbound-system
 spec:
   forProvider:
     keyName: test-key
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: wstest
   name: wstest-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     accountAccessType: CURRENT_ACCOUNT
@@ -48,6 +50,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: assume-wa
   name: assume-wa
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |-

@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/route
     uptest.upbound.io/disable-import: "true"
   name: route
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: table
   name: table
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -40,6 +42,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/route
   name: routegw
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -56,6 +59,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: route-vpc
   name: route-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

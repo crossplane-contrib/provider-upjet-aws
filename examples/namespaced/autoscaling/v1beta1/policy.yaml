@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     adjustmentType: ChangeInCapacity
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: upbound-example-test
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZones:
@@ -58,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: as_conf
   name: as-conf
+  namespace: upbound-system
 spec:
   forProvider:
     imageId: ${data.aws_ami.ubuntu.id}

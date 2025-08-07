@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: regex_match_set
   name: regex-match-set
+  namespace: upbound-system
 spec:
   forProvider:
     name: regex-match-set
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: regex_pattern_set
   name: regex-pattern-set
+  namespace: upbound-system
 spec:
   forProvider:
     name: regex-pattern-set

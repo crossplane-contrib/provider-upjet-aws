@@ -6,6 +6,7 @@ apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: Topic
 metadata:
   name: sample-neptune-topic
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1
@@ -15,6 +16,7 @@ apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: EventSubscription
 metadata:
   name: sample-event-sub
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1

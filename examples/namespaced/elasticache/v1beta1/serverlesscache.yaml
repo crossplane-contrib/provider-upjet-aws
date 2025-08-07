@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     cacheUsageLimits:
@@ -37,6 +38,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-sg-serverlesscache
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -52,6 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: vpc-serverlesscache
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -67,6 +70,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: serverlesscache-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -83,6 +87,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: serverlesscache-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

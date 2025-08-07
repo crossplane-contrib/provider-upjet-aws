@@ -6,6 +6,7 @@ apiVersion: aws.m.upbound.io/v1beta1
 kind: ClusterProviderConfig
 metadata:
   name: default
+  namespace: upbound-system
 spec:
   credentials:
     source: Secret

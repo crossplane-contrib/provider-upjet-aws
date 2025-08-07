@@ -6,6 +6,7 @@ apiVersion: ecr.aws.m.upbound.io/v1beta1
 kind: LifecyclePolicy
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -30,3 +31,4 @@ spec:
     repository: upbound-sample-repository
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig

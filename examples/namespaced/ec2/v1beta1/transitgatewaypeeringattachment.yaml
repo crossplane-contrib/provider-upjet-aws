@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+  namespace: upbound-system
 spec:
   forProvider:
     peerAccountId: ${aws_ec2_transit_gateway.peer.owner_id}

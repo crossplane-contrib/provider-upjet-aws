@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: postgres-rotator
   name: postgres-rotator
+  namespace: upbound-system
 spec:
   forProvider:
     applicationId: arn:aws:serverlessrepo:us-east-1:297356227824:applications/SecretsManagerRDSPostgreSQLRotationSingleUser

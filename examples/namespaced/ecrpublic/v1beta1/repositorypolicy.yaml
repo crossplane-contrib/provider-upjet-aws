@@ -6,6 +6,7 @@ apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
 kind: RepositoryPolicy
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -39,11 +40,13 @@ spec:
     repositoryName: uptest-test-repo
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig
 ---
 apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   name: uptest-test-repo
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -57,11 +60,13 @@ spec:
         usageText: Usage Text
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig
 ---
 apiVersion: ecr.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   name: uptest-test-repo
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

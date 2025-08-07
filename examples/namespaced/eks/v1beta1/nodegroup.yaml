@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-eks-ng
+  namespace: upbound-system
 spec:
   forProvider:
     clusterNameRef:
@@ -29,6 +30,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-node-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -51,6 +53,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-node-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
@@ -63,6 +66,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-node-policy-2
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
@@ -75,6 +79,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-node-policy-3
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
@@ -90,6 +95,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-eks-cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -106,6 +112,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: auth
+  namespace: upbound-system
 spec:
   forProvider:
     clusterNameSelector:
@@ -122,6 +129,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-eks-cluster
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -144,6 +152,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-cluster-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
@@ -156,6 +165,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -171,6 +181,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1a
@@ -186,6 +197,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: private-subnet
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -200,6 +212,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -214,6 +227,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16
@@ -228,6 +242,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -240,6 +255,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     defaultRouteTableIdRef:

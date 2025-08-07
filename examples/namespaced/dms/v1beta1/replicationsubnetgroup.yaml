@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bar
   name: bar
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -43,6 +45,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1a
@@ -60,6 +63,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -73,6 +77,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test-attach
   name: test-attach
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -90,6 +95,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: amazondmsvpcanagementrole
+  namespace: upbound-system
 spec:
   forProvider:
     description: Provides access to manage VPC settings for AWS managed customer configurations
@@ -122,6 +128,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: dms-vpc-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

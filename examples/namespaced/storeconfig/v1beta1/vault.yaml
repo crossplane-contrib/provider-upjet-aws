@@ -6,6 +6,7 @@ apiVersion: aws.m.upbound.io/v1alpha1
 kind: StoreConfig
 metadata:
   name: vault
+  namespace: upbound-system
 spec:
   type: Vault
   defaultScope: crossplane-system

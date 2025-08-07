@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dynamodb/v1beta1/table
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     attribute:

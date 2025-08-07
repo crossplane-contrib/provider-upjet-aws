@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: patchgroup
   name: patchgroup
+  namespace: upbound-system
 spec:
   forProvider:
     baselineIdSelector:
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: production
   name: production
+  namespace: upbound-system
 spec:
   forProvider:
     approvedPatches:

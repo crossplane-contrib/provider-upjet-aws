@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instance-profile
   name: instance-profile
+  namespace: upbound-system
 spec:
   forProvider:
     roleSelector:
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instance-profile
   name: instance-profile
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-dbiabr
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default-test
   name: default-dbiabr
+  namespace: upbound-system
 spec:
   forProvider:
     backupRetentionPeriod: 7

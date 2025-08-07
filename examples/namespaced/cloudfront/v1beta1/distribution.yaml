@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: distribution
   name: example-distribution
+  namespace: upbound-system
 spec:
   forProvider:
     comment: Some comment
@@ -108,6 +109,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudfront/v1beta1/distribution
   name: example-monitoring-subscription
+  namespace: upbound-system
 spec:
   forProvider:
     distributionIdSelector:

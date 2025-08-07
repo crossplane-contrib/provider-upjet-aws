@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lakeformation/v1beta1/permissions
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     database:
@@ -27,6 +28,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lakeformation/v1beta1/permissions
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     catalogId: "609897127049"
@@ -38,6 +40,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lakeformation/v1beta1/permissions
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     catalogId: "609897127049"

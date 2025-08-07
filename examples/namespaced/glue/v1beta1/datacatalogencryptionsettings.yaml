@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: glue/v1beta1/datacatalogencryptionsettings
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     dataCatalogEncryptionSettings:
@@ -27,6 +28,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: glue/v1beta1/datacatalogencryptionsettings
   name: sample-key
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 7

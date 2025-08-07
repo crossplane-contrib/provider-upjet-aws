@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: contractors
   name: contractors
+  namespace: upbound-system
 spec:
   forProvider:
     description: Contractors IP access control group

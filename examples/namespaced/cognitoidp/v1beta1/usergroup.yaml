@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: example
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     name: identity pool
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: group_role
   name: group-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

@@ -6,6 +6,7 @@ apiVersion: aws.m.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: user-creds-with-assume-role
+  namespace: upbound-system
 spec:
   assumeRoleChain:
     - roleARN: <roleARN>

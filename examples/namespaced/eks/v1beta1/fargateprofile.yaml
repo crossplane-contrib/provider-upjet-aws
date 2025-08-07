@@ -8,6 +8,7 @@ metadata:
   name: sample-fargate-profile
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -26,6 +27,7 @@ metadata:
   name: sample-fargate-role
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -48,6 +50,7 @@ metadata:
   name: sample-fargate-policy
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy
@@ -63,6 +66,7 @@ metadata:
   name: sample-eks-cluster
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -79,6 +83,7 @@ metadata:
   name: sample-eks-cluster
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -101,6 +106,7 @@ metadata:
   name: sample-vpc
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     enableDnsHostnames: true
@@ -115,6 +121,7 @@ metadata:
   name: sample-subnet1
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -130,6 +137,7 @@ metadata:
   name: sample-subnet2
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -145,6 +153,7 @@ metadata:
   name: private-subnet
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/fargateprofile
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

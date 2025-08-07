@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foobar
   name: foobar
+  namespace: upbound-system
 spec:
   forProvider:
     alarmDescription: This metric monitors ec2 cpu utilization

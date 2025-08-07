@@ -10,6 +10,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "roles.authenticated is a map[string]*string, we cannot cross-reference it"
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     identityPoolIdSelector:
@@ -36,6 +37,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     allowUnauthenticatedIdentities: false
@@ -52,6 +54,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "can't automatically inject ${aws_cognito_identity_pool.main.id}"
   name: authenticated
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

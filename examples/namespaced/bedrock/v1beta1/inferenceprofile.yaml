@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-titan-app
   name: example-titan-app
+  namespace: upbound-system
 spec:
   forProvider:
     description: Profile with tag for cost allocation tracking

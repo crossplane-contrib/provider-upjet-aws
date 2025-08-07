@@ -10,6 +10,7 @@ metadata:
   name: example-topic-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: sns
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -60,6 +61,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

@@ -8,14 +8,15 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource has a reference to Proxy, which needs manual intervention."
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
-    dbProxyEndpointName: example
     dbProxyName: example
     targetRole: READ_ONLY
     vpcSubnetIds:
       - example1
       - example2
   providerConfigRef:
+    kind: ClusterProviderConfig
     name: default

@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/launchtemplate
   name: example-encrypted
+  namespace: upbound-system
 spec:
   forProvider:
     blockDeviceMappings:
@@ -62,6 +63,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: launchtemplate-key
   name: launchtemplate-key
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 7

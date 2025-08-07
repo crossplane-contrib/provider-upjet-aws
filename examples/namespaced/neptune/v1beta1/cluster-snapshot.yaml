@@ -6,6 +6,7 @@ apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterSnapshot
 metadata:
   name: sample-snapshot
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1

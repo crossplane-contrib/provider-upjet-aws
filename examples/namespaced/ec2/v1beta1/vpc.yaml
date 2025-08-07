@@ -8,6 +8,7 @@ metadata:
   name: sample-vpc
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

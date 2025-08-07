@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

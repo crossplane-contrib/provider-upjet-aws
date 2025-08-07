@@ -10,6 +10,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource is not stable due to https://github.com/crossplane/upjet/issues/80."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     hostedZoneIdSelector:
@@ -24,6 +25,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource HostedZoneDNSSEC is not stable and is thus skipped."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     customerMasterKeySpec: ECC_NIST_P256
@@ -89,6 +91,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource HostedZoneDNSSEC is not stable and is thus skipped."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: mycompany.test

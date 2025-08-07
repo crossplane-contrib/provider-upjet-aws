@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     deviceIdSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -47,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -61,6 +64,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
 ---
@@ -72,6 +76,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     insideCidrBlocks: ["169.254.100.0/29"]
@@ -89,6 +94,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -107,6 +113,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -121,6 +128,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -138,6 +146,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -155,6 +164,7 @@ metadata:
   name: sample-vpc
   annotations:
     meta.upbound.io/example-id: networkmanager/v1beta1/transitgatewayconnectpeerassociation
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -168,6 +178,7 @@ metadata:
   name: sample-subnet1
   annotations:
     meta.upbound.io/example-id: networkmanager/v1beta1/transitgatewayconnectpeerassociation
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2

@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-bedrockagent-model
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     agentName: example
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-bedrockagent-model
   name: example-bedrockagent-model
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -50,6 +52,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-bedrockagent-model
   name: example-bedrockagent-model
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |

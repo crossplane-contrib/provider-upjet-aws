@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     baseImage: ${data.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/sagemaker-scikit-learn:latest
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

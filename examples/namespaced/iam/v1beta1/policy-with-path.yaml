@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: sample-user-policy-with-path
+  namespace: upbound-system
 spec:
   forProvider:
     path: /test-path/

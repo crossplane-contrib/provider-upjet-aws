@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vocabulary
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     content: "Phrase\tIPA\tSoundsLike\tDisplayAs\nLos-Angeles\t\t\tLos Angeles\nF.B.I.\tɛ f b i aɪ\t\tFBI\nEtienne\t\teh-tee-en\t"
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vocabulary
   name: vocabulary
+  namespace: upbound-system
 spec:
   forProvider:
     identityManagementType: CONNECT_MANAGED

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: example
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -46,6 +48,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-2b
@@ -62,6 +65,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16

@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     identityPoolIdSelector:
@@ -29,6 +30,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "${aws_cognito_user_pool.example.endpoint} required manual propagation"
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     allowUnauthenticatedIdentities: false
@@ -47,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     autoVerifiedAttributes:
@@ -60,6 +63,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: client

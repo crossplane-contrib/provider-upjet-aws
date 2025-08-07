@@ -8,6 +8,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource needs a User resource and this User resource needs secrets that must contain valid credentials."
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     engine: REDIS

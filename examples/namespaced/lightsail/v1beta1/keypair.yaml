@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: lg_key_pair
   name: lg-key-pair
+  namespace: upbound-system
 spec:
   forProvider:
     name: "lg_key_pair"

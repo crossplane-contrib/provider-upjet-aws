@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/identityproviderconfig
     uptest.upbound.io/timeout: "3600"
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     clusterName: test

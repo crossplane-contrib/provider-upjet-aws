@@ -8,6 +8,7 @@ metadata:
   name: example-with-policy
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: upbound-sqs-with-policy

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: instanceport
+  namespace: upbound-system
 spec:
   forProvider:
     instanceNameSelector:
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instance
   name: instance
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2a

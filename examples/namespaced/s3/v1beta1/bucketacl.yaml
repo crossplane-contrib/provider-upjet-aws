@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1beta1/bucketacl
     upjet.upbound.io/manual-intervention: Requires adding canonical ID of the owner user who created the Bucket.
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     accessControlPolicy:

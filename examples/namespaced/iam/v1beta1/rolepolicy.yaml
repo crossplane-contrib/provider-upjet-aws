@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_policy
   name: test-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -35,6 +36,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_role
   name: test-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

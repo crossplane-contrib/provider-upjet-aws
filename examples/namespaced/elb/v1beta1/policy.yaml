@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: wu-tang-ca-pubkey-policy
   name: wu-tang-ca-pubkey-policy
+  namespace: upbound-system
 spec:
   forProvider:
     loadBalancerNameSelector:
@@ -53,6 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: wu-tang
   name: wu-tang
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZones:

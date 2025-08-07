@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-without-source-id
   name: example-without-source-id
+  namespace: upbound-system
 spec:
   forProvider:
     enabled: true
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-for-eventsubscription
   name: example-for-eventsubscription
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

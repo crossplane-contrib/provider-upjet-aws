@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample
   name: sample
+  namespace: upbound-system
 spec:
   forProvider:
     computeResources:
@@ -38,6 +39,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ecs_instance_role
   name: ecs-instance-role
+  namespace: upbound-system
 spec:
   forProvider:
     roleSelector:
@@ -53,6 +55,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: aws_batch_service_role
   name: aws-batch-service-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -77,6 +80,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ecs_iam_role
   name: ecs-instance-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -101,6 +105,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: aws_batch_service_role_attachment
   name: aws-batch-service-role
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -118,6 +123,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ecs_instance_role_attachment
   name: ecs-instance-role
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -135,6 +141,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample_pg
   name: sample
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -148,6 +155,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: aws_batch_service_policy
   name: batch-sample-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -237,6 +245,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: aws_ecs_service_policy
   name: ecs-sample-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -269,6 +278,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample_sg
   name: sample
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -284,6 +294,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample_subnet
   name: sample
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.1.1.0/24
@@ -300,6 +311,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample
   name: sample
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16

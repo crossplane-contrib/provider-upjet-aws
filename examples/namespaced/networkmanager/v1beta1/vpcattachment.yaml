@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: vpcattachment
+  namespace: upbound-system
 spec:
   forProvider:
     coreNetworkIdSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16
@@ -45,6 +47,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: subnet
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -61,6 +64,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: corenetworkname
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -99,6 +103,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: globalnetworkname
+  namespace: upbound-system
 spec:
   forProvider:
     description: example

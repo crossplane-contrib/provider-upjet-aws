@@ -6,6 +6,7 @@ apiVersion: glue.aws.m.upbound.io/v1beta1
 kind: Workflow
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-pipe-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |-
@@ -53,6 +55,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: source
   name: source
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |-
@@ -84,6 +87,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: target
   name: target
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |-
@@ -113,6 +117,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: source
   name: source
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -125,6 +130,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: target
   name: target
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

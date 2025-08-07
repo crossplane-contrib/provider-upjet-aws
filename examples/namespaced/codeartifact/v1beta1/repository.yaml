@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     domainSelector:
@@ -22,6 +23,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: repository-example
   name: repository-example
+  namespace: upbound-system
 spec:
   forProvider:
     domain: repository-example
@@ -38,6 +40,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: repository-example
   name: repository-example
+  namespace: upbound-system
 spec:
   forProvider:
     description: Codeartifact domain key

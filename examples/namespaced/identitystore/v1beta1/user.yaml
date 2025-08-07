@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-user
   name: example-user
+  namespace: upbound-system
 spec:
   forProvider:
     displayName: John Doe

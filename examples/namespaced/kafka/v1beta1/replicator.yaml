@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     description: test-description
@@ -63,6 +64,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: source
   name: source
+  namespace: upbound-system
 spec:
   forProvider:
     brokerNodeGroupInfo:
@@ -89,6 +91,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: target
   name: target
+  namespace: upbound-system
 spec:
   forProvider:
     brokerNodeGroupInfo:
@@ -114,6 +117,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: source-sg
   name: source-sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -129,6 +133,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: target-sg
   name: target-sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -144,6 +149,7 @@ metadata:
   name: source-subnet-1
   labels:
     testing.upbound.io/example-name: source-subnet-1
+  namespace: upbound-system
 spec:
   forProvider:
     vpcIdSelector:
@@ -161,6 +167,7 @@ metadata:
   name: source-subnet-2
   labels:
     testing.upbound.io/example-name: source-subnet-2
+  namespace: upbound-system
 spec:
   forProvider:
     vpcIdSelector:
@@ -178,6 +185,7 @@ metadata:
   name: target-subnet-1
   labels:
     testing.upbound.io/example-name: target-subnet-1
+  namespace: upbound-system
 spec:
   forProvider:
     vpcIdSelector:
@@ -195,6 +203,7 @@ metadata:
   name: target-subnet-2
   labels:
     testing.upbound.io/example-name: target-subnet-2
+  namespace: upbound-system
 spec:
   forProvider:
     vpcIdSelector:
@@ -212,6 +221,7 @@ metadata:
   name: source-vpc
   labels:
     testing.upbound.io/example-name: source-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
@@ -225,6 +235,7 @@ metadata:
   name: target-vpc
   labels:
     testing.upbound.io/example-name: target-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
@@ -238,6 +249,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -262,6 +274,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -279,6 +292,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |

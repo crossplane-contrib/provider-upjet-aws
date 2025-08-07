@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default-ce
   name: kms-test
+  namespace: upbound-system
 spec:
   forProvider:
     engine: aurora-postgresql
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-key
   name: sample-key
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 7

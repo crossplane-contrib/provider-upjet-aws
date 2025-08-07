@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: messenger
   name: messenger
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: acmpca/v1beta1/certificateauthority
     upjet.upbound.io/manual-intervention: Creation of this resource costs over $100, so it is not suitable for continuous testing.
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     certificateAuthorityConfiguration:
@@ -21,6 +22,7 @@ spec:
     type: ROOT
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig
   writeConnectionSecretToRef:
     name: acmpca-ca
     namespace: upbound-system

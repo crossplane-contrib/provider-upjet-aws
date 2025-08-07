@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: target1
   name: target1
+  namespace: upbound-system
 spec:
   forProvider:
     description: This is a maintenance window target
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: window
   name: window
+  namespace: upbound-system
 spec:
   forProvider:
     cutoff: 1

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: att
   name: att
+  namespace: upbound-system
 spec:
   forProvider:
     principalSelector:
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: cert
   name: cert
+  namespace: upbound-system
 spec:
   forProvider:
     active: true
@@ -41,6 +43,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     directoryIdSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ad
   name: bar
+  namespace: upbound-system
 spec:
   forProvider:
     name: corp.notexample.com
@@ -58,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bar
   name: bar
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1b
@@ -75,6 +78,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1a
@@ -92,6 +96,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16

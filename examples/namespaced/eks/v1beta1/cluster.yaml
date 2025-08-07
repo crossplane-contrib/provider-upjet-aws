@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-eks-cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -27,6 +28,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: sample-eks-cluster
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -49,6 +51,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: sample-cluster-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
@@ -61,6 +64,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -76,6 +80,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: sample-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1a
@@ -91,6 +96,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: private-subnet
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -105,6 +111,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -119,6 +126,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -133,6 +141,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16
@@ -147,6 +156,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -159,6 +169,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     defaultRouteTableIdRef:

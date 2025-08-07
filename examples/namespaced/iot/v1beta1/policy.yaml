@@ -6,6 +6,7 @@ apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: Policy
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |-

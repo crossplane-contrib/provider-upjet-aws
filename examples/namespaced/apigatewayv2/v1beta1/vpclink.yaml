@@ -8,6 +8,7 @@ metadata:
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-vpclink
+  namespace: upbound-system
 spec:
   forProvider:
     name: example
@@ -27,6 +28,7 @@ metadata:
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-vpclink
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -44,6 +46,7 @@ metadata:
   name: sample-subnet1
   labels:
     upjet.upbound.io/test-group: apigatewayv2-vpclink
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -58,6 +61,7 @@ metadata:
   name: sample-vpc
   labels:
     upjet.upbound.io/test-group: apigatewayv2-vpclink
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

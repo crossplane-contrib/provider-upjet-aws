@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-ssc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-ssc
   name: example-ssc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -42,6 +44,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-dbinstance-ssc
   name: example-dbinstance-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     dbName: example
@@ -78,6 +81,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-key-ssc
   name: sample-key-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

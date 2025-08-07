@@ -10,6 +10,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
   name: websocket-api
+  namespace: upbound-system
 spec:
   forProvider:
     name: example-websocket-api
@@ -25,6 +26,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
   name: example-websocket
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -51,6 +53,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
   name: example-websocket
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -70,6 +73,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
   name: example-websocket
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -90,6 +94,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
   name: example-websocket
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -110,6 +115,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
   name: example-websocket
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:

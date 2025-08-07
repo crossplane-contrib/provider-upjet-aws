@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     imageRecipeArnSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     blockDeviceMapping:
@@ -53,6 +55,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: example description
@@ -70,6 +73,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     roleSelector:
@@ -84,6 +88,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -109,6 +114,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssm_managed_instance_core
   name: ssm-managed-instance-core
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
@@ -124,6 +130,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssm_full_access
   name: ssm-full-access
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonSSMFullAccess
@@ -139,6 +146,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ecr_container_builds
   name: ecr-container-builds
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/EC2InstanceProfileForImageBuilderECRContainerBuilds
@@ -154,6 +162,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: image_builder
   name: image-builder
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/EC2InstanceProfileForImageBuilder
@@ -169,6 +178,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssm_managed_instance
   name: ssm-managed-instance
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonSSMManagedEC2InstanceDefaultPolicy

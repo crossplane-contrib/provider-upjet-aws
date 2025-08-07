@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sdirectory
+  namespace: upbound-system
 spec:
   forProvider:
     directoryIdSelector:
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: directoryname
+  namespace: upbound-system
 spec:
   forProvider:
     edition: Standard
@@ -51,6 +53,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ds/v1beta1/shareddirectory
   name: subnetone
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1a
@@ -66,6 +69,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ds/v1beta1/shareddirectory
   name: subnettwo
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -83,6 +87,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16

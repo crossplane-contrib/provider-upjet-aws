@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/securitygrouprule
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16
@@ -23,6 +24,7 @@ metadata:
   labels:
     selector: here-i-am
   name: test-vpc
+  namespace: upbound-system
 spec:
   deletionPolicy: Delete
   forProvider:
@@ -36,6 +38,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/securitygrouprule
   name: test-vpc-securitygroup
+  namespace: upbound-system
 spec:
   deletionPolicy: Delete
   forProvider:

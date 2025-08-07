@@ -8,6 +8,7 @@ metadata:
   name: example
   labels:
     testing.upbound.io/example-name: vault
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -31,6 +32,7 @@ metadata:
   name: test-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: vault
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vault
   name: kmskey
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 10

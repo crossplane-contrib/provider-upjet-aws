@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: simple
   name: simple
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

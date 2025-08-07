@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     description: Test
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_role
   name: test-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -48,6 +50,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_attach
   name: test-attach
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -65,6 +68,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-ssm-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: tf_template
   name: tf-template
+  namespace: upbound-system
 spec:
   forProvider:
     applicationSelector:
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: tftest
   name: first-app-test-qwerty-test
+  namespace: upbound-system
 spec:
   forProvider:
     appversionLifecycle:

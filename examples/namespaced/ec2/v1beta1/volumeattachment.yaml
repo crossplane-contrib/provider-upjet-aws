@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+  namespace: upbound-system
 spec:
   forProvider:
     deviceName: /dev/sdh

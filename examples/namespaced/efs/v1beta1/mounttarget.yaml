@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: efs/v1beta1/mounttarget
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: efs
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: efs
   name: efs-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -61,6 +64,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: efs
   name: efs-sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -76,6 +80,7 @@ metadata:
   name: example
   labels:
     testing.upbound.io/example-name: efs
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

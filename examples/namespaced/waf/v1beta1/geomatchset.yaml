@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: geo_match_set
   name: geo-match-set
+  namespace: upbound-system
 spec:
   forProvider:
     geoMatchConstraint:

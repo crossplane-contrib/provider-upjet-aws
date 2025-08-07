@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elb/v1beta1/elb
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     connectionDraining: true
@@ -36,6 +37,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elb/v1beta1/elb
   name: upbound-instance
+  namespace: upbound-system
 spec:
   forProvider:
     ami: ami-07b068f843ec78e72
@@ -54,6 +56,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elb/v1beta1/elb
   name: sample-ni
+  namespace: upbound-system
 spec:
   forProvider:
     privateIps:
@@ -68,6 +71,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elb/v1beta1/elb
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -82,6 +86,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elb/v1beta1/elb
   name: sample-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1c
@@ -96,6 +101,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elb/v1beta1/elb
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16
@@ -109,6 +115,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elb/v1beta1/elb
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

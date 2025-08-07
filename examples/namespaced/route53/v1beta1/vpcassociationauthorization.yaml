@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     vpcIdSelector:
@@ -23,6 +24,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: mycompany.test
@@ -33,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: alternate
   name: alternate
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.7.0.0/16
@@ -46,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.6.0.0/16

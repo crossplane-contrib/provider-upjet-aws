@@ -8,6 +8,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Requires a valid public key."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     publicKey: <public-key>

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     functionArnSelector:
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -49,6 +51,7 @@ metadata:
   name: sample-role
   labels:
     testing.upbound.io/example-name: role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -74,6 +77,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     identityManagementType: CONNECT_MANAGED

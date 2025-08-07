@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: ecr/v1beta1/replicationconfiguration
     upjet.upbound.io/manual-intervention: This resource requires an additional AWS account
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -19,3 +20,4 @@ spec:
               registryId: ${aws_account_id}
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig

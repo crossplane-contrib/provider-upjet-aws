@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: staticipatt
   name: staticipatt
+  namespace: upbound-system
 spec:
   forProvider:
     instanceNameSelector:
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instance
   name: instance
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2a
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: staticip
   name: staticip
+  namespace: upbound-system
 spec:
   forProvider:
     name: "staticip"
@@ -57,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: lg_key_pair
   name: lg-key-pair
+  namespace: upbound-system
 spec:
   forProvider:
     name: "lg_key_pair"

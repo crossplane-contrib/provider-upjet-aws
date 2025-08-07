@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sg_attachment
   name: sg-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     networkInterfaceIdSelector:
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instance
   name: instance
+  namespace: upbound-system
 spec:
   forProvider:
     ami: ami-0d9858aa3c6322f73
@@ -38,6 +40,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sg
   name: sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

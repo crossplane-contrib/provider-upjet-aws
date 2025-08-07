@@ -8,6 +8,7 @@ metadata:
   name: sample-user-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: user
+  namespace: upbound-system
 spec:
   forProvider: {}
 ---
@@ -17,6 +18,7 @@ metadata:
   name: sample-access-key
   labels:
     testing.upbound.io/example-name: user
+  namespace: upbound-system
 spec:
   forProvider:
     userSelector:
@@ -32,6 +34,7 @@ metadata:
   name: example-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: user
+  namespace: upbound-system
 spec:
   forProvider:
     path: /users/
@@ -40,6 +43,7 @@ apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: GroupMembership
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     groupSelector:
@@ -56,6 +60,7 @@ metadata:
   name: example
   labels:
     testing.upbound.io/example-name: user
+  namespace: upbound-system
 spec:
   forProvider:
     groupSelector:
@@ -71,6 +76,7 @@ metadata:
   name: user-policy
   labels:
     testing.upbound.io/example-name: user
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -90,6 +96,7 @@ apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: ServiceSpecificCredential
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     serviceName: codecommit.amazonaws.com
@@ -101,6 +108,7 @@ apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: UserPolicyAttachment
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:

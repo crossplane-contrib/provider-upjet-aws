@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: feature
   name: feature
+  namespace: upbound-system
 spec:
   forProvider:
     description: example description
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: feature
   name: feature
+  namespace: upbound-system
 spec:
   forProvider:
     description: Example Description

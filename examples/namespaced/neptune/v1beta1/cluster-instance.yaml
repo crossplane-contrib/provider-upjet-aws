@@ -13,6 +13,7 @@ apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
   name: sample-instance
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1

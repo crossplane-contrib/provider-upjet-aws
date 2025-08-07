@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: role-with-inline-policy
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

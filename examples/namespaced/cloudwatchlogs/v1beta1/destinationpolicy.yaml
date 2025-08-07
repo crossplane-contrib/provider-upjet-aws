@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_destination_policy
   name: destination
+  namespace: upbound-system
 spec:
   forProvider:
     accessPolicy: |
@@ -37,6 +38,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: destination
   name: destination
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -55,6 +57,7 @@ metadata:
     meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
   labels:
     testing.upbound.io/example-name: kinesis_for_cloudwatch
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -74,6 +77,7 @@ metadata:
   name: sample-role
   labels:
     testing.upbound.io/example-name: iam_for_cloudwatch
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -96,6 +100,7 @@ metadata:
   name: sample-user-policy
   labels:
     testing.upbound.io/example-name: policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -116,6 +121,7 @@ metadata:
   name: sample-policy-attachment
   labels:
     testing.upbound.io/example-name: attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:

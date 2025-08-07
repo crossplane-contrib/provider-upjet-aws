@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     connectionIdSelector:
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bandwidth: 1Gbps
@@ -43,6 +45,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: hoge
   name: hoge
+  namespace: upbound-system
 spec:
   forProvider:
     connectionsBandwidth: 1Gbps

@@ -6,6 +6,7 @@ apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
 kind: EndpointGroup
 metadata:
   name: sample-endpoint-group
+  namespace: upbound-system
 spec:
   forProvider:
     listenerArnRef:

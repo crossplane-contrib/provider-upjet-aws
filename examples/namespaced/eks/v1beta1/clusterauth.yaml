@@ -10,6 +10,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
     uptest.upbound.io/post-assert-hook: testhooks/check-clusterauth.sh
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -29,6 +30,7 @@ metadata:
   name: sample-eks-cluster
   labels:
     testing.upbound.io/example-name: example-clusterauth
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -45,6 +47,7 @@ metadata:
   name: sample-eks-cluster
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -67,6 +70,7 @@ metadata:
   name: sample-cluster-policy
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
@@ -79,6 +83,7 @@ metadata:
   name: sample-subnet1
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -94,6 +99,7 @@ metadata:
   name: sample-subnet2
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -109,6 +115,7 @@ metadata:
   name: private-subnet
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -123,6 +130,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -137,6 +145,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -151,6 +160,7 @@ metadata:
   name: sample-vpc
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     enableDnsHostnames: true
@@ -165,6 +175,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -177,6 +188,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     defaultRouteTableIdRef:

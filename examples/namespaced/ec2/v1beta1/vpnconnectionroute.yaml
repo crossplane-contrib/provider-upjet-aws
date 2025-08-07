@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: office
   name: office
+  namespace: upbound-system
 spec:
   forProvider:
     destinationCidrBlock: 192.168.10.0/24
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: customer_gateway
   name: customer-gateway
+  namespace: upbound-system
 spec:
   forProvider:
     bgpAsn: "65000"
@@ -41,6 +43,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpc
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
@@ -54,6 +57,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     customerGatewayIdSelector:
@@ -74,6 +78,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpn_gateway
   name: vpn-gateway
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

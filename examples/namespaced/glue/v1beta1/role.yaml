@@ -9,6 +9,7 @@ metadata:
   name: glue-role
   labels:
     testing.upbound.io/example-name: glue-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -35,6 +36,7 @@ metadata:
   name: glue-policy
   labels:
     testing.upbound.io/example-name: glue-policy
+  namespace: upbound-system
 spec:
   forProvider:
     description: glue-policy
@@ -46,6 +48,7 @@ metadata:
   name: glue
   labels:
     testing.upbound.io/example-name: glue
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:

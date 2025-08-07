@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: shexample
+  namespace: upbound-system
 spec:
   forProvider:
     flexibleTimeWindow:
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     delaySeconds: 90
@@ -53,6 +55,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

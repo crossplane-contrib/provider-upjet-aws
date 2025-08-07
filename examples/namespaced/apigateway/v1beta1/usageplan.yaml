@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: stage
   name: example-usageplan
+  namespace: upbound-system
 spec:
   forProvider:
     apiStages:
@@ -45,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: stage
   name: stage
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -60,6 +62,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: stage
   name: test-demo
+  namespace: upbound-system
 spec:
   forProvider:
     body: |-
@@ -94,6 +97,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: stage
   name: development
+  namespace: upbound-system
 spec:
   forProvider:
     deploymentIdSelector:
@@ -114,6 +118,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: stage
   name: production
+  namespace: upbound-system
 spec:
   forProvider:
     deploymentIdSelector:

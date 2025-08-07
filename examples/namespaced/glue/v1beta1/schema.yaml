@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: schema
   name: schema
+  namespace: upbound-system
 spec:
   forProvider:
     compatibility: NONE
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: schema
   name: schema
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

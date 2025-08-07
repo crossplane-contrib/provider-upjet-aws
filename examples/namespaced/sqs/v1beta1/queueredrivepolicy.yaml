@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: qrpexample
+  namespace: upbound-system
 spec:
   forProvider:
     redrivePolicy: |-
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ddl
   name: ddl
+  namespace: upbound-system
 spec:
   forProvider:
     name: examplequeue-ddl
@@ -49,6 +51,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: qrpexample
+  namespace: upbound-system
 spec:
   forProvider:
     name: examplequeue

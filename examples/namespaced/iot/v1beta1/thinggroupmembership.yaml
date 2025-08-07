@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     overrideDynamicGroup: true
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: parent
   name: parent
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -33,6 +35,7 @@ apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: Thing
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     attributes:

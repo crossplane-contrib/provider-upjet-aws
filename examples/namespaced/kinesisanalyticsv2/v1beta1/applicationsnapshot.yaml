@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -23,6 +24,7 @@ metadata:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
   labels:
     testing.upbound.io/example-name: example-application
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -59,6 +61,7 @@ metadata:
   name: kinesis-app-role
   annotations:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
+  namespace: upbound-system
 spec:
   forProvider:
     managedPolicyArns:
@@ -85,6 +88,7 @@ metadata:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
   labels:
     testing.upbound.io/example-name: s3
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -100,6 +104,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: s3object
   name: object
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:

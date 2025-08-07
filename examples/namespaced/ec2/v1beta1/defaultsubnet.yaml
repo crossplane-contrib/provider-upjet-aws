@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default_az1
   name: default-az1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1a

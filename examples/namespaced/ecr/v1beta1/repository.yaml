@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ecr/v1beta1/repository
   name: alper-test-repo
+  namespace: upbound-system
 spec:
   forProvider:
     imageTagMutability: IMMUTABLE

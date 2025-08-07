@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: replicationconfig
+  namespace: upbound-system
 spec:
   forProvider:
     destination:
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: filesystem
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

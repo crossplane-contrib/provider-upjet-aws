@@ -8,6 +8,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource requires a valid public key."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     encoding: SSH

@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
+  namespace: upbound-system
 spec:
   forProvider:
     instanceArn: ARN of a manually created SSO instance in the same region specified below
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
+  namespace: upbound-system
 spec:
   forProvider:
     description: An example
@@ -51,6 +53,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
+  namespace: upbound-system
 spec:
   forProvider:
     identityStoreId: identity store id from a manually created SSO instance in the same region specified below

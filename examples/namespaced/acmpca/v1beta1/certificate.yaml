@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: acmpca/v1beta1/certificate
     upjet.upbound.io/manual-intervention: It depends on CertificateAuthority which is not suitable for continuous automated testing.
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     certificateAuthorityArnRef:
@@ -24,6 +25,7 @@ spec:
       value: "1"
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig
   writeConnectionSecretToRef:
     name: acmpca-certificate
     namespace: upbound-system

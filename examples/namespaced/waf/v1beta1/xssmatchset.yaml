@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: xss_match_set
   name: xss-match-set
+  namespace: upbound-system
 spec:
   forProvider:
     name: xss_match_set

@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: signer/v1beta1/signingprofile
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     platformId: AWSLambda-SHA384-ECDSA

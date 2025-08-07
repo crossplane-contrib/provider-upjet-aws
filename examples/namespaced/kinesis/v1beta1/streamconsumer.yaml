@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -21,6 +22,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

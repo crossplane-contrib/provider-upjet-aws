@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-cs
+  namespace: upbound-system
 spec:
   forProvider:
     dbClusterIdentifierSelector:
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-cs
   name: example-cs
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

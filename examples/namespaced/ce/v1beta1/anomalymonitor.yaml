@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: service_monitor
   name: service-monitor
+  namespace: upbound-system
 spec:
   forProvider:
     monitorDimension: SERVICE

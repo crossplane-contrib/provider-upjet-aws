@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: wafacl
   name: wafacl
+  namespace: upbound-system
 spec:
   forProvider:
     defaultAction:
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ipset
   name: ipset
+  namespace: upbound-system
 spec:
   forProvider:
     ipSetDescriptor:
@@ -50,6 +52,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: wafrule
   name: wafrule
+  namespace: upbound-system
 spec:
   forProvider:
     metricName: tfWAFRule

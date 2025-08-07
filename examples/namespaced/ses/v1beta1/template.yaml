@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: MyTemplate
   name: mytemplate
+  namespace: upbound-system
 spec:
   forProvider:
     html: <h1>Hello {{name}},</h1><p>Your favorite animal is {{favoriteanimal}}.</p>

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bar
   name: bar
+  namespace: upbound-system
 spec:
   forProvider:
     family: redshift-1.0

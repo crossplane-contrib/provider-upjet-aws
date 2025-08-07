@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     details:
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bar_bucket
   name: bar-bucket
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -45,6 +47,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo_bucket
   name: foo-bucket
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

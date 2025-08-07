@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_com
   name: example-com
+  namespace: upbound-system
 spec:
   forProvider:
     cloudwatchLogGroupArnSelector:
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: aws_route53_example_com
   name: aws-route53-example-com
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -40,6 +42,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: route53-query-logging-policy
   name: route53-query-logging-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policyDocument: |
@@ -69,6 +72,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_com
   name: example-com
+  namespace: upbound-system
 spec:
   forProvider:
     name: mycompany.test

@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     deviceIndex: 1
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     networkInterface:
@@ -41,6 +43,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -54,6 +57,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test2
   name: test2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -67,6 +71,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: subnetattach2
   name: subnetattach2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -82,6 +87,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: subnetattach
   name: subnetattach
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -97,6 +103,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpcattach
   name: vpcattach
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

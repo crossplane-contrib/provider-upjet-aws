@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     content: "{\n    \"Version\": \"2019-10-30\",\n    \"StartAction\": \"12345678-1234-1234-1234-123456789012\",\n    \"Actions\": [\n        {\n            \"Identifier\": \"12345678-1234-1234-1234-123456789012\",\n            \"Type\": \"MessageParticipant\",\n            \"Transitions\": {\n                \"NextAction\": \"abcdef-abcd-abcd-abcd-abcdefghijkl\",\n                \"Errors\": [],\n                \"Conditions\": []\n            },\n            \"Parameters\": {\n                \"Text\": \"Thanks for calling the sample flow!\"\n            }\n        },\n        {\n            \"Identifier\": \"abcdef-abcd-abcd-abcd-abcdefghijkl\",\n            \"Type\": \"DisconnectParticipant\",\n            \"Transitions\": {},\n            \"Parameters\": {}\n        }\n    ]\n} \n"
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     identityManagementType: CONNECT_MANAGED

@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     domainIdSelector:
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-sage
   name: example-sage
+  namespace: upbound-system
 spec:
   forProvider:
     authMode: IAM
@@ -55,6 +57,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-sage-role
   name: example-sage-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -81,6 +84,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-subnet1-sage
   name: sample-subnet1-sage
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -97,6 +101,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-vpc-sage
   name: sample-vpc-sage
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16

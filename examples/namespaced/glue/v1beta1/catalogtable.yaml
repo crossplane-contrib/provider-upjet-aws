@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-ct
+  namespace: upbound-system
 spec:
   forProvider:
     catalogId: "${data.aws_account_id}"
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-ct-cd
+  namespace: upbound-system
 spec:
   forProvider:
     catalogId: "${data.aws_account_id}"

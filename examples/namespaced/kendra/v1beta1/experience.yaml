@@ -12,6 +12,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: experiencename
+  namespace: upbound-system
 spec:
   forProvider:
     configuration:
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: index-3
+  namespace: upbound-system
 spec:
   forProvider:
     name: index-3

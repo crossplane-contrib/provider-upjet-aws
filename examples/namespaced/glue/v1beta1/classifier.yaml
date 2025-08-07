@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: glue/v1beta1/classifier
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     csvClassifier:

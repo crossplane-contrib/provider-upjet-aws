@@ -12,6 +12,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-domainname
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     domainNameConfiguration:
@@ -31,6 +32,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-domainname
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     domainName: example-email.upbound-providers.io

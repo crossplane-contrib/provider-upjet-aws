@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1beta1/bucketinventory
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:

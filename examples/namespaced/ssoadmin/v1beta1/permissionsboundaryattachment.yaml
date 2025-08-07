@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
   name: ssoadmin-permissions-boundary-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     instanceArn: ARN of a manually created SSO instance in the same region specified below
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
   name: ssoadmin-permissions-boundary-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     description: My test policy
@@ -57,6 +59,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
   name: ssoadmin-permissions-boundary-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     instanceArn: ARN of a manually created SSO instance in the same region specified below

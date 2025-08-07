@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: tftest
   name: first-app-test-qwerty-test
+  namespace: upbound-system
 spec:
   forProvider:
     appversionLifecycle:

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: filter
   name: filter
+  namespace: upbound-system
 spec:
   forProvider:
     cidr: 10.10.10.10

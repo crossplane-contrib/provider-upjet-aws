@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-field-level-encryption-profile
   name: example-field-level-encryption-profile
+  namespace: upbound-system
 spec:
   forProvider:
     comment: test comment
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-field-level-encryption-profile
   name: example-public-key-prof
+  namespace: upbound-system
 spec:
   forProvider:
     comment: test public key

@@ -6,6 +6,7 @@ apiVersion: licensemanager.aws.m.upbound.io/v1beta1
 kind: Association
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -17,6 +18,7 @@ apiVersion: licensemanager.aws.m.upbound.io/v1beta1
 kind: LicenseConfiguration
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

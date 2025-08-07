@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: allow_me_to_foo
   name: allow-me-to-foo
+  namespace: upbound-system
 spec:
   forProvider:
     principalArn: ${data.aws_caller_identity.current.arn}
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     acceptanceRequired: false

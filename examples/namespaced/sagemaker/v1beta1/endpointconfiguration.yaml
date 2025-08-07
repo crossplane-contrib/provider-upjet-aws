@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ec
   name: ec
+  namespace: upbound-system
 spec:
   forProvider:
     productionVariants:
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     executionRoleArnSelector:
@@ -51,6 +53,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -77,6 +80,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonSageMakerFullAccess

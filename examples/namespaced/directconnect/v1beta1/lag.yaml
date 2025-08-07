@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: hoge
   name: hoge
+  namespace: upbound-system
 spec:
   forProvider:
     connectionsBandwidth: 1Gbps

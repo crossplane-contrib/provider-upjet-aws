@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-bssec
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: mykey
   name: mykey-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 10
@@ -45,6 +47,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: mybucket
   name: mybucket-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

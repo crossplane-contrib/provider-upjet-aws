@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_notifications
   name: example-notifications
+  namespace: upbound-system
 spec:
   forProvider:
     groupNames:
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -47,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bar
   name: bar
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -71,6 +74,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -95,6 +99,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: as_conf
   name: as-conf
+  namespace: upbound-system
 spec:
   forProvider:
     imageId: ami-0a1a70369f0fce06a

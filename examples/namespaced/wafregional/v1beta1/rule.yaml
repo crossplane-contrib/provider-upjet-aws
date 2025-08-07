@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: wafrule
   name: wafrule
+  namespace: upbound-system
 spec:
   forProvider:
     metricName: "tfWAFRule"
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ipset
   name: ipset
+  namespace: upbound-system
 spec:
   forProvider:
     ipSetDescriptor:

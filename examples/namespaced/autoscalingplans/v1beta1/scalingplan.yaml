@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     applicationSource:
@@ -40,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZones:
@@ -65,6 +67,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: as_conf
   name: as-conf
+  namespace: upbound-system
 spec:
   forProvider:
     imageId: ami-0430743863c514c80

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: domainname
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     certificateBody: <content of 'example.crt'>

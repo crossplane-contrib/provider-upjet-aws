@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-externalkey
   name: sample-externalkey
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

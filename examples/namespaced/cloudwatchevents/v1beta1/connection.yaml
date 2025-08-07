@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudwatchevents/v1beta1/connection
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     authParameters:

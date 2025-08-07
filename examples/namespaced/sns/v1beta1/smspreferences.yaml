@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: update_sms_prefs
   name: update-sms-prefs
+  namespace: upbound-system
 spec:
   forProvider:
     defaultSmsType: Promotional

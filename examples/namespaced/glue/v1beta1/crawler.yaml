@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     databaseNameSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -55,6 +57,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: aws-glue-catalog-database
+  namespace: upbound-system
 spec:
   forProvider:
     catalogId: "${data.aws_account_id}"

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     connectedDeviceIdSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example1
   name: example1
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -47,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example2
   name: example2
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -64,6 +67,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -78,5 +82,6 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider: {}

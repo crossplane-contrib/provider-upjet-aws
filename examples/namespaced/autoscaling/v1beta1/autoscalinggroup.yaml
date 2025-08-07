@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZones:
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: autoscalinggroup-example
   name: autoscalinggroup-example
+  namespace: upbound-system
 spec:
   forProvider:
     imageId: ami-0454207e5367abf01

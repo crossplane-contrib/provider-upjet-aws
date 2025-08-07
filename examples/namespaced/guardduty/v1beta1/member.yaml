@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: member
   name: member
+  namespace: upbound-system
 spec:
   forProvider:
     accountId: "${data.aws_peer_account_id}"
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: detector
   name: detector
+  namespace: upbound-system
 spec:
   providerConfigRef:
     name: peer
@@ -43,6 +45,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: primary
   name: primary
+  namespace: upbound-system
 spec:
   forProvider:
     enable: true

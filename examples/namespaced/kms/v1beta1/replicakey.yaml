@@ -6,6 +6,7 @@ apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   name: sample-replicakey
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -17,6 +18,7 @@ apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: ReplicaKey
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2

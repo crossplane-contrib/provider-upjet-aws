@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sg_ec2
   name: sg-ec2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ec2
   name: ec2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -39,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpc1
   name: vpc1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -50,6 +53,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: securitygroup1
   name: securitygroup1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: accepter
   name: accepter
+  namespace: upbound-system
 spec:
   providerConfigRef:
     name: peer
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   providerConfigRef:
     name: peer
@@ -50,6 +52,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: creator
   name: creator
+  namespace: upbound-system
 spec:
   forProvider:
     addressFamily: ipv4
@@ -70,6 +73,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bandwidth: 1Gbps

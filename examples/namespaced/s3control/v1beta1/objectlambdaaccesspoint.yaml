@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     configuration:
@@ -35,6 +36,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -52,6 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -64,6 +67,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     environment:
@@ -85,6 +89,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

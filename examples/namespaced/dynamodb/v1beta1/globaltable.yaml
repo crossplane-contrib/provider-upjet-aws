@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: dynamodb/v1beta1/globaltable
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -20,6 +21,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dynamodb/v1beta1/globaltable
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     attribute:

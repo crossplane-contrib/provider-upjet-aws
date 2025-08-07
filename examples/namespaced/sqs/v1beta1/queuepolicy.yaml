@@ -10,6 +10,7 @@ metadata:
     meta.upbound.io/example-id: sqs/v1beta1/queue-policy
   labels:
     testing.upbound.io/example-name: queue-policy
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -40,6 +41,7 @@ metadata:
     meta.upbound.io/example-id: sqs/v1beta1/queuepolicy
   labels:
     testing.upbound.io/example-name: queue-policy
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

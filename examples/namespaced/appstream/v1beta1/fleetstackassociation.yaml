@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     fleetNameSelector:
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     computeCapacity:
@@ -57,6 +59,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     applicationSettings:
@@ -88,6 +91,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apprunner/v1beta1/fleetstackassociation
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -102,6 +106,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apprunner/v1beta1/fleetstackassociation
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

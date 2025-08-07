@@ -8,6 +8,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Deleting this resource causes problems with the method used during the user's login."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     pgpKey: keybase:username

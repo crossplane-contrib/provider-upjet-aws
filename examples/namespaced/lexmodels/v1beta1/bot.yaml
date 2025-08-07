@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lexmodels/v1beta1/bot
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     abortStatement:

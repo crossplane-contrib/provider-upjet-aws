@@ -6,6 +6,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: NetworkInterface
 metadata:
   name: sample-ni
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

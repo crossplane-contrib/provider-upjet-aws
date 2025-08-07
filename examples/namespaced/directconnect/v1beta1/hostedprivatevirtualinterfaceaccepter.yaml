@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: accepter
   name: accepter
+  namespace: upbound-system
 spec:
   providerConfigRef:
     name: peer
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpn_gw
   name: vpn-gw
+  namespace: upbound-system
 spec:
   providerConfigRef:
     name: peer
@@ -48,6 +50,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     ownerAccountId: "${data.aws_peer_account_id}"
@@ -68,6 +71,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bandwidth: 1Gbps

@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     prefixListIdSelector:
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: entry_1
   name: entry-1
+  namespace: upbound-system
 spec:
   forProvider:
     cidr: 10.0.1.0/24
@@ -42,6 +44,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     addressFamily: IPv4
@@ -57,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: attachment1
   name: attachment1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -76,6 +80,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -87,6 +92,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: subnet1
   name: subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -101,6 +107,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpc1
   name: vpc1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -112,6 +119,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

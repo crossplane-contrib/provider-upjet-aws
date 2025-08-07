@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default-cas
   name: default-cas
+  namespace: upbound-system
 spec:
   forProvider:
     kmsKeyIdSelector:
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default-cas
   name: example-cas
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -50,6 +52,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default-cas
   name: default-cas
+  namespace: upbound-system
 spec:
   forProvider:
     description: AWS KMS Key to encrypt Database Activity Stream

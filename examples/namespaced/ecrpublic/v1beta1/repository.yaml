@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: ecrpublic/v1beta1/repository
     uptest.upbound.io/update-parameter: '{"tags":{"update-test-tag":"val"}}'
   name: uptest-test-repo
+  namespace: upbound-system
 spec:
   forProvider:
     catalogData:
@@ -22,6 +23,7 @@ spec:
     region: us-east-1
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig
 ---
 apiVersion: ecr.aws.m.upbound.io/v1beta1
 kind: Repository
@@ -29,6 +31,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ecrpublic/v1beta1/repository
   name: uptest-test-repo
+  namespace: upbound-system
 spec:
   forProvider:
     imageTagMutability: IMMUTABLE

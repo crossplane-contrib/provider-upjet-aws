@@ -6,6 +6,7 @@ apiVersion: dax.aws.m.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -16,6 +17,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: dax-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -27,6 +29,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: dax-subnet
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

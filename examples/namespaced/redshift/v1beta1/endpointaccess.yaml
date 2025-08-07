@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-endpointaccess
   name: example-endpointaccess
+  namespace: upbound-system
 spec:
   forProvider:
     clusterIdentifierSelector:
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-endpointaccess
   name: example-endpointaccess-c
+  namespace: upbound-system
 spec:
   forProvider:
     clusterType: single-node
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-endpointaccess
   name: example-endpointaccess-sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -61,6 +64,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bar
   name: bar
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2b
@@ -80,6 +84,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2c
@@ -99,6 +104,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16

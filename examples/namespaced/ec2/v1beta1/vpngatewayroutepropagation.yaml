@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -28,6 +29,7 @@ metadata:
   name: table
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -42,6 +44,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/vpngatewayroutepropagation
   name: route-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -57,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: vpn-gw
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

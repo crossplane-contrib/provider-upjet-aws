@@ -6,6 +6,7 @@ apiVersion: apigateway.aws.m.upbound.io/v1beta1
 kind: VPCLink
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: example description
@@ -21,6 +22,7 @@ metadata:
   name: example
   labels:
     testing.upbound.io/example-name: vpclink
+  namespace: upbound-system
 spec:
   forProvider:
     internal: true
@@ -38,6 +40,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpclink
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -53,6 +56,7 @@ metadata:
   name: sample-vpc
   labels:
     testing.upbound.io/example-name: vpclink
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

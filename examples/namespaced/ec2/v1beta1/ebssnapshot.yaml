@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_snapshot
   name: example-snapshot
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -23,6 +24,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1c

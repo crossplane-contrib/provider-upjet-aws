@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: peeraccepterlabel
   name: peeracceptername
+  namespace: upbound-system
 spec:
   forProvider:
     autoAccept: true
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
@@ -41,6 +43,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpcpeerlabel
   name: vpcpeername
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
@@ -54,6 +57,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpcpeerconnectionlabel
   name: peerconnectionname
+  namespace: upbound-system
 spec:
   forProvider:
     autoAccept: false

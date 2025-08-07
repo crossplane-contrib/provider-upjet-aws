@@ -6,6 +6,7 @@ apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterEndpoint
 metadata:
   name: sample-endpoint
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1

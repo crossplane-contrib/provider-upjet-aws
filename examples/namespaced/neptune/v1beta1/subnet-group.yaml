@@ -6,6 +6,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: sample-neptune-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1
@@ -17,6 +18,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: sample-neptune-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1
@@ -29,6 +31,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: sample-neptune-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1
@@ -41,6 +44,7 @@ apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
   name: sample-subnet-group
+  namespace: upbound-system
 spec:
   forProvider:
     description: "Managed by Crossplane"

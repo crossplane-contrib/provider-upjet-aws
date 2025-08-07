@@ -8,6 +8,7 @@ metadata:
   name: demo
   labels:
     testing.upbound.io/example-name-subgroup: account
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

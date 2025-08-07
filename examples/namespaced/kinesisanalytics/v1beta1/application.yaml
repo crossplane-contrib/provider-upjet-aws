@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
   name: kinesis-analytics-application-test
+  namespace: upbound-system
 spec:
   forProvider:
     inputs:
@@ -37,6 +38,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -56,6 +58,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
   name: kinesis-app-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

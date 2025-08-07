@@ -6,6 +6,7 @@ apiVersion: kafka.aws.m.upbound.io/v1beta1
 kind: Configuration
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     kafkaVersions:

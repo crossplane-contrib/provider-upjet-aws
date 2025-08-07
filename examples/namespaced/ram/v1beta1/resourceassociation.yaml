@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     allowExternalPrincipals: true
@@ -45,6 +47,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource is dependency of ResourceAssociation. This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -60,6 +63,7 @@ metadata:
     meta.upbound.io/example-id: ram/v1beta1/resourceassociation
     upjet.upbound.io/manual-intervention: "This resource is dependency of ResourceAssociation. This resource is skipping because parent resource was skipped."
   name: default
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

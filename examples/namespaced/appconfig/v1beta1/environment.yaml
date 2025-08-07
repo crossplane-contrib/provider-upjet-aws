@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     applicationIdSelector:
@@ -36,6 +37,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: Example AppConfig Application
@@ -52,6 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foobar
   name: foobar
+  namespace: upbound-system
 spec:
   forProvider:
     alarmDescription: This metric monitors ec2 cpu utilization
@@ -71,6 +74,7 @@ metadata:
   name: sample-role
   labels:
     testing.upbound.io/example-name: role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -93,6 +97,7 @@ metadata:
   name: sample-policy-attachment
   labels:
     testing.upbound.io/example-name: role
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -108,6 +113,7 @@ metadata:
   name: sample-user-policy
   labels:
     testing.upbound.io/example-name: role
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |

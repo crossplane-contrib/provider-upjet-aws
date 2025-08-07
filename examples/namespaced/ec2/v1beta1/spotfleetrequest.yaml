@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: cheap_compute
   name: cheap-compute
+  namespace: upbound-system
 spec:
   forProvider:
     allocationStrategy: capacityOptimized
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_profile
   name: test-profile
+  namespace: upbound-system
 spec:
   forProvider:
     roleSelector:
@@ -48,6 +50,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

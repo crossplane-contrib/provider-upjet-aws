@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudfront/v1beta1/originrequestpolicy
   name: example-origin-request-policy
+  namespace: upbound-system
 spec:
   forProvider:
     comment: example comment

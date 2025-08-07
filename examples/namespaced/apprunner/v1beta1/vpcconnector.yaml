@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: connector
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -26,6 +27,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -40,6 +42,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
   name: sample-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -54,6 +57,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -67,6 +71,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apprunner/v1beta1/vpcconnector
   name: securitygroup-example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

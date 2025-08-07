@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudfront/v1beta1/responseheaderspolicy
   name: example-response-headers-policy
+  namespace: upbound-system
 spec:
   forProvider:
     comment: test comment

@@ -12,6 +12,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     directoryIdSelector:
@@ -48,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: corp.example.com
@@ -73,6 +75,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_a
   name: example-a
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1a
@@ -91,6 +94,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_b
   name: example-b
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1b
@@ -109,6 +113,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_c
   name: example-c
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1a
@@ -127,6 +132,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_d
   name: example-d
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1b
@@ -145,6 +151,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16

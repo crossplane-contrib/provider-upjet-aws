@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/spotinstancerequest
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     ami: ami-0d9858aa3c6322f73

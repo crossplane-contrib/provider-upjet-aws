@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: domainpermissionspolicy-example
   name: domainpermissionspolicy-example
+  namespace: upbound-system
 spec:
   forProvider:
     domainSelector:
@@ -38,6 +39,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: domainpermissionspolicy-example
   name: domainpermissionspolicy-example
+  namespace: upbound-system
 spec:
   forProvider:
     domain: domainpermissionspolicy-example

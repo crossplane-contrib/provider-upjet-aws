@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     maxUnits: 1
@@ -40,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-osi-pipeline-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |-
@@ -64,6 +66,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-upbound-osis-pipeline-example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

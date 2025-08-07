@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
   name: example-application
+  namespace: upbound-system
 spec:
   forProvider:
     applicationConfiguration:
@@ -35,6 +36,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
   name: kinesis-app-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

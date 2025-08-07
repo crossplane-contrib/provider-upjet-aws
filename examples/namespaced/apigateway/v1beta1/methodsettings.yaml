@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-methodsettings
   name: example-methodsettings-all
+  namespace: upbound-system
 spec:
   forProvider:
     methodPath: '*/*'
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-methodsettings
   name: example-methodsettings-stage
+  namespace: upbound-system
 spec:
   forProvider:
     deploymentIdSelector:
@@ -52,6 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-methodsettings
   name: example-methodsettings-deployment
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -67,6 +70,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-methodsettings
   name: example-methodsettings-restapi
+  namespace: upbound-system
 spec:
   forProvider:
     body: |-

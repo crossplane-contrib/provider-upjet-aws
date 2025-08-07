@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     accountId: "${data.aws_account_id}"
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     administrationRoleArnSelector:
@@ -64,6 +66,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: AWSCloudFormationStackSetAdministrationRole
   name: awscloudformationstacksetadministrationrole
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

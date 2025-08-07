@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: eip_assoc
   name: eip-assoc
+  namespace: upbound-system
 spec:
   forProvider:
     allocationIdSelector:
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -35,6 +37,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: web
   name: web
+  namespace: upbound-system
 spec:
   forProvider:
     ami: ami-0d9858aa3c6322f73

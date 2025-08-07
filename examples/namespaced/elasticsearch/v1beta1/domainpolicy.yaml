@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     accessPolicies: |
@@ -41,6 +42,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-domainpolicy
+  namespace: upbound-system
 spec:
   forProvider:
     clusterConfig:

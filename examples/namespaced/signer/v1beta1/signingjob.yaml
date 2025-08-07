@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: build_signing_job
   name: build-signing-job
+  namespace: upbound-system
 spec:
   forProvider:
     destination:

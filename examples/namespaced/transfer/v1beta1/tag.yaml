@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: zone_id
   name: zone-id
+  namespace: upbound-system
 spec:
   forProvider:
     key: aws:transfer:route53HostedZoneId
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     identityProviderType: SERVICE_MANAGED

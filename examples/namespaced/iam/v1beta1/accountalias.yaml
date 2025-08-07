@@ -6,5 +6,6 @@ apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: AccountAlias
 metadata:
   name: official-providers-test
+  namespace: upbound-system
 spec:
   forProvider: {}

@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: member
   name: member
+  namespace: upbound-system
 spec:
   forProvider:
     graphArnSelector:
@@ -19,6 +20,7 @@ spec:
     region: us-west-1
   providerConfigRef:
     name: test1 #Provider config for second aws account used for creation Member
+    kind: ClusterProviderConfig
 ---
 apiVersion: detective.aws.m.upbound.io/v1beta1
 kind: Graph
@@ -29,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: primary
   name: primary
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -42,6 +45,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: primary
   name: primary
+  namespace: upbound-system
 spec:
   forProvider:
     accountId: <AccountId1>

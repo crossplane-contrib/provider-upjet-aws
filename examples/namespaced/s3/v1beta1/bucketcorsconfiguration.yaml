@@ -6,6 +6,7 @@ apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketCorsConfiguration
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

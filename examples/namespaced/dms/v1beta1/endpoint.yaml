@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test-endpoint
+  namespace: upbound-system
 spec:
   forProvider:
     databaseName: test
@@ -38,6 +39,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-endpoint
   name: example-endpoint
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 7

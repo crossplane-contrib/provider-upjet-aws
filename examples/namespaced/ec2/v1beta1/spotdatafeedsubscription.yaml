@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default
   name: default
+  namespace: upbound-system
 spec:
   forProvider:
     bucket: up-spotdata
@@ -22,6 +23,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "For deletion of this resource, firstly needs to be cleaned up."
   name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

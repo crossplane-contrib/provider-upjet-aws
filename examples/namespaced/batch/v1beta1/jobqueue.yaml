@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_queue
   name: test-queue
+  namespace: upbound-system
 spec:
   forProvider:
     computeEnvironmentOrder:
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample
   name: sample
+  namespace: upbound-system
 spec:
   forProvider:
     computeResources:

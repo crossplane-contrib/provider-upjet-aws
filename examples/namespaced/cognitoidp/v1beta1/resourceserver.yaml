@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: resource
   name: resource
+  namespace: upbound-system
 spec:
   forProvider:
     identifier: https://example.com
@@ -23,6 +24,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: pool
   name: pool
+  namespace: upbound-system
 spec:
   forProvider:
     name: pool

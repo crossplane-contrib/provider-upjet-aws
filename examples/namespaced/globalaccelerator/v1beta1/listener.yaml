@@ -6,6 +6,7 @@ apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
 kind: Listener
 metadata:
   name: sample-listener
+  namespace: upbound-system
 spec:
   forProvider:
     acceleratorArnRef:

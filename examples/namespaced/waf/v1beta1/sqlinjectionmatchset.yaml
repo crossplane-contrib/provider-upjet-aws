@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sql_injection_match_set
   name: sql-injection-match-set
+  namespace: upbound-system
 spec:
   forProvider:
     name: tf-sql_injection_match_set

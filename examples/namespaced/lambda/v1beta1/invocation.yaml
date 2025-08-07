@@ -6,6 +6,7 @@ apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: Invocation
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

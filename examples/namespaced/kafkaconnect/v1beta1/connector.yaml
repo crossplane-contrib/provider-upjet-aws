@@ -12,6 +12,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: connector
+  namespace: upbound-system
 spec:
   forProvider:
     capacity:
@@ -79,6 +80,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: connector
+  namespace: upbound-system
 spec:
   forProvider:
     name: ${Rand.RFC1123Subdomain}
@@ -95,6 +97,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     contentType: ZIP
@@ -117,6 +120,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: connector
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -146,6 +150,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: connector
+  namespace: upbound-system
 spec:
   forProvider:
     destination: extended_s3
@@ -167,6 +172,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     forceDestroy: true
@@ -181,6 +187,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -200,6 +207,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -215,6 +223,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: subnet-az1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2a
@@ -232,6 +241,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: subnet-az2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2b
@@ -249,6 +259,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22
@@ -263,6 +274,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -277,6 +289,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     brokerNodeGroupInfo:
@@ -325,6 +338,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     kafkaVersions:
@@ -343,6 +357,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: ingress
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlocks:
@@ -363,6 +378,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector
   name: egress
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlocks:

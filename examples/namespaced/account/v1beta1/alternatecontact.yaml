@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: operations
   name: operations
+  namespace: upbound-system
 spec:
   forProvider:
     alternateContactType: OPERATIONS

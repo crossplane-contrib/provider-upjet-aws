@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     analyzerName: example-analyzer
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_analyzer
   name: example-analyzer
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

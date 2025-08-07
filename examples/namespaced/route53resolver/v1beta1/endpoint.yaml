@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     direction: INBOUND
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-vpc
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-subnet1
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -58,6 +61,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-subnet2
   name: sample-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -72,6 +76,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sg1
   name: sg1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: hoge-encryption
   name: hoge-encryption
+  namespace: upbound-system
 spec:
   forProvider:
     bandwidth: 1Gbps

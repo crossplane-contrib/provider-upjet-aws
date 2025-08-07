@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta1/proxydefaulttargetgroup
     upjet.upbound.io/manual-intervention: This resource has a reference to Proxy, which needs manual intervention.
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     connectionPoolConfig:

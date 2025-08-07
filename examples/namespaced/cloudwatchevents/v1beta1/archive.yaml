@@ -6,6 +6,7 @@ apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
 kind: Archive
 metadata:
   name: order
+  namespace: upbound-system
 spec:
   forProvider:
     eventSourceArnSelector:
@@ -19,6 +20,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: order
   name: order
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

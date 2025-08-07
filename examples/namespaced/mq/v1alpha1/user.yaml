@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     brokerIdSelector:
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-user
   name: user-example-broker
+  namespace: upbound-system
 spec:
   forProvider:
     # Due to an existing Terrajet limitation, we cannot use "metadata.name" for "brokerName"
@@ -82,6 +84,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

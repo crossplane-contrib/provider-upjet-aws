@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpn_attachment
   name: vpn-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: network
   name: network
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
@@ -41,6 +43,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpn
   name: vpn
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

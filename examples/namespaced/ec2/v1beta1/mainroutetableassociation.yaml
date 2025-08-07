@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -28,6 +29,7 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/mainroutetableassociation
   labels:
     testing.upbound.io/example-name: table
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -45,6 +47,7 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/mainroutetableassociation
   labels:
     testing.upbound.io/example-name: route-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

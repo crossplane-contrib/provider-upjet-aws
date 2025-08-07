@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: my_archive
   name: my-archive
+  namespace: upbound-system
 spec:
   forProvider:
     notification:
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: aws_sns_topic
   name: aws-sns-topic
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

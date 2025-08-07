@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-ra
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-ra
   name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     accountAccessType: CURRENT_ACCOUNT
@@ -51,6 +53,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: assume-ra
   name: assume-ra
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |-

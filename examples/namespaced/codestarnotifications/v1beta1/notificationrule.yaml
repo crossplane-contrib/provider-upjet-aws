@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: commits
   name: commits
+  namespace: upbound-system
 spec:
   forProvider:
     detailType: BASIC
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: code
   name: code
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

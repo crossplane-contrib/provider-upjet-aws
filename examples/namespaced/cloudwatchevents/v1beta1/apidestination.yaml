@@ -6,6 +6,7 @@ apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
 kind: APIDestination
 metadata:
   name: test-api-dest
+  namespace: upbound-system
 spec:
   forProvider:
     connectionArnSelector:
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: apitest
   name: apitest
+  namespace: upbound-system
 spec:
   forProvider:
     authParameters:

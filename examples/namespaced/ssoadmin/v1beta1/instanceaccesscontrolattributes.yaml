@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-instance-access-control-attributes
   name: ssoadmin-instance-access-control-attributes
+  namespace: upbound-system
 spec:
   forProvider:
     instanceArn: ARN of a manually created SSO instance in the same region specified below

@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-os-co
+  namespace: upbound-system
 spec:
   forProvider:
     name: example-collection
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-os-co
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |

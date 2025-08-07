@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: codepipeline
   name: codepipeline-webhook
+  namespace: upbound-system
 spec:
   forProvider:
     authentication: GITHUB_HMAC
@@ -43,6 +44,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: codepipeline
   name: codepipeline
+  namespace: upbound-system
 spec:
   forProvider:
     artifactStore:
@@ -106,6 +108,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: codepipeline_role
   name: codepipeline-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -131,6 +134,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: codepipeline_bucket
   name: codepipeline-bucket
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

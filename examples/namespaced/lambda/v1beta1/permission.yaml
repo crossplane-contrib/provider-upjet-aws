@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta1/permission
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-permission
+  namespace: upbound-system
 spec:
   forProvider:
     s3Bucket: upbound-provider-test-data
@@ -54,6 +56,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: example-permission
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -79,6 +82,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: example-permission
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -110,6 +114,7 @@ metadata:
   name: example-permission
   labels:
     testing.upbound.io/example-name: policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -127,6 +132,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-permission
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -142,6 +148,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-permission
+  namespace: upbound-system
 spec:
   forProvider:
     description: Allow TLS inbound traffic
@@ -160,6 +167,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-permission
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     cdcStartTime: "1484346880"
@@ -37,6 +38,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test-dms-replication-instance-tf
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     allocatedStorage: 20
@@ -58,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-access-for-endpoint
   name: dms-access-for-endpoint
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -82,6 +85,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: amazondmsredshifts3role
   name: amazondmsredshifts3role
+  namespace: upbound-system
 spec:
   forProvider:
     description: Provides access to manage VPC settings for AWS managed customer configurations
@@ -150,6 +154,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-cloudwatch-logs-role
   name: dms-cloudwatch-logs-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -174,6 +179,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: amazondmscloudwatchlogsrole
   name: amazondmscloudwatchlogsrole
+  namespace: upbound-system
 spec:
   forProvider:
     description: Provides access to manage VPC settings for AWS managed customer configurations
@@ -242,6 +248,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-access-for-endpoint-AmazonDMSRedshiftS3Role
   name: dms-access-for-endpoint-amazondmsredshifts3role
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -259,6 +266,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-cloudwatch-logs-role-AmazonDMSCloudWatchLogsRole
   name: dms-cloudwatch-logs-role-amazondmscloudwatchlogsrole
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -276,6 +284,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-vpc-role-AmazonDMSVPCManagementRole
   name: dms-vpc-role-amazondmsvpcmanagementrole
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -293,6 +302,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: amazondmsvpcmanagementrole
+  namespace: upbound-system
 spec:
   forProvider:
     description: Provides access to manage VPC settings for AWS managed customer configurations
@@ -325,6 +335,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-vpc-role
   name: dms-vpc-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -349,6 +360,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test-dms-source-endpoint-tf
   name: test-source
+  namespace: upbound-system
 spec:
   forProvider:
     certificateArn: arn:aws:dms:us-west-1:153891904029:cert:5RO6Q5Y2PWAZWQG7X5GSQLYXMH56CEH4DMXACGA
@@ -377,6 +389,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test-dms-target-endpoint-tf
   name: test-target
+  namespace: upbound-system
 spec:
   forProvider:
     certificateArn: arn:aws:dms:us-west-1:153891904029:cert:5RO6Q5Y2PWAZWQG7X5GSQLYXMH56CEH4DMXACGA
@@ -405,6 +418,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     certificatePemSecretRef:
@@ -451,6 +465,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 7

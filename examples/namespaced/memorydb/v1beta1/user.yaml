@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: memorydb-user
   name: memorydb-user
+  namespace: upbound-system
 spec:
   forProvider:
     accessString: on ~* &* +@all

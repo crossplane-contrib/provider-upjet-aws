@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lexmodels/v1beta1/botalias
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     botName: example

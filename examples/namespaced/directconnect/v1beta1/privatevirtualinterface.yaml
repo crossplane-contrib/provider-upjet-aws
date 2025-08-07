@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     addressFamily: ipv4
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: hoge
   name: hoge
+  namespace: upbound-system
 spec:
   forProvider:
     bandwidth: 1Gbps
@@ -47,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpn_gw
   name: vpn-gw
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -64,6 +67,7 @@ metadata:
     meta.upbound.io/example-id: directconnect/v1beta1/privatevirtualinterface
   labels:
     testing.upbound.io/example-name: main
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

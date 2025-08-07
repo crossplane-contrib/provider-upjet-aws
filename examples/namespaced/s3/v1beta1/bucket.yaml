@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: s3
   name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     objectLockEnabled: true
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: s3-2
   name: ${Rand.RFC1123Subdomain}-2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

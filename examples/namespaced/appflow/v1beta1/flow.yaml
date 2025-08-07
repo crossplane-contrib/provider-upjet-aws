@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     destinationFlowConfig:
@@ -51,6 +52,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_destination
   name: example-destination-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -64,6 +66,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_source
   name: example-source-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -77,6 +80,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_destination
   name: example-destination
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -118,6 +122,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_source
   name: example-source
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -156,6 +161,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: userpoolclient
   name: userpoolclient
+  namespace: upbound-system
 spec:
   forProvider:
     name: userpoolclient
@@ -23,6 +24,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: userpoolclient
   name: userpoolclient
+  namespace: upbound-system
 spec:
   forProvider:
     name: userpoolclient
@@ -39,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: userpoolclient
   name: userpoolclient-with-dashes
+  namespace: upbound-system
 spec:
   forProvider:
     name: name-that-doesnt-match-id-regex

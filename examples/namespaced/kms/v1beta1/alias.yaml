@@ -6,6 +6,7 @@ apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Alias
 metadata:
   name: sample-key-alias
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -16,6 +17,7 @@ apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   name: sample-key
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

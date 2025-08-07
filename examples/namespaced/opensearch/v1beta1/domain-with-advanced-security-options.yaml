@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-advanced-security-options
   name: example-advanced-security-options
+  namespace: upbound-system
 spec:
   writeConnectionSecretToRef:
     name: example-aso-domain

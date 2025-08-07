@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: group
   name: group
+  namespace: upbound-system
 spec:
   forProvider:
     connector:
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vc1
   name: vc1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vc2
   name: vc2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

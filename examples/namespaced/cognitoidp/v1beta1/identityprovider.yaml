@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_provider
   name: example-provider
+  namespace: upbound-system
 spec:
   forProvider:
     attributeMapping:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     autoVerifiedAttributes:

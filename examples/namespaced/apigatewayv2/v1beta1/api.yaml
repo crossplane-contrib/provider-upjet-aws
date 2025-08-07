@@ -10,6 +10,7 @@ metadata:
   labels:
     upjet.upbound.io/test-group: apigatewayv2-domainname
   name: domainname-api
+  namespace: upbound-system
 spec:
   forProvider:
     name: test-http-api

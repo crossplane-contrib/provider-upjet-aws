@@ -6,6 +6,7 @@ apiVersion: servicediscovery.aws.m.upbound.io/v1beta1
 kind: PublicDNSNamespace
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: example

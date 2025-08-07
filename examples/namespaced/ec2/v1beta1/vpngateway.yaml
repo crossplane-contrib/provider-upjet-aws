@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpn_gw
   name: vpn-gw
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -27,6 +28,7 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/vpngateway
   labels:
     testing.upbound.io/example-name: main
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

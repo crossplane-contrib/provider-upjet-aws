@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-dbinstance
   name: example-dbinstance-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     allocatedStorage: 20
@@ -47,6 +48,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-key
   name: sample-key-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 7

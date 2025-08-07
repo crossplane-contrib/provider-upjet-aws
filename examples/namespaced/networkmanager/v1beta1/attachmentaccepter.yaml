@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: attachmentaccepter
+  namespace: upbound-system
 spec:
   forProvider:
     attachmentIdSelector:
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: vpcattachment
+  namespace: upbound-system
 spec:
   forProvider:
     coreNetworkIdSelector:
@@ -47,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -62,6 +65,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: subnet
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -78,6 +82,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: corenetworkname
+  namespace: upbound-system
 spec:
   forProvider:
     createBasePolicy: true
@@ -117,6 +122,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: globalnetworkname
+  namespace: upbound-system
 spec:
   forProvider:
     description: example

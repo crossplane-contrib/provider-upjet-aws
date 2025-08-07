@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: integration
   name: mydemoapi
+  namespace: upbound-system
 spec:
   forProvider:
     description: This is my API for demonstration purposes
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegrationresponse
+  namespace: upbound-system
 spec:
   forProvider:
     httpMethodSelector:
@@ -57,6 +59,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegration
+  namespace: upbound-system
 spec:
   forProvider:
     httpMethodSelector:
@@ -80,6 +83,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: integration
   name: mydemomethod
+  namespace: upbound-system
 spec:
   forProvider:
     authorization: NONE
@@ -101,6 +105,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: integration
   name: response-200
+  namespace: upbound-system
 spec:
   forProvider:
     httpMethodSelector:
@@ -123,6 +128,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: integration
   name: mydemoresource
+  namespace: upbound-system
 spec:
   forProvider:
     parentIdSelector:
@@ -142,6 +148,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: integration
   name: mydemomodel
+  namespace: upbound-system
 spec:
   forProvider:
     contentType: application/json

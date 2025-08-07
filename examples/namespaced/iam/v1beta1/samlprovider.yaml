@@ -8,6 +8,7 @@ metadata:
   name: myprovider
   annotations:
     upjet.upbound.io/manual-intervention: "It requires samlMetadaDocument that should be given by your IdP"
+  namespace: upbound-system
 spec:
   forProvider:
     samlMetadataDocument: |

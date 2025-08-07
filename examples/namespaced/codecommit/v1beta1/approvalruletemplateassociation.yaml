@@ -10,6 +10,7 @@ metadata:
     meta.upbound.io/example-id: codecommit/v1beta1/repository
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: This is the Sample App Repository
@@ -23,6 +24,7 @@ metadata:
     meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplate
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     content: |
@@ -46,6 +48,7 @@ metadata:
     meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplateassociation
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     approvalRuleTemplateNameSelector:

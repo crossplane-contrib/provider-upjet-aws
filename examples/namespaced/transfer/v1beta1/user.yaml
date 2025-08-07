@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: transfer/v1beta1/user
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     homeDirectoryMappings:

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-walc
+  namespace: upbound-system
 spec:
   forProvider:
     logDestinationConfigs:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: examle
   name: aws-waf-logs-example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -52,6 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: firehose
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -64,6 +67,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-role-wacl
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -88,6 +92,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-walc
+  namespace: upbound-system
 spec:
   forProvider:
     defaultAction:

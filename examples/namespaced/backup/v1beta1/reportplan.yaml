@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: backup/v1beta1/reportplan
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: example description

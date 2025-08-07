@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: test-channel
+  namespace: upbound-system
 spec:
   forProvider:
     isEnabled: true
@@ -23,6 +24,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: test-channel
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -39,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: test-channel
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -54,6 +57,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: r
   name: test-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -80,6 +84,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: b
   name: test-channel-bucket
+  namespace: upbound-system
 spec:
   forProvider:
     forceDestroy: true
@@ -93,6 +98,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: p
   name: test-recorder-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -120,6 +126,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: p
   name: test-attach
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnRef:

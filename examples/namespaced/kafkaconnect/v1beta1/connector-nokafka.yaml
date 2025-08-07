@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: connector-nokafka
+  namespace: upbound-system
 spec:
   forProvider:
     capacity:
@@ -70,6 +71,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     contentType: ZIP
@@ -92,6 +94,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: connector-nokafka
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -121,6 +124,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     forceDestroy: true
@@ -135,6 +139,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -154,6 +159,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -169,6 +175,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: subnet-az1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2a
@@ -186,6 +193,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: subnet-az2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2b
@@ -203,6 +211,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22
@@ -217,6 +226,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -230,6 +240,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: ingress
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlocks:
@@ -250,6 +261,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: egress
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlocks:

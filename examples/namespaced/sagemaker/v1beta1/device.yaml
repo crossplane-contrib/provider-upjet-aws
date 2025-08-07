@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     device:
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     outputConfig:
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -69,6 +72,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bucketname012
   name: bucketname012
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -83,6 +87,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: s3-policy
   name: s3-policy
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:

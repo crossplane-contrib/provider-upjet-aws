@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: cluster_instances
   name: cluster-instances
+  namespace: upbound-system
 spec:
   forProvider:
     preferredMaintenanceWindow: sun:10:30-sun:14:30
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default
   name: my-docdb-cluster
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2

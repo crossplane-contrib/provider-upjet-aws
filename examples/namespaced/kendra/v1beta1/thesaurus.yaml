@@ -12,6 +12,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: thesaurus
+  namespace: upbound-system
 spec:
   forProvider:
     indexIdSelector:
@@ -37,6 +38,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: index-5
+  namespace: upbound-system
 spec:
   forProvider:
     name: index-5
@@ -53,6 +55,7 @@ metadata:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
     testing.upbound.io/example-name: example
   name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     forceDestroy: true
@@ -67,6 +70,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: objectname
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -77,3 +81,4 @@ spec:
     region: us-east-1
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig

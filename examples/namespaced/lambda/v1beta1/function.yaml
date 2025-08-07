@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     handler: index.py
@@ -39,6 +40,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -64,6 +66,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: sample-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -95,6 +98,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy-attachment
   name: sample-user-policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -112,6 +116,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.10.0/24
@@ -127,6 +132,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     description: Allow TLS inbound traffic
@@ -145,6 +151,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16

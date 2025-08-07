@@ -8,6 +8,7 @@ metadata:
   name: vpc-cni
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
 spec:
   forProvider:
     addonName: vpc-cni
@@ -25,6 +26,7 @@ metadata:
   name: sample-eks-cluster
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -41,6 +43,7 @@ metadata:
   name: sample-eks-cluster
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -63,6 +66,7 @@ metadata:
   name: sample-vpc
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
 spec:
   forProvider:
     enableDnsHostnames: true
@@ -77,6 +81,7 @@ metadata:
   name: sample-subnet1
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -92,6 +97,7 @@ metadata:
   name: sample-subnet2
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -107,6 +113,7 @@ metadata:
   name: sample-cluster-policy
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy

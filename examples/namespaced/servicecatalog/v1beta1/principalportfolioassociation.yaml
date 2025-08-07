@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     portfolioIdSelector:
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: portfolio
   name: portfolio
+  namespace: upbound-system
 spec:
   forProvider:
     description: List of my organizations apps
@@ -45,5 +47,6 @@ metadata:
   name: sample-user-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: user
+  namespace: upbound-system
 spec:
   forProvider: {}

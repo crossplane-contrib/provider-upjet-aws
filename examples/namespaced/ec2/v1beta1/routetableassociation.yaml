@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: rta
   name: rta
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -20,6 +21,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: RouteTable
 metadata:
   name: rta
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -32,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: rta
   name: rta
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -43,6 +46,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: rta
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ruleout
   name: ruleout
+  namespace: upbound-system
 spec:
   forProvider:
     description: test rule
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: filter
   name: filter
+  namespace: upbound-system
 spec:
   forProvider:
     description: traffic mirror filter - terraform example

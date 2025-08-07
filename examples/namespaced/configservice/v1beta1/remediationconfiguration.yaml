@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: r
   name: this
+  namespace: upbound-system
 spec:
   forProvider:
     automatic: true
@@ -40,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: r
   name: this
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -55,6 +57,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: example-recorder
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -70,6 +73,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: r
   name: test-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

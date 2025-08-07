@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: v2-example
+  namespace: upbound-system
 spec:
   forProvider:
     email: v2-example@example.com

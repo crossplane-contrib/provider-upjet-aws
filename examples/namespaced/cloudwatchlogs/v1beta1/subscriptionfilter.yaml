@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_lambdafunction_logfilter
   name: test-lambdafunction-logfilter
+  namespace: upbound-system
 spec:
   forProvider:
     name: test-lambdafunction-logfilter
@@ -27,6 +28,7 @@ apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
 kind: Group
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -42,6 +44,7 @@ metadata:
     meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
   labels:
     testing.upbound.io/example-name: stream
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -61,6 +64,7 @@ metadata:
   name: sample-role
   labels:
     testing.upbound.io/example-name: iam_for_cloudwatch
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -83,6 +87,7 @@ metadata:
   name: sample-user-policy
   labels:
     testing.upbound.io/example-name: policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -103,6 +108,7 @@ metadata:
   name: sample-policy-attachment
   labels:
     testing.upbound.io/example-name: attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:

@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sfn/v1beta1/statemachine
   name: my-state-machine
+  namespace: upbound-system
 spec:
   forProvider:
     definition: |
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

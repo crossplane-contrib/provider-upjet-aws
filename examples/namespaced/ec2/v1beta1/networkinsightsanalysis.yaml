@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: analysis
   name: analysis
+  namespace: upbound-system
 spec:
   forProvider:
     networkInsightsPathIdSelector:
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: path
   name: path
+  namespace: upbound-system
 spec:
   forProvider:
     destinationSelector:
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: destination
   name: testdest
+  namespace: upbound-system
 spec:
   forProvider:
     privateIps:
@@ -61,6 +64,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: public_a
   name: publica
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/24
@@ -79,6 +83,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: source
   name: testsource
+  namespace: upbound-system
 spec:
   forProvider:
     privateIps:
@@ -96,6 +101,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: public_b
   name: piblicb
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.1.0/24
@@ -114,6 +120,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16

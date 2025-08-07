@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     dataRepositoryPath: s3://example-rand12345
@@ -39,6 +40,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     deploymentType: PERSISTENT_2
@@ -57,6 +59,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -69,6 +72,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test1
   name: test1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1a
@@ -86,6 +90,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16

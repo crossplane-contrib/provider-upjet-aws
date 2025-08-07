@@ -7,6 +7,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-environment-test
+  namespace: upbound-system
 spec:
   forProvider:
     dagS3Path: dags/
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_role
   name: example-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -59,6 +61,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_policy_attachment
   name: example-policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:
@@ -77,6 +80,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_user_policy
   name: example-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": \"airflow:PublishMetrics\",\n            \"Resource\": \"arn:aws:airflow:us-west-1:153891904029:environment/example-environment-test\"\n        },\n        { \n            \"Effect\": \"Deny\",\n            \"Action\": \"s3:ListAllMyBuckets\",\n            \"Resource\": \"*\"\n        },\n        { \n            \"Effect\": \"Allow\",\n            \"Action\": [ \n                \"s3:GetObject*\",\n                \"s3:GetBucket*\",\n                \"s3:List*\"\n            ],\n            \"Resource\": [\n                \"arn:aws:s3:::bucket-mwaaupb-test\",\n                \"arn:aws:s3:::bucket-mwaaupb-test/*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"logs:CreateLogStream\",\n                \"logs:CreateLogGroup\",\n                \"logs:PutLogEvents\",\n                \"logs:GetLogEvents\",\n                \"logs:GetLogRecord\",\n                \"logs:GetLogGroupFields\",\n                \"logs:GetQueryResults\"\n            ],\n            \"Resource\": [\n                \"arn:aws:logs:us-west-1:153891904029:log-group:airflow-example-environment-test-*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"logs:DescribeLogGroups\"\n            ],\n            \"Resource\": [\n                \"*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"s3:GetAccountPublicAccessBlock\"\n            ],\n            \"Resource\": [\n                \"*\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": \"cloudwatch:PutMetricData\",\n            \"Resource\": \"*\"\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"sqs:ChangeMessageVisibility\",\n                \"sqs:DeleteMessage\",\n                \"sqs:GetQueueAttributes\",\n                \"sqs:GetQueueUrl\",\n                \"sqs:ReceiveMessage\",\n                \"sqs:SendMessage\"\n            ],\n            \"Resource\": \"arn:aws:sqs:us-west-1:*:airflow-celery-*\"\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"kms:Decrypt\",\n                \"kms:DescribeKey\",\n                \"kms:GenerateDataKey*\",\n                \"kms:Encrypt\"\n            ],\n            \"NotResource\": \"arn:aws:kms:*:153891904029:key/*\",\n            \"Condition\": {\n                \"StringLike\": {\n                    \"kms:ViaService\": [\n                        \"sqs.us-west-1.amazonaws.com\"\n                    ]\n                }\n            }\n        }\n    ]\n}\n"
@@ -90,6 +94,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_bucket
   name: bucket-mwaaupb-test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -103,6 +108,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_versioning
   name: example-versioning
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -121,6 +127,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_security_group
   name: example-security-group
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -138,6 +145,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: securitygrouprule
   name: securitygroupruleself1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -158,6 +166,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_ingress_rule
   name: example-ingress-rule-http
+  namespace: upbound-system
 spec:
   forProvider:
     cidrIpv4: 0.0.0.0/0
@@ -177,6 +186,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_ingress_rule
   name: example-ingress-rule-https
+  namespace: upbound-system
 spec:
   forProvider:
     cidrIpv4: 0.0.0.0/0
@@ -196,6 +206,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_ingress_rule
   name: example-ingress-rule-postgresql
+  namespace: upbound-system
 spec:
   forProvider:
     cidrIpv4: 0.0.0.0/0
@@ -215,6 +226,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_egress_rule
   name: example-egress-rule-all
+  namespace: upbound-system
 spec:
   forProvider:
     cidrIpv4: 0.0.0.0/0
@@ -234,6 +246,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -250,6 +263,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_subnet
   name: example-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -267,6 +281,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_subnet
   name: example-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -284,6 +299,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: rta-mwaa
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -299,6 +315,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: rta1
   name: rta1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -316,6 +333,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: rta2
   name: rta2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -333,6 +351,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-mwaa
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -348,6 +367,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: route
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-cra
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-cra
   name: example-cluster-cra
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -50,6 +52,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-cra
   name: sample-policy-cra
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -75,6 +78,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-cra
   name: sample-role-cra
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -100,6 +104,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-cra
   name: sample-role-attach-cra
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnRef:

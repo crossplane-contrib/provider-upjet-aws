@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta1/eventsourcemapping
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     eventSourceArn: null

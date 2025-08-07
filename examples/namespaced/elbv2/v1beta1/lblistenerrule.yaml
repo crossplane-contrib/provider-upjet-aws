@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: static
   name: static
+  namespace: upbound-system
 spec:
   forProvider:
     action:
@@ -38,6 +39,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: front_end
   name: front-end
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -60,6 +62,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: elbv2
   name: elbv2-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16
@@ -75,6 +78,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: elbv2
   name: elbv2-internet-gateway
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -92,6 +96,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: elbv2
   name: elbv2-subnet
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -109,6 +114,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: elbv2s2
   name: elbv2-subnet-2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1a
@@ -126,6 +132,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: elbv2
   name: elbv2-securitygroup
+  namespace: upbound-system
 spec:
   forProvider:
     description: Allow TLS inbound traffic
@@ -145,6 +152,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: front_end
   name: front-end
+  namespace: upbound-system
 spec:
   forProvider:
     defaultAction:
@@ -166,6 +174,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: elbv2
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     name: example-lb-tg

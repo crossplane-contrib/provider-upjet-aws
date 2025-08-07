@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
     upjet.upbound.io/manual-intervention: Requires a Role with permissions on both buckets.
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:

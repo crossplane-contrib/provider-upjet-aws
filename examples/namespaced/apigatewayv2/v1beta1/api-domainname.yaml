@@ -8,6 +8,7 @@ metadata:
   name: domainname-api
   labels:
     upjet.upbound.io/test-group: apigatewayv2-domainname
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -23,6 +24,7 @@ metadata:
     crossplane.io/external-name: example-email.upbound-providers.io
   labels:
     upjet.upbound.io/test-group: apigatewayv2-domainname
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -41,6 +43,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-domainname
   annotations:
     upjet.upbound.io/manual-intervention: "The domain given as spec.forProvider.domainName needs to be created beforehand."
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -57,6 +60,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-domainname
   annotations:
     upjet.upbound.io/manual-intervention: "The DomainName resource should be ready and that requires a real domain."
+  namespace: upbound-system
 spec:
   forProvider:
     apiIdSelector:
@@ -76,6 +80,7 @@ metadata:
   name: example-domainname
   labels:
     upjet.upbound.io/test-group: apigatewayv2-domainname
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

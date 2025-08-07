@@ -6,6 +6,7 @@ apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterParameterGroup
 metadata:
   name: sample-cluster-param-group
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1

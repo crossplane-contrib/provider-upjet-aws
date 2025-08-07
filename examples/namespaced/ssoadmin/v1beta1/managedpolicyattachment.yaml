@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-managed-policy-attachment
   name: ssoadmin-managed-policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     instanceArn: ARN of a manually created SSO instance in the same region specified below
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ssoadmin-managed-policy-attachment
   name: ssoadmin-managed-policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     instanceArn: ARN of a manually created SSO instance in the same region specified below

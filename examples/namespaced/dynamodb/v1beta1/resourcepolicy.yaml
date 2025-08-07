@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-resourcepolicy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -47,6 +48,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: examplerp
+  namespace: upbound-system
 spec:
   forProvider:
     attribute:

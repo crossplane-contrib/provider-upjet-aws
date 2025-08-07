@@ -10,6 +10,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: bucket-notification
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -40,6 +41,7 @@ metadata:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: bucket-notification
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -52,6 +54,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: bucket-notification
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -64,6 +67,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: bucket-notification
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -94,6 +98,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: bucket-notification
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -107,6 +112,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1beta1/bucketnotification
   labels:
     testing.upbound.io/example-name: bucket-notification
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

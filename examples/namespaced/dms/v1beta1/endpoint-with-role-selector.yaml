@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-endpoint-test
   name: dms-endpoint-test
+  namespace: upbound-system
 spec:
   deletionPolicy: Delete
   forProvider:
@@ -40,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-endpoint-role-test
   name: dms-endpoint-role-test
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -77,6 +79,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dms-example-key
   name: dms-example-key
+  namespace: upbound-system
 spec:
   forProvider:
     deletionWindowInDays: 7

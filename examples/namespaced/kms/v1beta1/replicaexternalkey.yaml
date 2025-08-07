@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-externalkey-replicated
   name: sample-externalkey-replicated
+  namespace: upbound-system
 spec:
   forProvider:
     enabled: true
@@ -27,6 +28,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2

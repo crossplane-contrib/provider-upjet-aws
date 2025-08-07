@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: realtimelogconfig
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     endpoint:
@@ -35,6 +36,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: realtimelogconfig
   name: test-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -59,6 +61,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: realtimelogconfig
   name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

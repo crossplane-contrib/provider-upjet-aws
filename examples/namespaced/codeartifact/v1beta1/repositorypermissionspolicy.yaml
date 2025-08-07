@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: repositorypermissionspolicy-example
   name: repositorypermissionspolicy-example
+  namespace: upbound-system
 spec:
   forProvider:
     domainSelector:
@@ -40,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: repositorypermissionspolicy-example
   name: repositorypermissionspolicy-example
+  namespace: upbound-system
 spec:
   forProvider:
     domain: repositorypermissionspolicy-example
@@ -53,6 +55,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: repositorypermissionspolicy-example
   name: repositorypermissionspolicy-example
+  namespace: upbound-system
 spec:
   forProvider:
     domainSelector:

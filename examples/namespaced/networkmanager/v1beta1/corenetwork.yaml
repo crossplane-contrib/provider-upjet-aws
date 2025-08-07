@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: corenetworkname
+  namespace: upbound-system
 spec:
   forProvider:
     globalNetworkIdSelector:
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: globalnetworkname
+  namespace: upbound-system
 spec:
   forProvider:
     description: example

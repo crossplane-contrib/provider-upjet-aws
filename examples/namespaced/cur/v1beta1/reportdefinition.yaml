@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example_cur_report_definition
   name: example-cur-report-definition
+  namespace: upbound-system
 spec:
   forProvider:
     additionalArtifacts:
@@ -35,6 +36,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: test-definition-bucket
+  namespace: upbound-system
 spec:
   forProvider:
     forceDestroy: true
@@ -48,6 +50,7 @@ metadata:
     meta.upbound.io/example-id: cur/v1beta1/reportdefinition
   labels:
     testing.upbound.io/example-name: example_cur_report_definition
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -101,6 +104,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: test-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -126,6 +130,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: p
   name: test-recorder-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -179,6 +184,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: p
   name: test-attach
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnRef:

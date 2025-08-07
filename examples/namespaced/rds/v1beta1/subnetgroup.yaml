@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default
   name: sample-db-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default
   name: sample-db-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -41,6 +43,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default
   name: sample-db-subnet2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -57,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: default
   name: example-subnetgroup
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

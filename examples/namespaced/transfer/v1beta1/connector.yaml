@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sftp-connector-role
   name: sftp-connector
+  namespace: upbound-system
 spec:
   forProvider:
     accessRoleSelector:
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sftp-connector-role
   name: sftp-connector-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -54,6 +56,7 @@ metadata:
     uptest.upbound.io/update-parameter: '{"tags":{"updated-by":"crossplane"}}'
   labels:
     testing.upbound.io/example-name: sftp-connector
+  namespace: upbound-system
 spec:
   forProvider:
     name: sftp-connector-${Rand.RFC1123Subdomain}
@@ -68,6 +71,7 @@ metadata:
     meta.upbound.io/example-id: transfer/v1beta1/connector
   labels:
     testing.upbound.io/example-name: sftp-connector
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: cloudwatchevents/v1beta1/target
     upjet.upbound.io/manual-intervention: This resource needs arn of Topic.
   name: aws-login
+  namespace: upbound-system
 spec:
   forProvider:
     arn: arn:aws:sns:${data.aws_region}:${data.aws_account_id}:topic
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: login-rule
   name: login-rule
+  namespace: upbound-system
 spec:
   forProvider:
     description: Capture all EC2 scaling events
@@ -53,6 +55,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: topic
   name: topic
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -78,6 +81,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: target-bus
   name: target-bus
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

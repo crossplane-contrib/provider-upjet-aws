@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-default-policy
   name: example-default-policy
+  namespace: upbound-system
 spec:
   forProvider:
     firewallPolicy:
@@ -39,6 +40,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-forward-all
   name: example-forward-all
+  namespace: upbound-system
 spec:
   forProvider:
     capacity: 1
@@ -67,6 +69,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-allow-domainlist
   name: example-allow-domainlist
+  namespace: upbound-system
 spec:
   forProvider:
     capacity: 1000
@@ -97,6 +100,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-deny
   name: example-deny
+  namespace: upbound-system
 spec:
   forProvider:
     capacity: 300

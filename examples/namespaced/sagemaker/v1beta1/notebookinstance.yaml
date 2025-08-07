@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: ni
   name: ni
+  namespace: upbound-system
 spec:
   forProvider:
     instanceType: ml.t2.medium
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

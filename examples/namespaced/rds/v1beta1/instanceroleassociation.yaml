@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-instanceroleassociation
   name: example-ira
+  namespace: upbound-system
 spec:
   forProvider:
     dbInstanceIdentifierSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-dbinstance-ira
   name: example-dbinstance-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     dbName: example
@@ -66,6 +68,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-key-ira
   name: sample-key-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -80,6 +83,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-role-attach-ira
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnRef:
@@ -95,6 +99,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-role-ira
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -120,6 +125,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-policy-ira
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |

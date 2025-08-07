@@ -6,6 +6,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -18,6 +19,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -29,6 +31,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: NATGateway
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -42,6 +45,7 @@ apiVersion: efs.aws.m.upbound.io/v1beta1
 kind: FileSystem
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -53,6 +57,7 @@ apiVersion: efs.aws.m.upbound.io/v1beta1
 kind: MountTarget
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -65,6 +70,7 @@ apiVersion: servicediscovery.aws.m.upbound.io/v1beta1
 kind: PrivateDNSNamespace
 metadata:
   name: exampleupb
+  namespace: upbound-system
 spec:
   forProvider:
     name: exampleupb
@@ -77,6 +83,7 @@ apiVersion: sqs.aws.m.upbound.io/v1beta1
 kind: Queue
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     name: example
@@ -92,6 +99,7 @@ apiVersion: secretsmanager.aws.m.upbound.io/v1beta1
 kind: Secret
 metadata:
   name: secretupb
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -100,6 +108,7 @@ apiVersion: transfer.aws.m.upbound.io/v1beta1
 kind: Server
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -110,6 +119,7 @@ apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: Table
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -142,6 +152,7 @@ apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: Topic
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -150,6 +161,7 @@ apiVersion: sns.aws.m.upbound.io/v1beta1
 kind: TopicSubscription
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -163,6 +175,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: Framework
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -194,6 +207,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: Plan
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -213,6 +227,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: Vault
 metadata:
   name: example-bucket-vault
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -221,6 +236,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: RegionSettings
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -235,6 +251,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: ReportPlan
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -254,6 +271,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: VaultLockConfiguration
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -266,6 +284,7 @@ apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: VaultNotifications
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

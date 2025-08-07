@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: upbound-example
   name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     forceDestroy: true

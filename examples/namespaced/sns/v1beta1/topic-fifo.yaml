@@ -10,6 +10,7 @@ metadata:
     testing.upbound.io/example-name: sns
   annotations:
     meta.upbound.io/example-id: sns/v1beta1/topic
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -24,6 +25,7 @@ metadata:
     meta.upbound.io/example-id: sns/v1beta1/topic
   labels:
     testing.upbound.io/example-name: sns
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

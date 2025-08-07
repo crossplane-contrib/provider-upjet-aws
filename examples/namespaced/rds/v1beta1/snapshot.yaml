@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-snapshot
   name: example-snapshot
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-dbinstance-snapshot
   name: example-dbinstance-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     dbName: example
@@ -62,6 +64,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-key-snapshot
   name: sample-key-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

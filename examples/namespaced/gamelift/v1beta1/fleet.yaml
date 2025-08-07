@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: gamelift/v1beta1/fleet
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     buildIdRef:

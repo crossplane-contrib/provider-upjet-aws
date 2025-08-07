@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-key
   name: sample-key
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1

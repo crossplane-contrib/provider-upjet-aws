@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dynamodb
   name: dynamodb
+  namespace: upbound-system
 spec:
   forProvider:
     name: dynamodb
@@ -36,6 +37,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: dynamodb
   name: dynamodb
+  namespace: upbound-system
 spec:
   forProvider:
     maxCapacity: 100
@@ -51,6 +53,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: appautoscaling/v1beta1/scheduledaction
   name: table
+  namespace: upbound-system
 spec:
   forProvider:
     attribute:

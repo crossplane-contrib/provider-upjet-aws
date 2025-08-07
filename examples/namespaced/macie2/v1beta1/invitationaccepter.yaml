@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: member
   name: member
+  namespace: upbound-system
 spec:
   providerConfigRef:
     name: peer
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: member
   name: member
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -38,6 +40,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: primary
   name: primary
+  namespace: upbound-system
 spec:
   providerConfigRef:
     name: peer
@@ -53,6 +56,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: primary
   name: primary
+  namespace: upbound-system
 spec:
   forProvider:
     accountId: "243569053065"

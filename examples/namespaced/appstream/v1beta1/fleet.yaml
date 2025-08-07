@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     computeCapacity:
@@ -37,6 +38,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: appstream/v1beta1/fleet
   name: sample-subnet1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1b
@@ -51,6 +53,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: appstream/v1beta1/fleet
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16

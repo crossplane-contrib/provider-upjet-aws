@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-deployment
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -43,6 +45,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-restapi
+  namespace: upbound-system
 spec:
   forProvider:
     body: |-
@@ -77,6 +80,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-stage
+  namespace: upbound-system
 spec:
   forProvider:
     deploymentIdSelector:
@@ -96,6 +100,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-waa
+  namespace: upbound-system
 spec:
   forProvider:
     defaultAction:

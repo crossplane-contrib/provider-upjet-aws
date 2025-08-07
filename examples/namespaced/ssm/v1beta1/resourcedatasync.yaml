@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: foo
   name: foo
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -29,6 +30,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: hoge
   name: hoge
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -41,6 +43,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: hoge
   name: hoge
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:

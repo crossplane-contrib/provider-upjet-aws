@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     autoscalingGroupNameSelector:
@@ -34,6 +35,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -58,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: as_conf
   name: as-conf
+  namespace: upbound-system
 spec:
   forProvider:
     imageId: ami-0a1a70369f0fce06a

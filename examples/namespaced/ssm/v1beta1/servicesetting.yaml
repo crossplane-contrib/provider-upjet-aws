@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_setting
   name: test-setting
+  namespace: upbound-system
 spec:
   forProvider:
     settingId: "arn:aws:ssm:us-west-1:${data.aws_account_id}:servicesetting/ssm/parameter-store/high-throughput-enabled"

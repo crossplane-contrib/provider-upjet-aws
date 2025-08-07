@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     name: my-metric-stream
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: firehose_to_s3
   name: firehose-to-s3
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -58,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: metric_stream_to_firehose
   name: metric-stream-to-firehose
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -83,6 +86,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: s3_stream
   name: s3-stream
+  namespace: upbound-system
 spec:
   forProvider:
     destination: s3
@@ -103,6 +107,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: bucket
   name: bucket
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

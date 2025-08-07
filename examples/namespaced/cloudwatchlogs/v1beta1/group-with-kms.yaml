@@ -4,6 +4,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-logs-key
   name: sample-logs-key
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -47,6 +48,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-with-kms
   name: example-with-kms
+  namespace: upbound-system
 spec:
   forProvider:
     kmsKeyIdRef:

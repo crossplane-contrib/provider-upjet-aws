@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -22,6 +23,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

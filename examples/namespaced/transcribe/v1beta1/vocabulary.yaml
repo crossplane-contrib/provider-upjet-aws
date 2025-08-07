@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     languageCode: en-US
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: test-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -54,6 +56,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: test-channel-bucket
+  namespace: upbound-system
 spec:
   forProvider:
     forceDestroy: true
@@ -67,6 +70,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: test-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -94,6 +98,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: test-attach
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnRef:
@@ -109,6 +114,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: object
   name: object
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:

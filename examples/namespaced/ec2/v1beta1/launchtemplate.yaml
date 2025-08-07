@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/launchtemplate
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     blockDeviceMappings:

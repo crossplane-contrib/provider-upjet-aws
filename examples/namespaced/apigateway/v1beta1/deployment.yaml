@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-deployment
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -21,6 +22,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-ra-deployment
+  namespace: upbound-system
 spec:
   forProvider:
     body: |-

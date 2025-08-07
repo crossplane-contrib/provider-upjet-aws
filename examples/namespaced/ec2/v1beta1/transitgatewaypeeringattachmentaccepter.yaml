@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -27,6 +28,7 @@ metadata:
   name: example
   labels:
     testing.upbound.io/example-name: example
+  namespace: upbound-system
 spec:
   forProvider:
     peerAccountId: "${data.aws_account_id}"
@@ -49,6 +51,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-peer
   name: example-peer
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
@@ -62,6 +65,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-local
   name: example-local
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

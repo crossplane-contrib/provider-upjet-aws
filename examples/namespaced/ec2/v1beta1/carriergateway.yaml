@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.7.0.0/16
@@ -42,6 +44,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: us-east-1-wl1
+  namespace: upbound-system
 spec:
   forProvider:
     optInStatus: opted-in

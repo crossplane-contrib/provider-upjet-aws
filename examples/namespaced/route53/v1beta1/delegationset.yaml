@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: main
   name: main
+  namespace: upbound-system
 spec:
   forProvider:
     referenceName: DynDNS
@@ -18,6 +19,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: primary
   name: primary
+  namespace: upbound-system
 spec:
   forProvider:
     delegationSetIdSelector:
@@ -31,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: secondary
   name: secondary
+  namespace: upbound-system
 spec:
   forProvider:
     delegationSetIdSelector:

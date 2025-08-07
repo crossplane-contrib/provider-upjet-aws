@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-instance
   name: sample-instance
+  namespace: upbound-system
 spec:
   forProvider:
     ami: ami-07b068f843ec78e72
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-instance
   name: sample-instance
+  namespace: upbound-system
 spec:
   forProvider:
     privateIps:
@@ -49,6 +51,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-instance
   name: sample-instance
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-1b
@@ -66,6 +69,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-instance
   name: sample-instance
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16

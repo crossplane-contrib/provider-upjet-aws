@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: globalaccelerator/v1beta1/accelerator
   name: sample-accelerator
+  namespace: upbound-system
 spec:
   forProvider:
     ipAddressType: IPV4

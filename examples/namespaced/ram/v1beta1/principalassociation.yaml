@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-2
+  namespace: upbound-system
 spec:
   forProvider:
     # principal: AWS Account ID, AWS Organizations Organization ARN, AWS Organizations Organization Unit ARN
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     allowExternalPrincipals: true

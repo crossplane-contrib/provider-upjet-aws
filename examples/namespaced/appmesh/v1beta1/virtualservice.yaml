@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: servicea
   name: servicea
+  namespace: upbound-system
 spec:
   forProvider:
     meshNameSelector:
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: simple
   name: simple
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -44,6 +46,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: serviceb1
   name: serviceb1
+  namespace: upbound-system
 spec:
   forProvider:
     meshNameSelector:

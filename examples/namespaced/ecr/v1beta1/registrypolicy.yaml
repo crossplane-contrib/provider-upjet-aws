@@ -6,6 +6,7 @@ apiVersion: ecr.aws.m.upbound.io/v1beta1
 kind: RegistryPolicy
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -31,3 +32,4 @@ spec:
       }
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig

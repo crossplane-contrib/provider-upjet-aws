@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: opensearch/v1beta1/domainsamloptions
     upjet.upbound.io/manual-intervention: This resource requires a valid saml metadata content.
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     domainNameRef:

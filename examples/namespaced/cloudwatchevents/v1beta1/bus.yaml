@@ -6,6 +6,7 @@ apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
 kind: Bus
 metadata:
   name: messenger
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

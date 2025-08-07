@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     brokerNodeGroupInfo:
@@ -38,6 +39,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sg
   name: sg
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -51,6 +53,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kafka/v1beta1/cluster
   name: subnet-az1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2a
@@ -66,6 +69,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kafka/v1beta1/cluster
   name: subnet-az2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2b
@@ -83,6 +87,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: vpc
   name: vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22

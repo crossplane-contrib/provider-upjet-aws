@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: resourcegroups/v1beta1/group
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -26,3 +27,4 @@ spec:
         }
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig

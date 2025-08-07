@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sns
   name: sns
+  namespace: upbound-system
 spec:
   forProvider:
     configurationSetNameSelector:
@@ -33,6 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -45,6 +47,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     displayName: backup-vault-events

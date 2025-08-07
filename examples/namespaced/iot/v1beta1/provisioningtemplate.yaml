@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: fleet
   name: fleet
+  namespace: upbound-system
 spec:
   forProvider:
     description: My provisioning template
@@ -47,6 +48,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -71,6 +73,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: iot_fleet_provisioning_registration
   name: iot-fleet-provisioning-registration
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/service-role/AWSIoTThingsRegistration
@@ -86,6 +89,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |-
@@ -109,6 +113,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: cert
   name: cert
+  namespace: upbound-system
 spec:
   forProvider:
     active: true

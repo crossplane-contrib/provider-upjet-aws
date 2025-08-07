@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: lb
   name: lb
+  namespace: upbound-system
 spec:
   forProvider:
     instanceSelector:
@@ -26,6 +27,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: web
   name: web
+  namespace: upbound-system
 spec:
   forProvider:
     ami: ami-07b068f843ec78e72

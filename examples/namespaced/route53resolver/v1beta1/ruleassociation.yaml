@@ -8,6 +8,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -24,6 +25,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sys
   name: sys
+  namespace: upbound-system
 spec:
   forProvider:
     domainName: mycompany.test
@@ -36,6 +38,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-vpc
   name: sample-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

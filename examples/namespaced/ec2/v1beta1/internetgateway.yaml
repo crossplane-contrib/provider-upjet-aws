@@ -6,6 +6,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: InternetGateway
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -18,6 +19,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: sample-vpc2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -6,6 +6,7 @@ apiVersion: lakeformation.aws.m.upbound.io/v1beta1
 kind: DataLakeSettings
 metadata:
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

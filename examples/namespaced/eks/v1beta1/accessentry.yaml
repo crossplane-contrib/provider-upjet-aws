@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: access-entry
   name: access-entry
+  namespace: upbound-system
 spec:
   forProvider:
     clusterNameSelector:
@@ -31,6 +32,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: access-entry
   name: access-entry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -50,6 +52,7 @@ metadata:
   name: custom-role
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -75,6 +78,7 @@ metadata:
   name: access-entry
   labels:
     testing.upbound.io/example-name: access-entry
+  namespace: upbound-system
 spec:
   forProvider:
     accessConfig:
@@ -94,6 +98,7 @@ metadata:
   name: access-entry-eks-cluster
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -116,6 +121,7 @@ metadata:
   name: access-entry-cluster-policy
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
@@ -128,6 +134,7 @@ metadata:
   name: sample-subnet1
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -143,6 +150,7 @@ metadata:
   name: sample-subnet2
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -158,6 +166,7 @@ metadata:
   name: private-subnet
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -172,6 +181,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -186,6 +196,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -200,6 +211,7 @@ metadata:
   name: sample-vpc
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     enableDnsHostnames: true
@@ -214,6 +226,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -226,6 +239,7 @@ metadata:
   name: example
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
+  namespace: upbound-system
 spec:
   forProvider:
     defaultRouteTableIdRef:

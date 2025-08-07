@@ -8,6 +8,7 @@ metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "For testing this resource, firstly disassociate the default association."
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

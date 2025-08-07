@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     inclusiveStartTime: "2021-01-01T00:00:00Z"
@@ -37,6 +38,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: sample-ledger
   name: sample-ledger
+  namespace: upbound-system
 spec:
   forProvider:
     deletionProtection: false
@@ -51,6 +53,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -72,6 +75,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -96,6 +100,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: policy
   name: sample-user-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policy: |
@@ -118,6 +123,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: attachment
   name: sample-policy-attachment
+  namespace: upbound-system
 spec:
   forProvider:
     policyArnSelector:

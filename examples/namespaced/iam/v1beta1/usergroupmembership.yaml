@@ -8,6 +8,7 @@ metadata:
   name: example
   labels:
     testing.upbound.io/example-name: group
+  namespace: upbound-system
 spec:
   forProvider:
     groupSelector:
@@ -23,6 +24,7 @@ metadata:
   name: example-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: group
+  namespace: upbound-system
 spec:
   forProvider:
     path: /users/
@@ -33,5 +35,6 @@ metadata:
   name: sample-user-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: group
+  namespace: upbound-system
 spec:
   forProvider: {}

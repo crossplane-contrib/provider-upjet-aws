@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_lambda_alias
   name: test-lambda-alias
+  namespace: upbound-system
 spec:
   forProvider:
     description: a sample description
@@ -27,6 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_lambda_alias
   name: test-lambda-alias
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -39,6 +41,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_lambda_alias
   name: test-lambda-alias
+  namespace: upbound-system
 spec:
   forProvider:
     bucketSelector:
@@ -57,6 +60,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_lambda_alias
   name: test-lambda-alias
+  namespace: upbound-system
 spec:
   forProvider:
     handler: lambda_function.lambda_handler
@@ -77,6 +81,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_lambda_alias
   name: test-lambda-alias
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -101,6 +106,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: test_lambda_alias
   name: test-lambda-alias
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole

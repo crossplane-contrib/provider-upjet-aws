@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: segment
   name: segment
+  namespace: upbound-system
 spec:
   forProvider:
     pattern: '{"Price":[{"numeric":[">",10,"<=",20]}]}'

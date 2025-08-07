@@ -11,6 +11,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     certificateArnSelector:
@@ -30,6 +31,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: certificate
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     domainName: example-dns.upbound-providers.io
@@ -45,6 +47,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: lblistener
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -69,6 +72,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: lb
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -92,6 +96,7 @@ metadata:
   name: elbv2-vpc
   labels:
     testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -108,6 +113,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -126,6 +132,7 @@ metadata:
   name: elbv2-subnet
   labels:
     testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -144,6 +151,7 @@ metadata:
   name: elbv2-subnet-2
   labels:
     testing.upbound.io/example-name: elbv2s2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -162,6 +170,7 @@ metadata:
   name: elbv2-securitygroup
   labels:
     testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: schema
   name: schema
+  namespace: upbound-system
 spec:
   forProvider:
     content: |-
@@ -48,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: registry
   name: registry
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

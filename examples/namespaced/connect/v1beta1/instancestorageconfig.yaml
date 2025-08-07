@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instancestorageconfig
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     instanceIdSelector:
@@ -32,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instancestorageconfig
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     destination: extended_s3
@@ -53,6 +55,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instancestorageconfig
   name: test
+  namespace: upbound-system
 spec:
   forProvider:
     identityManagementType: CONNECT_MANAGED
@@ -70,6 +73,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instancestorageconfig
   name: instancestorageconfig
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
@@ -82,6 +86,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: instancestorageconfig
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

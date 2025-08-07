@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: iot-topic-rule-destination-example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -36,6 +37,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: iot-topic-rule-destination
   name: iot-topic-rule-destination-example
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -104,6 +106,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: iot-topic-rule-destination
   name: iot-topic-rule-destination-example
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-2
@@ -119,6 +122,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: iot-topic-rule-destination
   name: iot-topic-rule-destination-example-az1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2a
@@ -136,6 +140,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: iot-topic-rule-destination
   name: iot-topic-rule-destination-example-az2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-2b
@@ -153,6 +158,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: iot-topic-rule-destination
   name: iot-topic-rule-destination-example-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22

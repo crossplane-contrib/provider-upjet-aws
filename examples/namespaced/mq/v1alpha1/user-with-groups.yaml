@@ -10,8 +10,10 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: mquser1
+  namespace: upbound-system
 spec:
   providerConfigRef:
+    kind: ClusterProviderConfig
     name: default
   forProvider:
     brokerIdSelector:
@@ -35,8 +37,10 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: mquser2
+  namespace: upbound-system
 spec:
   providerConfigRef:
+    kind: ClusterProviderConfig
     name: default
   forProvider:
     brokerIdSelector:
@@ -60,8 +64,10 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: mquser3
+  namespace: upbound-system
 spec:
   providerConfigRef:
+    kind: ClusterProviderConfig
     name: default
   forProvider:
     brokerIdSelector:
@@ -85,6 +91,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example-test
+  namespace: upbound-system
 spec:
   forProvider:
     applyImmediately: true
@@ -97,6 +104,7 @@ spec:
     securityGroupRefs:
       - name: sg-test
   providerConfigRef:
+    kind: ClusterProviderConfig
     name: default
   initProvider:
     user:
@@ -125,6 +133,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mq/v1alpha1/user
   name: sg-test
+  namespace: upbound-system
 spec:
   forProvider:
     description: Allow TLS inbound traffic

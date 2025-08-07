@@ -6,6 +6,7 @@ apiVersion: cloudfront.aws.m.upbound.io/v1beta1
 kind: Function
 metadata:
   name: example-function
+  namespace: upbound-system
 spec:
   forProvider:
     codeSecretRef:

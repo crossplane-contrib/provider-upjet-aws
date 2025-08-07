@@ -8,6 +8,7 @@ metadata:
   name: example-public-key
   labels:
     testing.upbound.io/example-name: publickey
+  namespace: upbound-system
 spec:
   forProvider:
     comment: test public key
@@ -39,6 +40,7 @@ apiVersion: cloudfront.aws.m.upbound.io/v1beta1
 kind: KeyGroup
 metadata:
   name: example-key-group
+  namespace: upbound-system
 spec:
   forProvider:
     comment: example key group
@@ -53,6 +55,7 @@ metadata:
   name: example-field-level-encryption-profile
   labels:
     testing.upbound.io/example-name: publickey
+  namespace: upbound-system
 spec:
   forProvider:
     comment: test comment
@@ -73,6 +76,7 @@ metadata:
   name: example-field-level-encryption-config
   labels:
     testing.upbound.io/example-name: publickey
+  namespace: upbound-system
 spec:
   forProvider:
     comment: test comment

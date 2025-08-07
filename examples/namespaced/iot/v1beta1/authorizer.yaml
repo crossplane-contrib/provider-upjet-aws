@@ -6,6 +6,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     authorizerFunctionArnSelector:
@@ -27,6 +28,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: iot/v1beta1/authorizer
   name: example-lambda-permission
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -45,6 +47,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: lambda-authorizer
   name: lambda-authorizer
+  namespace: upbound-system
 spec:
   forProvider:
     handler: index.py
@@ -66,6 +69,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: role
   name: sample-role
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |

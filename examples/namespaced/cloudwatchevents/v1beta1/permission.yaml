@@ -8,6 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudwatchevents/v1beta1/permission
   name: devaccountaccess
+  namespace: upbound-system
 spec:
   forProvider:
     eventBusNameSelector:
@@ -25,6 +26,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: access
   name: access
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1

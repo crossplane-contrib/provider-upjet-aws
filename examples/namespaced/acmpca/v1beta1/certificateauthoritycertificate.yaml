@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "It depends on CertificateAuthority which is not suitable for continuous automated testing."
+  namespace: upbound-system
 spec:
   forProvider:
     region: eu-central-1
@@ -18,3 +19,4 @@ spec:
       name: acmpca-certificate
   providerConfigRef:
     name: default
+    kind: ClusterProviderConfig
