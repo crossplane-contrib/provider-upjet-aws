@@ -277,8 +277,6 @@ func main() {
 	}
 
 	kingpin.FatalIfError(conversion.RegisterConversions(clusterOptions.Provider, namespacedOptions.Provider, mgr.GetScheme()), "Cannot initialize the webhook conversion registry")
-	kingpin.FatalIfError(clustercontroller.Setup_route53recoverycontrolconfig(mgr, clusterOptions), "Cannot setup cluster-scoped AWS controllers")
-	kingpin.FatalIfError(namespacedcontroller.Setup_route53recoverycontrolconfig(mgr, namespacedOptions), "Cannot setup namespaced AWS controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }
 
