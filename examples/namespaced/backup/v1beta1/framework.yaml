@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: Framework
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/framework
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    control:
+      - inputParameter:
+          - name: requiredRetentionDays
+            value: "35"
+        name: BACKUP_RECOVERY_POINT_MINIMUM_RETENTION_CHECK
+      - inputParameter:
+          - name: requiredFrequencyUnit
+            value: hours
+          - name: requiredRetentionDays
+            value: "35"
+          - name: requiredFrequencyValue
+            value: "1"
+        name: BACKUP_PLAN_MIN_FREQUENCY_AND_MIN_RETENTION_CHECK
+      - name: BACKUP_RECOVERY_POINT_ENCRYPTED
+      - name: BACKUP_RESOURCES_PROTECTED_BY_BACKUP_PLAN
+        scope:
+          complianceResourceTypes:
+            - EBS
+      - name: BACKUP_RECOVERY_POINT_MANUAL_DELETION_DISABLED
+    description: this is an example framework
+    name: exampleFramework
+    region: us-west-1
+    tags:
+      Name: Example Framework

@@ -1,0 +1,19 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: AMICopy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/amicopy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: terraform-example
+    region: us-west-1
+    sourceAmiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAmiRegion: us-west-1
+    tags:
+      Name: HelloWorld

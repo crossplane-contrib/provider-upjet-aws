@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: CapacityReservation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/capacityreservation
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-1a
+    instanceCount: 1
+    instancePlatform: Linux/UNIX
+    instanceType: t2.micro
+    region: us-west-1

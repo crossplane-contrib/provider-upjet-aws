@@ -1,0 +1,19 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroupEgressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroupegressrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrIpv4: 10.0.0.0/8
+    fromPort: 80
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    toPort: 80

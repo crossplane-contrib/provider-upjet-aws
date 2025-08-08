@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: Classifier
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/classifier
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    csvClassifier:
+      allowSingleColumn: false
+      containsHeader: PRESENT
+      delimiter: ','
+      disableValueTrimming: false
+      header:
+        - example1
+        - example2
+      quoteSymbol: ''''
+    region: us-east-1

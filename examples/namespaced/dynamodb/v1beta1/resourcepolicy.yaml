@@ -1,0 +1,78 @@
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-resourcepolicy
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+            },
+            "Action": [
+              "dynamodb:BatchGetItem",
+              "dynamodb:BatchWriteItem",
+              "dynamodb:DescribeTable",
+              "dynamodb:GetItem",
+              "dynamodb:PutItem",
+              "dynamodb:Scan",
+              "dynamodb:UpdateItem",
+              "dynamodb:Query",
+              "dynamodb:DeleteItem"
+            ],
+            "Resource": [
+              "arn:aws:dynamodb:us-east-2:${data.aws_account_id}:table/examplerp"
+            ]
+          }
+        ]
+      }
+    region: us-east-2
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: dynamodb.aws.m.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: examplerp
+  namespace: upbound-system
+spec:
+  forProvider:
+    attribute:
+      - name: UserId
+        type: S
+      - name: GameTitle
+        type: S
+      - name: TopScore
+        type: "N"
+    billingMode: PROVISIONED
+    globalSecondaryIndex:
+      - hashKey: GameTitle
+        name: GameTitleIndex
+        nonKeyAttributes:
+          - UserId
+        projectionType: INCLUDE
+        rangeKey: TopScore
+        readCapacity: 10
+        writeCapacity: 10
+    hashKey: UserId
+    rangeKey: GameTitle
+    readCapacity: 20
+    region: us-east-2
+    tags:
+      Environment: testing
+      Name: example
+    writeCapacity: 20

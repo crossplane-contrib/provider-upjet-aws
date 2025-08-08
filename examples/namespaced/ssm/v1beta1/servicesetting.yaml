@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ssm.aws.m.upbound.io/v1beta1
+kind: ServiceSetting
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssm/v1beta1/servicesetting
+  labels:
+    testing.upbound.io/example-name: test_setting
+  name: test-setting
+  namespace: upbound-system
+spec:
+  forProvider:
+    settingId: "arn:aws:ssm:us-west-1:${data.aws_account_id}:servicesetting/ssm/parameter-store/high-throughput-enabled"
+    region: us-west-1
+    settingValue: "true"

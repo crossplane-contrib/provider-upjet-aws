@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  name: sample-replicakey
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    description: Created with Crossplane
+    multiRegion: true
+    deletionWindowInDays: 7
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: ReplicaKey
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-2
+    description: "Multi-Region replica key"
+    deletionWindowInDays: 7
+    primaryKeyArnRef:
+      name: sample-replicakey

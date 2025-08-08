@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: acmpca.aws.m.upbound.io/v1beta1
+kind: CertificateAuthority
+metadata:
+  annotations:
+    meta.upbound.io/example-id: acmpca/v1beta1/certificateauthority
+    upjet.upbound.io/manual-intervention: Creation of this resource costs over $100, so it is not suitable for continuous testing.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateAuthorityConfiguration:
+      keyAlgorithm: RSA_4096
+      signingAlgorithm: SHA512WITHRSA
+      subject:
+        commonName: example.com
+    permanentDeletionTimeInDays: 7
+    region: eu-central-1
+    type: ROOT
+  providerConfigRef:
+    name: default
+    kind: ClusterProviderConfig
+  writeConnectionSecretToRef:
+    name: acmpca-ca
+    namespace: upbound-system

@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: gamelift.aws.m.upbound.io/v1beta1
+kind: GameSessionQueue
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    playerLatencyPolicy:
+      - maximumIndividualPlayerLatencyMilliseconds: 100
+        policyDurationSeconds: 5
+      - maximumIndividualPlayerLatencyMilliseconds: 200
+    timeoutInSeconds: 60

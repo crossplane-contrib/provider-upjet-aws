@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: organizations.aws.m.upbound.io/v1beta1
+kind: OrganizationalUnit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizations/v1beta1/organizationalunit
+    upjet.upbound.io/manual-intervention: "This resource requires permissions to work with organizations, manually tested with a free tier account"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    parentId: <parent-id>

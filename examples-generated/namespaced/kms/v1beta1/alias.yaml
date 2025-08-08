@@ -1,0 +1,30 @@
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Alias
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: a
+  name: a
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    targetKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: a
+
+---
+
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: a
+  name: a
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

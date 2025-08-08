@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: budgets.aws.m.upbound.io/v1beta1
+kind: Budget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: budgets/v1beta1/budget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    budgetType: USAGE
+    limitAmount: "10.0"
+    limitUnit: dollars
+    timePeriodStart: 2006-01-02_15:04
+    timeUnit: MONTHLY

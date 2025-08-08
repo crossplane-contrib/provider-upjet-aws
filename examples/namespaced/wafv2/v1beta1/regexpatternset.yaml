@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: wafv2.aws.m.upbound.io/v1beta1
+kind: RegexPatternSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/regexpatternset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Example regex pattern set
+    name: example
+    region: us-west-1
+    regularExpression:
+      - regexString: one
+      - regexString: two
+    scope: REGIONAL
+    tags:
+      Tag1: Value1
+      Tag2: Value2

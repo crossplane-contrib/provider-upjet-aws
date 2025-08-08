@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: apprunner.aws.m.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    serviceName: example
+    sourceConfiguration:
+      autoDeploymentsEnabled: false
+      imageRepository:
+        imageConfiguration:
+          port: "8000"
+        imageIdentifier: public.ecr.aws/aws-containers/hello-app-runner:latest
+        imageRepositoryType: ECR_PUBLIC
+    tags:
+      Name: example-apprunner-service

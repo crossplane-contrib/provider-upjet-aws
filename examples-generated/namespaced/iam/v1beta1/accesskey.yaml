@@ -1,0 +1,30 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: AccessKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/accesskey
+  labels:
+    testing.upbound.io/example-name: lb
+  name: lb
+  namespace: upbound-system
+spec:
+  forProvider:
+    pgpKey: keybase:some_person_that_exists
+    userSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lb
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/accesskey
+  labels:
+    testing.upbound.io/example-name: lb
+  name: lb
+  namespace: upbound-system
+spec:
+  forProvider:
+    path: /system/

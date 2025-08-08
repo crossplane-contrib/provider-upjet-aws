@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: RealtimeLogConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/realtimelogconfig
+  labels:
+    testing.upbound.io/example-name: realtimelogconfig
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    endpoint:
+      kinesisStreamConfig:
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: realtimelogconfig
+        streamArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: realtimelogconfig
+      streamType: Kinesis
+    fields:
+      - timestamp
+      - c-ip
+    name: example-${Rand.RFC1123Subdomain}
+    samplingRate: 75
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/realtimelogconfig
+  labels:
+    testing.upbound.io/example-name: realtimelogconfig
+  name: test-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "cloudfront.amazonaws.com"
+            },
+            "Effect": "Allow"
+          }
+        ]
+      }
+---
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
+kind: Stream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/realtimelogconfig
+  labels:
+    testing.upbound.io/example-name: realtimelogconfig
+  name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+      - IncomingBytes
+      - OutgoingBytes
+    streamModeDetails:
+      streamMode: PROVISIONED
+    tags:
+      Environment: test

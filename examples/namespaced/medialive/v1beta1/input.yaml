@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: medialive.aws.m.upbound.io/v1beta1
+kind: Input
+metadata:
+  annotations:
+    meta.upbound.io/example-id: medialive/v1beta1/input
+    upjet.upbound.io/manual-intervention: Input resource requires at least one valid input_security_group id.
+  labels:
+    testing.upbound.io/example-name: input
+  name: input
+  namespace: upbound-system
+spec:
+  forProvider:
+    inputSecurityGroups:
+      - ${aws_medialive_input_security_group.id}
+    name: example-input
+    region: us-east-1
+    tags:
+      ENVIRONMENT: prod
+    type: UDP_PUSH
+---
+apiVersion: medialive.aws.m.upbound.io/v1beta1
+kind: InputSecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: medialive/v1beta1/input
+  labels:
+    testing.upbound.io/example-name: input
+  name: input
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    tags:
+      ENVIRONMENT: prod
+    whitelistRules:
+      - cidr: 10.0.0.8/32

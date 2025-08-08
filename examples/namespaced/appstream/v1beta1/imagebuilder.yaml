@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appstream.aws.m.upbound.io/v1beta1
+kind: ImageBuilder
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta1/imagebuilder
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Description of a ImageBuilder
+    displayName: Display name of a ImageBuilder
+    enableDefaultInternetAccess: false
+    imageArn: arn:aws:appstream:us-east-1::image/Amazon-AppStream2-Sample-Image-02-04-2019
+    instanceType: stream.standard.large
+    region: us-east-1
+    tags:
+      Name: Example Image Builder
+    vpcConfig:
+      subnetIdRefs:
+        - name: sample-subnet1
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta1/imagebuilder
+  name: sample-subnet1
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-east-1b
+    cidrBlock: 172.16.10.0/24
+    region: us-east-1
+    vpcIdRef:
+      name: sample-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta1/imagebuilder
+  name: sample-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-east-1
+    tags:
+      Name: DemoVpc

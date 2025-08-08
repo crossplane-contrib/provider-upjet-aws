@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: servicediscovery.aws.m.upbound.io/v1beta1
+kind: HTTPNamespace
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example
+    name: development
+    region: us-west-1

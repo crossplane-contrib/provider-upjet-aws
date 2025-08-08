@@ -1,0 +1,74 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: route53recoverycontrolconfig.aws.m.upbound.io/v1beta1
+kind: SafetyRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/safetyrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    assertedControlsRefs:
+      - name: example
+    controlPanelArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: daisyguttridge
+    ruleConfig:
+      inverted: false
+      threshold: 1
+      type: ATLEAST
+    waitPeriodMs: 5000
+---
+apiVersion: route53recoverycontrolconfig.aws.m.upbound.io/v1beta1
+kind: RoutingControl
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/safetyrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    controlPanelArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: tinlicker
+---
+apiVersion: route53recoverycontrolconfig.aws.m.upbound.io/v1beta1
+kind: ControlPanel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/safetyrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: balmorhea
+---
+apiVersion: route53recoverycontrolconfig.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/safetyrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: georgefitzgerald

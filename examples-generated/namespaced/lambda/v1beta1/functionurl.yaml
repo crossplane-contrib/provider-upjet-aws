@@ -1,0 +1,16 @@
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: FunctionURL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/functionurl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    authorizationType: NONE
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1

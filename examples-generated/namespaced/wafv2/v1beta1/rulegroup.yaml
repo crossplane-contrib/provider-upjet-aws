@@ -1,0 +1,34 @@
+apiVersion: wafv2.aws.m.upbound.io/v1beta1
+kind: RuleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/rulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    capacity: 2
+    name: example-rule
+    region: us-west-1
+    rule:
+    - action:
+      - allow:
+        - {}
+      name: rule-1
+      priority: 1
+      statement:
+      - geo_match_statement:
+        - country_codes:
+          - US
+          - NL
+      visibility_config:
+      - cloudwatch_metrics_enabled: false
+        metric_name: friendly-rule-metric-name
+        sampled_requests_enabled: false
+    scope: REGIONAL
+    visibilityConfig:
+    - cloudwatchMetricsEnabled: false
+      metricName: friendly-metric-name
+      sampledRequestsEnabled: false

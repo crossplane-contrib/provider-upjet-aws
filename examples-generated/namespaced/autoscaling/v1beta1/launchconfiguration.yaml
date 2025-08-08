@@ -1,0 +1,14 @@
+apiVersion: autoscaling.aws.m.upbound.io/v1beta1
+kind: LaunchConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/launchconfiguration
+  labels:
+    testing.upbound.io/example-name: as_conf
+  name: as-conf
+  namespace: upbound-system
+spec:
+  forProvider:
+    imageId: ${data.aws_ami.ubuntu.id}
+    instanceType: t2.micro
+    region: us-west-1

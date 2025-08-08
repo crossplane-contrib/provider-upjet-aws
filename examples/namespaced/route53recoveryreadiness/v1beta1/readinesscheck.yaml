@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: route53recoveryreadiness.aws.m.upbound.io/v1beta1
+kind: ReadinessCheck
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoveryreadiness/v1beta1/readinesscheck
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceSetName: example
+---
+apiVersion: route53recoveryreadiness.aws.m.upbound.io/v1beta1
+kind: ResourceSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoveryreadiness/v1beta1/resourceset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceSetType: AWS::CloudWatch::Alarm
+    resources:
+      - resourceArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+---
+apiVersion: cloudwatch.aws.m.upbound.io/v1beta1
+kind: MetricAlarm
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoveryreadiness/v1beta1/resourceset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    alarmDescription: This metric monitors ec2 cpu utilization
+    comparisonOperator: GreaterThanOrEqualToThreshold
+    evaluationPeriods: 2
+    insufficientDataActions: []
+    metricName: CPUUtilization
+    namespace: AWS/EC2
+    period: 120
+    region: us-west-1
+    statistic: Average
+    threshold: 80

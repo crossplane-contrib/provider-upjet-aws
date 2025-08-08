@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: opensearch.aws.m.upbound.io/v1beta1
+kind: DomainSAMLOptions
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/domainsamloptions
+    upjet.upbound.io/manual-intervention: This resource requires a valid saml metadata content.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    domainNameRef:
+      name: example
+    region: us-west-1
+    samlOptions:
+      enabled: true
+      idp:
+        entityId: https://example.com
+        metadataContent: ${file("./saml-metadata.xml")}

@@ -1,0 +1,140 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: CustomerGatewayAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    customerGatewayArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: CustomerGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bgpAsn: "65000"
+    ipAddress: 172.83.124.10
+    region: us-west-1
+    type: ipsec.1
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: TransitGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: GlobalNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: Site
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: TransitGatewayRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    transitGatewayArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPNConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/customergatewayassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    customerGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    staticRoutesOnly: true
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    typeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

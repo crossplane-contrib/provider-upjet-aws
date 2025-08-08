@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ram.aws.m.upbound.io/v1beta1
+kind: PrincipalAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/principalassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-2
+  namespace: upbound-system
+spec:
+  forProvider:
+    # principal: AWS Account ID, AWS Organizations Organization ARN, AWS Organizations Organization Unit ARN
+    principal: "123456789012"
+    region: us-west-1
+    resourceShareArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ram.aws.m.upbound.io/v1beta1
+kind: ResourceShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/principalassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    allowExternalPrincipals: true
+    name: example
+    region: us-west-1
+    tags:
+      Environment: Production

@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ssm.aws.m.upbound.io/v1beta1
+kind: PatchGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssm/v1beta1/patchgroup
+  labels:
+    testing.upbound.io/example-name: patchgroup
+  name: patchgroup
+  namespace: upbound-system
+spec:
+  forProvider:
+    baselineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: production
+    patchGroup: patch-group-name
+    region: us-west-1
+---
+apiVersion: ssm.aws.m.upbound.io/v1beta1
+kind: PatchBaseline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssm/v1beta1/patchgroup
+  labels:
+    testing.upbound.io/example-name: production
+  name: production
+  namespace: upbound-system
+spec:
+  forProvider:
+    approvedPatches:
+      - KB123456
+    name: patch-baseline
+    region: us-west-1

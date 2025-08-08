@@ -1,0 +1,176 @@
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketReplicationConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    provider: ${aws.central}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replication
+    rule:
+    - destination:
+      - bucketSelector:
+          matchLabels:
+            testing.upbound.io/example-name: destination
+        storageClass: STANDARD
+      filter:
+      - prefix: example
+      id: examplerule
+      status: Enabled
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.replication.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: replication
+  name: replication
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replication
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replication
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: destination
+  name: destination
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+  namespace: upbound-system
+spec:
+  forProvider:
+    provider: ${aws.central}
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: source_bucket_acl
+  name: source-bucket-acl
+  namespace: upbound-system
+spec:
+  forProvider:
+    acl: private
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    provider: ${aws.central}
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: destination
+  name: destination
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: destination
+    region: us-west-1
+    versioningConfiguration:
+    - status: Enabled
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    provider: ${aws.central}
+    region: us-west-1
+    versioningConfiguration:
+    - status: Enabled

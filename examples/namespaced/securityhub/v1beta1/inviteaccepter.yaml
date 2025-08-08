@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: InviteAccepter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/inviteaccepter
+  labels:
+    testing.upbound.io/example-name: invitee
+  name: invitee
+  namespace: upbound-system
+spec:
+  providerConfigRef:
+    name: peer
+    kind: ClusterProviderConfig
+  forProvider:
+    masterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+---
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/inviteaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/inviteaccepter
+  labels:
+    testing.upbound.io/example-name: invitee
+  name: invitee
+  namespace: upbound-system
+spec:
+  providerConfigRef:
+    name: peer
+    kind: ClusterProviderConfig
+  forProvider:
+    region: us-west-1
+---
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: Member
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/inviteaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountId: "${data.aws_peer_account_id}"
+    email: test@example.com
+    invite: true
+    region: us-west-1

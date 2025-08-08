@@ -37,6 +37,21 @@ spec:
       namespace: upbound-system
       key: credentials
 EOF
+
+    echo "Creating a default cluster provider config..."
+    cat <<EOF | ${KUBECTL} apply -f -
+apiVersion: aws.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: provider-secret
+      namespace: upbound-system
+      key: credentials
+EOF
   fi
 
   if [[ -n "${PEER:-}" ]]; then
@@ -47,6 +62,21 @@ EOF
     cat <<EOF | ${KUBECTL} apply -f -
 apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
+metadata:
+  name: peer
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: provider-secret-peer
+      namespace: upbound-system
+      key: credentials
+EOF
+
+    echo "Creating a peer cluster provider config for cross-account testing..."
+    cat <<EOF | ${KUBECTL} apply -f -
+apiVersion: aws.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
 metadata:
   name: peer
 spec:

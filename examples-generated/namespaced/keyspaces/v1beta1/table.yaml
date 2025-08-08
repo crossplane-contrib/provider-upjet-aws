@@ -1,0 +1,22 @@
+apiVersion: keyspaces.aws.m.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyspaces/v1beta1/table
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    schemaDefinition:
+    - column:
+      - name: Message
+        type: ASCII
+      partitionKey:
+      - name: Message
+    tableName: my_table

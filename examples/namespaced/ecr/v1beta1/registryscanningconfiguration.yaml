@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: RegistryScanningConfiguration
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    rule:
+      - repositoryFilter:
+          - filter: example
+            filterType: WILDCARD
+        scanFrequency: CONTINUOUS_SCAN
+    scanType: ENHANCED
+  providerConfigRef:
+    name: default
+    kind: ClusterProviderConfig

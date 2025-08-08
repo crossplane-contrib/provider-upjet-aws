@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  labels:
+    testing.upbound.io/example-name: rta
+  name: rta
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdRef:
+      name: rta
+    subnetIdRef:
+      name: rta
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: rta
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdRef:
+      name: rta
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: rta
+  name: rta
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.0.1.0/24
+    vpcIdRef:
+      name: rta
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: rta
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.0.0.0/16

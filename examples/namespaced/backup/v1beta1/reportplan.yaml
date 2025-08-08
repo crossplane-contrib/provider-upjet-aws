@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: ReportPlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/reportplan
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example description
+    name: example_name
+    region: us-west-1
+    reportDeliveryChannel:
+      formats:
+        - CSV
+        - JSON
+      s3BucketName: example-bucket-name
+    reportSetting:
+      reportTemplate: RESTORE_JOB_REPORT
+    tags:
+      Name: Example Report Plan

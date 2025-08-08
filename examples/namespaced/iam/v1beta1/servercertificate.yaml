@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: ServerCertificate
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires a valid certificate and private key."
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateBody: |
+      -----BEGIN CERTIFICATE-----
+      [......] # cert contents
+      -----END CERTIFICATE-----
+    privateKeySecretRef:
+      key: pem
+      name: example-secret

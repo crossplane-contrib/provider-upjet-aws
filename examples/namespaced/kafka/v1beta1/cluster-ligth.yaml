@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kafka.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    brokerNodeGroupInfo:
+      clientSubnetsRefs:
+        - name: subnet-az1
+        - name: subnet-az2
+      instanceType: kafka.t3.small
+      securityGroupsRefs:
+        - name: sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 1000
+    clusterName: ${Rand.RFC1123Subdomain}
+    kafkaVersion: 2.6.0
+    numberOfBrokerNodes: 2
+    region: us-east-2
+    tags:
+      foo: bar
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: sg
+  name: sg
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  name: subnet-az1
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  name: subnet-az2
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: vpc
+  name: vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2

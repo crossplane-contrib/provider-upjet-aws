@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
+kind: EndpointGroup
+metadata:
+  name: sample-endpoint-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    listenerArnRef:
+      name: sample-listener
+  writeConnectionSecretToRef:
+    name: endpoint
+    namespace: upbound-system

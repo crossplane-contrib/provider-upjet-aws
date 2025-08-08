@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sesv2.aws.m.upbound.io/v1beta1
+kind: DedicatedIPPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/dedicatedippool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

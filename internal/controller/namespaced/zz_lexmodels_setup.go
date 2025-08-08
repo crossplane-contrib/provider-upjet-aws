@@ -1,0 +1,48 @@
+// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
+package controller
+
+import (
+	ctrl "sigs.k8s.io/controller-runtime"
+
+	"github.com/crossplane/upjet/v2/pkg/controller"
+
+	bot "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/bot"
+	botalias "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/botalias"
+	intent "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/intent"
+	slottype "github.com/upbound/provider-aws/internal/controller/namespaced/lexmodels/slottype"
+)
+
+// Setup_lexmodels creates all controllers with the supplied logger and adds them to
+// the supplied manager.
+func Setup_lexmodels(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		bot.Setup,
+		botalias.Setup,
+		intent.Setup,
+		slottype.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_lexmodels creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_lexmodels(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		bot.SetupGated,
+		botalias.SetupGated,
+		intent.SetupGated,
+		slottype.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

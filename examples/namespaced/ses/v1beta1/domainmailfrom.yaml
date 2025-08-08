@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ses.aws.m.upbound.io/v1beta1
+kind: DomainMailFrom
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    mailFromDomain: "mail.testdomain.com"
+    region: us-west-1
+---
+apiVersion: ses.aws.m.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+    crossplane.io/external-name: testdomain.com
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

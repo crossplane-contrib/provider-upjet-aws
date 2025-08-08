@@ -1,0 +1,21 @@
+apiVersion: kendra.aws.m.upbound.io/v1beta1
+kind: DataSource
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kendra/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example
+    indexIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    languageCode: en
+    name: example
+    region: us-west-1
+    tags:
+      hello: world
+    type: CUSTOM

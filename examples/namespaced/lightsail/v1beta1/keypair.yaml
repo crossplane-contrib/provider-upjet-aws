@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: lightsail.aws.m.upbound.io/v1beta1
+kind: KeyPair
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/keypair
+  labels:
+    testing.upbound.io/example-name: lg_key_pair
+  name: lg-key-pair
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: "lg_key_pair"
+    region: us-east-2

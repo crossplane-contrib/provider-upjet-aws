@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Invocation
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    functionNameRef:
+      name: example
+    input: |-
+      {
+        key1 = "value1",
+        key2 = "value2"
+      }

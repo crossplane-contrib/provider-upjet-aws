@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: QueuePolicy
+metadata:
+  name: queue-policy
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queue-policy
+  labels:
+    testing.upbound.io/example-name: queue-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    queueUrlSelector:
+      matchLabels:
+        testing.upbound.io/example-name: queue-policy
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "example",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "s3.amazonaws.com"
+            },
+            "Action": "sqs:SendMessage",
+            "Resource": "arn:aws:sqs:us-west-1:*:queue-policy"
+          }
+        ]
+      }
+---
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  name: queue-policy
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queuepolicy
+  labels:
+    testing.upbound.io/example-name: queue-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    name: queue-policy

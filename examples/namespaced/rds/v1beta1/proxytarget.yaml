@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: ProxyTarget
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a reference to Proxy, which needs manual intervention."
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    dbProxyName: example
+    dbClusterIdentifier: example
+    targetGroupName: default
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default

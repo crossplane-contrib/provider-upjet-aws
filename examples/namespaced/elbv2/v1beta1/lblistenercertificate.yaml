@@ -1,0 +1,183 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
+kind: LBListenerCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource requires a valid Certificate"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: certificate
+    listenerArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lblistener
+    region: us-west-1
+---
+apiVersion: acm.aws.m.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "It requires a real domain to be bought"
+  labels:
+    testing.upbound.io/example-name: certificate
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    domainName: example-dns.upbound-providers.io
+    region: us-west-1
+    validationMethod: DNS
+---
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
+kind: LBListener
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "The certificateArn field needs to be set to a valid default listener certificate"
+  labels:
+    testing.upbound.io/example-name: lblistener
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    port: 443
+    protocol: "HTTPS"
+    certificateArn: "<default certificate arn>"
+    defaultAction:
+      - fixedResponse:
+          - statusCode: "404"
+            contentType: "text/plain"
+        type: fixed-response
+    loadBalancerArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lb
+---
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: lb
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    securityGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+    subnetMapping:
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: elbv2
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: elbv2s2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  name: elbv2-vpc
+  labels:
+    testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  name: elbv2-internet-gateway
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: testing
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  name: elbv2-subnet
+  labels:
+    testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  name: elbv2-subnet-2
+  labels:
+    testing.upbound.io/example-name: elbv2s2
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+    cidrBlock: 172.16.20.0/24
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  name: elbv2-securitygroup
+  labels:
+    testing.upbound.io/example-name: elbv2
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    tags:
+      Name: allow_tls
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2

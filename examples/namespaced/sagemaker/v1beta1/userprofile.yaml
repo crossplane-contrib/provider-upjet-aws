@@ -1,0 +1,107 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: UserProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/userprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    domainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-domain
+    region: us-east-1
+    userProfileName: example
+---
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/userprofile
+  labels:
+    testing.upbound.io/example-name: example-domain
+  name: example-domain
+  namespace: upbound-system
+spec:
+  forProvider:
+    authMode: IAM
+    defaultUserSettings:
+      executionRoleSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    domainName: example
+    region: us-east-1
+    retentionPolicy:
+      homeEfsFileSystem: Delete
+    subnetIdRefs:
+      - name: sample-subnet-sage
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-vpc-sage
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/userprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "sagemaker.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+    path: /
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/userprofile
+  labels:
+    testing.upbound.io/example-name: sample-subnet-sage
+  name: sample-subnet-sage
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-east-1b
+    cidrBlock: 172.16.10.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-vpc-sage
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/userprofile
+  labels:
+    testing.upbound.io/example-name: sample-vpc-sage
+  name: sample-vpc-sage
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-east-1
+    tags:
+      Name: DemoVpc-Sage

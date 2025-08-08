@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: wafregional.aws.m.upbound.io/v1beta1
+kind: SizeConstraintSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafregional/v1beta1/sizeconstraintset
+  labels:
+    testing.upbound.io/example-name: size_constraint_set
+  name: size-constraint-set
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: tfsize_constraints
+    region: us-west-1
+    sizeConstraints:
+      - comparisonOperator: EQ
+        fieldToMatch:
+          type: BODY
+        size: 4096
+        textTransformation: NONE

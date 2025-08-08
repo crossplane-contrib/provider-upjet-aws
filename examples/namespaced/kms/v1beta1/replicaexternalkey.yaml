@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: ExternalKey
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+  labels:
+    testing.upbound.io/example-name: sample-externalkey-replicated
+  name: sample-externalkey-replicated
+  namespace: upbound-system
+spec:
+  forProvider:
+    enabled: true
+    region: us-west-1
+    description: Created with Crossplane
+    multiRegion: true
+    deletionWindowInDays: 7
+    keyMaterialBase64SecretRef:
+      key: key-metarial
+      name: example-externalkey
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: ReplicaExternalKey
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    description: "Multi-Region replica key"
+    deletionWindowInDays: 7
+    keyMaterialBase64SecretRef:
+      key: key-metarial
+      name: example-externalkey
+    primaryKeyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-externalkey-replicated

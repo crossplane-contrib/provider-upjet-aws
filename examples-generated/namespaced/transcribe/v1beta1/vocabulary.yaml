@@ -1,0 +1,54 @@
+apiVersion: transcribe.aws.m.upbound.io/v1beta1
+kind: Vocabulary
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    languageCode: en-US
+    region: us-west-1
+    tags:
+      tag1: value1
+      tag2: value3
+    vocabularyFileUri: s3://${aws_s3_bucket.example.id}/${aws_s3_object.object.key}
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: object
+  name: object
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    key: transcribe/test1.txt
+    region: us-west-1
+    source: test.txt

@@ -1,0 +1,42 @@
+apiVersion: opensearchserverless.aws.m.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/accesspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: read and write permissions
+    policy: |-
+      ${jsonencode([
+          {
+            Rules = [
+              {
+                ResourceType = "index",
+                Resource = [
+                  "index/example-collection/*"
+                ],
+                Permission = [
+                  "aoss:*"
+                ]
+              },
+              {
+                ResourceType = "collection",
+                Resource = [
+                  "collection/example-collection"
+                ],
+                Permission = [
+                  "aoss:*"
+                ]
+              }
+            ],
+            Principal = [
+              data.aws_caller_identity.current.arn
+            ]
+          }
+        ])}
+    region: us-west-1
+    type: data

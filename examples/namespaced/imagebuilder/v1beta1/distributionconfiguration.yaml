@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: imagebuilder.aws.m.upbound.io/v1beta1
+kind: DistributionConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: imagebuilder/v1beta1/distributionconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    distribution:
+      - amiDistributionConfiguration:
+          amiTags:
+            CostCenter: IT
+        region: us-west-1
+    name: examle
+    region: us-west-1

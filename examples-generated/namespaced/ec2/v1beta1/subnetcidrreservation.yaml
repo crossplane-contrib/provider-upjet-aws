@@ -1,0 +1,17 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SubnetCidrReservation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/subnetcidrreservation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.16/28
+    region: us-west-1
+    reservationType: prefix
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

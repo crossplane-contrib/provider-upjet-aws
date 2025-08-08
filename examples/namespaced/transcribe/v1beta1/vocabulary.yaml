@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: transcribe.aws.m.upbound.io/v1beta1
+kind: Vocabulary
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "It requires file to be uploaded manually on s3."
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    languageCode: en-US
+    region: us-east-1
+    tags:
+      tag1: value1
+      tag2: value3
+    vocabularyFileUri: s3://test-channel-bucket/transcribe/test1.txt
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "transcribe.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: test-channel-bucket
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-channel-bucket
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "s3:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+              "arn:aws:s3:::test-channel-bucket",
+              "arn:aws:s3:::test-channel-bucket/*"
+            ]
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-attach
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArnRef:
+      name: test-policy
+    roleRef:
+      name: test-role
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transcribe/v1beta1/vocabulary
+  labels:
+    testing.upbound.io/example-name: object
+  name: object
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    key: transcribe/test1.txt
+    region: us-east-1

@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecrpublic/v1beta1/repository
+    uptest.upbound.io/update-parameter: '{"tags":{"update-test-tag":"val"}}'
+  name: uptest-test-repo
+  namespace: upbound-system
+spec:
+  forProvider:
+    catalogData:
+      aboutText: About Text
+      architectures:
+        - ARM
+      description: Description
+      operatingSystems:
+        - Linux
+      usageText: Usage Text
+    region: us-east-1
+  providerConfigRef:
+    name: default
+    kind: ClusterProviderConfig
+---
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecrpublic/v1beta1/repository
+  name: uptest-test-repo
+  namespace: upbound-system
+spec:
+  forProvider:
+    imageTagMutability: IMMUTABLE
+    region: us-east-1

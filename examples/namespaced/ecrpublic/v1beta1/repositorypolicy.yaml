@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
+kind: RepositoryPolicy
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    policy: |
+      {
+          "Version": "2008-10-17",
+          "Statement": [
+              {
+                  "Sid": "new policy",
+                  "Effect": "Allow",
+                  "Principal": "*",
+                  "Action": [
+                      "ecr:GetDownloadUrlForLayer",
+                      "ecr:BatchGetImage",
+                      "ecr:BatchCheckLayerAvailability",
+                      "ecr:PutImage",
+                      "ecr:InitiateLayerUpload",
+                      "ecr:UploadLayerPart",
+                      "ecr:CompleteLayerUpload",
+                      "ecr:DescribeRepositories",
+                      "ecr:GetRepositoryPolicy",
+                      "ecr:ListImages",
+                      "ecr:DeleteRepository",
+                      "ecr:BatchDeleteImage",
+                      "ecr:SetRepositoryPolicy",
+                      "ecr:DeleteRepositoryPolicy"
+                  ]
+              }
+          ]
+      }
+    repositoryName: uptest-test-repo
+  providerConfigRef:
+    name: default
+    kind: ClusterProviderConfig
+---
+apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: uptest-test-repo
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    catalogData:
+      - aboutText: About Text
+        architectures:
+          - ARM
+        description: Description
+        operatingSystems:
+          - Linux
+        usageText: Usage Text
+  providerConfigRef:
+    name: default
+    kind: ClusterProviderConfig
+---
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: uptest-test-repo
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    imageTagMutability: "IMMUTABLE"

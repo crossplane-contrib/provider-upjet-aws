@@ -1,0 +1,61 @@
+apiVersion: docdb.aws.m.upbound.io/v1beta1
+kind: EventSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/eventsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    enabled: true
+    eventCategories:
+    - creation
+    - failure
+    region: us-west-1
+    snsTopicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceIdsRefs:
+    - name: example
+    sourceType: db-cluster
+
+---
+
+apiVersion: docdb.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/eventsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZones:
+    - ${data.aws_availability_zones.available.names[0]}
+    - ${data.aws_availability_zones.available.names[1]}
+    - ${data.aws_availability_zones.available.names[2]}
+    masterPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    masterUsername: foo
+    region: us-west-1
+    skipFinalSnapshot: true
+
+---
+
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/eventsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

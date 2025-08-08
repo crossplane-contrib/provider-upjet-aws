@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: efs.aws.m.upbound.io/v1beta1
+kind: FileSystemPolicy
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "User needs to add the ARN of the FileSystem to the policy manually."
+  namespace: upbound-system
+spec:
+  forProvider:
+    bypassPolicyLockoutSafetyCheck: true
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: efs
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Id": "ExamplePolicy01",
+          "Statement": [
+              {
+                  "Sid": "ExampleStatement01",
+                  "Effect": "Allow",
+                  "Principal": {
+                      "AWS": "*"
+                  },
+                  "Resource": "<file system ARN>",
+                  "Action": [
+                      "elasticfilesystem:ClientMount",
+                      "elasticfilesystem:ClientWrite"
+                  ],
+                  "Condition": {
+                      "Bool": {
+                          "aws:SecureTransport": "true"
+                      }
+                  }
+              }
+          ]
+      }
+    region: us-west-1

@@ -13,9 +13,10 @@ import (
 	"sort"
 	"strings"
 
-	ujconfig "github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/pipeline"
-	"gopkg.in/alecthomas/kingpin.v2"
+	"github.com/alecthomas/kingpin/v2"
+	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/pipeline"
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 
 	"github.com/upbound/provider-aws/config"
 )
@@ -33,11 +34,21 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
-	p, err := config.GetProvider(context.Background(), true, false)
+
+	ctx := context.Background()
+	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
+	kingpin.FatalIfError(err, "Cannot get the Terraform framework and SDK providers")
+
+	pc, err := config.GetProvider(context.Background(), fwProvider, sdkProvider, true, false)
+	kingpin.FatalIfError(err, "Cannot initialize the provider cluster scoped configuration")
+	pns, err := config.GetProviderNamespaced(context.Background(), fwProvider, sdkProvider, true, false)
+	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
-	dumpGeneratedResourceList(p, generatedResourceList)
-	dumpSkippedResourcesCSV(p, skippedResourcesCSV)
-	pipeline.Run(p, absRootDir)
+
+	dumpGeneratedResourceList(pc, generatedResourceList)
+	dumpSkippedResourcesCSV(pc, skippedResourcesCSV)
+
+	pipeline.Run(pc, pns, absRootDir)
 }
 
 func dumpGeneratedResourceList(p *ujconfig.Provider, targetPath *string) {

@@ -1,0 +1,104 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: connect.aws.m.upbound.io/v1beta1
+kind: InstanceStorageConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/instancestorageconfig
+  labels:
+    testing.upbound.io/example-name: instancestorageconfig
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instancestorageconfig
+    region: us-east-1
+    resourceType: CONTACT_TRACE_RECORDS
+    storageConfig:
+      kinesisFirehoseConfig:
+        firehoseArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: instancestorageconfig
+      storageType: KINESIS_FIREHOSE
+---
+apiVersion: firehose.aws.m.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/instancestorageconfig
+  labels:
+    testing.upbound.io/example-name: instancestorageconfig
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    destination: extended_s3
+    extendedS3Configuration:
+      bucketArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: instancestorageconfig
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: instancestorageconfig
+    name: instancestorageconfig
+    region: us-east-1
+---
+apiVersion: connect.aws.m.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/instancestorageconfig
+  labels:
+    testing.upbound.io/example-name: instancestorageconfig
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    identityManagementType: CONNECT_MANAGED
+    inboundCallsEnabled: true
+    instanceAlias: friendly-name-connect-${Rand.RFC1123Subdomain}
+    outboundCallsEnabled: true
+    region: us-east-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: einstancestorageconfig
+    meta.upbound.io/example-id: connect/v1beta1/instancestorageconfig
+  labels:
+    testing.upbound.io/example-name: instancestorageconfig
+  name: instancestorageconfig
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/instancestorageconfig
+  labels:
+    testing.upbound.io/example-name: instancestorageconfig
+  name: sample-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "firehose.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }

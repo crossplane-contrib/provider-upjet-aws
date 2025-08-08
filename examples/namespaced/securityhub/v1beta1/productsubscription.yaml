@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: ProductSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/productsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    productArn: arn:aws:securityhub:${data.aws_region}:733251395267:product/alertlogic/althreatmanagement
+    region: us-west-1

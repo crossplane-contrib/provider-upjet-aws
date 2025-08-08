@@ -1,0 +1,21 @@
+apiVersion: appmesh.aws.m.upbound.io/v1beta1
+kind: VirtualRouter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appmesh/v1beta1/virtualrouter
+  labels:
+    testing.upbound.io/example-name: serviceb
+  name: serviceb
+  namespace: upbound-system
+spec:
+  forProvider:
+    meshNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: simple
+    name: serviceB
+    region: us-west-1
+    spec:
+    - listener:
+      - portMapping:
+        - port: 8080
+          protocol: http

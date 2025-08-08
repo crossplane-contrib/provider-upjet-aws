@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: route53recoverycontrolconfig.aws.m.upbound.io/v1beta1
+kind: ControlPanel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/controlpanel
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: balmorhea
+---
+apiVersion: route53recoverycontrolconfig.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53recoverycontrolconfig/v1beta1/controlpanel
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: georgefitzgerald

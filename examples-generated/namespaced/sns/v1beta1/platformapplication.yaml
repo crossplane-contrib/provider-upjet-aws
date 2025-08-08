@@ -1,0 +1,19 @@
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: PlatformApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/platformapplication
+  labels:
+    testing.upbound.io/example-name: apns_application
+  name: apns-application
+  namespace: upbound-system
+spec:
+  forProvider:
+    platform: APNS
+    platformCredentialSecretRef:
+      key: example-key
+      name: example-secret
+    platformPrincipalSecretRef:
+      key: example-key
+      name: example-secret
+    region: us-west-1

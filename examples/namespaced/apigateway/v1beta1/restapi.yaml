@@ -1,0 +1,160 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/restapi
+  labels:
+    testing.upbound.io/example-name: restapi
+  name: auth-demo
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: auth-demo
+    region: us-west-1
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: RestAPIPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/restapi
+    upjet.upbound.io/manual-intervention: RestAPIPolicy needs a valid arn for its policy json.
+  labels:
+    testing.upbound.io/example-name: restapi
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "*"
+            },
+            "Action": "execute-api:Invoke",
+            "Resource": "<rest-api-arn>",
+            "Condition": {
+              "IpAddress": {
+                "aws:SourceIp": "123.123.123.123/32"
+              }
+            }
+          }
+        ]
+      }
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: Authorizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/restapi
+  labels:
+    testing.upbound.io/example-name: demo
+  name: demo
+  namespace: upbound-system
+spec:
+  forProvider:
+    authorizerCredentialsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: restapi
+    authorizerUri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:609897127049:function:official-providers-noop-test-func/invocations
+    name: demo
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: restapi
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: DocumentationVersion
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/restapi
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Example description
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: restapi
+    version: example_version
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: DocumentationPart
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/restapi
+  labels:
+    testing.upbound.io/example-name: restapi
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location:
+      type: API
+    properties: '{"description":"Example"}'
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: restapi
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: GatewayResponse
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/restapi
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    responseParameters:
+      gatewayresponse.header.Authorization: '''Basic'''
+    responseTemplates:
+      application/json: '{"message":$context.error.messageString}'
+    responseType: UNAUTHORIZED
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: restapi
+    statusCode: "401"
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/restapi
+  labels:
+    testing.upbound.io/example-name: restapi
+  name: test-invocation-role-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "apigateway.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+    path: /

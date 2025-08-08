@@ -1,0 +1,165 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: iot.aws.m.upbound.io/v1beta1
+kind: TopicRuleDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: iot-topic-rule-destination-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-2
+    vpcConfiguration:
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: iot-topic-rule-destination
+      securityGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: iot-topic-rule-destination
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: iot-topic-rule-destination
+      vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: iot-topic-rule-destination
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-topicruledestination.sh
+  labels:
+    testing.upbound.io/example-name: iot-topic-rule-destination
+  name: iot-topic-rule-destination-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "iot.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+    inlinePolicy:
+      - name: manage-vpc-networking
+        policy: |
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "ec2:CreateNetworkInterface",
+                        "ec2:DescribeNetworkInterfaces",
+                        "ec2:DescribeVpcs",
+                        "ec2:DeleteNetworkInterface",
+                        "ec2:DescribeSubnets",
+                        "ec2:DescribeVpcAttribute",
+                        "ec2:DescribeSecurityGroups"
+                    ],
+                    "Resource": "*"
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": "ec2:CreateNetworkInterfacePermission",
+                    "Resource": "*",
+                    "Condition": {
+                        "StringEquals": {
+                            "ec2:ResourceTag/VPCDestinationENI": "true"
+                        }
+                    }
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "ec2:CreateTags"
+                    ],
+                    "Resource": "*",
+                    "Condition": {
+                        "StringEquals": {
+                            "ec2:CreateAction": "CreateNetworkInterface",
+                            "aws:RequestTag/VPCDestinationENI": "true"
+                        }
+                    }
+                }
+            ]
+          }
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+  labels:
+    testing.upbound.io/example-name: iot-topic-rule-destination
+  name: iot-topic-rule-destination-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iot-topic-rule-destination
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+  labels:
+    testing.upbound.io/example-name: iot-topic-rule-destination
+  name: iot-topic-rule-destination-example-az1
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iot-topic-rule-destination
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+  labels:
+    testing.upbound.io/example-name: iot-topic-rule-destination
+  name: iot-topic-rule-destination-example-az2
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iot-topic-rule-destination
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+  labels:
+    testing.upbound.io/example-name: iot-topic-rule-destination
+  name: iot-topic-rule-destination-example-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2

@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: batch.aws.m.upbound.io/v1beta1
+kind: JobDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobdefinition
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerProperties: |-
+      {
+        "command": [
+            "ls",
+            "-la"
+        ],
+        "environment": [
+            {
+                "name": "VARNAME",
+                "value": "VARVAL"
+            }
+        ],
+        "image": "busybox",
+        "mountPoints": [
+            {
+                "containerPath": "/tmp",
+                "readOnly": false,
+                "sourceVolume": "tmp"
+            }
+        ],
+        "resourceRequirements": [
+            {
+                "type": "VCPU",
+                "value": "1"
+            },
+            {
+                "type": "MEMORY",
+                "value": "512"
+            }
+        ],
+        "ulimits": [
+            {
+                "hardLimit": 1024,
+                "name": "nofile",
+                "softLimit": 1024
+            }
+        ],
+        "volumes": [
+            {
+                "host": {
+                    "sourcePath": "/tmp"
+                },
+                "name": "tmp"
+            }
+        ]
+      }
+    name: tf_test_batch_job_definition
+    region: us-west-1
+    type: container

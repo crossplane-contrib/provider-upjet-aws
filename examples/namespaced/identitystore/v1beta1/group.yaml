@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/group
+    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
+  labels:
+    testing.upbound.io/example-name: example-group
+  name: example-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Example description
+    displayName: Example group
+    identityStoreId: Identity store id from a manually created SSO instance in the same region specified below
+    region: us-east-1

@@ -1,0 +1,58 @@
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
+kind: GroupMembership
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    groupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identityStoreId: ${tolist(data.aws_ssoadmin_instances.example.identity_store_ids)[0]}
+    memberIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Some group name
+    displayName: MyGroup
+    identityStoreId: ${tolist(data.aws_ssoadmin_instances.example.identity_store_ids)[0]}
+    region: us-west-1
+
+---
+
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: John Doe
+    identityStoreId: ${tolist(data.aws_ssoadmin_instances.example.identity_store_ids)[0]}
+    name:
+    - familyName: Doe
+      givenName: John
+    region: us-west-1
+    userName: john.doe@example.com

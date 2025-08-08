@@ -1,0 +1,16 @@
+apiVersion: neptune.aws.m.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/parametergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    family: neptune1
+    parameter:
+    - name: neptune_query_timeout
+      value: "25"
+    region: us-west-1

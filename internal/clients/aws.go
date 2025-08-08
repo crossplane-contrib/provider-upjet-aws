@@ -12,19 +12,18 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/smithy-go/middleware"
-	"github.com/crossplane/crossplane-runtime/pkg/logging"
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
-	"github.com/crossplane/upjet/pkg/metrics"
-	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/logging"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/crossplane/upjet/v2/pkg/metrics"
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 	"github.com/hashicorp/aws-sdk-go-base/v2/endpoints"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-aws/apis/namespaced/v1beta1"
 )
 
 const (
@@ -76,13 +75,9 @@ var globalGroups = map[string]string{
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	credsCache := NewAWSCredentialsProviderCache(WithCacheLogger(config.Logger))
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
-		pc := &v1beta1.ProviderConfig{}
-		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
-			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced ProviderConfig: %q", mg.GetProviderConfigReference().Name)
-		}
-		t := resource.NewProviderConfigUsageTracker(c, &v1beta1.ProviderConfigUsage{})
-		if err := t.Track(ctx, mg); err != nil {
-			return terraform.Setup{}, errors.Wrapf(err, "cannot track ProviderConfig usage for %q", mg.GetProviderConfigReference().Name)
+		pc, err := resolveProviderConfig(ctx, c, mg)
+		if err != nil {
+			return terraform.Setup{}, err
 		}
 
 		ps := terraform.Setup{}
@@ -146,7 +141,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 	}
 }
 
-func setPartition(awsCfg *aws.Config, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
+func setPartition(awsCfg *aws.Config, pc *namespacedv1beta1.ClusterProviderConfig, ps *terraform.Setup) error {
 	var partitionFromConfig string
 	if pc.Spec.Endpoint != nil && pc.Spec.Endpoint.PartitionID != nil {
 		partitionFromConfig = *pc.Spec.Endpoint.PartitionID
@@ -193,7 +188,7 @@ func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (
 // this does not have an effect on the resource, as global group resources
 // have no concept of region, this is done to conform with the TF AWS config
 // which requires non-empty region
-func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ProviderConfig) (*aws.Config, error) {
+func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *namespacedv1beta1.ClusterProviderConfig) (*aws.Config, error) {
 	cfg, err := GetAWSConfigWithoutTracking(ctx, c, obj, pc)
 	if err != nil {
 		return nil, err
@@ -212,7 +207,7 @@ func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj run
 // based on the partition. It first checks for resource-level configuration, then falls
 // back to group-level configuration. It uses the generated partitions map to find
 // the service-specific region, falling back to partition-specific defaults.
-func getGlobalRegion(group, kind string, pc *v1beta1.ProviderConfig) string {
+func getGlobalRegion(group, kind string, pc *namespacedv1beta1.ClusterProviderConfig) string {
 	var serviceName string
 	var isGlobal bool
 
@@ -329,7 +324,7 @@ func withExternalAPICallCounter(stack *middleware.Stack) error {
 // configureNoForkAWSClient populates the supplied *terraform.Setup with
 // Terraform Plugin SDK style AWS client (Meta) and Terraform Plugin Framework
 // style FrameworkProvider
-func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, region string, creds aws.Credentials, pc *v1beta1.ProviderConfig) error { //nolint:gocyclo
+func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, region string, creds aws.Credentials, pc *namespacedv1beta1.ClusterProviderConfig) error { //nolint:gocyclo
 	tfAwsConnsCfg := xpprovider.AWSConfig{
 		AccessKey:               creds.AccessKeyID,
 		Endpoints:               map[string]string{},

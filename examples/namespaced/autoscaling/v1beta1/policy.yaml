@@ -1,0 +1,68 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: autoscaling.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/policy
+    upjet.upbound.io/manual-intervention: This resource depends on AutoscalingGroup with manual intervention.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    adjustmentType: ChangeInCapacity
+    autoscalingGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    cooldown: 300
+    region: us-west-1
+    scalingAdjustment: 4
+---
+apiVersion: autoscaling.aws.m.upbound.io/v1beta1
+kind: AutoscalingGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/policy
+    upjet.upbound.io/manual-intervention: This resource depends on LaunchConfiguration with manual intervention.
+  labels:
+    testing.upbound.io/example-name: example
+  name: upbound-example-test
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZones:
+      - us-west-1a
+    forceDelete: true
+    healthCheckGracePeriod: 300
+    healthCheckType: ELB
+    launchConfigurationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: as_conf
+    maxSize: 5
+    minSize: 2
+    region: us-west-1
+    tag:
+      - key: AmazonECSManaged
+        propagateAtLaunch: true
+        value: "true"
+    waitForCapacityTimeout: "0"
+---
+apiVersion: autoscaling.aws.m.upbound.io/v1beta1
+kind: LaunchConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/policy
+    upjet.upbound.io/manual-intervention: This resource refers to an AMI ID.
+  labels:
+    testing.upbound.io/example-name: as_conf
+  name: as-conf
+  namespace: upbound-system
+spec:
+  forProvider:
+    imageId: ${data.aws_ami.ubuntu.id}
+    instanceType: t2.micro
+    region: us-west-1

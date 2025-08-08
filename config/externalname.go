@@ -9,10 +9,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/crossplane/crossplane-runtime/pkg/errors"
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
+	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
 // TerraformPluginFrameworkExternalNameConfigs contains all external

@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: ResponseHeadersPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/responseheaderspolicy
+  name: example-response-headers-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    comment: test comment
+    corsConfig:
+      accessControlAllowCredentials: true
+      accessControlAllowHeaders:
+        items:
+          - test
+      accessControlAllowMethods:
+        items:
+          - GET
+      accessControlAllowOrigins:
+        items:
+          - test.example.comtest
+      originOverride: true
+    name: example-policy

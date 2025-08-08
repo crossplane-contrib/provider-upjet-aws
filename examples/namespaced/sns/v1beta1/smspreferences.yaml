@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: SMSPreferences
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/smspreferences
+  labels:
+    testing.upbound.io/example-name: update_sms_prefs
+  name: update-sms-prefs
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultSmsType: Promotional
+    region: us-west-1

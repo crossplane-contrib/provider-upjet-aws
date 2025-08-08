@@ -1,0 +1,35 @@
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: MetricFilter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/metricfilter
+  labels:
+    testing.upbound.io/example-name: yada
+  name: yada
+  namespace: upbound-system
+spec:
+  forProvider:
+    logGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dada
+    metricTransformation:
+    - name: EventCount
+      namespace: YourNamespace
+      value: "1"
+    pattern: ""
+    region: us-west-1
+
+---
+
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/metricfilter
+  labels:
+    testing.upbound.io/example-name: dada
+  name: dada
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

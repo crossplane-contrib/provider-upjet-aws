@@ -1,0 +1,138 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: ConnectAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/connectattachment
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: connectattachment
+  namespace: upbound-system
+spec:
+  forProvider:
+    coreNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    edgeLocationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    options:
+      protocol: GRE
+    transportAttachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: VPCAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/connectattachment
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: vpcattachment
+  namespace: upbound-system
+spec:
+  forProvider:
+    coreNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetArnsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vpcArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/connectattachment
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-1
+    tags:
+      Name: vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/connectattachment
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: subnet
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-1b
+    cidrBlock: 172.16.10.0/24
+    region: us-west-1
+    vpcIdRef:
+      name: vpc
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: CoreNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/connectattachment
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: corenetworkname
+  namespace: upbound-system
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyDocument: |
+      {
+        "version": "2021.12",
+        "core-network-configuration": {
+          "vpn-ecmp-support": false,
+          "inside-cidr-blocks": [
+            "10.0.0.0/16"
+          ],
+          "asn-ranges": [
+            "64512-65534"
+          ],
+          "edge-locations": [
+            {
+              "location": "us-west-1"
+            }
+          ]
+        },
+        "segments": [
+          {
+            "name": "development",
+            "require-attachment-acceptance": false
+          }
+        ]
+      }
+---
+apiVersion: networkmanager.aws.m.upbound.io/v1beta1
+kind: GlobalNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/connectattachment
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: globalnetworkname
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example

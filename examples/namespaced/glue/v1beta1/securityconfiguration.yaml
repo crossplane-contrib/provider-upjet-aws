@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: SecurityConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/securityconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    encryptionConfiguration:
+      cloudwatchEncryption:
+        cloudwatchEncryptionMode: DISABLED
+      jobBookmarksEncryption:
+        jobBookmarksEncryptionMode: DISABLED
+      s3Encryption:
+        kmsKeyArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: glue-example-key
+        s3EncryptionMode: SSE-KMS
+    region: us-west-1
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/securityconfiguration
+  labels:
+    testing.upbound.io/example-name: glue-example-key
+  name: glue-example-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: Created with Crossplane
+    region: us-west-1

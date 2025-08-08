@@ -1,0 +1,56 @@
+apiVersion: wafv2.aws.m.upbound.io/v1beta1
+kind: WebACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultAction:
+    - allow:
+      - {}
+    description: Example of a managed rule.
+    name: managed-rule-example
+    region: us-west-1
+    rule:
+    - name: rule-1
+      override_action:
+      - count:
+        - {}
+      priority: 1
+      statement:
+      - managed_rule_group_statement:
+        - name: AWSManagedRulesCommonRuleSet
+          rule_action_override:
+          - action_to_use:
+            - count:
+              - {}
+            name: SizeRestrictions_QUERYSTRING
+          - action_to_use:
+            - count:
+              - {}
+            name: NoUserAgent_HEADER
+          scope_down_statement:
+          - geo_match_statement:
+            - country_codes:
+              - US
+              - NL
+          vendor_name: AWS
+      visibility_config:
+      - cloudwatch_metrics_enabled: false
+        metric_name: friendly-rule-metric-name
+        sampled_requests_enabled: false
+    scope: REGIONAL
+    tags:
+      Tag1: Value1
+      Tag2: Value2
+    tokenDomains:
+    - mywebsite.com
+    - myotherwebsite.com
+    visibilityConfig:
+    - cloudwatchMetricsEnabled: false
+      metricName: friendly-metric-name
+      sampledRequestsEnabled: false
