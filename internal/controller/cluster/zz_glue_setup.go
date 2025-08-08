@@ -11,6 +11,7 @@ import (
 
 	catalogdatabase "github.com/upbound/provider-aws/internal/controller/cluster/glue/catalogdatabase"
 	catalogtable "github.com/upbound/provider-aws/internal/controller/cluster/glue/catalogtable"
+	catalogtableoptimizer "github.com/upbound/provider-aws/internal/controller/cluster/glue/catalogtableoptimizer"
 	classifier "github.com/upbound/provider-aws/internal/controller/cluster/glue/classifier"
 	connection "github.com/upbound/provider-aws/internal/controller/cluster/glue/connection"
 	crawler "github.com/upbound/provider-aws/internal/controller/cluster/glue/crawler"
@@ -31,6 +32,7 @@ func Setup_glue(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		catalogdatabase.Setup,
 		catalogtable.Setup,
+		catalogtableoptimizer.Setup,
 		classifier.Setup,
 		connection.Setup,
 		crawler.Setup,
@@ -57,6 +59,7 @@ func SetupGated_glue(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		catalogdatabase.SetupGated,
 		catalogtable.SetupGated,
+		catalogtableoptimizer.SetupGated,
 		classifier.SetupGated,
 		connection.SetupGated,
 		crawler.SetupGated,
