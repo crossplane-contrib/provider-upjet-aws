@@ -1,0 +1,12 @@
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: SMSPreferences
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/smspreferences
+  labels:
+    testing.upbound.io/example-name: update_sms_prefs
+  name: update-sms-prefs
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

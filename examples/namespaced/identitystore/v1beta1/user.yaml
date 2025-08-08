@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/user
+    upjet.upbound.io/manual-intervention: This resource requires a valid identityStoreId
+  labels:
+    testing.upbound.io/example-name: example-user
+  name: example-user
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: John Doe
+    emails:
+      value: john@example.com
+    identityStoreId: Identity store id from a manually created SSO instance in the same region specified below
+    name:
+      familyName: Doe
+      givenName: John
+    region: us-east-1
+    userName: johndoe

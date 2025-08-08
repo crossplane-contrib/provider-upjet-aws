@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: Proxy
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    auth:
+      - authScheme: SECRETS
+        description: example
+        iamAuth: DISABLED
+        secretArn: arn:aws:secretsmanager:us-west-1:123456789012:secret:example
+    debugLogging: false
+    engineFamily: POSTGRESQL
+    idleClientTimeout: 1800
+    requireTls: true
+    roleArn: arn:aws:iam::123456789012:role/example
+    tags:
+      Key: value
+      Name: example
+    vpcSubnetIds:
+      - example1
+      - example2

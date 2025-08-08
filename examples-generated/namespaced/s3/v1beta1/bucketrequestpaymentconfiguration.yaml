@@ -1,0 +1,16 @@
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketRequestPaymentConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketrequestpaymentconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    payer: Requester
+    region: us-west-1

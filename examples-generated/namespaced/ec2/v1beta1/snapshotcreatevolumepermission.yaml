@@ -1,0 +1,51 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SnapshotCreateVolumePermission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/snapshotcreatevolumepermission
+  labels:
+    testing.upbound.io/example-name: example_perm
+  name: example-perm
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountId: "12345678"
+    region: us-west-1
+    snapshotIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_snapshot
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSSnapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/snapshotcreatevolumepermission
+  labels:
+    testing.upbound.io/example-name: example_snapshot
+  name: example-snapshot
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSVolume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/snapshotcreatevolumepermission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    region: us-west-1
+    size: 40

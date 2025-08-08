@@ -1,0 +1,16 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: AMILaunchPermission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/amilaunchpermission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountId: "123456789012"
+    imageIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1

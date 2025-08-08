@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: ReplicationConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/replicationconfiguration
+    upjet.upbound.io/manual-intervention: This resource requires an additional AWS account
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    replicationConfiguration:
+      rule:
+        - destination:
+            - region: us-east-1
+              registryId: ${aws_account_id}
+  providerConfigRef:
+    name: default
+    kind: ClusterProviderConfig

@@ -1,0 +1,46 @@
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
+kind: DomainPermissionsPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/domainpermissionspolicy
+  labels:
+    testing.upbound.io/example-name: domainpermissionspolicy-example
+  name: domainpermissionspolicy-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domainpermissionspolicy-example
+    policyDocument: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Action": [
+                      "codeartifact:CreateRepository"
+                  ],
+                  "Effect": "Allow",
+                  "Principal": {
+                      "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+
+                  },
+                  "Resource": "*"
+              }
+          ]
+      }
+    region: us-east-1
+---
+apiVersion: codeartifact.aws.m.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/domainpermissionspolicy
+  labels:
+    testing.upbound.io/example-name: domainpermissionspolicy-example
+  name: domainpermissionspolicy-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    domain: domainpermissionspolicy-example
+    region: us-east-1

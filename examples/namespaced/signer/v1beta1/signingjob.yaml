@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: signer.aws.m.upbound.io/v1beta1
+kind: SigningJob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signer/v1beta1/signingjob
+    upjet.upbound.io/manual-intervention: It requires a real active profile to be specified
+  labels:
+    testing.upbound.io/example-name: build_signing_job
+  name: build-signing-job
+  namespace: upbound-system
+spec:
+  forProvider:
+    destination:
+      s3:
+        bucket: upbound-provider-test-data
+    ignoreSigningJobFailure: true
+    profileName: test
+    region: us-east-1
+    source:
+      s3:
+        bucket: upbound-provider-test-data
+        key: hello-python-test.zip
+        version: Yamdn8_YrdYjwmni6isSpknLMq3IDThN

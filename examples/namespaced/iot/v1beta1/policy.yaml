@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: iot.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |-
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": "iot:*",
+              "Resource": "*"
+          }
+        ]
+      }
+    region: us-west-1

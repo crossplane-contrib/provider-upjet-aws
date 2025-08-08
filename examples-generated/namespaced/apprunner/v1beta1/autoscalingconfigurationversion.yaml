@@ -1,0 +1,18 @@
+apiVersion: apprunner.aws.m.upbound.io/v1beta1
+kind: AutoScalingConfigurationVersion
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta1/autoscalingconfigurationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    autoScalingConfigurationName: example
+    maxConcurrency: 50
+    maxSize: 10
+    minSize: 2
+    region: us-west-1
+    tags:
+      Name: example-apprunner-autoscaling

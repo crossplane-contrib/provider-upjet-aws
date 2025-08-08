@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elastictranscoder.aws.m.upbound.io/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastictranscoder/v1beta1/pipeline
+  labels:
+    testing.upbound.io/example-name: bar
+  name: bar
+  namespace: upbound-system
+spec:
+  forProvider:
+    contentConfig:
+      bucketSelector:
+        matchLabels:
+          testing.upbound.io/example-name: content_bucket_label
+      storageClass: Standard
+    inputBucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: input_bucket_label
+    name: pipeline_tf_test_name
+    region: us-west-1
+    role: arn:aws:iam::153891904029:role/Elastic_Transcoder_Default_Role
+    thumbnailConfig:
+      bucketSelector:
+        matchLabels:
+          testing.upbound.io/example-name: thumb_bucket_label
+      storageClass: Standard
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastictranscoder/v1beta1/pipeline
+  labels:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    testing.upbound.io/example-name: input_bucket_label
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastictranscoder/v1beta1/pipeline
+  labels:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    testing.upbound.io/example-name: content_bucket_label
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastictranscoder/v1beta1/pipeline
+  labels:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    testing.upbound.io/example-name: thumb_bucket_label
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-west-1

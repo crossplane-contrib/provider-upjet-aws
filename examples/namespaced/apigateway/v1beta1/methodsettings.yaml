@@ -1,0 +1,97 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: MethodSettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodsettings
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-all
+  namespace: upbound-system
+spec:
+  forProvider:
+    methodPath: '*/*'
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+    settings:
+      metricsEnabled: true
+    stageNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodsettings
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-stage
+  namespace: upbound-system
+spec:
+  forProvider:
+    deploymentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+    stageName: development
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodsettings
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-deployment
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/methodsettings
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-restapi
+  namespace: upbound-system
+spec:
+  forProvider:
+    body: |-
+      ${jsonencode({
+          openapi = "3.0.1"
+          info = {
+            title   = "example"
+            version = "1.0"
+          }
+          paths = {
+            "/path1" = {
+              get = {
+                x-amazon-apigateway-integration = {
+                  httpMethod           = "GET"
+                  payloadFormatVersion = "1.0"
+                  type                 = "HTTP_PROXY"
+                  uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+                }
+              }
+            }
+          }
+        })}
+    name: test-demo
+    region: us-west-1

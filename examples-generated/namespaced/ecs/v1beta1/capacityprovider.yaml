@@ -1,0 +1,41 @@
+apiVersion: ecs.aws.m.upbound.io/v1beta1
+kind: CapacityProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/capacityprovider
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    autoScalingGroupProvider:
+    - autoScalingGroupArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      managedScaling:
+      - maximumScalingStepSize: 1000
+        minimumScalingStepSize: 1
+        status: ENABLED
+        targetCapacity: 10
+      managedTerminationProtection: ENABLED
+    region: us-west-1
+
+---
+
+apiVersion: autoscaling.aws.m.upbound.io/v1beta1
+kind: AutoscalingGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/capacityprovider
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    tag:
+    - key: AmazonECSManaged
+      propagateAtLaunch: true
+      value: true

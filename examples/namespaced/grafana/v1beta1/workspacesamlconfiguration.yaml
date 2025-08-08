@@ -1,0 +1,68 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: grafana.aws.m.upbound.io/v1beta1
+kind: WorkspaceSAMLConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspacesamlconfiguration
+  labels:
+    testing.upbound.io/example-name: example-ws
+  name: example-ws
+  namespace: upbound-system
+spec:
+  forProvider:
+    editorRoleValues:
+      - editor
+    idpMetadataUrl: https://my_idp_metadata.url
+    region: us-east-1
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ws
+---
+apiVersion: grafana.aws.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspacesamlconfiguration
+  labels:
+    testing.upbound.io/example-name: example-ws
+  name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountAccessType: CURRENT_ACCOUNT
+    authenticationProviders:
+      - SAML
+    permissionType: SERVICE_MANAGED
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: assume-ws
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspacesamlconfiguration
+  labels:
+    testing.upbound.io/example-name: assume-ws
+  name: assume-ws
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Sid    = ""
+              Principal = {
+                Service = "grafana.amazonaws.com"
+              }
+            },
+          ]
+        })}

@@ -5,7 +5,7 @@
 package apis
 
 import (
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"

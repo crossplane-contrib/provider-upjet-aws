@@ -1,0 +1,17 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SpotInstanceRequest
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/spotinstancerequest
+  labels:
+    testing.upbound.io/example-name: cheap_worker
+  name: cheap-worker
+  namespace: upbound-system
+spec:
+  forProvider:
+    ami: ami-1234
+    instanceType: c4.xlarge
+    region: us-west-1
+    spotPrice: "0.03"
+    tags:
+      Name: CheapWorker

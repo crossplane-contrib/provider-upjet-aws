@@ -1,0 +1,14 @@
+apiVersion: servicecatalog.aws.m.upbound.io/v1beta1
+kind: TagOption
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicecatalog/v1beta1/tagoption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    key: nyckel
+    region: us-west-1
+    value: värde

@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSDefaultKMSKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/ebsdefaultkmskey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/ebsdefaultkmskey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7

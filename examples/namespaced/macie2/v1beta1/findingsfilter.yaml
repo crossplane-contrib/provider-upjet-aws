@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: macie2.aws.m.upbound.io/v1beta1
+kind: FindingsFilter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: macie2/v1beta1/findingsfilter
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    action: ARCHIVE
+    description: DESCRIPTION
+    findingCriteria:
+      criterion:
+        - eq:
+            - us-east-1
+          field: region
+    name: example
+    position: 1
+    region: us-east-1
+---
+apiVersion: macie2.aws.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: macie2/v1beta1/findingsfilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1

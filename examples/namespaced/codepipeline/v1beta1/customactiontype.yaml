@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: codepipeline.aws.m.upbound.io/v1beta1
+kind: CustomActionType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codepipeline/v1beta1/customactiontype
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    category: Test
+    inputArtifactDetails:
+      maximumCount: 1
+      minimumCount: 0
+    outputArtifactDetails:
+      maximumCount: 1
+      minimumCount: 0
+    providerName: example
+    region: us-west-1
+    version: "1"

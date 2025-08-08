@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: devicefarm.aws.m.upbound.io/v1beta1
+kind: NetworkProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devicefarm/v1beta1/networkprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    projectArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-2
+---
+apiVersion: devicefarm.aws.m.upbound.io/v1beta1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devicefarm/v1beta1/networkprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    region: us-west-2

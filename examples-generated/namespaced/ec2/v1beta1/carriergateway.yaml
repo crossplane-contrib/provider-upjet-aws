@@ -1,0 +1,17 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: CarrierGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/carriergateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: example-carrier-gateway
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

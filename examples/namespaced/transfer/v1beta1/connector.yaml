@@ -1,0 +1,98 @@
+apiVersion: transfer.aws.m.upbound.io/v1beta1
+kind: Connector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: sftp-connector-role
+  name: sftp-connector
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sftp-connector-role
+    sftpConfig:
+      trustedHostKeys:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDk2Dc99b3U4AXp4QHrgENyouPDEOIUEuYh+qPpVgzkWKEuTmXppfz1vWh3Tq4xIfef5PGfrBzrjg1QOOEO0xFSquJ33fZhWTt8sWDosFYa7dS9ekYDf8p/m7jYTxeidSDo8kxdCYZap6ED/8bMz4za9GkIF/T4rTr/jqi8BxoY3hnocpfJ9y5zqhYxeufwDFkABX6yM/tniAKEGWozjVnvT7XZMdobiHW5B3Iisnx+uRkudvrjT/pHhvEy8mecDQkQaDrqaRvpemn5nIamB7fwFGxSNCxSYehz0k3aBtNswLLhcCbtseatDLtBhSjEKcj2nngYHVGb9UES1cdEaSEK1LZUndha6/3+JymG15/9+yrhgmJ+9HLH/yiyvU1hC/8KP9NiEs9svsvZGzkAVCsKe0o1ZZ+QWqWNc77fPxktfPbCpIOm+kKRXz16yxW9DphczOe8hj+uCPWIdPHfLEpuY48ygT2kM+LBPQtfxm/Jg4q5QLnHWNx0ZhNhKfxph5s="
+      userSecretIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sftp-connector
+    region: us-west-1
+    url: sftp://example.com
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: sftp-connector-role
+  name: sftp-connector-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "",
+                  "Effect": "Allow",
+                  "Principal": {
+                      "Service": "transfer.amazonaws.com"
+                  },
+                  "Action": "sts:AssumeRole"
+              }
+          ]
+      }
+---
+apiVersion: secretsmanager.aws.m.upbound.io/v1beta1
+kind: Secret
+metadata:
+  name: sftp-connector
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/connector
+    uptest.upbound.io/update-parameter: '{"tags":{"updated-by":"crossplane"}}'
+  labels:
+    testing.upbound.io/example-name: sftp-connector
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: sftp-connector-${Rand.RFC1123Subdomain}
+    region: us-west-1
+    recoveryWindowInDays: 0
+---
+apiVersion: secretsmanager.aws.m.upbound.io/v1beta1
+kind: SecretVersion
+metadata:
+  name: sftp-connector
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: sftp-connector
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    secretIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sftp-connector
+    secretStringSecretRef:
+      key: key
+      name: sftp-connector
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/connector
+  name: sftp-connector
+  namespace: upbound-system
+type: Opaque
+stringData:
+  key: |
+    {
+      "Username": "test",
+      "PrivateKey": "-----BEGIN OPENSSH PRIVATE KEY-----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-----END OPENSSH PRIVATE KEY-----"
+    }

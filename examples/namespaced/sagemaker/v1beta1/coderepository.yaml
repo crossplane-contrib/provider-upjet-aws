@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: CodeRepository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/coderepository
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    gitConfig:
+      repositoryUrl: https://github.com/hashicorp/terraform-provider-aws.git
+    region: us-west-1

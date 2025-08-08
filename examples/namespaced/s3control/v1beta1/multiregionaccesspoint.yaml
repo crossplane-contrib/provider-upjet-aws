@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: s3control.aws.m.upbound.io/v1beta1
+kind: MultiRegionAccessPoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3control/v1beta1/multiregionaccesspoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    details:
+      name: example
+      region:
+        - bucketSelector:
+            matchLabels:
+              testing.upbound.io/example-name: foo_bucket
+        - bucketSelector:
+            matchLabels:
+              testing.upbound.io/example-name: bar_bucket
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3control/v1beta1/multiregionaccesspoint
+  labels:
+    testing.upbound.io/example-name: bar_bucket
+  name: bar-bucket
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: s3control/v1beta1/multiregionaccesspoint
+  labels:
+    testing.upbound.io/example-name: foo_bucket
+  name: foo-bucket
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

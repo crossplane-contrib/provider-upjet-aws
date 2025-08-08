@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygrouprule
+  name: sample-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-east-1
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygrouprule
+  labels:
+    selector: here-i-am
+  name: test-vpc
+  namespace: upbound-system
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: us-east-1
+    vpcIdRef:
+      name: sample-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygrouprule
+  name: test-vpc-securitygroup
+  namespace: upbound-system
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    fromPort: 22
+    protocol: tcp
+    region: us-east-1
+    securityGroupIdSelector:
+      matchLabels:
+        selector: here-i-am
+    self: true
+    toPort: 22
+    type: ingress

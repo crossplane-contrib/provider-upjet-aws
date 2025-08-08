@@ -1,0 +1,61 @@
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: FunctionEventInvokeConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/functioneventinvokeconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    destinationConfig:
+    - onFailure:
+      - destinationSelector:
+          matchLabels:
+            testing.upbound.io/example-name: dlq
+      onSuccess:
+      - destinationSelector:
+          matchLabels:
+            testing.upbound.io/example-name: success
+    functionName: ${aws_lambda_function.example.function_name}
+    maximumEventAgeInSeconds: 300
+    maximumRetryAttempts: 1
+    region: us-west-1
+
+---
+
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/functioneventinvokeconfig
+  labels:
+    testing.upbound.io/example-name: success
+  name: success
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Environment: production
+      Purpose: lambda-success-notifications
+
+---
+
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/functioneventinvokeconfig
+  labels:
+    testing.upbound.io/example-name: dlq
+  name: dlq
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: lambda-dlq
+    region: us-west-1
+    tags:
+      Environment: production
+      Purpose: lambda-error-handling

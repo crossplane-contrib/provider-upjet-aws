@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
+kind: BusPolicy
+metadata:
+  name: test-bus-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    eventBusNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test-bus
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "0",
+            "Effect": "Allow",
+            "Principal": {"AWS":"arn:aws:iam::${data.aws_account_id}:root"},
+            "Action": "events:PutEvents",
+            "Resource": "arn:aws:events:${data.aws_region}:${data.aws_account_id}:event-bus/test-bus"
+          }
+        ]
+      }
+    region: us-west-1
+---
+apiVersion: cloudwatchevents.aws.m.upbound.io/v1beta1
+kind: Bus
+metadata:
+  labels:
+    testing.upbound.io/example-name: test-bus
+  name: test-bus
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

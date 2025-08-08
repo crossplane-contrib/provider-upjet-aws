@@ -1,0 +1,20 @@
+apiVersion: appstream.aws.m.upbound.io/v1beta1
+kind: DirectoryConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta1/directoryconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    directoryName: NAME OF DIRECTORY
+    organizationalUnitDistinguishedNames:
+    - DISTINGUISHED NAME
+    region: us-west-1
+    serviceAccountCredentials:
+    - accountName: NAME OF ACCOUNT
+      accountPasswordSecretRef:
+        key: example-key
+        name: example-secret

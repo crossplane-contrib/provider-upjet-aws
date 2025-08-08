@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elasticsearch.aws.m.upbound.io/v1beta1
+kind: DomainSAMLOptions
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticsearch/v1beta1/domainsamloptions
+    upjet.upbound.io/manual-intervention: This resource requires a valid saml metadata content.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-domainsamloptions
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    samlOptions:
+      enabled: true
+      idp:
+        entityId: https://example.com
+        metadataContent: ${file("./saml-metadata.xml")}
+---
+apiVersion: elasticsearch.aws.m.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticsearch/v1beta1/domainsamloptions
+    upjet.upbound.io/manual-intervention: This resource is dependency of DomainSAMLOptions. This resource is skipping because parent resource was skipped.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-domainsamloptions
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterConfig:
+      instanceType: r4.large.elasticsearch
+    ebsOptions:
+      ebsEnabled: true
+      volumeSize: 30
+    elasticsearchVersion: "5.3"
+    region: us-west-1

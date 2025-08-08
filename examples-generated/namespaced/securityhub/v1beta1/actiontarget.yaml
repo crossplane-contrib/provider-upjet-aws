@@ -1,0 +1,29 @@
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: ActionTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/actiontarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: This is custom action sends selected findings to chat
+    name: Send notification to chat
+    region: us-west-1
+
+---
+
+apiVersion: securityhub.aws.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityhub/v1beta1/actiontarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

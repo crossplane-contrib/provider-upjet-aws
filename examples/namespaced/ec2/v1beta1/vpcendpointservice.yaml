@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPCEndpointService
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+  namespace: upbound-system
+spec:
+  forProvider:
+    acceptanceRequired: false
+    networkLoadBalancerArns:
+      - ${aws_lb.example.arn}
+    region: us-west-1

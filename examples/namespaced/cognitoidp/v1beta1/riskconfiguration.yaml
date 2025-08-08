@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: RiskConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/riskconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    riskExceptionConfiguration:
+      blockedIpRangeList:
+        - 10.10.10.10/32
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/riskconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    passwordPolicy:
+      minimumLength: 6
+      requireNumbers: false
+      requireSymbols: false
+      requireUppercase: false
+      temporaryPasswordValidityDays: 7
+    region: us-west-1

@@ -1,0 +1,31 @@
+apiVersion: mediastore.aws.m.upbound.io/v1beta1
+kind: ContainerPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mediastore/v1beta1/containerpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
+
+---
+
+apiVersion: mediastore.aws.m.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mediastore/v1beta1/containerpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

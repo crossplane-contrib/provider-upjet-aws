@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sagemaker.aws.m.upbound.io/v1beta1
+kind: AppImageConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/appimageconfig
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    kernelGatewayImageConfig:
+      kernelSpec:
+        - name: example
+    region: us-west-1

@@ -30,7 +30,8 @@ def load_crd_type(t):
 
 exceptions = {
     "provider-aws": {
-        'ProviderConfigUsage.aws.upbound.io/v1beta1', 
+        'ProviderConfigUsage.aws.upbound.io/v1beta1',
+        'ProviderConfigUsage.aws.m.upbound.io/v1beta1',
     },
 }
 

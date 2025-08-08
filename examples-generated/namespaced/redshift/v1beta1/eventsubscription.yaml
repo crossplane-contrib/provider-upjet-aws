@@ -1,0 +1,57 @@
+apiVersion: redshift.aws.m.upbound.io/v1beta1
+kind: EventSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/eventsubscription
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    eventCategories:
+    - configuration
+    - management
+    - monitoring
+    - security
+    region: us-west-1
+    severity: INFO
+    snsTopicArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    sourceIdsRefs:
+    - name: default
+    sourceType: cluster
+    tags:
+      Name: default
+
+---
+
+apiVersion: redshift.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/eventsubscription
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    databaseName: default
+    region: us-west-1
+
+---
+
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshift/v1beta1/eventsubscription
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

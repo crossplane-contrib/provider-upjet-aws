@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sesv2.aws.m.upbound.io/v1beta1
+kind: EmailIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sesv2/v1beta1/emailidentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: v2-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    email: v2-example@example.com
+    region: us-west-1

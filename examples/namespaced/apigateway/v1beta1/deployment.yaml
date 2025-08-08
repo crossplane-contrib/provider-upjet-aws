@@ -1,0 +1,49 @@
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/deployment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-deployment
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/deployment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-ra-deployment
+  namespace: upbound-system
+spec:
+  forProvider:
+    body: |-
+      ${jsonencode({
+          openapi = "3.0.1"
+          info = {
+            title   = "example"
+            version = "1.0"
+          }
+          paths = {
+            "/path1" = {
+              get = {
+                x-amazon-apigateway-integration = {
+                  httpMethod           = "GET"
+                  payloadFormatVersion = "1.0"
+                  type                 = "HTTP_PROXY"
+                  uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+                }
+              }
+            }
+          }
+        })}
+    name: example-ra-deployment
+    region: us-west-1

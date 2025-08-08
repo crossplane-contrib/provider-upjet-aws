@@ -1,0 +1,24 @@
+apiVersion: servicecatalog.aws.m.upbound.io/v1beta1
+kind: Constraint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicecatalog/v1beta1/constraint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Back off, man. I'm a scientist.
+    parameters: |-
+      ${jsonencode({
+          "RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"
+        })}
+    portfolioIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    productIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    type: LAUNCH

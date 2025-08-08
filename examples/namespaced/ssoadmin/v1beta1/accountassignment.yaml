@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
+kind: AccountAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed)."
+  labels:
+    testing.upbound.io/example-name: ssoadmin-accountassignment
+  name: ssoadmin-accountassignment
+  namespace: upbound-system
+spec:
+  forProvider:
+    instanceArn: ARN of a manually created SSO instance in the same region specified below
+    permissionSetArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssoadmin-accountassignment
+    principalIdFromGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssoadmin-accountassignment
+    principalType: GROUP
+    region: us-east-1
+    targetId: "012347678910"
+    targetType: AWS_ACCOUNT
+---
+apiVersion: ssoadmin.aws.m.upbound.io/v1beta1
+kind: PermissionSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed)."
+  labels:
+    testing.upbound.io/example-name: ssoadmin-accountassignment
+  name: ssoadmin-accountassignment
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: An example
+    instanceArn: ARN of a manually created SSO instance in the same region specified below
+    name: example-acct-assignment
+    region: us-east-1
+    sessionDuration: PT2H
+---
+apiVersion: identitystore.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
+    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
+  labels:
+    testing.upbound.io/example-name: ssoadmin-accountassignment
+  name: ssoadmin-accountassignment
+  namespace: upbound-system
+spec:
+  forProvider:
+    identityStoreId: identity store id from a manually created SSO instance in the same region specified below
+    region: us-east-1
+    displayName: example-acct-assignment

@@ -1,0 +1,15 @@
+apiVersion: opensearchserverless.aws.m.upbound.io/v1beta1
+kind: SecurityConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/securityconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    samlOptions:
+    - metadata: ${file("${path.module}/idp-metadata.xml")}
+    type: saml

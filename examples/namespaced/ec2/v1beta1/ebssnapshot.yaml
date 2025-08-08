@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSSnapshot
+metadata:
+  labels:
+    testing.upbound.io/example-name: example_snapshot
+  name: example-snapshot
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: HelloWorld_snap
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: EBSVolume
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-1c
+    region: us-west-1
+    size: 1
+    tags:
+      Name: HelloWorld

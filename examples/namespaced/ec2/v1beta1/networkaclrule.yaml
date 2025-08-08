@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: NetworkACLRule
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: ${aws_vpc.foo.cidr_block}
+    egress: false
+    fromPort: 22
+    networkAclId: ${aws_network_acl.bar.id}
+    protocol: tcp
+    region: us-west-1
+    ruleAction: allow
+    ruleNumber: 200
+    toPort: 22

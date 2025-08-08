@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  name: example-function
+  namespace: upbound-system
+spec:
+  forProvider:
+    codeSecretRef:
+      name: codesecret
+      key: code
+    comment: my function
+    publish: true
+    runtime: cloudfront-js-1.0
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: codesecret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  code: "function handler(event) {\n    // NOTE: This example function is for a viewer request event trigger. \n    // Choose viewer request for event trigger when you associate this function with a distribution. \n    var response = {\n        statusCode: 302,\n        statusDescription: 'Found',\n        headers: {\n            'cloudfront-functions': { value: 'generated-by-CloudFront-Functions' },\n            'location': { value: 'https://aws.amazon.com/cloudfront/' }\n        }\n    };\n    return response;\n}\n"

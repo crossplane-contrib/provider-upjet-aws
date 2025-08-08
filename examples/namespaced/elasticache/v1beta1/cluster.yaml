@@ -1,0 +1,95 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/cluster
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    engine: memcached
+    maintenanceWindow: sun:05:00-sun:09:00
+    nodeType: cache.t2.micro
+    numCacheNodes: 1
+    parameterGroupName: default.memcached1.6
+    port: 11211
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  writeConnectionSecretToRef:
+    name: sample-cluster
+    namespace: default
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: SubnetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdRefs:
+      - name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-1b
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1

@@ -1,0 +1,17 @@
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/function
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    codeSecretRef:
+      key: attribute.function.js
+      name: example-secret
+    comment: my function
+    publish: true
+    runtime: cloudfront-js-2.0

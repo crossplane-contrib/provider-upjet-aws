@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/parametergroup
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: cache-params
+    family: redis2.8
+    parameter:
+      - name: activerehashing
+        value: "yes"
+      - name: min-slaves-to-write
+        value: "2"
+    region: us-west-1

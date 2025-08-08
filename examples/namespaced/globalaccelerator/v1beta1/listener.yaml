@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
+kind: Listener
+metadata:
+  name: sample-listener
+  namespace: upbound-system
+spec:
+  forProvider:
+    acceleratorArnRef:
+      name: sample-accelerator
+    clientAffinity: "SOURCE_IP"
+    protocol: "TCP"
+    portRange:
+      - fromPort: 80
+        toPort: 80
+  writeConnectionSecretToRef:
+    name: listener
+    namespace: upbound-system

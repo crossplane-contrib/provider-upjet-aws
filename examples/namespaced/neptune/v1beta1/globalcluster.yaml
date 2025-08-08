@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: neptune.aws.m.upbound.io/v1beta1
+kind: GlobalCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/globalcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    engine: neptune
+    engineVersion: 1.2.0.0
+    region: us-west-1

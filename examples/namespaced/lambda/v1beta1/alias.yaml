@@ -1,0 +1,115 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Alias
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: a sample description
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda_alias
+    functionVersion: "1"
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda_alias
+    contentBase64: |
+      UEsDBBQAAAAIAKtNjFYSV7EydQAAAKAAAAASABwAbGFtYmRhX2Z1bmN0aW9uLnB5VVQJAAOibzZkEHQ2ZHV4CwABBPUBAAAEFAAAAD1NQQrCQBC79xXjaSyUPqDg3T+IlNGdVWF2FmZHEUr/3rpWQy5JSBI4glC6BBrvpEHY9vxi9Q6uWZ3f3g4NrEhcCt0YDoBHFskwzSt32MdsifxbOmF8WPFRKTGeO9hMob/X1jFjf5rCVMUHuM0jDL+nms3NAlBLAQIeAxQAAAAIAKtNjFYSV7EydQAAAKAAAAASABgAAAAAAAEAAACkgQAAAABsYW1iZGFfZnVuY3Rpb24ucHlVVAUAA6JvNmR1eAsAAQT1AQAABBQAAABQSwUGAAAAAAEAAQBYAAAAwQAAAAAA
+    key: lambda-alias-test.zip
+    region: us-west-1
+---
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+  namespace: upbound-system
+spec:
+  forProvider:
+    handler: lambda_function.lambda_handler
+    publish: true
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda_alias
+    runtime: python3.9
+    s3Bucket: test-lambda-alias
+    s3Key: lambda-alias-test.zip
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Principal": {
+                      "Service": "lambda.amazonaws.com"
+                  },
+                  "Action": "sts:AssumeRole"
+              }
+          ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda_alias

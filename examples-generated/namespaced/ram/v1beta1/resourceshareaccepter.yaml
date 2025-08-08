@@ -1,0 +1,57 @@
+apiVersion: ram.aws.m.upbound.io/v1beta1
+kind: ResourceShareAccepter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+  labels:
+    testing.upbound.io/example-name: receiver_accept
+  name: receiver-accept
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    shareArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sender_invite
+
+---
+
+apiVersion: ram.aws.m.upbound.io/v1beta1
+kind: PrincipalAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+  labels:
+    testing.upbound.io/example-name: sender_invite
+  name: sender-invite
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_caller_identity
+    provider: ${aws.alternate}
+    region: us-west-1
+    resourceShareArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sender_share
+
+---
+
+apiVersion: ram.aws.m.upbound.io/v1beta1
+kind: ResourceShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+  labels:
+    testing.upbound.io/example-name: sender_share
+  name: sender-share
+  namespace: upbound-system
+spec:
+  forProvider:
+    allowExternalPrincipals: true
+    name: tf-test-resource-share
+    provider: ${aws.alternate}
+    region: us-west-1
+    tags:
+      Name: tf-test-resource-share

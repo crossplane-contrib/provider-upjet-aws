@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: OriginRequestPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/originrequestpolicy
+  name: example-origin-request-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    comment: example comment
+    cookiesConfig:
+      cookieBehavior: whitelist
+      cookies:
+        items:
+          - example
+    headersConfig:
+      headerBehavior: whitelist
+      headers:
+        items:
+          - example
+    queryStringsConfig:
+      queryStringBehavior: whitelist
+      queryStrings:
+        items:
+          - example

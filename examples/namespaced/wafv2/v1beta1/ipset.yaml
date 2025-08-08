@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: wafv2.aws.m.upbound.io/v1beta1
+kind: IPSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/ipset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addresses:
+      - 1.2.3.4/32
+      - 5.6.7.8/32
+    description: Example IP set
+    ipAddressVersion: IPV4
+    name: example
+    region: us-west-1
+    scope: REGIONAL
+    tags:
+      Tag1: Value1
+      Tag2: Value2

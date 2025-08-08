@@ -1,0 +1,34 @@
+apiVersion: macie2.aws.m.upbound.io/v1beta1
+kind: ClassificationJob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: macie2/v1beta1/classificationjob
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    jobType: ONE_TIME
+    name: NAME OF THE CLASSIFICATION JOB
+    region: us-west-1
+    s3JobDefinition:
+    - bucketDefinitions:
+      - accountId: ACCOUNT ID
+        buckets:
+        - S3 BUCKET NAME
+
+---
+
+apiVersion: macie2.aws.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: macie2/v1beta1/classificationjob
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

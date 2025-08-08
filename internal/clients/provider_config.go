@@ -22,14 +22,13 @@ import (
 	"github.com/go-ini/ini"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/fieldpath"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
+	"github.com/upbound/provider-aws/apis/namespaced/v1beta1"
 	"github.com/upbound/provider-aws/internal/version"
 )
 
@@ -89,10 +88,10 @@ func getRegion(obj runtime.Object) (string, error) {
 }
 
 // GetAWSConfigWithoutTracking produces an AWS config from the specified
-// v1beta1.ProviderConfig that can be used to authenticate to AWS.
+// v1beta1.ClusterProviderConfig that can be used to authenticate to AWS.
 // ProviderConfigUsage is not tracked when this function is called.
 // The caller is responsible for tracking the usage if needed.
-func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ProviderConfig) (*aws.Config, error) { // nolint:gocyclo
+func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ClusterProviderConfig) (*aws.Config, error) { // nolint:gocyclo
 	region, err := getRegion(obj)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot get region")
@@ -142,17 +141,9 @@ func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runti
 // authenticate to AWS and tracks the ProviderConfigUsage. Useful for obtaining
 // AWS config for non-upjet based MR controllers.
 func GetAWSConfigWithTracking(ctx context.Context, c client.Client, mg resource.Managed) (*aws.Config, error) {
-	if mg.GetProviderConfigReference() == nil {
-		return nil, errors.New("no providerConfigRef provided")
-	}
-	pc := &v1beta1.ProviderConfig{}
-	if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
-		return nil, errors.Wrap(err, "cannot get referenced Provider")
-	}
-
-	t := resource.NewProviderConfigUsageTracker(c, &v1beta1.ProviderConfigUsage{})
-	if err := t.Track(ctx, mg); err != nil {
-		return nil, errors.Wrap(err, "cannot track ProviderConfig usage")
+	pc, err := resolveProviderConfig(ctx, c, mg)
+	if err != nil {
+		return nil, err
 	}
 	return GetAWSConfigWithoutTracking(ctx, c, mg, pc)
 }
@@ -166,7 +157,7 @@ func (a awsEndpointResolverAdaptorWithOptions) ResolveEndpoint(service, region s
 
 // SetResolver parses annotations from the managed resource
 // and returns a configuration accordingly.
-func SetResolver(pc *v1beta1.ProviderConfig, cfg *aws.Config) (*aws.Config, error) { // nolint:gocyclo
+func SetResolver(pc *v1beta1.ClusterProviderConfig, cfg *aws.Config) (*aws.Config, error) { // nolint:gocyclo
 	if pc.Spec.Endpoint == nil {
 		return cfg, nil
 	}

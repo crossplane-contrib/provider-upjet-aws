@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: opensearchserverless.aws.m.upbound.io/v1beta1
+kind: VPCEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-os-vpce
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: myendpoint
+    region: us-east-1
+    subnetIdRefs:
+      - name: sample-subnet1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-subnet1
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    availabilityZone: us-east-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: acmpca.aws.m.upbound.io/v1beta1
+kind: Permission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: acmpca/v1beta1/permission
+    upjet.upbound.io/manual-intervention: "Creation of CertificateAuthority resource costs over $100, so it is not suitable for continuous testing."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    actions:
+      - IssueCertificate
+      - GetCertificate
+      - ListPermissions
+    certificateAuthorityArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    principal: acm.amazonaws.com
+    region: us-west-1
+---
+apiVersion: acmpca.aws.m.upbound.io/v1beta1
+kind: CertificateAuthority
+metadata:
+  annotations:
+    meta.upbound.io/example-id: acmpca/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateAuthorityConfiguration:
+      - keyAlgorithm: RSA_4096
+        signingAlgorithm: SHA512WITHRSA
+        subject:
+          - commonName: example.com
+    region: us-west-1

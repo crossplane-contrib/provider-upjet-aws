@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketInventory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketinventory
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
+    destination:
+      bucket:
+        bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: s3-2
+        format: ORC
+    includedObjectVersions: All
+    name: EntireBucketDaily
+    region: us-west-1
+    schedule:
+      frequency: Daily

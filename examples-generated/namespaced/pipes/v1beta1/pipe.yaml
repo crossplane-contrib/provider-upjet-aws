@@ -1,0 +1,150 @@
+apiVersion: pipes.aws.m.upbound.io/v1beta1
+kind: Pipe
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    targetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = {
+            Effect = "Allow"
+            Action = "sts:AssumeRole"
+            Principal = {
+              Service = "pipes.amazonaws.com"
+            }
+            Condition = {
+              StringEquals = {
+                "aws:SourceAccount" = data.aws_caller_identity.main.account_id
+              }
+            }
+          }
+        })}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Effect = "Allow"
+              Action = [
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:ReceiveMessage",
+              ],
+              Resource = [
+                aws_sqs_queue.source.arn,
+              ]
+            },
+          ]
+        })}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: target
+  name: target
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Effect = "Allow"
+              Action = [
+                "sqs:SendMessage",
+              ],
+              Resource = [
+                aws_sqs_queue.target.arn,
+              ]
+            },
+          ]
+        })}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: target
+  name: target
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

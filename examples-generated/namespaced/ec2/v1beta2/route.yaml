@@ -1,0 +1,19 @@
+apiVersion: ec2.aws.m.upbound.io/v1beta2
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta2/route
+  labels:
+    testing.upbound.io/example-name: r
+  name: r
+  namespace: upbound-system
+spec:
+  forProvider:
+    destinationCidrBlock: 10.0.1.0/22
+    region: us-west-1
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: testing
+    vpcPeeringConnectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

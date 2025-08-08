@@ -1,0 +1,47 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: GroupPolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/grouppolicyattachment
+  labels:
+    testing.upbound.io/example-name: test-attach
+  name: test-attach
+  namespace: upbound-system
+spec:
+  forProvider:
+    groupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: group
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/grouppolicyattachment
+  labels:
+    testing.upbound.io/example-name: group
+  name: group
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/grouppolicyattachment
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: A test policy
+    policy: '{ ... policy JSON ... }'

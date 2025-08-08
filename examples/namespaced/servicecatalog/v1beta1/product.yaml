@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: servicecatalog.aws.m.upbound.io/v1beta1
+kind: Product
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicecatalog/v1beta1/product
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    owner: test testovich
+    provisioningArtifactParameters:
+      templateUrl: https://s3-us-west-1.amazonaws.com/cloudformation-templates-us-west-1/LAMP_Single_Instance.template
+      type: CLOUD_FORMATION_TEMPLATE
+    region: us-west-1
+    tags:
+      foo: bar
+    type: CLOUD_FORMATION_TEMPLATE

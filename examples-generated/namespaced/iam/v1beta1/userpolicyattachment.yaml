@@ -1,0 +1,47 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: UserPolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userpolicyattachment
+  labels:
+    testing.upbound.io/example-name: test-attach
+  name: test-attach
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    userSelector:
+      matchLabels:
+        testing.upbound.io/example-name: user
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userpolicyattachment
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: A test policy
+    policy: '{ ... policy JSON ... }'
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/userpolicyattachment
+  labels:
+    testing.upbound.io/example-name: user
+  name: user
+  namespace: upbound-system
+spec:
+  forProvider: {}

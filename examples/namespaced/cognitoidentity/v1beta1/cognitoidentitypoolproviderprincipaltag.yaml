@@ -1,0 +1,75 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitoidentity.aws.m.upbound.io/v1beta1
+kind: CognitoIdentityPoolProviderPrincipalTag
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    identityPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identityProviderNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    principalTags:
+      test: value
+    region: us-west-1
+    useDefaults: false
+---
+apiVersion: cognitoidentity.aws.m.upbound.io/v1beta1
+kind: Pool
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "${aws_cognito_user_pool.example.endpoint} required manual propagation"
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    allowUnauthenticatedIdentities: false
+    cognitoIdentityProviders:
+      - clientIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        providerName: ${aws_cognito_user_pool.example.endpoint}
+        serverSideTokenCheck: false
+    identityPoolName: identity pool
+    region: us-west-1
+---
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    autoVerifiedAttributes:
+      - email
+    name: user pool
+    region: us-west-1
+---
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: UserPoolClient
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: client
+    region: us-west-1
+    supportedIdentityProviders:
+      - "COGNITO"
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

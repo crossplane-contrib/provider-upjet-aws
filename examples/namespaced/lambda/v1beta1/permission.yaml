@@ -1,0 +1,176 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Permission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    action: lambda:InvokeFunction
+    functionNameRef:
+      name: example-permission
+    principal: events.amazonaws.com
+    statementId: AllowExecutionFromCloudWatch
+---
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    s3Bucket: upbound-provider-test-data
+    s3Key: hello-python.zip
+    handler: index.py
+    packageType: Zip
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    runtime: python3.9
+    timeout: 60
+    vpcConfig:
+      - securityGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: role
+  name: example-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": ["ec2.amazonaws.com", "lambda.amazonaws.com"]
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: policy
+  name: example-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DescribeRouteTables",
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcAttribute",
+                "ec2:DescribeNetworkInterfaces"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  name: example-permission
+  labels:
+    testing.upbound.io/example-name: policy-attachment
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdRef:
+      name: example-permission
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    tags:
+      Name: allow_tls
+    region: us-west-1
+    vpcIdRef:
+      name: example-permission
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/permission
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: example-permission

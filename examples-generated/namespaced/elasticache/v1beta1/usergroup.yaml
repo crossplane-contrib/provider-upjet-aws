@@ -1,0 +1,38 @@
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroup
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    engine: redis
+    region: us-west-1
+    userIdRefs:
+    - name: test
+
+---
+
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroup
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
+      -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
+      -georadiusbymember
+    engine: redis
+    passwordsSecretRef:
+    - key: example-key
+      name: example-secret
+    region: us-west-1
+    userName: default

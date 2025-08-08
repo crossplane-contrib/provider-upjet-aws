@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: efs.aws.m.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/filesystem
+  labels:
+    testing.upbound.io/example-name: example-efs-encrypted
+  name: example-efs-encrypted
+  namespace: upbound-system
+spec:
+  forProvider:
+    creationToken: my-product
+    encrypted: true
+    kmsKeyIdRef:
+      name: example-key
+    region: us-west-1
+    tags:
+      Name: MyProduct
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/filesystem
+  labels:
+    testing.upbound.io/example-name: example-key
+  name: example-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: Created with Crossplane
+    region: us-west-1

@@ -1,0 +1,13 @@
+apiVersion: quicksight.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/group
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    groupName: tf-example
+    region: us-west-1

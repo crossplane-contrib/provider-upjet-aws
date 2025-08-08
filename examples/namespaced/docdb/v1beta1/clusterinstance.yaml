@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: docdb.aws.m.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/clusterinstance
+  labels:
+    testing.upbound.io/example-name: cluster_instances
+  name: cluster-instances
+  namespace: upbound-system
+spec:
+  forProvider:
+    preferredMaintenanceWindow: sun:10:30-sun:14:30
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default
+    instanceClass: db.r5.large
+    region: us-west-2
+---
+apiVersion: docdb.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/clusterinstance
+  labels:
+    testing.upbound.io/example-name: default
+  name: my-docdb-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    engine: "docdb"
+    backupRetentionPeriod: 5
+    masterPasswordSecretRef:
+      key: password
+      name: docdb-creds
+    masterUsername: foo
+    preferredBackupWindow: 07:00-09:00
+    preferredMaintenanceWindow: sun:10:30-sun:14:30
+    skipFinalSnapshot: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/clusterinstance
+  labels:
+    testing.upbound.io/example-name: docdb-creds
+  name: docdb-creds
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "Upboundtest!"

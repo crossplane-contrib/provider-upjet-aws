@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: opensearch.aws.m.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/domain
+  labels:
+    testing.upbound.io/example-name: example-advanced-security-options
+  name: example-advanced-security-options
+  namespace: upbound-system
+spec:
+  writeConnectionSecretToRef:
+    name: example-aso-domain
+    namespace: default
+  forProvider:
+    domainName: ${Rand.RFC1123Subdomain}
+    engineVersion: OpenSearch_1.0
+    region: us-west-1
+    advancedSecurityOptions:
+      - enabled: true
+        internalUserDatabaseEnabled: false
+        masterUserOptions:
+          - masterUserArn: arn:aws:iam::${data.aws_account_id}:user/example
+    nodeToNodeEncryption:
+      - enabled: true
+    encryptAtRest:
+      - enabled: true
+    domainEndpointOptions:
+      - enforceHttps: true
+    clusterConfig:
+      - instanceType: m4.large.search
+    ebsOptions:
+      - ebsEnabled: true
+        volumeType: gp2
+        volumeSize: 10

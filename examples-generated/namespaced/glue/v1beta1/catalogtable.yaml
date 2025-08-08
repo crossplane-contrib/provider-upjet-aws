@@ -1,0 +1,15 @@
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: CatalogTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtable
+  labels:
+    testing.upbound.io/example-name: aws_glue_catalog_table
+  name: aws-glue-catalog-table
+  namespace: upbound-system
+spec:
+  forProvider:
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1

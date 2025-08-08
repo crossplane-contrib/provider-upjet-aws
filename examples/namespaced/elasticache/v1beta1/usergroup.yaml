@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: UserGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a User resource and this User resource needs secrets that must contain valid credentials."
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    engine: REDIS
+    region: us-west-1
+    userIdRefs:
+      - name: test

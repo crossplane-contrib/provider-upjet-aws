@@ -1,0 +1,134 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: qldb.aws.m.upbound.io/v1beta1
+kind: Stream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: qldb/v1beta1/stream
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    inclusiveStartTime: "2021-01-01T00:00:00Z"
+    kinesisConfiguration:
+      aggregationEnabled: false
+      streamArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    ledgerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-ledger
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamName: test-ledger-stream
+    tags:
+      example: tag
+---
+apiVersion: qldb.aws.m.upbound.io/v1beta1
+kind: Ledger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: qldb/v1beta1/stream
+  labels:
+    testing.upbound.io/example-name: sample-ledger
+  name: sample-ledger
+  namespace: upbound-system
+spec:
+  forProvider:
+    deletionProtection: false
+    permissionsMode: STANDARD
+    region: us-east-1
+---
+apiVersion: kinesis.aws.m.upbound.io/v1beta1
+kind: Stream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: qldb/v1beta1/stream
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+      - IncomingBytes
+      - OutgoingBytes
+    streamModeDetails:
+      streamMode: PROVISIONED
+    tags:
+      Environment: test
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: qldb/v1beta1/stream
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": ["qldb.amazonaws.com", "kinesis.amazonaws.com"]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: qldb/v1beta1/stream
+  labels:
+    testing.upbound.io/example-name: policy
+  name: sample-user-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": ["qldb:*", "kinesis:*"],
+            "Effect": "Allow",
+            "Resource": "*"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: qldb/v1beta1/stream
+  labels:
+    testing.upbound.io/example-name: attachment
+  name: sample-policy-attachment
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

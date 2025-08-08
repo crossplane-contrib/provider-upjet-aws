@@ -1,0 +1,18 @@
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketObject
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketobject
+  labels:
+    testing.upbound.io/example-name: object
+  name: object
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    etag: ${filemd5("path/to/file")}
+    key: new_object_key
+    region: us-west-1
+    source: path/to/file

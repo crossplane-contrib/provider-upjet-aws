@@ -1,0 +1,52 @@
+apiVersion: batch.aws.m.upbound.io/v1beta1
+kind: JobQueue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: test_queue
+  name: test-queue
+  namespace: upbound-system
+spec:
+  forProvider:
+    computeEnvironmentOrder:
+      - computeEnvironmentSelector:
+          matchLabels:
+            testing.upbound.io/example-name: sample
+        order: 1
+    priority: 1
+    region: eu-west-1
+    state: ENABLED
+---
+apiVersion: batch.aws.m.upbound.io/v1beta1
+kind: ComputeEnvironment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+  namespace: upbound-system
+spec:
+  forProvider:
+    computeResources:
+      instanceRoleSelector:
+        matchLabels:
+          testing.upbound.io/example-name: ecs_instance_role
+      instanceType:
+        - c4.large
+      maxVcpus: 16
+      minVcpus: 0
+      placementGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample_pg
+      securityGroupIdsRefs:
+        - name: sample
+      subnetsRefs:
+        - name: sample
+      type: EC2
+    region: eu-west-1
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_batch_service_role
+    type: MANAGED

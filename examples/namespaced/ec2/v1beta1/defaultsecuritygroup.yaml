@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: DefaultSecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/defaultsecuritygroup
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    egress:
+      - cidrBlocks:
+          - 0.0.0.0/0
+        fromPort: 0
+        protocol: "-1"
+        toPort: 0
+    ingress:
+      - fromPort: 0
+        protocol: "-1"
+        self: true
+        toPort: 0
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mainvpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/defaultsecuritygroup
+  labels:
+    testing.upbound.io/example-name: mainvpc
+  name: mainvpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 10.1.0.0/16
+    region: us-west-1

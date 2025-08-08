@@ -1,0 +1,121 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: eks.aws.m.upbound.io/v1beta1
+kind: Addon
+metadata:
+  name: vpc-cni
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
+spec:
+  forProvider:
+    addonName: vpc-cni
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+---
+apiVersion: eks.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "2400"
+    meta.upbound.io/example-id: eks/v1beta1/addon
+  name: sample-eks-cluster
+  labels:
+    testing.upbound.io/example-name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    roleArnRef:
+      name: sample-eks-cluster
+    vpcConfig:
+      - subnetIdRefs:
+          - name: sample-subnet1
+          - name: sample-subnet2
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: sample-eks-cluster
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: sample-vpc
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
+spec:
+  forProvider:
+    enableDnsHostnames: true
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet1
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet2
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/addon
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.11.0/24
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: sample-cluster-policy
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+    roleRef:
+      name: sample-eks-cluster
