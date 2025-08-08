@@ -53,6 +53,11 @@ type AssumeRoleOptions struct {
 	// +optional
 	ExternalID *string `json:"externalID,omitempty"`
 
+	// An ExternalIDSecretRef is a reference to a secret key that contains the external ID
+	// that must be used to assume the role.
+	// +optional
+	ExternalIDSecretRef *xpv1.SecretKeySelector `json:"externalIDSecretRef,omitempty"`
+
 	// Tags is list of session tags that you want to pass. Each session tag consists of a key
 	// name and an associated value. For more information about session tags, see
 	// Tagging STS Sessions
