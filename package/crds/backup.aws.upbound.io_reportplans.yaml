@@ -83,8 +83,9 @@ spec:
                       consisting of letters, numbers, and underscores.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reportDeliveryChannel:
                     description: An object that contains information about where and
@@ -474,6 +475,11 @@ spec:
                     description: The unique name of the report plan. The name must
                       be between 1 and 256 characters, starting with a letter, and
                       consisting of letters, numbers, and underscores.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reportDeliveryChannel:
                     description: An object that contains information about where and
@@ -687,8 +693,9 @@ spec:
                       consisting of letters, numbers, and underscores.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reportDeliveryChannel:
                     description: An object that contains information about where and
@@ -1066,6 +1073,11 @@ spec:
                     description: The unique name of the report plan. The name must
                       be between 1 and 256 characters, starting with a letter, and
                       consisting of letters, numbers, and underscores.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reportDeliveryChannel:
                     description: An object that contains information about where and

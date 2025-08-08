@@ -69,6 +69,10 @@ type EndpointAccessObservation struct {
 	// The port that Amazon Redshift Serverless listens on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// An array of VPC subnet IDs to associate with the endpoint.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -90,10 +94,10 @@ type EndpointAccessParameters struct {
 	// +kubebuilder:validation:Optional
 	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional

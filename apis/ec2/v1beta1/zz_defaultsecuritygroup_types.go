@@ -267,6 +267,10 @@ type DefaultSecurityGroupObservation struct {
 	// Owner ID.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
 
 	// Key-value map of resource tags.
@@ -291,10 +295,10 @@ type DefaultSecurityGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Ingress []DefaultSecurityGroupIngressParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`

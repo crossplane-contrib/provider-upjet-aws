@@ -147,8 +147,9 @@ spec:
                       of letters, numbers, and underscores.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -520,6 +521,11 @@ spec:
                     description: The unique name of the framework. The name must be
                       between 1 and 256 characters, starting with a letter, and consisting
                       of letters, numbers, and underscores.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: A framework consists of one or more controls. Each
@@ -731,8 +737,9 @@ spec:
                       of letters, numbers, and underscores.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -1100,6 +1107,11 @@ spec:
                     description: The unique name of the framework. The name must be
                       between 1 and 256 characters, starting with a letter, and consisting
                       of letters, numbers, and underscores.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: A framework consists of one or more controls. Each

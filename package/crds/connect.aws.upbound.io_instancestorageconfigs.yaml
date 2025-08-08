@@ -152,13 +152,15 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:
@@ -738,7 +740,8 @@ spec:
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:
@@ -1417,10 +1420,16 @@ spec:
                     description: Specifies the identifier of the hosting Amazon Connect
                       Instance.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:
@@ -1719,13 +1728,15 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:
@@ -2287,7 +2298,8 @@ spec:
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:
@@ -2948,10 +2960,16 @@ spec:
                     description: Specifies the identifier of the hosting Amazon Connect
                       Instance.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceType:
                     description: 'A valid resource type. Valid Values: AGENT_EVENTS
                       | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS
-                      | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                      | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
+                      | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                       | SCHEDULED_REPORTS | SCREEN_RECORDINGS.'
                     type: string
                   storageConfig:

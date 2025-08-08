@@ -24,4 +24,3 @@ spec:
         - test.example.comtest
       originOverride: true
     name: example-policy
-    region: us-west-1

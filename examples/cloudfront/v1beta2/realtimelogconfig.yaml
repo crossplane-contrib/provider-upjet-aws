@@ -25,7 +25,6 @@ spec:
     - timestamp
     - c-ip
     name: example-${Rand.RFC1123Subdomain}
-    region: us-west-1
     samplingRate: 75
 
 ---

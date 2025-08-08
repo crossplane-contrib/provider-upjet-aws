@@ -15,7 +15,6 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     transitGatewayArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -43,4 +42,3 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1

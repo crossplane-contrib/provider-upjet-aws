@@ -17,7 +17,6 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
       textTransformation: NONE
-    region: us-west-1
 
 ---
 
@@ -35,4 +34,3 @@ spec:
     regexPatternStrings:
     - one
     - two
-    region: us-west-1

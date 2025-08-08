@@ -345,6 +345,11 @@ func (in *LifecyclePolicyObservation) DeepCopyInto(out *LifecyclePolicyObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RegistryID != nil {
 		in, out := &in.RegistryID, &out.RegistryID
 		*out = new(string)
@@ -477,6 +482,21 @@ func (in *PullThroughCacheRuleInitParameters) DeepCopyInto(out *PullThroughCache
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomRoleArn != nil {
+		in, out := &in.CustomRoleArn, &out.CustomRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.CustomRoleArnRef != nil {
+		in, out := &in.CustomRoleArnRef, &out.CustomRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomRoleArnSelector != nil {
+		in, out := &in.CustomRoleArnSelector, &out.CustomRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EcrRepositoryPrefix != nil {
 		in, out := &in.EcrRepositoryPrefix, &out.EcrRepositoryPrefix
 		*out = new(string)
@@ -484,6 +504,11 @@ func (in *PullThroughCacheRuleInitParameters) DeepCopyInto(out *PullThroughCache
 	}
 	if in.UpstreamRegistryURL != nil {
 		in, out := &in.UpstreamRegistryURL, &out.UpstreamRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.UpstreamRepositoryPrefix != nil {
+		in, out := &in.UpstreamRepositoryPrefix, &out.UpstreamRepositoryPrefix
 		*out = new(string)
 		**out = **in
 	}
@@ -539,6 +564,11 @@ func (in *PullThroughCacheRuleObservation) DeepCopyInto(out *PullThroughCacheRul
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomRoleArn != nil {
+		in, out := &in.CustomRoleArn, &out.CustomRoleArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.EcrRepositoryPrefix != nil {
 		in, out := &in.EcrRepositoryPrefix, &out.EcrRepositoryPrefix
 		*out = new(string)
@@ -549,6 +579,11 @@ func (in *PullThroughCacheRuleObservation) DeepCopyInto(out *PullThroughCacheRul
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RegistryID != nil {
 		in, out := &in.RegistryID, &out.RegistryID
 		*out = new(string)
@@ -556,6 +591,11 @@ func (in *PullThroughCacheRuleObservation) DeepCopyInto(out *PullThroughCacheRul
 	}
 	if in.UpstreamRegistryURL != nil {
 		in, out := &in.UpstreamRegistryURL, &out.UpstreamRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.UpstreamRepositoryPrefix != nil {
+		in, out := &in.UpstreamRepositoryPrefix, &out.UpstreamRepositoryPrefix
 		*out = new(string)
 		**out = **in
 	}
@@ -579,6 +619,21 @@ func (in *PullThroughCacheRuleParameters) DeepCopyInto(out *PullThroughCacheRule
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomRoleArn != nil {
+		in, out := &in.CustomRoleArn, &out.CustomRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.CustomRoleArnRef != nil {
+		in, out := &in.CustomRoleArnRef, &out.CustomRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomRoleArnSelector != nil {
+		in, out := &in.CustomRoleArnSelector, &out.CustomRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EcrRepositoryPrefix != nil {
 		in, out := &in.EcrRepositoryPrefix, &out.EcrRepositoryPrefix
 		*out = new(string)
@@ -591,6 +646,11 @@ func (in *PullThroughCacheRuleParameters) DeepCopyInto(out *PullThroughCacheRule
 	}
 	if in.UpstreamRegistryURL != nil {
 		in, out := &in.UpstreamRegistryURL, &out.UpstreamRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.UpstreamRepositoryPrefix != nil {
+		in, out := &in.UpstreamRepositoryPrefix, &out.UpstreamRepositoryPrefix
 		*out = new(string)
 		**out = **in
 	}
@@ -730,6 +790,11 @@ func (in *RegistryPolicyObservation) DeepCopyInto(out *RegistryPolicyObservation
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -901,6 +966,11 @@ func (in *RegistryScanningConfigurationObservation) DeepCopyInto(out *RegistrySc
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1086,6 +1156,11 @@ func (in *ReplicationConfigurationObservation) DeepCopyInto(out *ReplicationConf
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1554,6 +1629,11 @@ func (in *RepositoryObservation) DeepCopyInto(out *RepositoryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RegistryID != nil {
 		in, out := &in.RegistryID, &out.RegistryID
 		*out = new(string)
@@ -1772,6 +1852,11 @@ func (in *RepositoryPolicyObservation) DeepCopyInto(out *RepositoryPolicyObserva
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

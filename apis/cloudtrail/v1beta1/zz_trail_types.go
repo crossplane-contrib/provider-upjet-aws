@@ -291,7 +291,7 @@ type TrailInitParameters struct {
 	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
-	// Name of the Amazon SNS topic defined for notification of log file delivery.
+	// Name of the Amazon SNS topic defined for notification of log file delivery. Specify the SNS topic ARN if it resides in another region.
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -343,13 +343,20 @@ type TrailObservation struct {
 	// KMS key ARN to use to encrypt the logs delivered by CloudTrail.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Name of the S3 bucket designated for publishing log files.
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
 	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
-	// Name of the Amazon SNS topic defined for notification of log file delivery.
+	// ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered.
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// Name of the Amazon SNS topic defined for notification of log file delivery. Specify the SNS topic ARN if it resides in another region.
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -426,10 +433,10 @@ type TrailParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the S3 bucket designated for publishing log files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
@@ -449,7 +456,7 @@ type TrailParameters struct {
 	// +kubebuilder:validation:Optional
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
-	// Name of the Amazon SNS topic defined for notification of log file delivery.
+	// Name of the Amazon SNS topic defined for notification of log file delivery. Specify the SNS topic ARN if it resides in another region.
 	// +kubebuilder:validation:Optional
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 

@@ -15,7 +15,7 @@ import (
 
 type DiskAttachmentInitParameters struct {
 
-	// The name of the Lightsail Disk.
+	// Name of the Lightsail disk.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Disk
 	DiskName *string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
 
@@ -27,10 +27,10 @@ type DiskAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskNameSelector *v1.Selector `json:"diskNameSelector,omitempty" tf:"-"`
 
-	// The disk path to expose to the instance.
+	// Disk path to expose to the instance.
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
 
-	// The name of the Lightsail Instance to attach to.
+	// Name of the Lightsail instance to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
@@ -45,22 +45,26 @@ type DiskAttachmentInitParameters struct {
 
 type DiskAttachmentObservation struct {
 
-	// The name of the Lightsail Disk.
+	// Name of the Lightsail disk.
 	DiskName *string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
 
-	// The disk path to expose to the instance.
+	// Disk path to expose to the instance.
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
 
-	// A combination of attributes to create a unique id: disk_name,instance_name
+	// Combination of attributes to create a unique id: disk_name,instance_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Lightsail Instance to attach to.
+	// Name of the Lightsail instance to attach to.
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DiskAttachmentParameters struct {
 
-	// The name of the Lightsail Disk.
+	// Name of the Lightsail disk.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Disk
 	// +kubebuilder:validation:Optional
 	DiskName *string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
@@ -73,11 +77,11 @@ type DiskAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskNameSelector *v1.Selector `json:"diskNameSelector,omitempty" tf:"-"`
 
-	// The disk path to expose to the instance.
+	// Disk path to expose to the instance.
 	// +kubebuilder:validation:Optional
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
 
-	// The name of the Lightsail Instance to attach to.
+	// Name of the Lightsail instance to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
@@ -90,10 +94,10 @@ type DiskAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // DiskAttachmentSpec defines the desired state of DiskAttachment
@@ -123,7 +127,7 @@ type DiskAttachmentStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// DiskAttachment is the Schema for the DiskAttachments API. Attaches a Lightsail disk to a Lightsail Instance
+// DiskAttachment is the Schema for the DiskAttachments API. Manages the attachment of a Lightsail disk to an instance.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

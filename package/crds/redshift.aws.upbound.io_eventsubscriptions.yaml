@@ -86,8 +86,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   severity:
                     description: The event severity to be published by the notification
@@ -674,6 +675,11 @@ spec:
                     x-kubernetes-list-type: set
                   id:
                     description: The name of the Redshift event notification subscription
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   severity:
                     description: The event severity to be published by the notification

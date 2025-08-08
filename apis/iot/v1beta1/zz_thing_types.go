@@ -37,6 +37,10 @@ type ThingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The thing type name.
 	ThingTypeName *string `json:"thingTypeName,omitempty" tf:"thing_type_name,omitempty"`
 
@@ -51,10 +55,10 @@ type ThingParameters struct {
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The thing type name.
 	// +kubebuilder:validation:Optional

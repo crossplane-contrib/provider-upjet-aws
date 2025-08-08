@@ -58,11 +58,6 @@ type HostedZoneDNSSECParameters struct {
 	// +kubebuilder:validation:Optional
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Hosted Zone signing status. Valid values: SIGNING, NOT_SIGNING. Defaults to SIGNING.
 	// +kubebuilder:validation:Optional
 	SigningStatus *string `json:"signingStatus,omitempty" tf:"signing_status,omitempty"`

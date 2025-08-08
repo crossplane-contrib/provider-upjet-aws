@@ -68,6 +68,10 @@ type BucketWebsiteConfigurationObservation struct {
 	// Redirect behavior for every request to this bucket's website endpoint. See below. Conflicts with error_document, index_document, and routing_rule.
 	RedirectAllRequestsTo []RedirectAllRequestsToObservation `json:"redirectAllRequestsTo,omitempty" tf:"redirect_all_requests_to,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of rules that define when a redirect is applied and the redirect behavior. See below.
 	RoutingRule []RoutingRuleObservation `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
@@ -114,10 +118,10 @@ type BucketWebsiteConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RedirectAllRequestsTo []RedirectAllRequestsToParameters `json:"redirectAllRequestsTo,omitempty" tf:"redirect_all_requests_to,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// List of rules that define when a redirect is applied and the redirect behavior. See below.
 	// +kubebuilder:validation:Optional

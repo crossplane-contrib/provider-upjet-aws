@@ -24,7 +24,7 @@ type GlobalClusterInitParameters struct {
 	// Engine version of the global database. Upgrading the engine version will result in all cluster members being immediately updated and will.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	// ARN to use as the primary DB Cluster of the Global Cluster on creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
@@ -37,7 +37,7 @@ type GlobalClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierSelector *v1.Selector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
-	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 }
 
@@ -46,7 +46,7 @@ type GlobalClusterMembersInitParameters struct {
 
 type GlobalClusterMembersObservation struct {
 
-	// Amazon Resource Name (ARN) of member DB Cluster.
+	// ARN of member DB Cluster.
 	DBClusterArn *string `json:"dbClusterArn,omitempty" tf:"db_cluster_arn,omitempty"`
 
 	// Whether the member is the primary DB Cluster.
@@ -58,7 +58,7 @@ type GlobalClusterMembersParameters struct {
 
 type GlobalClusterObservation struct {
 
-	// Global Cluster Amazon Resource Name (ARN)
+	// Global Cluster ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// If the Global Cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false.
@@ -79,12 +79,16 @@ type GlobalClusterObservation struct {
 	// Neptune Global Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// ARN to use as the primary DB Cluster of the Global Cluster on creation.
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
 
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 }
 
@@ -102,12 +106,12 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	// ARN to use as the primary DB Cluster of the Global Cluster on creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -121,7 +125,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierSelector *v1.Selector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
-	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 }

@@ -15,13 +15,13 @@ import (
 
 type KeyPairInitParameters struct {
 
-	// The name of the Lightsail Key Pair
+	// Name of the Lightsail Key Pair. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  An optional PGP key to encrypt the resulting private key material. Only used when creating a new key pair
+	// PGP key to encrypt the resulting private key material. Only used when creating a new key pair.
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
-	// The public key material. This public key will be imported into Lightsail
+	// Public key material. This public key will be imported into Lightsail.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Key-value map of resource tags.
@@ -31,59 +31,64 @@ type KeyPairInitParameters struct {
 
 type KeyPairObservation struct {
 
-	// The ARN of the Lightsail key pair.
+	// ARN of the Lightsail key pair.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The MD5 public key fingerprint for the encrypted private key.
+	// MD5 public key fingerprint for the encrypted private key.
 	EncryptedFingerprint *string `json:"encryptedFingerprint,omitempty" tf:"encrypted_fingerprint,omitempty"`
 
-	// – the private key material, base 64 encoded and encrypted with the given pgp_key. This is only populated when creating a new key and pgp_key is supplied.
+	// Private key material, base 64 encoded and encrypted with the given pgp_key. This is only populated when creating a new key and pgp_key is supplied.
 	EncryptedPrivateKey *string `json:"encryptedPrivateKey,omitempty" tf:"encrypted_private_key,omitempty"`
 
-	// The MD5 public key fingerprint as specified in section 4 of RFC 4716.
+	// MD5 public key fingerprint as specified in section 4 of RFC 4716.
 	Fingerprint *string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
 
-	// The name used for this key pair.
+	// Name used for this key pair.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Lightsail Key Pair
+	// Name of the Lightsail Key Pair. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  An optional PGP key to encrypt the resulting private key material. Only used when creating a new key pair
+	// PGP key to encrypt the resulting private key material. Only used when creating a new key pair.
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
-	// the private key, base64 encoded. This is only populated when creating a new key, and when no pgp_key is provided.
+	// Private key, base64 encoded. This is only populated when creating a new key, and when no pgp_key is provided.
 	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
 
-	// The public key material. This public key will be imported into Lightsail
+	// Public key material. This public key will be imported into Lightsail.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type KeyPairParameters struct {
 
-	// The name of the Lightsail Key Pair
+	// Name of the Lightsail Key Pair. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// –  An optional PGP key to encrypt the resulting private key material. Only used when creating a new key pair
+	// PGP key to encrypt the resulting private key material. Only used when creating a new key pair.
 	// +kubebuilder:validation:Optional
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
-	// The public key material. This public key will be imported into Lightsail
+	// Public key material. This public key will be imported into Lightsail.
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -118,7 +123,7 @@ type KeyPairStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// KeyPair is the Schema for the KeyPairs API. Provides an Lightsail Key Pair
+// KeyPair is the Schema for the KeyPairs API. Manages a Lightsail Key Pair.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -102,8 +102,9 @@ spec:
                       Authority (IANA) website.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   ruleAction:
                     description: Action to take (accept | reject) on the filtered
@@ -598,6 +599,11 @@ spec:
                       value, see Protocol Numbers on the Internet Assigned Numbers
                       Authority (IANA) website.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleAction:
                     description: Action to take (accept | reject) on the filtered
                       traffic. Valid values are accept and reject
@@ -777,8 +783,9 @@ spec:
                       Authority (IANA) website.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   ruleAction:
                     description: Action to take (accept | reject) on the filtered
@@ -1265,6 +1272,11 @@ spec:
                       value, see Protocol Numbers on the Internet Assigned Numbers
                       Authority (IANA) website.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   ruleAction:
                     description: Action to take (accept | reject) on the filtered
                       traffic. Valid values are accept and reject

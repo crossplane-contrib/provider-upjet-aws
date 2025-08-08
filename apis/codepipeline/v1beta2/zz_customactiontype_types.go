@@ -146,6 +146,10 @@ type CustomActionTypeObservation struct {
 	// The provider of the service used in the custom action
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The settings for an action type.
 	Settings *SettingsObservation `json:"settings,omitempty" tf:"settings,omitempty"`
 
@@ -183,10 +187,10 @@ type CustomActionTypeParameters struct {
 	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The settings for an action type.
 	// +kubebuilder:validation:Optional

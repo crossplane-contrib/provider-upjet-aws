@@ -56,6 +56,10 @@ type BucketObjectLockConfigurationObservation struct {
 	// Indicates whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
 	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for specifying the Object Lock rule for the specified object. See below.
 	Rule *BucketObjectLockConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
@@ -84,10 +88,10 @@ type BucketObjectLockConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for specifying the Object Lock rule for the specified object. See below.
 	// +kubebuilder:validation:Optional

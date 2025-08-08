@@ -78,6 +78,35 @@ type EndpointVPCEndpointObservation struct {
 type EndpointVPCEndpointParameters struct {
 }
 
+type PricePerformanceTargetInitParameters struct {
+
+	// Whether to enable price-performance scaling.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The price-performance scaling level. Valid values are 1 (LOW_COST), 25 (ECONOMICAL), 50 (BALANCED), 75 (RESOURCEFUL), and 100 (HIGH_PERFORMANCE).
+	Level *float64 `json:"level,omitempty" tf:"level,omitempty"`
+}
+
+type PricePerformanceTargetObservation struct {
+
+	// Whether to enable price-performance scaling.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The price-performance scaling level. Valid values are 1 (LOW_COST), 25 (ECONOMICAL), 50 (BALANCED), 75 (RESOURCEFUL), and 100 (HIGH_PERFORMANCE).
+	Level *float64 `json:"level,omitempty" tf:"level,omitempty"`
+}
+
+type PricePerformanceTargetParameters struct {
+
+	// Whether to enable price-performance scaling.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// The price-performance scaling level. Valid values are 1 (LOW_COST), 25 (ECONOMICAL), 50 (BALANCED), 75 (RESOURCEFUL), and 100 (HIGH_PERFORMANCE).
+	// +kubebuilder:validation:Optional
+	Level *float64 `json:"level,omitempty" tf:"level,omitempty"`
+}
+
 type VPCEndpointNetworkInterfaceInitParameters struct {
 }
 
@@ -119,6 +148,9 @@ type WorkgroupInitParameters struct {
 	// The port number on which the cluster accepts incoming connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Price-performance scaling for the workgroup. See Price Performance Target below.
+	PricePerformanceTarget *PricePerformanceTargetInitParameters `json:"pricePerformanceTarget,omitempty" tf:"price_performance_target,omitempty"`
+
 	// A value that specifies whether the workgroup can be accessed from a public network.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
@@ -155,6 +187,9 @@ type WorkgroupInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The name of the track for the workgroup. If it is current, you get the most up-to-date certified release version with the latest features, security updates, and performance enhancements. If it is trailing, you will be on the previous certified release. For more information, see the following AWS document.
+	TrackName *string `json:"trackName,omitempty" tf:"track_name,omitempty"`
 }
 
 type WorkgroupObservation struct {
@@ -186,8 +221,15 @@ type WorkgroupObservation struct {
 	// The port number on which the cluster accepts incoming connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Price-performance scaling for the workgroup. See Price Performance Target below.
+	PricePerformanceTarget *PricePerformanceTargetObservation `json:"pricePerformanceTarget,omitempty" tf:"price_performance_target,omitempty"`
+
 	// A value that specifies whether the workgroup can be accessed from a public network.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// An array of security group IDs to associate with the workgroup.
 	// +listType=set
@@ -204,6 +246,9 @@ type WorkgroupObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The name of the track for the workgroup. If it is current, you get the most up-to-date certified release version with the latest features, security updates, and performance enhancements. If it is trailing, you will be on the previous certified release. For more information, see the following AWS document.
+	TrackName *string `json:"trackName,omitempty" tf:"track_name,omitempty"`
 
 	// The Redshift Workgroup ID.
 	WorkgroupID *string `json:"workgroupId,omitempty" tf:"workgroup_id,omitempty"`
@@ -235,14 +280,18 @@ type WorkgroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Price-performance scaling for the workgroup. See Price Performance Target below.
+	// +kubebuilder:validation:Optional
+	PricePerformanceTarget *PricePerformanceTargetParameters `json:"pricePerformanceTarget,omitempty" tf:"price_performance_target,omitempty"`
+
 	// A value that specifies whether the workgroup can be accessed from a public network.
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
@@ -280,6 +329,10 @@ type WorkgroupParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The name of the track for the workgroup. If it is current, you get the most up-to-date certified release version with the latest features, security updates, and performance enhancements. If it is trailing, you will be on the previous certified release. For more information, see the following AWS document.
+	// +kubebuilder:validation:Optional
+	TrackName *string `json:"trackName,omitempty" tf:"track_name,omitempty"`
 }
 
 // WorkgroupSpec defines the desired state of Workgroup

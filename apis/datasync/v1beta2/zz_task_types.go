@@ -395,6 +395,9 @@ type TaskInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// One of the following task modes for your data transfer:
+	TaskMode *string `json:"taskMode,omitempty" tf:"task_mode,omitempty"`
+
 	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
 	TaskReportConfig *TaskReportConfigInitParameters `json:"taskReportConfig,omitempty" tf:"task_report_config,omitempty"`
 }
@@ -425,6 +428,10 @@ type TaskObservation struct {
 	// Configuration block containing option that controls the default behavior when you start an execution of this DataSync Task. For each individual task execution, you can override these options by specifying an overriding configuration in those executions.
 	Options *OptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Specifies a schedule used to periodically transfer files from a source to a destination location.
 	Schedule *ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
@@ -438,6 +445,9 @@ type TaskObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// One of the following task modes for your data transfer:
+	TaskMode *string `json:"taskMode,omitempty" tf:"task_mode,omitempty"`
 
 	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
 	TaskReportConfig *TaskReportConfigObservation `json:"taskReportConfig,omitempty" tf:"task_report_config,omitempty"`
@@ -488,10 +498,10 @@ type TaskParameters struct {
 	// +kubebuilder:validation:Optional
 	Options *OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies a schedule used to periodically transfer files from a source to a destination location.
 	// +kubebuilder:validation:Optional
@@ -514,6 +524,10 @@ type TaskParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One of the following task modes for your data transfer:
+	// +kubebuilder:validation:Optional
+	TaskMode *string `json:"taskMode,omitempty" tf:"task_mode,omitempty"`
 
 	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
 	// +kubebuilder:validation:Optional

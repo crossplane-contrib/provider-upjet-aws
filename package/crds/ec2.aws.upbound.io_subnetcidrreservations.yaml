@@ -80,8 +80,9 @@ spec:
                     description: A brief description of the reservation.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reservationType:
                     description: 'The type of reservation to create. Valid values:
@@ -461,6 +462,11 @@ spec:
                     type: string
                   ownerId:
                     description: ID of the AWS account that owns this CIDR reservation.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   reservationType:
                     description: 'The type of reservation to create. Valid values:

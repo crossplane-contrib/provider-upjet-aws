@@ -77,6 +77,10 @@ type BasePathMappingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path.
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 }
@@ -119,10 +123,10 @@ type BasePathMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.Stage

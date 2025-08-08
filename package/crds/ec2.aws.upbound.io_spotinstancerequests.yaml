@@ -79,12 +79,6 @@ spec:
                     type: boolean
                   availabilityZone:
                     type: string
-                  blockDurationMinutes:
-                    description: |-
-                      The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-                      The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-                      Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-                    type: number
                   capacityReservationSpecification:
                     items:
                       properties:
@@ -102,8 +96,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  cpuCoreCount:
-                    type: number
                   cpuOptions:
                     items:
                       properties:
@@ -115,8 +107,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  cpuThreadsPerCore:
-                    type: number
                   creditSpecification:
                     items:
                       properties:
@@ -292,8 +282,10 @@ spec:
                     description: The private IP address assigned to the instance
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     items:
@@ -565,12 +557,6 @@ spec:
                     type: boolean
                   availabilityZone:
                     type: string
-                  blockDurationMinutes:
-                    description: |-
-                      The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-                      The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-                      Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-                    type: number
                   capacityReservationSpecification:
                     items:
                       properties:
@@ -588,8 +574,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  cpuCoreCount:
-                    type: number
                   cpuOptions:
                     items:
                       properties:
@@ -601,8 +585,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  cpuThreadsPerCore:
-                    type: number
                   creditSpecification:
                     items:
                       properties:
@@ -1206,12 +1188,6 @@ spec:
                     type: boolean
                   availabilityZone:
                     type: string
-                  blockDurationMinutes:
-                    description: |-
-                      The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-                      The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-                      Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-                    type: number
                   capacityReservationSpecification:
                     items:
                       properties:
@@ -1229,8 +1205,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  cpuCoreCount:
-                    type: number
                   cpuOptions:
                     items:
                       properties:
@@ -1242,8 +1216,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  cpuThreadsPerCore:
-                    type: number
                   creditSpecification:
                     items:
                       properties:
@@ -1447,6 +1419,12 @@ spec:
                   publicIp:
                     description: The public IP address assigned to the instance, if
                       applicable.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     items:
@@ -1697,12 +1675,6 @@ spec:
                     type: boolean
                   availabilityZone:
                     type: string
-                  blockDurationMinutes:
-                    description: |-
-                      The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-                      The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-                      Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-                    type: number
                   capacityReservationSpecification:
                     properties:
                       capacityReservationPreference:
@@ -1716,8 +1688,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    type: number
                   cpuOptions:
                     properties:
                       amdSevSnp:
@@ -1727,8 +1697,6 @@ spec:
                       threadsPerCore:
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    type: number
                   creditSpecification:
                     properties:
                       cpuCredits:
@@ -1892,8 +1860,10 @@ spec:
                     description: The private IP address assigned to the instance
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     properties:
@@ -2163,12 +2133,6 @@ spec:
                     type: boolean
                   availabilityZone:
                     type: string
-                  blockDurationMinutes:
-                    description: |-
-                      The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-                      The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-                      Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-                    type: number
                   capacityReservationSpecification:
                     properties:
                       capacityReservationPreference:
@@ -2182,8 +2146,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    type: number
                   cpuOptions:
                     properties:
                       amdSevSnp:
@@ -2193,8 +2155,6 @@ spec:
                       threadsPerCore:
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    type: number
                   creditSpecification:
                     properties:
                       cpuCredits:
@@ -2784,12 +2744,6 @@ spec:
                     type: boolean
                   availabilityZone:
                     type: string
-                  blockDurationMinutes:
-                    description: |-
-                      The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
-                      The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-                      Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-                    type: number
                   capacityReservationSpecification:
                     properties:
                       capacityReservationPreference:
@@ -2803,8 +2757,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    type: number
                   cpuOptions:
                     properties:
                       amdSevSnp:
@@ -2814,8 +2766,6 @@ spec:
                       threadsPerCore:
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    type: number
                   creditSpecification:
                     properties:
                       cpuCredits:
@@ -3007,6 +2957,12 @@ spec:
                   publicIp:
                     description: The public IP address assigned to the instance, if
                       applicable.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     properties:

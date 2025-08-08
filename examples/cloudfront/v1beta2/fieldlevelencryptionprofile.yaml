@@ -12,7 +12,6 @@ metadata:
   name: example-field-level-encryption-profile
 spec:
   forProvider:
-    region: us-west-1
     comment: test comment
     encryptionEntities:
       items:
@@ -37,7 +36,6 @@ metadata:
   name: example-public-key-prof
 spec:
   forProvider:
-    region: us-west-1
     comment: test public key
     encodedKeySecretRef:
       name: publickeysecret

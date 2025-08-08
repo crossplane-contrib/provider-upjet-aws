@@ -42,7 +42,7 @@ type S3EndpointInitParameters struct {
 	// Minimum file size condition as defined in kilobytes to output a file to Amazon S3. (AWS default is 32000 KB.)
 	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
 
-	// Folder path of CDC files. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later.
+	// Folder path of CDC files. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later. Required for CDC.
 	CdcPath *string `json:"cdcPath,omitempty" tf:"cdc_path,omitempty"`
 
 	// ARN for the certificate.
@@ -102,7 +102,7 @@ type S3EndpointInitParameters struct {
 	// Bucket owner to prevent sniping. Value is an AWS account ID.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// JSON document that describes how AWS DMS should interpret the data.
+	// JSON document that describes how AWS DMS should interpret the data. Required for source endpoints.
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
 	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
@@ -216,7 +216,7 @@ type S3EndpointObservation struct {
 	// Minimum file size condition as defined in kilobytes to output a file to Amazon S3. (AWS default is 32000 KB.)
 	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
 
-	// Folder path of CDC files. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later.
+	// Folder path of CDC files. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later. Required for CDC.
 	CdcPath *string `json:"cdcPath,omitempty" tf:"cdc_path,omitempty"`
 
 	// ARN for the certificate.
@@ -285,7 +285,7 @@ type S3EndpointObservation struct {
 	// Can be used for cross-account validation. Use it in another account with aws_dms_s3_endpoint to create the endpoint cross-account.
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
 
-	// JSON document that describes how AWS DMS should interpret the data.
+	// JSON document that describes how AWS DMS should interpret the data. Required for source endpoints.
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
 	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
@@ -313,6 +313,10 @@ type S3EndpointObservation struct {
 
 	// Whether DMS saves the transaction order for a CDC load on the S3 target specified by cdc_path. Default is false. (Ignored for source endpoints.)
 	PreserveTransactions *bool `json:"preserveTransactions,omitempty" tf:"preserve_transactions,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// For an S3 source, whether each leading double quotation mark has to be followed by an ending double quotation mark. Default is true.
 	Rfc4180 *bool `json:"rfc4180,omitempty" tf:"rfc_4180,omitempty"`
@@ -388,7 +392,7 @@ type S3EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
 
-	// Folder path of CDC files. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later.
+	// Folder path of CDC files. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later. Required for CDC.
 	// +kubebuilder:validation:Optional
 	CdcPath *string `json:"cdcPath,omitempty" tf:"cdc_path,omitempty"`
 
@@ -468,7 +472,7 @@ type S3EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// JSON document that describes how AWS DMS should interpret the data.
+	// JSON document that describes how AWS DMS should interpret the data. Required for source endpoints.
 	// +kubebuilder:validation:Optional
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
@@ -513,10 +517,10 @@ type S3EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	PreserveTransactions *bool `json:"preserveTransactions,omitempty" tf:"preserve_transactions,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// For an S3 source, whether each leading double quotation mark has to be followed by an ending double quotation mark. Default is true.
 	// +kubebuilder:validation:Optional

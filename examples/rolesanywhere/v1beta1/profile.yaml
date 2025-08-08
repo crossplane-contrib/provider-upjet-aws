@@ -13,7 +13,6 @@ metadata:
 spec:
   forProvider:
     name: example
-    region: us-west-1
     roleArnsRefs:
     - name: testprofile
 

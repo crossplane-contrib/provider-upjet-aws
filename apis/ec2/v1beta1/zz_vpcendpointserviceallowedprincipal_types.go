@@ -40,6 +40,10 @@ type VPCEndpointServiceAllowedPrincipalObservation struct {
 	// The ARN of the principal to allow permissions.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ID of the VPC endpoint service to allow permission.
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 }
@@ -50,10 +54,10 @@ type VPCEndpointServiceAllowedPrincipalParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the VPC endpoint service to allow permission.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpointService

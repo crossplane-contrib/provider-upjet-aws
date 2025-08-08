@@ -129,6 +129,11 @@ func (in *NetworkPerformanceMetricSubscriptionObservation) DeepCopyInto(out *Net
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Source != nil {
 		in, out := &in.Source, &out.Source
 		*out = new(string)

@@ -16,7 +16,6 @@ spec:
     accountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: account
-    region: us-west-1
     servicePrincipal: config.amazonaws.com
 # This config requires this API to be enabled via CLI, for this we have to run the following command:
 # `aws organizations enable-aws-service-access --service-principal config.amazonaws.com`
@@ -35,4 +34,3 @@ spec:
   forProvider:
     email: <new-account-email>
     name: my_new_account
-    region: us-west-1

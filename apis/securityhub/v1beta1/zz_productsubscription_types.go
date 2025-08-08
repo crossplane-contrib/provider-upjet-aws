@@ -28,6 +28,10 @@ type ProductSubscriptionObservation struct {
 
 	// The ARN of the product that generates findings that you want to import into Security Hub - see below.
 	ProductArn *string `json:"productArn,omitempty" tf:"product_arn,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ProductSubscriptionParameters struct {
@@ -36,10 +40,10 @@ type ProductSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ProductArn *string `json:"productArn,omitempty" tf:"product_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // ProductSubscriptionSpec defines the desired state of ProductSubscription

@@ -140,6 +140,11 @@ func (in *LicenseAssociationObservation) DeepCopyInto(out *LicenseAssociationObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.WorkspaceID != nil {
 		in, out := &in.WorkspaceID, &out.WorkspaceID
 		*out = new(string)
@@ -480,6 +485,11 @@ func (in *RoleAssociationObservation) DeepCopyInto(out *RoleAssociationObservati
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -873,6 +883,11 @@ func (in *WorkspaceAPIKeyObservation) DeepCopyInto(out *WorkspaceAPIKeyObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecondsToLive != nil {
 		in, out := &in.SecondsToLive, &out.SecondsToLive
 		*out = new(float64)
@@ -1257,6 +1272,11 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 	}
 	if in.PermissionType != nil {
 		in, out := &in.PermissionType, &out.PermissionType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1720,6 +1740,11 @@ func (in *WorkspaceSAMLConfigurationObservation) DeepCopyInto(out *WorkspaceSAML
 	}
 	if in.OrgAssertion != nil {
 		in, out := &in.OrgAssertion, &out.OrgAssertion
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -18,7 +18,6 @@ spec:
     attachmentTypeSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
 
 ---
 
@@ -35,7 +34,6 @@ spec:
     coreNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     subnetArnsSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -55,7 +53,7 @@ metadata:
   name: vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-west-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: vpc
@@ -72,8 +70,8 @@ metadata:
   name: subnet
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-west-2
+    availabilityZone: us-west-2a
     vpcIdRef:
       name: vpc
     cidrBlock: 172.16.10.0/24
@@ -90,10 +88,11 @@ metadata:
   name: corenetworkname
 spec:
   forProvider:
+    createBasePolicy: true
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    policyDocument: |
+    basePolicyDocument: |
       {
         "version": "2021.12",
         "core-network-configuration": {
@@ -106,7 +105,7 @@ spec:
           ],
           "edge-locations": [
             {
-              "location": "us-west-1"
+              "location": "us-west-2"
             }
           ]
         },
@@ -117,7 +116,6 @@ spec:
           }
         ]
       }
-    region: us-west-1
 
 ---
 
@@ -132,4 +130,3 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1

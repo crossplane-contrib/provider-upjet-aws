@@ -15,13 +15,13 @@ import (
 
 type ResourceInitParameters struct {
 
-	// –  Amazon Resource Name (ARN) of the resource.
+	// Amazon Resource Name (ARN) of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Flag to enable AWS LakeFormation hybrid access permission mode.
 	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
 
-	// –  Role that has read/write access to the resource.
+	// Role that has read/write access to the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -37,12 +37,13 @@ type ResourceInitParameters struct {
 	// Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
 	UseServiceLinkedRole *bool `json:"useServiceLinkedRole,omitempty" tf:"use_service_linked_role,omitempty"`
 
+	// Whether or not the resource is a federated resource. Set to true when registering AWS Glue connections for federated catalog functionality.
 	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
 }
 
 type ResourceObservation struct {
 
-	// –  Amazon Resource Name (ARN) of the resource.
+	// Amazon Resource Name (ARN) of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Flag to enable AWS LakeFormation hybrid access permission mode.
@@ -53,18 +54,23 @@ type ResourceObservation struct {
 	// Date and time the resource was last modified in RFC 3339 format.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 
-	// –  Role that has read/write access to the resource.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Role that has read/write access to the resource.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
 	UseServiceLinkedRole *bool `json:"useServiceLinkedRole,omitempty" tf:"use_service_linked_role,omitempty"`
 
+	// Whether or not the resource is a federated resource. Set to true when registering AWS Glue connections for federated catalog functionality.
 	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
 }
 
 type ResourceParameters struct {
 
-	// –  Amazon Resource Name (ARN) of the resource.
+	// Amazon Resource Name (ARN) of the resource.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -72,12 +78,12 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// –  Role that has read/write access to the resource.
+	// Role that has read/write access to the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -95,6 +101,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	UseServiceLinkedRole *bool `json:"useServiceLinkedRole,omitempty" tf:"use_service_linked_role,omitempty"`
 
+	// Whether or not the resource is a federated resource. Set to true when registering AWS Glue connections for federated catalog functionality.
 	// +kubebuilder:validation:Optional
 	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
 }

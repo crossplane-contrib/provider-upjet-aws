@@ -68,6 +68,9 @@ type BucketObservation struct {
 	// Bucket domain name. Will be of format bucketname.s3.amazonaws.com.
 	BucketDomainName *string `json:"bucketDomainName,omitempty" tf:"bucket_domain_name,omitempty"`
 
+	// AWS region this bucket resides in.
+	BucketRegion *string `json:"bucketRegion,omitempty" tf:"bucket_region,omitempty"`
+
 	// The bucket region-specific domain name. The bucket domain name including the region name. Please refer to the S3 endpoints reference for format. Note: AWS CloudFront allows specifying an S3 region-specific endpoint when creating an S3 origin. This will prevent redirect issues from CloudFront to the S3 Origin URL. For more information, see the Virtual Hosted-Style Requests for Other Regions section in the AWS S3 User Guide.
 	BucketRegionalDomainName *string `json:"bucketRegionalDomainName,omitempty" tf:"bucket_regional_domain_name,omitempty"`
 
@@ -105,7 +108,7 @@ type BucketObservation struct {
 	// Use the resource aws_s3_bucket_policy instead.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// AWS region this bucket resides in.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -155,11 +158,10 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
-	// AWS region this bucket resides in.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

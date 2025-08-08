@@ -114,13 +114,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -147,11 +140,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -394,9 +382,9 @@ spec:
                     items:
                       properties:
                         marketType:
-                          description: Type of market for the instance. Valid value
-                            is spot. Defaults to spot. Required if spot_options is
-                            specified.
+                          description: Type of market for the instance. Valid values
+                            are spot and capacity-block. Defaults to spot. Required
+                            if spot_options is specified.
                           type: string
                         spotOptions:
                           description: Block to configure the options for Spot Instances.
@@ -507,7 +495,7 @@ spec:
                           description: Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
                             Service Version 2 (IMDSv2). Valid values include optional
-                            or required. Defaults to optional.
+                            or required.
                           type: string
                         instanceMetadataTags:
                           description: Enables or disables access to instance tags
@@ -658,8 +646,9 @@ spec:
                       in a VPC.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     description: Configuration block to customize details about the
@@ -900,7 +889,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -910,12 +899,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:
@@ -1064,13 +1053,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -1097,11 +1079,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -1344,9 +1321,9 @@ spec:
                     items:
                       properties:
                         marketType:
-                          description: Type of market for the instance. Valid value
-                            is spot. Defaults to spot. Required if spot_options is
-                            specified.
+                          description: Type of market for the instance. Valid values
+                            are spot and capacity-block. Defaults to spot. Required
+                            if spot_options is specified.
                           type: string
                         spotOptions:
                           description: Block to configure the options for Spot Instances.
@@ -1457,7 +1434,7 @@ spec:
                           description: Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
                             Service Version 2 (IMDSv2). Valid values include optional
-                            or required. Defaults to optional.
+                            or required.
                           type: string
                         instanceMetadataTags:
                           description: Enables or disables access to instance tags
@@ -1846,7 +1823,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -1856,12 +1833,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:
@@ -2170,13 +2147,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -2203,11 +2173,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -2387,9 +2352,9 @@ spec:
                     items:
                       properties:
                         marketType:
-                          description: Type of market for the instance. Valid value
-                            is spot. Defaults to spot. Required if spot_options is
-                            specified.
+                          description: Type of market for the instance. Valid values
+                            are spot and capacity-block. Defaults to spot. Required
+                            if spot_options is specified.
                           type: string
                         spotOptions:
                           description: Block to configure the options for Spot Instances.
@@ -2505,7 +2470,7 @@ spec:
                           description: Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
                             Service Version 2 (IMDSv2). Valid values include optional
-                            or required. Defaults to optional.
+                            or required.
                           type: string
                         instanceMetadataTags:
                           description: Enables or disables access to instance tags
@@ -2608,6 +2573,11 @@ spec:
                       NOTE: If you are using an aws_eip with your instance, you should
                       refer to the EIP''s address directly and not use public_ip as
                       this field will change after the EIP is attached.'
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     description: Configuration block to customize details about the
@@ -2724,7 +2694,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -2734,12 +2704,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:
@@ -2908,13 +2878,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -2937,11 +2900,6 @@ spec:
                           CPU Options for more information.
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -3429,8 +3387,9 @@ spec:
                       in a VPC.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     description: Configuration block to customize details about the
@@ -3829,13 +3788,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -3858,11 +3810,6 @@ spec:
                           CPU Options for more information.
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -4906,13 +4853,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  cpuCoreCount:
-                    description: Sets the number of CPU cores for an instance. This
-                      option is only supported on creation of instance type that support
-                      CPU Options CPU Cores and Threads Per CPU Core Per Instance
-                      Type - specifying this option for unsupported instance types
-                      will return an error from the EC2 API.
-                    type: number
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -4935,11 +4875,6 @@ spec:
                           CPU Options for more information.
                         type: number
                     type: object
-                  cpuThreadsPerCore:
-                    description: If set to 1, hyperthreading is disabled on the launched
-                      instance. Defaults to 2 if not set. See Optimizing CPU Options
-                      for more information.
-                    type: number
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -5321,6 +5256,11 @@ spec:
                       NOTE: If you are using an aws_eip with your instance, you should
                       refer to the EIP''s address directly and not use public_ip as
                       this field will change after the EIP is attached.'
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rootBlockDevice:
                     description: Configuration block to customize details about the

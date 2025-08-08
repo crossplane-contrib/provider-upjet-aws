@@ -347,6 +347,11 @@ func (in *ConnectorObservation) DeepCopyInto(out *ConnectorObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityPolicyName != nil {
 		in, out := &in.SecurityPolicyName, &out.SecurityPolicyName
 		*out = new(string)
@@ -2846,6 +2851,11 @@ func (in *SSHKeyObservation) DeepCopyInto(out *SSHKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SSHKeyID != nil {
 		in, out := &in.SSHKeyID, &out.SSHKeyID
 		*out = new(string)
@@ -3300,6 +3310,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.S3StorageOptions != nil {
 		in, out := &in.S3StorageOptions, &out.S3StorageOptions
@@ -4621,6 +4636,11 @@ func (in *TagObservation) DeepCopyInto(out *TagObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceArn != nil {
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
@@ -5160,6 +5180,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Role != nil {
 		in, out := &in.Role, &out.Role
 		*out = new(string)
@@ -5564,6 +5589,11 @@ func (in *WorkflowObservation) DeepCopyInto(out *WorkflowObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 	if in.Steps != nil {
 		in, out := &in.Steps, &out.Steps

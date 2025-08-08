@@ -46,6 +46,10 @@ type VoiceConnectorLoggingObservation struct {
 	// The Amazon Chime Voice Connector ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The Amazon Chime Voice Connector ID.
 	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 }
@@ -60,10 +64,10 @@ type VoiceConnectorLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableSIPLogs *bool `json:"enableSipLogs,omitempty" tf:"enable_sip_logs,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Chime Voice Connector ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector

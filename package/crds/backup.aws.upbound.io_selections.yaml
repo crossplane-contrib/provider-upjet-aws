@@ -74,51 +74,65 @@ spec:
               forProvider:
                 properties:
                   condition:
-                    description: A list of conditions that you define to assign resources
-                      to your backup plans using tags.
+                    description: Condition-based filters used to specify sets of resources
+                      for a backup plan. See below for details.
                     items:
                       properties:
                         stringEquals:
+                          description: Filters the values of your tagged resources
+                            for only those resources that you tagged with the same
+                            value. Also called "exact matching". See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringLike:
+                          description: Filters the values of your tagged resources
+                            for matching tag values with the use of a wildcard character
+                            (*) anywhere in the string. For example, prod* or *rod*
+                            matches the tag value production. See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringNotEquals:
+                          description: Filters the values of your tagged resources
+                            for only those resources that you tagged that do not have
+                            the same value. Also called "negated matching". See below
+                            for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringNotLike:
+                          description: Filters the values of your tagged resources
+                            for non-matching tag values with the use of a wildcard
+                            character (*) anywhere in the string. See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
@@ -373,8 +387,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resources:
                     description: An array of strings that either contain Amazon Resource
@@ -464,19 +479,19 @@ spec:
                     type: object
                   selectionTag:
                     description: Tag-based conditions used to specify a set of resources
-                      to assign to a backup plan.
+                      to assign to a backup plan. See below for details.
                     items:
                       properties:
                         key:
-                          description: The key in a key-value pair.
+                          description: Key for the filter.
                           type: string
                         type:
-                          description: An operation, such as StringEquals, that is
-                            applied to a key-value pair used to filter resources in
-                            a selection.
+                          description: An operation, such as STRINGEQUALS, that is
+                            applied to the key-value pair used to filter resources
+                            in a selection.
                           type: string
                         value:
-                          description: The value in a key-value pair.
+                          description: Value for the filter.
                           type: string
                       type: object
                     type: array
@@ -497,51 +512,65 @@ spec:
                   autoscaler.
                 properties:
                   condition:
-                    description: A list of conditions that you define to assign resources
-                      to your backup plans using tags.
+                    description: Condition-based filters used to specify sets of resources
+                      for a backup plan. See below for details.
                     items:
                       properties:
                         stringEquals:
+                          description: Filters the values of your tagged resources
+                            for only those resources that you tagged with the same
+                            value. Also called "exact matching". See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringLike:
+                          description: Filters the values of your tagged resources
+                            for matching tag values with the use of a wildcard character
+                            (*) anywhere in the string. For example, prod* or *rod*
+                            matches the tag value production. See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringNotEquals:
+                          description: Filters the values of your tagged resources
+                            for only those resources that you tagged that do not have
+                            the same value. Also called "negated matching". See below
+                            for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringNotLike:
+                          description: Filters the values of your tagged resources
+                            for non-matching tag values with the use of a wildcard
+                            character (*) anywhere in the string. See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
@@ -883,19 +912,19 @@ spec:
                     type: object
                   selectionTag:
                     description: Tag-based conditions used to specify a set of resources
-                      to assign to a backup plan.
+                      to assign to a backup plan. See below for details.
                     items:
                       properties:
                         key:
-                          description: The key in a key-value pair.
+                          description: Key for the filter.
                           type: string
                         type:
-                          description: An operation, such as StringEquals, that is
-                            applied to a key-value pair used to filter resources in
-                            a selection.
+                          description: An operation, such as STRINGEQUALS, that is
+                            applied to the key-value pair used to filter resources
+                            in a selection.
                           type: string
                         value:
-                          description: The value in a key-value pair.
+                          description: Value for the filter.
                           type: string
                       type: object
                     type: array
@@ -1078,51 +1107,65 @@ spec:
               atProvider:
                 properties:
                   condition:
-                    description: A list of conditions that you define to assign resources
-                      to your backup plans using tags.
+                    description: Condition-based filters used to specify sets of resources
+                      for a backup plan. See below for details.
                     items:
                       properties:
                         stringEquals:
+                          description: Filters the values of your tagged resources
+                            for only those resources that you tagged with the same
+                            value. Also called "exact matching". See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringLike:
+                          description: Filters the values of your tagged resources
+                            for matching tag values with the use of a wildcard character
+                            (*) anywhere in the string. For example, prod* or *rod*
+                            matches the tag value production. See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringNotEquals:
+                          description: Filters the values of your tagged resources
+                            for only those resources that you tagged that do not have
+                            the same value. Also called "negated matching". See below
+                            for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
                         stringNotLike:
+                          description: Filters the values of your tagged resources
+                            for non-matching tag values with the use of a wildcard
+                            character (*) anywhere in the string. See below for details.
                           items:
                             properties:
                               key:
-                                description: The key in a key-value pair.
+                                description: Key for the filter.
                                 type: string
                               value:
-                                description: The value in a key-value pair.
+                                description: Value for the filter.
                                 type: string
                             type: object
                           type: array
@@ -1153,6 +1196,11 @@ spec:
                     description: The backup plan ID to be associated with the selection
                       of resources.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resources:
                     description: An array of strings that either contain Amazon Resource
                       Names (ARNs) or match patterns of resources to assign to a backup
@@ -1163,19 +1211,19 @@ spec:
                     x-kubernetes-list-type: set
                   selectionTag:
                     description: Tag-based conditions used to specify a set of resources
-                      to assign to a backup plan.
+                      to assign to a backup plan. See below for details.
                     items:
                       properties:
                         key:
-                          description: The key in a key-value pair.
+                          description: Key for the filter.
                           type: string
                         type:
-                          description: An operation, such as StringEquals, that is
-                            applied to a key-value pair used to filter resources in
-                            a selection.
+                          description: An operation, such as STRINGEQUALS, that is
+                            applied to the key-value pair used to filter resources
+                            in a selection.
                           type: string
                         value:
-                          description: The value in a key-value pair.
+                          description: Value for the filter.
                           type: string
                       type: object
                     type: array

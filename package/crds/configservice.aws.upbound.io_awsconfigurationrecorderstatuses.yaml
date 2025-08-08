@@ -79,8 +79,9 @@ spec:
                       or disabled.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                 required:
                 - region
@@ -287,6 +288,11 @@ spec:
                     description: Whether the configuration recorder should be enabled
                       or disabled.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

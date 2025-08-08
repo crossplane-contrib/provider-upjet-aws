@@ -19,7 +19,7 @@ spec:
     - RESOURCES
     compression: GZIP
     format: textORcsv
-    region: us-east-1
+    s3Prefix: ""
     s3BucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -70,8 +70,8 @@ spec:
                 "Resource":"arn:aws:s3:::test-definition-bucket-axbjhdwjdk",
                 "Condition": {
                     "StringEquals": {
-                        "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
-                        "aws:SourceAccount": "${data.aws_account_id}"
+                        "aws:SourceArn": "arn:aws:cur:us-east-1:153891904029:definition/*",
+                        "aws:SourceAccount": "153891904029"
                     }
                 }
             },
@@ -85,8 +85,8 @@ spec:
                 "Resource": "arn:aws:s3:::test-definition-bucket-axbjhdwjdk/*",
                 "Condition": {
                     "StringEquals": {
-                        "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
-                        "aws:SourceAccount": "${data.aws_account_id}"
+                        "aws:SourceArn": "arn:aws:cur:us-east-1:153891904029:definition/*",
+                        "aws:SourceAccount": "153891904029"
                     }
                 }
             }
@@ -141,8 +141,8 @@ spec:
             "Resource":"arn:aws:s3:::test-definition-bucket-*",
             "Condition": {
               "StringEquals": {
-                "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
-                "aws:SourceAccount": "${data.aws_account_id}"
+                "aws:SourceArn": "arn:aws:cur:us-east-1:153891904029:definition/*",
+                "aws:SourceAccount": "153891904029"
               }
             }
           },
@@ -153,8 +153,8 @@ spec:
             "Resource": "arn:aws:s3:::test-definition-bucket-*/*",
             "Condition": {
               "StringEquals": {
-                "aws:SourceArn": "arn:aws:cur:us-east-1:${data.aws_account_id}:definition/*",
-                "aws:SourceAccount": "${data.aws_account_id}"
+                "aws:SourceArn": "arn:aws:cur:us-east-1:153891904029:definition/*",
+                "aws:SourceAccount": "153891904029"
               }
             }
           },

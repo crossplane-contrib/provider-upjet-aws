@@ -231,8 +231,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   targetGroupName:
                     description: The name of the target group.
@@ -616,6 +617,11 @@ spec:
                   rdsResourceId:
                     description: Identifier representing the DB Instance or DB Cluster
                       target.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   targetArn:
                     description: Amazon Resource Name (ARN) for the DB instance or

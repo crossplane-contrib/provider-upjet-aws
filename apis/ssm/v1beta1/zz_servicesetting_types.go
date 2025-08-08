@@ -29,6 +29,10 @@ type ServiceSettingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// ID of the service setting.
 	SettingID *string `json:"settingId,omitempty" tf:"setting_id,omitempty"`
 
@@ -41,10 +45,10 @@ type ServiceSettingObservation struct {
 
 type ServiceSettingParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the service setting.
 	// +kubebuilder:validation:Optional

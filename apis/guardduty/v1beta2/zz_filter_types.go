@@ -128,11 +128,14 @@ type FilterObservation struct {
 	// Represents the criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
 	FindingCriteria *FindingCriteriaObservation `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
-	// A compound field, consisting of the ID of the GuardDuty detector and the name of the filter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
 	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -175,10 +178,10 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

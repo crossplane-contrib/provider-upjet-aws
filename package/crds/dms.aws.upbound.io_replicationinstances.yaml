@@ -199,8 +199,9 @@ spec:
                       IP address.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replicationInstanceClass:
                     description: The compute and memory capacity of the replication
@@ -930,6 +931,11 @@ spec:
                       IP address. A value of false represents an instance with a private
                       IP address.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replicationInstanceArn:
                     description: The Amazon Resource Name (ARN) of the replication
                       instance.

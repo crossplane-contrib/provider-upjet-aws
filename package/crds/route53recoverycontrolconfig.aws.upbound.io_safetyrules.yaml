@@ -328,10 +328,6 @@ spec:
                   name:
                     description: Name describing the safety rule.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   ruleConfig:
                     description: Configuration block for safety rule criteria. See
                       below.
@@ -440,8 +436,6 @@ spec:
                     description: Evaluation period, in milliseconds (ms), during which
                       any request against the target routing controls will fail.
                     type: number
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -1437,10 +1431,6 @@ spec:
                   name:
                     description: Name describing the safety rule.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   ruleConfig:
                     description: Configuration block for safety rule criteria. See
                       below.
@@ -1547,8 +1537,6 @@ spec:
                     description: Evaluation period, in milliseconds (ms), during which
                       any request against the target routing controls will fail.
                     type: number
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-

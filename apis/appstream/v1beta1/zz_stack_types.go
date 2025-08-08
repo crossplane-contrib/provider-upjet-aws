@@ -164,6 +164,10 @@ type StackObservation struct {
 	// URL that users are redirected to after their streaming session ends.
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block for the storage connectors to enable.
 	// See storage_connectors below.
 	StorageConnectors []StorageConnectorsObservation `json:"storageConnectors,omitempty" tf:"storage_connectors,omitempty"`
@@ -221,10 +225,10 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block for the storage connectors to enable.
 	// See storage_connectors below.
@@ -314,7 +318,7 @@ type StreamingExperienceSettingsParameters struct {
 type UserSettingsInitParameters struct {
 
 	// Action that is enabled or disabled.
-	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
+	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Whether the action is enabled or disabled.
@@ -325,7 +329,7 @@ type UserSettingsInitParameters struct {
 type UserSettingsObservation struct {
 
 	// Action that is enabled or disabled.
-	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
+	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Whether the action is enabled or disabled.
@@ -336,7 +340,7 @@ type UserSettingsObservation struct {
 type UserSettingsParameters struct {
 
 	// Action that is enabled or disabled.
-	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
+	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 

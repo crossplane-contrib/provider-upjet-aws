@@ -11,5 +11,4 @@ spec:
     policyIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     targetId: "123456789012"

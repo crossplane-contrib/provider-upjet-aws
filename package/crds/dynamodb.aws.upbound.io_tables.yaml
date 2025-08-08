@@ -280,6 +280,10 @@ spec:
                             can take 10 minutes to enable for new tables. If the point_in_time_recovery
                             block is not provided, this defaults to false.
                           type: boolean
+                        recoveryPeriodInDays:
+                          description: Number of preceding days for which continuous
+                            backups are taken and maintained. Default is 35.
+                          type: number
                       type: object
                     type: array
                   rangeKey:
@@ -291,35 +295,39 @@ spec:
                       is PROVISIONED, this field is required.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replica:
                     description: Configuration block(s) with DynamoDB Global Tables
                       V2 (version 2019.11.21) replication configurations. See below.
                     items:
                       properties:
+                        consistencyMode:
+                          description: Whether this global table will be using STRONG
+                            consistency mode or EVENTUAL consistency mode. Default
+                            value is EVENTUAL.
+                          type: string
                         kmsKeyArn:
-                          description: 'ARN of the CMK that should be used for the
-                            AWS KMS encryption. This argument should only be used
-                            if the key is different from the default KMS-managed DynamoDB
-                            key, alias/aws/dynamodb. Note: This attribute will not
-                            be populated with the ARN of default keys.'
+                          description: |-
+                            ARN of the CMK that should be used for the AWS KMS encryption.
+                            This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+                            Note: This attribute will not be populated with the ARN of default keys.
+                            Note: Changing this value will recreate the replica.
                           type: string
                         pointInTimeRecovery:
                           description: Whether to enable Point In Time Recovery for
                             the replica. Default is false.
                           type: boolean
                         propagateTags:
-                          description: 'Whether to propagate the global table''s tags
-                            to a replica. Default is false. Changes to tags only move
-                            in one direction: from global (source) to replica. In
-                            other words, tag drift on a replica will not trigger an
-                            update. Tag or replica changes on the global table, whether
-                            from drift or configuration changes, are propagated to
-                            replicas. Changing from true to false on a subsequent
-                            apply means replica tags are left as they were, unmanaged,
-                            not deleted.'
+                          description: |-
+                            Whether to propagate the global table's tags to a replica.
+                            Default is false.
+                            Changes to tags only move in one direction: from global (source) to replica.
+                            Tag drift on a replica will not trigger an update.
+                            Tag changes on the global table are propagated to replicas.
+                            Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
                           type: boolean
                         regionName:
                           description: Region name of the replica.
@@ -344,7 +352,8 @@ spec:
                   serverSideEncryption:
                     description: Encryption at rest options. AWS DynamoDB tables are
                       automatically encrypted at rest with an AWS-owned Customer Master
-                      Key if this argument isn't specified. See below.
+                      Key if this argument isn't specified. Must be supplied for cross-region
+                      restores. See below.
                     items:
                       properties:
                         enabled:
@@ -392,11 +401,14 @@ spec:
                     items:
                       properties:
                         attributeName:
-                          description: Name of the table attribute to store the TTL
-                            timestamp in.
+                          description: |-
+                            Name of the table attribute to store the TTL timestamp in.
+                            Required if enabled is true, must not be set otherwise.
                           type: string
                         enabled:
-                          description: Whether TTL is enabled.
+                          description: |-
+                            Whether TTL is enabled.
+                            Default value is false.
                           type: boolean
                       type: object
                     type: array
@@ -627,6 +639,10 @@ spec:
                             can take 10 minutes to enable for new tables. If the point_in_time_recovery
                             block is not provided, this defaults to false.
                           type: boolean
+                        recoveryPeriodInDays:
+                          description: Number of preceding days for which continuous
+                            backups are taken and maintained. Default is 35.
+                          type: number
                       type: object
                     type: array
                   rangeKey:
@@ -642,27 +658,30 @@ spec:
                       V2 (version 2019.11.21) replication configurations. See below.
                     items:
                       properties:
+                        consistencyMode:
+                          description: Whether this global table will be using STRONG
+                            consistency mode or EVENTUAL consistency mode. Default
+                            value is EVENTUAL.
+                          type: string
                         kmsKeyArn:
-                          description: 'ARN of the CMK that should be used for the
-                            AWS KMS encryption. This argument should only be used
-                            if the key is different from the default KMS-managed DynamoDB
-                            key, alias/aws/dynamodb. Note: This attribute will not
-                            be populated with the ARN of default keys.'
+                          description: |-
+                            ARN of the CMK that should be used for the AWS KMS encryption.
+                            This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+                            Note: This attribute will not be populated with the ARN of default keys.
+                            Note: Changing this value will recreate the replica.
                           type: string
                         pointInTimeRecovery:
                           description: Whether to enable Point In Time Recovery for
                             the replica. Default is false.
                           type: boolean
                         propagateTags:
-                          description: 'Whether to propagate the global table''s tags
-                            to a replica. Default is false. Changes to tags only move
-                            in one direction: from global (source) to replica. In
-                            other words, tag drift on a replica will not trigger an
-                            update. Tag or replica changes on the global table, whether
-                            from drift or configuration changes, are propagated to
-                            replicas. Changing from true to false on a subsequent
-                            apply means replica tags are left as they were, unmanaged,
-                            not deleted.'
+                          description: |-
+                            Whether to propagate the global table's tags to a replica.
+                            Default is false.
+                            Changes to tags only move in one direction: from global (source) to replica.
+                            Tag drift on a replica will not trigger an update.
+                            Tag changes on the global table are propagated to replicas.
+                            Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
                           type: boolean
                         regionName:
                           description: Region name of the replica.
@@ -687,7 +706,8 @@ spec:
                   serverSideEncryption:
                     description: Encryption at rest options. AWS DynamoDB tables are
                       automatically encrypted at rest with an AWS-owned Customer Master
-                      Key if this argument isn't specified. See below.
+                      Key if this argument isn't specified. Must be supplied for cross-region
+                      restores. See below.
                     items:
                       properties:
                         enabled:
@@ -735,11 +755,14 @@ spec:
                     items:
                       properties:
                         attributeName:
-                          description: Name of the table attribute to store the TTL
-                            timestamp in.
+                          description: |-
+                            Name of the table attribute to store the TTL timestamp in.
+                            Required if enabled is true, must not be set otherwise.
                           type: string
                         enabled:
-                          description: Whether TTL is enabled.
+                          description: |-
+                            Whether TTL is enabled.
+                            Default value is false.
                           type: boolean
                       type: object
                     type: array
@@ -1133,6 +1156,10 @@ spec:
                             can take 10 minutes to enable for new tables. If the point_in_time_recovery
                             block is not provided, this defaults to false.
                           type: boolean
+                        recoveryPeriodInDays:
+                          description: Number of preceding days for which continuous
+                            backups are taken and maintained. Default is 35.
+                          type: number
                       type: object
                     type: array
                   rangeKey:
@@ -1143,6 +1170,11 @@ spec:
                     description: Number of read units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replica:
                     description: Configuration block(s) with DynamoDB Global Tables
                       V2 (version 2019.11.21) replication configurations. See below.
@@ -1151,27 +1183,30 @@ spec:
                         arn:
                           description: ARN of the replica
                           type: string
+                        consistencyMode:
+                          description: Whether this global table will be using STRONG
+                            consistency mode or EVENTUAL consistency mode. Default
+                            value is EVENTUAL.
+                          type: string
                         kmsKeyArn:
-                          description: 'ARN of the CMK that should be used for the
-                            AWS KMS encryption. This argument should only be used
-                            if the key is different from the default KMS-managed DynamoDB
-                            key, alias/aws/dynamodb. Note: This attribute will not
-                            be populated with the ARN of default keys.'
+                          description: |-
+                            ARN of the CMK that should be used for the AWS KMS encryption.
+                            This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+                            Note: This attribute will not be populated with the ARN of default keys.
+                            Note: Changing this value will recreate the replica.
                           type: string
                         pointInTimeRecovery:
                           description: Whether to enable Point In Time Recovery for
                             the replica. Default is false.
                           type: boolean
                         propagateTags:
-                          description: 'Whether to propagate the global table''s tags
-                            to a replica. Default is false. Changes to tags only move
-                            in one direction: from global (source) to replica. In
-                            other words, tag drift on a replica will not trigger an
-                            update. Tag or replica changes on the global table, whether
-                            from drift or configuration changes, are propagated to
-                            replicas. Changing from true to false on a subsequent
-                            apply means replica tags are left as they were, unmanaged,
-                            not deleted.'
+                          description: |-
+                            Whether to propagate the global table's tags to a replica.
+                            Default is false.
+                            Changes to tags only move in one direction: from global (source) to replica.
+                            Tag drift on a replica will not trigger an update.
+                            Tag changes on the global table are propagated to replicas.
+                            Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
                           type: boolean
                         regionName:
                           description: Region name of the replica.
@@ -1208,7 +1243,8 @@ spec:
                   serverSideEncryption:
                     description: Encryption at rest options. AWS DynamoDB tables are
                       automatically encrypted at rest with an AWS-owned Customer Master
-                      Key if this argument isn't specified. See below.
+                      Key if this argument isn't specified. Must be supplied for cross-region
+                      restores. See below.
                     items:
                       properties:
                         enabled:
@@ -1275,11 +1311,14 @@ spec:
                     items:
                       properties:
                         attributeName:
-                          description: Name of the table attribute to store the TTL
-                            timestamp in.
+                          description: |-
+                            Name of the table attribute to store the TTL timestamp in.
+                            Required if enabled is true, must not be set otherwise.
                           type: string
                         enabled:
-                          description: Whether TTL is enabled.
+                          description: |-
+                            Whether TTL is enabled.
+                            Default value is false.
                           type: boolean
                       type: object
                     type: array
@@ -1594,6 +1633,10 @@ spec:
                           can take 10 minutes to enable for new tables. If the point_in_time_recovery
                           block is not provided, this defaults to false.
                         type: boolean
+                      recoveryPeriodInDays:
+                        description: Number of preceding days for which continuous
+                          backups are taken and maintained. Default is 35.
+                        type: number
                     type: object
                   rangeKey:
                     description: Attribute to use as the range (sort) key. Must also
@@ -1604,35 +1647,39 @@ spec:
                       is PROVISIONED, this field is required.
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replica:
                     description: Configuration block(s) with DynamoDB Global Tables
                       V2 (version 2019.11.21) replication configurations. See below.
                     items:
                       properties:
+                        consistencyMode:
+                          description: Whether this global table will be using STRONG
+                            consistency mode or EVENTUAL consistency mode. Default
+                            value is EVENTUAL.
+                          type: string
                         kmsKeyArn:
-                          description: 'ARN of the CMK that should be used for the
-                            AWS KMS encryption. This argument should only be used
-                            if the key is different from the default KMS-managed DynamoDB
-                            key, alias/aws/dynamodb. Note: This attribute will not
-                            be populated with the ARN of default keys.'
+                          description: |-
+                            ARN of the CMK that should be used for the AWS KMS encryption.
+                            This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+                            Note: This attribute will not be populated with the ARN of default keys.
+                            Note: Changing this value will recreate the replica.
                           type: string
                         pointInTimeRecovery:
                           description: Whether to enable Point In Time Recovery for
                             the replica. Default is false.
                           type: boolean
                         propagateTags:
-                          description: 'Whether to propagate the global table''s tags
-                            to a replica. Default is false. Changes to tags only move
-                            in one direction: from global (source) to replica. In
-                            other words, tag drift on a replica will not trigger an
-                            update. Tag or replica changes on the global table, whether
-                            from drift or configuration changes, are propagated to
-                            replicas. Changing from true to false on a subsequent
-                            apply means replica tags are left as they were, unmanaged,
-                            not deleted.'
+                          description: |-
+                            Whether to propagate the global table's tags to a replica.
+                            Default is false.
+                            Changes to tags only move in one direction: from global (source) to replica.
+                            Tag drift on a replica will not trigger an update.
+                            Tag changes on the global table are propagated to replicas.
+                            Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
                           type: boolean
                         regionName:
                           description: Region name of the replica.
@@ -1923,6 +1970,10 @@ spec:
                           can take 10 minutes to enable for new tables. If the point_in_time_recovery
                           block is not provided, this defaults to false.
                         type: boolean
+                      recoveryPeriodInDays:
+                        description: Number of preceding days for which continuous
+                          backups are taken and maintained. Default is 35.
+                        type: number
                     type: object
                   rangeKey:
                     description: Attribute to use as the range (sort) key. Must also
@@ -1937,27 +1988,30 @@ spec:
                       V2 (version 2019.11.21) replication configurations. See below.
                     items:
                       properties:
+                        consistencyMode:
+                          description: Whether this global table will be using STRONG
+                            consistency mode or EVENTUAL consistency mode. Default
+                            value is EVENTUAL.
+                          type: string
                         kmsKeyArn:
-                          description: 'ARN of the CMK that should be used for the
-                            AWS KMS encryption. This argument should only be used
-                            if the key is different from the default KMS-managed DynamoDB
-                            key, alias/aws/dynamodb. Note: This attribute will not
-                            be populated with the ARN of default keys.'
+                          description: |-
+                            ARN of the CMK that should be used for the AWS KMS encryption.
+                            This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+                            Note: This attribute will not be populated with the ARN of default keys.
+                            Note: Changing this value will recreate the replica.
                           type: string
                         pointInTimeRecovery:
                           description: Whether to enable Point In Time Recovery for
                             the replica. Default is false.
                           type: boolean
                         propagateTags:
-                          description: 'Whether to propagate the global table''s tags
-                            to a replica. Default is false. Changes to tags only move
-                            in one direction: from global (source) to replica. In
-                            other words, tag drift on a replica will not trigger an
-                            update. Tag or replica changes on the global table, whether
-                            from drift or configuration changes, are propagated to
-                            replicas. Changing from true to false on a subsequent
-                            apply means replica tags are left as they were, unmanaged,
-                            not deleted.'
+                          description: |-
+                            Whether to propagate the global table's tags to a replica.
+                            Default is false.
+                            Changes to tags only move in one direction: from global (source) to replica.
+                            Tag drift on a replica will not trigger an update.
+                            Tag changes on the global table are propagated to replicas.
+                            Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
                           type: boolean
                         regionName:
                           description: Region name of the replica.
@@ -2411,6 +2465,10 @@ spec:
                           can take 10 minutes to enable for new tables. If the point_in_time_recovery
                           block is not provided, this defaults to false.
                         type: boolean
+                      recoveryPeriodInDays:
+                        description: Number of preceding days for which continuous
+                          backups are taken and maintained. Default is 35.
+                        type: number
                     type: object
                   rangeKey:
                     description: Attribute to use as the range (sort) key. Must also
@@ -2420,6 +2478,11 @@ spec:
                     description: Number of read units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
                     type: number
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replica:
                     description: Configuration block(s) with DynamoDB Global Tables
                       V2 (version 2019.11.21) replication configurations. See below.
@@ -2428,27 +2491,30 @@ spec:
                         arn:
                           description: ARN of the replica
                           type: string
+                        consistencyMode:
+                          description: Whether this global table will be using STRONG
+                            consistency mode or EVENTUAL consistency mode. Default
+                            value is EVENTUAL.
+                          type: string
                         kmsKeyArn:
-                          description: 'ARN of the CMK that should be used for the
-                            AWS KMS encryption. This argument should only be used
-                            if the key is different from the default KMS-managed DynamoDB
-                            key, alias/aws/dynamodb. Note: This attribute will not
-                            be populated with the ARN of default keys.'
+                          description: |-
+                            ARN of the CMK that should be used for the AWS KMS encryption.
+                            This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+                            Note: This attribute will not be populated with the ARN of default keys.
+                            Note: Changing this value will recreate the replica.
                           type: string
                         pointInTimeRecovery:
                           description: Whether to enable Point In Time Recovery for
                             the replica. Default is false.
                           type: boolean
                         propagateTags:
-                          description: 'Whether to propagate the global table''s tags
-                            to a replica. Default is false. Changes to tags only move
-                            in one direction: from global (source) to replica. In
-                            other words, tag drift on a replica will not trigger an
-                            update. Tag or replica changes on the global table, whether
-                            from drift or configuration changes, are propagated to
-                            replicas. Changing from true to false on a subsequent
-                            apply means replica tags are left as they were, unmanaged,
-                            not deleted.'
+                          description: |-
+                            Whether to propagate the global table's tags to a replica.
+                            Default is false.
+                            Changes to tags only move in one direction: from global (source) to replica.
+                            Tag drift on a replica will not trigger an update.
+                            Tag changes on the global table are propagated to replicas.
+                            Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
                           type: boolean
                         regionName:
                           description: Region name of the replica.

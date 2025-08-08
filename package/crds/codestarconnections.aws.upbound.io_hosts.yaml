@@ -85,8 +85,9 @@ spec:
                       code repository is configured.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcConfiguration:
                     description: The VPC configuration to be provisioned for the host.
@@ -385,6 +386,11 @@ spec:
                   providerType:
                     description: The name of the external provider where your third-party
                       code repository is configured.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: The CodeStar Host status. Possible values are PENDING,
@@ -553,8 +559,9 @@ spec:
                       code repository is configured.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcConfiguration:
                     description: The VPC configuration to be provisioned for the host.
@@ -849,6 +856,11 @@ spec:
                   providerType:
                     description: The name of the external provider where your third-party
                       code repository is configured.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: The CodeStar Host status. Possible values are PENDING,

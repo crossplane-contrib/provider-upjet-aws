@@ -18,9 +18,9 @@ spec:
     region: us-west-1
     rule:
     - expiration:
-        days: 90
+      - days: 90
       filter:
-        prefix: tmp/
+      - prefix: tmp/
       id: rule-1
       status: Enabled
 

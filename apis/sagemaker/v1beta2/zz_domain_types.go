@@ -15,7 +15,7 @@ import (
 
 type AppLifecycleManagementIdleSettingsInitParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
@@ -30,7 +30,7 @@ type AppLifecycleManagementIdleSettingsInitParameters struct {
 
 type AppLifecycleManagementIdleSettingsObservation struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
@@ -45,7 +45,7 @@ type AppLifecycleManagementIdleSettingsObservation struct {
 
 type AppLifecycleManagementIdleSettingsParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
@@ -83,10 +83,10 @@ type AppLifecycleManagementParameters struct {
 
 type CanvasAppSettingsInitParameters struct {
 
-	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
+	// The model deployment settings for the SageMaker AI Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings *DirectDeploySettingsInitParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
-	// The settings for running Amazon EMR Serverless jobs in SageMaker Canvas. See emr_serverless_settings Block below.
+	// The settings for running Amazon EMR Serverless jobs in SageMaker AI Canvas. See emr_serverless_settings Block below.
 	EmrServerlessSettings *EmrServerlessSettingsInitParameters `json:"emrServerlessSettings,omitempty" tf:"emr_serverless_settings,omitempty"`
 
 	GenerativeAISettings *GenerativeAISettingsInitParameters `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
@@ -97,22 +97,22 @@ type CanvasAppSettingsInitParameters struct {
 	// The settings for document querying. See kendra_settings Block below.
 	KendraSettings *KendraSettingsInitParameters `json:"kendraSettings,omitempty" tf:"kendra_settings,omitempty"`
 
-	// The model registry settings for the SageMaker Canvas application. See model_register_settings Block below.
+	// The model registry settings for the SageMaker AI Canvas application. See model_register_settings Block below.
 	ModelRegisterSettings *ModelRegisterSettingsInitParameters `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
 
 	// Time series forecast settings for the Canvas app. See time_series_forecasting_settings Block below.
 	TimeSeriesForecastingSettings *TimeSeriesForecastingSettingsInitParameters `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 
-	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
+	// The workspace settings for the SageMaker AI Canvas application. See workspace_settings Block below.
 	WorkspaceSettings *WorkspaceSettingsInitParameters `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
 }
 
 type CanvasAppSettingsObservation struct {
 
-	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
+	// The model deployment settings for the SageMaker AI Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings *DirectDeploySettingsObservation `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
-	// The settings for running Amazon EMR Serverless jobs in SageMaker Canvas. See emr_serverless_settings Block below.
+	// The settings for running Amazon EMR Serverless jobs in SageMaker AI Canvas. See emr_serverless_settings Block below.
 	EmrServerlessSettings *EmrServerlessSettingsObservation `json:"emrServerlessSettings,omitempty" tf:"emr_serverless_settings,omitempty"`
 
 	GenerativeAISettings *GenerativeAISettingsObservation `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
@@ -123,23 +123,23 @@ type CanvasAppSettingsObservation struct {
 	// The settings for document querying. See kendra_settings Block below.
 	KendraSettings *KendraSettingsObservation `json:"kendraSettings,omitempty" tf:"kendra_settings,omitempty"`
 
-	// The model registry settings for the SageMaker Canvas application. See model_register_settings Block below.
+	// The model registry settings for the SageMaker AI Canvas application. See model_register_settings Block below.
 	ModelRegisterSettings *ModelRegisterSettingsObservation `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
 
 	// Time series forecast settings for the Canvas app. See time_series_forecasting_settings Block below.
 	TimeSeriesForecastingSettings *TimeSeriesForecastingSettingsObservation `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 
-	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
+	// The workspace settings for the SageMaker AI Canvas application. See workspace_settings Block below.
 	WorkspaceSettings *WorkspaceSettingsObservation `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
 }
 
 type CanvasAppSettingsParameters struct {
 
-	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
+	// The model deployment settings for the SageMaker AI Canvas application. See direct_deploy_settings Block below.
 	// +kubebuilder:validation:Optional
 	DirectDeploySettings *DirectDeploySettingsParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
-	// The settings for running Amazon EMR Serverless jobs in SageMaker Canvas. See emr_serverless_settings Block below.
+	// The settings for running Amazon EMR Serverless jobs in SageMaker AI Canvas. See emr_serverless_settings Block below.
 	// +kubebuilder:validation:Optional
 	EmrServerlessSettings *EmrServerlessSettingsParameters `json:"emrServerlessSettings,omitempty" tf:"emr_serverless_settings,omitempty"`
 
@@ -154,7 +154,7 @@ type CanvasAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	KendraSettings *KendraSettingsParameters `json:"kendraSettings,omitempty" tf:"kendra_settings,omitempty"`
 
-	// The model registry settings for the SageMaker Canvas application. See model_register_settings Block below.
+	// The model registry settings for the SageMaker AI Canvas application. See model_register_settings Block below.
 	// +kubebuilder:validation:Optional
 	ModelRegisterSettings *ModelRegisterSettingsParameters `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
 
@@ -162,7 +162,7 @@ type CanvasAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TimeSeriesForecastingSettings *TimeSeriesForecastingSettingsParameters `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 
-	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
+	// The workspace settings for the SageMaker AI Canvas application. See workspace_settings Block below.
 	// +kubebuilder:validation:Optional
 	WorkspaceSettings *WorkspaceSettingsParameters `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
 }
@@ -227,16 +227,16 @@ type CodeEditorAppSettingsCustomImageParameters struct {
 
 type CodeEditorAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -245,16 +245,16 @@ type CodeEditorAppSettingsDefaultResourceSpecInitParameters struct {
 
 type CodeEditorAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -263,7 +263,7 @@ type CodeEditorAppSettingsDefaultResourceSpecObservation struct {
 
 type CodeEditorAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -271,11 +271,11 @@ type CodeEditorAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -292,10 +292,10 @@ type CodeEditorAppSettingsInitParameters struct {
 	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []CodeEditorAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *CodeEditorAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -311,10 +311,10 @@ type CodeEditorAppSettingsObservation struct {
 	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []CodeEditorAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *CodeEditorAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -332,11 +332,11 @@ type CodeEditorAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []CodeEditorAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *CodeEditorAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -351,7 +351,7 @@ type CustomFileSystemConfigEFSFileSystemConfigInitParameters struct {
 	// The ID of your Amazon EFS file system.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	// The path to the file system directory that is accessible in Amazon SageMaker AI Studio. Permitted users can access only this directory and below.
 	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
 }
 
@@ -360,7 +360,7 @@ type CustomFileSystemConfigEFSFileSystemConfigObservation struct {
 	// The ID of your Amazon EFS file system.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	// The path to the file system directory that is accessible in Amazon SageMaker AI Studio. Permitted users can access only this directory and below.
 	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
 }
 
@@ -370,7 +370,7 @@ type CustomFileSystemConfigEFSFileSystemConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
 
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	// The path to the file system directory that is accessible in Amazon SageMaker AI Studio. Permitted users can access only this directory and below.
 	// +kubebuilder:validation:Optional
 	FileSystemPath *string `json:"fileSystemPath" tf:"file_system_path,omitempty"`
 }
@@ -493,16 +493,16 @@ type DefaultEBSStorageSettingsParameters struct {
 
 type DefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -511,16 +511,16 @@ type DefaultResourceSpecInitParameters struct {
 
 type DefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -529,7 +529,7 @@ type DefaultResourceSpecObservation struct {
 
 type DefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -537,11 +537,11 @@ type DefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -552,7 +552,7 @@ type DefaultResourceSpecParameters struct {
 
 type DefaultSpaceSettingsInitParameters struct {
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See custom_file_system_config Block below.
 	CustomFileSystemConfig []CustomFileSystemConfigInitParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
 	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
@@ -580,7 +580,7 @@ type DefaultSpaceSettingsInitParameters struct {
 
 type DefaultSpaceSettingsObservation struct {
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See custom_file_system_config Block below.
 	CustomFileSystemConfig []CustomFileSystemConfigObservation `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
 	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
@@ -608,7 +608,7 @@ type DefaultSpaceSettingsObservation struct {
 
 type DefaultSpaceSettingsParameters struct {
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See custom_file_system_config Block below.
 	// +kubebuilder:validation:Optional
 	CustomFileSystemConfig []CustomFileSystemConfigParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
@@ -701,7 +701,7 @@ type DefaultUserSettingsInitParameters struct {
 	// The Code Editor application settings. See code_editor_app_settings Block below.
 	CodeEditorAppSettings *CodeEditorAppSettingsInitParameters `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See custom_file_system_config Block below.
 	CustomFileSystemConfig []DefaultUserSettingsCustomFileSystemConfigInitParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
 	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
@@ -785,16 +785,16 @@ type DefaultUserSettingsJupyterLabAppSettingsInitParameters struct {
 	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []DefaultUserSettingsJupyterLabAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []JupyterLabAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *JupyterLabAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
-	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker AI (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
 	EmrSettings *JupyterLabAppSettingsEmrSettingsInitParameters `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -810,16 +810,16 @@ type DefaultUserSettingsJupyterLabAppSettingsObservation struct {
 	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []DefaultUserSettingsJupyterLabAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []JupyterLabAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *JupyterLabAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
-	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker AI (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
 	EmrSettings *JupyterLabAppSettingsEmrSettingsObservation `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -837,19 +837,19 @@ type DefaultUserSettingsJupyterLabAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []DefaultUserSettingsJupyterLabAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []JupyterLabAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *JupyterLabAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
-	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker AI (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
 	// +kubebuilder:validation:Optional
 	EmrSettings *JupyterLabAppSettingsEmrSettingsParameters `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
 
@@ -880,16 +880,16 @@ type DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryParameters struct 
 
 type DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -898,16 +898,16 @@ type DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameter
 
 type DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -916,7 +916,7 @@ type DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecObservation s
 
 type DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -924,11 +924,11 @@ type DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecParameters st
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -939,10 +939,10 @@ type DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecParameters st
 
 type DefaultUserSettingsJupyterServerAppSettingsInitParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -952,10 +952,10 @@ type DefaultUserSettingsJupyterServerAppSettingsInitParameters struct {
 
 type DefaultUserSettingsJupyterServerAppSettingsObservation struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -965,11 +965,11 @@ type DefaultUserSettingsJupyterServerAppSettingsObservation struct {
 
 type DefaultUserSettingsJupyterServerAppSettingsParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *DefaultUserSettingsJupyterServerAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -1058,16 +1058,16 @@ type DefaultUserSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 
 type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -1076,16 +1076,16 @@ type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameter
 
 type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -1094,7 +1094,7 @@ type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation s
 
 type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -1102,11 +1102,11 @@ type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters st
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -1117,10 +1117,10 @@ type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters st
 
 type DefaultUserSettingsKernelGatewayAppSettingsInitParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []DefaultUserSettingsKernelGatewayAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1130,10 +1130,10 @@ type DefaultUserSettingsKernelGatewayAppSettingsInitParameters struct {
 
 type DefaultUserSettingsKernelGatewayAppSettingsObservation struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []DefaultUserSettingsKernelGatewayAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1143,11 +1143,11 @@ type DefaultUserSettingsKernelGatewayAppSettingsObservation struct {
 
 type DefaultUserSettingsKernelGatewayAppSettingsParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []DefaultUserSettingsKernelGatewayAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -1168,7 +1168,7 @@ type DefaultUserSettingsObservation struct {
 	// The Code Editor application settings. See code_editor_app_settings Block below.
 	CodeEditorAppSettings *CodeEditorAppSettingsObservation `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See custom_file_system_config Block below.
 	CustomFileSystemConfig []DefaultUserSettingsCustomFileSystemConfigObservation `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
 	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
@@ -1229,7 +1229,7 @@ type DefaultUserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CodeEditorAppSettings *CodeEditorAppSettingsParameters `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker AI Studio. See custom_file_system_config Block below.
 	// +kubebuilder:validation:Optional
 	CustomFileSystemConfig []DefaultUserSettingsCustomFileSystemConfigParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
@@ -1479,13 +1479,17 @@ type DomainObservation struct {
 	// The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the domain.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See retention_policy Block below.
 	RetentionPolicy *RetentionPolicyObservation `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
 	SecurityGroupIDForDomainBoundary *string `json:"securityGroupIdForDomainBoundary,omitempty" tf:"security_group_id_for_domain_boundary,omitempty"`
 
-	// The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after September 19, 2023.
+	// The ARN of the application managed by SageMaker AI in IAM Identity Center. This value is only returned for domains created after September 19, 2023.
 	SingleSignOnApplicationArn *string `json:"singleSignOnApplicationArn,omitempty" tf:"single_sign_on_application_arn,omitempty"`
 
 	// The SSO managed application instance ID.
@@ -1556,10 +1560,10 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See retention_policy Block below.
 	// +kubebuilder:validation:Optional
@@ -1609,7 +1613,7 @@ type DomainSettingsInitParameters struct {
 	// A collection of settings that configure the domain’s Docker interaction. see docker_settings Block below.
 	DockerSettings *DockerSettingsInitParameters `json:"dockerSettings,omitempty" tf:"docker_settings,omitempty"`
 
-	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
+	// The configuration for attaching a SageMaker AI user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
 	// A collection of settings that configure the RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings Block below.
@@ -1625,7 +1629,7 @@ type DomainSettingsObservation struct {
 	// A collection of settings that configure the domain’s Docker interaction. see docker_settings Block below.
 	DockerSettings *DockerSettingsObservation `json:"dockerSettings,omitempty" tf:"docker_settings,omitempty"`
 
-	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
+	// The configuration for attaching a SageMaker AI user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
 	// A collection of settings that configure the RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings Block below.
@@ -1642,7 +1646,7 @@ type DomainSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DockerSettings *DockerSettingsParameters `json:"dockerSettings,omitempty" tf:"docker_settings,omitempty"`
 
-	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
+	// The configuration for attaching a SageMaker AI user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
@@ -1661,7 +1665,7 @@ type EFSFileSystemConfigInitParameters struct {
 	// The ID of your Amazon EFS file system.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	// The path to the file system directory that is accessible in Amazon SageMaker AI Studio. Permitted users can access only this directory and below.
 	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
 }
 
@@ -1670,7 +1674,7 @@ type EFSFileSystemConfigObservation struct {
 	// The ID of your Amazon EFS file system.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	// The path to the file system directory that is accessible in Amazon SageMaker AI Studio. Permitted users can access only this directory and below.
 	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
 }
 
@@ -1680,14 +1684,14 @@ type EFSFileSystemConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
 
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	// The path to the file system directory that is accessible in Amazon SageMaker AI Studio. Permitted users can access only this directory and below.
 	// +kubebuilder:validation:Optional
 	FileSystemPath *string `json:"fileSystemPath" tf:"file_system_path,omitempty"`
 }
 
 type EmrServerlessSettingsInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
+	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker AI Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
@@ -1696,7 +1700,7 @@ type EmrServerlessSettingsInitParameters struct {
 
 type EmrServerlessSettingsObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
+	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker AI Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
@@ -1705,7 +1709,7 @@ type EmrServerlessSettingsObservation struct {
 
 type EmrServerlessSettingsParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
+	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker AI Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
@@ -1716,7 +1720,7 @@ type EmrServerlessSettingsParameters struct {
 
 type EmrSettingsInitParameters struct {
 
-	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker AI can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker AI domain.
 	// +listType=set
 	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
 
@@ -1727,7 +1731,7 @@ type EmrSettingsInitParameters struct {
 
 type EmrSettingsObservation struct {
 
-	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker AI can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker AI domain.
 	// +listType=set
 	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
 
@@ -1738,7 +1742,7 @@ type EmrSettingsObservation struct {
 
 type EmrSettingsParameters struct {
 
-	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker AI can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker AI domain.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
@@ -1809,7 +1813,7 @@ type IdentityProviderOauthSettingsParameters struct {
 
 type IdleSettingsInitParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
@@ -1824,7 +1828,7 @@ type IdleSettingsInitParameters struct {
 
 type IdleSettingsObservation struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
@@ -1839,7 +1843,7 @@ type IdleSettingsObservation struct {
 
 type IdleSettingsParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
@@ -1858,7 +1862,7 @@ type IdleSettingsParameters struct {
 
 type JupyterLabAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
@@ -1873,7 +1877,7 @@ type JupyterLabAppSettingsAppLifecycleManagementIdleSettingsInitParameters struc
 
 type JupyterLabAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
@@ -1888,7 +1892,7 @@ type JupyterLabAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
 
 type JupyterLabAppSettingsAppLifecycleManagementIdleSettingsParameters struct {
 
-	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// The time that SageMaker AI waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
@@ -1984,16 +1988,16 @@ type JupyterLabAppSettingsCustomImageParameters struct {
 
 type JupyterLabAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2002,16 +2006,16 @@ type JupyterLabAppSettingsDefaultResourceSpecInitParameters struct {
 
 type JupyterLabAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2020,7 +2024,7 @@ type JupyterLabAppSettingsDefaultResourceSpecObservation struct {
 
 type JupyterLabAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -2028,11 +2032,11 @@ type JupyterLabAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -2043,7 +2047,7 @@ type JupyterLabAppSettingsDefaultResourceSpecParameters struct {
 
 type JupyterLabAppSettingsEmrSettingsInitParameters struct {
 
-	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker AI can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker AI domain.
 	// +listType=set
 	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
 
@@ -2054,7 +2058,7 @@ type JupyterLabAppSettingsEmrSettingsInitParameters struct {
 
 type JupyterLabAppSettingsEmrSettingsObservation struct {
 
-	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker AI can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker AI domain.
 	// +listType=set
 	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
 
@@ -2065,7 +2069,7 @@ type JupyterLabAppSettingsEmrSettingsObservation struct {
 
 type JupyterLabAppSettingsEmrSettingsParameters struct {
 
-	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker AI can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker AI domain.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
@@ -2084,16 +2088,16 @@ type JupyterLabAppSettingsInitParameters struct {
 	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterLabAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []CustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *DefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
-	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker AI (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
 	EmrSettings *EmrSettingsInitParameters `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -2109,16 +2113,16 @@ type JupyterLabAppSettingsObservation struct {
 	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterLabAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []CustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *DefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
-	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker AI (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
 	EmrSettings *EmrSettingsObservation `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -2136,19 +2140,19 @@ type JupyterLabAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []JupyterLabAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []CustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *DefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
-	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker AI (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
 	// +kubebuilder:validation:Optional
 	EmrSettings *EmrSettingsParameters `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
 
@@ -2179,16 +2183,16 @@ type JupyterServerAppSettingsCodeRepositoryParameters struct {
 
 type JupyterServerAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2197,16 +2201,16 @@ type JupyterServerAppSettingsDefaultResourceSpecInitParameters struct {
 
 type JupyterServerAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2215,7 +2219,7 @@ type JupyterServerAppSettingsDefaultResourceSpecObservation struct {
 
 type JupyterServerAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -2223,11 +2227,11 @@ type JupyterServerAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -2238,10 +2242,10 @@ type JupyterServerAppSettingsDefaultResourceSpecParameters struct {
 
 type JupyterServerAppSettingsInitParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterServerAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *JupyterServerAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -2251,10 +2255,10 @@ type JupyterServerAppSettingsInitParameters struct {
 
 type JupyterServerAppSettingsObservation struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterServerAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *JupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -2264,11 +2268,11 @@ type JupyterServerAppSettingsObservation struct {
 
 type JupyterServerAppSettingsParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
+	// A list of Git repositories that SageMaker AI automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []JupyterServerAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *JupyterServerAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -2338,16 +2342,16 @@ type KernelGatewayAppSettingsCustomImageParameters struct {
 
 type KernelGatewayAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2356,16 +2360,16 @@ type KernelGatewayAppSettingsDefaultResourceSpecInitParameters struct {
 
 type KernelGatewayAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2374,7 +2378,7 @@ type KernelGatewayAppSettingsDefaultResourceSpecObservation struct {
 
 type KernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -2382,11 +2386,11 @@ type KernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -2397,10 +2401,10 @@ type KernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 
 type KernelGatewayAppSettingsInitParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []KernelGatewayAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *KernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -2410,10 +2414,10 @@ type KernelGatewayAppSettingsInitParameters struct {
 
 type KernelGatewayAppSettingsObservation struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []KernelGatewayAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *KernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -2423,11 +2427,11 @@ type KernelGatewayAppSettingsObservation struct {
 
 type KernelGatewayAppSettingsParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []KernelGatewayAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *KernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -2439,7 +2443,7 @@ type KernelGatewayAppSettingsParameters struct {
 
 type ModelRegisterSettingsInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	// The Amazon Resource Name (ARN) of the SageMaker AI model registry account. Required only to register model versions created by a different SageMaker AI Canvas AWS account than the AWS account in which SageMaker AI model registry is set up.
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
@@ -2448,7 +2452,7 @@ type ModelRegisterSettingsInitParameters struct {
 
 type ModelRegisterSettingsObservation struct {
 
-	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	// The Amazon Resource Name (ARN) of the SageMaker AI model registry account. Required only to register model versions created by a different SageMaker AI Canvas AWS account than the AWS account in which SageMaker AI model registry is set up.
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
@@ -2457,7 +2461,7 @@ type ModelRegisterSettingsObservation struct {
 
 type ModelRegisterSettingsParameters struct {
 
-	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	// The Amazon Resource Name (ARN) of the SageMaker AI model registry account. Required only to register model versions created by a different SageMaker AI Canvas AWS account than the AWS account in which SageMaker AI model registry is set up.
 	// +kubebuilder:validation:Optional
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
 
@@ -2507,16 +2511,16 @@ type RSessionAppSettingsCustomImageParameters struct {
 
 type RSessionAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2525,16 +2529,16 @@ type RSessionAppSettingsDefaultResourceSpecInitParameters struct {
 
 type RSessionAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2543,7 +2547,7 @@ type RSessionAppSettingsDefaultResourceSpecObservation struct {
 
 type RSessionAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -2551,11 +2555,11 @@ type RSessionAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -2566,29 +2570,29 @@ type RSessionAppSettingsDefaultResourceSpecParameters struct {
 
 type RSessionAppSettingsInitParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []RSessionAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *RSessionAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type RSessionAppSettingsObservation struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []RSessionAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *RSessionAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type RSessionAppSettingsParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// A list of custom SageMaker AI images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []RSessionAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *RSessionAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
@@ -2624,16 +2628,16 @@ type RStudioServerProAppSettingsParameters struct {
 
 type RStudioServerProDomainSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2642,16 +2646,16 @@ type RStudioServerProDomainSettingsDefaultResourceSpecInitParameters struct {
 
 type RStudioServerProDomainSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2660,7 +2664,7 @@ type RStudioServerProDomainSettingsDefaultResourceSpecObservation struct {
 
 type RStudioServerProDomainSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -2668,11 +2672,11 @@ type RStudioServerProDomainSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -2683,7 +2687,7 @@ type RStudioServerProDomainSettingsDefaultResourceSpecParameters struct {
 
 type RStudioServerProDomainSettingsInitParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *RStudioServerProDomainSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The ARN of the execution role for the RStudioServerPro Domain-level app.
@@ -2698,7 +2702,7 @@ type RStudioServerProDomainSettingsInitParameters struct {
 
 type RStudioServerProDomainSettingsObservation struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *RStudioServerProDomainSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The ARN of the execution role for the RStudioServerPro Domain-level app.
@@ -2713,7 +2717,7 @@ type RStudioServerProDomainSettingsObservation struct {
 
 type RStudioServerProDomainSettingsParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *RStudioServerProDomainSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -2886,16 +2890,16 @@ type StudioWebPortalSettingsParameters struct {
 
 type TensorBoardAppSettingsDefaultResourceSpecInitParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2904,16 +2908,16 @@ type TensorBoardAppSettingsDefaultResourceSpecInitParameters struct {
 
 type TensorBoardAppSettingsDefaultResourceSpecObservation struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
@@ -2922,7 +2926,7 @@ type TensorBoardAppSettingsDefaultResourceSpecObservation struct {
 
 type TensorBoardAppSettingsDefaultResourceSpecParameters struct {
 
-	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// The instance type that the image version runs on.. For valid values see SageMaker AI Instance Types.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -2930,11 +2934,11 @@ type TensorBoardAppSettingsDefaultResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
-	// The SageMaker Image Version Alias.
+	// The SageMaker AI Image Version Alias.
 	// +kubebuilder:validation:Optional
 	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
@@ -2945,19 +2949,19 @@ type TensorBoardAppSettingsDefaultResourceSpecParameters struct {
 
 type TensorBoardAppSettingsInitParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *TensorBoardAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type TensorBoardAppSettingsObservation struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *TensorBoardAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type TensorBoardAppSettingsParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *TensorBoardAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
@@ -3046,7 +3050,7 @@ type DomainStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Domain is the Schema for the Domains API. Provides a SageMaker Domain resource.
+// Domain is the Schema for the Domains API. Provides a SageMaker AI Domain resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

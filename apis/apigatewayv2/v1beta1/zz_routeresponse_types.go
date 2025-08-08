@@ -61,6 +61,10 @@ type RouteResponseObservation struct {
 	// The model selection expression for the route response.
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Response models for the route response.
 	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
@@ -91,10 +95,10 @@ type RouteResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Response models for the route response.
 	// +kubebuilder:validation:Optional

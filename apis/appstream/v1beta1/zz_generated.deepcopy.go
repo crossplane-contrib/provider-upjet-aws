@@ -454,6 +454,11 @@ func (in *DirectoryConfigObservation) DeepCopyInto(out *DirectoryConfigObservati
 			}
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceAccountCredentials != nil {
 		in, out := &in.ServiceAccountCredentials, &out.ServiceAccountCredentials
 		*out = make([]ServiceAccountCredentialsObservation, len(*in))
@@ -914,6 +919,11 @@ func (in *FleetObservation) DeepCopyInto(out *FleetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -1214,6 +1224,11 @@ func (in *FleetStackAssociationObservation) DeepCopyInto(out *FleetStackAssociat
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1636,6 +1651,11 @@ func (in *ImageBuilderObservation) DeepCopyInto(out *ImageBuilderObservation) {
 	}
 	if in.InstanceType != nil {
 		in, out := &in.InstanceType, &out.InstanceType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2258,6 +2278,11 @@ func (in *StackObservation) DeepCopyInto(out *StackObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.StorageConnectors != nil {
 		in, out := &in.StorageConnectors, &out.StorageConnectors
 		*out = make([]StorageConnectorsObservation, len(*in))
@@ -2765,6 +2790,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SendEmailNotification != nil {
 		in, out := &in.SendEmailNotification, &out.SendEmailNotification
 		*out = new(bool)
@@ -3009,6 +3039,11 @@ func (in *UserStackAssociationObservation) DeepCopyInto(out *UserStackAssociatio
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

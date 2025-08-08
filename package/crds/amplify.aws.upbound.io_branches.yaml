@@ -193,6 +193,9 @@ spec:
                   enablePullRequestPreview:
                     description: Enables pull request previews for this branch.
                     type: boolean
+                  enableSkewProtection:
+                    description: Enables skew protection for the branch.
+                    type: boolean
                   environmentVariables:
                     additionalProperties:
                       type: string
@@ -206,8 +209,9 @@ spec:
                     description: Amplify environment name for the pull request.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   stage:
                     description: 'Describes the current stage for the branch. Valid
@@ -280,6 +284,9 @@ spec:
                     type: boolean
                   enablePullRequestPreview:
                     description: Enables pull request previews for this branch.
+                    type: boolean
+                  enableSkewProtection:
+                    description: Enables skew protection for the branch.
                     type: boolean
                   environmentVariables:
                     additionalProperties:
@@ -526,6 +533,9 @@ spec:
                   enablePullRequestPreview:
                     description: Enables pull request previews for this branch.
                     type: boolean
+                  enableSkewProtection:
+                    description: Enables skew protection for the branch.
+                    type: boolean
                   environmentVariables:
                     additionalProperties:
                       type: string
@@ -539,6 +549,11 @@ spec:
                     type: string
                   pullRequestEnvironmentName:
                     description: Amplify environment name for the pull request.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   sourceBranch:
                     description: Source branch if the branch is a pull request branch.

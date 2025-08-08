@@ -178,12 +178,6 @@ spec:
                     description: The protocol for the connections from clients to
                       the accelerator. Valid values are TCP, UDP.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -487,6 +481,9 @@ spec:
                 properties:
                   acceleratorArn:
                     description: The Amazon Resource Name (ARN) of your accelerator.
+                    type: string
+                  arn:
+                    description: The Amazon Resource Name (ARN) of the listener.
                     type: string
                   clientAffinity:
                     description: 'Direct all requests from a user to the same endpoint.

@@ -100,6 +100,9 @@ type FieldLevelEncryptionProfileInitParameters struct {
 
 type FieldLevelEncryptionProfileObservation struct {
 
+	// The Field Level Encryption Profile ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Internal value used by CloudFront to allow future updates to the Field Level Encryption Profile.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
@@ -132,11 +135,6 @@ type FieldLevelEncryptionProfileParameters struct {
 	// The name of the Field Level Encryption Profile.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type FieldPatternsInitParameters struct {

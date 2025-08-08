@@ -426,6 +426,11 @@ func (in *DeploymentConfigObservation) DeepCopyInto(out *DeploymentConfigObserva
 		*out = new(MinimumHealthyHostsObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TrafficRoutingConfig != nil {
 		in, out := &in.TrafficRoutingConfig, &out.TrafficRoutingConfig
 		*out = new(TrafficRoutingConfigObservation)
@@ -809,6 +814,11 @@ func (in *DeploymentGroupObservation) DeepCopyInto(out *DeploymentGroupObservati
 	}
 	if in.OutdatedInstancesStrategy != nil {
 		in, out := &in.OutdatedInstancesStrategy, &out.OutdatedInstancesStrategy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

@@ -331,12 +331,18 @@ type PointInTimeRecoveryInitParameters struct {
 
 	// Whether to enable point-in-time recovery. It can take 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided, this defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Number of preceding days for which continuous backups are taken and maintained. Default is 35.
+	RecoveryPeriodInDays *float64 `json:"recoveryPeriodInDays,omitempty" tf:"recovery_period_in_days,omitempty"`
 }
 
 type PointInTimeRecoveryObservation struct {
 
 	// Whether to enable point-in-time recovery. It can take 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided, this defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Number of preceding days for which continuous backups are taken and maintained. Default is 35.
+	RecoveryPeriodInDays *float64 `json:"recoveryPeriodInDays,omitempty" tf:"recovery_period_in_days,omitempty"`
 }
 
 type PointInTimeRecoveryParameters struct {
@@ -344,17 +350,32 @@ type PointInTimeRecoveryParameters struct {
 	// Whether to enable point-in-time recovery. It can take 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided, this defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Number of preceding days for which continuous backups are taken and maintained. Default is 35.
+	// +kubebuilder:validation:Optional
+	RecoveryPeriodInDays *float64 `json:"recoveryPeriodInDays,omitempty" tf:"recovery_period_in_days,omitempty"`
 }
 
 type ReplicaInitParameters struct {
 
-	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
+	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
+	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
+
+	// ARN of the CMK that should be used for the AWS KMS encryption.
+	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+	// Note: This attribute will not be populated with the ARN of default keys.
+	// Note: Changing this value will recreate the replica.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Whether to enable Point In Time Recovery for the replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
-	// Whether to propagate the global table's tags to a replica. Default is false. Changes to tags only move in one direction: from global (source) to replica. In other words, tag drift on a replica will not trigger an update. Tag or replica changes on the global table, whether from drift or configuration changes, are propagated to replicas. Changing from true to false on a subsequent apply means replica tags are left as they were, unmanaged, not deleted.
+	// Whether to propagate the global table's tags to a replica.
+	// Default is false.
+	// Changes to tags only move in one direction: from global (source) to replica.
+	// Tag drift on a replica will not trigger an update.
+	// Tag changes on the global table are propagated to replicas.
+	// Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
 	PropagateTags *bool `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// Region name of the replica.
@@ -366,13 +387,24 @@ type ReplicaObservation struct {
 	// ARN of the replica
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
+	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
+	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
+
+	// ARN of the CMK that should be used for the AWS KMS encryption.
+	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+	// Note: This attribute will not be populated with the ARN of default keys.
+	// Note: Changing this value will recreate the replica.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Whether to enable Point In Time Recovery for the replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
-	// Whether to propagate the global table's tags to a replica. Default is false. Changes to tags only move in one direction: from global (source) to replica. In other words, tag drift on a replica will not trigger an update. Tag or replica changes on the global table, whether from drift or configuration changes, are propagated to replicas. Changing from true to false on a subsequent apply means replica tags are left as they were, unmanaged, not deleted.
+	// Whether to propagate the global table's tags to a replica.
+	// Default is false.
+	// Changes to tags only move in one direction: from global (source) to replica.
+	// Tag drift on a replica will not trigger an update.
+	// Tag changes on the global table are propagated to replicas.
+	// Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
 	PropagateTags *bool `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// Region name of the replica.
@@ -387,7 +419,14 @@ type ReplicaObservation struct {
 
 type ReplicaParameters struct {
 
-	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
+	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
+	// +kubebuilder:validation:Optional
+	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
+
+	// ARN of the CMK that should be used for the AWS KMS encryption.
+	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
+	// Note: This attribute will not be populated with the ARN of default keys.
+	// Note: Changing this value will recreate the replica.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -395,7 +434,12 @@ type ReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
-	// Whether to propagate the global table's tags to a replica. Default is false. Changes to tags only move in one direction: from global (source) to replica. In other words, tag drift on a replica will not trigger an update. Tag or replica changes on the global table, whether from drift or configuration changes, are propagated to replicas. Changing from true to false on a subsequent apply means replica tags are left as they were, unmanaged, not deleted.
+	// Whether to propagate the global table's tags to a replica.
+	// Default is false.
+	// Changes to tags only move in one direction: from global (source) to replica.
+	// Tag drift on a replica will not trigger an update.
+	// Tag changes on the global table are propagated to replicas.
+	// Changing from true to false on a subsequent apply leaves replica tags as-is and no longer manages them.
 	// +kubebuilder:validation:Optional
 	PropagateTags *bool `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
@@ -623,6 +667,10 @@ type TableObservation struct {
 	// Number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 
@@ -748,10 +796,10 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	// +kubebuilder:validation:Optional

@@ -45,6 +45,10 @@ type WorkerConfigurationObservation_2 struct {
 	// Contents of connect-distributed.properties file. The value can be either base64 encoded or in raw format.
 	PropertiesFileContent *string `json:"propertiesFileContent,omitempty" tf:"properties_file_content,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -68,10 +72,10 @@ type WorkerConfigurationParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	PropertiesFileContent *string `json:"propertiesFileContent,omitempty" tf:"properties_file_content,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

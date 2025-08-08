@@ -33,7 +33,7 @@ type ParameterInitParameters_2 struct {
 	// KMS key ID or ARN for encrypting a SecureString.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Overwrite an existing parameter.
+	// Overwrite an existing parameter. Lifecycle rules should be used to manage non-standard update behavior.
 	Overwrite *bool `json:"overwrite,omitempty" tf:"overwrite,omitempty"`
 
 	// Key-value map of resource tags.
@@ -48,6 +48,12 @@ type ParameterInitParameters_2 struct {
 
 	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+
+	// Value of the parameter. Additionally, write-only values are never stored to state. value_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	ValueWoSecretRef *v1.SecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
+	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 }
 
 type ParameterObservation_2 struct {
@@ -64,6 +70,9 @@ type ParameterObservation_2 struct {
 	// Description of the parameter.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Indicates whether the resource has a value_wo set.
+	HasValueWo *bool `json:"hasValueWo,omitempty" tf:"has_value_wo,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Value of the parameter. This argument is not valid with a type of SecureString.
@@ -72,8 +81,12 @@ type ParameterObservation_2 struct {
 	// KMS key ID or ARN for encrypting a SecureString.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Overwrite an existing parameter.
+	// Overwrite an existing parameter. Lifecycle rules should be used to manage non-standard update behavior.
 	Overwrite *bool `json:"overwrite,omitempty" tf:"overwrite,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -88,6 +101,9 @@ type ParameterObservation_2 struct {
 
 	// Type of the parameter. Valid types are String, StringList and SecureString.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
+	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 
 	// Version of the parameter.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
@@ -119,14 +135,14 @@ type ParameterParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Overwrite an existing parameter.
+	// Overwrite an existing parameter. Lifecycle rules should be used to manage non-standard update behavior.
 	// +kubebuilder:validation:Optional
 	Overwrite *bool `json:"overwrite,omitempty" tf:"overwrite,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -144,6 +160,14 @@ type ParameterParameters_2 struct {
 	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+
+	// Value of the parameter. Additionally, write-only values are never stored to state. value_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	// +kubebuilder:validation:Optional
+	ValueWoSecretRef *v1.SecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
+	// +kubebuilder:validation:Optional
+	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 }
 
 // ParameterSpec defines the desired state of Parameter

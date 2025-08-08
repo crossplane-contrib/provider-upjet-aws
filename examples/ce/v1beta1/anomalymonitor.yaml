@@ -15,4 +15,3 @@ spec:
     monitorDimension: SERVICE
     monitorType: DIMENSIONAL
     name: AWSServiceMonitor
-    region: us-west-1

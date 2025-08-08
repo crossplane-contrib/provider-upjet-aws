@@ -15,7 +15,7 @@ import (
 
 type ConnectAttachmentInitParameters struct {
 
-	// The ID of a core network where you want to create the attachment.
+	// ID of a core network where you want to create the attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
@@ -27,7 +27,7 @@ type ConnectAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
-	// The Region where the edge is located.
+	// Region where the edge is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("edge_location",true)
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
@@ -47,7 +47,7 @@ type ConnectAttachmentInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the attachment between the two connections.
+	// ID of the attachment between the two connections.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
@@ -63,60 +63,59 @@ type ConnectAttachmentInitParameters struct {
 
 type ConnectAttachmentObservation struct {
 
-	// The ARN of the attachment.
+	// ARN of the attachment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ID of the attachment.
+	// ID of the attachment.
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
-	// The policy rule number associated with the attachment.
+	// Policy rule number associated with the attachment.
 	AttachmentPolicyRuleNumber *float64 `json:"attachmentPolicyRuleNumber,omitempty" tf:"attachment_policy_rule_number,omitempty"`
 
-	// The type of attachment.
+	// Type of attachment.
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
-	// The ARN of a core network.
+	// ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
-	// The ID of a core network where you want to create the attachment.
+	// ID of a core network where you want to create the attachment.
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
-	// The Region where the edge is located.
+	// Region where the edge is located.
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
 
-	// The ID of the attachment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Options block. See options for more information.
 	Options []OptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
 
-	// The ID of the attachment account owner.
+	// ID of the attachment account owner.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
-	// The attachment resource ARN.
+	// Attachment resource ARN.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The name of the segment attachment.
+	// Name of the segment attachment.
 	SegmentName *string `json:"segmentName,omitempty" tf:"segment_name,omitempty"`
 
-	// The state of the attachment.
+	// State of the attachment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The ID of the attachment between the two connections.
+	// ID of the attachment between the two connections.
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 }
 
 type ConnectAttachmentParameters struct {
 
-	// The ID of a core network where you want to create the attachment.
+	// ID of a core network where you want to create the attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
 	// +kubebuilder:validation:Optional
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
@@ -129,7 +128,7 @@ type ConnectAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
-	// The Region where the edge is located.
+	// Region where the edge is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("edge_location",true)
 	// +kubebuilder:validation:Optional
@@ -147,17 +146,12 @@ type ConnectAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the attachment between the two connections.
+	// ID of the attachment between the two connections.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -174,19 +168,19 @@ type ConnectAttachmentParameters struct {
 
 type OptionsInitParameters struct {
 
-	// The protocol used for the attachment connection. Possible values are GRE and NO_ENCAP.
+	// Protocol used for the attachment connection. Valid values: GRE, NO_ENCAP.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type OptionsObservation struct {
 
-	// The protocol used for the attachment connection. Possible values are GRE and NO_ENCAP.
+	// Protocol used for the attachment connection. Valid values: GRE, NO_ENCAP.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type OptionsParameters struct {
 
-	// The protocol used for the attachment connection. Possible values are GRE and NO_ENCAP.
+	// Protocol used for the attachment connection. Valid values: GRE, NO_ENCAP.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
@@ -218,7 +212,7 @@ type ConnectAttachmentStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ConnectAttachment is the Schema for the ConnectAttachments API.
+// ConnectAttachment is the Schema for the ConnectAttachments API. Manages an AWS Network Manager Connect Attachment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

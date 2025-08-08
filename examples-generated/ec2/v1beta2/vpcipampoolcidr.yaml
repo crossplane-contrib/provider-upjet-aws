@@ -27,7 +27,7 @@ metadata:
 spec:
   forProvider:
     operatingRegions:
-    - regionName: ${data.aws_region.current.name}
+    - regionName: ${data.aws_region.current.region}
     region: us-west-1
 
 ---
@@ -46,5 +46,5 @@ spec:
     ipamScopeIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    locale: ${data.aws_region.current.name}
+    locale: ${data.aws_region.current.region}
     region: us-west-1

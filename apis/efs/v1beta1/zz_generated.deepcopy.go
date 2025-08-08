@@ -167,6 +167,11 @@ func (in *AccessPointObservation) DeepCopyInto(out *AccessPointObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RootDirectory != nil {
 		in, out := &in.RootDirectory, &out.RootDirectory
 		*out = make([]RootDirectoryObservation, len(*in))
@@ -491,6 +496,11 @@ func (in *BackupPolicyObservation) DeepCopyInto(out *BackupPolicyObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1009,6 +1019,11 @@ func (in *FileSystemObservation) DeepCopyInto(out *FileSystemObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SizeInBytes != nil {
 		in, out := &in.SizeInBytes, &out.SizeInBytes
 		*out = make([]SizeInBytesObservation, len(*in))
@@ -1279,6 +1294,11 @@ func (in *FileSystemPolicyObservation) DeepCopyInto(out *FileSystemPolicyObserva
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -1681,6 +1701,11 @@ func (in *MountTargetObservation) DeepCopyInto(out *MountTargetObservation) {
 	}
 	if in.OwnerID != nil {
 		in, out := &in.OwnerID, &out.OwnerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -2111,6 +2136,11 @@ func (in *ReplicationConfigurationObservation) DeepCopyInto(out *ReplicationConf
 	}
 	if in.OriginalSourceFileSystemArn != nil {
 		in, out := &in.OriginalSourceFileSystemArn, &out.OriginalSourceFileSystemArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

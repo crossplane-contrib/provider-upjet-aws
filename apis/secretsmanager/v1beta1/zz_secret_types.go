@@ -108,6 +108,10 @@ type SecretObservation struct {
 	// Number of days that AWS Secrets Manager waits before it can delete the secret. This value can be 0 to force deletion without recovery or range from 7 to 30 days. The default value is 30.
 	RecoveryWindowInDays *float64 `json:"recoveryWindowInDays,omitempty" tf:"recovery_window_in_days,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration block to support secret replication. See details below.
 	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 
@@ -151,11 +155,10 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	RecoveryWindowInDays *float64 `json:"recoveryWindowInDays,omitempty" tf:"recovery_window_in_days,omitempty"`
 
-	// Region for replicating the secret.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Configuration block to support secret replication. See details below.
 	// +kubebuilder:validation:Optional

@@ -938,6 +938,11 @@ func (in *ClassificationJobObservation) DeepCopyInto(out *ClassificationJobObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.S3JobDefinition != nil {
 		in, out := &in.S3JobDefinition, &out.S3JobDefinition
 		*out = new(S3JobDefinitionObservation)
@@ -1703,6 +1708,11 @@ func (in *FindingsFilterObservation) DeepCopyInto(out *FindingsFilterObservation
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {

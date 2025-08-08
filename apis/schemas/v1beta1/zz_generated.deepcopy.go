@@ -141,6 +141,11 @@ func (in *DiscovererObservation) DeepCopyInto(out *DiscovererObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceArn != nil {
 		in, out := &in.SourceArn, &out.SourceArn
 		*out = new(string)
@@ -391,6 +396,11 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -669,6 +679,11 @@ func (in *SchemaObservation) DeepCopyInto(out *SchemaObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

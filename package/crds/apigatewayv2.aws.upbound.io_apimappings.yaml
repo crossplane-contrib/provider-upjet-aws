@@ -235,8 +235,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   stage:
                     description: API stage. Use the aws_apigatewayv2_stage resource
@@ -761,6 +762,11 @@ spec:
                     type: string
                   id:
                     description: API mapping identifier.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   stage:
                     description: API stage. Use the aws_apigatewayv2_stage resource

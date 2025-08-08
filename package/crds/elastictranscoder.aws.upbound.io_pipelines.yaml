@@ -307,8 +307,9 @@ spec:
                       to save the transcoded files.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   role:
                     description: The IAM Amazon Resource Name (ARN) for the role that
@@ -1208,6 +1209,11 @@ spec:
                   outputBucket:
                     description: The Amazon S3 bucket in which you want Elastic Transcoder
                       to save the transcoded files.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   role:
                     description: The IAM Amazon Resource Name (ARN) for the role that
@@ -1601,8 +1607,9 @@ spec:
                       to save the transcoded files.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   role:
                     description: The IAM Amazon Resource Name (ARN) for the role that
@@ -2490,6 +2497,11 @@ spec:
                   outputBucket:
                     description: The Amazon S3 bucket in which you want Elastic Transcoder
                       to save the transcoded files.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   role:
                     description: The IAM Amazon Resource Name (ARN) for the role that

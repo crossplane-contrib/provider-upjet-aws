@@ -56,6 +56,10 @@ type InstanceRoleAssociationObservation struct {
 	// DB Instance Identifier and IAM Role ARN separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Instance.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
@@ -80,10 +84,10 @@ type InstanceRoleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

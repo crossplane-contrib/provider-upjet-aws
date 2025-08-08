@@ -21,7 +21,7 @@ func (mg *OntapStorageVirtualMachine) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OntapStorageVirtualMachine
 func (tr *OntapStorageVirtualMachine) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"active_directory_configuration[*].self_managed_active_directory_configuration[*].password": "activeDirectoryConfiguration[*].selfManagedActiveDirectoryConfiguration[*].passwordSecretRef", "svm_admin_password": "svmAdminPasswordSecretRef"}
+	return map[string]string{"active_directory_configuration[*].self_managed_active_directory_configuration[*].password": "activeDirectoryConfiguration.selfManagedActiveDirectoryConfiguration.passwordSecretRef", "svm_admin_password": "svmAdminPasswordSecretRef"}
 }
 
 // GetObservation of this OntapStorageVirtualMachine

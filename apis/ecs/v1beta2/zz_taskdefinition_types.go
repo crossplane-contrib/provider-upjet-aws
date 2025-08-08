@@ -253,35 +253,6 @@ type FSXWindowsFileServerVolumeConfigurationParameters struct {
 	RootDirectory *string `json:"rootDirectory" tf:"root_directory,omitempty"`
 }
 
-type InferenceAcceleratorInitParameters struct {
-
-	// Elastic Inference accelerator device name. The deviceName must also be referenced in a container definition as a ResourceRequirement.
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
-
-	// Elastic Inference accelerator type to use.
-	DeviceType *string `json:"deviceType,omitempty" tf:"device_type,omitempty"`
-}
-
-type InferenceAcceleratorObservation struct {
-
-	// Elastic Inference accelerator device name. The deviceName must also be referenced in a container definition as a ResourceRequirement.
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
-
-	// Elastic Inference accelerator type to use.
-	DeviceType *string `json:"deviceType,omitempty" tf:"device_type,omitempty"`
-}
-
-type InferenceAcceleratorParameters struct {
-
-	// Elastic Inference accelerator device name. The deviceName must also be referenced in a container definition as a ResourceRequirement.
-	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
-
-	// Elastic Inference accelerator type to use.
-	// +kubebuilder:validation:Optional
-	DeviceType *string `json:"deviceType" tf:"device_type,omitempty"`
-}
-
 type ProxyConfigurationInitParameters struct {
 
 	// Name of the container that will serve as the App Mesh proxy.
@@ -361,6 +332,9 @@ type TaskDefinitionInitParameters struct {
 	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
+	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
+	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
+
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	EphemeralStorage *EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
@@ -379,9 +353,6 @@ type TaskDefinitionInitParameters struct {
 
 	// A unique name for your task definition.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
-
-	// Configuration block(s) with Inference Accelerators settings. Detailed below.
-	InferenceAccelerator []InferenceAcceleratorInitParameters `json:"inferenceAccelerator,omitempty" tf:"inference_accelerator,omitempty"`
 
 	// IPC resource namespace to be used for the containers in the task The valid values are host, task, and none.
 	IpcMode *string `json:"ipcMode,omitempty" tf:"ipc_mode,omitempty"`
@@ -439,6 +410,9 @@ type TaskDefinitionObservation struct {
 	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
+	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
+	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
+
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	EphemeralStorage *EphemeralStorageObservation `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
@@ -449,9 +423,6 @@ type TaskDefinitionObservation struct {
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Configuration block(s) with Inference Accelerators settings. Detailed below.
-	InferenceAccelerator []InferenceAcceleratorObservation `json:"inferenceAccelerator,omitempty" tf:"inference_accelerator,omitempty"`
 
 	// IPC resource namespace to be used for the containers in the task The valid values are host, task, and none.
 	IpcMode *string `json:"ipcMode,omitempty" tf:"ipc_mode,omitempty"`
@@ -470,6 +441,10 @@ type TaskDefinitionObservation struct {
 
 	// Configuration block for the App Mesh proxy. Detailed below.
 	ProxyConfiguration *ProxyConfigurationObservation `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
 	// +listType=set
@@ -512,6 +487,10 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
+	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
+	// +kubebuilder:validation:Optional
+	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
+
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	// +kubebuilder:validation:Optional
 	EphemeralStorage *EphemeralStorageParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
@@ -533,10 +512,6 @@ type TaskDefinitionParameters struct {
 	// A unique name for your task definition.
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
-
-	// Configuration block(s) with Inference Accelerators settings. Detailed below.
-	// +kubebuilder:validation:Optional
-	InferenceAccelerator []InferenceAcceleratorParameters `json:"inferenceAccelerator,omitempty" tf:"inference_accelerator,omitempty"`
 
 	// IPC resource namespace to be used for the containers in the task The valid values are host, task, and none.
 	// +kubebuilder:validation:Optional
@@ -562,10 +537,10 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ProxyConfiguration *ProxyConfigurationParameters `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
 	// +kubebuilder:validation:Optional

@@ -25,7 +25,7 @@ type IPSetInitParameters struct {
 	// Specify IPV4 or IPV6. Valid values are IPV4 or IPV6.
 	IPAddressVersion *string `json:"ipAddressVersion,omitempty" tf:"ip_address_version,omitempty"`
 
-	// A friendly name of the IP set.
+	// A friendly name of the IP set. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the Region US East (N. Virginia).
@@ -56,8 +56,12 @@ type IPSetObservation struct {
 
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`
 
-	// A friendly name of the IP set.
+	// A friendly name of the IP set. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the Region US East (N. Virginia).
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
@@ -86,14 +90,14 @@ type IPSetParameters struct {
 	// +kubebuilder:validation:Optional
 	IPAddressVersion *string `json:"ipAddressVersion,omitempty" tf:"ip_address_version,omitempty"`
 
-	// A friendly name of the IP set.
+	// A friendly name of the IP set. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the Region US East (N. Virginia).
 	// +kubebuilder:validation:Optional
@@ -142,7 +146,6 @@ type IPSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipAddressVersion) || (has(self.initProvider) && has(self.initProvider.ipAddressVersion))",message="spec.forProvider.ipAddressVersion is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || (has(self.initProvider) && has(self.initProvider.scope))",message="spec.forProvider.scope is a required parameter"
 	Spec   IPSetSpec   `json:"spec"`
 	Status IPSetStatus `json:"status,omitempty"`

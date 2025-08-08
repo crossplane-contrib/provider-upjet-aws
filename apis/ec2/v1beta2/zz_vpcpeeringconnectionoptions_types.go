@@ -34,10 +34,10 @@ type VPCPeeringConnectionOptionsAccepterParameters struct {
 
 type VPCPeeringConnectionOptionsInitParameters struct {
 
-	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that acceptsthe peering connection (a maximum of one).
+	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts the peering connection (a maximum of one).
 	Accepter *VPCPeeringConnectionOptionsAccepterInitParameters `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
-	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requeststhe peering connection (a maximum of one).
+	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests the peering connection (a maximum of one).
 	Requester *VPCPeeringConnectionOptionsRequesterInitParameters `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// The ID of the requester VPC peering connection.
@@ -56,13 +56,17 @@ type VPCPeeringConnectionOptionsInitParameters struct {
 
 type VPCPeeringConnectionOptionsObservation struct {
 
-	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that acceptsthe peering connection (a maximum of one).
+	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts the peering connection (a maximum of one).
 	Accepter *VPCPeeringConnectionOptionsAccepterObservation `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
 	// The ID of the VPC Peering Connection Options.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requeststhe peering connection (a maximum of one).
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests the peering connection (a maximum of one).
 	Requester *VPCPeeringConnectionOptionsRequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// The ID of the requester VPC peering connection.
@@ -71,16 +75,16 @@ type VPCPeeringConnectionOptionsObservation struct {
 
 type VPCPeeringConnectionOptionsParameters struct {
 
-	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that acceptsthe peering connection (a maximum of one).
+	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts the peering connection (a maximum of one).
 	// +kubebuilder:validation:Optional
 	Accepter *VPCPeeringConnectionOptionsAccepterParameters `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requeststhe peering connection (a maximum of one).
+	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests the peering connection (a maximum of one).
 	// +kubebuilder:validation:Optional
 	Requester *VPCPeeringConnectionOptionsRequesterParameters `json:"requester,omitempty" tf:"requester,omitempty"`
 

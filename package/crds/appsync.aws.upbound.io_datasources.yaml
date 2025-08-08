@@ -156,12 +156,13 @@ spec:
                     description: Description of the data source.
                     type: string
                   dynamodbConfig:
-                    description: DynamoDB settings. See DynamoDB Config
+                    description: DynamoDB settings. See dynamodb_config Block for
+                      details.
                     items:
                       properties:
                         deltaSyncConfig:
                           description: The DeltaSyncConfig for a versioned data source.
-                            See Delta Sync Config
+                            See delta_sync_config Block for details.
                           items:
                             properties:
                               baseTableTtl:
@@ -271,21 +272,22 @@ spec:
                       type: object
                     type: array
                   elasticsearchConfig:
-                    description: Amazon Elasticsearch settings. See ElasticSearch
-                      Config
+                    description: Amazon Elasticsearch settings. See elasticsearch_config
+                      Block for details.
                     items:
                       properties:
                         endpoint:
                           description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                         region:
-                          description: AWS region of the DynamoDB table. Defaults
+                          description: AWS region of Elasticsearch domain. Defaults
                             to current region.
                           type: string
                       type: object
                     type: array
                   eventBridgeConfig:
-                    description: AWS EventBridge settings. See Event Bridge Config
+                    description: AWS EventBridge settings. See event_bridge_config
+                      Block for details.
                     items:
                       properties:
                         eventBusArn:
@@ -294,12 +296,13 @@ spec:
                       type: object
                     type: array
                   httpConfig:
-                    description: HTTP settings. See HTTP Config
+                    description: HTTP settings. See http_config Block for details.
                     items:
                       properties:
                         authorizationConfig:
                           description: Authorization configuration in case the HTTP
-                            endpoint requires authorization. See Authorization Config.
+                            endpoint requires authorization. See authorization_config
+                            Block for details.
                           items:
                             properties:
                               authorizationType:
@@ -308,7 +311,7 @@ spec:
                                 type: string
                               awsIamConfig:
                                 description: Identity and Access Management (IAM)
-                                  settings. See AWS IAM Config.
+                                  settings. See aws_iam_config Block for details.
                                 items:
                                   properties:
                                     signingRegion:
@@ -323,12 +326,13 @@ spec:
                             type: object
                           type: array
                         endpoint:
-                          description: HTTP endpoint of the Elasticsearch domain.
+                          description: HTTP URL.
                           type: string
                       type: object
                     type: array
                   lambdaConfig:
-                    description: AWS Lambda settings. See Lambda Config
+                    description: AWS Lambda settings. See lambda_config Block for
+                      details.
                     items:
                       properties:
                         functionArn:
@@ -337,31 +341,32 @@ spec:
                       type: object
                     type: array
                   opensearchserviceConfig:
-                    description: Amazon OpenSearch Service settings. See OpenSearch
-                      Service Config
+                    description: Amazon OpenSearch Service settings. See opensearchservice_config
+                      Block for details.
                     items:
                       properties:
                         endpoint:
-                          description: HTTP endpoint of the Elasticsearch domain.
+                          description: HTTP endpoint of the OpenSearch domain.
                           type: string
                         region:
-                          description: AWS region of the DynamoDB table. Defaults
+                          description: AWS region of the OpenSearch domain. Defaults
                             to current region.
                           type: string
                       type: object
                     type: array
                   region:
                     description: |-
-                      AWS region of the DynamoDB table. Defaults to current region.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   relationalDatabaseConfig:
-                    description: AWS RDS settings. See Relational Database Config
+                    description: AWS RDS settings. See relational_database_config
+                      Block for details.
                     items:
                       properties:
                         httpEndpointConfig:
                           description: Amazon RDS HTTP endpoint configuration. See
-                            HTTP Endpoint Config.
+                            http_endpoint_config Block for details.
                           items:
                             properties:
                               awsSecretStoreArn:
@@ -374,7 +379,7 @@ spec:
                                 description: Amazon RDS cluster identifier.
                                 type: string
                               region:
-                                description: AWS region of the DynamoDB table. Defaults
+                                description: AWS Region for RDS HTTP endpoint. Defaults
                                   to current region.
                                 type: string
                               schema:
@@ -492,12 +497,13 @@ spec:
                     description: Description of the data source.
                     type: string
                   dynamodbConfig:
-                    description: DynamoDB settings. See DynamoDB Config
+                    description: DynamoDB settings. See dynamodb_config Block for
+                      details.
                     items:
                       properties:
                         deltaSyncConfig:
                           description: The DeltaSyncConfig for a versioned data source.
-                            See Delta Sync Config
+                            See delta_sync_config Block for details.
                           items:
                             properties:
                               baseTableTtl:
@@ -603,8 +609,8 @@ spec:
                       type: object
                     type: array
                   elasticsearchConfig:
-                    description: Amazon Elasticsearch settings. See ElasticSearch
-                      Config
+                    description: Amazon Elasticsearch settings. See elasticsearch_config
+                      Block for details.
                     items:
                       properties:
                         endpoint:
@@ -613,7 +619,8 @@ spec:
                       type: object
                     type: array
                   eventBridgeConfig:
-                    description: AWS EventBridge settings. See Event Bridge Config
+                    description: AWS EventBridge settings. See event_bridge_config
+                      Block for details.
                     items:
                       properties:
                         eventBusArn:
@@ -622,12 +629,13 @@ spec:
                       type: object
                     type: array
                   httpConfig:
-                    description: HTTP settings. See HTTP Config
+                    description: HTTP settings. See http_config Block for details.
                     items:
                       properties:
                         authorizationConfig:
                           description: Authorization configuration in case the HTTP
-                            endpoint requires authorization. See Authorization Config.
+                            endpoint requires authorization. See authorization_config
+                            Block for details.
                           items:
                             properties:
                               authorizationType:
@@ -636,7 +644,7 @@ spec:
                                 type: string
                               awsIamConfig:
                                 description: Identity and Access Management (IAM)
-                                  settings. See AWS IAM Config.
+                                  settings. See aws_iam_config Block for details.
                                 items:
                                   properties:
                                     signingRegion:
@@ -651,12 +659,13 @@ spec:
                             type: object
                           type: array
                         endpoint:
-                          description: HTTP endpoint of the Elasticsearch domain.
+                          description: HTTP URL.
                           type: string
                       type: object
                     type: array
                   lambdaConfig:
-                    description: AWS Lambda settings. See Lambda Config
+                    description: AWS Lambda settings. See lambda_config Block for
+                      details.
                     items:
                       properties:
                         functionArn:
@@ -665,22 +674,23 @@ spec:
                       type: object
                     type: array
                   opensearchserviceConfig:
-                    description: Amazon OpenSearch Service settings. See OpenSearch
-                      Service Config
+                    description: Amazon OpenSearch Service settings. See opensearchservice_config
+                      Block for details.
                     items:
                       properties:
                         endpoint:
-                          description: HTTP endpoint of the Elasticsearch domain.
+                          description: HTTP endpoint of the OpenSearch domain.
                           type: string
                       type: object
                     type: array
                   relationalDatabaseConfig:
-                    description: AWS RDS settings. See Relational Database Config
+                    description: AWS RDS settings. See relational_database_config
+                      Block for details.
                     items:
                       properties:
                         httpEndpointConfig:
                           description: Amazon RDS HTTP endpoint configuration. See
-                            HTTP Endpoint Config.
+                            http_endpoint_config Block for details.
                           items:
                             properties:
                               awsSecretStoreArn:
@@ -975,12 +985,13 @@ spec:
                     description: Description of the data source.
                     type: string
                   dynamodbConfig:
-                    description: DynamoDB settings. See DynamoDB Config
+                    description: DynamoDB settings. See dynamodb_config Block for
+                      details.
                     items:
                       properties:
                         deltaSyncConfig:
                           description: The DeltaSyncConfig for a versioned data source.
-                            See Delta Sync Config
+                            See delta_sync_config Block for details.
                           items:
                             properties:
                               baseTableTtl:
@@ -1014,21 +1025,22 @@ spec:
                       type: object
                     type: array
                   elasticsearchConfig:
-                    description: Amazon Elasticsearch settings. See ElasticSearch
-                      Config
+                    description: Amazon Elasticsearch settings. See elasticsearch_config
+                      Block for details.
                     items:
                       properties:
                         endpoint:
                           description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                         region:
-                          description: AWS region of the DynamoDB table. Defaults
+                          description: AWS region of Elasticsearch domain. Defaults
                             to current region.
                           type: string
                       type: object
                     type: array
                   eventBridgeConfig:
-                    description: AWS EventBridge settings. See Event Bridge Config
+                    description: AWS EventBridge settings. See event_bridge_config
+                      Block for details.
                     items:
                       properties:
                         eventBusArn:
@@ -1037,12 +1049,13 @@ spec:
                       type: object
                     type: array
                   httpConfig:
-                    description: HTTP settings. See HTTP Config
+                    description: HTTP settings. See http_config Block for details.
                     items:
                       properties:
                         authorizationConfig:
                           description: Authorization configuration in case the HTTP
-                            endpoint requires authorization. See Authorization Config.
+                            endpoint requires authorization. See authorization_config
+                            Block for details.
                           items:
                             properties:
                               authorizationType:
@@ -1051,7 +1064,7 @@ spec:
                                 type: string
                               awsIamConfig:
                                 description: Identity and Access Management (IAM)
-                                  settings. See AWS IAM Config.
+                                  settings. See aws_iam_config Block for details.
                                 items:
                                   properties:
                                     signingRegion:
@@ -1066,14 +1079,15 @@ spec:
                             type: object
                           type: array
                         endpoint:
-                          description: HTTP endpoint of the Elasticsearch domain.
+                          description: HTTP URL.
                           type: string
                       type: object
                     type: array
                   id:
                     type: string
                   lambdaConfig:
-                    description: AWS Lambda settings. See Lambda Config
+                    description: AWS Lambda settings. See lambda_config Block for
+                      details.
                     items:
                       properties:
                         functionArn:
@@ -1082,26 +1096,32 @@ spec:
                       type: object
                     type: array
                   opensearchserviceConfig:
-                    description: Amazon OpenSearch Service settings. See OpenSearch
-                      Service Config
+                    description: Amazon OpenSearch Service settings. See opensearchservice_config
+                      Block for details.
                     items:
                       properties:
                         endpoint:
-                          description: HTTP endpoint of the Elasticsearch domain.
+                          description: HTTP endpoint of the OpenSearch domain.
                           type: string
                         region:
-                          description: AWS region of the DynamoDB table. Defaults
+                          description: AWS region of the OpenSearch domain. Defaults
                             to current region.
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   relationalDatabaseConfig:
-                    description: AWS RDS settings. See Relational Database Config
+                    description: AWS RDS settings. See relational_database_config
+                      Block for details.
                     items:
                       properties:
                         httpEndpointConfig:
                           description: Amazon RDS HTTP endpoint configuration. See
-                            HTTP Endpoint Config.
+                            http_endpoint_config Block for details.
                           items:
                             properties:
                               awsSecretStoreArn:
@@ -1114,7 +1134,7 @@ spec:
                                 description: Amazon RDS cluster identifier.
                                 type: string
                               region:
-                                description: AWS region of the DynamoDB table. Defaults
+                                description: AWS Region for RDS HTTP endpoint. Defaults
                                   to current region.
                                 type: string
                               schema:
@@ -1520,7 +1540,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      AWS Region for RDS HTTP endpoint. Defaults to current region.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   relationalDatabaseConfig:
@@ -2229,6 +2249,11 @@ spec:
                           to current region.
                         type: string
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   relationalDatabaseConfig:
                     description: AWS RDS settings. See relational_database_config
                       Block for details.

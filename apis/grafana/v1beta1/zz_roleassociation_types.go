@@ -47,6 +47,10 @@ type RoleAssociationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The grafana role. Valid values can be found here.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -65,10 +69,10 @@ type RoleAssociationParameters struct {
 	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The grafana role. Valid values can be found here.
 	// +kubebuilder:validation:Optional

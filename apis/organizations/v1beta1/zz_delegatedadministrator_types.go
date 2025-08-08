@@ -79,11 +79,6 @@ type DelegatedAdministratorParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
 	// +kubebuilder:validation:Optional
 	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`

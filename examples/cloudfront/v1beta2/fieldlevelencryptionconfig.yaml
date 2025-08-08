@@ -12,7 +12,6 @@ metadata:
   name: example-field-level-encryption-config
 spec:
   forProvider:
-    region: us-west-1
     comment: test comment
     contentTypeProfileConfig:
       contentTypeProfiles:
@@ -41,7 +40,6 @@ metadata:
     testing.upbound.io/example-name: example-field-level-encryption-config
 spec:
   forProvider:
-    region: us-west-1
     comment: test comment
     encryptionEntities:
       items:
@@ -66,7 +64,6 @@ metadata:
   name: example-public-key-config
 spec:
   forProvider:
-    region: us-west-1
     comment: test public key
     encodedKeySecretRef:
       name: publickeysecret

@@ -36,6 +36,10 @@ type InvitationAccepterObservation struct {
 
 	// Unique identifier (ID) of the Detective invitation accepter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type InvitationAccepterParameters struct {
@@ -54,10 +58,10 @@ type InvitationAccepterParameters struct {
 	// +kubebuilder:validation:Optional
 	GraphArnSelector *v1.Selector `json:"graphArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // InvitationAccepterSpec defines the desired state of InvitationAccepter

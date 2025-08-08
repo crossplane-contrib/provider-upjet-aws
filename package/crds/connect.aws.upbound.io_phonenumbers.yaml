@@ -87,8 +87,9 @@ spec:
                       the resource.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -499,6 +500,11 @@ spec:
                       available phone numbers. If provided, it must contain + as part
                       of the country code. Do not specify this argument when importing
                       the resource.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: A block that specifies status of the phone number.

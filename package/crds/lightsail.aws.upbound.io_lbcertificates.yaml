@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LBCertificate is the Schema for the LBCertificates API. Provides
-          a Lightsail Load Balancer
+        description: LBCertificate is the Schema for the LBCertificates API. Manages
+          a Lightsail Load Balancer Certificate.
         properties:
           apiVersion:
             description: |-
@@ -74,12 +74,12 @@ spec:
               forProvider:
                 properties:
                   domainName:
-                    description: The domain name (e.g., example.com) for your SSL/TLS
+                    description: Domain name (e.g., example.com) for your SSL/TLS
                       certificate.
                     type: string
                   lbName:
-                    description: The load balancer name where you want to create the
-                      SSL/TLS certificate.
+                    description: Load balancer name where you want to create the SSL/TLS
+                      certificate.
                     type: string
                   lbNameRef:
                     description: Reference to a LB in lightsail to populate lbName.
@@ -156,8 +156,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
@@ -184,7 +185,7 @@ spec:
                   autoscaler.
                 properties:
                   domainName:
-                    description: The domain name (e.g., example.com) for your SSL/TLS
+                    description: Domain name (e.g., example.com) for your SSL/TLS
                       certificate.
                     type: string
                   subjectAlternativeNames:
@@ -369,24 +370,27 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the lightsail certificate.
+                    description: ARN of the lightsail certificate.
                     type: string
                   createdAt:
-                    description: The timestamp when the instance was created.
+                    description: Timestamp when the instance was created.
                     type: string
                   domainName:
-                    description: The domain name (e.g., example.com) for your SSL/TLS
+                    description: Domain name (e.g., example.com) for your SSL/TLS
                       certificate.
                     type: string
                   domainValidationRecords:
+                    description: Set of domain validation objects which can be used
+                      to complete certificate validation. Can have more than one element,
+                      e.g., if SANs are defined.
                     items:
                       properties:
                         domainName:
-                          description: The domain name (e.g., example.com) for your
-                            SSL/TLS certificate.
+                          description: Domain name (e.g., example.com) for your SSL/TLS
+                            certificate.
                           type: string
                         resourceRecordName:
-                          description: The SSL/TLS certificate name.
+                          description: SSL/TLS certificate name.
                           type: string
                         resourceRecordType:
                           type: string
@@ -395,12 +399,17 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: 'A combination of attributes to create a unique id:
+                    description: 'Combination of attributes to create a unique id:
                       lb_name,name'
                     type: string
                   lbName:
-                    description: The load balancer name where you want to create the
-                      SSL/TLS certificate.
+                    description: Load balancer name where you want to create the SSL/TLS
+                      certificate.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subjectAlternativeNames:
                     description: Set of domains that should be SANs in the issued
@@ -411,6 +420,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   supportCode:
+                    description: Support code for the certificate.
                     type: string
                 type: object
               conditions:

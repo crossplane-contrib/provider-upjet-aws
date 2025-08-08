@@ -23,8 +23,8 @@ spec:
             testing.upbound.io/example-name: destination
         storageClass: STANDARD
       filter:
-      - prefix: foo
-      id: foobar
+      - prefix: example
+      id: examplerule
       status: Enabled
 
 ---
@@ -40,6 +40,7 @@ metadata:
 spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.replication.json}
+    region: us-west-1
 
 ---
 
@@ -54,6 +55,7 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
 
 ---
 
@@ -70,6 +72,7 @@ spec:
     policyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: replication
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: replication

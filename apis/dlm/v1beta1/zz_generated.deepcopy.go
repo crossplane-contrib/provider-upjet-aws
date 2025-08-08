@@ -1082,6 +1082,11 @@ func (in *LifecyclePolicyObservation) DeepCopyInto(out *LifecyclePolicyObservati
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)

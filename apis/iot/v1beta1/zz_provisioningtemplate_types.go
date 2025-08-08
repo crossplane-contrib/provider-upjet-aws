@@ -99,6 +99,10 @@ type ProvisioningTemplateObservation struct {
 	// The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
 	ProvisioningRoleArn *string `json:"provisioningRoleArn,omitempty" tf:"provisioning_role_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -142,10 +146,10 @@ type ProvisioningTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	ProvisioningRoleArnSelector *v1.Selector `json:"provisioningRoleArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

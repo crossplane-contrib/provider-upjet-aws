@@ -44,6 +44,10 @@ type MemberObservation struct {
 
 	// The status of the member account relationship.
 	MemberStatus *string `json:"memberStatus,omitempty" tf:"member_status,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type MemberParameters struct {
@@ -60,10 +64,10 @@ type MemberParameters struct {
 	// +kubebuilder:validation:Optional
 	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // MemberSpec defines the desired state of Member

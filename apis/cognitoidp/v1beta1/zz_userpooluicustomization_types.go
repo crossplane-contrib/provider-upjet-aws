@@ -71,6 +71,10 @@ type UserPoolUICustomizationObservation struct {
 	// The last-modified date in RFC3339 format for the UI customization.
 	LastModifiedDate *string `json:"lastModifiedDate,omitempty" tf:"last_modified_date,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The user pool ID for the user pool.
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
@@ -98,10 +102,10 @@ type UserPoolUICustomizationParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageFile *string `json:"imageFile,omitempty" tf:"image_file,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The user pool ID for the user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool

@@ -74,6 +74,10 @@ type DefaultNetworkACLObservation struct {
 	// ID of the AWS account that owns the Default Network ACL
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -114,10 +118,10 @@ type DefaultNetworkACLParameters struct {
 	// +kubebuilder:validation:Optional
 	Ingress []IngressParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional

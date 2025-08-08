@@ -52,6 +52,10 @@ type LBListenerCertificateObservation struct {
 
 	// The ARN of the listener to which to attach the certificate.
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type LBListenerCertificateParameters struct {
@@ -84,10 +88,10 @@ type LBListenerCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // LBListenerCertificateSpec defines the desired state of LBListenerCertificate

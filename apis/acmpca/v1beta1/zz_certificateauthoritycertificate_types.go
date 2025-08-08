@@ -40,6 +40,10 @@ type CertificateAuthorityCertificateObservation struct {
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type CertificateAuthorityCertificateParameters struct {
@@ -65,10 +69,10 @@ type CertificateAuthorityCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateSecretRef v1.SecretKeySelector `json:"certificateSecretRef" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // CertificateAuthorityCertificateSpec defines the desired state of CertificateAuthorityCertificate

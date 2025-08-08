@@ -240,14 +240,21 @@ spec:
                       logged for an organization in AWS Organizations. Default: false.'
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retentionPeriod:
                     description: 'The retention period of the event data store, in
                       days. You can set a retention period of up to 2555 days, the
                       equivalent of seven years. Default: 2555.'
                     type: number
+                  suspend:
+                    description: Specifies whether to stop ingesting new events into
+                      the event data store. If set to true, ingestion is suspended
+                      while maintaining the ability to query existing events. If set
+                      to false, ingestion is active.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -447,6 +454,12 @@ spec:
                       days. You can set a retention period of up to 2555 days, the
                       equivalent of seven years. Default: 2555.'
                     type: number
+                  suspend:
+                    description: Specifies whether to stop ingesting new events into
+                      the event data store. If set to true, ingestion is suspended
+                      while maintaining the ability to query existing events. If set
+                      to false, ingestion is active.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -735,11 +748,22 @@ spec:
                     description: 'Specifies whether an event data store collects events
                       logged for an organization in AWS Organizations. Default: false.'
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   retentionPeriod:
                     description: 'The retention period of the event data store, in
                       days. You can set a retention period of up to 2555 days, the
                       equivalent of seven years. Default: 2555.'
                     type: number
+                  suspend:
+                    description: Specifies whether to stop ingesting new events into
+                      the event data store. If set to true, ingestion is suspended
+                      while maintaining the ability to query existing events. If set
+                      to false, ingestion is active.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

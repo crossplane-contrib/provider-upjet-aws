@@ -136,6 +136,10 @@ type VPCIpamPoolObservation struct {
 	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon". Setting this argument to true when it is not available may result in erroneous differences being reported.
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
 	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`
 
@@ -216,10 +220,10 @@ type VPCIpamPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamPool

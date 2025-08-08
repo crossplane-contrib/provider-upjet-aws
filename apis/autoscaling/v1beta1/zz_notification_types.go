@@ -60,6 +60,10 @@ type NotificationObservation struct {
 	// +listType=set
 	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Topic ARN for notifications to be sent through
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
@@ -86,10 +90,10 @@ type NotificationParameters struct {
 	// +listType=set
 	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Topic ARN for notifications to be sent through
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic

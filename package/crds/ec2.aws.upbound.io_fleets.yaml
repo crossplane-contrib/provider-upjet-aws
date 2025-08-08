@@ -648,8 +648,9 @@ spec:
                         type: boolean
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   replaceUnhealthyInstances:
                     description: Whether EC2 Fleet should replace unhealthy instances.
@@ -692,6 +693,26 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      maxTotalPrice:
+                        description: The maximum amount per hour for Spot Instances
+                          that you're willing to pay.
+                        type: string
+                      minTargetCapacity:
+                        description: The minimum target capacity for Spot Instances
+                          in the fleet. If the minimum target capacity is not reached,
+                          the fleet launches no instances. Supported only for fleets
+                          of type instant.
+                        type: number
+                      singleAvailabilityZone:
+                        description: Indicates that the fleet launches all Spot Instances
+                          into a single Availability Zone. Supported only for fleets
+                          of type instant.
+                        type: boolean
+                      singleInstanceType:
+                        description: Indicates that the fleet uses a single instance
+                          type to launch all Spot Instances in the fleet. Supported
+                          only for fleets of type instant.
+                        type: boolean
                     type: object
                   tags:
                     additionalProperties:
@@ -1379,6 +1400,26 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      maxTotalPrice:
+                        description: The maximum amount per hour for Spot Instances
+                          that you're willing to pay.
+                        type: string
+                      minTargetCapacity:
+                        description: The minimum target capacity for Spot Instances
+                          in the fleet. If the minimum target capacity is not reached,
+                          the fleet launches no instances. Supported only for fleets
+                          of type instant.
+                        type: number
+                      singleAvailabilityZone:
+                        description: Indicates that the fleet launches all Spot Instances
+                          into a single Availability Zone. Supported only for fleets
+                          of type instant.
+                        type: boolean
+                      singleInstanceType:
+                        description: Indicates that the fleet uses a single instance
+                          type to launch all Spot Instances in the fleet. Supported
+                          only for fleets of type instant.
+                        type: boolean
                     type: object
                   tags:
                     additionalProperties:
@@ -2046,6 +2087,11 @@ spec:
                           only for fleets of type instant.
                         type: boolean
                     type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   replaceUnhealthyInstances:
                     description: Whether EC2 Fleet should replace unhealthy instances.
                       Defaults to false. Supported only for fleets of type maintain.
@@ -2087,6 +2133,26 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      maxTotalPrice:
+                        description: The maximum amount per hour for Spot Instances
+                          that you're willing to pay.
+                        type: string
+                      minTargetCapacity:
+                        description: The minimum target capacity for Spot Instances
+                          in the fleet. If the minimum target capacity is not reached,
+                          the fleet launches no instances. Supported only for fleets
+                          of type instant.
+                        type: number
+                      singleAvailabilityZone:
+                        description: Indicates that the fleet launches all Spot Instances
+                          into a single Availability Zone. Supported only for fleets
+                          of type instant.
+                        type: boolean
+                      singleInstanceType:
+                        description: Indicates that the fleet uses a single instance
+                          type to launch all Spot Instances in the fleet. Supported
+                          only for fleets of type instant.
+                        type: boolean
                     type: object
                   tags:
                     additionalProperties:

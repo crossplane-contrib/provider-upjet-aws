@@ -291,8 +291,9 @@ spec:
                       in this fleetE.g., FullProtection. Defaults to NoProtection.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceCreationLimitPolicy:
                     description: Policy that limits the number of game sessions an
@@ -917,6 +918,11 @@ spec:
                     type: string
                   operatingSystem:
                     description: Operating system of the fleet's computing resources.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceCreationLimitPolicy:
                     description: Policy that limits the number of game sessions an
@@ -1324,8 +1330,9 @@ spec:
                       in this fleetE.g., FullProtection. Defaults to NoProtection.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceCreationLimitPolicy:
                     description: Policy that limits the number of game sessions an
@@ -1938,6 +1945,11 @@ spec:
                     type: string
                   operatingSystem:
                     description: Operating system of the fleet's computing resources.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceCreationLimitPolicy:
                     description: Policy that limits the number of game sessions an

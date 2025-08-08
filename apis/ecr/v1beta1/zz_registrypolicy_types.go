@@ -25,6 +25,10 @@ type RegistryPolicyObservation struct {
 	// The policy document. This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The registry ID where the registry was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
@@ -35,10 +39,10 @@ type RegistryPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // RegistryPolicySpec defines the desired state of RegistryPolicy

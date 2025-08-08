@@ -21,19 +21,19 @@ type AliasInitParameters struct {
 	// Lambda function version for which you are creating the alias. Pattern: (\$LATEST|[0-9]+).
 	FunctionVersion *string `json:"functionVersion,omitempty" tf:"function_version,omitempty"`
 
-	// The Lambda alias' route configuration settings. Fields documented below
+	// Lambda alias' route configuration settings. See below.
 	RoutingConfig *RoutingConfigInitParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 }
 
 type AliasObservation struct {
 
-	// The Amazon Resource Name (ARN) identifying your Lambda function alias.
+	// ARN identifying your Lambda function alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the alias.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Lambda Function name or ARN.
+	// Name or ARN of the Lambda function.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Lambda function version for which you are creating the alias. Pattern: (\$LATEST|[0-9]+).
@@ -41,10 +41,14 @@ type AliasObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri
+	// ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	InvokeArn *string `json:"invokeArn,omitempty" tf:"invoke_arn,omitempty"`
 
-	// The Lambda alias' route configuration settings. Fields documented below
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Lambda alias' route configuration settings. See below.
 	RoutingConfig *RoutingConfigObservation `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 }
 
@@ -54,7 +58,7 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Lambda Function name or ARN.
+	// Name or ARN of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -71,33 +75,33 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionVersion *string `json:"functionVersion,omitempty" tf:"function_version,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Lambda alias' route configuration settings. Fields documented below
+	// Lambda alias' route configuration settings. See below.
 	// +kubebuilder:validation:Optional
 	RoutingConfig *RoutingConfigParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 }
 
 type RoutingConfigInitParameters struct {
 
-	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
+	// Map that defines the proportion of events that should be sent to different versions of a Lambda function.
 	// +mapType=granular
 	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
 }
 
 type RoutingConfigObservation struct {
 
-	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
+	// Map that defines the proportion of events that should be sent to different versions of a Lambda function.
 	// +mapType=granular
 	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
 }
 
 type RoutingConfigParameters struct {
 
-	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
+	// Map that defines the proportion of events that should be sent to different versions of a Lambda function.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
@@ -129,7 +133,7 @@ type AliasStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Alias is the Schema for the Aliass API. Creates a Lambda function alias.
+// Alias is the Schema for the Aliass API. Manages an AWS Lambda Alias.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

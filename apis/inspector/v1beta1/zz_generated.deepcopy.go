@@ -125,6 +125,11 @@ func (in *AssessmentTargetObservation) DeepCopyInto(out *AssessmentTargetObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceGroupArn != nil {
 		in, out := &in.ResourceGroupArn, &out.ResourceGroupArn
 		*out = new(string)
@@ -377,6 +382,11 @@ func (in *AssessmentTemplateObservation) DeepCopyInto(out *AssessmentTemplateObs
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -749,6 +759,11 @@ func (in *ResourceGroupObservation) DeepCopyInto(out *ResourceGroupObservation) 
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

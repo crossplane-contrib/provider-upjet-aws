@@ -59,6 +59,10 @@ type BackendServerPolicyObservation struct {
 	// List of Policy Names to apply to the backend server.
 	// +listType=set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type BackendServerPolicyParameters struct {
@@ -95,10 +99,10 @@ type BackendServerPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyNamesSelector *v1.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // BackendServerPolicySpec defines the desired state of BackendServerPolicy

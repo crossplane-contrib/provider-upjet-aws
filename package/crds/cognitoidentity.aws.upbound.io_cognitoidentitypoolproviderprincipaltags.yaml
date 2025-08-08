@@ -240,8 +240,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   useDefaults:
                     description: ':  use default (username and clientID) attribute
@@ -619,6 +620,11 @@ spec:
                     description: String to string map of variables.
                     type: object
                     x-kubernetes-map-type: granular
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   useDefaults:
                     description: ':  use default (username and clientID) attribute
                       mappings.'

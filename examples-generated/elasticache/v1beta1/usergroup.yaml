@@ -8,7 +8,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    engine: REDIS
+    engine: redis
     region: us-west-1
     userIdRefs:
     - name: test
@@ -28,7 +28,7 @@ spec:
     accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
       -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
       -georadiusbymember
-    engine: REDIS
+    engine: redis
     passwordsSecretRef:
     - key: example-key
       name: example-secret

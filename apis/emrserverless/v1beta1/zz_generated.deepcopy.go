@@ -243,6 +243,11 @@ func (in *ApplicationObservation) DeepCopyInto(out *ApplicationObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReleaseLabel != nil {
 		in, out := &in.ReleaseLabel, &out.ReleaseLabel
 		*out = new(string)

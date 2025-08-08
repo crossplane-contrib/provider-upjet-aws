@@ -116,7 +116,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute); i5++ {
 				{
-					m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LBListener", "LBListenerList")
+					m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta1", "LBListener", "LBListenerList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
@@ -271,7 +271,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute); i5++ {
 				{
-					m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LBListener", "LBListenerList")
+					m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta1", "LBListener", "LBListenerList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}

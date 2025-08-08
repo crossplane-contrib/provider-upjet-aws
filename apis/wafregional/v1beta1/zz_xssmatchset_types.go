@@ -30,6 +30,10 @@ type XSSMatchSetObservation struct {
 	// The name of the set
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The parts of web requests that you want to inspect for cross-site scripting attacks.
 	XSSMatchTuple []XSSMatchTupleObservation `json:"xssMatchTuple,omitempty" tf:"xss_match_tuple,omitempty"`
 }
@@ -40,10 +44,10 @@ type XSSMatchSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The parts of web requests that you want to inspect for cross-site scripting attacks.
 	// +kubebuilder:validation:Optional

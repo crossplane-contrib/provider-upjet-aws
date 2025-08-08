@@ -159,8 +159,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
                     description: The ARN of the application, configuration profile,
@@ -616,6 +617,11 @@ spec:
                     description: The parameter names and values defined for the association.
                     type: object
                     x-kubernetes-map-type: granular
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   resourceArn:
                     description: The ARN of the application, configuration profile,
                       or environment to associate with the extension.

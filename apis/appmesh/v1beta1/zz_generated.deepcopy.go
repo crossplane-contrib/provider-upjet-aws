@@ -4072,6 +4072,11 @@ func (in *GatewayRouteObservation) DeepCopyInto(out *GatewayRouteObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceOwner != nil {
 		in, out := &in.ResourceOwner, &out.ResourceOwner
 		*out = new(string)
@@ -10380,6 +10385,11 @@ func (in *MeshObservation) DeepCopyInto(out *MeshObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceOwner != nil {
 		in, out := &in.ResourceOwner, &out.ResourceOwner
 		*out = new(string)
@@ -12568,6 +12578,11 @@ func (in *RouteObservation) DeepCopyInto(out *RouteObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -17972,6 +17987,11 @@ func (in *VirtualGatewayObservation) DeepCopyInto(out *VirtualGatewayObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceOwner != nil {
 		in, out := &in.ResourceOwner, &out.ResourceOwner
 		*out = new(string)
@@ -18386,6 +18406,11 @@ func (in *VirtualNodeObservation) DeepCopyInto(out *VirtualNodeObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -18855,6 +18880,11 @@ func (in *VirtualRouterObservation) DeepCopyInto(out *VirtualRouterObservation) 
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
@@ -19412,6 +19442,11 @@ func (in *VirtualServiceObservation_2) DeepCopyInto(out *VirtualServiceObservati
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}

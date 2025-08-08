@@ -114,7 +114,7 @@ spec:
                     description: Folder path of CDC files. If cdc_path is set, AWS
                       DMS reads CDC files from this path and replicates the data changes
                       to the target endpoint. Supported in AWS DMS versions 3.4.2
-                      and later.
+                      and later. Required for CDC.
                     type: string
                   certificateArn:
                     description: ARN for the certificate.
@@ -205,7 +205,7 @@ spec:
                     type: string
                   externalTableDefinition:
                     description: JSON document that describes how AWS DMS should interpret
-                      the data.
+                      the data. Required for source endpoints.
                     type: string
                   glueCatalogGeneration:
                     description: Whether to integrate AWS Glue Data Catalog with an
@@ -324,8 +324,9 @@ spec:
                       (Ignored for source endpoints.)
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   rfc4180:
                     description: For an S3 source, whether each leading double quotation
@@ -576,7 +577,7 @@ spec:
                     description: Folder path of CDC files. If cdc_path is set, AWS
                       DMS reads CDC files from this path and replicates the data changes
                       to the target endpoint. Supported in AWS DMS versions 3.4.2
-                      and later.
+                      and later. Required for CDC.
                     type: string
                   certificateArn:
                     description: ARN for the certificate.
@@ -667,7 +668,7 @@ spec:
                     type: string
                   externalTableDefinition:
                     description: JSON document that describes how AWS DMS should interpret
-                      the data.
+                      the data. Required for source endpoints.
                     type: string
                   glueCatalogGeneration:
                     description: Whether to integrate AWS Glue Data Catalog with an
@@ -1200,7 +1201,7 @@ spec:
                     description: Folder path of CDC files. If cdc_path is set, AWS
                       DMS reads CDC files from this path and replicates the data changes
                       to the target endpoint. Supported in AWS DMS versions 3.4.2
-                      and later.
+                      and later. Required for CDC.
                     type: string
                   certificateArn:
                     description: ARN for the certificate.
@@ -1302,7 +1303,7 @@ spec:
                     type: string
                   externalTableDefinition:
                     description: JSON document that describes how AWS DMS should interpret
-                      the data.
+                      the data. Required for source endpoints.
                     type: string
                   glueCatalogGeneration:
                     description: Whether to integrate AWS Glue Data Catalog with an
@@ -1348,6 +1349,11 @@ spec:
                       load on the S3 target specified by cdc_path. Default is false.
                       (Ignored for source endpoints.)
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   rfc4180:
                     description: For an S3 source, whether each leading double quotation
                       mark has to be followed by an ending double quotation mark.

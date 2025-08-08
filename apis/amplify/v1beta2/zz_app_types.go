@@ -34,6 +34,19 @@ type AppInitParameters struct {
 	// Cache configuration for the Amplify app. See cache_config Block for details.
 	CacheConfig *CacheConfigInitParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
@@ -72,6 +85,9 @@ type AppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
+	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	JobConfig *JobConfigInitParameters `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
+
 	// Name for an Amplify app.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -107,6 +123,9 @@ type AppObservation struct {
 	// Cache configuration for the Amplify app. See cache_config Block for details.
 	CacheConfig *CacheConfigObservation `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
@@ -141,6 +160,9 @@ type AppObservation struct {
 	// Unique ID of the Amplify app.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	JobConfig *JobConfigObservation `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
+
 	// Name for an Amplify app.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -149,6 +171,10 @@ type AppObservation struct {
 
 	// Describes the information about a production branch for an Amplify app. A production_branch block is documented below.
 	ProductionBranch []ProductionBranchObservation `json:"productionBranch,omitempty" tf:"production_branch,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Repository for an Amplify app.
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
@@ -188,6 +214,20 @@ type AppParameters struct {
 	// Cache configuration for the Amplify app. See cache_config Block for details.
 	// +kubebuilder:validation:Optional
 	CacheConfig *CacheConfigParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
+
+	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate computeRoleArn.
+	// +kubebuilder:validation:Optional
+	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
 
 	// The custom HTTP headers for an Amplify app.
 	// +kubebuilder:validation:Optional
@@ -236,6 +276,10 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
+	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	// +kubebuilder:validation:Optional
+	JobConfig *JobConfigParameters `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
+
 	// Name for an Amplify app.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -248,10 +292,10 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Repository for an Amplify app.
 	// +kubebuilder:validation:Optional
@@ -438,6 +482,25 @@ type CustomRuleParameters struct {
 	// Target pattern for a URL rewrite or redirect rule.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target" tf:"target,omitempty"`
+}
+
+type JobConfigInitParameters struct {
+
+	// Size of the build instance. Valid values: STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.
+	BuildComputeType *string `json:"buildComputeType,omitempty" tf:"build_compute_type,omitempty"`
+}
+
+type JobConfigObservation struct {
+
+	// Size of the build instance. Valid values: STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.
+	BuildComputeType *string `json:"buildComputeType,omitempty" tf:"build_compute_type,omitempty"`
+}
+
+type JobConfigParameters struct {
+
+	// Size of the build instance. Valid values: STANDARD_8GB, LARGE_16GB, and XLARGE_72GB. Default: STANDARD_8GB.
+	// +kubebuilder:validation:Optional
+	BuildComputeType *string `json:"buildComputeType,omitempty" tf:"build_compute_type,omitempty"`
 }
 
 type ProductionBranchInitParameters struct {

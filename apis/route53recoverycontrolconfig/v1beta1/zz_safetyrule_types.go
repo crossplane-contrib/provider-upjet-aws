@@ -196,11 +196,6 @@ type SafetyRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Configuration block for safety rule criteria. See below.
 	// +kubebuilder:validation:Optional
 	RuleConfig []RuleConfigParameters `json:"ruleConfig,omitempty" tf:"rule_config,omitempty"`

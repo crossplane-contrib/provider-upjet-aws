@@ -603,6 +603,11 @@ func (in *EventDataStoreInitParameters) DeepCopyInto(out *EventDataStoreInitPara
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Suspend != nil {
+		in, out := &in.Suspend, &out.Suspend
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -713,9 +718,19 @@ func (in *EventDataStoreObservation) DeepCopyInto(out *EventDataStoreObservation
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Suspend != nil {
+		in, out := &in.Suspend, &out.Suspend
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -820,6 +835,11 @@ func (in *EventDataStoreParameters) DeepCopyInto(out *EventDataStoreParameters) 
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Suspend != nil {
+		in, out := &in.Suspend, &out.Suspend
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1612,6 +1632,11 @@ func (in *TrailObservation) DeepCopyInto(out *TrailObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.S3BucketName != nil {
 		in, out := &in.S3BucketName, &out.S3BucketName
 		*out = new(string)
@@ -1619,6 +1644,11 @@ func (in *TrailObservation) DeepCopyInto(out *TrailObservation) {
 	}
 	if in.S3KeyPrefix != nil {
 		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix
+		*out = new(string)
+		**out = **in
+	}
+	if in.SnsTopicArn != nil {
+		in, out := &in.SnsTopicArn, &out.SnsTopicArn
 		*out = new(string)
 		**out = **in
 	}

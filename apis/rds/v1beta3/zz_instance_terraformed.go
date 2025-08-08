@@ -21,7 +21,7 @@ func (mg *Instance) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Instance
 func (tr *Instance) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password": "passwordSecretRef"}
+	return map[string]string{"password": "passwordSecretRef", "password_wo": "passwordWoSecretRef"}
 }
 
 // GetObservation of this Instance

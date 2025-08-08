@@ -54,6 +54,7 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.AWSCloudFormationStackSetAdministrationRole_assume_role_policy.json}
+    region: us-west-1
 
 ---
 
@@ -68,6 +69,7 @@ metadata:
 spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.AWSCloudFormationStackSetAdministrationRole_ExecutionPolicy.json}
+    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: AWSCloudFormationStackSetAdministrationRole

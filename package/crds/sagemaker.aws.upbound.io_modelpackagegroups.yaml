@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ModelPackageGroup is the Schema for the ModelPackageGroups API.
-          Provides a SageMaker Model Package Group resource.
+          Provides a SageMaker AI Model Package Group resource.
         properties:
           apiVersion:
             description: |-
@@ -77,8 +77,9 @@ spec:
                     description: A description for the model group.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -293,6 +294,11 @@ spec:
                     type: string
                   modelPackageGroupDescription:
                     description: A description for the model group.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

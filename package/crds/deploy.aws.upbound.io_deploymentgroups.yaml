@@ -80,7 +80,6 @@ spec:
                       properties:
                         alarms:
                           description: A list of alarms configured for the deployment
-                            group. A maximum of 10 alarms can be added to a deployment
                             group.
                           items:
                             type: string
@@ -835,8 +834,9 @@ spec:
                       are UPDATE and IGNORE. Defaults to UPDATE.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRoleArn:
                     description: The service role ARN that allows deployments.
@@ -1047,7 +1047,6 @@ spec:
                       properties:
                         alarms:
                           description: A list of alarms configured for the deployment
-                            group. A maximum of 10 alarms can be added to a deployment
                             group.
                           items:
                             type: string
@@ -2090,7 +2089,6 @@ spec:
                       properties:
                         alarms:
                           description: A list of alarms configured for the deployment
-                            group. A maximum of 10 alarms can be added to a deployment
                             group.
                           items:
                             type: string
@@ -2402,6 +2400,11 @@ spec:
                       new Amazon EC2 instances are launched mid-deployment and do
                       not receive the deployed application revision. Valid values
                       are UPDATE and IGNORE. Defaults to UPDATE.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRoleArn:
                     description: The service role ARN that allows deployments.
@@ -3298,8 +3301,9 @@ spec:
                       are UPDATE and IGNORE. Defaults to UPDATE.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRoleArn:
                     description: The service role ARN that allows deployments.
@@ -4807,6 +4811,11 @@ spec:
                       new Amazon EC2 instances are launched mid-deployment and do
                       not receive the deployed application revision. Valid values
                       are UPDATE and IGNORE. Defaults to UPDATE.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRoleArn:
                     description: The service role ARN that allows deployments.

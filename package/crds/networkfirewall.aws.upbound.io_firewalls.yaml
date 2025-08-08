@@ -81,6 +81,15 @@ spec:
                   description:
                     description: A friendly description of the firewall.
                     type: string
+                  enabledAnalysisTypes:
+                    description: 'Set of types for which to collect analysis metrics.
+                      See Reporting on network traffic in Network Firewall for details
+                      on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults
+                      to [].'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   encryptionConfiguration:
                     description: KMS encryption configuration settings. See Encryption
                       Configuration below for details.
@@ -190,8 +199,9 @@ spec:
                     description: A friendly name of the firewall.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subnetChangeProtection:
                     description: A flag indicating whether the firewall is protected
@@ -207,7 +217,7 @@ spec:
                     items:
                       properties:
                         ipAddressType:
-                          description: 'The subnet''s IP address type. Valida values:
+                          description: 'The subnet''s IP address type. Valid values:
                             "DUALSTACK", "IPV4".'
                           type: string
                         subnetId:
@@ -397,6 +407,15 @@ spec:
                   description:
                     description: A friendly description of the firewall.
                     type: string
+                  enabledAnalysisTypes:
+                    description: 'Set of types for which to collect analysis metrics.
+                      See Reporting on network traffic in Network Firewall for details
+                      on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults
+                      to [].'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   encryptionConfiguration:
                     description: KMS encryption configuration settings. See Encryption
                       Configuration below for details.
@@ -519,7 +538,7 @@ spec:
                     items:
                       properties:
                         ipAddressType:
-                          description: 'The subnet''s IP address type. Valida values:
+                          description: 'The subnet''s IP address type. Valid values:
                             "DUALSTACK", "IPV4".'
                           type: string
                         subnetId:
@@ -879,6 +898,15 @@ spec:
                   description:
                     description: A friendly description of the firewall.
                     type: string
+                  enabledAnalysisTypes:
+                    description: 'Set of types for which to collect analysis metrics.
+                      See Reporting on network traffic in Network Firewall for details
+                      on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults
+                      to [].'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   encryptionConfiguration:
                     description: KMS encryption configuration settings. See Encryption
                       Configuration below for details.
@@ -951,6 +979,11 @@ spec:
                   name:
                     description: A friendly name of the firewall.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   subnetChangeProtection:
                     description: A flag indicating whether the firewall is protected
                       against changes to the subnet associations. Use this setting
@@ -965,7 +998,7 @@ spec:
                     items:
                       properties:
                         ipAddressType:
-                          description: 'The subnet''s IP address type. Valida values:
+                          description: 'The subnet''s IP address type. Valid values:
                             "DUALSTACK", "IPV4".'
                           type: string
                         subnetId:
@@ -1119,6 +1152,15 @@ spec:
                   description:
                     description: A friendly description of the firewall.
                     type: string
+                  enabledAnalysisTypes:
+                    description: 'Set of types for which to collect analysis metrics.
+                      See Reporting on network traffic in Network Firewall for details
+                      on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults
+                      to [].'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   encryptionConfiguration:
                     description: KMS encryption configuration settings. See Encryption
                       Configuration below for details.
@@ -1226,8 +1268,9 @@ spec:
                     description: A friendly name of the firewall.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   subnetChangeProtection:
                     description: A flag indicating whether the firewall is protected
@@ -1243,7 +1286,7 @@ spec:
                     items:
                       properties:
                         ipAddressType:
-                          description: 'The subnet''s IP address type. Valida values:
+                          description: 'The subnet''s IP address type. Valid values:
                             "DUALSTACK", "IPV4".'
                           type: string
                         subnetId:
@@ -1433,6 +1476,15 @@ spec:
                   description:
                     description: A friendly description of the firewall.
                     type: string
+                  enabledAnalysisTypes:
+                    description: 'Set of types for which to collect analysis metrics.
+                      See Reporting on network traffic in Network Firewall for details
+                      on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults
+                      to [].'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   encryptionConfiguration:
                     description: KMS encryption configuration settings. See Encryption
                       Configuration below for details.
@@ -1553,7 +1605,7 @@ spec:
                     items:
                       properties:
                         ipAddressType:
-                          description: 'The subnet''s IP address type. Valida values:
+                          description: 'The subnet''s IP address type. Valid values:
                             "DUALSTACK", "IPV4".'
                           type: string
                         subnetId:
@@ -1913,6 +1965,15 @@ spec:
                   description:
                     description: A friendly description of the firewall.
                     type: string
+                  enabledAnalysisTypes:
+                    description: 'Set of types for which to collect analysis metrics.
+                      See Reporting on network traffic in Network Firewall for details
+                      on how to use the data. Valid values: TLS_SNI, HTTP_HOST. Defaults
+                      to [].'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   encryptionConfiguration:
                     description: KMS encryption configuration settings. See Encryption
                       Configuration below for details.
@@ -1983,6 +2044,11 @@ spec:
                   name:
                     description: A friendly name of the firewall.
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   subnetChangeProtection:
                     description: A flag indicating whether the firewall is protected
                       against changes to the subnet associations. Use this setting
@@ -1997,7 +2063,7 @@ spec:
                     items:
                       properties:
                         ipAddressType:
-                          description: 'The subnet''s IP address type. Valida values:
+                          description: 'The subnet''s IP address type. Valid values:
                             "DUALSTACK", "IPV4".'
                           type: string
                         subnetId:

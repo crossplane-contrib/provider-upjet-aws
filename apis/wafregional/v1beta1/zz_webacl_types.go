@@ -209,6 +209,10 @@ type WebACLObservation struct {
 	// The name or description of the web ACL.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Set of configuration blocks containing rules for the web ACL. Detailed below.
 	Rule []WebACLRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
@@ -239,10 +243,10 @@ type WebACLParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Set of configuration blocks containing rules for the web ACL. Detailed below.
 	// +kubebuilder:validation:Optional

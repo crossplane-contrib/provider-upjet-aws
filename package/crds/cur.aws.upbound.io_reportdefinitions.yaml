@@ -84,7 +84,7 @@ spec:
                     x-kubernetes-list-type: set
                   additionalSchemaElements:
                     description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                      SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.'
                     items:
                       type: string
                     type: array
@@ -102,10 +102,6 @@ spec:
                     description: Set to true to update your reports after they have
                       been finalized if AWS detects charges related to previous months.
                     type: boolean
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   reportVersioning:
                     description: 'Overwrite the previous version of each report or
                       to deliver the report in addition to the previous versions.
@@ -190,7 +186,9 @@ spec:
                         type: object
                     type: object
                   s3Prefix:
-                    description: Report path prefix. Limited to 256 characters.
+                    description: Report path prefix. Limited to 256 characters. May
+                      be empty ("") but the resource can then not be modified via
+                      the AWS Console.
                     type: string
                   s3Region:
                     description: Region of the existing S3 bucket to hold generated
@@ -206,8 +204,6 @@ spec:
                     description: 'The frequency on which report data are measured
                       and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.'
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -233,7 +229,7 @@ spec:
                     x-kubernetes-list-type: set
                   additionalSchemaElements:
                     description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                      SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.'
                     items:
                       type: string
                     type: array
@@ -335,7 +331,9 @@ spec:
                         type: object
                     type: object
                   s3Prefix:
-                    description: Report path prefix. Limited to 256 characters.
+                    description: Report path prefix. Limited to 256 characters. May
+                      be empty ("") but the resource can then not be modified via
+                      the AWS Console.
                     type: string
                   s3Region:
                     description: Region of the existing S3 bucket to hold generated
@@ -532,6 +530,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.format)
                 || (has(self.initProvider) && has(self.initProvider.format))'
+            - message: spec.forProvider.s3Prefix is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.s3Prefix)
+                || (has(self.initProvider) && has(self.initProvider.s3Prefix))'
             - message: spec.forProvider.s3Region is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.s3Region)
@@ -556,7 +558,7 @@ spec:
                     x-kubernetes-list-type: set
                   additionalSchemaElements:
                     description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                      SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY.'
                     items:
                       type: string
                     type: array
@@ -590,7 +592,9 @@ spec:
                       reports.
                     type: string
                   s3Prefix:
-                    description: Report path prefix. Limited to 256 characters.
+                    description: Report path prefix. Limited to 256 characters. May
+                      be empty ("") but the resource can then not be modified via
+                      the AWS Console.
                     type: string
                   s3Region:
                     description: Region of the existing S3 bucket to hold generated

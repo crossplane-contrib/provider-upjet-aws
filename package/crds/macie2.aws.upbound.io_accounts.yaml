@@ -81,8 +81,9 @@ spec:
                       or SIX_HOURS.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   status:
                     description: Specifies the status for the account. To enable Amazon
@@ -303,6 +304,11 @@ spec:
                     type: string
                   id:
                     description: The unique identifier (ID) of the macie account.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRole:
                     description: The Amazon Resource Name (ARN) of the service-linked

@@ -159,8 +159,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   vpcEndpointId:
                     description: The ID of the VPC Endpoint to receive notifications
@@ -624,6 +625,11 @@ spec:
                     type: string
                   notificationType:
                     description: The type of notification.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   state:
                     description: The state of the notification.

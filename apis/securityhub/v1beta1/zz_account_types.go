@@ -41,6 +41,10 @@ type AccountObservation struct {
 
 	// AWS Account ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AccountParameters struct {
@@ -57,10 +61,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDefaultStandards *bool `json:"enableDefaultStandards,omitempty" tf:"enable_default_standards,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // AccountSpec defines the desired state of Account

@@ -19,7 +19,6 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: example
     name: test profile
-    region: us-west-1
 
 ---
 
@@ -39,4 +38,3 @@ spec:
       name: example-secret
       namespace: upbound-system
     name: test_key
-    region: us-west-1

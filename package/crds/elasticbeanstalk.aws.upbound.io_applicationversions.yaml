@@ -253,8 +253,9 @@ spec:
                       files, like proxy server or Docker configuration.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -677,6 +678,11 @@ spec:
                       files. It doesn’t validate your application’s configuration
                       files, like proxy server or Docker configuration.
                     type: boolean
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

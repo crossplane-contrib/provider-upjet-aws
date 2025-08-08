@@ -74,8 +74,9 @@ spec:
               forProvider:
                 properties:
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   targetKeyId:
                     description: Identifier for the key for which the alias is for,
@@ -426,6 +427,11 @@ spec:
                     description: The Amazon Resource Name (ARN) of the key alias.
                     type: string
                   id:
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   targetKeyArn:
                     description: The Amazon Resource Name (ARN) of the target key

@@ -958,11 +958,6 @@ func (in *RecordParameters) DeepCopyInto(out *RecordParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.SetIdentifier != nil {
 		in, out := &in.SetIdentifier, &out.SetIdentifier
 		*out = new(string)

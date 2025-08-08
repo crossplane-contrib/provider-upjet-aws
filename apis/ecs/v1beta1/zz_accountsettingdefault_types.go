@@ -23,14 +23,16 @@ type AccountSettingDefaultInitParameters struct {
 }
 
 type AccountSettingDefaultObservation struct {
-
-	// ARN that identifies the account setting.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the account setting to set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// State of the setting.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -42,10 +44,10 @@ type AccountSettingDefaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// State of the setting.
 	// +kubebuilder:validation:Optional

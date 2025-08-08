@@ -34,6 +34,25 @@ func (mg *App) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.ComputeRoleArnRef,
+			Selector:     mg.Spec.ForProvider.ComputeRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ComputeRoleArn")
+	}
+	mg.Spec.ForProvider.ComputeRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ComputeRoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMServiceRoleArn),
 			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.IAMServiceRoleArnRef,
@@ -46,6 +65,25 @@ func (mg *App) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.IAMServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMServiceRoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.ComputeRoleArnRef,
+			Selector:     mg.Spec.InitProvider.ComputeRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ComputeRoleArn")
+	}
+	mg.Spec.InitProvider.ComputeRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ComputeRoleArnRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {

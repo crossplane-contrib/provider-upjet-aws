@@ -31,6 +31,10 @@ type KeyspaceObservation struct {
 	// The name of the keyspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The replication specification of the keyspace.
 	ReplicationSpecification *ReplicationSpecificationObservation `json:"replicationSpecification,omitempty" tf:"replication_specification,omitempty"`
 
@@ -45,10 +49,10 @@ type KeyspaceObservation struct {
 
 type KeyspaceParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The replication specification of the keyspace.
 	// +kubebuilder:validation:Optional

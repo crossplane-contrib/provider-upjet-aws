@@ -1015,6 +1015,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 		*out = new(PointInTimeRecoveryObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.SchemaDefinition != nil {
 		in, out := &in.SchemaDefinition, &out.SchemaDefinition
 		*out = new(SchemaDefinitionObservation)

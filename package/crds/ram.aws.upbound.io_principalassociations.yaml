@@ -156,8 +156,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceShareArn:
                     description: The Amazon Resource Name (ARN) of the resource share.
@@ -594,6 +595,11 @@ spec:
                       Possible values are an AWS account ID, an AWS Organizations
                       Organization ARN, or an AWS Organizations Organization Unit
                       ARN.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resourceShareArn:
                     description: The Amazon Resource Name (ARN) of the resource share.

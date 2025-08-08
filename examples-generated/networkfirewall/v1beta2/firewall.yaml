@@ -8,6 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
+    enabledAnalysisTypes:
+    - TLS_SNI
+    - HTTP_HOST
     firewallPolicyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

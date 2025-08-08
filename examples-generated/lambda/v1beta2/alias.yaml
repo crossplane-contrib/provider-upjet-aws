@@ -4,16 +4,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lambda/v1beta2/alias
   labels:
-    testing.upbound.io/example-name: test_lambda_alias
-  name: test-lambda-alias
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    description: a sample description
+    description: Production environment alias
     functionNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: lambda_function_test
+        testing.upbound.io/example-name: example
     functionVersion: "1"
     region: us-west-1
-    routingConfig:
-    - additionalVersionWeights:
-        "2": 0.5

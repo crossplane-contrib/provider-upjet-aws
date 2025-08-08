@@ -80,6 +80,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -148,7 +152,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -221,6 +226,16 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether the distribution is enabled to
+                                  accept end user requests for content.
+                                type: boolean
+                            type: object
+                          type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -247,13 +262,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -316,13 +333,19 @@ spec:
                     description: Whether the IPv6 is enabled for the distribution.
                     type: boolean
                   loggingConfig:
-                    description: The logging configuration that controls how logs
-                      are written to your distribution (maximum one).
+                    description: 'The logging configuration that controls how logs
+                      are written to your distribution (maximum one). AWS provides
+                      two versions of access logs for CloudFront: Legacy and v2. This
+                      argument configures legacy version standard logs.'
                     items:
                       properties:
                         bucket:
-                          description: Amazon S3 bucket to store the access logs in,
-                            for example, myawslogbucket.s3.amazonaws.com.
+                          description: 'Amazon S3 bucket to store the access logs
+                            in, for example, myawslogbucket.s3.amazonaws.com. The
+                            bucket must have correct ACL attached with "FULL_CONTROL"
+                            permission for "awslogsdelivery" account (Canonical ID:
+                            "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                            for log transfer to work.'
                           type: string
                         includeCookies:
                           description: 'Whether to include cookies in access logs
@@ -369,7 +392,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -518,6 +542,16 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether the distribution is enabled to
+                                  accept end user requests for content.
+                                type: boolean
+                            type: object
+                          type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -620,13 +654,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -1001,10 +1037,6 @@ spec:
                     description: Price class for this distribution. One of PriceClass_All,
                       PriceClass_200, PriceClass_100.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   restrictions:
                     description: The restriction configuration for this distribution
                       (maximum one).
@@ -1107,8 +1139,6 @@ spec:
                       credentials configuring this argument must have waf:GetWebACL
                       permissions assigned.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -1130,6 +1160,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -1198,7 +1232,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -1271,6 +1306,16 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether the distribution is enabled to
+                                  accept end user requests for content.
+                                type: boolean
+                            type: object
+                          type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -1297,13 +1342,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -1366,13 +1413,19 @@ spec:
                     description: Whether the IPv6 is enabled for the distribution.
                     type: boolean
                   loggingConfig:
-                    description: The logging configuration that controls how logs
-                      are written to your distribution (maximum one).
+                    description: 'The logging configuration that controls how logs
+                      are written to your distribution (maximum one). AWS provides
+                      two versions of access logs for CloudFront: Legacy and v2. This
+                      argument configures legacy version standard logs.'
                     items:
                       properties:
                         bucket:
-                          description: Amazon S3 bucket to store the access logs in,
-                            for example, myawslogbucket.s3.amazonaws.com.
+                          description: 'Amazon S3 bucket to store the access logs
+                            in, for example, myawslogbucket.s3.amazonaws.com. The
+                            bucket must have correct ACL attached with "FULL_CONTROL"
+                            permission for "awslogsdelivery" account (Canonical ID:
+                            "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                            for log transfer to work.'
                           type: string
                         includeCookies:
                           description: 'Whether to include cookies in access logs
@@ -1419,7 +1472,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -1568,6 +1622,16 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether the distribution is enabled to
+                                  accept end user requests for content.
+                                type: boolean
+                            type: object
+                          type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -1670,13 +1734,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -2354,6 +2420,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   arn:
                     description: 'ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
                       where 123456789012 is your AWS account ID.'
@@ -2430,7 +2500,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -2503,6 +2574,16 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether the distribution is enabled to
+                                  accept end user requests for content.
+                                type: boolean
+                            type: object
+                          type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -2529,13 +2610,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -2620,13 +2703,19 @@ spec:
                     description: Date and time the distribution was last modified.
                     type: string
                   loggingConfig:
-                    description: The logging configuration that controls how logs
-                      are written to your distribution (maximum one).
+                    description: 'The logging configuration that controls how logs
+                      are written to your distribution (maximum one). AWS provides
+                      two versions of access logs for CloudFront: Legacy and v2. This
+                      argument configures legacy version standard logs.'
                     items:
                       properties:
                         bucket:
-                          description: Amazon S3 bucket to store the access logs in,
-                            for example, myawslogbucket.s3.amazonaws.com.
+                          description: 'Amazon S3 bucket to store the access logs
+                            in, for example, myawslogbucket.s3.amazonaws.com. The
+                            bucket must have correct ACL attached with "FULL_CONTROL"
+                            permission for "awslogsdelivery" account (Canonical ID:
+                            "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                            for log transfer to work.'
                           type: string
                         includeCookies:
                           description: 'Whether to include cookies in access logs
@@ -2673,7 +2762,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -2746,6 +2836,16 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether the distribution is enabled to
+                                  accept end user requests for content.
+                                type: boolean
+                            type: object
+                          type: array
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -2772,13 +2872,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -3294,6 +3396,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -3360,7 +3466,7 @@ spec:
                         description: Default amount of time (in seconds) that an object
                           is in a CloudFront cache before CloudFront forwards another
                           request in the absence of an Cache-Control max-age or Expires
-                          header.
+                          header. The TTL defined in Cache Policy overrides this configuration.
                         type: number
                       fieldLevelEncryptionId:
                         description: Field level encryption configuration ID.
@@ -3427,6 +3533,14 @@ spec:
                               type: string
                           type: object
                         type: array
+                      grpcConfig:
+                        description: A config block that sets the grpc config.
+                        properties:
+                          enabled:
+                            description: Whether the distribution is enabled to accept
+                              end user requests for content.
+                            type: boolean
+                        type: object
                       lambdaFunctionAssociation:
                         description: A config block that triggers a lambda function
                           with specific actions (maximum 4).
@@ -3452,13 +3566,15 @@ spec:
                           is in a CloudFront cache before CloudFront forwards another
                           request to your origin to determine whether the object has
                           been updated. Only effective in the presence of Cache-Control
-                          max-age, Cache-Control s-maxage, and Expires headers.
+                          max-age, Cache-Control s-maxage, and Expires headers. The
+                          TTL defined in Cache Policy overrides this configuration.
                         type: number
                       minTtl:
                         description: Minimum amount of time that you want objects
                           to stay in CloudFront caches before CloudFront queries your
                           origin to see whether the object has been updated. Defaults
-                          to 0 seconds.
+                          to 0 seconds. The TTL defined in Cache Policy overrides
+                          this configuration.
                         type: number
                       originRequestPolicyId:
                         description: Unique identifier of the origin request policy
@@ -3520,12 +3636,17 @@ spec:
                     description: Whether the IPv6 is enabled for the distribution.
                     type: boolean
                   loggingConfig:
-                    description: The logging configuration that controls how logs
-                      are written to your distribution (maximum one).
+                    description: 'The logging configuration that controls how logs
+                      are written to your distribution (maximum one). AWS provides
+                      two versions of access logs for CloudFront: Legacy and v2. This
+                      argument configures legacy version standard logs.'
                     properties:
                       bucket:
-                        description: Amazon S3 bucket to store the access logs in,
-                          for example, myawslogbucket.s3.amazonaws.com.
+                        description: 'Amazon S3 bucket to store the access logs in,
+                          for example, myawslogbucket.s3.amazonaws.com. The bucket
+                          must have correct ACL attached with "FULL_CONTROL" permission
+                          for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                          for log transfer to work.'
                         type: string
                       includeCookies:
                         description: 'Whether to include cookies in access logs (default:
@@ -3571,7 +3692,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -3715,6 +3837,14 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          properties:
+                            enabled:
+                              description: Whether the distribution is enabled to
+                                accept end user requests for content.
+                              type: boolean
+                          type: object
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -3817,13 +3947,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -4187,10 +4319,6 @@ spec:
                     description: Price class for this distribution. One of PriceClass_All,
                       PriceClass_200, PriceClass_100.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   restrictions:
                     description: The restriction configuration for this distribution
                       (maximum one).
@@ -4285,8 +4413,6 @@ spec:
                       credentials configuring this argument must have waf:GetWebACL
                       permissions assigned.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: |-
@@ -4308,6 +4434,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -4374,7 +4504,7 @@ spec:
                         description: Default amount of time (in seconds) that an object
                           is in a CloudFront cache before CloudFront forwards another
                           request in the absence of an Cache-Control max-age or Expires
-                          header.
+                          header. The TTL defined in Cache Policy overrides this configuration.
                         type: number
                       fieldLevelEncryptionId:
                         description: Field level encryption configuration ID.
@@ -4441,6 +4571,14 @@ spec:
                               type: string
                           type: object
                         type: array
+                      grpcConfig:
+                        description: A config block that sets the grpc config.
+                        properties:
+                          enabled:
+                            description: Whether the distribution is enabled to accept
+                              end user requests for content.
+                            type: boolean
+                        type: object
                       lambdaFunctionAssociation:
                         description: A config block that triggers a lambda function
                           with specific actions (maximum 4).
@@ -4466,13 +4604,15 @@ spec:
                           is in a CloudFront cache before CloudFront forwards another
                           request to your origin to determine whether the object has
                           been updated. Only effective in the presence of Cache-Control
-                          max-age, Cache-Control s-maxage, and Expires headers.
+                          max-age, Cache-Control s-maxage, and Expires headers. The
+                          TTL defined in Cache Policy overrides this configuration.
                         type: number
                       minTtl:
                         description: Minimum amount of time that you want objects
                           to stay in CloudFront caches before CloudFront queries your
                           origin to see whether the object has been updated. Defaults
-                          to 0 seconds.
+                          to 0 seconds. The TTL defined in Cache Policy overrides
+                          this configuration.
                         type: number
                       originRequestPolicyId:
                         description: Unique identifier of the origin request policy
@@ -4534,12 +4674,17 @@ spec:
                     description: Whether the IPv6 is enabled for the distribution.
                     type: boolean
                   loggingConfig:
-                    description: The logging configuration that controls how logs
-                      are written to your distribution (maximum one).
+                    description: 'The logging configuration that controls how logs
+                      are written to your distribution (maximum one). AWS provides
+                      two versions of access logs for CloudFront: Legacy and v2. This
+                      argument configures legacy version standard logs.'
                     properties:
                       bucket:
-                        description: Amazon S3 bucket to store the access logs in,
-                          for example, myawslogbucket.s3.amazonaws.com.
+                        description: 'Amazon S3 bucket to store the access logs in,
+                          for example, myawslogbucket.s3.amazonaws.com. The bucket
+                          must have correct ACL attached with "FULL_CONTROL" permission
+                          for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                          for log transfer to work.'
                         type: string
                       includeCookies:
                         description: 'Whether to include cookies in access logs (default:
@@ -4585,7 +4730,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -4729,6 +4875,14 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          properties:
+                            enabled:
+                              description: Whether the distribution is enabled to
+                                accept end user requests for content.
+                              type: boolean
+                          type: object
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -4831,13 +4985,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
@@ -5496,6 +5652,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  anycastIpListId:
+                    description: ID of the Anycast static IP list that is associated
+                      with the distribution.
+                    type: string
                   arn:
                     description: 'ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
                       where 123456789012 is your AWS account ID.'
@@ -5570,7 +5730,7 @@ spec:
                         description: Default amount of time (in seconds) that an object
                           is in a CloudFront cache before CloudFront forwards another
                           request in the absence of an Cache-Control max-age or Expires
-                          header.
+                          header. The TTL defined in Cache Policy overrides this configuration.
                         type: number
                       fieldLevelEncryptionId:
                         description: Field level encryption configuration ID.
@@ -5637,6 +5797,14 @@ spec:
                               type: string
                           type: object
                         type: array
+                      grpcConfig:
+                        description: A config block that sets the grpc config.
+                        properties:
+                          enabled:
+                            description: Whether the distribution is enabled to accept
+                              end user requests for content.
+                            type: boolean
+                        type: object
                       lambdaFunctionAssociation:
                         description: A config block that triggers a lambda function
                           with specific actions (maximum 4).
@@ -5662,13 +5830,15 @@ spec:
                           is in a CloudFront cache before CloudFront forwards another
                           request to your origin to determine whether the object has
                           been updated. Only effective in the presence of Cache-Control
-                          max-age, Cache-Control s-maxage, and Expires headers.
+                          max-age, Cache-Control s-maxage, and Expires headers. The
+                          TTL defined in Cache Policy overrides this configuration.
                         type: number
                       minTtl:
                         description: Minimum amount of time that you want objects
                           to stay in CloudFront caches before CloudFront queries your
                           origin to see whether the object has been updated. Defaults
-                          to 0 seconds.
+                          to 0 seconds. The TTL defined in Cache Policy overrides
+                          this configuration.
                         type: number
                       originRequestPolicyId:
                         description: Unique identifier of the origin request policy
@@ -5752,12 +5922,17 @@ spec:
                     description: Date and time the distribution was last modified.
                     type: string
                   loggingConfig:
-                    description: The logging configuration that controls how logs
-                      are written to your distribution (maximum one).
+                    description: 'The logging configuration that controls how logs
+                      are written to your distribution (maximum one). AWS provides
+                      two versions of access logs for CloudFront: Legacy and v2. This
+                      argument configures legacy version standard logs.'
                     properties:
                       bucket:
-                        description: Amazon S3 bucket to store the access logs in,
-                          for example, myawslogbucket.s3.amazonaws.com.
+                        description: 'Amazon S3 bucket to store the access logs in,
+                          for example, myawslogbucket.s3.amazonaws.com. The bucket
+                          must have correct ACL attached with "FULL_CONTROL" permission
+                          for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                          for log transfer to work.'
                         type: string
                       includeCookies:
                         description: 'Whether to include cookies in access logs (default:
@@ -5803,7 +5978,8 @@ spec:
                           description: Default amount of time (in seconds) that an
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
-                            or Expires header.
+                            or Expires header. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
@@ -5871,6 +6047,14 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        grpcConfig:
+                          description: A config block that sets the grpc config.
+                          properties:
+                            enabled:
+                              description: Whether the distribution is enabled to
+                                accept end user requests for content.
+                              type: boolean
+                          type: object
                         lambdaFunctionAssociation:
                           description: A config block that triggers a lambda function
                             with specific actions (maximum 4).
@@ -5897,13 +6081,15 @@ spec:
                             another request to your origin to determine whether the
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
-                            Expires headers.
+                            Expires headers. The TTL defined in Cache Policy overrides
+                            this configuration.
                           type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                            Defaults to 0 seconds.
+                            Defaults to 0 seconds. The TTL defined in Cache Policy
+                            overrides this configuration.
                           type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy

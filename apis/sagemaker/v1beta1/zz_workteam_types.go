@@ -214,39 +214,39 @@ type OidcMemberDefinitionParameters struct {
 type S3PresignInitParameters struct {
 
 	// Use this parameter to specify the allowed request source. Possible sources are either SourceIp or VpcSourceIp. see IAM Policy Constraints details below.
-	IAMPolicyConstraints *IAMPolicyConstraintsInitParameters `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
+	IAMPolicyConstraints []IAMPolicyConstraintsInitParameters `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
 }
 
 type S3PresignObservation struct {
 
 	// Use this parameter to specify the allowed request source. Possible sources are either SourceIp or VpcSourceIp. see IAM Policy Constraints details below.
-	IAMPolicyConstraints *IAMPolicyConstraintsObservation `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
+	IAMPolicyConstraints []IAMPolicyConstraintsObservation `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
 }
 
 type S3PresignParameters struct {
 
 	// Use this parameter to specify the allowed request source. Possible sources are either SourceIp or VpcSourceIp. see IAM Policy Constraints details below.
 	// +kubebuilder:validation:Optional
-	IAMPolicyConstraints *IAMPolicyConstraintsParameters `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
+	IAMPolicyConstraints []IAMPolicyConstraintsParameters `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
 }
 
 type WorkerAccessConfigurationInitParameters struct {
 
 	// Defines any Amazon S3 resource constraints. see S3 Presign details below.
-	S3Presign *S3PresignInitParameters `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
+	S3Presign []S3PresignInitParameters `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
 }
 
 type WorkerAccessConfigurationObservation struct {
 
 	// Defines any Amazon S3 resource constraints. see S3 Presign details below.
-	S3Presign *S3PresignObservation `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
+	S3Presign []S3PresignObservation `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
 }
 
 type WorkerAccessConfigurationParameters struct {
 
 	// Defines any Amazon S3 resource constraints. see S3 Presign details below.
 	// +kubebuilder:validation:Optional
-	S3Presign *S3PresignParameters `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
+	S3Presign []S3PresignParameters `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
 }
 
 type WorkteamInitParameters struct {
@@ -265,7 +265,7 @@ type WorkteamInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
-	WorkerAccessConfiguration *WorkerAccessConfigurationInitParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
+	WorkerAccessConfiguration []WorkerAccessConfigurationInitParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
 	// The name of the workforce.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Workforce
@@ -298,6 +298,10 @@ type WorkteamObservation struct {
 	// Configures notification of workers regarding available or expiring work items. see Notification Configuration details below.
 	NotificationConfiguration []NotificationConfigurationObservation `json:"notificationConfiguration,omitempty" tf:"notification_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The subdomain for your OIDC Identity Provider.
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 
@@ -310,7 +314,7 @@ type WorkteamObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
-	WorkerAccessConfiguration *WorkerAccessConfigurationObservation `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
+	WorkerAccessConfiguration []WorkerAccessConfigurationObservation `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
 	// The name of the workforce.
 	WorkforceName *string `json:"workforceName,omitempty" tf:"workforce_name,omitempty"`
@@ -330,10 +334,10 @@ type WorkteamParameters struct {
 	// +kubebuilder:validation:Optional
 	NotificationConfiguration []NotificationConfigurationParameters `json:"notificationConfiguration,omitempty" tf:"notification_configuration,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -342,7 +346,7 @@ type WorkteamParameters struct {
 
 	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
 	// +kubebuilder:validation:Optional
-	WorkerAccessConfiguration *WorkerAccessConfigurationParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
+	WorkerAccessConfiguration []WorkerAccessConfigurationParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
 	// The name of the workforce.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Workforce
@@ -386,7 +390,7 @@ type WorkteamStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Workteam is the Schema for the Workteams API. Provides a SageMaker Workteam resource.
+// Workteam is the Schema for the Workteams API. Provides a SageMaker AI Workteam resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

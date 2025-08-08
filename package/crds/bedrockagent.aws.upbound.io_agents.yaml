@@ -189,8 +189,26 @@ spec:
                   instruction:
                     description: Instructions that tell the agent what it should do
                       and how it should interact with users. The valid range is 40
-                      - 8000 characters.
+                      - 20000 characters.
                     type: string
+                  memoryConfiguration:
+                    description: Configurations for the agent's ability to retain
+                      the conversational context.
+                    items:
+                      properties:
+                        enabledMemoryTypes:
+                          description: The type of memory being stored by the agent.
+                            See AWS API documentation for possible values.
+                          items:
+                            type: string
+                          type: array
+                        storageDays:
+                          description: The number of days the agent is configured
+                            to retain the conversational context. Minimum value of
+                            0, maximum value of 30.
+                          type: number
+                      type: object
+                    type: array
                   prepareAgent:
                     description: Whether to prepare the agent after creation or modification.
                       Defaults to true.
@@ -294,8 +312,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   skipResourceInUseCheck:
                     description: Whether the in-use check is skipped when deleting
@@ -440,8 +459,26 @@ spec:
                   instruction:
                     description: Instructions that tell the agent what it should do
                       and how it should interact with users. The valid range is 40
-                      - 8000 characters.
+                      - 20000 characters.
                     type: string
+                  memoryConfiguration:
+                    description: Configurations for the agent's ability to retain
+                      the conversational context.
+                    items:
+                      properties:
+                        enabledMemoryTypes:
+                          description: The type of memory being stored by the agent.
+                            See AWS API documentation for possible values.
+                          items:
+                            type: string
+                          type: array
+                        storageDays:
+                          description: The number of days the agent is configured
+                            to retain the conversational context. Minimum value of
+                            0, maximum value of 30.
+                          type: number
+                      type: object
+                    type: array
                   prepareAgent:
                     description: Whether to prepare the agent after creation or modification.
                       Defaults to true.
@@ -791,12 +828,33 @@ spec:
                   instruction:
                     description: Instructions that tell the agent what it should do
                       and how it should interact with users. The valid range is 40
-                      - 8000 characters.
+                      - 20000 characters.
                     type: string
+                  memoryConfiguration:
+                    description: Configurations for the agent's ability to retain
+                      the conversational context.
+                    items:
+                      properties:
+                        enabledMemoryTypes:
+                          description: The type of memory being stored by the agent.
+                            See AWS API documentation for possible values.
+                          items:
+                            type: string
+                          type: array
+                        storageDays:
+                          description: The number of days the agent is configured
+                            to retain the conversational context. Minimum value of
+                            0, maximum value of 30.
+                          type: number
+                      type: object
+                    type: array
                   prepareAgent:
                     description: Whether to prepare the agent after creation or modification.
                       Defaults to true.
                     type: boolean
+                  preparedAt:
+                    description: Timestamp of when the agent was last prepared.
+                    type: string
                   promptOverrideConfiguration:
                     description: Configurations to override prompt templates in different
                       parts of an agent sequence. For more information, see Advanced
@@ -895,6 +953,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
                   skipResourceInUseCheck:
                     description: Whether the in-use check is skipped when deleting
                       the agent.

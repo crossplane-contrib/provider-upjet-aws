@@ -26,4 +26,3 @@ spec:
       queryStrings:
         items:
         - example
-    region: us-west-1

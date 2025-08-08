@@ -46,6 +46,10 @@ type GatewayResponseInitParameters struct {
 type GatewayResponseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Map of parameters (paths, query strings and headers) of the Gateway Response.
 	// +mapType=granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
@@ -66,10 +70,10 @@ type GatewayResponseObservation struct {
 
 type GatewayResponseParameters struct {
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Map of parameters (paths, query strings and headers) of the Gateway Response.
 	// +kubebuilder:validation:Optional

@@ -79,11 +79,12 @@ spec:
                     type: string
                   name:
                     description: A friendly name of the regular expression pattern
-                      set.
+                      set. Conflicts with name_prefix.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   regularExpression:
                     description: One or more blocks of regular expression patterns
@@ -132,7 +133,7 @@ spec:
                     type: string
                   name:
                     description: A friendly name of the regular expression pattern
-                      set.
+                      set. Conflicts with name_prefix.
                     type: string
                   regularExpression:
                     description: One or more blocks of regular expression patterns
@@ -328,10 +329,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.scope is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
@@ -356,7 +353,12 @@ spec:
                     type: string
                   name:
                     description: A friendly name of the regular expression pattern
-                      set.
+                      set. Conflicts with name_prefix.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   regularExpression:
                     description: One or more blocks of regular expression patterns

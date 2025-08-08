@@ -21,7 +21,7 @@ func (mg *Webhook) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Webhook
 func (tr *Webhook) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"authentication_configuration[*].secret_token": "authenticationConfiguration[*].secretTokenSecretRef"}
+	return map[string]string{"authentication_configuration[*].secret_token": "authenticationConfiguration.secretTokenSecretRef"}
 }
 
 // GetObservation of this Webhook

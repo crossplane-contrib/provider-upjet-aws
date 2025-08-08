@@ -25,7 +25,7 @@ type GlobalNetworkInitParameters struct {
 
 type GlobalNetworkObservation struct {
 
-	// Global Network Amazon Resource Name (ARN)
+	// Global Network ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the Global Network.
@@ -37,7 +37,7 @@ type GlobalNetworkObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -47,11 +47,6 @@ type GlobalNetworkParameters struct {
 	// Description of the Global Network.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -86,7 +81,7 @@ type GlobalNetworkStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// GlobalNetwork is the Schema for the GlobalNetworks API. Provides a global network resource.
+// GlobalNetwork is the Schema for the GlobalNetworks API. Manages a Network Manager Global Network.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -68,6 +68,10 @@ type ActivationObservation struct {
 	// The default name of the registered managed instance.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The number of managed instances that are currently registered using this activation.
 	RegistrationCount *float64 `json:"registrationCount,omitempty" tf:"registration_count,omitempty"`
 
@@ -111,10 +115,10 @@ type ActivationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The maximum number of managed instances you want to register. The default value is 1 instance.
 	// +kubebuilder:validation:Optional

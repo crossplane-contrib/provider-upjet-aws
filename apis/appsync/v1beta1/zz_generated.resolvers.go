@@ -484,7 +484,7 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PipelineConfig); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Function", "FunctionList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -524,7 +524,7 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PipelineConfig); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Function", "FunctionList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

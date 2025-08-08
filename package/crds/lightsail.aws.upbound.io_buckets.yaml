@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Bucket is the Schema for the Buckets API. Provides a lightsail
-          bucket
+        description: Bucket is the Schema for the Buckets API. Manages a Lightsail
+          object storage bucket.
         properties:
           apiVersion:
             description: |-
@@ -74,20 +74,20 @@ spec:
               forProvider:
                 properties:
                   bundleId:
-                    description: '- The ID of the bundle to use for the bucket. A
-                      bucket bundle specifies the monthly cost, storage space, and
-                      data transfer quota for a bucket. Use the get-bucket-bundles
-                      cli command to get a list of bundle IDs that you can specify.'
+                    description: Bundle ID to use for the bucket. A bucket bundle
+                      specifies the monthly cost, storage space, and data transfer
+                      quota for a bucket. Use the get-bucket-bundles cli command to
+                      get a list of bundle IDs that you can specify.
                     type: string
                   forceDelete:
-                    description: AWS by default will not delete an s3 bucket which
-                      is not empty, to prevent losing bucket data and affecting other
-                      resources in lightsail. If force_delete is set to true the bucket
+                    description: AWS by default will not delete a bucket which is
+                      not empty, to prevent losing bucket data and affecting other
+                      resources in Lightsail. If force_delete is set to true the bucket
                       will be deleted even when not empty.
                     type: boolean
                   region:
                     description: |-
-                      The Amazon Web Services Region name.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
@@ -113,15 +113,15 @@ spec:
                   autoscaler.
                 properties:
                   bundleId:
-                    description: '- The ID of the bundle to use for the bucket. A
-                      bucket bundle specifies the monthly cost, storage space, and
-                      data transfer quota for a bucket. Use the get-bucket-bundles
-                      cli command to get a list of bundle IDs that you can specify.'
+                    description: Bundle ID to use for the bucket. A bucket bundle
+                      specifies the monthly cost, storage space, and data transfer
+                      quota for a bucket. Use the get-bucket-bundles cli command to
+                      get a list of bundle IDs that you can specify.
                     type: string
                   forceDelete:
-                    description: AWS by default will not delete an s3 bucket which
-                      is not empty, to prevent losing bucket data and affecting other
-                      resources in lightsail. If force_delete is set to true the bucket
+                    description: AWS by default will not delete a bucket which is
+                      not empty, to prevent losing bucket data and affecting other
+                      resources in Lightsail. If force_delete is set to true the bucket
                       will be deleted even when not empty.
                     type: boolean
                   tags:
@@ -309,37 +309,37 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the lightsail bucket.
+                    description: ARN of the Lightsail bucket.
                     type: string
                   availabilityZone:
-                    description: The resource Availability Zone. Follows the format
-                      us-east-2a (case-sensitive).
+                    description: Availability Zone. Follows the format us-east-2a
+                      (case-sensitive).
                     type: string
                   bundleId:
-                    description: '- The ID of the bundle to use for the bucket. A
-                      bucket bundle specifies the monthly cost, storage space, and
-                      data transfer quota for a bucket. Use the get-bucket-bundles
-                      cli command to get a list of bundle IDs that you can specify.'
+                    description: Bundle ID to use for the bucket. A bucket bundle
+                      specifies the monthly cost, storage space, and data transfer
+                      quota for a bucket. Use the get-bucket-bundles cli command to
+                      get a list of bundle IDs that you can specify.
                     type: string
                   createdAt:
-                    description: The timestamp when the bucket was created.
+                    description: Date and time when the bucket was created.
                     type: string
                   forceDelete:
-                    description: AWS by default will not delete an s3 bucket which
-                      is not empty, to prevent losing bucket data and affecting other
-                      resources in lightsail. If force_delete is set to true the bucket
+                    description: AWS by default will not delete a bucket which is
+                      not empty, to prevent losing bucket data and affecting other
+                      resources in Lightsail. If force_delete is set to true the bucket
                       will be deleted even when not empty.
                     type: boolean
                   id:
-                    description: The name used for this bucket (matches name).
+                    description: Name used for this bucket (matches name).
                     type: string
                   region:
                     description: |-
-                      The Amazon Web Services Region name.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   supportCode:
-                    description: The support code for the resource. Include this code
+                    description: Support code for the resource. Include this code
                       in your email to support when you have questions about a resource
                       in Lightsail. This code enables our support team to look up
                       your Lightsail information more easily.
@@ -353,12 +353,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   url:
+                    description: URL of the bucket.
                     type: string
                 type: object
               conditions:

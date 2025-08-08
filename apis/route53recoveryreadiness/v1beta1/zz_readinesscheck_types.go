@@ -44,11 +44,6 @@ type ReadinessCheckObservation struct {
 
 type ReadinessCheckParameters struct {
 
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
-
 	// Name describing the resource set that will be monitored for readiness.
 	// +kubebuilder:validation:Optional
 	ResourceSetName *string `json:"resourceSetName,omitempty" tf:"resource_set_name,omitempty"`

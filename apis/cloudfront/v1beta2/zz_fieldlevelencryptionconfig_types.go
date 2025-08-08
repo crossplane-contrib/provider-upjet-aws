@@ -109,6 +109,9 @@ type FieldLevelEncryptionConfigInitParameters struct {
 
 type FieldLevelEncryptionConfigObservation struct {
 
+	// The Field Level Encryption Config ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Internal value used by CloudFront to allow future updates to the Field Level Encryption Config.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
 
@@ -141,11 +144,6 @@ type FieldLevelEncryptionConfigParameters struct {
 	// Query Arg Profile Config that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
 	// +kubebuilder:validation:Optional
 	QueryArgProfileConfig *QueryArgProfileConfigParameters `json:"queryArgProfileConfig,omitempty" tf:"query_arg_profile_config,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type QueryArgProfileConfigInitParameters struct {

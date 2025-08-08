@@ -78,12 +78,19 @@ spec:
                       applied. See more in AWS Docs.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   workspaceId:
                     description: ID of the prometheus workspace the rule group namespace
-                      should be linked to
+                      should be linked to.
                     type: string
                   workspaceIdRef:
                     description: Reference to a Workspace in amp to populate workspaceId.
@@ -179,6 +186,12 @@ spec:
                     description: the rule group namespace data that you want to be
                       applied. See more in AWS Docs.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -357,15 +370,36 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The ARN of the rule group namespace.
+                    type: string
                   data:
                     description: the rule group namespace data that you want to be
                       applied. See more in AWS Docs.
                     type: string
                   id:
                     type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
+                    type: object
+                    x-kubernetes-map-type: granular
                   workspaceId:
                     description: ID of the prometheus workspace the rule group namespace
-                      should be linked to
+                      should be linked to.
                     type: string
                 type: object
               conditions:

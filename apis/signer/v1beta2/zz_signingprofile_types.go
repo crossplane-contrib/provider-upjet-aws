@@ -90,6 +90,10 @@ type SigningProfileObservation struct {
 	// The ID of the platform that is used by the target signing profile.
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Revocation information for a signing profile. See revocation_record Block below for details.
 	RevocationRecord []SigningProfileRevocationRecordObservation `json:"revocationRecord,omitempty" tf:"revocation_record,omitempty"`
 
@@ -123,10 +127,10 @@ type SigningProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The validity period for a signing job. See signature_validity_period Block below for details.
 	// +kubebuilder:validation:Optional

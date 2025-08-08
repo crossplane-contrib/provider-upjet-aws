@@ -18,7 +18,7 @@ type LagInitParameters struct {
 	// The ID of an existing dedicated connection to migrate to the LAG.
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// The bandwidth of the individual physical connections bundled by the LAG. Valid values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.
+	// The bandwidth of the individual dedicated connections bundled by the LAG. Valid values: 1Gbps, 10Gbps, 100Gbps, and 400Gbps. Case sensitive. Refer to the AWS Direct Connection supported bandwidths for Dedicated Connections.
 	ConnectionsBandwidth *string `json:"connectionsBandwidth,omitempty" tf:"connections_bandwidth,omitempty"`
 
 	// A boolean that indicates all connections associated with the LAG should be deleted so that the LAG can be destroyed without error. These objects are not recoverable.
@@ -46,7 +46,7 @@ type LagObservation struct {
 	// The ID of an existing dedicated connection to migrate to the LAG.
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// The bandwidth of the individual physical connections bundled by the LAG. Valid values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.
+	// The bandwidth of the individual dedicated connections bundled by the LAG. Valid values: 1Gbps, 10Gbps, 100Gbps, and 400Gbps. Case sensitive. Refer to the AWS Direct Connection supported bandwidths for Dedicated Connections.
 	ConnectionsBandwidth *string `json:"connectionsBandwidth,omitempty" tf:"connections_bandwidth,omitempty"`
 
 	// A boolean that indicates all connections associated with the LAG should be deleted so that the LAG can be destroyed without error. These objects are not recoverable.
@@ -73,6 +73,10 @@ type LagObservation struct {
 	// The name of the service provider associated with the LAG.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -88,7 +92,7 @@ type LagParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// The bandwidth of the individual physical connections bundled by the LAG. Valid values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.
+	// The bandwidth of the individual dedicated connections bundled by the LAG. Valid values: 1Gbps, 10Gbps, 100Gbps, and 400Gbps. Case sensitive. Refer to the AWS Direct Connection supported bandwidths for Dedicated Connections.
 	// +kubebuilder:validation:Optional
 	ConnectionsBandwidth *string `json:"connectionsBandwidth,omitempty" tf:"connections_bandwidth,omitempty"`
 
@@ -108,10 +112,10 @@ type LagParameters struct {
 	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

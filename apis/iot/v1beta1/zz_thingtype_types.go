@@ -45,6 +45,10 @@ type ThingTypeObservation struct {
 	// , Configuration block that can contain the following properties of the thing type:
 	Properties []ThingTypePropertiesObservation `json:"properties,omitempty" tf:"properties,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -68,10 +72,10 @@ type ThingTypeParameters struct {
 	// +kubebuilder:validation:Optional
 	Properties []ThingTypePropertiesParameters `json:"properties,omitempty" tf:"properties,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

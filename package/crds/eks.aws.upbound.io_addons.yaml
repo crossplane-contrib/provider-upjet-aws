@@ -74,16 +74,16 @@ spec:
                 properties:
                   addonName:
                     description: |-
-                      on. The name must match one of
+                      Name of the EKS add-on. The name must match one of
                       the names returned by describe-addon-versions.
                     type: string
                   addonVersion:
                     description: |-
-                      on. The version must
+                      The version of the EKS add-on. The version must
                       match one of the versions returned by describe-addon-versions.
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -186,31 +186,21 @@ spec:
                       when deleting the EKS add-on.
                     type: boolean
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                  resolveConflicts:
-                    description: (Deprecated use the resolve_conflicts_on_create and
-                      resolve_conflicts_on_update attributes instead) Define how to
-                      resolve parameter value conflicts when migrating an existing
-                      add-on to an Amazon EKS add-on or when applying version updates
-                      to the add-on. Valid values are NONE, OVERWRITE and PRESERVE.
-                      Note that PRESERVE is only valid on addon update, not for initial
-                      addon creation. If you need to set this to PRESERVE, use the
-                      resolve_conflicts_on_create and resolve_conflicts_on_update
-                      attributes instead. For more details check UpdateAddon API Docs.
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resolveConflictsOnCreate:
                     description: How to resolve field value conflicts when migrating
                       a self-managed add-on to an Amazon EKS add-on. Valid values
                       are NONE and OVERWRITE. For more details see the CreateAddon
-                      API Docs.
+                      API Documentation.
                     type: string
                   resolveConflictsOnUpdate:
                     description: How to resolve field value conflicts for an Amazon
                       EKS add-on if you've changed a value from the Amazon EKS default
                       value. Valid values are NONE, OVERWRITE, and PRESERVE. For more
-                      details see the UpdateAddon API Docs.
+                      details see the UpdateAddon API Documentation.
                     type: string
                   serviceAccountRoleArn:
                     description: |-
@@ -319,16 +309,16 @@ spec:
                 properties:
                   addonName:
                     description: |-
-                      on. The name must match one of
+                      Name of the EKS add-on. The name must match one of
                       the names returned by describe-addon-versions.
                     type: string
                   addonVersion:
                     description: |-
-                      on. The version must
+                      The version of the EKS add-on. The version must
                       match one of the versions returned by describe-addon-versions.
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -430,28 +420,17 @@ spec:
                     description: Indicates if you want to preserve the created resources
                       when deleting the EKS add-on.
                     type: boolean
-                  resolveConflicts:
-                    description: (Deprecated use the resolve_conflicts_on_create and
-                      resolve_conflicts_on_update attributes instead) Define how to
-                      resolve parameter value conflicts when migrating an existing
-                      add-on to an Amazon EKS add-on or when applying version updates
-                      to the add-on. Valid values are NONE, OVERWRITE and PRESERVE.
-                      Note that PRESERVE is only valid on addon update, not for initial
-                      addon creation. If you need to set this to PRESERVE, use the
-                      resolve_conflicts_on_create and resolve_conflicts_on_update
-                      attributes instead. For more details check UpdateAddon API Docs.
-                    type: string
                   resolveConflictsOnCreate:
                     description: How to resolve field value conflicts when migrating
                       a self-managed add-on to an Amazon EKS add-on. Valid values
                       are NONE and OVERWRITE. For more details see the CreateAddon
-                      API Docs.
+                      API Documentation.
                     type: string
                   resolveConflictsOnUpdate:
                     description: How to resolve field value conflicts for an Amazon
                       EKS add-on if you've changed a value from the Amazon EKS default
                       value. Valid values are NONE, OVERWRITE, and PRESERVE. For more
-                      details see the UpdateAddon API Docs.
+                      details see the UpdateAddon API Documentation.
                     type: string
                   serviceAccountRoleArn:
                     description: |-
@@ -722,19 +701,19 @@ spec:
                 properties:
                   addonName:
                     description: |-
-                      on. The name must match one of
+                      Name of the EKS add-on. The name must match one of
                       the names returned by describe-addon-versions.
                     type: string
                   addonVersion:
                     description: |-
-                      on. The version must
+                      The version of the EKS add-on. The version must
                       match one of the versions returned by describe-addon-versions.
                     type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the EKS add-on.
                     type: string
                   clusterName:
-                    description: –  Name of the EKS Cluster.
+                    description: Name of the EKS Cluster.
                     type: string
                   configurationValues:
                     description: custom configuration values for addons with single
@@ -774,28 +753,22 @@ spec:
                     description: Indicates if you want to preserve the created resources
                       when deleting the EKS add-on.
                     type: boolean
-                  resolveConflicts:
-                    description: (Deprecated use the resolve_conflicts_on_create and
-                      resolve_conflicts_on_update attributes instead) Define how to
-                      resolve parameter value conflicts when migrating an existing
-                      add-on to an Amazon EKS add-on or when applying version updates
-                      to the add-on. Valid values are NONE, OVERWRITE and PRESERVE.
-                      Note that PRESERVE is only valid on addon update, not for initial
-                      addon creation. If you need to set this to PRESERVE, use the
-                      resolve_conflicts_on_create and resolve_conflicts_on_update
-                      attributes instead. For more details check UpdateAddon API Docs.
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   resolveConflictsOnCreate:
                     description: How to resolve field value conflicts when migrating
                       a self-managed add-on to an Amazon EKS add-on. Valid values
                       are NONE and OVERWRITE. For more details see the CreateAddon
-                      API Docs.
+                      API Documentation.
                     type: string
                   resolveConflictsOnUpdate:
                     description: How to resolve field value conflicts for an Amazon
                       EKS add-on if you've changed a value from the Amazon EKS default
                       value. Valid values are NONE, OVERWRITE, and PRESERVE. For more
-                      details see the UpdateAddon API Docs.
+                      details see the UpdateAddon API Documentation.
                     type: string
                   serviceAccountRoleArn:
                     description: |-
