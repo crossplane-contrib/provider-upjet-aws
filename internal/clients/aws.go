@@ -50,6 +50,12 @@ var globalResources = map[string]string{
 	"directconnect.aws.upbound.io/GatewayAssociation":   "directconnect",
 	"ec2.aws.upbound.io/SerialConsoleAccess":            "ec2",
 	"s3control.aws.upbound.io/AccountPublicAccessBlock": "s3control",
+	// namespaced apis
+	"backup.aws.m.upbound.io/GlobalSettings":              "backup",
+	"directconnect.aws.m.upbound.io/Gateway":              "directconnect",
+	"directconnect.aws.m.upbound.io/GatewayAssociation":   "directconnect",
+	"ec2.aws.m.upbound.io/SerialConsoleAccess":            "ec2",
+	"s3control.aws.m.upbound.io/AccountPublicAccessBlock": "s3control",
 }
 
 // globalGroups maps Kubernetes API group names to their corresponding AWS service names.
@@ -70,6 +76,21 @@ var globalGroups = map[string]string{
 	"route53recoverycontrolconfig.aws.upbound.io": "route53recoverycontrolconfig",
 	"route53recoveryreadiness.aws.upbound.io":     "route53recoveryreadiness",
 	"waf.aws.upbound.io":                          "waf",
+	// namespaced apis
+	"account.aws.m.upbound.io":                      "account",
+	"budgets.aws.m.upbound.io":                      "budgets",
+	"ce.aws.m.upbound.io":                           "ce",
+	"cloudfront.aws.m.upbound.io":                   "cloudfront",
+	"cur.aws.m.upbound.io":                          "cur",
+	"globalaccelerator.aws.m.upbound.io":            "globalaccelerator",
+	"iam.aws.m.upbound.io":                          "iam",
+	"networkmanager.aws.m.upbound.io":               "networkmanager",
+	"organizations.aws.m.upbound.io":                "organizations",
+	"rolesanywhere.aws.m.upbound.io":                "rolesanywhere",
+	"route53.aws.m.upbound.io":                      "route53",
+	"route53recoverycontrolconfig.aws.m.upbound.io": "route53recoverycontrolconfig",
+	"route53recoveryreadiness.aws.m.upbound.io":     "route53recoveryreadiness",
+	"waf.aws.m.upbound.io":                          "waf",
 }
 
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
