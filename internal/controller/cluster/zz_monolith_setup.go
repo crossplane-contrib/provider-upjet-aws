@@ -485,6 +485,7 @@ import (
 	listener "github.com/upbound/provider-aws/internal/controller/cluster/globalaccelerator/listener"
 	catalogdatabase "github.com/upbound/provider-aws/internal/controller/cluster/glue/catalogdatabase"
 	catalogtable "github.com/upbound/provider-aws/internal/controller/cluster/glue/catalogtable"
+	catalogtableoptimizer "github.com/upbound/provider-aws/internal/controller/cluster/glue/catalogtableoptimizer"
 	classifier "github.com/upbound/provider-aws/internal/controller/cluster/glue/classifier"
 	connectionglue "github.com/upbound/provider-aws/internal/controller/cluster/glue/connection"
 	crawler "github.com/upbound/provider-aws/internal/controller/cluster/glue/crawler"
@@ -1445,6 +1446,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		listener.Setup,
 		catalogdatabase.Setup,
 		catalogtable.Setup,
+		catalogtableoptimizer.Setup,
 		classifier.Setup,
 		connectionglue.Setup,
 		crawler.Setup,
@@ -2411,6 +2413,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		listener.SetupGated,
 		catalogdatabase.SetupGated,
 		catalogtable.SetupGated,
+		catalogtableoptimizer.SetupGated,
 		classifier.SetupGated,
 		connectionglue.SetupGated,
 		crawler.SetupGated,

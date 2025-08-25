@@ -13,6 +13,9 @@ func (tr *CatalogDatabase) Hub() {}
 func (tr *CatalogTable) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CatalogTableOptimizer) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Classifier) Hub() {}
 
 // Hub marks this type as a conversion hub.
