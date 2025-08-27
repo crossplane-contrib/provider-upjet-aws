@@ -7,6 +7,9 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *CatalogTableOptimizer) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Registry) Hub() {}
 
 // Hub marks this type as a conversion hub.

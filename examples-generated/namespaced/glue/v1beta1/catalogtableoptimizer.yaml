@@ -1,0 +1,21 @@
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: CatalogTableOptimizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    catalogId: "123456789012"
+    configuration:
+    - enabled: true
+      roleArn: arn:aws:iam::123456789012:role/example-role
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    tableName: example_table
+    type: compaction

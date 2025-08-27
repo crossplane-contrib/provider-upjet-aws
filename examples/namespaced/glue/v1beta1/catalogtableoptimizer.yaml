@@ -1,0 +1,184 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: CatalogTableOptimizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  labels:
+    testing.upbound.io/example-name: example-glue-cto
+  name: example-glue-cto
+  namespace: upbound-system
+spec:
+  forProvider:
+    catalogId: "${data.aws_account_id}"
+    configuration:
+    - enabled: true
+      roleArn: "arn:aws:iam::${data.aws_account_id}:role/example-glue-cto"
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-glue-cto
+    region: us-east-1
+    tableName: example-glue-cto
+    type: compaction
+---
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: CatalogDatabase
+metadata:
+  name: example-glue-cto
+  namespace: upbound-system
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  labels:
+    testing.upbound.io/example-name: example-glue-cto
+spec:
+  forProvider:
+    region: us-east-1
+    catalogId: "${data.aws_account_id}"
+---
+apiVersion: glue.aws.m.upbound.io/v1beta1
+kind: CatalogTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  name: example-glue-cto
+  namespace: upbound-system
+spec:
+  forProvider:
+    catalogId: "${data.aws_account_id}"
+    databaseNameRef:
+      name: example-glue-cto
+    openTableFormatInput:
+    - icebergInput: 
+      - metadataOperation: "CREATE" 
+    parameters:
+      classification: "csv"
+    region: us-east-1
+    storageDescriptor:
+    - columns:
+      - name: year
+        type: bigint
+      - name: quarter
+        type: bigint
+      - name: month
+        type: bigint
+      - name: day_of_month
+        type: bigint
+      inputFormat: "org.apache.hadoop.mapred.TextInputFormat"
+      location: s3://example-glue-cto/flight/2016/csv
+      outputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+      serDeInfo:
+      - serializationLibrary: "org.apache.hadoop.hive.serde2.OpenCSVSerde"
+        parameters:
+          field.delim: ','
+    tableType: EXTERNAL_TABLE
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  labels:
+    testing.upbound.io/example-name: example-glue-cto
+  name: example-glue-cto
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": ["sts:AssumeRole"],
+            "Effect": "allow",
+            "Principal": {
+              "Service": ["glue.amazonaws.com"]
+            }
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+      meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  labels:
+    testing.upbound.io/example-name: example-glue-cto
+  name: example-glue-cto
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:PutObject",
+                      "s3:GetObject",
+                      "s3:DeleteObject"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::example-glue-cto/*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:ListBucket"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::example-glue-cto"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "glue:UpdateTable",
+                      "glue:GetTable"
+                  ],
+                  "Resource": [
+                      "arn:aws:glue:us-east-1:${data.aws_account_id}:table/example-glue-cto/example-glue-cto",
+                      "arn:aws:glue:us-east-1:${data.aws_account_id}:database/example-glue-cto",
+                      "arn:aws:glue:us-east-1:${data.aws_account_id}:catalog"
+                  ]
+              }
+          ]
+      } 
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-glue-cto
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  labels:
+    testing.upbound.io/example-name: example_glue_cto
+  name: example-glue-cto
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: ObjectCopy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogtableoptimizer
+  labels:
+    testing.upbound.io/example-name: example_glue_cto
+  name: example-glue-cto
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucket: example-glue-cto
+    forceDestroy: true
+    key: flight/2016/csv/mon=10/October2016.csv
+    region: us-east-1
+    source: crawler-public-us-east-1/flight/2016/csv/mon=10/October2016.csv      
