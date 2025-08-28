@@ -908,7 +908,6 @@ func TestReplicationGroupConversion_RoundTrip(t *testing.T) {
 	}
 	type want struct {
 		final *v1beta1.ReplicationGroup
-		err   error
 	}
 
 	cases := map[string]struct {
