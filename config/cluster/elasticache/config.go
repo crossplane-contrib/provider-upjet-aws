@@ -155,19 +155,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 				cmi := v1beta1.ClusterModeInitParameters{}
 				if srcTyped.Spec.InitProvider.NumNodeGroups != nil {
-					cm.NumNodeGroups = srcTyped.Spec.InitProvider.NumNodeGroups
+					cmi.NumNodeGroups = srcTyped.Spec.InitProvider.NumNodeGroups
 				}
 				if srcTyped.Spec.InitProvider.ReplicasPerNodeGroup != nil {
-					cm.ReplicasPerNodeGroup = srcTyped.Spec.InitProvider.ReplicasPerNodeGroup
+					cmi.ReplicasPerNodeGroup = srcTyped.Spec.InitProvider.ReplicasPerNodeGroup
 				}
 				targetTyped.Spec.InitProvider.ClusterMode = []v1beta1.ClusterModeInitParameters{cmi}
 
 				cmo := v1beta1.ClusterModeObservation{}
 				if srcTyped.Status.AtProvider.NumNodeGroups != nil {
-					cm.NumNodeGroups = srcTyped.Status.AtProvider.NumNodeGroups
+					cmo.NumNodeGroups = srcTyped.Status.AtProvider.NumNodeGroups
 				}
 				if srcTyped.Status.AtProvider.ReplicasPerNodeGroup != nil {
-					cm.ReplicasPerNodeGroup = srcTyped.Status.AtProvider.ReplicasPerNodeGroup
+					cmo.ReplicasPerNodeGroup = srcTyped.Status.AtProvider.ReplicasPerNodeGroup
 				}
 				targetTyped.Status.AtProvider.ClusterMode = []v1beta1.ClusterModeObservation{cmo}
 				return nil
