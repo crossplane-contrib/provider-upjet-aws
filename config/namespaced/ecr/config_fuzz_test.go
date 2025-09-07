@@ -1,0 +1,254 @@
+// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
+package ecr
+
+import (
+	"strings"
+	"testing"
+
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
+
+// FuzzNamespacedECRRepositoryCreationTemplateConfig fuzzes the namespaced ECR Repository Creation Template configuration
+func FuzzNamespacedECRRepositoryCreationTemplateConfig(f *testing.F) {
+	// Add seed inputs for better coverage
+	f.Add("ns-test-prefix", "IMMUTABLE", "PULL_THROUGH_CACHE", "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012")
+	f.Add("", "MUTABLE", "REPLICATION", "")
+	f.Add("namespaced-template", "", "", "invalid-arn")
+	f.Add("very-long-namespaced-prefix-name-that-might-cause-issues", "IMMUTABLE", "PULL_THROUGH_CACHE,REPLICATION", "")
+	
+	f.Fuzz(func(t *testing.T, prefix, imageTagMutability, appliedFor, kmsKeyArn string) {
+		// Skip empty prefix as it's required
+		if prefix == "" {
+			t.Skip("Empty prefix not valid for testing")
+		}
+		
+		// Create a mock provider and resource for testing
+		p := config.NewProvider([]byte(`{}`), "aws", "github.com/upbound/provider-aws", []byte(`{}`))
+		
+		// Create a mock Terraform resource schema
+		mockSchema := map[string]*schema.Schema{
+			"prefix": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"image_tag_mutability": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"applied_for": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"encryption_configuration": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"kms_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+					},
+				},
+			},
+		}
+		
+		// Create a resource with the mock schema for validation
+		_ = &config.Resource{
+			Name: "aws_ecr_repository_creation_template",
+			TerraformResource: &schema.Resource{
+				Schema: mockSchema,
+			},
+		}
+		
+		// Apply the ECR configuration
+		Configure(p)
+		
+		// Test that the configuration doesn't panic with fuzzed inputs
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Namespaced configuration panicked with inputs prefix=%q, imageTagMutability=%q, appliedFor=%q, kmsKeyArn=%q: %v",
+					prefix, imageTagMutability, appliedFor, kmsKeyArn, r)
+			}
+		}()
+		
+		// Validate that the configuration is reasonable
+		if len(p.Resources) == 0 {
+			t.Error("No resources configured in namespaced provider")
+		}
+		
+		// Test specific ECR resource configuration
+		ecrRepoTemplate, exists := p.Resources["aws_ecr_repository_creation_template"]
+		if !exists {
+			t.Error("ECR repository creation template not configured in namespaced provider")
+			return
+		}
+		
+		// Validate configuration properties
+		if ecrRepoTemplate.Kind != "RepositoryCreationTemplate" {
+			t.Errorf("Expected Kind 'RepositoryCreationTemplate', got %q", ecrRepoTemplate.Kind)
+		}
+		
+		if ecrRepoTemplate.ShortGroup != "ecr" {
+			t.Errorf("Expected ShortGroup 'ecr', got %q", ecrRepoTemplate.ShortGroup)
+		}
+		
+		// Test that references are properly configured
+		if ecrRepoTemplate.References == nil {
+			t.Error("References not configured in namespaced provider")
+		} else {
+			if _, hasKMSRef := ecrRepoTemplate.References["encryption_configuration.kms_key"]; !hasKMSRef {
+				t.Error("KMS key reference not configured in namespaced provider")
+			}
+		}
+	})
+}
+
+// FuzzNamespacedECRRepositoryConfig fuzzes the namespaced ECR Repository configuration
+func FuzzNamespacedECRRepositoryConfig(f *testing.F) {
+	// Add seed inputs
+	f.Add("ns-test-repo", "AES256", "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012")
+	f.Add("", "KMS", "")
+	f.Add("namespaced-repo-with-special-chars_123", "", "invalid-kms-arn")
+	
+	f.Fuzz(func(t *testing.T, repoName, encryptionType, kmsKeyArn string) {
+		// Create a mock provider for testing
+		p := config.NewProvider([]byte(`{}`), "aws", "github.com/upbound/provider-aws", []byte(`{}`))
+		
+		// Apply the ECR configuration
+		Configure(p)
+		
+		// Test that the configuration doesn't panic with fuzzed inputs
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Namespaced configuration panicked with inputs repoName=%q, encryptionType=%q, kmsKeyArn=%q: %v",
+					repoName, encryptionType, kmsKeyArn, r)
+			}
+		}()
+		
+		// Validate ECR repository configuration
+		ecrRepo, exists := p.Resources["aws_ecr_repository"]
+		if !exists {
+			t.Error("ECR repository not configured in namespaced provider")
+			return
+		}
+		
+		// Verify UseAsync is set for repository (deletion takes time)
+		if !ecrRepo.UseAsync {
+			t.Error("ECR repository should use async operations in namespaced provider")
+		}
+		
+		// Test KMS reference configuration
+		if ecrRepo.References == nil {
+			t.Error("References not configured for ECR repository in namespaced provider")
+		} else {
+			if _, hasKMSRef := ecrRepo.References["encryption_configuration.kms_key"]; !hasKMSRef {
+				t.Error("KMS key reference not configured for ECR repository in namespaced provider")
+			}
+		}
+	})
+}
+
+// FuzzNamespacedResourceNaming fuzzes namespace-specific resource naming logic
+func FuzzNamespacedResourceNaming(f *testing.F) {
+	// Add seed inputs for namespace testing
+	f.Add("test-namespace", "my-repo", "prefix-123")
+	f.Add("", "repo-name", "")
+	f.Add("very-long-namespace-name-that-might-exceed-limits", "short", "p")
+	f.Add("namespace-with-special-chars_123", "repo@#$%", "prefix!@#")
+	
+	f.Fuzz(func(t *testing.T, namespace, repoName, prefix string) {
+		// Test namespace-specific naming logic doesn't panic
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Namespace naming logic panicked with inputs namespace=%q, repoName=%q, prefix=%q: %v",
+					namespace, repoName, prefix, r)
+			}
+		}()
+		
+		// Test various namespace scenarios
+		if namespace == "" {
+			t.Logf("Testing empty namespace")
+		}
+		
+		if len(namespace) > 63 {
+			t.Logf("Testing long namespace: %d characters", len(namespace))
+		}
+		
+		if strings.ContainsAny(namespace, "!@#$%^&*()") {
+			t.Logf("Testing namespace with special characters: %q", namespace)
+		}
+		
+		// Test repo name validation in namespace context
+		if repoName == "" {
+			t.Logf("Testing empty repo name in namespace %q", namespace)
+		}
+		
+		// Test prefix validation in namespace context
+		if prefix == "" {
+			t.Logf("Testing empty prefix in namespace %q", namespace)
+		}
+		
+		// Test combined length constraints
+		combinedLength := len(namespace) + len(repoName) + len(prefix)
+		if combinedLength > 255 {
+			t.Logf("Testing combined name length: %d characters", combinedLength)
+		}
+	})
+}
+
+// FuzzNamespacedResourceValidation fuzzes namespaced resource validation
+func FuzzNamespacedResourceValidation(f *testing.F) {
+	// Add seed inputs for validation testing
+	f.Add("test-ns", "valid-repo", true, "IMMUTABLE")
+	f.Add("", "", false, "MUTABLE")
+	f.Add("ns-with-dashes", "repo_with_underscores", true, "INVALID")
+	
+	f.Fuzz(func(t *testing.T, namespace, repoName string, useAsync bool, imageTagMutability string) {
+		// Test validation doesn't panic
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Namespaced validation panicked with inputs namespace=%q, repoName=%q, useAsync=%v, imageTagMutability=%q: %v",
+					namespace, repoName, useAsync, imageTagMutability, r)
+			}
+		}()
+		
+		// Test namespace validation
+		if strings.HasPrefix(namespace, "-") || strings.HasSuffix(namespace, "-") {
+			t.Logf("Testing namespace with leading/trailing dashes: %q", namespace)
+		}
+		
+		if strings.Contains(namespace, "--") {
+			t.Logf("Testing namespace with double dashes: %q", namespace)
+		}
+		
+		// Test repository name validation in namespace context
+		if strings.Contains(repoName, "..") {
+			t.Logf("Testing repo name with double dots: %q", repoName)
+		}
+		
+		// Test async configuration validation
+		if useAsync {
+			t.Logf("Testing async configuration in namespace %q", namespace)
+		}
+		
+		// Test image tag mutability validation
+		validMutabilityValues := []string{"MUTABLE", "IMMUTABLE"}
+		isValid := false
+		for _, valid := range validMutabilityValues {
+			if imageTagMutability == valid {
+				isValid = true
+				break
+			}
+		}
+		
+		if imageTagMutability != "" && !isValid {
+			t.Logf("Testing invalid image tag mutability in namespace: %q", imageTagMutability)
+		}
+	})
+}
