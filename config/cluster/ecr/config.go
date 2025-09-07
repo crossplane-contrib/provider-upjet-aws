@@ -22,4 +22,25 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// Deletion takes a while.
 		r.UseAsync = true
 	})
+
+	// Add Repository Creation Template configuration
+	p.AddResourceConfigurator("aws_ecr_repository_creation_template", func(r *config.Resource) {
+		r.ShortGroup = "ecr"
+		r.Kind = "RepositoryCreationTemplate"
+		
+		// KMS key reference for encryption configuration
+		r.References = map[string]config.Reference{
+			"encryption_configuration.kms_key": {
+				TerraformName: "aws_kms_key",
+				Extractor:     common.PathARNExtractor,
+			},
+		}
+		
+		// External name is the template prefix/name, not ARN
+		// Terraform import uses: terraform import aws_ecr_repository_creation_template.example template-name
+		r.ExternalName = config.NameAsIdentifier
+		
+		// Repository creation templates are relatively quick to create/delete
+		r.UseAsync = false
+	})
 }
