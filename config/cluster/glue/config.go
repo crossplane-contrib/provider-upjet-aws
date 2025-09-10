@@ -18,6 +18,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// This causes refresh to fail in the first reconcile.
 		r.TerraformResource.Schema["catalog_id"].Computed = false
 		r.TerraformResource.Schema["catalog_id"].Optional = false
+
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"create_table_default_permission"},
+		}
 	})
 
 	p.AddResourceConfigurator("aws_glue_catalog_table", func(r *config.Resource) {
@@ -27,7 +31,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.TerraformResource.Schema["catalog_id"].Optional = false
 
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
-			if diff != nil && diff.Attributes != nil {
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			piDiff, ok := diff.Attributes["partition_index.#"]
+			if ok && piDiff.Old == "" && piDiff.New == "" && piDiff.NewComputed {
 				delete(diff.Attributes, "partition_index.#")
 			}
 			return diff, nil
