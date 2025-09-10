@@ -1117,6 +1117,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ecr_replication_configuration": config.IdentifierFromProvider,
 	//
 	"aws_ecr_repository": config.NameAsIdentifier,
+	// Imported using the template name/prefix.
+	"aws_ecr_repository_creation_template": config.NameAsIdentifier,
 	// Imported using the parameter called repository but this is not the name
 	// of the resource, only a configuration/reference.
 	"aws_ecr_repository_policy": config.IdentifierFromProvider,
