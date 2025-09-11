@@ -118,6 +118,7 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("AvailabilityZone"))
 	opts = append(opts, resource.WithNameFilter("DBName"))
 
 	li := resource.NewGenericLateInitializer(opts...)
