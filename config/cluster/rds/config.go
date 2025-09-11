@@ -149,7 +149,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.UseAsync = true
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"name", "db_name"},
+			IgnoredFields: []string{"name", "db_name", "availability_zone"},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
 			conn := map[string][]byte{}
