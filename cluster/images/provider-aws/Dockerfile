@@ -1,4 +1,5 @@
-FROM alpine:3.22.1
+FROM public.ecr.aws/docker/library/alpine:3.22.1
+
 RUN apk --no-cache add ca-certificates bash
 
 ARG TARGETOS
