@@ -27,7 +27,6 @@ spec:
     skipFinalSnapshot: true
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
-    namespace: upbound-system
 ---
 apiVersion: rds.aws.m.upbound.io/v1beta1
 kind: ClusterParameterGroup

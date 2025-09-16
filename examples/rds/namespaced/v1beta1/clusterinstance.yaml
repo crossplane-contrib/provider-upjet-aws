@@ -45,7 +45,6 @@ spec:
     skipFinalSnapshot: true
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
-    namespace: upbound-system
 ---
 apiVersion: v1
 kind: Secret
