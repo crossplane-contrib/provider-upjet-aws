@@ -55,7 +55,6 @@ spec:
     username: adminuser
   writeConnectionSecretToRef:
     name: example-dbinstance-out
-    namespace: default
 ---
 apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key

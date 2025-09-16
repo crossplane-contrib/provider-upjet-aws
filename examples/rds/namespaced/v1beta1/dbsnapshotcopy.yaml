@@ -71,7 +71,6 @@ spec:
         testing.upbound.io/example-name: sample-key-ssc
   writeConnectionSecretToRef:
     name: example-dbinstance-out
-    namespace: default
 ---
 apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key

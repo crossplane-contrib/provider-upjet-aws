@@ -42,7 +42,6 @@ spec:
     skipFinalSnapshot: true
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
-    namespace: upbound-system
 ---
 apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
