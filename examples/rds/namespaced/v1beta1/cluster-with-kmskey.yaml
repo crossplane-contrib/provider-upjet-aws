@@ -27,7 +27,6 @@ spec:
         testing.upbound.io/example-name: sample-key
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
-    namespace: upbound-system
 ---
 apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
