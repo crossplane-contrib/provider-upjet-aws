@@ -27,6 +27,9 @@ type BusInitParameters struct {
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
+	// configured
+	LogConfig *LogConfigInitParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -51,6 +54,9 @@ type BusObservation struct {
 
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// configured
+	LogConfig *LogConfigObservation `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// The following arguments are required:
@@ -84,6 +90,10 @@ type BusParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
+	// configured
+	// +kubebuilder:validation:Optional
+	LogConfig *LogConfigParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// The following arguments are required:
 	// Region is the region you'd like your resource to be created in.
@@ -113,6 +123,35 @@ type DeadLetterConfigParameters struct {
 	// The ARN of the SQS queue specified as the target for the dead-letter queue.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type LogConfigInitParameters struct {
+
+	// Whether EventBridge include detailed event information in the records it generates. Valid values are NONE and FULL.
+	IncludeDetail *string `json:"includeDetail,omitempty" tf:"include_detail,omitempty"`
+
+	// Level of logging detail to include. Valid values are OFF, ERROR, INFO, and TRACE.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+}
+
+type LogConfigObservation struct {
+
+	// Whether EventBridge include detailed event information in the records it generates. Valid values are NONE and FULL.
+	IncludeDetail *string `json:"includeDetail,omitempty" tf:"include_detail,omitempty"`
+
+	// Level of logging detail to include. Valid values are OFF, ERROR, INFO, and TRACE.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+}
+
+type LogConfigParameters struct {
+
+	// Whether EventBridge include detailed event information in the records it generates. Valid values are NONE and FULL.
+	// +kubebuilder:validation:Optional
+	IncludeDetail *string `json:"includeDetail,omitempty" tf:"include_detail,omitempty"`
+
+	// Level of logging detail to include. Valid values are OFF, ERROR, INFO, and TRACE.
+	// +kubebuilder:validation:Optional
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 }
 
 // BusSpec defines the desired state of Bus

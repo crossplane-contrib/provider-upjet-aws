@@ -62,6 +62,10 @@ spec:
                   indexName:
                     description: The global secondary index name
                     type: string
+                  mode:
+                    description: argument to specify the CloudWatch contributor insights
+                      mode
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -168,6 +172,10 @@ spec:
                 properties:
                   indexName:
                     description: The global secondary index name
+                    type: string
+                  mode:
+                    description: argument to specify the CloudWatch contributor insights
+                      mode
                     type: string
                   tableName:
                     description: The name of the table to enable contributor insights
@@ -320,6 +328,10 @@ spec:
                     type: string
                   indexName:
                     description: The global secondary index name
+                    type: string
+                  mode:
+                    description: argument to specify the CloudWatch contributor insights
+                      mode
                     type: string
                   region:
                     description: |-

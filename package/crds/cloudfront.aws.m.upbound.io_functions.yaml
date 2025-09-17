@@ -78,7 +78,7 @@ spec:
                     type: string
                   keyValueStoreAssociations:
                     description: List of aws_cloudfront_key_value_store ARNs to be
-                      associated to the function. AWS limits associations to on key
+                      associated to the function. AWS limits associations to one key
                       value store per function.
                     items:
                       type: string
@@ -123,7 +123,7 @@ spec:
                     type: string
                   keyValueStoreAssociations:
                     description: List of aws_cloudfront_key_value_store ARNs to be
-                      associated to the function. AWS limits associations to on key
+                      associated to the function. AWS limits associations to one key
                       value store per function.
                     items:
                       type: string
@@ -226,7 +226,7 @@ spec:
                     type: string
                   keyValueStoreAssociations:
                     description: List of aws_cloudfront_key_value_store ARNs to be
-                      associated to the function. AWS limits associations to on key
+                      associated to the function. AWS limits associations to one key
                       value store per function.
                     items:
                       type: string

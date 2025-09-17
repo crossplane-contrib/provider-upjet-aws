@@ -18,7 +18,7 @@ type AccessConfigInitParameters struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is false.
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type AccessConfigObservation struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is false.
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type AccessConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is false.
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
 	// +kubebuilder:validation:Optional
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
@@ -83,6 +83,9 @@ type ClusterInitParameters struct {
 
 	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
 	ComputeConfig *ComputeConfigInitParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
+	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
@@ -158,6 +161,9 @@ type ClusterObservation struct {
 
 	// Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
@@ -237,6 +243,10 @@ type ClusterParameters struct {
 	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
 	// +kubebuilder:validation:Optional
 	ComputeConfig *ComputeConfigParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
+	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
+	// +kubebuilder:validation:Optional
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +kubebuilder:validation:Optional

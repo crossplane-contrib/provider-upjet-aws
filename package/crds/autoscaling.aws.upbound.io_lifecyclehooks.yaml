@@ -178,7 +178,7 @@ spec:
                     description: ARN of the notification target that Auto Scaling
                       will use to notify you when an instance is in the transition
                       state for the lifecycle hook. This ARN target can be either
-                      an SQS queue or an SNS topic.
+                      an SQS queue, an SNS topic, or a Lambda function.
                     type: string
                   region:
                     description: |-
@@ -304,7 +304,7 @@ spec:
                     description: ARN of the notification target that Auto Scaling
                       will use to notify you when an instance is in the transition
                       state for the lifecycle hook. This ARN target can be either
-                      an SQS queue or an SNS topic.
+                      an SQS queue, an SNS topic, or a Lambda function.
                     type: string
                   roleArn:
                     description: ARN of the IAM role that allows the Auto Scaling
@@ -512,7 +512,7 @@ spec:
                     description: ARN of the notification target that Auto Scaling
                       will use to notify you when an instance is in the transition
                       state for the lifecycle hook. This ARN target can be either
-                      an SQS queue or an SNS topic.
+                      an SQS queue, an SNS topic, or a Lambda function.
                     type: string
                   region:
                     description: |-

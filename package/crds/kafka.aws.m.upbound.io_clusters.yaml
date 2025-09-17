@@ -60,11 +60,11 @@ spec:
                 properties:
                   brokerNodeGroupInfo:
                     description: Configuration block for the broker nodes of the Kafka
-                      cluster.
+                      cluster. See broker_node_group_info Argument Reference below.
                     properties:
                       azDistribution:
                         description: The distribution of broker nodes across availability
-                          zones (documentation). Currently the only valid value is
+                          zones (documentation). Currently, the only valid value is
                           DEFAULT.
                         type: string
                       clientSubnets:
@@ -160,15 +160,16 @@ spec:
                         type: object
                       connectivityInfo:
                         description: Information about the cluster access configuration.
-                          See below. For security reasons, you can't turn on public
-                          access while creating an MSK cluster. However, you can update
-                          an existing cluster to make it publicly accessible. You
-                          can also create a new cluster and then update it to make
-                          it publicly accessible (documentation).
+                          See broker_node_group_info connectivity_info Argument Reference
+                          below. For security reasons, you can't turn on public access
+                          while creating an MSK cluster. However, you can update an
+                          existing cluster to make it publicly accessible. You can
+                          also create a new cluster and then update it to make it
+                          publicly accessible (documentation).
                         properties:
                           publicAccess:
                             description: Access control settings for brokers. See
-                              below.
+                              connectivity_info public_access Argument Reference below.
                             properties:
                               type:
                                 description: 'Public access type. Valid values: DISABLED,
@@ -177,15 +178,18 @@ spec:
                             type: object
                           vpcConnectivity:
                             description: VPC connectivity access control for brokers.
-                              See below.
+                              See connectivity_info vpc_connectivity Argument Reference
+                              below.
                             properties:
                               clientAuthentication:
                                 description: Configuration block for specifying a
-                                  client authentication. See below.
+                                  client authentication. See client_authentication
+                                  Argument Reference below.
                                 properties:
                                   sasl:
                                     description: SASL authentication type details
-                                      for VPC connectivity. See below.
+                                      for VPC connectivity. See vpc_connectivity client_authentication
+                                      sasl Argument Reference below.
                                     properties:
                                       iam:
                                         description: Enables SASL/IAM authentication
@@ -302,17 +306,20 @@ spec:
                         type: object
                       storageInfo:
                         description: A block that contains information about storage
-                          volumes attached to MSK broker nodes. See below.
+                          volumes attached to MSK broker nodes. See broker_node_group_info
+                          storage_info Argument Reference below.
                         properties:
                           ebsStorageInfo:
                             description: A block that contains EBS volume information.
-                              See below.
+                              See storage_info ebs_storage_info Argument Reference
+                              below.
                             properties:
                               provisionedThroughput:
                                 description: A block that contains EBS volume provisioned
                                   throughput information. To provision storage throughput,
                                   you must choose broker type kafka.m5.4xlarge or
-                                  larger. See below.
+                                  larger. See ebs_storage_info provisioned_throughput
+                                  Argument Reference below.
                                 properties:
                                   enabled:
                                     description: 'Controls whether provisioned throughput
@@ -338,11 +345,12 @@ spec:
                     type: object
                   clientAuthentication:
                     description: Configuration block for specifying a client authentication.
-                      See below.
+                      See client_authentication Argument Reference below.
                     properties:
                       sasl:
                         description: SASL authentication type details for VPC connectivity.
-                          See below.
+                          See vpc_connectivity client_authentication sasl Argument
+                          Reference below.
                         properties:
                           iam:
                             description: Enables SASL/IAM authentication for VPC connectivity.
@@ -371,8 +379,9 @@ spec:
                     description: Name of the MSK cluster.
                     type: string
                   configurationInfo:
-                    description: Configuration block for specifying a MSK Configuration
-                      to attach to Kafka brokers. See below.
+                    description: Configuration block for specifying an MSK Configuration
+                      to attach to Kafka brokers. See configuration_info Argument
+                      Reference below.
                     properties:
                       arn:
                         description: Amazon Resource Name (ARN) of the MSK Configuration
@@ -467,7 +476,7 @@ spec:
                     type: object
                   encryptionInfo:
                     description: Configuration block for specifying encryption. See
-                      below.
+                      encryption_info Argument Reference below.
                     properties:
                       encryptionAtRestKmsKeyArn:
                         description: The ARN of the KMS key used for encryption at
@@ -555,7 +564,8 @@ spec:
                         type: object
                       encryptionInTransit:
                         description: Configuration block to specify encryption in
-                          transit. See below.
+                          transit. See encryption_info encryption_in_transit Argument
+                          Reference below.
                         properties:
                           clientBroker:
                             description: 'Encryption setting for data in transit between
@@ -577,13 +587,18 @@ spec:
                     type: string
                   loggingInfo:
                     description: Configuration block for streaming broker logs to
-                      Cloudwatch/S3/Kinesis Firehose. See below.
+                      Cloudwatch/S3/Kinesis Firehose. See logging_info Argument Reference
+                      below.
                     properties:
                       brokerLogs:
                         description: Configuration block for Broker Logs settings
-                          for logging info. See below.
+                          for logging info. See logging_info broker_logs Argument
+                          Reference below.
                         properties:
                           cloudwatchLogs:
+                            description: Configuration block for Cloudwatch Logs settings.
+                              See logging_info broker_logs cloudwatch_logs Argument
+                              Reference below.
                             properties:
                               enabled:
                                 description: 'Controls whether provisioned throughput
@@ -677,6 +692,9 @@ spec:
                                 type: object
                             type: object
                           firehose:
+                            description: Configuration block for Kinesis Data Firehose
+                              settings. See logging_info broker_logs firehose Argument
+                              Reference below.
                             properties:
                               deliveryStream:
                                 description: Name of the Kinesis Data Firehose delivery
@@ -770,6 +788,8 @@ spec:
                                 type: boolean
                             type: object
                           s3:
+                            description: Configuration block for S3 settings. See
+                              logging_info broker_logs s3 Argument Reference below.
                             properties:
                               bucket:
                                 description: Name of the S3 bucket to deliver logs
@@ -874,14 +894,16 @@ spec:
                     type: number
                   openMonitoring:
                     description: Configuration block for JMX and Node monitoring for
-                      the MSK cluster. See below.
+                      the MSK cluster. See open_monitoring Argument Reference below.
                     properties:
                       prometheus:
                         description: Configuration block for Prometheus settings for
-                          open monitoring. See below.
+                          open monitoring. See open_monitoring prometheus Argument
+                          Reference below.
                         properties:
                           jmxExporter:
                             description: Configuration block for JMX Exporter. See
+                              open_monitoring prometheus jmx_exporter Argument Reference
                               below.
                             properties:
                               enabledInBroker:
@@ -891,6 +913,7 @@ spec:
                             type: object
                           nodeExporter:
                             description: Configuration block for Node Exporter. See
+                              open_monitoring prometheus node_exporter Argument Reference
                               below.
                             properties:
                               enabledInBroker:
@@ -933,11 +956,11 @@ spec:
                 properties:
                   brokerNodeGroupInfo:
                     description: Configuration block for the broker nodes of the Kafka
-                      cluster.
+                      cluster. See broker_node_group_info Argument Reference below.
                     properties:
                       azDistribution:
                         description: The distribution of broker nodes across availability
-                          zones (documentation). Currently the only valid value is
+                          zones (documentation). Currently, the only valid value is
                           DEFAULT.
                         type: string
                       clientSubnets:
@@ -1033,15 +1056,16 @@ spec:
                         type: object
                       connectivityInfo:
                         description: Information about the cluster access configuration.
-                          See below. For security reasons, you can't turn on public
-                          access while creating an MSK cluster. However, you can update
-                          an existing cluster to make it publicly accessible. You
-                          can also create a new cluster and then update it to make
-                          it publicly accessible (documentation).
+                          See broker_node_group_info connectivity_info Argument Reference
+                          below. For security reasons, you can't turn on public access
+                          while creating an MSK cluster. However, you can update an
+                          existing cluster to make it publicly accessible. You can
+                          also create a new cluster and then update it to make it
+                          publicly accessible (documentation).
                         properties:
                           publicAccess:
                             description: Access control settings for brokers. See
-                              below.
+                              connectivity_info public_access Argument Reference below.
                             properties:
                               type:
                                 description: 'Public access type. Valid values: DISABLED,
@@ -1050,15 +1074,18 @@ spec:
                             type: object
                           vpcConnectivity:
                             description: VPC connectivity access control for brokers.
-                              See below.
+                              See connectivity_info vpc_connectivity Argument Reference
+                              below.
                             properties:
                               clientAuthentication:
                                 description: Configuration block for specifying a
-                                  client authentication. See below.
+                                  client authentication. See client_authentication
+                                  Argument Reference below.
                                 properties:
                                   sasl:
                                     description: SASL authentication type details
-                                      for VPC connectivity. See below.
+                                      for VPC connectivity. See vpc_connectivity client_authentication
+                                      sasl Argument Reference below.
                                     properties:
                                       iam:
                                         description: Enables SASL/IAM authentication
@@ -1175,17 +1202,20 @@ spec:
                         type: object
                       storageInfo:
                         description: A block that contains information about storage
-                          volumes attached to MSK broker nodes. See below.
+                          volumes attached to MSK broker nodes. See broker_node_group_info
+                          storage_info Argument Reference below.
                         properties:
                           ebsStorageInfo:
                             description: A block that contains EBS volume information.
-                              See below.
+                              See storage_info ebs_storage_info Argument Reference
+                              below.
                             properties:
                               provisionedThroughput:
                                 description: A block that contains EBS volume provisioned
                                   throughput information. To provision storage throughput,
                                   you must choose broker type kafka.m5.4xlarge or
-                                  larger. See below.
+                                  larger. See ebs_storage_info provisioned_throughput
+                                  Argument Reference below.
                                 properties:
                                   enabled:
                                     description: 'Controls whether provisioned throughput
@@ -1211,11 +1241,12 @@ spec:
                     type: object
                   clientAuthentication:
                     description: Configuration block for specifying a client authentication.
-                      See below.
+                      See client_authentication Argument Reference below.
                     properties:
                       sasl:
                         description: SASL authentication type details for VPC connectivity.
-                          See below.
+                          See vpc_connectivity client_authentication sasl Argument
+                          Reference below.
                         properties:
                           iam:
                             description: Enables SASL/IAM authentication for VPC connectivity.
@@ -1244,8 +1275,9 @@ spec:
                     description: Name of the MSK cluster.
                     type: string
                   configurationInfo:
-                    description: Configuration block for specifying a MSK Configuration
-                      to attach to Kafka brokers. See below.
+                    description: Configuration block for specifying an MSK Configuration
+                      to attach to Kafka brokers. See configuration_info Argument
+                      Reference below.
                     properties:
                       arn:
                         description: Amazon Resource Name (ARN) of the MSK Configuration
@@ -1340,7 +1372,7 @@ spec:
                     type: object
                   encryptionInfo:
                     description: Configuration block for specifying encryption. See
-                      below.
+                      encryption_info Argument Reference below.
                     properties:
                       encryptionAtRestKmsKeyArn:
                         description: The ARN of the KMS key used for encryption at
@@ -1428,7 +1460,8 @@ spec:
                         type: object
                       encryptionInTransit:
                         description: Configuration block to specify encryption in
-                          transit. See below.
+                          transit. See encryption_info encryption_in_transit Argument
+                          Reference below.
                         properties:
                           clientBroker:
                             description: 'Encryption setting for data in transit between
@@ -1450,13 +1483,18 @@ spec:
                     type: string
                   loggingInfo:
                     description: Configuration block for streaming broker logs to
-                      Cloudwatch/S3/Kinesis Firehose. See below.
+                      Cloudwatch/S3/Kinesis Firehose. See logging_info Argument Reference
+                      below.
                     properties:
                       brokerLogs:
                         description: Configuration block for Broker Logs settings
-                          for logging info. See below.
+                          for logging info. See logging_info broker_logs Argument
+                          Reference below.
                         properties:
                           cloudwatchLogs:
+                            description: Configuration block for Cloudwatch Logs settings.
+                              See logging_info broker_logs cloudwatch_logs Argument
+                              Reference below.
                             properties:
                               enabled:
                                 description: 'Controls whether provisioned throughput
@@ -1550,6 +1588,9 @@ spec:
                                 type: object
                             type: object
                           firehose:
+                            description: Configuration block for Kinesis Data Firehose
+                              settings. See logging_info broker_logs firehose Argument
+                              Reference below.
                             properties:
                               deliveryStream:
                                 description: Name of the Kinesis Data Firehose delivery
@@ -1643,6 +1684,8 @@ spec:
                                 type: boolean
                             type: object
                           s3:
+                            description: Configuration block for S3 settings. See
+                              logging_info broker_logs s3 Argument Reference below.
                             properties:
                               bucket:
                                 description: Name of the S3 bucket to deliver logs
@@ -1747,14 +1790,16 @@ spec:
                     type: number
                   openMonitoring:
                     description: Configuration block for JMX and Node monitoring for
-                      the MSK cluster. See below.
+                      the MSK cluster. See open_monitoring Argument Reference below.
                     properties:
                       prometheus:
                         description: Configuration block for Prometheus settings for
-                          open monitoring. See below.
+                          open monitoring. See open_monitoring prometheus Argument
+                          Reference below.
                         properties:
                           jmxExporter:
                             description: Configuration block for JMX Exporter. See
+                              open_monitoring prometheus jmx_exporter Argument Reference
                               below.
                             properties:
                               enabledInBroker:
@@ -1764,6 +1809,7 @@ spec:
                             type: object
                           nodeExporter:
                             description: Configuration block for Node Exporter. See
+                              open_monitoring prometheus node_exporter Argument Reference
                               below.
                             properties:
                               enabledInBroker:
@@ -1954,11 +2000,11 @@ spec:
                     type: string
                   brokerNodeGroupInfo:
                     description: Configuration block for the broker nodes of the Kafka
-                      cluster.
+                      cluster. See broker_node_group_info Argument Reference below.
                     properties:
                       azDistribution:
                         description: The distribution of broker nodes across availability
-                          zones (documentation). Currently the only valid value is
+                          zones (documentation). Currently, the only valid value is
                           DEFAULT.
                         type: string
                       clientSubnets:
@@ -1970,15 +2016,16 @@ spec:
                         x-kubernetes-list-type: set
                       connectivityInfo:
                         description: Information about the cluster access configuration.
-                          See below. For security reasons, you can't turn on public
-                          access while creating an MSK cluster. However, you can update
-                          an existing cluster to make it publicly accessible. You
-                          can also create a new cluster and then update it to make
-                          it publicly accessible (documentation).
+                          See broker_node_group_info connectivity_info Argument Reference
+                          below. For security reasons, you can't turn on public access
+                          while creating an MSK cluster. However, you can update an
+                          existing cluster to make it publicly accessible. You can
+                          also create a new cluster and then update it to make it
+                          publicly accessible (documentation).
                         properties:
                           publicAccess:
                             description: Access control settings for brokers. See
-                              below.
+                              connectivity_info public_access Argument Reference below.
                             properties:
                               type:
                                 description: 'Public access type. Valid values: DISABLED,
@@ -1987,15 +2034,18 @@ spec:
                             type: object
                           vpcConnectivity:
                             description: VPC connectivity access control for brokers.
-                              See below.
+                              See connectivity_info vpc_connectivity Argument Reference
+                              below.
                             properties:
                               clientAuthentication:
                                 description: Configuration block for specifying a
-                                  client authentication. See below.
+                                  client authentication. See client_authentication
+                                  Argument Reference below.
                                 properties:
                                   sasl:
                                     description: SASL authentication type details
-                                      for VPC connectivity. See below.
+                                      for VPC connectivity. See vpc_connectivity client_authentication
+                                      sasl Argument Reference below.
                                     properties:
                                       iam:
                                         description: Enables SASL/IAM authentication
@@ -2027,17 +2077,20 @@ spec:
                         x-kubernetes-list-type: set
                       storageInfo:
                         description: A block that contains information about storage
-                          volumes attached to MSK broker nodes. See below.
+                          volumes attached to MSK broker nodes. See broker_node_group_info
+                          storage_info Argument Reference below.
                         properties:
                           ebsStorageInfo:
                             description: A block that contains EBS volume information.
-                              See below.
+                              See storage_info ebs_storage_info Argument Reference
+                              below.
                             properties:
                               provisionedThroughput:
                                 description: A block that contains EBS volume provisioned
                                   throughput information. To provision storage throughput,
                                   you must choose broker type kafka.m5.4xlarge or
-                                  larger. See below.
+                                  larger. See ebs_storage_info provisioned_throughput
+                                  Argument Reference below.
                                 properties:
                                   enabled:
                                     description: 'Controls whether provisioned throughput
@@ -2063,11 +2116,12 @@ spec:
                     type: object
                   clientAuthentication:
                     description: Configuration block for specifying a client authentication.
-                      See below.
+                      See client_authentication Argument Reference below.
                     properties:
                       sasl:
                         description: SASL authentication type details for VPC connectivity.
-                          See below.
+                          See vpc_connectivity client_authentication sasl Argument
+                          Reference below.
                         properties:
                           iam:
                             description: Enables SASL/IAM authentication for VPC connectivity.
@@ -2099,8 +2153,9 @@ spec:
                     description: UUID of the MSK cluster, for use in IAM policies.
                     type: string
                   configurationInfo:
-                    description: Configuration block for specifying a MSK Configuration
-                      to attach to Kafka brokers. See below.
+                    description: Configuration block for specifying an MSK Configuration
+                      to attach to Kafka brokers. See configuration_info Argument
+                      Reference below.
                     properties:
                       arn:
                         description: Amazon Resource Name (ARN) of the MSK Configuration
@@ -2117,7 +2172,7 @@ spec:
                     type: string
                   encryptionInfo:
                     description: Configuration block for specifying encryption. See
-                      below.
+                      encryption_info Argument Reference below.
                     properties:
                       encryptionAtRestKmsKeyArn:
                         description: The ARN of the KMS key used for encryption at
@@ -2125,7 +2180,8 @@ spec:
                         type: string
                       encryptionInTransit:
                         description: Configuration block to specify encryption in
-                          transit. See below.
+                          transit. See encryption_info encryption_in_transit Argument
+                          Reference below.
                         properties:
                           clientBroker:
                             description: 'Encryption setting for data in transit between
@@ -2149,13 +2205,18 @@ spec:
                     type: string
                   loggingInfo:
                     description: Configuration block for streaming broker logs to
-                      Cloudwatch/S3/Kinesis Firehose. See below.
+                      Cloudwatch/S3/Kinesis Firehose. See logging_info Argument Reference
+                      below.
                     properties:
                       brokerLogs:
                         description: Configuration block for Broker Logs settings
-                          for logging info. See below.
+                          for logging info. See logging_info broker_logs Argument
+                          Reference below.
                         properties:
                           cloudwatchLogs:
+                            description: Configuration block for Cloudwatch Logs settings.
+                              See logging_info broker_logs cloudwatch_logs Argument
+                              Reference below.
                             properties:
                               enabled:
                                 description: 'Controls whether provisioned throughput
@@ -2167,6 +2228,9 @@ spec:
                                 type: string
                             type: object
                           firehose:
+                            description: Configuration block for Kinesis Data Firehose
+                              settings. See logging_info broker_logs firehose Argument
+                              Reference below.
                             properties:
                               deliveryStream:
                                 description: Name of the Kinesis Data Firehose delivery
@@ -2178,6 +2242,8 @@ spec:
                                 type: boolean
                             type: object
                           s3:
+                            description: Configuration block for S3 settings. See
+                              logging_info broker_logs s3 Argument Reference below.
                             properties:
                               bucket:
                                 description: Name of the S3 bucket to deliver logs
@@ -2200,14 +2266,16 @@ spec:
                     type: number
                   openMonitoring:
                     description: Configuration block for JMX and Node monitoring for
-                      the MSK cluster. See below.
+                      the MSK cluster. See open_monitoring Argument Reference below.
                     properties:
                       prometheus:
                         description: Configuration block for Prometheus settings for
-                          open monitoring. See below.
+                          open monitoring. See open_monitoring prometheus Argument
+                          Reference below.
                         properties:
                           jmxExporter:
                             description: Configuration block for JMX Exporter. See
+                              open_monitoring prometheus jmx_exporter Argument Reference
                               below.
                             properties:
                               enabledInBroker:
@@ -2217,6 +2285,7 @@ spec:
                             type: object
                           nodeExporter:
                             description: Configuration block for Node Exporter. See
+                              open_monitoring prometheus node_exporter Argument Reference
                               below.
                             properties:
                               enabledInBroker:

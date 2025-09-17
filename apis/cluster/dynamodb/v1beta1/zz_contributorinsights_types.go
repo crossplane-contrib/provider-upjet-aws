@@ -18,6 +18,9 @@ type ContributorInsightsInitParameters struct {
 	// The global secondary index name
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
+	// argument to specify the CloudWatch contributor insights mode
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
 	// The name of the table to enable contributor insights
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -37,6 +40,9 @@ type ContributorInsightsObservation struct {
 	// The global secondary index name
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
+	// argument to specify the CloudWatch contributor insights mode
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -50,6 +56,10 @@ type ContributorInsightsParameters struct {
 	// The global secondary index name
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+
+	// argument to specify the CloudWatch contributor insights mode
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

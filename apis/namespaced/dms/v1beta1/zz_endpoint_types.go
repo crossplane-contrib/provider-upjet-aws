@@ -115,6 +115,9 @@ type EndpointInitParameters struct {
 	// Configuration block for MongoDB settings. See below.
 	MongodbSettings *MongodbSettingsInitParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
 
+	// Configuration block for Oracle settings. See below.
+	OracleSettings *OracleSettingsInitParameters `json:"oracleSettings,omitempty" tf:"oracle_settings,omitempty"`
+
 	// Password to be used to login to the endpoint database.
 	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
@@ -212,6 +215,9 @@ type EndpointObservation struct {
 	// Configuration block for MongoDB settings. See below.
 	MongodbSettings *MongodbSettingsObservation `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
 
+	// Configuration block for Oracle settings. See below.
+	OracleSettings *OracleSettingsObservation `json:"oracleSettings,omitempty" tf:"oracle_settings,omitempty"`
+
 	// Only tasks paused by the resource will be restarted after the modification completes. Default is false.
 	PauseReplicationTasks *bool `json:"pauseReplicationTasks,omitempty" tf:"pause_replication_tasks,omitempty"`
 
@@ -308,6 +314,10 @@ type EndpointParameters struct {
 	// Configuration block for MongoDB settings. See below.
 	// +kubebuilder:validation:Optional
 	MongodbSettings *MongodbSettingsParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
+
+	// Configuration block for Oracle settings. See below.
+	// +kubebuilder:validation:Optional
+	OracleSettings *OracleSettingsParameters `json:"oracleSettings,omitempty" tf:"oracle_settings,omitempty"`
 
 	// Password to be used to login to the endpoint database.
 	// +kubebuilder:validation:Optional
@@ -758,10 +768,32 @@ type MongodbSettingsParameters struct {
 	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
 }
 
+type OracleSettingsInitParameters struct {
+
+	// Authentication mechanism to access the Oracle source endpoint. Default is password. Valid values are password and kerberos.
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+}
+
+type OracleSettingsObservation struct {
+
+	// Authentication mechanism to access the Oracle source endpoint. Default is password. Valid values are password and kerberos.
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+}
+
+type OracleSettingsParameters struct {
+
+	// Authentication mechanism to access the Oracle source endpoint. Default is password. Valid values are password and kerberos.
+	// +kubebuilder:validation:Optional
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+}
+
 type PostgresSettingsInitParameters struct {
 
 	// For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.
 	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
+
+	// Specifies the authentication method. Valid values: password, iam.
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
 
 	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
 	BabelfishDatabaseName *string `json:"babelfishDatabaseName,omitempty" tf:"babelfish_database_name,omitempty"`
@@ -804,6 +836,9 @@ type PostgresSettingsInitParameters struct {
 
 	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
 	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
+
+	// Specifies the IAM role to use to authenticate the connection.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
 
 	// Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.
 	SlotName *string `json:"slotName,omitempty" tf:"slot_name,omitempty"`
@@ -814,6 +849,9 @@ type PostgresSettingsObservation struct {
 	// For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.
 	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
 
+	// Specifies the authentication method. Valid values: password, iam.
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
 	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
 	BabelfishDatabaseName *string `json:"babelfishDatabaseName,omitempty" tf:"babelfish_database_name,omitempty"`
 
@@ -855,6 +893,9 @@ type PostgresSettingsObservation struct {
 
 	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
 	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
+
+	// Specifies the IAM role to use to authenticate the connection.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
 
 	// Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.
 	SlotName *string `json:"slotName,omitempty" tf:"slot_name,omitempty"`
@@ -866,6 +907,10 @@ type PostgresSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
 
+	// Specifies the authentication method. Valid values: password, iam.
+	// +kubebuilder:validation:Optional
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
 	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
 	// +kubebuilder:validation:Optional
 	BabelfishDatabaseName *string `json:"babelfishDatabaseName,omitempty" tf:"babelfish_database_name,omitempty"`
@@ -921,6 +966,10 @@ type PostgresSettingsParameters struct {
 	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
 	// +kubebuilder:validation:Optional
 	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
+
+	// Specifies the IAM role to use to authenticate the connection.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
 
 	// Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.
 	// +kubebuilder:validation:Optional

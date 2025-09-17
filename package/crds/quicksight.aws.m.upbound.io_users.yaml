@@ -60,9 +60,7 @@ spec:
               forProvider:
                 properties:
                   awsAccountId:
-                    description: ID for the AWS account that the user is in. Use the
-                      ID for the AWS account that contains your Amazon QuickSight
-                      account.
+                    description: AWS account ID.
                     type: string
                   email:
                     description: Email address of the user that you want to register.
@@ -74,7 +72,8 @@ spec:
                     type: string
                   identityType:
                     description: 'Identity type that your Amazon QuickSight account
-                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.'
+                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT,
+                      IAM_IDENTITY_CENTER.'
                     type: string
                   namespace:
                     description: The Amazon Quicksight namespace to create the user
@@ -98,8 +97,9 @@ spec:
                       an identity type of QUICKSIGHT.
                     type: string
                   userRole:
-                    description: 'Amazon QuickSight role for the user. Value values:
-                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.'
+                    description: 'Amazon QuickSight role for the user. Valid values:
+                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO, RESTRICTED_AUTHOR,
+                      RESTRICTED_READER.'
                     type: string
                 required:
                 - region
@@ -118,9 +118,7 @@ spec:
                   autoscaler.
                 properties:
                   awsAccountId:
-                    description: ID for the AWS account that the user is in. Use the
-                      ID for the AWS account that contains your Amazon QuickSight
-                      account.
+                    description: AWS account ID.
                     type: string
                   email:
                     description: Email address of the user that you want to register.
@@ -132,7 +130,8 @@ spec:
                     type: string
                   identityType:
                     description: 'Identity type that your Amazon QuickSight account
-                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.'
+                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT,
+                      IAM_IDENTITY_CENTER.'
                     type: string
                   namespace:
                     description: The Amazon Quicksight namespace to create the user
@@ -151,8 +150,9 @@ spec:
                       an identity type of QUICKSIGHT.
                     type: string
                   userRole:
-                    description: 'Amazon QuickSight role for the user. Value values:
-                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.'
+                    description: 'Amazon QuickSight role for the user. Valid values:
+                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO, RESTRICTED_AUTHOR,
+                      RESTRICTED_READER.'
                     type: string
                 type: object
               managementPolicies:
@@ -235,9 +235,7 @@ spec:
                     description: Amazon Resource Name (ARN) for the user.
                     type: string
                   awsAccountId:
-                    description: ID for the AWS account that the user is in. Use the
-                      ID for the AWS account that contains your Amazon QuickSight
-                      account.
+                    description: AWS account ID.
                     type: string
                   email:
                     description: Email address of the user that you want to register.
@@ -253,7 +251,8 @@ spec:
                     type: string
                   identityType:
                     description: 'Identity type that your Amazon QuickSight account
-                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.'
+                      uses to manage the identity of users. Valid values: IAM, QUICKSIGHT,
+                      IAM_IDENTITY_CENTER.'
                     type: string
                   namespace:
                     description: The Amazon Quicksight namespace to create the user
@@ -282,8 +281,9 @@ spec:
                       an identity type of QUICKSIGHT.
                     type: string
                   userRole:
-                    description: 'Amazon QuickSight role for the user. Value values:
-                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.'
+                    description: 'Amazon QuickSight role for the user. Valid values:
+                      READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO, RESTRICTED_AUTHOR,
+                      RESTRICTED_READER.'
                     type: string
                 type: object
               conditions:

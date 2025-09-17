@@ -79,7 +79,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   settingId:
-                    description: ID of the service setting.
+                    description: ID of the service setting. Valid values are shown
+                      in the AWS documentation.
                     type: string
                   settingValue:
                     description: Value of the service setting.
@@ -101,7 +102,8 @@ spec:
                   autoscaler.
                 properties:
                   settingId:
-                    description: ID of the service setting.
+                    description: ID of the service setting. Valid values are shown
+                      in the AWS documentation.
                     type: string
                   settingValue:
                     description: Value of the service setting.
@@ -218,7 +220,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   settingId:
-                    description: ID of the service setting.
+                    description: ID of the service setting. Valid values are shown
+                      in the AWS documentation.
                     type: string
                   settingValue:
                     description: Value of the service setting.

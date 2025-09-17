@@ -94,9 +94,35 @@ spec:
                     description: The EC2 Availability Zone that the replication instance
                       will be created in.
                     type: string
+                  dnsNameServers:
+                    description: A list of custom DNS name servers supported for the
+                      replication instance to access your on-premise source or target
+                      database. This list overrides the default name servers supported
+                      by the replication instance. You can specify a comma-separated
+                      list of internet addresses for up to four on-premise DNS name
+                      servers.
+                    type: string
                   engineVersion:
                     description: The engine version number of the replication instance.
                     type: string
+                  kerberosAuthenticationSettings:
+                    description: Configuration block for settings required for Kerberos
+                      authentication. See below.
+                    properties:
+                      keyCacheSecretIamArn:
+                        description: ARN of the IAM role that grants AWS DMS access
+                          to the secret containing key cache file for the Kerberos
+                          authentication.
+                        type: string
+                      keyCacheSecretId:
+                        description: Secret ID that stores the key cache file required
+                          for Kerberos authentication.
+                        type: string
+                      krb5FileContents:
+                        description: Contents of krb5 configuration file required
+                          for Kerberos authentication.
+                        type: string
+                    type: object
                   kmsKeyArn:
                     description: The Amazon Resource Name (ARN) for the KMS key that
                       will be used to encrypt the connection parameters. If you do
@@ -418,9 +444,35 @@ spec:
                     description: The EC2 Availability Zone that the replication instance
                       will be created in.
                     type: string
+                  dnsNameServers:
+                    description: A list of custom DNS name servers supported for the
+                      replication instance to access your on-premise source or target
+                      database. This list overrides the default name servers supported
+                      by the replication instance. You can specify a comma-separated
+                      list of internet addresses for up to four on-premise DNS name
+                      servers.
+                    type: string
                   engineVersion:
                     description: The engine version number of the replication instance.
                     type: string
+                  kerberosAuthenticationSettings:
+                    description: Configuration block for settings required for Kerberos
+                      authentication. See below.
+                    properties:
+                      keyCacheSecretIamArn:
+                        description: ARN of the IAM role that grants AWS DMS access
+                          to the secret containing key cache file for the Kerberos
+                          authentication.
+                        type: string
+                      keyCacheSecretId:
+                        description: Secret ID that stores the key cache file required
+                          for Kerberos authentication.
+                        type: string
+                      krb5FileContents:
+                        description: Contents of krb5 configuration file required
+                          for Kerberos authentication.
+                        type: string
+                    type: object
                   kmsKeyArn:
                     description: The Amazon Resource Name (ARN) for the KMS key that
                       will be used to encrypt the connection parameters. If you do
@@ -818,11 +870,37 @@ spec:
                     description: The EC2 Availability Zone that the replication instance
                       will be created in.
                     type: string
+                  dnsNameServers:
+                    description: A list of custom DNS name servers supported for the
+                      replication instance to access your on-premise source or target
+                      database. This list overrides the default name servers supported
+                      by the replication instance. You can specify a comma-separated
+                      list of internet addresses for up to four on-premise DNS name
+                      servers.
+                    type: string
                   engineVersion:
                     description: The engine version number of the replication instance.
                     type: string
                   id:
                     type: string
+                  kerberosAuthenticationSettings:
+                    description: Configuration block for settings required for Kerberos
+                      authentication. See below.
+                    properties:
+                      keyCacheSecretIamArn:
+                        description: ARN of the IAM role that grants AWS DMS access
+                          to the secret containing key cache file for the Kerberos
+                          authentication.
+                        type: string
+                      keyCacheSecretId:
+                        description: Secret ID that stores the key cache file required
+                          for Kerberos authentication.
+                        type: string
+                      krb5FileContents:
+                        description: Contents of krb5 configuration file required
+                          for Kerberos authentication.
+                        type: string
+                    type: object
                   kmsKeyArn:
                     description: The Amazon Resource Name (ARN) for the KMS key that
                       will be used to encrypt the connection parameters. If you do

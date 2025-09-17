@@ -83,6 +83,18 @@ spec:
                       be the key Amazon Resource Name (ARN), KeyId, key alias, or
                       key alias ARN.
                     type: string
+                  logConfig:
+                    description: configured
+                    properties:
+                      includeDetail:
+                        description: Whether EventBridge include detailed event information
+                          in the records it generates. Valid values are NONE and FULL.
+                        type: string
+                      level:
+                        description: Level of logging detail to include. Valid values
+                          are OFF, ERROR, INFO, and TRACE.
+                        type: string
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -135,6 +147,18 @@ spec:
                       be the key Amazon Resource Name (ARN), KeyId, key alias, or
                       key alias ARN.
                     type: string
+                  logConfig:
+                    description: configured
+                    properties:
+                      includeDetail:
+                        description: Whether EventBridge include detailed event information
+                          in the records it generates. Valid values are NONE and FULL.
+                        type: string
+                      level:
+                        description: Level of logging detail to include. Valid values
+                          are OFF, ERROR, INFO, and TRACE.
+                        type: string
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -236,6 +260,18 @@ spec:
                       be the key Amazon Resource Name (ARN), KeyId, key alias, or
                       key alias ARN.
                     type: string
+                  logConfig:
+                    description: configured
+                    properties:
+                      includeDetail:
+                        description: Whether EventBridge include detailed event information
+                          in the records it generates. Valid values are NONE and FULL.
+                        type: string
+                      level:
+                        description: Level of logging detail to include. Valid values
+                          are OFF, ERROR, INFO, and TRACE.
+                        type: string
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

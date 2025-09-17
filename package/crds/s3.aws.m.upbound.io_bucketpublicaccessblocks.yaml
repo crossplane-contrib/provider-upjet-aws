@@ -176,6 +176,12 @@ spec:
                       policy, including non-public delegation to specific accounts,
                       is blocked. When set to true:'
                     type: boolean
+                  skipDestroy:
+                    description: Whether to retain the public access block upon destruction.
+                      If set to true, the resource is simply removed from state instead.
+                      This may be desirable in certain scenarios to prevent the removal
+                      of a public access block before deletion of the associated bucket.
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -303,6 +309,12 @@ spec:
                       policy, including non-public delegation to specific accounts,
                       is blocked. When set to true:'
                     type: boolean
+                  skipDestroy:
+                    description: Whether to retain the public access block upon destruction.
+                      If set to true, the resource is simply removed from state instead.
+                      This may be desirable in certain scenarios to prevent the removal
+                      of a public access block before deletion of the associated bucket.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -407,6 +419,12 @@ spec:
                       that public and cross-account access within the public bucket
                       policy, including non-public delegation to specific accounts,
                       is blocked. When set to true:'
+                    type: boolean
+                  skipDestroy:
+                    description: Whether to retain the public access block upon destruction.
+                      If set to true, the resource is simply removed from state instead.
+                      This may be desirable in certain scenarios to prevent the removal
+                      of a public access block before deletion of the associated bucket.
                     type: boolean
                 type: object
               conditions:
