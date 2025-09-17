@@ -167,7 +167,8 @@ spec:
                     type: string
                   secondaryAllocationIds:
                     description: A list of secondary allocation EIP IDs for this NAT
-                      Gateway.
+                      Gateway. To remove all secondary allocations an empty list should
+                      be specified.
                     items:
                       type: string
                     type: array
@@ -255,7 +256,8 @@ spec:
                     type: number
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
-                      to the NAT Gateway.
+                      to the NAT Gateway. To remove all secondary private addresses
+                      an empty list should be specified.
                     items:
                       type: string
                     type: array
@@ -449,7 +451,8 @@ spec:
                     type: string
                   secondaryAllocationIds:
                     description: A list of secondary allocation EIP IDs for this NAT
-                      Gateway.
+                      Gateway. To remove all secondary allocations an empty list should
+                      be specified.
                     items:
                       type: string
                     type: array
@@ -537,7 +540,8 @@ spec:
                     type: number
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
-                      to the NAT Gateway.
+                      to the NAT Gateway. To remove all secondary private addresses
+                      an empty list should be specified.
                     items:
                       type: string
                     type: array
@@ -753,7 +757,8 @@ spec:
                     type: string
                   secondaryAllocationIds:
                     description: A list of secondary allocation EIP IDs for this NAT
-                      Gateway.
+                      Gateway. To remove all secondary allocations an empty list should
+                      be specified.
                     items:
                       type: string
                     type: array
@@ -764,7 +769,8 @@ spec:
                     type: number
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
-                      to the NAT Gateway.
+                      to the NAT Gateway. To remove all secondary private addresses
+                      an empty list should be specified.
                     items:
                       type: string
                     type: array

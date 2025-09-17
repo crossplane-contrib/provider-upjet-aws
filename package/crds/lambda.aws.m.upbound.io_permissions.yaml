@@ -66,7 +66,7 @@ spec:
                     description: Event Source Token for Alexa Skills
                     type: string
                   functionName:
-                    description: Name of the Lambda function
+                    description: Name or ARN of the Lambda function
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -286,7 +286,7 @@ spec:
                     description: Event Source Token for Alexa Skills
                     type: string
                   functionName:
-                    description: Name of the Lambda function
+                    description: Name or ARN of the Lambda function
                     type: string
                   functionNameRef:
                     description: Reference to a Function in lambda to populate functionName.
@@ -558,7 +558,7 @@ spec:
                     description: Event Source Token for Alexa Skills
                     type: string
                   functionName:
-                    description: Name of the Lambda function
+                    description: Name or ARN of the Lambda function
                     type: string
                   functionUrlAuthType:
                     description: 'Lambda Function URL authentication type. Valid values:

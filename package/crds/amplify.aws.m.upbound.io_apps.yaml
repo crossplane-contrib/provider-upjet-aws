@@ -380,8 +380,8 @@ spec:
                         type: object
                     type: object
                   jobConfig:
-                    description: Used to configure the Amplify Application build settings.
-                      See job_config Block for details.
+                    description: Used to configure the Amplify Application build instance
+                      compute type. See job_config Block for details.
                     properties:
                       buildComputeType:
                         description: 'Size of the build instance. Valid values: STANDARD_8GB,
@@ -761,8 +761,8 @@ spec:
                         type: object
                     type: object
                   jobConfig:
-                    description: Used to configure the Amplify Application build settings.
-                      See job_config Block for details.
+                    description: Used to configure the Amplify Application build instance
+                      compute type. See job_config Block for details.
                     properties:
                       buildComputeType:
                         description: 'Size of the build instance. Valid values: STANDARD_8GB,
@@ -997,8 +997,8 @@ spec:
                     description: Unique ID of the Amplify app.
                     type: string
                   jobConfig:
-                    description: Used to configure the Amplify Application build settings.
-                      See job_config Block for details.
+                    description: Used to configure the Amplify Application build instance
+                      compute type. See job_config Block for details.
                     properties:
                       buildComputeType:
                         description: 'Size of the build instance. Valid values: STANDARD_8GB,

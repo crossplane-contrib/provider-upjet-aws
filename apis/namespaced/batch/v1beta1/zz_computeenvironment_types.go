@@ -413,6 +413,9 @@ type EC2ConfigurationInitParameters struct {
 	// The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
 	ImageIDOverride *string `json:"imageIdOverride,omitempty" tf:"image_id_override,omitempty"`
 
+	// The Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
+	ImageKubernetesVersion *string `json:"imageKubernetesVersion,omitempty" tf:"image_kubernetes_version,omitempty"`
+
 	// The image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
 	ImageType *string `json:"imageType,omitempty" tf:"image_type,omitempty"`
 }
@@ -421,6 +424,9 @@ type EC2ConfigurationObservation struct {
 
 	// The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
 	ImageIDOverride *string `json:"imageIdOverride,omitempty" tf:"image_id_override,omitempty"`
+
+	// The Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
+	ImageKubernetesVersion *string `json:"imageKubernetesVersion,omitempty" tf:"image_kubernetes_version,omitempty"`
 
 	// The image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
 	ImageType *string `json:"imageType,omitempty" tf:"image_type,omitempty"`
@@ -431,6 +437,10 @@ type EC2ConfigurationParameters struct {
 	// The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the image_id argument in the compute_resources block.
 	// +kubebuilder:validation:Optional
 	ImageIDOverride *string `json:"imageIdOverride,omitempty" tf:"image_id_override,omitempty"`
+
+	// The Kubernetes version for the compute environment. If you don't specify a value, the latest version that AWS Batch supports is used. See Supported Kubernetes versions for the list of Kubernetes versions supported by AWS Batch on Amazon EKS.
+	// +kubebuilder:validation:Optional
+	ImageKubernetesVersion *string `json:"imageKubernetesVersion,omitempty" tf:"image_kubernetes_version,omitempty"`
 
 	// The image type to match with the instance type to select an AMI. If the image_id_override parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.
 	// +kubebuilder:validation:Optional
@@ -510,7 +520,7 @@ type UpdatePolicyInitParameters struct {
 	// Specifies the job timeout (in minutes) when the compute environment infrastructure is updated.
 	JobExecutionTimeoutMinutes *float64 `json:"jobExecutionTimeoutMinutes,omitempty" tf:"job_execution_timeout_minutes,omitempty"`
 
-	// Specifies whether jobs are automatically terminated when the computer environment infrastructure is updated.
+	// Specifies whether jobs are automatically terminated when the compute environment infrastructure is updated.
 	TerminateJobsOnUpdate *bool `json:"terminateJobsOnUpdate,omitempty" tf:"terminate_jobs_on_update,omitempty"`
 }
 
@@ -519,7 +529,7 @@ type UpdatePolicyObservation struct {
 	// Specifies the job timeout (in minutes) when the compute environment infrastructure is updated.
 	JobExecutionTimeoutMinutes *float64 `json:"jobExecutionTimeoutMinutes,omitempty" tf:"job_execution_timeout_minutes,omitempty"`
 
-	// Specifies whether jobs are automatically terminated when the computer environment infrastructure is updated.
+	// Specifies whether jobs are automatically terminated when the compute environment infrastructure is updated.
 	TerminateJobsOnUpdate *bool `json:"terminateJobsOnUpdate,omitempty" tf:"terminate_jobs_on_update,omitempty"`
 }
 
@@ -527,11 +537,11 @@ type UpdatePolicyParameters struct {
 
 	// Specifies the job timeout (in minutes) when the compute environment infrastructure is updated.
 	// +kubebuilder:validation:Optional
-	JobExecutionTimeoutMinutes *float64 `json:"jobExecutionTimeoutMinutes" tf:"job_execution_timeout_minutes,omitempty"`
+	JobExecutionTimeoutMinutes *float64 `json:"jobExecutionTimeoutMinutes,omitempty" tf:"job_execution_timeout_minutes,omitempty"`
 
-	// Specifies whether jobs are automatically terminated when the computer environment infrastructure is updated.
+	// Specifies whether jobs are automatically terminated when the compute environment infrastructure is updated.
 	// +kubebuilder:validation:Optional
-	TerminateJobsOnUpdate *bool `json:"terminateJobsOnUpdate" tf:"terminate_jobs_on_update,omitempty"`
+	TerminateJobsOnUpdate *bool `json:"terminateJobsOnUpdate,omitempty" tf:"terminate_jobs_on_update,omitempty"`
 }
 
 // ComputeEnvironmentSpec defines the desired state of ComputeEnvironment

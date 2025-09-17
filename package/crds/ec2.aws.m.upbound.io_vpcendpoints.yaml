@@ -223,7 +223,8 @@ spec:
                             address if the VPC endpoint supports IPv6.
                           type: string
                         subnetId:
-                          description: The ID of the VPC endpoint.
+                          description: The ID of the subnet. Must have a corresponding
+                            subnet in the subnet_ids argument.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in ec2 to populate subnetId.
@@ -575,7 +576,8 @@ spec:
                             address if the VPC endpoint supports IPv6.
                           type: string
                         subnetId:
-                          description: The ID of the VPC endpoint.
+                          description: The ID of the subnet. Must have a corresponding
+                            subnet in the subnet_ids argument.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in ec2 to populate subnetId.
@@ -959,7 +961,8 @@ spec:
                             address if the VPC endpoint supports IPv6.
                           type: string
                         subnetId:
-                          description: The ID of the VPC endpoint.
+                          description: The ID of the subnet. Must have a corresponding
+                            subnet in the subnet_ids argument.
                           type: string
                       type: object
                     type: array

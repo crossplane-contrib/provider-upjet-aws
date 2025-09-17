@@ -35,7 +35,7 @@ type NATGatewayInitParameters_2 struct {
 	// The private IPv4 address to assign to the NAT Gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
-	// A list of secondary allocation EIP IDs for this NAT Gateway.
+	// A list of secondary allocation EIP IDs for this NAT Gateway. To remove all secondary allocations an empty list should be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -52,7 +52,7 @@ type NATGatewayInitParameters_2 struct {
 	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
 
-	// A list of secondary private IPv4 addresses to assign to the NAT Gateway.
+	// A list of secondary private IPv4 addresses to assign to the NAT Gateway. To remove all secondary private addresses an empty list should be specified.
 	// +listType=set
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
@@ -100,14 +100,14 @@ type NATGatewayObservation_2 struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A list of secondary allocation EIP IDs for this NAT Gateway.
+	// A list of secondary allocation EIP IDs for this NAT Gateway. To remove all secondary allocations an empty list should be specified.
 	// +listType=set
 	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
 
 	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
 
-	// A list of secondary private IPv4 addresses to assign to the NAT Gateway.
+	// A list of secondary private IPv4 addresses to assign to the NAT Gateway. To remove all secondary private addresses an empty list should be specified.
 	// +listType=set
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
@@ -152,7 +152,7 @@ type NATGatewayParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A list of secondary allocation EIP IDs for this NAT Gateway.
+	// A list of secondary allocation EIP IDs for this NAT Gateway. To remove all secondary allocations an empty list should be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -171,7 +171,7 @@ type NATGatewayParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
 
-	// A list of secondary private IPv4 addresses to assign to the NAT Gateway.
+	// A list of secondary private IPv4 addresses to assign to the NAT Gateway. To remove all secondary private addresses an empty list should be specified.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`

@@ -25,8 +25,11 @@ type ConfigurationInitParameters struct {
 	// Configuration block for the Athena Engine Versioning. For more information, see Athena Engine Versioning. See Engine Version below.
 	EngineVersion *EngineVersionInitParameters `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// Role used in a notebook session for accessing the user's resources.
+	// Role used to access user resources in notebook sessions and IAM Identity Center enabled workgroups. The property is required for IAM Identity Center enabled workgroups.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
+	// Configuration block to set up an IAM Identity Center enabled workgroup. See Identity Center Configuration below.
+	IdentityCenterConfiguration *IdentityCenterConfigurationInitParameters `json:"identityCenterConfiguration,omitempty" tf:"identity_center_configuration,omitempty"`
 
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	PublishCloudwatchMetricsEnabled *bool `json:"publishCloudwatchMetricsEnabled,omitempty" tf:"publish_cloudwatch_metrics_enabled,omitempty"`
@@ -49,8 +52,11 @@ type ConfigurationObservation struct {
 	// Configuration block for the Athena Engine Versioning. For more information, see Athena Engine Versioning. See Engine Version below.
 	EngineVersion *EngineVersionObservation `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// Role used in a notebook session for accessing the user's resources.
+	// Role used to access user resources in notebook sessions and IAM Identity Center enabled workgroups. The property is required for IAM Identity Center enabled workgroups.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
+	// Configuration block to set up an IAM Identity Center enabled workgroup. See Identity Center Configuration below.
+	IdentityCenterConfiguration *IdentityCenterConfigurationObservation `json:"identityCenterConfiguration,omitempty" tf:"identity_center_configuration,omitempty"`
 
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	PublishCloudwatchMetricsEnabled *bool `json:"publishCloudwatchMetricsEnabled,omitempty" tf:"publish_cloudwatch_metrics_enabled,omitempty"`
@@ -76,9 +82,13 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineVersion *EngineVersionParameters `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// Role used in a notebook session for accessing the user's resources.
+	// Role used to access user resources in notebook sessions and IAM Identity Center enabled workgroups. The property is required for IAM Identity Center enabled workgroups.
 	// +kubebuilder:validation:Optional
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
+	// Configuration block to set up an IAM Identity Center enabled workgroup. See Identity Center Configuration below.
+	// +kubebuilder:validation:Optional
+	IdentityCenterConfiguration *IdentityCenterConfigurationParameters `json:"identityCenterConfiguration,omitempty" tf:"identity_center_configuration,omitempty"`
 
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -113,6 +123,35 @@ type EngineVersionParameters struct {
 	// Requested engine version. Defaults to AUTO.
 	// +kubebuilder:validation:Optional
 	SelectedEngineVersion *string `json:"selectedEngineVersion,omitempty" tf:"selected_engine_version,omitempty"`
+}
+
+type IdentityCenterConfigurationInitParameters struct {
+
+	// Specifies whether the workgroup is IAM Identity Center supported.
+	EnableIdentityCenter *bool `json:"enableIdentityCenter,omitempty" tf:"enable_identity_center,omitempty"`
+
+	// The IAM Identity Center instance ARN that the workgroup associates to.
+	IdentityCenterInstanceArn *string `json:"identityCenterInstanceArn,omitempty" tf:"identity_center_instance_arn,omitempty"`
+}
+
+type IdentityCenterConfigurationObservation struct {
+
+	// Specifies whether the workgroup is IAM Identity Center supported.
+	EnableIdentityCenter *bool `json:"enableIdentityCenter,omitempty" tf:"enable_identity_center,omitempty"`
+
+	// The IAM Identity Center instance ARN that the workgroup associates to.
+	IdentityCenterInstanceArn *string `json:"identityCenterInstanceArn,omitempty" tf:"identity_center_instance_arn,omitempty"`
+}
+
+type IdentityCenterConfigurationParameters struct {
+
+	// Specifies whether the workgroup is IAM Identity Center supported.
+	// +kubebuilder:validation:Optional
+	EnableIdentityCenter *bool `json:"enableIdentityCenter,omitempty" tf:"enable_identity_center,omitempty"`
+
+	// The IAM Identity Center instance ARN that the workgroup associates to.
+	// +kubebuilder:validation:Optional
+	IdentityCenterInstanceArn *string `json:"identityCenterInstanceArn,omitempty" tf:"identity_center_instance_arn,omitempty"`
 }
 
 type ResultConfigurationACLConfigurationInitParameters struct {

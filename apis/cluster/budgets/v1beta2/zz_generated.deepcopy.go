@@ -612,6 +612,11 @@ func (in *BudgetInitParameters) DeepCopyInto(out *BudgetInitParameters) {
 		*out = new(AutoAdjustDataInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.BillingViewArn != nil {
+		in, out := &in.BillingViewArn, &out.BillingViewArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.BudgetType != nil {
 		in, out := &in.BudgetType, &out.BudgetType
 		*out = new(string)
@@ -746,6 +751,11 @@ func (in *BudgetObservation) DeepCopyInto(out *BudgetObservation) {
 		*out = new(AutoAdjustDataObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.BillingViewArn != nil {
+		in, out := &in.BillingViewArn, &out.BillingViewArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.BudgetType != nil {
 		in, out := &in.BudgetType, &out.BudgetType
 		*out = new(string)
@@ -863,6 +873,11 @@ func (in *BudgetParameters) DeepCopyInto(out *BudgetParameters) {
 		in, out := &in.AutoAdjustData, &out.AutoAdjustData
 		*out = new(AutoAdjustDataParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.BillingViewArn != nil {
+		in, out := &in.BillingViewArn, &out.BillingViewArn
+		*out = new(string)
+		**out = **in
 	}
 	if in.BudgetType != nil {
 		in, out := &in.BudgetType, &out.BudgetType

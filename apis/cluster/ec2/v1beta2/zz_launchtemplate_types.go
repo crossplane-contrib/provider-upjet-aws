@@ -873,7 +873,7 @@ type LaunchTemplateCPUOptionsParameters struct {
 
 type LaunchTemplateCapacityReservationSpecificationInitParameters struct {
 
-	// Indicates the instance's Capacity Reservation preferences. Can be open or none. (Default none).
+	// Indicates the instance's Capacity Reservation preferences. Can be capacity-reservations-only, open or none. If capacity_reservation_id or capacity_reservation_resource_group_arn is specified in capacity_reservation_target block, either omit capacity_reservation_preference or set it to capacity-reservations-only.
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
 	// Used to target a specific Capacity Reservation:
@@ -882,7 +882,7 @@ type LaunchTemplateCapacityReservationSpecificationInitParameters struct {
 
 type LaunchTemplateCapacityReservationSpecificationObservation struct {
 
-	// Indicates the instance's Capacity Reservation preferences. Can be open or none. (Default none).
+	// Indicates the instance's Capacity Reservation preferences. Can be capacity-reservations-only, open or none. If capacity_reservation_id or capacity_reservation_resource_group_arn is specified in capacity_reservation_target block, either omit capacity_reservation_preference or set it to capacity-reservations-only.
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
 	// Used to target a specific Capacity Reservation:
@@ -891,7 +891,7 @@ type LaunchTemplateCapacityReservationSpecificationObservation struct {
 
 type LaunchTemplateCapacityReservationSpecificationParameters struct {
 
-	// Indicates the instance's Capacity Reservation preferences. Can be open or none. (Default none).
+	// Indicates the instance's Capacity Reservation preferences. Can be capacity-reservations-only, open or none. If capacity_reservation_id or capacity_reservation_resource_group_arn is specified in capacity_reservation_target block, either omit capacity_reservation_preference or set it to capacity-reservations-only.
 	// +kubebuilder:validation:Optional
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
@@ -2005,7 +2005,10 @@ type PlacementInitParameters struct {
 	// The Availability Zone for the instance.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The name of the placement group for the instance.
+	// The ID of the placement group for the instance. Conflicts with group_name.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// The name of the placement group for the instance. Conflicts with group_id.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// The ID of the Dedicated Host for the instance.
@@ -2032,7 +2035,10 @@ type PlacementObservation struct {
 	// The Availability Zone for the instance.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The name of the placement group for the instance.
+	// The ID of the placement group for the instance. Conflicts with group_name.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// The name of the placement group for the instance. Conflicts with group_id.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// The ID of the Dedicated Host for the instance.
@@ -2061,7 +2067,11 @@ type PlacementParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The name of the placement group for the instance.
+	// The ID of the placement group for the instance. Conflicts with group_name.
+	// +kubebuilder:validation:Optional
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// The name of the placement group for the instance. Conflicts with group_id.
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 

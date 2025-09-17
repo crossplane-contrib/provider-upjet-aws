@@ -43,6 +43,44 @@ type ActionParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
+type ArchiveRetainRuleInitParameters struct {
+
+	// Information about retention period in the Amazon EBS Snapshots Archive. See the retention_archive_tier block.
+	RetentionArchiveTier *RetentionArchiveTierInitParameters `json:"retentionArchiveTier,omitempty" tf:"retention_archive_tier,omitempty"`
+}
+
+type ArchiveRetainRuleObservation struct {
+
+	// Information about retention period in the Amazon EBS Snapshots Archive. See the retention_archive_tier block.
+	RetentionArchiveTier *RetentionArchiveTierObservation `json:"retentionArchiveTier,omitempty" tf:"retention_archive_tier,omitempty"`
+}
+
+type ArchiveRetainRuleParameters struct {
+
+	// Information about retention period in the Amazon EBS Snapshots Archive. See the retention_archive_tier block.
+	// +kubebuilder:validation:Optional
+	RetentionArchiveTier *RetentionArchiveTierParameters `json:"retentionArchiveTier" tf:"retention_archive_tier,omitempty"`
+}
+
+type ArchiveRuleInitParameters struct {
+
+	// Information about the retention period for the snapshot archiving rule. See the archive_retain_rule block.
+	ArchiveRetainRule *ArchiveRetainRuleInitParameters `json:"archiveRetainRule,omitempty" tf:"archive_retain_rule,omitempty"`
+}
+
+type ArchiveRuleObservation struct {
+
+	// Information about the retention period for the snapshot archiving rule. See the archive_retain_rule block.
+	ArchiveRetainRule *ArchiveRetainRuleObservation `json:"archiveRetainRule,omitempty" tf:"archive_retain_rule,omitempty"`
+}
+
+type ArchiveRuleParameters struct {
+
+	// Information about the retention period for the snapshot archiving rule. See the archive_retain_rule block.
+	// +kubebuilder:validation:Optional
+	ArchiveRetainRule *ArchiveRetainRuleParameters `json:"archiveRetainRule" tf:"archive_retain_rule,omitempty"`
+}
+
 type CreateRuleInitParameters struct {
 
 	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. Conflicts with interval, interval_unit, and times.
@@ -56,6 +94,9 @@ type CreateRuleInitParameters struct {
 
 	// Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost. Valid values are CLOUD and OUTPOST_LOCAL.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies pre and/or post scripts for a snapshot lifecycle policy that targets instances. Valid only when resource_type is INSTANCE. See the scripts configuration block.
+	Scripts *ScriptsInitParameters `json:"scripts,omitempty" tf:"scripts,omitempty"`
 
 	// A list of times in 24 hour clock format that sets when the lifecycle policy should be evaluated. Max of 1. Conflicts with cron_expression. Must be set if interval is set.
 	Times []*string `json:"times,omitempty" tf:"times,omitempty"`
@@ -74,6 +115,9 @@ type CreateRuleObservation struct {
 
 	// Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost. Valid values are CLOUD and OUTPOST_LOCAL.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies pre and/or post scripts for a snapshot lifecycle policy that targets instances. Valid only when resource_type is INSTANCE. See the scripts configuration block.
+	Scripts *ScriptsObservation `json:"scripts,omitempty" tf:"scripts,omitempty"`
 
 	// A list of times in 24 hour clock format that sets when the lifecycle policy should be evaluated. Max of 1. Conflicts with cron_expression. Must be set if interval is set.
 	Times []*string `json:"times,omitempty" tf:"times,omitempty"`
@@ -96,6 +140,10 @@ type CreateRuleParameters struct {
 	// Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost. Valid values are CLOUD and OUTPOST_LOCAL.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies pre and/or post scripts for a snapshot lifecycle policy that targets instances. Valid only when resource_type is INSTANCE. See the scripts configuration block.
+	// +kubebuilder:validation:Optional
+	Scripts *ScriptsParameters `json:"scripts,omitempty" tf:"scripts,omitempty"`
 
 	// A list of times in 24 hour clock format that sets when the lifecycle policy should be evaluated. Max of 1. Conflicts with cron_expression. Must be set if interval is set.
 	// +kubebuilder:validation:Optional
@@ -156,7 +204,7 @@ type CrossRegionCopyRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CmkArnSelector *v1.NamespacedSelector `json:"cmkArnSelector,omitempty" tf:"-"`
 
-	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
 	// See the deprecate_rule block. Max of 1 per schedule.
@@ -170,6 +218,9 @@ type CrossRegionCopyRuleInitParameters struct {
 
 	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	TargetRegion *string `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
 type CrossRegionCopyRuleObservation struct {
@@ -177,7 +228,7 @@ type CrossRegionCopyRuleObservation struct {
 	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
 
-	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
 	// See the deprecate_rule block. Max of 1 per schedule.
@@ -191,6 +242,9 @@ type CrossRegionCopyRuleObservation struct {
 
 	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	TargetRegion *string `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
 type CrossRegionCopyRuleParameters struct {
@@ -209,7 +263,7 @@ type CrossRegionCopyRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	CmkArnSelector *v1.NamespacedSelector `json:"cmkArnSelector,omitempty" tf:"-"`
 
-	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	// +kubebuilder:validation:Optional
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
@@ -227,7 +281,11 @@ type CrossRegionCopyRuleParameters struct {
 
 	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
 	// +kubebuilder:validation:Optional
-	Target *string `json:"target" tf:"target,omitempty"`
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// +kubebuilder:validation:Optional
+	TargetRegion *string `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
 type CrossRegionCopyRuleRetainRuleInitParameters struct {
@@ -346,6 +404,48 @@ type EventSourceParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type ExclusionsInitParameters struct {
+
+	// Indicates whether to exclude volumes that are attached to instances as the boot volume. To exclude boot volumes, specify true.
+	ExcludeBootVolumes *bool `json:"excludeBootVolumes,omitempty" tf:"exclude_boot_volumes,omitempty"`
+
+	// Map specifies whether to exclude volumes that have specific tags.
+	// +mapType=granular
+	ExcludeTags map[string]*string `json:"excludeTags,omitempty" tf:"exclude_tags,omitempty"`
+
+	// List specifies the volume types to exclude.
+	ExcludeVolumeTypes []*string `json:"excludeVolumeTypes,omitempty" tf:"exclude_volume_types,omitempty"`
+}
+
+type ExclusionsObservation struct {
+
+	// Indicates whether to exclude volumes that are attached to instances as the boot volume. To exclude boot volumes, specify true.
+	ExcludeBootVolumes *bool `json:"excludeBootVolumes,omitempty" tf:"exclude_boot_volumes,omitempty"`
+
+	// Map specifies whether to exclude volumes that have specific tags.
+	// +mapType=granular
+	ExcludeTags map[string]*string `json:"excludeTags,omitempty" tf:"exclude_tags,omitempty"`
+
+	// List specifies the volume types to exclude.
+	ExcludeVolumeTypes []*string `json:"excludeVolumeTypes,omitempty" tf:"exclude_volume_types,omitempty"`
+}
+
+type ExclusionsParameters struct {
+
+	// Indicates whether to exclude volumes that are attached to instances as the boot volume. To exclude boot volumes, specify true.
+	// +kubebuilder:validation:Optional
+	ExcludeBootVolumes *bool `json:"excludeBootVolumes,omitempty" tf:"exclude_boot_volumes,omitempty"`
+
+	// Map specifies whether to exclude volumes that have specific tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	ExcludeTags map[string]*string `json:"excludeTags,omitempty" tf:"exclude_tags,omitempty"`
+
+	// List specifies the volume types to exclude.
+	// +kubebuilder:validation:Optional
+	ExcludeVolumeTypes []*string `json:"excludeVolumeTypes,omitempty" tf:"exclude_volume_types,omitempty"`
+}
+
 type FastRestoreRuleInitParameters struct {
 
 	// The Availability Zones in which to enable fast snapshot restore.
@@ -400,6 +500,9 @@ type FastRestoreRuleParameters struct {
 
 type LifecyclePolicyInitParameters struct {
 
+	// Specify the type of default policy to create. valid values are VOLUME or INSTANCE.
+	DefaultPolicy *string `json:"defaultPolicy,omitempty" tf:"default_policy,omitempty"`
+
 	// A description for the DLM lifecycle policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -432,6 +535,9 @@ type LifecyclePolicyObservation struct {
 	// Amazon Resource Name (ARN) of the DLM Lifecycle Policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specify the type of default policy to create. valid values are VOLUME or INSTANCE.
+	DefaultPolicy *string `json:"defaultPolicy,omitempty" tf:"default_policy,omitempty"`
+
 	// A description for the DLM lifecycle policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -461,6 +567,10 @@ type LifecyclePolicyObservation struct {
 }
 
 type LifecyclePolicyParameters struct {
+
+	// Specify the type of default policy to create. valid values are VOLUME or INSTANCE.
+	// +kubebuilder:validation:Optional
+	DefaultPolicy *string `json:"defaultPolicy,omitempty" tf:"default_policy,omitempty"`
 
 	// A description for the DLM lifecycle policy.
 	// +kubebuilder:validation:Optional
@@ -546,25 +656,46 @@ type PolicyDetailsInitParameters struct {
 	// The actions to be performed when the event-based policy is triggered. You can specify only one action per policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the action configuration block.
 	Action *ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
+	// How often the policy should run and create snapshots or AMIs. valid values range from 1 to 7. Default value is 1.
+	CreateInterval *float64 `json:"createInterval,omitempty" tf:"create_interval,omitempty"`
+
 	// The event that triggers the event-based policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the event_source configuration block.
 	EventSource *EventSourceInitParameters `json:"eventSource,omitempty" tf:"event_source,omitempty"`
+
+	// Specifies exclusion parameters for volumes or instances for which you do not want to create snapshots or AMIs.  See the exclusions configuration block.
+	Exclusions *ExclusionsInitParameters `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// snapshot or AMI retention behavior for the policy if the source volume or instance is deleted, or if the policy enters the error, disabled, or deleted state. Default value is false.
+	ExtendDeletion *bool `json:"extendDeletion,omitempty" tf:"extend_deletion,omitempty"`
 
 	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
 	Parameters *PolicyDetailsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Type of policy to create. SIMPLIFIED To create a default policy. STANDARD To create a custom policy.
+	PolicyLanguage *string `json:"policyLanguage,omitempty" tf:"policy_language,omitempty"`
+
 	// The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY to create an event-based policy that performs specific actions when a defined event occurs in your AWS account. Default value is EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 
-	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account. Valid values are CLOUD and OUTPOST.
+	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If the source resources are located in a Local Zone, specify LOCAL_ZONE. Valid values are CLOUD, LOCAL_ZONE, and OUTPOST.
 	ResourceLocations []*string `json:"resourceLocations,omitempty" tf:"resource_locations,omitempty"`
+
+	// Type of default policy to create. Valid values are VOLUME and INSTANCE.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A list of resource types that should be targeted by the lifecycle policy. Valid values are VOLUME and INSTANCE.
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
+	// Specifies how long the policy should retain snapshots or AMIs before deleting them. valid values range from 2 to 14. Default value is 7.
+	RetainInterval *float64 `json:"retainInterval,omitempty" tf:"retain_interval,omitempty"`
+
 	// See the schedule configuration block.
 	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
+	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted. Required when policy_type is EBS_SNAPSHOT_MANAGEMENT or IMAGE_MANAGEMENT. Must not be specified when policy_type is EVENT_BASED_POLICY.
 	// +mapType=granular
 	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
@@ -574,25 +705,46 @@ type PolicyDetailsObservation struct {
 	// The actions to be performed when the event-based policy is triggered. You can specify only one action per policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the action configuration block.
 	Action *ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
+	// How often the policy should run and create snapshots or AMIs. valid values range from 1 to 7. Default value is 1.
+	CreateInterval *float64 `json:"createInterval,omitempty" tf:"create_interval,omitempty"`
+
 	// The event that triggers the event-based policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the event_source configuration block.
 	EventSource *EventSourceObservation `json:"eventSource,omitempty" tf:"event_source,omitempty"`
+
+	// Specifies exclusion parameters for volumes or instances for which you do not want to create snapshots or AMIs.  See the exclusions configuration block.
+	Exclusions *ExclusionsObservation `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// snapshot or AMI retention behavior for the policy if the source volume or instance is deleted, or if the policy enters the error, disabled, or deleted state. Default value is false.
+	ExtendDeletion *bool `json:"extendDeletion,omitempty" tf:"extend_deletion,omitempty"`
 
 	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
 	Parameters *PolicyDetailsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Type of policy to create. SIMPLIFIED To create a default policy. STANDARD To create a custom policy.
+	PolicyLanguage *string `json:"policyLanguage,omitempty" tf:"policy_language,omitempty"`
+
 	// The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY to create an event-based policy that performs specific actions when a defined event occurs in your AWS account. Default value is EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 
-	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account. Valid values are CLOUD and OUTPOST.
+	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If the source resources are located in a Local Zone, specify LOCAL_ZONE. Valid values are CLOUD, LOCAL_ZONE, and OUTPOST.
 	ResourceLocations []*string `json:"resourceLocations,omitempty" tf:"resource_locations,omitempty"`
+
+	// Type of default policy to create. Valid values are VOLUME and INSTANCE.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A list of resource types that should be targeted by the lifecycle policy. Valid values are VOLUME and INSTANCE.
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
+	// Specifies how long the policy should retain snapshots or AMIs before deleting them. valid values range from 2 to 14. Default value is 7.
+	RetainInterval *float64 `json:"retainInterval,omitempty" tf:"retain_interval,omitempty"`
+
 	// See the schedule configuration block.
 	Schedule []ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
+	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted. Required when policy_type is EBS_SNAPSHOT_MANAGEMENT or IMAGE_MANAGEMENT. Must not be specified when policy_type is EVENT_BASED_POLICY.
 	// +mapType=granular
 	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
@@ -603,31 +755,59 @@ type PolicyDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
+	// +kubebuilder:validation:Optional
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
+	// How often the policy should run and create snapshots or AMIs. valid values range from 1 to 7. Default value is 1.
+	// +kubebuilder:validation:Optional
+	CreateInterval *float64 `json:"createInterval,omitempty" tf:"create_interval,omitempty"`
+
 	// The event that triggers the event-based policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the event_source configuration block.
 	// +kubebuilder:validation:Optional
 	EventSource *EventSourceParameters `json:"eventSource,omitempty" tf:"event_source,omitempty"`
+
+	// Specifies exclusion parameters for volumes or instances for which you do not want to create snapshots or AMIs.  See the exclusions configuration block.
+	// +kubebuilder:validation:Optional
+	Exclusions *ExclusionsParameters `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// snapshot or AMI retention behavior for the policy if the source volume or instance is deleted, or if the policy enters the error, disabled, or deleted state. Default value is false.
+	// +kubebuilder:validation:Optional
+	ExtendDeletion *bool `json:"extendDeletion,omitempty" tf:"extend_deletion,omitempty"`
 
 	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
 	// +kubebuilder:validation:Optional
 	Parameters *PolicyDetailsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Type of policy to create. SIMPLIFIED To create a default policy. STANDARD To create a custom policy.
+	// +kubebuilder:validation:Optional
+	PolicyLanguage *string `json:"policyLanguage,omitempty" tf:"policy_language,omitempty"`
+
 	// The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY to create an event-based policy that performs specific actions when a defined event occurs in your AWS account. Default value is EBS_SNAPSHOT_MANAGEMENT.
 	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 
-	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account. Valid values are CLOUD and OUTPOST.
+	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If the source resources are located in a Local Zone, specify LOCAL_ZONE. Valid values are CLOUD, LOCAL_ZONE, and OUTPOST.
 	// +kubebuilder:validation:Optional
 	ResourceLocations []*string `json:"resourceLocations,omitempty" tf:"resource_locations,omitempty"`
+
+	// Type of default policy to create. Valid values are VOLUME and INSTANCE.
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A list of resource types that should be targeted by the lifecycle policy. Valid values are VOLUME and INSTANCE.
 	// +kubebuilder:validation:Optional
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
+	// Specifies how long the policy should retain snapshots or AMIs before deleting them. valid values range from 2 to 14. Default value is 7.
+	// +kubebuilder:validation:Optional
+	RetainInterval *float64 `json:"retainInterval,omitempty" tf:"retain_interval,omitempty"`
+
 	// See the schedule configuration block.
 	// +kubebuilder:validation:Optional
 	Schedule []ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
+	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted. Required when policy_type is EBS_SNAPSHOT_MANAGEMENT or IMAGE_MANAGEMENT. Must not be specified when policy_type is EVENT_BASED_POLICY.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
@@ -691,6 +871,45 @@ type RetainRuleParameters struct {
 	IntervalUnit *string `json:"intervalUnit" tf:"interval_unit,omitempty"`
 }
 
+type RetentionArchiveTierInitParameters struct {
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000. Conflicts with interval and interval_unit.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value. Conflicts with cron_expression. Must be set if interval is set.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type RetentionArchiveTierObservation struct {
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000. Conflicts with interval and interval_unit.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value. Conflicts with cron_expression. Must be set if interval is set.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type RetentionArchiveTierParameters struct {
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000. Conflicts with interval and interval_unit.
+	// +kubebuilder:validation:Optional
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
+	// +kubebuilder:validation:Optional
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value. Conflicts with cron_expression. Must be set if interval is set.
+	// +kubebuilder:validation:Optional
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
 type ScheduleDeprecateRuleInitParameters struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000. Conflicts with interval and interval_unit.
@@ -732,7 +951,10 @@ type ScheduleDeprecateRuleParameters struct {
 
 type ScheduleInitParameters struct {
 
-	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	// Specifies a snapshot archiving rule for a schedule. See archive_rule block.
+	ArchiveRule *ArchiveRuleInitParameters `json:"archiveRule,omitempty" tf:"archive_rule,omitempty"`
+
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
 	// See the create_rule block. Max of 1 per schedule.
@@ -767,7 +989,10 @@ type ScheduleInitParameters struct {
 
 type ScheduleObservation struct {
 
-	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	// Specifies a snapshot archiving rule for a schedule. See archive_rule block.
+	ArchiveRule *ArchiveRuleObservation `json:"archiveRule,omitempty" tf:"archive_rule,omitempty"`
+
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
 	// See the create_rule block. Max of 1 per schedule.
@@ -802,7 +1027,11 @@ type ScheduleObservation struct {
 
 type ScheduleParameters struct {
 
-	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	// Specifies a snapshot archiving rule for a schedule. See archive_rule block.
+	// +kubebuilder:validation:Optional
+	ArchiveRule *ArchiveRuleParameters `json:"archiveRule,omitempty" tf:"archive_rule,omitempty"`
+
+	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	// +kubebuilder:validation:Optional
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
@@ -882,6 +1111,75 @@ type ScheduleRetainRuleParameters struct {
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value. Conflicts with cron_expression. Must be set if interval is set.
 	// +kubebuilder:validation:Optional
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type ScriptsInitParameters struct {
+
+	// Indicates whether Amazon Data Lifecycle Manager should default to crash-consistent snapshots if the pre script fails. The default is true.
+	ExecuteOperationOnScriptFailure *bool `json:"executeOperationOnScriptFailure,omitempty" tf:"execute_operation_on_script_failure,omitempty"`
+
+	// The SSM document that includes the pre and/or post scripts to run. In case automating VSS backups, specify AWS_VSS_BACKUP. In case automating application-consistent snapshots for SAP HANA workloads, specify AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA. If you are using a custom SSM document that you own, specify either the name or ARN of the SSM document.
+	ExecutionHandler *string `json:"executionHandler,omitempty" tf:"execution_handler,omitempty"`
+
+	// Indicates the service used to execute the pre and/or post scripts. If using custom SSM documents or automating application-consistent snapshots of SAP HANA workloads, specify AWS_SYSTEMS_MANAGER. In case automating VSS Backups, omit this parameter. The default is AWS_SYSTEMS_MANAGER.
+	ExecutionHandlerService *string `json:"executionHandlerService,omitempty" tf:"execution_handler_service,omitempty"`
+
+	// Specifies a timeout period, in seconds, after which Amazon Data Lifecycle Manager fails the script run attempt if it has not completed. In case automating VSS Backups, omit this parameter. The default is 10.
+	ExecutionTimeout *float64 `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
+
+	// Specifies the number of times Amazon Data Lifecycle Manager should retry scripts that fail. Must be an integer between 0 and 3. The default is 0.
+	MaximumRetryCount *float64 `json:"maximumRetryCount,omitempty" tf:"maximum_retry_count,omitempty"`
+
+	// List to indicate which scripts Amazon Data Lifecycle Manager should run on target instances. Pre scripts run before Amazon Data Lifecycle Manager initiates snapshot creation. Post scripts run after Amazon Data Lifecycle Manager initiates snapshot creation. Valid values: PRE and POST. The default is PRE and POST
+	Stages []*string `json:"stages,omitempty" tf:"stages,omitempty"`
+}
+
+type ScriptsObservation struct {
+
+	// Indicates whether Amazon Data Lifecycle Manager should default to crash-consistent snapshots if the pre script fails. The default is true.
+	ExecuteOperationOnScriptFailure *bool `json:"executeOperationOnScriptFailure,omitempty" tf:"execute_operation_on_script_failure,omitempty"`
+
+	// The SSM document that includes the pre and/or post scripts to run. In case automating VSS backups, specify AWS_VSS_BACKUP. In case automating application-consistent snapshots for SAP HANA workloads, specify AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA. If you are using a custom SSM document that you own, specify either the name or ARN of the SSM document.
+	ExecutionHandler *string `json:"executionHandler,omitempty" tf:"execution_handler,omitempty"`
+
+	// Indicates the service used to execute the pre and/or post scripts. If using custom SSM documents or automating application-consistent snapshots of SAP HANA workloads, specify AWS_SYSTEMS_MANAGER. In case automating VSS Backups, omit this parameter. The default is AWS_SYSTEMS_MANAGER.
+	ExecutionHandlerService *string `json:"executionHandlerService,omitempty" tf:"execution_handler_service,omitempty"`
+
+	// Specifies a timeout period, in seconds, after which Amazon Data Lifecycle Manager fails the script run attempt if it has not completed. In case automating VSS Backups, omit this parameter. The default is 10.
+	ExecutionTimeout *float64 `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
+
+	// Specifies the number of times Amazon Data Lifecycle Manager should retry scripts that fail. Must be an integer between 0 and 3. The default is 0.
+	MaximumRetryCount *float64 `json:"maximumRetryCount,omitempty" tf:"maximum_retry_count,omitempty"`
+
+	// List to indicate which scripts Amazon Data Lifecycle Manager should run on target instances. Pre scripts run before Amazon Data Lifecycle Manager initiates snapshot creation. Post scripts run after Amazon Data Lifecycle Manager initiates snapshot creation. Valid values: PRE and POST. The default is PRE and POST
+	Stages []*string `json:"stages,omitempty" tf:"stages,omitempty"`
+}
+
+type ScriptsParameters struct {
+
+	// Indicates whether Amazon Data Lifecycle Manager should default to crash-consistent snapshots if the pre script fails. The default is true.
+	// +kubebuilder:validation:Optional
+	ExecuteOperationOnScriptFailure *bool `json:"executeOperationOnScriptFailure,omitempty" tf:"execute_operation_on_script_failure,omitempty"`
+
+	// The SSM document that includes the pre and/or post scripts to run. In case automating VSS backups, specify AWS_VSS_BACKUP. In case automating application-consistent snapshots for SAP HANA workloads, specify AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA. If you are using a custom SSM document that you own, specify either the name or ARN of the SSM document.
+	// +kubebuilder:validation:Optional
+	ExecutionHandler *string `json:"executionHandler" tf:"execution_handler,omitempty"`
+
+	// Indicates the service used to execute the pre and/or post scripts. If using custom SSM documents or automating application-consistent snapshots of SAP HANA workloads, specify AWS_SYSTEMS_MANAGER. In case automating VSS Backups, omit this parameter. The default is AWS_SYSTEMS_MANAGER.
+	// +kubebuilder:validation:Optional
+	ExecutionHandlerService *string `json:"executionHandlerService,omitempty" tf:"execution_handler_service,omitempty"`
+
+	// Specifies a timeout period, in seconds, after which Amazon Data Lifecycle Manager fails the script run attempt if it has not completed. In case automating VSS Backups, omit this parameter. The default is 10.
+	// +kubebuilder:validation:Optional
+	ExecutionTimeout *float64 `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
+
+	// Specifies the number of times Amazon Data Lifecycle Manager should retry scripts that fail. Must be an integer between 0 and 3. The default is 0.
+	// +kubebuilder:validation:Optional
+	MaximumRetryCount *float64 `json:"maximumRetryCount,omitempty" tf:"maximum_retry_count,omitempty"`
+
+	// List to indicate which scripts Amazon Data Lifecycle Manager should run on target instances. Pre scripts run before Amazon Data Lifecycle Manager initiates snapshot creation. Post scripts run after Amazon Data Lifecycle Manager initiates snapshot creation. Valid values: PRE and POST. The default is PRE and POST
+	// +kubebuilder:validation:Optional
+	Stages []*string `json:"stages,omitempty" tf:"stages,omitempty"`
 }
 
 type ShareRuleInitParameters struct {

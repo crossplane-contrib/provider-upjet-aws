@@ -1456,6 +1456,9 @@ type OriginInitParameters struct {
 	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	OriginShield *OriginShieldInitParameters `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
+	// Time (in seconds) that a request from CloudFront to the origin can stay open and wait for a response. Must be integer greater than or equal to the value of origin_read_timeout. If omitted or explicitly set to 0, no maximum value is enforced.
+	ResponseCompletionTimeout *float64 `json:"responseCompletionTimeout,omitempty" tf:"response_completion_timeout,omitempty"`
+
 	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig *S3OriginConfigInitParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 
@@ -1491,6 +1494,9 @@ type OriginObservation struct {
 
 	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	OriginShield *OriginShieldObservation `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
+
+	// Time (in seconds) that a request from CloudFront to the origin can stay open and wait for a response. Must be integer greater than or equal to the value of origin_read_timeout. If omitted or explicitly set to 0, no maximum value is enforced.
+	ResponseCompletionTimeout *float64 `json:"responseCompletionTimeout,omitempty" tf:"response_completion_timeout,omitempty"`
 
 	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig *S3OriginConfigObservation `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
@@ -1546,6 +1552,10 @@ type OriginParameters struct {
 	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	// +kubebuilder:validation:Optional
 	OriginShield *OriginShieldParameters `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
+
+	// Time (in seconds) that a request from CloudFront to the origin can stay open and wait for a response. Must be integer greater than or equal to the value of origin_read_timeout. If omitted or explicitly set to 0, no maximum value is enforced.
+	// +kubebuilder:validation:Optional
+	ResponseCompletionTimeout *float64 `json:"responseCompletionTimeout,omitempty" tf:"response_completion_timeout,omitempty"`
 
 	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	// +kubebuilder:validation:Optional

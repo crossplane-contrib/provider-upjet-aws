@@ -17,8 +17,7 @@ import (
 type EndpointInitParameters struct {
 
 	// Direction of DNS queries to or from the Route 53 Resolver endpoint.
-	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
-	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
+	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC), OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC) or INBOUND_DELEGATION (resolver delegates queries to Route 53 private hosted zones from your network).
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// Subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
@@ -63,8 +62,7 @@ type EndpointObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Direction of DNS queries to or from the Route 53 Resolver endpoint.
-	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
-	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
+	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC), OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC) or INBOUND_DELEGATION (resolver delegates queries to Route 53 private hosted zones from your network).
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// ID of the VPC that you want to create the resolver endpoint in.
@@ -109,8 +107,7 @@ type EndpointObservation struct {
 type EndpointParameters struct {
 
 	// Direction of DNS queries to or from the Route 53 Resolver endpoint.
-	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
-	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
+	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC), OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC) or INBOUND_DELEGATION (resolver delegates queries to Route 53 private hosted zones from your network).
 	// +kubebuilder:validation:Optional
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 

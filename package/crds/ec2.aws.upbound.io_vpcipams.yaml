@@ -85,6 +85,10 @@ spec:
                     description: 'Enable this option to use your own GUA ranges as
                       private IPv6 addresses. Default: false.'
                     type: boolean
+                  meteredAccount:
+                    description: AWS account that is charged for active IP addresses
+                      managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
+                    type: string
                   operatingRegions:
                     description: Determines which locales can be chosen when you create
                       pools. Locale is the Region where you want to make an IPAM pool
@@ -144,6 +148,10 @@ spec:
                     description: 'Enable this option to use your own GUA ranges as
                       private IPv6 addresses. Default: false.'
                     type: boolean
+                  meteredAccount:
+                    description: AWS account that is charged for active IP addresses
+                      managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
+                    type: string
                   operatingRegions:
                     description: Determines which locales can be chosen when you create
                       pools. Locale is the Region where you want to make an IPAM pool
@@ -291,6 +299,10 @@ spec:
                     type: boolean
                   id:
                     description: The ID of the IPAM
+                    type: string
+                  meteredAccount:
+                    description: AWS account that is charged for active IP addresses
+                      managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
                     type: string
                   operatingRegions:
                     description: Determines which locales can be chosen when you create

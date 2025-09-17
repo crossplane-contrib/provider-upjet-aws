@@ -652,6 +652,16 @@ func (in *ExternalKeyInitParameters) DeepCopyInto(out *ExternalKeyInitParameters
 		*out = new(v1.LocalSecretKeySelector)
 		**out = **in
 	}
+	if in.KeySpec != nil {
+		in, out := &in.KeySpec, &out.KeySpec
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyUsage != nil {
+		in, out := &in.KeyUsage, &out.KeyUsage
+		*out = new(string)
+		**out = **in
+	}
 	if in.MultiRegion != nil {
 		in, out := &in.MultiRegion, &out.MultiRegion
 		*out = new(bool)
@@ -765,6 +775,11 @@ func (in *ExternalKeyObservation) DeepCopyInto(out *ExternalKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeySpec != nil {
+		in, out := &in.KeySpec, &out.KeySpec
+		*out = new(string)
+		**out = **in
+	}
 	if in.KeyState != nil {
 		in, out := &in.KeyState, &out.KeyState
 		*out = new(string)
@@ -865,6 +880,16 @@ func (in *ExternalKeyParameters) DeepCopyInto(out *ExternalKeyParameters) {
 	if in.KeyMaterialBase64SecretRef != nil {
 		in, out := &in.KeyMaterialBase64SecretRef, &out.KeyMaterialBase64SecretRef
 		*out = new(v1.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.KeySpec != nil {
+		in, out := &in.KeySpec, &out.KeySpec
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyUsage != nil {
+		in, out := &in.KeyUsage, &out.KeyUsage
+		*out = new(string)
 		**out = **in
 	}
 	if in.MultiRegion != nil {

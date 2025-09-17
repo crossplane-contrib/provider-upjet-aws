@@ -695,21 +695,21 @@ type JobDefinitionParameters struct {
 
 type MetadataInitParameters struct {
 
-	// Key-value pairs used to identify, sort, and organize cube resources.
+	// Key-value pairs used to identify, sort, and organize kubernetes resources.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type MetadataObservation struct {
 
-	// Key-value pairs used to identify, sort, and organize cube resources.
+	// Key-value pairs used to identify, sort, and organize kubernetes resources.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type MetadataParameters struct {
 
-	// Key-value pairs used to identify, sort, and organize cube resources.
+	// Key-value pairs used to identify, sort, and organize kubernetes resources.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`

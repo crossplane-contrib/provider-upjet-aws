@@ -23,7 +23,7 @@ type GatewayResponseInitParameters struct {
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// Response type of the associated GatewayResponse.
+	// Response type of the associated GatewayResponse. See the AWS Documentation for supported values.
 	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
 
 	// String identifier of the associated REST API.
@@ -46,7 +46,7 @@ type GatewayResponseInitParameters struct {
 type GatewayResponseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region where this resource will be managed. See the AWS Documentation for supported values. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -58,7 +58,7 @@ type GatewayResponseObservation struct {
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// Response type of the associated GatewayResponse.
+	// Response type of the associated GatewayResponse. See the AWS Documentation for supported values.
 	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
 
 	// String identifier of the associated REST API.
@@ -70,7 +70,7 @@ type GatewayResponseObservation struct {
 
 type GatewayResponseParameters struct {
 
-	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region where this resource will be managed. See the AWS Documentation for supported values. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
@@ -85,7 +85,7 @@ type GatewayResponseParameters struct {
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// Response type of the associated GatewayResponse.
+	// Response type of the associated GatewayResponse. See the AWS Documentation for supported values.
 	// +kubebuilder:validation:Optional
 	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
 

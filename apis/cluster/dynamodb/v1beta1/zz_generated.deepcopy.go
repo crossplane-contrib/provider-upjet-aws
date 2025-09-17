@@ -123,6 +123,11 @@ func (in *ContributorInsightsInitParameters) DeepCopyInto(out *ContributorInsigh
 		*out = new(string)
 		**out = **in
 	}
+	if in.Mode != nil {
+		in, out := &in.Mode, &out.Mode
+		*out = new(string)
+		**out = **in
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
@@ -195,6 +200,11 @@ func (in *ContributorInsightsObservation) DeepCopyInto(out *ContributorInsightsO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Mode != nil {
+		in, out := &in.Mode, &out.Mode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -222,6 +232,11 @@ func (in *ContributorInsightsParameters) DeepCopyInto(out *ContributorInsightsPa
 	*out = *in
 	if in.IndexName != nil {
 		in, out := &in.IndexName, &out.IndexName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Mode != nil {
+		in, out := &in.Mode, &out.Mode
 		*out = new(string)
 		**out = **in
 	}

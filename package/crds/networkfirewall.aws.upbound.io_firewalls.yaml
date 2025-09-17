@@ -1063,6 +1063,25 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  availabilityZoneChangeProtection:
+                    description: A setting indicating whether the firewall is protected
+                      against changes to its Availability Zone configuration. When
+                      set to true, you must first disable this protection before adding
+                      or removing Availability Zones.
+                    type: boolean
+                  availabilityZoneMapping:
+                    description: Required when creating a transit gateway-attached
+                      firewall. Set of configuration blocks describing the avaiability
+                      availability where you want to create firewall endpoints for
+                      a transit gateway-attached firewall.
+                    items:
+                      properties:
+                        availabilityZoneId:
+                          description: The ID of the Availability Zone where the firewall
+                            endpoint is located..
+                          type: string
+                      type: object
+                    type: array
                   deleteProtection:
                     description: A flag indicating whether the firewall is protected
                       against deletion. Use this setting to protect against accidentally
@@ -1198,10 +1217,11 @@ spec:
                       for a firewall that is in use. Defaults to false.
                     type: boolean
                   subnetMapping:
-                    description: Set of configuration blocks describing the public
-                      subnets. Each subnet must belong to a different Availability
-                      Zone in the VPC. AWS Network Firewall creates a firewall endpoint
-                      in each subnet. See Subnet Mapping below for details.
+                    description: Required when creating a VPC attached firewall. Set
+                      of configuration blocks describing the public subnets. Each
+                      subnet must belong to a different Availability Zone in the VPC.
+                      AWS Network Firewall creates a firewall endpoint in each subnet.
+                      See Subnet Mapping below for details.
                     items:
                       properties:
                         ipAddressType:
@@ -1293,9 +1313,93 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  transitGatewayId:
+                    description: . Required when creating a transit gateway-attached
+                      firewall. The unique identifier of the transit gateway to attach
+                      to this firewall. You can provide either a transit gateway from
+                      your account or one that has been shared with you through AWS
+                      Resource Access Manager
+                    type: string
+                  transitGatewayIdRef:
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  transitGatewayIdSelector:
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   vpcId:
-                    description: The unique identifier of the VPC where AWS Network
-                      Firewall should create the firewall.
+                    description: Required when creating a VPC attached firewall. The
+                      unique identifier of the VPC where AWS Network Firewall should
+                      create the firewall.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -1387,6 +1491,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  availabilityZoneChangeProtection:
+                    description: A setting indicating whether the firewall is protected
+                      against changes to its Availability Zone configuration. When
+                      set to true, you must first disable this protection before adding
+                      or removing Availability Zones.
+                    type: boolean
+                  availabilityZoneMapping:
+                    description: Required when creating a transit gateway-attached
+                      firewall. Set of configuration blocks describing the avaiability
+                      availability where you want to create firewall endpoints for
+                      a transit gateway-attached firewall.
+                    items:
+                      properties:
+                        availabilityZoneId:
+                          description: The ID of the Availability Zone where the firewall
+                            endpoint is located..
+                          type: string
+                      type: object
+                    type: array
                   deleteProtection:
                     description: A flag indicating whether the firewall is protected
                       against deletion. Use this setting to protect against accidentally
@@ -1517,10 +1640,11 @@ spec:
                       for a firewall that is in use. Defaults to false.
                     type: boolean
                   subnetMapping:
-                    description: Set of configuration blocks describing the public
-                      subnets. Each subnet must belong to a different Availability
-                      Zone in the VPC. AWS Network Firewall creates a firewall endpoint
-                      in each subnet. See Subnet Mapping below for details.
+                    description: Required when creating a VPC attached firewall. Set
+                      of configuration blocks describing the public subnets. Each
+                      subnet must belong to a different Availability Zone in the VPC.
+                      AWS Network Firewall creates a firewall endpoint in each subnet.
+                      See Subnet Mapping below for details.
                     items:
                       properties:
                         ipAddressType:
@@ -1612,9 +1736,93 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  transitGatewayId:
+                    description: . Required when creating a transit gateway-attached
+                      firewall. The unique identifier of the transit gateway to attach
+                      to this firewall. You can provide either a transit gateway from
+                      your account or one that has been shared with you through AWS
+                      Resource Access Manager
+                    type: string
+                  transitGatewayIdRef:
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  transitGatewayIdSelector:
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   vpcId:
-                    description: The unique identifier of the VPC where AWS Network
-                      Firewall should create the firewall.
+                    description: Required when creating a VPC attached firewall. The
+                      unique identifier of the VPC where AWS Network Firewall should
+                      create the firewall.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -1782,10 +1990,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.subnetMapping is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subnetMapping)
-                || (has(self.initProvider) && has(self.initProvider.subnetMapping))'
           status:
             description: FirewallStatus defines the observed state of Firewall.
             properties:
@@ -1795,6 +1999,25 @@ spec:
                     description: The Amazon Resource Name (ARN) that identifies the
                       firewall.
                     type: string
+                  availabilityZoneChangeProtection:
+                    description: A setting indicating whether the firewall is protected
+                      against changes to its Availability Zone configuration. When
+                      set to true, you must first disable this protection before adding
+                      or removing Availability Zones.
+                    type: boolean
+                  availabilityZoneMapping:
+                    description: Required when creating a transit gateway-attached
+                      firewall. Set of configuration blocks describing the avaiability
+                      availability where you want to create firewall endpoints for
+                      a transit gateway-attached firewall.
+                    items:
+                      properties:
+                        availabilityZoneId:
+                          description: The ID of the Availability Zone where the firewall
+                            endpoint is located..
+                          type: string
+                      type: object
+                    type: array
                   deleteProtection:
                     description: A flag indicating whether the firewall is protected
                       against deletion. Use this setting to protect against accidentally
@@ -1873,6 +2096,17 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        transitGatewayAttachmentSyncStates:
+                          description: Set of transit gateway configured for use by
+                            the firewall.
+                          items:
+                            properties:
+                              attachmentId:
+                                description: The unique identifier of the transit
+                                  gateway attachment.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   id:
@@ -1894,10 +2128,11 @@ spec:
                       for a firewall that is in use. Defaults to false.
                     type: boolean
                   subnetMapping:
-                    description: Set of configuration blocks describing the public
-                      subnets. Each subnet must belong to a different Availability
-                      Zone in the VPC. AWS Network Firewall creates a firewall endpoint
-                      in each subnet. See Subnet Mapping below for details.
+                    description: Required when creating a VPC attached firewall. Set
+                      of configuration blocks describing the public subnets. Each
+                      subnet must belong to a different Availability Zone in the VPC.
+                      AWS Network Firewall creates a firewall endpoint in each subnet.
+                      See Subnet Mapping below for details.
                     items:
                       properties:
                         ipAddressType:
@@ -1923,12 +2158,23 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  transitGatewayId:
+                    description: . Required when creating a transit gateway-attached
+                      firewall. The unique identifier of the transit gateway to attach
+                      to this firewall. You can provide either a transit gateway from
+                      your account or one that has been shared with you through AWS
+                      Resource Access Manager
+                    type: string
+                  transitGatewayOwnerAccountId:
+                    description: The AWS account ID that owns the transit gateway.
+                    type: string
                   updateToken:
                     description: A string token used when updating a firewall.
                     type: string
                   vpcId:
-                    description: The unique identifier of the VPC where AWS Network
-                      Firewall should create the firewall.
+                    description: Required when creating a VPC attached firewall. The
+                      unique identifier of the VPC where AWS Network Firewall should
+                      create the firewall.
                     type: string
                 type: object
               conditions:

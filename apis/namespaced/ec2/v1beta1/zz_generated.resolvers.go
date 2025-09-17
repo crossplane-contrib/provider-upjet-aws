@@ -1261,6 +1261,26 @@ func (mg *FlowLog) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeliverCrossAccountRole),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DeliverCrossAccountRoleRef,
+			Selector:     mg.Spec.ForProvider.DeliverCrossAccountRoleSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DeliverCrossAccountRole")
+	}
+	mg.Spec.ForProvider.DeliverCrossAccountRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeliverCrossAccountRoleRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IAMRoleArn),
 			Extract:      common.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
@@ -1334,6 +1354,26 @@ func (mg *FlowLog) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeliverCrossAccountRole),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DeliverCrossAccountRoleRef,
+			Selector:     mg.Spec.InitProvider.DeliverCrossAccountRoleSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DeliverCrossAccountRole")
+	}
+	mg.Spec.InitProvider.DeliverCrossAccountRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DeliverCrossAccountRoleRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
@@ -1472,6 +1512,28 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.ForProvider.NetworkInterface[i3].NetworkInterfaceIDRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.ForProvider.PrimaryNetworkInterface != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryNetworkInterface.NetworkInterfaceID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.PrimaryNetworkInterface.NetworkInterfaceIDRef,
+				Selector:     mg.Spec.ForProvider.PrimaryNetworkInterface.NetworkInterfaceIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PrimaryNetworkInterface.NetworkInterfaceID")
+		}
+		mg.Spec.ForProvider.PrimaryNetworkInterface.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PrimaryNetworkInterface.NetworkInterfaceIDRef = rsp.ResolvedReference
+
+	}
 	if mg.Spec.ForProvider.RootBlockDevice != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
@@ -1576,6 +1638,28 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 		mg.Spec.InitProvider.NetworkInterface[i3].NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.NetworkInterface[i3].NetworkInterfaceIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.PrimaryNetworkInterface != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryNetworkInterface.NetworkInterfaceID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.PrimaryNetworkInterface.NetworkInterfaceIDRef,
+				Selector:     mg.Spec.InitProvider.PrimaryNetworkInterface.NetworkInterfaceIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.PrimaryNetworkInterface.NetworkInterfaceID")
+		}
+		mg.Spec.InitProvider.PrimaryNetworkInterface.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PrimaryNetworkInterface.NetworkInterfaceIDRef = rsp.ResolvedReference
 
 	}
 	if mg.Spec.InitProvider.RootBlockDevice != nil {

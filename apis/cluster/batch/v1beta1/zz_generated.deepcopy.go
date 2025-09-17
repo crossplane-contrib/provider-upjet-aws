@@ -1185,6 +1185,11 @@ func (in *EC2ConfigurationInitParameters) DeepCopyInto(out *EC2ConfigurationInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.ImageKubernetesVersion != nil {
+		in, out := &in.ImageKubernetesVersion, &out.ImageKubernetesVersion
+		*out = new(string)
+		**out = **in
+	}
 	if in.ImageType != nil {
 		in, out := &in.ImageType, &out.ImageType
 		*out = new(string)
@@ -1210,6 +1215,11 @@ func (in *EC2ConfigurationObservation) DeepCopyInto(out *EC2ConfigurationObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.ImageKubernetesVersion != nil {
+		in, out := &in.ImageKubernetesVersion, &out.ImageKubernetesVersion
+		*out = new(string)
+		**out = **in
+	}
 	if in.ImageType != nil {
 		in, out := &in.ImageType, &out.ImageType
 		*out = new(string)
@@ -1232,6 +1242,11 @@ func (in *EC2ConfigurationParameters) DeepCopyInto(out *EC2ConfigurationParamete
 	*out = *in
 	if in.ImageIDOverride != nil {
 		in, out := &in.ImageIDOverride, &out.ImageIDOverride
+		*out = new(string)
+		**out = **in
+	}
+	if in.ImageKubernetesVersion != nil {
+		in, out := &in.ImageKubernetesVersion, &out.ImageKubernetesVersion
 		*out = new(string)
 		**out = **in
 	}

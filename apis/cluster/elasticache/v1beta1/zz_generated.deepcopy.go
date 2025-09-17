@@ -1439,6 +1439,11 @@ func (in *GlobalReplicationGroupInitParameters) DeepCopyInto(out *GlobalReplicat
 		*out = new(string)
 		**out = **in
 	}
+	if in.Engine != nil {
+		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -1645,6 +1650,11 @@ func (in *GlobalReplicationGroupParameters) DeepCopyInto(out *GlobalReplicationG
 	}
 	if in.CacheNodeType != nil {
 		in, out := &in.CacheNodeType, &out.CacheNodeType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Engine != nil {
+		in, out := &in.Engine, &out.Engine
 		*out = new(string)
 		**out = **in
 	}

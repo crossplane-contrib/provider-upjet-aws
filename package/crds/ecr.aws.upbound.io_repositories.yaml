@@ -715,8 +715,28 @@ spec:
                     type: object
                   imageTagMutability:
                     description: 'The tag mutability setting for the repository. Must
-                      be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.'
+                      be one of: MUTABLE, IMMUTABLE, IMMUTABLE_WITH_EXCLUSION, or
+                      MUTABLE_WITH_EXCLUSION. Defaults to MUTABLE.'
                     type: string
+                  imageTagMutabilityExclusionFilter:
+                    description: Configuration block that defines filters to specify
+                      which image tags can override the default tag mutability setting.
+                      Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION
+                      or MUTABLE_WITH_EXCLUSION. See below for schema.
+                    items:
+                      properties:
+                        filter:
+                          description: The filter pattern to use for excluding image
+                            tags from the mutability setting. Must contain only letters,
+                            numbers, and special characters (._-). Each filter can
+                            be up to 128 characters long and can contain a maximum
+                            of 2 wildcards ().
+                          type: string
+                        filterType:
+                          description: The type of filter to use. Must be WILDCARD.
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -852,8 +872,28 @@ spec:
                     type: object
                   imageTagMutability:
                     description: 'The tag mutability setting for the repository. Must
-                      be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.'
+                      be one of: MUTABLE, IMMUTABLE, IMMUTABLE_WITH_EXCLUSION, or
+                      MUTABLE_WITH_EXCLUSION. Defaults to MUTABLE.'
                     type: string
+                  imageTagMutabilityExclusionFilter:
+                    description: Configuration block that defines filters to specify
+                      which image tags can override the default tag mutability setting.
+                      Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION
+                      or MUTABLE_WITH_EXCLUSION. See below for schema.
+                    items:
+                      properties:
+                        filter:
+                          description: The filter pattern to use for excluding image
+                            tags from the mutability setting. Must contain only letters,
+                            numbers, and special characters (._-). Each filter can
+                            be up to 128 characters long and can contain a maximum
+                            of 2 wildcards ().
+                          type: string
+                        filterType:
+                          description: The type of filter to use. Must be WILDCARD.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -991,8 +1031,28 @@ spec:
                     type: object
                   imageTagMutability:
                     description: 'The tag mutability setting for the repository. Must
-                      be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.'
+                      be one of: MUTABLE, IMMUTABLE, IMMUTABLE_WITH_EXCLUSION, or
+                      MUTABLE_WITH_EXCLUSION. Defaults to MUTABLE.'
                     type: string
+                  imageTagMutabilityExclusionFilter:
+                    description: Configuration block that defines filters to specify
+                      which image tags can override the default tag mutability setting.
+                      Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION
+                      or MUTABLE_WITH_EXCLUSION. See below for schema.
+                    items:
+                      properties:
+                        filter:
+                          description: The filter pattern to use for excluding image
+                            tags from the mutability setting. Must contain only letters,
+                            numbers, and special characters (._-). Each filter can
+                            be up to 128 characters long and can contain a maximum
+                            of 2 wildcards ().
+                          type: string
+                        filterType:
+                          description: The type of filter to use. Must be WILDCARD.
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

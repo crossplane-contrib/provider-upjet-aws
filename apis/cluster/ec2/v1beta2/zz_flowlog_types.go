@@ -54,8 +54,18 @@ type DestinationOptionsParameters struct {
 
 type FlowLogInitParameters struct {
 
-	// ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
+	// ARN of the IAM role in the destination account used for cross-account delivery of flow logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
+
+	// Reference to a Role in iam to populate deliverCrossAccountRole.
+	// +kubebuilder:validation:Optional
+	DeliverCrossAccountRoleRef *v1.Reference `json:"deliverCrossAccountRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate deliverCrossAccountRole.
+	// +kubebuilder:validation:Optional
+	DeliverCrossAccountRoleSelector *v1.Selector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
 
 	// Describes the destination options for a flow log. More details below.
 	DestinationOptions *DestinationOptionsInitParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
@@ -63,7 +73,7 @@ type FlowLogInitParameters struct {
 	// Elastic Network Interface ID to attach to.
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
-	// ARN of the IAM role that's used to post flow logs to a CloudWatch Logs log group.
+	// ARN of the IAM role used to post flow logs. Corresponds to DeliverLogsPermissionArn in the AWS API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
@@ -143,7 +153,7 @@ type FlowLogObservation struct {
 	// ARN of the Flow Log.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
+	// ARN of the IAM role in the destination account used for cross-account delivery of flow logs.
 	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
 
 	// Describes the destination options for a flow log. More details below.
@@ -152,7 +162,7 @@ type FlowLogObservation struct {
 	// Elastic Network Interface ID to attach to.
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
-	// ARN of the IAM role that's used to post flow logs to a CloudWatch Logs log group.
+	// ARN of the IAM role used to post flow logs. Corresponds to DeliverLogsPermissionArn in the AWS API.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// Flow Log ID.
@@ -202,9 +212,19 @@ type FlowLogObservation struct {
 
 type FlowLogParameters struct {
 
-	// ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
+	// ARN of the IAM role in the destination account used for cross-account delivery of flow logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
+
+	// Reference to a Role in iam to populate deliverCrossAccountRole.
+	// +kubebuilder:validation:Optional
+	DeliverCrossAccountRoleRef *v1.Reference `json:"deliverCrossAccountRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate deliverCrossAccountRole.
+	// +kubebuilder:validation:Optional
+	DeliverCrossAccountRoleSelector *v1.Selector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
 
 	// Describes the destination options for a flow log. More details below.
 	// +kubebuilder:validation:Optional
@@ -214,7 +234,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
-	// ARN of the IAM role that's used to post flow logs to a CloudWatch Logs log group.
+	// ARN of the IAM role used to post flow logs. Corresponds to DeliverLogsPermissionArn in the AWS API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

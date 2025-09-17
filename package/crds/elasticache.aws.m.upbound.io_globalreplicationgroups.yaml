@@ -71,9 +71,17 @@ spec:
                       and guidance on selecting node types.
                       When creating, by default the Global Replication Group inherits the node type of the primary replication group.
                     type: string
+                  engine:
+                    description: |-
+                      The name of the cache engine to be used for the clusters in this global replication group.
+                      When creating, by default the Global Replication Group inherits the engine of the primary replication group.
+                      If an engine is specified, the Global Replication Group and all member replication groups will be upgraded to this engine.
+                      Valid values are redis or valkey.
+                      Default is redis if engine_version is specified.
+                    type: string
                   engineVersion:
                     description: |-
-                      Redis version to use for the Global Replication Group.
+                      Engine version to use for the Global Replication Group.
                       When creating, by default the Global Replication Group inherits the version of the primary replication group.
                       If a version is specified, the Global Replication Group and all member replication groups will be upgraded to this version.
                       Cannot be downgraded without replacing the Global Replication Group and all member replication groups.
@@ -97,7 +105,7 @@ spec:
                   parameterGroupName:
                     description: |-
                       An ElastiCache Parameter Group to use for the Global Replication Group.
-                      Required when upgrading a major engine version, but will be ignored if left configured after the upgrade is complete.
+                      Required when upgrading an engine or major engine version, but will be ignored if left configured after the upgrade is complete.
                       Specifying without a major version upgrade will fail.
                       Note that ElastiCache creates a copy of this parameter group for each member replication group.
                     type: string
@@ -221,9 +229,17 @@ spec:
                       and guidance on selecting node types.
                       When creating, by default the Global Replication Group inherits the node type of the primary replication group.
                     type: string
+                  engine:
+                    description: |-
+                      The name of the cache engine to be used for the clusters in this global replication group.
+                      When creating, by default the Global Replication Group inherits the engine of the primary replication group.
+                      If an engine is specified, the Global Replication Group and all member replication groups will be upgraded to this engine.
+                      Valid values are redis or valkey.
+                      Default is redis if engine_version is specified.
+                    type: string
                   engineVersion:
                     description: |-
-                      Redis version to use for the Global Replication Group.
+                      Engine version to use for the Global Replication Group.
                       When creating, by default the Global Replication Group inherits the version of the primary replication group.
                       If a version is specified, the Global Replication Group and all member replication groups will be upgraded to this version.
                       Cannot be downgraded without replacing the Global Replication Group and all member replication groups.
@@ -247,7 +263,7 @@ spec:
                   parameterGroupName:
                     description: |-
                       An ElastiCache Parameter Group to use for the Global Replication Group.
-                      Required when upgrading a major engine version, but will be ignored if left configured after the upgrade is complete.
+                      Required when upgrading an engine or major engine version, but will be ignored if left configured after the upgrade is complete.
                       Specifying without a major version upgrade will fail.
                       Note that ElastiCache creates a copy of this parameter group for each member replication group.
                     type: string
@@ -437,12 +453,16 @@ spec:
                       enabled.
                     type: boolean
                   engine:
-                    description: The name of the cache engine to be used for the clusters
-                      in this global replication group.
+                    description: |-
+                      The name of the cache engine to be used for the clusters in this global replication group.
+                      When creating, by default the Global Replication Group inherits the engine of the primary replication group.
+                      If an engine is specified, the Global Replication Group and all member replication groups will be upgraded to this engine.
+                      Valid values are redis or valkey.
+                      Default is redis if engine_version is specified.
                     type: string
                   engineVersion:
                     description: |-
-                      Redis version to use for the Global Replication Group.
+                      Engine version to use for the Global Replication Group.
                       When creating, by default the Global Replication Group inherits the version of the primary replication group.
                       If a version is specified, the Global Replication Group and all member replication groups will be upgraded to this version.
                       Cannot be downgraded without replacing the Global Replication Group and all member replication groups.
@@ -490,7 +510,7 @@ spec:
                   parameterGroupName:
                     description: |-
                       An ElastiCache Parameter Group to use for the Global Replication Group.
-                      Required when upgrading a major engine version, but will be ignored if left configured after the upgrade is complete.
+                      Required when upgrading an engine or major engine version, but will be ignored if left configured after the upgrade is complete.
                       Specifying without a major version upgrade will fail.
                       Note that ElastiCache creates a copy of this parameter group for each member replication group.
                     type: string

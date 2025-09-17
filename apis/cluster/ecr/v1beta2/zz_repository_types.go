@@ -81,6 +81,35 @@ type ImageScanningConfigurationParameters struct {
 	ScanOnPush *bool `json:"scanOnPush" tf:"scan_on_push,omitempty"`
 }
 
+type ImageTagMutabilityExclusionFilterInitParameters struct {
+
+	// The filter pattern to use for excluding image tags from the mutability setting. Must contain only letters, numbers, and special characters (._-). Each filter can be up to 128 characters long and can contain a maximum of 2 wildcards ().
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// The type of filter to use. Must be WILDCARD.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+}
+
+type ImageTagMutabilityExclusionFilterObservation struct {
+
+	// The filter pattern to use for excluding image tags from the mutability setting. Must contain only letters, numbers, and special characters (._-). Each filter can be up to 128 characters long and can contain a maximum of 2 wildcards ().
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// The type of filter to use. Must be WILDCARD.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+}
+
+type ImageTagMutabilityExclusionFilterParameters struct {
+
+	// The filter pattern to use for excluding image tags from the mutability setting. Must contain only letters, numbers, and special characters (._-). Each filter can be up to 128 characters long and can contain a maximum of 2 wildcards ().
+	// +kubebuilder:validation:Optional
+	Filter *string `json:"filter" tf:"filter,omitempty"`
+
+	// The type of filter to use. Must be WILDCARD.
+	// +kubebuilder:validation:Optional
+	FilterType *string `json:"filterType" tf:"filter_type,omitempty"`
+}
+
 type RepositoryInitParameters struct {
 
 	// Encryption configuration for the repository. See below for schema.
@@ -93,8 +122,11 @@ type RepositoryInitParameters struct {
 	// Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.
 	ImageScanningConfiguration *ImageScanningConfigurationInitParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
 
-	// The tag mutability setting for the repository. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
+	// The tag mutability setting for the repository. Must be one of: MUTABLE, IMMUTABLE, IMMUTABLE_WITH_EXCLUSION, or MUTABLE_WITH_EXCLUSION. Defaults to MUTABLE.
 	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
+
+	// Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION. See below for schema.
+	ImageTagMutabilityExclusionFilter []ImageTagMutabilityExclusionFilterInitParameters `json:"imageTagMutabilityExclusionFilter,omitempty" tf:"image_tag_mutability_exclusion_filter,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -118,8 +150,11 @@ type RepositoryObservation struct {
 	// Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.
 	ImageScanningConfiguration *ImageScanningConfigurationObservation `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
 
-	// The tag mutability setting for the repository. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
+	// The tag mutability setting for the repository. Must be one of: MUTABLE, IMMUTABLE, IMMUTABLE_WITH_EXCLUSION, or MUTABLE_WITH_EXCLUSION. Defaults to MUTABLE.
 	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
+
+	// Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION. See below for schema.
+	ImageTagMutabilityExclusionFilter []ImageTagMutabilityExclusionFilterObservation `json:"imageTagMutabilityExclusionFilter,omitempty" tf:"image_tag_mutability_exclusion_filter,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -155,9 +190,13 @@ type RepositoryParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageScanningConfiguration *ImageScanningConfigurationParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
 
-	// The tag mutability setting for the repository. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
+	// The tag mutability setting for the repository. Must be one of: MUTABLE, IMMUTABLE, IMMUTABLE_WITH_EXCLUSION, or MUTABLE_WITH_EXCLUSION. Defaults to MUTABLE.
 	// +kubebuilder:validation:Optional
 	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
+
+	// Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION. See below for schema.
+	// +kubebuilder:validation:Optional
+	ImageTagMutabilityExclusionFilter []ImageTagMutabilityExclusionFilterParameters `json:"imageTagMutabilityExclusionFilter,omitempty" tf:"image_tag_mutability_exclusion_filter,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

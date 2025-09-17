@@ -27,6 +27,9 @@ type AttachmentObservation struct {
 
 	// ID of the instance to attach to.
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
+
+	// Index of the network card. Specify a value greater than 0 when using multiple network cards, which are supported by some instance types. The default is 0.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 }
 
 type AttachmentParameters struct {

@@ -91,6 +91,7 @@ type SecurityGroupIngressRuleObservation struct {
 	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// (String) ID of the security group rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.

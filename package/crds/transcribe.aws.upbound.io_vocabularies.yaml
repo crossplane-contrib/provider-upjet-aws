@@ -94,7 +94,7 @@ spec:
                     x-kubernetes-map-type: granular
                   vocabularyFileUri:
                     description: The Amazon S3 location (URI) of the text file that
-                      contains your custom vocabulary.
+                      contains your custom vocabulary. Conflicts wth phrases.
                     type: string
                 required:
                 - region
@@ -129,7 +129,7 @@ spec:
                     x-kubernetes-map-type: granular
                   vocabularyFileUri:
                     description: The Amazon S3 location (URI) of the text file that
-                      contains your custom vocabulary.
+                      contains your custom vocabulary. Conflicts wth phrases.
                     type: string
                 type: object
               managementPolicies:
@@ -264,7 +264,7 @@ spec:
                     x-kubernetes-map-type: granular
                   vocabularyFileUri:
                     description: The Amazon S3 location (URI) of the text file that
-                      contains your custom vocabulary.
+                      contains your custom vocabulary. Conflicts wth phrases.
                     type: string
                 type: object
               conditions:

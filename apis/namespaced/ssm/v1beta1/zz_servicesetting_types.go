@@ -16,7 +16,7 @@ import (
 
 type ServiceSettingInitParameters struct {
 
-	// ID of the service setting.
+	// ID of the service setting. Valid values are shown in the AWS documentation.
 	SettingID *string `json:"settingId,omitempty" tf:"setting_id,omitempty"`
 
 	// Value of the service setting.
@@ -34,7 +34,7 @@ type ServiceSettingObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// ID of the service setting.
+	// ID of the service setting. Valid values are shown in the AWS documentation.
 	SettingID *string `json:"settingId,omitempty" tf:"setting_id,omitempty"`
 
 	// Value of the service setting.
@@ -51,7 +51,7 @@ type ServiceSettingParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// ID of the service setting.
+	// ID of the service setting. Valid values are shown in the AWS documentation.
 	// +kubebuilder:validation:Optional
 	SettingID *string `json:"settingId,omitempty" tf:"setting_id,omitempty"`
 

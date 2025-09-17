@@ -341,6 +341,7 @@ spec:
                       to false.
                     type: boolean
                   id:
+                    description: (String) ID of the KMS key.
                     type: string
                   isEnabled:
                     description: Specifies whether the key is enabled. Defaults to

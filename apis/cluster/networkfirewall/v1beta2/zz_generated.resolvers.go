@@ -69,10 +69,30 @@ func (mg *Firewall) ResolveReferences( // ResolveReferences of this Firewall.
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "TransitGateway", "TransitGatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TransitGatewayIDRef,
+			Selector:     mg.Spec.ForProvider.TransitGatewayIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TransitGatewayID")
+	}
+	mg.Spec.ForProvider.TransitGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransitGatewayIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
 			Extract:      reference.ExternalName(),
@@ -131,10 +151,30 @@ func (mg *Firewall) ResolveReferences( // ResolveReferences of this Firewall.
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "TransitGateway", "TransitGatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TransitGatewayID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TransitGatewayIDRef,
+			Selector:     mg.Spec.InitProvider.TransitGatewayIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TransitGatewayID")
+	}
+	mg.Spec.InitProvider.TransitGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TransitGatewayIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
 			Extract:      reference.ExternalName(),

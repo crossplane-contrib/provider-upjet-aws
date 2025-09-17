@@ -106,6 +106,10 @@ spec:
                                         files should be retained before file deletion.
                                         Defaults to 3.
                                       type: number
+                                    runRateInHours:
+                                      description: interval in hours between orphan
+                                        file deletion job runs. Defaults to 24.
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -132,6 +136,10 @@ spec:
                                         to retain within the retention period. Defaults
                                         to 1 or the corresponding Iceberg table configuration
                                         field if it exists.
+                                      type: number
+                                    runRateInHours:
+                                      description: interval in hours between orphan
+                                        file deletion job runs. Defaults to 24.
                                       type: number
                                     snapshotRetentionPeriodInDays:
                                       description: The number of days to retain the
@@ -287,6 +295,10 @@ spec:
                                         files should be retained before file deletion.
                                         Defaults to 3.
                                       type: number
+                                    runRateInHours:
+                                      description: interval in hours between orphan
+                                        file deletion job runs. Defaults to 24.
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -313,6 +325,10 @@ spec:
                                         to retain within the retention period. Defaults
                                         to 1 or the corresponding Iceberg table configuration
                                         field if it exists.
+                                      type: number
+                                    runRateInHours:
+                                      description: interval in hours between orphan
+                                        file deletion job runs. Defaults to 24.
                                       type: number
                                     snapshotRetentionPeriodInDays:
                                       description: The number of days to retain the
@@ -471,6 +487,10 @@ spec:
                                         files should be retained before file deletion.
                                         Defaults to 3.
                                       type: number
+                                    runRateInHours:
+                                      description: interval in hours between orphan
+                                        file deletion job runs. Defaults to 24.
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -497,6 +517,10 @@ spec:
                                         to retain within the retention period. Defaults
                                         to 1 or the corresponding Iceberg table configuration
                                         field if it exists.
+                                      type: number
+                                    runRateInHours:
+                                      description: interval in hours between orphan
+                                        file deletion job runs. Defaults to 24.
                                       type: number
                                     snapshotRetentionPeriodInDays:
                                       description: The number of days to retain the

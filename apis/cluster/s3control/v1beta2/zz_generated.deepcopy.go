@@ -83,6 +83,22 @@ func (in *AccessPointInitParameters) DeepCopyInto(out *AccessPointInitParameters
 		*out = new(PublicAccessBlockConfigurationInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.VPCConfiguration != nil {
 		in, out := &in.VPCConfiguration, &out.VPCConfiguration
 		*out = new(VPCConfigurationInitParameters)
@@ -216,6 +232,38 @@ func (in *AccessPointObservation) DeepCopyInto(out *AccessPointObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.VPCConfiguration != nil {
 		in, out := &in.VPCConfiguration, &out.VPCConfiguration
 		*out = new(VPCConfigurationObservation)
@@ -280,6 +328,22 @@ func (in *AccessPointParameters) DeepCopyInto(out *AccessPointParameters) {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.VPCConfiguration != nil {
 		in, out := &in.VPCConfiguration, &out.VPCConfiguration

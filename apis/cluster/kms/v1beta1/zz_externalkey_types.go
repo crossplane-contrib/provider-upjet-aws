@@ -30,6 +30,12 @@ type ExternalKeyInitParameters struct {
 	// Base64 encoded 256-bit symmetric encryption key material to import. The CMK is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
 	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
 
+	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only). Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
+	KeySpec *string `json:"keySpec,omitempty" tf:"key_spec,omitempty"`
+
+	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.
+	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
+
 	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
 
@@ -67,10 +73,13 @@ type ExternalKeyObservation struct {
 	// The unique identifier for the key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only). Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
+	KeySpec *string `json:"keySpec,omitempty" tf:"key_spec,omitempty"`
+
 	// The state of the CMK.
 	KeyState *string `json:"keyState,omitempty" tf:"key_state,omitempty"`
 
-	// The cryptographic operations for which you can use the CMK.
+	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
 	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
@@ -116,6 +125,14 @@ type ExternalKeyParameters struct {
 	// Base64 encoded 256-bit symmetric encryption key material to import. The CMK is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
 	// +kubebuilder:validation:Optional
 	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
+
+	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only). Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
+	// +kubebuilder:validation:Optional
+	KeySpec *string `json:"keySpec,omitempty" tf:"key_spec,omitempty"`
+
+	// Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.
+	// +kubebuilder:validation:Optional
+	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
 	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	// +kubebuilder:validation:Optional

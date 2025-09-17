@@ -323,6 +323,10 @@ type PartitionKeysInitParameters struct {
 	// Name of the Partition Key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Map of key-value pairs.
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
 	// Datatype of data in the Partition Key.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -334,6 +338,10 @@ type PartitionKeysObservation struct {
 
 	// Name of the Partition Key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Map of key-value pairs.
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Datatype of data in the Partition Key.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -348,6 +356,11 @@ type PartitionKeysParameters struct {
 	// Name of the Partition Key.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Map of key-value pairs.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Datatype of data in the Partition Key.
 	// +kubebuilder:validation:Optional

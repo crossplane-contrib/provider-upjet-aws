@@ -14,6 +14,45 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type KerberosAuthenticationSettingsInitParameters struct {
+
+	// ARN of the IAM role that grants AWS DMS access to the secret containing key cache file for the Kerberos authentication.
+	KeyCacheSecretIAMArn *string `json:"keyCacheSecretIamArn,omitempty" tf:"key_cache_secret_iam_arn,omitempty"`
+
+	// Secret ID that stores the key cache file required for Kerberos authentication.
+	KeyCacheSecretID *string `json:"keyCacheSecretId,omitempty" tf:"key_cache_secret_id,omitempty"`
+
+	// Contents of krb5 configuration file required for Kerberos authentication.
+	Krb5FileContents *string `json:"krb5FileContents,omitempty" tf:"krb5_file_contents,omitempty"`
+}
+
+type KerberosAuthenticationSettingsObservation struct {
+
+	// ARN of the IAM role that grants AWS DMS access to the secret containing key cache file for the Kerberos authentication.
+	KeyCacheSecretIAMArn *string `json:"keyCacheSecretIamArn,omitempty" tf:"key_cache_secret_iam_arn,omitempty"`
+
+	// Secret ID that stores the key cache file required for Kerberos authentication.
+	KeyCacheSecretID *string `json:"keyCacheSecretId,omitempty" tf:"key_cache_secret_id,omitempty"`
+
+	// Contents of krb5 configuration file required for Kerberos authentication.
+	Krb5FileContents *string `json:"krb5FileContents,omitempty" tf:"krb5_file_contents,omitempty"`
+}
+
+type KerberosAuthenticationSettingsParameters struct {
+
+	// ARN of the IAM role that grants AWS DMS access to the secret containing key cache file for the Kerberos authentication.
+	// +kubebuilder:validation:Optional
+	KeyCacheSecretIAMArn *string `json:"keyCacheSecretIamArn" tf:"key_cache_secret_iam_arn,omitempty"`
+
+	// Secret ID that stores the key cache file required for Kerberos authentication.
+	// +kubebuilder:validation:Optional
+	KeyCacheSecretID *string `json:"keyCacheSecretId" tf:"key_cache_secret_id,omitempty"`
+
+	// Contents of krb5 configuration file required for Kerberos authentication.
+	// +kubebuilder:validation:Optional
+	Krb5FileContents *string `json:"krb5FileContents" tf:"krb5_file_contents,omitempty"`
+}
+
 type ReplicationInstanceInitParameters struct {
 
 	// The amount of storage (in gigabytes) to be initially allocated for the replication instance.
@@ -31,6 +70,9 @@ type ReplicationInstanceInitParameters struct {
 	// The EC2 Availability Zone that the replication instance will be created in.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database. This list overrides the default name servers supported by the replication instance. You can specify a comma-separated list of internet addresses for up to four on-premise DNS name servers.
+	DNSNameServers *string `json:"dnsNameServers,omitempty" tf:"dns_name_servers,omitempty"`
+
 	// The engine version number of the replication instance.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -45,6 +87,9 @@ type ReplicationInstanceInitParameters struct {
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
+	// Configuration block for settings required for Kerberos authentication. See below.
+	KerberosAuthenticationSettings *KerberosAuthenticationSettingsInitParameters `json:"kerberosAuthenticationSettings,omitempty" tf:"kerberos_authentication_settings,omitempty"`
 
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
@@ -111,6 +156,9 @@ type ReplicationInstanceObservation struct {
 	// The EC2 Availability Zone that the replication instance will be created in.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database. This list overrides the default name servers supported by the replication instance. You can specify a comma-separated list of internet addresses for up to four on-premise DNS name servers.
+	DNSNameServers *string `json:"dnsNameServers,omitempty" tf:"dns_name_servers,omitempty"`
+
 	// The engine version number of the replication instance.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -118,6 +166,9 @@ type ReplicationInstanceObservation struct {
 
 	// The Amazon Resource Name (ARN) for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Configuration block for settings required for Kerberos authentication. See below.
+	KerberosAuthenticationSettings *KerberosAuthenticationSettingsObservation `json:"kerberosAuthenticationSettings,omitempty" tf:"kerberos_authentication_settings,omitempty"`
 
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
@@ -185,6 +236,10 @@ type ReplicationInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database. This list overrides the default name servers supported by the replication instance. You can specify a comma-separated list of internet addresses for up to four on-premise DNS name servers.
+	// +kubebuilder:validation:Optional
+	DNSNameServers *string `json:"dnsNameServers,omitempty" tf:"dns_name_servers,omitempty"`
+
 	// The engine version number of the replication instance.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
@@ -201,6 +256,10 @@ type ReplicationInstanceParameters struct {
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
+	// Configuration block for settings required for Kerberos authentication. See below.
+	// +kubebuilder:validation:Optional
+	KerberosAuthenticationSettings *KerberosAuthenticationSettingsParameters `json:"kerberosAuthenticationSettings,omitempty" tf:"kerberos_authentication_settings,omitempty"`
 
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	// +kubebuilder:validation:Optional

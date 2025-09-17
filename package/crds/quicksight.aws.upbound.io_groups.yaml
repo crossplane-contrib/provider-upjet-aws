@@ -74,9 +74,7 @@ spec:
               forProvider:
                 properties:
                   awsAccountId:
-                    description: The ID for the AWS account that the group is in.
-                      Currently, you use the ID for the AWS account that contains
-                      your Amazon QuickSight account.
+                    description: AWS account ID.
                     type: string
                   description:
                     description: A description for the group.
@@ -110,9 +108,7 @@ spec:
                   autoscaler.
                 properties:
                   awsAccountId:
-                    description: The ID for the AWS account that the group is in.
-                      Currently, you use the ID for the AWS account that contains
-                      your Amazon QuickSight account.
+                    description: AWS account ID.
                     type: string
                   description:
                     description: A description for the group.
@@ -225,9 +221,7 @@ spec:
                     description: Amazon Resource Name (ARN) of group
                     type: string
                   awsAccountId:
-                    description: The ID for the AWS account that the group is in.
-                      Currently, you use the ID for the AWS account that contains
-                      your Amazon QuickSight account.
+                    description: AWS account ID.
                     type: string
                   description:
                     description: A description for the group.

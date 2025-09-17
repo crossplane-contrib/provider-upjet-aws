@@ -18,7 +18,6 @@ type BucketLoggingInitParameters struct {
 
 	// Name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -34,7 +33,6 @@ type BucketLoggingInitParameters struct {
 
 	// Name of the bucket where you want Amazon S3 to store server access logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate targetBucket.
@@ -87,7 +85,6 @@ type BucketLoggingParameters struct {
 
 	// Name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -110,7 +107,6 @@ type BucketLoggingParameters struct {
 
 	// Name of the bucket where you want Amazon S3 to store server access logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
 
@@ -244,29 +240,29 @@ type TargetGrantParameters struct {
 
 type TargetObjectKeyFormatInitParameters struct {
 
-	// Partitioned S3 key for log objects. See below.
+	// Partitioned S3 key for log objects, in the form [target_prefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]. Conflicts with simple_prefix. See below.
 	PartitionedPrefix *PartitionedPrefixInitParameters `json:"partitionedPrefix,omitempty" tf:"partitioned_prefix,omitempty"`
 
-	// Use the simple format for S3 keys for log objects. To use, set simple_prefix {}.
+	// Use the simple format for S3 keys for log objects, in the form [target_prefix][YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]. To use, set simple_prefix {}. Conflicts with partitioned_prefix.
 	SimplePrefix *SimplePrefixInitParameters `json:"simplePrefix,omitempty" tf:"simple_prefix,omitempty"`
 }
 
 type TargetObjectKeyFormatObservation struct {
 
-	// Partitioned S3 key for log objects. See below.
+	// Partitioned S3 key for log objects, in the form [target_prefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]. Conflicts with simple_prefix. See below.
 	PartitionedPrefix *PartitionedPrefixObservation `json:"partitionedPrefix,omitempty" tf:"partitioned_prefix,omitempty"`
 
-	// Use the simple format for S3 keys for log objects. To use, set simple_prefix {}.
+	// Use the simple format for S3 keys for log objects, in the form [target_prefix][YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]. To use, set simple_prefix {}. Conflicts with partitioned_prefix.
 	SimplePrefix *SimplePrefixParameters `json:"simplePrefix,omitempty" tf:"simple_prefix,omitempty"`
 }
 
 type TargetObjectKeyFormatParameters struct {
 
-	// Partitioned S3 key for log objects. See below.
+	// Partitioned S3 key for log objects, in the form [target_prefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]. Conflicts with simple_prefix. See below.
 	// +kubebuilder:validation:Optional
 	PartitionedPrefix *PartitionedPrefixParameters `json:"partitionedPrefix,omitempty" tf:"partitioned_prefix,omitempty"`
 
-	// Use the simple format for S3 keys for log objects. To use, set simple_prefix {}.
+	// Use the simple format for S3 keys for log objects, in the form [target_prefix][YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]. To use, set simple_prefix {}. Conflicts with partitioned_prefix.
 	// +kubebuilder:validation:Optional
 	SimplePrefix *SimplePrefixParameters `json:"simplePrefix,omitempty" tf:"simple_prefix,omitempty"`
 }

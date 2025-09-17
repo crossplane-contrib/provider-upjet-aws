@@ -40,6 +40,9 @@ type BucketPublicAccessBlockInitParameters struct {
 
 	// Whether Amazon S3 should restrict public bucket policies for this bucket. Defaults to false. Enabling this setting does not affect the previously stored bucket policy, except that public and cross-account access within the public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
+
+	// Whether to retain the public access block upon destruction. If set to true, the resource is simply removed from state instead. This may be desirable in certain scenarios to prevent the removal of a public access block before deletion of the associated bucket.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
 type BucketPublicAccessBlockObservation struct {
@@ -65,6 +68,9 @@ type BucketPublicAccessBlockObservation struct {
 
 	// Whether Amazon S3 should restrict public bucket policies for this bucket. Defaults to false. Enabling this setting does not affect the previously stored bucket policy, except that public and cross-account access within the public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
+
+	// Whether to retain the public access block upon destruction. If set to true, the resource is simply removed from state instead. This may be desirable in certain scenarios to prevent the removal of a public access block before deletion of the associated bucket.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
 type BucketPublicAccessBlockParameters struct {
@@ -103,6 +109,10 @@ type BucketPublicAccessBlockParameters struct {
 	// Whether Amazon S3 should restrict public bucket policies for this bucket. Defaults to false. Enabling this setting does not affect the previously stored bucket policy, except that public and cross-account access within the public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
 	// +kubebuilder:validation:Optional
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
+
+	// Whether to retain the public access block upon destruction. If set to true, the resource is simply removed from state instead. This may be desirable in certain scenarios to prevent the removal of a public access block before deletion of the associated bucket.
+	// +kubebuilder:validation:Optional
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
 // BucketPublicAccessBlockSpec defines the desired state of BucketPublicAccessBlock

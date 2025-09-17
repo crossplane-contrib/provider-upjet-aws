@@ -43,6 +43,10 @@ type AccessPointInitParameters struct {
 	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. Detailed below.
 	PublicAccessBlockConfiguration *PublicAccessBlockConfigurationInitParameters `json:"publicAccessBlockConfiguration,omitempty" tf:"public_access_block_configuration,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Configuration block to restrict access to this access point to requests from the specified Virtual Private Cloud (VPC). Required for S3 on Outposts. Detailed below.
 	VPCConfiguration *VPCConfigurationInitParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
@@ -94,6 +98,14 @@ type AccessPointObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	// Configuration block to restrict access to this access point to requests from the specified Virtual Private Cloud (VPC). Required for S3 on Outposts. Detailed below.
 	VPCConfiguration *VPCConfigurationObservation `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
@@ -138,6 +150,11 @@ type AccessPointParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block to restrict access to this access point to requests from the specified Virtual Private Cloud (VPC). Required for S3 on Outposts. Detailed below.
 	// +kubebuilder:validation:Optional

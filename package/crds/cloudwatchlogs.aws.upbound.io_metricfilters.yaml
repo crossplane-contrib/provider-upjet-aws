@@ -616,6 +616,12 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  applyOnTransformedLogs:
+                    description: Whether the metric filter will be applied on the
+                      transformed version of the log events instead of the original
+                      ingested log events. Defaults to false. Valid only for log groups
+                      that have an active log transformer.
+                    type: boolean
                   logGroupName:
                     description: The name of the log group to associate the metric
                       filter with.
@@ -756,6 +762,12 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  applyOnTransformedLogs:
+                    description: Whether the metric filter will be applied on the
+                      transformed version of the log events instead of the original
+                      ingested log events. Defaults to false. Valid only for log groups
+                      that have an active log transformer.
+                    type: boolean
                   logGroupName:
                     description: The name of the log group to associate the metric
                       filter with.
@@ -976,6 +988,12 @@ spec:
             properties:
               atProvider:
                 properties:
+                  applyOnTransformedLogs:
+                    description: Whether the metric filter will be applied on the
+                      transformed version of the log events instead of the original
+                      ingested log events. Defaults to false. Valid only for log groups
+                      that have an active log transformer.
+                    type: boolean
                   id:
                     description: The name of the metric filter.
                     type: string

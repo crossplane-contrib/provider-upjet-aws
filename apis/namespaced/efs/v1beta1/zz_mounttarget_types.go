@@ -32,6 +32,12 @@ type MountTargetInitParameters struct {
 	// which the file system may be mounted via the mount target.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// IP address type for the mount target. Valid values are IPV4_ONLY (only IPv4 addresses), IPV6_ONLY (only IPv6 addresses), and DUAL_STACK (dual-stack, both IPv4 and IPv6 addresses). Defaults to IPV4_ONLY.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// IPv6 address to use. Valid only when ip_address_type is set to IPV6_ONLY or DUAL_STACK.
+	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
+
 	// A list of up to 5 VPC security group IDs (that must
 	// be for the same VPC as subnet specified) in effect for the mount target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -83,6 +89,12 @@ type MountTargetObservation struct {
 	// which the file system may be mounted via the mount target.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// IP address type for the mount target. Valid values are IPV4_ONLY (only IPv4 addresses), IPV6_ONLY (only IPv6 addresses), and DUAL_STACK (dual-stack, both IPv4 and IPv6 addresses). Defaults to IPV4_ONLY.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// IPv6 address to use. Valid only when ip_address_type is set to IPV6_ONLY or DUAL_STACK.
+	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
+
 	// The DNS name for the given subnet/AZ per documented convention.
 	MountTargetDNSName *string `json:"mountTargetDnsName,omitempty" tf:"mount_target_dns_name,omitempty"`
 
@@ -124,6 +136,14 @@ type MountTargetParameters struct {
 	// which the file system may be mounted via the mount target.
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// IP address type for the mount target. Valid values are IPV4_ONLY (only IPv4 addresses), IPV6_ONLY (only IPv6 addresses), and DUAL_STACK (dual-stack, both IPv4 and IPv6 addresses). Defaults to IPV4_ONLY.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// IPv6 address to use. Valid only when ip_address_type is set to IPV6_ONLY or DUAL_STACK.
+	// +kubebuilder:validation:Optional
+	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

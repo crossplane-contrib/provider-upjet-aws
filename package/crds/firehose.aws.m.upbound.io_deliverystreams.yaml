@@ -2119,6 +2119,8 @@ spec:
                     description: Configuration options when destination is iceberg.
                       See iceberg_configuration block below for details.
                     properties:
+                      appendOnly:
+                        type: boolean
                       bufferingInterval:
                         description: Buffer incoming data for the specified period
                           of time, in seconds between 0 and 900, before delivering
@@ -7717,6 +7719,8 @@ spec:
                     description: Configuration options when destination is iceberg.
                       See iceberg_configuration block below for details.
                     properties:
+                      appendOnly:
+                        type: boolean
                       bufferingInterval:
                         description: Buffer incoming data for the specified period
                           of time, in seconds between 0 and 900, before delivering
@@ -12228,6 +12232,8 @@ spec:
                     description: Configuration options when destination is iceberg.
                       See iceberg_configuration block below for details.
                     properties:
+                      appendOnly:
+                        type: boolean
                       bufferingInterval:
                         description: Buffer incoming data for the specified period
                           of time, in seconds between 0 and 900, before delivering

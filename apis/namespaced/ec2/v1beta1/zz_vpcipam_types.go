@@ -44,6 +44,9 @@ type VPCIpamInitParameters struct {
 	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
 	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
 
+	// AWS account that is charged for active IP addresses managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
+	MeteredAccount *string `json:"meteredAccount,omitempty" tf:"metered_account,omitempty"`
+
 	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	OperatingRegions []OperatingRegionsInitParameters `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
 
@@ -77,6 +80,9 @@ type VPCIpamObservation struct {
 
 	// The ID of the IPAM
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// AWS account that is charged for active IP addresses managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
+	MeteredAccount *string `json:"meteredAccount,omitempty" tf:"metered_account,omitempty"`
 
 	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	OperatingRegions []OperatingRegionsObservation `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
@@ -120,6 +126,10 @@ type VPCIpamParameters struct {
 	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
 	// +kubebuilder:validation:Optional
 	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
+
+	// AWS account that is charged for active IP addresses managed in IPAM. Valid values are ipam-owner (default) and resource-owner.
+	// +kubebuilder:validation:Optional
+	MeteredAccount *string `json:"meteredAccount,omitempty" tf:"metered_account,omitempty"`
 
 	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	// +kubebuilder:validation:Optional

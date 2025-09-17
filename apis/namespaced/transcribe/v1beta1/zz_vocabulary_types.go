@@ -26,7 +26,7 @@ type VocabularyInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary.
+	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
 	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
 }
 
@@ -58,7 +58,7 @@ type VocabularyObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary.
+	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
 	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
 }
 
@@ -82,7 +82,7 @@ type VocabularyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary.
+	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
 	// +kubebuilder:validation:Optional
 	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
 }

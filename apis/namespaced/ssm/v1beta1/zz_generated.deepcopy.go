@@ -4194,6 +4194,11 @@ func (in *PatchBaselineInitParameters) DeepCopyInto(out *PatchBaselineInitParame
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AvailableSecurityUpdatesComplianceStatus != nil {
+		in, out := &in.AvailableSecurityUpdatesComplianceStatus, &out.AvailableSecurityUpdatesComplianceStatus
+		*out = new(string)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -4335,6 +4340,11 @@ func (in *PatchBaselineObservation) DeepCopyInto(out *PatchBaselineObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.AvailableSecurityUpdatesComplianceStatus != nil {
+		in, out := &in.AvailableSecurityUpdatesComplianceStatus, &out.AvailableSecurityUpdatesComplianceStatus
+		*out = new(string)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -4468,6 +4478,11 @@ func (in *PatchBaselineParameters) DeepCopyInto(out *PatchBaselineParameters) {
 	if in.ApprovedPatchesEnableNonSecurity != nil {
 		in, out := &in.ApprovedPatchesEnableNonSecurity, &out.ApprovedPatchesEnableNonSecurity
 		*out = new(bool)
+		**out = **in
+	}
+	if in.AvailableSecurityUpdatesComplianceStatus != nil {
+		in, out := &in.AvailableSecurityUpdatesComplianceStatus, &out.AvailableSecurityUpdatesComplianceStatus
+		*out = new(string)
 		**out = **in
 	}
 	if in.Description != nil {

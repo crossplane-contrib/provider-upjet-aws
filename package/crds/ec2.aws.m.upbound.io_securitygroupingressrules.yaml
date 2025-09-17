@@ -731,6 +731,7 @@ spec:
                       or an ICMP/ICMPv6 type.
                     type: number
                   id:
+                    description: (String) ID of the security group rule.
                     type: string
                   ipProtocol:
                     description: The IP protocol name or number. Use -1 to specify

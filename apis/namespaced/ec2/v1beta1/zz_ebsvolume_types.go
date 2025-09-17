@@ -61,6 +61,9 @@ type EBSVolumeInitParameters struct {
 
 	// Type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// EBS provisioned rate for volume initialization, in MiB/s, at which to download the snapshot blocks from Amazon S3 to the volume. This argument can only be set if snapshot_id is specified.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 }
 
 type EBSVolumeObservation struct {
@@ -118,6 +121,9 @@ type EBSVolumeObservation struct {
 
 	// Type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// EBS provisioned rate for volume initialization, in MiB/s, at which to download the snapshot blocks from Amazon S3 to the volume. This argument can only be set if snapshot_id is specified.
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 }
 
 type EBSVolumeParameters struct {
@@ -184,6 +190,10 @@ type EBSVolumeParameters struct {
 	// Type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// EBS provisioned rate for volume initialization, in MiB/s, at which to download the snapshot blocks from Amazon S3 to the volume. This argument can only be set if snapshot_id is specified.
+	// +kubebuilder:validation:Optional
+	VolumeInitializationRate *float64 `json:"volumeInitializationRate,omitempty" tf:"volume_initialization_rate,omitempty"`
 }
 
 // EBSVolumeSpec defines the desired state of EBSVolume

@@ -31,6 +31,9 @@ type NetworkInterfaceAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// Index of the network card. Specify a value greater than 0 when using multiple network cards, which are supported by some instance types. The default is 0.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
 	// ENI ID to attach.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -57,6 +60,9 @@ type NetworkInterfaceAttachmentObservation struct {
 
 	// Instance ID to attach.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Index of the network card. Specify a value greater than 0 when using multiple network cards, which are supported by some instance types. The default is 0.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// ENI ID to attach.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
@@ -88,6 +94,10 @@ type NetworkInterfaceAttachmentParameters struct {
 	// Selector for a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+
+	// Index of the network card. Specify a value greater than 0 when using multiple network cards, which are supported by some instance types. The default is 0.
+	// +kubebuilder:validation:Optional
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// ENI ID to attach.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.NetworkInterface

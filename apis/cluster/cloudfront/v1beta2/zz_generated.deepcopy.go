@@ -6205,6 +6205,11 @@ func (in *OriginInitParameters) DeepCopyInto(out *OriginInitParameters) {
 		*out = new(OriginShieldInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ResponseCompletionTimeout != nil {
+		in, out := &in.ResponseCompletionTimeout, &out.ResponseCompletionTimeout
+		*out = new(float64)
+		**out = **in
+	}
 	if in.S3OriginConfig != nil {
 		in, out := &in.S3OriginConfig, &out.S3OriginConfig
 		*out = new(S3OriginConfigInitParameters)
@@ -6276,6 +6281,11 @@ func (in *OriginObservation) DeepCopyInto(out *OriginObservation) {
 		in, out := &in.OriginShield, &out.OriginShield
 		*out = new(OriginShieldObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ResponseCompletionTimeout != nil {
+		in, out := &in.ResponseCompletionTimeout, &out.ResponseCompletionTimeout
+		*out = new(float64)
+		**out = **in
 	}
 	if in.S3OriginConfig != nil {
 		in, out := &in.S3OriginConfig, &out.S3OriginConfig
@@ -6358,6 +6368,11 @@ func (in *OriginParameters) DeepCopyInto(out *OriginParameters) {
 		in, out := &in.OriginShield, &out.OriginShield
 		*out = new(OriginShieldParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ResponseCompletionTimeout != nil {
+		in, out := &in.ResponseCompletionTimeout, &out.ResponseCompletionTimeout
+		*out = new(float64)
+		**out = **in
 	}
 	if in.S3OriginConfig != nil {
 		in, out := &in.S3OriginConfig, &out.S3OriginConfig

@@ -857,9 +857,24 @@ spec:
                             type: string
                         type: object
                       executionRole:
-                        description: Role used in a notebook session for accessing
-                          the user's resources.
+                        description: Role used to access user resources in notebook
+                          sessions and IAM Identity Center enabled workgroups. The
+                          property is required for IAM Identity Center enabled workgroups.
                         type: string
+                      identityCenterConfiguration:
+                        description: Configuration block to set up an IAM Identity
+                          Center enabled workgroup. See Identity Center Configuration
+                          below.
+                        properties:
+                          enableIdentityCenter:
+                            description: Specifies whether the workgroup is IAM Identity
+                              Center supported.
+                            type: boolean
+                          identityCenterInstanceArn:
+                            description: The IAM Identity Center instance ARN that
+                              the workgroup associates to.
+                            type: string
+                        type: object
                       publishCloudwatchMetricsEnabled:
                         description: Boolean whether Amazon CloudWatch metrics are
                           enabled for the workgroup. Defaults to true.
@@ -1059,9 +1074,24 @@ spec:
                             type: string
                         type: object
                       executionRole:
-                        description: Role used in a notebook session for accessing
-                          the user's resources.
+                        description: Role used to access user resources in notebook
+                          sessions and IAM Identity Center enabled workgroups. The
+                          property is required for IAM Identity Center enabled workgroups.
                         type: string
+                      identityCenterConfiguration:
+                        description: Configuration block to set up an IAM Identity
+                          Center enabled workgroup. See Identity Center Configuration
+                          below.
+                        properties:
+                          enableIdentityCenter:
+                            description: Specifies whether the workgroup is IAM Identity
+                              Center supported.
+                            type: boolean
+                          identityCenterInstanceArn:
+                            description: The IAM Identity Center instance ARN that
+                              the workgroup associates to.
+                            type: string
+                        type: object
                       publishCloudwatchMetricsEnabled:
                         description: Boolean whether Amazon CloudWatch metrics are
                           enabled for the workgroup. Defaults to true.
@@ -1340,9 +1370,24 @@ spec:
                             type: string
                         type: object
                       executionRole:
-                        description: Role used in a notebook session for accessing
-                          the user's resources.
+                        description: Role used to access user resources in notebook
+                          sessions and IAM Identity Center enabled workgroups. The
+                          property is required for IAM Identity Center enabled workgroups.
                         type: string
+                      identityCenterConfiguration:
+                        description: Configuration block to set up an IAM Identity
+                          Center enabled workgroup. See Identity Center Configuration
+                          below.
+                        properties:
+                          enableIdentityCenter:
+                            description: Specifies whether the workgroup is IAM Identity
+                              Center supported.
+                            type: boolean
+                          identityCenterInstanceArn:
+                            description: The IAM Identity Center instance ARN that
+                              the workgroup associates to.
+                            type: string
+                        type: object
                       publishCloudwatchMetricsEnabled:
                         description: Boolean whether Amazon CloudWatch metrics are
                           enabled for the workgroup. Defaults to true.

@@ -82,19 +82,19 @@ type CustomActionParameters struct {
 
 type DestinationInitParameters struct {
 
-	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
+	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4 and IPv6.
 	AddressDefinition *string `json:"addressDefinition,omitempty" tf:"address_definition,omitempty"`
 }
 
 type DestinationObservation struct {
 
-	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
+	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4 and IPv6.
 	AddressDefinition *string `json:"addressDefinition,omitempty" tf:"address_definition,omitempty"`
 }
 
 type DestinationParameters struct {
 
-	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
+	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4 and IPv6.
 	// +kubebuilder:validation:Optional
 	AddressDefinition *string `json:"addressDefinition" tf:"address_definition,omitempty"`
 }
@@ -856,19 +856,19 @@ type RulesSourceParameters struct {
 
 type SourceInitParameters struct {
 
-	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
+	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4 and IPv6.
 	AddressDefinition *string `json:"addressDefinition,omitempty" tf:"address_definition,omitempty"`
 }
 
 type SourceObservation struct {
 
-	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
+	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4 and IPv6.
 	AddressDefinition *string `json:"addressDefinition,omitempty" tf:"address_definition,omitempty"`
 }
 
 type SourceParameters struct {
 
-	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
+	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4 and IPv6.
 	// +kubebuilder:validation:Optional
 	AddressDefinition *string `json:"addressDefinition" tf:"address_definition,omitempty"`
 }

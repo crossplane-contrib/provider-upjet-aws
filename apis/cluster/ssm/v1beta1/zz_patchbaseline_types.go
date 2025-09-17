@@ -108,6 +108,9 @@ type PatchBaselineInitParameters struct {
 	// Whether the list of approved patches includes non-security updates that should be applied to the instances. Applies to Linux instances only.
 	ApprovedPatchesEnableNonSecurity *bool `json:"approvedPatchesEnableNonSecurity,omitempty" tf:"approved_patches_enable_non_security,omitempty"`
 
+	// Indicates the compliance status of managed nodes for which security-related patches are available but were not approved. Supported for Windows Server managed nodes only. Valid values are COMPLIANT, NON_COMPLIANT.
+	AvailableSecurityUpdatesComplianceStatus *string `json:"availableSecurityUpdatesComplianceStatus,omitempty" tf:"available_security_updates_compliance_status,omitempty"`
+
 	// Description of the patch baseline.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -152,6 +155,9 @@ type PatchBaselineObservation struct {
 
 	// ARN of the baseline.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Indicates the compliance status of managed nodes for which security-related patches are available but were not approved. Supported for Windows Server managed nodes only. Valid values are COMPLIANT, NON_COMPLIANT.
+	AvailableSecurityUpdatesComplianceStatus *string `json:"availableSecurityUpdatesComplianceStatus,omitempty" tf:"available_security_updates_compliance_status,omitempty"`
 
 	// Description of the patch baseline.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -212,6 +218,10 @@ type PatchBaselineParameters struct {
 	// Whether the list of approved patches includes non-security updates that should be applied to the instances. Applies to Linux instances only.
 	// +kubebuilder:validation:Optional
 	ApprovedPatchesEnableNonSecurity *bool `json:"approvedPatchesEnableNonSecurity,omitempty" tf:"approved_patches_enable_non_security,omitempty"`
+
+	// Indicates the compliance status of managed nodes for which security-related patches are available but were not approved. Supported for Windows Server managed nodes only. Valid values are COMPLIANT, NON_COMPLIANT.
+	// +kubebuilder:validation:Optional
+	AvailableSecurityUpdatesComplianceStatus *string `json:"availableSecurityUpdatesComplianceStatus,omitempty" tf:"available_security_updates_compliance_status,omitempty"`
 
 	// Description of the patch baseline.
 	// +kubebuilder:validation:Optional

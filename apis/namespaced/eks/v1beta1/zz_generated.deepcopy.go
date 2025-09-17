@@ -1508,6 +1508,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(ComputeConfigInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DeletionProtection != nil {
+		in, out := &in.DeletionProtection, &out.DeletionProtection
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes
 		*out = make([]*string, len(*in))
@@ -1684,6 +1689,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeletionProtection != nil {
+		in, out := &in.DeletionProtection, &out.DeletionProtection
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes
 		*out = make([]*string, len(*in))
@@ -1843,6 +1853,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.ComputeConfig, &out.ComputeConfig
 		*out = new(ComputeConfigParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DeletionProtection != nil {
+		in, out := &in.DeletionProtection, &out.DeletionProtection
+		*out = new(bool)
+		**out = **in
 	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes

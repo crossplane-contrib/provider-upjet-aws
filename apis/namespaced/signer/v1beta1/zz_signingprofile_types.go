@@ -73,6 +73,10 @@ type SigningProfileInitParameters struct {
 	// The AWS Certificate Manager certificate that will be used to sign code with the new signing profile. See signing_material Block below for details.
 	SigningMaterial *SigningMaterialInitParameters `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
 
+	// Map of key-value pairs for signing. These can include any information that you want to use during signing.
+	// +mapType=granular
+	SigningParameters map[string]*string `json:"signingParameters,omitempty" tf:"signing_parameters,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -103,6 +107,10 @@ type SigningProfileObservation struct {
 
 	// The AWS Certificate Manager certificate that will be used to sign code with the new signing profile. See signing_material Block below for details.
 	SigningMaterial *SigningMaterialObservation `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
+
+	// Map of key-value pairs for signing. These can include any information that you want to use during signing.
+	// +mapType=granular
+	SigningParameters map[string]*string `json:"signingParameters,omitempty" tf:"signing_parameters,omitempty"`
 
 	// The status of the target signing profile.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -140,6 +148,11 @@ type SigningProfileParameters struct {
 	// The AWS Certificate Manager certificate that will be used to sign code with the new signing profile. See signing_material Block below for details.
 	// +kubebuilder:validation:Optional
 	SigningMaterial *SigningMaterialParameters `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
+
+	// Map of key-value pairs for signing. These can include any information that you want to use during signing.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SigningParameters map[string]*string `json:"signingParameters,omitempty" tf:"signing_parameters,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
