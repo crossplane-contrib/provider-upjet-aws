@@ -41,7 +41,14 @@ type GlobalReplicationGroupInitParameters struct {
 	// When creating, by default the Global Replication Group inherits the node type of the primary replication group.
 	CacheNodeType *string `json:"cacheNodeType,omitempty" tf:"cache_node_type,omitempty"`
 
-	// Redis version to use for the Global Replication Group.
+	// The name of the cache engine to be used for the clusters in this global replication group.
+	// When creating, by default the Global Replication Group inherits the engine of the primary replication group.
+	// If an engine is specified, the Global Replication Group and all member replication groups will be upgraded to this engine.
+	// Valid values are redis or valkey.
+	// Default is redis if engine_version is specified.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Engine version to use for the Global Replication Group.
 	// When creating, by default the Global Replication Group inherits the version of the primary replication group.
 	// If a version is specified, the Global Replication Group and all member replication groups will be upgraded to this version.
 	// Cannot be downgraded without replacing the Global Replication Group and all member replication groups.
@@ -61,7 +68,7 @@ type GlobalReplicationGroupInitParameters struct {
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// An ElastiCache Parameter Group to use for the Global Replication Group.
-	// Required when upgrading a major engine version, but will be ignored if left configured after the upgrade is complete.
+	// Required when upgrading an engine or major engine version, but will be ignored if left configured after the upgrade is complete.
 	// Specifying without a major version upgrade will fail.
 	// Note that ElastiCache creates a copy of this parameter group for each member replication group.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
@@ -105,9 +112,13 @@ type GlobalReplicationGroupObservation struct {
 	ClusterEnabled *bool `json:"clusterEnabled,omitempty" tf:"cluster_enabled,omitempty"`
 
 	// The name of the cache engine to be used for the clusters in this global replication group.
+	// When creating, by default the Global Replication Group inherits the engine of the primary replication group.
+	// If an engine is specified, the Global Replication Group and all member replication groups will be upgraded to this engine.
+	// Valid values are redis or valkey.
+	// Default is redis if engine_version is specified.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Redis version to use for the Global Replication Group.
+	// Engine version to use for the Global Replication Group.
 	// When creating, by default the Global Replication Group inherits the version of the primary replication group.
 	// If a version is specified, the Global Replication Group and all member replication groups will be upgraded to this version.
 	// Cannot be downgraded without replacing the Global Replication Group and all member replication groups.
@@ -140,7 +151,7 @@ type GlobalReplicationGroupObservation struct {
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// An ElastiCache Parameter Group to use for the Global Replication Group.
-	// Required when upgrading a major engine version, but will be ignored if left configured after the upgrade is complete.
+	// Required when upgrading an engine or major engine version, but will be ignored if left configured after the upgrade is complete.
 	// Specifying without a major version upgrade will fail.
 	// Note that ElastiCache creates a copy of this parameter group for each member replication group.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
@@ -170,7 +181,15 @@ type GlobalReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheNodeType *string `json:"cacheNodeType,omitempty" tf:"cache_node_type,omitempty"`
 
-	// Redis version to use for the Global Replication Group.
+	// The name of the cache engine to be used for the clusters in this global replication group.
+	// When creating, by default the Global Replication Group inherits the engine of the primary replication group.
+	// If an engine is specified, the Global Replication Group and all member replication groups will be upgraded to this engine.
+	// Valid values are redis or valkey.
+	// Default is redis if engine_version is specified.
+	// +kubebuilder:validation:Optional
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Engine version to use for the Global Replication Group.
 	// When creating, by default the Global Replication Group inherits the version of the primary replication group.
 	// If a version is specified, the Global Replication Group and all member replication groups will be upgraded to this version.
 	// Cannot be downgraded without replacing the Global Replication Group and all member replication groups.
@@ -194,7 +213,7 @@ type GlobalReplicationGroupParameters struct {
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// An ElastiCache Parameter Group to use for the Global Replication Group.
-	// Required when upgrading a major engine version, but will be ignored if left configured after the upgrade is complete.
+	// Required when upgrading an engine or major engine version, but will be ignored if left configured after the upgrade is complete.
 	// Specifying without a major version upgrade will fail.
 	// Note that ElastiCache creates a copy of this parameter group for each member replication group.
 	// +kubebuilder:validation:Optional

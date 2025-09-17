@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta2/instance
   labels:
-    testing.upbound.io/example-name: web
-  name: web
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     ami: ${data.aws_ami.ubuntu.id}

@@ -65,6 +65,9 @@ type DatabaseInitParameters struct {
 	// Key-value map of custom metadata properties for the database definition.
 	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Name of the workgroup.
+	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 }
 
 type DatabaseObservation struct {
@@ -97,6 +100,9 @@ type DatabaseObservation struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Name of the workgroup.
+	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 }
 
 type DatabaseParameters struct {
@@ -144,6 +150,10 @@ type DatabaseParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Name of the workgroup.
+	// +kubebuilder:validation:Optional
+	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 }
 
 type EncryptionConfigurationInitParameters struct {

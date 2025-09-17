@@ -277,6 +277,8 @@ type SpotInstanceRequestInitParameters struct {
 
 	EphemeralBlockDevice []SpotInstanceRequestEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
 
 	Hibernation *bool `json:"hibernation,omitempty" tf:"hibernation,omitempty"`
@@ -316,6 +318,9 @@ type SpotInstanceRequestInitParameters struct {
 	NetworkInterface []SpotInstanceRequestNetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	// The Spot Instance Request ID.
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
@@ -489,8 +494,6 @@ type SpotInstanceRequestNetworkInterfaceInitParameters struct {
 
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
-
 	// The Spot Instance Request ID.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 }
@@ -513,9 +516,6 @@ type SpotInstanceRequestNetworkInterfaceParameters struct {
 
 	// +kubebuilder:validation:Optional
 	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
@@ -550,6 +550,8 @@ type SpotInstanceRequestObservation struct {
 	EnclaveOptions *SpotInstanceRequestEnclaveOptionsObservation `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
 	EphemeralBlockDevice []SpotInstanceRequestEphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
 
@@ -600,7 +602,12 @@ type SpotInstanceRequestObservation struct {
 
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
+	// The Spot Instance Request ID.
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+
+	PrimaryNetworkInterface []SpotInstanceRequestPrimaryNetworkInterfaceObservation `json:"primaryNetworkInterface,omitempty" tf:"primary_network_interface,omitempty"`
 
 	// The Spot Instance Request ID.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
@@ -623,7 +630,6 @@ type SpotInstanceRequestObservation struct {
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
-	// Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -735,6 +741,9 @@ type SpotInstanceRequestParameters struct {
 	EphemeralBlockDevice []SpotInstanceRequestEphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -792,6 +801,10 @@ type SpotInstanceRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
+	// The Spot Instance Request ID.
+	// +kubebuilder:validation:Optional
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
@@ -803,7 +816,6 @@ type SpotInstanceRequestParameters struct {
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
-	// Spot Instance Requests support all the same arguments as aws_instance, with the addition of:
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
@@ -891,6 +903,19 @@ type SpotInstanceRequestParameters struct {
 
 	// +kubebuilder:validation:Optional
 	WaitForFulfillment *bool `json:"waitForFulfillment,omitempty" tf:"wait_for_fulfillment,omitempty"`
+}
+
+type SpotInstanceRequestPrimaryNetworkInterfaceInitParameters struct {
+}
+
+type SpotInstanceRequestPrimaryNetworkInterfaceObservation struct {
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// The Spot Instance Request ID.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+}
+
+type SpotInstanceRequestPrimaryNetworkInterfaceParameters struct {
 }
 
 type SpotInstanceRequestPrivateDNSNameOptionsInitParameters struct {

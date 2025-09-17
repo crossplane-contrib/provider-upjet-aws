@@ -1153,7 +1153,7 @@ type UserPoolInitParameters struct {
 	// Configuration block for configuring email. Detailed below.
 	EmailConfiguration *EmailConfigurationInitParameters `json:"emailConfiguration,omitempty" tf:"email_configuration,omitempty"`
 
-	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Detailed below.
+	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Effective only when mfa_configuration is ON or OPTIONAL. Detailed below.
 	EmailMfaConfiguration *EmailMfaConfigurationInitParameters `json:"emailMfaConfiguration,omitempty" tf:"email_mfa_configuration,omitempty"`
 
 	// String representing the email verification message. Conflicts with verification_message_template configuration block email_message argument.
@@ -1165,7 +1165,7 @@ type UserPoolInitParameters struct {
 	// Configuration block for the AWS Lambda triggers associated with the user pool. Detailed below.
 	LambdaConfig *LambdaConfigInitParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of sms_configuration or software_token_mfa_configuration to be configured).
+	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of email_mfa_configuration, sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of email_mfa_configuration, sms_configuration or software_token_mfa_configuration to be configured).
 	MfaConfiguration *string `json:"mfaConfiguration,omitempty" tf:"mfa_configuration,omitempty"`
 
 	// Name of the user pool.
@@ -1177,7 +1177,7 @@ type UserPoolInitParameters struct {
 	// String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code.
 	SMSAuthenticationMessage *string `json:"smsAuthenticationMessage,omitempty" tf:"sms_authentication_message,omitempty"`
 
-	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
+	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). SMS MFA is activated only when mfa_configuration is set to ON or OPTIONAL along with this block. Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
 	SMSConfiguration *SMSConfigurationInitParameters `json:"smsConfiguration,omitempty" tf:"sms_configuration,omitempty"`
 
 	// String representing the SMS verification message. Conflicts with verification_message_template configuration block sms_message argument.
@@ -1189,7 +1189,7 @@ type UserPoolInitParameters struct {
 	// Configuration block for information about the user pool sign in policy. Detailed below.
 	SignInPolicy *SignInPolicyInitParameters `json:"signInPolicy,omitempty" tf:"sign_in_policy,omitempty"`
 
-	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
+	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Effective only when mfa_configuration is ON or OPTIONAL. Detailed below.
 	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigurationInitParameters `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1256,7 +1256,7 @@ type UserPoolObservation struct {
 	// Configuration block for configuring email. Detailed below.
 	EmailConfiguration *EmailConfigurationObservation `json:"emailConfiguration,omitempty" tf:"email_configuration,omitempty"`
 
-	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Detailed below.
+	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Effective only when mfa_configuration is ON or OPTIONAL. Detailed below.
 	EmailMfaConfiguration *EmailMfaConfigurationObservation `json:"emailMfaConfiguration,omitempty" tf:"email_mfa_configuration,omitempty"`
 
 	// String representing the email verification message. Conflicts with verification_message_template configuration block email_message argument.
@@ -1280,7 +1280,7 @@ type UserPoolObservation struct {
 	// Date the user pool was last modified.
 	LastModifiedDate *string `json:"lastModifiedDate,omitempty" tf:"last_modified_date,omitempty"`
 
-	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of sms_configuration or software_token_mfa_configuration to be configured).
+	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of email_mfa_configuration, sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of email_mfa_configuration, sms_configuration or software_token_mfa_configuration to be configured).
 	MfaConfiguration *string `json:"mfaConfiguration,omitempty" tf:"mfa_configuration,omitempty"`
 
 	// Name of the user pool.
@@ -1296,7 +1296,7 @@ type UserPoolObservation struct {
 	// String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code.
 	SMSAuthenticationMessage *string `json:"smsAuthenticationMessage,omitempty" tf:"sms_authentication_message,omitempty"`
 
-	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
+	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). SMS MFA is activated only when mfa_configuration is set to ON or OPTIONAL along with this block. Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
 	SMSConfiguration *SMSConfigurationObservation `json:"smsConfiguration,omitempty" tf:"sms_configuration,omitempty"`
 
 	// String representing the SMS verification message. Conflicts with verification_message_template configuration block sms_message argument.
@@ -1308,7 +1308,7 @@ type UserPoolObservation struct {
 	// Configuration block for information about the user pool sign in policy. Detailed below.
 	SignInPolicy *SignInPolicyObservation `json:"signInPolicy,omitempty" tf:"sign_in_policy,omitempty"`
 
-	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
+	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Effective only when mfa_configuration is ON or OPTIONAL. Detailed below.
 	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigurationObservation `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1374,7 +1374,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailConfiguration *EmailConfigurationParameters `json:"emailConfiguration,omitempty" tf:"email_configuration,omitempty"`
 
-	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Detailed below.
+	// Configuration block for configuring email Multi-Factor Authentication (MFA); requires at least 2 account_recovery_setting entries; requires an email_configuration configuration block. Effective only when mfa_configuration is ON or OPTIONAL. Detailed below.
 	// +kubebuilder:validation:Optional
 	EmailMfaConfiguration *EmailMfaConfigurationParameters `json:"emailMfaConfiguration,omitempty" tf:"email_mfa_configuration,omitempty"`
 
@@ -1390,7 +1390,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaConfig *LambdaConfigParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of sms_configuration or software_token_mfa_configuration to be configured).
+	// Multi-Factor Authentication (MFA) configuration for the User Pool. Defaults of OFF. Valid values are OFF (MFA Tokens are not required), ON (MFA is required for all users to sign in; requires at least one of email_mfa_configuration, sms_configuration or software_token_mfa_configuration to be configured), or OPTIONAL (MFA Will be required only for individual users who have MFA Enabled; requires at least one of email_mfa_configuration, sms_configuration or software_token_mfa_configuration to be configured).
 	// +kubebuilder:validation:Optional
 	MfaConfiguration *string `json:"mfaConfiguration,omitempty" tf:"mfa_configuration,omitempty"`
 
@@ -1411,7 +1411,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SMSAuthenticationMessage *string `json:"smsAuthenticationMessage,omitempty" tf:"sms_authentication_message,omitempty"`
 
-	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
+	// Configuration block for Short Message Service (SMS) settings. Detailed below. These settings apply to SMS user verification and SMS Multi-Factor Authentication (MFA). SMS MFA is activated only when mfa_configuration is set to ON or OPTIONAL along with this block. Due to Cognito API restrictions, the SMS configuration cannot be removed without recreating the Cognito User Pool. For user data safety, this resource will ignore the removal of this configuration by disabling drift detection. To force resource recreation after this configuration has been applied, see the taint command.
 	// +kubebuilder:validation:Optional
 	SMSConfiguration *SMSConfigurationParameters `json:"smsConfiguration,omitempty" tf:"sms_configuration,omitempty"`
 
@@ -1427,7 +1427,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SignInPolicy *SignInPolicyParameters `json:"signInPolicy,omitempty" tf:"sign_in_policy,omitempty"`
 
-	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Detailed below.
+	// Configuration block for software token Mult-Factor Authentication (MFA) settings. Effective only when mfa_configuration is ON or OPTIONAL. Detailed below.
 	// +kubebuilder:validation:Optional
 	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigurationParameters `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 

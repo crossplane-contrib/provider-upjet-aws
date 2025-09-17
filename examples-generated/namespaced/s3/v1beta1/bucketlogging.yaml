@@ -15,7 +15,10 @@ spec:
     region: us-west-1
     targetBucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: log_bucket
+        testing.upbound.io/example-name: logging
+    targetObjectKeyFormat:
+    - partitionedPrefix:
+      - partitionDateSource: EventTime
     targetPrefix: log/
 
 ---
@@ -43,8 +46,8 @@ metadata:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
     meta.upbound.io/example-id: s3/v1beta1/bucketlogging
   labels:
-    testing.upbound.io/example-name: log_bucket
-  name: log-bucket
+    testing.upbound.io/example-name: logging
+  name: logging
   namespace: upbound-system
 spec:
   forProvider:
@@ -53,37 +56,18 @@ spec:
 ---
 
 apiVersion: s3.aws.m.upbound.io/v1beta1
-kind: BucketACL
+kind: BucketPolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1beta1/bucketlogging
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: logging
+  name: logging
   namespace: upbound-system
 spec:
   forProvider:
-    acl: private
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    region: us-west-1
-
----
-
-apiVersion: s3.aws.m.upbound.io/v1beta1
-kind: BucketACL
-metadata:
-  annotations:
-    meta.upbound.io/example-id: s3/v1beta1/bucketlogging
-  labels:
-    testing.upbound.io/example-name: log_bucket_acl
-  name: log-bucket-acl
-  namespace: upbound-system
-spec:
-  forProvider:
-    acl: log-delivery-write
-    bucketSelector:
-      matchLabels:
-        testing.upbound.io/example-name: log_bucket
+        testing.upbound.io/example-name: logging
+    policy: ${data.aws_iam_policy_document.logging_bucket_policy.json}
     region: us-west-1

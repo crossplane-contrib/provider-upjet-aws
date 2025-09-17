@@ -152,6 +152,13 @@ spec:
                   thing:
                     description: The name of the thing.
                     type: string
+                  thingPrincipalType:
+                    description: The type of relationship to specify when attaching
+                      a principal to a thing. Valid values are EXCLUSIVE_THING (the
+                      thing will be the only one attached to the principal) or NON_EXCLUSIVE_THING
+                      (multiple things can be attached to the principal). Defaults
+                      to NON_EXCLUSIVE_THING.
+                    type: string
                   thingRef:
                     description: Reference to a Thing in iot to populate thing.
                     properties:
@@ -335,6 +342,13 @@ spec:
                   thing:
                     description: The name of the thing.
                     type: string
+                  thingPrincipalType:
+                    description: The type of relationship to specify when attaching
+                      a principal to a thing. Valid values are EXCLUSIVE_THING (the
+                      thing will be the only one attached to the principal) or NON_EXCLUSIVE_THING
+                      (multiple things can be attached to the principal). Defaults
+                      to NON_EXCLUSIVE_THING.
+                    type: string
                   thingRef:
                     description: Reference to a Thing in iot to populate thing.
                     properties:
@@ -493,6 +507,13 @@ spec:
                     type: string
                   thing:
                     description: The name of the thing.
+                    type: string
+                  thingPrincipalType:
+                    description: The type of relationship to specify when attaching
+                      a principal to a thing. Valid values are EXCLUSIVE_THING (the
+                      thing will be the only one attached to the principal) or NON_EXCLUSIVE_THING
+                      (multiple things can be attached to the principal). Defaults
+                      to NON_EXCLUSIVE_THING.
                     type: string
                 type: object
               conditions:

@@ -2064,8 +2064,18 @@ func (in *VPCAttachmentOptionsInitParameters) DeepCopyInto(out *VPCAttachmentOpt
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DNSSupport != nil {
+		in, out := &in.DNSSupport, &out.DNSSupport
+		*out = new(bool)
+		**out = **in
+	}
 	if in.IPv6Support != nil {
 		in, out := &in.IPv6Support, &out.IPv6Support
+		*out = new(bool)
+		**out = **in
+	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
 		*out = new(bool)
 		**out = **in
 	}
@@ -2089,8 +2099,18 @@ func (in *VPCAttachmentOptionsObservation) DeepCopyInto(out *VPCAttachmentOption
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DNSSupport != nil {
+		in, out := &in.DNSSupport, &out.DNSSupport
+		*out = new(bool)
+		**out = **in
+	}
 	if in.IPv6Support != nil {
 		in, out := &in.IPv6Support, &out.IPv6Support
+		*out = new(bool)
+		**out = **in
+	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
 		*out = new(bool)
 		**out = **in
 	}
@@ -2114,8 +2134,18 @@ func (in *VPCAttachmentOptionsParameters) DeepCopyInto(out *VPCAttachmentOptions
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DNSSupport != nil {
+		in, out := &in.DNSSupport, &out.DNSSupport
+		*out = new(bool)
+		**out = **in
+	}
 	if in.IPv6Support != nil {
 		in, out := &in.IPv6Support, &out.IPv6Support
+		*out = new(bool)
+		**out = **in
+	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
 		*out = new(bool)
 		**out = **in
 	}

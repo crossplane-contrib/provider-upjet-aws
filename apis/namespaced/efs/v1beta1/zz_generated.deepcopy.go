@@ -1545,6 +1545,16 @@ func (in *MountTargetInitParameters) DeepCopyInto(out *MountTargetInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPv6Address != nil {
+		in, out := &in.IPv6Address, &out.IPv6Address
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityGroups != nil {
 		in, out := &in.SecurityGroups, &out.SecurityGroups
 		*out = make([]*string, len(*in))
@@ -1665,6 +1675,16 @@ func (in *MountTargetObservation) DeepCopyInto(out *MountTargetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPv6Address != nil {
+		in, out := &in.IPv6Address, &out.IPv6Address
+		*out = new(string)
+		**out = **in
+	}
 	if in.MountTargetDNSName != nil {
 		in, out := &in.MountTargetDNSName, &out.MountTargetDNSName
 		*out = new(string)
@@ -1733,6 +1753,16 @@ func (in *MountTargetParameters) DeepCopyInto(out *MountTargetParameters) {
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPv6Address != nil {
+		in, out := &in.IPv6Address, &out.IPv6Address
 		*out = new(string)
 		**out = **in
 	}

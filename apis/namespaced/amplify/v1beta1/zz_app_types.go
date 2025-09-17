@@ -86,7 +86,7 @@ type AppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArnSelector *v1.NamespacedSelector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
-	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	// Used to configure the Amplify Application build instance compute type. See job_config Block for details.
 	JobConfig *JobConfigInitParameters `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
 
 	// Name for an Amplify app.
@@ -161,7 +161,7 @@ type AppObservation struct {
 	// Unique ID of the Amplify app.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	// Used to configure the Amplify Application build instance compute type. See job_config Block for details.
 	JobConfig *JobConfigObservation `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
 
 	// Name for an Amplify app.
@@ -277,7 +277,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArnSelector *v1.NamespacedSelector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
-	// Used to configure the Amplify Application build settings. See job_config Block for details.
+	// Used to configure the Amplify Application build instance compute type. See job_config Block for details.
 	// +kubebuilder:validation:Optional
 	JobConfig *JobConfigParameters `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
 

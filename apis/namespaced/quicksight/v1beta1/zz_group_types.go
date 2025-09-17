@@ -16,7 +16,7 @@ import (
 
 type GroupInitParameters struct {
 
-	// The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	// AWS account ID.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
 	// A description for the group.
@@ -34,7 +34,7 @@ type GroupObservation struct {
 	// Amazon Resource Name (ARN) of group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	// AWS account ID.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
 	// A description for the group.
@@ -55,7 +55,7 @@ type GroupObservation struct {
 
 type GroupParameters struct {
 
-	// The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	// AWS account ID.
 	// +kubebuilder:validation:Optional
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 

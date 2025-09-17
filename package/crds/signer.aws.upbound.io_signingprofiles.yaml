@@ -498,6 +498,13 @@ spec:
                           that is used to sign your code.
                         type: string
                     type: object
+                  signingParameters:
+                    additionalProperties:
+                      type: string
+                    description: Map of key-value pairs for signing. These can include
+                      any information that you want to use during signing.
+                    type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     additionalProperties:
                       type: string
@@ -547,6 +554,13 @@ spec:
                           that is used to sign your code.
                         type: string
                     type: object
+                  signingParameters:
+                    additionalProperties:
+                      type: string
+                    description: Map of key-value pairs for signing. These can include
+                      any information that you want to use during signing.
+                    type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     additionalProperties:
                       type: string
@@ -707,6 +721,13 @@ spec:
                           that is used to sign your code.
                         type: string
                     type: object
+                  signingParameters:
+                    additionalProperties:
+                      type: string
+                    description: Map of key-value pairs for signing. These can include
+                      any information that you want to use during signing.
+                    type: object
+                    x-kubernetes-map-type: granular
                   status:
                     description: The status of the target signing profile.
                     type: string

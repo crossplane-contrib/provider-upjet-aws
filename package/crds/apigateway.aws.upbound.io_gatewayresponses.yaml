@@ -75,7 +75,7 @@ spec:
                 properties:
                   region:
                     description: |-
-                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region where this resource will be managed. See the AWS Documentation for supported values. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   responseParameters:
@@ -93,6 +93,7 @@ spec:
                     x-kubernetes-map-type: granular
                   responseType:
                     description: Response type of the associated GatewayResponse.
+                      See the AWS Documentation for supported values.
                     type: string
                   restApiId:
                     description: String identifier of the associated REST API.
@@ -207,6 +208,7 @@ spec:
                     x-kubernetes-map-type: granular
                   responseType:
                     description: Response type of the associated GatewayResponse.
+                      See the AWS Documentation for supported values.
                     type: string
                   restApiId:
                     description: String identifier of the associated REST API.
@@ -391,7 +393,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region where this resource will be managed. See the AWS Documentation for supported values. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   responseParameters:
@@ -409,6 +411,7 @@ spec:
                     x-kubernetes-map-type: granular
                   responseType:
                     description: Response type of the associated GatewayResponse.
+                      See the AWS Documentation for supported values.
                     type: string
                   restApiId:
                     description: String identifier of the associated REST API.

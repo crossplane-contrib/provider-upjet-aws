@@ -143,6 +143,9 @@ type IcebergConfigurationInitParameters struct {
 
 	// The number of days that orphan files should be retained before file deletion. Defaults to 3.
 	OrphanFileRetentionPeriodInDays *float64 `json:"orphanFileRetentionPeriodInDays,omitempty" tf:"orphan_file_retention_period_in_days,omitempty"`
+
+	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 }
 
 type IcebergConfigurationObservation struct {
@@ -152,6 +155,9 @@ type IcebergConfigurationObservation struct {
 
 	// The number of days that orphan files should be retained before file deletion. Defaults to 3.
 	OrphanFileRetentionPeriodInDays *float64 `json:"orphanFileRetentionPeriodInDays,omitempty" tf:"orphan_file_retention_period_in_days,omitempty"`
+
+	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 }
 
 type IcebergConfigurationParameters struct {
@@ -163,6 +169,10 @@ type IcebergConfigurationParameters struct {
 	// The number of days that orphan files should be retained before file deletion. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	OrphanFileRetentionPeriodInDays *float64 `json:"orphanFileRetentionPeriodInDays,omitempty" tf:"orphan_file_retention_period_in_days,omitempty"`
+
+	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// +kubebuilder:validation:Optional
+	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 }
 
 type OrphanFileDeletionConfigurationInitParameters struct {
@@ -192,6 +202,9 @@ type RetentionConfigurationIcebergConfigurationInitParameters struct {
 	// The number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
 	NumberOfSnapshotsToRetain *float64 `json:"numberOfSnapshotsToRetain,omitempty" tf:"number_of_snapshots_to_retain,omitempty"`
 
+	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
+
 	// The number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
 	SnapshotRetentionPeriodInDays *float64 `json:"snapshotRetentionPeriodInDays,omitempty" tf:"snapshot_retention_period_in_days,omitempty"`
 }
@@ -203,6 +216,9 @@ type RetentionConfigurationIcebergConfigurationObservation struct {
 
 	// The number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
 	NumberOfSnapshotsToRetain *float64 `json:"numberOfSnapshotsToRetain,omitempty" tf:"number_of_snapshots_to_retain,omitempty"`
+
+	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 
 	// The number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
 	SnapshotRetentionPeriodInDays *float64 `json:"snapshotRetentionPeriodInDays,omitempty" tf:"snapshot_retention_period_in_days,omitempty"`
@@ -217,6 +233,10 @@ type RetentionConfigurationIcebergConfigurationParameters struct {
 	// The number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
 	// +kubebuilder:validation:Optional
 	NumberOfSnapshotsToRetain *float64 `json:"numberOfSnapshotsToRetain,omitempty" tf:"number_of_snapshots_to_retain,omitempty"`
+
+	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// +kubebuilder:validation:Optional
+	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 
 	// The number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
 	// +kubebuilder:validation:Optional
