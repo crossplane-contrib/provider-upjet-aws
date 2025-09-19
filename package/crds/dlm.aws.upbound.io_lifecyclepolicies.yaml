@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  defaultPolicy:
+                    description: Specify the type of default policy to create. valid
+                      values are VOLUME or INSTANCE.
+                    type: string
                   description:
                     description: A description for the DLM lifecycle policy.
                     type: string
@@ -232,6 +236,16 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        copyTags:
+                          description: Indicates whether the policy should copy tags
+                            from the source resource to the snapshot or AMI. Default
+                            value is false.
+                          type: boolean
+                        createInterval:
+                          description: How often the policy should run and create
+                            snapshots or AMIs. valid values range from 1 to 7. Default
+                            value is 1.
+                          type: number
                         eventSource:
                           description: The event that triggers the event-based policy.
                             This parameter is required for event-based policies only.
@@ -276,6 +290,37 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exclusions:
+                          description: Specifies exclusion parameters for volumes
+                            or instances for which you do not want to create snapshots
+                            or AMIs.  See the exclusions configuration block.
+                          items:
+                            properties:
+                              excludeBootVolumes:
+                                description: Indicates whether to exclude volumes
+                                  that are attached to instances as the boot volume.
+                                  To exclude boot volumes, specify true.
+                                type: boolean
+                              excludeTags:
+                                additionalProperties:
+                                  type: string
+                                description: Map specifies whether to exclude volumes
+                                  that have specific tags.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              excludeVolumeTypes:
+                                description: List specifies the volume types to exclude.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        extendDeletion:
+                          description: snapshot or AMI retention behavior for the
+                            policy if the source volume or instance is deleted, or
+                            if the policy enters the error, disabled, or deleted state.
+                            Default value is false.
+                          type: boolean
                         parameters:
                           description: A set of optional parameters for snapshot and
                             AMI lifecycle policies. See the parameters configuration
@@ -298,6 +343,10 @@ spec:
                                 type: boolean
                             type: object
                           type: array
+                        policyLanguage:
+                          description: Type of policy to create. SIMPLIFIED To create
+                            a default policy. STANDARD To create a custom policy.
+                          type: string
                         policyType:
                           description: The valid target resource types and actions
                             a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to
@@ -312,28 +361,81 @@ spec:
                           description: The location of the resources to backup. If
                             the source resources are located in an AWS Region, specify
                             CLOUD. If the source resources are located on an Outpost
-                            in your account, specify OUTPOST. If you specify OUTPOST,
-                            Amazon Data Lifecycle Manager backs up all resources of
-                            the specified type with matching target tags across all
-                            of the Outposts in your account. Valid values are CLOUD
-                            and OUTPOST.
+                            in your account, specify OUTPOST. If the source resources
+                            are located in a Local Zone, specify LOCAL_ZONE. Valid
+                            values are CLOUD, LOCAL_ZONE, and OUTPOST.
                           items:
                             type: string
                           type: array
+                        resourceType:
+                          description: Type of default policy to create. Valid values
+                            are VOLUME and INSTANCE.
+                          type: string
                         resourceTypes:
                           description: A list of resource types that should be targeted
                             by the lifecycle policy. Valid values are VOLUME and INSTANCE.
                           items:
                             type: string
                           type: array
+                        retainInterval:
+                          description: Specifies how long the policy should retain
+                            snapshots or AMIs before deleting them. valid values range
+                            from 2 to 14. Default value is 7.
+                          type: number
                         schedule:
                           description: See the schedule configuration block.
                           items:
                             properties:
+                              archiveRule:
+                                description: Specifies a snapshot archiving rule for
+                                  a schedule. See archive_rule block.
+                                items:
+                                  properties:
+                                    archiveRetainRule:
+                                      description: Information about the retention
+                                        period for the snapshot archiving rule. See
+                                        the archive_retain_rule block.
+                                      items:
+                                        properties:
+                                          retentionArchiveTier:
+                                            description: Information about retention
+                                              period in the Amazon EBS Snapshots Archive.
+                                              See the retention_archive_tier block.
+                                            items:
+                                              properties:
+                                                count:
+                                                  description: Specifies the number
+                                                    of oldest AMIs to deprecate. Must
+                                                    be an integer between 1 and 1000.
+                                                    Conflicts with interval and interval_unit.
+                                                  type: number
+                                                interval:
+                                                  description: How often this lifecycle
+                                                    policy should be evaluated. 1,
+                                                    2,3,4,6,8,12 or 24 are valid values.
+                                                    Conflicts with cron_expression.
+                                                    If set, interval_unit and times
+                                                    must also be set.
+                                                  type: number
+                                                intervalUnit:
+                                                  description: The unit for how often
+                                                    the lifecycle policy should be
+                                                    evaluated. HOURS is currently
+                                                    the only allowed value and also
+                                                    the default value. Conflicts with
+                                                    cron_expression. Must be set if
+                                                    interval is set.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               copyTags:
-                                description: Copy all user-defined tags on a source
-                                  volume to snapshots of the volume created by this
-                                  policy.
+                                description: Indicates whether the policy should copy
+                                  tags from the source resource to the snapshot or
+                                  AMI. Default value is false.
                                 type: boolean
                               createRule:
                                 description: See the create_rule block. Max of 1 per
@@ -376,6 +478,69 @@ spec:
                                         or in the Region of that Outpost. Valid values
                                         are CLOUD and OUTPOST_LOCAL.
                                       type: string
+                                    scripts:
+                                      description: Specifies pre and/or post scripts
+                                        for a snapshot lifecycle policy that targets
+                                        instances. Valid only when resource_type is
+                                        INSTANCE. See the scripts configuration block.
+                                      items:
+                                        properties:
+                                          executeOperationOnScriptFailure:
+                                            description: Indicates whether Amazon
+                                              Data Lifecycle Manager should default
+                                              to crash-consistent snapshots if the
+                                              pre script fails. The default is true.
+                                            type: boolean
+                                          executionHandler:
+                                            description: The SSM document that includes
+                                              the pre and/or post scripts to run.
+                                              In case automating VSS backups, specify
+                                              AWS_VSS_BACKUP. In case automating application-consistent
+                                              snapshots for SAP HANA workloads, specify
+                                              AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA.
+                                              If you are using a custom SSM document
+                                              that you own, specify either the name
+                                              or ARN of the SSM document.
+                                            type: string
+                                          executionHandlerService:
+                                            description: Indicates the service used
+                                              to execute the pre and/or post scripts.
+                                              If using custom SSM documents or automating
+                                              application-consistent snapshots of
+                                              SAP HANA workloads, specify AWS_SYSTEMS_MANAGER.
+                                              In case automating VSS Backups, omit
+                                              this parameter. The default is AWS_SYSTEMS_MANAGER.
+                                            type: string
+                                          executionTimeout:
+                                            description: Specifies a timeout period,
+                                              in seconds, after which Amazon Data
+                                              Lifecycle Manager fails the script run
+                                              attempt if it has not completed. In
+                                              case automating VSS Backups, omit this
+                                              parameter. The default is 10.
+                                            type: number
+                                          maximumRetryCount:
+                                            description: Specifies the number of times
+                                              Amazon Data Lifecycle Manager should
+                                              retry scripts that fail. Must be an
+                                              integer between 0 and 3. The default
+                                              is 0.
+                                            type: number
+                                          stages:
+                                            description: 'List to indicate which scripts
+                                              Amazon Data Lifecycle Manager should
+                                              run on target instances. Pre scripts
+                                              run before Amazon Data Lifecycle Manager
+                                              initiates snapshot creation. Post scripts
+                                              run after Amazon Data Lifecycle Manager
+                                              initiates snapshot creation. Valid values:
+                                              PRE and POST. The default is PRE and
+                                              POST'
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
                                     times:
                                       description: A list of times in 24 hour clock
                                         format that sets when the lifecycle policy
@@ -475,9 +640,9 @@ spec:
                                           type: object
                                       type: object
                                     copyTags:
-                                      description: Copy all user-defined tags on a
-                                        source volume to snapshots of the volume created
-                                        by this policy.
+                                      description: Indicates whether the policy should
+                                        copy tags from the source resource to the
+                                        snapshot or AMI. Default value is false.
                                       type: boolean
                                     deprecateRule:
                                       description: See the deprecate_rule block. Max
@@ -536,6 +701,12 @@ spec:
                                       description: The target Region or the Amazon
                                         Resource Name (ARN) of the target Outpost
                                         for the snapshot copies.
+                                      type: string
+                                    targetRegion:
+                                      description: Use only for DLM policies of policy_type=IMAGE_MANAGEMENT.
+                                        The target Region or the Amazon Resource Name
+                                        (ARN) of the target Outpost for the snapshot
+                                        copies.
                                       type: string
                                   type: object
                                 type: array
@@ -678,7 +849,9 @@ spec:
                             type: string
                           description: A map of tag keys and their values. Any resources
                             that match the resource_types and are tagged with any
-                            of these tags will be targeted.
+                            of these tags will be targeted. Required when policy_type
+                            is EBS_SNAPSHOT_MANAGEMENT or IMAGE_MANAGEMENT. Must not
+                            be specified when policy_type is EVENT_BASED_POLICY.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
@@ -715,6 +888,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  defaultPolicy:
+                    description: Specify the type of default policy to create. valid
+                      values are VOLUME or INSTANCE.
+                    type: string
                   description:
                     description: A description for the DLM lifecycle policy.
                     type: string
@@ -874,6 +1051,16 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        copyTags:
+                          description: Indicates whether the policy should copy tags
+                            from the source resource to the snapshot or AMI. Default
+                            value is false.
+                          type: boolean
+                        createInterval:
+                          description: How often the policy should run and create
+                            snapshots or AMIs. valid values range from 1 to 7. Default
+                            value is 1.
+                          type: number
                         eventSource:
                           description: The event that triggers the event-based policy.
                             This parameter is required for event-based policies only.
@@ -918,6 +1105,37 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exclusions:
+                          description: Specifies exclusion parameters for volumes
+                            or instances for which you do not want to create snapshots
+                            or AMIs.  See the exclusions configuration block.
+                          items:
+                            properties:
+                              excludeBootVolumes:
+                                description: Indicates whether to exclude volumes
+                                  that are attached to instances as the boot volume.
+                                  To exclude boot volumes, specify true.
+                                type: boolean
+                              excludeTags:
+                                additionalProperties:
+                                  type: string
+                                description: Map specifies whether to exclude volumes
+                                  that have specific tags.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              excludeVolumeTypes:
+                                description: List specifies the volume types to exclude.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        extendDeletion:
+                          description: snapshot or AMI retention behavior for the
+                            policy if the source volume or instance is deleted, or
+                            if the policy enters the error, disabled, or deleted state.
+                            Default value is false.
+                          type: boolean
                         parameters:
                           description: A set of optional parameters for snapshot and
                             AMI lifecycle policies. See the parameters configuration
@@ -940,6 +1158,10 @@ spec:
                                 type: boolean
                             type: object
                           type: array
+                        policyLanguage:
+                          description: Type of policy to create. SIMPLIFIED To create
+                            a default policy. STANDARD To create a custom policy.
+                          type: string
                         policyType:
                           description: The valid target resource types and actions
                             a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to
@@ -954,28 +1176,81 @@ spec:
                           description: The location of the resources to backup. If
                             the source resources are located in an AWS Region, specify
                             CLOUD. If the source resources are located on an Outpost
-                            in your account, specify OUTPOST. If you specify OUTPOST,
-                            Amazon Data Lifecycle Manager backs up all resources of
-                            the specified type with matching target tags across all
-                            of the Outposts in your account. Valid values are CLOUD
-                            and OUTPOST.
+                            in your account, specify OUTPOST. If the source resources
+                            are located in a Local Zone, specify LOCAL_ZONE. Valid
+                            values are CLOUD, LOCAL_ZONE, and OUTPOST.
                           items:
                             type: string
                           type: array
+                        resourceType:
+                          description: Type of default policy to create. Valid values
+                            are VOLUME and INSTANCE.
+                          type: string
                         resourceTypes:
                           description: A list of resource types that should be targeted
                             by the lifecycle policy. Valid values are VOLUME and INSTANCE.
                           items:
                             type: string
                           type: array
+                        retainInterval:
+                          description: Specifies how long the policy should retain
+                            snapshots or AMIs before deleting them. valid values range
+                            from 2 to 14. Default value is 7.
+                          type: number
                         schedule:
                           description: See the schedule configuration block.
                           items:
                             properties:
+                              archiveRule:
+                                description: Specifies a snapshot archiving rule for
+                                  a schedule. See archive_rule block.
+                                items:
+                                  properties:
+                                    archiveRetainRule:
+                                      description: Information about the retention
+                                        period for the snapshot archiving rule. See
+                                        the archive_retain_rule block.
+                                      items:
+                                        properties:
+                                          retentionArchiveTier:
+                                            description: Information about retention
+                                              period in the Amazon EBS Snapshots Archive.
+                                              See the retention_archive_tier block.
+                                            items:
+                                              properties:
+                                                count:
+                                                  description: Specifies the number
+                                                    of oldest AMIs to deprecate. Must
+                                                    be an integer between 1 and 1000.
+                                                    Conflicts with interval and interval_unit.
+                                                  type: number
+                                                interval:
+                                                  description: How often this lifecycle
+                                                    policy should be evaluated. 1,
+                                                    2,3,4,6,8,12 or 24 are valid values.
+                                                    Conflicts with cron_expression.
+                                                    If set, interval_unit and times
+                                                    must also be set.
+                                                  type: number
+                                                intervalUnit:
+                                                  description: The unit for how often
+                                                    the lifecycle policy should be
+                                                    evaluated. HOURS is currently
+                                                    the only allowed value and also
+                                                    the default value. Conflicts with
+                                                    cron_expression. Must be set if
+                                                    interval is set.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               copyTags:
-                                description: Copy all user-defined tags on a source
-                                  volume to snapshots of the volume created by this
-                                  policy.
+                                description: Indicates whether the policy should copy
+                                  tags from the source resource to the snapshot or
+                                  AMI. Default value is false.
                                 type: boolean
                               createRule:
                                 description: See the create_rule block. Max of 1 per
@@ -1018,6 +1293,69 @@ spec:
                                         or in the Region of that Outpost. Valid values
                                         are CLOUD and OUTPOST_LOCAL.
                                       type: string
+                                    scripts:
+                                      description: Specifies pre and/or post scripts
+                                        for a snapshot lifecycle policy that targets
+                                        instances. Valid only when resource_type is
+                                        INSTANCE. See the scripts configuration block.
+                                      items:
+                                        properties:
+                                          executeOperationOnScriptFailure:
+                                            description: Indicates whether Amazon
+                                              Data Lifecycle Manager should default
+                                              to crash-consistent snapshots if the
+                                              pre script fails. The default is true.
+                                            type: boolean
+                                          executionHandler:
+                                            description: The SSM document that includes
+                                              the pre and/or post scripts to run.
+                                              In case automating VSS backups, specify
+                                              AWS_VSS_BACKUP. In case automating application-consistent
+                                              snapshots for SAP HANA workloads, specify
+                                              AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA.
+                                              If you are using a custom SSM document
+                                              that you own, specify either the name
+                                              or ARN of the SSM document.
+                                            type: string
+                                          executionHandlerService:
+                                            description: Indicates the service used
+                                              to execute the pre and/or post scripts.
+                                              If using custom SSM documents or automating
+                                              application-consistent snapshots of
+                                              SAP HANA workloads, specify AWS_SYSTEMS_MANAGER.
+                                              In case automating VSS Backups, omit
+                                              this parameter. The default is AWS_SYSTEMS_MANAGER.
+                                            type: string
+                                          executionTimeout:
+                                            description: Specifies a timeout period,
+                                              in seconds, after which Amazon Data
+                                              Lifecycle Manager fails the script run
+                                              attempt if it has not completed. In
+                                              case automating VSS Backups, omit this
+                                              parameter. The default is 10.
+                                            type: number
+                                          maximumRetryCount:
+                                            description: Specifies the number of times
+                                              Amazon Data Lifecycle Manager should
+                                              retry scripts that fail. Must be an
+                                              integer between 0 and 3. The default
+                                              is 0.
+                                            type: number
+                                          stages:
+                                            description: 'List to indicate which scripts
+                                              Amazon Data Lifecycle Manager should
+                                              run on target instances. Pre scripts
+                                              run before Amazon Data Lifecycle Manager
+                                              initiates snapshot creation. Post scripts
+                                              run after Amazon Data Lifecycle Manager
+                                              initiates snapshot creation. Valid values:
+                                              PRE and POST. The default is PRE and
+                                              POST'
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
                                     times:
                                       description: A list of times in 24 hour clock
                                         format that sets when the lifecycle policy
@@ -1117,9 +1455,9 @@ spec:
                                           type: object
                                       type: object
                                     copyTags:
-                                      description: Copy all user-defined tags on a
-                                        source volume to snapshots of the volume created
-                                        by this policy.
+                                      description: Indicates whether the policy should
+                                        copy tags from the source resource to the
+                                        snapshot or AMI. Default value is false.
                                       type: boolean
                                     deprecateRule:
                                       description: See the deprecate_rule block. Max
@@ -1178,6 +1516,12 @@ spec:
                                       description: The target Region or the Amazon
                                         Resource Name (ARN) of the target Outpost
                                         for the snapshot copies.
+                                      type: string
+                                    targetRegion:
+                                      description: Use only for DLM policies of policy_type=IMAGE_MANAGEMENT.
+                                        The target Region or the Amazon Resource Name
+                                        (ARN) of the target Outpost for the snapshot
+                                        copies.
                                       type: string
                                   type: object
                                 type: array
@@ -1320,7 +1664,9 @@ spec:
                             type: string
                           description: A map of tag keys and their values. Any resources
                             that match the resource_types and are tagged with any
-                            of these tags will be targeted.
+                            of these tags will be targeted. Required when policy_type
+                            is EBS_SNAPSHOT_MANAGEMENT or IMAGE_MANAGEMENT. Must not
+                            be specified when policy_type is EVENT_BASED_POLICY.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object
@@ -1440,6 +1786,10 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the DLM Lifecycle Policy.
                     type: string
+                  defaultPolicy:
+                    description: Specify the type of default policy to create. valid
+                      values are VOLUME or INSTANCE.
+                    type: string
                   description:
                     description: A description for the DLM lifecycle policy.
                     type: string
@@ -1528,6 +1878,16 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        copyTags:
+                          description: Indicates whether the policy should copy tags
+                            from the source resource to the snapshot or AMI. Default
+                            value is false.
+                          type: boolean
+                        createInterval:
+                          description: How often the policy should run and create
+                            snapshots or AMIs. valid values range from 1 to 7. Default
+                            value is 1.
+                          type: number
                         eventSource:
                           description: The event that triggers the event-based policy.
                             This parameter is required for event-based policies only.
@@ -1572,6 +1932,37 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exclusions:
+                          description: Specifies exclusion parameters for volumes
+                            or instances for which you do not want to create snapshots
+                            or AMIs.  See the exclusions configuration block.
+                          items:
+                            properties:
+                              excludeBootVolumes:
+                                description: Indicates whether to exclude volumes
+                                  that are attached to instances as the boot volume.
+                                  To exclude boot volumes, specify true.
+                                type: boolean
+                              excludeTags:
+                                additionalProperties:
+                                  type: string
+                                description: Map specifies whether to exclude volumes
+                                  that have specific tags.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              excludeVolumeTypes:
+                                description: List specifies the volume types to exclude.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        extendDeletion:
+                          description: snapshot or AMI retention behavior for the
+                            policy if the source volume or instance is deleted, or
+                            if the policy enters the error, disabled, or deleted state.
+                            Default value is false.
+                          type: boolean
                         parameters:
                           description: A set of optional parameters for snapshot and
                             AMI lifecycle policies. See the parameters configuration
@@ -1594,6 +1985,10 @@ spec:
                                 type: boolean
                             type: object
                           type: array
+                        policyLanguage:
+                          description: Type of policy to create. SIMPLIFIED To create
+                            a default policy. STANDARD To create a custom policy.
+                          type: string
                         policyType:
                           description: The valid target resource types and actions
                             a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to
@@ -1608,28 +2003,81 @@ spec:
                           description: The location of the resources to backup. If
                             the source resources are located in an AWS Region, specify
                             CLOUD. If the source resources are located on an Outpost
-                            in your account, specify OUTPOST. If you specify OUTPOST,
-                            Amazon Data Lifecycle Manager backs up all resources of
-                            the specified type with matching target tags across all
-                            of the Outposts in your account. Valid values are CLOUD
-                            and OUTPOST.
+                            in your account, specify OUTPOST. If the source resources
+                            are located in a Local Zone, specify LOCAL_ZONE. Valid
+                            values are CLOUD, LOCAL_ZONE, and OUTPOST.
                           items:
                             type: string
                           type: array
+                        resourceType:
+                          description: Type of default policy to create. Valid values
+                            are VOLUME and INSTANCE.
+                          type: string
                         resourceTypes:
                           description: A list of resource types that should be targeted
                             by the lifecycle policy. Valid values are VOLUME and INSTANCE.
                           items:
                             type: string
                           type: array
+                        retainInterval:
+                          description: Specifies how long the policy should retain
+                            snapshots or AMIs before deleting them. valid values range
+                            from 2 to 14. Default value is 7.
+                          type: number
                         schedule:
                           description: See the schedule configuration block.
                           items:
                             properties:
+                              archiveRule:
+                                description: Specifies a snapshot archiving rule for
+                                  a schedule. See archive_rule block.
+                                items:
+                                  properties:
+                                    archiveRetainRule:
+                                      description: Information about the retention
+                                        period for the snapshot archiving rule. See
+                                        the archive_retain_rule block.
+                                      items:
+                                        properties:
+                                          retentionArchiveTier:
+                                            description: Information about retention
+                                              period in the Amazon EBS Snapshots Archive.
+                                              See the retention_archive_tier block.
+                                            items:
+                                              properties:
+                                                count:
+                                                  description: Specifies the number
+                                                    of oldest AMIs to deprecate. Must
+                                                    be an integer between 1 and 1000.
+                                                    Conflicts with interval and interval_unit.
+                                                  type: number
+                                                interval:
+                                                  description: How often this lifecycle
+                                                    policy should be evaluated. 1,
+                                                    2,3,4,6,8,12 or 24 are valid values.
+                                                    Conflicts with cron_expression.
+                                                    If set, interval_unit and times
+                                                    must also be set.
+                                                  type: number
+                                                intervalUnit:
+                                                  description: The unit for how often
+                                                    the lifecycle policy should be
+                                                    evaluated. HOURS is currently
+                                                    the only allowed value and also
+                                                    the default value. Conflicts with
+                                                    cron_expression. Must be set if
+                                                    interval is set.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               copyTags:
-                                description: Copy all user-defined tags on a source
-                                  volume to snapshots of the volume created by this
-                                  policy.
+                                description: Indicates whether the policy should copy
+                                  tags from the source resource to the snapshot or
+                                  AMI. Default value is false.
                                 type: boolean
                               createRule:
                                 description: See the create_rule block. Max of 1 per
@@ -1672,6 +2120,69 @@ spec:
                                         or in the Region of that Outpost. Valid values
                                         are CLOUD and OUTPOST_LOCAL.
                                       type: string
+                                    scripts:
+                                      description: Specifies pre and/or post scripts
+                                        for a snapshot lifecycle policy that targets
+                                        instances. Valid only when resource_type is
+                                        INSTANCE. See the scripts configuration block.
+                                      items:
+                                        properties:
+                                          executeOperationOnScriptFailure:
+                                            description: Indicates whether Amazon
+                                              Data Lifecycle Manager should default
+                                              to crash-consistent snapshots if the
+                                              pre script fails. The default is true.
+                                            type: boolean
+                                          executionHandler:
+                                            description: The SSM document that includes
+                                              the pre and/or post scripts to run.
+                                              In case automating VSS backups, specify
+                                              AWS_VSS_BACKUP. In case automating application-consistent
+                                              snapshots for SAP HANA workloads, specify
+                                              AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA.
+                                              If you are using a custom SSM document
+                                              that you own, specify either the name
+                                              or ARN of the SSM document.
+                                            type: string
+                                          executionHandlerService:
+                                            description: Indicates the service used
+                                              to execute the pre and/or post scripts.
+                                              If using custom SSM documents or automating
+                                              application-consistent snapshots of
+                                              SAP HANA workloads, specify AWS_SYSTEMS_MANAGER.
+                                              In case automating VSS Backups, omit
+                                              this parameter. The default is AWS_SYSTEMS_MANAGER.
+                                            type: string
+                                          executionTimeout:
+                                            description: Specifies a timeout period,
+                                              in seconds, after which Amazon Data
+                                              Lifecycle Manager fails the script run
+                                              attempt if it has not completed. In
+                                              case automating VSS Backups, omit this
+                                              parameter. The default is 10.
+                                            type: number
+                                          maximumRetryCount:
+                                            description: Specifies the number of times
+                                              Amazon Data Lifecycle Manager should
+                                              retry scripts that fail. Must be an
+                                              integer between 0 and 3. The default
+                                              is 0.
+                                            type: number
+                                          stages:
+                                            description: 'List to indicate which scripts
+                                              Amazon Data Lifecycle Manager should
+                                              run on target instances. Pre scripts
+                                              run before Amazon Data Lifecycle Manager
+                                              initiates snapshot creation. Post scripts
+                                              run after Amazon Data Lifecycle Manager
+                                              initiates snapshot creation. Valid values:
+                                              PRE and POST. The default is PRE and
+                                              POST'
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
                                     times:
                                       description: A list of times in 24 hour clock
                                         format that sets when the lifecycle policy
@@ -1695,9 +2206,9 @@ spec:
                                         KMS key for the account is used.
                                       type: string
                                     copyTags:
-                                      description: Copy all user-defined tags on a
-                                        source volume to snapshots of the volume created
-                                        by this policy.
+                                      description: Indicates whether the policy should
+                                        copy tags from the source resource to the
+                                        snapshot or AMI. Default value is false.
                                       type: boolean
                                     deprecateRule:
                                       description: See the deprecate_rule block. Max
@@ -1756,6 +2267,12 @@ spec:
                                       description: The target Region or the Amazon
                                         Resource Name (ARN) of the target Outpost
                                         for the snapshot copies.
+                                      type: string
+                                    targetRegion:
+                                      description: Use only for DLM policies of policy_type=IMAGE_MANAGEMENT.
+                                        The target Region or the Amazon Resource Name
+                                        (ARN) of the target Outpost for the snapshot
+                                        copies.
                                       type: string
                                   type: object
                                 type: array
@@ -1898,7 +2415,9 @@ spec:
                             type: string
                           description: A map of tag keys and their values. Any resources
                             that match the resource_types and are tagged with any
-                            of these tags will be targeted.
+                            of these tags will be targeted. Required when policy_type
+                            is EBS_SNAPSHOT_MANAGEMENT or IMAGE_MANAGEMENT. Must not
+                            be specified when policy_type is EVENT_BASED_POLICY.
                           type: object
                           x-kubernetes-map-type: granular
                       type: object

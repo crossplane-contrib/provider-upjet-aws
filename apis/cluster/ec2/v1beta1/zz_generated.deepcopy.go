@@ -13144,6 +13144,16 @@ func (in *FlowLogInitParameters) DeepCopyInto(out *FlowLogInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeliverCrossAccountRoleRef != nil {
+		in, out := &in.DeliverCrossAccountRoleRef, &out.DeliverCrossAccountRoleRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeliverCrossAccountRoleSelector != nil {
+		in, out := &in.DeliverCrossAccountRoleSelector, &out.DeliverCrossAccountRoleSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DestinationOptions != nil {
 		in, out := &in.DestinationOptions, &out.DestinationOptions
 		*out = make([]DestinationOptionsInitParameters, len(*in))
@@ -13442,6 +13452,16 @@ func (in *FlowLogParameters) DeepCopyInto(out *FlowLogParameters) {
 		in, out := &in.DeliverCrossAccountRole, &out.DeliverCrossAccountRole
 		*out = new(string)
 		**out = **in
+	}
+	if in.DeliverCrossAccountRoleRef != nil {
+		in, out := &in.DeliverCrossAccountRoleRef, &out.DeliverCrossAccountRoleRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeliverCrossAccountRoleSelector != nil {
+		in, out := &in.DeliverCrossAccountRoleSelector, &out.DeliverCrossAccountRoleSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DestinationOptions != nil {
 		in, out := &in.DestinationOptions, &out.DestinationOptions
@@ -16027,6 +16047,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GetPasswordData != nil {
 		in, out := &in.GetPasswordData, &out.GetPasswordData
 		*out = new(bool)
@@ -16128,10 +16153,22 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PlacementGroupID != nil {
+		in, out := &in.PlacementGroupID, &out.PlacementGroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PlacementPartitionNumber != nil {
 		in, out := &in.PlacementPartitionNumber, &out.PlacementPartitionNumber
 		*out = new(float64)
 		**out = **in
+	}
+	if in.PrimaryNetworkInterface != nil {
+		in, out := &in.PrimaryNetworkInterface, &out.PrimaryNetworkInterface
+		*out = make([]PrimaryNetworkInterfaceInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.PrivateDNSNameOptions != nil {
 		in, out := &in.PrivateDNSNameOptions, &out.PrivateDNSNameOptions
@@ -16698,6 +16735,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GetPasswordData != nil {
 		in, out := &in.GetPasswordData, &out.GetPasswordData
 		*out = new(bool)
@@ -16824,10 +16866,22 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PlacementGroupID != nil {
+		in, out := &in.PlacementGroupID, &out.PlacementGroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PlacementPartitionNumber != nil {
 		in, out := &in.PlacementPartitionNumber, &out.PlacementPartitionNumber
 		*out = new(float64)
 		**out = **in
+	}
+	if in.PrimaryNetworkInterface != nil {
+		in, out := &in.PrimaryNetworkInterface, &out.PrimaryNetworkInterface
+		*out = make([]PrimaryNetworkInterfaceObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.PrimaryNetworkInterfaceID != nil {
 		in, out := &in.PrimaryNetworkInterfaceID, &out.PrimaryNetworkInterfaceID
@@ -17081,6 +17135,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GetPasswordData != nil {
 		in, out := &in.GetPasswordData, &out.GetPasswordData
 		*out = new(bool)
@@ -17182,10 +17241,22 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PlacementGroupID != nil {
+		in, out := &in.PlacementGroupID, &out.PlacementGroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PlacementPartitionNumber != nil {
 		in, out := &in.PlacementPartitionNumber, &out.PlacementPartitionNumber
 		*out = new(float64)
 		**out = **in
+	}
+	if in.PrimaryNetworkInterface != nil {
+		in, out := &in.PrimaryNetworkInterface, &out.PrimaryNetworkInterface
+		*out = make([]PrimaryNetworkInterfaceParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.PrivateDNSNameOptions != nil {
 		in, out := &in.PrivateDNSNameOptions, &out.PrivateDNSNameOptions
@@ -30677,6 +30748,11 @@ func (in *PlacementInitParameters) DeepCopyInto(out *PlacementInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.GroupID != nil {
+		in, out := &in.GroupID, &out.GroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.GroupName != nil {
 		in, out := &in.GroupName, &out.GroupName
 		*out = new(string)
@@ -30732,6 +30808,11 @@ func (in *PlacementObservation) DeepCopyInto(out *PlacementObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.GroupID != nil {
+		in, out := &in.GroupID, &out.GroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.GroupName != nil {
 		in, out := &in.GroupName, &out.GroupName
 		*out = new(string)
@@ -30784,6 +30865,11 @@ func (in *PlacementParameters) DeepCopyInto(out *PlacementParameters) {
 	}
 	if in.AvailabilityZone != nil {
 		in, out := &in.AvailabilityZone, &out.AvailabilityZone
+		*out = new(string)
+		**out = **in
+	}
+	if in.GroupID != nil {
+		in, out := &in.GroupID, &out.GroupID
 		*out = new(string)
 		**out = **in
 	}
@@ -30995,6 +31081,91 @@ func (in *PrefixListParameters) DeepCopy() *PrefixListParameters {
 		return nil
 	}
 	out := new(PrefixListParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PrimaryNetworkInterfaceInitParameters) DeepCopyInto(out *PrimaryNetworkInterfaceInitParameters) {
+	*out = *in
+	if in.NetworkInterfaceID != nil {
+		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkInterfaceIDRef != nil {
+		in, out := &in.NetworkInterfaceIDRef, &out.NetworkInterfaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkInterfaceIDSelector != nil {
+		in, out := &in.NetworkInterfaceIDSelector, &out.NetworkInterfaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PrimaryNetworkInterfaceInitParameters.
+func (in *PrimaryNetworkInterfaceInitParameters) DeepCopy() *PrimaryNetworkInterfaceInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PrimaryNetworkInterfaceInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PrimaryNetworkInterfaceObservation) DeepCopyInto(out *PrimaryNetworkInterfaceObservation) {
+	*out = *in
+	if in.DeleteOnTermination != nil {
+		in, out := &in.DeleteOnTermination, &out.DeleteOnTermination
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NetworkInterfaceID != nil {
+		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PrimaryNetworkInterfaceObservation.
+func (in *PrimaryNetworkInterfaceObservation) DeepCopy() *PrimaryNetworkInterfaceObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(PrimaryNetworkInterfaceObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PrimaryNetworkInterfaceParameters) DeepCopyInto(out *PrimaryNetworkInterfaceParameters) {
+	*out = *in
+	if in.NetworkInterfaceID != nil {
+		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkInterfaceIDRef != nil {
+		in, out := &in.NetworkInterfaceIDRef, &out.NetworkInterfaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkInterfaceIDSelector != nil {
+		in, out := &in.NetworkInterfaceIDSelector, &out.NetworkInterfaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PrimaryNetworkInterfaceParameters.
+func (in *PrimaryNetworkInterfaceParameters) DeepCopy() *PrimaryNetworkInterfaceParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PrimaryNetworkInterfaceParameters)
 	in.DeepCopyInto(out)
 	return out
 }
@@ -39058,6 +39229,11 @@ func (in *SpotInstanceRequestInitParameters) DeepCopyInto(out *SpotInstanceReque
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GetPasswordData != nil {
 		in, out := &in.GetPasswordData, &out.GetPasswordData
 		*out = new(bool)
@@ -39159,6 +39335,11 @@ func (in *SpotInstanceRequestInitParameters) DeepCopyInto(out *SpotInstanceReque
 	}
 	if in.PlacementGroup != nil {
 		in, out := &in.PlacementGroup, &out.PlacementGroup
+		*out = new(string)
+		**out = **in
+	}
+	if in.PlacementGroupID != nil {
+		in, out := &in.PlacementGroupID, &out.PlacementGroupID
 		*out = new(string)
 		**out = **in
 	}
@@ -39655,11 +39836,6 @@ func (in *SpotInstanceRequestNetworkInterfaceInitParameters) DeepCopyInto(out *S
 		*out = new(float64)
 		**out = **in
 	}
-	if in.NetworkCardIndex != nil {
-		in, out := &in.NetworkCardIndex, &out.NetworkCardIndex
-		*out = new(float64)
-		**out = **in
-	}
 	if in.NetworkInterfaceID != nil {
 		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
 		*out = new(string)
@@ -39722,11 +39898,6 @@ func (in *SpotInstanceRequestNetworkInterfaceParameters) DeepCopyInto(out *SpotI
 	}
 	if in.DeviceIndex != nil {
 		in, out := &in.DeviceIndex, &out.DeviceIndex
-		*out = new(float64)
-		**out = **in
-	}
-	if in.NetworkCardIndex != nil {
-		in, out := &in.NetworkCardIndex, &out.NetworkCardIndex
 		*out = new(float64)
 		**out = **in
 	}
@@ -39831,6 +40002,11 @@ func (in *SpotInstanceRequestObservation) DeepCopyInto(out *SpotInstanceRequestO
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
 	}
 	if in.GetPasswordData != nil {
 		in, out := &in.GetPasswordData, &out.GetPasswordData
@@ -39956,10 +40132,22 @@ func (in *SpotInstanceRequestObservation) DeepCopyInto(out *SpotInstanceRequestO
 		*out = new(string)
 		**out = **in
 	}
+	if in.PlacementGroupID != nil {
+		in, out := &in.PlacementGroupID, &out.PlacementGroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PlacementPartitionNumber != nil {
 		in, out := &in.PlacementPartitionNumber, &out.PlacementPartitionNumber
 		*out = new(float64)
 		**out = **in
+	}
+	if in.PrimaryNetworkInterface != nil {
+		in, out := &in.PrimaryNetworkInterface, &out.PrimaryNetworkInterface
+		*out = make([]SpotInstanceRequestPrimaryNetworkInterfaceObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.PrimaryNetworkInterfaceID != nil {
 		in, out := &in.PrimaryNetworkInterfaceID, &out.PrimaryNetworkInterfaceID
@@ -40248,6 +40436,11 @@ func (in *SpotInstanceRequestParameters) DeepCopyInto(out *SpotInstanceRequestPa
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GetPasswordData != nil {
 		in, out := &in.GetPasswordData, &out.GetPasswordData
 		*out = new(bool)
@@ -40349,6 +40542,11 @@ func (in *SpotInstanceRequestParameters) DeepCopyInto(out *SpotInstanceRequestPa
 	}
 	if in.PlacementGroup != nil {
 		in, out := &in.PlacementGroup, &out.PlacementGroup
+		*out = new(string)
+		**out = **in
+	}
+	if in.PlacementGroupID != nil {
+		in, out := &in.PlacementGroupID, &out.PlacementGroupID
 		*out = new(string)
 		**out = **in
 	}
@@ -40531,6 +40729,61 @@ func (in *SpotInstanceRequestParameters) DeepCopy() *SpotInstanceRequestParamete
 		return nil
 	}
 	out := new(SpotInstanceRequestParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *SpotInstanceRequestPrimaryNetworkInterfaceInitParameters) DeepCopyInto(out *SpotInstanceRequestPrimaryNetworkInterfaceInitParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SpotInstanceRequestPrimaryNetworkInterfaceInitParameters.
+func (in *SpotInstanceRequestPrimaryNetworkInterfaceInitParameters) DeepCopy() *SpotInstanceRequestPrimaryNetworkInterfaceInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(SpotInstanceRequestPrimaryNetworkInterfaceInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *SpotInstanceRequestPrimaryNetworkInterfaceObservation) DeepCopyInto(out *SpotInstanceRequestPrimaryNetworkInterfaceObservation) {
+	*out = *in
+	if in.DeleteOnTermination != nil {
+		in, out := &in.DeleteOnTermination, &out.DeleteOnTermination
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NetworkInterfaceID != nil {
+		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SpotInstanceRequestPrimaryNetworkInterfaceObservation.
+func (in *SpotInstanceRequestPrimaryNetworkInterfaceObservation) DeepCopy() *SpotInstanceRequestPrimaryNetworkInterfaceObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(SpotInstanceRequestPrimaryNetworkInterfaceObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *SpotInstanceRequestPrimaryNetworkInterfaceParameters) DeepCopyInto(out *SpotInstanceRequestPrimaryNetworkInterfaceParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SpotInstanceRequestPrimaryNetworkInterfaceParameters.
+func (in *SpotInstanceRequestPrimaryNetworkInterfaceParameters) DeepCopy() *SpotInstanceRequestPrimaryNetworkInterfaceParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(SpotInstanceRequestPrimaryNetworkInterfaceParameters)
 	in.DeepCopyInto(out)
 	return out
 }

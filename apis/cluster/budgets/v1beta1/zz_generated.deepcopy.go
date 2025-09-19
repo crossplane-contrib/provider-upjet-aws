@@ -632,6 +632,11 @@ func (in *BudgetInitParameters) DeepCopyInto(out *BudgetInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.BillingViewArn != nil {
+		in, out := &in.BillingViewArn, &out.BillingViewArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.BudgetType != nil {
 		in, out := &in.BudgetType, &out.BudgetType
 		*out = new(string)
@@ -770,6 +775,11 @@ func (in *BudgetObservation) DeepCopyInto(out *BudgetObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.BillingViewArn != nil {
+		in, out := &in.BillingViewArn, &out.BillingViewArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.BudgetType != nil {
 		in, out := &in.BudgetType, &out.BudgetType
 		*out = new(string)
@@ -891,6 +901,11 @@ func (in *BudgetParameters) DeepCopyInto(out *BudgetParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.BillingViewArn != nil {
+		in, out := &in.BillingViewArn, &out.BillingViewArn
+		*out = new(string)
+		**out = **in
 	}
 	if in.BudgetType != nil {
 		in, out := &in.BudgetType, &out.BudgetType

@@ -502,7 +502,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BucketRef,
 			Selector:     mg.Spec.ForProvider.BucketSelector,
@@ -522,7 +522,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetBucket),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetBucketRef,
 			Selector:     mg.Spec.ForProvider.TargetBucketSelector,
@@ -542,7 +542,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BucketRef,
 			Selector:     mg.Spec.InitProvider.BucketSelector,
@@ -562,7 +562,7 @@ func (mg *BucketLogging) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetBucket),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetBucketRef,
 			Selector:     mg.Spec.InitProvider.TargetBucketSelector,

@@ -18,7 +18,7 @@ type AccessConfigInitParameters struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is false.
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type AccessConfigObservation struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is false.
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type AccessConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is false.
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
 	// +kubebuilder:validation:Optional
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
@@ -84,6 +84,9 @@ type ClusterInitParameters struct {
 	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
 	ComputeConfig []ComputeConfigInitParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
 
+	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
+
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
@@ -127,8 +130,6 @@ type ClusterInitParameters struct {
 	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
-	// +listType=map
-	// +listMapKey=index
 	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
 	// Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
@@ -160,6 +161,9 @@ type ClusterObservation struct {
 
 	// Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
@@ -217,8 +221,6 @@ type ClusterObservation struct {
 	UpgradePolicy []UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
-	// +listType=map
-	// +listMapKey=index
 	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
 	// Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
@@ -241,6 +243,10 @@ type ClusterParameters struct {
 	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
 	// +kubebuilder:validation:Optional
 	ComputeConfig []ComputeConfigParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
+	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
+	// +kubebuilder:validation:Optional
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +kubebuilder:validation:Optional
@@ -301,8 +307,6 @@ type ClusterParameters struct {
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
 	// +kubebuilder:validation:Optional
-	// +listType=map
-	// +listMapKey=index
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
 	// Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
@@ -675,10 +679,6 @@ type VPCConfigInitParameters struct {
 	// Whether the Amazon EKS public API server endpoint is enabled. Default is true.
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
-	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:="0"
-	Index *string `json:"index,omitempty" tf:"-"`
-
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +listType=set
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
@@ -725,10 +725,6 @@ type VPCConfigObservation struct {
 	// Whether the Amazon EKS public API server endpoint is enabled. Default is true.
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
-	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:="0"
-	Index *string `json:"index,omitempty" tf:"-"`
-
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +listType=set
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
@@ -754,11 +750,6 @@ type VPCConfigParameters struct {
 	// Whether the Amazon EKS public API server endpoint is enabled. Default is true.
 	// +kubebuilder:validation:Optional
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
-
-	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:validation:Optional
-	// +kubebuilder:default:="0"
-	Index *string `json:"index" tf:"-"`
 
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +kubebuilder:validation:Optional

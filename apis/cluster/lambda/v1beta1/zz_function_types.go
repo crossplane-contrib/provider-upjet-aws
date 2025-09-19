@@ -275,6 +275,9 @@ type FunctionInitParameters struct {
 	// Used to trigger updates. Must be set to a base64 encoded SHA256 hash of the package file specified with either filename or s3_key. If you have specified this field manually, it should be the actual (computed) hash of the underlying lambda function specified in the filename, image_uri, s3_bucket fields.
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
+	// ARN of the AWS Key Management Service key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
+	SourceKMSKeyArn *string `json:"sourceKmsKeyArn,omitempty" tf:"source_kms_key_arn,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -405,6 +408,9 @@ type FunctionObservation struct {
 
 	// Size in bytes of the function .zip file.
 	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
+
+	// ARN of the AWS Key Management Service key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
+	SourceKMSKeyArn *string `json:"sourceKmsKeyArn,omitempty" tf:"source_kms_key_arn,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -592,6 +598,10 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
+	// ARN of the AWS Key Management Service key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
+	// +kubebuilder:validation:Optional
+	SourceKMSKeyArn *string `json:"sourceKmsKeyArn,omitempty" tf:"source_kms_key_arn,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -658,7 +668,16 @@ type LoggingConfigInitParameters struct {
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
 	// CloudWatch log group where logs are sent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 
 	// Detail level of Lambda platform logs. Valid values: DEBUG, INFO, WARN.
 	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
@@ -690,8 +709,17 @@ type LoggingConfigParameters struct {
 	LogFormat *string `json:"logFormat" tf:"log_format,omitempty"`
 
 	// CloudWatch log group where logs are sent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 
 	// Detail level of Lambda platform logs. Valid values: DEBUG, INFO, WARN.
 	// +kubebuilder:validation:Optional

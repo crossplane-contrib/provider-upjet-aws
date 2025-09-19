@@ -825,6 +825,22 @@ func (in *SigningProfileInitParameters) DeepCopyInto(out *SigningProfileInitPara
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SigningParameters != nil {
+		in, out := &in.SigningParameters, &out.SigningParameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -934,6 +950,22 @@ func (in *SigningProfileObservation) DeepCopyInto(out *SigningProfileObservation
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SigningParameters != nil {
+		in, out := &in.SigningParameters, &out.SigningParameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -1018,6 +1050,22 @@ func (in *SigningProfileParameters) DeepCopyInto(out *SigningProfileParameters) 
 		*out = make([]SigningMaterialParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SigningParameters != nil {
+		in, out := &in.SigningParameters, &out.SigningParameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.Tags != nil {

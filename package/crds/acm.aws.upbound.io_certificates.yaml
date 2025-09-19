@@ -185,6 +185,12 @@ spec:
                             or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
                             for more details.
                           type: string
+                        export:
+                          description: Whether the certificate can be exported. Valid
+                            values are ENABLED or DISABLED (default). Note Issuing
+                            an exportable certificate is subject to additional charges.
+                            See AWS Certificate Manager pricing for more details.
+                          type: string
                       type: object
                     type: array
                   privateKeySecretRef:
@@ -372,6 +378,12 @@ spec:
                             to a certificate transparency log. Valid values are ENABLED
                             or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
                             for more details.
+                          type: string
+                        export:
+                          description: Whether the certificate can be exported. Valid
+                            values are ENABLED or DISABLED (default). Note Issuing
+                            an exportable certificate is subject to additional charges.
+                            See AWS Certificate Manager pricing for more details.
                           type: string
                       type: object
                     type: array
@@ -589,6 +601,12 @@ spec:
                             to a certificate transparency log. Valid values are ENABLED
                             or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
                             for more details.
+                          type: string
+                        export:
+                          description: Whether the certificate can be exported. Valid
+                            values are ENABLED or DISABLED (default). Note Issuing
+                            an exportable certificate is subject to additional charges.
+                            See AWS Certificate Manager pricing for more details.
                           type: string
                       type: object
                     type: array

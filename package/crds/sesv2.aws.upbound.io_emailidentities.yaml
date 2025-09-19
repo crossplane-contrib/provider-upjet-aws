@@ -515,6 +515,11 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  verificationStatus:
+                    description: 'The verification status of the identity. The status
+                      can be one of the following: PENDING, SUCCESS, FAILED, TEMPORARY_FAILURE,
+                      and NOT_STARTED.'
+                    type: string
                   verifiedForSendingStatus:
                     description: Specifies whether or not the identity is verified.
                     type: boolean

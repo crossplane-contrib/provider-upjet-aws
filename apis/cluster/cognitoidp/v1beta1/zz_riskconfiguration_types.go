@@ -39,7 +39,7 @@ type AccountTakeoverRiskConfigurationParameters struct {
 
 	// The notify configuration used to construct email notifications. See details below.
 	// +kubebuilder:validation:Optional
-	NotifyConfiguration []NotifyConfigurationParameters `json:"notifyConfiguration" tf:"notify_configuration,omitempty"`
+	NotifyConfiguration []NotifyConfigurationParameters `json:"notifyConfiguration,omitempty" tf:"notify_configuration,omitempty"`
 }
 
 type ActionsInitParameters struct {

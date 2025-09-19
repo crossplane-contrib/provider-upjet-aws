@@ -119,7 +119,7 @@ spec:
                           x-kubernetes-list-type: set
                         onDemandThroughput:
                           description: Sets the maximum number of read and write units
-                            for the specified on-demand table. See below.
+                            for the specified on-demand index. See below.
                           items:
                             properties:
                               maxReadRequestUnits:
@@ -151,6 +151,29 @@ spec:
                           description: Number of read units for this index. Must be
                             set if billing_mode is set to PROVISIONED.
                           type: number
+                        warmThroughput:
+                          description: Sets the number of warm read and write units
+                            for this index. See below.
+                          items:
+                            properties:
+                              readUnitsPerSecond:
+                                description: Number of read operations a table or
+                                  index can instantaneously support. For the base
+                                  table, decreasing this value will force a new resource.
+                                  For a global secondary index, this value can be
+                                  increased or decreased without recreation. Minimum
+                                  value of 12000 (default).
+                                type: number
+                              writeUnitsPerSecond:
+                                description: Number of write operations a table or
+                                  index can instantaneously support. For the base
+                                  table, decreasing this value will force a new resource.
+                                  For a global secondary index, this value can be
+                                  increased or decreased without recreation. Minimum
+                                  value of 4000 (default).
+                                type: number
+                            type: object
+                          type: array
                         writeCapacity:
                           description: Number of write units for this index. Must
                             be set if billing_mode is set to PROVISIONED.
@@ -309,6 +332,10 @@ spec:
                             consistency mode or EVENTUAL consistency mode. Default
                             value is EVENTUAL.
                           type: string
+                        deletionProtectionEnabled:
+                          description: Whether deletion protection is enabled (true)
+                            or disabled (false) on the replica. Default is false.
+                          type: boolean
                         kmsKeyArn:
                           description: |-
                             ARN of the CMK that should be used for the AWS KMS encryption.
@@ -412,6 +439,27 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  warmThroughput:
+                    description: Sets the number of warm read and write units for
+                      the specified table. See below.
+                    items:
+                      properties:
+                        readUnitsPerSecond:
+                          description: Number of read operations a table or index
+                            can instantaneously support. For the base table, decreasing
+                            this value will force a new resource. For a global secondary
+                            index, this value can be increased or decreased without
+                            recreation. Minimum value of 12000 (default).
+                          type: number
+                        writeUnitsPerSecond:
+                          description: Number of write operations a table or index
+                            can instantaneously support. For the base table, decreasing
+                            this value will force a new resource. For a global secondary
+                            index, this value can be increased or decreased without
+                            recreation. Minimum value of 4000 (default).
+                          type: number
+                      type: object
+                    type: array
                   writeCapacity:
                     description: Number of write units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
@@ -478,7 +526,7 @@ spec:
                           x-kubernetes-list-type: set
                         onDemandThroughput:
                           description: Sets the maximum number of read and write units
-                            for the specified on-demand table. See below.
+                            for the specified on-demand index. See below.
                           items:
                             properties:
                               maxReadRequestUnits:
@@ -510,6 +558,29 @@ spec:
                           description: Number of read units for this index. Must be
                             set if billing_mode is set to PROVISIONED.
                           type: number
+                        warmThroughput:
+                          description: Sets the number of warm read and write units
+                            for this index. See below.
+                          items:
+                            properties:
+                              readUnitsPerSecond:
+                                description: Number of read operations a table or
+                                  index can instantaneously support. For the base
+                                  table, decreasing this value will force a new resource.
+                                  For a global secondary index, this value can be
+                                  increased or decreased without recreation. Minimum
+                                  value of 12000 (default).
+                                type: number
+                              writeUnitsPerSecond:
+                                description: Number of write operations a table or
+                                  index can instantaneously support. For the base
+                                  table, decreasing this value will force a new resource.
+                                  For a global secondary index, this value can be
+                                  increased or decreased without recreation. Minimum
+                                  value of 4000 (default).
+                                type: number
+                            type: object
+                          type: array
                         writeCapacity:
                           description: Number of write units for this index. Must
                             be set if billing_mode is set to PROVISIONED.
@@ -663,6 +734,10 @@ spec:
                             consistency mode or EVENTUAL consistency mode. Default
                             value is EVENTUAL.
                           type: string
+                        deletionProtectionEnabled:
+                          description: Whether deletion protection is enabled (true)
+                            or disabled (false) on the replica. Default is false.
+                          type: boolean
                         kmsKeyArn:
                           description: |-
                             ARN of the CMK that should be used for the AWS KMS encryption.
@@ -764,6 +839,27 @@ spec:
                             Whether TTL is enabled.
                             Default value is false.
                           type: boolean
+                      type: object
+                    type: array
+                  warmThroughput:
+                    description: Sets the number of warm read and write units for
+                      the specified table. See below.
+                    items:
+                      properties:
+                        readUnitsPerSecond:
+                          description: Number of read operations a table or index
+                            can instantaneously support. For the base table, decreasing
+                            this value will force a new resource. For a global secondary
+                            index, this value can be increased or decreased without
+                            recreation. Minimum value of 12000 (default).
+                          type: number
+                        writeUnitsPerSecond:
+                          description: Number of write operations a table or index
+                            can instantaneously support. For the base table, decreasing
+                            this value will force a new resource. For a global secondary
+                            index, this value can be increased or decreased without
+                            recreation. Minimum value of 4000 (default).
+                          type: number
                       type: object
                     type: array
                   writeCapacity:
@@ -911,7 +1007,7 @@ spec:
                           x-kubernetes-list-type: set
                         onDemandThroughput:
                           description: Sets the maximum number of read and write units
-                            for the specified on-demand table. See below.
+                            for the specified on-demand index. See below.
                           items:
                             properties:
                               maxReadRequestUnits:
@@ -943,6 +1039,29 @@ spec:
                           description: Number of read units for this index. Must be
                             set if billing_mode is set to PROVISIONED.
                           type: number
+                        warmThroughput:
+                          description: Sets the number of warm read and write units
+                            for this index. See below.
+                          items:
+                            properties:
+                              readUnitsPerSecond:
+                                description: Number of read operations a table or
+                                  index can instantaneously support. For the base
+                                  table, decreasing this value will force a new resource.
+                                  For a global secondary index, this value can be
+                                  increased or decreased without recreation. Minimum
+                                  value of 12000 (default).
+                                type: number
+                              writeUnitsPerSecond:
+                                description: Number of write operations a table or
+                                  index can instantaneously support. For the base
+                                  table, decreasing this value will force a new resource.
+                                  For a global secondary index, this value can be
+                                  increased or decreased without recreation. Minimum
+                                  value of 4000 (default).
+                                type: number
+                            type: object
+                          type: array
                         writeCapacity:
                           description: Number of write units for this index. Must
                             be set if billing_mode is set to PROVISIONED.
@@ -1107,6 +1226,10 @@ spec:
                             consistency mode or EVENTUAL consistency mode. Default
                             value is EVENTUAL.
                           type: string
+                        deletionProtectionEnabled:
+                          description: Whether deletion protection is enabled (true)
+                            or disabled (false) on the replica. Default is false.
+                          type: boolean
                         kmsKeyArn:
                           description: |-
                             ARN of the CMK that should be used for the AWS KMS encryption.
@@ -1239,6 +1362,27 @@ spec:
                             Whether TTL is enabled.
                             Default value is false.
                           type: boolean
+                      type: object
+                    type: array
+                  warmThroughput:
+                    description: Sets the number of warm read and write units for
+                      the specified table. See below.
+                    items:
+                      properties:
+                        readUnitsPerSecond:
+                          description: Number of read operations a table or index
+                            can instantaneously support. For the base table, decreasing
+                            this value will force a new resource. For a global secondary
+                            index, this value can be increased or decreased without
+                            recreation. Minimum value of 12000 (default).
+                          type: number
+                        writeUnitsPerSecond:
+                          description: Number of write operations a table or index
+                            can instantaneously support. For the base table, decreasing
+                            this value will force a new resource. For a global secondary
+                            index, this value can be increased or decreased without
+                            recreation. Minimum value of 4000 (default).
+                          type: number
                       type: object
                     type: array
                   writeCapacity:

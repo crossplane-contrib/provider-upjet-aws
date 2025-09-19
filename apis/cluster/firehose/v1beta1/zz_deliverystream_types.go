@@ -1480,6 +1480,7 @@ type IcebergConfigurationCloudwatchLoggingOptionsParameters struct {
 }
 
 type IcebergConfigurationInitParameters struct {
+	AppendOnly *bool `json:"appendOnly,omitempty" tf:"append_only,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -1524,6 +1525,7 @@ type IcebergConfigurationInitParameters struct {
 }
 
 type IcebergConfigurationObservation struct {
+	AppendOnly *bool `json:"appendOnly,omitempty" tf:"append_only,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -1558,6 +1560,9 @@ type IcebergConfigurationObservation struct {
 }
 
 type IcebergConfigurationParameters struct {
+
+	// +kubebuilder:validation:Optional
+	AppendOnly *bool `json:"appendOnly,omitempty" tf:"append_only,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional

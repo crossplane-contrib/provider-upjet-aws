@@ -1512,6 +1512,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DeletionProtection != nil {
+		in, out := &in.DeletionProtection, &out.DeletionProtection
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes
 		*out = make([]*string, len(*in))
@@ -1708,6 +1713,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeletionProtection != nil {
+		in, out := &in.DeletionProtection, &out.DeletionProtection
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes
 		*out = make([]*string, len(*in))
@@ -1887,6 +1897,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.DeletionProtection != nil {
+		in, out := &in.DeletionProtection, &out.DeletionProtection
+		*out = new(bool)
+		**out = **in
 	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes
@@ -5786,11 +5801,6 @@ func (in *VPCConfigInitParameters) DeepCopyInto(out *VPCConfigInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Index != nil {
-		in, out := &in.Index, &out.Index
-		*out = new(string)
-		**out = **in
-	}
 	if in.PublicAccessCidrs != nil {
 		in, out := &in.PublicAccessCidrs, &out.PublicAccessCidrs
 		*out = make([]*string, len(*in))
@@ -5878,11 +5888,6 @@ func (in *VPCConfigObservation) DeepCopyInto(out *VPCConfigObservation) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Index != nil {
-		in, out := &in.Index, &out.Index
-		*out = new(string)
-		**out = **in
-	}
 	if in.PublicAccessCidrs != nil {
 		in, out := &in.PublicAccessCidrs, &out.PublicAccessCidrs
 		*out = make([]*string, len(*in))
@@ -5944,11 +5949,6 @@ func (in *VPCConfigParameters) DeepCopyInto(out *VPCConfigParameters) {
 	if in.EndpointPublicAccess != nil {
 		in, out := &in.EndpointPublicAccess, &out.EndpointPublicAccess
 		*out = new(bool)
-		**out = **in
-	}
-	if in.Index != nil {
-		in, out := &in.Index, &out.Index
-		*out = new(string)
 		**out = **in
 	}
 	if in.PublicAccessCidrs != nil {

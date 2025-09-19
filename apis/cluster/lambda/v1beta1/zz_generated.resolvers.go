@@ -339,12 +339,34 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.Layers = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.LayersRefs = mrsp.ResolvedReferences
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoggingConfig); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingConfig[i3].LogGroup),
+				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.LoggingConfig[i3].LogGroupRef,
+				Selector:     mg.Spec.ForProvider.LoggingConfig[i3].LogGroupSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LoggingConfig[i3].LogGroup")
+		}
+		mg.Spec.ForProvider.LoggingConfig[i3].LogGroup = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LoggingConfig[i3].LogGroupRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ReplacementSecurityGroupIds),
 			Extract:       reference.ExternalName(),
@@ -527,12 +549,34 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.Layers = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.LayersRefs = mrsp.ResolvedReferences
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingConfig); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingConfig[i3].LogGroup),
+				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.LoggingConfig[i3].LogGroupRef,
+				Selector:     mg.Spec.InitProvider.LoggingConfig[i3].LogGroupSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LoggingConfig[i3].LogGroup")
+		}
+		mg.Spec.InitProvider.LoggingConfig[i3].LogGroup = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LoggingConfig[i3].LogGroupRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ReplacementSecurityGroupIds),
 			Extract:       reference.ExternalName(),
