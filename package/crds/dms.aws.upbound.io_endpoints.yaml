@@ -431,6 +431,17 @@ spec:
                           type: string
                       type: object
                     type: array
+                  oracleSettings:
+                    description: Configuration block for Oracle settings. See below.
+                    items:
+                      properties:
+                        authenticationMethod:
+                          description: Authentication mechanism to access the Oracle
+                            source endpoint. Default is password. Valid values are
+                            password and kerberos.
+                          type: string
+                      type: object
+                    type: array
                   passwordSecretRef:
                     description: Password to be used to login to the endpoint database.
                     properties:
@@ -463,6 +474,10 @@ spec:
                           description: For use with change data capture (CDC) only,
                             this attribute has AWS DMS bypass foreign keys and user
                             triggers to reduce the time it takes to bulk load data.
+                          type: string
+                        authenticationMethod:
+                          description: 'Specifies the authentication method. Valid
+                            values: password, iam.'
                           type: string
                         babelfishDatabaseName:
                           description: The Babelfish for Aurora PostgreSQL database
@@ -526,6 +541,10 @@ spec:
                         pluginName:
                           description: 'Specifies the plugin to use to create a replication
                             slot. Valid values: pglogical, test_decoding.'
+                          type: string
+                        serviceAccessRoleArn:
+                          description: Specifies the IAM role to use to authenticate
+                            the connection.
                           type: string
                         slotName:
                           description: Sets the name of a previously created logical
@@ -1168,6 +1187,17 @@ spec:
                           type: string
                       type: object
                     type: array
+                  oracleSettings:
+                    description: Configuration block for Oracle settings. See below.
+                    items:
+                      properties:
+                        authenticationMethod:
+                          description: Authentication mechanism to access the Oracle
+                            source endpoint. Default is password. Valid values are
+                            password and kerberos.
+                          type: string
+                      type: object
+                    type: array
                   passwordSecretRef:
                     description: Password to be used to login to the endpoint database.
                     properties:
@@ -1200,6 +1230,10 @@ spec:
                           description: For use with change data capture (CDC) only,
                             this attribute has AWS DMS bypass foreign keys and user
                             triggers to reduce the time it takes to bulk load data.
+                          type: string
+                        authenticationMethod:
+                          description: 'Specifies the authentication method. Valid
+                            values: password, iam.'
                           type: string
                         babelfishDatabaseName:
                           description: The Babelfish for Aurora PostgreSQL database
@@ -1263,6 +1297,10 @@ spec:
                         pluginName:
                           description: 'Specifies the plugin to use to create a replication
                             slot. Valid values: pglogical, test_decoding.'
+                          type: string
+                        serviceAccessRoleArn:
+                          description: Specifies the IAM role to use to authenticate
+                            the connection.
                           type: string
                         slotName:
                           description: Sets the name of a previously created logical
@@ -1878,6 +1916,17 @@ spec:
                           type: string
                       type: object
                     type: array
+                  oracleSettings:
+                    description: Configuration block for Oracle settings. See below.
+                    items:
+                      properties:
+                        authenticationMethod:
+                          description: Authentication mechanism to access the Oracle
+                            source endpoint. Default is password. Valid values are
+                            password and kerberos.
+                          type: string
+                      type: object
+                    type: array
                   pauseReplicationTasks:
                     description: Only tasks paused by the resource will be restarted
                       after the modification completes. Default is false.
@@ -1893,6 +1942,10 @@ spec:
                           description: For use with change data capture (CDC) only,
                             this attribute has AWS DMS bypass foreign keys and user
                             triggers to reduce the time it takes to bulk load data.
+                          type: string
+                        authenticationMethod:
+                          description: 'Specifies the authentication method. Valid
+                            values: password, iam.'
                           type: string
                         babelfishDatabaseName:
                           description: The Babelfish for Aurora PostgreSQL database
@@ -1956,6 +2009,10 @@ spec:
                         pluginName:
                           description: 'Specifies the plugin to use to create a replication
                             slot. Valid values: pglogical, test_decoding.'
+                          type: string
+                        serviceAccessRoleArn:
+                          description: Specifies the IAM role to use to authenticate
+                            the connection.
                           type: string
                         slotName:
                           description: Sets the name of a previously created logical

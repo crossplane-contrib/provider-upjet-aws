@@ -6779,6 +6779,22 @@ func (in *PartitionKeysInitParameters) DeepCopyInto(out *PartitionKeysInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -6809,6 +6825,22 @@ func (in *PartitionKeysObservation) DeepCopyInto(out *PartitionKeysObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -6838,6 +6870,22 @@ func (in *PartitionKeysParameters) DeepCopyInto(out *PartitionKeysParameters) {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type

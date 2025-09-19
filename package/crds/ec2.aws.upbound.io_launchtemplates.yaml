@@ -225,7 +225,10 @@ spec:
                       properties:
                         capacityReservationPreference:
                           description: Indicates the instance's Capacity Reservation
-                            preferences. Can be open or none. (Default none).
+                            preferences. Can be capacity-reservations-only, open or
+                            none. If capacity_reservation_id or capacity_reservation_resource_group_arn
+                            is specified in capacity_reservation_target block, either
+                            omit capacity_reservation_preference or set it to capacity-reservations-only.
                           type: string
                         capacityReservationTarget:
                           description: 'Used to target a specific Capacity Reservation:'
@@ -1261,8 +1264,13 @@ spec:
                         availabilityZone:
                           description: The Availability Zone for the instance.
                           type: string
+                        groupId:
+                          description: The ID of the placement group for the instance.
+                            Conflicts with group_name.
+                          type: string
                         groupName:
                           description: The name of the placement group for the instance.
+                            Conflicts with group_id.
                           type: string
                         hostId:
                           description: The ID of the Dedicated Host for the instance.
@@ -1689,7 +1697,10 @@ spec:
                       properties:
                         capacityReservationPreference:
                           description: Indicates the instance's Capacity Reservation
-                            preferences. Can be open or none. (Default none).
+                            preferences. Can be capacity-reservations-only, open or
+                            none. If capacity_reservation_id or capacity_reservation_resource_group_arn
+                            is specified in capacity_reservation_target block, either
+                            omit capacity_reservation_preference or set it to capacity-reservations-only.
                           type: string
                         capacityReservationTarget:
                           description: 'Used to target a specific Capacity Reservation:'
@@ -2725,8 +2736,13 @@ spec:
                         availabilityZone:
                           description: The Availability Zone for the instance.
                           type: string
+                        groupId:
+                          description: The ID of the placement group for the instance.
+                            Conflicts with group_name.
+                          type: string
                         groupName:
                           description: The name of the placement group for the instance.
+                            Conflicts with group_id.
                           type: string
                         hostId:
                           description: The ID of the Dedicated Host for the instance.
@@ -3151,7 +3167,10 @@ spec:
                       properties:
                         capacityReservationPreference:
                           description: Indicates the instance's Capacity Reservation
-                            preferences. Can be open or none. (Default none).
+                            preferences. Can be capacity-reservations-only, open or
+                            none. If capacity_reservation_id or capacity_reservation_resource_group_arn
+                            is specified in capacity_reservation_target block, either
+                            omit capacity_reservation_preference or set it to capacity-reservations-only.
                           type: string
                         capacityReservationTarget:
                           description: 'Used to target a specific Capacity Reservation:'
@@ -3812,8 +3831,13 @@ spec:
                         availabilityZone:
                           description: The Availability Zone for the instance.
                           type: string
+                        groupId:
+                          description: The ID of the placement group for the instance.
+                            Conflicts with group_name.
+                          type: string
                         groupName:
                           description: The name of the placement group for the instance.
+                            Conflicts with group_id.
                           type: string
                         hostId:
                           description: The ID of the Dedicated Host for the instance.

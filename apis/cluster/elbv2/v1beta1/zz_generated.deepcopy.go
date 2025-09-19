@@ -3121,6 +3121,11 @@ func (in *LBInitParameters) DeepCopyInto(out *LBInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SecondaryIpsAutoAssignedPerSubnet != nil {
+		in, out := &in.SecondaryIpsAutoAssignedPerSubnet, &out.SecondaryIpsAutoAssignedPerSubnet
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SecurityGroupRefs != nil {
 		in, out := &in.SecurityGroupRefs, &out.SecurityGroupRefs
 		*out = make([]v1.Reference, len(*in))
@@ -4604,6 +4609,11 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecondaryIpsAutoAssignedPerSubnet != nil {
+		in, out := &in.SecondaryIpsAutoAssignedPerSubnet, &out.SecondaryIpsAutoAssignedPerSubnet
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SecurityGroups != nil {
 		in, out := &in.SecurityGroups, &out.SecurityGroups
 		*out = make([]*string, len(*in))
@@ -4821,6 +4831,11 @@ func (in *LBParameters) DeepCopyInto(out *LBParameters) {
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryIpsAutoAssignedPerSubnet != nil {
+		in, out := &in.SecondaryIpsAutoAssignedPerSubnet, &out.SecondaryIpsAutoAssignedPerSubnet
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SecurityGroupRefs != nil {

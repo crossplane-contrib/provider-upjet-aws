@@ -2178,6 +2178,8 @@ spec:
                       See iceberg_configuration block below for details.
                     items:
                       properties:
+                        appendOnly:
+                          type: boolean
                         bufferingInterval:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 0 and 900, before delivering
@@ -7845,6 +7847,8 @@ spec:
                       See iceberg_configuration block below for details.
                     items:
                       properties:
+                        appendOnly:
+                          type: boolean
                         bufferingInterval:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 0 and 900, before delivering
@@ -12520,6 +12524,8 @@ spec:
                       See iceberg_configuration block below for details.
                     items:
                       properties:
+                        appendOnly:
+                          type: boolean
                         bufferingInterval:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 0 and 900, before delivering
