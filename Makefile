@@ -197,7 +197,7 @@ $(TERRAFORM):
 $(TERRAFORM_PROVIDER):
 	@$(INFO) installing terraform AWS provider for the platform $(SAFEHOST_PLATFORM)
 	@mkdir -p $(dir $(TERRAFORM_PROVIDER))
-	@curl -fsSL https://github.com/turkenf/terraform-provider-aws/releases/download/$(TERRAFORM_PROVIDER_RELEASE)/terraform-provider-aws_$(TERRAFORM_PROVIDER_RELEASE)_$(SAFEHOST_PLATFORM).zip -o $(TERRAFORM_PROVIDER).zip
+	@curl -fsSL https://github.com/upbound/terraform-provider-aws/releases/download/$(TERRAFORM_PROVIDER_RELEASE)/terraform-provider-aws_$(TERRAFORM_PROVIDER_RELEASE)_$(SAFEHOST_PLATFORM).zip -o $(TERRAFORM_PROVIDER).zip
 	@unzip $(TERRAFORM_PROVIDER).zip -d $(dir $(TERRAFORM_PROVIDER))
 	@rm -fr $(TERRAFORM_PROVIDER).zip
 	@$(OK) installing terraform provider $(SAFEHOST_PLATFORM)
