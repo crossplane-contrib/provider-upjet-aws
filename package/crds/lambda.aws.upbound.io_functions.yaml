@@ -494,6 +494,82 @@ spec:
                         logGroup:
                           description: CloudWatch log group where logs are sent.
                           type: string
+                        logGroupRef:
+                          description: Reference to a Group in cloudwatchlogs to populate
+                            logGroup.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        logGroupSelector:
+                          description: Selector for a Group in cloudwatchlogs to populate
+                            logGroup.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         systemLogLevel:
                           description: 'Detail level of Lambda platform logs. Valid
                             values: DEBUG, INFO, WARN.'
@@ -804,6 +880,11 @@ spec:
                       filename or s3_key. If you have specified this field manually,
                       it should be the actual (computed) hash of the underlying lambda
                       function specified in the filename, image_uri, s3_bucket fields.
+                    type: string
+                  sourceKmsKeyArn:
+                    description: ARN of the AWS Key Management Service key used to
+                      encrypt the function's .zip deployment package. Conflicts with
+                      image_uri.
                     type: string
                   tags:
                     additionalProperties:
@@ -1444,6 +1525,82 @@ spec:
                         logGroup:
                           description: CloudWatch log group where logs are sent.
                           type: string
+                        logGroupRef:
+                          description: Reference to a Group in cloudwatchlogs to populate
+                            logGroup.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        logGroupSelector:
+                          description: Selector for a Group in cloudwatchlogs to populate
+                            logGroup.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         systemLogLevel:
                           description: 'Detail level of Lambda platform logs. Valid
                             values: DEBUG, INFO, WARN.'
@@ -1749,6 +1906,11 @@ spec:
                       filename or s3_key. If you have specified this field manually,
                       it should be the actual (computed) hash of the underlying lambda
                       function specified in the filename, image_uri, s3_bucket fields.
+                    type: string
+                  sourceKmsKeyArn:
+                    description: ARN of the AWS Key Management Service key used to
+                      encrypt the function's .zip deployment package. Conflicts with
+                      image_uri.
                     type: string
                   tags:
                     additionalProperties:
@@ -2285,6 +2447,11 @@ spec:
                   sourceCodeSize:
                     description: Size in bytes of the function .zip file.
                     type: number
+                  sourceKmsKeyArn:
+                    description: ARN of the AWS Key Management Service key used to
+                      encrypt the function's .zip deployment package. Conflicts with
+                      image_uri.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

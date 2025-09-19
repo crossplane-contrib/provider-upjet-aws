@@ -103,6 +103,9 @@ spec:
                           type: array
                       type: object
                     type: array
+                  billingViewArn:
+                    description: ARN of the billing view.
+                    type: string
                   budgetType:
                     description: Whether this budget tracks monetary cost or usage.
                     type: string
@@ -302,6 +305,9 @@ spec:
                           type: array
                       type: object
                     type: array
+                  billingViewArn:
+                    description: ARN of the billing view.
+                    type: string
                   budgetType:
                     description: Whether this budget tracks monetary cost or usage.
                     type: string
@@ -605,6 +611,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  billingViewArn:
+                    description: ARN of the billing view.
+                    type: string
                   budgetType:
                     description: Whether this budget tracks monetary cost or usage.
                     type: string
