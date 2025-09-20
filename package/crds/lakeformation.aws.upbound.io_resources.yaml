@@ -172,6 +172,11 @@ spec:
                       Set to true when registering AWS Glue connections for federated
                       catalog functionality.
                     type: boolean
+                  withPrivilegedAccess:
+                    description: Boolean to grant the calling principal the permissions
+                      to perform all supported Lake Formation operations on the registered
+                      data location.
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -281,6 +286,11 @@ spec:
                     description: Whether or not the resource is a federated resource.
                       Set to true when registering AWS Glue connections for federated
                       catalog functionality.
+                    type: boolean
+                  withPrivilegedAccess:
+                    description: Boolean to grant the calling principal the permissions
+                      to perform all supported Lake Formation operations on the registered
+                      data location.
                     type: boolean
                 type: object
               managementPolicies:
@@ -409,6 +419,11 @@ spec:
                     description: Whether or not the resource is a federated resource.
                       Set to true when registering AWS Glue connections for federated
                       catalog functionality.
+                    type: boolean
+                  withPrivilegedAccess:
+                    description: Boolean to grant the calling principal the permissions
+                      to perform all supported Lake Formation operations on the registered
+                      data location.
                     type: boolean
                 type: object
               conditions:

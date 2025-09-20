@@ -1897,7 +1897,7 @@ spec:
                                 additionalProperties:
                                   type: string
                                 description: Key-value pairs used to identify, sort,
-                                  and organize cube resources.
+                                  and organize kubernetes resources.
                                 type: object
                                 x-kubernetes-map-type: granular
                             type: object
@@ -2322,7 +2322,7 @@ spec:
                                 additionalProperties:
                                   type: string
                                 description: Key-value pairs used to identify, sort,
-                                  and organize cube resources.
+                                  and organize kubernetes resources.
                                 type: object
                                 x-kubernetes-map-type: granular
                             type: object
@@ -2833,7 +2833,7 @@ spec:
                                 additionalProperties:
                                   type: string
                                 description: Key-value pairs used to identify, sort,
-                                  and organize cube resources.
+                                  and organize kubernetes resources.
                                 type: object
                                 x-kubernetes-map-type: granular
                             type: object

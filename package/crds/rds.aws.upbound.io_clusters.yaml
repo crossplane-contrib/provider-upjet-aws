@@ -3484,8 +3484,8 @@ spec:
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
                       no logs will be exported. The following log types are supported:
-                      audit, error, general, slowquery, iam-db-auth-error, postgresql
-                      (PostgreSQL).'
+                      audit, error, general, iam-db-auth-error, instance, postgresql
+                      (PostgreSQL), slowquery.'
                     items:
                       type: string
                     type: array
@@ -4652,8 +4652,8 @@ spec:
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
                       no logs will be exported. The following log types are supported:
-                      audit, error, general, slowquery, iam-db-auth-error, postgresql
-                      (PostgreSQL).'
+                      audit, error, general, iam-db-auth-error, instance, postgresql
+                      (PostgreSQL), slowquery.'
                     items:
                       type: string
                     type: array
@@ -5679,8 +5679,8 @@ spec:
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
                       no logs will be exported. The following log types are supported:
-                      audit, error, general, slowquery, iam-db-auth-error, postgresql
-                      (PostgreSQL).'
+                      audit, error, general, iam-db-auth-error, instance, postgresql
+                      (PostgreSQL), slowquery.'
                     items:
                       type: string
                     type: array

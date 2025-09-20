@@ -65,7 +65,7 @@ type SubnetConfigurationInitParameters struct {
 	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
-	// The ID of the VPC endpoint.
+	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -87,7 +87,7 @@ type SubnetConfigurationObservation struct {
 	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
-	// The ID of the VPC endpoint.
+	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
@@ -101,7 +101,7 @@ type SubnetConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
-	// The ID of the VPC endpoint.
+	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -13,6 +13,55 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type AdvancedConfigurationInitParameters struct {
+
+	// ARN of the alternate target group to use for Blue/Green deployments.
+	AlternateTargetGroupArn *string `json:"alternateTargetGroupArn,omitempty" tf:"alternate_target_group_arn,omitempty"`
+
+	// ARN of the listener rule that routes production traffic.
+	ProductionListenerRule *string `json:"productionListenerRule,omitempty" tf:"production_listener_rule,omitempty"`
+
+	// ARN of the IAM role that allows ECS to manage the target groups.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// ARN of the listener rule that routes test traffic.
+	TestListenerRule *string `json:"testListenerRule,omitempty" tf:"test_listener_rule,omitempty"`
+}
+
+type AdvancedConfigurationObservation struct {
+
+	// ARN of the alternate target group to use for Blue/Green deployments.
+	AlternateTargetGroupArn *string `json:"alternateTargetGroupArn,omitempty" tf:"alternate_target_group_arn,omitempty"`
+
+	// ARN of the listener rule that routes production traffic.
+	ProductionListenerRule *string `json:"productionListenerRule,omitempty" tf:"production_listener_rule,omitempty"`
+
+	// ARN of the IAM role that allows ECS to manage the target groups.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// ARN of the listener rule that routes test traffic.
+	TestListenerRule *string `json:"testListenerRule,omitempty" tf:"test_listener_rule,omitempty"`
+}
+
+type AdvancedConfigurationParameters struct {
+
+	// ARN of the alternate target group to use for Blue/Green deployments.
+	// +kubebuilder:validation:Optional
+	AlternateTargetGroupArn *string `json:"alternateTargetGroupArn" tf:"alternate_target_group_arn,omitempty"`
+
+	// ARN of the listener rule that routes production traffic.
+	// +kubebuilder:validation:Optional
+	ProductionListenerRule *string `json:"productionListenerRule" tf:"production_listener_rule,omitempty"`
+
+	// ARN of the IAM role that allows ECS to manage the target groups.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+
+	// ARN of the listener rule that routes test traffic.
+	// +kubebuilder:validation:Optional
+	TestListenerRule *string `json:"testListenerRule,omitempty" tf:"test_listener_rule,omitempty"`
+}
+
 type AlarmsInitParameters struct {
 
 	// One or more CloudWatch alarm names.
@@ -101,6 +150,9 @@ type ClientAliasInitParameters struct {
 
 	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Configuration block for test traffic routing rules. See below.
+	TestTrafficRules []TestTrafficRulesInitParameters `json:"testTrafficRules,omitempty" tf:"test_traffic_rules,omitempty"`
 }
 
 type ClientAliasObservation struct {
@@ -110,6 +162,9 @@ type ClientAliasObservation struct {
 
 	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Configuration block for test traffic routing rules. See below.
+	TestTrafficRules []TestTrafficRulesObservation `json:"testTrafficRules,omitempty" tf:"test_traffic_rules,omitempty"`
 }
 
 type ClientAliasParameters struct {
@@ -121,6 +176,10 @@ type ClientAliasParameters struct {
 	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
+
+	// Configuration block for test traffic routing rules. See below.
+	// +kubebuilder:validation:Optional
+	TestTrafficRules []TestTrafficRulesParameters `json:"testTrafficRules,omitempty" tf:"test_traffic_rules,omitempty"`
 }
 
 type DeploymentCircuitBreakerInitParameters struct {
@@ -152,6 +211,45 @@ type DeploymentCircuitBreakerParameters struct {
 	Rollback *bool `json:"rollback" tf:"rollback,omitempty"`
 }
 
+type DeploymentConfigurationInitParameters struct {
+
+	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Only used when strategy is set to BLUE_GREEN.
+	BakeTimeInMinutes *string `json:"bakeTimeInMinutes,omitempty" tf:"bake_time_in_minutes,omitempty"`
+
+	// Configuration block for lifecycle hooks that are invoked during deployments. See below.
+	LifecycleHook []LifecycleHookInitParameters `json:"lifecycleHook,omitempty" tf:"lifecycle_hook,omitempty"`
+
+	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN. Default: ROLLING.
+	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
+}
+
+type DeploymentConfigurationObservation struct {
+
+	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Only used when strategy is set to BLUE_GREEN.
+	BakeTimeInMinutes *string `json:"bakeTimeInMinutes,omitempty" tf:"bake_time_in_minutes,omitempty"`
+
+	// Configuration block for lifecycle hooks that are invoked during deployments. See below.
+	LifecycleHook []LifecycleHookObservation `json:"lifecycleHook,omitempty" tf:"lifecycle_hook,omitempty"`
+
+	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN. Default: ROLLING.
+	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
+}
+
+type DeploymentConfigurationParameters struct {
+
+	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Only used when strategy is set to BLUE_GREEN.
+	// +kubebuilder:validation:Optional
+	BakeTimeInMinutes *string `json:"bakeTimeInMinutes,omitempty" tf:"bake_time_in_minutes,omitempty"`
+
+	// Configuration block for lifecycle hooks that are invoked during deployments. See below.
+	// +kubebuilder:validation:Optional
+	LifecycleHook []LifecycleHookParameters `json:"lifecycleHook,omitempty" tf:"lifecycle_hook,omitempty"`
+
+	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN. Default: ROLLING.
+	// +kubebuilder:validation:Optional
+	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
+}
+
 type DeploymentControllerInitParameters struct {
 
 	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
@@ -169,6 +267,35 @@ type DeploymentControllerParameters struct {
 	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type HeaderInitParameters struct {
+
+	// Name of the HTTP header to match.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block for header value matching criteria. See below.
+	Value []ValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type HeaderObservation struct {
+
+	// Name of the HTTP header to match.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block for header value matching criteria. See below.
+	Value []ValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type HeaderParameters struct {
+
+	// Name of the HTTP header to match.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Configuration block for header value matching criteria. See below.
+	// +kubebuilder:validation:Optional
+	Value []ValueParameters `json:"value" tf:"value,omitempty"`
 }
 
 type IssuerCertAuthorityInitParameters struct {
@@ -190,7 +317,49 @@ type IssuerCertAuthorityParameters struct {
 	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn" tf:"aws_pca_authority_arn,omitempty"`
 }
 
+type LifecycleHookInitParameters struct {
+
+	// ARN of the Lambda function to invoke for the lifecycle hook.
+	HookTargetArn *string `json:"hookTargetArn,omitempty" tf:"hook_target_arn,omitempty"`
+
+	// Stages during the deployment when the hook should be invoked. Valid values: RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.
+	LifecycleStages []*string `json:"lifecycleStages,omitempty" tf:"lifecycle_stages,omitempty"`
+
+	// ARN of the IAM role that grants the service permission to invoke the Lambda function.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type LifecycleHookObservation struct {
+
+	// ARN of the Lambda function to invoke for the lifecycle hook.
+	HookTargetArn *string `json:"hookTargetArn,omitempty" tf:"hook_target_arn,omitempty"`
+
+	// Stages during the deployment when the hook should be invoked. Valid values: RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.
+	LifecycleStages []*string `json:"lifecycleStages,omitempty" tf:"lifecycle_stages,omitempty"`
+
+	// ARN of the IAM role that grants the service permission to invoke the Lambda function.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type LifecycleHookParameters struct {
+
+	// ARN of the Lambda function to invoke for the lifecycle hook.
+	// +kubebuilder:validation:Optional
+	HookTargetArn *string `json:"hookTargetArn" tf:"hook_target_arn,omitempty"`
+
+	// Stages during the deployment when the hook should be invoked. Valid values: RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.
+	// +kubebuilder:validation:Optional
+	LifecycleStages []*string `json:"lifecycleStages" tf:"lifecycle_stages,omitempty"`
+
+	// ARN of the IAM role that grants the service permission to invoke the Lambda function.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+}
+
 type LoadBalancerInitParameters struct {
+
+	// Configuration block for Blue/Green deployment settings. Required when using BLUE_GREEN deployment strategy. See below.
+	AdvancedConfiguration []AdvancedConfigurationInitParameters `json:"advancedConfiguration,omitempty" tf:"advanced_configuration,omitempty"`
 
 	// Name of the container to associate with the load balancer (as it appears in a container definition).
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
@@ -216,6 +385,9 @@ type LoadBalancerInitParameters struct {
 
 type LoadBalancerObservation struct {
 
+	// Configuration block for Blue/Green deployment settings. Required when using BLUE_GREEN deployment strategy. See below.
+	AdvancedConfiguration []AdvancedConfigurationObservation `json:"advancedConfiguration,omitempty" tf:"advanced_configuration,omitempty"`
+
 	// Name of the container to associate with the load balancer (as it appears in a container definition).
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
@@ -230,6 +402,10 @@ type LoadBalancerObservation struct {
 }
 
 type LoadBalancerParameters struct {
+
+	// Configuration block for Blue/Green deployment settings. Required when using BLUE_GREEN deployment strategy. See below.
+	// +kubebuilder:validation:Optional
+	AdvancedConfiguration []AdvancedConfigurationParameters `json:"advancedConfiguration,omitempty" tf:"advanced_configuration,omitempty"`
 
 	// Name of the container to associate with the load balancer (as it appears in a container definition).
 	// +kubebuilder:validation:Optional
@@ -654,7 +830,7 @@ type ServiceConnectConfigurationParameters struct {
 
 type ServiceConnectConfigurationServiceInitParameters struct {
 
-	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. For each service block where enabled is true, exactly one client_alias with one port should be specified. See below.
 	ClientAlias []ClientAliasInitParameters `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
 
 	// Name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
@@ -675,7 +851,7 @@ type ServiceConnectConfigurationServiceInitParameters struct {
 
 type ServiceConnectConfigurationServiceObservation struct {
 
-	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. For each service block where enabled is true, exactly one client_alias with one port should be specified. See below.
 	ClientAlias []ClientAliasObservation `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
 
 	// Name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
@@ -696,7 +872,7 @@ type ServiceConnectConfigurationServiceObservation struct {
 
 type ServiceConnectConfigurationServiceParameters struct {
 
-	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	// List of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. For each service block where enabled is true, exactly one client_alias with one port should be specified. See below.
 	// +kubebuilder:validation:Optional
 	ClientAlias []ClientAliasParameters `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
 
@@ -726,7 +902,7 @@ type ServiceInitParameters struct {
 	// Information about the CloudWatch alarms. See below.
 	Alarms []AlarmsInitParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
-	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
+	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. When creating a new service, if no value is specified, it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing. When updating an existing service, if no value is specified it defaults to the existing service's AvailabilityZoneRebalancing value. If the service never had an AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED.
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
@@ -746,6 +922,9 @@ type ServiceInitParameters struct {
 
 	// Configuration block for deployment circuit breaker. See below.
 	DeploymentCircuitBreaker []DeploymentCircuitBreakerInitParameters `json:"deploymentCircuitBreaker,omitempty" tf:"deployment_circuit_breaker,omitempty"`
+
+	// Configuration block for deployment settings. See below.
+	DeploymentConfiguration []DeploymentConfigurationInitParameters `json:"deploymentConfiguration,omitempty" tf:"deployment_configuration,omitempty"`
 
 	// Configuration block for deployment controller configuration. See below.
 	DeploymentController []DeploymentControllerInitParameters `json:"deploymentController,omitempty" tf:"deployment_controller,omitempty"`
@@ -817,6 +996,9 @@ type ServiceInitParameters struct {
 	// Service discovery registries for the service. The maximum number of service_registries blocks is 1. See below.
 	ServiceRegistries []ServiceRegistriesInitParameters `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
 
+	// Whether to enable graceful termination of deployments using SIGINT signals. When enabled, allows customers to safely cancel an in-progress deployment and automatically trigger a rollback to the previous stable state. Defaults to false. Only applicable when using ECS deployment controller and requires wait_for_steady_state = true.
+	SigintRollback *bool `json:"sigintRollback,omitempty" tf:"sigint_rollback,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -855,7 +1037,7 @@ type ServiceObservation struct {
 	// ARN that identifies the service.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
+	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. When creating a new service, if no value is specified, it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing. When updating an existing service, if no value is specified it defaults to the existing service's AvailabilityZoneRebalancing value. If the service never had an AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED.
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
@@ -866,6 +1048,9 @@ type ServiceObservation struct {
 
 	// Configuration block for deployment circuit breaker. See below.
 	DeploymentCircuitBreaker []DeploymentCircuitBreakerObservation `json:"deploymentCircuitBreaker,omitempty" tf:"deployment_circuit_breaker,omitempty"`
+
+	// Configuration block for deployment settings. See below.
+	DeploymentConfiguration []DeploymentConfigurationObservation `json:"deploymentConfiguration,omitempty" tf:"deployment_configuration,omitempty"`
 
 	// Configuration block for deployment controller configuration. See below.
 	DeploymentController []DeploymentControllerObservation `json:"deploymentController,omitempty" tf:"deployment_controller,omitempty"`
@@ -933,6 +1118,9 @@ type ServiceObservation struct {
 	// Service discovery registries for the service. The maximum number of service_registries blocks is 1. See below.
 	ServiceRegistries []ServiceRegistriesObservation `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
 
+	// Whether to enable graceful termination of deployments using SIGINT signals. When enabled, allows customers to safely cancel an in-progress deployment and automatically trigger a rollback to the previous stable state. Defaults to false. Only applicable when using ECS deployment controller and requires wait_for_steady_state = true.
+	SigintRollback *bool `json:"sigintRollback,omitempty" tf:"sigint_rollback,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -964,7 +1152,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Alarms []AlarmsParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
-	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
+	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. When creating a new service, if no value is specified, it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing. When updating an existing service, if no value is specified it defaults to the existing service's AvailabilityZoneRebalancing value. If the service never had an AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED.
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
@@ -988,6 +1176,10 @@ type ServiceParameters struct {
 	// Configuration block for deployment circuit breaker. See below.
 	// +kubebuilder:validation:Optional
 	DeploymentCircuitBreaker []DeploymentCircuitBreakerParameters `json:"deploymentCircuitBreaker,omitempty" tf:"deployment_circuit_breaker,omitempty"`
+
+	// Configuration block for deployment settings. See below.
+	// +kubebuilder:validation:Optional
+	DeploymentConfiguration []DeploymentConfigurationParameters `json:"deploymentConfiguration,omitempty" tf:"deployment_configuration,omitempty"`
 
 	// Configuration block for deployment controller configuration. See below.
 	// +kubebuilder:validation:Optional
@@ -1083,6 +1275,10 @@ type ServiceParameters struct {
 	// Service discovery registries for the service. The maximum number of service_registries blocks is 1. See below.
 	// +kubebuilder:validation:Optional
 	ServiceRegistries []ServiceRegistriesParameters `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
+
+	// Whether to enable graceful termination of deployments using SIGINT signals. When enabled, allows customers to safely cancel an in-progress deployment and automatically trigger a rollback to the previous stable state. Defaults to false. Only applicable when using ECS deployment controller and requires wait_for_steady_state = true.
+	// +kubebuilder:validation:Optional
+	SigintRollback *bool `json:"sigintRollback,omitempty" tf:"sigint_rollback,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -1250,6 +1446,25 @@ type TagSpecificationsParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type TestTrafficRulesInitParameters struct {
+
+	// Configuration block for header-based routing rules. See below.
+	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
+}
+
+type TestTrafficRulesObservation struct {
+
+	// Configuration block for header-based routing rules. See below.
+	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+}
+
+type TestTrafficRulesParameters struct {
+
+	// Configuration block for header-based routing rules. See below.
+	// +kubebuilder:validation:Optional
+	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+}
+
 type TimeoutInitParameters struct {
 
 	// Amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
@@ -1316,6 +1531,25 @@ type VPCLatticeConfigurationsParameters struct {
 	// The full ARN of the target group or groups associated with the VPC Lattice configuration.
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn" tf:"target_group_arn,omitempty"`
+}
+
+type ValueInitParameters struct {
+
+	// Exact string value to match in the header.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+}
+
+type ValueObservation struct {
+
+	// Exact string value to match in the header.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+}
+
+type ValueParameters struct {
+
+	// Exact string value to match in the header.
+	// +kubebuilder:validation:Optional
+	Exact *string `json:"exact" tf:"exact,omitempty"`
 }
 
 type VolumeConfigurationInitParameters struct {

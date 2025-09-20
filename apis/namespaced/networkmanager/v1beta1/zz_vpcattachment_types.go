@@ -122,8 +122,14 @@ type VPCAttachmentOptionsInitParameters struct {
 	// Whether to enable appliance mode support. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
+	// Whether to enable DNS support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	DNSSupport *bool `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
+
 	// Whether to enable IPv6 support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
+
+	// Whether to enable security group referencing support for this VPC attachment. The default is true. However, at the core network policy-level the default is set to false. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	SecurityGroupReferencingSupport *bool `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 }
 
 type VPCAttachmentOptionsObservation struct {
@@ -131,8 +137,14 @@ type VPCAttachmentOptionsObservation struct {
 	// Whether to enable appliance mode support. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
+	// Whether to enable DNS support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	DNSSupport *bool `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
+
 	// Whether to enable IPv6 support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
+
+	// Whether to enable security group referencing support for this VPC attachment. The default is true. However, at the core network policy-level the default is set to false. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	SecurityGroupReferencingSupport *bool `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 }
 
 type VPCAttachmentOptionsParameters struct {
@@ -141,9 +153,17 @@ type VPCAttachmentOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
+	// Whether to enable DNS support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// +kubebuilder:validation:Optional
+	DNSSupport *bool `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
+
 	// Whether to enable IPv6 support. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	// +kubebuilder:validation:Optional
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
+
+	// Whether to enable security group referencing support for this VPC attachment. The default is true. However, at the core network policy-level the default is set to false. If the VPC attachment is pending acceptance, changing this value will recreate the resource.
+	// +kubebuilder:validation:Optional
+	SecurityGroupReferencingSupport *bool `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 }
 
 type VPCAttachmentParameters struct {

@@ -22,7 +22,7 @@ type EnablerInitParameters struct {
 	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
 	// Type of resources to scan.
-	// Valid values are EC2, ECR, LAMBDA and LAMBDA_CODE.
+	// Valid values are EC2, ECR, LAMBDA, LAMBDA_CODE and CODE_REPOSITORY.
 	// At least one item is required.
 	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
@@ -42,7 +42,7 @@ type EnablerObservation struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Type of resources to scan.
-	// Valid values are EC2, ECR, LAMBDA and LAMBDA_CODE.
+	// Valid values are EC2, ECR, LAMBDA, LAMBDA_CODE and CODE_REPOSITORY.
 	// At least one item is required.
 	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
@@ -62,7 +62,7 @@ type EnablerParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Type of resources to scan.
-	// Valid values are EC2, ECR, LAMBDA and LAMBDA_CODE.
+	// Valid values are EC2, ECR, LAMBDA, LAMBDA_CODE and CODE_REPOSITORY.
 	// At least one item is required.
 	// +kubebuilder:validation:Optional
 	// +listType=set

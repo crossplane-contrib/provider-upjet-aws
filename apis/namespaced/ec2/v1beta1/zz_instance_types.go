@@ -375,6 +375,9 @@ type InstanceInitParameters struct {
 	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
 	EphemeralBlockDevice []InstanceEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
+	// Destroys instance even if disable_api_termination or disable_api_stop is set to true. Defaults to false. If setting this field in the same operation that would require replacing the instance or destroying the instance, this flag will not work.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
 
@@ -423,11 +426,17 @@ type InstanceInitParameters struct {
 	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
 	NetworkInterface []InstanceNetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// Placement Group to start the instance in.
+	// Placement Group to start the instance in. Conflicts with placement_group_id.
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	// Placement Group ID to start the instance in. Conflicts with placement_group.
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+
+	// The primary network interface. See Primary Network Interface below.
+	PrimaryNetworkInterface *PrimaryNetworkInterfaceInitParameters `json:"primaryNetworkInterface,omitempty" tf:"primary_network_interface,omitempty"`
 
 	// Options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
 	PrivateDNSNameOptions *PrivateDNSNameOptionsInitParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
@@ -682,6 +691,9 @@ type InstanceObservation struct {
 	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
 	EphemeralBlockDevice []InstanceEphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
+	// Destroys instance even if disable_api_termination or disable_api_stop is set to true. Defaults to false. If setting this field in the same operation that would require replacing the instance or destroying the instance, this flag will not work.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
 
@@ -745,11 +757,17 @@ type InstanceObservation struct {
 	// Base-64 encoded encrypted password data for the instance. Useful for getting the administrator password for instances running Microsoft Windows. This attribute is only exported if get_password_data is true. Note that this encrypted value will be stored in the state file, as with all exported attributes. See GetPasswordData for more information.
 	PasswordData *string `json:"passwordData,omitempty" tf:"password_data,omitempty"`
 
-	// Placement Group to start the instance in.
+	// Placement Group to start the instance in. Conflicts with placement_group_id.
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	// Placement Group ID to start the instance in. Conflicts with placement_group.
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+
+	// The primary network interface. See Primary Network Interface below.
+	PrimaryNetworkInterface *PrimaryNetworkInterfaceObservation `json:"primaryNetworkInterface,omitempty" tf:"primary_network_interface,omitempty"`
 
 	// ID of the instance's primary network interface.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
@@ -876,6 +894,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	EphemeralBlockDevice []InstanceEphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
+	// Destroys instance even if disable_api_termination or disable_api_stop is set to true. Defaults to false. If setting this field in the same operation that would require replacing the instance or destroying the instance, this flag will not work.
+	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
 	// +kubebuilder:validation:Optional
 	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
@@ -940,13 +962,21 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterface []InstanceNetworkInterfaceParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// Placement Group to start the instance in.
+	// Placement Group to start the instance in. Conflicts with placement_group_id.
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	// Placement Group ID to start the instance in. Conflicts with placement_group.
+	// +kubebuilder:validation:Optional
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
 	// +kubebuilder:validation:Optional
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+
+	// The primary network interface. See Primary Network Interface below.
+	// +kubebuilder:validation:Optional
+	PrimaryNetworkInterface *PrimaryNetworkInterfaceParameters `json:"primaryNetworkInterface,omitempty" tf:"primary_network_interface,omitempty"`
 
 	// Options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
 	// +kubebuilder:validation:Optional
@@ -1145,6 +1175,48 @@ type MetadataOptionsParameters struct {
 	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
+}
+
+type PrimaryNetworkInterfaceInitParameters struct {
+
+	// ID of the network interface to attach.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.NamespacedReference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.NamespacedSelector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+}
+
+type PrimaryNetworkInterfaceObservation struct {
+
+	// (Read-Only) Whether the network interface will be deleted when the instance terminates.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// ID of the network interface to attach.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+}
+
+type PrimaryNetworkInterfaceParameters struct {
+
+	// ID of the network interface to attach.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.NamespacedReference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.NamespacedSelector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSNameOptionsInitParameters struct {

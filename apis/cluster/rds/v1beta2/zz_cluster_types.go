@@ -121,7 +121,7 @@ type ClusterInitParameters struct {
 	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -386,7 +386,7 @@ type ClusterObservation struct {
 	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -663,7 +663,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`

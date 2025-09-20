@@ -123,6 +123,11 @@ func (in *ContributorInsightsInitParameters) DeepCopyInto(out *ContributorInsigh
 		*out = new(string)
 		**out = **in
 	}
+	if in.Mode != nil {
+		in, out := &in.Mode, &out.Mode
+		*out = new(string)
+		**out = **in
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
@@ -195,6 +200,11 @@ func (in *ContributorInsightsObservation) DeepCopyInto(out *ContributorInsightsO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Mode != nil {
+		in, out := &in.Mode, &out.Mode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -222,6 +232,11 @@ func (in *ContributorInsightsParameters) DeepCopyInto(out *ContributorInsightsPa
 	*out = *in
 	if in.IndexName != nil {
 		in, out := &in.IndexName, &out.IndexName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Mode != nil {
+		in, out := &in.Mode, &out.Mode
 		*out = new(string)
 		**out = **in
 	}
@@ -431,6 +446,13 @@ func (in *GlobalSecondaryIndexInitParameters) DeepCopyInto(out *GlobalSecondaryI
 		*out = new(float64)
 		**out = **in
 	}
+	if in.WarmThroughput != nil {
+		in, out := &in.WarmThroughput, &out.WarmThroughput
+		*out = make([]WarmThroughputInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
 		*out = new(float64)
@@ -494,6 +516,13 @@ func (in *GlobalSecondaryIndexObservation) DeepCopyInto(out *GlobalSecondaryInde
 		*out = new(float64)
 		**out = **in
 	}
+	if in.WarmThroughput != nil {
+		in, out := &in.WarmThroughput, &out.WarmThroughput
+		*out = make([]WarmThroughputObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
 		*out = new(float64)
@@ -556,6 +585,13 @@ func (in *GlobalSecondaryIndexParameters) DeepCopyInto(out *GlobalSecondaryIndex
 		in, out := &in.ReadCapacity, &out.ReadCapacity
 		*out = new(float64)
 		**out = **in
+	}
+	if in.WarmThroughput != nil {
+		in, out := &in.WarmThroughput, &out.WarmThroughput
+		*out = make([]WarmThroughputParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
@@ -2127,6 +2163,13 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.WarmThroughput != nil {
+		in, out := &in.WarmThroughput, &out.WarmThroughput
+		*out = make([]TableWarmThroughputInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
 		*out = new(float64)
@@ -2593,6 +2636,13 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.WarmThroughput != nil {
+		in, out := &in.WarmThroughput, &out.WarmThroughput
+		*out = make([]TableWarmThroughputObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
 		*out = new(float64)
@@ -2832,6 +2882,13 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.WarmThroughput != nil {
+		in, out := &in.WarmThroughput, &out.WarmThroughput
+		*out = make([]TableWarmThroughputParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
 		*out = new(float64)
@@ -2882,6 +2939,11 @@ func (in *TableReplicaInitParameters) DeepCopyInto(out *TableReplicaInitParamete
 	if in.ConsistencyMode != nil {
 		in, out := &in.ConsistencyMode, &out.ConsistencyMode
 		*out = new(string)
+		**out = **in
+	}
+	if in.DeletionProtectionEnabled != nil {
+		in, out := &in.DeletionProtectionEnabled, &out.DeletionProtectionEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.KMSKeyArn != nil {
@@ -3037,6 +3099,11 @@ func (in *TableReplicaObservation) DeepCopyInto(out *TableReplicaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeletionProtectionEnabled != nil {
+		in, out := &in.DeletionProtectionEnabled, &out.DeletionProtectionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.KMSKeyArn != nil {
 		in, out := &in.KMSKeyArn, &out.KMSKeyArn
 		*out = new(string)
@@ -3172,6 +3239,11 @@ func (in *TableReplicaParameters) DeepCopyInto(out *TableReplicaParameters) {
 	if in.ConsistencyMode != nil {
 		in, out := &in.ConsistencyMode, &out.ConsistencyMode
 		*out = new(string)
+		**out = **in
+	}
+	if in.DeletionProtectionEnabled != nil {
+		in, out := &in.DeletionProtectionEnabled, &out.DeletionProtectionEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.KMSKeyArn != nil {
@@ -3353,6 +3425,81 @@ func (in *TableStatus) DeepCopy() *TableStatus {
 		return nil
 	}
 	out := new(TableStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *TableWarmThroughputInitParameters) DeepCopyInto(out *TableWarmThroughputInitParameters) {
+	*out = *in
+	if in.ReadUnitsPerSecond != nil {
+		in, out := &in.ReadUnitsPerSecond, &out.ReadUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+	if in.WriteUnitsPerSecond != nil {
+		in, out := &in.WriteUnitsPerSecond, &out.WriteUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TableWarmThroughputInitParameters.
+func (in *TableWarmThroughputInitParameters) DeepCopy() *TableWarmThroughputInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(TableWarmThroughputInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *TableWarmThroughputObservation) DeepCopyInto(out *TableWarmThroughputObservation) {
+	*out = *in
+	if in.ReadUnitsPerSecond != nil {
+		in, out := &in.ReadUnitsPerSecond, &out.ReadUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+	if in.WriteUnitsPerSecond != nil {
+		in, out := &in.WriteUnitsPerSecond, &out.WriteUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TableWarmThroughputObservation.
+func (in *TableWarmThroughputObservation) DeepCopy() *TableWarmThroughputObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(TableWarmThroughputObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *TableWarmThroughputParameters) DeepCopyInto(out *TableWarmThroughputParameters) {
+	*out = *in
+	if in.ReadUnitsPerSecond != nil {
+		in, out := &in.ReadUnitsPerSecond, &out.ReadUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+	if in.WriteUnitsPerSecond != nil {
+		in, out := &in.WriteUnitsPerSecond, &out.WriteUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TableWarmThroughputParameters.
+func (in *TableWarmThroughputParameters) DeepCopy() *TableWarmThroughputParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(TableWarmThroughputParameters)
 	in.DeepCopyInto(out)
 	return out
 }
@@ -3542,6 +3689,81 @@ func (in *TagStatus) DeepCopy() *TagStatus {
 		return nil
 	}
 	out := new(TagStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *WarmThroughputInitParameters) DeepCopyInto(out *WarmThroughputInitParameters) {
+	*out = *in
+	if in.ReadUnitsPerSecond != nil {
+		in, out := &in.ReadUnitsPerSecond, &out.ReadUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+	if in.WriteUnitsPerSecond != nil {
+		in, out := &in.WriteUnitsPerSecond, &out.WriteUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new WarmThroughputInitParameters.
+func (in *WarmThroughputInitParameters) DeepCopy() *WarmThroughputInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(WarmThroughputInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *WarmThroughputObservation) DeepCopyInto(out *WarmThroughputObservation) {
+	*out = *in
+	if in.ReadUnitsPerSecond != nil {
+		in, out := &in.ReadUnitsPerSecond, &out.ReadUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+	if in.WriteUnitsPerSecond != nil {
+		in, out := &in.WriteUnitsPerSecond, &out.WriteUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new WarmThroughputObservation.
+func (in *WarmThroughputObservation) DeepCopy() *WarmThroughputObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(WarmThroughputObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *WarmThroughputParameters) DeepCopyInto(out *WarmThroughputParameters) {
+	*out = *in
+	if in.ReadUnitsPerSecond != nil {
+		in, out := &in.ReadUnitsPerSecond, &out.ReadUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+	if in.WriteUnitsPerSecond != nil {
+		in, out := &in.WriteUnitsPerSecond, &out.WriteUnitsPerSecond
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new WarmThroughputParameters.
+func (in *WarmThroughputParameters) DeepCopy() *WarmThroughputParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(WarmThroughputParameters)
 	in.DeepCopyInto(out)
 	return out
 }

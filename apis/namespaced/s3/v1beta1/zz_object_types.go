@@ -118,7 +118,7 @@ type ObjectInitParameters struct {
 	// Override provider-level configuration options. See Override Provider below for more details.
 	OverrideProvider *OverrideProviderInitParameters `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
 
-	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
+	// Server-side encryption of the object in S3. Valid values are "AES256", "aws:kms", "aws:kms:dsse", and "aws:fsx".
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
 	// Path to a file that will be read and uploaded as raw bytes for the object content.
@@ -225,7 +225,7 @@ type ObjectObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
+	// Server-side encryption of the object in S3. Valid values are "AES256", "aws:kms", "aws:kms:dsse", and "aws:fsx".
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
 	// Path to a file that will be read and uploaded as raw bytes for the object content.
@@ -359,7 +359,7 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
+	// Server-side encryption of the object in S3. Valid values are "AES256", "aws:kms", "aws:kms:dsse", and "aws:fsx".
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 

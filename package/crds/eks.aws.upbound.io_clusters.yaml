@@ -83,7 +83,7 @@ spec:
                           type: string
                         bootstrapClusterCreatorAdminPermissions:
                           description: Whether or not to bootstrap the access config
-                            values to the cluster. Default is false.
+                            values to the cluster. Default is true.
                           type: boolean
                       type: object
                     type: array
@@ -120,6 +120,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  deletionProtection:
+                    description: 'Whether to enable deletion protection for the cluster.
+                      When enabled, the cluster cannot be deleted unless deletion
+                      protection is first disabled. Default: false.'
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -426,11 +431,6 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
-                        index:
-                          default: "0"
-                          description: This is an injected field with a default value
-                            for being able to merge items of the parent object list.
-                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -616,9 +616,6 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   zonalShiftConfig:
                     description: Configuration block with zonal shift configuration
                       for the cluster. Detailed below.
@@ -656,7 +653,7 @@ spec:
                           type: string
                         bootstrapClusterCreatorAdminPermissions:
                           description: Whether or not to bootstrap the access config
-                            values to the cluster. Default is false.
+                            values to the cluster. Default is true.
                           type: boolean
                       type: object
                     type: array
@@ -693,6 +690,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  deletionProtection:
+                    description: 'Whether to enable deletion protection for the cluster.
+                      When enabled, the cluster cannot be deleted unless deletion
+                      protection is first disabled. Default: false.'
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -994,11 +996,6 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
-                        index:
-                          default: "0"
-                          description: This is an injected field with a default value
-                            for being able to merge items of the parent object list.
-                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -1184,9 +1181,6 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   zonalShiftConfig:
                     description: Configuration block with zonal shift configuration
                       for the cluster. Detailed below.
@@ -1305,7 +1299,7 @@ spec:
                           type: string
                         bootstrapClusterCreatorAdminPermissions:
                           description: Whether or not to bootstrap the access config
-                            values to the cluster. Default is false.
+                            values to the cluster. Default is true.
                           type: boolean
                       type: object
                     type: array
@@ -1366,6 +1360,11 @@ spec:
                     description: Unix epoch timestamp in seconds for when the cluster
                       was created.
                     type: string
+                  deletionProtection:
+                    description: 'Whether to enable deletion protection for the cluster.
+                      When enabled, the cluster cannot be deleted unless deletion
+                      protection is first disabled. Default: false.'
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -1651,11 +1650,6 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
-                        index:
-                          default: "0"
-                          description: This is an injected field with a default value
-                            for being able to merge items of the parent object list.
-                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -1688,9 +1682,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   zonalShiftConfig:
                     description: Configuration block with zonal shift configuration
                       for the cluster. Detailed below.
@@ -1827,7 +1818,7 @@ spec:
                         type: string
                       bootstrapClusterCreatorAdminPermissions:
                         description: Whether or not to bootstrap the access config
-                          values to the cluster. Default is false.
+                          values to the cluster. Default is true.
                         type: boolean
                     type: object
                   bootstrapSelfManagedAddons:
@@ -1861,6 +1852,11 @@ spec:
                           Mode is enabled..
                         type: string
                     type: object
+                  deletionProtection:
+                    description: 'Whether to enable deletion protection for the cluster.
+                      When enabled, the cluster cannot be deleted unless deletion
+                      protection is first disabled. Default: false.'
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -2358,7 +2354,7 @@ spec:
                         type: string
                       bootstrapClusterCreatorAdminPermissions:
                         description: Whether or not to bootstrap the access config
-                          values to the cluster. Default is false.
+                          values to the cluster. Default is true.
                         type: boolean
                     type: object
                   bootstrapSelfManagedAddons:
@@ -2392,6 +2388,11 @@ spec:
                           Mode is enabled..
                         type: string
                     type: object
+                  deletionProtection:
+                    description: 'Whether to enable deletion protection for the cluster.
+                      When enabled, the cluster cannot be deleted unless deletion
+                      protection is first disabled. Default: false.'
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -2965,7 +2966,7 @@ spec:
                         type: string
                       bootstrapClusterCreatorAdminPermissions:
                         description: Whether or not to bootstrap the access config
-                          values to the cluster. Default is false.
+                          values to the cluster. Default is true.
                         type: boolean
                     type: object
                   arn:
@@ -3023,6 +3024,11 @@ spec:
                     description: Unix epoch timestamp in seconds for when the cluster
                       was created.
                     type: string
+                  deletionProtection:
+                    description: 'Whether to enable deletion protection for the cluster.
+                      When enabled, the cluster cannot be deleted unless deletion
+                      protection is first disabled. Default: false.'
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.

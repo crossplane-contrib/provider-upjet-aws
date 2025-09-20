@@ -2857,6 +2857,11 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceKMSKeyArn != nil {
+		in, out := &in.SourceKMSKeyArn, &out.SourceKMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3143,6 +3148,11 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SourceKMSKeyArn != nil {
+		in, out := &in.SourceKMSKeyArn, &out.SourceKMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3419,6 +3429,11 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	}
 	if in.SourceCodeHash != nil {
 		in, out := &in.SourceCodeHash, &out.SourceCodeHash
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceKMSKeyArn != nil {
+		in, out := &in.SourceKMSKeyArn, &out.SourceKMSKeyArn
 		*out = new(string)
 		**out = **in
 	}
@@ -4954,6 +4969,16 @@ func (in *LoggingConfigInitParameters) DeepCopyInto(out *LoggingConfigInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogGroupRef != nil {
+		in, out := &in.LogGroupRef, &out.LogGroupRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupSelector != nil {
+		in, out := &in.LogGroupSelector, &out.LogGroupSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SystemLogLevel != nil {
 		in, out := &in.SystemLogLevel, &out.SystemLogLevel
 		*out = new(string)
@@ -5023,6 +5048,16 @@ func (in *LoggingConfigParameters) DeepCopyInto(out *LoggingConfigParameters) {
 		in, out := &in.LogGroup, &out.LogGroup
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupRef != nil {
+		in, out := &in.LogGroupRef, &out.LogGroupRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupSelector != nil {
+		in, out := &in.LogGroupSelector, &out.LogGroupSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemLogLevel != nil {
 		in, out := &in.SystemLogLevel, &out.SystemLogLevel

@@ -93,6 +93,7 @@ type KeyObservation struct {
 	// Specifies whether key rotation is enabled. Defaults to false.
 	EnableKeyRotation *bool `json:"enableKeyRotation,omitempty" tf:"enable_key_rotation,omitempty"`
 
+	// (String) ID of the KMS key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies whether the key is enabled. Defaults to true.

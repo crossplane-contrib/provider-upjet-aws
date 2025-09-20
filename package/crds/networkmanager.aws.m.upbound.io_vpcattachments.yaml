@@ -154,10 +154,22 @@ spec:
                           lifetime of that flow. If the VPC attachment is pending
                           acceptance, changing this value will recreate the resource.
                         type: boolean
+                      dnsSupport:
+                        description: Whether to enable DNS support. If the VPC attachment
+                          is pending acceptance, changing this value will recreate
+                          the resource.
+                        type: boolean
                       ipv6Support:
                         description: Whether to enable IPv6 support. If the VPC attachment
                           is pending acceptance, changing this value will recreate
                           the resource.
+                        type: boolean
+                      securityGroupReferencingSupport:
+                        description: Whether to enable security group referencing
+                          support for this VPC attachment. The default is true. However,
+                          at the core network policy-level the default is set to false.
+                          If the VPC attachment is pending acceptance, changing this
+                          value will recreate the resource.
                         type: boolean
                     type: object
                   subnetArns:
@@ -448,10 +460,22 @@ spec:
                           lifetime of that flow. If the VPC attachment is pending
                           acceptance, changing this value will recreate the resource.
                         type: boolean
+                      dnsSupport:
+                        description: Whether to enable DNS support. If the VPC attachment
+                          is pending acceptance, changing this value will recreate
+                          the resource.
+                        type: boolean
                       ipv6Support:
                         description: Whether to enable IPv6 support. If the VPC attachment
                           is pending acceptance, changing this value will recreate
                           the resource.
+                        type: boolean
+                      securityGroupReferencingSupport:
+                        description: Whether to enable security group referencing
+                          support for this VPC attachment. The default is true. However,
+                          at the core network policy-level the default is set to false.
+                          If the VPC attachment is pending acceptance, changing this
+                          value will recreate the resource.
                         type: boolean
                     type: object
                   subnetArns:
@@ -728,10 +752,22 @@ spec:
                           lifetime of that flow. If the VPC attachment is pending
                           acceptance, changing this value will recreate the resource.
                         type: boolean
+                      dnsSupport:
+                        description: Whether to enable DNS support. If the VPC attachment
+                          is pending acceptance, changing this value will recreate
+                          the resource.
+                        type: boolean
                       ipv6Support:
                         description: Whether to enable IPv6 support. If the VPC attachment
                           is pending acceptance, changing this value will recreate
                           the resource.
+                        type: boolean
+                      securityGroupReferencingSupport:
+                        description: Whether to enable security group referencing
+                          support for this VPC attachment. The default is true. However,
+                          at the core network policy-level the default is set to false.
+                          If the VPC attachment is pending acceptance, changing this
+                          value will recreate the resource.
                         type: boolean
                     type: object
                   ownerAccountId:

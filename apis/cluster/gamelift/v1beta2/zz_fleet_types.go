@@ -83,7 +83,7 @@ type EC2InboundPermissionParameters struct {
 
 type FleetInitParameters struct {
 
-	// ID of the GameLift Build to be deployed on the fleet.
+	// ID of the GameLift Build to be deployed on the fleet. Conflicts with script_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/gamelift/v1beta2.Build
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
 
@@ -138,7 +138,7 @@ type FleetInitParameters struct {
 	// Instructions for launching server processes on each instance in the fleet. See below.
 	RuntimeConfiguration *RuntimeConfigurationInitParameters `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
 
-	// ID of the GameLift Script to be deployed on the fleet.
+	// ID of the GameLift Script to be deployed on the fleet. Conflicts with build_id.
 	ScriptID *string `json:"scriptId,omitempty" tf:"script_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -154,7 +154,7 @@ type FleetObservation struct {
 	// Build ARN.
 	BuildArn *string `json:"buildArn,omitempty" tf:"build_arn,omitempty"`
 
-	// ID of the GameLift Build to be deployed on the fleet.
+	// ID of the GameLift Build to be deployed on the fleet. Conflicts with script_id.
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
 
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. See certificate_configuration.
@@ -205,7 +205,7 @@ type FleetObservation struct {
 	// Script ARN.
 	ScriptArn *string `json:"scriptArn,omitempty" tf:"script_arn,omitempty"`
 
-	// ID of the GameLift Script to be deployed on the fleet.
+	// ID of the GameLift Script to be deployed on the fleet. Conflicts with build_id.
 	ScriptID *string `json:"scriptId,omitempty" tf:"script_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -219,7 +219,7 @@ type FleetObservation struct {
 
 type FleetParameters struct {
 
-	// ID of the GameLift Build to be deployed on the fleet.
+	// ID of the GameLift Build to be deployed on the fleet. Conflicts with script_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/gamelift/v1beta2.Build
 	// +kubebuilder:validation:Optional
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
@@ -291,7 +291,7 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	RuntimeConfiguration *RuntimeConfigurationParameters `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
 
-	// ID of the GameLift Script to be deployed on the fleet.
+	// ID of the GameLift Script to be deployed on the fleet. Conflicts with build_id.
 	// +kubebuilder:validation:Optional
 	ScriptID *string `json:"scriptId,omitempty" tf:"script_id,omitempty"`
 

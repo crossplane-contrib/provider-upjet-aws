@@ -167,6 +167,7 @@ type EventDestinationInitParameters struct {
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
 	EventBridgeDestination *EventBridgeDestinationInitParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
@@ -191,6 +192,7 @@ type EventDestinationObservation struct {
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
 	EventBridgeDestination *EventBridgeDestinationObservation `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
@@ -217,6 +219,7 @@ type EventDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
 	// +kubebuilder:validation:Optional
 	EventBridgeDestination *EventBridgeDestinationParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 

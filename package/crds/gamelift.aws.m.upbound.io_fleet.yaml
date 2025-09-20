@@ -61,6 +61,7 @@ spec:
                 properties:
                   buildId:
                     description: ID of the GameLift Build to be deployed on the fleet.
+                      Conflicts with script_id.
                     type: string
                   buildIdRef:
                     description: Reference to a Build in gamelift to populate buildId.
@@ -342,6 +343,7 @@ spec:
                     type: object
                   scriptId:
                     description: ID of the GameLift Script to be deployed on the fleet.
+                      Conflicts with build_id.
                     type: string
                   tags:
                     additionalProperties:
@@ -367,6 +369,7 @@ spec:
                 properties:
                   buildId:
                     description: ID of the GameLift Build to be deployed on the fleet.
+                      Conflicts with script_id.
                     type: string
                   buildIdRef:
                     description: Reference to a Build in gamelift to populate buildId.
@@ -643,6 +646,7 @@ spec:
                     type: object
                   scriptId:
                     description: ID of the GameLift Script to be deployed on the fleet.
+                      Conflicts with build_id.
                     type: string
                   tags:
                     additionalProperties:
@@ -731,6 +735,7 @@ spec:
                     type: string
                   buildId:
                     description: ID of the GameLift Build to be deployed on the fleet.
+                      Conflicts with script_id.
                     type: string
                   certificateConfiguration:
                     description: Prompts GameLift to generate a TLS/SSL certificate
@@ -865,6 +870,7 @@ spec:
                     type: string
                   scriptId:
                     description: ID of the GameLift Script to be deployed on the fleet.
+                      Conflicts with build_id.
                     type: string
                   tags:
                     additionalProperties:

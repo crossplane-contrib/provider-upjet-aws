@@ -40,6 +40,9 @@ type ResourceInitParameters struct {
 
 	// Whether or not the resource is a federated resource. Set to true when registering AWS Glue connections for federated catalog functionality.
 	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
+
+	// Boolean to grant the calling principal the permissions to perform all supported Lake Formation operations on the registered data location.
+	WithPrivilegedAccess *bool `json:"withPrivilegedAccess,omitempty" tf:"with_privileged_access,omitempty"`
 }
 
 type ResourceObservation struct {
@@ -67,6 +70,9 @@ type ResourceObservation struct {
 
 	// Whether or not the resource is a federated resource. Set to true when registering AWS Glue connections for federated catalog functionality.
 	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
+
+	// Boolean to grant the calling principal the permissions to perform all supported Lake Formation operations on the registered data location.
+	WithPrivilegedAccess *bool `json:"withPrivilegedAccess,omitempty" tf:"with_privileged_access,omitempty"`
 }
 
 type ResourceParameters struct {
@@ -105,6 +111,10 @@ type ResourceParameters struct {
 	// Whether or not the resource is a federated resource. Set to true when registering AWS Glue connections for federated catalog functionality.
 	// +kubebuilder:validation:Optional
 	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
+
+	// Boolean to grant the calling principal the permissions to perform all supported Lake Formation operations on the registered data location.
+	// +kubebuilder:validation:Optional
+	WithPrivilegedAccess *bool `json:"withPrivilegedAccess,omitempty" tf:"with_privileged_access,omitempty"`
 }
 
 // ResourceSpec defines the desired state of Resource

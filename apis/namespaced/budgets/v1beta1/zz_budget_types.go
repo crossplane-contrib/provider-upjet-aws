@@ -54,6 +54,9 @@ type BudgetInitParameters struct {
 	// Object containing AutoAdjustData which determines the budget amount for an auto-adjusting budget.
 	AutoAdjustData *AutoAdjustDataInitParameters `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
 
+	// ARN of the billing view.
+	BillingViewArn *string `json:"billingViewArn,omitempty" tf:"billing_view_arn,omitempty"`
+
 	// Whether this budget tracks monetary cost or usage.
 	BudgetType *string `json:"budgetType,omitempty" tf:"budget_type,omitempty"`
 
@@ -99,6 +102,9 @@ type BudgetObservation struct {
 
 	// Object containing AutoAdjustData which determines the budget amount for an auto-adjusting budget.
 	AutoAdjustData *AutoAdjustDataObservation `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
+
+	// ARN of the billing view.
+	BillingViewArn *string `json:"billingViewArn,omitempty" tf:"billing_view_arn,omitempty"`
 
 	// Whether this budget tracks monetary cost or usage.
 	BudgetType *string `json:"budgetType,omitempty" tf:"budget_type,omitempty"`
@@ -151,6 +157,10 @@ type BudgetParameters struct {
 	// Object containing AutoAdjustData which determines the budget amount for an auto-adjusting budget.
 	// +kubebuilder:validation:Optional
 	AutoAdjustData *AutoAdjustDataParameters `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
+
+	// ARN of the billing view.
+	// +kubebuilder:validation:Optional
+	BillingViewArn *string `json:"billingViewArn,omitempty" tf:"billing_view_arn,omitempty"`
 
 	// Whether this budget tracks monetary cost or usage.
 	// +kubebuilder:validation:Optional

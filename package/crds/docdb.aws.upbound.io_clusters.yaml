@@ -373,6 +373,23 @@ spec:
                           to false. Cannot be specified with restore_to_time.
                         type: boolean
                     type: object
+                  serverlessV2ScalingConfiguration:
+                    description: Scaling configuration of an Amazon DocumentDB Serverless
+                      cluster. See Serverless V2 Scaling Configuration below for details.
+                    properties:
+                      maxCapacity:
+                        description: Maximum number of Amazon DocumentDB capacity
+                          units (DCUs) for an instance in an Amazon DocumentDB Serverless
+                          cluster. Valid values are multiples of 0.5 between 1 and
+                          256.
+                        type: number
+                      minCapacity:
+                        description: Minimum number of Amazon DocumentDB capacity
+                          units (DCUs) for an instance in an Amazon DocumentDB Serverless
+                          cluster. Valid values are multiples of 0.5 between 0.5 and
+                          256.
+                        type: number
+                    type: object
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB cluster is deleted. If true is specified, no DB
@@ -794,6 +811,23 @@ spec:
                           to false. Cannot be specified with restore_to_time.
                         type: boolean
                     type: object
+                  serverlessV2ScalingConfiguration:
+                    description: Scaling configuration of an Amazon DocumentDB Serverless
+                      cluster. See Serverless V2 Scaling Configuration below for details.
+                    properties:
+                      maxCapacity:
+                        description: Maximum number of Amazon DocumentDB capacity
+                          units (DCUs) for an instance in an Amazon DocumentDB Serverless
+                          cluster. Valid values are multiples of 0.5 between 1 and
+                          256.
+                        type: number
+                      minCapacity:
+                        description: Minimum number of Amazon DocumentDB capacity
+                          units (DCUs) for an instance in an Amazon DocumentDB Serverless
+                          cluster. Valid values are multiples of 0.5 between 0.5 and
+                          256.
+                        type: number
+                    type: object
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB cluster is deleted. If true is specified, no DB
@@ -1165,6 +1199,23 @@ spec:
                           cluster is restored from the latest backup time. Defaults
                           to false. Cannot be specified with restore_to_time.
                         type: boolean
+                    type: object
+                  serverlessV2ScalingConfiguration:
+                    description: Scaling configuration of an Amazon DocumentDB Serverless
+                      cluster. See Serverless V2 Scaling Configuration below for details.
+                    properties:
+                      maxCapacity:
+                        description: Maximum number of Amazon DocumentDB capacity
+                          units (DCUs) for an instance in an Amazon DocumentDB Serverless
+                          cluster. Valid values are multiples of 0.5 between 1 and
+                          256.
+                        type: number
+                      minCapacity:
+                        description: Minimum number of Amazon DocumentDB capacity
+                          units (DCUs) for an instance in an Amazon DocumentDB Serverless
+                          cluster. Valid values are multiples of 0.5 between 0.5 and
+                          256.
+                        type: number
                     type: object
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
