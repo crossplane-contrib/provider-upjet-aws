@@ -18,4 +18,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			Extractor:     common.PathARNExtractor,
 		}
 	})
+	p.AddResourceConfigurator("aws_fsx_ontap_file_system", func(r *config.Resource) {
+		r.LateInitializer.IgnoredFields = []string{"disk_iops_configuration"}
+	})
 }
