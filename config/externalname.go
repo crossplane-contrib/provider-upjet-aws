@@ -126,6 +126,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
 
+	// vpclattice
+	//
+	// VPC Lattice Resource Configuration can be imported using the id
+	"aws_vpclattice_resource_configuration": identifierFromProviderWithDefaultStub("rcfg-1234567890abcdef1"),
+	// VPC Lattice Resource Gateway can be imported using the id
+	"aws_vpclattice_resource_gateway": identifierFromProviderWithDefaultStub("rgw-055b56956a39439ba"),
+
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
 
@@ -2645,6 +2652,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// VPC Lattice Service can be imported using the id
 	"aws_vpclattice_service": config.IdentifierFromProvider,
+	// VPC Lattice Listener can be imported using the service_id/listener_id
+	"aws_vpclattice_listener": config.IdentifierFromProvider,
+	// VPC Lattice Service Network can be imported using the id
+	"aws_vpclattice_service_network": config.IdentifierFromProvider,
+	// VPC Lattice Target Group can be imported using the id
+	"aws_vpclattice_target_group": config.IdentifierFromProvider,
 
 	// waf
 	//

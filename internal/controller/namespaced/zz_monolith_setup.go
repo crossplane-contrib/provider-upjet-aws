@@ -930,7 +930,12 @@ import (
 	usertransfer "github.com/upbound/provider-aws/internal/controller/namespaced/transfer/user"
 	workflowtransfer "github.com/upbound/provider-aws/internal/controller/namespaced/transfer/workflow"
 	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/namespaced/vpc/networkperformancemetricsubscription"
+	listenervpclattice "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/listener"
+	resourceconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/resourceconfiguration"
+	resourcegateway "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/resourcegateway"
 	servicevpclattice "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/service"
+	servicenetwork "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/servicenetwork"
+	targetgroup "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/targetgroup"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/ipset"
@@ -1891,7 +1896,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		usertransfer.Setup,
 		workflowtransfer.Setup,
 		networkperformancemetricsubscription.Setup,
+		listenervpclattice.Setup,
+		resourceconfiguration.Setup,
+		resourcegateway.Setup,
 		servicevpclattice.Setup,
+		servicenetwork.Setup,
+		targetgroup.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,
@@ -2858,7 +2868,12 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		usertransfer.SetupGated,
 		workflowtransfer.SetupGated,
 		networkperformancemetricsubscription.SetupGated,
+		listenervpclattice.SetupGated,
+		resourceconfiguration.SetupGated,
+		resourcegateway.SetupGated,
 		servicevpclattice.SetupGated,
+		servicenetwork.SetupGated,
+		targetgroup.SetupGated,
 		bytematchset.SetupGated,
 		geomatchset.SetupGated,
 		ipset.SetupGated,
