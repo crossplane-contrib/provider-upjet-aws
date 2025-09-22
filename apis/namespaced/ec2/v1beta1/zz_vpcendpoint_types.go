@@ -136,7 +136,17 @@ type VPCEndpointInitParameters_2 struct {
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+
+	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnRef *v1.NamespacedReference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnSelector *v1.NamespacedSelector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCEndpointService
@@ -152,7 +162,17 @@ type VPCEndpointInitParameters_2 struct {
 	ServiceNameSelector *v1.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
+
+	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnRef *v1.NamespacedReference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnSelector *v1.NamespacedSelector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
 	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
@@ -302,8 +322,18 @@ type VPCEndpointParameters_2 struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+
+	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnRef *v1.NamespacedReference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnSelector *v1.NamespacedSelector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCEndpointService
@@ -320,8 +350,18 @@ type VPCEndpointParameters_2 struct {
 	ServiceNameSelector *v1.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
+
+	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnRef *v1.NamespacedReference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnSelector *v1.NamespacedSelector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
 	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	// +kubebuilder:validation:Optional

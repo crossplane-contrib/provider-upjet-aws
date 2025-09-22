@@ -16423,6 +16423,16 @@ func (in *VPCEndpointInitParameters) DeepCopyInto(out *VPCEndpointInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceConfigurationArnRef != nil {
+		in, out := &in.ResourceConfigurationArnRef, &out.ResourceConfigurationArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceConfigurationArnSelector != nil {
+		in, out := &in.ResourceConfigurationArnSelector, &out.ResourceConfigurationArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ServiceName != nil {
 		in, out := &in.ServiceName, &out.ServiceName
 		*out = new(string)
@@ -16442,6 +16452,16 @@ func (in *VPCEndpointInitParameters) DeepCopyInto(out *VPCEndpointInitParameters
 		in, out := &in.ServiceNetworkArn, &out.ServiceNetworkArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServiceNetworkArnRef != nil {
+		in, out := &in.ServiceNetworkArnRef, &out.ServiceNetworkArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceNetworkArnSelector != nil {
+		in, out := &in.ServiceNetworkArnSelector, &out.ServiceNetworkArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServiceRegion != nil {
 		in, out := &in.ServiceRegion, &out.ServiceRegion
@@ -16779,6 +16799,16 @@ func (in *VPCEndpointParameters) DeepCopyInto(out *VPCEndpointParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceConfigurationArnRef != nil {
+		in, out := &in.ResourceConfigurationArnRef, &out.ResourceConfigurationArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceConfigurationArnSelector != nil {
+		in, out := &in.ResourceConfigurationArnSelector, &out.ResourceConfigurationArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ServiceName != nil {
 		in, out := &in.ServiceName, &out.ServiceName
 		*out = new(string)
@@ -16798,6 +16828,16 @@ func (in *VPCEndpointParameters) DeepCopyInto(out *VPCEndpointParameters) {
 		in, out := &in.ServiceNetworkArn, &out.ServiceNetworkArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServiceNetworkArnRef != nil {
+		in, out := &in.ServiceNetworkArnRef, &out.ServiceNetworkArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceNetworkArnSelector != nil {
+		in, out := &in.ServiceNetworkArnSelector, &out.ServiceNetworkArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServiceRegion != nil {
 		in, out := &in.ServiceRegion, &out.ServiceRegion

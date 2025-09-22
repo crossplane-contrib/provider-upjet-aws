@@ -1,0 +1,19 @@
+apiVersion: vpclattice.aws.upbound.io/v1beta1
+kind: ResourceGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/resourcegateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: Example
+    region: us-west-1
+    subnetIdRefs:
+    - name: example
+    tags:
+      Environment: Example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

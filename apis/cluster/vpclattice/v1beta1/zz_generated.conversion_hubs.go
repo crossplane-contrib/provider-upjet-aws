@@ -7,4 +7,19 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *Listener) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ResourceConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ResourceGateway) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Service) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ServiceNetwork) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *TargetGroup) Hub() {}

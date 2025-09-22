@@ -1,0 +1,20 @@
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: TargetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+    - port: 443
+      protocol: HTTPS
+      vpcIdentifierSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    name: example
+    region: us-west-1
+    type: INSTANCE
