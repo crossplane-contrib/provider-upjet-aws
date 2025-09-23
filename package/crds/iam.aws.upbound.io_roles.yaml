@@ -74,7 +74,11 @@ spec:
                 properties:
                   assumeRolePolicy:
                     description: Policy that grants an entity permission to assume
-                      the role.
+                      the role. This field is required, but it can be specified in
+                      either 'spec.forProvider.assumeRolePolicy' or 'spec.initProvider.assumeRolePolicy'.
+                      While it may appear optional in each location individually,
+                      the resource requires that it is defined in at least one of
+                      them during creation.
                     type: string
                   description:
                     description: Description of the role.
@@ -226,7 +230,11 @@ spec:
                 properties:
                   assumeRolePolicy:
                     description: Policy that grants an entity permission to assume
-                      the role.
+                      the role. This field is required, but it can be specified in
+                      either 'spec.forProvider.assumeRolePolicy' or 'spec.initProvider.assumeRolePolicy'.
+                      While it may appear optional in each location individually,
+                      the resource requires that it is defined in at least one of
+                      them during creation.
                     type: string
                   description:
                     description: Description of the role.
@@ -464,7 +472,11 @@ spec:
                     type: string
                   assumeRolePolicy:
                     description: Policy that grants an entity permission to assume
-                      the role.
+                      the role. This field is required, but it can be specified in
+                      either 'spec.forProvider.assumeRolePolicy' or 'spec.initProvider.assumeRolePolicy'.
+                      While it may appear optional in each location individually,
+                      the resource requires that it is defined in at least one of
+                      them during creation.
                     type: string
                   createDate:
                     description: Creation date of the IAM role.

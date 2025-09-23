@@ -44,7 +44,7 @@ type InlinePolicyParameters struct {
 
 type RoleInitParameters struct {
 
-	// Policy that grants an entity permission to assume the role.
+	// Policy that grants an entity permission to assume the role. This field is required, but it can be specified in either 'spec.forProvider.assumeRolePolicy' or 'spec.initProvider.assumeRolePolicy'. While it may appear optional in each location individually, the resource requires that it is defined in at least one of them during creation.
 	AssumeRolePolicy *string `json:"assumeRolePolicy,omitempty" tf:"assume_role_policy,omitempty"`
 
 	// Description of the role.
@@ -89,7 +89,7 @@ type RoleObservation struct {
 	// Amazon Resource Name (ARN) specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Policy that grants an entity permission to assume the role.
+	// Policy that grants an entity permission to assume the role. This field is required, but it can be specified in either 'spec.forProvider.assumeRolePolicy' or 'spec.initProvider.assumeRolePolicy'. While it may appear optional in each location individually, the resource requires that it is defined in at least one of them during creation.
 	AssumeRolePolicy *string `json:"assumeRolePolicy,omitempty" tf:"assume_role_policy,omitempty"`
 
 	// Creation date of the IAM role.
@@ -134,7 +134,7 @@ type RoleObservation struct {
 
 type RoleParameters struct {
 
-	// Policy that grants an entity permission to assume the role.
+	// Policy that grants an entity permission to assume the role. This field is required, but it can be specified in either 'spec.forProvider.assumeRolePolicy' or 'spec.initProvider.assumeRolePolicy'. While it may appear optional in each location individually, the resource requires that it is defined in at least one of them during creation.
 	// +kubebuilder:validation:Optional
 	AssumeRolePolicy *string `json:"assumeRolePolicy,omitempty" tf:"assume_role_policy,omitempty"`
 
