@@ -148,6 +148,16 @@ spec:
                       The address (within the address range of the specified subnet) at
                       which the file system may be mounted via the mount target.
                     type: string
+                  ipAddressType:
+                    description: IP address type for the mount target. Valid values
+                      are IPV4_ONLY (only IPv4 addresses), IPV6_ONLY (only IPv6 addresses),
+                      and DUAL_STACK (dual-stack, both IPv4 and IPv6 addresses). Defaults
+                      to IPV4_ONLY.
+                    type: string
+                  ipv6Address:
+                    description: IPv6 address to use. Valid only when ip_address_type
+                      is set to IPV6_ONLY or DUAL_STACK.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -433,6 +443,16 @@ spec:
                       The address (within the address range of the specified subnet) at
                       which the file system may be mounted via the mount target.
                     type: string
+                  ipAddressType:
+                    description: IP address type for the mount target. Valid values
+                      are IPV4_ONLY (only IPv4 addresses), IPV6_ONLY (only IPv6 addresses),
+                      and DUAL_STACK (dual-stack, both IPv4 and IPv6 addresses). Defaults
+                      to IPV4_ONLY.
+                    type: string
+                  ipv6Address:
+                    description: IPv6 address to use. Valid only when ip_address_type
+                      is set to IPV6_ONLY or DUAL_STACK.
+                    type: string
                   securityGroups:
                     description: |-
                       A list of up to 5 VPC security group IDs (that must
@@ -697,6 +717,16 @@ spec:
                     description: |-
                       The address (within the address range of the specified subnet) at
                       which the file system may be mounted via the mount target.
+                    type: string
+                  ipAddressType:
+                    description: IP address type for the mount target. Valid values
+                      are IPV4_ONLY (only IPv4 addresses), IPV6_ONLY (only IPv6 addresses),
+                      and DUAL_STACK (dual-stack, both IPv4 and IPv6 addresses). Defaults
+                      to IPV4_ONLY.
+                    type: string
+                  ipv6Address:
+                    description: IPv6 address to use. Valid only when ip_address_type
+                      is set to IPV6_ONLY or DUAL_STACK.
                     type: string
                   mountTargetDnsName:
                     description: The DNS name for the given subnet/AZ per documented

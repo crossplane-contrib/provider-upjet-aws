@@ -29,6 +29,25 @@ type AttachmentObservation struct {
 type AttachmentParameters struct {
 }
 
+type AvailabilityZoneMappingInitParameters struct {
+
+	// The ID of the Availability Zone where the firewall endpoint is located..
+	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
+}
+
+type AvailabilityZoneMappingObservation struct {
+
+	// The ID of the Availability Zone where the firewall endpoint is located..
+	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
+}
+
+type AvailabilityZoneMappingParameters struct {
+
+	// The ID of the Availability Zone where the firewall endpoint is located..
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneID *string `json:"availabilityZoneId" tf:"availability_zone_id,omitempty"`
+}
+
 type EncryptionConfigurationInitParameters struct {
 
 	// The ID of the customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN.
@@ -59,6 +78,12 @@ type EncryptionConfigurationParameters struct {
 }
 
 type FirewallInitParameters struct {
+
+	// A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to true, you must first disable this protection before adding or removing Availability Zones.
+	AvailabilityZoneChangeProtection *bool `json:"availabilityZoneChangeProtection,omitempty" tf:"availability_zone_change_protection,omitempty"`
+
+	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the avaiability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
+	AvailabilityZoneMapping []AvailabilityZoneMappingInitParameters `json:"availabilityZoneMapping,omitempty" tf:"availability_zone_mapping,omitempty"`
 
 	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
 	DeleteProtection *bool `json:"deleteProtection,omitempty" tf:"delete_protection,omitempty"`
@@ -95,14 +120,27 @@ type FirewallInitParameters struct {
 	// A flag indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. Defaults to false.
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
 
-	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
+	// Required when creating a VPC attached firewall. Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
 	SubnetMapping []SubnetMappingInitParameters `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The unique identifier of the VPC where AWS Network Firewall should create the firewall.
+	// . Required when creating a transit gateway-attached firewall. The unique identifier of the transit gateway to attach to this firewall. You can provide either a transit gateway from your account or one that has been shared with you through AWS Resource Access Manager
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+
+	// Required when creating a VPC attached firewall. The unique identifier of the VPC where AWS Network Firewall should create the firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -119,6 +157,12 @@ type FirewallObservation struct {
 
 	// The Amazon Resource Name (ARN) that identifies the firewall.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to true, you must first disable this protection before adding or removing Availability Zones.
+	AvailabilityZoneChangeProtection *bool `json:"availabilityZoneChangeProtection,omitempty" tf:"availability_zone_change_protection,omitempty"`
+
+	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the avaiability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
+	AvailabilityZoneMapping []AvailabilityZoneMappingObservation `json:"availabilityZoneMapping,omitempty" tf:"availability_zone_mapping,omitempty"`
 
 	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
 	DeleteProtection *bool `json:"deleteProtection,omitempty" tf:"delete_protection,omitempty"`
@@ -155,7 +199,7 @@ type FirewallObservation struct {
 	// A flag indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. Defaults to false.
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
 
-	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
+	// Required when creating a VPC attached firewall. Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
 	SubnetMapping []SubnetMappingObservation `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
 
 	// Key-value map of resource tags.
@@ -166,14 +210,28 @@ type FirewallObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// . Required when creating a transit gateway-attached firewall. The unique identifier of the transit gateway to attach to this firewall. You can provide either a transit gateway from your account or one that has been shared with you through AWS Resource Access Manager
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// The AWS account ID that owns the transit gateway.
+	TransitGatewayOwnerAccountID *string `json:"transitGatewayOwnerAccountId,omitempty" tf:"transit_gateway_owner_account_id,omitempty"`
+
 	// A string token used when updating a firewall.
 	UpdateToken *string `json:"updateToken,omitempty" tf:"update_token,omitempty"`
 
-	// The unique identifier of the VPC where AWS Network Firewall should create the firewall.
+	// Required when creating a VPC attached firewall. The unique identifier of the VPC where AWS Network Firewall should create the firewall.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type FirewallParameters struct {
+
+	// A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to true, you must first disable this protection before adding or removing Availability Zones.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneChangeProtection *bool `json:"availabilityZoneChangeProtection,omitempty" tf:"availability_zone_change_protection,omitempty"`
+
+	// Required when creating a transit gateway-attached firewall. Set of configuration blocks describing the avaiability availability where you want to create firewall endpoints for a transit gateway-attached firewall.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneMapping []AvailabilityZoneMappingParameters `json:"availabilityZoneMapping,omitempty" tf:"availability_zone_mapping,omitempty"`
 
 	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -223,7 +281,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
 
-	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
+	// Required when creating a VPC attached firewall. Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
 	// +kubebuilder:validation:Optional
 	SubnetMapping []SubnetMappingParameters `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
 
@@ -232,7 +290,21 @@ type FirewallParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The unique identifier of the VPC where AWS Network Firewall should create the firewall.
+	// . Required when creating a transit gateway-attached firewall. The unique identifier of the transit gateway to attach to this firewall. You can provide either a transit gateway from your account or one that has been shared with you through AWS Resource Access Manager
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+
+	// Required when creating a VPC attached firewall. The unique identifier of the VPC where AWS Network Firewall should create the firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -253,6 +325,9 @@ type FirewallStatusObservation struct {
 
 	// Set of subnets configured for use by the firewall.
 	SyncStates []SyncStatesObservation `json:"syncStates,omitempty" tf:"sync_states,omitempty"`
+
+	// Set of transit gateway configured for use by the firewall.
+	TransitGatewayAttachmentSyncStates []TransitGatewayAttachmentSyncStatesObservation `json:"transitGatewayAttachmentSyncStates,omitempty" tf:"transit_gateway_attachment_sync_states,omitempty"`
 }
 
 type FirewallStatusParameters struct {
@@ -322,6 +397,18 @@ type SyncStatesObservation struct {
 type SyncStatesParameters struct {
 }
 
+type TransitGatewayAttachmentSyncStatesInitParameters struct {
+}
+
+type TransitGatewayAttachmentSyncStatesObservation struct {
+
+	// The unique identifier of the transit gateway attachment.
+	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
+}
+
+type TransitGatewayAttachmentSyncStatesParameters struct {
+}
+
 // FirewallSpec defines the desired state of Firewall
 type FirewallSpec struct {
 	v2.ManagedResourceSpec `json:",inline"`
@@ -359,7 +446,6 @@ type Firewall struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subnetMapping) || (has(self.initProvider) && has(self.initProvider.subnetMapping))",message="spec.forProvider.subnetMapping is a required parameter"
 	Spec   FirewallSpec   `json:"spec"`
 	Status FirewallStatus `json:"status,omitempty"`
 }

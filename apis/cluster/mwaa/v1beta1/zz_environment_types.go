@@ -146,6 +146,9 @@ type EnvironmentInitParameters struct {
 
 	// Specifies the start date for the weekly maintenance window.
 	WeeklyMaintenanceWindowStart *string `json:"weeklyMaintenanceWindowStart,omitempty" tf:"weekly_maintenance_window_start,omitempty"`
+
+	// Worker replacement strategy. Valid values: FORCED, GRACEFUL.
+	WorkerReplacementStrategy *string `json:"workerReplacementStrategy,omitempty" tf:"worker_replacement_strategy,omitempty"`
 }
 
 type EnvironmentObservation struct {
@@ -252,6 +255,9 @@ type EnvironmentObservation struct {
 
 	// Specifies the start date for the weekly maintenance window.
 	WeeklyMaintenanceWindowStart *string `json:"weeklyMaintenanceWindowStart,omitempty" tf:"weekly_maintenance_window_start,omitempty"`
+
+	// Worker replacement strategy. Valid values: FORCED, GRACEFUL.
+	WorkerReplacementStrategy *string `json:"workerReplacementStrategy,omitempty" tf:"worker_replacement_strategy,omitempty"`
 }
 
 type EnvironmentParameters struct {
@@ -386,6 +392,10 @@ type EnvironmentParameters struct {
 	// Specifies the start date for the weekly maintenance window.
 	// +kubebuilder:validation:Optional
 	WeeklyMaintenanceWindowStart *string `json:"weeklyMaintenanceWindowStart,omitempty" tf:"weekly_maintenance_window_start,omitempty"`
+
+	// Worker replacement strategy. Valid values: FORCED, GRACEFUL.
+	// +kubebuilder:validation:Optional
+	WorkerReplacementStrategy *string `json:"workerReplacementStrategy,omitempty" tf:"worker_replacement_strategy,omitempty"`
 }
 
 type ErrorInitParameters struct {

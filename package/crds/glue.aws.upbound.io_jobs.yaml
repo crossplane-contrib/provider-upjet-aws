@@ -1517,9 +1517,10 @@ spec:
                       for gluestreaming jobs.
                     type: number
                   workerType:
-                    description: The type of predefined worker that is allocated when
-                      a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X
-                      for Spark jobs. Accepts the value Z.2X for Ray jobs.
+                    description: 'The type of predefined worker that is allocated
+                      when a job runs. Valid values: Standard, G.1X, G.2X, G.025X,
+                      G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray
+                      jobs). See the AWS documentation for details.'
                     type: string
                 required:
                 - region
@@ -1867,9 +1868,10 @@ spec:
                       for gluestreaming jobs.
                     type: number
                   workerType:
-                    description: The type of predefined worker that is allocated when
-                      a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X
-                      for Spark jobs. Accepts the value Z.2X for Ray jobs.
+                    description: 'The type of predefined worker that is allocated
+                      when a job runs. Valid values: Standard, G.1X, G.2X, G.025X,
+                      G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray
+                      jobs). See the AWS documentation for details.'
                     type: string
                 type: object
               managementPolicies:
@@ -2148,9 +2150,10 @@ spec:
                       for gluestreaming jobs.
                     type: number
                   workerType:
-                    description: The type of predefined worker that is allocated when
-                      a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X
-                      for Spark jobs. Accepts the value Z.2X for Ray jobs.
+                    description: 'The type of predefined worker that is allocated
+                      when a job runs. Valid values: Standard, G.1X, G.2X, G.025X,
+                      G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray
+                      jobs). See the AWS documentation for details.'
                     type: string
                 type: object
               conditions:

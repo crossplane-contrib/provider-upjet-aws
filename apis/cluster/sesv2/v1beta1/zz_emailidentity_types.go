@@ -114,6 +114,9 @@ type EmailIdentityObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// The verification status of the identity. The status can be one of the following: PENDING, SUCCESS, FAILED, TEMPORARY_FAILURE, and NOT_STARTED.
+	VerificationStatus *string `json:"verificationStatus,omitempty" tf:"verification_status,omitempty"`
+
 	// Specifies whether or not the identity is verified.
 	VerifiedForSendingStatus *bool `json:"verifiedForSendingStatus,omitempty" tf:"verified_for_sending_status,omitempty"`
 }

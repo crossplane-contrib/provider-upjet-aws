@@ -141,9 +141,8 @@ type ClusterRoleAssociationStatus struct {
 type ClusterRoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureName) || (has(self.initProvider) && has(self.initProvider.featureName))",message="spec.forProvider.featureName is a required parameter"
-	Spec   ClusterRoleAssociationSpec   `json:"spec"`
-	Status ClusterRoleAssociationStatus `json:"status,omitempty"`
+	Spec              ClusterRoleAssociationSpec   `json:"spec"`
+	Status            ClusterRoleAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

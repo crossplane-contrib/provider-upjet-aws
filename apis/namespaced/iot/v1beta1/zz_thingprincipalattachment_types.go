@@ -33,6 +33,9 @@ type ThingPrincipalAttachmentInitParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iot/v1beta1.Thing
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 
+	// The type of relationship to specify when attaching a principal to a thing. Valid values are EXCLUSIVE_THING (the thing will be the only one attached to the principal) or NON_EXCLUSIVE_THING (multiple things can be attached to the principal). Defaults to NON_EXCLUSIVE_THING.
+	ThingPrincipalType *string `json:"thingPrincipalType,omitempty" tf:"thing_principal_type,omitempty"`
+
 	// Reference to a Thing in iot to populate thing.
 	// +kubebuilder:validation:Optional
 	ThingRef *v1.NamespacedReference `json:"thingRef,omitempty" tf:"-"`
@@ -54,6 +57,9 @@ type ThingPrincipalAttachmentObservation struct {
 
 	// The name of the thing.
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
+
+	// The type of relationship to specify when attaching a principal to a thing. Valid values are EXCLUSIVE_THING (the thing will be the only one attached to the principal) or NON_EXCLUSIVE_THING (multiple things can be attached to the principal). Defaults to NON_EXCLUSIVE_THING.
+	ThingPrincipalType *string `json:"thingPrincipalType,omitempty" tf:"thing_principal_type,omitempty"`
 }
 
 type ThingPrincipalAttachmentParameters struct {
@@ -81,6 +87,10 @@ type ThingPrincipalAttachmentParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iot/v1beta1.Thing
 	// +kubebuilder:validation:Optional
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
+
+	// The type of relationship to specify when attaching a principal to a thing. Valid values are EXCLUSIVE_THING (the thing will be the only one attached to the principal) or NON_EXCLUSIVE_THING (multiple things can be attached to the principal). Defaults to NON_EXCLUSIVE_THING.
+	// +kubebuilder:validation:Optional
+	ThingPrincipalType *string `json:"thingPrincipalType,omitempty" tf:"thing_principal_type,omitempty"`
 
 	// Reference to a Thing in iot to populate thing.
 	// +kubebuilder:validation:Optional

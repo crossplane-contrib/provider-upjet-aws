@@ -109,7 +109,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Key),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      resource.ExtractParamPath("key", false),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyRef,
 			Selector:     mg.Spec.ForProvider.KeySelector,
@@ -149,7 +149,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Key),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      resource.ExtractParamPath("key", false),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyRef,
 			Selector:     mg.Spec.InitProvider.KeySelector,

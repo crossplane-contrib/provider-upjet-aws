@@ -22,7 +22,7 @@ type FunctionInitParameters struct {
 	// Comment.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to on key value store per function.
+	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to one key value store per function.
 	// +listType=set
 	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`
 
@@ -46,7 +46,7 @@ type FunctionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to on key value store per function.
+	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to one key value store per function.
 	// +listType=set
 	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`
 
@@ -73,7 +73,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to on key value store per function.
+	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to one key value store per function.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`

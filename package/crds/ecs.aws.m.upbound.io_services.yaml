@@ -83,7 +83,12 @@ spec:
                       across Availability Zones (AZs) to mitigate the risk of impaired
                       application availability due to underlying infrastructure failures
                       and task lifecycle activities. The valid values are ENABLED
-                      and DISABLED. Defaults to DISABLED.
+                      and DISABLED. When creating a new service, if no value is specified,
+                      it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing.
+                      When updating an existing service, if no value is specified
+                      it defaults to the existing service's AvailabilityZoneRebalancing
+                      value. If the service never had an AvailabilityZoneRebalancing
+                      value set, Amazon ECS treats this as DISABLED.
                     type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
@@ -205,6 +210,43 @@ spec:
                           when a service deployment fails, the service is rolled back
                           to the last deployment that completed successfully.
                         type: boolean
+                    type: object
+                  deploymentConfiguration:
+                    description: Configuration block for deployment settings. See
+                      below.
+                    properties:
+                      bakeTimeInMinutes:
+                        description: Number of minutes to wait after a new deployment
+                          is fully provisioned before terminating the old deployment.
+                          Only used when strategy is set to BLUE_GREEN.
+                        type: string
+                      lifecycleHook:
+                        description: Configuration block for lifecycle hooks that
+                          are invoked during deployments. See below.
+                        items:
+                          properties:
+                            hookTargetArn:
+                              description: ARN of the Lambda function to invoke for
+                                the lifecycle hook.
+                              type: string
+                            lifecycleStages:
+                              description: 'Stages during the deployment when the
+                                hook should be invoked. Valid values: RECONCILE_SERVICE,
+                                PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT,
+                                PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.'
+                              items:
+                                type: string
+                              type: array
+                            roleArn:
+                              description: ARN of the IAM role that grants the service
+                                permission to invoke the Lambda function.
+                              type: string
+                          type: object
+                        type: array
+                      strategy:
+                        description: 'Type of deployment strategy. Valid values: ROLLING,
+                          BLUE_GREEN. Default: ROLLING.'
+                        type: string
                     type: object
                   deploymentController:
                     description: Configuration block for deployment controller configuration.
@@ -357,6 +399,28 @@ spec:
                     description: Configuration block for load balancers. See below.
                     items:
                       properties:
+                        advancedConfiguration:
+                          description: Configuration block for Blue/Green deployment
+                            settings. Required when using BLUE_GREEN deployment strategy.
+                            See below.
+                          properties:
+                            alternateTargetGroupArn:
+                              description: ARN of the alternate target group to use
+                                for Blue/Green deployments.
+                              type: string
+                            productionListenerRule:
+                              description: ARN of the listener rule that routes production
+                                traffic.
+                              type: string
+                            roleArn:
+                              description: ARN of the IAM role that allows ECS to
+                                manage the target groups.
+                              type: string
+                            testListenerRule:
+                              description: ARN of the listener rule that routes test
+                                traffic.
+                              type: string
+                          type: object
                         containerName:
                           description: Name of the container to associate with the
                             load balancer (as it appears in a container definition).
@@ -765,9 +829,9 @@ spec:
                             clientAlias:
                               description: List of client aliases for this Service
                                 Connect service. You use these to assign names that
-                                can be used by client applications. The maximum number
-                                of client aliases that you can have in this list is
-                                1. See below.
+                                can be used by client applications. For each service
+                                block where enabled is true, exactly one client_alias
+                                with one port should be specified. See below.
                               properties:
                                 dnsName:
                                   description: Name that you use in the applications
@@ -778,6 +842,31 @@ spec:
                                     Connect proxy. This port is available inside of
                                     all of the tasks within the same namespace.
                                   type: number
+                                testTrafficRules:
+                                  description: Configuration block for test traffic
+                                    routing rules. See below.
+                                  items:
+                                    properties:
+                                      header:
+                                        description: Configuration block for header-based
+                                          routing rules. See below.
+                                        properties:
+                                          name:
+                                            description: Name of the HTTP header to
+                                              match.
+                                            type: string
+                                          value:
+                                            description: Configuration block for header
+                                              value matching criteria. See below.
+                                            properties:
+                                              exact:
+                                                description: Exact string value to
+                                                  match in the header.
+                                                type: string
+                                            type: object
+                                        type: object
+                                    type: object
+                                  type: array
                               type: object
                             discoveryName:
                               description: Name of the new AWS Cloud Map service that
@@ -854,6 +943,14 @@ spec:
                           For more information, see Service
                         type: string
                     type: object
+                  sigintRollback:
+                    description: Whether to enable graceful termination of deployments
+                      using SIGINT signals. When enabled, allows customers to safely
+                      cancel an in-progress deployment and automatically trigger a
+                      rollback to the previous stable state. Defaults to false. Only
+                      applicable when using ECS deployment controller and requires
+                      wait_for_steady_state = true.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -1102,7 +1199,12 @@ spec:
                       across Availability Zones (AZs) to mitigate the risk of impaired
                       application availability due to underlying infrastructure failures
                       and task lifecycle activities. The valid values are ENABLED
-                      and DISABLED. Defaults to DISABLED.
+                      and DISABLED. When creating a new service, if no value is specified,
+                      it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing.
+                      When updating an existing service, if no value is specified
+                      it defaults to the existing service's AvailabilityZoneRebalancing
+                      value. If the service never had an AvailabilityZoneRebalancing
+                      value set, Amazon ECS treats this as DISABLED.
                     type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
@@ -1224,6 +1326,43 @@ spec:
                           when a service deployment fails, the service is rolled back
                           to the last deployment that completed successfully.
                         type: boolean
+                    type: object
+                  deploymentConfiguration:
+                    description: Configuration block for deployment settings. See
+                      below.
+                    properties:
+                      bakeTimeInMinutes:
+                        description: Number of minutes to wait after a new deployment
+                          is fully provisioned before terminating the old deployment.
+                          Only used when strategy is set to BLUE_GREEN.
+                        type: string
+                      lifecycleHook:
+                        description: Configuration block for lifecycle hooks that
+                          are invoked during deployments. See below.
+                        items:
+                          properties:
+                            hookTargetArn:
+                              description: ARN of the Lambda function to invoke for
+                                the lifecycle hook.
+                              type: string
+                            lifecycleStages:
+                              description: 'Stages during the deployment when the
+                                hook should be invoked. Valid values: RECONCILE_SERVICE,
+                                PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT,
+                                PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.'
+                              items:
+                                type: string
+                              type: array
+                            roleArn:
+                              description: ARN of the IAM role that grants the service
+                                permission to invoke the Lambda function.
+                              type: string
+                          type: object
+                        type: array
+                      strategy:
+                        description: 'Type of deployment strategy. Valid values: ROLLING,
+                          BLUE_GREEN. Default: ROLLING.'
+                        type: string
                     type: object
                   deploymentController:
                     description: Configuration block for deployment controller configuration.
@@ -1376,6 +1515,28 @@ spec:
                     description: Configuration block for load balancers. See below.
                     items:
                       properties:
+                        advancedConfiguration:
+                          description: Configuration block for Blue/Green deployment
+                            settings. Required when using BLUE_GREEN deployment strategy.
+                            See below.
+                          properties:
+                            alternateTargetGroupArn:
+                              description: ARN of the alternate target group to use
+                                for Blue/Green deployments.
+                              type: string
+                            productionListenerRule:
+                              description: ARN of the listener rule that routes production
+                                traffic.
+                              type: string
+                            roleArn:
+                              description: ARN of the IAM role that allows ECS to
+                                manage the target groups.
+                              type: string
+                            testListenerRule:
+                              description: ARN of the listener rule that routes test
+                                traffic.
+                              type: string
+                          type: object
                         containerName:
                           description: Name of the container to associate with the
                             load balancer (as it appears in a container definition).
@@ -1779,9 +1940,9 @@ spec:
                             clientAlias:
                               description: List of client aliases for this Service
                                 Connect service. You use these to assign names that
-                                can be used by client applications. The maximum number
-                                of client aliases that you can have in this list is
-                                1. See below.
+                                can be used by client applications. For each service
+                                block where enabled is true, exactly one client_alias
+                                with one port should be specified. See below.
                               properties:
                                 dnsName:
                                   description: Name that you use in the applications
@@ -1792,6 +1953,31 @@ spec:
                                     Connect proxy. This port is available inside of
                                     all of the tasks within the same namespace.
                                   type: number
+                                testTrafficRules:
+                                  description: Configuration block for test traffic
+                                    routing rules. See below.
+                                  items:
+                                    properties:
+                                      header:
+                                        description: Configuration block for header-based
+                                          routing rules. See below.
+                                        properties:
+                                          name:
+                                            description: Name of the HTTP header to
+                                              match.
+                                            type: string
+                                          value:
+                                            description: Configuration block for header
+                                              value matching criteria. See below.
+                                            properties:
+                                              exact:
+                                                description: Exact string value to
+                                                  match in the header.
+                                                type: string
+                                            type: object
+                                        type: object
+                                    type: object
+                                  type: array
                               type: object
                             discoveryName:
                               description: Name of the new AWS Cloud Map service that
@@ -1868,6 +2054,14 @@ spec:
                           For more information, see Service
                         type: string
                     type: object
+                  sigintRollback:
+                    description: Whether to enable graceful termination of deployments
+                      using SIGINT signals. When enabled, allows customers to safely
+                      cancel an in-progress deployment and automatically trigger a
+                      rollback to the previous stable state. Defaults to false. Only
+                      applicable when using ECS deployment controller and requires
+                      wait_for_steady_state = true.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -2167,7 +2361,12 @@ spec:
                       across Availability Zones (AZs) to mitigate the risk of impaired
                       application availability due to underlying infrastructure failures
                       and task lifecycle activities. The valid values are ENABLED
-                      and DISABLED. Defaults to DISABLED.
+                      and DISABLED. When creating a new service, if no value is specified,
+                      it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing.
+                      When updating an existing service, if no value is specified
+                      it defaults to the existing service's AvailabilityZoneRebalancing
+                      value. If the service never had an AvailabilityZoneRebalancing
+                      value set, Amazon ECS treats this as DISABLED.
                     type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
@@ -2209,6 +2408,43 @@ spec:
                           when a service deployment fails, the service is rolled back
                           to the last deployment that completed successfully.
                         type: boolean
+                    type: object
+                  deploymentConfiguration:
+                    description: Configuration block for deployment settings. See
+                      below.
+                    properties:
+                      bakeTimeInMinutes:
+                        description: Number of minutes to wait after a new deployment
+                          is fully provisioned before terminating the old deployment.
+                          Only used when strategy is set to BLUE_GREEN.
+                        type: string
+                      lifecycleHook:
+                        description: Configuration block for lifecycle hooks that
+                          are invoked during deployments. See below.
+                        items:
+                          properties:
+                            hookTargetArn:
+                              description: ARN of the Lambda function to invoke for
+                                the lifecycle hook.
+                              type: string
+                            lifecycleStages:
+                              description: 'Stages during the deployment when the
+                                hook should be invoked. Valid values: RECONCILE_SERVICE,
+                                PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT,
+                                PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT.'
+                              items:
+                                type: string
+                              type: array
+                            roleArn:
+                              description: ARN of the IAM role that grants the service
+                                permission to invoke the Lambda function.
+                              type: string
+                          type: object
+                        type: array
+                      strategy:
+                        description: 'Type of deployment strategy. Valid values: ROLLING,
+                          BLUE_GREEN. Default: ROLLING.'
+                        type: string
                     type: object
                   deploymentController:
                     description: Configuration block for deployment controller configuration.
@@ -2283,6 +2519,28 @@ spec:
                     description: Configuration block for load balancers. See below.
                     items:
                       properties:
+                        advancedConfiguration:
+                          description: Configuration block for Blue/Green deployment
+                            settings. Required when using BLUE_GREEN deployment strategy.
+                            See below.
+                          properties:
+                            alternateTargetGroupArn:
+                              description: ARN of the alternate target group to use
+                                for Blue/Green deployments.
+                              type: string
+                            productionListenerRule:
+                              description: ARN of the listener rule that routes production
+                                traffic.
+                              type: string
+                            roleArn:
+                              description: ARN of the IAM role that allows ECS to
+                                manage the target groups.
+                              type: string
+                            testListenerRule:
+                              description: ARN of the listener rule that routes test
+                                traffic.
+                              type: string
+                          type: object
                         containerName:
                           description: Name of the container to associate with the
                             load balancer (as it appears in a container definition).
@@ -2440,9 +2698,9 @@ spec:
                             clientAlias:
                               description: List of client aliases for this Service
                                 Connect service. You use these to assign names that
-                                can be used by client applications. The maximum number
-                                of client aliases that you can have in this list is
-                                1. See below.
+                                can be used by client applications. For each service
+                                block where enabled is true, exactly one client_alias
+                                with one port should be specified. See below.
                               properties:
                                 dnsName:
                                   description: Name that you use in the applications
@@ -2453,6 +2711,31 @@ spec:
                                     Connect proxy. This port is available inside of
                                     all of the tasks within the same namespace.
                                   type: number
+                                testTrafficRules:
+                                  description: Configuration block for test traffic
+                                    routing rules. See below.
+                                  items:
+                                    properties:
+                                      header:
+                                        description: Configuration block for header-based
+                                          routing rules. See below.
+                                        properties:
+                                          name:
+                                            description: Name of the HTTP header to
+                                              match.
+                                            type: string
+                                          value:
+                                            description: Configuration block for header
+                                              value matching criteria. See below.
+                                            properties:
+                                              exact:
+                                                description: Exact string value to
+                                                  match in the header.
+                                                type: string
+                                            type: object
+                                        type: object
+                                    type: object
+                                  type: array
                               type: object
                             discoveryName:
                               description: Name of the new AWS Cloud Map service that
@@ -2529,6 +2812,14 @@ spec:
                           For more information, see Service
                         type: string
                     type: object
+                  sigintRollback:
+                    description: Whether to enable graceful termination of deployments
+                      using SIGINT signals. When enabled, allows customers to safely
+                      cancel an in-progress deployment and automatically trigger a
+                      rollback to the previous stable state. Defaults to false. Only
+                      applicable when using ECS deployment controller and requires
+                      wait_for_steady_state = true.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string

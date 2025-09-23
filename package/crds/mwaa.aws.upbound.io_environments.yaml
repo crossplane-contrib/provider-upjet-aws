@@ -675,6 +675,10 @@ spec:
                     description: Specifies the start date for the weekly maintenance
                       window.
                     type: string
+                  workerReplacementStrategy:
+                    description: 'Worker replacement strategy. Valid values: FORCED,
+                      GRACEFUL.'
+                    type: string
                 required:
                 - region
                 type: object
@@ -1277,6 +1281,10 @@ spec:
                     description: Specifies the start date for the weekly maintenance
                       window.
                     type: string
+                  workerReplacementStrategy:
+                    description: 'Worker replacement strategy. Valid values: FORCED,
+                      GRACEFUL.'
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -1657,6 +1665,10 @@ spec:
                   weeklyMaintenanceWindowStart:
                     description: Specifies the start date for the weekly maintenance
                       window.
+                    type: string
+                  workerReplacementStrategy:
+                    description: 'Worker replacement strategy. Valid values: FORCED,
+                      GRACEFUL.'
                     type: string
                 type: object
               conditions:

@@ -86,7 +86,7 @@ type GlobalSecondaryIndexInitParameters struct {
 	// +listType=set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
-	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	// Sets the maximum number of read and write units for the specified on-demand index. See below.
 	OnDemandThroughput []OnDemandThroughputInitParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
@@ -97,6 +97,9 @@ type GlobalSecondaryIndexInitParameters struct {
 
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+
+	// Sets the number of warm read and write units for this index. See below.
+	WarmThroughput []WarmThroughputInitParameters `json:"warmThroughput,omitempty" tf:"warm_throughput,omitempty"`
 
 	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
@@ -114,7 +117,7 @@ type GlobalSecondaryIndexObservation struct {
 	// +listType=set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
-	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	// Sets the maximum number of read and write units for the specified on-demand index. See below.
 	OnDemandThroughput []OnDemandThroughputObservation `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
@@ -125,6 +128,9 @@ type GlobalSecondaryIndexObservation struct {
 
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+
+	// Sets the number of warm read and write units for this index. See below.
+	WarmThroughput []WarmThroughputObservation `json:"warmThroughput,omitempty" tf:"warm_throughput,omitempty"`
 
 	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
@@ -145,7 +151,7 @@ type GlobalSecondaryIndexParameters struct {
 	// +listType=set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
-	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	// Sets the maximum number of read and write units for the specified on-demand index. See below.
 	// +kubebuilder:validation:Optional
 	OnDemandThroughput []OnDemandThroughputParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
@@ -160,6 +166,10 @@ type GlobalSecondaryIndexParameters struct {
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+
+	// Sets the number of warm read and write units for this index. See below.
+	// +kubebuilder:validation:Optional
+	WarmThroughput []WarmThroughputParameters `json:"warmThroughput,omitempty" tf:"warm_throughput,omitempty"`
 
 	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
@@ -530,6 +540,9 @@ type TableInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Sets the number of warm read and write units for the specified table. See below.
+	WarmThroughput []TableWarmThroughputInitParameters `json:"warmThroughput,omitempty" tf:"warm_throughput,omitempty"`
+
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
@@ -624,6 +637,9 @@ type TableObservation struct {
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Sets the number of warm read and write units for the specified table. See below.
+	WarmThroughput []TableWarmThroughputObservation `json:"warmThroughput,omitempty" tf:"warm_throughput,omitempty"`
 
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
@@ -756,6 +772,10 @@ type TableParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Sets the number of warm read and write units for the specified table. See below.
+	// +kubebuilder:validation:Optional
+	WarmThroughput []TableWarmThroughputParameters `json:"warmThroughput,omitempty" tf:"warm_throughput,omitempty"`
+
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
 	// +kubebuilder:validation:Optional
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
@@ -765,6 +785,9 @@ type TableReplicaInitParameters struct {
 
 	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
 	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
+
+	// Whether deletion protection is enabled (true) or disabled (false) on the replica. Default is false.
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption.
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
@@ -794,6 +817,9 @@ type TableReplicaObservation struct {
 
 	// Whether this global table will be using STRONG consistency mode or EVENTUAL consistency mode. Default value is EVENTUAL.
 	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
+
+	// Whether deletion protection is enabled (true) or disabled (false) on the replica. Default is false.
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption.
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
@@ -828,6 +854,10 @@ type TableReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	ConsistencyMode *string `json:"consistencyMode,omitempty" tf:"consistency_mode,omitempty"`
 
+	// Whether deletion protection is enabled (true) or disabled (false) on the replica. Default is false.
+	// +kubebuilder:validation:Optional
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
 	// ARN of the CMK that should be used for the AWS KMS encryption.
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
 	// Note: This attribute will not be populated with the ARN of default keys.
@@ -851,6 +881,64 @@ type TableReplicaParameters struct {
 	// Region name of the replica.
 	// +kubebuilder:validation:Optional
 	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
+}
+
+type TableWarmThroughputInitParameters struct {
+
+	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
+
+	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
+}
+
+type TableWarmThroughputObservation struct {
+
+	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
+
+	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
+}
+
+type TableWarmThroughputParameters struct {
+
+	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// +kubebuilder:validation:Optional
+	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
+
+	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// +kubebuilder:validation:Optional
+	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
+}
+
+type WarmThroughputInitParameters struct {
+
+	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
+
+	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
+}
+
+type WarmThroughputObservation struct {
+
+	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
+
+	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
+}
+
+type WarmThroughputParameters struct {
+
+	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// +kubebuilder:validation:Optional
+	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
+
+	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// +kubebuilder:validation:Optional
+	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
 }
 
 // TableSpec defines the desired state of Table

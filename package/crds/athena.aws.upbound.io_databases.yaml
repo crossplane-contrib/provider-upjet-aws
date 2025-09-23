@@ -201,6 +201,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  workgroup:
+                    description: Name of the workgroup.
+                    type: string
                 required:
                 - region
                 type: object
@@ -340,6 +343,9 @@ spec:
                       database definition.
                     type: object
                     x-kubernetes-map-type: granular
+                  workgroup:
+                    description: Name of the workgroup.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -488,6 +494,9 @@ spec:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
+                    type: string
+                  workgroup:
+                    description: Name of the workgroup.
                     type: string
                 type: object
               conditions:
@@ -730,6 +739,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  workgroup:
+                    description: Name of the workgroup.
+                    type: string
                 required:
                 - region
                 type: object
@@ -865,6 +877,9 @@ spec:
                       database definition.
                     type: object
                     x-kubernetes-map-type: granular
+                  workgroup:
+                    description: Name of the workgroup.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -1009,6 +1024,9 @@ spec:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
+                    type: string
+                  workgroup:
+                    description: Name of the workgroup.
                     type: string
                 type: object
               conditions:
