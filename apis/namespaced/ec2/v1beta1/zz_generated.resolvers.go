@@ -6177,6 +6177,26 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ResourceConfiguration", "ResourceConfigurationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceConfigurationArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceConfigurationArnRef,
+			Selector:     mg.Spec.ForProvider.ResourceConfigurationArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceConfigurationArn")
+	}
+	mg.Spec.ForProvider.ResourceConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceConfigurationArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpointService", "VPCEndpointServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -6196,6 +6216,26 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceNetworkArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceNetworkArnRef,
+			Selector:     mg.Spec.ForProvider.ServiceNetworkArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceNetworkArn")
+	}
+	mg.Spec.ForProvider.ServiceNetworkArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceNetworkArnRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SubnetConfiguration); i3++ {
 		{
@@ -6239,6 +6279,26 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ResourceConfiguration", "ResourceConfigurationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceConfigurationArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceConfigurationArnRef,
+			Selector:     mg.Spec.InitProvider.ResourceConfigurationArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceConfigurationArn")
+	}
+	mg.Spec.InitProvider.ResourceConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceConfigurationArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpointService", "VPCEndpointServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -6258,6 +6318,26 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServiceNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceNetworkArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceNetworkArnRef,
+			Selector:     mg.Spec.InitProvider.ServiceNetworkArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceNetworkArn")
+	}
+	mg.Spec.InitProvider.ServiceNetworkArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceNetworkArnRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.SubnetConfiguration); i3++ {
 		{
