@@ -28,4 +28,3 @@ spec:
     kind: ClusterProviderConfig
   writeConnectionSecretToRef:
     name: acmpca-certificate
-    namespace: upbound-system

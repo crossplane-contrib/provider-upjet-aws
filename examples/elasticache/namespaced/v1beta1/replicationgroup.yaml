@@ -102,4 +102,3 @@ spec:
     region: us-east-1
   writeConnectionSecretToRef:
     name: redis-conn
-    namespace: upbound-system

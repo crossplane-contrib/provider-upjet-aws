@@ -121,7 +121,6 @@ spec:
     region: us-west-1
   writeConnectionSecretToRef:
     name: cluster-conn
-    namespace: upbound-system
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role

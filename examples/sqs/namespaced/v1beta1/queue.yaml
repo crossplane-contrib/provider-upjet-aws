@@ -21,4 +21,3 @@ spec:
       Environment: production
   writeConnectionSecretToRef:
     name: "sqs-example"
-    namespace: "upbound-system"

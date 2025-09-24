@@ -18,4 +18,3 @@ spec:
         toPort: 80
   writeConnectionSecretToRef:
     name: listener
-    namespace: upbound-system
