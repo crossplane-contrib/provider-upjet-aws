@@ -15,4 +15,3 @@ spec:
     name: sample-accelerator
   writeConnectionSecretToRef:
     name: accelerator
-    namespace: upbound-system

@@ -26,7 +26,6 @@ spec:
         testing.upbound.io/example-name: example
   writeConnectionSecretToRef:
     name: memorydb-example
-    namespace: upbound-system
 ---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: SecurityGroup
