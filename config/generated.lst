@@ -352,6 +352,7 @@
 "aws_ecr_registry_scanning_configuration",
 "aws_ecr_replication_configuration",
 "aws_ecr_repository",
+"aws_ecr_repository_creation_template",
 "aws_ecr_repository_policy",
 "aws_ecrpublic_repository",
 "aws_ecrpublic_repository_policy",
