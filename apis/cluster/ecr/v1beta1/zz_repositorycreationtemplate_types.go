@@ -62,6 +62,35 @@ type RepositoryCreationTemplateEncryptionConfigurationParameters struct {
 	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }
 
+type RepositoryCreationTemplateImageTagMutabilityExclusionFilterInitParameters struct {
+
+	// The filter pattern to use for excluding image tags from the mutability setting. Must contain only letters, numbers, and special characters (._-). Each filter can be up to 128 characters long and can contain a maximum of 2 wildcards ().
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// The type of filter to use. Must be WILDCARD.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+}
+
+type RepositoryCreationTemplateImageTagMutabilityExclusionFilterObservation struct {
+
+	// The filter pattern to use for excluding image tags from the mutability setting. Must contain only letters, numbers, and special characters (._-). Each filter can be up to 128 characters long and can contain a maximum of 2 wildcards ().
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// The type of filter to use. Must be WILDCARD.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+}
+
+type RepositoryCreationTemplateImageTagMutabilityExclusionFilterParameters struct {
+
+	// The filter pattern to use for excluding image tags from the mutability setting. Must contain only letters, numbers, and special characters (._-). Each filter can be up to 128 characters long and can contain a maximum of 2 wildcards ().
+	// +kubebuilder:validation:Optional
+	Filter *string `json:"filter" tf:"filter,omitempty"`
+
+	// The type of filter to use. Must be WILDCARD.
+	// +kubebuilder:validation:Optional
+	FilterType *string `json:"filterType" tf:"filter_type,omitempty"`
+}
+
 type RepositoryCreationTemplateInitParameters struct {
 
 	// Which features this template applies to. Must contain one or more of PULL_THROUGH_CACHE or REPLICATION.
@@ -79,6 +108,9 @@ type RepositoryCreationTemplateInitParameters struct {
 
 	// The tag mutability setting for any created repositories. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
 	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
+
+	// Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION. See below for schema.
+	ImageTagMutabilityExclusionFilter []RepositoryCreationTemplateImageTagMutabilityExclusionFilterInitParameters `json:"imageTagMutabilityExclusionFilter,omitempty" tf:"image_tag_mutability_exclusion_filter,omitempty"`
 
 	// The lifecycle policy document to apply to any created repositories. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the lifecycle_policy argument.
 	LifecyclePolicy *string `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
@@ -117,6 +149,9 @@ type RepositoryCreationTemplateObservation struct {
 
 	// The tag mutability setting for any created repositories. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
 	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
+
+	// Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION. See below for schema.
+	ImageTagMutabilityExclusionFilter []RepositoryCreationTemplateImageTagMutabilityExclusionFilterObservation `json:"imageTagMutabilityExclusionFilter,omitempty" tf:"image_tag_mutability_exclusion_filter,omitempty"`
 
 	// The lifecycle policy document to apply to any created repositories. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the lifecycle_policy argument.
 	LifecyclePolicy *string `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
@@ -161,6 +196,10 @@ type RepositoryCreationTemplateParameters struct {
 	// The tag mutability setting for any created repositories. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
 	// +kubebuilder:validation:Optional
 	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
+
+	// Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION. See below for schema.
+	// +kubebuilder:validation:Optional
+	ImageTagMutabilityExclusionFilter []RepositoryCreationTemplateImageTagMutabilityExclusionFilterParameters `json:"imageTagMutabilityExclusionFilter,omitempty" tf:"image_tag_mutability_exclusion_filter,omitempty"`
 
 	// The lifecycle policy document to apply to any created repositories. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the lifecycle_policy argument.
 	// +kubebuilder:validation:Optional
