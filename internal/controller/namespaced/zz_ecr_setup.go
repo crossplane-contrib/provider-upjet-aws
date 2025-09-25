@@ -15,6 +15,7 @@ import (
 	registryscanningconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/ecr/registryscanningconfiguration"
 	replicationconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/ecr/replicationconfiguration"
 	repository "github.com/upbound/provider-aws/internal/controller/namespaced/ecr/repository"
+	repositorycreationtemplate "github.com/upbound/provider-aws/internal/controller/namespaced/ecr/repositorycreationtemplate"
 	repositorypolicy "github.com/upbound/provider-aws/internal/controller/namespaced/ecr/repositorypolicy"
 )
 
@@ -28,6 +29,7 @@ func Setup_ecr(mgr ctrl.Manager, o controller.Options) error {
 		registryscanningconfiguration.Setup,
 		replicationconfiguration.Setup,
 		repository.Setup,
+		repositorycreationtemplate.Setup,
 		repositorypolicy.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -47,6 +49,7 @@ func SetupGated_ecr(mgr ctrl.Manager, o controller.Options) error {
 		registryscanningconfiguration.SetupGated,
 		replicationconfiguration.SetupGated,
 		repository.SetupGated,
+		repositorycreationtemplate.SetupGated,
 		repositorypolicy.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
