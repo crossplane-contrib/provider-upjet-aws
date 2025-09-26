@@ -199,6 +199,9 @@ type LBInitParameters struct {
 	// Whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
 	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
 
+	// The number of secondary IP addresses to configure for your load balancer nodes. Only valid for Load Balancers of type network. The valid range is 0-7. When decreased, this will force a recreation of the resource. Default: 0.
+	SecondaryIpsAutoAssignedPerSubnet *float64 `json:"secondaryIpsAutoAssignedPerSubnet,omitempty" tf:"secondary_ips_auto_assigned_per_subnet,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
@@ -326,6 +329,9 @@ type LBObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The number of secondary IP addresses to configure for your load balancer nodes. Only valid for Load Balancers of type network. The valid range is 0-7. When decreased, this will force a recreation of the resource. Default: 0.
+	SecondaryIpsAutoAssignedPerSubnet *float64 `json:"secondaryIpsAutoAssignedPerSubnet,omitempty" tf:"secondary_ips_auto_assigned_per_subnet,omitempty"`
+
 	// List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -452,6 +458,10 @@ type LBParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// The number of secondary IP addresses to configure for your load balancer nodes. Only valid for Load Balancers of type network. The valid range is 0-7. When decreased, this will force a recreation of the resource. Default: 0.
+	// +kubebuilder:validation:Optional
+	SecondaryIpsAutoAssignedPerSubnet *float64 `json:"secondaryIpsAutoAssignedPerSubnet,omitempty" tf:"secondary_ips_auto_assigned_per_subnet,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional

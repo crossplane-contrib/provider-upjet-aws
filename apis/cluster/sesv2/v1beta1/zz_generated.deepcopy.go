@@ -1779,6 +1779,11 @@ func (in *EmailIdentityObservation) DeepCopyInto(out *EmailIdentityObservation) 
 			(*out)[key] = outVal
 		}
 	}
+	if in.VerificationStatus != nil {
+		in, out := &in.VerificationStatus, &out.VerificationStatus
+		*out = new(string)
+		**out = **in
+	}
 	if in.VerifiedForSendingStatus != nil {
 		in, out := &in.VerifiedForSendingStatus, &out.VerifiedForSendingStatus
 		*out = new(bool)

@@ -344,6 +344,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  forceDestroy:
+                    description: Destroys instance even if disable_api_termination
+                      or disable_api_stop is set to true. Defaults to false. If setting
+                      this field in the same operation that would require replacing
+                      the instance or destroying the instance, this flag will not
+                      work.
+                    type: boolean
                   getPasswordData:
                     description: If true, wait for password data to become available
                       and retrieve it. Useful for getting the administrator password
@@ -610,12 +617,103 @@ spec:
                       type: object
                     type: array
                   placementGroup:
-                    description: Placement Group to start the instance in.
+                    description: Placement Group to start the instance in. Conflicts
+                      with placement_group_id.
+                    type: string
+                  placementGroupId:
+                    description: Placement Group ID to start the instance in. Conflicts
+                      with placement_group.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
                     type: number
+                  primaryNetworkInterface:
+                    description: The primary network interface. See Primary Network
+                      Interface below.
+                    items:
+                      properties:
+                        networkInterfaceId:
+                          description: ID of the network interface to attach.
+                          type: string
+                        networkInterfaceIdRef:
+                          description: Reference to a NetworkInterface in ec2 to populate
+                            networkInterfaceId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        networkInterfaceIdSelector:
+                          description: Selector for a NetworkInterface in ec2 to populate
+                            networkInterfaceId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   privateDnsNameOptions:
                     description: Options for the instance hostname. The default values
                       are inherited from the subnet. See Private DNS Name Options
@@ -1283,6 +1381,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  forceDestroy:
+                    description: Destroys instance even if disable_api_termination
+                      or disable_api_stop is set to true. Defaults to false. If setting
+                      this field in the same operation that would require replacing
+                      the instance or destroying the instance, this flag will not
+                      work.
+                    type: boolean
                   getPasswordData:
                     description: If true, wait for password data to become available
                       and retrieve it. Useful for getting the administrator password
@@ -1549,12 +1654,103 @@ spec:
                       type: object
                     type: array
                   placementGroup:
-                    description: Placement Group to start the instance in.
+                    description: Placement Group to start the instance in. Conflicts
+                      with placement_group_id.
+                    type: string
+                  placementGroupId:
+                    description: Placement Group ID to start the instance in. Conflicts
+                      with placement_group.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
                     type: number
+                  primaryNetworkInterface:
+                    description: The primary network interface. See Primary Network
+                      Interface below.
+                    items:
+                      properties:
+                        networkInterfaceId:
+                          description: ID of the network interface to attach.
+                          type: string
+                        networkInterfaceIdRef:
+                          description: Reference to a NetworkInterface in ec2 to populate
+                            networkInterfaceId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        networkInterfaceIdSelector:
+                          description: Selector for a NetworkInterface in ec2 to populate
+                            networkInterfaceId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   privateDnsNameOptions:
                     description: Options for the instance hostname. The default values
                       are inherited from the subnet. See Private DNS Name Options
@@ -2226,6 +2422,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  forceDestroy:
+                    description: Destroys instance even if disable_api_termination
+                      or disable_api_stop is set to true. Defaults to false. If setting
+                      this field in the same operation that would require replacing
+                      the instance or destroying the instance, this flag will not
+                      work.
+                    type: boolean
                   getPasswordData:
                     description: If true, wait for password data to become available
                       and retrieve it. Useful for getting the administrator password
@@ -2439,12 +2642,31 @@ spec:
                       See GetPasswordData for more information.
                     type: string
                   placementGroup:
-                    description: Placement Group to start the instance in.
+                    description: Placement Group to start the instance in. Conflicts
+                      with placement_group_id.
+                    type: string
+                  placementGroupId:
+                    description: Placement Group ID to start the instance in. Conflicts
+                      with placement_group.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
                     type: number
+                  primaryNetworkInterface:
+                    description: The primary network interface. See Primary Network
+                      Interface below.
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          description: (Read-Only) Whether the network interface will
+                            be deleted when the instance terminates.
+                          type: boolean
+                        networkInterfaceId:
+                          description: ID of the network interface to attach.
+                          type: string
+                      type: object
+                    type: array
                   primaryNetworkInterfaceId:
                     description: ID of the instance's primary network interface.
                     type: string
@@ -3019,6 +3241,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  forceDestroy:
+                    description: Destroys instance even if disable_api_termination
+                      or disable_api_stop is set to true. Defaults to false. If setting
+                      this field in the same operation that would require replacing
+                      the instance or destroying the instance, this flag will not
+                      work.
+                    type: boolean
                   getPasswordData:
                     description: If true, wait for password data to become available
                       and retrieve it. Useful for getting the administrator password
@@ -3272,12 +3501,101 @@ spec:
                       type: object
                     type: array
                   placementGroup:
-                    description: Placement Group to start the instance in.
+                    description: Placement Group to start the instance in. Conflicts
+                      with placement_group_id.
+                    type: string
+                  placementGroupId:
+                    description: Placement Group ID to start the instance in. Conflicts
+                      with placement_group.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
                     type: number
+                  primaryNetworkInterface:
+                    description: The primary network interface. See Primary Network
+                      Interface below.
+                    properties:
+                      networkInterfaceId:
+                        description: ID of the network interface to attach.
+                        type: string
+                      networkInterfaceIdRef:
+                        description: Reference to a NetworkInterface in ec2 to populate
+                          networkInterfaceId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      networkInterfaceIdSelector:
+                        description: Selector for a NetworkInterface in ec2 to populate
+                          networkInterfaceId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   privateDnsNameOptions:
                     description: Options for the instance hostname. The default values
                       are inherited from the subnet. See Private DNS Name Options
@@ -3929,6 +4247,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  forceDestroy:
+                    description: Destroys instance even if disable_api_termination
+                      or disable_api_stop is set to true. Defaults to false. If setting
+                      this field in the same operation that would require replacing
+                      the instance or destroying the instance, this flag will not
+                      work.
+                    type: boolean
                   getPasswordData:
                     description: If true, wait for password data to become available
                       and retrieve it. Useful for getting the administrator password
@@ -4182,12 +4507,101 @@ spec:
                       type: object
                     type: array
                   placementGroup:
-                    description: Placement Group to start the instance in.
+                    description: Placement Group to start the instance in. Conflicts
+                      with placement_group_id.
+                    type: string
+                  placementGroupId:
+                    description: Placement Group ID to start the instance in. Conflicts
+                      with placement_group.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
                     type: number
+                  primaryNetworkInterface:
+                    description: The primary network interface. See Primary Network
+                      Interface below.
+                    properties:
+                      networkInterfaceId:
+                        description: ID of the network interface to attach.
+                        type: string
+                      networkInterfaceIdRef:
+                        description: Reference to a NetworkInterface in ec2 to populate
+                          networkInterfaceId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      networkInterfaceIdSelector:
+                        description: Selector for a NetworkInterface in ec2 to populate
+                          networkInterfaceId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   privateDnsNameOptions:
                     description: Options for the instance hostname. The default values
                       are inherited from the subnet. See Private DNS Name Options
@@ -4843,6 +5257,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  forceDestroy:
+                    description: Destroys instance even if disable_api_termination
+                      or disable_api_stop is set to true. Defaults to false. If setting
+                      this field in the same operation that would require replacing
+                      the instance or destroying the instance, this flag will not
+                      work.
+                    type: boolean
                   getPasswordData:
                     description: If true, wait for password data to become available
                       and retrieve it. Useful for getting the administrator password
@@ -5043,12 +5464,29 @@ spec:
                       See GetPasswordData for more information.
                     type: string
                   placementGroup:
-                    description: Placement Group to start the instance in.
+                    description: Placement Group to start the instance in. Conflicts
+                      with placement_group_id.
+                    type: string
+                  placementGroupId:
+                    description: Placement Group ID to start the instance in. Conflicts
+                      with placement_group.
                     type: string
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
                     type: number
+                  primaryNetworkInterface:
+                    description: The primary network interface. See Primary Network
+                      Interface below.
+                    properties:
+                      deleteOnTermination:
+                        description: (Read-Only) Whether the network interface will
+                          be deleted when the instance terminates.
+                        type: boolean
+                      networkInterfaceId:
+                        description: ID of the network interface to attach.
+                        type: string
+                    type: object
                   primaryNetworkInterfaceId:
                     description: ID of the instance's primary network interface.
                     type: string

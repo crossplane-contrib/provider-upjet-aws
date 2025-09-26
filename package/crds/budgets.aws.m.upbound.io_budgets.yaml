@@ -85,6 +85,9 @@ spec:
                             type: number
                         type: object
                     type: object
+                  billingViewArn:
+                    description: ARN of the billing view.
+                    type: string
                   budgetType:
                     description: Whether this budget tracks monetary cost or usage.
                     type: string
@@ -278,6 +281,9 @@ spec:
                             type: number
                         type: object
                     type: object
+                  billingViewArn:
+                    description: ARN of the billing view.
+                    type: string
                   budgetType:
                     description: Whether this budget tracks monetary cost or usage.
                     type: string
@@ -547,6 +553,9 @@ spec:
                         description: The last time that your budget was auto-adjusted.
                         type: string
                     type: object
+                  billingViewArn:
+                    description: ARN of the billing view.
+                    type: string
                   budgetType:
                     description: Whether this budget tracks monetary cost or usage.
                     type: string

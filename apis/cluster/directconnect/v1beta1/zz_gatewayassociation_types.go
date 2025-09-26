@@ -90,6 +90,9 @@ type GatewayAssociationObservation struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The ID of the Transit Gateway Attachment when the type is transitGateway.
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 }
 
 type GatewayAssociationParameters struct {

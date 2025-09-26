@@ -110,6 +110,9 @@ type ClusterInitParameters struct {
 	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
 	RestoreToPointInTime *RestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
+	// Scaling configuration of an Amazon DocumentDB Serverless cluster. See Serverless V2 Scaling Configuration below for details.
+	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInitParameters `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
+
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
@@ -244,6 +247,9 @@ type ClusterObservation struct {
 
 	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
 	RestoreToPointInTime *RestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+
+	// Scaling configuration of an Amazon DocumentDB Serverless cluster. See Serverless V2 Scaling Configuration below for details.
+	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationObservation `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
 
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
@@ -400,6 +406,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreToPointInTime *RestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
+	// Scaling configuration of an Amazon DocumentDB Serverless cluster. See Serverless V2 Scaling Configuration below for details.
+	// +kubebuilder:validation:Optional
+	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationParameters `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
+
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
@@ -503,6 +513,35 @@ type RestoreToPointInTimeParameters struct {
 	// A boolean value that indicates whether the DB cluster is restored from the latest backup time. Defaults to false. Cannot be specified with restore_to_time.
 	// +kubebuilder:validation:Optional
 	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
+}
+
+type ServerlessV2ScalingConfigurationInitParameters struct {
+
+	// Maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. Valid values are multiples of 0.5 between 1 and 256.
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// Minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. Valid values are multiples of 0.5 between 0.5 and 256.
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+}
+
+type ServerlessV2ScalingConfigurationObservation struct {
+
+	// Maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. Valid values are multiples of 0.5 between 1 and 256.
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// Minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. Valid values are multiples of 0.5 between 0.5 and 256.
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+}
+
+type ServerlessV2ScalingConfigurationParameters struct {
+
+	// Maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. Valid values are multiples of 0.5 between 1 and 256.
+	// +kubebuilder:validation:Optional
+	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
+
+	// Minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. Valid values are multiples of 0.5 between 0.5 and 256.
+	// +kubebuilder:validation:Optional
+	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

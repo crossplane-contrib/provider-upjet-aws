@@ -21,7 +21,7 @@ type PermissionInitParameters struct {
 	// Event Source Token for Alexa Skills
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
-	// Name of the Lambda function
+	// Name or ARN of the Lambda function
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
@@ -75,7 +75,7 @@ type PermissionObservation struct {
 	// Event Source Token for Alexa Skills
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
-	// Name of the Lambda function
+	// Name or ARN of the Lambda function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
@@ -119,7 +119,7 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
-	// Name of the Lambda function
+	// Name or ARN of the Lambda function
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`

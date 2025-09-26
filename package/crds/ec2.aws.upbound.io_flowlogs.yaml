@@ -74,9 +74,83 @@ spec:
               forProvider:
                 properties:
                   deliverCrossAccountRole:
-                    description: ARN of the IAM role that allows Amazon EC2 to publish
-                      flow logs across accounts.
+                    description: ARN of the IAM role in the destination account used
+                      for cross-account delivery of flow logs.
                     type: string
+                  deliverCrossAccountRoleRef:
+                    description: Reference to a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  deliverCrossAccountRoleSelector:
+                    description: Selector for a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   destinationOptions:
                     description: Describes the destination options for a flow log.
                       More details below.
@@ -101,8 +175,8 @@ spec:
                     description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: ARN of the IAM role that's used to post flow logs
-                      to a CloudWatch Logs log group.
+                    description: ARN of the IAM role used to post flow logs. Corresponds
+                      to DeliverLogsPermissionArn in the AWS API.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -464,9 +538,83 @@ spec:
                   autoscaler.
                 properties:
                   deliverCrossAccountRole:
-                    description: ARN of the IAM role that allows Amazon EC2 to publish
-                      flow logs across accounts.
+                    description: ARN of the IAM role in the destination account used
+                      for cross-account delivery of flow logs.
                     type: string
+                  deliverCrossAccountRoleRef:
+                    description: Reference to a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  deliverCrossAccountRoleSelector:
+                    description: Selector for a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   destinationOptions:
                     description: Describes the destination options for a flow log.
                       More details below.
@@ -491,8 +639,8 @@ spec:
                     description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: ARN of the IAM role that's used to post flow logs
-                      to a CloudWatch Logs log group.
+                    description: ARN of the IAM role used to post flow logs. Corresponds
+                      to DeliverLogsPermissionArn in the AWS API.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -928,8 +1076,8 @@ spec:
                     description: ARN of the Flow Log.
                     type: string
                   deliverCrossAccountRole:
-                    description: ARN of the IAM role that allows Amazon EC2 to publish
-                      flow logs across accounts.
+                    description: ARN of the IAM role in the destination account used
+                      for cross-account delivery of flow logs.
                     type: string
                   destinationOptions:
                     description: Describes the destination options for a flow log.
@@ -955,8 +1103,8 @@ spec:
                     description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: ARN of the IAM role that's used to post flow logs
-                      to a CloudWatch Logs log group.
+                    description: ARN of the IAM role used to post flow logs. Corresponds
+                      to DeliverLogsPermissionArn in the AWS API.
                     type: string
                   id:
                     description: Flow Log ID.
@@ -1132,9 +1280,83 @@ spec:
               forProvider:
                 properties:
                   deliverCrossAccountRole:
-                    description: ARN of the IAM role that allows Amazon EC2 to publish
-                      flow logs across accounts.
+                    description: ARN of the IAM role in the destination account used
+                      for cross-account delivery of flow logs.
                     type: string
+                  deliverCrossAccountRoleRef:
+                    description: Reference to a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  deliverCrossAccountRoleSelector:
+                    description: Selector for a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   destinationOptions:
                     description: Describes the destination options for a flow log.
                       More details below.
@@ -1157,8 +1379,8 @@ spec:
                     description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: ARN of the IAM role that's used to post flow logs
-                      to a CloudWatch Logs log group.
+                    description: ARN of the IAM role used to post flow logs. Corresponds
+                      to DeliverLogsPermissionArn in the AWS API.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -1520,9 +1742,83 @@ spec:
                   autoscaler.
                 properties:
                   deliverCrossAccountRole:
-                    description: ARN of the IAM role that allows Amazon EC2 to publish
-                      flow logs across accounts.
+                    description: ARN of the IAM role in the destination account used
+                      for cross-account delivery of flow logs.
                     type: string
+                  deliverCrossAccountRoleRef:
+                    description: Reference to a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  deliverCrossAccountRoleSelector:
+                    description: Selector for a Role in iam to populate deliverCrossAccountRole.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   destinationOptions:
                     description: Describes the destination options for a flow log.
                       More details below.
@@ -1545,8 +1841,8 @@ spec:
                     description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: ARN of the IAM role that's used to post flow logs
-                      to a CloudWatch Logs log group.
+                    description: ARN of the IAM role used to post flow logs. Corresponds
+                      to DeliverLogsPermissionArn in the AWS API.
                     type: string
                   iamRoleArnRef:
                     description: Reference to a Role in iam to populate iamRoleArn.
@@ -1982,8 +2278,8 @@ spec:
                     description: ARN of the Flow Log.
                     type: string
                   deliverCrossAccountRole:
-                    description: ARN of the IAM role that allows Amazon EC2 to publish
-                      flow logs across accounts.
+                    description: ARN of the IAM role in the destination account used
+                      for cross-account delivery of flow logs.
                     type: string
                   destinationOptions:
                     description: Describes the destination options for a flow log.
@@ -2007,8 +2303,8 @@ spec:
                     description: Elastic Network Interface ID to attach to.
                     type: string
                   iamRoleArn:
-                    description: ARN of the IAM role that's used to post flow logs
-                      to a CloudWatch Logs log group.
+                    description: ARN of the IAM role used to post flow logs. Corresponds
+                      to DeliverLogsPermissionArn in the AWS API.
                     type: string
                   id:
                     description: Flow Log ID.

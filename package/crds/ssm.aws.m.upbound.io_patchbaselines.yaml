@@ -127,6 +127,12 @@ spec:
                       updates that should be applied to the instances. Applies to
                       Linux instances only.
                     type: boolean
+                  availableSecurityUpdatesComplianceStatus:
+                    description: Indicates the compliance status of managed nodes
+                      for which security-related patches are available but were not
+                      approved. Supported for Windows Server managed nodes only. Valid
+                      values are COMPLIANT, NON_COMPLIANT.
+                    type: string
                   description:
                     description: Description of the patch baseline.
                     type: string
@@ -284,6 +290,12 @@ spec:
                       updates that should be applied to the instances. Applies to
                       Linux instances only.
                     type: boolean
+                  availableSecurityUpdatesComplianceStatus:
+                    description: Indicates the compliance status of managed nodes
+                      for which security-related patches are available but were not
+                      approved. Supported for Windows Server managed nodes only. Valid
+                      values are COMPLIANT, NON_COMPLIANT.
+                    type: string
                   description:
                     description: Description of the patch baseline.
                     type: string
@@ -491,6 +503,12 @@ spec:
                     type: boolean
                   arn:
                     description: ARN of the baseline.
+                    type: string
+                  availableSecurityUpdatesComplianceStatus:
+                    description: Indicates the compliance status of managed nodes
+                      for which security-related patches are available but were not
+                      approved. Supported for Windows Server managed nodes only. Valid
+                      values are COMPLIANT, NON_COMPLIANT.
                     type: string
                   description:
                     description: Description of the patch baseline.

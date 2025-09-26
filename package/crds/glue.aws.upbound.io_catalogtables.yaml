@@ -220,6 +220,12 @@ spec:
                         name:
                           description: Name of the Partition Key.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Map of key-value pairs.
+                          type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Datatype of data in the Partition Key.
                           type: string
@@ -521,6 +527,12 @@ spec:
                         name:
                           description: Name of the Partition Key.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Map of key-value pairs.
+                          type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Datatype of data in the Partition Key.
                           type: string
@@ -896,6 +908,12 @@ spec:
                         name:
                           description: Name of the Partition Key.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Map of key-value pairs.
+                          type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Datatype of data in the Partition Key.
                           type: string
@@ -1375,6 +1393,12 @@ spec:
                         name:
                           description: Name of the Partition Key.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Map of key-value pairs.
+                          type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Datatype of data in the Partition Key.
                           type: string
@@ -1659,6 +1683,12 @@ spec:
                         name:
                           description: Name of the Partition Key.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Map of key-value pairs.
+                          type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Datatype of data in the Partition Key.
                           type: string
@@ -2017,6 +2047,12 @@ spec:
                         name:
                           description: Name of the Partition Key.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Map of key-value pairs.
+                          type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Datatype of data in the Partition Key.
                           type: string

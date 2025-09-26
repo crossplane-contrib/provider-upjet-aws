@@ -16,7 +16,7 @@ import (
 
 type UserInitParameters struct {
 
-	// ID for the AWS account that the user is in. Use the ID for the AWS account that contains your Amazon QuickSight account.
+	// AWS account ID.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
 	// Email address of the user that you want to register.
@@ -25,7 +25,7 @@ type UserInitParameters struct {
 	// ARN of the IAM user or role that you are registering with Amazon QuickSight. Required only for users with an identity type of IAM.
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
-	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.
+	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT, IAM_IDENTITY_CENTER.
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// The Amazon Quicksight namespace to create the user in. Defaults to default.
@@ -37,7 +37,7 @@ type UserInitParameters struct {
 	// Amazon QuickSight user name that you want to create for the user you are registering. Required only for users with an identity type of QUICKSIGHT.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Amazon QuickSight role for the user. Value values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.
+	// Amazon QuickSight role for the user. Valid values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO, RESTRICTED_AUTHOR, RESTRICTED_READER.
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
@@ -46,7 +46,7 @@ type UserObservation struct {
 	// Amazon Resource Name (ARN) for the user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ID for the AWS account that the user is in. Use the ID for the AWS account that contains your Amazon QuickSight account.
+	// AWS account ID.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
 	// Email address of the user that you want to register.
@@ -58,7 +58,7 @@ type UserObservation struct {
 	// Unique identifier consisting of the account ID, the namespace, and the user name separated by /s.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.
+	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT, IAM_IDENTITY_CENTER.
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// The Amazon Quicksight namespace to create the user in. Defaults to default.
@@ -77,13 +77,13 @@ type UserObservation struct {
 	// Amazon QuickSight user name that you want to create for the user you are registering. Required only for users with an identity type of QUICKSIGHT.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Amazon QuickSight role for the user. Value values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.
+	// Amazon QuickSight role for the user. Valid values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO, RESTRICTED_AUTHOR, RESTRICTED_READER.
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
 type UserParameters struct {
 
-	// ID for the AWS account that the user is in. Use the ID for the AWS account that contains your Amazon QuickSight account.
+	// AWS account ID.
 	// +kubebuilder:validation:Optional
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
@@ -95,7 +95,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
-	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT.
+	// Identity type that your Amazon QuickSight account uses to manage the identity of users. Valid values: IAM, QUICKSIGHT, IAM_IDENTITY_CENTER.
 	// +kubebuilder:validation:Optional
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
@@ -116,7 +116,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Amazon QuickSight role for the user. Value values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO.
+	// Amazon QuickSight role for the user. Valid values: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO, ADMIN_PRO, RESTRICTED_AUTHOR, RESTRICTED_READER.
 	// +kubebuilder:validation:Optional
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
