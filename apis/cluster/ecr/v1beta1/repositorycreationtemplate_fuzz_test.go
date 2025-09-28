@@ -192,7 +192,7 @@ func FuzzRepositoryCreationTemplateReferences(f *testing.F) {
 			}
 		}()
 		
-		template := &RepositoryCreationTemplate{
+		_ = &RepositoryCreationTemplate{
 			Spec: RepositoryCreationTemplateSpec{
 				ForProvider: RepositoryCreationTemplateParameters{
 					// Test KMS key reference fields if they exist
