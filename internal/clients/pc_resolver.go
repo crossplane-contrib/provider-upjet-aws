@@ -38,6 +38,8 @@ func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*names
 		Name:        pc.GetName(),
 		Labels:      pc.GetLabels(),
 		Annotations: pc.GetAnnotations(),
+		Generation:  pc.GetGeneration(),
+		UID:         pc.GetUID(),
 	}
 	return &mSpec, err
 }
@@ -124,6 +126,8 @@ func resolveProviderConfigModern(ctx context.Context, crClient client.Client, mg
 				Name:        pc.GetName(),
 				Labels:      pc.GetLabels(),
 				Annotations: pc.GetAnnotations(),
+				Generation:  pc.GetGeneration(),
+				UID:         pc.GetUID(),
 			},
 			Spec: pc.Spec,
 		}
