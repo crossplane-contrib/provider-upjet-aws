@@ -1,3 +1,5 @@
+//go:build eks || all
+
 package clusterauth
 
 import (
