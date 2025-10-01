@@ -24,7 +24,6 @@ spec:
     region: us-west-1
   writeConnectionSecretToRef:
     name: user-conn
-    namespace: default
 ---
 apiVersion: v1
 kind: Secret

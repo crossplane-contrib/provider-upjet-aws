@@ -19,7 +19,6 @@ spec:
         testing.upbound.io/example-name: example-clusterauth
   writeConnectionSecretToRef:
     name: sample-eks-cluster-conn
-    namespace: upbound-system
 ---
 apiVersion: eks.aws.m.upbound.io/v1beta1
 kind: Cluster

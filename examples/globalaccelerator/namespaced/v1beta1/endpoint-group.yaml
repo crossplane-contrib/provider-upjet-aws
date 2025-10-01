@@ -13,4 +13,3 @@ spec:
       name: sample-listener
   writeConnectionSecretToRef:
     name: endpoint
-    namespace: upbound-system

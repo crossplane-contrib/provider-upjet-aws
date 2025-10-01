@@ -14,7 +14,6 @@ metadata:
 spec:
   writeConnectionSecretToRef:
     name: example-aso-domain
-    namespace: default
   forProvider:
     domainName: ${Rand.RFC1123Subdomain}
     engineVersion: OpenSearch_1.0

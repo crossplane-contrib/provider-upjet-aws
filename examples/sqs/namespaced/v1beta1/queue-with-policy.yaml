@@ -35,4 +35,3 @@ spec:
       Environment: production
   writeConnectionSecretToRef:
     name: "upbound-sqs-with-policy"
-    namespace: "upbound-system"

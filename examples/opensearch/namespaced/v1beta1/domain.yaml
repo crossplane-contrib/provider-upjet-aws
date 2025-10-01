@@ -15,7 +15,6 @@ metadata:
 spec:
   writeConnectionSecretToRef:
     name: example-domain
-    namespace: default
   forProvider:
     clusterConfig:
       instanceType: m4.large.search

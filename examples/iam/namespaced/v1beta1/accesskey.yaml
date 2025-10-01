@@ -18,7 +18,6 @@ spec:
         testing.upbound.io/example-name: accesskey
   writeConnectionSecretToRef:
     name: sample-access-key-secret
-    namespace: upbound-system
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: User
