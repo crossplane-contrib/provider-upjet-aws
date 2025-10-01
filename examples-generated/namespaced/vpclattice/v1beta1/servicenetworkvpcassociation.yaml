@@ -1,0 +1,20 @@
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ServiceNetworkVPCAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkvpcassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    securityGroupIdRefs:
+    - name: example
+    serviceNetworkIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vpcIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

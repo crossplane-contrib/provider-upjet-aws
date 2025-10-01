@@ -1,0 +1,42 @@
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ListenerRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    action:
+    - forward:
+      - targetGroups:
+        - targetGroupIdentifierSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+          weight: 1
+        - targetGroupIdentifierSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example2
+          weight: 2
+    listenerIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    match:
+    - httpMatch:
+      - headerMatches:
+        - caseSensitive: false
+          match:
+          - exact: example-contains
+          name: example-header
+        pathMatch:
+        - caseSensitive: true
+          match:
+          - prefix: /example-path
+    name: example
+    priority: 20
+    region: us-west-1
+    serviceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

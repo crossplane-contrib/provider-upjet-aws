@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: vpclattice.aws.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17",
+          Statement = [{
+            Sid    = "test-pol-principals-6"
+            Effect = "Allow"
+            Principal = {
+              "AWS" = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
+            }
+            Action = [
+              "vpc-lattice:CreateServiceNetworkVpcAssociation",
+              "vpc-lattice:CreateServiceNetworkServiceAssociation",
+              "vpc-lattice:GetServiceNetwork"
+            ]
+            Resource = aws_vpclattice_service_network.example.arn
+          }]
+        })}
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: vpclattice.aws.upbound.io/v1beta1
+kind: ServiceNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-vpclattice-service-network
+    region: us-west-1

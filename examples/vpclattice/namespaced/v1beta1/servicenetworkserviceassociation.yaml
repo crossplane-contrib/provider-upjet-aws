@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ServiceNetworkServiceAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkserviceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    serviceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNetworkIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    authType: AWS_IAM
+    customDomainName: example.com
+    name: example
+    region: us-west-1
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ServiceNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    authType: AWS_IAM
+    name: example
+    region: us-west-1
