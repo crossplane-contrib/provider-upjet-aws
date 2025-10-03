@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: RepositoryCreationTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/repositorycreationtemplate
+  name: rct-root-immutable
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    prefix: "ROOT"
+    appliedFor:
+      - PULL_THROUGH_CACHE
+    imageTagMutability: IMMUTABLE
+    repositoryPolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "AllowPull",
+            "Effect": "Allow",
+            "Principal": {"AWS": "*"},
+            "Action": [
+              "ecr:GetDownloadUrlForLayer",
+              "ecr:BatchGetImage"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    resourceTags:
+      Environment: "development"
+      ManagedBy: "crossplane"
+
+
