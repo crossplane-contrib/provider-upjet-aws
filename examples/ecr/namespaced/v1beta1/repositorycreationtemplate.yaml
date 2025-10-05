@@ -1,0 +1,18 @@
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: RepositoryCreationTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/repositorycreationtemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    appliedFor:
+    - PULL_THROUGH_CACHE
+    description: Template for pull-through cache repositories
+    encryptionConfiguration:
+    - encryptionType: AES256
+    imageTagMutability: IMMUTABLE
+    prefix: example
+    region: us-west-1
