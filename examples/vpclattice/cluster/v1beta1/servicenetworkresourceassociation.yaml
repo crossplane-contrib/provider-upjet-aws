@@ -15,10 +15,10 @@ spec:
     region: us-west-1
     resourceConfigurationIdentifierSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-rc-snra
     serviceNetworkIdentifierSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-sn-snra
     tags:
       Name: Example
 ---
@@ -28,12 +28,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-sn-snra
+  name: example-sn-snra
 spec:
   forProvider:
     authType: AWS_IAM
-    name: example
+    name: example-sn-snra
     region: us-west-1
 ---
 apiVersion: vpclattice.aws.upbound.io/v1beta1
@@ -42,11 +42,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-rc-snra
+  name: example-rc-snra
 spec:
   forProvider:
-    name: example
+    name: example-rc-snra
     portRanges:
     - "80"
     protocol: TCP

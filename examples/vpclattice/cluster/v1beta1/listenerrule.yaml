@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     action:
-    - forward:
+      forward:
       - targetGroups:
         - targetGroupIdentifierSelector:
             matchLabels:

@@ -13,9 +13,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    destinationArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    destinationArn: "arn:aws:s3:::crossplane-provider-upjet-aws-accesslogsubscription-test-0933"
     region: us-west-1
     resourceIdentifierSelector:
       matchLabels:
@@ -28,7 +26,7 @@ metadata:
     meta.upbound.io/example-id: vpclattice/v1beta1/accesslogsubscription
   labels:
     testing.upbound.io/example-name: example
-  name: ${Rand.RFC1123Subdomain}
+  name: crossplane-provider-upjet-aws-accesslogsubscription-test-0933
   namespace: upbound-system
 spec:
   forProvider:
