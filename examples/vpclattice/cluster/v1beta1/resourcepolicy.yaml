@@ -13,22 +13,24 @@ metadata:
 spec:
   forProvider:
     policy: |-
-      ${jsonencode({
-          Version = "2012-10-17",
-          Statement = [{
-            Sid    = "test-pol-principals-6"
-            Effect = "Allow"
-            Principal = {
-              "AWS" = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
-            }
-            Action = [
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "test-pol-principals-6",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
+            },
+            "Action": [
               "vpc-lattice:CreateServiceNetworkVpcAssociation",
               "vpc-lattice:CreateServiceNetworkServiceAssociation",
               "vpc-lattice:GetServiceNetwork"
-            ]
-            Resource = aws_vpclattice_service_network.example.arn
-          }]
-        })}
+            ],
+            "Resource": "arn:aws:vpc-lattice:us-west-1:${data.aws_account_id}:service-network/svc-0123456789abcdef0"
+          }
+        ]
+      }
     region: us-west-1
     resourceArnSelector:
       matchLabels:

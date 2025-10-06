@@ -14,22 +14,22 @@ metadata:
 spec:
   forProvider:
     policy: |-
-      ${jsonencode({
-          Version = "2012-10-17"
-          Statement = [
-            {
-              Action    = "*"
-              Effect    = "Allow"
-              Principal = "*"
-              Resource  = "*"
-              Condition = {
-                StringNotEqualsIgnoreCase = {
-                  "aws:PrincipalType" = "anonymous"
-                }
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "*",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Resource": "*",
+            "Condition": {
+              "StringNotEqualsIgnoreCase": {
+                "aws:PrincipalType": "anonymous"
               }
             }
-          ]
-        })}
+          }
+        ]
+      }
     region: us-west-1
     resourceIdentifierSelector:
       matchLabels:

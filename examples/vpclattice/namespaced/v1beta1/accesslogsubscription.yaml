@@ -13,18 +13,33 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    destinationArn: ${aws_s3.bucket.arn}
+    destinationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     resourceIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sn
 ---
-
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/accesslogsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    forceDestroy: true
+---
 apiVersion: vpclattice.aws.m.upbound.io/v1beta1
 kind: ServiceNetwork
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetwork
+    meta.upbound.io/example-id: vpclattice/v1beta1/accesslogsubscription
   labels:
     testing.upbound.io/example-name: example-sn
   name: example-sn

@@ -25,7 +25,7 @@ apiVersion: vpclattice.aws.m.upbound.io/v1beta1
 kind: Service
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/service
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkserviceassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -41,7 +41,7 @@ apiVersion: vpclattice.aws.m.upbound.io/v1beta1
 kind: ServiceNetwork
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetwork
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkserviceassociation
   labels:
     testing.upbound.io/example-name: example
   name: example

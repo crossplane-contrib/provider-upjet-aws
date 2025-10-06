@@ -27,7 +27,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     match:
-    - httpMatch:
+      httpMatch:
       - headerMatches:
         - caseSensitive: false
           match:
@@ -48,7 +48,7 @@ apiVersion: vpclattice.aws.upbound.io/v1beta1
 kind: TargetGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroup
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -68,7 +68,7 @@ apiVersion: vpclattice.aws.upbound.io/v1beta1
 kind: TargetGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroup
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
   labels:
     testing.upbound.io/example-name: example2
   name: example2
@@ -88,7 +88,7 @@ apiVersion: vpclattice.aws.upbound.io/v1beta1
 kind: Listener
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/listener
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -108,7 +108,7 @@ apiVersion: vpclattice.aws.upbound.io/v1beta1
 kind: Service
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/listener
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -121,7 +121,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroup
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
   labels:
     testing.upbound.io/example-name: example
   name: sample-vpc
