@@ -5,7 +5,10 @@
 package route53
 
 import (
+	"strings"
+
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
 // Configure adds configurations for the route53 group.
@@ -32,6 +35,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		delete(r.References, "alias.name")
 		delete(r.References, "alias.zone_id")
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			nameDiff, ok := diff.Attributes["name"]
+			if !ok {
+				return diff, nil
+			}
+			if strings.TrimSuffix(nameDiff.New, ".") == strings.TrimSuffix(nameDiff.Old, ".") {
+				delete(diff.Attributes, "name")
+			}
+			return diff, nil
+		}
 	})
 	p.AddResourceConfigurator("aws_route53_vpc_association_authorization", func(r *config.Resource) {
 		r.References["zone_id"] = config.Reference{
