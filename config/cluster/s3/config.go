@@ -5,9 +5,13 @@
 package s3
 
 import (
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 	"github.com/crossplane/upjet/v2/pkg/registry"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/upbound/provider-aws/apis/cluster/s3/v1beta1"
+	"github.com/upbound/provider-aws/apis/cluster/s3/v1beta2"
 )
 
 // Configure adds configurations for the s3 group.
@@ -53,6 +57,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			return nil
 		}
+		r.Conversions = append(r.Conversions,
+			conversion.NewCustomConverter("v1beta1", "v1beta2", bucketConverterFromv1beta1Tov1beta2),
+			conversion.NewCustomConverter("v1beta2", "v1beta1", bucketConverterFromv1beta2Tov1beta1),
+		)
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_acl", func(r *config.Resource) {
@@ -135,4 +143,66 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			return diff, nil
 		}
 	})
+}
+
+func bucketConverterFromv1beta1Tov1beta2(src, target xpresource.Managed) error {
+	srcTyped := src.(*v1beta1.Bucket)
+	targetTyped := target.(*v1beta2.Bucket)
+
+	if len(srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration) > 0 {
+		if targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration == nil {
+			targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration = &v1beta2.ServerSideEncryptionConfigurationObservation{}
+		}
+		if len(srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule) > 0 {
+			if targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule == nil {
+				targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule = &v1beta2.ServerSideEncryptionConfigurationRuleObservation{}
+			}
+			if len(srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault) > 0 {
+				if targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault == nil {
+					targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault = &v1beta2.ApplyServerSideEncryptionByDefaultObservation{}
+				}
+				if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault[0].KMSMasterKeyID != nil {
+					targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault.KMSMasterKeyID = srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault[0].KMSMasterKeyID
+				}
+				if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault[0].SseAlgorithm != nil {
+					targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault.SseAlgorithm = srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault[0].SseAlgorithm
+				}
+			}
+			if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].BucketKeyEnabled != nil {
+				targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.BucketKeyEnabled = srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].BucketKeyEnabled
+			}
+		}
+	}
+	return nil
+}
+
+func bucketConverterFromv1beta2Tov1beta1(src, target xpresource.Managed) error {
+	srcTyped := src.(*v1beta2.Bucket)
+	targetTyped := target.(*v1beta1.Bucket)
+
+	if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration != nil {
+		if len(targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration) == 0 {
+			targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration = []v1beta1.ServerSideEncryptionConfigurationObservation{{}}
+		}
+		if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule != nil {
+			if len(targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule) == 0 {
+				targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule = []v1beta1.ServerSideEncryptionConfigurationRuleObservation{{}}
+			}
+			if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault != nil {
+				if len(targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault) == 0 {
+					targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault = []v1beta1.ApplyServerSideEncryptionByDefaultObservation{{}}
+				}
+				if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault.KMSMasterKeyID != nil {
+					targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault[0].KMSMasterKeyID = srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault.KMSMasterKeyID
+				}
+				if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault.SseAlgorithm != nil {
+					targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].ApplyServerSideEncryptionByDefault[0].SseAlgorithm = srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.ApplyServerSideEncryptionByDefault.SseAlgorithm
+				}
+			}
+			if srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.BucketKeyEnabled != nil {
+				targetTyped.Status.AtProvider.ServerSideEncryptionConfiguration[0].Rule[0].BucketKeyEnabled = srcTyped.Status.AtProvider.ServerSideEncryptionConfiguration.Rule.BucketKeyEnabled
+			}
+		}
+	}
+	return nil
 }
