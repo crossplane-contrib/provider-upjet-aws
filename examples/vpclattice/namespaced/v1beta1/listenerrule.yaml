@@ -15,7 +15,7 @@ spec:
   forProvider:
     action:
       forward:
-      - targetGroups:
+        targetGroups:
         - targetGroupIdentifierSelector:
             matchLabels:
               testing.upbound.io/example-name: example
@@ -29,15 +29,15 @@ spec:
         testing.upbound.io/example-name: example
     match:
       httpMatch:
-      - headerMatches:
+        headerMatches:
         - caseSensitive: false
           match:
-          - exact: example-contains
+            exact: example-contains
           name: example-header
         pathMatch:
         - caseSensitive: true
           match:
-          - prefix: /example-path
+            prefix: /example-path
     name: example
     priority: 20
     region: us-west-1
@@ -57,7 +57,7 @@ metadata:
 spec:
   forProvider:
     config:
-    - port: 443
+      port: 443
       protocol: HTTPS
       vpcIdentifierSelector:
         matchLabels:
@@ -73,17 +73,16 @@ metadata:
     meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
   labels:
     testing.upbound.io/example-name: example2
-  name: example
-  namespace: upbound-system
+  name: example2
 spec:
   forProvider:
     config:
-    - port: 443
+      port: 443
       protocol: HTTPS
       vpcIdentifierSelector:
         matchLabels:
           testing.upbound.io/example-name: example
-    name: example
+    name: example2
     region: us-west-1
     type: INSTANCE
 ---

@@ -36,7 +36,7 @@ spec:
   forProvider:
     authType: AWS_IAM
     name: example
-    region: us-wes
+    region: us-west-1
 ---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: SecurityGroup

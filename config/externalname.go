@@ -133,7 +133,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// VPC Lattice Resource Gateway can be imported using the id
 	"aws_vpclattice_resource_gateway": identifierFromProviderWithDefaultStub("rgw-055b56956a39439ba"),
 	// VPC Lattice Service Network Resource Association can be imported using the id
-	"aws_vpclattice_service_network_resource_association": config.IdentifierFromProvider,
+	"aws_vpclattice_service_network_resource_association": identifierFromProviderWithDefaultStub("snra-1234567890abcef12"),
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }

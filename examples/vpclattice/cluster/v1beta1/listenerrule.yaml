@@ -14,7 +14,7 @@ spec:
   forProvider:
     action:
       forward:
-      - targetGroups:
+        targetGroups:
         - targetGroupIdentifierSelector:
             matchLabels:
               testing.upbound.io/example-name: example
@@ -28,15 +28,15 @@ spec:
         testing.upbound.io/example-name: example
     match:
       httpMatch:
-      - headerMatches:
+        headerMatches:
         - caseSensitive: false
           match:
-          - exact: example-contains
+            exact: example-contains
           name: example-header
         pathMatch:
         - caseSensitive: true
           match:
-          - prefix: /example-path
+            prefix: /example-path
     name: example
     priority: 20
     region: us-west-1
