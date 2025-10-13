@@ -34,7 +34,7 @@ spec:
             exact: example-contains
           name: example-header
         pathMatch:
-        - caseSensitive: true
+          caseSensitive: true
           match:
             prefix: /example-path
     name: example

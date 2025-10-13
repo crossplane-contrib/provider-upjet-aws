@@ -28,7 +28,7 @@ spec:
               "vpc-lattice:CreateServiceNetworkServiceAssociation",
               "vpc-lattice:GetServiceNetwork"
             ],
-            "Resource": "arn:aws:vpc-lattice:us-west-1:${data.aws_account_id}:service-network/*"
+            "Resource": "arn:aws:vpc-lattice:us-west-1:${data.aws_account_id}:servicenetwork/*"
           }
         ]
       }

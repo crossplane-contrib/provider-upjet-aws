@@ -35,7 +35,7 @@ metadata:
 spec:
   forProvider:
     config:
-    - port: 443
+      port: 443
       protocol: HTTPS
       vpcIdentifierSelector:
         matchLabels:
