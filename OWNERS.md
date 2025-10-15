@@ -12,7 +12,7 @@ repository maintainers in their own `OWNERS.md` file.
 
 ## Maintainers
 
-* Sergen Yalcin <sergen@upbound.com> ([sergenyalcin](https://github.com/sergenyalcin))
+* Sergen Yalcin <sergen@upbound.io> ([sergenyalcin](https://github.com/sergenyalcin))
 * Fatih Turken <fatih@upbound.io> ([turkenf](https://github.com/turkenf)))
 * Matt Bush <mbbush@gmail.com> ([mbbush](https://github.com/mbbush))
 * Jason Tang <jasont@upbound.io> ([jastang](https://github.com/jastang))
