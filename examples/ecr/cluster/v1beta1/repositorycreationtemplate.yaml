@@ -9,10 +9,10 @@ metadata:
 spec:
   forProvider:
     appliedFor:
-    - PULL_THROUGH_CACHE
+      - PULL_THROUGH_CACHE
     description: Template for pull-through cache repositories
     encryptionConfiguration:
-    - encryptionType: AES256
+      - encryptionType: AES256
     imageTagMutability: IMMUTABLE
     prefix: example
     region: us-west-1
