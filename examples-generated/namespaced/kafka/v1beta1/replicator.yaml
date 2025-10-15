@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: kafka.aws.m.upbound.io/v1beta1
 kind: Replicator
 metadata:
@@ -12,28 +17,28 @@ spec:
     description: test-description
     kafkaCluster:
     - amazonMskCluster:
-      - mskClusterArnSelector:
+        mskClusterArnSelector:
           matchLabels:
             testing.upbound.io/example-name: source
       vpcConfig:
-      - securityGroupsIdsRefs:
+        securityGroupsIdsRefs:
         - name: source
         subnetIdsSelector:
           matchLabels:
             testing.upbound.io/example-name: source[*]
     - amazonMskCluster:
-      - mskClusterArnSelector:
+        mskClusterArnSelector:
           matchLabels:
             testing.upbound.io/example-name: target
       vpcConfig:
-      - securityGroupsIdsRefs:
+        securityGroupsIdsRefs:
         - name: target
         subnetIdsSelector:
           matchLabels:
             testing.upbound.io/example-name: target[*]
     region: us-west-1
     replicationInfoList:
-    - consumerGroupReplication:
+      consumerGroupReplication:
       - consumerGroupsToReplicate:
         - .*
       sourceKafkaClusterArnSelector:
@@ -45,9 +50,9 @@ spec:
           testing.upbound.io/example-name: target
       topicReplication:
       - startingPosition:
-        - type: LATEST
+          type: LATEST
         topicNameConfiguration:
-        - type: PREFIXED_WITH_SOURCE_CLUSTER_ALIAS
+          type: PREFIXED_WITH_SOURCE_CLUSTER_ALIAS
         topicsToReplicate:
         - .*
     replicatorName: test-name

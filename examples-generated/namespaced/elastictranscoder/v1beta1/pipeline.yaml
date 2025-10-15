@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: elastictranscoder.aws.m.upbound.io/v1beta1
 kind: Pipeline
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     contentConfig:
-    - bucketSelector:
+      bucketSelector:
         matchLabels:
           testing.upbound.io/example-name: content_bucket
       storageClass: Standard
@@ -23,7 +28,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test_role
     thumbnailConfig:
-    - bucketSelector:
+      bucketSelector:
         matchLabels:
           testing.upbound.io/example-name: thumb_bucket
       storageClass: Standard

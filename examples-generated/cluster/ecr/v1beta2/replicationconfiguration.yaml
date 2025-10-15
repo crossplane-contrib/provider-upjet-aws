@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ecr.aws.upbound.io/v1beta2
 kind: ReplicationConfiguration
 metadata:
@@ -10,7 +15,7 @@ spec:
   forProvider:
     region: us-west-1
     replicationConfiguration:
-    - rule:
+      rule:
       - destination:
         - region: ${data.aws_regions.example.names[0]}
           registryId: ${data.aws_caller_identity.current.account_id}

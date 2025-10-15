@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: glacier.aws.upbound.io/v1beta2
 kind: Vault
 metadata:
@@ -10,7 +15,7 @@ spec:
   forProvider:
     accessPolicy: ${data.aws_iam_policy_document.my_archive.json}
     notification:
-    - events:
+      events:
       - ArchiveRetrievalCompleted
       - InventoryRetrievalCompleted
       snsTopicSelector:

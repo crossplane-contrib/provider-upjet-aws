@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: s3.aws.upbound.io/v1beta2
 kind: BucketReplicationConfiguration
 metadata:
@@ -18,12 +23,12 @@ spec:
         testing.upbound.io/example-name: replication
     rule:
     - destination:
-      - bucketSelector:
+        bucketSelector:
           matchLabels:
             testing.upbound.io/example-name: destination
         storageClass: STANDARD
       filter:
-      - prefix: example
+        prefix: example
       id: examplerule
       status: Enabled
 
@@ -144,7 +149,7 @@ spec:
         testing.upbound.io/example-name: destination
     region: us-west-1
     versioningConfiguration:
-    - status: Enabled
+      status: Enabled
 
 ---
 
@@ -164,4 +169,4 @@ spec:
     provider: ${aws.central}
     region: us-west-1
     versioningConfiguration:
-    - status: Enabled
+      status: Enabled

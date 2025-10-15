@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: connect.aws.m.upbound.io/v1beta1
 kind: HoursOfOperation
 metadata:
@@ -12,17 +17,17 @@ spec:
     config:
     - day: MONDAY
       endTime:
-      - hours: 23
+        hours: 23
         minutes: 8
       startTime:
-      - hours: 8
+        hours: 8
         minutes: 0
     - day: TUESDAY
       endTime:
-      - hours: 21
+        hours: 21
         minutes: 0
       startTime:
-      - hours: 9
+        hours: 9
         minutes: 0
     description: Monday office hours
     instanceIdSelector:

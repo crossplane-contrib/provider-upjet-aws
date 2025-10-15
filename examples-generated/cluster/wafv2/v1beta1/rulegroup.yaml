@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: wafv2.aws.upbound.io/v1beta1
 kind: RuleGroup
 metadata:
@@ -28,6 +33,6 @@ spec:
         sampled_requests_enabled: false
     scope: REGIONAL
     visibilityConfig:
-    - cloudwatchMetricsEnabled: false
+      cloudwatchMetricsEnabled: false
       metricName: friendly-metric-name
       sampledRequestsEnabled: false

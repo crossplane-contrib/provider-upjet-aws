@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: elastictranscoder.aws.upbound.io/v1beta2
 kind: Preset
 metadata:
@@ -9,26 +14,26 @@ metadata:
 spec:
   forProvider:
     audio:
-    - audioPackingMode: SingleTrack
+      audioPackingMode: SingleTrack
       bitRate: 96
       channels: 2
       codec: AAC
       sampleRate: 44100
     audioCodecOptions:
-    - profile: AAC-LC
+      profile: AAC-LC
     container: mp4
     description: Sample Preset
     name: sample_preset
     region: us-west-1
     thumbnails:
-    - format: png
+      format: png
       interval: 120
       maxHeight: auto
       maxWidth: auto
       paddingPolicy: Pad
       sizingPolicy: Fit
     video:
-    - bitRate: "1600"
+      bitRate: "1600"
       codec: H.264
       displayAspectRatio: "16:9"
       fixedGop: "false"

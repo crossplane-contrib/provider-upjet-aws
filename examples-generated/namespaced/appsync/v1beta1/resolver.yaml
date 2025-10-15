@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appsync.aws.m.upbound.io/v1beta1
 kind: Resolver
 metadata:
@@ -13,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test
     cachingConfig:
-    - cachingKeys:
+      cachingKeys:
       - $context.identity.sub
       - $context.arguments.id
       ttl: 60
@@ -56,7 +61,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test
     httpConfig:
-    - endpoint: http://example.com
+      endpoint: http://example.com
     region: us-west-1
     type: HTTP
 

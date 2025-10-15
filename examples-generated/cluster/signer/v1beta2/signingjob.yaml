@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: signer.aws.upbound.io/v1beta2
 kind: SigningJob
 metadata:
@@ -9,8 +14,8 @@ metadata:
 spec:
   forProvider:
     destination:
-    - s3:
-      - bucket: s3-bucket-name
+      s3:
+        bucket: s3-bucket-name
         prefix: signed/
     ignoreSigningJobFailure: true
     profileNameSelector:
@@ -18,8 +23,8 @@ spec:
         testing.upbound.io/example-name: test_sp
     region: us-west-1
     source:
-    - s3:
-      - bucket: s3-bucket-name
+      s3:
+        bucket: s3-bucket-name
         key: object-to-be-signed.zip
         version: jADjFYYYEXAMPLETszPjOmCMFDzd9dN1
 

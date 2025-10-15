@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: codepipeline.aws.upbound.io/v1beta2
 kind: Codepipeline
 metadata:
@@ -10,7 +15,7 @@ spec:
   forProvider:
     artifactStore:
     - encryptionKey:
-      - id: ${data.aws_kms_alias.s3kmskey.arn}
+        id: ${data.aws_kms_alias.s3kmskey.arn}
         type: KMS
       locationSelector:
         matchLabels:

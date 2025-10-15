@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: macie2.aws.m.upbound.io/v1beta1
 kind: ClassificationJob
 metadata:
@@ -13,7 +18,7 @@ spec:
     name: NAME OF THE CLASSIFICATION JOB
     region: us-west-1
     s3JobDefinition:
-    - bucketDefinitions:
+      bucketDefinitions:
       - accountId: ACCOUNT ID
         buckets:
         - S3 BUCKET NAME

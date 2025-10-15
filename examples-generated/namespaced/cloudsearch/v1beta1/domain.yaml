@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: cloudsearch.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
@@ -26,4 +31,4 @@ spec:
       type: double
     region: us-west-1
     scalingParameters:
-    - desiredInstanceType: search.medium
+      desiredInstanceType: search.medium

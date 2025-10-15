@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: apigateway.aws.upbound.io/v1beta2
 kind: UsagePlan
 metadata:
@@ -25,12 +30,12 @@ spec:
     name: my-usage-plan
     productCode: MYCODE
     quotaSettings:
-    - limit: 20
+      limit: 20
       offset: 2
       period: WEEK
     region: us-west-1
     throttleSettings:
-    - burstLimit: 5
+      burstLimit: 5
       rateLimit: 10
 
 ---

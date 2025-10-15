@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: dlm.aws.m.upbound.io/v1beta1
 kind: LifecyclePolicy
 metadata:
@@ -14,18 +19,18 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: dlm_lifecycle_role
     policyDetails:
-    - resourceTypes:
+      resourceTypes:
       - VOLUME
       schedule:
       - copyTags: false
         createRule:
-        - interval: 24
+          interval: 24
           intervalUnit: HOURS
           times:
           - "23:45"
         name: 2 weeks of daily snapshots
         retainRule:
-        - count: 14
+          count: 14
         tagsToAdd:
           SnapshotCreator: DLM
       targetTags:

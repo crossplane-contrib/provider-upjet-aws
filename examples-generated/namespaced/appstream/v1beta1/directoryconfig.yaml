@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appstream.aws.m.upbound.io/v1beta1
 kind: DirectoryConfig
 metadata:
@@ -14,7 +19,7 @@ spec:
     - DISTINGUISHED NAME
     region: us-west-1
     serviceAccountCredentials:
-    - accountName: NAME OF ACCOUNT
+      accountName: NAME OF ACCOUNT
       accountPasswordSecretRef:
         key: example-key
         name: example-secret

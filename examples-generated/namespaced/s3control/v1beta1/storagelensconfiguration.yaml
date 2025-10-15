@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: s3control.aws.m.upbound.io/v1beta1
 kind: StorageLensConfiguration
 metadata:
@@ -12,28 +17,28 @@ spec:
     configId: example-1
     region: us-west-1
     storageLensConfiguration:
-    - accountLevel:
-      - activityMetrics:
-        - enabled: true
+      accountLevel:
+        activityMetrics:
+          enabled: true
         bucketLevel:
-        - activityMetrics:
-          - enabled: true
+          activityMetrics:
+            enabled: true
       dataExport:
-      - cloudWatchMetrics:
-        - enabled: true
+        cloudWatchMetrics:
+          enabled: true
         s3BucketDestination:
-        - accountId: ${data.aws_caller_identity.current.account_id}
+          accountId: ${data.aws_caller_identity.current.account_id}
           arnSelector:
             matchLabels:
               testing.upbound.io/example-name: target
           encryption:
-          - sseS3:
+            sseS3:
             - {}
           format: CSV
           outputSchemaVersion: V_1
       enabled: true
       exclude:
-      - bucketsRefs:
+        bucketsRefs:
         - name: b1
         - name: b2
         regions:

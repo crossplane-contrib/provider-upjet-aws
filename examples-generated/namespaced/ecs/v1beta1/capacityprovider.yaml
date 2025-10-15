@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ecs.aws.m.upbound.io/v1beta1
 kind: CapacityProvider
 metadata:
@@ -10,11 +15,11 @@ metadata:
 spec:
   forProvider:
     autoScalingGroupProvider:
-    - autoScalingGroupArnSelector:
+      autoScalingGroupArnSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       managedScaling:
-      - maximumScalingStepSize: 1000
+        maximumScalingStepSize: 1000
         minimumScalingStepSize: 1
         status: ENABLED
         targetCapacity: 10

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: medialive.aws.upbound.io/v1beta2
 kind: Channel
 metadata:
@@ -15,30 +20,30 @@ spec:
       - url: s3://${aws_s3_bucket.main.id}/test1
       - url: s3://${aws_s3_bucket.main2.id}/test2
     encoderSettings:
-    - audioDescriptions:
+      audioDescriptions:
       - audioSelectorName: example audio selector
         name: audio-selector
       outputGroups:
       - outputGroupSettings:
-        - archiveGroupSettings:
+          archiveGroupSettings:
           - destination:
-            - destinationRefId: destination
+              destinationRefId: destination
         outputs:
         - audioDescriptionNames:
           - audio-selector
           outputName: example-name
           outputSettings:
-          - archiveOutputSettings:
-            - containerSettings:
-              - m2tsSettings:
-                - audioBufferModel: ATSC
+            archiveOutputSettings:
+              containerSettings:
+                m2tsSettings:
+                  audioBufferModel: ATSC
                   bufferModel: MULTIPLEX
                   rateMode: CBR
               extension: m2ts
               nameModifier: _1
           videoDescriptionName: example-video
       timecodeConfig:
-      - source: EMBEDDED
+        source: EMBEDDED
       videoDescriptions:
       - name: example-video
     inputAttachments:
@@ -47,7 +52,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
     inputSpecification:
-    - codec: AVC
+      codec: AVC
       inputResolution: HD
       maximumBitrate: MAX_20_MBPS
     name: example-channel

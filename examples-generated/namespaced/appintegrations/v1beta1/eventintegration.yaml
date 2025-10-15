@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appintegrations.aws.m.upbound.io/v1beta1
 kind: EventIntegration
 metadata:
@@ -11,7 +16,7 @@ spec:
   forProvider:
     description: Example Description
     eventFilter:
-    - source: aws.partner/examplepartner.com
+      source: aws.partner/examplepartner.com
     eventbridgeBus: default
     region: us-west-1
     tags:

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ssm.aws.m.upbound.io/v1beta1
 kind: MaintenanceWindowTask
 metadata:
@@ -21,8 +26,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     taskInvocationParameters:
-    - automationParameters:
-      - documentVersion: $LATEST
+      automationParameters:
+        documentVersion: $LATEST
         parameter:
         - name: InstanceId
           valuesRefs:

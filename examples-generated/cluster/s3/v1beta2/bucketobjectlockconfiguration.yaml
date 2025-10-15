@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: s3.aws.upbound.io/v1beta2
 kind: BucketObjectLockConfiguration
 metadata:
@@ -13,8 +18,8 @@ spec:
         testing.upbound.io/example-name: example
     region: us-west-1
     rule:
-    - defaultRetention:
-      - days: 5
+      defaultRetention:
+        days: 5
         mode: COMPLIANCE
 
 ---
@@ -49,4 +54,4 @@ spec:
         testing.upbound.io/example-name: example
     region: us-west-1
     versioningConfiguration:
-    - status: Enabled
+      status: Enabled

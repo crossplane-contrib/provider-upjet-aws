@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: kinesisanalytics.aws.m.upbound.io/v1beta1
 kind: Application
 metadata:
@@ -10,8 +15,8 @@ metadata:
 spec:
   forProvider:
     inputs:
-    - kinesisStream:
-      - resourceArnSelector:
+      kinesisStream:
+        resourceArnSelector:
           matchLabels:
             testing.upbound.io/example-name: test_stream
         roleArnSelector:
@@ -19,17 +24,17 @@ spec:
             testing.upbound.io/example-name: test
       namePrefix: test_prefix
       parallelism:
-      - count: 1
+        count: 1
       schema:
-      - recordColumns:
+        recordColumns:
         - mapping: $.test
           name: test
           sqlType: VARCHAR(8)
         recordEncoding: UTF-8
         recordFormat:
-        - mappingParameters:
-          - json:
-            - recordRowPath: $
+          mappingParameters:
+            json:
+              recordRowPath: $
     region: us-west-1
 
 ---

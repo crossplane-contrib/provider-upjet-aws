@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: macie2.aws.upbound.io/v1beta2
 kind: FindingsFilter
 metadata:
@@ -11,7 +16,7 @@ spec:
     action: ARCHIVE
     description: DESCRIPTION
     findingCriteria:
-    - criterion:
+      criterion:
       - eq:
         - ${data.aws_region.current.region}
         field: region

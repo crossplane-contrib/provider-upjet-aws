@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: connect.aws.upbound.io/v1beta2
 kind: User
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     identityInfo:
-    - firstName: example
+      firstName: example
       lastName: example2
     instanceIdSelector:
       matchLabels:
@@ -20,7 +25,7 @@ spec:
       name: example-secret
       namespace: upbound-system
     phoneConfig:
-    - afterContactWorkTimeLimit: 0
+      afterContactWorkTimeLimit: 0
       phoneType: SOFT_PHONE
     region: us-west-1
     routingProfileIdSelector:

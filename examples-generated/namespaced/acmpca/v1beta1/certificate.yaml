@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: acmpca.aws.m.upbound.io/v1beta1
 kind: Certificate
 metadata:
@@ -18,7 +23,7 @@ spec:
     region: us-west-1
     signingAlgorithm: SHA256WITHRSA
     validity:
-    - type: YEARS
+      type: YEARS
       value: 1
 
 ---
@@ -35,9 +40,9 @@ metadata:
 spec:
   forProvider:
     certificateAuthorityConfiguration:
-    - keyAlgorithm: RSA_4096
+      keyAlgorithm: RSA_4096
       signingAlgorithm: SHA512WITHRSA
       subject:
-      - commonName: example.com
+        commonName: example.com
     permanentDeletionTimeInDays: 7
     region: us-west-1

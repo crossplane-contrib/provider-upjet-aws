@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: glue.aws.upbound.io/v1beta2
 kind: SecurityConfiguration
 metadata:
@@ -9,12 +14,12 @@ metadata:
 spec:
   forProvider:
     encryptionConfiguration:
-    - cloudwatchEncryption:
-      - cloudwatchEncryptionMode: DISABLED
+      cloudwatchEncryption:
+        cloudwatchEncryptionMode: DISABLED
       jobBookmarksEncryption:
-      - jobBookmarksEncryptionMode: DISABLED
+        jobBookmarksEncryptionMode: DISABLED
       s3Encryption:
-      - kmsKeyArnSelector:
+        kmsKeyArnSelector:
           matchLabels:
             testing.upbound.io/example-name: aws_kms_key
         s3EncryptionMode: SSE-KMS

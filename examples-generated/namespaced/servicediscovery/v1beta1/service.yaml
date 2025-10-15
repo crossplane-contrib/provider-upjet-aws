@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: servicediscovery.aws.m.upbound.io/v1beta1
 kind: Service
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-    - dnsRecords:
+      dnsRecords:
       - ttl: 10
         type: A
       namespaceIdSelector:
@@ -18,7 +23,7 @@ spec:
           testing.upbound.io/example-name: example
       routingPolicy: MULTIVALUE
     healthCheckCustomConfig:
-    - failureThreshold: 1
+      failureThreshold: 1
     name: example
     region: us-west-1
 

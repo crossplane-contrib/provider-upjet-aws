@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: pinpoint.aws.upbound.io/v1beta2
 kind: App
 metadata:
@@ -9,9 +14,9 @@ metadata:
 spec:
   forProvider:
     limits:
-    - maximumDuration: 600
+      maximumDuration: 600
     name: test-app
     quietTime:
-    - end: "06:00"
+      end: "06:00"
       start: "00:00"
     region: us-west-1

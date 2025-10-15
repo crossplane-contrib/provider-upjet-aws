@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: identitystore.aws.upbound.io/v1beta1
 kind: GroupMembership
 metadata:
@@ -49,7 +54,7 @@ spec:
     displayName: John Doe
     identityStoreId: ${tolist(data.aws_ssoadmin_instances.example.identity_store_ids)[0]}
     name:
-    - familyName: Doe
+      familyName: Doe
       givenName: John
     region: us-west-1
     userName: john.doe@example.com

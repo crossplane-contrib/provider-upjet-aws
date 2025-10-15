@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: autoscalingplans.aws.m.upbound.io/v1beta1
 kind: ScalingPlan
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     applicationSource:
-    - tagFilter:
+      tagFilter:
       - key: application
         values:
         - example
@@ -24,7 +29,7 @@ spec:
       serviceNamespace: autoscaling
       targetTrackingConfiguration:
       - predefinedScalingMetricSpecification:
-        - predefinedScalingMetricType: ASGAverageCPUUtilization
+          predefinedScalingMetricType: ASGAverageCPUUtilization
         targetValue: 70
 
 ---

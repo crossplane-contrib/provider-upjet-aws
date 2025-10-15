@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: cloudwatchevents.aws.upbound.io/v1beta2
 kind: Connection
 metadata:
@@ -9,8 +14,8 @@ metadata:
 spec:
   forProvider:
     authParameters:
-    - apiKey:
-      - key: x-signature
+      apiKey:
+        key: x-signature
         valueSecretRef:
           key: example-key
           name: example-secret

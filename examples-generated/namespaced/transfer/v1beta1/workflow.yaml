@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: transfer.aws.m.upbound.io/v1beta1
 kind: Workflow
 metadata:
@@ -12,6 +17,6 @@ spec:
     region: us-west-1
     steps:
     - deleteStepDetails:
-      - name: example
+        name: example
         sourceFileLocation: ${original.file}
       type: DELETE

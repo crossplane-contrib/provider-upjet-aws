@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: networkmanager.aws.upbound.io/v1beta2
 kind: Link
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     bandwidth:
-    - downloadSpeed: 50
+      downloadSpeed: 50
       uploadSpeed: 10
     globalNetworkIdSelector:
       matchLabels:

@@ -1,8 +1,13 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: autoscaling.aws.m.upbound.io/v1beta2
 kind: Attachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: autoscaling/v1beta2/attachment
+    meta.upbound.io/example-id: autoscaling/v1beta1/attachment
   labels:
     testing.upbound.io/example-name: example
   name: example
