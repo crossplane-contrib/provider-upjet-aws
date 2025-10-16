@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: connect.aws.m.upbound.io/v1beta1
 kind: UserHierarchyStructure
 metadata:
@@ -10,8 +15,8 @@ metadata:
 spec:
   forProvider:
     hierarchyStructure:
-    - levelOne:
-      - name: levelone
+      levelOne:
+        name: levelone
     instanceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

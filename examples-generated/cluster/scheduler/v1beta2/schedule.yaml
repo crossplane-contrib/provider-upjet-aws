@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: scheduler.aws.upbound.io/v1beta2
 kind: Schedule
 metadata:
@@ -9,13 +14,13 @@ metadata:
 spec:
   forProvider:
     flexibleTimeWindow:
-    - mode: "OFF"
+      mode: "OFF"
     groupName: default
     name: my-schedule
     region: us-west-1
     scheduleExpression: rate(1 hours)
     target:
-    - arnSelector:
+      arnSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       roleArnSelector:

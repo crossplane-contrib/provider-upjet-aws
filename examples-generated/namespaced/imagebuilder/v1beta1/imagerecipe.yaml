@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: imagebuilder.aws.m.upbound.io/v1beta1
 kind: ImageRecipe
 metadata:
@@ -12,7 +17,7 @@ spec:
     blockDeviceMapping:
     - deviceName: /dev/xvdb
       ebs:
-      - deleteOnTermination: true
+        deleteOnTermination: true
         volumeSize: 100
         volumeType: gp2
     component:

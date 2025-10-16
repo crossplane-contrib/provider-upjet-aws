@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: transcribe.aws.m.upbound.io/v1beta1
 kind: LanguageModel
 metadata:
@@ -11,7 +16,7 @@ spec:
   forProvider:
     baseModelName: NarrowBand
     inputDataConfig:
-    - dataAccessRoleArnSelector:
+      dataAccessRoleArnSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       s3Uri: s3://${aws_s3_bucket.example.id}/transcribe/

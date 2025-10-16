@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: securityhub.aws.upbound.io/v1beta2
 kind: Insight
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     filters:
-    - awsAccountId:
+      awsAccountId:
       - comparison: EQUALS
         value: "1234567890"
       - comparison: EQUALS

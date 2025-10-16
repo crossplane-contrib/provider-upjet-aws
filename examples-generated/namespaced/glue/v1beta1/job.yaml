@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: glue.aws.m.upbound.io/v1beta1
 kind: Job
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     command:
-    - name: glueetl
+      name: glueetl
       pythonVersion: "3"
       scriptLocation: s3://${aws_s3_bucket.glue_scripts.bucket}/jobs/etl_job.py
     connectionsRefs:
@@ -25,11 +30,11 @@ spec:
     description: An example Glue ETL job
     executionClass: STANDARD
     executionProperty:
-    - maxConcurrentRuns: 1
+      maxConcurrentRuns: 1
     glueVersion: "5.0"
     maxRetries: 0
     notificationProperty:
-    - notifyDelayAfter: 3
+      notifyDelayAfter: 3
     numberOfWorkers: 2
     region: us-west-1
     roleArnSelector:

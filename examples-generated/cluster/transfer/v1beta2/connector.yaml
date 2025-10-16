@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: transfer.aws.upbound.io/v1beta2
 kind: Connector
 metadata:
@@ -12,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test
     as2Config:
-    - compression: DISABLED
+      compression: DISABLED
       encryptionAlgorithm: AWS128_CBC
       localProfileId: ${aws_transfer_profile.local.profile_id}
       mdnResponse: NONE

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: redshift.aws.m.upbound.io/v1beta1
 kind: ScheduledAction
 metadata:
@@ -15,8 +20,8 @@ spec:
     region: us-west-1
     schedule: cron(00 23 * * ? *)
     targetAction:
-    - pauseCluster:
-      - clusterIdentifier: tf-redshift001
+      pauseCluster:
+        clusterIdentifier: tf-redshift001
 
 ---
 

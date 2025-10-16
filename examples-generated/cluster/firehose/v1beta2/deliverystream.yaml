@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: firehose.aws.upbound.io/v1beta2
 kind: DeliveryStream
 metadata:
@@ -10,11 +15,11 @@ spec:
   forProvider:
     destination: extended_s3
     extendedS3Configuration:
-    - bucketArnSelector:
+      bucketArnSelector:
         matchLabels:
           testing.upbound.io/example-name: bucket
       processingConfiguration:
-      - enabled: "true"
+        enabled: "true"
         processors:
         - parameters:
           - parameterName: LambdaArn

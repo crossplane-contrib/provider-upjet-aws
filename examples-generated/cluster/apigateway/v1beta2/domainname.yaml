@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: apigateway.aws.upbound.io/v1beta2
 kind: DomainName
 metadata:
@@ -27,7 +32,7 @@ metadata:
 spec:
   forProvider:
     alias:
-    - evaluateTargetHealth: true
+      evaluateTargetHealth: true
       name: ${aws_api_gateway_domain_name.example.cloudfront_domain_name}
       zoneId: ${aws_api_gateway_domain_name.example.cloudfront_zone_id}
     name: api.example.com

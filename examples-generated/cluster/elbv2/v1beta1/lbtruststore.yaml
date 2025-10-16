@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTrustStore
 metadata:
@@ -34,6 +39,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     mutualAuthentication:
-    - mode: verify
+      mode: verify
       trustStoreArn: ${aws_lb_trust_store.test.arn}
     region: us-west-1

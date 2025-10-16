@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: waf.aws.upbound.io/v1beta2
 kind: RegexMatchSet
 metadata:
@@ -11,7 +16,7 @@ spec:
     name: example
     regexMatchTuple:
     - fieldToMatch:
-      - data: User-Agent
+        data: User-Agent
         type: HEADER
       regexPatternSetIdSelector:
         matchLabels:

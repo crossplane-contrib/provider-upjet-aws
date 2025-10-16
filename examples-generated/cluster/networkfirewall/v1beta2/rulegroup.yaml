@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: networkfirewall.aws.upbound.io/v1beta2
 kind: RuleGroup
 metadata:
@@ -12,9 +17,9 @@ spec:
     name: example
     region: us-west-1
     ruleGroup:
-    - rulesSource:
-      - rulesSourceList:
-        - generatedRulesType: DENYLIST
+      rulesSource:
+        rulesSourceList:
+          generatedRulesType: DENYLIST
           targetTypes:
           - HTTP_HOST
           targets:

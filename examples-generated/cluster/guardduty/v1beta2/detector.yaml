@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: guardduty.aws.upbound.io/v1beta2
 kind: Detector
 metadata:
@@ -9,14 +14,14 @@ metadata:
 spec:
   forProvider:
     datasources:
-    - kubernetes:
-      - auditLogs:
-        - enable: false
+      kubernetes:
+        auditLogs:
+          enable: false
       malwareProtection:
-      - scanEc2InstanceWithFindings:
-        - ebsVolumes:
-          - enable: true
+        scanEc2InstanceWithFindings:
+          ebsVolumes:
+            enable: true
       s3Logs:
-      - enable: true
+        enable: true
     enable: true
     region: us-west-1

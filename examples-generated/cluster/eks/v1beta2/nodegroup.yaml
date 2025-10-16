@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: eks.aws.upbound.io/v1beta2
 kind: NodeGroup
 metadata:
@@ -16,11 +21,11 @@ spec:
         testing.upbound.io/example-name: example
     region: us-west-1
     scalingConfig:
-    - desiredSize: 1
+      desiredSize: 1
       maxSize: 2
       minSize: 1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example[*]
     updateConfig:
-    - maxUnavailable: 1
+      maxUnavailable: 1

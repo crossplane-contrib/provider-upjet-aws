@@ -1,8 +1,13 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: connect.aws.m.upbound.io/v1beta3
 kind: Queue
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta3/queue
+    meta.upbound.io/example-id: connect/v1beta1/queue
   labels:
     testing.upbound.io/example-name: test
   name: test

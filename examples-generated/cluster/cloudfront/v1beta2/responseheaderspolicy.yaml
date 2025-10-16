@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: cloudfront.aws.upbound.io/v1beta2
 kind: ResponseHeadersPolicy
 metadata:
@@ -10,15 +15,15 @@ spec:
   forProvider:
     comment: test comment
     corsConfig:
-    - accessControlAllowCredentials: true
+      accessControlAllowCredentials: true
       accessControlAllowHeaders:
-      - items:
+        items:
         - test
       accessControlAllowMethods:
-      - items:
+        items:
         - GET
       accessControlAllowOrigins:
-      - items:
+        items:
         - test.example.comtest
       originOverride: true
     name: example-policy

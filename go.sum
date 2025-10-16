@@ -594,8 +594,8 @@ github.com/crossplane/crossplane-runtime/v2 v2.0.0-20250730220209-c306b1c8b181 h
 github.com/crossplane/crossplane-runtime/v2 v2.0.0-20250730220209-c306b1c8b181/go.mod h1:pkd5UzmE8esaZAApevMutR832GjJ1Qgc5Ngr78ByxrI=
 github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec h1:+51Et4UW8XrvGne8RAqn9qEIfhoqPXYqIp/kQvpMaAo=
 github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec/go.mod h1:8etxwmP4cZwJDwen4+PQlnc1tggltAhEfyyigmdHulQ=
-github.com/crossplane/upjet/v2 v2.0.1-0.20251009193737-0b7f640373c8 h1:zdxlqcXtEhqb7YKsipQk4lIfLhp42UuJSAyFTw+LhAs=
-github.com/crossplane/upjet/v2 v2.0.1-0.20251009193737-0b7f640373c8/go.mod h1:nXboF68y9ZQRu39kZirQQiPL/BA4Afic17rEdHE+VQo=
+github.com/crossplane/upjet/v2 v2.0.1-0.20251016125717-bc4227e2dc7a h1:Uz9iN9FE/sPKSX/z29krX/zMhHdjttvRnqgJPWwp+xU=
+github.com/crossplane/upjet/v2 v2.0.1-0.20251016125717-bc4227e2dc7a/go.mod h1:jDCqvAFLrVEzqE+pywmQ5u18HbJK5j5Jj4cTQpqOLqY=
 github.com/cyphar/filepath-securejoin v0.4.1 h1:JyxxyPEaktOD+GAnqIqTf9A8tHyAG22rowi7HkoSU1s=
 github.com/cyphar/filepath-securejoin v0.4.1/go.mod h1:Sdj7gXlvMcPZsbhwhQ33GguGLDGQL7h7bg04C/+u9jI=
 github.com/dave/jennifer v1.7.1 h1:B4jJJDHelWcDhlRQxWeo0Npa/pYKBLrirAQoTN45txo=
@@ -820,8 +820,8 @@ github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9G
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 h1:C3w9PqII01/Oq1c1nUAm88MOHcQC9l5mIlSMApZMrHA=
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822/go.mod h1:+n7T8mK8HuQTcFwEeznm/DIxMOiR9yIdICNftLE1DvQ=
-github.com/muvaf/typewriter v0.0.0-20210910160850-80e49fe1eb32 h1:yBQlHXLeUJL3TWVmzup5uT3wG5FLxhiTAiTsmNVocys=
-github.com/muvaf/typewriter v0.0.0-20210910160850-80e49fe1eb32/go.mod h1:SAAdeMEiFXR8LcHffvIdiLI1w243DCH2DuHq7UrA5YQ=
+github.com/muvaf/typewriter v0.0.0-20240614220100-70f9d4a54ea0 h1:05HUfXEb9O/nGF32uKsjjYeGJBZ6PeVHMeqetyXUgR8=
+github.com/muvaf/typewriter v0.0.0-20240614220100-70f9d4a54ea0/go.mod h1:SAAdeMEiFXR8LcHffvIdiLI1w243DCH2DuHq7UrA5YQ=
 github.com/nxadm/tail v1.4.8 h1:nPr65rt6Y5JFSKQO7qToXr7pePgD6Gwiw05lkbyAQTE=
 github.com/nxadm/tail v1.4.8/go.mod h1:+ncqLTQzXmGhMZNUePPaPqPvBxHAIsmXswZKocGu+AU=
 github.com/oklog/run v1.1.0 h1:GEenZ1cK0+q0+wsJew9qUg/DyD8k3JzYsZAi5gYi2mA=

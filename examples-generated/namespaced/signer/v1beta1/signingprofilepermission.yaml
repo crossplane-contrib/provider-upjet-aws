@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: signer.aws.m.upbound.io/v1beta1
 kind: SigningProfilePermission
 metadata:
@@ -32,7 +37,7 @@ spec:
     platformId: AWSLambda-SHA384-ECDSA
     region: us-west-1
     signatureValidityPeriod:
-    - type: YEARS
+      type: YEARS
       value: 5
     tags:
       tag1: value1

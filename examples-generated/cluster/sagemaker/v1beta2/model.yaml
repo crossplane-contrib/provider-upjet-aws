@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: sagemaker.aws.upbound.io/v1beta2
 kind: Model
 metadata:
@@ -12,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     primaryContainer:
-    - image: ${data.aws_sagemaker_prebuilt_ecr_image.test.registry_path}
+      image: ${data.aws_sagemaker_prebuilt_ecr_image.test.registry_path}
     region: us-west-1
 
 ---

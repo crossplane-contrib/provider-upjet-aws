@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appmesh.aws.m.upbound.io/v1beta1
 kind: VirtualGateway
 metadata:
@@ -13,9 +18,9 @@ spec:
     name: example-virtual-gateway
     region: us-west-1
     spec:
-    - listener:
+      listener:
       - portMapping:
-        - port: 8080
+          port: 8080
           protocol: http
     tags:
       Environment: test

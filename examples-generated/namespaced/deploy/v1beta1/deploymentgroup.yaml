@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: deploy.aws.m.upbound.io/v1beta1
 kind: DeploymentGroup
 metadata:
@@ -10,14 +15,14 @@ metadata:
 spec:
   forProvider:
     alarmConfiguration:
-    - alarms:
+      alarms:
       - my-alarm-name
       enabled: true
     appNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     autoRollbackConfiguration:
-    - enabled: true
+      enabled: true
       events:
       - DEPLOYMENT_FAILURE
     ec2TagSet:

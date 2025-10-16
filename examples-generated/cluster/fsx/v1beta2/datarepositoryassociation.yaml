@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: fsx.aws.upbound.io/v1beta2
 kind: DataRepositoryAssociation
 metadata:
@@ -15,13 +20,13 @@ spec:
     fileSystemPath: /my-bucket
     region: us-west-1
     s3:
-    - autoExportPolicy:
-      - events:
+      autoExportPolicy:
+        events:
         - NEW
         - CHANGED
         - DELETED
       autoImportPolicy:
-      - events:
+        events:
         - NEW
         - CHANGED
         - DELETED

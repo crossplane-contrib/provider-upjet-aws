@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: kendra.aws.m.upbound.io/v1beta1
 kind: Experience
 metadata:
@@ -10,12 +15,12 @@ metadata:
 spec:
   forProvider:
     configuration:
-    - contentSourceConfiguration:
-      - directPutContent: true
+      contentSourceConfiguration:
+        directPutContent: true
         faqIds:
         - ${aws_kendra_faq.example.faq_id}
       userIdentityConfiguration:
-      - identityAttributeName: 12345ec453-1546651e-79c4-4554-91fa-00b43ccfa245
+        identityAttributeName: 12345ec453-1546651e-79c4-4554-91fa-00b43ccfa245
     description: My Kendra Experience
     indexIdSelector:
       matchLabels:

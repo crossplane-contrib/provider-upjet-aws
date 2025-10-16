@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: kinesis.aws.upbound.io/v1beta2
 kind: Stream
 metadata:
@@ -15,6 +20,6 @@ spec:
     - IncomingBytes
     - OutgoingBytes
     streamModeDetails:
-    - streamMode: PROVISIONED
+      streamMode: PROVISIONED
     tags:
       Environment: test

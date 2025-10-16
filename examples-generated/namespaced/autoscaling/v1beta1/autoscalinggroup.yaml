@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: autoscaling.aws.m.upbound.io/v1beta1
 kind: AutoscalingGroup
 metadata:
@@ -25,7 +30,7 @@ spec:
       notificationTargetArn: arn:aws:sqs:us-east-1:444455556666:queue1*
       roleArn: arn:aws:iam::123456789012:role/S3Access
     instanceMaintenancePolicy:
-    - maxHealthyPercentage: 120
+      maxHealthyPercentage: 120
       minHealthyPercentage: 90
     launchConfigurationSelector:
       matchLabels:

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: budgets.aws.m.upbound.io/v1beta1
 kind: BudgetAction
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     actionThreshold:
-    - actionThresholdType: ABSOLUTE_VALUE
+      actionThresholdType: ABSOLUTE_VALUE
       actionThresholdValue: 100
     actionType: APPLY_IAM_POLICY
     approvalModel: AUTOMATIC
@@ -18,8 +23,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     definition:
-    - iamActionDefinition:
-      - policyArnSelector:
+      iamActionDefinition:
+        policyArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
         rolesRefs:

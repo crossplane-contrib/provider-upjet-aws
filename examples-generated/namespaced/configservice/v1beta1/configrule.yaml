@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: configservice.aws.m.upbound.io/v1beta1
 kind: ConfigRule
 metadata:
@@ -11,7 +16,7 @@ spec:
   forProvider:
     region: us-west-1
     source:
-    - owner: AWS
+      owner: AWS
       sourceIdentifierSelector:
         matchLabels:
           testing.upbound.io/example-name: example

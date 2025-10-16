@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: elbv2.aws.upbound.io/v1beta2
 kind: LB
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     accessLogs:
-    - bucketSelector:
+      bucketSelector:
         matchLabels:
           testing.upbound.io/example-name: lb_logs
       enabled: true

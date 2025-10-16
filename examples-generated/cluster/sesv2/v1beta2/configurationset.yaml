@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: sesv2.aws.upbound.io/v1beta2
 kind: ConfigurationSet
 metadata:
@@ -9,17 +14,17 @@ metadata:
 spec:
   forProvider:
     deliveryOptions:
-    - maxDeliverySeconds: 300
+      maxDeliverySeconds: 300
       tlsPolicy: REQUIRE
     region: us-west-1
     reputationOptions:
-    - reputationMetricsEnabled: false
+      reputationMetricsEnabled: false
     sendingOptions:
-    - sendingEnabled: true
+      sendingEnabled: true
     suppressionOptions:
-    - suppressedReasons:
+      suppressedReasons:
       - BOUNCE
       - COMPLAINT
     trackingOptions:
-    - customRedirectDomain: example.com
+      customRedirectDomain: example.com
       httpsPolicy: REQUIRE

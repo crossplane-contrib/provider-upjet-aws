@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: backup.aws.upbound.io/v1beta2
 kind: Framework
 metadata:
@@ -24,7 +29,7 @@ spec:
     - name: BACKUP_RECOVERY_POINT_ENCRYPTED
     - name: BACKUP_RESOURCES_PROTECTED_BY_BACKUP_PLAN
       scope:
-      - complianceResourceTypes:
+        complianceResourceTypes:
         - EBS
     - name: BACKUP_RECOVERY_POINT_MANUAL_DELETION_DISABLED
     - inputParameter:
@@ -34,7 +39,7 @@ spec:
         value: "1"
       name: BACKUP_RESOURCES_PROTECTED_BY_BACKUP_VAULT_LOCK
       scope:
-      - complianceResourceTypes:
+        complianceResourceTypes:
         - EBS
     - inputParameter:
       - name: recoveryPointAgeUnit
@@ -43,7 +48,7 @@ spec:
         value: "1"
       name: BACKUP_LAST_RECOVERY_POINT_CREATED
       scope:
-      - complianceResourceTypes:
+        complianceResourceTypes:
         - EBS
     description: this is an example framework
     name: exampleFramework

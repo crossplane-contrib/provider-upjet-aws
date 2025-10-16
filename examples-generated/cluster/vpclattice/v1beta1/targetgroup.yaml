@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: vpclattice.aws.upbound.io/v1beta1
 kind: TargetGroup
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     config:
-    - port: 443
+      port: 443
       protocol: HTTPS
       vpcIdentifierSelector:
         matchLabels:

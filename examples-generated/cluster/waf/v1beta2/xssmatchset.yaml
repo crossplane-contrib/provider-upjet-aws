@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: waf.aws.upbound.io/v1beta2
 kind: XSSMatchSet
 metadata:
@@ -11,8 +16,8 @@ spec:
     name: xss_match_set
     xssMatchTuples:
     - fieldToMatch:
-      - type: URI
+        type: URI
       textTransformation: NONE
     - fieldToMatch:
-      - type: QUERY_STRING
+        type: QUERY_STRING
       textTransformation: NONE

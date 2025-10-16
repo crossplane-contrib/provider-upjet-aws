@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appstream.aws.upbound.io/v1beta2
 kind: Fleet
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     computeCapacity:
-    - desiredInstances: 1
+      desiredInstances: 1
     description: test fleet
     displayName: test-fleet
     enableDefaultInternetAccess: false
@@ -23,5 +28,5 @@ spec:
     tags:
       TagName: tag-value
     vpcConfig:
-    - subnetIdRefs:
+      subnetIdRefs:
       - name: example

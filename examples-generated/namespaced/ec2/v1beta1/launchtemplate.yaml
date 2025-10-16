@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: LaunchTemplate
 metadata:
@@ -12,42 +17,42 @@ spec:
     blockDeviceMappings:
     - deviceName: /dev/sdf
       ebs:
-      - volumeSize: 20
+        volumeSize: 20
     capacityReservationSpecification:
-    - capacityReservationPreference: open
+      capacityReservationPreference: open
     cpuOptions:
-    - coreCount: 4
+      coreCount: 4
       threadsPerCore: 2
     creditSpecification:
-    - cpuCredits: standard
+      cpuCredits: standard
     disableApiStop: true
     disableApiTermination: true
     ebsOptimized: true
     iamInstanceProfile:
-    - nameSelector:
+      nameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
     imageId: ami-test
     instanceInitiatedShutdownBehavior: terminate
     instanceMarketOptions:
-    - marketType: spot
+      marketType: spot
     instanceType: t2.micro
     kernelId: test
     keyName: test
     licenseSpecification:
     - licenseConfigurationArn: arn:aws:license-manager:eu-west-1:123456789012:license-configuration:lic-0123456789abcdef0123456789abcdef
     metadataOptions:
-    - httpEndpoint: enabled
+      httpEndpoint: enabled
       httpPutResponseHopLimit: 1
       httpTokens: required
       instanceMetadataTags: enabled
     monitoring:
-    - enabled: true
+      enabled: true
     name: foo
     networkInterfaces:
     - associatePublicIpAddress: true
     placement:
-    - availabilityZone: us-west-2a
+      availabilityZone: us-west-2a
     ramDiskId: test
     region: us-west-1
     tagSpecifications:

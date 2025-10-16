@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: imagebuilder.aws.m.upbound.io/v1beta1
 kind: ContainerRecipe
 metadata:
@@ -27,7 +32,7 @@ spec:
     parentImage: arn:aws:imagebuilder:eu-central-1:aws:image/amazon-linux-x86-latest/x.x.x
     region: us-west-1
     targetRepository:
-    - repositoryNameSelector:
+      repositoryNameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       service: ECR

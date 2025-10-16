@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: elbv2.aws.upbound.io/v1beta2
 kind: LBListenerRule
 metadata:
@@ -15,10 +20,10 @@ spec:
       type: forward
     condition:
     - pathPattern:
-      - values:
+        values:
         - /static/*
     - hostHeader:
-      - values:
+        values:
         - example.com
     listenerArnSelector:
       matchLabels:

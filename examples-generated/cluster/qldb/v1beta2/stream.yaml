@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: qldb.aws.upbound.io/v1beta2
 kind: Stream
 metadata:
@@ -10,7 +15,7 @@ spec:
   forProvider:
     inclusiveStartTime: "2021-01-01T00:00:00Z"
     kinesisConfiguration:
-    - aggregationEnabled: false
+      aggregationEnabled: false
       streamArnSelector:
         matchLabels:
           testing.upbound.io/example-name: example

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: Table
 metadata:
@@ -34,6 +39,6 @@ spec:
       Environment: production
       Name: dynamodb-table-1
     ttl:
-    - attributeName: TimeToExist
+      attributeName: TimeToExist
       enabled: true
     writeCapacity: 20

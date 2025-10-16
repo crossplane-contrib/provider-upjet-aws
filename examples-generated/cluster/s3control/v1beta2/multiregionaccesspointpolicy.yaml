@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: s3control.aws.upbound.io/v1beta2
 kind: MultiRegionAccessPointPolicy
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     details:
-    - name: ${element(split(":", aws_s3control_multi_region_access_point.example.id),
+      name: ${element(split(":", aws_s3control_multi_region_access_point.example.id),
         1)}
       policy: |-
         ${jsonencode({
@@ -56,7 +61,7 @@ metadata:
 spec:
   forProvider:
     details:
-    - name: example
+      name: example
       region:
       - bucketSelector:
           matchLabels:

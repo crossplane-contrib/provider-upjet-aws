@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: autoscaling.aws.m.upbound.io/v1beta1
 kind: GroupTag
 metadata:
@@ -20,7 +25,7 @@ spec:
         )}
     region: us-west-1
     tag:
-    - key: k8s.io/cluster-autoscaler/node-template/label/eks.amazonaws.com/capacityType
+      key: k8s.io/cluster-autoscaler/node-template/label/eks.amazonaws.com/capacityType
       propagateAtLaunch: false
       value: SPOT
 

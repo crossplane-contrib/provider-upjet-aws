@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: rds.aws.m.upbound.io/v1beta1
 kind: ProxyDefaultTargetGroup
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     connectionPoolConfig:
-    - connectionBorrowTimeout: 120
+      connectionBorrowTimeout: 120
       initQuery: SET x=1, y=2
       maxConnectionsPercent: 100
       maxIdleConnectionsPercent: 50

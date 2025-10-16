@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: deploy.aws.m.upbound.io/v1beta1
 kind: DeploymentConfig
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     minimumHealthyHosts:
-    - type: HOST_COUNT
+      type: HOST_COUNT
       value: 2
     region: us-west-1
 
@@ -28,14 +33,14 @@ metadata:
 spec:
   forProvider:
     alarmConfiguration:
-    - alarms:
+      alarms:
       - my-alarm-name
       enabled: true
     appNameSelector:
       matchLabels:
         testing.upbound.io/example-name: foo_app
     autoRollbackConfiguration:
-    - enabled: true
+      enabled: true
       events:
       - DEPLOYMENT_FAILURE
     deploymentConfigName: ${aws_codedeploy_deployment_config.foo.id}

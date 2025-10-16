@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: workspaces.aws.upbound.io/v1beta2
 kind: Directory
 metadata:
@@ -9,17 +14,17 @@ metadata:
 spec:
   forProvider:
     certificateBasedAuthProperties:
-    - certificateAuthorityArn: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
+      certificateAuthorityArn: arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012
       status: ENABLED
     directoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
     samlProperties:
-    - status: ENABLED
+      status: ENABLED
       userAccessUrl: https://sso.example.com/
     selfServicePermissions:
-    - changeComputeType: true
+      changeComputeType: true
       increaseVolumeSize: true
       rebuildWorkspace: true
       restartWorkspace: true
@@ -30,7 +35,7 @@ spec:
     tags:
       Example: true
     workspaceAccessProperties:
-    - deviceTypeAndroid: ALLOW
+      deviceTypeAndroid: ALLOW
       deviceTypeChromeos: ALLOW
       deviceTypeIos: ALLOW
       deviceTypeLinux: DENY
@@ -39,7 +44,7 @@ spec:
       deviceTypeWindows: DENY
       deviceTypeZeroclient: DENY
     workspaceCreationProperties:
-    - customSecurityGroupIdSelector:
+      customSecurityGroupIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       defaultOu: OU=AWS,DC=Workgroup,DC=Example,DC=com
@@ -67,7 +72,7 @@ spec:
     region: us-west-1
     size: Small
     vpcSettings:
-    - subnetIdsRefs:
+      subnetIdsRefs:
       - name: example_a
       - name: example_b
       vpcIdSelector:
