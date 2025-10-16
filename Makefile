@@ -79,7 +79,7 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.29.0
+KIND_VERSION = v0.30.0
 UP_VERSION = v0.40.0-0.rc.3
 UP_CHANNEL = alpha
 UPTEST_VERSION = v2.1.0
@@ -276,7 +276,7 @@ build-provider.%:
 
 XPKG_SKIP_DEP_RESOLUTION := true
 
-local-deploy.%: controlplane.up
+local-deploy.%: controlplane.up $(YQ)
 	# uptest workaround for the behavior change at Crossplane 1.15 default registry
 	# XP RBAC manager has a check for packages from the same provider family
 	# that they come from the same org and assign RBACs for all providers.
@@ -285,16 +285,20 @@ local-deploy.%: controlplane.up
     # TODO: Remove this when https://github.com/crossplane/build/issues/38 is resolved
     # this workaround is only valid for uptest on Crossplane 1.x
     # Crossplane v2 needs the above issue to be resolved
+    # TODO: We had better move the DeploymentRuntimeConfig patch to the build submodule.
 	@$(KUBECTL) -n $(CROSSPLANE_NAMESPACE) patch deployment crossplane-rbac-manager -p '{"spec":{"template":{"spec":{"containers":[{"name":"crossplane","env":[{"name":"REGISTRY","value":"index.docker.io"}]}]}}}}'
 	@for api in $$(tr ',' ' ' <<< $*); do \
-		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$${api}; \
-		$(INFO) running locally built $(PROJECT_NAME)-$${api}; \
-		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout 5m; \
-		$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m; \
+		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$${api} && \
+		container_patch="$$($(KUBECTL) get deploymentruntimeconfigs.pkg.crossplane.io runtimeconfig-$(PROJECT_NAME)-$${api} -o jsonpath='{.spec.deploymentTemplate.spec.template.spec.containers[?(.name == "package-runtime")]}' | $(YQ) '.ports = [{"containerPort": 8081, "name": "readyz", "protocol": "TCP"}]' | $(YQ) '.readinessProbe = {"httpGet": {"scheme": "HTTP", "port": "readyz", "path": "/readyz"}}' | $(YQ) e -o=json)" && \
+		$(INFO) Patching DeploymentRuntimeConfig package-runtime container spec with a readiness probe using: $$container_patch && \
+		$(KUBECTL) patch deploymentruntimeconfigs.pkg.crossplane.io runtimeconfig-$(PROJECT_NAME)-$${api} --type=merge -p="{\"spec\": {\"deploymentTemplate\":{\"spec\":{\"template\":{\"spec\":{\"containers\":[$$container_patch]}}}}}}" && \
+		$(INFO) running locally built $(PROJECT_NAME)-$${api} && \
+		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout=5m && \
+		$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m && \
 		$(OK) running locally built $(PROJECT_NAME)-$${api}; \
 	done || $(FAIL)
 
-local-deploy: build-provider.monolith local-deploy.monolith
+local-deploy: build-provider.config local-deploy.config
 
 # This target requires the following environment variables to be set:
 # - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g.
