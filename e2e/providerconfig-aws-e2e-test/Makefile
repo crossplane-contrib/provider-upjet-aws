@@ -12,10 +12,10 @@ PLATFORMS ?= linux_amd64
 # Setup Kubernetes tools
 
 KIND_VERSION = v0.22.0
-UP_VERSION = v0.28.0
-UP_CHANNEL = stable
 UPTEST_VERSION = v0.13.0
 YQ_VERSION = v4.40.5
+CROSSPLANE_VERSION = 2.0.2
+CROSSPLANE_CLI_VERSION = v2.0.2
 
 -include ../../build/makelib/k8s_tools.mk
 # ====================================================================================
@@ -30,7 +30,6 @@ XPKGS = $(PROJECT_NAME)
 -include ../../build/makelib/xpkg.mk
 
 CROSSPLANE_NAMESPACE = upbound-system
-CROSSPLANE_VERSION = 1.17.2
 CROSSPLANE_ARGS = "--enable-usages,--debug"
 -include ../../build/makelib/local.xpkg.mk
 -include ../../build/makelib/controlplane.mk
@@ -57,7 +56,7 @@ submodules:
 
 # We must ensure up is installed in tool cache prior to build as including the k8s_tools machinery prior to the xpkg
 # machinery sets UP to point to tool cache.
-build.init: $(UP)
+build.init: $(CROSSPLANE_CLI)
 
 # ====================================================================================
 # End to End Testing
