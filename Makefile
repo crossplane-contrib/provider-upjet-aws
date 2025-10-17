@@ -275,21 +275,9 @@ build-provider.%:
 XPKG_SKIP_DEP_RESOLUTION := true
 
 local-deploy.%: controlplane.up $(YQ)
-	# uptest workaround for the behavior change at Crossplane 1.15 default registry
-	# XP RBAC manager has a check for packages from the same provider family
-	# that they come from the same org and assign RBACs for all providers.
-	# This got broken for locally deployed dev packages through crossplane/build submodule,
-	# therefore cannot get necessary RBACs.
-    # TODO: Remove this when https://github.com/crossplane/build/issues/38 is resolved
-    # this workaround is only valid for uptest on Crossplane 1.x
-    # Crossplane v2 needs the above issue to be resolved
-    # TODO: We had better move the DeploymentRuntimeConfig patch to the build submodule.
 	@$(KUBECTL) -n $(CROSSPLANE_NAMESPACE) patch deployment crossplane-rbac-manager -p '{"spec":{"template":{"spec":{"containers":[{"name":"crossplane","env":[{"name":"REGISTRY","value":"index.docker.io"}]}]}}}}'
 	@for api in $$(tr ',' ' ' <<< $*); do \
-		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$${api} && \
-		container_patch="$$($(KUBECTL) get deploymentruntimeconfigs.pkg.crossplane.io runtimeconfig-$(PROJECT_NAME)-$${api} -o jsonpath='{.spec.deploymentTemplate.spec.template.spec.containers[?(.name == "package-runtime")]}' | $(YQ) '.ports = [{"containerPort": 8081, "name": "readyz", "protocol": "TCP"}]' | $(YQ) '.readinessProbe = {"httpGet": {"scheme": "HTTP", "port": "readyz", "path": "/readyz"}}' | $(YQ) e -o=json)" && \
-		$(INFO) Patching DeploymentRuntimeConfig package-runtime container spec with a readiness probe using: $$container_patch && \
-		$(KUBECTL) patch deploymentruntimeconfigs.pkg.crossplane.io runtimeconfig-$(PROJECT_NAME)-$${api} --type=merge -p="{\"spec\": {\"deploymentTemplate\":{\"spec\":{\"template\":{\"spec\":{\"containers\":[$$container_patch]}}}}}}" && \
+		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$${api} DRC_FILE="./examples/deploymentruntimeconfig.yaml" && \
 		$(INFO) running locally built $(PROJECT_NAME)-$${api} && \
 		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout=5m && \
 		$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m && \
