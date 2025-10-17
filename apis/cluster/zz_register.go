@@ -290,6 +290,7 @@ import (
 	v1beta2transfer "github.com/upbound/provider-aws/apis/cluster/transfer/v1beta2"
 	v1alpha1cluster "github.com/upbound/provider-aws/apis/cluster/v1alpha1"
 	v1beta1cluster "github.com/upbound/provider-aws/apis/cluster/v1beta1"
+	v1beta1verifiedaccess "github.com/upbound/provider-aws/apis/cluster/verifiedaccess/v1beta1"
 	v1beta1vpc "github.com/upbound/provider-aws/apis/cluster/vpc/v1beta1"
 	v1beta1vpclattice "github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1"
 	v1beta1waf "github.com/upbound/provider-aws/apis/cluster/waf/v1beta1"
@@ -586,6 +587,7 @@ func init() {
 		v1beta2transfer.SchemeBuilder.AddToScheme,
 		v1alpha1cluster.SchemeBuilder.AddToScheme,
 		v1beta1cluster.SchemeBuilder.AddToScheme,
+		v1beta1verifiedaccess.SchemeBuilder.AddToScheme,
 		v1beta1vpc.SchemeBuilder.AddToScheme,
 		v1beta1vpclattice.SchemeBuilder.AddToScheme,
 		v1beta1waf.SchemeBuilder.AddToScheme,

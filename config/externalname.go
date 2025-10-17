@@ -1110,6 +1110,20 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	"aws_vpn_gateway_route_propagation": config.IdentifierFromProvider,
 
+	// verified access
+	// VerifiedAccess Endpoint can be imported using the endpoint id (vae): vae-8012925589
+	"aws_verifiedaccess_endpoint": config.IdentifierFromProvider,
+	// No import
+	"aws_verifiedaccess_group": config.IdentifierFromProvider,
+	// VerifiedAccess Instance can be imported using the instance id (vai): vae-8012925589
+	"aws_verifiedaccess_instance": config.IdentifierFromProvider,
+	// VerifiedAccess Instance Logging Configuration can be imported using the instance id (vai): vai-1234567890abcdef0
+	"aws_verifiedaccess_instance_logging_configuration": config.IdentifierFromProvider,
+	// VerifiedAccess Instance Trust provider Attachment can be imported using the instance/attachment id: vai-1234567890abcdef0/vatp-801292558
+	"aws_verifiedaccess_instance_trust_provider_attachment": config.IdentifierFromProvider,
+	// VerifiedAccess TrustProvider can be imported using the trust provider id (vatp): vatp-8012925589
+	"aws_verifiedaccess_trust_provider": config.IdentifierFromProvider,
+
 	// ecr
 	//
 	// Imported using the name of the repository.

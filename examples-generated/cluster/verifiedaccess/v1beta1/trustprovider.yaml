@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: TrustProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/trustprovider
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyReferenceName: example
+    region: us-west-1
+    trustProviderType: user
+    userTrustProviderType: iam-identity-center
