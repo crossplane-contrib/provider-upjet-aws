@@ -1,0 +1,25 @@
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: placeholder # will be overridden to runtimeconfig-$*
+spec:
+  deploymentTemplate:
+    spec:
+      selector: {}
+      strategy: {}
+      template:
+        spec:
+          containers:
+            - name: package-runtime
+              image: placeholder # will be overridden to $(BUILD_REGISTRY)/$*-$(ARCH)
+              args:
+                - --debug
+              ports:
+                - containerPort: 8081
+                  name: readyz
+                  protocol: TCP
+              readinessProbe:
+                httpGet:
+                  scheme: HTTP
+                  port: readyz
+                  path: /readyz
