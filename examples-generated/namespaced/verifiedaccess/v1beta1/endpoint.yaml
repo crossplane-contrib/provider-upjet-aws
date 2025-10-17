@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: verifiedaccess.aws.m.upbound.io/v1beta1
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationDomain: example.com
+    attachmentType: vpc
+    description: example
+    domainCertificateArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    endpointDomainPrefix: example
+    endpointType: load-balancer
+    loadBalancerOptions:
+      loadBalancerArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      port: 443
+      protocol: https
+      subnetIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: 'public : subnet'
+    region: us-west-1
+    securityGroupIdRefs:
+    - name: example
+    verifiedAccessGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
