@@ -18,17 +18,12 @@ spec:
         "Version": "2012-10-17",
         "Statement": [
           {
-            "Sid": "test-pol-principals-6",
             "Effect": "Allow",
             "Principal": {
               "AWS": "arn:aws:iam::${data.aws_account_id}:root"
             },
-            "Action": [
-              "vpc-lattice:CreateServiceNetworkVpcAssociation",
-              "vpc-lattice:CreateServiceNetworkServiceAssociation",
-              "vpc-lattice:GetServiceNetwork"
-            ],
-            "Resource": "arn:aws:vpc-lattice:us-west-1:${data.aws_account_id}:servicenetwork/*"
+            "Action": "*",
+            "Resource": "*"
           }
         ]
       }
