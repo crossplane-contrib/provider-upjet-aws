@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ssm.aws.m.upbound.io/v1beta1
 kind: ResourceDataSync
 metadata:
@@ -11,7 +16,7 @@ spec:
   forProvider:
     region: us-west-1
     s3Destination:
-    - bucketNameSelector:
+      bucketNameSelector:
         matchLabels:
           testing.upbound.io/example-name: hoge
       regionSelector:

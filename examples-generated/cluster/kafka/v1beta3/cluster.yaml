@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: kafka.aws.upbound.io/v1beta3
 kind: Cluster
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     brokerNodeGroupInfo:
-    - clientSubnetsRefs:
+      clientSubnetsRefs:
       - name: subnet_az1
       - name: subnet_az2
       - name: subnet_az3
@@ -17,39 +22,39 @@ spec:
       securityGroupsRefs:
       - name: sg
       storageInfo:
-      - ebsStorageInfo:
-        - volumeSize: 1000
+        ebsStorageInfo:
+          volumeSize: 1000
     clusterName: example
     encryptionInfo:
-    - encryptionAtRestKmsKeyArnSelector:
+      encryptionAtRestKmsKeyArnSelector:
         matchLabels:
           testing.upbound.io/example-name: kms
     kafkaVersion: 3.2.0
     loggingInfo:
-    - brokerLogs:
-      - cloudwatchLogs:
-        - enabled: true
+      brokerLogs:
+        cloudwatchLogs:
+          enabled: true
           logGroupSelector:
             matchLabels:
               testing.upbound.io/example-name: test
         firehose:
-        - deliveryStreamSelector:
+          deliveryStreamSelector:
             matchLabels:
               testing.upbound.io/example-name: test_stream
           enabled: true
         s3:
-        - bucketSelector:
+          bucketSelector:
             matchLabels:
               testing.upbound.io/example-name: bucket
           enabled: true
           prefix: logs/msk-
     numberOfBrokerNodes: 3
     openMonitoring:
-    - prometheus:
-      - jmxExporter:
-        - enabledInBroker: true
+      prometheus:
+        jmxExporter:
+          enabledInBroker: true
         nodeExporter:
-        - enabledInBroker: true
+          enabledInBroker: true
     region: us-west-1
     tags:
       foo: bar
@@ -97,7 +102,7 @@ spec:
   forProvider:
     destination: extended_s3
     extendedS3Configuration:
-    - bucketArnSelector:
+      bucketArnSelector:
         matchLabels:
           testing.upbound.io/example-name: bucket
       roleArnSelector:

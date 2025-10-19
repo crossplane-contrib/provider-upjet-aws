@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: kafka.aws.upbound.io/v1beta2
 kind: ServerlessCluster
 metadata:
@@ -9,9 +14,9 @@ metadata:
 spec:
   forProvider:
     clientAuthentication:
-    - sasl:
-      - iam:
-        - enabled: true
+      sasl:
+        iam:
+          enabled: true
     clusterName: Example
     region: us-west-1
     vpcConfig:

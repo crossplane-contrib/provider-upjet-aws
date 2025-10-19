@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: mwaa.aws.m.upbound.io/v1beta1
 kind: Environment
 metadata:
@@ -14,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     networkConfiguration:
-    - securityGroupIdsRefs:
+      securityGroupIdsRefs:
       - name: example
       subnetIdsSelector:
         matchLabels:

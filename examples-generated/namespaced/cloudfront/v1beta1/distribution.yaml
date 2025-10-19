@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: cloudfront.aws.m.upbound.io/v1beta1
 kind: Distribution
 metadata:
@@ -14,7 +19,7 @@ spec:
     - yoursite.example.com
     comment: Some comment
     defaultCacheBehavior:
-    - allowedMethods:
+      allowedMethods:
       - DELETE
       - GET
       - HEAD
@@ -27,8 +32,8 @@ spec:
       - HEAD
       defaultTtl: 3600
       forwardedValues:
-      - cookies:
-        - forward: none
+        cookies:
+          forward: none
         queryString: false
       maxTtl: 86400
       minTtl: 0
@@ -38,7 +43,7 @@ spec:
     enabled: true
     isIpv6Enabled: true
     loggingConfig:
-    - bucket: mylogs.s3.amazonaws.com
+      bucket: mylogs.s3.amazonaws.com
       includeCookies: false
       prefix: myprefix
     orderedCacheBehavior:
@@ -53,8 +58,8 @@ spec:
       compress: true
       defaultTtl: 86400
       forwardedValues:
-      - cookies:
-        - forward: none
+        cookies:
+          forward: none
         headers:
         - Origin
         queryString: false
@@ -73,8 +78,8 @@ spec:
       compress: true
       defaultTtl: 3600
       forwardedValues:
-      - cookies:
-        - forward: none
+        cookies:
+          forward: none
         queryString: false
       maxTtl: 86400
       minTtl: 0
@@ -89,8 +94,8 @@ spec:
       originId: ${local.s3_origin_id}
     priceClass: PriceClass_200
     restrictions:
-    - geoRestriction:
-      - locations:
+      geoRestriction:
+        locations:
         - US
         - CA
         - GB
@@ -99,7 +104,7 @@ spec:
     tags:
       Environment: production
     viewerCertificate:
-    - cloudfrontDefaultCertificate: true
+      cloudfrontDefaultCertificate: true
 
 ---
 

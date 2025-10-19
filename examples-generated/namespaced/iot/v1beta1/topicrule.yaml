@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: TopicRule
 metadata:
@@ -12,8 +17,8 @@ spec:
     description: Example rule
     enabled: true
     errorAction:
-    - sns:
-      - messageFormat: RAW
+      sns:
+        messageFormat: RAW
         roleArnSelector:
           matchLabels:
             testing.upbound.io/example-name: role

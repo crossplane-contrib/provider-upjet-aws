@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: route53recoverycontrolconfig.aws.upbound.io/v1beta2
 kind: SafetyRule
 metadata:
@@ -15,7 +20,7 @@ spec:
         testing.upbound.io/example-name: example
     name: daisyguttridge
     ruleConfig:
-    - inverted: false
+      inverted: false
       threshold: 1
       type: ATLEAST
     waitPeriodMs: 5000

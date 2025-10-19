@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Fleet
 metadata:
@@ -10,7 +15,7 @@ spec:
   forProvider:
     launchTemplateConfig:
     - launchTemplateSpecification:
-      - launchTemplateIdSelector:
+        launchTemplateIdSelector:
           matchLabels:
             testing.upbound.io/example-name: example
         versionSelector:
@@ -18,5 +23,5 @@ spec:
             testing.upbound.io/example-name: example
     region: us-west-1
     targetCapacitySpecification:
-    - defaultTargetCapacityType: spot
+      defaultTargetCapacityType: spot
       totalTargetCapacity: 5

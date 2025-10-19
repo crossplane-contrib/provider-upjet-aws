@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: imagebuilder.aws.upbound.io/v1beta2
 kind: DistributionConfiguration
 metadata:
@@ -10,10 +15,10 @@ spec:
   forProvider:
     distribution:
     - amiDistributionConfiguration:
-      - amiTags:
+        amiTags:
           CostCenter: IT
         launchPermission:
-        - userIds:
+          userIds:
           - "123456789012"
         name: example-{{ imagebuilder:buildDate }}
       launchTemplateConfiguration:

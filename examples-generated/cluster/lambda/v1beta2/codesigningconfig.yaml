@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: lambda.aws.upbound.io/v1beta2
 kind: CodeSigningConfig
 metadata:
@@ -9,12 +14,12 @@ metadata:
 spec:
   forProvider:
     allowedPublishers:
-    - signingProfileVersionArnsRefs:
+      signingProfileVersionArnsRefs:
       - name: prod
       - name: dev
     description: Code signing configuration for Lambda functions
     policies:
-    - untrustedArtifactOnDeployment: Enforce
+      untrustedArtifactOnDeployment: Enforce
     region: us-west-1
     tags:
       Environment: production

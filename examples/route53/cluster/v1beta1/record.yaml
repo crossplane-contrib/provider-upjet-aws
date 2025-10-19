@@ -5,6 +5,10 @@
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Record
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/record
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -19,6 +23,8 @@ spec:
 apiVersion: route53.aws.upbound.io/v1beta1
 kind: Zone
 metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/record
   labels:
     testing.upbound.io/example-name: example
   name: example

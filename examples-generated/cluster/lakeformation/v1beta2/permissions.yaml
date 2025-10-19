@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: lakeformation.aws.upbound.io/v1beta2
 kind: Permissions
 metadata:
@@ -13,7 +18,7 @@ spec:
     principal: arn:aws:iam:us-east-1:123456789012:user/SanHolo
     region: us-west-1
     tableWithColumns:
-    - columnNames:
+      columnNames:
       - event
       databaseName: ${aws_glue_catalog_table.example.database_name}
       nameSelector:
@@ -51,6 +56,6 @@ spec:
         testing.upbound.io/example-name: test
     region: us-west-1
     storageDescriptor:
-    - columns:
+      columns:
       - name: event
         type: string

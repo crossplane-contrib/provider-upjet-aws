@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: apprunner.aws.upbound.io/v1beta2
 kind: Service
 metadata:
@@ -9,29 +14,29 @@ metadata:
 spec:
   forProvider:
     networkConfiguration:
-    - egressConfiguration:
-      - egressType: VPC
+      egressConfiguration:
+        egressType: VPC
         vpcConnectorArnSelector:
           matchLabels:
             testing.upbound.io/example-name: connector
     region: us-west-1
     serviceName: example
     sourceConfiguration:
-    - authenticationConfiguration:
-      - connectionArnSelector:
+      authenticationConfiguration:
+        connectionArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
       codeRepository:
-      - codeConfiguration:
-        - codeConfigurationValues:
-          - buildCommand: python setup.py develop
+        codeConfiguration:
+          codeConfigurationValues:
+            buildCommand: python setup.py develop
             port: "8000"
             runtime: PYTHON_3
             startCommand: python runapp.py
           configurationSource: API
         repositoryUrl: https://github.com/example/my-example-python-app
         sourceCodeVersion:
-        - type: BRANCH
+          type: BRANCH
           value: main
     tags:
       Name: example-apprunner-service

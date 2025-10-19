@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: s3.aws.upbound.io/v1beta2
 kind: BucketAnalyticsConfiguration
 metadata:
@@ -14,10 +19,10 @@ spec:
     name: EntireBucket
     region: us-west-1
     storageClassAnalysis:
-    - dataExport:
-      - destination:
-        - s3BucketDestination:
-          - bucketArnSelector:
+      dataExport:
+        destination:
+          s3BucketDestination:
+            bucketArnSelector:
               matchLabels:
                 testing.upbound.io/example-name: analytics
 

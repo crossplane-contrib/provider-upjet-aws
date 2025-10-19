@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: iot.aws.m.upbound.io/v1beta1
 kind: IndexingConfiguration
 metadata:
@@ -11,7 +16,7 @@ spec:
   forProvider:
     region: us-west-1
     thingIndexingConfiguration:
-    - customField:
+      customField:
       - name: shadow.desired.power
         type: Boolean
       - name: attributes.version
@@ -22,7 +27,7 @@ spec:
         type: Number
       deviceDefenderIndexingMode: VIOLATIONS
       filter:
-      - namedShadowNames:
+        namedShadowNames:
         - thing1shadow
       namedShadowIndexingMode: "ON"
       thingConnectivityIndexingMode: STATUS

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
 kind: Listener
 metadata:
@@ -32,7 +37,7 @@ metadata:
 spec:
   forProvider:
     attributes:
-    - flowLogsEnabled: true
+      flowLogsEnabled: true
       flowLogsS3Bucket: example-bucket
       flowLogsS3Prefix: flow-logs/
     enabled: true

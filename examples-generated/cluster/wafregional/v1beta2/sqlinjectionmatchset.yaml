@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: wafregional.aws.upbound.io/v1beta2
 kind: SQLInjectionMatchSet
 metadata:
@@ -12,5 +17,5 @@ spec:
     region: us-west-1
     sqlInjectionMatchTuple:
     - fieldToMatch:
-      - type: QUERY_STRING
+        type: QUERY_STRING
       textTransformation: URL_DECODE

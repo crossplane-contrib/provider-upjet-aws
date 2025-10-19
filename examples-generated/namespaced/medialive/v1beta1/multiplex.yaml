@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: medialive.aws.m.upbound.io/v1beta1
 kind: Multiplex
 metadata:
@@ -13,7 +18,7 @@ spec:
     - ${data.aws_availability_zones.available.names[0]}
     - ${data.aws_availability_zones.available.names[1]}
     multiplexSettings:
-    - maximumVideoBufferDelayMilliseconds: 1000
+      maximumVideoBufferDelayMilliseconds: 1000
       transportStreamBitrate: 1000000
       transportStreamId: 1
       transportStreamReservedBitrate: 1

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: imagebuilder.aws.upbound.io/v1beta2
 kind: ImagePipeline
 metadata:
@@ -17,7 +22,7 @@ spec:
     name: example
     region: us-west-1
     schedule:
-    - scheduleExpression: cron(0 0 * * ? *)
+      scheduleExpression: cron(0 0 * * ? *)
 
 ---
 
@@ -34,7 +39,7 @@ spec:
     blockDeviceMapping:
     - deviceName: /dev/xvdb
       ebs:
-      - deleteOnTermination: true
+        deleteOnTermination: true
         volumeSize: 100
         volumeType: gp2
     component:

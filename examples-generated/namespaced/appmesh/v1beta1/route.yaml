@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appmesh.aws.m.upbound.io/v1beta1
 kind: Route
 metadata:
@@ -15,9 +20,9 @@ spec:
     name: serviceB-route
     region: us-west-1
     spec:
-    - httpRoute:
-      - action:
-        - weightedTarget:
+      httpRoute:
+        action:
+          weightedTarget:
           - virtualNodeSelector:
               matchLabels:
                 testing.upbound.io/example-name: serviceb1
@@ -27,7 +32,7 @@ spec:
                 testing.upbound.io/example-name: serviceb2
             weight: 10
         match:
-        - prefix: /
+          prefix: /
     virtualRouterNameSelector:
       matchLabels:
         testing.upbound.io/example-name: serviceb

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: UserInGroup
 metadata:
@@ -72,7 +77,7 @@ spec:
   forProvider:
     name: example
     passwordPolicy:
-    - minimumLength: 6
+      minimumLength: 6
       requireNumbers: false
       requireSymbols: false
       requireUppercase: false

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: cloudfront.aws.upbound.io/v1beta2
 kind: FieldLevelEncryptionProfile
 metadata:
@@ -10,9 +15,9 @@ spec:
   forProvider:
     comment: test comment
     encryptionEntities:
-    - items:
+      items:
       - fieldPatterns:
-        - items:
+          items:
           - DateOfBirth
         providerId: test provider
         publicKeyIdSelector:

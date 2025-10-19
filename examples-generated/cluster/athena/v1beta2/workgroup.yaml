@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: athena.aws.upbound.io/v1beta2
 kind: Workgroup
 metadata:
@@ -9,11 +14,11 @@ metadata:
 spec:
   forProvider:
     configuration:
-    - enforceWorkgroupConfiguration: true
+      enforceWorkgroupConfiguration: true
       publishCloudwatchMetricsEnabled: true
       resultConfiguration:
-      - encryptionConfiguration:
-        - encryptionOption: SSE_KMS
+        encryptionConfiguration:
+          encryptionOption: SSE_KMS
           kmsKeyArnSelector:
             matchLabels:
               testing.upbound.io/example-name: example

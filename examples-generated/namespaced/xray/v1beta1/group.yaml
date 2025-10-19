@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: xray.aws.m.upbound.io/v1beta1
 kind: Group
 metadata:
@@ -12,6 +17,6 @@ spec:
     filterExpression: responsetime > 5
     groupName: example
     insightsConfiguration:
-    - insightsEnabled: true
+      insightsEnabled: true
       notificationsEnabled: true
     region: us-west-1

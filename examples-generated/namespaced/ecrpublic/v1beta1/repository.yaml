@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     catalogData:
-    - aboutText: About Text
+      aboutText: About Text
       architectures:
       - ARM
       description: Description

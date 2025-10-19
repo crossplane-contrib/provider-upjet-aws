@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: apigateway.aws.upbound.io/v1beta2
 kind: DocumentationPart
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     location:
-    - method: GET
+      method: GET
       path: /example
       type: METHOD
     properties: '{"description":"Example description"}'

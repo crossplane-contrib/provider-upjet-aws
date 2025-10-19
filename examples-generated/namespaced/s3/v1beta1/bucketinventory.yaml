@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketInventory
 metadata:
@@ -13,8 +18,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test
     destination:
-    - bucket:
-      - bucketArnSelector:
+      bucket:
+        bucketArnSelector:
           matchLabels:
             testing.upbound.io/example-name: inventory
         format: ORC
@@ -22,7 +27,7 @@ spec:
     name: EntireBucketDaily
     region: us-west-1
     schedule:
-    - frequency: Daily
+      frequency: Daily
 
 ---
 

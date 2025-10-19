@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: connect.aws.upbound.io/v1beta2
 kind: BotAssociation
 metadata:
@@ -12,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     lexBot:
-    - lexRegion: us-west-2
+      lexRegion: us-west-2
       nameSelector:
         matchLabels:
           testing.upbound.io/example-name: example

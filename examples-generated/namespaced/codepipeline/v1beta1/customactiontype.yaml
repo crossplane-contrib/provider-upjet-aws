@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: codepipeline.aws.m.upbound.io/v1beta1
 kind: CustomActionType
 metadata:
@@ -11,10 +16,10 @@ spec:
   forProvider:
     category: Build
     inputArtifactDetails:
-    - maximumCount: 1
+      maximumCount: 1
       minimumCount: 0
     outputArtifactDetails:
-    - maximumCount: 1
+      maximumCount: 1
       minimumCount: 0
     providerName: example
     region: us-west-1

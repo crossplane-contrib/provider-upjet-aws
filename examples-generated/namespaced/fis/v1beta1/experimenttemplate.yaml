@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: fis.aws.m.upbound.io/v1beta1
 kind: ExperimentTemplate
 metadata:
@@ -13,7 +18,7 @@ spec:
     - actionId: aws:ec2:terminate-instances
       name: example-action
       target:
-      - key: Instances
+        key: Instances
         value: example-target
     description: example
     region: us-west-1

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: cloudfront.aws.m.upbound.io/v1beta1
 kind: FieldLevelEncryptionConfig
 metadata:
@@ -11,15 +16,15 @@ spec:
   forProvider:
     comment: test comment
     contentTypeProfileConfig:
-    - contentTypeProfiles:
-      - items:
+      contentTypeProfiles:
+        items:
         - contentType: application/x-www-form-urlencoded
           format: URLEncoded
       forwardWhenContentTypeIsUnknown: true
     queryArgProfileConfig:
-    - forwardWhenQueryArgProfileIsUnknown: true
+      forwardWhenQueryArgProfileIsUnknown: true
       queryArgProfiles:
-      - items:
+        items:
         - profileIdSelector:
             matchLabels:
               testing.upbound.io/example-name: test

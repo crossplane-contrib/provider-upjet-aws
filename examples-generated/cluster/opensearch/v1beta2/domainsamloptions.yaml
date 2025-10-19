@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: opensearch.aws.upbound.io/v1beta2
 kind: DomainSAMLOptions
 metadata:
@@ -13,9 +18,9 @@ spec:
         testing.upbound.io/example-name: example
     region: us-west-1
     samlOptions:
-    - enabled: true
+      enabled: true
       idp:
-      - entityId: https://example.com
+        entityId: https://example.com
         metadataContent: ${file("./saml-metadata.xml")}
 
 ---
@@ -31,11 +36,11 @@ metadata:
 spec:
   forProvider:
     clusterConfig:
-    - instanceType: r4.large.search
+      instanceType: r4.large.search
     domainName: example
     engineVersion: OpenSearch_1.1
     region: us-west-1
     snapshotOptions:
-    - automatedSnapshotStartHour: 23
+      automatedSnapshotStartHour: 23
     tags:
       Domain: TestDomain

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appsync.aws.m.upbound.io/v1beta1
 kind: Datasource
 metadata:
@@ -13,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     dynamodbConfig:
-    - tableNameSelector:
+      tableNameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
     region: us-west-1

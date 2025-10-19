@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: appmesh.aws.upbound.io/v1beta2
 kind: VirtualNode
 metadata:
@@ -14,13 +19,13 @@ spec:
     name: serviceBv1
     region: us-west-1
     spec:
-    - backend:
+      backend:
       - virtualService:
-        - virtualServiceName: servicea.simpleapp.local
+          virtualServiceName: servicea.simpleapp.local
       listener:
       - portMapping:
-        - port: 8080
+          port: 8080
           protocol: http
       serviceDiscovery:
-      - dns:
-        - hostname: serviceb.simpleapp.local
+        dns:
+          hostname: serviceb.simpleapp.local

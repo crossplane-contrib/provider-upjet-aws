@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: acmpca.aws.m.upbound.io/v1beta1
 kind: CertificateAuthorityCertificate
 metadata:
@@ -43,7 +48,7 @@ spec:
     signingAlgorithm: SHA512WITHRSA
     templateArn: arn:${data.aws_partition.current.partition}:acm-pca:::template/RootCACertificate/V1
     validity:
-    - type: YEARS
+      type: YEARS
       value: 1
 
 ---
@@ -60,9 +65,9 @@ metadata:
 spec:
   forProvider:
     certificateAuthorityConfiguration:
-    - keyAlgorithm: RSA_4096
+      keyAlgorithm: RSA_4096
       signingAlgorithm: SHA512WITHRSA
       subject:
-      - commonName: example.com
+        commonName: example.com
     region: us-west-1
     type: ROOT

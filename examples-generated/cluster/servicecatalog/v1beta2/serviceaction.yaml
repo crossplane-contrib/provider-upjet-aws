@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: servicecatalog.aws.upbound.io/v1beta2
 kind: ServiceAction
 metadata:
@@ -9,7 +14,7 @@ metadata:
 spec:
   forProvider:
     definition:
-    - name: AWS-RestartEC2Instance
+      name: AWS-RestartEC2Instance
     description: Motor generator unit
     name: MGU
     region: us-west-1

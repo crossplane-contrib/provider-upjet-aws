@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: Plan
 metadata:
@@ -17,7 +22,7 @@ spec:
     region: us-west-1
     rule:
     - lifecycle:
-      - deleteAfter: 14
+        deleteAfter: 14
       ruleName: tf_example_backup_rule
       schedule: cron(0 12 * * ? *)
       targetVaultNameSelector:

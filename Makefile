@@ -79,31 +79,17 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.29.0
-UP_VERSION = v0.40.0-0.rc.3
-UP_CHANNEL = alpha
-UPTEST_VERSION = v0.11.1
-UPTEST_LOCAL_VERSION = v0.13.0
-UPTEST_LOCAL_CHANNEL = stable
+KIND_VERSION = v0.30.0
+UPTEST_VERSION = v2.2.0
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
-CROSSPLANE_VERSION = 1.20.0
+CROSSPLANE_VERSION = 2.0.2
+CROSSPLANE_CLI_VERSION = v2.0.2
 CRDDIFF_VERSION = v0.12.1
 
-export UP_VERSION := $(UP_VERSION)
-export UP_CHANNEL := $(UP_CHANNEL)
+export CROSSPLANE_CLI_VERSION := $(CROSSPLANE_CLI_VERSION)
 
 -include build/makelib/k8s_tools.mk
-
-# uptest download and install
-UPTEST_LOCAL := $(TOOLS_HOST_DIR)/uptest-$(UPTEST_LOCAL_VERSION)
-
-$(UPTEST_LOCAL):
-	@$(INFO) installing uptest $(UPTEST_LOCAL)
-	@mkdir -p $(TOOLS_HOST_DIR)
-	@curl -fsSLo $(UPTEST_LOCAL) https://s3.us-west-2.amazonaws.com/crossplane.uptest.releases/$(UPTEST_LOCAL_CHANNEL)/$(UPTEST_LOCAL_VERSION)/bin/$(SAFEHOST_PLATFORM)/uptest || $(FAIL)
-	@chmod +x $(UPTEST_LOCAL)
-	@$(OK) installing uptest $(UPTEST_LOCAL)
 
 # ====================================================================================
 # Setup Images
@@ -176,7 +162,7 @@ run: go.build
 
 # NOTE(hasheddan): we ensure up is installed prior to running platform-specific
 # build steps in parallel to avoid encountering an installation race condition.
-build.init: $(UP)
+build.init: $(CROSSPLANE_CLI)
 
 # ====================================================================================
 # Setup Terraform for fetching provider schema
@@ -241,9 +227,9 @@ CROSSPLANE_NAMESPACE = upbound-system
 #   aws_secret_access_key = REDACTED'
 #   The associated `ProviderConfig`s will be named as `default` and `peer`.
 # - UPTEST_DATASOURCE_PATH (optional), see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
-uptest: $(UPTEST_LOCAL) $(KUBECTL) $(KUTTL)
+uptest: $(UPTEST) $(KUBECTL) $(CHAINSAW) $(CROSSPLANE_CLI)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST_LOCAL) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
+	@KUBECTL=$(KUBECTL) CHAINSAW=$(CHAINSAW) CROSSPLANE_CLI=$(CROSSPLANE_CLI) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
 	@$(OK) running automated tests
 
 # This target triggers an e2e test for testing provider configs.
@@ -288,25 +274,17 @@ build-provider.%:
 
 XPKG_SKIP_DEP_RESOLUTION := true
 
-local-deploy.%: controlplane.up
-	# uptest workaround for the behavior change at Crossplane 1.15 default registry
-	# XP RBAC manager has a check for packages from the same provider family
-	# that they come from the same org and assign RBACs for all providers.
-	# This got broken for locally deployed dev packages through crossplane/build submodule,
-	# therefore cannot get necessary RBACs.
-    # TODO: Remove this when https://github.com/crossplane/build/issues/38 is resolved
-    # this workaround is only valid for uptest on Crossplane 1.x
-    # Crossplane v2 needs the above issue to be resolved
+local-deploy.%: controlplane.up $(YQ)
 	@$(KUBECTL) -n $(CROSSPLANE_NAMESPACE) patch deployment crossplane-rbac-manager -p '{"spec":{"template":{"spec":{"containers":[{"name":"crossplane","env":[{"name":"REGISTRY","value":"index.docker.io"}]}]}}}}'
 	@for api in $$(tr ',' ' ' <<< $*); do \
-		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$${api}; \
-		$(INFO) running locally built $(PROJECT_NAME)-$${api}; \
-		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout 5m; \
-		$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m; \
+		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$${api} DRC_FILE="./examples/deploymentruntimeconfig.yaml" && \
+		$(INFO) running locally built $(PROJECT_NAME)-$${api} && \
+		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout=5m && \
+		$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m && \
 		$(OK) running locally built $(PROJECT_NAME)-$${api}; \
 	done || $(FAIL)
 
-local-deploy: build-provider.monolith local-deploy.monolith
+local-deploy: build-provider.config local-deploy.config
 
 # This target requires the following environment variables to be set:
 # - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g.

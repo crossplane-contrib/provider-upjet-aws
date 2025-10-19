@@ -57,12 +57,12 @@ endif
 BUILD_ONLY ?= false
 STORE_PACKAGES ?= ""
 XPKG_CLEANUP_EXAMPLES_VERSION ?= v0.12.1
-batch-process: $(UP)
+batch-process: $(CROSSPLANE_CLI)
 	@rm -rf $(WORK_DIR)/xpkg-cleaned-examples
 	@GOOS=$(HOSTOS) GOARCH=$(TARGETARCH) go run github.com/upbound/uptest/cmd/cleanupexamples@$(XPKG_CLEANUP_EXAMPLES_VERSION) $(ROOT_DIR)/examples $(WORK_DIR)/xpkg-cleaned-examples || $(FAIL)
 	@$(INFO) Batch processing smaller provider packages for: "$(SUBPACKAGES)"
 	@mkdir -p "$(XPKG_OUTPUT_DIR)/$(PLATFORM)" && \
-	$(UP) xpkg batch --smaller-providers "$$(tr ' ' ',' <<< "$(SUBPACKAGES)")" \
+	$(CROSSPLANE_CLI) xpkg batch --smaller-providers "$$(tr ' ' ',' <<< "$(SUBPACKAGES)")" \
 		--family-base-image $(BUILD_REGISTRY)/$(PROJECT_NAME) \
 		--platform $(BATCH_PLATFORMS) \
 		--provider-name $(PROJECT_NAME) \
@@ -74,7 +74,6 @@ batch-process: $(UP)
 		--build-only=$(BUILD_ONLY) \
 		--examples-root $(WORK_DIR)/xpkg-cleaned-examples \
 		--examples-group-override monolith=* --examples-group-override config=providerconfig \
-		--auth-ext $(XPKG_DIR)/auth.yaml \
 		--crd-root $(XPKG_DIR)/crds \
 		--ignore $(XPKG_IGNORE) \
 		--crd-group-override monolith=* --crd-group-override config=$(CONFIG_CRD_GROUP) \

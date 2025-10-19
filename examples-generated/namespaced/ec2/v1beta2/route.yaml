@@ -1,8 +1,13 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: ec2.aws.m.upbound.io/v1beta2
 kind: Route
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta2/route
+    meta.upbound.io/example-id: ec2/v1beta1/route
   labels:
     testing.upbound.io/example-name: r
   name: r

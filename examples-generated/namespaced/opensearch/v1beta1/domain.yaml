@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: opensearch.aws.m.upbound.io/v1beta1
 kind: Domain
 metadata:
@@ -10,7 +15,7 @@ metadata:
 spec:
   forProvider:
     clusterConfig:
-    - instanceType: r4.large.search
+      instanceType: r4.large.search
     domainName: example
     engineVersion: Elasticsearch_7.10
     region: us-west-1

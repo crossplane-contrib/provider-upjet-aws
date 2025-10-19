@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: wafv2.aws.upbound.io/v1beta1
 kind: WebACL
 metadata:
@@ -9,8 +14,7 @@ metadata:
 spec:
   forProvider:
     defaultAction:
-    - allow:
-      - {}
+      allow: {}
     description: Example of a managed rule.
     name: managed-rule-example
     region: us-west-1
@@ -50,6 +54,6 @@ spec:
     - mywebsite.com
     - myotherwebsite.com
     visibilityConfig:
-    - cloudwatchMetricsEnabled: false
+      cloudwatchMetricsEnabled: false
       metricName: friendly-metric-name
       sampledRequestsEnabled: false

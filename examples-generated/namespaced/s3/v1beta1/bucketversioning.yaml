@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
@@ -14,7 +19,7 @@ spec:
         testing.upbound.io/example-name: example
     region: us-west-1
     versioningConfiguration:
-    - status: Enabled
+      status: Enabled
 
 ---
 

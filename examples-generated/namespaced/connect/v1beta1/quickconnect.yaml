@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: connect.aws.m.upbound.io/v1beta1
 kind: QuickConnect
 metadata:
@@ -15,7 +20,7 @@ spec:
         testing.upbound.io/example-name: example
     name: Example Name
     quickConnectConfig:
-    - phoneConfig:
+      phoneConfig:
       - phoneNumber: "+12345678912"
       quickConnectType: PHONE_NUMBER
     region: us-west-1

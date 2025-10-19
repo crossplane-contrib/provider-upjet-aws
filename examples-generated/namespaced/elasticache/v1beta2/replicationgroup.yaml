@@ -1,8 +1,13 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: elasticache.aws.m.upbound.io/v1beta2
 kind: ReplicationGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
+    meta.upbound.io/example-id: elasticache/v1beta1/replicationgroup
   labels:
     testing.upbound.io/example-name: example
   name: example
