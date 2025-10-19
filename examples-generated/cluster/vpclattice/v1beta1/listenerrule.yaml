@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 apiVersion: vpclattice.aws.upbound.io/v1beta1
 kind: ListenerRule
 metadata:
@@ -9,8 +14,8 @@ metadata:
 spec:
   forProvider:
     action:
-    - forward:
-      - targetGroups:
+      forward:
+        targetGroups:
         - targetGroupIdentifierSelector:
             matchLabels:
               testing.upbound.io/example-name: example
@@ -23,16 +28,16 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     match:
-    - httpMatch:
-      - headerMatches:
+      httpMatch:
+        headerMatches:
         - caseSensitive: false
           match:
-          - exact: example-contains
+            exact: example-contains
           name: example-header
         pathMatch:
-        - caseSensitive: true
+          caseSensitive: true
           match:
-          - prefix: /example-path
+            prefix: /example-path
     name: example
     priority: 20
     region: us-west-1
