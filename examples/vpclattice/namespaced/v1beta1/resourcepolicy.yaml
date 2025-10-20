@@ -23,7 +23,7 @@ spec:
               "AWS": "arn:aws:iam::${data.aws_account_id}:root"
             },
             "Action": "*",
-            "Resource": "*"
+            "Resource": "arn:aws:vpc-lattice:us-west-1:${data.aws_account_id}:servicenetwork/*"
           }
         ]
       }
