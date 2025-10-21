@@ -18,12 +18,19 @@ spec:
         "Version": "2012-10-17",
         "Statement": [
           {
+            "Sid": "AllowServiceNetworkAssociationsAndInvoke",
             "Effect": "Allow",
             "Principal": {
-              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+              "AWS": "arn:aws:iam::153891904029:root"
             },
-            "Action": "*",
-            "Resource": "arn:aws:vpc-lattice:us-west-1:${data.aws_account_id}:servicenetwork/*"
+            "Action": [
+              "vpc-lattice:CreateServiceNetworkVpcAssociation",
+              "vpc-lattice:DeleteServiceNetworkVpcAssociation",
+              "vpc-lattice:CreateServiceNetworkServiceAssociation",
+              "vpc-lattice:DeleteServiceNetworkServiceAssociation",
+              "vpc-lattice:Invoke"
+            ],
+            "Resource": "arn:aws:vpc-lattice:us-west-1:153891904029:servicenetwork/*"
           }
         ]
       }
