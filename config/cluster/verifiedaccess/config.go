@@ -10,10 +10,6 @@ import (
 
 // Configure adds configurations for the verifiedaccess group.
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("aws_verifiedaccess_trust_provider", func(r *config.Resource) {
-		r.RemoveSingletonListConversion("device_options")
-		r.RemoveSingletonListConversion("oidc_options")
-	})
 	p.AddResourceConfigurator("aws_verifiedaccess_endpoint", func(r *config.Resource) {
 		r.References["load_balancer_options.subnet_ids"] = config.Reference{
 			TerraformName: "aws_subnet",
