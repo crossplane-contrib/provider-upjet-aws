@@ -18,7 +18,7 @@ spec:
     trustProviderType: user
     userTrustProviderType: oidc
     oidcOptions:
-    - issuer: https://cognito-idp.us-west-1.amazonaws.com/us-west-1_xxxxxxxxx
+      issuer: https://cognito-idp.us-west-1.amazonaws.com/us-west-1_xxxxxxxxx
       authorizationEndpoint: "https://us-west-1xxxxxxxxx.auth.us-west-1.amazoncognito.com/oauth2/authorize"
       tokenEndpoint: "https://us-west-1xxxxxxxxx.auth.us-west-1.amazoncognito.com/oauth2/token"
       userInfoEndpoint: "https://us-west-1xxxxxxxxx.auth.us-west-1.amazoncognito.com/oauth2/userInfo"
