@@ -64,13 +64,11 @@ spec:
                   deviceOptions:
                     description: A block of options for device identity based trust
                       providers.
-                    items:
-                      properties:
-                        tenantId:
-                          description: The ID of the AWS Verified Access trust provider.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      tenantId:
+                        description: The ID of the AWS Verified Access trust provider.
+                        type: string
+                    type: object
                   deviceTrustProviderType:
                     description: based trust provider.
                     type: string
@@ -111,37 +109,35 @@ spec:
                   oidcOptions:
                     description: The OpenID Connect details for an oidc-type, user-identity
                       based trust provider.
-                    items:
-                      properties:
-                        authorizationEndpoint:
-                          type: string
-                        clientId:
-                          description: The ID of the AWS Verified Access trust provider.
-                          type: string
-                        clientSecretSecretRef:
-                          description: |-
-                            A LocalSecretKeySelector is a reference to a secret key
-                            in the same namespace with the referencing object.
-                          properties:
-                            key:
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          type: object
-                        issuer:
-                          type: string
-                        scope:
-                          type: string
-                        tokenEndpoint:
-                          type: string
-                        userInfoEndpoint:
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      authorizationEndpoint:
+                        type: string
+                      clientId:
+                        description: The ID of the AWS Verified Access trust provider.
+                        type: string
+                      clientSecretSecretRef:
+                        description: |-
+                          A LocalSecretKeySelector is a reference to a secret key
+                          in the same namespace with the referencing object.
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
+                      issuer:
+                        type: string
+                      scope:
+                        type: string
+                      tokenEndpoint:
+                        type: string
+                      userInfoEndpoint:
+                        type: string
+                    type: object
                   policyReferenceName:
                     description: The identifier to be used when working with policy
                       rules.
@@ -193,13 +189,11 @@ spec:
                   deviceOptions:
                     description: A block of options for device identity based trust
                       providers.
-                    items:
-                      properties:
-                        tenantId:
-                          description: The ID of the AWS Verified Access trust provider.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      tenantId:
+                        description: The ID of the AWS Verified Access trust provider.
+                        type: string
+                    type: object
                   deviceTrustProviderType:
                     description: based trust provider.
                     type: string
@@ -242,39 +236,37 @@ spec:
                   oidcOptions:
                     description: The OpenID Connect details for an oidc-type, user-identity
                       based trust provider.
-                    items:
-                      properties:
-                        authorizationEndpoint:
-                          type: string
-                        clientId:
-                          description: The ID of the AWS Verified Access trust provider.
-                          type: string
-                        clientSecretSecretRef:
-                          description: |-
-                            A LocalSecretKeySelector is a reference to a secret key
-                            in the same namespace with the referencing object.
-                          properties:
-                            key:
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          type: object
-                        issuer:
-                          type: string
-                        scope:
-                          type: string
-                        tokenEndpoint:
-                          type: string
-                        userInfoEndpoint:
-                          type: string
-                      required:
-                      - clientSecretSecretRef
-                      type: object
-                    type: array
+                    properties:
+                      authorizationEndpoint:
+                        type: string
+                      clientId:
+                        description: The ID of the AWS Verified Access trust provider.
+                        type: string
+                      clientSecretSecretRef:
+                        description: |-
+                          A LocalSecretKeySelector is a reference to a secret key
+                          in the same namespace with the referencing object.
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
+                      issuer:
+                        type: string
+                      scope:
+                        type: string
+                      tokenEndpoint:
+                        type: string
+                      userInfoEndpoint:
+                        type: string
+                    required:
+                    - clientSecretSecretRef
+                    type: object
                   policyReferenceName:
                     description: The identifier to be used when working with policy
                       rules.
@@ -378,13 +370,11 @@ spec:
                   deviceOptions:
                     description: A block of options for device identity based trust
                       providers.
-                    items:
-                      properties:
-                        tenantId:
-                          description: The ID of the AWS Verified Access trust provider.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      tenantId:
+                        description: The ID of the AWS Verified Access trust provider.
+                        type: string
+                    type: object
                   deviceTrustProviderType:
                     description: based trust provider.
                     type: string
@@ -414,23 +404,21 @@ spec:
                   oidcOptions:
                     description: The OpenID Connect details for an oidc-type, user-identity
                       based trust provider.
-                    items:
-                      properties:
-                        authorizationEndpoint:
-                          type: string
-                        clientId:
-                          description: The ID of the AWS Verified Access trust provider.
-                          type: string
-                        issuer:
-                          type: string
-                        scope:
-                          type: string
-                        tokenEndpoint:
-                          type: string
-                        userInfoEndpoint:
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      authorizationEndpoint:
+                        type: string
+                      clientId:
+                        description: The ID of the AWS Verified Access trust provider.
+                        type: string
+                      issuer:
+                        type: string
+                      scope:
+                        type: string
+                      tokenEndpoint:
+                        type: string
+                      userInfoEndpoint:
+                        type: string
+                    type: object
                   policyReferenceName:
                     description: The identifier to be used when working with policy
                       rules.

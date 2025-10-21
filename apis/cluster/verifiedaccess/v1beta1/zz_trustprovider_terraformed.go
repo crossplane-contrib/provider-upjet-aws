@@ -21,7 +21,7 @@ func (mg *TrustProvider) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this TrustProvider
 func (tr *TrustProvider) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"native_application_oidc_options[*].client_secret": "nativeApplicationOidcOptions.clientSecretSecretRef", "oidc_options[*].client_secret": "oidcOptions[*].clientSecretSecretRef"}
+	return map[string]string{"native_application_oidc_options[*].client_secret": "nativeApplicationOidcOptions.clientSecretSecretRef", "oidc_options[*].client_secret": "oidcOptions.clientSecretSecretRef"}
 }
 
 // GetObservation of this TrustProvider

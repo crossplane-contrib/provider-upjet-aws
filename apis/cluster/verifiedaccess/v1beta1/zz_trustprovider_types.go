@@ -159,7 +159,7 @@ type TrustProviderInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A block of options for device identity based trust providers.
-	DeviceOptions []DeviceOptionsInitParameters `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
+	DeviceOptions *DeviceOptionsInitParameters `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
 
 	// based trust provider.
 	DeviceTrustProviderType *string `json:"deviceTrustProviderType,omitempty" tf:"device_trust_provider_type,omitempty"`
@@ -168,7 +168,7 @@ type TrustProviderInitParameters struct {
 	NativeApplicationOidcOptions *NativeApplicationOidcOptionsInitParameters `json:"nativeApplicationOidcOptions,omitempty" tf:"native_application_oidc_options,omitempty"`
 
 	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
-	OidcOptions []OidcOptionsInitParameters `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
+	OidcOptions *OidcOptionsInitParameters `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
 
 	// The identifier to be used when working with policy rules.
 	PolicyReferenceName *string `json:"policyReferenceName,omitempty" tf:"policy_reference_name,omitempty"`
@@ -192,7 +192,7 @@ type TrustProviderObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A block of options for device identity based trust providers.
-	DeviceOptions []DeviceOptionsObservation `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
+	DeviceOptions *DeviceOptionsObservation `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
 
 	// based trust provider.
 	DeviceTrustProviderType *string `json:"deviceTrustProviderType,omitempty" tf:"device_trust_provider_type,omitempty"`
@@ -204,7 +204,7 @@ type TrustProviderObservation struct {
 	NativeApplicationOidcOptions *NativeApplicationOidcOptionsObservation `json:"nativeApplicationOidcOptions,omitempty" tf:"native_application_oidc_options,omitempty"`
 
 	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
-	OidcOptions []OidcOptionsObservation `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
+	OidcOptions *OidcOptionsObservation `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
 
 	// The identifier to be used when working with policy rules.
 	PolicyReferenceName *string `json:"policyReferenceName,omitempty" tf:"policy_reference_name,omitempty"`
@@ -237,7 +237,7 @@ type TrustProviderParameters struct {
 
 	// A block of options for device identity based trust providers.
 	// +kubebuilder:validation:Optional
-	DeviceOptions []DeviceOptionsParameters `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
+	DeviceOptions *DeviceOptionsParameters `json:"deviceOptions,omitempty" tf:"device_options,omitempty"`
 
 	// based trust provider.
 	// +kubebuilder:validation:Optional
@@ -249,7 +249,7 @@ type TrustProviderParameters struct {
 
 	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
 	// +kubebuilder:validation:Optional
-	OidcOptions []OidcOptionsParameters `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
+	OidcOptions *OidcOptionsParameters `json:"oidcOptions,omitempty" tf:"oidc_options,omitempty"`
 
 	// The identifier to be used when working with policy rules.
 	// +kubebuilder:validation:Optional

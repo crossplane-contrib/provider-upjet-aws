@@ -3437,10 +3437,8 @@ func (in *TrustProviderInitParameters) DeepCopyInto(out *TrustProviderInitParame
 	}
 	if in.DeviceOptions != nil {
 		in, out := &in.DeviceOptions, &out.DeviceOptions
-		*out = make([]DeviceOptionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DeviceOptionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeviceTrustProviderType != nil {
 		in, out := &in.DeviceTrustProviderType, &out.DeviceTrustProviderType
@@ -3454,10 +3452,8 @@ func (in *TrustProviderInitParameters) DeepCopyInto(out *TrustProviderInitParame
 	}
 	if in.OidcOptions != nil {
 		in, out := &in.OidcOptions, &out.OidcOptions
-		*out = make([]OidcOptionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(OidcOptionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PolicyReferenceName != nil {
 		in, out := &in.PolicyReferenceName, &out.PolicyReferenceName
@@ -3549,10 +3545,8 @@ func (in *TrustProviderObservation) DeepCopyInto(out *TrustProviderObservation) 
 	}
 	if in.DeviceOptions != nil {
 		in, out := &in.DeviceOptions, &out.DeviceOptions
-		*out = make([]DeviceOptionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DeviceOptionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeviceTrustProviderType != nil {
 		in, out := &in.DeviceTrustProviderType, &out.DeviceTrustProviderType
@@ -3571,10 +3565,8 @@ func (in *TrustProviderObservation) DeepCopyInto(out *TrustProviderObservation) 
 	}
 	if in.OidcOptions != nil {
 		in, out := &in.OidcOptions, &out.OidcOptions
-		*out = make([]OidcOptionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(OidcOptionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PolicyReferenceName != nil {
 		in, out := &in.PolicyReferenceName, &out.PolicyReferenceName
@@ -3655,10 +3647,8 @@ func (in *TrustProviderParameters) DeepCopyInto(out *TrustProviderParameters) {
 	}
 	if in.DeviceOptions != nil {
 		in, out := &in.DeviceOptions, &out.DeviceOptions
-		*out = make([]DeviceOptionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DeviceOptionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeviceTrustProviderType != nil {
 		in, out := &in.DeviceTrustProviderType, &out.DeviceTrustProviderType
@@ -3672,10 +3662,8 @@ func (in *TrustProviderParameters) DeepCopyInto(out *TrustProviderParameters) {
 	}
 	if in.OidcOptions != nil {
 		in, out := &in.OidcOptions, &out.OidcOptions
-		*out = make([]OidcOptionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(OidcOptionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PolicyReferenceName != nil {
 		in, out := &in.PolicyReferenceName, &out.PolicyReferenceName

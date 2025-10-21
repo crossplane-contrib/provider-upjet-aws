@@ -48,7 +48,7 @@ metadata:
 spec:
   forProvider:
     deviceOptions:
-    - tenantId: example
+      tenantId: example
     deviceTrustProviderType: jamf
     policyReferenceName: example
     region: us-west-1
