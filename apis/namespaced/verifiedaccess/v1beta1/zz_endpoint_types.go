@@ -32,8 +32,17 @@ type CidrOptionsInitParameters struct {
 
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type CidrOptionsObservation struct {
@@ -68,9 +77,18 @@ type CidrOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type EndpointInitParameters struct {

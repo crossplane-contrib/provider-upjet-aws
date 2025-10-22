@@ -48,6 +48,28 @@ func (mg *Endpoint) ResolveReferences( // ResolveReferences of this Endpoint.
 		mg.Spec.ForProvider.CidrOptions.CidrRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.ForProvider.CidrOptions != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CidrOptions.SubnetIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.CidrOptions.SubnetIdsRefs,
+				Selector:      mg.Spec.ForProvider.CidrOptions.SubnetIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CidrOptions.SubnetIds")
+		}
+		mg.Spec.ForProvider.CidrOptions.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.CidrOptions.SubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("acm.aws.m.upbound.io", "v1beta1", "Certificate", "CertificateList")
 		if err != nil {
@@ -194,6 +216,28 @@ func (mg *Endpoint) ResolveReferences( // ResolveReferences of this Endpoint.
 		}
 		mg.Spec.InitProvider.CidrOptions.Cidr = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.CidrOptions.CidrRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.CidrOptions != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CidrOptions.SubnetIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.CidrOptions.SubnetIdsRefs,
+				Selector:      mg.Spec.InitProvider.CidrOptions.SubnetIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CidrOptions.SubnetIds")
+		}
+		mg.Spec.InitProvider.CidrOptions.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.CidrOptions.SubnetIdsRefs = mrsp.ResolvedReferences
 
 	}
 	{
