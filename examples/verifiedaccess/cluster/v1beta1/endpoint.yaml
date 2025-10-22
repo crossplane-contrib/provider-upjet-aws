@@ -1,0 +1,294 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    applicationDomain: verifiedaccess.upbound-providers.io
+    attachmentType: vpc
+    description: example
+    domainCertificateArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+      policy:
+        resolution: Required
+    endpointDomainPrefix: va-example
+    endpointType: load-balancer
+    loadBalancerOptions:
+      loadBalancerArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: va-example
+        policy:
+          resolution: Required
+      port: 443
+      protocol: https
+      subnetIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: va-example
+        policy:
+          resolution: Required
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+      policy:
+        resolution: Required
+    verifiedAccessGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+      policy:
+        resolution: Required
+    policyDocument: >-
+      permit(
+          principal,
+          action,
+          resource
+      )
+      when {
+        ip(context.http_request.client_ip).isInRange(ip("0.0.0.0/0"))
+      };
+
+---
+
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    description: example
+    region: us-west-1
+    tags:
+      Name: va-example
+
+---
+
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: TrustProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    policyReferenceName: example
+    region: us-west-1
+    trustProviderType: user
+    userTrustProviderType: oidc
+    oidcOptions:
+      issuer: https://cognito-idp.us-west-1.amazonaws.com/us-west-1_xxxxxxxxx
+      authorizationEndpoint: "https://us-west-1xxxxxxxxx.auth.us-west-1.amazoncognito.com/oauth2/authorize"
+      tokenEndpoint: "https://us-west-1xxxxxxxxx.auth.us-west-1.amazoncognito.com/oauth2/token"
+      userInfoEndpoint: "https://us-west-1xxxxxxxxx.auth.us-west-1.amazoncognito.com/oauth2/userInfo"
+      clientId: xxxxxxxxxxxxxxxxxxxxxxxxxx
+      clientSecretSecretRef:
+        name: va-example
+        namespace: default
+        key: clientsecret
+      scope: openid email
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: va-example
+  namespace: default
+stringData:
+  clientsecret: clientsecretvalue
+
+---
+
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: InstanceTrustProviderAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    verifiedaccessInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+    verifiedaccessTrustProviderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+
+---
+
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    verifiedaccessInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+
+---
+
+apiVersion: acm.aws.upbound.io/v1beta2
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    domainName: verifiedaccess.upbound-providers.io
+    region: us-west-1
+    tags:
+      Environment: test
+    validationMethod: DNS
+
+---
+
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: CertificateValidation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+    upjet.upbound.io/manual-intervention: It requires a real domain to be bought
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    certificateArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+    region: us-west-1
+    validationRecordFqdns:
+      - # TODO: _6a48817259ef461524224d64f7a209f4.example-dns.upbound-providers.io
+
+---
+
+apiVersion: elbv2.aws.upbound.io/v1beta2
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    enableDeletionProtection: false
+    internal: true
+    loadBalancerType: application
+    name: example-verifiedaccess
+    region: us-west-1
+    securityGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+    subnetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+    tags:
+      Name: VerifiedAccess
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-1
+    tags:
+      Name: VerifiedAccess Demo
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    availabilityZone: us-west-1a
+    cidrBlock: 172.16.10.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    availabilityZone: us-west-1b
+    cidrBlock: 172.16.20.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: va-example
+  name: example
+spec:
+  forProvider:
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    region: us-west-1
+    tags:
+      Name: allow_tls
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: va-example

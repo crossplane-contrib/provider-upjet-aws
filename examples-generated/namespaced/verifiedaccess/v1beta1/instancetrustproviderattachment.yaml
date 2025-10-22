@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: verifiedaccess.aws.m.upbound.io/v1beta1
+kind: InstanceTrustProviderAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/instancetrustproviderattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    verifiedaccessInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    verifiedaccessTrustProviderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: verifiedaccess.aws.m.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/instancetrustproviderattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: verifiedaccess.aws.m.upbound.io/v1beta1
+kind: TrustProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/instancetrustproviderattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    deviceOptions:
+      tenantId: example
+    deviceTrustProviderType: jamf
+    policyReferenceName: example
+    region: us-west-1
+    trustProviderType: device

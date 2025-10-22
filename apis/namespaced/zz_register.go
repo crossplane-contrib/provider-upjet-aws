@@ -172,6 +172,7 @@ import (
 	v1beta1transfer "github.com/upbound/provider-aws/apis/namespaced/transfer/v1beta1"
 	v1alpha1namespaced "github.com/upbound/provider-aws/apis/namespaced/v1alpha1"
 	v1beta1namespaced "github.com/upbound/provider-aws/apis/namespaced/v1beta1"
+	v1beta1verifiedaccess "github.com/upbound/provider-aws/apis/namespaced/verifiedaccess/v1beta1"
 	v1beta1vpc "github.com/upbound/provider-aws/apis/namespaced/vpc/v1beta1"
 	v1beta1vpclattice "github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1"
 	v1beta1waf "github.com/upbound/provider-aws/apis/namespaced/waf/v1beta1"
@@ -346,6 +347,7 @@ func init() {
 		v1beta1transfer.SchemeBuilder.AddToScheme,
 		v1alpha1namespaced.SchemeBuilder.AddToScheme,
 		v1beta1namespaced.SchemeBuilder.AddToScheme,
+		v1beta1verifiedaccess.SchemeBuilder.AddToScheme,
 		v1beta1vpc.SchemeBuilder.AddToScheme,
 		v1beta1vpclattice.SchemeBuilder.AddToScheme,
 		v1beta1waf.SchemeBuilder.AddToScheme,

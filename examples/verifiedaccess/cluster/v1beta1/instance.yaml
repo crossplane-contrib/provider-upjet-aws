@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: verifiedaccess.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: example-instance
+  name: example-instance
+spec:
+  forProvider:
+    description: example
+    region: us-west-1
+    tags:
+      Name: example-instance

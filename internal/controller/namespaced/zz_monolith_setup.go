@@ -929,6 +929,12 @@ import (
 	tagtransfer "github.com/upbound/provider-aws/internal/controller/namespaced/transfer/tag"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/namespaced/transfer/user"
 	workflowtransfer "github.com/upbound/provider-aws/internal/controller/namespaced/transfer/workflow"
+	endpointverifiedaccess "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/endpoint"
+	groupverifiedaccess "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/group"
+	instanceverifiedaccess "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/instance"
+	instanceloggingconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/instanceloggingconfiguration"
+	instancetrustproviderattachment "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/instancetrustproviderattachment"
+	trustprovider "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/trustprovider"
 	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/namespaced/vpc/networkperformancemetricsubscription"
 	listenervpclattice "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/listener"
 	resourceconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/resourceconfiguration"
@@ -1895,6 +1901,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tagtransfer.Setup,
 		usertransfer.Setup,
 		workflowtransfer.Setup,
+		endpointverifiedaccess.Setup,
+		groupverifiedaccess.Setup,
+		instanceverifiedaccess.Setup,
+		instanceloggingconfiguration.Setup,
+		instancetrustproviderattachment.Setup,
+		trustprovider.Setup,
 		networkperformancemetricsubscription.Setup,
 		listenervpclattice.Setup,
 		resourceconfiguration.Setup,
@@ -2867,6 +2879,12 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tagtransfer.SetupGated,
 		usertransfer.SetupGated,
 		workflowtransfer.SetupGated,
+		endpointverifiedaccess.SetupGated,
+		groupverifiedaccess.SetupGated,
+		instanceverifiedaccess.SetupGated,
+		instanceloggingconfiguration.SetupGated,
+		instancetrustproviderattachment.SetupGated,
+		trustprovider.SetupGated,
 		networkperformancemetricsubscription.SetupGated,
 		listenervpclattice.SetupGated,
 		resourceconfiguration.SetupGated,
