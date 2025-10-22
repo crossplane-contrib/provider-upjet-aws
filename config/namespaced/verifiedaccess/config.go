@@ -14,5 +14,8 @@ func Configure(p *config.Provider) {
 		r.References["load_balancer_options.subnet_ids"] = config.Reference{
 			TerraformName: "aws_subnet",
 		}
+		r.References["cidr_options.subnet_ids"] = config.Reference{
+			TerraformName: "aws_subnet",
+		}
 	})
 }
