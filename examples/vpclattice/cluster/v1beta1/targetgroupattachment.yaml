@@ -14,9 +14,7 @@ spec:
   forProvider:
     region: us-west-1
     target:
-      idSelector:
-        matchLabels:
-          testing.upbound.io/example-name: elbv2
+      id: i-04a354440b0289895 # long-running instance
       port: 80
     targetGroupIdentifierSelector:
       matchLabels:
@@ -35,118 +33,7 @@ spec:
     config:
       port: 443
       protocol: HTTPS
-      vpcIdentifierSelector:
-        matchLabels:
-          testing.upbound.io/example-name: elbv2
+      vpcIdentifier: vpc-0a388e462a64e3e56 # default VPC
     name: example
     region: us-west-1
     type: INSTANCE
----
-apiVersion: elbv2.aws.upbound.io/v1beta2
-kind: LB
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroupattachment
-  labels:
-    testing.upbound.io/example-name: elbv2
-  name: test
-spec:
-  forProvider:
-    enableDeletionProtection: false
-    internal: false
-    loadBalancerType: application
-    name: test-lb-tf
-    region: us-west-1
-    securityGroupSelector:
-      matchLabels:
-        testing.upbound.io/example-name: elbv2
-    subnetSelector:
-      matchLabels:
-        testing.upbound.io/example-name: elbv2
-    tags:
-      Environment: production
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPC
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroupattachment
-  labels:
-    testing.upbound.io/example-name: elbv2
-  name: elbv2-vpc
-spec:
-  forProvider:
-    cidrBlock: 172.16.0.0/16
-    region: us-west-1
-    tags:
-      Name: DemoVpc
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: InternetGateway
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroupattachment
-  labels:
-    testing.upbound.io/example-name: elbv2
-  name: elbv2-internet-gateway
-spec:
-  forProvider:
-    region: us-west-1
-    tags:
-      Name: testing
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: elbv2
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: Subnet
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroupattachment
-  labels:
-    testing.upbound.io/example-name: elbv2
-  name: elbv2-subnet
-spec:
-  forProvider:
-    availabilityZone: us-west-1a
-    cidrBlock: 172.16.10.0/24
-    region: us-west-1
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: elbv2
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: Subnet
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroupattachment
-  labels:
-    testing.upbound.io/example-name: elbv2
-  name: elbv2-subnet-2
-spec:
-  forProvider:
-    availabilityZone: us-west-1b
-    cidrBlock: 172.16.20.0/24
-    region: us-west-1
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: elbv2
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: SecurityGroup
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroupattachment
-  labels:
-    testing.upbound.io/example-name: elbv2
-  name: elbv2-securitygroup
-spec:
-  forProvider:
-    description: Allow TLS inbound traffic
-    name: allow_tls
-    region: us-west-1
-    tags:
-      Name: allow_tls
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: elbv2

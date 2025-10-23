@@ -12,15 +12,23 @@ metadata:
   name: example
 spec:
   forProvider:
-    policy: |-
+    policy: |
       {
-        "Effect": "Allow",
-        "Action": [
-          "vpc-lattice:GetServiceNetwork",
-          "vpc-lattice:CreateServiceNetworkResourceAssociation",
-          "vpc-lattice:CreateServiceNetworkServiceAssociation",
-          "vpc-lattice:CreateServiceNetworkVpcAssociation",
-          "vpc-lattice:CreateServiceNetworkVpcEndpointAssociation"
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal":{
+              "AWS":"arn:aws:iam::153891904029:root"
+            },
+            "Action": [
+              "vpc-lattice:GetServiceNetwork",
+              "vpc-lattice:CreateServiceNetworkResourceAssociation",
+              "vpc-lattice:CreateServiceNetworkServiceAssociation",
+              "vpc-lattice:CreateServiceNetworkVpcAssociation",
+              "vpc-lattice:CreateServiceNetworkVpcEndpointAssociation"
+            ]
+          }
         ]
       }
     region: us-west-1
