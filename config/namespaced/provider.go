@@ -94,6 +94,7 @@ import (
 	"github.com/upbound/provider-aws/config/namespaced/ssoadmin"
 	"github.com/upbound/provider-aws/config/namespaced/transfer"
 	"github.com/upbound/provider-aws/config/namespaced/verifiedaccess"
+	"github.com/upbound/provider-aws/config/namespaced/vpclattice"
 	"github.com/upbound/provider-aws/config/namespaced/wafv2"
 )
 
@@ -188,4 +189,5 @@ func init() {
 	ProviderConfiguration.AddConfig(cloudformation.Configure)
 	ProviderConfiguration.AddConfig(wafv2.Configure)
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
+	ProviderConfiguration.AddConfig(vpclattice.Configure)
 }

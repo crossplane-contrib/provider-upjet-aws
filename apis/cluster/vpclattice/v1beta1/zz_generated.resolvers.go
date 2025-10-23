@@ -1035,34 +1035,12 @@ func (mg *TargetGroupAttachment) ResolveReferences(ctx context.Context, c client
 
 	var rsp reference.ResolutionResponse
 	var err error
-
-	if mg.Spec.ForProvider.Target != nil {
-		{
-			m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-			}
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target.ID),
-				Extract:      resource.ExtractParamPath("arn", true),
-				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.ForProvider.Target.IDRef,
-				Selector:     mg.Spec.ForProvider.Target.IDSelector,
-				To:           reference.To{List: l, Managed: m},
-			})
-		}
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Target.ID")
-		}
-		mg.Spec.ForProvider.Target.ID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Target.IDRef = rsp.ResolvedReference
-
-	}
 	{
 		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.upbound.io", "v1beta1", "TargetGroup", "TargetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetGroupIdentifier),
 			Extract:      resource.ExtractResourceID(),
@@ -1077,34 +1055,12 @@ func (mg *TargetGroupAttachment) ResolveReferences(ctx context.Context, c client
 	}
 	mg.Spec.ForProvider.TargetGroupIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetGroupIdentifierRef = rsp.ResolvedReference
-
-	if mg.Spec.InitProvider.Target != nil {
-		{
-			m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-			}
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target.ID),
-				Extract:      resource.ExtractParamPath("arn", true),
-				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.InitProvider.Target.IDRef,
-				Selector:     mg.Spec.InitProvider.Target.IDSelector,
-				To:           reference.To{List: l, Managed: m},
-			})
-		}
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.Target.ID")
-		}
-		mg.Spec.InitProvider.Target.ID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.Target.IDRef = rsp.ResolvedReference
-
-	}
 	{
 		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.upbound.io", "v1beta1", "TargetGroup", "TargetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetGroupIdentifier),
 			Extract:      resource.ExtractResourceID(),

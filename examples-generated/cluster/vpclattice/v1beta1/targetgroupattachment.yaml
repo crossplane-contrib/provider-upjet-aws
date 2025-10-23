@@ -15,9 +15,7 @@ spec:
   forProvider:
     region: us-west-1
     target:
-      idSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+      id: ${aws_lb.example.arn}
       port: 80
     targetGroupIdentifierSelector:
       matchLabels:

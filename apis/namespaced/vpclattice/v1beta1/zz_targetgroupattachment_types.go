@@ -78,17 +78,7 @@ type TargetGroupAttachmentParameters struct {
 type TargetInitParameters struct {
 
 	// The ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elbv2/v1beta1.LB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Reference to a LB in elbv2 to populate id.
-	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
-
-	// Selector for a LB in elbv2 to populate id.
-	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// This port is used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -106,18 +96,8 @@ type TargetObservation struct {
 type TargetParameters struct {
 
 	// The ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elbv2/v1beta1.LB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Reference to a LB in elbv2 to populate id.
-	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
-
-	// Selector for a LB in elbv2 to populate id.
-	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// This port is used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
 	// +kubebuilder:validation:Optional
