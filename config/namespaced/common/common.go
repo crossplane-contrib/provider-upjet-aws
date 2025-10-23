@@ -42,6 +42,9 @@ const (
 
 	// ErrGetPasswordSecret is an error string for failing to get password secret
 	ErrGetPasswordSecret = "cannot get password secret"
+
+	// errManagedNotNamespaced is an error string for non-namespaced MRs
+	errManagedNotNamespaced = "managed resource is not namespaced"
 )
 
 // ARNExtractor extracts ARN of the resources from "status.atProvider.arn" which
@@ -83,16 +86,22 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewIni
 	// is no easy way to reduce it without making it harder to read.
 	return func(client client.Client) managed.Initializer {
 		return managed.InitializerFn(func(ctx context.Context, mg xpresource.Managed) error {
+			// this would be a programming/configuration error
+			// should be used only for namespaced MRs
+			if mg.GetNamespace() == "" {
+				return errors.New(errManagedNotNamespaced)
+			}
+
 			paved, err := fieldpath.PaveObject(mg)
 			if err != nil {
 				return errors.Wrap(err, "cannot pave object")
 			}
-			sel := &v1.SecretKeySelector{}
+			sel := &v1.LocalSecretKeySelector{}
 			if err := paved.GetValueInto(secretRefFieldPath, sel); err != nil {
 				return errors.Wrapf(xpresource.Ignore(fieldpath.IsNotFound, err), "cannot unmarshal %s into a secret key selector", secretRefFieldPath)
 			}
 			s := &corev1.Secret{}
-			if err := client.Get(ctx, types.NamespacedName{Namespace: sel.Namespace, Name: sel.Name}, s); xpresource.IgnoreNotFound(err) != nil {
+			if err := client.Get(ctx, types.NamespacedName{Namespace: mg.GetNamespace(), Name: sel.Name}, s); xpresource.IgnoreNotFound(err) != nil {
 				return errors.Wrap(err, ErrGetPasswordSecret)
 			}
 			if err == nil && len(s.Data[sel.Key]) != 0 {
@@ -113,7 +122,7 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewIni
 				return errors.Wrap(err, "cannot generate password")
 			}
 			s.SetName(sel.Name)
-			s.SetNamespace(sel.Namespace)
+			s.SetNamespace(mg.GetNamespace())
 			if !meta.WasCreated(s) {
 				// We don't want to own the Secret if it is created by someone
 				// else, otherwise the deletion of the managed resource will
