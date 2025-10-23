@@ -7,7 +7,16 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *AccessLogSubscription) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AuthPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Listener) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ListenerRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ResourceConfiguration) Hub() {}
@@ -16,10 +25,25 @@ func (tr *ResourceConfiguration) Hub() {}
 func (tr *ResourceGateway) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ResourcePolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Service) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ServiceNetwork) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ServiceNetworkResourceAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ServiceNetworkServiceAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ServiceNetworkVPCAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *TargetGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *TargetGroupAttachment) Hub() {}

@@ -1,0 +1,138 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ListenerRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    action:
+      forward:
+        targetGroups:
+        - targetGroupIdentifierSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+          weight: 1
+        - targetGroupIdentifierSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example2
+          weight: 2
+    listenerIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    match:
+      httpMatch:
+        headerMatches:
+        - caseSensitive: false
+          match:
+            exact: example-contains
+          name: example-header
+        pathMatch:
+          caseSensitive: true
+          match:
+            prefix: /example-path
+    name: example
+    priority: 20
+    region: us-west-1
+    serviceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: TargetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+      port: 443
+      protocol: HTTPS
+      vpcIdentifierSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    name: example
+    region: us-west-1
+    type: INSTANCE
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: TargetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    config:
+      port: 443
+      protocol: HTTPS
+      vpcIdentifierSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    name: example2
+    region: us-west-1
+    type: INSTANCE
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: Listener
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultAction:
+      fixedResponse:
+        statusCode: 404
+    name: example
+    protocol: HTTPS
+    region: us-west-1
+    serviceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/listenerrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

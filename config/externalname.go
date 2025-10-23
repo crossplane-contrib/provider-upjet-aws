@@ -132,6 +132,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_vpclattice_resource_configuration": identifierFromProviderWithDefaultStub("rcfg-1234567890abcdef1"),
 	// VPC Lattice Resource Gateway can be imported using the id
 	"aws_vpclattice_resource_gateway": identifierFromProviderWithDefaultStub("rgw-055b56956a39439ba"),
+	// VPC Lattice Service Network Resource Association can be imported using the id
+	"aws_vpclattice_service_network_resource_association": identifierFromProviderWithDefaultStub("snra-1234567890abcef12"),
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
@@ -2664,14 +2666,28 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// vpclattice
 	//
-	// VPC Lattice Service can be imported using the id
-	"aws_vpclattice_service": config.IdentifierFromProvider,
+	// VPC Lattice Access Log Subscription can be imported using the id
+	"aws_vpclattice_access_log_subscription": config.IdentifierFromProvider,
+	// VPC Lattice Auth Policy can be imported using the id
+	"aws_vpclattice_auth_policy": config.IdentifierFromProvider,
 	// VPC Lattice Listener can be imported using the service_id/listener_id
 	"aws_vpclattice_listener": config.IdentifierFromProvider,
+	// VPC Lattice Listener Rule can be imported using the id
+	"aws_vpclattice_listener_rule": config.IdentifierFromProvider,
+	// VPC Lattice Resource Policy can be imported using the id
+	"aws_vpclattice_resource_policy": config.IdentifierFromProvider,
+	// VPC Lattice Service can be imported using the id
+	"aws_vpclattice_service": config.IdentifierFromProvider,
 	// VPC Lattice Service Network can be imported using the id
 	"aws_vpclattice_service_network": config.IdentifierFromProvider,
+	// VPC Lattice Service Network Service Association can be imported using the id
+	"aws_vpclattice_service_network_service_association": config.IdentifierFromProvider,
+	// VPC Lattice ServiceNetworkVPCAssociation can be imported using the id
+	"aws_vpclattice_service_network_vpc_association": config.IdentifierFromProvider,
 	// VPC Lattice Target Group can be imported using the id
 	"aws_vpclattice_target_group": config.IdentifierFromProvider,
+	// No import
+	"aws_vpclattice_target_group_attachment": config.IdentifierFromProvider,
 
 	// waf
 	//

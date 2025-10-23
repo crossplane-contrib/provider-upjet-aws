@@ -936,12 +936,20 @@ import (
 	instancetrustproviderattachment "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/instancetrustproviderattachment"
 	trustprovider "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/trustprovider"
 	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/cluster/vpc/networkperformancemetricsubscription"
+	accesslogsubscription "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/accesslogsubscription"
+	authpolicy "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/authpolicy"
 	listenervpclattice "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/listener"
+	listenerrule "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/listenerrule"
 	resourceconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/resourceconfiguration"
 	resourcegateway "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/resourcegateway"
+	resourcepolicyvpclattice "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/resourcepolicy"
 	servicevpclattice "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/service"
 	servicenetwork "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/servicenetwork"
+	servicenetworkresourceassociation "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/servicenetworkresourceassociation"
+	servicenetworkserviceassociation "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/servicenetworkserviceassociation"
+	servicenetworkvpcassociation "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/servicenetworkvpcassociation"
 	targetgroup "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/targetgroup"
+	targetgroupattachment "github.com/upbound/provider-aws/internal/controller/cluster/vpclattice/targetgroupattachment"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/cluster/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/cluster/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/cluster/waf/ipset"
@@ -1908,12 +1916,20 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancetrustproviderattachment.Setup,
 		trustprovider.Setup,
 		networkperformancemetricsubscription.Setup,
+		accesslogsubscription.Setup,
+		authpolicy.Setup,
 		listenervpclattice.Setup,
+		listenerrule.Setup,
 		resourceconfiguration.Setup,
 		resourcegateway.Setup,
+		resourcepolicyvpclattice.Setup,
 		servicevpclattice.Setup,
 		servicenetwork.Setup,
+		servicenetworkresourceassociation.Setup,
+		servicenetworkserviceassociation.Setup,
+		servicenetworkvpcassociation.Setup,
 		targetgroup.Setup,
+		targetgroupattachment.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,
@@ -2886,12 +2902,20 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancetrustproviderattachment.SetupGated,
 		trustprovider.SetupGated,
 		networkperformancemetricsubscription.SetupGated,
+		accesslogsubscription.SetupGated,
+		authpolicy.SetupGated,
 		listenervpclattice.SetupGated,
+		listenerrule.SetupGated,
 		resourceconfiguration.SetupGated,
 		resourcegateway.SetupGated,
+		resourcepolicyvpclattice.SetupGated,
 		servicevpclattice.SetupGated,
 		servicenetwork.SetupGated,
+		servicenetworkresourceassociation.SetupGated,
+		servicenetworkserviceassociation.SetupGated,
+		servicenetworkvpcassociation.SetupGated,
 		targetgroup.SetupGated,
+		targetgroupattachment.SetupGated,
 		bytematchset.SetupGated,
 		geomatchset.SetupGated,
 		ipset.SetupGated,
