@@ -6234,16 +6234,6 @@ func (in *TargetInitParameters) DeepCopyInto(out *TargetInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.IDRef != nil {
-		in, out := &in.IDRef, &out.IDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.IDSelector != nil {
-		in, out := &in.IDSelector, &out.IDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -6293,16 +6283,6 @@ func (in *TargetParameters) DeepCopyInto(out *TargetParameters) {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
-	}
-	if in.IDRef != nil {
-		in, out := &in.IDRef, &out.IDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.IDSelector != nil {
-		in, out := &in.IDSelector, &out.IDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
