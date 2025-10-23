@@ -1,0 +1,41 @@
+apiVersion: ecr.aws.m.upbound.io/v1beta1
+kind: RepositoryCreationTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/repositorycreationtemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    appliedFor:
+    - PULL_THROUGH_CACHE
+    customRoleArn: arn:aws:iam::123456789012:role/example
+    description: An example template
+    encryptionConfiguration:
+    - encryptionType: AES256
+    imageTagMutability: IMMUTABLE
+    lifecyclePolicy: |
+      {
+        "rules": [
+          {
+            "rulePriority": 1,
+            "description": "Expire images older than 14 days",
+            "selection": {
+              "tagStatus": "untagged",
+              "countType": "sinceImagePushed",
+              "countUnit": "days",
+              "countNumber": 14
+            },
+            "action": {
+              "type": "expire"
+            }
+          }
+        ]
+      }
+    prefix: example
+    region: us-west-1
+    repositoryPolicy: ${data.aws_iam_policy_document.example.json}
+    resourceTags:
+      Foo: Bar
