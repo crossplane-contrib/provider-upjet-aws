@@ -8,8 +8,10 @@ import (
 	"testing"
 
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+
 	"github.com/upbound/provider-aws/apis/cluster/eks/v1beta1"
 	"github.com/upbound/provider-aws/apis/cluster/eks/v1beta2"
 )
