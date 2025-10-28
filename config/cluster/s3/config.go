@@ -6,10 +6,13 @@ package s3
 
 import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 	"github.com/crossplane/upjet/v2/pkg/registry"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
 	"github.com/upbound/provider-aws/apis/cluster/s3/v1beta1"
 	"github.com/upbound/provider-aws/apis/cluster/s3/v1beta2"
 )
