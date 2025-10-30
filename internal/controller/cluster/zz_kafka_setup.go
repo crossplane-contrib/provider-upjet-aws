@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	cluster "github.com/upbound/provider-aws/internal/controller/cluster/kafka/cluster"
+	clusterpolicy "github.com/upbound/provider-aws/internal/controller/cluster/kafka/clusterpolicy"
 	configuration "github.com/upbound/provider-aws/internal/controller/cluster/kafka/configuration"
 	replicator "github.com/upbound/provider-aws/internal/controller/cluster/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/cluster/kafka/scramsecretassociation"
@@ -22,6 +23,7 @@ import (
 func Setup_kafka(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		cluster.Setup,
+		clusterpolicy.Setup,
 		configuration.Setup,
 		replicator.Setup,
 		scramsecretassociation.Setup,
@@ -40,6 +42,7 @@ func Setup_kafka(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_kafka(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		cluster.SetupGated,
+		clusterpolicy.SetupGated,
 		configuration.SetupGated,
 		replicator.SetupGated,
 		scramsecretassociation.SetupGated,

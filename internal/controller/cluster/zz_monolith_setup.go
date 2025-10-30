@@ -562,6 +562,7 @@ import (
 	channel "github.com/upbound/provider-aws/internal/controller/cluster/ivs/channel"
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/cluster/kafka/cluster"
+	clusterpolicy "github.com/upbound/provider-aws/internal/controller/cluster/kafka/clusterpolicy"
 	configuration "github.com/upbound/provider-aws/internal/controller/cluster/kafka/configuration"
 	replicator "github.com/upbound/provider-aws/internal/controller/cluster/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/cluster/kafka/scramsecretassociation"
@@ -1542,6 +1543,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		channel.Setup,
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,
+		clusterpolicy.Setup,
 		configuration.Setup,
 		replicator.Setup,
 		scramsecretassociation.Setup,
@@ -2528,6 +2530,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		channel.SetupGated,
 		recordingconfiguration.SetupGated,
 		clusterkafka.SetupGated,
+		clusterpolicy.SetupGated,
 		configuration.SetupGated,
 		replicator.SetupGated,
 		scramsecretassociation.SetupGated,

@@ -1594,6 +1594,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// MSK serverless clusters can be imported using the cluster arn
 	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
 	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
+	// Managed Streaming for Kafka Cluster Policy resource can be imported using the cluster_arn
+	"aws_msk_cluster_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }}"),
 
 	// kafkaconnect
 	//
