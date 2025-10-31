@@ -601,6 +601,7 @@
 "aws_mq_configuration",
 "aws_mq_user",
 "aws_msk_cluster",
+"aws_msk_cluster_policy",
 "aws_msk_configuration",
 "aws_msk_replicator",
 "aws_msk_scram_secret_association",
