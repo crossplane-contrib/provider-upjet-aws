@@ -69,6 +69,7 @@ import (
 	v1beta1dms "github.com/upbound/provider-aws/apis/namespaced/dms/v1beta1"
 	v1beta1docdb "github.com/upbound/provider-aws/apis/namespaced/docdb/v1beta1"
 	v1beta1ds "github.com/upbound/provider-aws/apis/namespaced/ds/v1beta1"
+	v1beta1dsql "github.com/upbound/provider-aws/apis/namespaced/dsql/v1beta1"
 	v1beta1dynamodb "github.com/upbound/provider-aws/apis/namespaced/dynamodb/v1beta1"
 	v1beta1ec2 "github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1"
 	v1beta1ecr "github.com/upbound/provider-aws/apis/namespaced/ecr/v1beta1"
@@ -244,6 +245,7 @@ func init() {
 		v1beta1dms.SchemeBuilder.AddToScheme,
 		v1beta1docdb.SchemeBuilder.AddToScheme,
 		v1beta1ds.SchemeBuilder.AddToScheme,
+		v1beta1dsql.SchemeBuilder.AddToScheme,
 		v1beta1dynamodb.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
 		v1beta1ecr.SchemeBuilder.AddToScheme,
