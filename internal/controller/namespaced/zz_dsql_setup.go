@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/cluster"
+	clusterpeering "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/clusterpeering"
 )
 
 // Setup_dsql creates all controllers with the supplied logger and adds them to
@@ -17,6 +18,7 @@ import (
 func Setup_dsql(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		cluster.Setup,
+		clusterpeering.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -30,6 +32,7 @@ func Setup_dsql(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_dsql(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		cluster.SetupGated,
+		clusterpeering.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

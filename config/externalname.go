@@ -57,10 +57,12 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 
+	// dsql
 	//
-	//
-	//
+	// DSQL Cluster can be imported using the identifier
 	"aws_dsql_cluster": config.FrameworkResourceWithComputedIdentifier("identifier", "artix3b6dqiognkp7732wzhroi"),
+	// DSQL Cluster Peering resource can be imported using the Cluster identifier
+	"aws_dsql_cluster_peering": dsqlClusterPeering(),
 
 	// dynamodb
 	//
@@ -3353,6 +3355,22 @@ func s3LifecycleConfiguration() config.ExternalName {
 		idStr, ok := id.(string)
 		if !ok {
 			return "", errors.New("bucket field must be a string")
+		}
+		return idStr, nil
+	}
+	return e
+}
+
+func dsqlClusterPeering() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["identifier"]
+		if !ok {
+			return "", errors.New("identifier field missing from tfstate")
+		}
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("identifier field must be a string")
 		}
 		return idStr, nil
 	}
