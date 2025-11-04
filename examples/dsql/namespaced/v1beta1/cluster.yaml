@@ -14,7 +14,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    deletionProtectionEnabled: true
+    deletionProtectionEnabled: false
     region: us-east-1
     tags:
       Name: TestCluster

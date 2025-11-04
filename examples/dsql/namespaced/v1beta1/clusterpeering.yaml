@@ -20,8 +20,10 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example_1
     region: us-east-1
-    witnessRegion: us-east-2
+    witnessRegion: us-west-2
+
 ---
+
 apiVersion: dsql.aws.m.upbound.io/v1beta1
 kind: ClusterPeering
 metadata:
@@ -38,12 +40,11 @@ spec:
     identifierSelector:
       matchLabels:
         testing.upbound.io/example-name: example_2
-    region: us-east-1
-    witnessRegion: us-east-2
-  providerConfigRef:
-    name: peer
-    kind: ClusterProviderConfig
+    region: us-east-2
+    witnessRegion: us-west-2
+
 ---
+
 apiVersion: dsql.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
@@ -57,9 +58,13 @@ spec:
   forProvider:
     deletionProtectionEnabled: false
     multiRegionProperties:
-    - witnessRegion: us-east-2
+    - witnessRegion: us-west-2
     region: us-east-1
+    tags:
+      Name: example-1
+
 ---
+
 apiVersion: dsql.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
@@ -73,8 +78,7 @@ spec:
   forProvider:
     deletionProtectionEnabled: false
     multiRegionProperties:
-    - witnessRegion: us-east-2
-    region: us-east-1
-  providerConfigRef:
-    name: peer
-    kind: ClusterProviderConfig
+    - witnessRegion: us-west-2
+    region: us-east-2
+    tags:
+      Name: example-2
