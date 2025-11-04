@@ -6,8 +6,6 @@ module github.com/upbound/provider-aws
 
 go 1.24.7
 
-toolchain go1.24.9
-
 require (
 	dario.cat/mergo v1.0.2
 	github.com/alecthomas/kingpin/v2 v2.4.0
@@ -457,4 +455,4 @@ replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terrafo
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20250919132046-4b6f0a4eae76
 
-replace github.com/crossplane/upjet/v2 => github.com/ulucinar/upbound-upjet/v2 v2.0.0-20251103110452-246cbd01ac9b
+replace github.com/crossplane/upjet/v2 => github.com/ulucinar/upbound-upjet/v2 v2.0.0-20251104103002-95cda1dca6da
