@@ -899,6 +899,13 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// aws_dynamodb_tag can be imported by using the DynamoDB resource identifier and key, separated by a comma (,)
 	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),
 
+	// dsql
+	//
+	// DSQL Cluster can be imported using the identifier
+	"aws_dsql_cluster": config.ParameterAsIdentifier("identifier"),
+	// DSQL Cluster Peering can be imported using the identifier
+	"aws_dsql_cluster_peering": config.ParameterAsIdentifier("identifier"),
+
 	// ec2
 	//
 	// aws_ami can be imported using the ID of the AMI
