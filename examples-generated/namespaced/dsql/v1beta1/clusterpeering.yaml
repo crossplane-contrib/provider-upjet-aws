@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: dsql.aws.m.upbound.io/v1beta1
+kind: ClusterPeering
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dsql/v1beta1/clusterpeering
+  labels:
+    testing.upbound.io/example-name: example_1
+  name: example-1
+  namespace: upbound-system
+spec:
+  forProvider:
+    clustersRefs:
+    - name: example_2
+    identifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_1
+    region: us-west-1
+    witnessRegion: ${aws_dsql_cluster.example_1.multi_region_properties[0].witness_region}
+
+---
+
+apiVersion: dsql.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dsql/v1beta1/clusterpeering
+  labels:
+    testing.upbound.io/example-name: example_1
+  name: example-1
+  namespace: upbound-system
+spec:
+  forProvider:
+    multiRegionProperties:
+    - witnessRegion: us-west-2
+    region: us-west-1
+
+---
+
+apiVersion: dsql.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dsql/v1beta1/clusterpeering
+  labels:
+    testing.upbound.io/example-name: example_2
+  name: example-2
+  namespace: upbound-system
+spec:
+  forProvider:
+    multiRegionProperties:
+    - witnessRegion: us-west-2
+    provider: ${aws.alternate}
+    region: us-west-1

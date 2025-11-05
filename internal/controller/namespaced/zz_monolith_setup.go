@@ -289,6 +289,8 @@ import (
 	conditionalforwarder "github.com/upbound/provider-aws/internal/controller/namespaced/ds/conditionalforwarder"
 	directory "github.com/upbound/provider-aws/internal/controller/namespaced/ds/directory"
 	shareddirectory "github.com/upbound/provider-aws/internal/controller/namespaced/ds/shareddirectory"
+	clusterdsql "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/cluster"
+	clusterpeering "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/clusterpeering"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/namespaced/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/namespaced/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/namespaced/dynamodb/kinesisstreamingdestination"
@@ -1270,6 +1272,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		conditionalforwarder.Setup,
 		directory.Setup,
 		shareddirectory.Setup,
+		clusterdsql.Setup,
+		clusterpeering.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
@@ -2257,6 +2261,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		conditionalforwarder.SetupGated,
 		directory.SetupGated,
 		shareddirectory.SetupGated,
+		clusterdsql.SetupGated,
+		clusterpeering.SetupGated,
 		contributorinsights.SetupGated,
 		globaltable.SetupGated,
 		kinesisstreamingdestination.SetupGated,

@@ -284,6 +284,8 @@
 "aws_docdb_event_subscription",
 "aws_docdb_global_cluster",
 "aws_docdb_subnet_group",
+"aws_dsql_cluster",
+"aws_dsql_cluster_peering",
 "aws_dx_bgp_peer",
 "aws_dx_connection",
 "aws_dx_connection_association",

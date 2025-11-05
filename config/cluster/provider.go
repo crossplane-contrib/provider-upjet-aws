@@ -34,6 +34,7 @@ import (
 	"github.com/upbound/provider-aws/config/cluster/dms"
 	"github.com/upbound/provider-aws/config/cluster/docdb"
 	"github.com/upbound/provider-aws/config/cluster/ds"
+	"github.com/upbound/provider-aws/config/cluster/dsql"
 	"github.com/upbound/provider-aws/config/cluster/dynamodb"
 	"github.com/upbound/provider-aws/config/cluster/ebs"
 	"github.com/upbound/provider-aws/config/cluster/ec2"
@@ -176,6 +177,7 @@ func init() {
 	ProviderConfiguration.AddConfig(transfer.Configure)
 	ProviderConfiguration.AddConfig(directconnect.Configure)
 	ProviderConfiguration.AddConfig(ds.Configure)
+	ProviderConfiguration.AddConfig(dsql.Configure)
 	ProviderConfiguration.AddConfig(qldb.Configure)
 	ProviderConfiguration.AddConfig(fsx.Configure)
 	ProviderConfiguration.AddConfig(networkmanager.Configure)
