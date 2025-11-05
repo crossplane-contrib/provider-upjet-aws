@@ -25,7 +25,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			var clusters []string
 			if diags := sdkState.GetAttribute(ctx, path.Root("clusters"), &clusters); diags.HasError() {
-				return false, errors.FrameworkDiagnosticsError(diags)
+				return false, errors.FrameworkDiagnosticsError("reading clusters attribute", diags)
 			}
 			return len(clusters) == 0, nil
 		}
